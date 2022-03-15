@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+set -x
+
 [ -d node_modules ] || yarn install --production
 
 set -a
