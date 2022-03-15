@@ -36,8 +36,9 @@ runs:
     - name: Setup env
       shell: bash
       run: |
-        echo "AUTODEVOPS_PATH=/tmp/autodevops" >> $GITHUB_ENV
+        AUTODEVOPS_PATH=/tmp/autodevops
         mkdir -p $AUTODEVOPS_PATH
+        echo "AUTODEVOPS_PATH=$AUTODEVOPS_PATH" >> $GITHUB_ENV
 
     - name: Build manifests
       shell: bash
