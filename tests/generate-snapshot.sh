@@ -11,7 +11,9 @@ for dir in $ROOT_WORKSPACE_PATH/*; do
   [ -d "$dir" ] || continue
   export WORKSPACE_PATH="$dir"
   if [ -f "$WORKSPACE_PATH/.env" ]; then
+    set -a
     source "$WORKSPACE_PATH/.env"
+    set +a
   fi
   $KUBEWORKFLOW_PATH/dev-local.sh
   cp $AUTODEVOPS_PATH/manifests.yaml $WORKSPACE_PATH/manifests.yaml.snap

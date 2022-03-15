@@ -28,8 +28,8 @@ if [ -f "common/values.yaml" ]; then
   VALUES_FILES+=" common/values.yaml"
 fi
 VALUES_FILES+=" values.env.yaml"
-if [ -f "${ENVIRONMENT}/values.yaml" ]; then
-  VALUES_FILES+=" ${ENVIRONMENT}/values.yaml"
+if [ -f "env/${ENVIRONMENT}/values.yaml" ]; then
+  VALUES_FILES+=" env/${ENVIRONMENT}/values.yaml"
 fi
 
 echo "Merging values files"

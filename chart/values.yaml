@@ -7,3 +7,14 @@ global:
   branchSlug:
   image:
   imageTag:
+
+app:
+  enabled: false
+hasura:
+  enabled: false
+jobs:
+  enabled: false
+maildev:
+  enabled: false
+pgweb:
+  enabled: false

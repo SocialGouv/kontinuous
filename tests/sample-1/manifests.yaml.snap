@@ -89,26 +89,6 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ""
   labels:
     application: sample-1
-    component: maildev
-  name: maildev
-  namespace: sample-1-feature-branch-1
-spec:
-  ports:
-  - name: http
-    port: 1025
-    targetPort: 1025
-  selector:
-    component: maildev
-  type: ClusterIP
----
-apiVersion: v1
-kind: Service
-metadata:
-  annotations:
-    kapp.k14s.io/disable-default-label-scoping-rules: ""
-    kapp.k14s.io/disable-default-ownership-label-rules: ""
-  labels:
-    application: sample-1
     component: pgweb
   name: pgweb
   namespace: sample-1-feature-branch-1
@@ -187,9 +167,19 @@ spec:
             path: /healthz
             port: http
           periodSeconds: 5
-        volumeMounts: []
+        volumeMounts:
+        - mountPath: /mnt/upload
+          name: upload
+        - mountPath: /mnt/docs
+          name: docs
       initContainers: null
-      volumes: []
+      volumes:
+      - name: upload
+        persistentVolumeClaim:
+          claimName: upload
+      - name: docs
+        persistentVolumeClaim:
+          claimName: docs
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -337,44 +327,6 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ""
   labels:
     application: sample-1
-    component: maildev
-  name: maildev
-  namespace: sample-1-feature-branch-1
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      component: maildev
-  template:
-    metadata:
-      labels:
-        application: sample-1
-        component: maildev
-    spec:
-      containers:
-      - image: maildev/maildev:latest
-        name: maildev
-        ports:
-        - containerPort: 1080
-          name: http
-        - containerPort: 1025
-          name: smtp
-        resources:
-          limits:
-            cpu: 200m
-            memory: 256Mi
-          requests:
-            cpu: 50m
-            memory: 128Mi
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  annotations:
-    kapp.k14s.io/disable-default-label-scoping-rules: ""
-    kapp.k14s.io/disable-default-ownership-label-rules: ""
-  labels:
-    application: sample-1
     component: pgweb
   name: pgweb
   namespace: sample-1-feature-branch-1
@@ -445,6 +397,157 @@ spec:
           requests:
             cpu: 5m
             memory: 16Mi
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    kapp.k14s.io/change-group.db: autodevops/db.sample-1-feature-branch-1
+    kapp.k14s.io/change-group.db..create-db: autodevops/db..create-db.sample-1-feature-branch-1
+    kapp.k14s.io/change-group.db.create-db: autodevops/db.create-db.sample-1-feature-branch-1
+    kapp.k14s.io/change-rule.db..create-secret: upsert after upserting autodevops/db..create-secret.sample-1-feature-branch-1
+    kapp.k14s.io/nonce: ""
+    kapp.k14s.io/update-strategy: fallback-on-replace
+  name: job-db--create-db
+  namespace: awesome-ci
+spec:
+  activeDeadlineSeconds: 3600
+  backoffLimit: 3
+  template:
+    metadata:
+      annotations: {}
+      labels: {}
+    spec:
+      containers:
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          /action/ensure-db.sh
+        env:
+        - name: NEW_DB_NAME
+          valueFrom:
+            secretKeyRef:
+              key: PGDATABASE
+              name: pg-user-feature-branch-1
+        - name: NEW_USER
+          valueFrom:
+            secretKeyRef:
+              key: PGUSER
+              name: pg-user-feature-branch-1
+        - name: NEW_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: PGPASSWORD
+              name: pg-user-feature-branch-1
+        - name: PGHOST
+          valueFrom:
+            secretKeyRef:
+              key: PGHOST
+              name: pg-user-feature-branch-1
+        - name: NEW_DB_EXTENSIONS
+          value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
+        envFrom:
+        - secretRef:
+            name: pg-scaleway
+        image: ghcr.io/socialgouv/docker/psql:6.70.0
+        imagePullPolicy: IfNotPresent
+        name: job
+        volumeMounts:
+        - mountPath: /workspace
+          name: workspace
+        - mountPath: /action
+          name: action
+      initContainers:
+      - command:
+        - sh
+        - -c
+        - npx degit ./jobs/create-db /action
+        image: node:17
+        name: degit-action
+        securityContext:
+          runAsGroup: 1000
+          runAsUser: 1000
+        volumeMounts:
+        - mountPath: /action
+          name: action
+      restartPolicy: Never
+      volumes:
+      - emptyDir: {}
+        name: workspace
+      - emptyDir: {}
+        name: action
+  ttlSecondsAfterFinished: 1800
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    kapp.k14s.io/change-group.db: autodevops/db.sample-1-feature-branch-1
+    kapp.k14s.io/change-group.db..create-secret: autodevops/db..create-secret.sample-1-feature-branch-1
+    kapp.k14s.io/change-group.db.create-secret: autodevops/db.create-secret.sample-1-feature-branch-1
+    kapp.k14s.io/nonce: ""
+    kapp.k14s.io/update-strategy: fallback-on-replace
+  name: job-db--create-secret
+  namespace: awesome-ci
+spec:
+  activeDeadlineSeconds: 3600
+  backoffLimit: 3
+  template:
+    metadata:
+      annotations: {}
+      labels: {}
+    spec:
+      containers:
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          /action/create-secret.sh
+        env:
+        - name: DB_SECRET_NAME
+          value: pg-user-feature-branch-1
+        - name: JOB_NAMESPACE
+          value: awesome-ci
+        - name: NAMESPACE
+          value: sample-1-feature-branch-1
+        - name: PGDATABASE
+          value: autodevops_feature-branch-1
+        - name: PGUSER
+          value: user_feature-branch-1
+        envFrom:
+        - secretRef:
+            name: pg-scaleway
+        - secretRef:
+            name: kubeconfig
+        image: bitnami/kubectl:latest
+        imagePullPolicy: IfNotPresent
+        name: job
+        volumeMounts:
+        - mountPath: /workspace
+          name: workspace
+        - mountPath: /action
+          name: action
+      initContainers:
+      - command:
+        - sh
+        - -c
+        - npx degit ./jobs/create-db /action
+        image: node:17
+        name: degit-action
+        securityContext:
+          runAsGroup: 1000
+          runAsUser: 1000
+        volumeMounts:
+        - mountPath: /action
+          name: action
+      restartPolicy: Never
+      volumes:
+      - emptyDir: {}
+        name: workspace
+      - emptyDir: {}
+        name: action
+  ttlSecondsAfterFinished: 1800
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -546,33 +649,6 @@ spec:
   tls:
   - hosts:
     - hasura-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
-    secretName: wildcard-crt
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-  labels:
-    application: sample-1
-    component: maildev
-  name: maildev
-  namespace: sample-1-feature-branch-1
-spec:
-  rules:
-  - host: sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
-    http:
-      paths:
-      - backend:
-          service:
-            name: maildev
-            port:
-              name: http
-        path: /
-        pathType: Prefix
-  tls:
-  - hosts:
-    - sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
     secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1

@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { cp } = require('fs/promises');
+const { cp, lstat } = require('fs/promises');
 
 const yaml = require('js-yaml');
 const { generate } = require("@socialgouv/env-slug")
@@ -21,20 +21,22 @@ const requireUse = async (use) => {
     let loading = downloadingPromises[slug]
     if (!loading){
       if (use.startsWith(".") || use.startsWith("/")){
-        console.log(`import local ${cp}`)
         const cpOptions = {}
-        if(fs.lstatSync(cp).isDirectory()){
+        const src = `${userCwd}/${use}`
+        console.log(`import local ${src}`)
+        if((await lstat(src)).isDirectory()){
           cpOptions.recursive = true
         }
-        loading = cp(`${userCwd}/${use}`, target, cpOptions);
+        loading = cp(src, target, cpOptions);
       } else {
         console.log(`degit ${use}`)
-        loading = degit(use).clonde(target)
+        loading = degit(use).clone(target)
       }
       downloadingPromises[slug] = loading
     }
+    await loading
   }
-  if (fs.lstatSync(target).isDirectory()) {
+  if ((await lstat(target)).isDirectory()) {
     target += "/use.yaml"
   }
   return { slug, use, target }

@@ -155,7 +155,7 @@ to enable correct syntax recognition and coloration of yaml helm templates in vs
 
 
 Resources:
-- [Learn X in Y minutes](https://learnxinyminutes.com/docs/yaml/)
+- [Learn YAML in Y minutes](https://learnxinyminutes.com/docs/yaml/)
 - [JSON to YAML](https://www.json2yaml.com/)
 - [Kubernetes doc](https://kubernetes.io/docs/concepts/)
 - [Helm doc](https://helm.sh/docs/)
