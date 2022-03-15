@@ -2,7 +2,7 @@
 
 export $($(dirname $0)/env.sh)
 
-REPOSITORY_NAME=${REPOSITORY##*/}
+export REPOSITORY_NAME=${REPOSITORY##*/}
 
 $(dirname $0)/utils/need-vars.sh "REPOSITORY_NAME"
 

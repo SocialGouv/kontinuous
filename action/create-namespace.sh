@@ -10,7 +10,7 @@ fi
 
 cat manifests.yaml | yq eval 'select(.kind=="Namespace")' - > namespace.yaml
 
-kubectl create -f namespace.yaml || true
+kubectl create -f namespace.yaml>/dev/null 2>&1 || true
 
 # wait for namespace to be ready
 n=0
@@ -20,3 +20,5 @@ until [ "$n" -ge 10 ]; do
   n=$((n+1))
   sleep 1
 done
+
+echo "namespace '$NAMESPACE' is ready"
