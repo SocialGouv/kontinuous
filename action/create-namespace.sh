@@ -4,13 +4,11 @@ set -e
 export NAMESPACE=$(cat manifests.yaml | yq eval-all 'select(.kind=="Namespace").metadata.name')
 
 namespaceStatus=$(kubectl get ns $NAMESPACE -o json | jq .status.phase -r)
-if [ "$namespaceStatus" == "Active" ];
+if [ "$namespaceStatus" == "Active" ]; then
   exit 0
 fi
 
 cat manifests.yaml | yq eval 'select(.kind=="Namespace")' - > namespace.yaml
-
-cat namespace.yaml
 
 kubectl create -f namespace.yaml || true
 
