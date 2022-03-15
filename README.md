@@ -160,3 +160,34 @@ Resources:
 - [Kubernetes doc](https://kubernetes.io/docs/concepts/)
 - [Helm doc](https://helm.sh/docs/)
 - [Kapp doc](https://carvel.dev/kapp/docs/v0.46.0/)
+
+
+### TODO
+#### documentation:
+- jobs workflow
+- tests
+- best-practices and contributing how-to add
+  - charts
+  - jobs
+  - patches
+  - options
+  - tests
+
+#### features
+- add default runner image with all base tooling for actions
+
+#### repo cycle automation
+- add releaser script with changelog generation (triggerable locally)
+- run tests on push (via simple github action)
+- build docker image for default runner image
+    via itself with jobs/docker-build, et la boucle est bouclée
+
+#### more jobs
+- add jobs:
+  - docker-build
+  - run-workflow (to replace github action)
+    triggerable by webhook (need to add webhook as app on argoCD before)
+
+#### more charts
+- add charts:
+  - an oauth2 proxy service (?)
