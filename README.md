@@ -9,7 +9,7 @@ Deploy application over kubernetes
     environment: "dev"
     token: ${{ secrets.GITHUB_TOKEN }}
     kubeconfig: ${{ secrets.KUBECONFIG }}
-    rancherId: ${{ secrets.RANCHER_PROJECT_ID }}
+    rancherProjectId: ${{ secrets.RANCHER_PROJECT_ID }}
     rancherProjectName: ${{ secrets.RANCHER_PROJECT_NAME }}
     imagePackage: app
     # imageName: fabrique/www

@@ -4,7 +4,7 @@ inputs:
   environment:
     description: "The deployment environment (dev | preprod | prod)"
     required: true
-  rancherId:
+  rancherProjectId:
     description: "The Rancher project ID, usually secrets.RANCHER_PROJECT_ID"
     required: true
   rancherProjectName:
@@ -41,7 +41,7 @@ runs:
       shell: bash
       env:
         ENVIRONMENT: ${{ inputs.environment }}
-        RANCHER_PROJECT_ID: ${{ inputs.rancherId}}
+        RANCHER_PROJECT_ID: ${{ inputs.rancherProjectId }}
         RANCHER_PROJECT_NAME: ${{ inputs.rancherProjectName }}
         COMPONENTS: ${{ inputs.components }}
         HELM_ARGS: ${{ inputs.helmArgs }}
