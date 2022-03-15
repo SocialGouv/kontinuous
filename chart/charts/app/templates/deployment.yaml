@@ -23,7 +23,7 @@ spec:
       {{- end }}
       volumes:
         {{- tpl (.Values.volumes | toYaml) . | nindent 8 }}
-        {{- range $volumeName := .Values.addVolumes }}
+        {{- range $volumeName := .Values.addVolumes -}}
         - name: "{{ tpl $volumeName $ }}"
           persistentVolumeClaim:
             claimName: "{{ tpl $volumeName $ }}"
