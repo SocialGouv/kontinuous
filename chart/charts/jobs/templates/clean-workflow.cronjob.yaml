@@ -5,8 +5,9 @@ metadata:
   namespace: {{ or .Values.namespace .Values.global.jobNamespace }}
   annotations: {}
 spec:
-  # schedule: "0 0 * * *" # Run once a day at midnight
-  schedule: "* * * * *" # Run at every minute
+  schedule: "0 0 * * *" # Run once a day at midnight
+  # schedule: "* * * * *" # Run at every minute
+  startingDeadlineSeconds: 180
   jobTemplate:
     spec:
       template:
