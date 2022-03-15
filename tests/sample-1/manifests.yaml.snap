@@ -6,9 +6,9 @@ metadata:
     git/branch: refs/heads/feature-branch-1
     janitor/ttl: 7d
   labels:
-    application: tests
+    application: sample-1
     cert: wildcard
-  name: tests-feature-branch-1
+  name: sample-1-feature-branch-1
 ---
 apiVersion: v1
 data:
@@ -19,7 +19,7 @@ data:
 kind: ConfigMap
 metadata:
   name: app-configmap
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 ---
 apiVersion: v1
 kind: Service
@@ -28,10 +28,10 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ""
     kapp.k14s.io/disable-default-ownership-label-rules: ""
   labels:
-    application: tests
+    application: sample-1
     component: app
   name: app
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   ports:
   - name: http
@@ -48,10 +48,10 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ""
     kapp.k14s.io/disable-default-ownership-label-rules: ""
   labels:
-    application: tests
+    application: sample-1
     component: app-2nd-instance
   name: app-2nd-instance
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   ports:
   - name: http
@@ -68,10 +68,10 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ""
     kapp.k14s.io/disable-default-ownership-label-rules: ""
   labels:
-    application: tests
+    application: sample-1
     component: hasura
   name: hasura
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   ports:
   - name: http
@@ -88,10 +88,10 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ""
     kapp.k14s.io/disable-default-ownership-label-rules: ""
   labels:
-    application: tests
+    application: sample-1
     component: maildev
   name: maildev
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   ports:
   - name: http
@@ -108,10 +108,10 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ""
     kapp.k14s.io/disable-default-ownership-label-rules: ""
   labels:
-    application: tests
+    application: sample-1
     component: pgweb
   name: pgweb
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   ports:
   - name: http
@@ -128,10 +128,10 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ""
     kapp.k14s.io/disable-default-ownership-label-rules: ""
   labels:
-    application: tests
+    application: sample-1
     component: app
   name: app
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   replicas: 1
   selector:
@@ -140,7 +140,7 @@ spec:
   template:
     metadata:
       labels:
-        application: tests
+        application: sample-1
         component: app
     spec:
       containers:
@@ -152,7 +152,7 @@ spec:
             name: app-sealed-secret
         - configMapRef:
             name: app-configmap
-        image: ghcr.io/socialgouv/tests/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+        image: ghcr.io/socialgouv/sample-1/app:sha-ffac537e6cbbf934b08745a378932722df287a53
         livenessProbe:
           failureThreshold: 15
           httpGet:
@@ -198,10 +198,10 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ""
     kapp.k14s.io/disable-default-ownership-label-rules: ""
   labels:
-    application: tests
+    application: sample-1
     component: app-2nd-instance
   name: app-2nd-instance
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   replicas: 1
   selector:
@@ -210,7 +210,7 @@ spec:
   template:
     metadata:
       labels:
-        application: tests
+        application: sample-1
         component: app-2nd-instance
     spec:
       containers:
@@ -222,7 +222,7 @@ spec:
             name: app-sealed-secret
         - configMapRef:
             name: app-configmap
-        image: ghcr.io/socialgouv/tests/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+        image: ghcr.io/socialgouv/sample-1/app:sha-ffac537e6cbbf934b08745a378932722df287a53
         livenessProbe:
           failureThreshold: 15
           httpGet:
@@ -268,10 +268,10 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ""
     kapp.k14s.io/disable-default-ownership-label-rules: ""
   labels:
-    application: tests
+    application: sample-1
     component: hasura
   name: hasura
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   replicas: 1
   selector:
@@ -280,7 +280,7 @@ spec:
   template:
     metadata:
       labels:
-        application: tests
+        application: sample-1
         component: hasura
     spec:
       containers:
@@ -292,7 +292,7 @@ spec:
             name: hasura-sealed-secret
         - configMapRef:
             name: hasura-configmap
-        image: ghcr.io/socialgouv/tests/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
+        image: ghcr.io/socialgouv/sample-1/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
         livenessProbe:
           failureThreshold: 15
           httpGet:
@@ -336,10 +336,10 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ""
     kapp.k14s.io/disable-default-ownership-label-rules: ""
   labels:
-    application: tests
+    application: sample-1
     component: maildev
   name: maildev
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   replicas: 1
   selector:
@@ -348,7 +348,7 @@ spec:
   template:
     metadata:
       labels:
-        application: tests
+        application: sample-1
         component: maildev
     spec:
       containers:
@@ -374,10 +374,10 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ""
     kapp.k14s.io/disable-default-ownership-label-rules: ""
   labels:
-    application: tests
+    application: sample-1
     component: pgweb
   name: pgweb
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   replicas: 1
   selector:
@@ -386,7 +386,7 @@ spec:
   template:
     metadata:
       labels:
-        application: tests
+        application: sample-1
         component: pgweb
     spec:
       containers:
@@ -453,7 +453,7 @@ metadata:
     sealedsecrets.bitnami.com/cluster-wide: "true"
   creationTimestamp: null
   name: hasura-sealed-secret
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   encryptedData:
     ACCOUNT_EMAIL_SECRET: AgCYU5zQRAGub/7BY2VzhhQ/Y5EtYeWcgdBrHMfOdhK6DLDbkiYTVBvdIVbvUp/AtHP8V3UwT0zoQfKRiECwdH6oJ92GJ2DQ6svTNJH+x4EyQRJTeRMOrx6y+iVAcFx6I5RbT6SdKkpzGztpY4t4pGt3IOUoKNrJRqshj170LQqsw57NyxzSgZ0HONNsHE+HUK6AijgZXBthAfWqlFyrg6WIBY1f/jyuZ7jvzlotTI9JXXSBz8LryNYG7kth2weHcmlQKiqERPbWGFuGwM77hzgFwixjqnrGJEjWXDfsAmBLk+B9nVht2H54pPYCD+cyRea5NeisxnNCAOw10BJHEX1gxgNzSwQDVfOSINWT1a8R81tm7Dz7j3LyKKT+UH8BREHMlu4qv7+D6PjrRXJXtAMGN6Vsz0Hqvf6vlZou7O4ygcAtirRaSPvsuU1FOg2JvwfheUVZ7StBGhsTBWyQ0jw9UqAXcjtcbqfzeOc8sEEe/5xyRJctT+A4s4XNGxiF/Mnaa9XB5OHtz55FUDzy2o0S21JXFjnNs2kmDji3gjPwYJzg+qat7ZcGBNMR4KNvu2SiUoDdQMKzmh7mi4nwqlOv08eJVP8ZzXGS3F8QcsMFXPfrH/53hunKq6gQ61D3+CsCN6Hz89X7FgWnMroMv52gNwtUc0yeQ+klIB2RsY6+NefWx0p+ikxHY9MG64qMPtFNG+RW2TwRgcdbD6CC31GUVmGVLpEF95RF7v1i66H9EvNwiRZCagnZ4qYcrQ==
@@ -473,13 +473,13 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
   labels:
-    application: tests
+    application: sample-1
     component: app
   name: app
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   rules:
-  - host: tests-feature-branch-1.dev.fabrique.social.gouv.fr
+  - host: sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
     http:
       paths:
       - backend:
@@ -491,7 +491,7 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - tests-feature-branch-1.dev.fabrique.social.gouv.fr
+    - sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
     secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -500,13 +500,13 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
   labels:
-    application: tests
+    application: sample-1
     component: app-2nd-instance
   name: app-2nd-instance
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   rules:
-  - host: tests-feature-branch-1.dev.fabrique.social.gouv.fr
+  - host: sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
     http:
       paths:
       - backend:
@@ -518,7 +518,7 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - tests-feature-branch-1.dev.fabrique.social.gouv.fr
+    - sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
     secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -527,13 +527,13 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
   labels:
-    application: tests
+    application: sample-1
     component: hasura
   name: hasura
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   rules:
-  - host: hasura-tests-feature-branch-1.dev.fabrique.social.gouv.fr
+  - host: hasura-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
     http:
       paths:
       - backend:
@@ -545,7 +545,7 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - hasura-tests-feature-branch-1.dev.fabrique.social.gouv.fr
+    - hasura-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
     secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -554,13 +554,13 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
   labels:
-    application: tests
+    application: sample-1
     component: maildev
   name: maildev
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   rules:
-  - host: tests-feature-branch-1.dev.fabrique.social.gouv.fr
+  - host: sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
     http:
       paths:
       - backend:
@@ -572,7 +572,7 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - tests-feature-branch-1.dev.fabrique.social.gouv.fr
+    - sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
     secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -581,13 +581,13 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
   labels:
-    application: tests
+    application: sample-1
     component: pgweb
   name: pgweb
-  namespace: tests-feature-branch-1
+  namespace: sample-1-feature-branch-1
 spec:
   rules:
-  - host: pgweb-tests-feature-branch-1.dev.fabrique.social.gouv.fr
+  - host: pgweb-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
     http:
       paths:
       - backend:
@@ -599,5 +599,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - pgweb-tests-feature-branch-1.dev.fabrique.social.gouv.fr
+    - pgweb-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
     secretName: wildcard-crt
