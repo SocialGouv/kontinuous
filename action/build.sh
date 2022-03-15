@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-[ -d node_modules ] || yarn install --production
+[ -d "$KUBEWORKFLOW_PATH/node_modules" ] || yarn --cwd $KUBEWORKFLOW_PATH install --production
 
 export $($(dirname $0)/env.sh)
 
