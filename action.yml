@@ -80,17 +80,14 @@ runs:
         only: kapp
         token: ${{ inputs.token }}
 
-    - name: Write kubeconfig
-      uses: SocialGouv/actions/util-write-kubeconfig@v1
-      with:
-        kubeconfig: ${{ inputs.kubeconfig }}
-
-    - name: Create k8s namespace
+    - name: Create kubernetes config
       shell: bash
-      working-directory: ${{ env.AUTODEVOPS_PATH }}
-      run: $GITHUB_ACTION/action/create-namespace.sh
+      run: |
+        mkdir -p ~/.kube
+        touch ~/.kube/config
+        echo ${{ inputs.kubeconfig }} | base64 -d > ~/.kube/config
     
-    - name: Apply manifests and wait for sync using kapp
+    - name: Deploy manifests
       shell: bash
       working-directory: ${{ env.AUTODEVOPS_PATH }}
       run: $GITHUB_ACTION_PATH/action/deploy.sh
