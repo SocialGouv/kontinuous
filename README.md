@@ -1,4 +1,4 @@
-# `socialgouv/kube-workflow`
+# `socialgouv/kube-workflow` 🚀
 Deploy application over kubernetes
 
 ## Call it in review, preprod, and prod github workflows
