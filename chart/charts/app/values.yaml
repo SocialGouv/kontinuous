@@ -2,7 +2,7 @@ enabled:
 namespace: 
 host: 
 image: 
-imagePackage: 
+imagePackage: app
 imageTag: 
 ttl: 
 rancherProjectId: my-cluser-id:my-project-id
