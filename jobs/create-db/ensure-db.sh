@@ -57,7 +57,7 @@ else
 fi
 
 echo "Set password for user ${NEW_USER_BASE}"
-psql -abe "$PG_URL_ADMIN" -c "ALTER USER \"$NEW_USER_BASE\" WITH PASSWORD '$NEW_PASSWORD';"
+psql -ab "$PG_URL_ADMIN" -c "ALTER USER \"$NEW_USER_BASE\" WITH PASSWORD '$NEW_PASSWORD';"
 
 echo "Grant user \"${NEW_USER_BASE}\" to \"${PGUSER}\""
 psql -abe "$PG_URL_ADMIN" -c "
@@ -69,3 +69,5 @@ psql -abe "$PG_URL_ADMIN" -c "
   GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO \"$NEW_USER_BASE\";
   ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO \"$NEW_USER_BASE\";
 "
+
+cat /workflow/.env

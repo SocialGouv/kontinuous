@@ -2,4 +2,7 @@ enabled:
 namespace: 
 repository: 
 branchName: 
+sharedStorage:
+  size: 2Gi
+  className: 'azurefile'
 runs: []

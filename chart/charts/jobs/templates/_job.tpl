@@ -96,12 +96,20 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - name: workflow
+              mountPath: /workflow
+              subPath: {{ $.val.global.sha }}
 
       volumes:
         - name: workspace
           emptyDir: {}
         - name: action
           emptyDir: {}
-      #   {{ .volume }}
+        - name: workflow
+          persistentVolumeClaim:
+            claimName: jobs-shared-storage
+        {{- if $run.volumes }}
+          {{- tpl ($run.volumes | toYaml) $ | nindent 8 }}
+        {{- end }}
 
 {{- end -}}

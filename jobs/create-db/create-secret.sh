@@ -34,3 +34,5 @@ kubectl get secret "$DB_SECRET_NAME" --namespace="$NAMESPACE" -ojson \
   | jq 'del(.metadata.namespace,.metadata.resourceVersion,.metadata.uid) | .metadata.creationTimestamp=null' \
   | jq '.metadata.annotations["janitor/ttl"] = "24h"' \
   | kubectl -n "$JOB_NAMESPACE" apply -f -
+
+echo "$DB_SECRET_NAME=$DB_SECRET_NAME">>/workflow/.env
