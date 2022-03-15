@@ -2,7 +2,6 @@ name: "Autodevops deploy"
 description: "Autodevops deploy using Helm template and kapp"
 inputs:
   environment:
-    default: 'dev'
     description: "The deployment environment (dev | preprod | prod)"
   kubeconfig:
     description: "The Kubernetes authentication configuration"

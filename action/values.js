@@ -20,7 +20,7 @@ const branchName = gitBranch.replace("refs/heads/", "").replace("refs/tags/","")
 
 const branchSlug = generate(branchName);
 
-const env = ENVIRONMENT || "dev"
+const env = ENVIRONMENT
 const isProduction = env === "prod";
 const isPreProduction = env === "preprod";
 const isDev = !(isProduction || isPreProduction);
