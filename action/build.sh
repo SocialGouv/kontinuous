@@ -1,13 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-set -x
-
 [ -d node_modules ] || yarn install --production
 
-set -a
-$(dirname $0)/env.sh
-set +a
+export $($(dirname $0)/env.sh)
 
 $(dirname $0)/utils/need-vars.sh "AUTODEVOPS_PATH KUBEWORKFLOW_PATH ENVIRONMENT"
 

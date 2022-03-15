@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-set -a
-$(dirname $0)/env.sh
-set +a
+export $($(dirname $0)/env.sh)
 
 REPOSITORY_NAME=${REPOSITORY##*/}
 
