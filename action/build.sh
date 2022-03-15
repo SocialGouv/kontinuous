@@ -9,9 +9,12 @@ set +a
 
 $(dirname $0)/utils/need-vars.sh "AUTODEVOPS_PATH KUBEWORKFLOW_PATH ENVIRONMENT"
 
-rm -rf $AUTODEVOPS_PATH
 mkdir -p $AUTODEVOPS_PATH
+
+rm -rf $AUTODEVOPS_PATH/*
+
 cd $AUTODEVOPS_PATH
+
 
 echo "Prepare charts and overlays"
 cp -r "$KUBEWORKFLOW_PATH/chart/." .
