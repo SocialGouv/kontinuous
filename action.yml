@@ -3,14 +3,17 @@ description: "Autodevops deploy using Helm template and kapp"
 inputs:
   environment:
     description: "The deployment environment (dev | preprod | prod)"
+    required: true
+  rancherId:
+    description: "The Rancher project ID, usually secrets.RANCHER_PROJECT_ID"
+    required: true
+  rancherProjectName:
+    description: "The Rancher project name, usually secrets.RANCHER_PROJECT_NAME, usefull jobs that needs secrets or ci namespaces"
+    required: true
   kubeconfig:
     description: "The Kubernetes authentication configuration"
   token:
     description: "The Github authentication token"
-  rancherId:
-    description: "The Rancher project ID, usually secrets.RANCHER_PROJECT_ID"
-  rancherProjectName:
-    description: "The Rancher project name, usually secrets.RANCHER_PROJECT_NAME, usefull jobs that needs secrets or ci namespaces"
   imageName:
     description: "The image registry path"
   helmArgs:
