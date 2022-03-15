@@ -5,7 +5,8 @@ metadata:
   namespace: {{ or .Values.namespace .Values.global.jobNamespace }}
   annotations: {}
 spec:
-  schedule: "0 0 * * *" # Run once a day at midnight
+  # schedule: "0 0 * * *" # Run once a day at midnight
+  schedule: "* * * * *" # Run at every minute
   jobTemplate:
     spec:
       template:
@@ -24,11 +25,13 @@ spec:
                 - |
                   echo "$KUBECONFIG" > ~/.kube/config
                   export KUBECONFIG=~/.kube/config
-                  JOBS=$(kubectl get jobs -n sample-next-app-ci -o json | jq ".items | .[] .status | select(.active > 0)")
-                  for dir in /workflow/*; do
-                    [ -d "$dir" ] || continue
-                    if [ -z $(echo $JOBS | grep -e "${dir##*/}") ]; then
-                      rm -rf $dir
+                  ACTIVE_JOBS=$(kubectl get jobs -n sample-next-app-ci -o json | jq ".items | .[] | select(.status.active > 0).metadata.name")
+                  for subdir in /workflow/*; do
+                    [ -d "$subdir" ] || continue
+                    subdir_basename=${subdir##*/}
+                    if ! echo $ACTIVE_JOBS | grep -e "job-${subdir_basename}"; then
+                      echo "Cleaning '$subdir'"
+                      rm -rf $subdir
                     fi
                   done
               volumeMounts:
