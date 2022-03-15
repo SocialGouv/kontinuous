@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  labels:
+    component: {{.Values.component }}
+    application: {{ .Values.global.repositoryName }}
+  name: {{.Values.component }}
+  namespace: {{ .Values.global.namespace }}
+spec:
+  rules:
+    - host: >-
+        {{ or .Values.host .Values.global.host }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: {{.Values.component }}
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - >-
+          {{ or .Values.host .Values.global.host }}
+      secretName: {{ or .Values.certSecretName .Values.global.certSecretName }}

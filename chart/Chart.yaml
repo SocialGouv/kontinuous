@@ -1,0 +1,32 @@
+apiVersion: v2
+name: socialgouv-autodevops
+version: 1.0.0
+home: https://github.com/SocialGouv
+description: Helm template for Kubernetes
+icon: https://avatars.githubusercontent.com/u/45039513?v=4
+sources:
+- https://github.com/SocialGouv/standup
+maintainers:
+- name: Fabrique numérique des Ministères Sociaux
+  email: dsi-incubateur@sg.social.gouv.fr
+dependencies:
+- name: app
+  repository: file://./charts/app
+  condition: app.enabled
+  version: 1.0.0
+- name: hasura
+  repository: file://./charts/hasura
+  condition: hasura.enabled
+  version: 1.0.0
+- name: maildev
+  repository: file://./charts/maildev
+  condition: maildev.enabled
+  version: 1.0.0
+- name: pgweb
+  repository: file://./charts/pgweb
+  condition: pgweb.enabled
+  version: 1.0.0
+- name: jobs
+  repository: file://./charts/jobs
+  condition: jobs.enabled
+  version: 1.0.0

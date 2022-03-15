@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    {{- if .Values.global.ttl }}
+    janitor/ttl: {{ .Values.global.ttl }}
+    {{- end }}
+    field.cattle.io/projectId: {{ .Values.global.rancherProjectId }}
+    git/branch: {{ .Values.global.gitBranch }}
+  labels:
+    application: {{ .Values.global.repositoryName }}
+  name: {{ .Values.global.namespace }}

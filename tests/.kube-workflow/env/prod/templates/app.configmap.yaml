@@ -1,0 +1,9 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: app-configmap
+data:
+  NODE_ENV: "production"
+  GRAPHQL_ENDPOINT: "http://hasura/v1/graphql"
+  ACCOUNT_MAIL_SENDER: "contact@fabrique.social.gouv.fr"
+  PRODUCTION: "true"

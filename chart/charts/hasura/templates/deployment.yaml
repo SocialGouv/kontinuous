@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: {{.Values.component }}
+    application: {{ .Values.global.repositoryName }}
+  name: {{.Values.component }}
+  namespace: {{ .Values.global.namespace }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      component: {{.Values.component }}
+  template:
+    metadata:
+      labels:
+        component: {{.Values.component }}
+        application: {{ .Values.global.repositoryName }}
+    spec:
+      initContainers:
+      {{- if .Values.waitForPostgres }}
+        {{- include "init-containers.wait-for-postgres" . | nindent 8 }}
+      {{- end }}
+      containers:
+        - image: "{{ or .Values.image .Values.global.image }}{{ if .Values.imagePackage }}{{ (print "/" .Values.imagePackage) }}{{ end }}:{{ or .Values.imageTag .Values.global.imageTag }}"
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: {{ .Values.probesPath }}
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: hasura
+          ports:
+            - containerPort: {{ .Values.containerPort }}
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: {{ .Values.probesPath }}
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: {{ .Values.probesPath }}
+              port: http
+            periodSeconds: 5
+          env: {{ tpl (.Values.env | toJson) . }}
+          envFrom: {{ tpl (.Values.envFrom | toJson) . }}

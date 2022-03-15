@@ -1,0 +1,5 @@
+{{- range $run := $.Values.runs }}
+---
+  {{- $context := (merge (dict "run" $run "with" $run.with "parentWith" $run.parentWith) $) -}}
+  {{- include "job" $context }}
+{{- end }}

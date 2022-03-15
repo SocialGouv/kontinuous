@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: {{.Values.component }}
+    application: {{ .Values.global.repositoryName }}
+  name: {{.Values.component }}
+  namespace: {{ .Values.global.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: {{.Values.component }}
+  template:
+    metadata:
+      labels:
+        component: {{.Values.component }}
+        application: {{ .Values.global.repositoryName }}
+    spec:
+      containers:
+        - image: maildev/maildev:latest
+          name: maildev
+          ports:
+            - containerPort: 1080
+              name: http
+            - containerPort: 1025
+              name: smtp
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+          

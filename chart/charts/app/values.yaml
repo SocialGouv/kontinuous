@@ -1,0 +1,38 @@
+enabled:
+namespace: 
+host: 
+image: 
+imagePackage: 
+imageTag: 
+ttl: 
+rancherProjectId: my-cluser-id:my-project-id
+gitBranch: my-awesome-branch
+isProduction: false
+isPreProduction: false
+replicas: 1
+containerPort: 3000
+servicePort: 80
+envSecretName: 
+envConfigName: 
+env: []
+envFrom: []
+probesPath: /index.html
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 50m
+    memory: 128Mi
+autoscale:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 10
+  averageUtilization:
+    cpu: 100
+    memory: 100
+certSecretName: 
+waitForPostgres: false
+addVolumes: []
+volumes: []
+volumeMounts: []

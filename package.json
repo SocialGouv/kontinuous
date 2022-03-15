@@ -1,0 +1,11 @@
+{
+  "name": "kube-workflow",
+  "version": "1.0.0",
+  "repository": "git@github.com:SocialGouv/kube-workflow.git",
+  "license": "MIT",
+  "dependencies": {
+    "@socialgouv/env-slug": "^1.2.2",
+    "degit": "^2.8.4",
+    "js-yaml": "^4.1.0"
+  }
+}

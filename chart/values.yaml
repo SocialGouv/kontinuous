@@ -1,0 +1,9 @@
+global:
+  isProduction: false
+  namespace: default
+  repositoryName: the-awesome
+  host:
+  certSecretName: wildcard-crt
+  branchSlug:
+  image:
+  imageTag:

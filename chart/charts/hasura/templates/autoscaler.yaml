@@ -1,0 +1,29 @@
+{{ if .Values.autoscale.enabled }}
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{.Values.component }}
+  namespace: {{ .Values.global.namespace }}
+  labels:
+    component: {{.Values.component }}
+spec:
+  minReplicas: {{ .Values.autoscale.minReplicas }}
+  maxReplicas: {{ .Values.autoscale.maxReplicas }}
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: {{ .Values.autoscale.averageUtilization.cpu }}
+          type: Utilization
+      type: Resource
+    - resource:
+        name: memory
+        target:
+          averageUtilization: {{ .Values.autoscale.averageUtilization.memory }}
+          type: Utilization
+      type: Resource
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{.Values.component }}
+{{ end }}

@@ -1,0 +1,115 @@
+name: "Autodevops deploy"
+description: "Autodevops deploy using Helm template and kapp"
+inputs:
+  environment:
+    default: 'dev'
+    description: "The deployment environment (dev | preprod | prod)"
+  kubeconfig:
+    description: "The Kubernetes authentication configuration"
+  token:
+    description: "The Github authentication token"
+  rancherId:
+    description: "The Rancher project ID, usually secrets.RANCHER_PROJECT_ID"
+  rancherProjectName:
+    description: "The Rancher project name, usually secrets.RANCHER_PROJECT_NAME, usefull jobs that needs secrets or ci namespaces"
+  imageName:
+    description: "The image registry path"
+  helmArgs:
+    description: "Add extra args to Helm template command"
+  components:
+    description: "list of components to enable separated by spaces, default to app"
+  actionName:
+    description: "override manifests name as manifest-$name.yaml, default to manifest-$environment.yaml"
+outputs:
+  url:
+    description: "Main deployment URL"
+    value: ${{ steps.environment-url.outputs.url }}
+runs:
+  using: "composite"
+  steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup env vars
+      shell: bash
+      run: echo "AUTODEVOPS_PATH=/tmp/autodevops" >> $GITHUB_ENV
+
+    - name: Build manifests
+      shell: bash
+      env:
+        ENVIRONMENT: ${{ inputs.environment }}
+        RANCHER_PROJECT_ID: ${{ inputs.rancherId}}
+        RANCHER_PROJECT_NAME: ${{ inputs.rancherProjectName }}
+        COMPONENTS: ${{ inputs.components }}
+        HELM_ARGS: ${{ inputs.helmArgs }}
+        IMAGE_NAME: ${{ inputs.imageName }}
+      working-directory: ${{ env.AUTODEVOPS_PATH }}
+      run: $GITHUB_ACTION_PATH/action/build.sh
+
+    - name: Archive manifest
+      uses: actions/upload-artifact@v2
+      with:
+        name: manifests-${{ inputs.actionName || inputs.environment }}.yaml
+        path: ${{ env.AUTODEVOPS_PATH }}/manifests.yaml
+
+    - name: Setup namespace env var
+      shell: bash
+      run: |
+        NAMESPACE=$(cat manifests.yaml | yq eval-all 'select(.kind=="Namespace").metadata.name')
+        echo "NAMESPACE=$NAMESPACE" >> $GITHUB_ENV
+
+    - name: Notify deployment start
+      uses: bobheadxi/deployments@v0.4.3
+      id: deployment
+      with:
+        step: start
+        token: ${{ inputs.token }}
+        desc: "Deploying environment: ${{ env.NAMESPACE }}"
+        env: ${{ inputs.environment == 'dev' && env.NAMESPACE || inputs.environment == 'preproduction' && 'preproduction' || 'production' }}
+        
+    - name: Install Kapp
+      uses: vmware-tanzu/carvel-setup-action@v1
+      with:
+        only: kapp
+        token: ${{ inputs.token }}
+
+    - name: Write kubeconfig
+      uses: SocialGouv/actions/util-write-kubeconfig@v1
+      with:
+        kubeconfig: ${{ inputs.kubeconfig }}
+
+    - name: Create k8s namespace
+      shell: bash
+      working-directory: ${{ env.AUTODEVOPS_PATH }}
+      run: $GITHUB_ACTION/action/create-namespace.sh
+    
+    - name: Apply manifests and wait for sync using kapp
+      shell: bash
+      working-directory: ${{ env.AUTODEVOPS_PATH }}
+      run: $GITHUB_ACTION_PATH/action/deploy.sh
+
+    - name: Define environment URL
+      id: environment-url
+      shell: bash
+      working-directory: ${{ env.AUTODEVOPS_PATH }}
+      run: |
+        HOSTS=$(cat manifests.yaml | yq eval-all '.spec.rules[] .host')
+        HOST=$(echo "$HOSTS" | head -n 1)
+        echo $HOST
+        echo "::set-output name=url::https://$HOST"
+
+    - name: Notify deployment end
+      uses: bobheadxi/deployments@v0.4.3
+      with:
+        step: finish
+        status: ${{ job.status }}
+        token: ${{ inputs.token }}
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+        env_url: ${{ steps.environment-url.outputs.url }}
+
+    - name: Debug manifests
+      uses: SocialGouv/actions/k8s-manifests-debug@v1
+      with:
+        token: ${{ inputs.token }}
+        path: ${{ env.AUTODEVOPS_PATH }}/manifests.yaml
