@@ -9,8 +9,10 @@
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
+    "dotenv": "^16.0.0",
     "eslint": "^8.11.0",
     "husky": "^7.0.4",
+    "jest": "^27.5.1",
     "lint-staged": "^12.3.5",
     "prettier": "^2.5.1"
   },
@@ -24,6 +26,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "jest tests"
   }
 }

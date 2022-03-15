@@ -1,4 +1,4 @@
-const { execFile } = require('child_process');
+const { execFile } = require("child_process");
 
 const promiseFromChildProcess = (child) => {
   return new Promise(function (resolve, reject) {
@@ -7,8 +7,9 @@ const promiseFromChildProcess = (child) => {
   });
 }
 
-const asyncShell = ([cmd, ...args], pipe = false) => {
-  const childProcess = execFile(cmd, args, { encoding: 'utf8' })
+const asyncShell = ([cmd, ...args], options = {}, pipe = true) => {
+  const defaultOptions = { encoding: "utf8" }
+  const childProcess = execFile(cmd, args, {...defaultOptions, ...options})
   if (pipe) {
     childProcess.stdout.pipe(process.stdout)
     childProcess.stderr.pipe(process.stderr)
