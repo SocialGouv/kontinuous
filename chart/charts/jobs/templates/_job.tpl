@@ -9,17 +9,19 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-{{ join "--" $run.scope }}
+  name: job-{{ $val.global.branchSlug }}-{{ join "--" $run.scope }}
   namespace: {{ or $val.namespace $val.global.jobNamespace }}
   annotations:
     kapp.k14s.io/nonce: ""
     kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/change-group: "autodevops/{{ $val.global.namespace }}"
     {{- range $scope := $run.scopes }}
     kapp.k14s.io/change-group.{{ $scope }}: "autodevops/{{ $scope }}.{{ $val.global.namespace }}"
     {{- end }}
     {{- range $need := $run.needs }}
     kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting autodevops/{{ $need }}.{{ $val.global.namespace }}"
     {{- end }}
+    janitor/ttl: 1800
 spec:
   backoffLimit: 3
   activeDeadlineSeconds: 3600
@@ -98,7 +100,7 @@ spec:
               mountPath: /action
             - name: workflow
               mountPath: /workflow
-              subPath: {{ $val.global.sha }}
+              subPath: {{ $val.global.branchSlug }}/{{ $val.global.sha }}
 
       volumes:
         - name: workspace

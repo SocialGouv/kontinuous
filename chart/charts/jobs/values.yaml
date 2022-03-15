@@ -6,3 +6,4 @@ sharedStorage:
   size: 2Gi
   className: 'azurefile'
 runs: []
+image: "alpine:3"

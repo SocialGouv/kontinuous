@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: jobci-clean-workflow
+  namespace: {{ or .Values.namespace .Values.global.jobNamespace }}
+  annotations: {}
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      annotations: {}
+      labels: {}
+    spec:
+      containers:          
+        - name: job
+          image: bitnami/kubectl:latest
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/bash
+            - -c
+            - |
+              for dir in /workflow/*; do
+                [ -d "$dir" ] || continue
+                echo $dir
+              done
+          volumeMounts:
+            - name: workflow
+              mountPath: /workflow
+
+      volumes:
+        - name: workflow
+          persistentVolumeClaim:
+            claimName: jobs-shared-storage
