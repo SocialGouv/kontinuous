@@ -98,7 +98,7 @@ spec:
               mountPath: /action
             - name: workflow
               mountPath: /workflow
-              subPath: {{ $.val.global.sha }}
+              subPath: {{ $val.global.sha }}
 
       volumes:
         - name: workspace
