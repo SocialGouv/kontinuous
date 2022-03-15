@@ -60,6 +60,7 @@ runs:
 
     - name: Setup namespace env var
       shell: bash
+      working-directory: ${{ env.AUTODEVOPS_PATH }}
       run: |
         NAMESPACE=$(cat manifests.yaml | yq eval-all 'select(.kind=="Namespace").metadata.name')
         echo "NAMESPACE=$NAMESPACE" >> $GITHUB_ENV
