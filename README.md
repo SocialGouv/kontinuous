@@ -164,7 +164,7 @@ Resources:
 
 ### TODO
 #### documentation:
-- jobs workflow
+- jobs workflow (needs, shared-storage, action, image, run, shell, uses)
 - tests
 - best-practices and contributing how-to add
   - charts
