@@ -7,7 +7,6 @@ metadata:
 spec:
   schedule: "0 0 * * *" # Run once a day at midnight
   # schedule: "* * * * *" # Run at every minute
-  startingDeadlineSeconds: 300
   jobTemplate:
     spec:
       template:
@@ -26,7 +25,8 @@ spec:
                 - |
                   echo "$KUBECONFIG" > ~/.kube/config
                   export KUBECONFIG=~/.kube/config
-                  ACTIVE_JOBS=$(kubectl get jobs -n sample-next-app-ci -o json | jq ".items | .[] | select(.status.active > 0).metadata.name")
+                  export JOB_NAMESPACE="{{ or .Values.namespace .Values.global.jobNamespace }}"
+                  ACTIVE_JOBS=$(kubectl get jobs -n $JOB_NAMESPACE -o json | jq ".items | .[] | select(.status.active > 0).metadata.name")
                   for subdir in /workflow/*; do
                     [ -d "$subdir" ] || continue
                     subdir_basename=${subdir##*/}
