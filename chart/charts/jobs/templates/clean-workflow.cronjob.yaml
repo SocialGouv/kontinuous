@@ -7,7 +7,7 @@ metadata:
 spec:
   schedule: "0 0 * * *" # Run once a day at midnight
   # schedule: "* * * * *" # Run at every minute
-  startingDeadlineSeconds: 180
+  startingDeadlineSeconds: 300
   jobTemplate:
     spec:
       template:
