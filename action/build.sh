@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-[ -d node_modules ] || yarn
+[ -d node_modules ] || yarn install --production
 
 set -a
 $(dirname $0)/env.sh

@@ -1,6 +1,6 @@
 const miniHash = function jenkinsOneAtATimeHash(keyString) {
   let hash = 0;
-  for (charIndex = 0; charIndex < keyString.length; ++charIndex) {
+  for (let charIndex = 0; charIndex < keyString.length; ++charIndex) {
     hash += keyString.charCodeAt(charIndex);
     hash += hash << 10;
     hash ^= hash >> 6;

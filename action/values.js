@@ -13,7 +13,6 @@ const {
   CERT_SECRET_NAME,
   PRODUCTION_DATABASE,
   GIT_HEAD_REF,
-  COMPONENTS,
 } = process.env;
 
 const gitBranch = GIT_HEAD_REF ? GIT_HEAD_REF : GIT_REF
