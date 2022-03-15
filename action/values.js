@@ -41,7 +41,7 @@ const isDestroyable = isDev && !keepAlive;
 
 const ttl = isDestroyable ? (isRenovate ? "1d" : "7d") : "";
 
-const sha = GIT_SHA || "";
+const sha = GIT_SHA;
 const imageTag = isPreProduction
   ? `preprod-${sha}`
   : gitBranch.startsWith("refs/tags/")

@@ -12,8 +12,6 @@ isPreProduction: false
 replicas: 1
 containerPort: 3000
 servicePort: 80
-envSecretName: 
-envConfigName: 
 env: []
 envFrom: []
 probesPath: /index.html

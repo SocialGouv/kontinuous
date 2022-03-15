@@ -15,13 +15,21 @@ spec:
             - name: job
               image: bitnami/kubectl:latest
               imagePullPolicy: IfNotPresent
+              envFrom:
+              - secretRef:
+                  name: kubeconfig
               command:
                 - /bin/bash
                 - -c
                 - |
+                  echo "$KUBECONFIG" > ~/.kube/config
+                  export KUBECONFIG=~/.kube/config
+                  JOBS=$(kubectl get jobs -n sample-next-app-ci -o json | jq ".items | .[] .status | select(.active > 0)")
                   for dir in /workflow/*; do
                     [ -d "$dir" ] || continue
-                    echo $dir
+                    if [ -z $(echo $JOBS | grep -e "${dir##*/}") ]; then
+                      rm -rf $dir
+                    fi
                   done
               volumeMounts:
                 - name: workflow

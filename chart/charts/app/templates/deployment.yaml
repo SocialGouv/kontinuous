@@ -22,8 +22,10 @@ spec:
         {{- include "init-containers.wait-for-postgres" . | nindent 8 }}
       {{- end }}
       volumes:
+        {{- if gt (len .Values.volumes) 0 }}
         {{- tpl (.Values.volumes | toYaml) . | nindent 8 }}
-        {{- range $volumeName := .Values.addVolumes -}}
+        {{- end }}
+        {{- range $volumeName := .Values.addVolumes }}
         - name: "{{ tpl $volumeName $ }}"
           persistentVolumeClaim:
             claimName: "{{ tpl $volumeName $ }}"
@@ -65,23 +67,17 @@ spec:
               port: http
             periodSeconds: 5
           env:
+            {{- if gt (len .Values.env) 0 }}
             {{- tpl (.Values.env | toYaml) . | nindent 12 }}
-          {{- if or .Values.envSecretName .Values.envConfigName }}
-          envFrom:
-            {{- if .Values.envSecretName }}
-            - secretRef:
-                name: "{{ .Values.envSecretName }}"
             {{- end }}
-            {{- if .Values.envConfigName }}
-            - configMapRef:
-                name: "{{ .Values.envConfigName }}"
-            {{- end }}
-          {{- else }}
           envFrom:
+            {{- if gt (len .Values.envFrom) 0 }}
             {{- tpl (.Values.envFrom | toYaml) . | nindent 12 }}
-          {{- end }}
+            {{- end }}
           volumeMounts:
+            {{- if gt (len .Values.volumeMounts) 0 }}
             {{- tpl (.Values.volumeMounts | toYaml) . | nindent 12 }}
+            {{- end }}
             {{- range $volumeName := .Values.addVolumes }}
             - name: "{{ tpl $volumeName $ }}"
               mountPath: "/mnt/{{ tpl $volumeName $ }}"
