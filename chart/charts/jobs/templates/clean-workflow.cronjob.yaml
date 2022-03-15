@@ -5,6 +5,7 @@ metadata:
   namespace: {{ or .Values.namespace .Values.global.jobNamespace }}
   annotations: {}
 spec:
+  schedule: "0 0 * * *" # Run once a day at midnight
   backoffLimit: 1
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
