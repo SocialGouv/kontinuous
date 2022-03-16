@@ -1,5 +1,4 @@
-const fs = require('fs');
-const { cp, lstat } = require('fs/promises');
+const fs = require('fs-extra');
 
 const yaml = require('js-yaml');
 const { generate } = require("@socialgouv/env-slug")
@@ -12,7 +11,6 @@ fs.mkdirSync("uses", {recursive: true})
 const downloadingPromises = {}
 
 const userCwd = process.env.WORKING_DIR || process.env.OLDPWD || process.cwd()
-
 const requireUse = async (use) => {
   const slug = generate(use)
   use = use.replace("@", "#")
@@ -21,13 +19,9 @@ const requireUse = async (use) => {
     let loading = downloadingPromises[slug]
     if (!loading){
       if (use.startsWith(".") || use.startsWith("/")){
-        const cpOptions = {}
         const src = `${userCwd}/${use}`
         console.log(`import local ${src}`)
-        if((await lstat(src)).isDirectory()){
-          cpOptions.recursive = true
-        }
-        loading = cp(src, target, cpOptions);
+        loading = fs.copy(src, target);
       } else {
         console.log(`degit ${use}`)
         loading = degit(use).clone(target)
@@ -36,7 +30,7 @@ const requireUse = async (use) => {
     }
     await loading
   }
-  if ((await lstat(target)).isDirectory()) {
+  if ((await fs.lstat(target)).isDirectory()) {
     target += "/use.yaml"
   }
   return { slug, use, target }

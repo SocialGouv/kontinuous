@@ -19,13 +19,22 @@ const testdirs = getDirectories(samplesDir)
 for (const testdir of testdirs){
   it(`build manifests correctly for "${testdir}"`, async () => {
     const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`));
-    const envFile = `${samplesDir}/${testdir}`
-    const env = await access(envFile) ?
+    const testdirPath = `${samplesDir}/${testdir}`
+    const envFile = `${testdirPath}/.env`
+    let envFileExists
+    try {
+      await access(envFile)
+      envFileExists = true
+    }catch(_e){
+      envFileExists = false
+    }
+    const env = envFileExists ?
       dotenv.parse(await readFile(envFile, {encoding: "utf-8"}))
       : process.env
     Object.assign(env, {
       KUBEWORKFLOW_PATH: rootPath,
       AUTODEVOPS_PATH: tmpDir,
+      WORKSPACE_PATH: testdirPath,
     })
     await asyncShell([`${rootPath}/dev-local.sh`], {
       env,

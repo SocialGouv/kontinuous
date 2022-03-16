@@ -6,6 +6,7 @@
   "dependencies": {
     "@socialgouv/env-slug": "^1.2.2",
     "degit": "^2.8.4",
+    "fs-extra": "^10.0.1",
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {

@@ -46,14 +46,12 @@ echo "Compiling additional subcharts instances"
 node $KUBEWORKFLOW_PATH/action/compile-chart.js
 
 echo "Merge .kube-workflow env manifests"
-NAMESPACE=$(cat compiled.values.json | yq e '.global.namespace')
 shopt -s globstar
 for filename in $WORKSPACE_PATH/.kube-workflow/env/$ENVIRONMENT/templates/**/*.{yml,yaml}; do
   [ -f "$filename" ] || continue
   echo "Merging $filename to manifests templates"
   target="templates/$(basename $filename)"
   cp "$filename" "$target"
-  yq -i e '.metadata.namespace |= "'$NAMESPACE'"' "$target"
 done
 
 echo "Build base manifest using helm"
@@ -76,6 +74,9 @@ helm template \
   $HELM_TEMPLATE_ARGS \
   . \
   > manifests.base.yaml
+
+echo "Set default namespace"
+node $KUBEWORKFLOW_PATH/action/compile-default-ns.js
 
 echo "Build final manifests using kustomize"
 kustomize build \
