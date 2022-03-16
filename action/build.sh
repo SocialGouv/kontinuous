@@ -5,7 +5,7 @@ export $($(dirname $0)/env.sh)
 
 $(dirname $0)/utils/need-vars.sh "AUTODEVOPS_PATH KUBEWORKFLOW_PATH ENVIRONMENT"
 
-[ -d "$KUBEWORKFLOW_PATH/node_modules" ] || yarn --cwd $KUBEWORKFLOW_PATH install --production
+[ -d "$KUBEWORKFLOW_PATH/node_modules" ] || yarn --cwd $KUBEWORKFLOW_PATH install --production --frozen-lockfile
 
 rm -rf $AUTODEVOPS_PATH
 
