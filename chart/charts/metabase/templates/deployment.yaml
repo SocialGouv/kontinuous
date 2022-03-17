@@ -22,9 +22,9 @@ spec:
           name: metabase
           envFrom:
             - secretRef:
-                name: metabase-{{ .Values.component }}
+                name: {{ .Values.component }}
             - configMapRef:
-                name: metabase-{{ .Values.component }}
+                name: {{ .Values.component }}
           ports:
             - containerPort: 3000
               name: http
