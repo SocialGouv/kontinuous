@@ -26,10 +26,14 @@ node $KUBEWORKFLOW_PATH/action/values.js > values.env.yaml
 VALUES_FILES=""
 if [ -f "common/values.yaml" ]; then
   VALUES_FILES+=" common/values.yaml"
+elif [ -f "common/values.yml" ]
+  VALUES_FILES+=" common/values.yml"
 fi
 VALUES_FILES+=" values.env.yaml"
 if [ -f "env/${ENVIRONMENT}/values.yaml" ]; then
   VALUES_FILES+=" env/${ENVIRONMENT}/values.yaml"
+elif [ -f "env/${ENVIRONMENT}/values.yml" ]; then
+  VALUES_FILES+=" env/${ENVIRONMENT}/values.yml"
 fi
 
 echo "Merging values files"
@@ -47,7 +51,7 @@ node $KUBEWORKFLOW_PATH/action/compile-chart.js
 
 echo "Merge .kube-workflow env manifests"
 shopt -s globstar
-for filename in $WORKSPACE_PATH/.kube-workflow/env/$ENVIRONMENT/templates/**/*.{yml,yaml}; do
+for filename in $WORKSPACE_PATH/.kube-workflow/env/$ENVIRONMENT/templates/**/*; do
   [ -f "$filename" ] || continue
   echo "Merging $filename to manifests templates"
   target="templates/$(basename $filename)"
