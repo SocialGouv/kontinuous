@@ -63,7 +63,6 @@ runs:
         HELM_ARGS: ${{ inputs.helmArgs }}
         IMAGE_NAME: ${{ inputs.imageName }}
         DEBUG: "true"
-      working-directory: ${{ env.KWBUILD_PATH }}
       run: node $GITHUB_ACTION_PATH/action/build/build.js
 
     - name: Archive manifest
