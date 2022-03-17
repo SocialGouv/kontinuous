@@ -50,9 +50,9 @@ runs:
 
     - name: Install dependencies
       shell: bash
+      working-directory: "${{ github.action_path }}"
       run: |
-        yarn --frozen-lockfile --prefer-offline --production \
-          --cwd ${{ env.GITHUB_ACTION_PATH }}
+        yarn --frozen-lockfile --prefer-offline --production
 
     - name: Build manifests
       shell: bash
@@ -64,11 +64,11 @@ runs:
         HELM_ARGS: ${{ inputs.helmArgs }}
         IMAGE_NAME: ${{ inputs.imageName }}
         DEBUG: "true"
-      working-directory: ${{ env.GITHUB_ACTION_PATH }}
+      working-directory: "${{ github.action_path }}"
       run: |
-        echo GITHUB_ACTION_PATH=${{ env.GITHUB_ACTION_PATH }}
-        cd ${{ env.GITHUB_ACTION_PATH }}
-        ls ${{ env.GITHUB_ACTION_PATH }}
+        echo GITHUB_ACTION_PATH=${{ github.action_path }}
+        cd ${{ github.action_path }}
+        ls ${{ github.action_path }}
         yarn build-manifests
 
     - name: Archive manifest
@@ -111,7 +111,7 @@ runs:
       working-directory: ${{ env.KWBUILD_PATH }}
       env:
         REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
-      run: $GITHUB_ACTION_PATH/action/deploy/deploy
+      run: ${{ github.action_path }}/action/deploy/deploy
 
     - name: Define environment URL
       id: environment-url
