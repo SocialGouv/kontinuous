@@ -26,7 +26,7 @@ node $KUBEWORKFLOW_PATH/action/values.js > values.env.yaml
 VALUES_FILES=""
 if [ -f "common/values.yaml" ]; then
   VALUES_FILES+=" common/values.yaml"
-elif [ -f "common/values.yml" ]
+elif [ -f "common/values.yml" ]; then
   VALUES_FILES+=" common/values.yml"
 fi
 VALUES_FILES+=" values.env.yaml"
