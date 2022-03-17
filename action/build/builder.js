@@ -41,10 +41,6 @@ module.exports = async (envVars) => {
   fs.ensureDirSync(KWBUILD_PATH)
   process.chdir(KWBUILD_PATH)
   
-  if (fs.pathExistsSync(`${KUBEWORKFLOW_PATH}/node_modules`)){
-    shell("yarn install --production --frozen-lockfile", { cwd: KUBEWORKFLOW_PATH }, true)
-  }
-
   logger.debug("Prepare charts and overlays")
   fs.copySync(`${KUBEWORKFLOW_PATH}/chart`, ".")
   

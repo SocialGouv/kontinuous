@@ -40,6 +40,19 @@ runs:
         mkdir -p $KWBUILD_PATH
         echo "KWBUILD_PATH=$KWBUILD_PATH" >> $GITHUB_ENV
 
+    - name: Node setup
+      uses: actions/setup-node@v2
+      with:
+        node-version: "14"
+
+    - name: Yarn cache setup
+      uses: c-hive/gha-yarn-cache@v1
+
+    - name: Install dependencies
+      shell: bash
+      working-directory: ${{ env.GITHUB_ACTION_PATH }}
+      run: yarn --frozen-lockfile --prefer-offline --production
+
     - name: Build manifests
       shell: bash
       env:
