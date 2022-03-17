@@ -1,11 +1,8 @@
-const fs = require('fs-extra');
-
 const yaml = require('js-yaml');
 
-const main = async() => {
-  const values = JSON.parse(fs.readFileSync("compiled.values.json"))
+module.exports = async (manifestsDocument, values) => {
   const defaultNamespace = values.global.namespace
-  const iterator = yaml.loadAll(fs.readFileSync("manifests.base.yaml"))
+  const iterator = yaml.loadAll(manifestsDocument)
   const manifests = []
   for (const manifest of iterator){
     if (!manifest){
@@ -19,7 +16,5 @@ const main = async() => {
     }
     manifests.push(yaml.dump(manifest))
   }
-  fs.writeFileSync("manifests.base.yaml", manifests.join("---\n"))
+  return  manifests.join("---\n")
 }
-
-main()

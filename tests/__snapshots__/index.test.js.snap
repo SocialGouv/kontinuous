@@ -57,7 +57,7 @@ spec:
       containers:
       - env: null
         envFrom: null
-        image: ghcr.io/socialgouv/redirect/app:sha-
+        image: ghcr.io/socialgouv/redirect/app:sha-ffac537e6cbbf934b08745a378932722df287a53
         livenessProbe:
           failureThreshold: 15
           httpGet:
@@ -316,7 +316,7 @@ spec:
             name: app-sealed-secret
         - configMapRef:
             name: app-configmap
-        image: ghcr.io/socialgouv/sample-1/app:sha-
+        image: ghcr.io/socialgouv/sample-1/app:sha-ffac537e6cbbf934b08745a378932722df287a53
         livenessProbe:
           failureThreshold: 15
           httpGet:
@@ -396,7 +396,7 @@ spec:
             name: app-sealed-secret
         - configMapRef:
             name: app-configmap
-        image: ghcr.io/socialgouv/sample-1/app:sha-
+        image: ghcr.io/socialgouv/sample-1/app:sha-ffac537e6cbbf934b08745a378932722df287a53
         livenessProbe:
           failureThreshold: 15
           httpGet:
@@ -466,7 +466,7 @@ spec:
             name: hasura-sealed-secret
         - configMapRef:
             name: hasura-configmap
-        image: ghcr.io/socialgouv/sample-1/hasura:sha-
+        image: ghcr.io/socialgouv/sample-1/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
         livenessProbe:
           failureThreshold: 15
           httpGet:
@@ -690,7 +690,7 @@ spec:
           name: action
         - mountPath: /workflow
           name: workflow
-          subPath: feature-branch-1/
+          subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
       initContainers:
       - command:
         - sh
@@ -768,7 +768,7 @@ spec:
           name: action
         - mountPath: /workflow
           name: workflow
-          subPath: feature-branch-1/
+          subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
       initContainers:
       - command:
         - sh
@@ -822,7 +822,7 @@ spec:
         volumeMounts:
         - mountPath: /workflow
           name: workflow
-          subPath: feature-branch-1/
+          subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
       restartPolicy: Never
       volumes:
       - name: workflow

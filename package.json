@@ -7,7 +7,10 @@
     "@socialgouv/env-slug": "^1.2.2",
     "degit": "^2.8.4",
     "fs-extra": "^10.0.1",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "lodash.defaultsdeep": "^4.6.1",
+    "pino": "^7.9.0",
+    "pino-pretty": "^7.5.4"
   },
   "devDependencies": {
     "dotenv": "^16.0.0",
