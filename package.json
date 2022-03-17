@@ -31,6 +31,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "lint": "eslint .",
-    "test": "jest tests"
+    "test": "jest tests",
+    "build-manifests": "node action/build/build.js"
   }
 }

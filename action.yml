@@ -64,7 +64,7 @@ runs:
         IMAGE_NAME: ${{ inputs.imageName }}
         DEBUG: "true"
       working-directory: ${{ env.GITHUB_ACTION_PATH }}
-      run: node $GITHUB_ACTION_PATH/action/build/build.js
+      run: yarn build-manifests
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2
