@@ -1,0 +1,5 @@
+metabase-app1:
+  enabled: false
+
+metabase-app2:
+  enabled: false
