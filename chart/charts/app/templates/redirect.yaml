@@ -9,12 +9,12 @@ metadata:
 spec:
   rules:
   {{ range $host := .Values.redirectFrom }}
-    - host: "{{ $host }}"
+    - host: "{{ tpl $host $ }}"
   {{ end }}
   tls:
     - hosts:
       {{ range $host := .Values.redirectFrom }}
-        - "{{ $host }}"
+        - "{{ tpl $host $ }}"
       {{ end }}
       secretName: "{{ .Values.component }}-redirect"
 {{ end }}

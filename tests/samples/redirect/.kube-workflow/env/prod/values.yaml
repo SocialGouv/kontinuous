@@ -2,4 +2,4 @@ app:
   enabled: true
   host: transco.travail-emploi.gouv.fr
   redirectFrom:
-    - transitions-collectives.fabrique.social.gouv.fr
+    - "{{ .Values.global.host }}"

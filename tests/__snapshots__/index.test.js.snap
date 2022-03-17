@@ -137,10 +137,10 @@ metadata:
   namespace: redirect
 spec:
   rules:
-  - host: transitions-collectives.fabrique.social.gouv.fr
+  - host: redirect.fabrique.social.gouv.fr
   tls:
   - hosts:
-    - transitions-collectives.fabrique.social.gouv.fr
+    - redirect.fabrique.social.gouv.fr
     secretName: app-redirect
 ---
 apiVersion: networking.k8s.io/v1
