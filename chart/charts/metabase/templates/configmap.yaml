@@ -4,7 +4,7 @@ metadata:
   labels:
     component: {{ .Values.component }}
     application: {{ .Values.global.repositoryName }}
-  name: metabase-{{ .Values.component }}
+  name: {{ .Values.component }}
   namespace: {{ .Values.global.namespace }}
 data:
   MB_APPLICATION_NAME: {{ .Values.component }}
