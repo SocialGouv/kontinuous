@@ -136,9 +136,13 @@ git clone https://github.com/SocialGouv/kube-workflow $KUBEWORKFLOW_PATH
 export WORKSPACE_PATH=$PWD/template
 git clone https://github.com/SocialGouv/template $WORKSPACE_PATH
 
-# run manifest generation
-node $KUBEWORKFLOW_PATH/tests/dev-local.js
+# run manifest generation as snapshots using symlink to tests
+ln -s $WORKSPACE_PATH $KUBEWORKFLOW_PATH/tests/samples/
+cd $KUBEWORKFLOW_PATH
+yarn test -t $(basename $WORKSPACE_PATH)
 ```
+
+then check content of `$KUBEWORKFLOW_PATH/tests/__snapshots__/$(basename $WORKSPACE_PATH)
 
 ### Development
 
