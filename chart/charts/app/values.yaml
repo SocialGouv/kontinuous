@@ -34,3 +34,4 @@ waitForPostgres: false
 addVolumes: []
 volumes: []
 volumeMounts: []
+redirectFrom: []

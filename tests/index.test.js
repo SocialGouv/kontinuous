@@ -29,8 +29,8 @@ for (const testdir of testdirs){
       envFileExists = false
     }
     const env = envFileExists ?
-      dotenv.parse(await readFile(envFile, {encoding: "utf-8"}))
-      : process.env
+    dotenv.parse(await readFile(envFile, {encoding: "utf-8"}))
+    : process.env
     Object.assign(env, {
       KUBEWORKFLOW_PATH: rootPath,
       AUTODEVOPS_PATH: tmpDir,

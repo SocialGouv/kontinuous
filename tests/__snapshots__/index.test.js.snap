@@ -1,5 +1,171 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`build manifests correctly for "redirect" 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: \\"1234\\"
+    git/branch: refs/heads/feature-branch-1
+  labels:
+    application: redirect
+  name: redirect
+  namespace: redirect
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
+    kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
+  labels:
+    application: redirect
+    component: app
+  name: app
+  namespace: redirect
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
+    kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
+  labels:
+    application: redirect
+    component: app
+  name: app
+  namespace: redirect
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  template:
+    metadata:
+      labels:
+        application: redirect
+        component: app
+    spec:
+      containers:
+      - env: null
+        envFrom: null
+        image: ghcr.io/socialgouv/redirect/app:sha-
+        livenessProbe:
+          failureThreshold: 15
+          httpGet:
+            path: /index.html
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 5
+        name: app
+        ports:
+        - containerPort: 3000
+          name: http
+        readinessProbe:
+          failureThreshold: 15
+          httpGet:
+            path: /index.html
+            port: http
+          initialDelaySeconds: 0
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        startupProbe:
+          failureThreshold: 12
+          httpGet:
+            path: /index.html
+            port: http
+          periodSeconds: 5
+        volumeMounts: null
+      initContainers: null
+      volumes: null
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: \\"true\\"
+  labels:
+    application: redirect
+    component: app
+  name: app
+  namespace: redirect
+spec:
+  rules:
+  - host: transco.travail-emploi.gouv.fr
+    http:
+      paths:
+      - backend:
+          service:
+            name: app
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - transco.travail-emploi.gouv.fr
+    secretName: redirect-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: \\"true\\"
+    nginx.ingress.kubernetes.io/permanent-redirect: https://transco.travail-emploi.gouv.fr$request_uri
+  name: app-redirect
+  namespace: redirect
+spec:
+  rules:
+  - host: transitions-collectives.fabrique.social.gouv.fr
+  tls:
+  - hosts:
+    - transitions-collectives.fabrique.social.gouv.fr
+    secretName: app-redirect
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: redirect
+spec:
+  ingress:
+  - from:
+    - podSelector: {}
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          network-policy/source: ingress-controller
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+  - Ingress
+"
+`;
+
 exports[`build manifests correctly for "sample-1" 1`] = `
 "apiVersion: v1
 kind: Namespace
