@@ -1,3 +1,2 @@
-#!/usr/bin/env node
 const builder = require("./builder")
 builder()
