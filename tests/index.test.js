@@ -36,8 +36,7 @@ for (const testdir of testdirs){
         KUBEWORKFLOW_PATH: rootPath,
         KWBUILD_PATH: tmpDir,
         WORKSPACE_PATH: testdirPath,
-        // REPOSITORY: `test-${path.basename(testdir)}`,
-        REPOSITORY: `${path.basename(testdir)}`,
+        REPOSITORY: `test-${path.basename(testdir)}`,
       }
       const envFile = `${testdirPath}/.env`
       if(fs.pathExistsSync(envFile)){
