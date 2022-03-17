@@ -1,0 +1,544 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`build manifests for test "sample-1" with env "preprod" 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: \\"1234\\"
+    git/branch: refs/heads/feature-branch-1
+  labels:
+    application: test-sample-1
+    cert: wildcard
+  name: test-sample-1-preprod
+  namespace: test-sample-1-preprod
+---
+apiVersion: v1
+data:
+  ACCOUNT_MAIL_SENDER: contact@fabrique.social.gouv.fr
+  GRAPHQL_ENDPOINT: http://hasura/v1/graphql
+  NODE_ENV: production
+  PRODUCTION: \\"false\\"
+kind: ConfigMap
+metadata:
+  name: app-configmap
+  namespace: test-sample-1-preprod
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
+    kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
+  labels:
+    application: test-sample-1
+    component: app
+  name: app
+  namespace: test-sample-1-preprod
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
+    kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
+  labels:
+    application: test-sample-1
+    component: app-2nd-instance
+  name: app-2nd-instance
+  namespace: test-sample-1-preprod
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 3000
+  selector:
+    component: app-2nd-instance
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
+    kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
+  labels:
+    application: test-sample-1
+    component: hasura
+  name: hasura
+  namespace: test-sample-1-preprod
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+  selector:
+    component: hasura
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
+    kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
+  labels:
+    application: test-sample-1
+    component: pgweb
+  name: pgweb
+  namespace: test-sample-1-preprod
+spec:
+  ports:
+  - name: http
+    port: 8081
+    targetPort: 8081
+  selector:
+    component: pgweb
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
+    kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
+  labels:
+    application: test-sample-1
+    component: app
+  name: app
+  namespace: test-sample-1-preprod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  template:
+    metadata:
+      labels:
+        application: test-sample-1
+        component: app
+    spec:
+      containers:
+      - env: null
+        envFrom:
+        - secretRef:
+            name: pg-user-preprod
+        - secretRef:
+            name: app-sealed-secret
+        - configMapRef:
+            name: app-configmap
+        image: ghcr.io/socialgouv/test-sample-1/app:preprod-ffac537e6cbbf934b08745a378932722df287a53
+        livenessProbe:
+          failureThreshold: 15
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 5
+        name: app
+        ports:
+        - containerPort: 3000
+          name: http
+        readinessProbe:
+          failureThreshold: 15
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 0
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        startupProbe:
+          failureThreshold: 12
+          httpGet:
+            path: /healthz
+            port: http
+          periodSeconds: 5
+        volumeMounts: null
+      initContainers: null
+      volumes: null
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
+    kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
+  labels:
+    application: test-sample-1
+    component: app-2nd-instance
+  name: app-2nd-instance
+  namespace: test-sample-1-preprod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app-2nd-instance
+  template:
+    metadata:
+      labels:
+        application: test-sample-1
+        component: app-2nd-instance
+    spec:
+      containers:
+      - env: null
+        envFrom:
+        - secretRef:
+            name: pg-user-preprod
+        - secretRef:
+            name: app-sealed-secret
+        - configMapRef:
+            name: app-configmap
+        image: ghcr.io/socialgouv/test-sample-1/app:preprod-ffac537e6cbbf934b08745a378932722df287a53
+        livenessProbe:
+          failureThreshold: 15
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 5
+        name: app
+        ports:
+        - containerPort: 3000
+          name: http
+        readinessProbe:
+          failureThreshold: 15
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 0
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        startupProbe:
+          failureThreshold: 12
+          httpGet:
+            path: /healthz
+            port: http
+          periodSeconds: 5
+        volumeMounts: null
+      initContainers: null
+      volumes: null
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
+    kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
+  labels:
+    application: test-sample-1
+    component: hasura
+  name: hasura
+  namespace: test-sample-1-preprod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: hasura
+  template:
+    metadata:
+      labels:
+        application: test-sample-1
+        component: hasura
+    spec:
+      containers:
+      - env: []
+        envFrom:
+        - secretRef:
+            name: pg-user-preprod
+        - secretRef:
+            name: hasura-sealed-secret
+        - configMapRef:
+            name: hasura-configmap
+        image: ghcr.io/socialgouv/test-sample-1/hasura:preprod-ffac537e6cbbf934b08745a378932722df287a53
+        livenessProbe:
+          failureThreshold: 15
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 5
+        name: hasura
+        ports:
+        - containerPort: 8080
+          name: http
+        readinessProbe:
+          failureThreshold: 15
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1280Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        startupProbe:
+          failureThreshold: 30
+          httpGet:
+            path: /healthz
+            port: http
+          periodSeconds: 5
+      initContainers: null
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
+    kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
+  labels:
+    application: test-sample-1
+    component: pgweb
+  name: pgweb
+  namespace: test-sample-1-preprod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: pgweb
+  template:
+    metadata:
+      labels:
+        application: test-sample-1
+        component: pgweb
+    spec:
+      containers:
+      - image: sosedoff/pgweb:0.11.8
+        livenessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 5
+        name: pgweb
+        ports:
+        - containerPort: 8081
+          name: http
+        readinessProbe:
+          failureThreshold: 15
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 0
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi
+        startupProbe:
+          failureThreshold: 12
+          httpGet:
+            path: /
+            port: http
+          periodSeconds: 5
+      envFrom:
+      - secretRef:
+          name: pg-user-preprod
+      initContainers:
+      - env:
+        - name: WAIT_FOR_RETRIES
+          value: \\"24\\"
+        envFrom:
+        - secretRef:
+            name: pg-user-preprod
+        image: ghcr.io/socialgouv/docker/wait-for-postgres:6.56.1
+        imagePullPolicy: Always
+        name: wait-for-postgres
+        resources:
+          limits:
+            cpu: 20m
+            memory: 32Mi
+          requests:
+            cpu: 5m
+            memory: 16Mi
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/cluster-wide: \\"true\\"
+  creationTimestamp: null
+  name: hasura-sealed-secret
+  namespace: test-sample-1-preprod
+spec:
+  encryptedData:
+    ACCOUNT_EMAIL_SECRET: AgCYU5zQRAGub/7BY2VzhhQ/Y5EtYeWcgdBrHMfOdhK6DLDbkiYTVBvdIVbvUp/AtHP8V3UwT0zoQfKRiECwdH6oJ92GJ2DQ6svTNJH+x4EyQRJTeRMOrx6y+iVAcFx6I5RbT6SdKkpzGztpY4t4pGt3IOUoKNrJRqshj170LQqsw57NyxzSgZ0HONNsHE+HUK6AijgZXBthAfWqlFyrg6WIBY1f/jyuZ7jvzlotTI9JXXSBz8LryNYG7kth2weHcmlQKiqERPbWGFuGwM77hzgFwixjqnrGJEjWXDfsAmBLk+B9nVht2H54pPYCD+cyRea5NeisxnNCAOw10BJHEX1gxgNzSwQDVfOSINWT1a8R81tm7Dz7j3LyKKT+UH8BREHMlu4qv7+D6PjrRXJXtAMGN6Vsz0Hqvf6vlZou7O4ygcAtirRaSPvsuU1FOg2JvwfheUVZ7StBGhsTBWyQ0jw9UqAXcjtcbqfzeOc8sEEe/5xyRJctT+A4s4XNGxiF/Mnaa9XB5OHtz55FUDzy2o0S21JXFjnNs2kmDji3gjPwYJzg+qat7ZcGBNMR4KNvu2SiUoDdQMKzmh7mi4nwqlOv08eJVP8ZzXGS3F8QcsMFXPfrH/53hunKq6gQ61D3+CsCN6Hz89X7FgWnMroMv52gNwtUc0yeQ+klIB2RsY6+NefWx0p+ikxHY9MG64qMPtFNG+RW2TwRgcdbD6CC31GUVmGVLpEF95RF7v1i66H9EvNwiRZCagnZ4qYcrQ==
+    HASURA_GRAPHQL_ADMIN_SECRET: AgDZX0nGJWSkGYaaTpArKf3L1jsBEzKzsE1qkDIziGJHgVuqdPUhvZwmd6/9yPtkw7ohLh4/yqpQFELURajvHPJy4ZBok5bRhX4eC2tbsEQ+20YmL86KGNUhGSdJ9Ua3m/jV5qEyFnLPBG4cPJL4OjEDNvm/WwJvQfTlXaV4YoZMzlZmPMLFKAQ/8jKoefaIjtTXPq3YSeULlEx94Pv08C5b6o0US4fQwhtBAUOlUmhPEDXo0u4r4yM5w7HGWSCD4Dsb+rHlcRi7ulCCafeaBLITq3BMhzS1eO5XNrLGzh4iDh4rTtv83Y8kFFvb/zXlq/uiPZMoTxaH5eTqYQkCRA3L/2T7hWWiINDB9kbNTIyIZ2uF0W1RLnwgq2VASruNEhxXHYKeQfnhxcqTxGAsTgJgAGhMm17vALEAHt+72L4O822WJw39TB9ozqbnZ0I++ZAmd+kIrZ3Uxp7WfzmM7bKzdqn8L2k0jxHCOKWxChXayONqTFUq9YfJdqSHtNnfi5Bt610SjmD62Vil1hmxIhQv6xmzRwo2pfbhrUj6gNsNdDTrV5fxfZzEOtvwl6C+bPuHmD+qbke78eiJp8A4WIgn1CayHsSoaokH36Q1IW+ETuyQHhz8RMd8ZmrGAeSWUm71SR0nKCWgCwtRX4NhBR5fGR8M7CLTJm3ofrv1fyZ8WKPC7OcnhHmKYBeaw6qku9K+0qRCuvIp/6/dd28SC1obdir77d924ZTkFxUVIAu9J0u0AOEu6UZS
+    HASURA_GRAPHQL_JWT_SECRET: AgB0yHuBM57mDtyon+1dEC9PTgejHVGA5uOHbdu5P4tH6CuOgpH2cnbXnBaeD+7d52aCNto7a0qD5TN4MtwMQZbJuyXdH8QIsZSvvVmKK0Tf5dgYBnTqDKfJnaH/frlIyrFrZs9aj84uHpZPMw1jP6Rrn/gHLn6oNdvkJS668c5ALSvjJoNoqT2l+2TC0p4fNq9H/q0HaLkL+s5Jfkb9ZqPevo3sBQKJvGEEZmgld0U6S95hiGRVhEGqLR90ZbnYpKpHXk09fxva/UgRGGniK4yAJ7noeUsB2HZU8+X88I0TeX7vx0+WHAqV65eA14e2BegKI55JPeX8rXte/Iy0KRkyBQ8KtD5jkfTsmdeLMchdnmys7pu4CGiRXyAANT8uWzP0QifqfZhG6fHqZiMPhOa8XM2Z8KhFgtWH0m8IG/OUZCllWeRyAFTcupa5Jsq3jn+Y/0N2sgeALvBEmhGSN8jTAWa4cetoF//1kk67BaLFpLrc9P2nSGqd5HII7HGL1C8kCbV9Fmz/etX705sB9g9Sg0xFVhNqUvwYUOs9h51MQJLn64zO1Bd0q/U8LN3k71tqidJbsEc9P1JX90U6QbGu2FpQrPFAIz3Y0UnAiCfxyfVxwGvciwAQw5yIo8S2/XbB1wyGY/hWCYy0s4qOl11Dj1YpNwe7Xjbq7cnGfxp2BFC5Ps4O42jeSj7mhpUSyacLG6MavSdSPdrnOAMGKD7Gdz7jBd5/EBFhGmN8roCR+8H/Q5kbUlKfS5kEQR3Xkx8uNHqW8mr8ka7Fbn06vlmCDc09L9sXC6rJOXwIsZ6peqD7e1gPnotGfARHh5D07R3x6v491eS/FVCWao19XUHsaA==
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/cluster-wide: \\"true\\"
+      creationTimestamp: null
+      name: hasura-sealed-secret
+    type: Opaque
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  labels:
+    application: test-sample-1
+    component: app
+  name: app
+  namespace: test-sample-1-preprod
+spec:
+  rules:
+  - host: test-sample-1-preprod.dev.fabrique.social.gouv.fr
+    http:
+      paths:
+      - backend:
+          service:
+            name: app
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - test-sample-1-preprod.dev.fabrique.social.gouv.fr
+    secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  labels:
+    application: test-sample-1
+    component: app-2nd-instance
+  name: app-2nd-instance
+  namespace: test-sample-1-preprod
+spec:
+  rules:
+  - host: test-sample-1-preprod.dev.fabrique.social.gouv.fr
+    http:
+      paths:
+      - backend:
+          service:
+            name: app-2nd-instance
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - test-sample-1-preprod.dev.fabrique.social.gouv.fr
+    secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  labels:
+    application: test-sample-1
+    component: hasura
+  name: hasura
+  namespace: test-sample-1-preprod
+spec:
+  rules:
+  - host: hasura-test-sample-1-preprod.dev.fabrique.social.gouv.fr
+    http:
+      paths:
+      - backend:
+          service:
+            name: hasura
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - hasura-test-sample-1-preprod.dev.fabrique.social.gouv.fr
+    secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  labels:
+    application: test-sample-1
+    component: pgweb
+  name: pgweb
+  namespace: test-sample-1-preprod
+spec:
+  rules:
+  - host: pgweb-test-sample-1-preprod.dev.fabrique.social.gouv.fr
+    http:
+      paths:
+      - backend:
+          service:
+            name: pgweb
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - pgweb-test-sample-1-preprod.dev.fabrique.social.gouv.fr
+    secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-sample-1-preprod
+spec:
+  ingress:
+  - from:
+    - podSelector: {}
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          network-policy/source: ingress-controller
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+  - Ingress
+"
+`;

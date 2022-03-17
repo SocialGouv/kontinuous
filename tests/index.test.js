@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+require('jest-specific-snapshot');
 const os = require('os')
 const path = require('path')
 const fs = require('fs-extra')
@@ -24,8 +25,11 @@ const defaultEnv = {
   RANCHER_PROJECT_NAME: "awesome",
 }
 
+const allEnvs = ["dev", "preprod", "prod"]
 for (const testdir of testdirs){
-  for (const environment of ["dev","preprod","prod"]){
+  const specificEnv = testdir.split(".").pop()
+  const environments = allEnvs.includes(specificEnv) ? [specificEnv] : allEnvs 
+  for (const environment of environments){
     it(`build manifests for test "${testdir}" with env "${environment}"`, async () => {
       const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`));
       const testdirPath = `${samplesDir}/${testdir}`
@@ -36,7 +40,7 @@ for (const testdir of testdirs){
         KUBEWORKFLOW_PATH: rootPath,
         KWBUILD_PATH: tmpDir,
         WORKSPACE_PATH: testdirPath,
-        REPOSITORY: `test-${path.basename(testdir)}`,
+        REPOSITORY: `test-${testdir}`,
       }
       const envFile = `${testdirPath}/.env`
       if(fs.pathExistsSync(envFile)){
@@ -45,7 +49,7 @@ for (const testdir of testdirs){
       }
       await builder(env)
       const output = await readFile(`${tmpDir}/manifests.yaml`, { encoding: "utf-8" })
-      expect(output).toMatchSnapshot();
+      expect(output).toMatchSpecificSnapshot(`./__snapshots__/${testdir}.${environment}.yaml`);
     });
   }
 }
