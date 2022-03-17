@@ -20,11 +20,16 @@ spec:
       containers:
         - image: metabase/metabase:v0.41.6
           name: metabase
+          env:
+            {{- if gt (len .Values.env) 0 }}
+            {{- tpl (.Values.env | toYaml) . | nindent 12 }}
+            {{- end }}
           envFrom:
-            - secretRef:
-                name: {{ .Values.component }}
             - configMapRef:
                 name: {{ .Values.component }}
+            {{- if gt (len .Values.envFrom) 0 }}
+            {{- tpl (.Values.envFrom | toYaml) . | nindent 12 }}
+            {{- end }}
           ports:
             - containerPort: 3000
               name: http
