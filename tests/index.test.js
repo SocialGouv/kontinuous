@@ -25,25 +25,28 @@ const defaultEnv = {
 }
 
 for (const testdir of testdirs){
-  it(`build manifests correctly for "${testdir}"`, async () => {
-    const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`));
-    const testdirPath = `${samplesDir}/${testdir}`
-    const env = {
-      ...process.env,
-      ...defaultEnv,
-      KUBEWORKFLOW_PATH: rootPath,
-      KWBUILD_PATH: tmpDir,
-      WORKSPACE_PATH: testdirPath,
-      // REPOSITORY: `test-${path.basename(testdir)}`,
-      REPOSITORY: `${path.basename(testdir)}`,
-    }
-    const envFile = `${testdirPath}/.env`
-    if(fs.pathExistsSync(envFile)){
-      const dotenvConfig = dotenv.parse(await fs.readFile(envFile, { encoding: "utf-8" }))
-      Object.assign(env, dotenvConfig)
-    }
-    await builder(env)
-    const output = await readFile(`${tmpDir}/manifests.yaml`, { encoding: "utf-8" })
-    expect(output).toMatchSnapshot();
-  });
+  for (const environment of ["dev","preprod","prod"]){
+    it(`build manifests for test "${testdir}" with env "${environment}"`, async () => {
+      const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`));
+      const testdirPath = `${samplesDir}/${testdir}`
+      const env = {
+        ...process.env,
+        ...defaultEnv,
+        ENVIRONMENT: environment,
+        KUBEWORKFLOW_PATH: rootPath,
+        KWBUILD_PATH: tmpDir,
+        WORKSPACE_PATH: testdirPath,
+        // REPOSITORY: `test-${path.basename(testdir)}`,
+        REPOSITORY: `${path.basename(testdir)}`,
+      }
+      const envFile = `${testdirPath}/.env`
+      if(fs.pathExistsSync(envFile)){
+        const dotenvConfig = dotenv.parse(await fs.readFile(envFile, { encoding: "utf-8" }))
+        Object.assign(env, dotenvConfig)
+      }
+      await builder(env)
+      const output = await readFile(`${tmpDir}/manifests.yaml`, { encoding: "utf-8" })
+      expect(output).toMatchSnapshot();
+    });
+  }
 }
