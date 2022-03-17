@@ -63,7 +63,8 @@ runs:
         HELM_ARGS: ${{ inputs.helmArgs }}
         IMAGE_NAME: ${{ inputs.imageName }}
         DEBUG: "true"
-      run: node $GITHUB_ACTION_PATH/action/build/build.js
+      working-directory: ${{ env.GITHUB_ACTION_PATH }}
+      run: node action/build/build.js
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2
