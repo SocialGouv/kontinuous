@@ -31,5 +31,4 @@ autoscale:
     cpu: 100
     memory: 100
 certSecretName: 
-hostPrefix: hasura-
 waitForPostgres: false
