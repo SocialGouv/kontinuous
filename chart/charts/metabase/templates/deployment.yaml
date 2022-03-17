@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: {{.Values.component }}
+    application: {{ .Values.global.repositoryName }}
+  name: {{.Values.component }}
+  namespace: {{ .Values.global.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: {{ .Values.component }}
+  template:
+    metadata:
+      labels:
+        component: {{ .Values.component }}
+        application: {{ .Values.application }}
+    spec:
+      containers:
+        - image: metabase/metabase:v0.41.6
+          name: metabase
+          envFrom:
+            - secretRef:
+                name: metabase-{{ .Values.component }}
+            - configMapRef:
+                name: metabase-{{ .Values.component }}
+          ports:
+            - containerPort: 3000
+              name: http
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 10
+            initialDelaySeconds: 240
+            successThreshold: 1
+            timeoutSeconds: 10
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 500m
+              memory: 512Mi
