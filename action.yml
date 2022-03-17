@@ -50,7 +50,6 @@ runs:
 
     - name: Install dependencies
       shell: bash
-      working-directory: ${{ env.GITHUB_ACTION_PATH }}
       run: yarn --frozen-lockfile --prefer-offline --production
 
     - name: Build manifests
