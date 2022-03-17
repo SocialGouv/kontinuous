@@ -65,11 +65,7 @@ runs:
         IMAGE_NAME: ${{ inputs.imageName }}
         DEBUG: "true"
       working-directory: "${{ github.action_path }}"
-      run: |
-        echo GITHUB_ACTION_PATH=${{ github.action_path }}
-        cd ${{ github.action_path }}
-        ls ${{ github.action_path }}
-        yarn build-manifests
+      run: yarn build-manifests
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2
@@ -110,7 +106,7 @@ runs:
       shell: bash
       working-directory: ${{ env.KWBUILD_PATH }}
       env:
-        REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
+        REPOSITORY: ${{ github.repository }}
       run: ${{ github.action_path }}/action/deploy/deploy
 
     - name: Define environment URL
