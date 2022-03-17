@@ -50,8 +50,9 @@ runs:
 
     - name: Install dependencies
       shell: bash
-      working-directory: ${{ env.GITHUB_ACTION_PATH }}
-      run: yarn --frozen-lockfile --prefer-offline --production
+      run: |
+        yarn --frozen-lockfile --prefer-offline --production \
+          --cwd ${{ env.GITHUB_ACTION_PATH }}
 
     - name: Build manifests
       shell: bash
@@ -64,7 +65,11 @@ runs:
         IMAGE_NAME: ${{ inputs.imageName }}
         DEBUG: "true"
       working-directory: ${{ env.GITHUB_ACTION_PATH }}
-      run: yarn build-manifests
+      run: |
+        echo GITHUB_ACTION_PATH=${{ env.GITHUB_ACTION_PATH }}
+        cd ${{ env.GITHUB_ACTION_PATH }}
+        ls ${{ env.GITHUB_ACTION_PATH }}
+        yarn build-manifests
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2
