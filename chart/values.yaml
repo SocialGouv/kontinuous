@@ -18,3 +18,5 @@ maildev:
   enabled: false
 pgweb:
   enabled: false
+metabase:
+  enabled: false
