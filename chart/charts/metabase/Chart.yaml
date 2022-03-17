@@ -1,0 +1,11 @@
+apiVersion: v2
+name: metabase
+version: 1.0.0
+home: https://github.com/SocialGouv
+description: Metabase app
+icon: https://avatars.githubusercontent.com/u/45039513?v=4
+sources:
+  - https://github.com/SocialGouv/kube-workflow
+maintainers:
+  - name: Fabrique numérique des Ministères Sociaux
+    email: dsi-incubateur@sg.social.gouv.fr

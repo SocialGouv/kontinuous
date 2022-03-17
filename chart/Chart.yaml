@@ -22,6 +22,10 @@ dependencies:
   repository: file://./charts/maildev
   condition: maildev.enabled
   version: 1.0.0
+- name: metabase
+  repository: file://./charts/metabase
+  condition: metabase.enabled
+  version: 1.0.0
 - name: pgweb
   repository: file://./charts/pgweb
   condition: pgweb.enabled
