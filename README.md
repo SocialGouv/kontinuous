@@ -114,7 +114,8 @@ patches:
 If you think you patches can be reused by other project, contribute to [chart/patches](chart/patches) folder of the action by sharing them.
 
 ### Test Helm chart generation
-required:
+
+#### required:
 - helm v3 [install guide](https://helm.sh/docs/intro/install/)
   ```sh
   curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
@@ -126,7 +127,12 @@ required:
 - node >= 16
 - yarn
 
-test with local kube-workflow repository and local project
+#### developments on your project, easy test, got to your project directory
+```sh
+npx kube-workflow b
+```
+
+### developments on kubeworkflow, test with local kube-workflow repository and local project
 ```sh
 # get kube-workflow
 export KUBEWORKFLOW_PATH=$PWD/kube-workflow
