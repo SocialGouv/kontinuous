@@ -15,11 +15,17 @@
   },
   "devDependencies": {
     "dotenv": "^16.0.0",
-    "eslint": "^8.11.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^7",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.1",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
     "jest-specific-snapshot": "^5.0.0",
-    "lint-staged": "^12.3.5",
+    "lint-staged": "^11.1.2",
     "prettier": "^2.5.1"
   },
   "optionalDependencies": {
@@ -40,6 +46,8 @@
     "precommit": "lint-staged",
     "lint": "eslint .",
     "test": "jest tests",
+    "test:debug": "DEBUG=1 jest tests",
+    "test:update-snapshots": "DEBUG=1 jest tests -u",
     "build-manifests": "node action/build/build.js",
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",

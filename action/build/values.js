@@ -2,8 +2,7 @@ const { generate } = require("@socialgouv/env-slug")
 
 const { buildCtx } = require("./ctx")
 
-function generateValues(){
-
+function generateValues() {
   const {
     REPOSITORY,
     ENVIRONMENT,
@@ -17,75 +16,92 @@ function generateValues(){
     CERT_SECRET_NAME,
     PRODUCTION_DATABASE,
     GIT_HEAD_REF,
-  } = buildCtx.require("env");
+  } = buildCtx.require("env")
 
-  const gitBranch = GIT_HEAD_REF ? GIT_HEAD_REF : GIT_REF
-  const branchName = gitBranch.replace("refs/heads/", "").replace("refs/tags/","");
+  const gitBranch = GIT_HEAD_REF || GIT_REF
+  const branchName = gitBranch
+    .replace("refs/heads/", "")
+    .replace("refs/tags/", "")
 
-  const branchSlug = generate(branchName);
+  const branchSlug = generate(branchName)
 
   const env = ENVIRONMENT
-  const isProduction = env === "prod";
-  const isPreProduction = env === "preprod";
-  const isDev = !(isProduction || isPreProduction);
+  const isProduction = env === "prod"
+  const isPreProduction = env === "preprod"
+  const isDev = !(isProduction || isPreProduction)
 
   const repository = REPOSITORY
-  const repositoryName = repository.split("/").pop();
+  const repositoryName = repository.split("/").pop()
 
-  const subdomain = isProduction ? repositoryName : isPreProduction ? `${repositoryName }-preprod`
+  const subdomain = isProduction
+    ? repositoryName
+    : isPreProduction
+    ? `${repositoryName}-preprod`
     : generate(`${repositoryName}-${branchName}`)
 
-  const namespace = isProduction ? repositoryName : isPreProduction ? `${repositoryName}-preprod`
+  const namespace = isProduction
+    ? repositoryName
+    : isPreProduction
+    ? `${repositoryName}-preprod`
     : generate(`${repositoryName}-${branchName}`)
 
-  const keepAlive = Boolean(KEEP_ALIVE);
+  const keepAlive = Boolean(KEEP_ALIVE)
 
-  const isRenovate = branchName.startsWith("renovate");
-  const isDestroyable = isDev && !keepAlive;
+  const isRenovate = branchName.startsWith("renovate")
+  const isDestroyable = isDev && !keepAlive
 
-  const ttl = isDestroyable ? (isRenovate ? "1d" : "7d") : "";
+  const ttl = isDestroyable ? (isRenovate ? "1d" : "7d") : ""
 
-  const sha = GIT_SHA;
+  const sha = GIT_SHA
   const imageTag = isPreProduction
     ? `preprod-${sha}`
     : gitBranch.startsWith("refs/tags/")
     ? (gitBranch.split("/").pop() || "").substring(1)
-    : `sha-${sha}`;
+    : `sha-${sha}`
 
-  const MAX_HOSTNAME_SIZE = 53;
+  const MAX_HOSTNAME_SIZE = 53
   const shortenHost = (hostname) =>
-    hostname.slice(0, MAX_HOSTNAME_SIZE).replace(/-+$/, "");
+    hostname.slice(0, MAX_HOSTNAME_SIZE).replace(/-+$/, "")
 
   const rootSocialGouvDomain = "fabrique.social.gouv.fr"
 
-  const domain = isProduction ? rootSocialGouvDomain : `dev.${rootSocialGouvDomain}`;
+  const domain = isProduction
+    ? rootSocialGouvDomain
+    : `dev.${rootSocialGouvDomain}`
 
-  const host = `${shortenHost(subdomain)}.${domain}`;
+  const host = `${shortenHost(subdomain)}.${domain}`
 
-  const registry = IMAGE_REGISTRY || "ghcr.io/socialgouv";
-  const imageName = IMAGE_NAME || repositoryName;
-  const image = `${registry}/${imageName}`;
+  const registry = IMAGE_REGISTRY || "ghcr.io/socialgouv"
+  const imageName = IMAGE_NAME || repositoryName
+  const image = `${registry}/${imageName}`
 
-  const rancherProjectId = RANCHER_PROJECT_ID;
+  const rancherProjectId = RANCHER_PROJECT_ID
 
   const certSecretName =
-    CERT_SECRET_NAME || (isProduction ? `${repositoryName}-crt` : "wildcard-crt");
+    CERT_SECRET_NAME ||
+    (isProduction ? `${repositoryName}-crt` : "wildcard-crt")
 
-  const pgSecretName = isProduction ? "pg-user" :
-    isPreProduction ? "pg-user-preprod"
+  const pgSecretName = isProduction
+    ? "pg-user"
+    : isPreProduction
+    ? "pg-user-preprod"
     : `pg-user-${branchSlug}`
 
   const productionDatabase = PRODUCTION_DATABASE || repositoryName
 
-  const pgDatabase = isProduction ? productionDatabase :
-    isPreProduction ? "preprod"
-      : `autodevops_${branchSlug}`
-      
-  const pgUser = isProduction ? productionDatabase :
-    isPreProduction ? "preprod"
-      : `user_${branchSlug}`
+  const pgDatabase = isProduction
+    ? productionDatabase
+    : isPreProduction
+    ? "preprod"
+    : `autodevops_${branchSlug}`
 
-  const jobNamespace = (RANCHER_PROJECT_NAME || repositoryName)+"-ci"
+  const pgUser = isProduction
+    ? productionDatabase
+    : isPreProduction
+    ? "preprod"
+    : `user_${branchSlug}`
+
+  const jobNamespace = `${RANCHER_PROJECT_NAME || repositoryName}-ci`
 
   return {
     global: {
@@ -111,8 +127,7 @@ function generateValues(){
       sha,
       env,
     },
-  };
-
+  }
 }
 
 module.exports = generateValues

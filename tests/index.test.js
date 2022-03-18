@@ -1,16 +1,17 @@
 /* eslint-disable no-undef */
-require('jest-specific-snapshot');
-const os = require('os')
-const path = require('path')
-const fs = require('fs-extra')
-const { readFile, mkdtemp } = require('fs/promises');
-const dotenv = require('dotenv')
-const builder = require('../action/build/builder')
+require("jest-specific-snapshot")
+const os = require("os")
+const path = require("path")
+const { mkdtemp } = require("fs/promises")
+const fs = require("fs-extra")
+const dotenv = require("dotenv")
+const builder = require("../action/build/builder")
 
-const getDirectories = source =>
-  fs.readdirSync(source, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory() || dirent.isSymbolicLink())
-    .map(dirent => dirent.name)
+const getDirectories = (source) =>
+  fs
+    .readdirSync(source, { withFileTypes: true })
+    .filter((dirent) => dirent.isDirectory() || dirent.isSymbolicLink())
+    .map((dirent) => dirent.name)
 
 const rootPath = path.resolve(`${__dirname}/..`)
 
@@ -26,21 +27,23 @@ const defaultEnv = {
 }
 
 const allEnvs = ["dev", "preprod", "prod"]
-for (const testdir of testdirs){
+for (const testdir of testdirs) {
   const afterDot = testdir.split(".").pop()
-  if (afterDot==="disabled"){
+  if (afterDot === "disabled") {
     continue
   }
-  const environments = allEnvs.includes(afterDot) ? [afterDot] : allEnvs 
+  const environments = allEnvs.includes(afterDot) ? [afterDot] : allEnvs
   const testdirPath = `${samplesDir}/${testdir}`
   const envFile = `${testdirPath}/.env`
   if (fs.pathExistsSync(envFile)) {
-    const dotenvConfig = dotenv.parse(fs.readFileSync(envFile, { encoding: "utf-8" }))
+    const dotenvConfig = dotenv.parse(
+      fs.readFileSync(envFile, { encoding: "utf-8" })
+    )
     Object.assign(env, dotenvConfig)
   }
-  for (const environment of environments){
+  for (const environment of environments) {
     it(`${testdir}.${environment}`, async () => {
-      const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`));
+      const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))
       const env = {
         ...process.env,
         ...defaultEnv,
@@ -52,7 +55,9 @@ for (const testdir of testdirs){
         REPOSITORY: `test-${testdir}`,
       }
       const output = await builder(env)
-      expect(output).toMatchSpecificSnapshot(`./__snapshots__/${testdir}.${environment}.yaml`);
-    });
+      expect(output).toMatchSpecificSnapshot(
+        `./__snapshots__/${testdir}.${environment}.yaml`
+      )
+    })
   }
 }
