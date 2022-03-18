@@ -2449,10 +2449,10 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
-nctx@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/nctx/-/nctx-1.0.0.tgz#356891d47b13a920731a38aab967ae401e692c37"
-  integrity sha512-yS5JFcX2DYVF0OzFjjX7dl+4VujlmPsmpSKHgp0Z2FVku/aR4Fmt8GNiAxjJ9oPEjnQE9J5aRn/dm1lFZ2V0EA==
+nctx@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/nctx/-/nctx-1.0.1.tgz#1362f2f842161e0e5ecdd5b90d95529ef42713a5"
+  integrity sha512-pKQMOdmwGp5gpXuyxLds54p2yRIkCK1eStF/10TjhRHZf/19zj0Ic/QvUTVcNur5Dgmv8k8bsbaKr7rt6XvvEg==
   dependencies:
     lodash.defaultsdeep "^4.6.1"
     lodash.get "^4.4.2"

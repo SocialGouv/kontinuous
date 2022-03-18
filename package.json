@@ -9,7 +9,7 @@
     "fs-extra": "^10.0.1",
     "js-yaml": "^4.1.0",
     "lodash.defaultsdeep": "^4.6.1",
-    "nctx": "^1.0.0",
+    "nctx": "^1.0.1",
     "pino": "^7.9.0",
     "pino-pretty": "^7.5.4"
   },
