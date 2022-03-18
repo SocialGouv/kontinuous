@@ -1,0 +1,5 @@
+tests
+.github
+.eslintrc.yml
+.gitignore
+action.yml

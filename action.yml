@@ -52,7 +52,7 @@ runs:
       shell: bash
       working-directory: "${{ github.action_path }}"
       run: |
-        yarn --frozen-lockfile --prefer-offline --production
+        yarn --frozen-lockfile --prefer-offline --production --ignore-optional
 
     - name: Build manifests
       shell: bash

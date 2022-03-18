@@ -21,6 +21,9 @@
     "lint-staged": "^12.3.5",
     "prettier": "^2.5.1"
   },
+  "optionalDependencies": {
+    "commander": "^9.1.0"
+  },
   "jest": {
     "testTimeout": 10000
   },
@@ -36,6 +39,18 @@
     "precommit": "lint-staged",
     "lint": "eslint .",
     "test": "jest tests",
-    "build-manifests": "node action/build/build.js"
+    "build-manifests": "node action/build/build.js",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major"
+  },
+  "bin": {
+    "kube-workflow": "./bin/run"
+  },
+  "files": [
+    "**"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }
