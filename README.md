@@ -128,11 +128,13 @@ If you think you patches can be reused by other project, contribute to [chart/pa
 - yarn
 
 #### developments on your project, easy test, got to your project directory
+
 ```sh
 npx kube-workflow b
 ```
 
-### developments on kubeworkflow, test with local kube-workflow repository and local project
+#### developments on kubeworkflow, test with local kube-workflow repository and local project
+
 ```sh
 # get kube-workflow
 export KUBEWORKFLOW_PATH=$PWD/kube-workflow
@@ -156,7 +158,7 @@ then check content of
     - $REPOSITORY_NAME.preprod.yaml
     - $REPOSITORY_NAME.prod.yaml
 
-### Development
+### Development resources
 
 #### helm templates
 
@@ -186,8 +188,6 @@ Resources:
 - add default runner image with all base tooling for actions
 
 #### repo cycle automation
-- add releaser script with changelog generation (triggerable locally)
-- run tests on push (via simple github action)
 - build docker image for default runner image
     via itself with jobs/docker-build, et la boucle est bouclée
 
