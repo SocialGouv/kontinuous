@@ -29,7 +29,8 @@
     "prettier": "^2.5.1"
   },
   "optionalDependencies": {
-    "commander": "^9.1.0"
+    "commander": "^9.1.0",
+    "cli-highlight": "^2.1.11"
   },
   "jest": {
     "testTimeout": 10000
@@ -54,7 +55,7 @@
     "version:major": "npm version major"
   },
   "bin": {
-    "kube-workflow": "./bin/cli"
+    "kube-workflow": "./bin/cli.js"
   },
   "files": [
     "**"
