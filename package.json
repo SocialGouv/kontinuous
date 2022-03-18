@@ -45,7 +45,7 @@
     "version:major": "npm version major"
   },
   "bin": {
-    "kube-workflow": "./bin/run"
+    "kube-workflow": "./bin/cli"
   },
   "files": [
     "**"
