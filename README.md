@@ -131,18 +131,24 @@ test with local kube-workflow repository and local project
 # get kube-workflow
 export KUBEWORKFLOW_PATH=$PWD/kube-workflow
 git clone https://github.com/SocialGouv/kube-workflow $KUBEWORKFLOW_PATH
+yarn --cwd $KUBEWORKFLOW_PATH
 
 # get the project repository, here template for example
 export WORKSPACE_PATH=$PWD/template
 git clone https://github.com/SocialGouv/template $WORKSPACE_PATH
 
 # run manifest generation as snapshots using symlink to tests
-ln -s $WORKSPACE_PATH $KUBEWORKFLOW_PATH/tests/samples/
+REPOSITORY_NAME=$(basename $WORKSPACE_PATH)
+ln -s $WORKSPACE_PATH/.kube-workflow $KUBEWORKFLOW_PATH/tests/samples/$REPOSITORY_NAME
 cd $KUBEWORKFLOW_PATH
-yarn test -t $(basename $WORKSPACE_PATH)
+yarn test -t $REPOSITORY_NAME
 ```
 
-then check content of `$KUBEWORKFLOW_PATH/tests/__snapshots__/$(basename $WORKSPACE_PATH)
+then check content of
+- `$KUBEWORKFLOW_PATH/tests/__snapshots__/
+    - $REPOSITORY_NAME.dev.yaml
+    - $REPOSITORY_NAME.preprod.yaml
+    - $REPOSITORY_NAME.prod.yaml
 
 ### Development
 

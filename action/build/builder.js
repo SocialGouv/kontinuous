@@ -31,6 +31,7 @@ module.exports = async (envVars) => {
     KUBEWORKFLOW_PATH,
     ENVIRONMENT,
     WORKSPACE_PATH,
+    WORKSPACE_SUBPATH = "/.kube-workflow",
   } = envVars
 
   let { KWBUILD_PATH } = envVars
@@ -38,30 +39,33 @@ module.exports = async (envVars) => {
     KWBUILD_PATH = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`));
   }
 
-  fs.ensureDirSync(KWBUILD_PATH)
+  await fs.ensureDir(KWBUILD_PATH)
   process.chdir(KWBUILD_PATH)
   
   logger.debug("Prepare charts and overlays")
-  fs.copySync(`${KUBEWORKFLOW_PATH}/chart`, ".")
+  await fs.copy(`${KUBEWORKFLOW_PATH}/chart`, ".")
   
-  if (fs.existsSync(`${WORKSPACE_PATH}/.kube-workflow`)){
-    fs.copySync(`${WORKSPACE_PATH}/.kube-workflow`, ".", {dereference: true})
+  const workspaceKubeworkflowPath = `${WORKSPACE_PATH}${WORKSPACE_SUBPATH}`
+  if (await fs.pathExists(workspaceKubeworkflowPath)){
+    await fs.copy(workspaceKubeworkflowPath, ".", {dereference: true})
   }
   
   logger.debug("Generate values file")
-  const getValuesFile = (file)=>{
+  const getValuesFile = async (file)=>{
     for(const filePath of [
       `${file}.yaml`,
       `${file}.yml`
     ]){
-      if (fs.existsSync(filePath)) {
-        return yaml.load(fs.readFileSync(filePath))
+      if (await fs.pathExists(filePath)) {
+        return yaml.load(await fs.readFile(filePath))
       }
     }
   }
   const defaultValues = generateValues(envVars)
-  const commonValues = getValuesFile("common/values")
-  const envValues = getValuesFile(`env/${ENVIRONMENT}/values`)
+  const [commonValues, envValues] = await Promise.all([
+    getValuesFile("common/values"),
+    getValuesFile(`env/${ENVIRONMENT}/values`),
+  ])
   const values = defautlsDeep({}, envValues, commonValues, defaultValues)
 
   logger.debug("Compiling composite uses")
@@ -87,7 +91,7 @@ module.exports = async (envVars) => {
   }
   
   logger.debug("Write values file")
-  fs.writeFileSync("values.json", JSON.stringify(values))
+  await fs.writeFile("values.json", JSON.stringify(values))
   
   logger.debug("Build base manifest using helm")
   const { HELM_ARGS = "" } = envVars
@@ -97,13 +101,13 @@ module.exports = async (envVars) => {
   baseManifests = await compiledefaultNs(baseManifests, values)
   
   logger.debug("Write base manifests file")
-  fs.writeFileSync("manifests.base.yaml", baseManifests)
+  await fs.writeFile("manifests.base.yaml", baseManifests)
   
   logger.debug("Build final manifests using kustomize")
   const manifests = shell(`kustomize build --load-restrictor=LoadRestrictionsNone "env/${ENVIRONMENT}"`)
   
   logger.debug("Write final manifests file")
-  fs.writeFileSync("manifests.yaml", manifests)
+  await fs.writeFile("manifests.yaml", manifests)
   
   logger.debug("Built manifests: $PWD/manifests.yaml")
 }

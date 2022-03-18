@@ -29,10 +29,15 @@ const allEnvs = ["dev", "preprod", "prod"]
 for (const testdir of testdirs){
   const specificEnv = testdir.split(".").pop()
   const environments = allEnvs.includes(specificEnv) ? [specificEnv] : allEnvs 
+  const testdirPath = `${samplesDir}/${testdir}`
+  const envFile = `${testdirPath}/.env`
+  if (fs.pathExistsSync(envFile)) {
+    const dotenvConfig = dotenv.parse(fs.readFileSync(envFile, { encoding: "utf-8" }))
+    Object.assign(env, dotenvConfig)
+  }
   for (const environment of environments){
     it(`build manifests for test "${testdir}" with env "${environment}"`, async () => {
       const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`));
-      const testdirPath = `${samplesDir}/${testdir}`
       const env = {
         ...process.env,
         ...defaultEnv,
@@ -40,12 +45,8 @@ for (const testdir of testdirs){
         KUBEWORKFLOW_PATH: rootPath,
         KWBUILD_PATH: tmpDir,
         WORKSPACE_PATH: testdirPath,
+        WORKSPACE_SUBPATH: "",
         REPOSITORY: `test-${testdir}`,
-      }
-      const envFile = `${testdirPath}/.env`
-      if(fs.pathExistsSync(envFile)){
-        const dotenvConfig = dotenv.parse(await fs.readFile(envFile, { encoding: "utf-8" }))
-        Object.assign(env, dotenvConfig)
       }
       await builder(env)
       const output = await readFile(`${tmpDir}/manifests.yaml`, { encoding: "utf-8" })
