@@ -38,6 +38,9 @@ jobs:
     needs: [test]
     if: github.ref == 'refs/heads/master'
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        
       - id: publish
         uses: JS-DevTools/npm-publish@v1
         with:
