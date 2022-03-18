@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - "*"
+  push:
+    branches:
+      - "*"
 
 concurrency:
   cancel-in-progress: true
