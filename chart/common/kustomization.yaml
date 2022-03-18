@@ -1,2 +1,10 @@
 resources:
-- ../autodevops/common
+- ../base
+
+patches:
+- target:
+    kind: Deployment
+  path: patches/kapp.yaml
+- target:
+    kind: Service
+  path: patches/kapp.yaml

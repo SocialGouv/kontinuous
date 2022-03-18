@@ -1,0 +1,10 @@
+resources:
+- ../common.autodevops
+
+patches:
+- target:
+    kind: Deployment
+  path: patches/kapp-delete-orphan.yaml
+- target:
+    kind: Service
+  path: patches/kapp-delete-orphan.yaml

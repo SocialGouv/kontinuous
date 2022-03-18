@@ -5,9 +5,7 @@ const { generate } = require("@socialgouv/env-slug")
 const degit = require('degit')
 
 const miniHash = require("./utils/miniHash")
-const logger = require("./logger")
-
-fs.mkdirSync("uses", {recursive: true})
+const logger = require("./utils/logger")
 
 const downloadingPromises = {}
 
@@ -16,7 +14,7 @@ const requireUse = async (use) => {
   const slug = generate(use)
   use = use.replace("@", "#")
   let target = `uses/${slug}`
-  if (!fs.existsSync(`${process.cwd()}/${target}`)){
+  if (!await fs.pathExists(`${process.cwd()}/${target}`)){
     let loading = downloadingPromises[slug]
     if (!loading){
       if (use.startsWith(".") || use.startsWith("/")){
@@ -39,7 +37,7 @@ const requireUse = async (use) => {
 
 module.exports = async function compile({ values, file }, parentScope = [], parentWith = {}) {
   if (file){
-    values = yaml.load(fs.readFileSync(file))
+    values = yaml.load(await fs.readFile(file, { encoding: "utf-8" }))
   }
   if (!values){
     return values

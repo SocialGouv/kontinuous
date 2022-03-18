@@ -5,7 +5,7 @@ const fs = require("fs-extra")
 const yaml = require("js-yaml")
 const defautlsDeep = require("lodash.defaultsdeep")
 
-const shell = require("./utils/shell")
+const asyncShell = require("./utils/asyncShell")
 
 const generateValues = require("./values")
 const compileUses = require("./compile-uses")
@@ -13,7 +13,7 @@ const compileChart = require("./compile-chart")
 const compiledefaultNs = require("./compile-default-ns")
 const getEnv = require("./env")
 
-const logger = require("./logger")
+const logger = require("./utils/logger")
 
 module.exports = async (envVars) => {
 
@@ -42,9 +42,12 @@ module.exports = async (envVars) => {
   await fs.ensureDir(KWBUILD_PATH)
   process.chdir(KWBUILD_PATH)
   
-  logger.debug("Prepare charts and overlays")
+  logger.debug("Merge charts and overlays")
   await fs.copy(`${KUBEWORKFLOW_PATH}/chart`, ".")
-  
+  await Promise.all([
+    fs.copy("./env", "./env.autodevops"),
+    fs.copy("./common", "./common.autodevops")
+  ])
   const workspaceKubeworkflowPath = `${WORKSPACE_PATH}${WORKSPACE_SUBPATH}`
   if (await fs.pathExists(workspaceKubeworkflowPath)){
     await fs.copy(workspaceKubeworkflowPath, ".", {dereference: true})
@@ -57,7 +60,7 @@ module.exports = async (envVars) => {
       `${file}.yml`
     ]){
       if (await fs.pathExists(filePath)) {
-        return yaml.load(await fs.readFile(filePath))
+        return yaml.load(await fs.readFile(filePath, {encoding: "utf-8"}))
       }
     }
   }
@@ -72,7 +75,7 @@ module.exports = async (envVars) => {
   await compileUses({ values })
   
   logger.debug("Compiling additional subcharts instances")
-  const chart = compileChart(values)
+  const chart = await compileChart(values)
   
   
   logger.debug("Merge .kube-workflow env templates")
@@ -95,16 +98,16 @@ module.exports = async (envVars) => {
   
   logger.debug("Build base manifest using helm")
   const { HELM_ARGS = "" } = envVars
-  let baseManifests = shell(`helm template -f values.json ${HELM_ARGS} .`)
+  let baseManifests = await asyncShell(`helm template -f values.json ${HELM_ARGS} .`)
   
   logger.debug("Set default namespace")
   baseManifests = await compiledefaultNs(baseManifests, values)
   
   logger.debug("Write base manifests file")
-  await fs.writeFile("manifests.base.yaml", baseManifests)
+  await fs.writeFile("base/manifests.yaml", baseManifests)
   
   logger.debug("Build final manifests using kustomize")
-  const manifests = shell(`kustomize build --load-restrictor=LoadRestrictionsNone "env/${ENVIRONMENT}"`)
+  const manifests = await asyncShell(`kustomize build --load-restrictor=LoadRestrictionsNone env/${ENVIRONMENT}`)
   
   logger.debug("Write final manifests file")
   await fs.writeFile("manifests.yaml", manifests)

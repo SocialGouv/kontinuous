@@ -1,8 +1,8 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const yaml = require('js-yaml');
 
-module.exports = (values) => {
-  const chart = yaml.load(fs.readFileSync("Chart.yaml"))
+module.exports = async (values) => {
+  const chart = yaml.load(await fs.readFile("Chart.yaml", { encoding: "utf-8" }))
 
   const { dependencies } = chart
 
@@ -24,7 +24,7 @@ module.exports = (values) => {
       }
     }
   }
-  fs.writeFileSync("Chart.yaml", yaml.dump(chart))
+  await fs.writeFile("Chart.yaml", yaml.dump(chart))
 
   for (const {name, alias} of dependencies){
     const key = alias || name

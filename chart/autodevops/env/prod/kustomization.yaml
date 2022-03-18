@@ -1,7 +1,0 @@
-resources:
-- ../../../common
-
-patches:
-- target:
-    kind: Ingress
-  path: ../../../patches/letsencrypt-prod.yaml

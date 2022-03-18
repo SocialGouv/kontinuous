@@ -33,14 +33,14 @@ Here is the order, the last in the list is the last applied:
 - `.kube-workflow/$ENVIRONMENT/values.yaml`
 
 ## Merge commons manifests as helm templates
-Every yaml file in `.kube-workflow/chart/templates` will be merged with the helm Chart `templates` folder before the build.
+Every yaml file in `.kube-workflow/templates` will be merged with the helm Chart `templates` folder before the build.
 
 All theses files can use the Helm templating syntax (or not if you don't need it, helm template is a superset of yaml).
 
 Both extensions yaml and yml are accepted.
 
 ## Merge manifests per environment as helm templates
-Every yaml files in `.kube-workflow/env/$ENVIRONMENT` will be merged with the helm Chart `templates` folder before the build, according to the `environment` input (dev | preprod | prod).
+Every yaml files in `.kube-workflow/env/$ENVIRONMENT/templates` will be merged with the helm Chart `templates` folder before the build, according to the `environment` input (dev | preprod | prod).
 
 All theses files can use the Helm templating syntax.
 
@@ -72,7 +72,7 @@ By doing this way you just optouted from generic kustomization for the selected 
 If you want (and more often you want) to keep the generic kustomization, containing some infra logic defined by the advised SRE team, you can extends it like this.
 ```yaml
 resources:
-- ../../autodevops/common
+- ../../common.autodevops
 
 patches:
 # ... put your patches here
@@ -81,8 +81,8 @@ patches:
 You can do it as well for the common base file called by environment kustomizations, just add a file called `.kube-workflow/common/kustomization.yaml` in your project and containing:
 ```yaml
 resources:
-# - ../manifests.base.yaml # here is if you want to optout
-- ../autodevops/common # here is if you want to extends from autodevops default settings
+# - ../base # here is if you want to optout
+- ../common.autodevops # here is if you want to extends from autodevops default settings
 
 patches:
 - target:
@@ -98,17 +98,17 @@ patches:
 
 - target:
     kind: Deployment
-  path: ../../patches/kapp-delete-orphan.yaml
+  path: patches/kapp-delete-orphan.yaml
 - target:
     kind: Service
-  path: ../../patches/kapp-delete-orphan.yaml
+  path: patches/kapp-delete-orphan.yaml
 - target:
     kind: Ingress
-  path: ../../patches/kapp-delete-orphan.yaml
+  path: patches/kapp-delete-orphan.yaml
 
 # - target:
 #     kind: Service
-#   path: ../patches/kapp.yaml
+#   path: patches/kapp.yaml
 ```
 
 If you think you patches can be reused by other project, contribute to [chart/patches](chart/patches) folder of the action by sharing them.

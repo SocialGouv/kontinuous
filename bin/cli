@@ -9,7 +9,7 @@ const { Command } = require("commander");
 const program = new Command();
 
 const builder = require("../action/build/builder")
-const logger = require("../action/build/logger")
+const logger = require("../action/build/utils/logger")
 const shell = require("../action/build/utils/shell")
 
 program

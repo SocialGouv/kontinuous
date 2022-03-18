@@ -1,2 +1,7 @@
 resources:
-- ../../autodevops/env/preprod
+- ../../common
+
+patches:
+- target:
+    kind: Namespace
+  path: ../../common/patches/wildcard-cert.yaml
