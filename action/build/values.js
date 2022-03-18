@@ -1,6 +1,8 @@
 const { generate } = require("@socialgouv/env-slug")
 
-function generateValues(envVars){
+const { buildCtx } = require("./ctx")
+
+function generateValues(){
 
   const {
     REPOSITORY,
@@ -15,7 +17,7 @@ function generateValues(envVars){
     CERT_SECRET_NAME,
     PRODUCTION_DATABASE,
     GIT_HEAD_REF,
-  } = envVars;
+  } = buildCtx.require("env");
 
   const gitBranch = GIT_HEAD_REF ? GIT_HEAD_REF : GIT_REF
   const branchName = gitBranch.replace("refs/heads/", "").replace("refs/tags/","");

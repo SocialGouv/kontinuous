@@ -27,8 +27,11 @@ const defaultEnv = {
 
 const allEnvs = ["dev", "preprod", "prod"]
 for (const testdir of testdirs){
-  const specificEnv = testdir.split(".").pop()
-  const environments = allEnvs.includes(specificEnv) ? [specificEnv] : allEnvs 
+  const afterDot = testdir.split(".").pop()
+  if (afterDot==="disabled"){
+    continue
+  }
+  const environments = allEnvs.includes(afterDot) ? [afterDot] : allEnvs 
   const testdirPath = `${samplesDir}/${testdir}`
   const envFile = `${testdirPath}/.env`
   if (fs.pathExistsSync(envFile)) {
@@ -36,7 +39,7 @@ for (const testdir of testdirs){
     Object.assign(env, dotenvConfig)
   }
   for (const environment of environments){
-    it(`build manifests for test "${testdir}" with env "${environment}"`, async () => {
+    it(`${testdir}.${environment}`, async () => {
       const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`));
       const env = {
         ...process.env,
@@ -48,8 +51,7 @@ for (const testdir of testdirs){
         WORKSPACE_SUBPATH: "",
         REPOSITORY: `test-${testdir}`,
       }
-      await builder(env)
-      const output = await readFile(`${tmpDir}/manifests.yaml`, { encoding: "utf-8" })
+      const output = await builder(env)
       expect(output).toMatchSpecificSnapshot(`./__snapshots__/${testdir}.${environment}.yaml`);
     });
   }

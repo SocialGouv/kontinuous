@@ -13,13 +13,15 @@ const compileChart = require("./compile-chart")
 const compiledefaultNs = require("./compile-default-ns")
 const getEnv = require("./env")
 
-const logger = require("./utils/logger")
+const globalLogger = require("./utils/logger")
 
-module.exports = async (envVars) => {
+const { buildCtx } = require("./ctx")
 
+const builder = async (envVars) => {
   if (!envVars){
     envVars = getEnv()
   }
+  buildCtx.set("env", envVars)
 
   for (const requiredEnv of ["KUBEWORKFLOW_PATH", "WORKSPACE_PATH", "ENVIRONMENT"]){
     if (!envVars[requiredEnv]){
@@ -27,44 +29,49 @@ module.exports = async (envVars) => {
     }
   }
   
+  if (!envVars.KWBUILD_PATH){
+    envVars.KWBUILD_PATH = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`));
+  }
+  
   const {
+    KWBUILD_PATH,
     KUBEWORKFLOW_PATH,
     ENVIRONMENT,
     WORKSPACE_PATH,
     WORKSPACE_SUBPATH = "/.kube-workflow",
+    COMPONENTS,
+    HELM_ARGS = ""
   } = envVars
 
-  let { KWBUILD_PATH } = envVars
-  if(!KWBUILD_PATH){
-    KWBUILD_PATH = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`));
-  }
+  const logger = globalLogger.child({ KWBUILD_PATH, WORKSPACE_PATH })
+  buildCtx.set("logger", logger)
+  asyncShell.ctx.set("logger", logger)
 
   await fs.ensureDir(KWBUILD_PATH)
-  process.chdir(KWBUILD_PATH)
   
   logger.debug("Merge charts and overlays")
-  await fs.copy(`${KUBEWORKFLOW_PATH}/chart`, ".")
+  await fs.copy(`${KUBEWORKFLOW_PATH}/chart`, KWBUILD_PATH)
   await Promise.all([
-    fs.copy("./env", "./env.autodevops"),
-    fs.copy("./common", "./common.autodevops")
+    fs.copy(`${KWBUILD_PATH}/env`, `${KWBUILD_PATH}/env.autodevops`),
+    fs.copy(`${KWBUILD_PATH}/common`, `${KWBUILD_PATH}/common.autodevops`)
   ])
   const workspaceKubeworkflowPath = `${WORKSPACE_PATH}${WORKSPACE_SUBPATH}`
   if (await fs.pathExists(workspaceKubeworkflowPath)){
-    await fs.copy(workspaceKubeworkflowPath, ".", {dereference: true})
+    await fs.copy(workspaceKubeworkflowPath, KWBUILD_PATH, {dereference: true})
   }
   
   logger.debug("Generate values file")
   const getValuesFile = async (file)=>{
     for(const filePath of [
-      `${file}.yaml`,
-      `${file}.yml`
+      `${KWBUILD_PATH}/${file}.yaml`,
+      `${KWBUILD_PATH}/${file}.yml`
     ]){
       if (await fs.pathExists(filePath)) {
         return yaml.load(await fs.readFile(filePath, {encoding: "utf-8"}))
       }
     }
   }
-  const defaultValues = generateValues(envVars)
+  const defaultValues = generateValues()
   const [commonValues, envValues] = await Promise.all([
     getValuesFile("common/values"),
     getValuesFile(`env/${ENVIRONMENT}/values`),
@@ -72,7 +79,7 @@ module.exports = async (envVars) => {
   const values = defautlsDeep({}, envValues, commonValues, defaultValues)
 
   logger.debug("Compiling composite uses")
-  await compileUses({ values })
+  await compileUses(values)
   
   logger.debug("Compiling additional subcharts instances")
   const chart = await compileChart(values)
@@ -81,11 +88,9 @@ module.exports = async (envVars) => {
   logger.debug("Merge .kube-workflow env templates")
   const envTemplatesDir = `${KWBUILD_PATH}/env/${ENVIRONMENT}/templates`
   if(await fs.pathExists(envTemplatesDir)){
-    await fs.copy(envTemplatesDir, "templates", { dereference: true })
+    await fs.copy(envTemplatesDir, `${KWBUILD_PATH}/templates`, { dereference: true })
   }
   
-  
-  const { COMPONENTS } = envVars
   if (COMPONENTS){
     const components = COMPONENTS.split(" ")
     for (const key of Object.keys(chart.dependencies)){
@@ -94,23 +99,31 @@ module.exports = async (envVars) => {
   }
   
   logger.debug("Write values file")
-  await fs.writeFile("values.json", JSON.stringify(values))
+  await fs.writeFile(`${KWBUILD_PATH}/values.json`, JSON.stringify(values))
   
   logger.debug("Build base manifest using helm")
-  const { HELM_ARGS = "" } = envVars
-  let baseManifests = await asyncShell(`helm template -f values.json ${HELM_ARGS} .`)
+  let baseManifests = await asyncShell(`helm template -f values.json ${HELM_ARGS} .`, { cwd: KWBUILD_PATH })
   
   logger.debug("Set default namespace")
   baseManifests = await compiledefaultNs(baseManifests, values)
   
   logger.debug("Write base manifests file")
-  await fs.writeFile("base/manifests.yaml", baseManifests)
+  await fs.writeFile(`${KWBUILD_PATH}/base/manifests.yaml`, baseManifests)
   
   logger.debug("Build final manifests using kustomize")
-  const manifests = await asyncShell(`kustomize build --load-restrictor=LoadRestrictionsNone env/${ENVIRONMENT}`)
+  const manifests = await asyncShell(`kustomize build --load-restrictor=LoadRestrictionsNone env/${ENVIRONMENT}`, { cwd: KWBUILD_PATH })
   
-  logger.debug("Write final manifests file")
-  await fs.writeFile("manifests.yaml", manifests)
+  logger.debug(`Write final manifests file`)
+  await fs.writeFile(`${KWBUILD_PATH}/manifests.yaml`, manifests)
   
-  logger.debug("Built manifests: $PWD/manifests.yaml")
+  logger.debug(`Built manifests: ${KWBUILD_PATH}/manifests.yaml`)
+
+  return manifests
+}
+
+module.exports = async (envVars) => {
+  buildCtx.provide()
+  asyncShell.ctx.provide()
+  const manifests = await builder(envVars)
+  return manifests
 }

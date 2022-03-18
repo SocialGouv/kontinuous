@@ -1,0 +1,7 @@
+jobs:
+  enabled: true
+  runs:
+    - name: db
+      use: SocialGouv/kube-workflow/jobs/create-db@master
+      with:
+        pgAdminSecretRefName: pg-scaleway

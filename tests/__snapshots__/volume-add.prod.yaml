@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`build manifests for test "volume-add" with env "prod" 1`] = `
+exports[`volume-add.prod 1`] = `
 "apiVersion: v1
 kind: Namespace
 metadata:

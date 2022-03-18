@@ -13,6 +13,7 @@ const logger = require("../action/build/utils/logger")
 const shell = require("../action/build/utils/shell")
 
 program
+  .version(require(`${__dirname}/../package.json`).version)
   .command("build-manifests")
   .alias('b')
   .alias('build')

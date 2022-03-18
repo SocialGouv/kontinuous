@@ -5,37 +5,36 @@ const { generate } = require("@socialgouv/env-slug")
 const degit = require('degit')
 
 const miniHash = require("./utils/miniHash")
-const logger = require("./utils/logger")
+const { buildCtx } = require("./ctx")
 
 const downloadingPromises = {}
 
-const userCwd = process.env.WORKING_DIR || process.env.OLDPWD || process.cwd()
 const requireUse = async (use) => {
+  const logger = buildCtx.require("logger")
+  const { KWBUILD_PATH: rootDir, WORKSPACE_PATH: userDir } = buildCtx.require("env")
   const slug = generate(use)
   use = use.replace("@", "#")
-  let target = `uses/${slug}`
-  if (!await fs.pathExists(`${process.cwd()}/${target}`)){
-    let loading = downloadingPromises[slug]
-    if (!loading){
+  let target = `${rootDir}/uses/${slug}`
+  if (!downloadingPromises[slug]){
+    downloadingPromises[slug] = (async ()=>{
       if (use.startsWith(".") || use.startsWith("/")){
-        const src = `${userCwd}/${use}`
+        const src = `${userDir}/${use}`
         logger.debug(`import local ${src}`)
-        loading = fs.copy(src, target);
+        await fs.copy(src, target);
       } else {
         logger.debug(`degit ${use}`)
-        loading = degit(use).clone(target)
+        await degit(use).clone(target)
       }
-      downloadingPromises[slug] = loading
-    }
-    await loading
+    })()
   }
+  await downloadingPromises[slug]
   if ((await fs.stat(target)).isDirectory()) {
     target += "/use.yaml"
   }
   return { slug, use, target }
 }
 
-module.exports = async function compile({ values, file }, parentScope = [], parentWith = {}) {
+async function compile({ values, file }, parentScope = [], parentWith = {}) {
   if (file){
     values = yaml.load(await fs.readFile(file, { encoding: "utf-8" }))
   }
@@ -97,4 +96,8 @@ module.exports = async function compile({ values, file }, parentScope = [], pare
   runs.length = 0
   runs.push(...newRuns)
   return values
+}
+
+module.exports = async (values) => {
+  return compile({ values })
 }
