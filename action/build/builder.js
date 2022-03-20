@@ -109,7 +109,7 @@ const builder = async (envVars) => {
   
   if (await fs.pathExists(`${KWBUILD_PATH}/templates`)) {
     logger.debug(`Copy templates to kube-workflow chart`)
-    await fs.copy(`${KWBUILD_PATH}/templates`, `${KWBUILD_PATH}/charts/kube-workflow/templates`, {overwrite: true})
+    await fs.copy(`${KWBUILD_PATH}/templates`, `${KWBUILD_PATH}/charts/kube-workflow/templates`)
   }
   
   if (COMPONENTS) {
