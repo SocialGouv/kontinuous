@@ -1,0 +1,99 @@
+apiVersion: v1
+entries:
+  app:
+  - apiVersion: v2
+    created: "2022-03-20T11:15:24.875187637Z"
+    description: Classic frontend app
+    digest: d800d02c5ffc091f1118371c5db2cc8a42a4d25647d5122d5e8dc2ea38ef5d78
+    home: https://github.com/SocialGouv
+    icon: https://avatars.githubusercontent.com/u/45039513?v=4
+    maintainers:
+    - email: dsi-incubateur@sg.social.gouv.fr
+      name: Fabrique numérique des Ministères Sociaux
+    name: app
+    sources:
+    - https://github.com/SocialGouv/actions
+    urls:
+    - https://SocialGouv.github.io/kube-workflow/app-1.0.0.tgz
+    version: 1.0.0
+  hasura:
+  - apiVersion: v2
+    created: "2022-03-20T11:15:24.876119091Z"
+    description: Hasura service
+    digest: f8e488cfbe64fc2c459ddee90bdeda0498b5e60e7560ba538cd1ff08b6b4ab02
+    home: https://github.com/SocialGouv
+    icon: https://avatars.githubusercontent.com/u/45039513?v=4
+    maintainers:
+    - email: dsi-incubateur@sg.social.gouv.fr
+      name: Fabrique numérique des Ministères Sociaux
+    name: hasura
+    sources:
+    - https://github.com/SocialGouv/actions
+    urls:
+    - https://SocialGouv.github.io/kube-workflow/hasura-1.0.0.tgz
+    version: 1.0.0
+  jobs:
+  - apiVersion: v2
+    created: "2022-03-20T11:15:24.876464111Z"
+    description: Jobs
+    digest: 6532d83b72f3043769a3d11e2fc74dc97a384d67d6eb431a0dacc2f1a35bf23f
+    home: https://github.com/SocialGouv
+    icon: https://avatars.githubusercontent.com/u/45039513?v=4
+    maintainers:
+    - email: dsi-incubateur@sg.social.gouv.fr
+      name: Fabrique numérique des Ministères Sociaux
+    name: jobs
+    sources:
+    - https://github.com/SocialGouv/actions
+    urls:
+    - https://SocialGouv.github.io/kube-workflow/jobs-1.0.0.tgz
+    version: 1.0.0
+  maildev:
+  - apiVersion: v2
+    created: "2022-03-20T11:15:24.876726826Z"
+    description: Classic frontend app
+    digest: 8ce7068436c3085234e9c97ce5a863a143dd3b5bff32c0ff865af99ffcea0faa
+    home: https://github.com/SocialGouv
+    icon: https://avatars.githubusercontent.com/u/45039513?v=4
+    maintainers:
+    - email: dsi-incubateur@sg.social.gouv.fr
+      name: Fabrique numérique des Ministères Sociaux
+    name: maildev
+    sources:
+    - https://github.com/SocialGouv/actions
+    urls:
+    - https://SocialGouv.github.io/kube-workflow/maildev-1.0.0.tgz
+    version: 1.0.0
+  metabase:
+  - apiVersion: v2
+    created: "2022-03-20T11:15:24.877035444Z"
+    description: Metabase app
+    digest: 19b96c6f284a8f58ee13094c26ad95476600c6f9a6de47409fab9dc14a892aa6
+    home: https://github.com/SocialGouv
+    icon: https://avatars.githubusercontent.com/u/45039513?v=4
+    maintainers:
+    - email: dsi-incubateur@sg.social.gouv.fr
+      name: Fabrique numérique des Ministères Sociaux
+    name: metabase
+    sources:
+    - https://github.com/SocialGouv/kube-workflow
+    urls:
+    - https://SocialGouv.github.io/kube-workflow/metabase-1.0.0.tgz
+    version: 1.0.0
+  pgweb:
+  - apiVersion: v2
+    created: "2022-03-20T11:15:24.877321761Z"
+    description: Pgweb
+    digest: 599f48937f46c51ab4be869aa4e99979fd2e4782d2d0de0cc83f3f9dc9c8b4b7
+    home: https://github.com/SocialGouv
+    icon: https://avatars.githubusercontent.com/u/45039513?v=4
+    maintainers:
+    - email: dsi-incubateur@sg.social.gouv.fr
+      name: Fabrique numérique des Ministères Sociaux
+    name: pgweb
+    sources:
+    - https://github.com/SocialGouv/actions
+    urls:
+    - https://SocialGouv.github.io/kube-workflow/pgweb-1.0.0.tgz
+    version: 1.0.0
+generated: "2022-03-20T11:15:24.874133676Z"
