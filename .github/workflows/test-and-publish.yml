@@ -51,6 +51,7 @@ jobs:
           echo "Version changed: ${{ steps.publish.outputs.old-version }} => ${{ steps.publish.outputs.version }}"
   
   release-charts:
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
