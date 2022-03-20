@@ -76,4 +76,5 @@ jobs:
       - name: Publish Helm charts
         uses: stefanprodan/helm-gh-pages@master
         with:
+          linting: off
           token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
