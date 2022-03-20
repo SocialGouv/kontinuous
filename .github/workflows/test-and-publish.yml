@@ -53,6 +53,7 @@ jobs:
   release-charts:
     needs: [test]
     runs-on: ubuntu-latest
+    name: Release Helm Charts if has changed
     steps:
       - name: Checkout
         uses: actions/checkout@v2
