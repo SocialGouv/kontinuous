@@ -262,7 +262,7 @@ spec:
         - /bin/sh
         - -c
         - rm -rf /workflow/*
-        image: alpine:3
+        image: debian:stable
         imagePullPolicy: IfNotPresent
         name: job
         volumeMounts:
