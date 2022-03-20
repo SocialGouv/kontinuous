@@ -61,10 +61,6 @@ const builder = async (envVars) => {
     fs.copy(`${KUBEWORKFLOW_PATH}/charts`, `${KWBUILD_PATH}/charts`),
     fs.copy(`${KUBEWORKFLOW_PATH}/common`, `${KWBUILD_PATH}/common`),
     fs.copy(`${KUBEWORKFLOW_PATH}/env`, `${KWBUILD_PATH}/env`),
-    fs.copy(`${KUBEWORKFLOW_PATH}/templates`, `${KWBUILD_PATH}/templates`),
-    fs.copy(`${KUBEWORKFLOW_PATH}/Chart.yaml`, `${KWBUILD_PATH}/Chart.yaml`),
-    fs.copy(`${KUBEWORKFLOW_PATH}/values.yaml`, `${KWBUILD_PATH}/values.yaml`),
-    fs.copy(`${KUBEWORKFLOW_PATH}/.helmignore`, `${KWBUILD_PATH}/.helmignore`),
   ])
 
   await Promise.all([
@@ -73,7 +69,7 @@ const builder = async (envVars) => {
   ])
   const workspaceKubeworkflowPath = `${WORKSPACE_PATH}${WORKSPACE_SUBPATH}`
   if (await fs.pathExists(workspaceKubeworkflowPath)) {
-    await fs.copy(workspaceKubeworkflowPath, KWBUILD_PATH, {
+    await fs.copy(`${workspaceKubeworkflowPath}`, `${KWBUILD_PATH}`, {
       dereference: true,
     })
   }
@@ -110,8 +106,14 @@ const builder = async (envVars) => {
       dereference: true,
     })
   }
-
+  
+  if (await fs.pathExists(`${KWBUILD_PATH}/templates`)) {
+    logger.debug(`Copy templates to kube-workflow chart`)
+    await fs.copy(`${KWBUILD_PATH}/templates`, `${KWBUILD_PATH}/charts/kube-workflow/templates`, {overwrite: true})
+  }
+  
   if (COMPONENTS) {
+    logger.debug(`Enable only components: "${COMPONENTS}"`)
     const components = COMPONENTS.split(" ")
     for (const key of Object.keys(chart.dependencies)) {
       values[key].enabled = components.includes(key)
@@ -123,7 +125,7 @@ const builder = async (envVars) => {
 
   logger.debug("Build base manifest using helm")
   let baseManifests = await asyncShell(
-    `helm template -f values.json ${HELM_ARGS} .`,
+    `helm template -f values.json ${HELM_ARGS} charts/kube-workflow`,
     { cwd: KWBUILD_PATH }
   )
 

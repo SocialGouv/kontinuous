@@ -15,6 +15,9 @@ const promiseFromChildProcess = (child) => {
   })
   const err = []
   child.stderr.on("data", (data) => {
+    if (data.includes("found symbolic link")){
+      return
+    }
     err.push(data)
   })
   return new Promise(function (resolve, reject) {

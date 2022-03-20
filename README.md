@@ -52,7 +52,7 @@ Everything is overridable using filesystem merging.
 The `.kube-workflow` directoty of your project will be merged and eventually overwrite content of this repository `chart` directory.
 
 ### Override the full Chart
-- You can optout from the generic Chart and define a new one by creating your own `Chart.yaml` in the directory `.kube-workflow`. More often, you can use kustomize to adjust the manifests.
+- You can optout from the generic Chart and define a new one by creating your own `Chart.yaml` in the directory `.kube-workflow/charts/kube-workflow`. More often, you can use kustomize to adjust the manifests.
 
 ### Override and extends kustomizations
 The kustomization patches are applied after Helm template rendering.
