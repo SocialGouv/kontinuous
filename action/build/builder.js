@@ -63,7 +63,7 @@ const builder = async (envVars) => {
         continue
       }
       await fs.symlink(
-        `../../${chartName}`,
+        `${KUBEWORKFLOW_PATH}/charts/${chartName}`,
         `${KUBEWORKFLOW_PATH}/charts/kube-workflow/charts/${chartName}`
       )
     }
