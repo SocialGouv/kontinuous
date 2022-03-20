@@ -3,7 +3,7 @@ namespace:
 repository: 
 branchName: 
 sharedStorage:
-  size: 2Gi
+  size: 1Gi
   className: 'azurefile'
 runs: []
 image: "debian:stable"
