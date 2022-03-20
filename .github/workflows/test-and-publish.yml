@@ -53,12 +53,11 @@ jobs:
   release-charts:
     needs: [test]
     runs-on: ubuntu-latest
+    # if: startsWith(github.ref, 'refs/tags/v')
     name: Release Helm Charts if has changed
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
       - name: Configure Git
         run: |
@@ -70,7 +69,11 @@ jobs:
         with:
           version: v3.7.1
 
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.3.0
-        env:
-          CR_TOKEN: "${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}"
+      # - name: Run chart-releaser
+      #   uses: helm/chart-releaser-action@v1.3.0
+      #   env:
+      #     CR_TOKEN: "${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}"
+      - name: Publish Helm charts
+        uses: stefanprodan/helm-gh-pages@master
+        with:
+          token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
