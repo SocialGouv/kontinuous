@@ -7,16 +7,12 @@ const fs = require("fs-extra")
 const dotenv = require("dotenv")
 const builder = require("../action/build/builder")
 
-const getDirectories = (source) =>
-  fs
-    .readdirSync(source, { withFileTypes: true })
-    .filter((dirent) => dirent.isDirectory() || dirent.isSymbolicLink())
-    .map((dirent) => dirent.name)
+const getDirectoriesSync = require("../action/build/utils/getDirectoriesSync")
 
 const rootPath = path.resolve(`${__dirname}/..`)
 
 const samplesDir = `${__dirname}/samples`
-const testdirs = getDirectories(samplesDir)
+const testdirs = getDirectoriesSync(samplesDir)
 
 const defaultEnv = {
   GIT_REF: "refs/heads/feature-branch-1",
@@ -42,13 +38,6 @@ for (const testdir of testdirs) {
 test.each(cases)(`%s.%s`, async (testdir, environment) => {
   const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))
   const testdirPath = `${samplesDir}/${testdir}`
-  const envFile = `${testdirPath}/.env`
-  if (fs.pathExistsSync(envFile)) {
-    const dotenvConfig = dotenv.parse(
-      fs.readFileSync(envFile, { encoding: "utf-8" })
-    )
-    Object.assign(env, dotenvConfig)
-  }
   const env = {
     ...process.env,
     ...defaultEnv,
@@ -58,6 +47,13 @@ test.each(cases)(`%s.%s`, async (testdir, environment) => {
     WORKSPACE_PATH: testdirPath,
     WORKSPACE_SUBPATH: "",
     REPOSITORY: `test-${testdir}`,
+  }
+  const envFile = `${testdirPath}/.env`
+  if (fs.pathExistsSync(envFile)) {
+    const dotenvConfig = dotenv.parse(
+      fs.readFileSync(envFile, { encoding: "utf-8" })
+    )
+    Object.assign(env, dotenvConfig)
   }
   const output = await builder(env)
   expect(output).toMatchSpecificSnapshot(

@@ -68,10 +68,10 @@ program
       let manifests = await fs.readFile(manifestsFile, { encoding: "utf-8" })
       if (options.S) {
         const theme = themeFromJson({
-          "keyword": "blue",
-          "built_in": ["cyan", "dim"],
-          "string": "green",
-          "default": "gray"
+          keyword: "blue",
+          built_in: ["cyan", "dim"],
+          string: "green",
+          default: "gray",
         })
         manifests = highlight(manifests, {
           language: "yaml",

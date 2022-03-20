@@ -53,6 +53,22 @@ const builder = async (envVars) => {
   buildCtx.set("logger", logger)
   asyncShell.ctx.set("logger", logger)
 
+  logger.debug(`Add symlinks kube-workflow chart`)
+  if (!(await fs.pathExists(`${KUBEWORKFLOW_PATH}/charts/kube-workflow/charts`))) {
+    const getDirectories = require("./utils/getDirectories")
+    const charts = await getDirectories(`${KUBEWORKFLOW_PATH}/charts`)
+    await fs.ensureDir(`${KUBEWORKFLOW_PATH}/charts/kube-workflow/charts`)
+    for (const chartName of charts) {
+      if (chartName === "kube-workflow") {
+        continue
+      }
+      await fs.symlink(
+        `${KUBEWORKFLOW_PATH}/charts/${chartName}`,
+        `${KUBEWORKFLOW_PATH}/charts/kube-workflow/charts/${chartName}`
+      )
+    }
+  }
+
   await fs.ensureDir(KWBUILD_PATH)
 
   logger.debug("Merge charts and overlays")
@@ -106,12 +122,15 @@ const builder = async (envVars) => {
       dereference: true,
     })
   }
-  
+
+  logger.debug(`Import template in kube-workflow chart`)
   if (await fs.pathExists(`${KWBUILD_PATH}/templates`)) {
-    logger.debug(`Copy templates to kube-workflow chart`)
-    await fs.copy(`${KWBUILD_PATH}/templates`, `${KWBUILD_PATH}/charts/kube-workflow/templates`)
+    await fs.copy(
+      `${KWBUILD_PATH}/templates`,
+      `${KWBUILD_PATH}/charts/kube-workflow/templates`
+    )
   }
-  
+
   if (COMPONENTS) {
     logger.debug(`Enable only components: "${COMPONENTS}"`)
     const components = COMPONENTS.split(" ")
