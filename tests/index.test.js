@@ -27,12 +27,20 @@ const defaultEnv = {
 }
 
 const allEnvs = ["dev", "preprod", "prod"]
+const cases = []
 for (const testdir of testdirs) {
   const afterDot = testdir.split(".").pop()
   if (afterDot === "disabled") {
     continue
   }
   const environments = allEnvs.includes(afterDot) ? [afterDot] : allEnvs
+  for (const environment of environments) {
+    cases.push([testdir, environment])
+  }
+}
+
+test.each(cases)(`%s.%s`, async (testdir, environment) => {
+  const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))
   const testdirPath = `${samplesDir}/${testdir}`
   const envFile = `${testdirPath}/.env`
   if (fs.pathExistsSync(envFile)) {
@@ -41,23 +49,18 @@ for (const testdir of testdirs) {
     )
     Object.assign(env, dotenvConfig)
   }
-  for (const environment of environments) {
-    it(`${testdir}.${environment}`, async () => {
-      const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))
-      const env = {
-        ...process.env,
-        ...defaultEnv,
-        ENVIRONMENT: environment,
-        KUBEWORKFLOW_PATH: rootPath,
-        KWBUILD_PATH: tmpDir,
-        WORKSPACE_PATH: testdirPath,
-        WORKSPACE_SUBPATH: "",
-        REPOSITORY: `test-${testdir}`,
-      }
-      const output = await builder(env)
-      expect(output).toMatchSpecificSnapshot(
-        `./__snapshots__/${testdir}.${environment}.yaml`
-      )
-    })
+  const env = {
+    ...process.env,
+    ...defaultEnv,
+    ENVIRONMENT: environment,
+    KUBEWORKFLOW_PATH: rootPath,
+    KWBUILD_PATH: tmpDir,
+    WORKSPACE_PATH: testdirPath,
+    WORKSPACE_SUBPATH: "",
+    REPOSITORY: `test-${testdir}`,
   }
-}
+  const output = await builder(env)
+  expect(output).toMatchSpecificSnapshot(
+    `./__snapshots__/${testdir}.${environment}.yaml`
+  )
+})
