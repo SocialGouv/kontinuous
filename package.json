@@ -11,7 +11,8 @@
     "lodash.defaultsdeep": "^4.6.1",
     "nctx": "^1.0.1",
     "pino": "^7.9.0",
-    "pino-pretty": "^7.5.4"
+    "pino-pretty": "^7.5.4",
+    "pretty-ms": "^7.0.1"
   },
   "devDependencies": {
     "dotenv": "^16.0.0",
@@ -29,8 +30,8 @@
     "prettier": "^2.5.1"
   },
   "optionalDependencies": {
-    "commander": "^9.1.0",
-    "cli-highlight": "^2.1.11"
+    "cli-highlight": "^2.1.11",
+    "commander": "^9.1.0"
   },
   "jest": {
     "testTimeout": 10000

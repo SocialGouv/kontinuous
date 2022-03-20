@@ -56,7 +56,17 @@ const builder = async (envVars) => {
   await fs.ensureDir(KWBUILD_PATH)
 
   logger.debug("Merge charts and overlays")
-  await fs.copy(`${KUBEWORKFLOW_PATH}/chart`, KWBUILD_PATH)
+  await Promise.all([
+    fs.copy(`${KUBEWORKFLOW_PATH}/base`, `${KWBUILD_PATH}/base`),
+    fs.copy(`${KUBEWORKFLOW_PATH}/charts`, `${KWBUILD_PATH}/charts`),
+    fs.copy(`${KUBEWORKFLOW_PATH}/common`, `${KWBUILD_PATH}/common`),
+    fs.copy(`${KUBEWORKFLOW_PATH}/env`, `${KWBUILD_PATH}/env`),
+    fs.copy(`${KUBEWORKFLOW_PATH}/templates`, `${KWBUILD_PATH}/templates`),
+    fs.copy(`${KUBEWORKFLOW_PATH}/Chart.yaml`, `${KWBUILD_PATH}/Chart.yaml`),
+    fs.copy(`${KUBEWORKFLOW_PATH}/values.yaml`, `${KWBUILD_PATH}/values.yaml`),
+    fs.copy(`${KUBEWORKFLOW_PATH}/.helmignore`, `${KWBUILD_PATH}/.helmignore`),
+  ])
+
   await Promise.all([
     fs.copy(`${KWBUILD_PATH}/env`, `${KWBUILD_PATH}/env.autodevops`),
     fs.copy(`${KWBUILD_PATH}/common`, `${KWBUILD_PATH}/common.autodevops`),
