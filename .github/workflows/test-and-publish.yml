@@ -72,7 +72,5 @@ jobs:
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.3.0
-        with:
-          charts_dir: "chart/charts"
         env:
           CR_TOKEN: "${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}"
