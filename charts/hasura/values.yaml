@@ -6,7 +6,6 @@ imagePackage: hasura
 imageTag: 
 ttl: 
 rancherProjectId: my-cluser-id:my-project-id
-gitBranch: my-awesome-branch
 isProduction: false
 isPreProduction: false
 replicas: 1
