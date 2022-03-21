@@ -30,16 +30,15 @@ const chartsUpdater = {
   }
 }
 
+const bumpFiles = [{ filename: "package.json", type: "json" }]
+
 const chartsPath = "charts"
 const charts = getDirectoriesSync(chartsPath)
-const bumpFiles = []
-
-bumpFiles.push(...charts.map(async (chartName) => ({
+bumpFiles.push(...charts.map((chartName) => ({
   filename: `${chartsPath}/${chartName}/Chart.yaml`,
   updater: chartsUpdater
 })))
 
 module.exports = {
   bumpFiles,
-  packageFiles: ["package.json"]
 }
