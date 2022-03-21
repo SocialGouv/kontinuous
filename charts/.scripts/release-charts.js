@@ -31,7 +31,6 @@ const main = async ()=>{
     }
     await fs.writeFile(chartPath, yaml.dump(chart))
   }))
-  logger.info(`Charts version is now ${version}`)
 }
 
 main()
