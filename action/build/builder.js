@@ -54,20 +54,24 @@ const builder = async (envVars) => {
   asyncShell.ctx.set("logger", logger)
 
   logger.debug(`Add symlinks kube-workflow chart`)
-  if (!(await fs.pathExists(`${KUBEWORKFLOW_PATH}/charts/kube-workflow/charts`))) {
-    const getDirectories = require("./utils/getDirectories")
-    const charts = await getDirectories(`${KUBEWORKFLOW_PATH}/charts`)
-    await fs.ensureDir(`${KUBEWORKFLOW_PATH}/charts/kube-workflow/charts`)
-    for (const chartName of charts) {
-      if (chartName === "kube-workflow") {
-        continue
-      }
-      await fs.symlink(
-        `../../${chartName}`,
-        `${KUBEWORKFLOW_PATH}/charts/kube-workflow/charts/${chartName}`
-      )
+  const getDirectories = require("./utils/getDirectories")
+  const charts = await getDirectories(`${KUBEWORKFLOW_PATH}/charts`)
+  await fs.ensureDir(`${KUBEWORKFLOW_PATH}/charts/kube-workflow/charts`)
+  const symlinkPromises = []
+  for (const chartName of charts) {
+    if (chartName === "kube-workflow") {
+      continue
     }
+    symlinkPromises.push(
+      (async () => {
+        const dest = `${KUBEWORKFLOW_PATH}/charts/kube-workflow/charts/${chartName}`
+        if (!(await fs.pathExists(dest))) {
+          await fs.symlink(`../../${chartName}`, dest)
+        }
+      })()
+    )
   }
+  await Promise.all(symlinkPromises)
 
   await fs.ensureDir(KWBUILD_PATH)
 
