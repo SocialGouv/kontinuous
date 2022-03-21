@@ -56,7 +56,7 @@
   },
   "standard-version": {
     "scripts": {
-      "precommit": "node charts/.scripts/release-charts"
+      "precommit": "node charts/.scripts/release-charts && git add ./charts/*/Chart.yaml"
     }
   },
   "bin": {
