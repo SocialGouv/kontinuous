@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/SocialGouv/kube-workflow/compare/v1.1.2...v1.2.0) (2022-03-21)
+
+
+### Features
+
+* ingress annotations ([cb4f524](https://github.com/SocialGouv/kube-workflow/commit/cb4f524babebc03ec53afac418e0665248a3a320))
+
+
+### Bug Fixes
+
+* **kube-workflow:** allow empty branch on NS ([#6](https://github.com/SocialGouv/kube-workflow/issues/6)) ([748de56](https://github.com/SocialGouv/kube-workflow/commit/748de5663d31a7a2e9a60f31af0881d1104327e6))
+* **kube-workflow:** allow empty git branch on NS ([#5](https://github.com/SocialGouv/kube-workflow/issues/5)) ([931907d](https://github.com/SocialGouv/kube-workflow/commit/931907de25ed4bc080ad92af2ab496d87479af8e))
+* remove wrong usage of yarn cache ([59c5388](https://github.com/SocialGouv/kube-workflow/commit/59c5388dd37dd5e9833d9f655ed29ec926f46d29))
+* rm imageName input + clean ([2ab5f2a](https://github.com/SocialGouv/kube-workflow/commit/2ab5f2a6e97b48b1ad15e281287d1b77736dacce))
+
 ### [1.1.2](https://github.com/SocialGouv/kube-workflow/compare/v1.1.1...v1.1.2) (2022-03-20)
 
 
