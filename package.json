@@ -54,11 +54,6 @@
     "build-manifests": "node action/build/build.js",
     "release": "standard-version"
   },
-  "standard-version": {
-    "scripts": {
-      "precommit": "node charts/.scripts/release-charts && git add ./charts/*/Chart.yaml"
-    }
-  },
   "bin": {
     "kube-workflow": "./bin/cli.js"
   },
