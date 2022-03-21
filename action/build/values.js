@@ -8,13 +8,8 @@ function generateValues() {
     ENVIRONMENT,
     RANCHER_PROJECT_ID,
     RANCHER_PROJECT_NAME,
-    IMAGE_REGISTRY,
-    IMAGE_NAME,
     GIT_REF,
     GIT_SHA,
-    KEEP_ALIVE,
-    CERT_SECRET_NAME,
-    PRODUCTION_DATABASE,
     GIT_HEAD_REF,
   } = buildCtx.require("env")
 
@@ -45,12 +40,9 @@ function generateValues() {
     ? `${repositoryName}-preprod`
     : generate(`${repositoryName}-${branchName}`)
 
-  const keepAlive = Boolean(KEEP_ALIVE)
-
   const isRenovate = branchName.startsWith("renovate")
-  const isDestroyable = isDev && !keepAlive
 
-  const ttl = isDestroyable ? (isRenovate ? "1d" : "7d") : ""
+  const ttl = isDev ? (isRenovate ? "1d" : "7d") : ""
 
   const sha = GIT_SHA
   const imageTag = isPreProduction
@@ -71,15 +63,12 @@ function generateValues() {
 
   const host = `${shortenHost(subdomain)}.${domain}`
 
-  const registry = IMAGE_REGISTRY || "ghcr.io/socialgouv"
-  const imageName = IMAGE_NAME || repositoryName
-  const image = `${registry}/${imageName}`
+  const registry = "ghcr.io/socialgouv"
+  const imageName = repositoryName
 
   const rancherProjectId = RANCHER_PROJECT_ID
 
-  const certSecretName =
-    CERT_SECRET_NAME ||
-    (isProduction ? `${repositoryName}-crt` : "wildcard-crt")
+  const certSecretName = isProduction ? `${repositoryName}-crt` : "wildcard-crt"
 
   const pgSecretName = isProduction
     ? "pg-user"
@@ -87,7 +76,7 @@ function generateValues() {
     ? "pg-user-preprod"
     : `pg-user-${branchSlug}`
 
-  const productionDatabase = PRODUCTION_DATABASE || repositoryName
+  const productionDatabase = repositoryName
 
   const pgDatabase = isProduction
     ? productionDatabase
@@ -119,7 +108,8 @@ function generateValues() {
       pgUser,
       host,
       domain,
-      image,
+      registry,
+      imageName,
       imageTag,
       branchSlug,
       branchName,

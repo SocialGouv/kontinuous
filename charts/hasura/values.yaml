@@ -1,7 +1,8 @@
 enabled:
 namespace: 
 host: 
-image: 
+registry: 
+imageName: 
 imagePackage: hasura
 imageTag: 
 ttl: 

@@ -31,7 +31,7 @@ spec:
             claimName: "{{ tpl $volumeName $ }}"
         {{- end }}
       containers:
-        - image: "{{ or .Values.image .Values.global.image }}{{ if .Values.imagePackage }}{{ (print "/" .Values.imagePackage) }}{{ end }}:{{ or .Values.imageTag .Values.global.imageTag }}"
+        - image: "{{ or .Values.registry .Values.global.registry }}/{{ or .Values.imageName .Values.global.imageName }}{{ if .Values.imagePackage }}{{ (print "/" .Values.imagePackage) }}{{ end }}:{{ or .Values.imageTag .Values.global.imageTag }}"
           livenessProbe:
             failureThreshold: 15
             httpGet:

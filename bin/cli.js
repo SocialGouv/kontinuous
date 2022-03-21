@@ -24,7 +24,6 @@ program
   .option("--env, -e", "select environment (dev | preprod | prod), default dev")
   .option("--components, -c", "override components to enable")
   .option("--helm-args, -a", "add extra helm arguments")
-  .option("--image-name, -i", "override image-name")
   .option("--repository, -r", "set repository, default to current folder name")
   .option("--output, -o", "enable direct output of manifest")
   .option(
@@ -49,7 +48,6 @@ program
       ENVIRONMENT: options.E || process.env.ENVIRONMENT || "dev",
       COMPONENTS: options.C || process.env.COMPONENTS,
       HELM_ARGS: options.A || process.env.HELM_ARGS,
-      IMAGE_NAME: options.I || process.env.IMAGE_NAME,
 
       GIT_REF,
       GIT_SHA,

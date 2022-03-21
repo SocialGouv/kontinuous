@@ -14,8 +14,6 @@ inputs:
     description: "The Kubernetes authentication configuration"
   token:
     description: "The Github authentication token"
-  imageName:
-    description: "The image registry path"
   helmArgs:
     description: "Add extra args to Helm template command"
   components:
@@ -59,7 +57,6 @@ runs:
         RANCHER_PROJECT_NAME: ${{ inputs.rancherProjectName }}
         COMPONENTS: ${{ inputs.components }}
         HELM_ARGS: ${{ inputs.helmArgs }}
-        IMAGE_NAME: ${{ inputs.imageName }}
         DEBUG: "true"
       working-directory: "${{ github.action_path }}"
       run: yarn build-manifests
