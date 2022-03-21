@@ -39,9 +39,6 @@ bumpFiles.push(...charts.map(async (chartName) => ({
   updater: chartsUpdater
 })))
 
-
-const bumpFiles = []
-
 module.exports = {
   bumpFiles,
   packageFiles: ["package.json"]
