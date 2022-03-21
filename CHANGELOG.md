@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/SocialGouv/kube-workflow/compare/v1.2.0...v1.2.1) (2022-03-21)
+
+
+### Bug Fixes
+
+* component default ([bd36e7d](https://github.com/SocialGouv/kube-workflow/commit/bd36e7d00ede9e9c2389df1c823492fcb38acf47))
+* gen symlinks ([cbbb7cc](https://github.com/SocialGouv/kube-workflow/commit/cbbb7cc5135076d926991e43e6144935ae544d8d))
+* internal github workflow ([974db6e](https://github.com/SocialGouv/kube-workflow/commit/974db6e35eeeb7c9252dc91214a61d7fb4970a18))
+* release charts version ([ddf0892](https://github.com/SocialGouv/kube-workflow/commit/ddf0892eeff25809527a1952df43623a27d5a04c))
+* release charts version precommit ([dfabb22](https://github.com/SocialGouv/kube-workflow/commit/dfabb22796ec3e4ec88fe5b0cfcca0a800674900))
+* release charts version precommit ([90dbef6](https://github.com/SocialGouv/kube-workflow/commit/90dbef698a281e02aa5d9bb79ffbf4bb8ef4879a))
+* release charts version precommit ([1e1417c](https://github.com/SocialGouv/kube-workflow/commit/1e1417c3f499a8ac347d88ed1374031db2c887ee))
+* release charts version updater ([b57a6c3](https://github.com/SocialGouv/kube-workflow/commit/b57a6c309f648fc19895f1ac24e36d2f4a6d278f))
+* release charts version updater ([d225094](https://github.com/SocialGouv/kube-workflow/commit/d2250946de732b217131b56bc869a8cc2e9cffbf))
+* release charts version updater ([1744e01](https://github.com/SocialGouv/kube-workflow/commit/1744e010568caf0ef85d2a379e6fc6c1afb7ff40))
+* reup jobs shared size ([b33e1ae](https://github.com/SocialGouv/kube-workflow/commit/b33e1ae2332cc8a0b9014d14d1239462c90d9817))
+
 ## [1.2.0](https://github.com/SocialGouv/kube-workflow/compare/v1.1.2...v1.2.0) (2022-03-21)
 
 
