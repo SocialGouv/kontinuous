@@ -25,7 +25,7 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
+      storage: 2Gi
   storageClassName: azurefile
 ---
 apiVersion: batch/v1beta1
