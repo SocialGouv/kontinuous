@@ -45,9 +45,6 @@ runs:
       with:
         node-version: "14"
 
-    - name: Yarn cache setup
-      uses: c-hive/gha-yarn-cache@v1
-
     - name: Install dependencies
       shell: bash
       working-directory: "${{ github.action_path }}"
