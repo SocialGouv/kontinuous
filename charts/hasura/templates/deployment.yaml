@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    component: {{.Values.component }}
+    component: {{ or .Values.component .Chart.Name }}
     application: {{ .Values.global.repositoryName }}
-  name: {{.Values.component }}
+  name: {{ or .Values.component .Chart.Name }}
   namespace: {{ .Values.global.namespace }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      component: {{.Values.component }}
+      component: {{ or .Values.component .Chart.Name }}
   template:
     metadata:
       labels:
-        component: {{.Values.component }}
+        component: {{ or .Values.component .Chart.Name }}
         application: {{ .Values.global.repositoryName }}
     spec:
       initContainers:

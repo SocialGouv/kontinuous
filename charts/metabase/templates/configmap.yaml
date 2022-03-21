@@ -2,12 +2,12 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   labels:
-    component: {{ .Values.component }}
+    component: {{ or .Values.component .Chart.Name }}
     application: {{ .Values.global.repositoryName }}
-  name: {{ .Values.component }}
+  name: {{ or .Values.component .Chart.Name }}
   namespace: {{ .Values.global.namespace }}
 data:
-  MB_APPLICATION_NAME: {{ .Values.component }}
+  MB_APPLICATION_NAME: {{ or .Values.component .Chart.Name }}
   MB_DB_TYPE: "postgres"
   MB_ADMIN_EMAIL: "admin@fabrique.social.gouv.fr"
   MB_ANON_TRACKING_ENABLED: "false"

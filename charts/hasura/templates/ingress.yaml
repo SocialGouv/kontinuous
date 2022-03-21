@@ -7,19 +7,19 @@ metadata:
     "{{ $key }}": "{{ $val }}"
     {{ end }}
   labels:
-    component: {{.Values.component }}
+    component: {{ or .Values.component .Chart.Name }}
     application: {{ .Values.global.repositoryName }}
-  name: {{.Values.component }}
+  name: {{ or .Values.component .Chart.Name }}
   namespace: {{ .Values.global.namespace }}
 spec:
   rules:
     - host: >-
-        {{ tpl (or .Values.host (print .Values.component "-" .Values.global.host)) . }}
+        {{ tpl (or .Values.host (print (or .Values.component .Chart.Name) "-" .Values.global.host)) . }}
       http:
         paths:
           - backend:
               service:
-                name: {{.Values.component }}
+                name: {{ or .Values.component .Chart.Name }}
                 port:
                   name: http
             path: /
@@ -27,5 +27,5 @@ spec:
   tls:
     - hosts:
         - >-
-          {{ tpl (or .Values.host (print .Values.component "-" .Values.global.host)) . }}
+          {{ tpl (or .Values.host (print (or .Values.component .Chart.Name) "-" .Values.global.host)) . }}
       secretName: {{ or .Values.certSecretName .Values.global.certSecretName }}

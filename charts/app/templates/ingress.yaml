@@ -7,9 +7,9 @@ metadata:
     "{{ $key }}": "{{ $val }}"
     {{ end }}
   labels:
-    component: {{.Values.component }}
+    component: {{ or .Values.component .Chart.Name }}
     application: {{ .Values.global.repositoryName }}
-  name: {{.Values.component }}
+  name: {{ or .Values.component .Chart.Name }}
   namespace: {{ .Values.global.namespace }}
 spec:
   rules:
@@ -19,7 +19,7 @@ spec:
         paths:
           - backend:
               service:
-                name: {{.Values.component }}
+                name: {{ or .Values.component .Chart.Name }}
                 port:
                   name: http
             path: /

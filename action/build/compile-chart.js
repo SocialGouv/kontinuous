@@ -36,13 +36,5 @@ module.exports = async (values) => {
     yaml.dump(chart)
   )
 
-  for (const { name, alias } of dependencies) {
-    const key = alias || name
-    if (!values[key]) {
-      values[key] = {}
-    }
-    values[key].component = key
-  }
-
   return chart
 }
