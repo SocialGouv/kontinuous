@@ -34,3 +34,5 @@ addVolumes: []
 volumes: []
 volumeMounts: []
 redirectFrom: []
+ingress:
+  annotations: {}

@@ -4,3 +4,5 @@ host:
 certSecretName:
 env: []
 envFrom: []
+ingress:
+  annotations: {}

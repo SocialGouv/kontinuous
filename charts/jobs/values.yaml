@@ -7,3 +7,5 @@ sharedStorage:
   className: 'azurefile'
 runs: []
 image: "debian:stable"
+ingress:
+  annotations: {}

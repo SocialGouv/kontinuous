@@ -31,3 +31,5 @@ autoscale:
     memory: 100
 certSecretName: 
 waitForPostgres: false
+ingress:
+  annotations: {}

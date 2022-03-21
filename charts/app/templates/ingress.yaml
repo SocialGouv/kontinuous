@@ -3,6 +3,9 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    {{ range $key, $val := (merge .Values.global.ingress.annotations .Values.ingress.annotations) }}
+    "{{ $key }}": "{{ $val }}"
+    {{ end }}
   labels:
     component: {{.Values.component }}
     application: {{ .Values.global.repositoryName }}
