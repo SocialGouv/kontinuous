@@ -52,7 +52,12 @@
     "test:debug": "DEBUG=1 jest tests",
     "test:update-snapshots": "DEBUG=1 jest tests -u",
     "build-manifests": "node action/build/build.js",
-    "release": "standard-version && node charts/.scripts/release-charts"
+    "release": "standard-version"
+  },
+  "standard-version": {
+    "scripts": {
+      "precommit": "node charts/.scripts/release-charts"
+    }
   },
   "bin": {
     "kube-workflow": "./bin/cli.js"
