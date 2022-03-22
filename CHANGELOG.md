@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.2](https://github.com/SocialGouv/kube-workflow/compare/v1.2.1...v1.2.2) (2022-03-22)
+
+
+### Bug Fixes
+
+* cli options values ([21727f2](https://github.com/SocialGouv/kube-workflow/commit/21727f290d7ce787f87cf443a87755fa18adbde4))
+
 ### [1.2.1](https://github.com/SocialGouv/kube-workflow/compare/v1.2.0...v1.2.1) (2022-03-21)
 
 
