@@ -21,10 +21,10 @@ program
   .description(
     "Build manifests using kube-workflow with current directory configuration"
   )
-  .option("--env, -e", "select environment (dev | preprod | prod), default dev")
-  .option("--components, -c", "override components to enable")
-  .option("--helm-args, -a", "add extra helm arguments")
-  .option("--repository, -r", "set repository, default to current folder name")
+  .option("--env, -e <env>", "select environment (dev | preprod | prod), default dev")
+  .option("--components <component>, -c", "override components to enable")
+  .option("--helm-args <args>, -a", "add extra helm arguments")
+  .option("--repository, -r <repo>", "set repository, default to current folder name")
   .option("--output, -o", "enable direct output of manifest")
   .option(
     "--syntax-highlight, -s",
