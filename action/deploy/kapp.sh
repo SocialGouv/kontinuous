@@ -8,5 +8,6 @@ kapp \
   --app $REPOSITORY_NAME \
   --namespace $NAMESPACE \
   --logs-all \
+  --dangerous-override-ownership-of-existing-resources \
   --yes \
   -f manifests.yaml
