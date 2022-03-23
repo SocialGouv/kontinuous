@@ -43,8 +43,9 @@ spec:
               npx degit {{ or $val.repository $val.global.repository }}#{{ or $val.branchName $val.global.branchName }} \
                 /workspace
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
+            runAsUser: {{ or $run.user "1000" }}
+            runAsGroup: {{ or $run.group (or $run.user "1000") }}
+            fsGroup: {{ or $run.fsGroup (or $run.user "1000") }}
           volumeMounts:
             - name: workspace
               mountPath: /workspace
@@ -57,8 +58,9 @@ spec:
             - -c
             - npx degit {{ $run.action | replace "@" "#" }} /action
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
+            runAsUser: {{ or $run.user "1000" }}
+            runAsGroup: {{ or $run.group (or $run.user "1000") }}
+            fsGroup: {{ or $run.fsGroup (or $run.user "1000") }}
           volumeMounts:
             - name: action
               mountPath: /action
@@ -93,8 +95,9 @@ spec:
               /action/action.sh
           {{- end }}
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
+            runAsUser: {{ or $run.user "1000" }}
+            runAsGroup: {{ or $run.group (or $run.user "1000") }}
+            fsGroup: {{ or $run.fsGroup (or $run.user "1000") }}
           volumeMounts:
             - name: workspace
               mountPath: /workspace
