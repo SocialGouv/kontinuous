@@ -130,6 +130,7 @@ spec:
         imagePullPolicy: IfNotPresent
         name: job
         securityContext:
+          fsGroup: 1000
           runAsGroup: 1000
           runAsUser: 1000
         volumeMounts:
@@ -145,9 +146,13 @@ spec:
         - sh
         - -c
         - npx degit ../../../jobs/create-db /action
+        env:
+        - name: npm_config_cache
+          value: /tmp/npm-cache
         image: node:17
         name: degit-action
         securityContext:
+          fsGroup: 1000
           runAsGroup: 1000
           runAsUser: 1000
         volumeMounts:
@@ -211,8 +216,9 @@ spec:
         imagePullPolicy: IfNotPresent
         name: job
         securityContext:
-          runAsGroup: 1000
-          runAsUser: 1000
+          fsGroup: 1001
+          runAsGroup: 1001
+          runAsUser: 1001
         volumeMounts:
         - mountPath: /workspace
           name: workspace
@@ -226,9 +232,13 @@ spec:
         - sh
         - -c
         - npx degit ../../../jobs/create-db /action
+        env:
+        - name: npm_config_cache
+          value: /tmp/npm-cache
         image: node:17
         name: degit-action
         securityContext:
+          fsGroup: 1001
           runAsGroup: 1000
           runAsUser: 1000
         volumeMounts:
