@@ -2,6 +2,7 @@
 
 set -e
 
+mkdir -p /tmp/.kube
 echo "$KUBECONFIG" > /tmp/.kube/config
 export KUBECONFIG=/tmp/.kube/config
 
