@@ -53,11 +53,12 @@
     "test:update-snapshots": "DEBUG=1 jest tests -u",
     "build-manifests": "node action/build/build.js",
     "release": "standard-version",
-    "retag": "git tag -f $(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1)"
+    "retag": "git tag -f $(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1)",
+    "push": "git push -f --tags"
   },
   "standard-version": {
     "scripts": {
-      "posttag": "yarn retag && git push -f --tags"
+      "posttag": "yarn retag"
     }
   },
   "bin": {

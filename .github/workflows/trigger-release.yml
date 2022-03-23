@@ -27,9 +27,9 @@ jobs:
         run: yarn --frozen-lockfile --prefer-offline
 
       - name: Run release
+        run: yarn release
+      
+      - name: Push release
         shell: bash
         run: |
-          git remote add github https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git config push.default github
-          yarn release
-      
+          git push -f --tags https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
