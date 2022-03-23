@@ -31,5 +31,11 @@ jobs:
       
       - name: Push release
         shell: bash
+        env:
+          GIT_AUTHOR_EMAIL: ${{ secrets.SOCIALGROOVYBOT_EMAIL }}
+          GIT_AUTHOR_NAME: ${{ secrets.SOCIALGROOVYBOT_NAME }}
+          GIT_COMMITTER_EMAIL: ${{ secrets.SOCIALGROOVYBOT_EMAIL }}
+          GIT_COMMITTER_NAME: ${{ secrets.SOCIALGROOVYBOT_NAME }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git push -f --tags https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
