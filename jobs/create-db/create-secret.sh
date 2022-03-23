@@ -2,8 +2,8 @@
 
 set -e
 
-echo "$KUBECONFIG" > ~/.kube/config
-export KUBECONFIG=~/.kube/config
+echo "$KUBECONFIG" > /tmp/.kube/config
+export KUBECONFIG=/tmp/.kube/config
 
 if [ -n "$(kubectl -n $NAMESPACE get secret $DB_SECRET_NAME 2>/dev/null)" ]; then
   echo "secret named '$DB_SECRET_NAME' already exists in namespace '$NAMESPACE'"
