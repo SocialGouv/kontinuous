@@ -29,6 +29,7 @@ jobs:
       - name: Run release
         shell: bash
         run: |
-          git config push.default https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git remote add github https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git config push.default github
           yarn release
       
