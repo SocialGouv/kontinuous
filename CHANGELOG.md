@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.3](https://github.com/SocialGouv/kube-workflow/compare/v1.2.2...v1.2.3) (2022-03-23)
+
+
+### Bug Fixes
+
+* force retag ([58b8ae2](https://github.com/SocialGouv/kube-workflow/commit/58b8ae2230d7f3bc4e14f1d4adbf69cfa453dbbf))
+* job add psp ([4618de7](https://github.com/SocialGouv/kube-workflow/commit/4618de7c4df6617699f1bbccc0ad46527939a847))
+* kapp override existing resources ([cb2d9c9](https://github.com/SocialGouv/kube-workflow/commit/cb2d9c932217c5e648872ff91470517f61b31e47))
+* security context ([79c0a6d](https://github.com/SocialGouv/kube-workflow/commit/79c0a6d06879c3b9a0060c90e772d16850cfe25e))
+* security context ([867ee47](https://github.com/SocialGouv/kube-workflow/commit/867ee47668eaa0fd52aaafb00b535452dc1e7185))
+* security context ([4975ed9](https://github.com/SocialGouv/kube-workflow/commit/4975ed9c89127ba453aaa74fba9d51e8fc872a46))
+* security context option ([e335f1f](https://github.com/SocialGouv/kube-workflow/commit/e335f1f5b4e563915f6560ab30b399a682be6826))
+
 ### [1.2.2](https://github.com/SocialGouv/kube-workflow/compare/v1.2.1...v1.2.2) (2022-03-22)
 
 
