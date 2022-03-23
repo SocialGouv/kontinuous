@@ -129,6 +129,9 @@ spec:
         image: ghcr.io/socialgouv/docker/psql:6.70.0
         imagePullPolicy: IfNotPresent
         name: job
+        securityContext:
+          runAsGroup: 1000
+          runAsUser: 1000
         volumeMounts:
         - mountPath: /workspace
           name: workspace
@@ -207,6 +210,9 @@ spec:
         image: bitnami/kubectl:latest
         imagePullPolicy: IfNotPresent
         name: job
+        securityContext:
+          runAsGroup: 1000
+          runAsUser: 1000
         volumeMounts:
         - mountPath: /workspace
           name: workspace
