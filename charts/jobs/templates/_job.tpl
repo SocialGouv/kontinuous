@@ -36,6 +36,9 @@ spec:
       {{- if or (not (hasKey $run "checkout")) $run.checkout }}
         - name: degit-repository
           image: node:17
+          env:
+            - name: npm_config_cache
+              value: /tmp/npm-cache
           command:
             - sh
             - -c
@@ -43,8 +46,8 @@ spec:
               npx degit {{ or $val.repository $val.global.repository }}#{{ or $val.branchName $val.global.branchName }} \
                 /workspace
           securityContext:
-            runAsUser: {{ or $run.user "1000" }}
-            runAsGroup: {{ or $run.group (or $run.user "1000") }}
+            runAsUser: 1000
+            runAsGroup: 1000
             fsGroup: {{ or $run.fsGroup (or $run.user "1000") }}
           volumeMounts:
             - name: workspace
@@ -53,13 +56,16 @@ spec:
       {{- if $run.action }}
         - name: degit-action
           image: node:17
+          env:
+            - name: npm_config_cache
+              value: /tmp/npm-cache
           command:
             - sh
             - -c
             - npx degit {{ $run.action | replace "@" "#" }} /action
           securityContext:
-            runAsUser: {{ or $run.user "1000" }}
-            runAsGroup: {{ or $run.group (or $run.user "1000") }}
+            runAsUser: 1000
+            runAsGroup: 1000
             fsGroup: {{ or $run.fsGroup (or $run.user "1000") }}
           volumeMounts:
             - name: action
