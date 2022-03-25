@@ -5,10 +5,8 @@ runs:
       - name: DOCKER_CONFIG
         value: /jobs/docker/config.json
     envFrom:
-      - name: registry
-        valueFrom:
-          secretKeyRef:
-            name: "{{ $.with.registrySecretRefName }}"
+      - secretRef:
+          name: "{{ $.with.registrySecretRefName }}"
     run: |
       mkdir -p /jobs/docker
       echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > $DOCKER_CONFIG

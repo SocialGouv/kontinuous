@@ -1,3 +1,11 @@
+app:
+  enabled: true
+  needs: [build-app]
+
+hasura:
+  enabled: true
+  needs: [build-hasura]
+
 jobs:
   enabled: true
   runs:
