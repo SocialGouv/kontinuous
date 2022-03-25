@@ -23,7 +23,7 @@ runs:
     entrypoint: ["/busybox/sh","-c"]
     run:
       /kaniko/executor \
-        --context=/workspace/{{ or $.with.context "" }} \
+        --context=dir:///workspace/{{ or $.with.context "" }} \
         --dockerfile={{ or $.with.dockerfile "Dockerfile" }} \
         --destination=$CI_REGISTRY/{{ or $.with.imageName $.Values.global.imageName }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}:{{ or $.with.imageTag $.Values.global.imageTag }} \
         --cache=true \
