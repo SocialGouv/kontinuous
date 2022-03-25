@@ -9,7 +9,7 @@ runs:
       - secretRef:
           name: "{{ $.with.registrySecretRefName }}"
     run: |
-      mkdir -p /workflow/docker
+      mkdir -p $(dirname "$DOCKER_CONFIG")
       echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > $DOCKER_CONFIG
 
   - name: kaniko
@@ -24,6 +24,8 @@ runs:
     user: 0
     entrypoint: ["/busybox/sh","-c"]
     run: |
+      set -x
+      cat $DOCKER_CONFIG
       /kaniko/executor \
         --context=dir:///workspace/{{ or $.with.context "" }} \
         --dockerfile={{ or $.with.dockerfile "Dockerfile" }} \
