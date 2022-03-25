@@ -160,6 +160,11 @@ const builder = async (envVars) => {
     { cwd: KWBUILD_PATH }
   )
 
+  console.log("baseManifests")
+  console.log(baseManifests)
+  console.log("finalManifests")
+  console.log(manifests)
+
   logger.debug(`Write final manifests file`)
   await fs.writeFile(`${KWBUILD_PATH}/manifests.yaml`, manifests)
 
