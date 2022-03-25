@@ -20,14 +20,14 @@ runs:
         value: /jobs/docker/config.json
     serviceAccountName: kaniko
     entrypoint: ["/busybox/sh","-c"]
-    run:
+    run: |
       /kaniko/executor \
         --context=dir:///workspace/{{ or $.with.context "" }} \
         --dockerfile={{ or $.with.dockerfile "Dockerfile" }} \
         --destination=$CI_REGISTRY/{{ or $.with.imageName $.Values.global.imageName }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}:{{ or $.with.imageTag $.Values.global.imageTag }} \
         --cache=true \
-        {{- if $.with.buildArgs -}}
+        {{ if $.with.buildArgs -}}
         {{- range $key, $val := $.with.buildArgs -}}
-        --build-arg="{{ $key }}={{ $val }}"
+        --build-arg="{{ $key }}={{ $val }}" \
         {{- end -}}
         {{- end -}}
