@@ -1,6 +1,7 @@
 runs:
   - name: credentials
     checkout: false
+    action: false
     env:
       - name: DOCKER_CONFIG
         value: /workflow/docker/config.json
@@ -14,10 +15,11 @@ runs:
   - name: kaniko
     needs: [credentials]
     checkout: true
+    action: false
     image: gcr.io/kaniko-project/executor:debug
     env:
       - name: DOCKER_CONFIG
-        value: /jobs/docker/config.json
+        value: /workflow/docker/config.json
     # serviceAccountName: kaniko
     user: 0
     entrypoint: ["/busybox/sh","-c"]

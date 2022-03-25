@@ -416,23 +416,7 @@ spec:
           name: workflow
           subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
         workingDir: /workspace
-      initContainers:
-      - command:
-        - sh
-        - -c
-        - npx degit ../../../jobs/build /action
-        env:
-        - name: npm_config_cache
-          value: /tmp/npm-cache
-        image: node:17
-        name: degit-action
-        securityContext:
-          fsGroup: 1000
-          runAsGroup: 1000
-          runAsUser: 1000
-        volumeMounts:
-        - mountPath: /action
-          name: action
+      initContainers: null
       restartPolicy: Never
       volumes:
       - emptyDir: {}
@@ -475,7 +459,7 @@ spec:
           \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  \\\\n\\"
         env:
         - name: DOCKER_CONFIG
-          value: /jobs/docker/config.json
+          value: /workflow/docker/config.json
         image: gcr.io/kaniko-project/executor:debug
         imagePullPolicy: IfNotPresent
         name: job
@@ -511,22 +495,6 @@ spec:
         volumeMounts:
         - mountPath: /workspace
           name: workspace
-      - command:
-        - sh
-        - -c
-        - npx degit ../../../jobs/build /action
-        env:
-        - name: npm_config_cache
-          value: /tmp/npm-cache
-        image: node:17
-        name: degit-action
-        securityContext:
-          fsGroup: 1000
-          runAsGroup: 1000
-          runAsUser: 1000
-        volumeMounts:
-        - mountPath: /action
-          name: action
       restartPolicy: Never
       volumes:
       - emptyDir: {}
@@ -588,23 +556,7 @@ spec:
           name: workflow
           subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
         workingDir: /workspace
-      initContainers:
-      - command:
-        - sh
-        - -c
-        - npx degit ../../../jobs/build /action
-        env:
-        - name: npm_config_cache
-          value: /tmp/npm-cache
-        image: node:17
-        name: degit-action
-        securityContext:
-          fsGroup: 1000
-          runAsGroup: 1000
-          runAsUser: 1000
-        volumeMounts:
-        - mountPath: /action
-          name: action
+      initContainers: null
       restartPolicy: Never
       volumes:
       - emptyDir: {}
@@ -647,7 +599,7 @@ spec:
           \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  \\\\n\\"
         env:
         - name: DOCKER_CONFIG
-          value: /jobs/docker/config.json
+          value: /workflow/docker/config.json
         image: gcr.io/kaniko-project/executor:debug
         imagePullPolicy: IfNotPresent
         name: job
@@ -683,22 +635,6 @@ spec:
         volumeMounts:
         - mountPath: /workspace
           name: workspace
-      - command:
-        - sh
-        - -c
-        - npx degit ../../../jobs/build /action
-        env:
-        - name: npm_config_cache
-          value: /tmp/npm-cache
-        image: node:17
-        name: degit-action
-        securityContext:
-          fsGroup: 1000
-          runAsGroup: 1000
-          runAsUser: 1000
-        volumeMounts:
-        - mountPath: /action
-          name: action
       restartPolicy: Never
       volumes:
       - emptyDir: {}
