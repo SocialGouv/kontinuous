@@ -718,7 +718,7 @@ metadata:
     kapp.k14s.io/change-rule: upsert after upserting autodevops/test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
-  name: jobci-post-operations
+  name: jobci-post-operations-jobs
   namespace: awesome-ci
 spec:
   activeDeadlineSeconds: 3600
