@@ -1,3 +1,4 @@
+{{ if eq .Chart.Name "jobs" }}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
@@ -43,3 +44,4 @@ spec:
             - name: workflow
               persistentVolumeClaim:
                 claimName: jobs-shared-storage
+{{ end }}

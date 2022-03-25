@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: jobci-post-operations
+  name: "jobci-post-operations-{{ or .Values.component .Chart.Name }}"
   namespace: {{ or .Values.namespace .Values.global.jobNamespace }}
   annotations:
     kapp.k14s.io/nonce: ""
