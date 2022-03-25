@@ -3,12 +3,12 @@ runs:
     checkout: false
     env:
       - name: DOCKER_CONFIG
-        value: /jobs/docker/config.json
+        value: /workflow/docker/config.json
     envFrom:
       - secretRef:
           name: "{{ $.with.registrySecretRefName }}"
     run: |
-      mkdir -p /jobs/docker
+      mkdir -p /workflow/docker
       echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > $DOCKER_CONFIG
 
   - name: kaniko

@@ -34,3 +34,4 @@ certSecretName:
 waitForPostgres: false
 ingress:
   annotations: {}
+needs: []

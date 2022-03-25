@@ -9,3 +9,4 @@ runs: []
 image: "debian:stable"
 ingress:
   annotations: {}
+needs: []

@@ -265,16 +265,14 @@ spec:
         - /bin/bash
         - -c
         - |
-          mkdir -p /jobs/docker
+          mkdir -p /workflow/docker
           echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > $DOCKER_CONFIG
         env:
         - name: DOCKER_CONFIG
-          value: /jobs/docker/config.json
+          value: /workflow/docker/config.json
         envFrom:
-        - name: registry
-          valueFrom:
-            secretKeyRef:
-              name: harbor
+        - secretRef:
+            name: harbor
         image: debian:stable
         imagePullPolicy: IfNotPresent
         name: job
@@ -437,16 +435,14 @@ spec:
         - /bin/bash
         - -c
         - |
-          mkdir -p /jobs/docker
+          mkdir -p /workflow/docker
           echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > $DOCKER_CONFIG
         env:
         - name: DOCKER_CONFIG
-          value: /jobs/docker/config.json
+          value: /workflow/docker/config.json
         envFrom:
-        - name: registry
-          valueFrom:
-            secretKeyRef:
-              name: harbor
+        - secretRef:
+            name: harbor
         image: debian:stable
         imagePullPolicy: IfNotPresent
         name: job
