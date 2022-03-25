@@ -12,7 +12,7 @@ runs:
       mkdir -p $(dirname "$DOCKER_CONFIG")
       # echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > $DOCKER_CONFIG
       CI_AUTH=$(echo -n "${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD}" | base64)
-      echo "{\"auths\":{\"$CI_REGISTRY\":\"$CI_AUTH\"}}" > $DOCKER_CONFIG
+      echo "{\"auths\":{\"http://$CI_REGISTRY\":\"$CI_AUTH\"}}" > $DOCKER_CONFIG
 
   - name: kaniko
     needs: [credentials]
