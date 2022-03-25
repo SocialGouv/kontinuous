@@ -24,8 +24,9 @@ runs:
     user: 0
     entrypoint: ["/busybox/sh","-c"]
     run: |
+      set -x
       mkdir -p /kaniko/.docker
-      ln -s $DOCKER_CONFIG /kaniko/.docker/config.json
+      cp $DOCKER_CONFIG /kaniko/.docker/config.json
       /kaniko/executor \
         --context=dir:///workspace/{{ or $.with.context "" }} \
         --dockerfile={{ or $.with.dockerfile "Dockerfile" }} \
