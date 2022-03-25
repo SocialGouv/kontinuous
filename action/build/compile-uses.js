@@ -7,10 +7,9 @@ const degit = require("degit")
 const miniHash = require("./utils/miniHash")
 const { buildCtx } = require("./ctx")
 
-const downloadingPromises = {}
-
 const requireUse = async (use) => {
   const logger = buildCtx.require("logger")
+  const downloadingPromises = buildCtx.require("downloadingPromises")
   const { KWBUILD_PATH: rootDir, WORKSPACE_PATH: userDir } =
     buildCtx.require("env")
   const slug = generate(use)
@@ -35,53 +34,53 @@ const requireUse = async (use) => {
   return { slug, use, target }
 }
 
-async function compile({ values, file }, parentScope = [], parentWith = {}) {
-  if (file) {
-    values = yaml.load(await fs.readFile(file, { encoding: "utf-8" }))
-  }
-  if (!values) {
-    return values
-  }
-  const runs = values.jobs?.runs || values.runs || []
-  const newRuns = []
-  for (let i = 0; i < runs.length; i++) {
-    const run = runs[i]
+async function compile(
+  values = {},
+  parentScope = [],
+  parentWith = {},
+  file = null
+) {
+  const newRuns = await Promise.all(
+    (values.runs || []).map(async (run) => {
+      if (!run.name) {
+        run.name = miniHash(file)
+      }
+      if (!run.with) {
+        run.with = {}
+      }
 
-    if (!run.name) {
-      run.name = miniHash(file)
-    }
-    if (!run.with) {
-      run.with = {}
-    }
+      const scope = [...parentScope, run.name]
+      run.scope = scope
+      const scopes = []
+      const currentScope = []
+      for (const sc of scope) {
+        currentScope.push(sc)
+        scopes.push(currentScope.join("."))
+      }
+      if (scope.length > 1) {
+        scopes.push([scope[0], scope[scope.length - 1]].join(".."))
+      }
+      run.scopes = scopes
+      run.parentWith = { ...parentWith, ...run.with }
 
-    const scope = [...parentScope, run.name]
-    run.scope = scope
-    const scopes = []
-    const currentScope = []
-    for (const sc of scope) {
-      currentScope.push(sc)
-      scopes.push(currentScope.join("."))
-    }
-    if (scope.length > 1) {
-      scopes.push([scope[0], scope[scope.length - 1]].join(".."))
-    }
-    run.scopes = scopes
-    run.parentWith = { ...parentWith, ...run.with }
+      if (!run.needs) {
+        run.needs = []
+      }
+      run.needs = run.needs.map((r) => [scope[0], r].join(".."))
 
-    if (!run.needs) {
-      run.needs = []
-    }
-    run.needs = run.needs.map((r) => [scope[0], r].join(".."))
+      if (!run.use) {
+        return [run]
+      }
 
-    if (!run.use) {
-      newRuns.push(run)
-      continue
-    }
-
-    const { target } = await requireUse(run.use)
-    const compiled = await compile({ file: target }, scope, run.parentWith)
-    if (compiled.runs) {
-      const flat = compiled.runs.map((r) => ({
+      const { target } = await requireUse(run.use)
+      const runValues = yaml.load(
+        await fs.readFile(target, { encoding: "utf-8" })
+      )
+      await compile(runValues, scope, run.parentWith, target)
+      if (!runValues.runs) {
+        return []
+      }
+      return runValues.runs.map((r) => ({
         action: run.use,
         ...Object.entries(r).reduce((acc, [key, value]) => {
           if (key !== "use") {
@@ -91,14 +90,21 @@ async function compile({ values, file }, parentScope = [], parentWith = {}) {
         }, {}),
         with: run.with,
       }))
-      newRuns.push(...flat)
-    }
-  }
-  runs.length = 0
-  runs.push(...newRuns)
-  return values
+    })
+  )
+  values.runs = newRuns.reduce((acc, run) => {
+    acc.push(...run)
+    return acc
+  }, [])
 }
 
 module.exports = async (values) => {
-  return compile({ values })
+  buildCtx.set("downloadingPromises", {})
+  await Promise.all(
+    Object.keys(values).map(async (key) => {
+      if (key === "jobs" || key.startsWith("jobs-")) {
+        await compile(values[key])
+      }
+    })
+  )
 }
