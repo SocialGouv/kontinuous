@@ -5,6 +5,27 @@
 {{ $parentWith := $.parentWith }}
 {{ $val := $.Values }}
 
+{{ $user := "" }}
+{{ if kindIs "invalid" $run.user }}
+{{ $user = "1000" }}
+{{ else }}
+{{ $user = ($run.user | toString) }}
+{{ end }}
+
+{{ $group := "" }}
+{{ if kindIs "invalid" $run.group }}
+{{ $group = ($user | toString) }}
+{{ else }}
+{{ $group = $run.group }}
+{{ end }}
+
+{{ $fsGroup := "" }}
+{{ if kindIs "invalid" $run.fsGroup }}
+{{ $fsGroup = $user }}
+{{ else }}
+{{ $fsGroup = ($run.fsGroup | toString) }}
+{{ end }}
+
 ---
 apiVersion: batch/v1
 kind: Job
@@ -46,10 +67,6 @@ spec:
     spec:
       {{- if $run.serviceAccountName }}
       serviceAccountName: "{{ $run.serviceAccountName }}"
-      {{- end }}
-      {{- if $run.securityContext }}
-      securityContext:
-        {{- $run.securityContext | toYaml | nindent 8 }}
       {{- end }}
       restartPolicy: Never
       initContainers:
@@ -129,9 +146,9 @@ spec:
           {{- end }}
           {{- end }}
           securityContext:
-            runAsUser: {{ or $run.user "1000" }}
-            runAsGroup: {{ or $run.group (or $run.user "1000") }}
-            fsGroup: {{ or $run.fsGroup (or $run.user "1000") }}
+            runAsUser: {{ $user }}
+            runAsGroup: {{ $group }}
+            fsGroup: {{ $fsGroup }}
           volumeMounts:
             - name: workspace
               mountPath: /workspace

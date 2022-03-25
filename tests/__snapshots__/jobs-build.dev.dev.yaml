@@ -480,9 +480,9 @@ spec:
         imagePullPolicy: IfNotPresent
         name: job
         securityContext:
-          fsGroup: 1000
-          runAsGroup: 1000
-          runAsUser: 1000
+          fsGroup: 0
+          runAsGroup: 0
+          runAsUser: 0
         volumeMounts:
         - mountPath: /workspace
           name: workspace
@@ -528,8 +528,6 @@ spec:
         - mountPath: /action
           name: action
       restartPolicy: Never
-      securityContext:
-        runAsUser: 0
       volumes:
       - emptyDir: {}
         name: workspace
@@ -654,9 +652,9 @@ spec:
         imagePullPolicy: IfNotPresent
         name: job
         securityContext:
-          fsGroup: 1000
-          runAsGroup: 1000
-          runAsUser: 1000
+          fsGroup: 0
+          runAsGroup: 0
+          runAsUser: 0
         volumeMounts:
         - mountPath: /workspace
           name: workspace
@@ -702,8 +700,6 @@ spec:
         - mountPath: /action
           name: action
       restartPolicy: Never
-      securityContext:
-        runAsUser: 0
       volumes:
       - emptyDir: {}
         name: workspace
