@@ -56,6 +56,26 @@ spec:
   type: ClusterIP
 ---
 apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
+    kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
+  labels:
+    application: test-jobs-build.dev
+    component: pgweb
+  name: pgweb
+  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+spec:
+  ports:
+  - name: http
+    port: 8081
+    targetPort: 8081
+  selector:
+    component: pgweb
+  type: ClusterIP
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels: {}
@@ -98,12 +118,18 @@ spec:
     spec:
       containers:
       - env: null
-        envFrom: null
-        image: ghcr.io/socialgouv/test-jobs-build.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+        envFrom:
+        - secretRef:
+            name: pg-user-feature-branch-1
+        - secretRef:
+            name: app-sealed-secret
+        - configMapRef:
+            name: app-configmap
+        image: harbor.fabrique.social.gouv.fr/test-jobs-build.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53
         livenessProbe:
           failureThreshold: 15
           httpGet:
-            path: /index.html
+            path: /healthz
             port: http
           initialDelaySeconds: 30
           periodSeconds: 5
@@ -115,7 +141,7 @@ spec:
         readinessProbe:
           failureThreshold: 15
           httpGet:
-            path: /index.html
+            path: /healthz
             port: http
           initialDelaySeconds: 0
           periodSeconds: 5
@@ -131,7 +157,7 @@ spec:
         startupProbe:
           failureThreshold: 12
           httpGet:
-            path: /index.html
+            path: /healthz
             port: http
           periodSeconds: 5
         volumeMounts: null
@@ -167,8 +193,14 @@ spec:
     spec:
       containers:
       - env: []
-        envFrom: []
-        image: ghcr.io/socialgouv/test-jobs-build.dev/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
+        envFrom:
+        - secretRef:
+            name: pg-user-feature-branch-1
+        - secretRef:
+            name: hasura-sealed-secret
+        - configMapRef:
+            name: hasura-configmap
+        image: harbor.fabrique.social.gouv.fr/test-jobs-build.dev/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
         livenessProbe:
           failureThreshold: 15
           httpGet:
@@ -204,6 +236,89 @@ spec:
             port: http
           periodSeconds: 5
       initContainers: null
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/change-group: autodevops/test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group.pgweb: autodevops/pgweb.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
+    kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
+    kapp.k14s.io/nonce: \\"\\"
+    kapp.k14s.io/update-strategy: fallback-on-replace
+  labels:
+    application: test-jobs-build.dev
+    component: pgweb
+  name: pgweb
+  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: pgweb
+  template:
+    metadata:
+      labels:
+        application: test-jobs-build.dev
+        component: pgweb
+    spec:
+      containers:
+      - image: sosedoff/pgweb:0.11.8
+        livenessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 5
+        name: pgweb
+        ports:
+        - containerPort: 8081
+          name: http
+        readinessProbe:
+          failureThreshold: 15
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 0
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi
+        startupProbe:
+          failureThreshold: 12
+          httpGet:
+            path: /
+            port: http
+          periodSeconds: 5
+      envFrom:
+      - secretRef:
+          name: pg-user-feature-branch-1
+      initContainers:
+      - env:
+        - name: WAIT_FOR_RETRIES
+          value: \\"24\\"
+        envFrom:
+        - secretRef:
+            name: pg-user-feature-branch-1
+        image: ghcr.io/socialgouv/docker/wait-for-postgres:6.56.1
+        imagePullPolicy: Always
+        name: wait-for-postgres
+        resources:
+          limits:
+            cpu: 20m
+            memory: 32Mi
+          requests:
+            cpu: 5m
+            memory: 16Mi
 ---
 apiVersion: batch/v1beta1
 kind: CronJob
@@ -264,7 +379,7 @@ metadata:
   namespace: awesome-ci
 spec:
   activeDeadlineSeconds: 3600
-  backoffLimit: 3
+  backoffLimit: 2
   template:
     metadata:
       annotations: null
@@ -298,6 +413,7 @@ spec:
         - mountPath: /workflow
           name: workflow
           subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
+        workingDir: /workspace
       initContainers:
       - command:
         - sh
@@ -342,7 +458,7 @@ metadata:
   namespace: awesome-ci
 spec:
   activeDeadlineSeconds: 3600
-  backoffLimit: 3
+  backoffLimit: 2
   template:
     metadata:
       annotations: null
@@ -352,8 +468,9 @@ spec:
       - command:
         - /busybox/sh
         - -c
-        - |
-          /kaniko/executor \\\\ --context=dir:///workspace/ \\\\ --dockerfile=Dockerfile \\\\ --destination=$CI_REGISTRY/test-jobs-build.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53 \\\\ --cache=true \\\\--build-arg=\\"FOO=BAR\\"
+        - \\"/kaniko/executor \\\\\\\\\\\\n  --context=dir:///workspace/ \\\\\\\\\\\\n  --dockerfile=Dockerfile
+          \\\\\\\\\\\\n  --destination=$CI_REGISTRY/test-jobs-build.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  \\\\n\\"
         env:
         - name: DOCKER_CONFIG
           value: /jobs/docker/config.json
@@ -372,6 +489,7 @@ spec:
         - mountPath: /workflow
           name: workflow
           subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
+        workingDir: /workspace
       initContainers:
       - command:
         - sh
@@ -434,7 +552,7 @@ metadata:
   namespace: awesome-ci
 spec:
   activeDeadlineSeconds: 3600
-  backoffLimit: 3
+  backoffLimit: 2
   template:
     metadata:
       annotations: null
@@ -468,6 +586,7 @@ spec:
         - mountPath: /workflow
           name: workflow
           subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
+        workingDir: /workspace
       initContainers:
       - command:
         - sh
@@ -512,7 +631,7 @@ metadata:
   namespace: awesome-ci
 spec:
   activeDeadlineSeconds: 3600
-  backoffLimit: 3
+  backoffLimit: 2
   template:
     metadata:
       annotations: null
@@ -522,8 +641,9 @@ spec:
       - command:
         - /busybox/sh
         - -c
-        - |
-          /kaniko/executor \\\\ --context=dir:///workspace/hasura \\\\ --dockerfile=Dockerfile \\\\ --destination=$CI_REGISTRY/test-jobs-build.dev/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53 \\\\ --cache=true \\\\
+        - \\"/kaniko/executor \\\\\\\\\\\\n  --context=dir:///workspace/hasura \\\\\\\\\\\\n  --dockerfile=Dockerfile
+          \\\\\\\\\\\\n  --destination=$CI_REGISTRY/test-jobs-build.dev/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
+          \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  \\\\n\\"
         env:
         - name: DOCKER_CONFIG
           value: /jobs/docker/config.json
@@ -542,6 +662,7 @@ spec:
         - mountPath: /workflow
           name: workflow
           subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
+        workingDir: /workspace
       initContainers:
       - command:
         - sh
@@ -651,7 +772,7 @@ spec:
   tls:
   - hosts:
     - test-jobs-build-dev-feature-branch-1-312rwy.dev.fabrique.social.gouv.fr
-    secretName: wildcard-crt
+    secretName: app-crt
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -679,6 +800,33 @@ spec:
   - hosts:
     - hasura-test-jobs-build-dev-feature-branch-1-312rwy.dev.fabrique.social.gouv.fr
     secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  labels:
+    application: test-jobs-build.dev
+    component: pgweb
+  name: pgweb
+  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+spec:
+  rules:
+  - host: pgweb-test-jobs-build-dev-feature-branch-1-312rwy.dev.fabrique.social.gouv.fr
+    http:
+      paths:
+      - backend:
+          service:
+            name: pgweb
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - pgweb-test-jobs-build-dev-feature-branch-1-312rwy.dev.fabrique.social.gouv.fr
+    secretName: pgweb-crt
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy

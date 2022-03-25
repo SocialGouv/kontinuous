@@ -1,10 +1,35 @@
+global:
+  registry: harbor.fabrique.social.gouv.fr
+
 app:
   enabled: true
   needs: [build-app]
+  imagePackage: app
+  probesPath: /healthz
+  certSecretName: app-crt
+  envFrom:
+    - secretRef:
+        name: "{{ .Values.global.pgSecretName }}"
+    - secretRef:
+        name: app-sealed-secret
+    - configMapRef:
+        name: app-configmap
 
 hasura:
   enabled: true
   needs: [build-hasura]
+  # waitForPostgres: true
+  envFrom:
+    - secretRef:
+        name: "{{ .Values.global.pgSecretName }}"
+    - secretRef:
+        name: hasura-sealed-secret
+    - configMapRef:
+        name: hasura-configmap
+
+pgweb:
+  enabled: true
+  certSecretName: pgweb-crt
 
 jobs:
   enabled: true
@@ -16,8 +41,6 @@ jobs:
       with:
         registrySecretRefName: harbor
         imagePackage: app
-        buildArgs:
-          FOO: BAR
 
     - name: build-hasura
       # use: SocialGouv/kube-workflow/jobs/build@master

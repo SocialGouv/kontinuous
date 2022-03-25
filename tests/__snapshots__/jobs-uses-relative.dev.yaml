@@ -89,7 +89,7 @@ metadata:
   namespace: awesome-ci
 spec:
   activeDeadlineSeconds: 3600
-  backoffLimit: 3
+  backoffLimit: 2
   template:
     metadata:
       annotations: null
@@ -142,6 +142,7 @@ spec:
         - mountPath: /workflow
           name: workflow
           subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
+        workingDir: /workspace
       initContainers:
       - command:
         - sh
@@ -185,7 +186,7 @@ metadata:
   namespace: awesome-ci
 spec:
   activeDeadlineSeconds: 3600
-  backoffLimit: 3
+  backoffLimit: 2
   template:
     metadata:
       annotations: null
@@ -228,6 +229,7 @@ spec:
         - mountPath: /workflow
           name: workflow
           subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
+        workingDir: /workspace
       initContainers:
       - command:
         - sh
