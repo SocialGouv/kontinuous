@@ -1,11 +1,20 @@
 jobs:
   enabled: true
   runs:
-    - name: build
+
+    - name: build-app
+      # use: SocialGouv/kube-workflow/jobs/build@master
       use: ../../../jobs/build
       with:
-        context: packages/app
-        dockerfile: Dockerfile.dev
         registrySecretRefName: harbor
+        imagePackage: app
         buildArgs:
           FOO: BAR
+
+    - name: build-hasura
+      # use: SocialGouv/kube-workflow/jobs/build@master
+      use: ../../../jobs/build
+      with:
+        registrySecretRefName: harbor
+        imagePackage: hasura
+        context: hasura
