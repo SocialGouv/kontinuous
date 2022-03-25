@@ -57,15 +57,17 @@ const builder = async (envVars) => {
   logger.debug(`Add symlinks kube-workflow chart`)
   const charts = await getDirectories(`${KUBEWORKFLOW_PATH}/charts`)
   await fs.ensureDir(`${KUBEWORKFLOW_PATH}/charts/kube-workflow/charts`)
-  await Promise.all(charts.map(async (chartName)=>{
-    if (chartName === "kube-workflow") {
-      return
-    }
-    const dest = `${KUBEWORKFLOW_PATH}/charts/kube-workflow/charts/${chartName}`
-    if (!(await fs.pathExists(dest))) {
-      await fs.symlink(`../../${chartName}`, dest)
-    }
-  }))
+  await Promise.all(
+    charts.map(async (chartName) => {
+      if (chartName === "kube-workflow") {
+        return
+      }
+      const dest = `${KUBEWORKFLOW_PATH}/charts/kube-workflow/charts/${chartName}`
+      if (!(await fs.pathExists(dest))) {
+        await fs.symlink(`../../${chartName}`, dest)
+      }
+    })
+  )
 
   await fs.ensureDir(KWBUILD_PATH)
 
@@ -141,13 +143,13 @@ const builder = async (envVars) => {
   await fs.writeFile(`${KWBUILD_PATH}/values.json`, JSON.stringify(values))
 
   logger.debug("Build base manifest using helm")
-  let baseManifests = await asyncShell(
+  const baseManifests = await asyncShell(
     `helm template -f values.json ${HELM_ARGS} charts/kube-workflow`,
     { cwd: KWBUILD_PATH }
   )
 
-  logger.debug("Set default namespace")
-  baseManifests = await compiledefaultNs(baseManifests, values)
+  // logger.debug("Set default namespace")
+  // baseManifests = await compiledefaultNs(baseManifests, values)
 
   logger.debug("Write base manifests file")
   await fs.writeFile(`${KWBUILD_PATH}/base/manifests.yaml`, baseManifests)
