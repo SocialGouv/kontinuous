@@ -10,3 +10,4 @@ metadata:
   labels:
     application: {{ .Values.global.repositoryName }}
   name: {{ .Values.global.namespace }}
+automountServiceAccountToken: false
