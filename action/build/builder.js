@@ -154,11 +154,12 @@ const builder = async (envVars) => {
   logger.debug("Write base manifests file")
   await fs.writeFile(`${KWBUILD_PATH}/base/manifests.yaml`, baseManifests)
 
-  logger.debug("Build final manifests using kustomize")
-  const manifests = await asyncShell(
-    `kustomize build --load-restrictor=LoadRestrictionsNone env/${ENVIRONMENT}`,
-    { cwd: KWBUILD_PATH }
-  )
+  // logger.debug("Build final manifests using kustomize")
+  // const manifests = await asyncShell(
+  //   `kustomize build --load-restrictor=LoadRestrictionsNone env/${ENVIRONMENT}`,
+  //   { cwd: KWBUILD_PATH }
+  // )
+  const manifests = baseManifests
 
   logger.debug(`Write final manifests file`)
   await fs.writeFile(`${KWBUILD_PATH}/manifests.yaml`, manifests)
