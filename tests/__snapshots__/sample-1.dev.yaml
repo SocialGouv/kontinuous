@@ -2,6 +2,7 @@
 
 exports[`sample-1.dev 1`] = `
 "apiVersion: v1
+automountServiceAccountToken: false
 kind: Namespace
 metadata:
   annotations:

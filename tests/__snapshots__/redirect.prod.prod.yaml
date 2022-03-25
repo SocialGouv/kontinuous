@@ -2,6 +2,7 @@
 
 exports[`redirect.prod.prod 1`] = `
 "apiVersion: v1
+automountServiceAccountToken: false
 kind: Namespace
 metadata:
   annotations:
