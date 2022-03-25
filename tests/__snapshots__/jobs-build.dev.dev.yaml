@@ -172,7 +172,7 @@ spec:
         - /busybox/sh
         - -c
         - |
-          /kaniko/executor \\\\ --context=/workspace/packages/app \\\\ --dockerfile=Dockerfile.dev \\\\ --destination=$CI_REGISTRY/test-jobs-build.dev:sha-ffac537e6cbbf934b08745a378932722df287a53 \\\\ --cache=true \\\\--build-arg=\\"FOO=BAR\\"
+          /kaniko/executor \\\\ --context=dir:///workspace/packages/app \\\\ --dockerfile=Dockerfile.dev \\\\ --destination=$CI_REGISTRY/test-jobs-build.dev:sha-ffac537e6cbbf934b08745a378932722df287a53 \\\\ --cache=true \\\\--build-arg=\\"FOO=BAR\\"
         env:
         - name: DOCKER_CONFIG
           value: /jobs/docker/config.json
