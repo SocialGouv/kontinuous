@@ -11,11 +11,8 @@ runs:
       - secretRef:
           name: "{{ $.with.registrySecretRefName }}"
     run: |
-      set -x
       mkdir -p /kaniko/.docker
       echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-      # CI_AUTH=$(echo -n "${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD}" | base64)
-      # echo "{\"auths\":{\"https://$CI_REGISTRY\":\"$CI_AUTH\"}}" > /kaniko/.docker/config.json
       /kaniko/executor \
         --context=dir:///workspace/{{ or $.with.context "" }} \
         --dockerfile={{ or $.with.dockerfile "Dockerfile" }} \
