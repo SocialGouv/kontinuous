@@ -25,7 +25,7 @@ runs:
       /kaniko/executor \
         --context=/workspace/{{ or $.with.context "" }} \
         --dockerfile={{ or $.with.dockerfile "Dockerfile" }} \
-        --destination=$CI_REGISTRY/{{ or $.with.imageName $.Values.global.imageName }}:{{ or $.with.imageTag $.Values.global.imageTag }} \
+        --destination=$CI_REGISTRY/{{ or $.with.imageName $.Values.global.imageName }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}:{{ or $.with.imageTag $.Values.global.imageTag }} \
         --cache=true \
         {{- if and $.with.buildArgs (gt (len (keys $.with.buildArgs)) 0) -}}
         {{- range $key, $val := $.with.buildArgs -}}
