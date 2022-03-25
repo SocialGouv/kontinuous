@@ -18,7 +18,7 @@ runs:
     env:
       - name: DOCKER_CONFIG
         value: /jobs/docker/config.json
-    serviceAccountName: kaniko
+    # serviceAccountName: kaniko
     entrypoint: ["/busybox/sh","-c"]
     run: |
       /kaniko/executor \
