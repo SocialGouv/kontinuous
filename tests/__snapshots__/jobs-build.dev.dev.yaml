@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`jobs-uses-relative.dev 1`] = `
+exports[`jobs-build.dev.dev 1`] = `
 "apiVersion: v1
 kind: Namespace
 metadata:
@@ -9,10 +9,10 @@ metadata:
     git/branch: refs/heads/feature-branch-1
     janitor/ttl: 7d
   labels:
-    application: test-jobs-uses-relative
+    application: test-jobs-build.dev
     cert: wildcard
-  name: test-jobs-uses-relative-feature-branch-1
-  namespace: test-jobs-uses-relative-feature-branch-1
+  name: test-jobs-build-dev-feature-branch-1-312rwy
+  namespace: test-jobs-build-dev-feature-branch-1-312rwy
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -77,14 +77,13 @@ kind: Job
 metadata:
   annotations:
     janitor/ttl: \\"1800\\"
-    kapp.k14s.io/change-group: autodevops/test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-group.db: autodevops/db.test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-group.db..create-db: autodevops/db..create-db.test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-group.db.create-db: autodevops/db.create-db.test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-rule.db..create-secret: upsert after upserting autodevops/db..create-secret.test-jobs-uses-relative-feature-branch-1
+    kapp.k14s.io/change-group: autodevops/test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group.build: autodevops/build.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group.build..credentials: autodevops/build..credentials.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group.build.credentials: autodevops/build.credentials.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
-  name: job-feature-branch-1-db--create-db
+  name: job-feature-branch-1-build--credentials
   namespace: awesome-ci
 spec:
   activeDeadlineSeconds: 3600
@@ -99,34 +98,11 @@ spec:
         - /bin/bash
         - -c
         - |
-          /action/ensure-db.sh
+          echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > $DOCKER_CONFIG
         env:
-        - name: NEW_DB_NAME
-          valueFrom:
-            secretKeyRef:
-              key: PGDATABASE
-              name: pg-user-feature-branch-1
-        - name: NEW_USER
-          valueFrom:
-            secretKeyRef:
-              key: PGUSER
-              name: pg-user-feature-branch-1
-        - name: NEW_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: PGPASSWORD
-              name: pg-user-feature-branch-1
-        - name: PGHOST
-          valueFrom:
-            secretKeyRef:
-              key: PGHOST
-              name: pg-user-feature-branch-1
-        - name: NEW_DB_EXTENSIONS
-          value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
-        envFrom:
-        - secretRef:
-            name: pg-scaleway
-        image: ghcr.io/socialgouv/docker/psql:6.70.0
+        - name: DOCKER_CONFIG
+          value: /jobs/docker/config.json
+        image: alpine:3
         imagePullPolicy: IfNotPresent
         name: job
         securityContext:
@@ -145,7 +121,7 @@ spec:
       - command:
         - sh
         - -c
-        - npx degit ../../../jobs/create-db /action
+        - npx degit ../../../jobs/build /action
         env:
         - name: npm_config_cache
           value: /tmp/npm-cache
@@ -174,13 +150,14 @@ kind: Job
 metadata:
   annotations:
     janitor/ttl: \\"1800\\"
-    kapp.k14s.io/change-group: autodevops/test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-group.db: autodevops/db.test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-group.db..create-secret: autodevops/db..create-secret.test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-group.db.create-secret: autodevops/db.create-secret.test-jobs-uses-relative-feature-branch-1
+    kapp.k14s.io/change-group: autodevops/test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group.build: autodevops/build.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group.build..kaniko: autodevops/build..kaniko.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group.build.kaniko: autodevops/build.kaniko.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-rule.build..credentials: upsert after upserting autodevops/build..credentials.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
-  name: job-feature-branch-1-db--create-secret
+  name: job-feature-branch-1-build--kaniko
   namespace: awesome-ci
 spec:
   activeDeadlineSeconds: 3600
@@ -192,33 +169,20 @@ spec:
     spec:
       containers:
       - command:
-        - /bin/bash
+        - /busybox/sh
         - -c
         - |
-          /action/create-secret.sh
+          /kaniko/executor \\\\ --context=/workspace/packages/app \\\\ --dockerfile=Dockerfile.dev \\\\ --destination=$CI_REGISTRY/test-jobs-build.dev:sha-ffac537e6cbbf934b08745a378932722df287a53 \\\\ --cache=true \\\\--build-arg=\\"FOO=BAR\\"
         env:
-        - name: DB_SECRET_NAME
-          value: pg-user-feature-branch-1
-        - name: JOB_NAMESPACE
-          value: awesome-ci
-        - name: NAMESPACE
-          value: test-jobs-uses-relative-feature-branch-1
-        - name: PGDATABASE
-          value: autodevops_feature-branch-1
-        - name: PGUSER
-          value: user_feature-branch-1
-        envFrom:
-        - secretRef:
-            name: pg-scaleway
-        - secretRef:
-            name: kubeconfig
-        image: bitnami/kubectl:latest
+        - name: DOCKER_CONFIG
+          value: /jobs/docker/config.json
+        image: gcr.io/kaniko-project/executor:debug
         imagePullPolicy: IfNotPresent
         name: job
         securityContext:
-          fsGroup: 1001
-          runAsGroup: 1001
-          runAsUser: 1001
+          fsGroup: 1000
+          runAsGroup: 1000
+          runAsUser: 1000
         volumeMounts:
         - mountPath: /workspace
           name: workspace
@@ -231,20 +195,39 @@ spec:
       - command:
         - sh
         - -c
-        - npx degit ../../../jobs/create-db /action
+        - |
+          npx degit test-jobs-build.dev#feature-branch-1 \\\\
+            /workspace
+        env:
+        - name: npm_config_cache
+          value: /tmp/npm-cache
+        image: node:17
+        name: degit-repository
+        securityContext:
+          fsGroup: 1000
+          runAsGroup: 1000
+          runAsUser: 1000
+        volumeMounts:
+        - mountPath: /workspace
+          name: workspace
+      - command:
+        - sh
+        - -c
+        - npx degit ../../../jobs/build /action
         env:
         - name: npm_config_cache
           value: /tmp/npm-cache
         image: node:17
         name: degit-action
         securityContext:
-          fsGroup: 1001
+          fsGroup: 1000
           runAsGroup: 1000
           runAsUser: 1000
         volumeMounts:
         - mountPath: /action
           name: action
       restartPolicy: Never
+      serviceAccountName: kaniko
       volumes:
       - emptyDir: {}
         name: workspace
@@ -259,8 +242,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   annotations:
-    kapp.k14s.io/change-group: autodevops/post-test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-rule: upsert after upserting autodevops/test-jobs-uses-relative-feature-branch-1
+    kapp.k14s.io/change-group: autodevops/post-test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-rule: upsert after upserting autodevops/test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   name: jobci-post-operations
@@ -296,7 +279,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: netpol-ingress
-  namespace: test-jobs-uses-relative-feature-branch-1
+  namespace: test-jobs-build-dev-feature-branch-1-312rwy
 spec:
   ingress:
   - from:

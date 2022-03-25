@@ -1,0 +1,34 @@
+runs:
+  - name: credentials
+    checkout: false
+    env:
+      - name: DOCKER_CONFIG
+        value: /jobs/docker/config.json
+    envFom:
+      - name: registry
+        valueFrom:
+          secretKeyRef:
+            name: "{{ $.with.registrySecretRefName }}"
+    run: |
+      echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > $DOCKER_CONFIG
+
+  - name: kaniko
+    needs: [credentials]
+    checkout: true
+    image: gcr.io/kaniko-project/executor:debug
+    env:
+      - name: DOCKER_CONFIG
+        value: /jobs/docker/config.json
+    serviceAccountName: kaniko
+    entrypoint: ["/busybox/sh","-c"]
+    run:
+      /kaniko/executor \
+        --context=/workspace/{{ or $.with.context "" }} \
+        --dockerfile={{ or $.with.dockerfile "Dockerfile" }} \
+        --destination=$CI_REGISTRY/{{ or $.with.imageName $.Values.global.imageName }}:{{ or $.with.imageTag $.Values.global.imageTag }} \
+        --cache=true \
+        {{- if and $.with.buildArgs (gt (len (keys $.with.buildArgs)) 0) -}}
+        {{- range $key, $val := $.with.buildArgs -}}
+        --build-arg="{{ $key }}={{ $val }}"
+        {{- end -}}
+        {{- end -}}

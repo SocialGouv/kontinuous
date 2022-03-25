@@ -1,0 +1,83 @@
+name: "Autodevops deploy"
+description: "Autodevops deploy using Helm template and kapp"
+inputs:
+  environment:
+    description: "The deployment environment (dev | preprod | prod)"
+    required: true
+  kubeconfig:
+    description: "The Kubernetes authentication configuration"
+  token:
+    description: "The Github authentication token"
+  actionName:
+    description: "override manifests name as manifest-$name.yaml, default to manifest-$environment.yaml"
+outputs:
+  url:
+    description: "Main deployment URL"
+    value: ${{ steps.environment-url.outputs.url }}
+runs:
+  using: "composite"
+  steps:
+    
+    - name: Install dependencies
+      shell: bash
+      working-directory: "${{ github.action_path }}"
+      run: |
+        yarn --frozen-lockfile --prefer-offline --production
+    
+    - name: Display logs of kube pipeline
+      shell: bash
+      working-directory: "${{ github.action_path }}"
+      run: yarn share-with-github-ci
+
+    - name: Archive manifest
+      uses: actions/upload-artifact@v2
+      with:
+        name: manifests-${{ inputs.actionName || inputs.environment }}.yaml
+        path: manifests.yaml
+
+    - name: Setup namespace env var
+      shell: bash
+      run: |
+        NAMESPACE=$(cat manifests.yaml | yq eval-all 'select(.kind=="Namespace").metadata.name')
+        echo "NAMESPACE=$NAMESPACE" >> $GITHUB_ENV
+
+    - name: Notify deployment start
+      uses: bobheadxi/deployments@v0.4.3
+      id: deployment
+      with:
+        step: start
+        token: ${{ inputs.token }}
+        desc: "Deploying environment: ${{ env.NAMESPACE }}"
+        env: ${{ inputs.environment == 'dev' && env.NAMESPACE || inputs.environment == 'preproduction' && 'preproduction' || 'production' }}
+        
+
+    - name: Create kubernetes config
+      shell: bash
+      run: |
+        mkdir -p ~/.kube
+        touch ~/.kube/config
+        echo ${{ inputs.kubeconfig }} | base64 -d > ~/.kube/config
+    
+    - name: Define environment URL
+      id: environment-url
+      shell: bash
+      run: |
+        HOSTS=$(cat manifests.yaml | yq eval-all '.spec.rules[] .host')
+        HOST=$(echo "$HOSTS" | head -n 1)
+        echo $HOST
+        echo "::set-output name=url::https://$HOST"
+
+    - name: Notify deployment end
+      uses: bobheadxi/deployments@v0.4.3
+      with:
+        step: finish
+        status: ${{ job.status }}
+        token: ${{ inputs.token }}
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+        env_url: ${{ steps.environment-url.outputs.url }}
+
+    - name: Debug manifests
+      uses: SocialGouv/actions/k8s-manifests-debug@v1
+      with:
+        token: ${{ inputs.token }}
+        path: manifests.yaml

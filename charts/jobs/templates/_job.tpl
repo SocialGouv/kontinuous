@@ -28,9 +28,22 @@ spec:
   ttlSecondsAfterFinished: 1800
   template:
     metadata:
-      annotations: {}
-      labels: {}
+      annotations:
+      {{- if $run.annotations }}
+      {{- range $key, $val := $run.annotations }}
+        "{{ $key }}": "{{ $val }}"
+      {{- end }}
+      {{- end }}
+      labels:
+      {{- if $run.labels }}
+      {{- range $key, $val := $run.labels }}
+        "{{ $key }}": "{{ $val }}"
+      {{- end }}
+      {{- end }}
     spec:
+      {{- if $run.serviceAccountName }}
+      serviceAccountName: "{{ $run.serviceAccountName }}"
+      {{- end }}
       restartPolicy: Never
       initContainers:
       {{- if or (not (hasKey $run "checkout")) $run.checkout }}
@@ -87,18 +100,25 @@ spec:
               value: "{{ tpl $value $ }}"
             {{- end }}
           
-          {{- if $run.run }}
           command:
+            {{- if and $run.entrypoint }}
+            {{- tpl ($run.entrypoint | toYaml) $ | nindent 12 }}
+            {{- else }}
             - /bin/{{ or $run.shell "bash" }}
             - -c
+            {{- end }}
+            {{- if $run.run }}
             - |
-              {{- nindent 90 (tpl $run.run $) }}
-          {{- else if $run.action }}
-          command:
-            - /bin/{{ or $run.shell "bash" }}
-            - -c
+              {{- nindent 14 (tpl $run.run $) }}
+            {{- else if $run.action }}
             - |
               /action/action.sh
+            {{- end }}
+          {{- if $run.args }}
+          args:
+          {{- range $arg := $run.args }}
+            - "{{ tpl $arg $ }}"
+          {{- end }}
           {{- end }}
           securityContext:
             runAsUser: {{ or $run.user "1000" }}

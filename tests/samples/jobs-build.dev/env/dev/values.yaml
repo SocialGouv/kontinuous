@@ -1,0 +1,11 @@
+jobs:
+  enabled: true
+  runs:
+    - name: build
+      use: ../../../jobs/build
+      with:
+        context: packages/app
+        dockerfile: Dockerfile.dev
+        registrySecretRefName: harbor
+        buildArgs:
+          FOO: BAR
