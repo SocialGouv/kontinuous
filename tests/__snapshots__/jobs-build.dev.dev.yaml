@@ -528,7 +528,8 @@ spec:
         - mountPath: /action
           name: action
       restartPolicy: Never
-      serviceAccountName: kaniko
+      securityContext:
+        runAsUser: 0
       volumes:
       - emptyDir: {}
         name: workspace
@@ -701,7 +702,8 @@ spec:
         - mountPath: /action
           name: action
       restartPolicy: Never
-      serviceAccountName: kaniko
+      securityContext:
+        runAsUser: 0
       volumes:
       - emptyDir: {}
         name: workspace

@@ -47,6 +47,10 @@ spec:
       {{- if $run.serviceAccountName }}
       serviceAccountName: "{{ $run.serviceAccountName }}"
       {{- end }}
+      {{- if $run.securityContext }}
+      securityContext:
+        {{- $run.securityContext | toYaml | nindent 8 }}
+      {{- end }}
       restartPolicy: Never
       initContainers:
       {{- if or (not (hasKey $run "checkout")) $run.checkout }}

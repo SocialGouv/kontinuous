@@ -19,6 +19,8 @@ runs:
       - name: DOCKER_CONFIG
         value: /jobs/docker/config.json
     # serviceAccountName: kaniko
+    securityContext:
+      runAsUser: 0
     entrypoint: ["/busybox/sh","-c"]
     run: |
       /kaniko/executor \
