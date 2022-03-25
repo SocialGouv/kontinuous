@@ -86,7 +86,7 @@ spec:
       {{- end }}
       containers:          
         - name: job
-          image: "{{ or $run.image "alpine:3" }}"
+          image: "{{ or $run.image $.Values.image }}"
           imagePullPolicy: IfNotPresent
           {{- if $run.envFrom }}
           envFrom: {{ tpl ($run.envFrom | toJson) $ }}

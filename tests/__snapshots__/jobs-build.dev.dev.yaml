@@ -102,7 +102,7 @@ spec:
         env:
         - name: DOCKER_CONFIG
           value: /jobs/docker/config.json
-        image: alpine:3
+        image: debian:stable
         imagePullPolicy: IfNotPresent
         name: job
         securityContext:
@@ -268,7 +268,7 @@ spec:
         env:
         - name: DOCKER_CONFIG
           value: /jobs/docker/config.json
-        image: alpine:3
+        image: debian:stable
         imagePullPolicy: IfNotPresent
         name: job
         securityContext:
