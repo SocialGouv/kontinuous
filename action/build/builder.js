@@ -143,13 +143,13 @@ const builder = async (envVars) => {
   await fs.writeFile(`${KWBUILD_PATH}/values.json`, JSON.stringify(values))
 
   logger.debug("Build base manifest using helm")
-  const baseManifests = await asyncShell(
+  let baseManifests = await asyncShell(
     `helm template -f values.json ${HELM_ARGS} charts/kube-workflow`,
     { cwd: KWBUILD_PATH }
   )
 
-  // logger.debug("Set default namespace")
-  // baseManifests = await compiledefaultNs(baseManifests, values)
+  logger.debug("Set default namespace")
+  baseManifests = await compiledefaultNs(baseManifests, values)
 
   logger.debug("Write base manifests file")
   await fs.writeFile(`${KWBUILD_PATH}/base/manifests.yaml`, baseManifests)
