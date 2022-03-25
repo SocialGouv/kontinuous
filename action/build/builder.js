@@ -148,14 +148,8 @@ const builder = async (envVars) => {
     { cwd: KWBUILD_PATH }
   )
 
-  console.log("baseManifests")
-  console.log(baseManifests)
-
   logger.debug("Set default namespace")
   baseManifests = await compiledefaultNs(baseManifests, values)
-
-  console.log("nsManifests")
-  console.log(baseManifests)
 
   logger.debug("Write base manifests file")
   await fs.writeFile(`${KWBUILD_PATH}/base/manifests.yaml`, baseManifests)
