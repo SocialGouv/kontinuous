@@ -21,6 +21,9 @@ metadata:
     {{- range $need := $run.needs }}
     kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting autodevops/{{ $need }}.{{ $val.global.namespace }}"
     {{- end }}
+    {{- range $need := $.Values.needs }}
+    kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting autodevops/{{ $need }}.{{ $val.global.namespace }}"
+    {{- end }}
     janitor/ttl: 1800
 spec:
   backoffLimit: 3
