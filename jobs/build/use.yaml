@@ -14,8 +14,8 @@ runs:
       mkdir -p /kaniko/.docker
       echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
       /kaniko/executor \
-        --context=dir:///workspace/{{ or $.with.context "" }} \
-        --dockerfile={{ or $.with.dockerfile "Dockerfile" }} \
+        --context=dir:///workspace{{ if $.with.context }}/{{ $.with.context }}{{ end }} \
+        --dockerfile=/workspace{{ if $.with.context }}/{{ $.with.context }}{{ end }}/{{ or $.with.dockerfile "Dockerfile" }} \
         --destination=$CI_REGISTRY/{{ or $.with.imageName $.Values.global.imageName }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}:{{ or $.with.imageTag $.Values.global.imageTag }} \
         --cache=true \
         {{ if $.with.buildArgs -}}
