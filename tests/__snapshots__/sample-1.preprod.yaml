@@ -115,6 +115,7 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: autodevops/test-sample-1-preprod
     kapp.k14s.io/change-group.app: autodevops/app.test-sample-1-preprod
+    kapp.k14s.io/create-strategy: fallback-on-replace
     kapp.k14s.io/delete-strategy: orphan
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
@@ -190,6 +191,7 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: autodevops/test-sample-1-preprod
     kapp.k14s.io/change-group.app-2nd-instance: autodevops/app-2nd-instance.test-sample-1-preprod
+    kapp.k14s.io/create-strategy: fallback-on-replace
     kapp.k14s.io/delete-strategy: orphan
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
@@ -265,6 +267,7 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: autodevops/test-sample-1-preprod
     kapp.k14s.io/change-group.hasura: autodevops/hasura.test-sample-1-preprod
+    kapp.k14s.io/create-strategy: fallback-on-replace
     kapp.k14s.io/delete-strategy: orphan
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
@@ -338,6 +341,7 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: autodevops/test-sample-1-preprod
     kapp.k14s.io/change-group.pgweb: autodevops/pgweb.test-sample-1-preprod
+    kapp.k14s.io/create-strategy: fallback-on-replace
     kapp.k14s.io/delete-strategy: orphan
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"

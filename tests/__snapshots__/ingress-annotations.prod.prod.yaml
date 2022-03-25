@@ -59,6 +59,7 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: autodevops/test-ingress-annotations.prod
     kapp.k14s.io/change-group.metabase: autodevops/metabase.test-ingress-annotations.prod
+    kapp.k14s.io/create-strategy: fallback-on-replace
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"

@@ -96,6 +96,7 @@ metadata:
     kapp.k14s.io/change-group: autodevops/test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.app: autodevops/app.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-rule.build-app: upsert after upserting autodevops/build-app.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/create-strategy: fallback-on-replace
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
@@ -172,6 +173,7 @@ metadata:
     kapp.k14s.io/change-group.hasura: autodevops/hasura.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-rule.build-hasura: upsert after upserting autodevops/build-hasura.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-rule.db: upsert after upserting autodevops/db.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/create-strategy: fallback-on-replace
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
@@ -245,6 +247,7 @@ metadata:
     kapp.k14s.io/change-group: autodevops/test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.pgweb: autodevops/pgweb.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-rule.db: upsert after upserting autodevops/db.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/create-strategy: fallback-on-replace
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
@@ -393,8 +396,8 @@ spec:
         - /busybox/sh
         - -c
         - \\"mkdir -p /kaniko/.docker\\\\necho \\\\\\"{\\\\\\\\\\\\\\"auths\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"$CI_REGISTRY\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_USER\\\\\\\\\\\\\\",\\\\\\\\\\\\\\"password\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\\\\\\\\\"}}}\\\\\\"
-          > /kaniko/.docker/config.json\\\\n/kaniko/executor \\\\\\\\\\\\n  --context=dir:///workspace/
-          \\\\\\\\\\\\n  --dockerfile=Dockerfile \\\\\\\\\\\\n  --destination=$CI_REGISTRY/test-jobs-build.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          > /kaniko/.docker/config.json\\\\n/kaniko/executor \\\\\\\\\\\\n  --context=dir:///workspace
+          \\\\\\\\\\\\n  --dockerfile=/workspace/Dockerfile \\\\\\\\\\\\n  --destination=$CI_REGISTRY/test-jobs-build.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  \\\\n\\"
         env: null
         envFrom:
@@ -436,6 +439,7 @@ spec:
         - mountPath: /workspace
           name: workspace
       restartPolicy: Never
+      serviceAccountName: kaniko
       volumes:
       - emptyDir: {}
         name: workspace
@@ -474,7 +478,7 @@ spec:
         - -c
         - \\"mkdir -p /kaniko/.docker\\\\necho \\\\\\"{\\\\\\\\\\\\\\"auths\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"$CI_REGISTRY\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_USER\\\\\\\\\\\\\\",\\\\\\\\\\\\\\"password\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\\\\\\\\\"}}}\\\\\\"
           > /kaniko/.docker/config.json\\\\n/kaniko/executor \\\\\\\\\\\\n  --context=dir:///workspace/hasura
-          \\\\\\\\\\\\n  --dockerfile=Dockerfile \\\\\\\\\\\\n  --destination=$CI_REGISTRY/test-jobs-build.dev/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
+          \\\\\\\\\\\\n  --dockerfile=/workspace/hasura/Dockerfile \\\\\\\\\\\\n  --destination=$CI_REGISTRY/test-jobs-build.dev/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
           \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  \\\\n\\"
         env: null
         envFrom:
@@ -516,6 +520,7 @@ spec:
         - mountPath: /workspace
           name: workspace
       restartPolicy: Never
+      serviceAccountName: kaniko
       volumes:
       - emptyDir: {}
         name: workspace
