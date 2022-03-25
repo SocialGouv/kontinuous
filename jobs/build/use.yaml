@@ -1,34 +1,21 @@
 runs:
-  - name: credentials
-    checkout: false
-    action: false
-    env:
-      - name: DOCKER_CONFIG
-        value: /workflow/docker/config.json
-    envFrom:
-      - secretRef:
-          name: "{{ $.with.registrySecretRefName }}"
-    run: |
-      mkdir -p $(dirname "$DOCKER_CONFIG")
-      # echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > $DOCKER_CONFIG
-      CI_AUTH=$(echo -n "${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD}" | base64)
-      echo "{\"auths\":{\"https://$CI_REGISTRY\":\"$CI_AUTH\"}}" > $DOCKER_CONFIG
-
   - name: kaniko
     needs: [credentials]
     checkout: true
     action: false
     image: gcr.io/kaniko-project/executor:debug
-    env:
-      - name: DOCKER_CONFIG
-        value: /workflow/docker/config.json
     # serviceAccountName: kaniko
     user: 0
     entrypoint: ["/busybox/sh","-c"]
+    envFrom:
+      - secretRef:
+          name: "{{ $.with.registrySecretRefName }}"
     run: |
       set -x
       mkdir -p /kaniko/.docker
-      cp $DOCKER_CONFIG /kaniko/.docker/config.json
+      echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+      # CI_AUTH=$(echo -n "${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD}" | base64)
+      # echo "{\"auths\":{\"https://$CI_REGISTRY\":\"$CI_AUTH\"}}" > /kaniko/.docker/config.json
       /kaniko/executor \
         --context=dir:///workspace/{{ or $.with.context "" }} \
         --dockerfile={{ or $.with.dockerfile "Dockerfile" }} \
