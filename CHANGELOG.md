@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/SocialGouv/kube-workflow/compare/v1.3.0...v1.4.0) (2022-03-26)
+
+
+### Features
+
+* npx deploy + rollback ns + refacto+things ([b0a813d](https://github.com/SocialGouv/kube-workflow/commit/b0a813df7040731379863043a3ff52865ceec272))
+
+
+### Bug Fixes
+
+* add yarn delivery ([0b54301](https://github.com/SocialGouv/kube-workflow/commit/0b5430102f08f8a0becc56a4d2e82a60852a7fd2))
+* clean ([862bb11](https://github.com/SocialGouv/kube-workflow/commit/862bb11c7dba51b01a212feda69c32db67c6760f))
+* up tests ([c22d248](https://github.com/SocialGouv/kube-workflow/commit/c22d24848849cf806b04e1eea401bbe3d490fda2))
+* yarn push ([361305a](https://github.com/SocialGouv/kube-workflow/commit/361305aedc0edd417226cbaa678885b6334df87a))
+
 ## [1.3.0](https://github.com/SocialGouv/kube-workflow/compare/v1.2.6...v1.3.0) (2022-03-26)
 
 
