@@ -1,6 +1,5 @@
 runs:
   - name: kaniko
-    needs: [credentials]
     checkout: true
     action: false
     image: gcr.io/kaniko-project/executor:debug
