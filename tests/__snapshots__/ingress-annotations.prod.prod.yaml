@@ -2,16 +2,15 @@
 
 exports[`ingress-annotations.prod.prod 1`] = `
 "apiVersion: v1
-automountServiceAccountToken: false
 kind: Namespace
 metadata:
   annotations:
     field.cattle.io/projectId: \\"1234\\"
-    git/branch: refs/heads/feature-branch-1
+    kubeWorkflow/gitBranch: feature-branch-1
+    kubeWorkflow/mainNamespace: \\"true\\"
   labels:
     application: test-ingress-annotations.prod
   name: test-ingress-annotations.prod
-  namespace: test-ingress-annotations.prod
 ---
 apiVersion: v1
 data:
@@ -59,7 +58,7 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: autodevops/test-ingress-annotations.prod
     kapp.k14s.io/change-group.metabase: autodevops/metabase.test-ingress-annotations.prod
-    kapp.k14s.io/create-strategy: fallback-on-replace
+    kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"

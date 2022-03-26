@@ -2,18 +2,17 @@
 
 exports[`jobs-build.dev.dev 1`] = `
 "apiVersion: v1
-automountServiceAccountToken: false
 kind: Namespace
 metadata:
   annotations:
     field.cattle.io/projectId: \\"1234\\"
-    git/branch: refs/heads/feature-branch-1
     janitor/ttl: 7d
+    kubeWorkflow/gitBranch: feature-branch-1
+    kubeWorkflow/mainNamespace: \\"true\\"
   labels:
     application: test-jobs-build.dev
     cert: wildcard
   name: test-jobs-build-dev-feature-branch-1-312rwy
-  namespace: test-jobs-build-dev-feature-branch-1-312rwy
 ---
 apiVersion: v1
 kind: Service
@@ -96,7 +95,7 @@ metadata:
     kapp.k14s.io/change-group: autodevops/test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.app: autodevops/app.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-rule.build-app: upsert after upserting autodevops/build-app.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/create-strategy: fallback-on-replace
+    kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
@@ -173,7 +172,7 @@ metadata:
     kapp.k14s.io/change-group.hasura: autodevops/hasura.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-rule.build-hasura: upsert after upserting autodevops/build-hasura.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-rule.db: upsert after upserting autodevops/db.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/create-strategy: fallback-on-replace
+    kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
@@ -247,7 +246,7 @@ metadata:
     kapp.k14s.io/change-group: autodevops/test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.pgweb: autodevops/pgweb.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-rule.db: upsert after upserting autodevops/db.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/create-strategy: fallback-on-replace
+    kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
@@ -423,7 +422,7 @@ spec:
         - sh
         - -c
         - |
-          npx degit test-jobs-build.dev#feature-branch-1 \\\\
+          npx degit kube-workflow/test-jobs-build.dev#feature-branch-1 \\\\
             /workspace
         env:
         - name: npm_config_cache
@@ -503,7 +502,7 @@ spec:
         - sh
         - -c
         - |
-          npx degit test-jobs-build.dev#feature-branch-1 \\\\
+          npx degit kube-workflow/test-jobs-build.dev#feature-branch-1 \\\\
             /workspace
         env:
         - name: npm_config_cache

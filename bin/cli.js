@@ -1,85 +1,71 @@
 #!/usr/bin/env node
-const os = require("os")
-const path = require("path")
-const { mkdtemp } = require("fs/promises")
-const fs = require("fs-extra")
-const { Command } = require("commander")
-
-const { highlight, fromJson: themeFromJson } = require("cli-highlight")
+const { Command, Option } = require("commander")
 
 const program = new Command()
 
-const builder = require("../action/build/builder")
-const logger = require("../action/build/utils/logger")
-const shell = require("../action/build/utils/shell")
+const { configureDebug } = require("../action/build/utils/logger")
+
+const build = require("./cli/build")
+const deploy = require("./cli/deploy")
 
 program
+  .name("kube-workflow")
+  .description("CI pipeline running on Kubernetes deploying to Kubernetes 🚀")
   .version(require(`${__dirname}/../package.json`).version)
-  .command("build-manifests")
+  .addOption(
+    new Option(
+      "--env, -e <env>",
+      "select environment, default autodetect from current git branch"
+    ).choices(["dev", "preprod", "prod"])
+  )
+  .option("--components, -c <component>", "override components to enable")
+  .option("--helm-args, -a <args>", "add extra helm arguments")
+  .option("--cwd <path>", "set current working directory")
+  .option("--debug, -d", "enable debugging loglevel")
+
+program
+  .command("build")
   .alias("b")
-  .alias("build")
   .description(
     "Build manifests using kube-workflow with current directory configuration"
   )
-  .option("--env, -e <env>", "select environment (dev | preprod | prod), default dev")
-  .option("--components <component>, -c", "override components to enable")
-  .option("--helm-args <args>, -a", "add extra helm arguments")
-  .option("--repository, -r <repo>", "set repository, default to current folder name")
   .option("--output, -o", "enable direct output of manifest")
   .option(
     "--syntax-highlight, -s",
     "enable syntax highlight for yaml when used with -o"
   )
-  .action(async (options) => {
-    const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))
+  .action(async (_options, command) => {
+    const options = command.optsWithGlobals()
+    configureDebug(options.D)
+    await build(options)
+  })
 
-    let GIT_REF
-    let GIT_SHA
-    try {
-      GIT_REF = shell("git branch --show-current").trim()
-      GIT_SHA = shell("git show -s --format=%H").trim()
-    } catch (e) {
-      GIT_REF = "master"
-      GIT_SHA = "01c1226fc326a2651631ed61e6cbd96cd97f375d"
-    }
-
-    const envVars = {
-      ...process.env,
-      ENVIRONMENT: options.E || process.env.ENVIRONMENT || "dev",
-      COMPONENTS: options.C || process.env.COMPONENTS,
-      HELM_ARGS: options.A || process.env.HELM_ARGS,
-
-      GIT_REF,
-      GIT_SHA,
-
-      KUBEWORKFLOW_PATH: path.resolve(__dirname, ".."),
-      WORKSPACE_PATH: process.cwd(),
-      REPOSITORY:
-        options.R || process.env.REPOSITORY || path.basename(process.cwd()),
-      KWBUILD_PATH: tmpDir,
-    }
-
-    await builder(envVars)
-
-    const manifestsFile = `${tmpDir}/manifests.yaml`
-    if (options.O) {
-      let manifests = await fs.readFile(manifestsFile, { encoding: "utf-8" })
-      if (options.S) {
-        const theme = themeFromJson({
-          keyword: "blue",
-          built_in: ["cyan", "dim"],
-          string: "green",
-          default: "gray",
-        })
-        manifests = highlight(manifests, {
-          language: "yaml",
-          theme,
-        })
-      }
-      console.log(manifests)
-    } else {
-      logger.info(`Built manifests files: ${manifestsFile}`)
-    }
+program
+  .command("deploy")
+  .alias("d")
+  .option(
+    "--file, -f <file>",
+    "select a manifests yaml file, default will build one"
+  )
+  .option(
+    "--rancher-project-name <project>",
+    "rancher project name, default to repository basename"
+  )
+  .option(
+    "--rancher-project-id <project-id>",
+    "rancher project id, default retrieved from ci namespace"
+  )
+  .option(
+    "--kubeconfig-context <context>",
+    "kubeconfig context, default inferred from environment"
+  )
+  .description(
+    "Deploy manifests using kapp with current directory configuration"
+  )
+  .action(async (_options, command) => {
+    const options = command.optsWithGlobals()
+    configureDebug(options.D)
+    await deploy(options)
   })
 
 program.parse(process.argv)

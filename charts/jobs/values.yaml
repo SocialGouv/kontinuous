@@ -1,7 +1,7 @@
 enabled:
 namespace: 
 repository: 
-branchName: 
+gitBranch: 
 sharedStorage:
   size: 2Gi
   className: 'azurefile'

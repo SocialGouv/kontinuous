@@ -46,7 +46,7 @@ test.each(cases)(`%s.%s`, async (testdir, environment) => {
     KWBUILD_PATH: tmpDir,
     WORKSPACE_PATH: testdirPath,
     WORKSPACE_SUBPATH: "",
-    REPOSITORY: `test-${testdir}`,
+    GIT_REPOSITORY: `kube-workflow/test-${testdir}`,
   }
   const envFile = `${testdirPath}/.env`
   if (fs.pathExistsSync(envFile)) {
@@ -55,8 +55,8 @@ test.each(cases)(`%s.%s`, async (testdir, environment) => {
     )
     Object.assign(env, dotenvConfig)
   }
-  const output = await builder(env)
-  expect(output).toMatchSpecificSnapshot(
+  const { manifests } = await builder(env)
+  expect(manifests).toMatchSpecificSnapshot(
     `./__snapshots__/${testdir}.${environment}.yaml`
   )
 })

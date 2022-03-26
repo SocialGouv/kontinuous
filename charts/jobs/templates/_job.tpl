@@ -80,7 +80,7 @@ spec:
             - sh
             - -c
             - |
-              npx degit {{ or $val.repository $val.global.repository }}#{{ or $val.branchName $val.global.branchName }} \
+              npx degit {{ or $val.repository $val.global.repository }}#{{ or $val.gitBranch $val.global.gitBranch }} \
                 /workspace
           securityContext:
             runAsUser: 1000

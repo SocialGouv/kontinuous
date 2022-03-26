@@ -6,8 +6,9 @@ metadata:
     janitor/ttl: {{ .Values.global.ttl }}
     {{- end }}
     field.cattle.io/projectId: {{ .Values.global.rancherProjectId }}
-    git/branch: "{{ or .Values.global.gitBranch "" }}"
+    kubeWorkflow/gitBranch: "{{ or .Values.global.gitBranch "" }}"
+    kubeWorkflow/mainNamespace: true
   labels:
     application: {{ .Values.global.repositoryName }}
   name: {{ .Values.global.namespace }}
-automountServiceAccountToken: false
+# automountServiceAccountToken: false

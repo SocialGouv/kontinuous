@@ -100,7 +100,7 @@ runs:
       shell: bash
       working-directory: ${{ env.KWBUILD_PATH }}
       env:
-        REPOSITORY: ${{ github.repository }}
+        GIT_REPOSITORY: ${{ github.repository }}
       run: ${{ github.action_path }}/action/deploy/deploy
 
     - name: Define environment URL

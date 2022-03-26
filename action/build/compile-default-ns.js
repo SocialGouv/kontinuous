@@ -8,11 +8,13 @@ module.exports = async (manifestsDocument, values) => {
     if (!manifest) {
       continue
     }
-    if (!manifest.metadata) {
-      manifest.metadata = {}
-    }
-    if (!manifest.metadata.namespace) {
-      manifest.metadata.namespace = defaultNamespace
+    if (manifest.kind !== "Namespace") {
+      if (!manifest.metadata) {
+        manifest.metadata = {}
+      }
+      if (!manifest.metadata.namespace) {
+        manifest.metadata.namespace = defaultNamespace
+      }
     }
     manifests.push(yaml.dump(manifest))
   }

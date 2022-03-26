@@ -5,8 +5,11 @@
   "license": "MIT",
   "dependencies": {
     "@socialgouv/env-slug": "^1.2.2",
+    "async-retry": "^1.3.3",
     "degit": "^2.8.4",
+    "delay": "^5.0.0",
     "fs-extra": "^10.0.1",
+    "git-url-parse": "^11.6.0",
     "js-yaml": "^4.1.0",
     "lodash.defaultsdeep": "^4.6.1",
     "nctx": "^1.0.1",

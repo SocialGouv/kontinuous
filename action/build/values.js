@@ -2,53 +2,54 @@ const { generate } = require("@socialgouv/env-slug")
 
 const { buildCtx } = require("./ctx")
 
+const versionTagRe = /v[0-9]*/
+
 function generateValues() {
   const {
-    REPOSITORY,
     ENVIRONMENT,
     RANCHER_PROJECT_ID,
     RANCHER_PROJECT_NAME,
+    GIT_REPOSITORY,
     GIT_REF,
     GIT_SHA,
     GIT_HEAD_REF,
   } = buildCtx.require("env")
 
-  const gitBranch = GIT_HEAD_REF || GIT_REF
-  const branchName = gitBranch
+  const gitBranch = (GIT_HEAD_REF || GIT_REF)
     .replace("refs/heads/", "")
     .replace("refs/tags/", "")
 
-  const branchSlug = generate(branchName)
+  const branchSlug = generate(gitBranch)
 
   const env = ENVIRONMENT
   const isProduction = env === "prod"
   const isPreProduction = env === "preprod"
   const isDev = !(isProduction || isPreProduction)
 
-  const repository = REPOSITORY
+  const repository = GIT_REPOSITORY
   const repositoryName = repository.split("/").pop()
 
   const subdomain = isProduction
     ? repositoryName
     : isPreProduction
     ? `${repositoryName}-preprod`
-    : generate(`${repositoryName}-${branchName}`)
+    : generate(`${repositoryName}-${gitBranch}`)
 
   const namespace = isProduction
     ? repositoryName
     : isPreProduction
     ? `${repositoryName}-preprod`
-    : generate(`${repositoryName}-${branchName}`)
+    : generate(`${repositoryName}-${gitBranch}`)
 
-  const isRenovate = branchName.startsWith("renovate")
+  const isRenovate = gitBranch.startsWith("renovate")
 
   const ttl = isDev ? (isRenovate ? "1d" : "7d") : ""
 
   const sha = GIT_SHA
   const imageTag = isPreProduction
     ? `preprod-${sha}`
-    : gitBranch.startsWith("refs/tags/")
-    ? (gitBranch.split("/").pop() || "").substring(1)
+    : versionTagRe.test(gitBranch)
+    ? gitBranch
     : `sha-${sha}`
 
   const MAX_HOSTNAME_SIZE = 53
@@ -90,7 +91,8 @@ function generateValues() {
     ? "preprod"
     : `user_${branchSlug}`
 
-  const jobNamespace = `${RANCHER_PROJECT_NAME || repositoryName}-ci`
+  const rancherProjectName = RANCHER_PROJECT_NAME || repositoryName
+  const jobNamespace = `${rancherProjectName}-ci`
 
   return {
     global: {
@@ -100,7 +102,6 @@ function generateValues() {
       isPreProduction,
       ttl,
       namespace,
-      gitBranch,
       rancherProjectId,
       certSecretName,
       pgSecretName,
@@ -112,7 +113,7 @@ function generateValues() {
       imageName,
       imageTag,
       branchSlug,
-      branchName,
+      gitBranch,
       jobNamespace,
       sha,
       env,

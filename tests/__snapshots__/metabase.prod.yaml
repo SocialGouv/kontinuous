@@ -2,16 +2,15 @@
 
 exports[`metabase.prod 1`] = `
 "apiVersion: v1
-automountServiceAccountToken: false
 kind: Namespace
 metadata:
   annotations:
     field.cattle.io/projectId: \\"1234\\"
-    git/branch: refs/heads/feature-branch-1
+    kubeWorkflow/gitBranch: feature-branch-1
+    kubeWorkflow/mainNamespace: \\"true\\"
   labels:
     application: test-metabase
   name: test-metabase
-  namespace: test-metabase
 ---
 apiVersion: v1
 data:
@@ -115,7 +114,7 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: autodevops/test-metabase
     kapp.k14s.io/change-group.metabase-app1: autodevops/metabase-app1.test-metabase
-    kapp.k14s.io/create-strategy: fallback-on-replace
+    kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
@@ -190,7 +189,7 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: autodevops/test-metabase
     kapp.k14s.io/change-group.metabase-app2: autodevops/metabase-app2.test-metabase
-    kapp.k14s.io/create-strategy: fallback-on-replace
+    kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"

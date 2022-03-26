@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export REPOSITORY_NAME=${REPOSITORY##*/}
+export REPOSITORY_NAME=${GIT_REPOSITORY##*/}
 export NAMESPACE=$(cat manifests.yaml | yq eval-all 'select(.kind=="Namespace").metadata.name')
 
 kapp \

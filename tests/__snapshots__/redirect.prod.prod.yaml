@@ -2,16 +2,15 @@
 
 exports[`redirect.prod.prod 1`] = `
 "apiVersion: v1
-automountServiceAccountToken: false
 kind: Namespace
 metadata:
   annotations:
     field.cattle.io/projectId: \\"1234\\"
-    git/branch: refs/heads/feature-branch-1
+    kubeWorkflow/gitBranch: feature-branch-1
+    kubeWorkflow/mainNamespace: \\"true\\"
   labels:
     application: test-redirect.prod
   name: test-redirect.prod
-  namespace: test-redirect.prod
 ---
 apiVersion: v1
 kind: Service
@@ -39,7 +38,7 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: autodevops/test-redirect.prod
     kapp.k14s.io/change-group.app: autodevops/app.test-redirect.prod
-    kapp.k14s.io/create-strategy: fallback-on-replace
+    kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"

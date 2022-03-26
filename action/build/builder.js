@@ -18,7 +18,10 @@ const globalLogger = require("./utils/logger")
 
 const { buildCtx } = require("./ctx")
 
-const builder = async (envVars) => {
+module.exports = async (envVars) => {
+  buildCtx.provide()
+  asyncShell.ctx.provide()
+
   if (!envVars) {
     envVars = getEnv()
   }
@@ -161,16 +164,14 @@ const builder = async (envVars) => {
   )
 
   logger.debug(`Write final manifests file`)
-  await fs.writeFile(`${KWBUILD_PATH}/manifests.yaml`, manifests)
+  const manifestsFile = `${KWBUILD_PATH}/manifests.yaml`
+  await fs.writeFile(manifestsFile, manifests)
 
   logger.debug(`Built manifests: ${KWBUILD_PATH}/manifests.yaml`)
 
-  return manifests
-}
-
-module.exports = async (envVars) => {
-  buildCtx.provide()
-  asyncShell.ctx.provide()
-  const manifests = await builder(envVars)
-  return manifests
+  return {
+    manifestsFile,
+    manifests,
+    values,
+  }
 }
