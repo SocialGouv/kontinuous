@@ -378,7 +378,6 @@ metadata:
     kapp.k14s.io/change-group.build-app: autodevops/build-app.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.build-app..kaniko: autodevops/build-app..kaniko.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.build-app.kaniko: autodevops/build-app.kaniko.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-rule.build-app..credentials: upsert after upserting autodevops/build-app..credentials.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   name: job-feature-branch-1-build-app--kaniko
@@ -459,7 +458,6 @@ metadata:
     kapp.k14s.io/change-group.build-hasura: autodevops/build-hasura.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.build-hasura..kaniko: autodevops/build-hasura..kaniko.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.build-hasura.kaniko: autodevops/build-hasura.kaniko.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-rule.build-hasura..credentials: upsert after upserting autodevops/build-hasura..credentials.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   name: job-feature-branch-1-build-hasura--kaniko
