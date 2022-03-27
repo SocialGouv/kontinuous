@@ -5,6 +5,10 @@ on:
     tags:
       - "v*"
 
+concurrency:
+  cancel-in-progress: true
+  group: release-${{ github.ref_name }}
+
 jobs:
   build:
     runs-on: ubuntu-latest

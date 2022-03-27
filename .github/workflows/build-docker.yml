@@ -5,6 +5,10 @@ on:
     branches:
       - master
 
+concurrency:
+  cancel-in-progress: true
+  group: docker-${{ github.ref_name }}
+
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
