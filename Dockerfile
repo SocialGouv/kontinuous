@@ -42,11 +42,11 @@ RUN curl -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/${KAP
 
 RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1001 ubuntu
 RUN mkdir -p /opt && chown 1001:1001 /opt
-USER 1001
 
 RUN mkdir -p /opt/kube-workflow
 WORKDIR /opt/kube-workflow
-COPY --chown=1001:1001 package.json yarn.lock ./
+COPY package.json yarn.lock ./
+RUN chown -R 1001:1001 .
 
 # Keep yarn install cache when bumping version and dependencies still the sames
 RUN node -e " \
@@ -56,7 +56,9 @@ RUN node -e " \
 RUN yarn install --frozen-lockfile --production \
   && yarn cache clean
 
-COPY --chown=1001:1001 . /opt/kube-workflow
+COPY . ./
+RUN chown -R 1001:1001 .
 
+USER 1001
 ENTRYPOINT ["/bin/sh","-c"]
 CMD ["/opt/kube-workflow/bin/cli.js"]
