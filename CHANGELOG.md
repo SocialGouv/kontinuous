@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.4](https://github.com/SocialGouv/kube-workflow/compare/v1.4.3...v1.4.4) (2022-03-27)
+
+
+### Bug Fixes
+
+* docker build ([833815e](https://github.com/SocialGouv/kube-workflow/commit/833815e74fb0b073921034776749028769cf25c1))
+* docker build ([8915736](https://github.com/SocialGouv/kube-workflow/commit/89157360407c54b6805384d4323ad96f4f851613))
+* docker build ([9f3cd3a](https://github.com/SocialGouv/kube-workflow/commit/9f3cd3a5b226596167a2b15c130f55ab500ad0b7))
+* docker build ([9c9c7da](https://github.com/SocialGouv/kube-workflow/commit/9c9c7dae57b05ec708ac72feaa27664b047a00ca))
+* docker build ([67aa46e](https://github.com/SocialGouv/kube-workflow/commit/67aa46eb789590d80ee5c5bddf55eca83e44c615))
+* docker build ([15ffa71](https://github.com/SocialGouv/kube-workflow/commit/15ffa7175857f1e58000a374092ad631854e4ac2))
+* docker build ([eef2672](https://github.com/SocialGouv/kube-workflow/commit/eef2672524a48f1b5aa340c9b606bb3021ed67f9))
+* gh workflow cancel ([0e52c85](https://github.com/SocialGouv/kube-workflow/commit/0e52c85d79ab49b04dd0e6c8cac240cbd80f59eb))
+* gh workflow cancel ([b664dc3](https://github.com/SocialGouv/kube-workflow/commit/b664dc3908471b3b28ee84285f526b8d9b51765c))
+* github docker build ([af6a40f](https://github.com/SocialGouv/kube-workflow/commit/af6a40fd6be06c34548e508f59c8df34ac33dc9b))
+* github docker build ([1d38e2f](https://github.com/SocialGouv/kube-workflow/commit/1d38e2f8a803e3678b4971a6c37a6145e5418c82))
+* gitlab docker build ([a985682](https://github.com/SocialGouv/kube-workflow/commit/a985682b4c134454daf535e89b925fb61a6eacd5))
+* gitlab docker build ([5586ee6](https://github.com/SocialGouv/kube-workflow/commit/5586ee6e477518c0d210a834e1eabc58ff735534))
+* gitlab docker build ([1b4efda](https://github.com/SocialGouv/kube-workflow/commit/1b4efda54cf0f7885587b39e724888afa1904426))
+* gitlab docker build ([cd54bf1](https://github.com/SocialGouv/kube-workflow/commit/cd54bf1b2b34ec5aa1a4bb05ebd90953c5c38c71))
+* gitlab docker build ([bf2e9bb](https://github.com/SocialGouv/kube-workflow/commit/bf2e9bbca979682a0caaa9ce3ba4cdb1f86608ec))
+* gitlab docker build ([48d0513](https://github.com/SocialGouv/kube-workflow/commit/48d05136acfd763c21162adc8884506d3e784ff9))
+* gitlab docker build ([17d7662](https://github.com/SocialGouv/kube-workflow/commit/17d766241b86d264a22d8aa3dabf5bf13913665d))
+* gitlab docker build ([1667bd2](https://github.com/SocialGouv/kube-workflow/commit/1667bd2fdae976cc3410a66743aa862499fe9aa0))
+* gitlab docker build ([f0470fb](https://github.com/SocialGouv/kube-workflow/commit/f0470fb938fc8908d8f386ded16d5dc1db3d2feb))
+
 ### [1.4.3](https://github.com/SocialGouv/kube-workflow/compare/v1.4.2...v1.4.3) (2022-03-27)
 
 
