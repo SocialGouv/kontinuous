@@ -50,9 +50,9 @@ COPY package.json yarn.lock ./
 
 # Keep yarn install cache when bumping version and dependencies still the sames
 RUN node -e " \
-  const package = JSON.parse(fs.readFileSync('package.json')); \
+  const package = JSON.parse(fs.readFileSync('./package.json')); \
   const packageZero = { ...package, version: '0.0.0' };  \
-  fs.writeFileSync('package.json', JSON.stringify(packageZero));"
+  fs.writeFileSync('./package.json', JSON.stringify(packageZero));"
 RUN yarn install --frozen-lockfile --production \
   && yarn cache clean
 
