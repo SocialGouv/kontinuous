@@ -163,9 +163,11 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
+        {{ if .Values.global.extra.jobs.sharedStorage.enabled }}
         - name: workflow
           persistentVolumeClaim:
             claimName: jobs-shared-storage
+        {{- end }}
         {{- if $run.volumes }}
           {{- tpl ($run.volumes | toYaml) $ | nindent 8 }}
         {{- end }}

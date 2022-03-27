@@ -22,12 +22,23 @@ module.exports = async (values) => {
 
   for (const { name } of [...dependencies]) {
     for (const componentKey of componentKeys) {
-      if (componentKey !== name && componentKey.startsWith(`${name}-`)) {
+      const isAnInstanceOf = componentKey.startsWith(`${name}-`)
+
+      // create subcharts alias for components instances
+      if (isAnInstanceOf) {
         dependencies.push({
           ...dependenciesByName[name],
           alias: componentKey,
           condition: `${componentKey}.enabled`,
         })
+      }
+
+      // enable common extra features for used components
+      if (
+        (componentKey === name || isAnInstanceOf) &&
+        values.global.extra[name]
+      ) {
+        values.global.extra[name].enabled = true
       }
     }
   }

@@ -2,11 +2,10 @@ enabled:
 namespace: 
 repository: 
 gitBranch: 
-sharedStorage:
-  size: 2Gi
-  className: 'azurefile'
 runs: []
 image: "debian:stable"
 ingress:
   annotations: {}
 needs: []
+sharedStorage:
+  enabled: false

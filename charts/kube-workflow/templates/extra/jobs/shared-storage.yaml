@@ -1,9 +1,24 @@
-{{ if .Values.extra.enableJobs }}
+{{ if and .Values.global.extra.jobs.enabled .Values.global.extra.jobs.sharedStorage.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jobs-shared-storage
+  annotations: {}
+  labels: {}
+  namespace: {{ .Values.global.jobNamespace }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.global.extra.jobs.sharedStorage.size }}
+  storageClassName: {{ .Values.global.extra.jobs.sharedStorage.className }}
+---
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: jobci-clean-workflow
-  namespace: {{ or .Values.namespace .Values.global.jobNamespace }}
+  namespace: {{ .Values.global.jobNamespace }}
   annotations: {}
 spec:
   schedule: "0 0 * * *" # Run once a day at midnight
@@ -26,7 +41,7 @@ spec:
                 - |
                   echo "$KUBECONFIG" > ~/.kube/config
                   export KUBECONFIG=~/.kube/config
-                  export JOB_NAMESPACE="{{ or .Values.namespace .Values.global.jobNamespace }}"
+                  export JOB_NAMESPACE="{{ .Values.global.jobNamespace }}"
                   ACTIVE_JOBS=$(kubectl get jobs -n $JOB_NAMESPACE -o json | jq ".items | .[] | select(.status.active > 0).metadata.name")
                   for subdir in /workflow/*; do
                     [ -d "$subdir" ] || continue

@@ -117,9 +117,13 @@ function generateValues() {
       jobNamespace,
       sha,
       env,
-    },
-    extra: {
-      enableJobs: true,
+      extra: {
+        jobs: {
+          sharedStorage: {
+            enabled: true,
+          },
+        },
+      },
     },
   }
 }

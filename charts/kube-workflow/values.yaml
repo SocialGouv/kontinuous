@@ -10,9 +10,12 @@ global:
   imageTag:
   ingress:
     annotations: {}
-
-extra:
-  enableJobs: false
+  extra:
+    jobs:
+      sharedStorage:
+        enabled: false
+        size: 2Gi
+        className: 'azurefile'
 
 app:
   enabled: false

@@ -1,3 +1,4 @@
+{{ if .Values.global.extra.jobs.sharedStorage.enabled -}}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -35,3 +36,4 @@ spec:
         - name: workflow
           persistentVolumeClaim:
             claimName: jobs-shared-storage
+{{- end }}
