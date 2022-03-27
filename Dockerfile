@@ -65,5 +65,9 @@ RUN chown -R 1001:1001 /workspace
 WORKDIR /workspace
 
 USER 1001
+ENV HOME=/home/ubuntu
+RUN chmod a+rw $HOME
+ENV KUBECONFIG=$HOME/.kube/config
+RUN mkdir $HOME/.kube
 ENTRYPOINT ["/opt/kube-workflow/bin/cli.js"]
 CMD ["deploy"]
