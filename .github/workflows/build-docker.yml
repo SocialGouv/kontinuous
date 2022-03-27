@@ -54,7 +54,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: "true"
-          file: Dockerfile
+          file: ./Dockerfile
           context: .
           builder: ${{ steps.buildx.outputs.name }}
           tags: "${{ steps.docker_meta.outputs.tags }}"
