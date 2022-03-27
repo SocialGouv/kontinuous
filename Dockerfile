@@ -46,13 +46,13 @@ USER 1001
 
 RUN mkdir -p /opt/kube-workflow
 WORKDIR /opt/kube-workflow
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock /opt/kube-workflow/
 
 # Keep yarn install cache when bumping version and dependencies still the sames
 RUN node -e " \
-  const package = JSON.parse(fs.readFileSync('./package.json')); \
+  const package = JSON.parse(fs.readFileSync('/opt/kube-workflow/package.json')); \
   const packageZero = { ...package, version: '0.0.0' };  \
-  fs.writeFileSync('./package.json', JSON.stringify(packageZero));"
+  fs.writeFileSync('/opt/kube-workflow/package.json', JSON.stringify(packageZero));"
 RUN yarn install --frozen-lockfile --production \
   && yarn cache clean
 
