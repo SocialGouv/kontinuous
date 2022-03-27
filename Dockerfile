@@ -59,6 +59,10 @@ RUN yarn install --frozen-lockfile --production \
 COPY . ./
 RUN chown -R 1001:1001 .
 
+RUN mkdir -p /workspace
+RUN chown -R 1001:1001 /workspace
+WORKDIR /workspace
+
 USER 1001
 ENTRYPOINT ["/bin/sh","-c"]
 CMD ["/opt/kube-workflow/bin/cli.js"]
