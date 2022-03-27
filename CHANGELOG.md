@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.6](https://github.com/SocialGouv/kube-workflow/compare/v1.4.5...v1.4.6) (2022-03-27)
+
+
+### Bug Fixes
+
+* docker ([ab2c17a](https://github.com/SocialGouv/kube-workflow/commit/ab2c17a84468e79a573b65438187de8234cbc2bd))
+* docker add git ([707c76e](https://github.com/SocialGouv/kube-workflow/commit/707c76e88956e83f33cc7e749d7c99ec06d7eda2))
+* docker build add workspace ([2dc6770](https://github.com/SocialGouv/kube-workflow/commit/2dc6770190377f5a28a5528cd887781f1ff45974))
+* docker entrypoint ([3086b9f](https://github.com/SocialGouv/kube-workflow/commit/3086b9f413e654f19a2faa344c0ebc5ea69b4fca))
+
 ### [1.4.5](https://github.com/SocialGouv/kube-workflow/compare/v1.4.4...v1.4.5) (2022-03-27)
 
 
