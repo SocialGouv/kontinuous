@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - master
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - 'master'
 
 concurrency:
   cancel-in-progress: true
