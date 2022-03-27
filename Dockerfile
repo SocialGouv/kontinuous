@@ -64,5 +64,5 @@ RUN chown -R 1001:1001 /workspace
 WORKDIR /workspace
 
 USER 1001
-ENTRYPOINT ["/bin/sh","-c"]
-CMD ["/opt/kube-workflow/bin/cli.js"]
+ENTRYPOINT ["/opt/kube-workflow/bin/cli.js"]
+CMD ["deploy"]
