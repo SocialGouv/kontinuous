@@ -46,7 +46,7 @@ USER 1001
 
 RUN mkdir -p /opt/kube-workflow
 WORKDIR /opt/kube-workflow
-COPY package.json yarn.lock ./
+COPY --chown=1001:1001 package.json yarn.lock ./
 
 # Keep yarn install cache when bumping version and dependencies still the sames
 RUN node -e " \
@@ -56,7 +56,7 @@ RUN node -e " \
 RUN yarn install --frozen-lockfile --production \
   && yarn cache clean
 
-COPY . /opt/kube-workflow
+COPY --chown=1001:1001 . /opt/kube-workflow
 
 ENTRYPOINT ["/bin/sh","-c"]
 CMD ["/opt/kube-workflow/bin/cli.js"]
