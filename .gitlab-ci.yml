@@ -7,7 +7,6 @@ build:
     - |
       mkdir -p /kaniko/.docker
       echo "{\"auths\":{\"$HARBOR\":{\"username\":\"$HARBOR_USER\",\"password\":\"$HARBOR_PASSWORD\"}}}" > /kaniko/.docker/config.json
-      cat /kaniko/.docker/config.json
       /kaniko/executor \
         --context="dir://${CI_PROJECT_DIR}" \
         --dockerfile="${CI_PROJECT_DIR}/Dockerfile" \
