@@ -11,6 +11,9 @@ global:
   ingress:
     annotations: {}
 
+extra:
+  enableJobs: false
+
 app:
   enabled: false
 hasura:

@@ -118,6 +118,9 @@ function generateValues() {
       sha,
       env,
     },
+    extra: {
+      enableJobs: true,
+    },
   }
 }
 
