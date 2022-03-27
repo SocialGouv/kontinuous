@@ -1,0 +1,10 @@
+node_modules
+.git
+.github
+.husky
+tests
+CHANGELOG.md
+README.md
+.gitignore
+.gitlab-ci.yml
+.npmignore
