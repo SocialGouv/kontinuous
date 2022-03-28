@@ -16,7 +16,7 @@ kubectl create -f namespace.yaml>/dev/null 2>&1 || true
 n=0
 until [ "$n" -ge 10 ]; do
   namespaceStatus=$(kubectl get ns $NAMESPACE -o json | jq .status.phase -r)
-  [ $namespaceStatus == "Active" ] && break
+  [ "$namespaceStatus" == "Active" ] && break
   n=$((n+1))
   sleep 1
 done
