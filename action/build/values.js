@@ -49,7 +49,7 @@ function generateValues() {
   const imageTag = isPreProduction
     ? `preprod-${sha}`
     : versionTagRe.test(gitBranch)
-    ? gitBranch
+    ? gitBranch.substring(1)
     : `sha-${sha}`
 
   const MAX_HOSTNAME_SIZE = 53
