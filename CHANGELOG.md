@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.8](https://github.com/SocialGouv/kube-workflow/compare/v1.4.7...v1.4.8) (2022-03-28)
+
+
+### Bug Fixes
+
+* disable serviceaccount ([6055bcb](https://github.com/SocialGouv/kube-workflow/commit/6055bcb1e0e86bf4e066ba84d8b1ef8a2281685b))
+* image tag strip v ([8143c0f](https://github.com/SocialGouv/kube-workflow/commit/8143c0f94cea7269a01fbde1e1ef5e47bb6c8740))
+* increase kaniko build perfs ([62ea77b](https://github.com/SocialGouv/kube-workflow/commit/62ea77bb60a00d4870b98de8aa595c328278bc4b))
+* increase kaniko build perfs ([2627e5d](https://github.com/SocialGouv/kube-workflow/commit/2627e5d730ab90a158dcdc1c695c766fc01cae22))
+* job name add repository ([86214b1](https://github.com/SocialGouv/kube-workflow/commit/86214b1f0df106aebc078e7aab12473214e2d620))
+
 ### [1.4.7](https://github.com/SocialGouv/kube-workflow/compare/v1.4.6...v1.4.7) (2022-03-28)
 
 
