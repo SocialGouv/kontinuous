@@ -65,7 +65,7 @@ function generateValues() {
   const host = `${shortenHost(subdomain)}.${domain}`
 
   const registry = "ghcr.io/socialgouv"
-  const imageName = repositoryName
+  const imageRepository = repositoryName
 
   const rancherProjectId = RANCHER_PROJECT_ID
 
@@ -94,6 +94,9 @@ function generateValues() {
   const rancherProjectName = RANCHER_PROJECT_NAME || repositoryName
   const jobNamespace = `${rancherProjectName}-ci`
 
+  const imageProject = ""
+  // const imageProject = rancherProjectName
+
   return {
     global: {
       repository,
@@ -110,7 +113,8 @@ function generateValues() {
       host,
       domain,
       registry,
-      imageName,
+      imageProject,
+      imageRepository,
       imageTag,
       branchSlug,
       gitBranch,

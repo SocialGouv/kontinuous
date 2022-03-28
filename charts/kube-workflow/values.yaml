@@ -6,7 +6,8 @@ global:
   certSecretName: wildcard-crt
   branchSlug:
   registry:
-  imageName:
+  imageProject:
+  imageRepository:
   imageTag:
   ingress:
     annotations: {}

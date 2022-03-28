@@ -2,7 +2,9 @@ enabled:
 namespace: 
 host: 
 registry: 
-imageName: 
+imagePath:
+imageProject:
+imageRepository:
 imagePackage: app
 imageTag: 
 ttl: 

@@ -15,7 +15,7 @@ runs:
       /kaniko/executor \
         --context=dir:///workspace{{ if $.with.context }}/{{ $.with.context }}{{ end }} \
         --dockerfile=/workspace{{ if $.with.context }}/{{ $.with.context }}{{ end }}/{{ or $.with.dockerfile "Dockerfile" }} \
-        --destination=$CI_REGISTRY/{{ or $.with.imageName $.Values.global.imageName }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}:{{ or $.with.imageTag $.Values.global.imageTag }} \
+        --destination=$CI_REGISTRY{{ if (or $.with.imageProject $.Values.global.imageProject) }}{{ (print "/" (or $.with.imageProject $.Values.global.imageProject)) }}{{ end }}/{{ or $.with.imageRepository $.Values.global.imageRepository }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}:{{ or $.with.imageTag $.Values.global.imageTag }} \
         --cache=true \
         --snapshotMode=time \
         --use-new-run \
