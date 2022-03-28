@@ -30,7 +30,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-{{ $val.global.branchSlug }}-{{ join "--" $run.scope }}
+  name: job-{{ $val.global.namespace }}-{{ join "--" $run.scope }}
   namespace: {{ or $val.namespace $val.global.jobNamespace }}
   annotations:
     kapp.k14s.io/nonce: ""
