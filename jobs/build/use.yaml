@@ -3,7 +3,7 @@ runs:
     checkout: true
     action: false
     image: gcr.io/kaniko-project/executor:debug
-    serviceAccountName: kaniko
+    # serviceAccountName: kaniko
     user: 0
     entrypoint: ["/busybox/sh","-c"]
     envFrom:

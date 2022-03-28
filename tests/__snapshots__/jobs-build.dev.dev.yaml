@@ -437,7 +437,6 @@ spec:
         - mountPath: /workspace
           name: workspace
       restartPolicy: Never
-      serviceAccountName: kaniko
       volumes:
       - emptyDir: {}
         name: workspace
@@ -517,7 +516,6 @@ spec:
         - mountPath: /workspace
           name: workspace
       restartPolicy: Never
-      serviceAccountName: kaniko
       volumes:
       - emptyDir: {}
         name: workspace
