@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.10](https://github.com/SocialGouv/kube-workflow/compare/v1.4.9...v1.4.10) (2022-03-28)
+
+
+### Bug Fixes
+
+* imageProject + imageRepository ([4cc9fcf](https://github.com/SocialGouv/kube-workflow/commit/4cc9fcfce74c62ad1795dd4a5c21e529d980ed35))
+
 ### [1.4.9](https://github.com/SocialGouv/kube-workflow/compare/v1.4.8...v1.4.9) (2022-03-28)
 
 
