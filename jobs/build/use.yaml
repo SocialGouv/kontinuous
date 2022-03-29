@@ -24,3 +24,6 @@ runs:
         --build-arg="{{ $key }}={{ $val }}" \
         {{- end -}}
         {{- end -}}
+        {{ if $.with.target -}}
+        --target="{{ $.with.target }}" \
+        {{- end -}}
