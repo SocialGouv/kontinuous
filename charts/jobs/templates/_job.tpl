@@ -125,6 +125,7 @@ spec:
               value: "{{ tpl $value $ }}"
             {{- end }}
           
+          {{- if or $run.entrypoint $run.run $run.action $run.outputs }}
           command:
             {{- if and $run.entrypoint }}
             {{- tpl ($run.entrypoint | toYaml) $ | nindent 12 }}
@@ -132,13 +133,21 @@ spec:
             - /bin/{{ or $run.shell "bash" }}
             - -c
             {{- end }}
-            {{- if $run.run }}
+            {{- if or $run.run $run.action $run.outputs }}
             - |
+              {{- if $run.run }}
               {{- nindent 14 (tpl $run.run $) }}
-            {{- else if $run.action }}
-            - |
+              {{- else if $run.action }}
               /action/action.sh
+              {{- end }}
+              {{- if $run.outputs }}
+              {{- range $output := $run.outputs }}
+              mkdir -p "$(dirname /workflow/vars/{{ $run.name }}/{{ $output }})"
+              echo "${{ $output }}">/workflow/vars/{{ $run.name }}/{{ $output }}
+              {{- end }}
+              {{- end }}
             {{- end }}
+          {{- end }}
           {{- if $run.args }}
           args:
           {{- range $arg := $run.args }}

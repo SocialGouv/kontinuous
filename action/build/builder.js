@@ -10,6 +10,7 @@ const asyncShell = require("./utils/asyncShell")
 
 const generateValues = require("./values")
 const compileUses = require("./compile-uses")
+const compileOutputs = require("./compile-outputs")
 const compileChart = require("./compile-chart")
 const compiledefaultNs = require("./compile-default-ns")
 const getEnv = require("./env")
@@ -114,6 +115,9 @@ module.exports = async (envVars) => {
 
   logger.debug("Compiling composite uses")
   await compileUses(values)
+
+  logger.debug("Compiling outputs")
+  await compileOutputs(values)
 
   logger.debug("Compiling additional subcharts instances")
   const chart = await compileChart(values)

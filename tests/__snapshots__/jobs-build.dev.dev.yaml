@@ -394,9 +394,11 @@ spec:
         - /busybox/sh
         - -c
         - \\"mkdir -p /kaniko/.docker\\\\necho \\\\\\"{\\\\\\\\\\\\\\"auths\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"$CI_REGISTRY\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_USER\\\\\\\\\\\\\\",\\\\\\\\\\\\\\"password\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\\\\\\\\\"}}}\\\\\\"
-          > /kaniko/.docker/config.json\\\\n/kaniko/executor \\\\\\\\\\\\n  --context=dir:///workspace
-          \\\\\\\\\\\\n  --dockerfile=/workspace/Dockerfile \\\\\\\\\\\\n  --destination=$CI_REGISTRY/test-jobs-build.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53
-          \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  --snapshotMode=time \\\\\\\\\\\\n  --use-new-run \\\\\\\\\\\\n  \\\\n\\"
+          > /kaniko/.docker/config.json\\\\nexport DOCKER_IMAGE=$CI_REGISTRY/test-jobs-build.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53\\\\n/kaniko/executor
+          \\\\\\\\\\\\n  --context=dir:///workspace \\\\\\\\\\\\n  --dockerfile=/workspace/Dockerfile
+          \\\\\\\\\\\\n  --destination=$DOCKER_IMAGE \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  --snapshotMode=time
+          \\\\\\\\\\\\n  --use-new-run \\\\\\\\\\\\n  \\\\nmkdir -p \\\\\\"$(dirname /workflow/vars/kaniko/DOCKER_IMAGE)\\\\\\"\\\\necho
+          \\\\\\"$DOCKER_IMAGE\\\\\\">/workflow/vars/kaniko/DOCKER_IMAGE\\\\n\\"
         env: null
         envFrom:
         - secretRef:
@@ -473,9 +475,11 @@ spec:
         - /busybox/sh
         - -c
         - \\"mkdir -p /kaniko/.docker\\\\necho \\\\\\"{\\\\\\\\\\\\\\"auths\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"$CI_REGISTRY\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_USER\\\\\\\\\\\\\\",\\\\\\\\\\\\\\"password\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\\\\\\\\\"}}}\\\\\\"
-          > /kaniko/.docker/config.json\\\\n/kaniko/executor \\\\\\\\\\\\n  --context=dir:///workspace/hasura
-          \\\\\\\\\\\\n  --dockerfile=/workspace/hasura/Dockerfile \\\\\\\\\\\\n  --destination=$CI_REGISTRY/test-jobs-build.dev/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
-          \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  --snapshotMode=time \\\\\\\\\\\\n  --use-new-run \\\\\\\\\\\\n  \\\\n\\"
+          > /kaniko/.docker/config.json\\\\nexport DOCKER_IMAGE=$CI_REGISTRY/test-jobs-build.dev/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53\\\\n/kaniko/executor
+          \\\\\\\\\\\\n  --context=dir:///workspace/hasura \\\\\\\\\\\\n  --dockerfile=/workspace/hasura/Dockerfile
+          \\\\\\\\\\\\n  --destination=$DOCKER_IMAGE \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  --snapshotMode=time
+          \\\\\\\\\\\\n  --use-new-run \\\\\\\\\\\\n  \\\\nmkdir -p \\\\\\"$(dirname /workflow/vars/kaniko/DOCKER_IMAGE)\\\\\\"\\\\necho
+          \\\\\\"$DOCKER_IMAGE\\\\\\">/workflow/vars/kaniko/DOCKER_IMAGE\\\\n\\"
         env: null
         envFrom:
         - secretRef:

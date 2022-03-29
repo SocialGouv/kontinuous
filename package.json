@@ -11,6 +11,7 @@
     "fs-extra": "^10.0.1",
     "git-url-parse": "^11.6.0",
     "js-yaml": "^4.1.0",
+    "lodash.camelcase": "^4.3.0",
     "lodash.defaultsdeep": "^4.6.1",
     "nctx": "^1.0.1",
     "pino": "^7.9.0",
