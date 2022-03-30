@@ -217,9 +217,13 @@ dependencies:
 
 ## Releasing
 
-Releasing follow semantic versioning using standard-version tool. Versioning is volountary trigerred manually on dev machine too not block rapid iteration of master branch code.
-Just run `yarn release` on master branch and CHANGELOG will be feeded with informations from commits using the conventionnal commit standard, then package will be bumped, as the charts versions and commited, then tagged. Then just follow cli instruction that say: git push --follow-tags.
-Then the action will publish automatically new version of npm cli, and charts index.
+### Automatic
+
+Execute the [Trigger Release](https://github.com/SocialGouv/kube-workflow/actions/workflows/trigger-release.yml) workflow to trigger a new release of actions and helm charts.
+
+### Manual
+
+Releasing follow semantic versioning using [standard-version tool](https://github.com/conventional-changelog/standard-version). Versioning can be trigerred manually on dev machine to not block rapid iteration of master branch code : just run `yarn release` on master branch and CHANGELOG will be feeded with informations from commits using the conventionnal commit standard, then package will be bumped, as the charts versions and commited, then tagged. Then just follow cli instruction that say: `git push --follow-tags`. Then the action will publish automatically new version of npm cli, and charts index.
 
 ## CONTRIBUTING (developments on kube-workflow)
 
