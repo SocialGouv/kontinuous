@@ -80,16 +80,20 @@ async function compile(
       if (!runValues.runs) {
         return []
       }
-      return runValues.runs.map((r) => ({
-        action: run.use,
-        ...Object.entries(r).reduce((acc, [key, value]) => {
-          if (key !== "use") {
-            acc[key] = value
+      return runValues.runs.map((r) => {
+        const newRun = {
+          action: run.use,
+        }
+        for (const key of Object.keys(r)) {
+          if (key === "use") {
+            continue
           }
-          return acc
-        }, {}),
-        with: run.with,
-      }))
+          newRun[key] = r[key]
+        }
+        newRun.with = run.with
+        newRun.needs = [...new Set([...newRun.needs, ...run.needs])]
+        return newRun
+      })
     })
   )
   values.runs = newRuns.reduce((acc, run) => {

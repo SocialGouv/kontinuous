@@ -545,6 +545,7 @@ metadata:
     kapp.k14s.io/change-group.db: autodevops/db.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.db..create-db: autodevops/db..create-db.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.db.create-db: autodevops/db.create-db.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-rule.db..build-app: upsert after upserting autodevops/db..build-app.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-rule.db..create-secret: upsert after upserting autodevops/db..create-secret.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -643,6 +644,7 @@ metadata:
     kapp.k14s.io/change-group.db: autodevops/db.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.db..create-secret: autodevops/db..create-secret.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.db.create-secret: autodevops/db.create-secret.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-rule.db..build-app: upsert after upserting autodevops/db..build-app.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   name: job-test-jobs-build-dev-feature-branch-1-312rwy-db--create-secret

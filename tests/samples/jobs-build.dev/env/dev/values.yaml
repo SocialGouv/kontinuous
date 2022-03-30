@@ -63,5 +63,6 @@ jobs-dev:
     - name: db
       # use: SocialGouv/kube-workflow/jobs/create-db@master
       use: ../../../jobs/create-db
+      needs: [build-app]
       with:
         pgAdminSecretRefName: pg-scaleway
