@@ -147,7 +147,7 @@ spec:
               {{- if eq $i 0 }}
               echo "${{ $output }}">/workflow/vars/{{ $scope }}/{{ $output }}
               {{- else }}
-              ln -s /workflow/vars/{{ index $run.scopes 0 }}/{{ $output }} /workflow/vars/{{ $scope }}/{{ $output }}
+              ln -s -f /workflow/vars/{{ index $run.scopes 0 }}/{{ $output }} /workflow/vars/{{ $scope }}/{{ $output }}
               {{- end }}
               {{- end }}
               {{- end }}

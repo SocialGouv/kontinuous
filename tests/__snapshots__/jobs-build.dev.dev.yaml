@@ -399,9 +399,9 @@ spec:
           \\\\\\\\\\\\n  --destination=$DOCKER_IMAGE \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  --snapshotMode=time
           \\\\\\\\\\\\n  --use-new-run \\\\\\\\\\\\n  \\\\nmkdir -p \\\\\\"$(dirname /workflow/vars/build-app/DOCKER_IMAGE)\\\\\\"\\\\necho
           \\\\\\"$DOCKER_IMAGE\\\\\\">/workflow/vars/build-app/DOCKER_IMAGE\\\\nmkdir -p \\\\\\"$(dirname
-          /workflow/vars/build-app.kaniko/DOCKER_IMAGE)\\\\\\"\\\\nln -s /workflow/vars/build-app/DOCKER_IMAGE
+          /workflow/vars/build-app.kaniko/DOCKER_IMAGE)\\\\\\"\\\\nln -s -f /workflow/vars/build-app/DOCKER_IMAGE
           /workflow/vars/build-app.kaniko/DOCKER_IMAGE\\\\nmkdir -p \\\\\\"$(dirname /workflow/vars/build-app..kaniko/DOCKER_IMAGE)\\\\\\"\\\\nln
-          -s /workflow/vars/build-app/DOCKER_IMAGE /workflow/vars/build-app..kaniko/DOCKER_IMAGE\\\\n\\"
+          -s -f /workflow/vars/build-app/DOCKER_IMAGE /workflow/vars/build-app..kaniko/DOCKER_IMAGE\\\\n\\"
         env: null
         envFrom:
         - secretRef:
@@ -483,9 +483,9 @@ spec:
           \\\\\\\\\\\\n  --destination=$DOCKER_IMAGE \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  --snapshotMode=time
           \\\\\\\\\\\\n  --use-new-run \\\\\\\\\\\\n  \\\\nmkdir -p \\\\\\"$(dirname /workflow/vars/build-hasura/DOCKER_IMAGE)\\\\\\"\\\\necho
           \\\\\\"$DOCKER_IMAGE\\\\\\">/workflow/vars/build-hasura/DOCKER_IMAGE\\\\nmkdir -p \\\\\\"$(dirname
-          /workflow/vars/build-hasura.kaniko/DOCKER_IMAGE)\\\\\\"\\\\nln -s /workflow/vars/build-hasura/DOCKER_IMAGE
+          /workflow/vars/build-hasura.kaniko/DOCKER_IMAGE)\\\\\\"\\\\nln -s -f /workflow/vars/build-hasura/DOCKER_IMAGE
           /workflow/vars/build-hasura.kaniko/DOCKER_IMAGE\\\\nmkdir -p \\\\\\"$(dirname /workflow/vars/build-hasura..kaniko/DOCKER_IMAGE)\\\\\\"\\\\nln
-          -s /workflow/vars/build-hasura/DOCKER_IMAGE /workflow/vars/build-hasura..kaniko/DOCKER_IMAGE\\\\n\\"
+          -s -f /workflow/vars/build-hasura/DOCKER_IMAGE /workflow/vars/build-hasura..kaniko/DOCKER_IMAGE\\\\n\\"
         env: null
         envFrom:
         - secretRef:
