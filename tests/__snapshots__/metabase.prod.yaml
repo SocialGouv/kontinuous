@@ -24,6 +24,7 @@ data:
   MB_ENABLE_PUBLIC_SHARING: \\"true\\"
   MB_SITE_LOCALE: fr
   MB_SITE_NAME: Fabrique des ministères sociaux
+  MB_SITE_URL: https://metabase-app1-test-metabase.fabrique.social.gouv.fr
 kind: ConfigMap
 metadata:
   labels:
@@ -44,6 +45,7 @@ data:
   MB_ENABLE_PUBLIC_SHARING: \\"true\\"
   MB_SITE_LOCALE: fr
   MB_SITE_NAME: Fabrique des ministères sociaux
+  MB_SITE_URL: https://metabase-app2-test-metabase.fabrique.social.gouv.fr
 kind: ConfigMap
 metadata:
   labels:
