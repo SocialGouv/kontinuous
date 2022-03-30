@@ -1,25 +1,12 @@
 {
-  "name": "kube-workflow",
-  "version": "1.4.10",
-  "repository": "git@github.com:SocialGouv/kube-workflow.git",
+  "name": "kube-workflow-root",
+  "version": "1.0.0",
   "license": "MIT",
-  "dependencies": {
-    "@socialgouv/env-slug": "^1.2.2",
-    "async-retry": "^1.3.3",
-    "degit": "^2.8.4",
-    "delay": "^5.0.0",
-    "fs-extra": "^10.0.1",
-    "git-url-parse": "^11.6.0",
-    "js-yaml": "^4.1.0",
-    "lodash.camelcase": "^4.3.0",
-    "lodash.defaultsdeep": "^4.6.1",
-    "nctx": "^1.0.1",
-    "pino": "^7.9.0",
-    "pino-pretty": "^7.5.4",
-    "pretty-ms": "^7.0.1"
-  },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
-    "dotenv": "^16.0.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-node": "^4.1.0",
@@ -28,51 +15,30 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.1",
     "husky": "^7.0.4",
-    "jest": "^27.5.1",
-    "jest-specific-snapshot": "^5.0.0",
     "lint-staged": "^11.1.2",
     "prettier": "^2.5.1",
     "standard-version": "^9.3.2"
   },
-  "optionalDependencies": {
-    "cli-highlight": "^2.1.11",
-    "commander": "^9.1.0"
-  },
-  "jest": {
-    "testTimeout": 10000
-  },
-  "engines": {
-    "node": ">=14.0.0"
+  "scripts": {
+    "precommit": "lint-staged",
+    "prepare": "husky install",
+    "lint": "yarn workspaces run --parallel lint",
+    "release": "standard-version",
+    "retag": "git tag -f $(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1)",
+    "push": "git push -f --follow-tags origin master",
+    "delivery": "yarn release && yarn push"
   },
   "lint-staged": {
     "*.js": [
       "eslint --fix"
     ]
   },
-  "scripts": {
-    "precommit": "lint-staged",
-    "lint": "eslint .",
-    "test": "jest tests",
-    "test:debug": "DEBUG=1 jest tests",
-    "test:update-snapshots": "DEBUG=1 jest tests -u",
-    "build-manifests": "node action/build/build.js",
-    "release": "standard-version",
-    "retag": "git tag -f $(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1)",
-    "push": "git push -f --follow-tags origin master",
-    "delivery": "yarn release && yarn push"
-  },
   "standard-version": {
     "scripts": {
       "posttag": "yarn retag"
     }
   },
-  "bin": {
-    "kube-workflow": "./bin/cli.js"
-  },
-  "files": [
-    "**"
-  ],
-  "publishConfig": {
-    "access": "public"
+  "engines": {
+    "node": ">=14"
   }
 }

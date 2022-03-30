@@ -1,7 +1,8 @@
+const fs = require("fs-extra")
 
 const yaml = require("js-yaml")
 
-const getDirectoriesSync = require("./action/build/utils/getDirectoriesSync")
+const getDirectoriesSync = require("./packages/workflow/build/utils/getDirectoriesSync")
 
 const chartsUpdater = {
   readVersion: (contents) => {
@@ -32,10 +33,21 @@ const chartsUpdater = {
 
 const bumpFiles = [{ filename: "package.json", type: "json" }]
 
-const chartsPath = "charts"
-const charts = getDirectoriesSync(chartsPath)
-bumpFiles.push(...charts.map((chartName) => ({
-  filename: `${chartsPath}/${chartName}/Chart.yaml`,
+const getChartsRecursive = (dir = "charts", list=[])=>{
+  const chartList = getDirectoriesSync(dir)
+  list.push(...chartList.map(c =>`${dir}/${c}`))
+  for (const chartName of chartList){
+    const childDir = `${dir}/${chartName}/charts`
+    if (fs.pathExistsSync(childDir)){
+      list.push(...getChartsRecursive(childDir))
+    }
+  }
+  return list
+}
+const charts = getChartsRecursive()
+
+bumpFiles.push(...charts.map((chartDir) => ({
+  filename: `${chartDir}/Chart.yaml`,
   updater: chartsUpdater
 })))
 

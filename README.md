@@ -1,6 +1,6 @@
 # Kube-Workflow - CI on Kubernetes 🚀
 
-[![schema](./schema.png)](https://excalidraw.com/#json=gKk7kOn6a9tbmkRZlPige,IQnqqMuiEPgmWbd39GlUYg)
+[![schema](./docs/webhook-schema.png)](https://excalidraw.com/#json=gKk7kOn6a9tbmkRZlPige,IQnqqMuiEPgmWbd39GlUYg)
 
 ## GitHub Action Entrypoint
 
