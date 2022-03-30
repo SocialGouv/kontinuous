@@ -1,4 +1,4 @@
-{{- $outputs := $.Values.outputs -}}
+{{- $outputs := $.Values.global.extra.jobs.outputs -}}
 {{- range $run := $.Values.runs }}
 ---
   {{- $context := (merge (dict "run" $run "with" $run.with "parentWith" $run.parentWith "outputs" $outputs) $) -}}

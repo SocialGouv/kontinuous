@@ -51,6 +51,12 @@ jobs:
         imagePackage: hasura
         context: hasura
 
+    - name: test-app
+      # use: SocialGouv/kube-workflow/jobs/test@master
+      use: ../../../jobs/test
+      with:
+        dockerImage: '{{ printf $.outputs.buildApp "DOCKER_IMAGE" }}'
+
 jobs-dev:
   enabled: true
   runs:

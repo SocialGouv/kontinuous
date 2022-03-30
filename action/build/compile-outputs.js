@@ -1,13 +1,24 @@
 const camelcase = require("lodash.camelcase")
+const defaultsDeep = require("lodash.defaultsdeep")
 
 module.exports = async (values) => {
-  if (!values.runs) {
-    return
+  const outputs = {}
+  for (const key of Object.keys(values)) {
+    if (key === "jobs" || key.startsWith("jobs-")) {
+      for (const run of values[key].runs || []) {
+        for (const name of run.scopes) {
+          const ccName = camelcase(name)
+          outputs[ccName] = `"$(cat "/workflow/vars/${name}/%s")"`
+        }
+      }
+    }
   }
-  values.outputs = {}
-  const { outputs } = values
-  for (const run of values.runs) {
-    const name = camelcase(run.name)
-    outputs[name] = `$(cat /workflow/vars/${run.name}/%s)`
-  }
+  defaultsDeep(values, {
+    global: {
+      extra: {
+        jobs: {},
+      },
+    },
+  })
+  values.global.extra.jobs.outputs = outputs
 }

@@ -142,8 +142,14 @@ spec:
               {{- end }}
               {{- if $run.outputs }}
               {{- range $output := $run.outputs }}
-              mkdir -p "$(dirname /workflow/vars/{{ $run.name }}/{{ $output }})"
-              echo "${{ $output }}">/workflow/vars/{{ $run.name }}/{{ $output }}
+              {{- range $i, $scope := $run.scopes }}
+              mkdir -p "$(dirname /workflow/vars/{{ $scope }}/{{ $output }})"
+              {{- if eq $i 0 }}
+              echo "${{ $output }}">/workflow/vars/{{ $scope }}/{{ $output }}
+              {{- else }}
+              ln -s /workflow/vars/{{ index $run.scopes 0 }}/{{ $output }} /workflow/vars/{{ $scope }}/{{ $output }}
+              {{- end }}
+              {{- end }}
               {{- end }}
               {{- end }}
             {{- end }}
