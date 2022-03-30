@@ -394,9 +394,14 @@ spec:
         - /busybox/sh
         - -c
         - \\"mkdir -p /kaniko/.docker\\\\necho \\\\\\"{\\\\\\\\\\\\\\"auths\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"$CI_REGISTRY\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_USER\\\\\\\\\\\\\\",\\\\\\\\\\\\\\"password\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\\\\\\\\\"}}}\\\\\\"
-          > /kaniko/.docker/config.json\\\\n/kaniko/executor \\\\\\\\\\\\n  --context=dir:///workspace
-          \\\\\\\\\\\\n  --dockerfile=/workspace/Dockerfile \\\\\\\\\\\\n  --destination=$CI_REGISTRY/test-jobs-build.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53
-          \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  --snapshotMode=time \\\\\\\\\\\\n  --use-new-run \\\\\\\\\\\\n  \\\\n\\"
+          > /kaniko/.docker/config.json\\\\nexport DOCKER_IMAGE=$CI_REGISTRY/test-jobs-build.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53\\\\n/kaniko/executor
+          \\\\\\\\\\\\n  --context=dir:///workspace \\\\\\\\\\\\n  --dockerfile=/workspace/Dockerfile
+          \\\\\\\\\\\\n  --destination=$DOCKER_IMAGE \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  --snapshotMode=time
+          \\\\\\\\\\\\n  --use-new-run \\\\\\\\\\\\n  \\\\nmkdir -p \\\\\\"$(dirname /workflow/vars/build-app/DOCKER_IMAGE)\\\\\\"\\\\necho
+          \\\\\\"$DOCKER_IMAGE\\\\\\">/workflow/vars/build-app/DOCKER_IMAGE\\\\nmkdir -p \\\\\\"$(dirname
+          /workflow/vars/build-app.kaniko/DOCKER_IMAGE)\\\\\\"\\\\nln -s /workflow/vars/build-app/DOCKER_IMAGE
+          /workflow/vars/build-app.kaniko/DOCKER_IMAGE\\\\nmkdir -p \\\\\\"$(dirname /workflow/vars/build-app..kaniko/DOCKER_IMAGE)\\\\\\"\\\\nln
+          -s /workflow/vars/build-app/DOCKER_IMAGE /workflow/vars/build-app..kaniko/DOCKER_IMAGE\\\\n\\"
         env: null
         envFrom:
         - secretRef:
@@ -473,9 +478,14 @@ spec:
         - /busybox/sh
         - -c
         - \\"mkdir -p /kaniko/.docker\\\\necho \\\\\\"{\\\\\\\\\\\\\\"auths\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"$CI_REGISTRY\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_USER\\\\\\\\\\\\\\",\\\\\\\\\\\\\\"password\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\\\\\\\\\"}}}\\\\\\"
-          > /kaniko/.docker/config.json\\\\n/kaniko/executor \\\\\\\\\\\\n  --context=dir:///workspace/hasura
-          \\\\\\\\\\\\n  --dockerfile=/workspace/hasura/Dockerfile \\\\\\\\\\\\n  --destination=$CI_REGISTRY/test-jobs-build.dev/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
-          \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  --snapshotMode=time \\\\\\\\\\\\n  --use-new-run \\\\\\\\\\\\n  \\\\n\\"
+          > /kaniko/.docker/config.json\\\\nexport DOCKER_IMAGE=$CI_REGISTRY/test-jobs-build.dev/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53\\\\n/kaniko/executor
+          \\\\\\\\\\\\n  --context=dir:///workspace/hasura \\\\\\\\\\\\n  --dockerfile=/workspace/hasura/Dockerfile
+          \\\\\\\\\\\\n  --destination=$DOCKER_IMAGE \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  --snapshotMode=time
+          \\\\\\\\\\\\n  --use-new-run \\\\\\\\\\\\n  \\\\nmkdir -p \\\\\\"$(dirname /workflow/vars/build-hasura/DOCKER_IMAGE)\\\\\\"\\\\necho
+          \\\\\\"$DOCKER_IMAGE\\\\\\">/workflow/vars/build-hasura/DOCKER_IMAGE\\\\nmkdir -p \\\\\\"$(dirname
+          /workflow/vars/build-hasura.kaniko/DOCKER_IMAGE)\\\\\\"\\\\nln -s /workflow/vars/build-hasura/DOCKER_IMAGE
+          /workflow/vars/build-hasura.kaniko/DOCKER_IMAGE\\\\nmkdir -p \\\\\\"$(dirname /workflow/vars/build-hasura..kaniko/DOCKER_IMAGE)\\\\\\"\\\\nln
+          -s /workflow/vars/build-hasura/DOCKER_IMAGE /workflow/vars/build-hasura..kaniko/DOCKER_IMAGE\\\\n\\"
         env: null
         envFrom:
         - secretRef:
@@ -700,6 +710,64 @@ spec:
         volumeMounts:
         - mountPath: /action
           name: action
+      restartPolicy: Never
+      volumes:
+      - emptyDir: {}
+        name: workspace
+      - emptyDir: {}
+        name: action
+      - name: workflow
+        persistentVolumeClaim:
+          claimName: jobs-shared-storage
+  ttlSecondsAfterFinished: 1800
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    janitor/ttl: \\"1800\\"
+    kapp.k14s.io/change-group: autodevops/test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group.test-app: autodevops/test-app.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group.test-app..test: autodevops/test-app..test.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group.test-app.test: autodevops/test-app.test.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-rule.build-app: upsert after upserting autodevops/build-app.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/nonce: \\"\\"
+    kapp.k14s.io/update-strategy: fallback-on-replace
+  name: job-test-jobs-build-dev-feature-branch-1-312rwy-test-app--test
+  namespace: awesome-ci
+spec:
+  activeDeadlineSeconds: 3600
+  backoffLimit: 2
+  template:
+    metadata:
+      annotations: null
+      labels: null
+    spec:
+      containers:
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          DOCKER_IMAGE=\\"$(cat \\"/workflow/vars/build-app/DOCKER_IMAGE\\")\\"
+          echo \\"my DOCKER_IMAGE is '$DOCKER_IMAGE' !!!\\"
+        env: null
+        image: debian:stable
+        imagePullPolicy: IfNotPresent
+        name: job
+        securityContext:
+          fsGroup: 1000
+          runAsGroup: 1000
+          runAsUser: 1000
+        volumeMounts:
+        - mountPath: /workspace
+          name: workspace
+        - mountPath: /action
+          name: action
+        - mountPath: /workflow
+          name: workflow
+          subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
+        workingDir: /workspace
+      initContainers: null
       restartPolicy: Never
       volumes:
       - emptyDir: {}
