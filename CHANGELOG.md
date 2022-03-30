@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.4.12 (2022-03-30)
+
+
+### Bug Fixes
+
+* **namespace:** mainNamespace annotation as string ([bff7591](https://github.com/SocialGouv/kube-workflow/commit/bff7591f886671bbcf162c65a8cafa06720108d1))
+
 ### 1.4.11 (2022-03-30)
 
 
