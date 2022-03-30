@@ -66,7 +66,6 @@ async function compile(
       if (!run.needs) {
         run.needs = []
       }
-      run.needs = run.needs.map((r) => [scope[0], r].join(".."))
 
       if (!run.use) {
         return [run]
@@ -91,6 +90,10 @@ async function compile(
           newRun[key] = r[key]
         }
         newRun.with = run.with
+        if (!newRun.needs) {
+          newRun.needs = []
+        }
+        newRun.needs = newRun.needs.map((r) => [scope[0], r].join(".."))
         newRun.needs = [...new Set([...newRun.needs, ...run.needs])]
         return newRun
       })
