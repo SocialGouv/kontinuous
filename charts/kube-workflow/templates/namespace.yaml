@@ -7,7 +7,7 @@ metadata:
     {{- end }}
     field.cattle.io/projectId: {{ .Values.global.rancherProjectId }}
     kubeWorkflow/gitBranch: "{{ or .Values.global.gitBranch "" }}"
-    kubeWorkflow/mainNamespace: true
+    kubeWorkflow/mainNamespace: "true"
   labels:
     application: {{ .Values.global.repositoryName }}
   name: {{ .Values.global.namespace }}
