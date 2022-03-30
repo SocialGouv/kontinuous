@@ -26,7 +26,7 @@ const promiseFromChildProcess = (child) => {
         if (err.length > 0) {
           logger.warn(err.join())
         }
-        resolve(out.join())
+        resolve(Buffer.concat(out).toString())
       } else {
         reject(err.join())
       }
