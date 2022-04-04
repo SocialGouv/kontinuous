@@ -134,7 +134,8 @@ jobs:
       use: SocialGouv/kube-workflow/jobs/create-db # degit implicit github
       with:
         pgAdminSecretRefName: pg-scaleway
-    - name: db
+    - name: seed
+      needs: [db]
       # use: ./.kube-workflow/jobs/seed-db # local job, defined in project repository
       # use: https://github.com/SocialGouv/kube-workflow/jobs/seed-db # degit full url
       use: SocialGouv/kube-workflow/jobs/seed-db # degit implicit github
