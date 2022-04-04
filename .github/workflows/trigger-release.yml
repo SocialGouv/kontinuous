@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
 
       - name: Node setup
         uses: actions/setup-node@v2
