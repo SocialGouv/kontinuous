@@ -4,13 +4,13 @@ const fs = require("fs-extra")
 const yaml = require("js-yaml")
 const retry = require("async-retry")
 
-const logger = require("../../action/build/utils/logger")
-const shell = require("../../action/build/utils/shell")
+const logger = require("~/utils/logger")
+const shell = require("~/utils/shell")
 
-const timeLogger = require("../../action/build/utils/timeLogger")
-const build = require("./build")
-const getGitInfos = require("./get-git-infos")
-const selectEnv = require("./select-env")
+const timeLogger = require("~/utils/time-logger")
+const builder = require("~/build/builder")
+const getGitInfos = require("~/utils/get-git-infos")
+const selectEnv = require("~/utils/select-env")
 
 module.exports = async (options) => {
   const elapsed = timeLogger({
@@ -54,7 +54,7 @@ module.exports = async (options) => {
   let manifestsFile = options.F
   let manifests
   if (!manifestsFile) {
-    const result = await build(options)
+    const result = await builder(options)
     manifestsFile = result.manifestsFile
     manifests = result.manifests
   } else {

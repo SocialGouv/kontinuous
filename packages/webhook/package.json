@@ -1,0 +1,32 @@
+{
+  "name": "kube-webhook",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "author": "",
+  "scripts": {
+    "build": "node src/index.js build && ncc build src/index.js --source-map",
+    "dev": "nodemon --inspect --exec node --trace-warnings src/index.js dev",
+    "postinstall": "mkdir -p build && link-module-alias",
+    "lint": "eslint src",
+    "start": "node dist/index.js",
+    "test": "jest tests --passWithNoTests"
+  },
+  "dependencies": {
+    "@vercel/ncc": "^0.33.3",
+    "modjo": "^1.1.1"
+  },
+  "devDependencies": {
+    "link-module-alias": "^1.2.0",
+    "nodemon": "^2.0.12"
+  },
+  "peerDependencies": {
+    "kube-webhook": "*"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "_moduleAliases": {
+    "~": "src"
+  }
+}

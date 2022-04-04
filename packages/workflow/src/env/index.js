@@ -1,6 +1,6 @@
 const fs = require("fs-extra")
 
-const envsDir = `${__dirname}/envs`
+const envsDir = __dirname
 const getFiles = (path) =>
   fs
     .readdirSync(path)

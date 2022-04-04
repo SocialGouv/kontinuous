@@ -5,11 +5,11 @@ const fs = require("fs-extra")
 
 const { highlight, fromJson: themeFromJson } = require("cli-highlight")
 
-const builder = require("../../action/build/builder")
-const logger = require("../../action/build/utils/logger")
+const logger = require("~/utils/logger")
 
-const getGitInfos = require("./get-git-infos")
-const selectEnv = require("./select-env")
+const getGitInfos = require("~/utils/get-git-infos")
+const selectEnv = require("~/utils/select-env")
+const builder = require("./builder")
 
 module.exports = async (options) => {
   const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))
@@ -28,7 +28,7 @@ module.exports = async (options) => {
     GIT_REF,
     GIT_SHA,
 
-    KUBEWORKFLOW_PATH: path.resolve(__dirname, "../.."),
+    KUBEWORKFLOW_PATH: path.resolve(__dirname, "../../.."),
     WORKSPACE_PATH: cwd,
     GIT_REPOSITORY,
     KWBUILD_PATH: tmpDir,

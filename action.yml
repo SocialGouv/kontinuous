@@ -59,7 +59,7 @@ runs:
         HELM_ARGS: ${{ inputs.helmArgs }}
         DEBUG: "true"
       working-directory: "${{ github.action_path }}"
-      run: yarn build-manifests
+      run: yarn workflow:build
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2

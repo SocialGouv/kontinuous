@@ -146,7 +146,7 @@ spec:
       - command:
         - sh
         - -c
-        - npx degit ../../../jobs/create-db /action
+        - npx degit ../../../../../jobs/create-db /action
         env:
         - name: npm_config_cache
           value: /tmp/npm-cache
@@ -233,7 +233,7 @@ spec:
       - command:
         - sh
         - -c
-        - npx degit ../../../jobs/create-db /action
+        - npx degit ../../../../../jobs/create-db /action
         env:
         - name: npm_config_cache
           value: /tmp/npm-cache

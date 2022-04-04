@@ -2,7 +2,11 @@ const fs = require("fs-extra")
 
 const yaml = require("js-yaml")
 
-const getDirectoriesSync = require("./packages/workflow/build/utils/getDirectoriesSync")
+const getDirectoriesSync = (source) =>
+  fs
+    .readdirSync(source, { withFileTypes: true })
+    .filter((dirent) => dirent.isDirectory() || dirent.isSymbolicLink())
+    .map((dirent) => dirent.name)
 
 const chartsUpdater = {
   readVersion: (contents) => {

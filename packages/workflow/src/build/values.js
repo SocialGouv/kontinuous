@@ -46,6 +46,9 @@ function generateValues() {
   const ttl = isDev ? (isRenovate ? "1d" : "7d") : ""
 
   const sha = GIT_SHA
+
+  const shortSha = sha.slice(0, 7)
+
   const imageTag = isPreProduction
     ? `preprod-${sha}`
     : versionTagRe.test(gitBranch)
@@ -120,6 +123,7 @@ function generateValues() {
       gitBranch,
       jobNamespace,
       sha,
+      shortSha,
       env,
       extra: {
         jobs: {

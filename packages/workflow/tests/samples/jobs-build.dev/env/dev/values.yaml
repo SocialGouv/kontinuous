@@ -38,14 +38,14 @@ jobs:
 
     - name: build-app
       # use: SocialGouv/kube-workflow/jobs/build@master
-      use: ../../../jobs/build
+      use: ../../../../../jobs/build
       with:
         registrySecretRefName: harbor
         imagePackage: app
 
     - name: build-hasura
       # use: SocialGouv/kube-workflow/jobs/build@master
-      use: ../../../jobs/build
+      use: ../../../../../jobs/build
       with:
         registrySecretRefName: harbor
         imagePackage: hasura
@@ -53,7 +53,7 @@ jobs:
 
     - name: test-app
       # use: SocialGouv/kube-workflow/jobs/test@master
-      use: ../../../jobs/test
+      use: ../../../../../jobs/test
       needs: [build-app]
       with:
         dockerImage: '{{ printf $.outputs.buildApp "DOCKER_IMAGE" }}'
@@ -63,6 +63,6 @@ jobs-dev:
   runs:
     - name: db
       # use: SocialGouv/kube-workflow/jobs/create-db@master
-      use: ../../../jobs/create-db
+      use: ../../../../../jobs/create-db
       with:
         pgAdminSecretRefName: pg-scaleway

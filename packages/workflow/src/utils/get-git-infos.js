@@ -1,6 +1,6 @@
 const GitUrlParse = require("git-url-parse")
-const shell = require("../../action/build/utils/shell")
-const logger = require("../../action/build/utils/logger")
+const shell = require("~/utils/shell")
+const logger = require("~/utils/logger")
 
 let gitInfos
 

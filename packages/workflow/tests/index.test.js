@@ -5,11 +5,11 @@ const path = require("path")
 const { mkdtemp } = require("fs/promises")
 const fs = require("fs-extra")
 const dotenv = require("dotenv")
-const builder = require("../action/build/builder")
+const builder = require("~/build/builder")
 
-const getDirectoriesSync = require("../action/build/utils/getDirectoriesSync")
+const getDirectoriesSync = require("~/utils/get-directories-sync")
 
-const rootPath = path.resolve(`${__dirname}/..`)
+const rootPath = path.resolve(`${__dirname}/../../..`)
 
 const samplesDir = `${__dirname}/samples`
 const testdirs = getDirectoriesSync(samplesDir)

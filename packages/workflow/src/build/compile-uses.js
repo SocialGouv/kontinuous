@@ -4,7 +4,7 @@ const yaml = require("js-yaml")
 const { generate } = require("@socialgouv/env-slug")
 const degit = require("degit")
 
-const miniHash = require("./utils/miniHash")
+const miniHash = require("~/utils/mini-hash")
 const { buildCtx } = require("./ctx")
 
 const requireUse = async (use) => {
@@ -93,7 +93,7 @@ async function compile(
         if (!newRun.needs) {
           newRun.needs = []
         }
-        newRun.needs = newRun.needs.map((r) => [scope[0], r].join(".."))
+        newRun.needs = newRun.needs.map((r2) => [scope[0], r2].join(".."))
         newRun.needs = [...new Set([...newRun.needs, ...run.needs])]
         return newRun
       })

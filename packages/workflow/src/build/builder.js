@@ -5,17 +5,16 @@ const fs = require("fs-extra")
 const yaml = require("js-yaml")
 const defautlsDeep = require("lodash.defaultsdeep")
 
-const getDirectories = require("./utils/getDirectories")
-const asyncShell = require("./utils/asyncShell")
+const getDirectories = require("~/utils/get-directories")
+const asyncShell = require("~/utils/async-shell")
 
+const globalLogger = require("~/utils/logger")
+const getEnv = require("~/env")
 const generateValues = require("./values")
 const compileUses = require("./compile-uses")
 const compileOutputs = require("./compile-outputs")
 const compileChart = require("./compile-chart")
 const compiledefaultNs = require("./compile-default-ns")
-const getEnv = require("./env")
-
-const globalLogger = require("./utils/logger")
 
 const { buildCtx } = require("./ctx")
 
@@ -77,10 +76,8 @@ module.exports = async (envVars) => {
 
   logger.debug("Merge charts and overlays")
   await Promise.all([
-    fs.copy(`${KUBEWORKFLOW_PATH}/base`, `${KWBUILD_PATH}/base`),
     fs.copy(`${KUBEWORKFLOW_PATH}/charts`, `${KWBUILD_PATH}/charts`),
-    fs.copy(`${KUBEWORKFLOW_PATH}/common`, `${KWBUILD_PATH}/common`),
-    fs.copy(`${KUBEWORKFLOW_PATH}/env`, `${KWBUILD_PATH}/env`),
+    fs.copy(`${KUBEWORKFLOW_PATH}/kustomize`, `${KWBUILD_PATH}`),
   ])
 
   await Promise.all([

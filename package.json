@@ -1,5 +1,5 @@
 {
-  "name": "kube-workflow-root",
+  "name": "kube-workflow-dev",
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
@@ -24,9 +24,11 @@
     "prepare": "husky install",
     "lint": "yarn workspaces run --parallel lint",
     "release": "standard-version",
-    "retag": "git tag -f $(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1)",
+    "retag": "TAG=$(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1) && git tag -f $TAG && git push origin :refs/tags/$TAG && git push origin master --tags",
     "push": "git push -f --follow-tags origin master",
-    "delivery": "yarn release && yarn push"
+    "delivery": "yarn release && yarn push",
+    "workflow:build": "kube-workflow build",
+    "test": "yarn workspaces run --parallel test"
   },
   "lint-staged": {
     "*.js": [

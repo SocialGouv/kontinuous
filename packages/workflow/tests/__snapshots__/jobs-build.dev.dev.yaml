@@ -393,7 +393,7 @@ spec:
       - command:
         - /busybox/sh
         - -c
-        - \\"mkdir -p /kaniko/.docker\\\\necho \\\\\\"{\\\\\\\\\\\\\\"auths\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"$CI_REGISTRY\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_USER\\\\\\\\\\\\\\",\\\\\\\\\\\\\\"password\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\\\\\\\\\"}}}\\\\\\"
+        - \\"set -e\\\\nmkdir -p /kaniko/.docker\\\\necho \\\\\\"{\\\\\\\\\\\\\\"auths\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"$CI_REGISTRY\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_USER\\\\\\\\\\\\\\",\\\\\\\\\\\\\\"password\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\\\\\\\\\"}}}\\\\\\"
           > /kaniko/.docker/config.json\\\\nexport DOCKER_IMAGE=$CI_REGISTRY/test-jobs-build.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53\\\\n/kaniko/executor
           \\\\\\\\\\\\n  --context=dir:///workspace \\\\\\\\\\\\n  --dockerfile=/workspace/Dockerfile
           \\\\\\\\\\\\n  --destination=$DOCKER_IMAGE \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  --snapshotMode=time
@@ -477,7 +477,7 @@ spec:
       - command:
         - /busybox/sh
         - -c
-        - \\"mkdir -p /kaniko/.docker\\\\necho \\\\\\"{\\\\\\\\\\\\\\"auths\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"$CI_REGISTRY\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_USER\\\\\\\\\\\\\\",\\\\\\\\\\\\\\"password\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\\\\\\\\\"}}}\\\\\\"
+        - \\"set -e\\\\nmkdir -p /kaniko/.docker\\\\necho \\\\\\"{\\\\\\\\\\\\\\"auths\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"$CI_REGISTRY\\\\\\\\\\\\\\":{\\\\\\\\\\\\\\"username\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_USER\\\\\\\\\\\\\\",\\\\\\\\\\\\\\"password\\\\\\\\\\\\\\":\\\\\\\\\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\\\\\\\\\"}}}\\\\\\"
           > /kaniko/.docker/config.json\\\\nexport DOCKER_IMAGE=$CI_REGISTRY/test-jobs-build.dev/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53\\\\n/kaniko/executor
           \\\\\\\\\\\\n  --context=dir:///workspace/hasura \\\\\\\\\\\\n  --dockerfile=/workspace/hasura/Dockerfile
           \\\\\\\\\\\\n  --destination=$DOCKER_IMAGE \\\\\\\\\\\\n  --cache=true \\\\\\\\\\\\n  --snapshotMode=time
@@ -610,7 +610,7 @@ spec:
       - command:
         - sh
         - -c
-        - npx degit ../../../jobs/create-db /action
+        - npx degit ../../../../../jobs/create-db /action
         env:
         - name: npm_config_cache
           value: /tmp/npm-cache
@@ -697,7 +697,7 @@ spec:
       - command:
         - sh
         - -c
-        - npx degit ../../../jobs/create-db /action
+        - npx degit ../../../../../jobs/create-db /action
         env:
         - name: npm_config_cache
           value: /tmp/npm-cache

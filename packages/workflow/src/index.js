@@ -1,12 +1,11 @@
-#!/usr/bin/env node
 const { Command, Option } = require("commander")
 
 const program = new Command()
 
-const { configureDebug } = require("../action/build/utils/logger")
+const { configureDebug } = require("~/utils/logger")
 
-const build = require("./cli/build")
-const deploy = require("./cli/deploy")
+const build = require("~/build")
+const deploy = require("~/deploy")
 
 program
   .name("kube-workflow")
