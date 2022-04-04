@@ -1,0 +1,11 @@
+runs:
+  - name: seed-db
+    checkout: true
+    image: ghcr.io/socialgouv/docker/psql:7.0.0
+    envFrom:
+      - secretRef:
+          name: "{{ $.Values.global.pgSecretName }}"
+    env:
+      - name: SEED_PATH
+        value: "{{ $.with.seedPath }}"
+    run: /action/ensure-db.sh
