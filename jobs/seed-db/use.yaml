@@ -8,4 +8,4 @@ runs:
     env:
       - name: SEED_PATH
         value: "{{ $.with.seedPath }}"
-    run: /action/ensure-db.sh
+    run: /action/seed-db.sh
