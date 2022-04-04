@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.4.13 (2022-04-04)
+
+
+### Bug Fixes
+
+* import common templates ([ec37052](https://github.com/SocialGouv/kube-workflow/commit/ec3705294e8cfa5f7e1747acbda94c9af0f0c22c))
+
 ### 1.4.12 (2022-03-30)
 
 
