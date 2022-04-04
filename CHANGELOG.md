@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](https://github.com/SocialGouv/kube-workflow/compare/v1.5.0...v1.5.1) (2022-04-04)
+
+
+### Bug Fixes
+
+* app ingress ([b7777d7](https://github.com/SocialGouv/kube-workflow/commit/b7777d726e6c260c23d817ca158527fafb3fd337))
+
 ## 1.5.0 (2022-04-04)
 
 
