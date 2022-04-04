@@ -15,6 +15,13 @@ metadata:
   name: test-jobs-build-dev-feature-branch-1-312rwy
 ---
 apiVersion: v1
+automountServiceAccountToken: false
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+---
+apiVersion: v1
 kind: Service
 metadata:
   annotations:

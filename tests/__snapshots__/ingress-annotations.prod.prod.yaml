@@ -13,6 +13,13 @@ metadata:
   name: test-ingress-annotations.prod
 ---
 apiVersion: v1
+automountServiceAccountToken: false
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-ingress-annotations.prod
+---
+apiVersion: v1
 data:
   MB_ADMIN_EMAIL: admin@fabrique.social.gouv.fr
   MB_ANON_TRACKING_ENABLED: \\"false\\"

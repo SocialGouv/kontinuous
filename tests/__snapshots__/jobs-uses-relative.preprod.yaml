@@ -13,6 +13,13 @@ metadata:
     cert: wildcard
   name: test-jobs-uses-relative-preprod
 ---
+apiVersion: v1
+automountServiceAccountToken: false
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-jobs-uses-relative-preprod
+---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
