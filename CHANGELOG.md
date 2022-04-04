@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.5.0 (2022-04-04)
+
+
+### Features
+
+* add seed job ([559d2fd](https://github.com/SocialGouv/kube-workflow/commit/559d2fd8f194e23c6db35bcdd30c76adf9d15689))
+
 ### 1.4.13 (2022-04-04)
 
 
