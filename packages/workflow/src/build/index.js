@@ -28,7 +28,7 @@ module.exports = async (options) => {
     GIT_REF,
     GIT_SHA,
 
-    KUBEWORKFLOW_PATH: path.resolve(__dirname, "../../.."),
+    KUBEWORKFLOW_PATH: path.resolve(__dirname, "../../../.."),
     WORKSPACE_PATH: cwd,
     GIT_REPOSITORY,
     KWBUILD_PATH: tmpDir,

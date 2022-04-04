@@ -49,11 +49,18 @@ function generateValues() {
 
   const shortSha = sha.slice(0, 7)
 
-  const imageTag = isPreProduction
-    ? `preprod-${sha}`
-    : versionTagRe.test(gitBranch)
-    ? gitBranch.substring(1)
-    : `sha-${sha}`
+  let imageTag
+  if (isPreProduction) {
+    imageTag = `preprod-${sha}`
+  } else if (isProduction) {
+    if (versionTagRe.test(gitBranch)) {
+      gitBranch.substring(1)
+    } else {
+      imageTag = "prod"
+    }
+  } else {
+    imageTag = `sha-${sha}`
+  }
 
   const MAX_HOSTNAME_SIZE = 53
   const shortenHost = (hostname) =>

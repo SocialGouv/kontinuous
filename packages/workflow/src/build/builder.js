@@ -5,7 +5,6 @@ const fs = require("fs-extra")
 const yaml = require("js-yaml")
 const defautlsDeep = require("lodash.defaultsdeep")
 
-const getDirectories = require("~/utils/get-directories")
 const asyncShell = require("~/utils/async-shell")
 
 const globalLogger = require("~/utils/logger")
@@ -57,21 +56,6 @@ module.exports = async (envVars) => {
   buildCtx.set("logger", logger)
   asyncShell.ctx.set("logger", logger)
 
-  logger.debug(`Add symlinks kube-workflow chart`)
-  const charts = await getDirectories(`${KUBEWORKFLOW_PATH}/charts`)
-  await fs.ensureDir(`${KUBEWORKFLOW_PATH}/charts/kube-workflow/charts`)
-  await Promise.all(
-    charts.map(async (chartName) => {
-      if (chartName === "kube-workflow") {
-        return
-      }
-      const dest = `${KUBEWORKFLOW_PATH}/charts/kube-workflow/charts/${chartName}`
-      if (!(await fs.pathExists(dest))) {
-        await fs.symlink(`../../${chartName}`, dest)
-      }
-    })
-  )
-
   await fs.ensureDir(KWBUILD_PATH)
 
   logger.debug("Merge charts and overlays")
@@ -119,7 +103,13 @@ module.exports = async (envVars) => {
   logger.debug("Compiling additional subcharts instances")
   const chart = await compileChart(values)
 
-  logger.debug("Merge .kube-workflow env templates")
+  logger.debug("Merge .kube-workflow templates")
+  const commonTemplatesDir = `${KWBUILD_PATH}/common/templates`
+  if (await fs.pathExists(commonTemplatesDir)) {
+    await fs.copy(commonTemplatesDir, `${KWBUILD_PATH}/templates`, {
+      dereference: true,
+    })
+  }
   const envTemplatesDir = `${KWBUILD_PATH}/env/${ENVIRONMENT}/templates`
   if (await fs.pathExists(envTemplatesDir)) {
     await fs.copy(envTemplatesDir, `${KWBUILD_PATH}/templates`, {

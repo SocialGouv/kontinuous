@@ -8,7 +8,7 @@ const logger = require("~/utils/logger")
 const shell = require("~/utils/shell")
 
 const timeLogger = require("~/utils/time-logger")
-const builder = require("~/build/builder")
+const build = require("~/build")
 const getGitInfos = require("~/utils/get-git-infos")
 const selectEnv = require("~/utils/select-env")
 
@@ -54,7 +54,7 @@ module.exports = async (options) => {
   let manifestsFile = options.F
   let manifests
   if (!manifestsFile) {
-    const result = await builder(options)
+    const result = await build(options)
     manifestsFile = result.manifestsFile
     manifests = result.manifests
   } else {
