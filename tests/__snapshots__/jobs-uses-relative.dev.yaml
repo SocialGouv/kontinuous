@@ -15,6 +15,13 @@ metadata:
   name: test-jobs-uses-relative-feature-branch-1
 ---
 apiVersion: v1
+automountServiceAccountToken: false
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-jobs-uses-relative-feature-branch-1
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels: {}

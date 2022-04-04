@@ -13,6 +13,13 @@ metadata:
     cert: wildcard
   name: test-volume-add-preprod
 ---
+apiVersion: v1
+automountServiceAccountToken: false
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-volume-add-preprod
+---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:

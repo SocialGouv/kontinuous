@@ -13,6 +13,13 @@ metadata:
   name: test-redirect.prod
 ---
 apiVersion: v1
+automountServiceAccountToken: false
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-redirect.prod
+---
+apiVersion: v1
 kind: Service
 metadata:
   annotations:

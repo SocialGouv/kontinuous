@@ -14,6 +14,13 @@ metadata:
   name: test-sample-1-preprod
 ---
 apiVersion: v1
+automountServiceAccountToken: false
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-sample-1-preprod
+---
+apiVersion: v1
 data:
   ACCOUNT_MAIL_SENDER: contact@fabrique.social.gouv.fr
   GRAPHQL_ENDPOINT: http://hasura/v1/graphql

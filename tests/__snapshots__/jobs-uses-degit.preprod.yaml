@@ -13,6 +13,12 @@ metadata:
   name: test-jobs-uses-degit-preprod
   namespace: test-jobs-uses-degit-preprod
 ---
+apiVersion: v1
+automountServiceAccountToken: false
+kind: ServiceAccount
+metadata:
+  name: default
+---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
