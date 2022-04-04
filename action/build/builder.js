@@ -122,7 +122,13 @@ module.exports = async (envVars) => {
   logger.debug("Compiling additional subcharts instances")
   const chart = await compileChart(values)
 
-  logger.debug("Merge .kube-workflow env templates")
+  logger.debug("Merge .kube-workflow templates")
+  const commonTemplatesDir = `${KWBUILD_PATH}/common/templates`
+  if (await fs.pathExists(commonTemplatesDir)) {
+    await fs.copy(commonTemplatesDir, `${KWBUILD_PATH}/templates`, {
+      dereference: true,
+    })
+  }
   const envTemplatesDir = `${KWBUILD_PATH}/env/${ENVIRONMENT}/templates`
   if (await fs.pathExists(envTemplatesDir)) {
     await fs.copy(envTemplatesDir, `${KWBUILD_PATH}/templates`, {
