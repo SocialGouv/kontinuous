@@ -24,7 +24,6 @@ module.exports = (reloadCache = false) => {
       }
       GIT_REPOSITORY = pathname
     } catch (e) {
-      console.log(GIT_REPOSITORY)
       logger.error(
         "Unable to retrieve git info, ensure that you have git installed and the current directroy is a git repository"
       )

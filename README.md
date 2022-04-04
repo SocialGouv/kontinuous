@@ -60,9 +60,11 @@ pre-requisites:
   ```sh
   curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
   ```
-- kustomize v4 [install guide](https://kubectl.docs.kubernetes.io/installation/kustomize/binaries/)
+- kubeval [install guide](https://www.kubeval.com/installation/)
   ```sh
-  curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+  curl -sL https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz | tar xz -C /tmp/ \
+    && mv /tmp/kubeval /usr/local/bin/kubeval \
+    && chmod +x /usr/local/bin/kubeval
   ```
 - node >= 14
 - yarn
@@ -158,50 +160,24 @@ All theses files can use the Helm templating syntax.
 
 Usually, that's where you put your ConfigMap and SealedSecrets ressources.
 
-## Override and extends kustomizations
-The kustomization patches are applied after Helm template rendering.
+## Hack the manifests
+You can modify anything you want using `post-renderer` executable that you can put at `.kube-workflow/post-renderer`.
+This can be a simple script and use `jq`, or you can call kustomize from it.
+The post-renderer will receive manifest in json format, for easier usage with `jq`:
+`/kube-workflow/post-render`:
+```sh
+#!/bin/sh
 
-The kustomization entrypoint is `$KUBEWORKFLOW_ACTION/env/$ENVIRONMENT/kustomization.yaml`.
+# load into variable from standard input
+manifest=$(cat /dev/stdin)
 
-To override it, create a file called `.kube-workflow/env/$ENVIRONMENT/kustomization.yaml` in your project and containing:
-```yaml
-resources:
-- ../../common
+# arbitrary modify some stuf
+manifest=`echo "$manifest" | jq 'select(.kind = Ingress) | .annotation.foo = "bar"'`
 
-patches:
-# ... put your patches here
+# output
+echo "$manifest"
 ```
-By doing this way you just optouted from generic kustomization for the selected environment.
-
-If you want (and more often you want) to keep the generic kustomization, containing some infra logic defined by the advised SRE team, you can extends it like this.
-```yaml
-resources:
-- ../../common.autodevops
-
-patches:
-# ... put your patches here
-```
-
-You can do it as well for the common base file called by environment kustomizations, just add a file called `.kube-workflow/common/kustomization.yaml` in your project and containing:
-```yaml
-resources:
-# - ../base # here is if you want to optout
-- ../common.autodevops # here is if you want to extends from autodevops default settings
-
-patches:
-- target:
-    kind: Ingress
-  patch: |
-    - op: add
-      path: "/metadata/annotations~1nginx.ingress.kubernetes.io~1configuration-snippet"
-      value: |
-          more_set_headers "Content-Security-Policy: default-src 'none'; connect-src 'self' https://*.gouv.fr; font-src 'self'; img-src 'self'; prefetch-src 'self' https://*.gouv.fr; script-src 'self' https://*.gouv.fr; frame-src 'self' https://*.gouv.fr; style-src 'self' 'unsafe-inline'";
-          more_set_headers "X-Frame-Options: deny";
-          more_set_headers "X-XSS-Protection: 1; mode=block";
-          more_set_headers "X-Content-Type-Options: nosniff";
-```
-
-If you think you patches can be reused by other project, contribute to [common/patches](common/patches) and `env/*/patches` folders of the action by sharing them.
+see [jq documentation](https://stedolan.github.io/jq/manual/#Invokingjq)
 
 ## Charts re-use
 
@@ -234,7 +210,7 @@ To upgrade snapshots run `yarn test -u`.
 
 ### Contribute adding more Helm charts
 New charts are welcome in folder [charts/](charts/).
-More options on existing charts will be carefully design, in case of doubt, or if you don't want to wait, you can hack everything using kustomize from your repository. Feel free, then give us feedback to ensure we follow best practices and are preserving project maintainability.
+More options on existing charts will be carefully design, in case of doubt, or if you don't want to wait, you can hack everything using post-renderer from your repository. Feel free, then give us feedback to ensure we follow best practices and are preserving project maintainability.
 
 Wee need:
 - oauth2-proxy-service

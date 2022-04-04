@@ -1,5 +1,5 @@
 global:
-  isProduction: false
+  isProd: false
   namespace: default
   repositoryName: the-awesome
   host:

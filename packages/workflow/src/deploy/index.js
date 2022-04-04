@@ -103,7 +103,7 @@ module.exports = async (options) => {
         proc.stdin.write(JSON.stringify(namespaceManifest))
 
         proc.stdout.on("data", (data) => {
-          console.log(data.toString())
+          process.stdout.write(data.toString())
         })
         proc.stderr.on("data", (data) => {
           const message = data.toString()
@@ -167,7 +167,7 @@ module.exports = async (options) => {
         const proc = spawn(cmd, args, { encoding: "utf-8" })
 
         proc.stdout.on("data", (data) => {
-          console.log(data.toString())
+          process.stdout.write(data.toString())
         })
         proc.stderr.on("data", (data) => {
           logger.warn(data.toString())

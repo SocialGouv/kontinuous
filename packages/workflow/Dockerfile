@@ -40,13 +40,18 @@ RUN curl -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/${KAP
   && mv /tmp/kapp /usr/local/bin/kapp \
   && chmod +x /usr/local/bin/kapp
 
+# ARG KUBEVAL_VERSION=v0.16.1
+# ENV KUBEVAL_VERSION=$KUBEVAL_VERSION
+# RUN curl -sL https://github.com/instrumenta/kubeval/releases/download/${KUBEVAL_VERSION}/kubeval-linux-amd64.tar.gz | tar xz -C /tmp/ \
+#   && mv /tmp/kubeval /usr/local/bin/kubeval \
+#   && chmod +x /usr/local/bin/kubeval
 
 RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1001 ubuntu
 RUN mkdir -p /opt && chown 1001:1001 /opt
 
 RUN mkdir -p /opt/kube-workflow
 WORKDIR /opt/kube-workflow
-COPY package.json yarn.lock ./
+COPY packages/workflow/package.json yarn.lock ./
 RUN chown -R 1001:1001 .
 
 # Keep yarn install cache when bumping version and dependencies still the sames
@@ -54,12 +59,12 @@ RUN node -e " \
   const package = JSON.parse(fs.readFileSync('package.json')); \
   const packageZero = { ...package, version: '0.0.0' };  \
   fs.writeFileSync('package.json', JSON.stringify(packageZero));"
-RUN yarn install --frozen-lockfile --production \
+RUN yarn install --frozen-lockfile --production --ignore-scripts \
   && yarn cache clean
+COPY packages/workflow/ ./
+RUN yarn postinstall
 
-COPY . ./
 RUN chown -R 1001:1001 .
-
 RUN mkdir -p /workspace
 RUN chown -R 1001:1001 /workspace
 WORKDIR /workspace

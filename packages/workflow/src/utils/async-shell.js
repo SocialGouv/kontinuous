@@ -6,7 +6,7 @@ const globalLogger = require("./logger")
 
 const ctx = nctx.create("asyncShell")
 
-const promiseFromChildProcess = (child) => {
+const promiseFromChildProcess = (child, callback) => {
   const logger = ctx.get("logger") || globalLogger
 
   const out = []
@@ -20,7 +20,10 @@ const promiseFromChildProcess = (child) => {
     }
     err.push(data)
   })
-  return new Promise(function (resolve, reject) {
+  return new Promise(async (resolve, reject) => {
+    if (callback) {
+      await callback(child)
+    }
     child.on("close", (code) => {
       if (code === 0) {
         if (err.length > 0) {
@@ -34,14 +37,17 @@ const promiseFromChildProcess = (child) => {
   })
 }
 
-const asyncShell = (arg, options = {}) => {
+const asyncShell = (arg, options = {}, callback = null) => {
   if (typeof arg === "string") {
-    arg = arg.split(" ").filter((a) => !!a)
+    arg = arg
+      .split(" ")
+      .map((a) => a.trim())
+      .filter((a) => !!a)
   }
   const [cmd, ...args] = arg
   const defaultOptions = { encoding: "utf8" }
   const childProcess = spawn(cmd, args, { ...defaultOptions, ...options })
-  return promiseFromChildProcess(childProcess)
+  return promiseFromChildProcess(childProcess, callback)
 }
 
 module.exports = asyncShell

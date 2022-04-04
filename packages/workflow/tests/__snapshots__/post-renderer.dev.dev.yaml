@@ -1,16 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`redirect.prod.prod 1`] = `
+exports[`post-renderer.dev.dev 1`] = `
 "apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
     field.cattle.io/projectId: \\"1234\\"
+    janitor/ttl: 7d
     kubeWorkflow/gitBranch: feature-branch-1
     kubeWorkflow/mainNamespace: \\"true\\"
   labels:
-    application: test-redirect.prod
-  name: test-redirect.prod
+    application: test-post-renderer.dev
+    cert: wildcard
+  name: test-post-renderer-dev-feature-branch-1-5yqz79
 ---
 apiVersion: v1
 kind: Service
@@ -19,10 +21,10 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
   labels:
-    application: test-redirect.prod
+    application: test-post-renderer.dev
     component: app
   name: app
-  namespace: test-redirect.prod
+  namespace: test-post-renderer-dev-feature-branch-1-5yqz79
 spec:
   ports:
   - name: http
@@ -36,18 +38,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kapp.k14s.io/change-group: autodevops/test-redirect.prod
-    kapp.k14s.io/change-group.app: autodevops/app.test-redirect.prod
+    kapp.k14s.io/change-group: autodevops/test-post-renderer-dev-feature-branch-1-5yqz79
+    kapp.k14s.io/change-group.app: autodevops/app.test-post-renderer-dev-feature-branch-1-5yqz79
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   labels:
-    application: test-redirect.prod
+    application: test-post-renderer.dev
     component: app
   name: app
-  namespace: test-redirect.prod
+  namespace: test-post-renderer-dev-feature-branch-1-5yqz79
 spec:
   replicas: 1
   selector:
@@ -56,13 +58,13 @@ spec:
   template:
     metadata:
       labels:
-        application: test-redirect.prod
+        application: test-post-renderer.dev
         component: app
     spec:
       containers:
       - env: null
         envFrom: null
-        image: ghcr.io/socialgouv/test-redirect.prod/app:prod
+        image: ghcr.io/socialgouv/test-post-renderer.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53
         livenessProbe:
           failureThreshold: 15
           httpGet:
@@ -105,17 +107,15 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/ingress.class: nginx
-    kubernetes.io/tls-acme: \\"true\\"
   labels:
-    application: test-redirect.prod
+    application: test-post-renderer.dev
     component: app
   name: app
-  namespace: test-redirect.prod
+  namespace: test-post-renderer-dev-feature-branch-1-5yqz79
 spec:
   rules:
-  - host: transco.travail-emploi.gouv.fr
+  - host: test-post-renderer-dev-feature-branch-1-5yqz79.dev.fabrique.social.gouv.fr
     http:
       paths:
       - backend:
@@ -127,32 +127,14 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - transco.travail-emploi.gouv.fr
+    - test-post-renderer-dev-feature-branch-1-5yqz79.dev.fabrique.social.gouv.fr
     secretName: app-crt
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/ingress.class: nginx
-    kubernetes.io/tls-acme: \\"true\\"
-    nginx.ingress.kubernetes.io/permanent-redirect: https://transco.travail-emploi.gouv.fr$request_uri
-  name: app-redirect
-  namespace: test-redirect.prod
-spec:
-  rules:
-  - host: test-redirect.prod.fabrique.social.gouv.fr
-  tls:
-  - hosts:
-    - test-redirect.prod.fabrique.social.gouv.fr
-    secretName: app-redirect
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: netpol-ingress
-  namespace: test-redirect.prod
+  namespace: test-post-renderer-dev-feature-branch-1-5yqz79
 spec:
   ingress:
   - from:

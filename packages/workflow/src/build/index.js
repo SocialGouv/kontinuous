@@ -52,7 +52,7 @@ module.exports = async (options) => {
         theme,
       })
     }
-    console.log(manifests)
+    process.stdout.write(manifests)
   } else {
     logger.info(`Built manifests files: ${manifestsFile}`)
   }

@@ -317,7 +317,7 @@ spec:
   tls:
   - hosts:
     - metabase-app1-test-metabase.fabrique.social.gouv.fr
-    secretName: test-metabase-crt
+    secretName: metabase-app1-crt
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -346,7 +346,7 @@ spec:
   tls:
   - hosts:
     - metabase-app2-test-metabase.fabrique.social.gouv.fr
-    secretName: test-metabase-crt
+    secretName: metabase-app2-crt
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy

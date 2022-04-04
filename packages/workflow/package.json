@@ -47,7 +47,8 @@
     "~": "src"
   },
   "bin": {
-    "kube-workflow": "./bin/kube-workflow"
+    "kube-workflow": "./bin/kube-workflow",
+    "post-renderer": "./bin/post-renderer"
   },
   "files": [
     "**"

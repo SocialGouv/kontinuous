@@ -4,8 +4,6 @@ repository:
 gitBranch: 
 runs: []
 image: "debian:stable"
-ingress:
-  annotations: {}
 needs: []
 sharedStorage:
   enabled: false

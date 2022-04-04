@@ -1,6 +1,0 @@
-- op: add
-  path: "/metadata/annotations/cert-manager.io~1cluster-issuer"
-  value: letsencrypt-prod
-- op: add
-  path: "/metadata/annotations/kubernetes.io~1tls-acme"
-  value: 'true'

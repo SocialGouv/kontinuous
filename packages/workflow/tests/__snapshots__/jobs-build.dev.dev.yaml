@@ -905,7 +905,7 @@ spec:
   tls:
   - hosts:
     - hasura-test-jobs-build-dev-feature-branch-1-312rwy.dev.fabrique.social.gouv.fr
-    secretName: wildcard-crt
+    secretName: hasura-crt
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

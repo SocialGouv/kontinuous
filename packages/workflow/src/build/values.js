@@ -22,22 +22,22 @@ function generateValues() {
   const branchSlug = generate(gitBranch)
 
   const env = ENVIRONMENT
-  const isProduction = env === "prod"
-  const isPreProduction = env === "preprod"
-  const isDev = !(isProduction || isPreProduction)
+  const isProd = env === "prod"
+  const isPreProd = env === "preprod"
+  const isDev = !(isProd || isPreProd)
 
   const repository = GIT_REPOSITORY
   const repositoryName = repository.split("/").pop()
 
-  const subdomain = isProduction
+  const subdomain = isProd
     ? repositoryName
-    : isPreProduction
+    : isPreProd
     ? `${repositoryName}-preprod`
     : generate(`${repositoryName}-${gitBranch}`)
 
-  const namespace = isProduction
+  const namespace = isProd
     ? repositoryName
-    : isPreProduction
+    : isPreProd
     ? `${repositoryName}-preprod`
     : generate(`${repositoryName}-${gitBranch}`)
 
@@ -50,9 +50,9 @@ function generateValues() {
   const shortSha = sha.slice(0, 7)
 
   let imageTag
-  if (isPreProduction) {
+  if (isPreProd) {
     imageTag = `preprod-${sha}`
-  } else if (isProduction) {
+  } else if (isProd) {
     if (versionTagRe.test(gitBranch)) {
       gitBranch.substring(1)
     } else {
@@ -68,9 +68,7 @@ function generateValues() {
 
   const rootSocialGouvDomain = "fabrique.social.gouv.fr"
 
-  const domain = isProduction
-    ? rootSocialGouvDomain
-    : `dev.${rootSocialGouvDomain}`
+  const domain = isProd ? rootSocialGouvDomain : `dev.${rootSocialGouvDomain}`
 
   const host = `${shortenHost(subdomain)}.${domain}`
 
@@ -79,25 +77,23 @@ function generateValues() {
 
   const rancherProjectId = RANCHER_PROJECT_ID
 
-  const certSecretName = isProduction ? `${repositoryName}-crt` : "wildcard-crt"
-
-  const pgSecretName = isProduction
+  const pgSecretName = isProd
     ? "pg-user"
-    : isPreProduction
+    : isPreProd
     ? "pg-user-preprod"
     : `pg-user-${branchSlug}`
 
   const productionDatabase = repositoryName
 
-  const pgDatabase = isProduction
+  const pgDatabase = isProd
     ? productionDatabase
-    : isPreProduction
+    : isPreProd
     ? "preprod"
     : `autodevops_${branchSlug}`
 
-  const pgUser = isProduction
+  const pgUser = isProd
     ? productionDatabase
-    : isPreProduction
+    : isPreProd
     ? "preprod"
     : `user_${branchSlug}`
 
@@ -111,12 +107,12 @@ function generateValues() {
     global: {
       repository,
       repositoryName,
-      isProduction,
-      isPreProduction,
+      isDev,
+      isProd,
+      isPreProd,
       ttl,
       namespace,
       rancherProjectId,
-      certSecretName,
       pgSecretName,
       pgDatabase,
       pgUser,

@@ -29,7 +29,6 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    kapp.k14s.io/delete-strategy: orphan
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
   labels:
@@ -50,7 +49,6 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    kapp.k14s.io/delete-strategy: orphan
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
   labels:
@@ -71,7 +69,6 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    kapp.k14s.io/delete-strategy: orphan
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
   labels:
@@ -92,7 +89,6 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    kapp.k14s.io/delete-strategy: orphan
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
   labels:
@@ -116,7 +112,6 @@ metadata:
     kapp.k14s.io/change-group: autodevops/test-sample-1-feature-branch-1
     kapp.k14s.io/change-group.app: autodevops/app.test-sample-1-feature-branch-1
     kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/delete-strategy: orphan
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
@@ -202,7 +197,6 @@ metadata:
     kapp.k14s.io/change-group: autodevops/test-sample-1-feature-branch-1
     kapp.k14s.io/change-group.app-2nd-instance: autodevops/app-2nd-instance.test-sample-1-feature-branch-1
     kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/delete-strategy: orphan
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
@@ -279,7 +273,6 @@ metadata:
     kapp.k14s.io/change-group.hasura: autodevops/hasura.test-sample-1-feature-branch-1
     kapp.k14s.io/change-rule.db: upsert after upserting autodevops/db.test-sample-1-feature-branch-1
     kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/delete-strategy: orphan
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
@@ -354,7 +347,6 @@ metadata:
     kapp.k14s.io/change-group.pgweb: autodevops/pgweb.test-sample-1-feature-branch-1
     kapp.k14s.io/change-rule.db: upsert after upserting autodevops/db.test-sample-1-feature-branch-1
     kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/delete-strategy: orphan
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
@@ -458,11 +450,11 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-  annotations/nginx.ingress.kubernetes.io/configuration-snippet: |-
-    more_set_headers \\"Content-Security-Policy: default-src 'none'; connect-src 'self' https://*.gouv.fr; font-src 'self'; img-src 'self'; prefetch-src 'self' https://*.gouv.fr; script-src 'self' https://*.gouv.fr; frame-src 'self' https://*.gouv.fr; style-src 'self' 'unsafe-inline'\\";
-    more_set_headers \\"X-Frame-Options: deny\\";
-    more_set_headers \\"X-XSS-Protection: 1; mode=block\\";
-    more_set_headers \\"X-Content-Type-Options: nosniff\\";
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers \\"Content-Security-Policy: default-src 'none'; connect-src 'self' https://*.gouv.fr; font-src 'self'; img-src 'self'; prefetch-src 'self' https://*.gouv.fr; script-src 'self' https://*.gouv.fr; frame-src 'self' https://*.gouv.fr; style-src 'self' 'unsafe-inline'\\";
+      more_set_headers \\"X-Frame-Options: deny\\";
+      more_set_headers \\"X-XSS-Protection: 1; mode=block\\";
+      more_set_headers \\"X-Content-Type-Options: nosniff\\";
   labels:
     application: test-sample-1
     component: app
@@ -483,18 +475,18 @@ spec:
   tls:
   - hosts:
     - test-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
-    secretName: wildcard-crt
+    secretName: app-crt
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-  annotations/nginx.ingress.kubernetes.io/configuration-snippet: |-
-    more_set_headers \\"Content-Security-Policy: default-src 'none'; connect-src 'self' https://*.gouv.fr; font-src 'self'; img-src 'self'; prefetch-src 'self' https://*.gouv.fr; script-src 'self' https://*.gouv.fr; frame-src 'self' https://*.gouv.fr; style-src 'self' 'unsafe-inline'\\";
-    more_set_headers \\"X-Frame-Options: deny\\";
-    more_set_headers \\"X-XSS-Protection: 1; mode=block\\";
-    more_set_headers \\"X-Content-Type-Options: nosniff\\";
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers \\"Content-Security-Policy: default-src 'none'; connect-src 'self' https://*.gouv.fr; font-src 'self'; img-src 'self'; prefetch-src 'self' https://*.gouv.fr; script-src 'self' https://*.gouv.fr; frame-src 'self' https://*.gouv.fr; style-src 'self' 'unsafe-inline'\\";
+      more_set_headers \\"X-Frame-Options: deny\\";
+      more_set_headers \\"X-XSS-Protection: 1; mode=block\\";
+      more_set_headers \\"X-Content-Type-Options: nosniff\\";
   labels:
     application: test-sample-1
     component: app-2nd-instance
@@ -515,18 +507,13 @@ spec:
   tls:
   - hosts:
     - test-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
-    secretName: wildcard-crt
+    secretName: app-2nd-instance-crt
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-  annotations/nginx.ingress.kubernetes.io/configuration-snippet: |-
-    more_set_headers \\"Content-Security-Policy: default-src 'none'; connect-src 'self' https://*.gouv.fr; font-src 'self'; img-src 'self'; prefetch-src 'self' https://*.gouv.fr; script-src 'self' https://*.gouv.fr; frame-src 'self' https://*.gouv.fr; style-src 'self' 'unsafe-inline'\\";
-    more_set_headers \\"X-Frame-Options: deny\\";
-    more_set_headers \\"X-XSS-Protection: 1; mode=block\\";
-    more_set_headers \\"X-Content-Type-Options: nosniff\\";
   labels:
     application: test-sample-1
     component: hasura
@@ -547,18 +534,13 @@ spec:
   tls:
   - hosts:
     - hasura-test-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
-    secretName: wildcard-crt
+    secretName: hasura-crt
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-  annotations/nginx.ingress.kubernetes.io/configuration-snippet: |-
-    more_set_headers \\"Content-Security-Policy: default-src 'none'; connect-src 'self' https://*.gouv.fr; font-src 'self'; img-src 'self'; prefetch-src 'self' https://*.gouv.fr; script-src 'self' https://*.gouv.fr; frame-src 'self' https://*.gouv.fr; style-src 'self' 'unsafe-inline'\\";
-    more_set_headers \\"X-Frame-Options: deny\\";
-    more_set_headers \\"X-XSS-Protection: 1; mode=block\\";
-    more_set_headers \\"X-Content-Type-Options: nosniff\\";
   labels:
     application: test-sample-1
     component: pgweb
@@ -579,7 +561,7 @@ spec:
   tls:
   - hosts:
     - pgweb-test-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
-    secretName: wildcard-crt
+    secretName: pgweb-crt
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy

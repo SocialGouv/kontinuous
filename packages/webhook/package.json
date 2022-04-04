@@ -14,10 +14,9 @@
   },
   "dependencies": {
     "@vercel/ncc": "^0.33.3",
-    "modjo": "^1.1.1"
+    "link-module-alias": "^1.2.0"
   },
   "devDependencies": {
-    "link-module-alias": "^1.2.0",
     "nodemon": "^2.0.12"
   },
   "peerDependencies": {

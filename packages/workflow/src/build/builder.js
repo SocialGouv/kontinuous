@@ -58,16 +58,9 @@ module.exports = async (envVars) => {
 
   await fs.ensureDir(KWBUILD_PATH)
 
-  logger.debug("Merge charts and overlays")
-  await Promise.all([
-    fs.copy(`${KUBEWORKFLOW_PATH}/charts`, `${KWBUILD_PATH}/charts`),
-    fs.copy(`${KUBEWORKFLOW_PATH}/kustomize`, `${KWBUILD_PATH}`),
-  ])
+  logger.debug("Import charts")
+  await fs.copy(`${KUBEWORKFLOW_PATH}/charts`, `${KWBUILD_PATH}/charts`)
 
-  await Promise.all([
-    fs.copy(`${KWBUILD_PATH}/env`, `${KWBUILD_PATH}/env.autodevops`),
-    fs.copy(`${KWBUILD_PATH}/common`, `${KWBUILD_PATH}/common.autodevops`),
-  ])
   const workspaceKubeworkflowPath = `${WORKSPACE_PATH}${WORKSPACE_SUBPATH}`
   if (await fs.pathExists(workspaceKubeworkflowPath)) {
     await fs.copy(`${workspaceKubeworkflowPath}`, `${KWBUILD_PATH}`, {
@@ -76,21 +69,23 @@ module.exports = async (envVars) => {
   }
 
   logger.debug("Generate values file")
-  const getValuesFile = async (file) => {
-    for (const filePath of [
-      `${KWBUILD_PATH}/${file}.yaml`,
-      `${KWBUILD_PATH}/${file}.yml`,
-    ]) {
-      if (await fs.pathExists(filePath)) {
-        return yaml.load(await fs.readFile(filePath, { encoding: "utf-8" }))
+  const getValuesFile = async (...files) => {
+    for (const file of files) {
+      for (const filePath of [
+        `${KWBUILD_PATH}/${file}.yaml`,
+        `${KWBUILD_PATH}/${file}.yml`,
+      ]) {
+        if (await fs.pathExists(filePath)) {
+          return yaml.load(await fs.readFile(filePath, { encoding: "utf-8" }))
+        }
       }
     }
     return null
   }
   const defaultValues = generateValues()
   const [commonValues, envValues] = await Promise.all([
-    getValuesFile("common/values"),
-    getValuesFile(`env/${ENVIRONMENT}/values`),
+    getValuesFile("values", "common/values"),
+    getValuesFile(`${ENVIRONMENT}/values`, `env/${ENVIRONMENT}/values`),
   ])
   const values = defautlsDeep({}, envValues, commonValues, defaultValues)
 
@@ -104,17 +99,24 @@ module.exports = async (envVars) => {
   const chart = await compileChart(values)
 
   logger.debug("Merge .kube-workflow templates")
-  const commonTemplatesDir = `${KWBUILD_PATH}/common/templates`
-  if (await fs.pathExists(commonTemplatesDir)) {
-    await fs.copy(commonTemplatesDir, `${KWBUILD_PATH}/templates`, {
-      dereference: true,
-    })
+  for (const dir of ["templates", "common/templates"]) {
+    const templatesDir = `${KWBUILD_PATH}/${dir}`
+    if (await fs.pathExists(templatesDir)) {
+      await fs.copy(templatesDir, `${KWBUILD_PATH}/templates`, {
+        dereference: true,
+      })
+    }
   }
-  const envTemplatesDir = `${KWBUILD_PATH}/env/${ENVIRONMENT}/templates`
-  if (await fs.pathExists(envTemplatesDir)) {
-    await fs.copy(envTemplatesDir, `${KWBUILD_PATH}/templates`, {
-      dereference: true,
-    })
+  for (const dir of [
+    `${ENVIRONMENT}/templates`,
+    `env/${ENVIRONMENT}/templates`,
+  ]) {
+    const templatesDir = `${KWBUILD_PATH}/${dir}`
+    if (await fs.pathExists(templatesDir)) {
+      await fs.copy(templatesDir, `${KWBUILD_PATH}/templates`, {
+        dereference: true,
+      })
+    }
   }
 
   logger.debug(`Import template in kube-workflow chart`)
@@ -137,28 +139,25 @@ module.exports = async (envVars) => {
   await fs.writeFile(`${KWBUILD_PATH}/values.json`, JSON.stringify(values))
 
   logger.debug("Build base manifest using helm")
-  let baseManifests = await asyncShell(
-    `helm template -f values.json ${HELM_ARGS} charts/kube-workflow`,
+  let manifests = await asyncShell(
+    `
+      helm template
+        -f values.json
+        --post-renderer ${KUBEWORKFLOW_PATH}/packages/workflow/bin/post-renderer
+        ${HELM_ARGS}
+        charts/kube-workflow
+    `,
     { cwd: KWBUILD_PATH }
   )
 
   logger.debug("Set default namespace")
-  baseManifests = await compiledefaultNs(baseManifests, values)
+  manifests = await compiledefaultNs(manifests, values)
 
-  logger.debug("Write base manifests file")
-  await fs.writeFile(`${KWBUILD_PATH}/base/manifests.yaml`, baseManifests)
-
-  logger.debug("Build final manifests using kustomize")
-  const manifests = await asyncShell(
-    `kustomize build --load-restrictor=LoadRestrictionsNone env/${ENVIRONMENT}`,
-    { cwd: KWBUILD_PATH }
-  )
-
-  logger.debug(`Write final manifests file`)
+  logger.debug("Write manifests file")
   const manifestsFile = `${KWBUILD_PATH}/manifests.yaml`
   await fs.writeFile(manifestsFile, manifests)
 
-  logger.debug(`Built manifests: ${KWBUILD_PATH}/manifests.yaml`)
+  logger.debug(`Built manifests: ${manifestsFile}`)
 
   return {
     manifestsFile,
