@@ -5,12 +5,11 @@ exports[`metabase.preprod 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: \\"1234\\"
+    field.cattle.io/projectId: '1234'
     kubeWorkflow/gitBranch: feature-branch-1
-    kubeWorkflow/mainNamespace: \\"true\\"
+    kubeWorkflow/mainNamespace: 'true'
   labels:
     application: test-metabase
-    cert: wildcard
   name: test-metabase-preprod
 ---
 apiVersion: networking.k8s.io/v1
@@ -20,18 +19,18 @@ metadata:
   namespace: test-metabase-preprod
 spec:
   ingress:
-  - from:
-    - podSelector: {}
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          network-policy/source: ingress-controller
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          network-policy/source: monitoring
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
   podSelector: {}
   policyTypes:
-  - Ingress
+    - Ingress
 "
 `;

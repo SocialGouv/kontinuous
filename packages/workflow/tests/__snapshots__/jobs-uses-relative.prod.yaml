@@ -5,9 +5,9 @@ exports[`jobs-uses-relative.prod 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: \\"1234\\"
+    field.cattle.io/projectId: '1234'
     kubeWorkflow/gitBranch: feature-branch-1
-    kubeWorkflow/mainNamespace: \\"true\\"
+    kubeWorkflow/mainNamespace: 'true'
   labels:
     application: test-jobs-uses-relative
   name: test-jobs-uses-relative
@@ -19,18 +19,18 @@ metadata:
   namespace: test-jobs-uses-relative
 spec:
   ingress:
-  - from:
-    - podSelector: {}
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          network-policy/source: ingress-controller
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          network-policy/source: monitoring
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
   podSelector: {}
   policyTypes:
-  - Ingress
+    - Ingress
 "
 `;

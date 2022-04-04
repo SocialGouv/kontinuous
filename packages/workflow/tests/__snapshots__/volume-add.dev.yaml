@@ -5,10 +5,10 @@ exports[`volume-add.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: \\"1234\\"
     janitor/ttl: 7d
+    field.cattle.io/projectId: '1234'
     kubeWorkflow/gitBranch: feature-branch-1
-    kubeWorkflow/mainNamespace: \\"true\\"
+    kubeWorkflow/mainNamespace: 'true'
   labels:
     application: test-volume-add
     cert: wildcard
@@ -21,18 +21,18 @@ metadata:
   namespace: test-volume-add-feature-branch-1
 spec:
   ingress:
-  - from:
-    - podSelector: {}
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          network-policy/source: ingress-controller
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          network-policy/source: monitoring
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
   podSelector: {}
   policyTypes:
-  - Ingress
+    - Ingress
 "
 `;

@@ -5,294 +5,14 @@ exports[`jobs-uses-relative.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: \\"1234\\"
     janitor/ttl: 7d
+    field.cattle.io/projectId: '1234'
     kubeWorkflow/gitBranch: feature-branch-1
-    kubeWorkflow/mainNamespace: \\"true\\"
+    kubeWorkflow/mainNamespace: 'true'
   labels:
     application: test-jobs-uses-relative
     cert: wildcard
   name: test-jobs-uses-relative-feature-branch-1
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  labels: {}
-  name: jobs-shared-storage
-  namespace: awesome-ci
-spec:
-  accessModes:
-  - ReadWriteMany
-  resources:
-    requests:
-      storage: 2Gi
-  storageClassName: azurefile
----
-apiVersion: batch/v1beta1
-kind: CronJob
-metadata:
-  name: jobci-clean-workflow
-  namespace: awesome-ci
-spec:
-  jobTemplate:
-    spec:
-      template:
-        spec:
-          containers:
-          - command:
-            - /bin/bash
-            - -c
-            - |
-              echo \\"$KUBECONFIG\\" > ~/.kube/config
-              export KUBECONFIG=~/.kube/config
-              export JOB_NAMESPACE=\\"awesome-ci\\"
-              ACTIVE_JOBS=$(kubectl get jobs -n $JOB_NAMESPACE -o json | jq \\".items | .[] | select(.status.active > 0).metadata.name\\")
-              for subdir in /workflow/*; do
-
-                [ -d \\"$subdir\\" ] || continue
-                subdir_basename=\${subdir##*/}
-                if ! echo $ACTIVE_JOBS | grep -e \\"job-\${subdir_basename}\\"; then
-                  echo \\"Cleaning '$subdir'\\"
-                  rm -rf $subdir
-                fi
-              done
-            envFrom:
-            - secretRef:
-                name: kubeconfig
-            image: bitnami/kubectl:latest
-            imagePullPolicy: IfNotPresent
-            name: job
-            volumeMounts:
-            - mountPath: /workflow
-              name: workflow
-          restartPolicy: Never
-          volumes:
-          - name: workflow
-            persistentVolumeClaim:
-              claimName: jobs-shared-storage
-  schedule: 0 0 * * *
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  annotations:
-    janitor/ttl: \\"1800\\"
-    kapp.k14s.io/change-group: autodevops/test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-group.db: autodevops/db.test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-group.db..create-db: autodevops/db..create-db.test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-group.db.create-db: autodevops/db.create-db.test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-rule.db..create-secret: upsert after upserting autodevops/db..create-secret.test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/nonce: \\"\\"
-    kapp.k14s.io/update-strategy: fallback-on-replace
-  name: job-test-jobs-uses-relative-feature-branch-1-db--create-db
-  namespace: awesome-ci
-spec:
-  activeDeadlineSeconds: 3600
-  backoffLimit: 2
-  template:
-    metadata:
-      annotations: null
-      labels: null
-    spec:
-      containers:
-      - command:
-        - /bin/bash
-        - -c
-        - |
-          /action/ensure-db.sh
-        env:
-        - name: NEW_DB_NAME
-          valueFrom:
-            secretKeyRef:
-              key: PGDATABASE
-              name: pg-user-feature-branch-1
-        - name: NEW_USER
-          valueFrom:
-            secretKeyRef:
-              key: PGUSER
-              name: pg-user-feature-branch-1
-        - name: NEW_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: PGPASSWORD
-              name: pg-user-feature-branch-1
-        - name: PGHOST
-          valueFrom:
-            secretKeyRef:
-              key: PGHOST
-              name: pg-user-feature-branch-1
-        - name: NEW_DB_EXTENSIONS
-          value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
-        envFrom:
-        - secretRef:
-            name: pg-scaleway
-        image: ghcr.io/socialgouv/docker/psql:6.70.0
-        imagePullPolicy: IfNotPresent
-        name: job
-        securityContext:
-          fsGroup: 1000
-          runAsGroup: 1000
-          runAsUser: 1000
-        volumeMounts:
-        - mountPath: /workspace
-          name: workspace
-        - mountPath: /action
-          name: action
-        - mountPath: /workflow
-          name: workflow
-          subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
-        workingDir: /workspace
-      initContainers:
-      - command:
-        - sh
-        - -c
-        - npx degit ../../../../../jobs/create-db /action
-        env:
-        - name: npm_config_cache
-          value: /tmp/npm-cache
-        image: node:17
-        name: degit-action
-        securityContext:
-          fsGroup: 1000
-          runAsGroup: 1000
-          runAsUser: 1000
-        volumeMounts:
-        - mountPath: /action
-          name: action
-      restartPolicy: Never
-      volumes:
-      - emptyDir: {}
-        name: workspace
-      - emptyDir: {}
-        name: action
-      - name: workflow
-        persistentVolumeClaim:
-          claimName: jobs-shared-storage
-  ttlSecondsAfterFinished: 1800
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  annotations:
-    janitor/ttl: \\"1800\\"
-    kapp.k14s.io/change-group: autodevops/test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-group.db: autodevops/db.test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-group.db..create-secret: autodevops/db..create-secret.test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-group.db.create-secret: autodevops/db.create-secret.test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/nonce: \\"\\"
-    kapp.k14s.io/update-strategy: fallback-on-replace
-  name: job-test-jobs-uses-relative-feature-branch-1-db--create-secret
-  namespace: awesome-ci
-spec:
-  activeDeadlineSeconds: 3600
-  backoffLimit: 2
-  template:
-    metadata:
-      annotations: null
-      labels: null
-    spec:
-      containers:
-      - command:
-        - /bin/bash
-        - -c
-        - |
-          /action/create-secret.sh
-        env:
-        - name: DB_SECRET_NAME
-          value: pg-user-feature-branch-1
-        - name: JOB_NAMESPACE
-          value: awesome-ci
-        - name: NAMESPACE
-          value: test-jobs-uses-relative-feature-branch-1
-        - name: PGDATABASE
-          value: autodevops_feature-branch-1
-        - name: PGUSER
-          value: user_feature-branch-1
-        envFrom:
-        - secretRef:
-            name: pg-scaleway
-        - secretRef:
-            name: kubeconfig
-        image: bitnami/kubectl:latest
-        imagePullPolicy: IfNotPresent
-        name: job
-        securityContext:
-          fsGroup: 1001
-          runAsGroup: 1001
-          runAsUser: 1001
-        volumeMounts:
-        - mountPath: /workspace
-          name: workspace
-        - mountPath: /action
-          name: action
-        - mountPath: /workflow
-          name: workflow
-          subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
-        workingDir: /workspace
-      initContainers:
-      - command:
-        - sh
-        - -c
-        - npx degit ../../../../../jobs/create-db /action
-        env:
-        - name: npm_config_cache
-          value: /tmp/npm-cache
-        image: node:17
-        name: degit-action
-        securityContext:
-          fsGroup: 1001
-          runAsGroup: 1000
-          runAsUser: 1000
-        volumeMounts:
-        - mountPath: /action
-          name: action
-      restartPolicy: Never
-      volumes:
-      - emptyDir: {}
-        name: workspace
-      - emptyDir: {}
-        name: action
-      - name: workflow
-        persistentVolumeClaim:
-          claimName: jobs-shared-storage
-  ttlSecondsAfterFinished: 1800
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  annotations:
-    kapp.k14s.io/change-group: autodevops/post-test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/change-rule: upsert after upserting autodevops/test-jobs-uses-relative-feature-branch-1
-    kapp.k14s.io/nonce: \\"\\"
-    kapp.k14s.io/update-strategy: fallback-on-replace
-  name: jobci-post-operations-jobs
-  namespace: awesome-ci
-spec:
-  activeDeadlineSeconds: 3600
-  backoffLimit: 1
-  template:
-    metadata:
-      annotations: {}
-      labels: {}
-    spec:
-      containers:
-      - command:
-        - /bin/sh
-        - -c
-        - rm -rf /workflow/*
-        image: debian:stable
-        imagePullPolicy: IfNotPresent
-        name: job
-        volumeMounts:
-        - mountPath: /workflow
-          name: workflow
-          subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
-      restartPolicy: Never
-      volumes:
-      - name: workflow
-        persistentVolumeClaim:
-          claimName: jobs-shared-storage
-  ttlSecondsAfterFinished: 1800
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -301,18 +21,306 @@ metadata:
   namespace: test-jobs-uses-relative-feature-branch-1
 spec:
   ingress:
-  - from:
-    - podSelector: {}
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          network-policy/source: ingress-controller
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          network-policy/source: monitoring
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
   podSelector: {}
   policyTypes:
-  - Ingress
+    - Ingress
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jobs-shared-storage
+  annotations: {}
+  labels: {}
+  namespace: awesome-ci
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: azurefile
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-test-jobs-uses-relative-feature-branch-1-db--create-secret
+  namespace: awesome-ci
+  annotations:
+    kapp.k14s.io/nonce: ''
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/change-group: autodevops/test-jobs-uses-relative-feature-branch-1
+    kapp.k14s.io/change-group.db: autodevops/db.test-jobs-uses-relative-feature-branch-1
+    kapp.k14s.io/change-group.db.create-secret: autodevops/db.create-secret.test-jobs-uses-relative-feature-branch-1
+    kapp.k14s.io/change-group.db..create-secret: autodevops/db..create-secret.test-jobs-uses-relative-feature-branch-1
+    janitor/ttl: 1800
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      annotations: null
+      labels: null
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-action
+          image: node:17
+          env:
+            - name: npm_config_cache
+              value: /tmp/npm-cache
+          command:
+            - sh
+            - '-c'
+            - npx degit ../../../../../jobs/create-db /action
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1001
+          volumeMounts:
+            - name: action
+              mountPath: /action
+      containers:
+        - name: job
+          image: bitnami/kubectl:latest
+          imagePullPolicy: IfNotPresent
+          workingDir: /workspace
+          envFrom:
+            - secretRef:
+                name: pg-scaleway
+            - secretRef:
+                name: kubeconfig
+          env:
+            - name: DB_SECRET_NAME
+              value: pg-user-feature-branch-1
+            - name: JOB_NAMESPACE
+              value: awesome-ci
+            - name: NAMESPACE
+              value: test-jobs-uses-relative-feature-branch-1
+            - name: PGDATABASE
+              value: autodevops_feature-branch-1
+            - name: PGUSER
+              value: user_feature-branch-1
+          command:
+            - /bin/bash
+            - '-c'
+            - |
+              /action/create-secret.sh
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: 1001
+            fsGroup: 1001
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - name: workflow
+              mountPath: /workflow
+              subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - name: workflow
+          persistentVolumeClaim:
+            claimName: jobs-shared-storage
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-test-jobs-uses-relative-feature-branch-1-db--create-db
+  namespace: awesome-ci
+  annotations:
+    kapp.k14s.io/nonce: ''
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/change-group: autodevops/test-jobs-uses-relative-feature-branch-1
+    kapp.k14s.io/change-group.db: autodevops/db.test-jobs-uses-relative-feature-branch-1
+    kapp.k14s.io/change-group.db.create-db: autodevops/db.create-db.test-jobs-uses-relative-feature-branch-1
+    kapp.k14s.io/change-group.db..create-db: autodevops/db..create-db.test-jobs-uses-relative-feature-branch-1
+    kapp.k14s.io/change-rule.db..create-secret: >-
+      upsert after upserting
+      autodevops/db..create-secret.test-jobs-uses-relative-feature-branch-1
+    janitor/ttl: 1800
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      annotations: null
+      labels: null
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-action
+          image: node:17
+          env:
+            - name: npm_config_cache
+              value: /tmp/npm-cache
+          command:
+            - sh
+            - '-c'
+            - npx degit ../../../../../jobs/create-db /action
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+          volumeMounts:
+            - name: action
+              mountPath: /action
+      containers:
+        - name: job
+          image: ghcr.io/socialgouv/docker/psql:6.70.0
+          imagePullPolicy: IfNotPresent
+          workingDir: /workspace
+          envFrom:
+            - secretRef:
+                name: pg-scaleway
+          env:
+            - name: NEW_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: PGDATABASE
+                  name: pg-user-feature-branch-1
+            - name: NEW_USER
+              valueFrom:
+                secretKeyRef:
+                  key: PGUSER
+                  name: pg-user-feature-branch-1
+            - name: NEW_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: PGPASSWORD
+                  name: pg-user-feature-branch-1
+            - name: PGHOST
+              valueFrom:
+                secretKeyRef:
+                  key: PGHOST
+                  name: pg-user-feature-branch-1
+            - name: NEW_DB_EXTENSIONS
+              value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
+          command:
+            - /bin/bash
+            - '-c'
+            - |
+              /action/ensure-db.sh
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - name: workflow
+              mountPath: /workflow
+              subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - name: workflow
+          persistentVolumeClaim:
+            claimName: jobs-shared-storage
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jobci-post-operations-jobs
+  namespace: awesome-ci
+  annotations:
+    kapp.k14s.io/nonce: ''
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/change-group: autodevops/post-test-jobs-uses-relative-feature-branch-1
+    kapp.k14s.io/change-rule: upsert after upserting autodevops/test-jobs-uses-relative-feature-branch-1
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      annotations: {}
+      labels: {}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: job
+          image: debian:stable
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - '-c'
+            - rm -rf /workflow/*
+          volumeMounts:
+            - name: workflow
+              mountPath: /workflow
+              subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
+      volumes:
+        - name: workflow
+          persistentVolumeClaim:
+            claimName: jobs-shared-storage
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: jobci-clean-workflow
+  namespace: awesome-ci
+  annotations: {}
+spec:
+  schedule: 0 0 * * *
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: job
+              image: bitnami/kubectl:latest
+              imagePullPolicy: IfNotPresent
+              envFrom:
+                - secretRef:
+                    name: kubeconfig
+              command:
+                - /bin/bash
+                - '-c'
+                - >
+                  echo \\"$KUBECONFIG\\" > ~/.kube/config
+
+                  export KUBECONFIG=~/.kube/config
+
+                  export JOB_NAMESPACE=\\"awesome-ci\\"
+
+                  ACTIVE_JOBS=$(kubectl get jobs -n $JOB_NAMESPACE -o json | jq
+                  \\".items | .[] | select(.status.active > 0).metadata.name\\")
+
+                  for subdir in /workflow/*; do
+                    [ -d \\"$subdir\\" ] || continue
+                    subdir_basename=\${subdir##*/}
+                    if ! echo $ACTIVE_JOBS | grep -e \\"job-\${subdir_basename}\\"; then
+                      echo \\"Cleaning '$subdir'\\"
+                      rm -rf $subdir
+                    fi
+                  done
+              volumeMounts:
+                - name: workflow
+                  mountPath: /workflow
+          volumes:
+            - name: workflow
+              persistentVolumeClaim:
+                claimName: jobs-shared-storage
 "
 `;
