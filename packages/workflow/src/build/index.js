@@ -12,8 +12,6 @@ const selectEnv = require("~/utils/select-env")
 const builder = require("./builder")
 
 module.exports = async (options) => {
-  const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))
-
   const cwd = options.cwd || process.cwd()
 
   const { GIT_REF, GIT_SHA, GIT_REPOSITORY } = getGitInfos(cwd)
@@ -32,7 +30,9 @@ module.exports = async (options) => {
     KUBEWORKFLOW_PATH: path.resolve(__dirname, "../../../.."),
     WORKSPACE_PATH: cwd,
     GIT_REPOSITORY,
-    KWBUILD_PATH: tmpDir,
+    KWBUILD_PATH:
+      process.env.KWBUILD_PATH ||
+      (await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))),
   }
 
   const result = await builder(envVars)
