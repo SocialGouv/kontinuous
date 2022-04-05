@@ -59,7 +59,7 @@ runs:
         HELM_ARGS: ${{ inputs.helmArgs }}
         DEBUG: "true"
       working-directory: "${{ github.action_path }}"
-      run: yarn workflow:build --cwd ${{ github.workspace }}
+      run: packages/workflow/bin/kube-workflow build --cwd ${{ github.workspace }}
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2

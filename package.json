@@ -28,8 +28,6 @@
     "retag": "TAG=$(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1) && git tag -f $TAG && git push origin :refs/tags/$TAG && git push -f origin master --tags",
     "push": "git push -f --follow-tags origin master",
     "delivery": "yarn release && yarn push",
-    "workflow:build": "kube-workflow build",
-    "workflow:deploy": "kube-workflow deploy",
     "test": "yarn workspaces run --parallel test"
   },
   "lint-staged": {
