@@ -369,7 +369,7 @@ metadata:
     kapp.k14s.io/change-group.db.create-secret: kube-workflow/db.create-secret.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.db..create-secret: >-
       kube-workflow/db..create-secret.test-jobs-build-dev-feature-branch-1-312rwy
-    janitor/ttl: 1800
+    janitor/ttl: '1800'
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -460,7 +460,7 @@ metadata:
     kapp.k14s.io/change-rule.db..create-secret: >-
       upsert after upserting
       kube-workflow/db..create-secret.test-jobs-build-dev-feature-branch-1-312rwy
-    janitor/ttl: 1800
+    janitor/ttl: '1800'
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -598,7 +598,7 @@ metadata:
     kapp.k14s.io/change-group.build-app.kaniko: kube-workflow/build-app.kaniko.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.build-app..kaniko: >-
       kube-workflow/build-app..kaniko.test-jobs-build-dev-feature-branch-1-312rwy
-    janitor/ttl: 1800
+    janitor/ttl: '1800'
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -709,7 +709,7 @@ metadata:
       kube-workflow/build-hasura.kaniko.test-jobs-build-dev-feature-branch-1-312rwy
     kapp.k14s.io/change-group.build-hasura..kaniko: >-
       kube-workflow/build-hasura..kaniko.test-jobs-build-dev-feature-branch-1-312rwy
-    janitor/ttl: 1800
+    janitor/ttl: '1800'
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -822,7 +822,7 @@ metadata:
     kapp.k14s.io/change-rule.build-app: >-
       upsert after upserting
       kube-workflow/build-app.test-jobs-build-dev-feature-branch-1-312rwy
-    janitor/ttl: 1800
+    janitor/ttl: '1800'
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600

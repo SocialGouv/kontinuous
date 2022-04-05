@@ -3,7 +3,7 @@ kind: Namespace
 metadata:
   annotations:
     {{- if .Values.global.ttl }}
-    janitor/ttl: {{ .Values.global.ttl }}
+    janitor/ttl: "{{ .Values.global.ttl }}"
     {{- end }}
     field.cattle.io/projectId: "{{ .Values.global.rancherProjectId }}"
     kubeWorkflow/gitBranch: "{{ or .Values.global.gitBranch "" }}"

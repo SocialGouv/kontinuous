@@ -45,7 +45,7 @@ metadata:
     {{- range $need := $.Values.needs }}
     kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting kube-workflow/{{ $need }}.{{ $val.global.namespace }}"
     {{- end }}
-    janitor/ttl: 1800
+    janitor/ttl: "1800"
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600

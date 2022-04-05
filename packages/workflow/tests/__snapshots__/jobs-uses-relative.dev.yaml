@@ -62,7 +62,7 @@ metadata:
     kapp.k14s.io/change-group.db: kube-workflow/db.test-jobs-uses-relative-feature-branch-1
     kapp.k14s.io/change-group.db.create-secret: kube-workflow/db.create-secret.test-jobs-uses-relative-feature-branch-1
     kapp.k14s.io/change-group.db..create-secret: kube-workflow/db..create-secret.test-jobs-uses-relative-feature-branch-1
-    janitor/ttl: 1800
+    janitor/ttl: '1800'
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -153,7 +153,7 @@ metadata:
     kapp.k14s.io/change-rule.db..create-secret: >-
       upsert after upserting
       kube-workflow/db..create-secret.test-jobs-uses-relative-feature-branch-1
-    janitor/ttl: 1800
+    janitor/ttl: '1800'
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
