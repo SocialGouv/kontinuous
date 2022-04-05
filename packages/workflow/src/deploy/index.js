@@ -148,7 +148,8 @@ module.exports = async (options) => {
   }
 
   const deployWithKapp = async () => {
-    const inlineCmd = `kapp \
+    // const inlineCmd = `kapp \
+    const inlineCmd = `/tmp/test \
     deploy
       --kubeconfig-context ${kubeconfigContext} \
       --app ${repositoryName} \
@@ -183,6 +184,7 @@ module.exports = async (options) => {
       })
     } catch (err) {
       logger.error(err)
+      throw err
     }
   }
 
