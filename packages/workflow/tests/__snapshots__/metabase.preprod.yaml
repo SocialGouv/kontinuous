@@ -12,6 +12,13 @@ metadata:
     application: test-metabase
   name: test-metabase-preprod
 ---
+apiVersion: v1
+automountServiceAccountToken: false
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-metabase-preprod
+---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:

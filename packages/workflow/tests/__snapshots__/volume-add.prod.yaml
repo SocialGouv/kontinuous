@@ -12,6 +12,13 @@ metadata:
     application: test-volume-add
   name: test-volume-add
 ---
+apiVersion: v1
+automountServiceAccountToken: false
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-volume-add
+---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
