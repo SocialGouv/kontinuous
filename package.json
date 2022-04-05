@@ -29,6 +29,7 @@
     "push": "git push -f --follow-tags origin master",
     "delivery": "yarn release && yarn push",
     "workflow:build": "kube-workflow build",
+    "workflow:deploy": "kube-workflow deploy",
     "test": "yarn workspaces run --parallel test"
   },
   "lint-staged": {
