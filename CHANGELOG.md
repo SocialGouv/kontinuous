@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.8](https://github.com/SocialGouv/kube-workflow/compare/v1.5.7...v1.5.8) (2022-04-05)
+
+
+### Bug Fixes
+
+* gh cancel groups ([32ab522](https://github.com/SocialGouv/kube-workflow/commit/32ab522b8c358b8799790ebcb7400a6ec7858988))
+* npm and charts structure compat ([a1d74b8](https://github.com/SocialGouv/kube-workflow/commit/a1d74b8580e95c3d0c7560cc1cfb50a0b083d045))
+
 ### [1.5.7](https://github.com/SocialGouv/kube-workflow/compare/v1.5.6...v1.5.7) (2022-04-05)
 
 
