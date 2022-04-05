@@ -1,9 +1,9 @@
-{{ if .Values.global.extra.jobs.sharedStorage.enabled -}}
+{{ if and .Values.global.extra.jobs.sharedStorage.enabled .Values.jobs.enabled -}}
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: "jobci-post-operations-{{ .Values.global.namespace }}"
-  namespace: {{ or .Values.namespace .Values.global.jobNamespace }}
+  namespace: {{ .Values.global.jobNamespace }}
   annotations:
     kapp.k14s.io/nonce: ""
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -21,7 +21,7 @@ spec:
       restartPolicy: Never
       containers:          
         - name: job
-          image: "{{ or .Values.postJobImage .Values.image }}"
+          image: "debian:stable"
           imagePullPolicy: IfNotPresent
           command:
             - /bin/sh

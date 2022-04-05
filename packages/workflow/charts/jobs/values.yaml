@@ -5,5 +5,3 @@ gitBranch:
 runs: []
 image: "debian:stable"
 needs: []
-sharedStorage:
-  enabled: false
