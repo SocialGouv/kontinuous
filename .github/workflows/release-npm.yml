@@ -1,0 +1,56 @@
+name: Release NPM
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "*"
+
+concurrency:
+  cancel-in-progress: true
+  group: ci-${{ github.ref_name }}
+
+jobs:
+
+  test:
+    name: Test application
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Node setup
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Yarn cache setup
+        uses: c-hive/gha-yarn-cache@v1
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile --prefer-offline
+
+      - name: Run tests
+        run: yarn test
+    
+  publish-npm:
+    name: NPM Publish if version has been updated
+    runs-on: ubuntu-latest
+    needs: [test]
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        
+      - id: publish-kube-workflow
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.SOCIALGROOVYBOT_NPM_TOKEN }}
+          package: packages/workflow/package.json
+      
+      - if: steps.publish-kube-workflow.outputs.type != 'none'
+        run: |
+          echo "Version changed: ${{ steps.publish-kube-workflow.outputs.old-version }} => ${{ steps.publish-kube-workflow.outputs.version }}"
+  
