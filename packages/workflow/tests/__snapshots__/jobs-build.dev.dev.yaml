@@ -19,6 +19,8 @@ kind: NetworkPolicy
 metadata:
   name: netpol-ingress
   namespace: test-jobs-build-dev-feature-branch-1-312rwy
+  annotations:
+    kapp.k14s.io/disable-original: ''
 spec:
   ingress:
     - from:
@@ -40,13 +42,16 @@ kind: ServiceAccount
 metadata:
   name: default
   namespace: test-jobs-build-dev-feature-branch-1-312rwy
+  annotations:
+    kapp.k14s.io/disable-original: ''
 automountServiceAccountToken: false
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: jobs-shared-storage
-  annotations: {}
+  annotations:
+    kapp.k14s.io/disable-original: ''
   labels: {}
   namespace: awesome-ci
 spec:
@@ -68,6 +73,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
 spec:
   ports:
     - name: http
@@ -88,6 +94,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
 spec:
   ports:
     - name: http
@@ -108,6 +115,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
 spec:
   ports:
     - name: http
@@ -136,6 +144,7 @@ metadata:
     kapp.k14s.io/change-rule.build-app: >-
       upsert after upserting
       kube-workflow/build-app.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
   selector:
@@ -214,6 +223,7 @@ metadata:
     kapp.k14s.io/change-rule.db: >-
       upsert after upserting
       kube-workflow/db.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
   selector:
@@ -290,6 +300,7 @@ metadata:
     kapp.k14s.io/change-rule.db: >-
       upsert after upserting
       kube-workflow/db.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
   selector:
@@ -372,6 +383,7 @@ metadata:
     kapp.k14s.io/change-group.db..create-secret: >-
       kube-workflow/db..create-secret.test-jobs-build-dev-feature-branch-1-312rwy
     janitor/ttl: '1800'
+    kapp.k14s.io/disable-original: ''
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -461,6 +473,7 @@ metadata:
       upsert after upserting
       kube-workflow/db..create-secret.test-jobs-build-dev-feature-branch-1-312rwy
     janitor/ttl: '1800'
+    kapp.k14s.io/disable-original: ''
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -558,6 +571,7 @@ metadata:
     kapp.k14s.io/change-group.build-app..kaniko: >-
       kube-workflow/build-app..kaniko.test-jobs-build-dev-feature-branch-1-312rwy
     janitor/ttl: '1800'
+    kapp.k14s.io/disable-original: ''
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -666,6 +680,7 @@ metadata:
     kapp.k14s.io/change-group.build-hasura..kaniko: >-
       kube-workflow/build-hasura..kaniko.test-jobs-build-dev-feature-branch-1-312rwy
     janitor/ttl: '1800'
+    kapp.k14s.io/disable-original: ''
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -776,6 +791,7 @@ metadata:
       upsert after upserting
       kube-workflow/build-app.test-jobs-build-dev-feature-branch-1-312rwy
     janitor/ttl: '1800'
+    kapp.k14s.io/disable-original: ''
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -829,6 +845,7 @@ metadata:
     kapp.k14s.io/change-rule: >-
       upsert after upserting
       kube-workflow/test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/disable-original: ''
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
@@ -861,7 +878,8 @@ kind: CronJob
 metadata:
   name: jobci-clean-workflow
   namespace: awesome-ci
-  annotations: {}
+  annotations:
+    kapp.k14s.io/disable-original: ''
 spec:
   schedule: 0 0 * * *
   jobTemplate:
@@ -910,6 +928,7 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-original: ''
   labels:
     component: app
     application: test-jobs-build.dev
@@ -938,6 +957,7 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-original: ''
   labels:
     component: hasura
     application: test-jobs-build.dev
@@ -967,6 +987,7 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-original: ''
   labels:
     component: pgweb
     application: test-jobs-build.dev

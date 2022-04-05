@@ -17,6 +17,8 @@ kind: NetworkPolicy
 metadata:
   name: netpol-ingress
   namespace: test-ingress-annotations.prod
+  annotations:
+    kapp.k14s.io/disable-original: ''
 spec:
   ingress:
     - from:
@@ -38,6 +40,8 @@ kind: ServiceAccount
 metadata:
   name: default
   namespace: test-ingress-annotations.prod
+  annotations:
+    kapp.k14s.io/disable-original: ''
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -48,6 +52,8 @@ metadata:
     application: test-ingress-annotations.prod
   name: metabase
   namespace: test-ingress-annotations.prod
+  annotations:
+    kapp.k14s.io/disable-original: ''
 data:
   MB_APPLICATION_NAME: metabase
   MB_DB_TYPE: postgres
@@ -72,6 +78,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
 spec:
   ports:
     - name: http
@@ -97,6 +104,7 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: kube-workflow/test-ingress-annotations.prod
     kapp.k14s.io/change-group.metabase: kube-workflow/metabase.test-ingress-annotations.prod
+    kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
   selector:
@@ -157,6 +165,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
     cert-manager.io: cluster-issuer
     kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-original: ''
   labels:
     component: metabase
     application: test-ingress-annotations.prod

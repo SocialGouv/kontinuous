@@ -17,6 +17,8 @@ kind: NetworkPolicy
 metadata:
   name: netpol-ingress
   namespace: test-redirect.prod
+  annotations:
+    kapp.k14s.io/disable-original: ''
 spec:
   ingress:
     - from:
@@ -38,6 +40,8 @@ kind: ServiceAccount
 metadata:
   name: default
   namespace: test-redirect.prod
+  annotations:
+    kapp.k14s.io/disable-original: ''
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -51,6 +55,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
 spec:
   ports:
     - name: http
@@ -76,6 +81,7 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: kube-workflow/test-redirect.prod
     kapp.k14s.io/change-group.app: kube-workflow/app.test-redirect.prod
+    kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
   selector:
@@ -131,6 +137,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
     cert-manager.io: cluster-issuer
     kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-original: ''
   labels:
     component: app
     application: test-redirect.prod
@@ -160,6 +167,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/permanent-redirect: https://transco.travail-emploi.gouv.fr$request_uri
+    kapp.k14s.io/disable-original: ''
   namespace: test-redirect.prod
 spec:
   rules:

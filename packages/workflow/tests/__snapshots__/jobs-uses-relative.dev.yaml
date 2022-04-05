@@ -19,6 +19,8 @@ kind: NetworkPolicy
 metadata:
   name: netpol-ingress
   namespace: test-jobs-uses-relative-feature-branch-1
+  annotations:
+    kapp.k14s.io/disable-original: ''
 spec:
   ingress:
     - from:
@@ -40,13 +42,16 @@ kind: ServiceAccount
 metadata:
   name: default
   namespace: test-jobs-uses-relative-feature-branch-1
+  annotations:
+    kapp.k14s.io/disable-original: ''
 automountServiceAccountToken: false
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: jobs-shared-storage
-  annotations: {}
+  annotations:
+    kapp.k14s.io/disable-original: ''
   labels: {}
   namespace: awesome-ci
 spec:
@@ -70,6 +75,7 @@ metadata:
     kapp.k14s.io/change-group.db.create-secret: kube-workflow/db.create-secret.test-jobs-uses-relative-feature-branch-1
     kapp.k14s.io/change-group.db..create-secret: kube-workflow/db..create-secret.test-jobs-uses-relative-feature-branch-1
     janitor/ttl: '1800'
+    kapp.k14s.io/disable-original: ''
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -159,6 +165,7 @@ metadata:
       upsert after upserting
       kube-workflow/db..create-secret.test-jobs-uses-relative-feature-branch-1
     janitor/ttl: '1800'
+    kapp.k14s.io/disable-original: ''
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -254,6 +261,7 @@ metadata:
     kapp.k14s.io/change-rule: >-
       upsert after upserting
       kube-workflow/test-jobs-uses-relative-feature-branch-1
+    kapp.k14s.io/disable-original: ''
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
@@ -286,7 +294,8 @@ kind: CronJob
 metadata:
   name: jobci-clean-workflow
   namespace: awesome-ci
-  annotations: {}
+  annotations:
+    kapp.k14s.io/disable-original: ''
 spec:
   schedule: 0 0 * * *
   jobTemplate:

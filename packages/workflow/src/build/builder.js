@@ -58,12 +58,13 @@ module.exports = async (envVars) => {
 
   await fs.ensureDir(KWBUILD_PATH)
 
-  logger.debug("Import charts")
+  logger.debug("Import kube-workflow charts and patches")
   await Promise.all([
     fs.copy(`${KUBEWORKFLOW_PATH}/Chart.yaml`, `${KWBUILD_PATH}/Chart.yaml`),
     fs.copy(`${KUBEWORKFLOW_PATH}/values.yaml`, `${KWBUILD_PATH}/values.yaml`),
     fs.copy(`${KUBEWORKFLOW_PATH}/templates`, `${KWBUILD_PATH}/templates`),
     fs.copy(`${KUBEWORKFLOW_PATH}/charts`, `${KWBUILD_PATH}/charts`),
+    fs.copy(`${KUBEWORKFLOW_PATH}/patches`, `${KWBUILD_PATH}/patches`),
   ])
 
   const workspaceKubeworkflowPath = `${WORKSPACE_PATH}${WORKSPACE_SUBPATH}`
@@ -103,7 +104,7 @@ module.exports = async (envVars) => {
   logger.debug("Compiling additional subcharts instances")
   const chart = await compileChart(values)
 
-  logger.debug("Merge .kube-workflow templates")
+  logger.debug("Merge project templates")
   for (const dir of [
     "templates",
     "common/templates",
@@ -116,6 +117,13 @@ module.exports = async (envVars) => {
         dereference: true,
       })
     }
+  }
+  logger.debug("Merge project patches")
+  const patchesDir = `${buildKubeworkflowPath}/patches`
+  if (await fs.pathExists(patchesDir)) {
+    await fs.copy(patchesDir, `${KWBUILD_PATH}/patches`, {
+      dereference: true,
+    })
   }
 
   if (COMPONENTS) {

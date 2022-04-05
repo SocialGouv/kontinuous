@@ -2,25 +2,27 @@ const yaml = require("js-yaml")
 
 const removeNulls = require("~/utils/remove-nulls")
 
+const { buildCtx } = require("~/build/ctx")
+
 module.exports = async (manifestsDocument, values) => {
-  const defaultNamespace = values.global.namespace
+  const env = buildCtx.require("env")
+  const { KWBUILD_PATH } = env
+
+  const patches = require(`${KWBUILD_PATH}/patches`)
+
   const iterator = yaml.loadAll(manifestsDocument)
   const manifests = []
 
   const uniqNames = new Set()
 
-  for (const manifest of iterator) {
+  for (let manifest of iterator) {
     if (!manifest) {
       continue
     }
-    if (manifest.kind !== "Namespace") {
-      if (!manifest.metadata) {
-        manifest.metadata = {}
-      }
-      if (!manifest.metadata.namespace) {
-        manifest.metadata.namespace = defaultNamespace
-      }
-    }
+
+    removeNulls(manifest)
+
+    manifest = patches(manifest, values)
 
     if (manifest.metadata?.name) {
       const n = `${manifest.kind}.${manifest.metadata.namespace}.${manifest.metadata.name}`
@@ -29,8 +31,6 @@ module.exports = async (manifestsDocument, values) => {
       }
       uniqNames.add(n)
     }
-
-    removeNulls(manifest)
 
     manifests.push(yaml.dump(manifest))
   }

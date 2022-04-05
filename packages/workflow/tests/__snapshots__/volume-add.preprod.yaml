@@ -17,6 +17,8 @@ kind: NetworkPolicy
 metadata:
   name: netpol-ingress
   namespace: test-volume-add-preprod
+  annotations:
+    kapp.k14s.io/disable-original: ''
 spec:
   ingress:
     - from:
@@ -38,6 +40,8 @@ kind: ServiceAccount
 metadata:
   name: default
   namespace: test-volume-add-preprod
+  annotations:
+    kapp.k14s.io/disable-original: ''
 automountServiceAccountToken: false
 "
 `;

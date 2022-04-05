@@ -19,6 +19,8 @@ kind: NetworkPolicy
 metadata:
   name: netpol-ingress
   namespace: test-metabase-feature-branch-1
+  annotations:
+    kapp.k14s.io/disable-original: ''
 spec:
   ingress:
     - from:
@@ -40,6 +42,8 @@ kind: ServiceAccount
 metadata:
   name: default
   namespace: test-metabase-feature-branch-1
+  annotations:
+    kapp.k14s.io/disable-original: ''
 automountServiceAccountToken: false
 "
 `;

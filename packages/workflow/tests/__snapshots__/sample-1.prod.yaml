@@ -17,6 +17,8 @@ kind: NetworkPolicy
 metadata:
   name: netpol-ingress
   namespace: test-sample-1
+  annotations:
+    kapp.k14s.io/disable-original: ''
 spec:
   ingress:
     - from:
@@ -38,6 +40,8 @@ kind: ServiceAccount
 metadata:
   name: default
   namespace: test-sample-1
+  annotations:
+    kapp.k14s.io/disable-original: ''
 automountServiceAccountToken: false
 ---
 kind: ConfigMap
@@ -45,6 +49,8 @@ apiVersion: v1
 metadata:
   name: app-configmap
   namespace: test-sample-1
+  annotations:
+    kapp.k14s.io/disable-original: ''
 data:
   NODE_ENV: production
   GRAPHQL_ENDPOINT: http://hasura/v1/graphql
@@ -62,6 +68,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
 spec:
   ports:
     - name: http
@@ -82,6 +89,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
 spec:
   ports:
     - name: http
@@ -102,6 +110,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
 spec:
   ports:
     - name: http
@@ -122,6 +131,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
 spec:
   ports:
     - name: http
@@ -147,6 +157,7 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: kube-workflow/test-sample-1
     kapp.k14s.io/change-group.app-2nd-instance: kube-workflow/app-2nd-instance.test-sample-1
+    kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
   selector:
@@ -218,6 +229,7 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: kube-workflow/test-sample-1
     kapp.k14s.io/change-group.app: kube-workflow/app.test-sample-1
+    kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
   selector:
@@ -289,6 +301,7 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: kube-workflow/test-sample-1
     kapp.k14s.io/change-group.hasura: kube-workflow/hasura.test-sample-1
+    kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
   selector:
@@ -361,6 +374,7 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: kube-workflow/test-sample-1
     kapp.k14s.io/change-group.pgweb: kube-workflow/pgweb.test-sample-1
+    kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
   selector:
@@ -447,6 +461,7 @@ metadata:
       more_set_headers \\"X-Content-Type-Options: nosniff\\";
     cert-manager.io: cluster-issuer
     kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-original: ''
   labels:
     component: app-2nd-instance
     application: test-sample-1
@@ -487,6 +502,7 @@ metadata:
       more_set_headers \\"X-Content-Type-Options: nosniff\\";
     cert-manager.io: cluster-issuer
     kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-original: ''
   labels:
     component: app
     application: test-sample-1
@@ -516,6 +532,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
     cert-manager.io: cluster-issuer
     kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-original: ''
   labels:
     component: hasura
     application: test-sample-1
@@ -545,6 +562,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
     cert-manager.io: cluster-issuer
     kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-original: ''
   labels:
     component: pgweb
     application: test-sample-1
@@ -572,6 +590,8 @@ kind: SealedSecret
 metadata:
   name: hasura-sealed-secret
   namespace: test-sample-1
+  annotations:
+    kapp.k14s.io/disable-original: ''
 spec:
   encryptedData:
     ACCOUNT_EMAIL_SECRET: >-

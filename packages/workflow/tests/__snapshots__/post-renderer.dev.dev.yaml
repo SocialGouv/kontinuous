@@ -19,6 +19,8 @@ kind: NetworkPolicy
 metadata:
   name: netpol-ingress
   namespace: test-post-renderer-dev-feature-branch-1-5yqz79
+  annotations:
+    kapp.k14s.io/disable-original: ''
 spec:
   ingress:
     - from:
@@ -40,6 +42,8 @@ kind: ServiceAccount
 metadata:
   name: default
   namespace: test-post-renderer-dev-feature-branch-1-5yqz79
+  annotations:
+    kapp.k14s.io/disable-original: ''
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -53,6 +57,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
 spec:
   ports:
     - name: http
@@ -78,6 +83,7 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: kube-workflow/test-post-renderer-dev-feature-branch-1-5yqz79
     kapp.k14s.io/change-group.app: kube-workflow/app.test-post-renderer-dev-feature-branch-1-5yqz79
+    kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
   selector:
@@ -132,6 +138,7 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-original: ''
   labels:
     component: app
     application: test-post-renderer.dev
