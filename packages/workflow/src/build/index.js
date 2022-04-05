@@ -14,10 +14,11 @@ const builder = require("./builder")
 module.exports = async (options) => {
   const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))
 
-  const { GIT_REF, GIT_SHA, GIT_REPOSITORY } = getGitInfos()
-
   const cwd = options.cwd || process.cwd()
-  const selectedEnv = selectEnv(options)
+
+  const { GIT_REF, GIT_SHA, GIT_REPOSITORY } = getGitInfos(cwd)
+
+  const selectedEnv = selectEnv(options, cwd)
 
   const envVars = {
     ...process.env,

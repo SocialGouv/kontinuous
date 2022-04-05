@@ -1,5 +1,5 @@
 const { execSync } = require("child_process")
 
-const shell = (cmd) => execSync(cmd, { encoding: "utf8" })
+const shell = (cmd, options) => execSync(cmd, { encoding: "utf8", ...options })
 
 module.exports = shell

@@ -4,16 +4,16 @@ const logger = require("~/utils/logger")
 
 let gitInfos
 
-module.exports = (reloadCache = false) => {
+module.exports = (cwd = process.cwd(), reloadCache = false) => {
   if (!gitInfos || reloadCache) {
     let GIT_REF
     let GIT_SHA
     let GIT_REPOSITORY
     try {
-      GIT_REF = shell("git branch --show-current").trim()
-      GIT_SHA = shell("git show -s --format=%H").trim()
+      GIT_REF = shell("git branch --show-current", { cwd }).trim()
+      GIT_SHA = shell("git show -s --format=%H", { cwd }).trim()
 
-      const gitUrl = shell("git remote get-url origin").trim()
+      const gitUrl = shell("git remote get-url origin", { cwd }).trim()
       const url = GitUrlParse(gitUrl)
       let { pathname } = url
       if (pathname.startsWith("/")) {
@@ -31,7 +31,7 @@ module.exports = (reloadCache = false) => {
     }
     let GIT_TAGS
     try {
-      GIT_TAGS = shell("git tag --points-at HEAD")
+      GIT_TAGS = shell("git tag --points-at HEAD", { cwd })
         .split("\n")
         .map((tag) => tag.trim())
     } catch (_e) {

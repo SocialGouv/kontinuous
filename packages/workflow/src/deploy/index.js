@@ -18,11 +18,12 @@ module.exports = async (options) => {
     logLevel: "info",
   })
 
-  const { GIT_REPOSITORY } = getGitInfos()
+  const cwd = options.cwd || process.cwd()
+  const { GIT_REPOSITORY } = getGitInfos(cwd)
 
   const repositoryName = path.basename(GIT_REPOSITORY)
 
-  const selectedEnv = selectEnv(options)
+  const selectedEnv = selectEnv(options, cwd)
 
   let { kubeconfigContext } = options
   if (!kubeconfigContext) {
