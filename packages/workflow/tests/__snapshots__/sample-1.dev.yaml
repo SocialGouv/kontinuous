@@ -160,8 +160,6 @@ spec:
         component: app-2nd-instance
         application: test-sample-1
     spec:
-      initContainers: null
-      volumes: null
       containers:
         - image: >-
             ghcr.io/socialgouv/test-sample-1/app:sha-ffac537e6cbbf934b08745a378932722df287a53
@@ -199,7 +197,6 @@ spec:
               path: /healthz
               port: http
             periodSeconds: 5
-          env: null
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -207,7 +204,6 @@ spec:
                 name: app-sealed-secret
             - configMapRef:
                 name: app-configmap
-          volumeMounts: null
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -236,7 +232,6 @@ spec:
         component: app
         application: test-sample-1
     spec:
-      initContainers: null
       volumes:
         - name: upload
           persistentVolumeClaim:
@@ -281,7 +276,6 @@ spec:
               path: /healthz
               port: http
             periodSeconds: 5
-          env: null
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -323,7 +317,6 @@ spec:
         component: hasura
         application: test-sample-1
     spec:
-      initContainers: null
       containers:
         - image: >-
             ghcr.io/socialgouv/test-sample-1/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
@@ -592,7 +585,6 @@ kind: SealedSecret
 metadata:
   annotations:
     sealedsecrets.bitnami.com/cluster-wide: 'true'
-  creationTimestamp: null
   name: hasura-sealed-secret
   namespace: test-sample-1-feature-branch-1
 spec:
@@ -607,7 +599,6 @@ spec:
     metadata:
       annotations:
         sealedsecrets.bitnami.com/cluster-wide: 'true'
-      creationTimestamp: null
       name: hasura-sealed-secret
     type: Opaque
 "

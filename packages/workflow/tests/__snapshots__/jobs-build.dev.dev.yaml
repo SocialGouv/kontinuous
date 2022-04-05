@@ -147,8 +147,6 @@ spec:
         component: app
         application: test-jobs-build.dev
     spec:
-      initContainers: null
-      volumes: null
       containers:
         - image: >-
             harbor.fabrique.social.gouv.fr/test-jobs-build.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53
@@ -186,7 +184,6 @@ spec:
               path: /healthz
               port: http
             periodSeconds: 5
-          env: null
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -194,7 +191,6 @@ spec:
                 name: app-sealed-secret
             - configMapRef:
                 name: app-configmap
-          volumeMounts: null
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -229,7 +225,6 @@ spec:
         component: hasura
         application: test-jobs-build.dev
     spec:
-      initContainers: null
       containers:
         - image: >-
             harbor.fabrique.social.gouv.fr/test-jobs-build.dev/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
@@ -382,9 +377,7 @@ spec:
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
-    metadata:
-      annotations: null
-      labels: null
+    metadata: {}
     spec:
       restartPolicy: Never
       initContainers:
@@ -473,9 +466,7 @@ spec:
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
-    metadata:
-      annotations: null
-      labels: null
+    metadata: {}
     spec:
       restartPolicy: Never
       initContainers:
@@ -611,9 +602,7 @@ spec:
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
-    metadata:
-      annotations: null
-      labels: null
+    metadata: {}
     spec:
       restartPolicy: Never
       initContainers:
@@ -643,7 +632,6 @@ spec:
           envFrom:
             - secretRef:
                 name: harbor
-          env: null
           command:
             - /busybox/sh
             - '-c'
@@ -722,9 +710,7 @@ spec:
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
-    metadata:
-      annotations: null
-      labels: null
+    metadata: {}
     spec:
       restartPolicy: Never
       initContainers:
@@ -754,7 +740,6 @@ spec:
           envFrom:
             - secretRef:
                 name: harbor
-          env: null
           command:
             - /busybox/sh
             - '-c'
@@ -835,18 +820,14 @@ spec:
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
-    metadata:
-      annotations: null
-      labels: null
+    metadata: {}
     spec:
       restartPolicy: Never
-      initContainers: null
       containers:
         - name: job
           image: debian:stable
           imagePullPolicy: IfNotPresent
           workingDir: /workspace
-          env: null
           command:
             - /bin/bash
             - '-c'

@@ -158,8 +158,6 @@ spec:
         component: app-2nd-instance
         application: test-sample-1
     spec:
-      initContainers: null
-      volumes: null
       containers:
         - image: ghcr.io/socialgouv/test-sample-1/app:prod
           livenessProbe:
@@ -196,7 +194,6 @@ spec:
               path: /healthz
               port: http
             periodSeconds: 5
-          env: null
           envFrom:
             - secretRef:
                 name: pg-user
@@ -204,7 +201,6 @@ spec:
                 name: app-sealed-secret
             - configMapRef:
                 name: app-configmap
-          volumeMounts: null
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -233,8 +229,6 @@ spec:
         component: app
         application: test-sample-1
     spec:
-      initContainers: null
-      volumes: null
       containers:
         - image: ghcr.io/socialgouv/test-sample-1/app:prod
           livenessProbe:
@@ -271,7 +265,6 @@ spec:
               path: /healthz
               port: http
             periodSeconds: 5
-          env: null
           envFrom:
             - secretRef:
                 name: pg-user
@@ -279,7 +272,6 @@ spec:
                 name: app-sealed-secret
             - configMapRef:
                 name: app-configmap
-          volumeMounts: null
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -308,7 +300,6 @@ spec:
         component: hasura
         application: test-sample-1
     spec:
-      initContainers: null
       containers:
         - image: ghcr.io/socialgouv/test-sample-1/hasura:prod
           livenessProbe:
@@ -579,7 +570,6 @@ spec:
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  creationTimestamp: null
   name: hasura-sealed-secret
   namespace: test-sample-1
 spec:
@@ -592,7 +582,6 @@ spec:
       AgAyuiPLqj0UMvhEkyEGF04LOp8al2O59/YGOei4hfkqcEw83rmJnb/o3nz96oLYG4gX/JlMT8grhUmR8wPG+Ah5UDuGK9POP75YYyNDQ05FrMDPCjQtEXNslqNp+oVS91ONUwJ7ARUr47vfQdxRoK03cFCboY0wEF8HMZzRjn5fXccttyT21kJV75Y0MtCif5jNCj+gtX2DIP9dNfvAJKCvOCzNJDALLmhv4tY71ZquGAiXf/+mJVP5ugRjFL0wYoKThAr3vph5cOPUo44swVilESu54gAoRlPNxFgOBXHS5Uu0VWryzTJyQGOElkYCxyBC45YzFZGMB3RWxaZtuForw76bD0RYWTVNsI+N/KmZdbYZO5Cs6HdqE2nptb3QAgpH0JOeWnzZGxTmkSOpEwCUGCJG+7ApPB5obIaVMZG39lWvZc/VTBZkTr7ufvOyIvwtYc9eh+AiNSy02gUXMzIkxK/eyWmKXowJcqXYK8K9iIgkLfMclUdWFQtHCN0h4OEyenRreP9qX8E34eeZ1ZwiDgJGOki8Ys4bphaFjSXZd82KRwuHDTIamAEGCUm7rLW9yOGE77AJpBTdqt2Qz9SUCXWbJewukbvtZwVtAEpEI/O+/KKNinObH0Lmhj8bRLn01rLgt9WsB972vEjboyzkT2gC7/G2Nx8O3IFiiJ9Ki5/hko5A4oorXdkCfuP7UfiKFR/pkXKqCOMrqi7uD7N0/qNtZ2j3satfeInOEldn1M6h7mz2IiRdszxq/RTsdFEO6h3X3lZLELXcDjgkZqCMXaPToAPRS2EKi6Ihs151VepGAerGOeq+DL+NU1aOwenivXe91vqDm9O0Cc3K756VBkUZA7ufFp3RKujk5fWygk0N8w0Zd9qU/tL7NqE/5n8xIdknzBI+qoHCrrOTnyMUpUEPuYbxY2lYkhb/4Afzte2nyM0K50I/4imEYWVsC+vNQ59OeYCoYcJBe19D+dm2rfxvYgy/H7scFjsl9rwCe23aPWQOJBJvcEnmgKOMRkG0cw6gvhBPVZ2w8gvIAfffLsj+zsag1izfgzcaajrfRr/kkxYk6R6Gz5tdjYSUz6P1Xk8LyCyB6st9IE433qlel4bwxjwh1CYz3pGUvAwj+TKsAF4xeiFd/LN3nitE74yGAOerbB/MrQqCcGbD6Anz2DWaFkhRxYKlJQsyy1rsxPzfo2wr8W/zpX7Jf17fHXJ96OG/WV2uZvudw7EjVdvxLhauabodjh3eC1/Kn9yvxJ5GTQLjJ04C/o7QgiIz+vNyxSqfvWf6zAsPJrAoHZXXoPbOaZVG2Sx1eWrhEIi8eV2z1x54SKLM0yy8lRTc2170AhLxqf4PaDTMR4ZTkhaIwPONeAIdHGnk3DVgYa/97WNO3j48ZnXwjKvp8mcKoe2Q9Y3WYuu4XafZg9UdDLbtePJiBlSF42uUbZsS4/oEU8ErRyodcOQPUYEM5SGuxceTvyxi6v7zhgYv3TiwWGgkoxznvFZ9H8m3SN0hCY4TINo9bnBAm2XRzZrhmGRpoKTOvQbkIXKoOzKeoQRgopjUdWW5X4EcKOW76X7B20x+2sPVkqwN/u5KFX3+HY3z1ui1+nIIKlbjUCY17QwxuVDP7yMU6xeBhtwUz0FkFGyHuSbrk+NhpA==
   template:
     metadata:
-      creationTimestamp: null
       name: hasura-sealed-secret
     type: Opaque
 "

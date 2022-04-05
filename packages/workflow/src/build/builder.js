@@ -13,7 +13,7 @@ const generateValues = require("./values")
 const compileJobs = require("./compile-jobs")
 const compileOutputs = require("./compile-outputs")
 const compileChart = require("./compile-chart")
-const compiledefaultNs = require("./compile-default-ns")
+const compileFinal = require("./compile-final")
 
 const { buildCtx } = require("./ctx")
 
@@ -142,7 +142,7 @@ module.exports = async (envVars) => {
   )
 
   logger.debug("Set default namespace")
-  manifests = await compiledefaultNs(manifests, values)
+  manifests = await compileFinal(manifests, values)
 
   logger.debug("Write manifests file")
   const manifestsFile = `${KWBUILD_PATH}/manifests.yaml`

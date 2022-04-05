@@ -75,9 +75,7 @@ spec:
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
-    metadata:
-      annotations: null
-      labels: null
+    metadata: {}
     spec:
       restartPolicy: Never
       initContainers:
@@ -166,9 +164,7 @@ spec:
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
-    metadata:
-      annotations: null
-      labels: null
+    metadata: {}
     spec:
       restartPolicy: Never
       initContainers:

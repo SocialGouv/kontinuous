@@ -1,5 +1,7 @@
 const yaml = require("js-yaml")
 
+const removeNulls = require("~/utils/remove-nulls")
+
 module.exports = async (manifestsDocument, values) => {
   const defaultNamespace = values.global.namespace
   const iterator = yaml.loadAll(manifestsDocument)
@@ -16,6 +18,7 @@ module.exports = async (manifestsDocument, values) => {
         manifest.metadata.namespace = defaultNamespace
       }
     }
+    removeNulls(manifest)
     manifests.push(yaml.dump(manifest))
   }
   return manifests.join("---\n")

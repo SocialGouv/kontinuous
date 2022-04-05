@@ -106,12 +106,10 @@ spec:
     metadata:
       labels:
         component: metabase
-        application: null
     spec:
       containers:
         - image: metabase/metabase:v0.41.6
           name: metabase
-          env: null
           envFrom:
             - configMapRef:
                 name: metabase

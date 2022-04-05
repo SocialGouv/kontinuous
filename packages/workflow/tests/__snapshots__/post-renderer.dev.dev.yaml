@@ -89,8 +89,6 @@ spec:
         component: app
         application: test-post-renderer.dev
     spec:
-      initContainers: null
-      volumes: null
       containers:
         - image: >-
             ghcr.io/socialgouv/test-post-renderer.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53
@@ -128,9 +126,6 @@ spec:
               path: /index.html
               port: http
             periodSeconds: 5
-          env: null
-          envFrom: null
-          volumeMounts: null
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

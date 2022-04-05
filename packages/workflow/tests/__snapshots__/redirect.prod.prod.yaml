@@ -87,8 +87,6 @@ spec:
         component: app
         application: test-redirect.prod
     spec:
-      initContainers: null
-      volumes: null
       containers:
         - image: ghcr.io/socialgouv/test-redirect.prod/app:prod
           livenessProbe:
@@ -125,9 +123,6 @@ spec:
               path: /index.html
               port: http
             periodSeconds: 5
-          env: null
-          envFrom: null
-          volumeMounts: null
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
