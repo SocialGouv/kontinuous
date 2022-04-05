@@ -9,7 +9,7 @@ const builder = require("~/build/builder")
 
 const getDirectoriesSync = require("~/utils/get-directories-sync")
 
-const rootPath = path.resolve(`${__dirname}/../../..`)
+const rootPath = path.resolve(`${__dirname}/..`)
 
 const samplesDir = `${__dirname}/samples`
 const testdirs = getDirectoriesSync(samplesDir)

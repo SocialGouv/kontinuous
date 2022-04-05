@@ -59,7 +59,9 @@ module.exports = async (envVars) => {
   await fs.ensureDir(KWBUILD_PATH)
 
   logger.debug("Import charts")
-  await fs.copy(`${KUBEWORKFLOW_PATH}/charts`, `${KWBUILD_PATH}/charts`)
+  await fs.copy(`${KUBEWORKFLOW_PATH}/chart`, `${KWBUILD_PATH}/chart`, {
+    dereference: true,
+  })
 
   const workspaceKubeworkflowPath = `${WORKSPACE_PATH}${WORKSPACE_SUBPATH}`
   if (await fs.pathExists(workspaceKubeworkflowPath)) {
@@ -123,7 +125,7 @@ module.exports = async (envVars) => {
   if (await fs.pathExists(`${KWBUILD_PATH}/templates`)) {
     await fs.copy(
       `${KWBUILD_PATH}/templates`,
-      `${KWBUILD_PATH}/charts/kube-workflow/templates`
+      `${KWBUILD_PATH}/chart/templates`
     )
   }
 
@@ -143,9 +145,9 @@ module.exports = async (envVars) => {
     `
       helm template
         -f values.json
-        --post-renderer ${KUBEWORKFLOW_PATH}/packages/workflow/bin/post-renderer
+        --post-renderer ${KUBEWORKFLOW_PATH}/bin/post-renderer
         ${HELM_ARGS}
-        charts/kube-workflow
+        chart
     `,
     { cwd: KWBUILD_PATH }
   )
