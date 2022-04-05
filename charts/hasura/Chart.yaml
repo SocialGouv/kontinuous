@@ -1,6 +1,6 @@
 apiVersion: v2
 name: hasura
-version: 1.5.1
+version: 1.5.2
 home: https://github.com/SocialGouv
 description: Hasura service
 icon: https://avatars.githubusercontent.com/u/45039513?v=4
@@ -9,4 +9,4 @@ sources:
 maintainers:
   - name: Fabrique numérique des Ministères Sociaux
     email: dsi-incubateur@sg.social.gouv.fr
-appVersion: 1.5.1
+appVersion: 1.5.2
