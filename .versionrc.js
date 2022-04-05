@@ -36,6 +36,10 @@ const chartsUpdater = {
 }
 
 const bumpFiles = [{ filename: "package.json", type: "json" }]
+const packageDirs = getDirectoriesSync("packages")
+for (const dir of packageDirs){
+  bumpFiles.push({ filename: `packages/${dir}/package.json`, type: "json" })
+}
 
 const getChartsRecursive = (dir = "charts", list=[])=>{
   const chartList = getDirectoriesSync(dir)
