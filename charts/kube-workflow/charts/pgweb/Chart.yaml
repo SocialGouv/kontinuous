@@ -1,6 +1,6 @@
 apiVersion: v2
 name: pgweb
-version: 1.5.4
+version: 1.5.5
 home: 'https://github.com/SocialGouv'
 description: Pgweb
 icon: 'https://avatars.githubusercontent.com/u/45039513?v=4'
@@ -9,4 +9,4 @@ sources:
 maintainers:
   - name: Fabrique numérique des Ministères Sociaux
     email: dsi-incubateur@sg.social.gouv.fr
-appVersion: 1.5.4
+appVersion: 1.5.5
