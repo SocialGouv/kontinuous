@@ -177,7 +177,7 @@ module.exports = async (options) => {
           if (code === 0) {
             resolve()
           } else {
-            reject(new Error(`Deploy failed with exit code ${code}`))
+            reject(new Error(`kapp deploy failed with exit code ${code}`))
           }
         })
       })
