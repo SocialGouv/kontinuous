@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/SocialGouv/kube-workflow/compare/v1.6.0...v1.6.1) (2022-04-05)
+
+
+### Bug Fixes
+
+* ensure gh action use last version ([f6a6f27](https://github.com/SocialGouv/kube-workflow/commit/f6a6f27157c340a99e4ff93cf97a8d7fcf5c1753))
+* exit code on deploy ([4f67789](https://github.com/SocialGouv/kube-workflow/commit/4f67789f2a6443f40c02119b00cf29582501930c))
+* exit code on deploy ([39234d0](https://github.com/SocialGouv/kube-workflow/commit/39234d040e7116b48d8ba4b447b4f88ec8644574))
+
 ## [1.6.0](https://github.com/SocialGouv/kube-workflow/compare/v1.5.10...v1.6.0) (2022-04-05)
 
 
