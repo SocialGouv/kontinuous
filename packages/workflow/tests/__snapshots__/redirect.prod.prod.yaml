@@ -67,8 +67,8 @@ metadata:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: autodevops/test-redirect.prod
-    kapp.k14s.io/change-group.app: autodevops/app.test-redirect.prod
+    kapp.k14s.io/change-group: kube-workflow/test-redirect.prod
+    kapp.k14s.io/change-group.app: kube-workflow/app.test-redirect.prod
 spec:
   replicas: 1
   selector:

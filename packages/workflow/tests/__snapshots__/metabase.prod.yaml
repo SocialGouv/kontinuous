@@ -145,8 +145,8 @@ metadata:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: autodevops/test-metabase
-    kapp.k14s.io/change-group.metabase-app1: autodevops/metabase-app1.test-metabase
+    kapp.k14s.io/change-group: kube-workflow/test-metabase
+    kapp.k14s.io/change-group.metabase-app1: kube-workflow/metabase-app1.test-metabase
 spec:
   replicas: 1
   selector:
@@ -220,8 +220,8 @@ metadata:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: autodevops/test-metabase
-    kapp.k14s.io/change-group.metabase-app2: autodevops/metabase-app2.test-metabase
+    kapp.k14s.io/change-group: kube-workflow/test-metabase
+    kapp.k14s.io/change-group.metabase-app2: kube-workflow/metabase-app2.test-metabase
 spec:
   replicas: 1
   selector:

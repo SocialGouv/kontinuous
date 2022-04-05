@@ -118,9 +118,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kapp.k14s.io/change-group: autodevops/test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.app: autodevops/app.test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-rule.build-app: upsert after upserting autodevops/build-app.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group: kube-workflow/test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.app: kube-workflow/app.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-rule.build-app: upsert after upserting kube-workflow/build-app.test-sample-next-app-feature-branch-1
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
@@ -193,10 +193,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kapp.k14s.io/change-group: autodevops/test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.hasura: autodevops/hasura.test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-rule.build-hasura: upsert after upserting autodevops/build-hasura.test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-rule.db: upsert after upserting autodevops/db.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group: kube-workflow/test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.hasura: kube-workflow/hasura.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-rule.build-hasura: upsert after upserting kube-workflow/build-hasura.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-rule.db: upsert after upserting kube-workflow/db.test-sample-next-app-feature-branch-1
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
@@ -267,9 +267,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kapp.k14s.io/change-group: autodevops/test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.pgweb: autodevops/pgweb.test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-rule.db: upsert after upserting autodevops/db.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group: kube-workflow/test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.pgweb: kube-workflow/pgweb.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-rule.db: upsert after upserting kube-workflow/db.test-sample-next-app-feature-branch-1
     kapp.k14s.io/disable-default-label-scoping-rules: \\"\\"
     kapp.k14s.io/disable-default-ownership-label-rules: \\"\\"
     kapp.k14s.io/nonce: \\"\\"
@@ -396,7 +396,7 @@ kind: Job
 metadata:
   annotations:
     janitor/ttl: \\"1800\\"
-    kapp.k14s.io/change-group: autodevops/test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group: kube-workflow/test-sample-next-app-feature-branch-1
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   name: job-feature-branch-1-
@@ -465,10 +465,10 @@ kind: Job
 metadata:
   annotations:
     janitor/ttl: \\"1800\\"
-    kapp.k14s.io/change-group: autodevops/test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.build-app: autodevops/build-app.test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.build-app..credentials: autodevops/build-app..credentials.test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.build-app.credentials: autodevops/build-app.credentials.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group: kube-workflow/test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.build-app: kube-workflow/build-app.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.build-app..credentials: kube-workflow/build-app..credentials.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.build-app.credentials: kube-workflow/build-app.credentials.test-sample-next-app-feature-branch-1
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   name: job-feature-branch-1-build-app--credentials
@@ -543,11 +543,11 @@ kind: Job
 metadata:
   annotations:
     janitor/ttl: \\"1800\\"
-    kapp.k14s.io/change-group: autodevops/test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.build-app: autodevops/build-app.test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.build-app..kaniko: autodevops/build-app..kaniko.test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.build-app.kaniko: autodevops/build-app.kaniko.test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-rule.build-app..credentials: upsert after upserting autodevops/build-app..credentials.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group: kube-workflow/test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.build-app: kube-workflow/build-app.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.build-app..kaniko: kube-workflow/build-app..kaniko.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.build-app.kaniko: kube-workflow/build-app.kaniko.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-rule.build-app..credentials: upsert after upserting kube-workflow/build-app..credentials.test-sample-next-app-feature-branch-1
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   name: job-feature-branch-1-build-app--kaniko
@@ -638,10 +638,10 @@ kind: Job
 metadata:
   annotations:
     janitor/ttl: \\"1800\\"
-    kapp.k14s.io/change-group: autodevops/test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.build-hasura: autodevops/build-hasura.test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.build-hasura..credentials: autodevops/build-hasura..credentials.test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.build-hasura.credentials: autodevops/build-hasura.credentials.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group: kube-workflow/test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.build-hasura: kube-workflow/build-hasura.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.build-hasura..credentials: kube-workflow/build-hasura..credentials.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.build-hasura.credentials: kube-workflow/build-hasura.credentials.test-sample-next-app-feature-branch-1
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   name: job-feature-branch-1-build-hasura--credentials
@@ -716,11 +716,11 @@ kind: Job
 metadata:
   annotations:
     janitor/ttl: \\"1800\\"
-    kapp.k14s.io/change-group: autodevops/test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.build-hasura: autodevops/build-hasura.test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.build-hasura..kaniko: autodevops/build-hasura..kaniko.test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-group.build-hasura.kaniko: autodevops/build-hasura.kaniko.test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-rule.build-hasura..credentials: upsert after upserting autodevops/build-hasura..credentials.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group: kube-workflow/test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.build-hasura: kube-workflow/build-hasura.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.build-hasura..kaniko: kube-workflow/build-hasura..kaniko.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group.build-hasura.kaniko: kube-workflow/build-hasura.kaniko.test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-rule.build-hasura..credentials: upsert after upserting kube-workflow/build-hasura..credentials.test-sample-next-app-feature-branch-1
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   name: job-feature-branch-1-build-hasura--kaniko
@@ -810,8 +810,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   annotations:
-    kapp.k14s.io/change-group: autodevops/post-test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-rule: upsert after upserting autodevops/test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group: kube-workflow/post-test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-rule: upsert after upserting kube-workflow/test-sample-next-app-feature-branch-1
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   name: jobci-post-operations-jobs
@@ -847,8 +847,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   annotations:
-    kapp.k14s.io/change-group: autodevops/post-test-sample-next-app-feature-branch-1
-    kapp.k14s.io/change-rule: upsert after upserting autodevops/test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-group: kube-workflow/post-test-sample-next-app-feature-branch-1
+    kapp.k14s.io/change-rule: upsert after upserting kube-workflow/test-sample-next-app-feature-branch-1
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   name: jobci-post-operations-jobs-dev

@@ -138,8 +138,8 @@ metadata:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: autodevops/test-sample-1
-    kapp.k14s.io/change-group.app-2nd-instance: autodevops/app-2nd-instance.test-sample-1
+    kapp.k14s.io/change-group: kube-workflow/test-sample-1
+    kapp.k14s.io/change-group.app-2nd-instance: kube-workflow/app-2nd-instance.test-sample-1
 spec:
   replicas: 1
   selector:
@@ -213,8 +213,8 @@ metadata:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: autodevops/test-sample-1
-    kapp.k14s.io/change-group.app: autodevops/app.test-sample-1
+    kapp.k14s.io/change-group: kube-workflow/test-sample-1
+    kapp.k14s.io/change-group.app: kube-workflow/app.test-sample-1
 spec:
   replicas: 1
   selector:
@@ -288,8 +288,8 @@ metadata:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: autodevops/test-sample-1
-    kapp.k14s.io/change-group.hasura: autodevops/hasura.test-sample-1
+    kapp.k14s.io/change-group: kube-workflow/test-sample-1
+    kapp.k14s.io/change-group.hasura: kube-workflow/hasura.test-sample-1
 spec:
   replicas: 1
   selector:
@@ -361,8 +361,8 @@ metadata:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: autodevops/test-sample-1
-    kapp.k14s.io/change-group.pgweb: autodevops/pgweb.test-sample-1
+    kapp.k14s.io/change-group: kube-workflow/test-sample-1
+    kapp.k14s.io/change-group.pgweb: kube-workflow/pgweb.test-sample-1
 spec:
   replicas: 1
   selector:

@@ -1,8 +1,8 @@
 const fs = require("fs-extra")
 
 const yaml = require("js-yaml")
-const { generate } = require("@socialgouv/env-slug")
 const degit = require("degit")
+const slug = require("~/utils/slug")
 
 const miniHash = require("~/utils/mini-hash")
 const { buildCtx } = require("./ctx")
@@ -12,11 +12,11 @@ const requireUse = async (use) => {
   const downloadingPromises = buildCtx.require("downloadingPromises")
   const { KWBUILD_PATH: rootDir, WORKSPACE_PATH: userDir } =
     buildCtx.require("env")
-  const slug = generate(use)
+  const useSlug = slug(use)
   use = use.replace("@", "#")
-  let target = `${rootDir}/uses/${slug}`
-  if (!downloadingPromises[slug]) {
-    downloadingPromises[slug] = (async () => {
+  let target = `${rootDir}/uses/${useSlug}`
+  if (!downloadingPromises[useSlug]) {
+    downloadingPromises[useSlug] = (async () => {
       if (use.startsWith(".") || use.startsWith("/")) {
         const src = `${userDir}/${use}`
         logger.debug(`import local ${src}`)
@@ -27,15 +27,16 @@ const requireUse = async (use) => {
       }
     })()
   }
-  await downloadingPromises[slug]
+  await downloadingPromises[useSlug]
   if ((await fs.stat(target)).isDirectory()) {
     target += "/use.yaml"
   }
-  return { slug, use, target }
+  return { slug: useSlug, use, target }
 }
 
 async function compile(
   values = {},
+  Values = {},
   parentScope = [],
   parentWith = {},
   file = null
@@ -67,6 +68,13 @@ async function compile(
         run.needs = []
       }
 
+      const jobName = slug([
+        "job",
+        [Values.global.gitBranch, 30],
+        currentScope.join("--"),
+      ])
+      run.jobName = jobName
+
       if (!run.use) {
         return [run]
       }
@@ -75,7 +83,7 @@ async function compile(
       const runValues = yaml.load(
         await fs.readFile(target, { encoding: "utf-8" })
       )
-      await compile(runValues, scope, run.parentWith, target)
+      await compile(runValues, Values, scope, run.parentWith, target)
       if (!runValues.runs) {
         return []
       }
@@ -110,7 +118,7 @@ module.exports = async (values) => {
   await Promise.all(
     Object.keys(values).map(async (key) => {
       if (key === "jobs" || key.startsWith("jobs-")) {
-        await compile(values[key])
+        await compile(values[key], values)
       }
     })
   )

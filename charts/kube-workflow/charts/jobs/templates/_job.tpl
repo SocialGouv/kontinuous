@@ -30,20 +30,20 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-{{ $val.global.namespace }}-{{ join "--" $run.scope }}
+  name: {{ $run.jobName }}
   namespace: {{ or $val.namespace $val.global.jobNamespace }}
   annotations:
     kapp.k14s.io/nonce: ""
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: "autodevops/{{ $val.global.namespace }}"
+    kapp.k14s.io/change-group: "kube-workflow/{{ $val.global.namespace }}"
     {{- range $scope := $run.scopes }}
-    kapp.k14s.io/change-group.{{ $scope }}: "autodevops/{{ $scope }}.{{ $val.global.namespace }}"
+    kapp.k14s.io/change-group.{{ $scope }}: "kube-workflow/{{ $scope }}.{{ $val.global.namespace }}"
     {{- end }}
     {{- range $need := $run.needs }}
-    kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting autodevops/{{ $need }}.{{ $val.global.namespace }}"
+    kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting kube-workflow/{{ $need }}.{{ $val.global.namespace }}"
     {{- end }}
     {{- range $need := $.Values.needs }}
-    kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting autodevops/{{ $need }}.{{ $val.global.namespace }}"
+    kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting kube-workflow/{{ $need }}.{{ $val.global.namespace }}"
     {{- end }}
     janitor/ttl: 1800
 spec:

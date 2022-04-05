@@ -1,10 +1,10 @@
-const { generate } = require("@socialgouv/env-slug")
+const slug = require("~/utils/slug")
 
 const { buildCtx } = require("./ctx")
 
 const versionTagRe = /v[0-9]*/
 
-function generateValues() {
+module.exports = () => {
   const {
     ENVIRONMENT,
     RANCHER_PROJECT_ID,
@@ -19,7 +19,7 @@ function generateValues() {
     .replace("refs/heads/", "")
     .replace("refs/tags/", "")
 
-  const branchSlug = generate(gitBranch)
+  const branchSlug = slug(gitBranch)
 
   const env = ENVIRONMENT
   const isProd = env === "prod"
@@ -33,13 +33,13 @@ function generateValues() {
     ? repositoryName
     : isPreProd
     ? `${repositoryName}-preprod`
-    : generate(`${repositoryName}-${gitBranch}`)
+    : slug(`${repositoryName}-${gitBranch}`)
 
   const namespace = isProd
     ? repositoryName
     : isPreProd
     ? `${repositoryName}-preprod`
-    : generate(`${repositoryName}-${gitBranch}`)
+    : slug(`${repositoryName}-${gitBranch}`)
 
   const isRenovate = gitBranch.startsWith("renovate")
 
@@ -138,5 +138,3 @@ function generateValues() {
     },
   }
 }
-
-module.exports = generateValues

@@ -77,11 +77,11 @@ kind: Job
 metadata:
   annotations:
     janitor/ttl: \\"1800\\"
-    kapp.k14s.io/change-group: autodevops/test-jobs-uses-degit-feature-branch-1
-    kapp.k14s.io/change-group.db: autodevops/db.test-jobs-uses-degit-feature-branch-1
-    kapp.k14s.io/change-group.db..create-db: autodevops/db..create-db.test-jobs-uses-degit-feature-branch-1
-    kapp.k14s.io/change-group.db.create-db: autodevops/db.create-db.test-jobs-uses-degit-feature-branch-1
-    kapp.k14s.io/change-rule.db..create-secret: upsert after upserting autodevops/db..create-secret.test-jobs-uses-degit-feature-branch-1
+    kapp.k14s.io/change-group: kube-workflow/test-jobs-uses-degit-feature-branch-1
+    kapp.k14s.io/change-group.db: kube-workflow/db.test-jobs-uses-degit-feature-branch-1
+    kapp.k14s.io/change-group.db..create-db: kube-workflow/db..create-db.test-jobs-uses-degit-feature-branch-1
+    kapp.k14s.io/change-group.db.create-db: kube-workflow/db.create-db.test-jobs-uses-degit-feature-branch-1
+    kapp.k14s.io/change-rule.db..create-secret: upsert after upserting kube-workflow/db..create-secret.test-jobs-uses-degit-feature-branch-1
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   name: job-feature-branch-1-db--create-db
@@ -166,10 +166,10 @@ kind: Job
 metadata:
   annotations:
     janitor/ttl: \\"1800\\"
-    kapp.k14s.io/change-group: autodevops/test-jobs-uses-degit-feature-branch-1
-    kapp.k14s.io/change-group.db: autodevops/db.test-jobs-uses-degit-feature-branch-1
-    kapp.k14s.io/change-group.db..create-secret: autodevops/db..create-secret.test-jobs-uses-degit-feature-branch-1
-    kapp.k14s.io/change-group.db.create-secret: autodevops/db.create-secret.test-jobs-uses-degit-feature-branch-1
+    kapp.k14s.io/change-group: kube-workflow/test-jobs-uses-degit-feature-branch-1
+    kapp.k14s.io/change-group.db: kube-workflow/db.test-jobs-uses-degit-feature-branch-1
+    kapp.k14s.io/change-group.db..create-secret: kube-workflow/db..create-secret.test-jobs-uses-degit-feature-branch-1
+    kapp.k14s.io/change-group.db.create-secret: kube-workflow/db.create-secret.test-jobs-uses-degit-feature-branch-1
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   name: job-feature-branch-1-db--create-secret
@@ -243,8 +243,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   annotations:
-    kapp.k14s.io/change-group: autodevops/post-test-jobs-uses-degit-feature-branch-1
-    kapp.k14s.io/change-rule: upsert after upserting autodevops/test-jobs-uses-degit-feature-branch-1
+    kapp.k14s.io/change-group: kube-workflow/post-test-jobs-uses-degit-feature-branch-1
+    kapp.k14s.io/change-rule: upsert after upserting kube-workflow/test-jobs-uses-degit-feature-branch-1
     kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
   name: jobci-post-operations
