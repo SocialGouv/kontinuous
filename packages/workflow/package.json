@@ -51,7 +51,10 @@
     "post-renderer": "./bin/post-renderer"
   },
   "files": [
-    "**"
+    "bin",
+    "src",
+    "chart"
+
   ],
   "publishConfig": {
     "access": "public"
