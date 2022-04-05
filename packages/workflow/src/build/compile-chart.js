@@ -6,7 +6,7 @@ const { buildCtx } = require("./ctx")
 module.exports = async (values) => {
   const { KWBUILD_PATH: rootDir } = buildCtx.require("env")
   const chart = yaml.load(
-    await fs.readFile(`${rootDir}/charts/kube-workflow/Chart.yaml`, {
+    await fs.readFile(`${rootDir}/chart/Chart.yaml`, {
       encoding: "utf-8",
     })
   )
@@ -42,10 +42,7 @@ module.exports = async (values) => {
       }
     }
   }
-  await fs.writeFile(
-    `${rootDir}/charts/kube-workflow/Chart.yaml`,
-    yaml.dump(chart)
-  )
+  await fs.writeFile(`${rootDir}/chart/Chart.yaml`, yaml.dump(chart))
 
   return chart
 }

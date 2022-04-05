@@ -149,15 +149,15 @@ module.exports = async (options) => {
 
   const deployWithKapp = async () => {
     const inlineCmd = `kapp \
-    deploy
-      --kubeconfig-context ${kubeconfigContext} \
-      --app ${repositoryName} \
-      --namespace ${namespace} \
-      --logs-all \
-      --dangerous-override-ownership-of-existing-resources \
-      --yes \
-      -f ${manifestsFile}
-  `
+      deploy
+        --kubeconfig-context ${kubeconfigContext} \
+        --app ${repositoryName} \
+        --namespace ${namespace} \
+        --logs-all \
+        --dangerous-override-ownership-of-existing-resources \
+        --yes \
+        -f ${manifestsFile}
+    `
     const [cmd, ...args] = inlineCmd
       .split(" ")
       .map((a) => a.trim())
@@ -177,12 +177,13 @@ module.exports = async (options) => {
           if (code === 0) {
             resolve()
           } else {
-            reject(new Error(`Deploy failed with exit code ${code}`))
+            reject(new Error(`kapp deploy failed with exit code ${code}`))
           }
         })
       })
     } catch (err) {
       logger.error(err)
+      throw err
     }
   }
 
