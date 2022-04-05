@@ -421,6 +421,7 @@ spec:
             - /bin/bash
             - '-c'
             - |
+              set -e
               /action/create-secret.sh
           securityContext:
             runAsUser: 1001
@@ -521,6 +522,7 @@ spec:
             - /bin/bash
             - '-c'
             - |
+              set -e
               /action/ensure-db.sh
           securityContext:
             runAsUser: 1000
@@ -839,6 +841,7 @@ spec:
             - /bin/bash
             - '-c'
             - |
+              set -e
               DOCKER_IMAGE=\\"$(cat \\"/workflow/vars/build-app/DOCKER_IMAGE\\")\\"
               echo \\"my DOCKER_IMAGE is '$DOCKER_IMAGE' !!!\\"
           securityContext:

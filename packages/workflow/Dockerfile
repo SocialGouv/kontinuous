@@ -21,12 +21,6 @@ RUN curl -sL https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar x
   && chmod +x /usr/local/bin/helm \
   && rm -r /tmp/linux-amd64
 
-ARG KUSTOMIZE_VERSION=v4.5.2
-ENV KUSTOMIZE_VERSION=$KUSTOMIZE_VERSION
-RUN curl -sL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_v4.5.2_linux_amd64.tar.gz | tar xz -C /tmp/ \
-  && mv /tmp/kustomize /usr/local/bin/kustomize \
-  && chmod +x /usr/local/bin/kustomize
-
 ARG NODE_VERSION=17
 ENV NODE_VERSION=$NODE_VERSION
 RUN wget -qO- https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
@@ -39,6 +33,12 @@ ENV KAPP_VERSION=$KAPP_VERSION
 RUN curl -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/${KAPP_VERSION}/kapp-linux-amd64 > /tmp/kapp \
   && mv /tmp/kapp /usr/local/bin/kapp \
   && chmod +x /usr/local/bin/kapp
+
+# ARG KUSTOMIZE_VERSION=v4.5.2
+# ENV KUSTOMIZE_VERSION=$KUSTOMIZE_VERSION
+# RUN curl -sL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_v4.5.2_linux_amd64.tar.gz | tar xz -C /tmp/ \
+#   && mv /tmp/kustomize /usr/local/bin/kustomize \
+#   && chmod +x /usr/local/bin/kustomize
 
 # ARG KUBEVAL_VERSION=v0.16.1
 # ENV KUBEVAL_VERSION=$KUBEVAL_VERSION

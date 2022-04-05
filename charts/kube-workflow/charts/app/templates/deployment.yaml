@@ -34,6 +34,16 @@ spec:
         {{- end }}
       containers:
         - image: "{{ or .Values.registry .Values.global.registry }}{{ if (or .Values.imageProject .Values.global.imageProject) }}{{ (print "/" (or .Values.imageProject .Values.global.imageProject)) }}{{ end }}/{{ or .Values.imageRepository .Values.global.imageRepository }}{{ if .Values.imagePackage }}{{ (print "/" .Values.imagePackage) }}{{ end }}:{{ or .Values.imageTag .Values.global.imageTag }}"
+          {{- if .Values.entrypoint }}
+          command: |
+            {{- tpl (.Values.entrypoint | toYaml) $ | nindent 12 }}
+          {{- end }}
+          {{- if .Values.cmd }}
+          args:
+          {{- range $arg := .Values.args }}
+            - "{{ tpl $arg $ }}"
+          {{- end }}
+          {{- end }}
           livenessProbe:
             failureThreshold: 15
             httpGet:

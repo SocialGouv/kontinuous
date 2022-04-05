@@ -12,7 +12,6 @@ runs:
     outputs:
       - DOCKER_IMAGE
     run: |
-      set -e
       mkdir -p /kaniko/.docker
       echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
       export DOCKER_IMAGE=$CI_REGISTRY{{ if (or $.with.imageProject $.Values.global.imageProject) }}{{ (print "/" (or $.with.imageProject $.Values.global.imageProject)) }}{{ end }}/{{ or $.with.imageRepository $.Values.global.imageRepository }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}{{ if $.with.target }}{{ (print "-" $.with.target) }}{{ end }}:{{ or $.with.imageTag $.Values.global.imageTag }}

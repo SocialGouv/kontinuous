@@ -127,7 +127,7 @@ spec:
           
           {{- if or $run.entrypoint $run.run $run.action $run.outputs }}
           command:
-            {{- if and $run.entrypoint }}
+            {{- if $run.entrypoint }}
             {{- tpl ($run.entrypoint | toYaml) $ | nindent 12 }}
             {{- else }}
             - /bin/{{ or $run.shell "bash" }}
@@ -135,6 +135,7 @@ spec:
             {{- end }}
             {{- if or $run.run $run.action $run.outputs }}
             - |
+              set -e
               {{- if $run.run }}
               {{- nindent 14 (tpl $run.run $) }}
               {{- else if $run.action }}

@@ -40,3 +40,5 @@ redirectFrom: []
 ingress:
   annotations: {}
 needs: []
+entrypoint:
+args: []

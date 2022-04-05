@@ -115,6 +115,7 @@ spec:
             - /bin/bash
             - '-c'
             - |
+              set -e
               /action/create-secret.sh
           securityContext:
             runAsUser: 1001
@@ -215,6 +216,7 @@ spec:
             - /bin/bash
             - '-c'
             - |
+              set -e
               /action/ensure-db.sh
           securityContext:
             runAsUser: 1000
