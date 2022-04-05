@@ -21,7 +21,7 @@ Call it in review, preprod, and prod github workflows
 
 ## Configure your project
 
-`.kube-workflow/common/values.yaml`
+`.kube-workflow/values.yaml`
 
 ```yaml
 # here you define variables shared by all helm subcharts/components
@@ -42,8 +42,8 @@ From kube-workflow repository:
 
 From your project repository:
 
-- `.kube-workflow/common/values.yaml`
-- `.kube-workflow/env/$ENVIRONMENT/values.yaml`
+- `.kube-workflow/values.yaml`
+- `.kube-workflow/$ENVIRONMENT/values.yaml`
 
 ## Generate manifests
 
@@ -57,7 +57,8 @@ get documentation of kube-workflow cli
 
 ```
 npx kube-workflow --help
-npx kube-workflow b --help
+npx kube-workflow build --help
+npx kube-workflow deploy --help
 ```
 
 pre-requisites:
@@ -65,12 +66,6 @@ pre-requisites:
 - helm v3 [install guide](https://helm.sh/docs/intro/install/)
   ```sh
   curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-  ```
-- kubeval [install guide](https://www.kubeval.com/installation/)
-  ```sh
-  curl -sL https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz | tar xz -C /tmp/ \
-    && mv /tmp/kubeval /usr/local/bin/kubeval \
-    && chmod +x /usr/local/bin/kubeval
   ```
 - node >= 14
 - yarn
@@ -161,9 +156,9 @@ There is a shared storage volume between jobs of a same pipeline, it's mounted a
 
 Same as other components, you can define multiple instance of jobs, for example, if you want to use one pipeline from a manual triggered action.
 
-## Merge commons manifests as helm templates
+## Merge common manifests as helm templates
 
-Every yaml file in `.kube-workflow/common/templates` will be merged with the helm Chart `templates` folder before the build.
+Every yaml file in `.kube-workflow/templates` will be merged with the helm Chart `templates` folder before the build.
 
 All theses files can use the Helm templating syntax (or not if you don't need it, helm template is a superset of yaml).
 
@@ -171,7 +166,7 @@ Both extensions yaml and yml are accepted.
 
 ## Merge manifests per environment as helm templates
 
-Every yaml files in `.kube-workflow/env/$ENVIRONMENT/templates` will be merged with the helm Chart `templates` folder before the build, according to the `environment` input (dev | preprod | prod).
+Every yaml files in `.kube-workflow/$ENVIRONMENT/templates` will be merged with the helm Chart `templates` folder before the build, according to the `environment` input (dev | preprod | prod).
 
 All theses files can use the Helm templating syntax.
 
@@ -238,9 +233,6 @@ Wee need:
 - oauth2-proxy-service
   ... (many things that we don't know that we need until we'll have them)
 
-### Contribute adding more kustomize patches
-
-New patches are welcome in folders [common/patches/](common/patches/) and `env/*/patches/`
 
 ### Contribute adding more jobs
 
