@@ -36,6 +36,13 @@ spec:
     - Ingress
 ---
 apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-post-renderer-dev-feature-branch-1-5yqz79
+automountServiceAccountToken: false
+---
+apiVersion: v1
 kind: Service
 metadata:
   labels:

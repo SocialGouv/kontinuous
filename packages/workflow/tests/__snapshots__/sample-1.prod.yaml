@@ -33,6 +33,13 @@ spec:
   policyTypes:
     - Ingress
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-sample-1
+automountServiceAccountToken: false
+---
 kind: ConfigMap
 apiVersion: v1
 metadata:

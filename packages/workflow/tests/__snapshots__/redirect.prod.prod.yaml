@@ -34,6 +34,13 @@ spec:
     - Ingress
 ---
 apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-redirect.prod
+automountServiceAccountToken: false
+---
+apiVersion: v1
 kind: Service
 metadata:
   labels:

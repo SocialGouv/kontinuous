@@ -36,6 +36,13 @@ spec:
     - Ingress
 ---
 apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+automountServiceAccountToken: false
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: jobs-shared-storage
