@@ -18,7 +18,7 @@ metadata:
 spec:
   rules:
     - host: >-
-        {{ or .Values.host .Values.global.host }}
+        {{- include "defaults.ingress-host" . | nindent 8 }}
       http:
         paths:
           - backend:
@@ -31,7 +31,7 @@ spec:
   tls:
     - hosts:
         - >-
-          {{ or .Values.host .Values.global.host }}
+          {{- include "defaults.ingress-host" . | nindent 10 }}
       {{- if .Values.global.isDev }}
       secretName: "wildcard-crt"
       {{- else }}

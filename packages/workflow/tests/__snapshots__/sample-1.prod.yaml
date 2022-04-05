@@ -463,7 +463,7 @@ metadata:
   namespace: test-sample-1
 spec:
   rules:
-    - host: test-sample-1.fabrique.social.gouv.fr
+    - host: app-2nd-instance-test-sample-1.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -475,7 +475,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - test-sample-1.fabrique.social.gouv.fr
+        - app-2nd-instance-test-sample-1.fabrique.social.gouv.fr
       secretName: app-2nd-instance-crt
 ---
 apiVersion: networking.k8s.io/v1
