@@ -123,7 +123,8 @@ The component called "jobs" is a special component that allow you to define a fu
 
 ```yaml
 hasura:
-  needs: [seed]
+  enabled: true
+  needs: [db]
 
 jobs:
   enabled: true
@@ -135,10 +136,8 @@ jobs:
       with:
         pgAdminSecretRefName: pg-scaleway
     - name: seed
-      needs: [db]
-      # use: ./.kube-workflow/jobs/seed-db # local job, defined in project repository
-      # use: https://github.com/SocialGouv/kube-workflow/jobs/seed-db # degit full url
-      use: SocialGouv/kube-workflow/jobs/seed-db # degit implicit github
+      needs: [hasura]
+      use: SocialGouv/kube-workflow/jobs/seed-db
       with:
         seedPath: path/in/repo.sql
 ```
