@@ -1,0 +1,9 @@
+enabled:
+namespace: 
+repository: 
+gitBranch: 
+runs: []
+image: "debian:stable"
+needs: []
+sharedStorage:
+  enabled: false

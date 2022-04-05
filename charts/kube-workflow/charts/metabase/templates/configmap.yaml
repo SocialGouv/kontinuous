@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    component: {{ or .Values.component .Chart.Name }}
+    application: {{ .Values.global.repositoryName }}
+  name: {{ or .Values.component .Chart.Name }}
+  namespace: {{ .Values.global.namespace }}
+data:
+  MB_APPLICATION_NAME: {{ or .Values.component .Chart.Name }}
+  MB_DB_TYPE: "postgres"
+  MB_ADMIN_EMAIL: "admin@fabrique.social.gouv.fr"
+  MB_ANON_TRACKING_ENABLED: "false"
+  MB_APPLICATION_LOGO_URL: "https://socialgouv.github.io/support/_media/marianne.jpeg"
+  MB_EMAIL_FROM_ADDRESS: "contact@fabrique.social.gouv.fr"
+  MB_ENABLE_EMBEDDING: "true"
+  MB_ENABLE_PUBLIC_SHARING: "true"
+  MB_SITE_LOCALE: "fr"
+  MB_SITE_NAME: "Fabrique des ministères sociaux"
+  MB_SITE_URL: "https://{{ include "defaults.ingress-host" . }}"

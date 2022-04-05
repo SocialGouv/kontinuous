@@ -3,12 +3,15 @@ kind: Namespace
 metadata:
   annotations:
     {{- if .Values.global.ttl }}
-    janitor/ttl: {{ .Values.global.ttl }}
+    janitor/ttl: "{{ .Values.global.ttl }}"
     {{- end }}
-    field.cattle.io/projectId: {{ .Values.global.rancherProjectId }}
+    field.cattle.io/projectId: "{{ .Values.global.rancherProjectId }}"
     kubeWorkflow/gitBranch: "{{ or .Values.global.gitBranch "" }}"
     kubeWorkflow/mainNamespace: "true"
   labels:
     application: {{ .Values.global.repositoryName }}
+    {{- if .Values.global.isDev }}
+    cert: wildcard
+    {{- end }}
   name: {{ .Values.global.namespace }}
 # automountServiceAccountToken: false

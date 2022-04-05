@@ -1,0 +1,59 @@
+{
+  "name": "kube-workflow",
+  "version": "1.4.13",
+  "repository": "git@github.com:SocialGouv/kube-workflow.git",
+  "license": "MIT",
+  "main": "src/index",
+  "dependencies": {
+    "async-retry": "^1.3.3",
+    "cli-highlight": "^2.1.11",
+    "commander": "^9.1.0",
+    "degit": "^2.8.4",
+    "delay": "^5.0.0",
+    "fs-extra": "^10.0.1",
+    "git-url-parse": "^11.6.0",
+    "js-yaml": "^4.1.0",
+    "link-module-alias": "^1.2.0",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.defaultsdeep": "^4.6.1",
+    "nctx": "^1.0.1",
+    "pino": "^7.9.0",
+    "pino-pretty": "^7.5.4",
+    "pretty-ms": "^7.0.1",
+    "slugify": "^1.6.5"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "jest": "^27.5.1",
+    "jest-specific-snapshot": "^5.0.0"
+  },
+  "peerDependencies": {
+    "kube-workflow": "*"
+  },
+  "jest": {
+    "testTimeout": 10000
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest tests",
+    "test:debug": "DEBUG=1 jest tests",
+    "test:update-snapshots": "jest tests -u",
+    "postinstall": "link-module-alias"
+  },
+  "_moduleAliases": {
+    "~": "src"
+  },
+  "bin": {
+    "kube-workflow": "./bin/kube-workflow",
+    "post-renderer": "./bin/post-renderer"
+  },
+  "files": [
+    "**"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

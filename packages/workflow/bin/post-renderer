@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+const fs = require("fs-extra")
+const yaml = require("js-yaml")
+const asyncShell = require("~/utils/async-shell")
+
+const main = async () => {
+  if (!(await fs.pathExists(`${process.env.KWBUILD_PATH}/post-renderer`))) {
+    process.stdin.pipe(process.stdout)
+    return
+  }
+  const stdin = fs.readFileSync(0, "utf-8")
+  const manifests = yaml.loadAll(stdin)
+  const json = JSON.stringify(manifests)
+  const rendered = await asyncShell(
+    `${process.env.KWBUILD_PATH}/post-renderer`,
+    {},
+    (proc) => {
+      proc.stdin.write(json)
+      proc.stdin.end()
+    }
+  )
+  for (const manifest of yaml.loadAll(rendered)) {
+    if (!manifest) {
+      continue
+    }
+    process.stdout.write("---\n")
+    process.stdout.write(yaml.dump(manifest))
+  }
+}
+
+main()

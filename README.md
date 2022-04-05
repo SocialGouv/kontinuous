@@ -1,6 +1,6 @@
 # Kube-Workflow - CI on Kubernetes 🚀
 
-[![schema](./schema.png)](https://excalidraw.com/#json=gKk7kOn6a9tbmkRZlPige,IQnqqMuiEPgmWbd39GlUYg)
+[![schema](./docs/webhook-schema.png)](https://excalidraw.com/#json=gKk7kOn6a9tbmkRZlPige,IQnqqMuiEPgmWbd39GlUYg)
 
 ## GitHub Action Entrypoint
 
@@ -21,7 +21,7 @@ Call it in review, preprod, and prod github workflows
 
 ## Configure your project
 
-`.kube-workflow/common/values.yaml`
+`.kube-workflow/values.yaml`
 
 ```yaml
 # here you define variables shared by all helm subcharts/components
@@ -42,8 +42,8 @@ From kube-workflow repository:
 
 From your project repository:
 
-- `.kube-workflow/common/values.yaml`
-- `.kube-workflow/env/$ENVIRONMENT/values.yaml`
+- `.kube-workflow/values.yaml`
+- `.kube-workflow/$ENVIRONMENT/values.yaml`
 
 ## Generate manifests
 
@@ -57,7 +57,8 @@ get documentation of kube-workflow cli
 
 ```
 npx kube-workflow --help
-npx kube-workflow b --help
+npx kube-workflow build --help
+npx kube-workflow deploy --help
 ```
 
 pre-requisites:
@@ -65,10 +66,6 @@ pre-requisites:
 - helm v3 [install guide](https://helm.sh/docs/intro/install/)
   ```sh
   curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-  ```
-- kustomize v4 [install guide](https://kubectl.docs.kubernetes.io/installation/kustomize/binaries/)
-  ```sh
-  curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
   ```
 - node >= 14
 - yarn
@@ -159,9 +156,9 @@ There is a shared storage volume between jobs of a same pipeline, it's mounted a
 
 Same as other components, you can define multiple instance of jobs, for example, if you want to use one pipeline from a manual triggered action.
 
-## Merge commons manifests as helm templates
+## Merge common manifests as helm templates
 
-Every yaml file in `.kube-workflow/common/templates` will be merged with the helm Chart `templates` folder before the build.
+Every yaml file in `.kube-workflow/templates` will be merged with the helm Chart `templates` folder before the build.
 
 All theses files can use the Helm templating syntax (or not if you don't need it, helm template is a superset of yaml).
 
@@ -169,61 +166,30 @@ Both extensions yaml and yml are accepted.
 
 ## Merge manifests per environment as helm templates
 
-Every yaml files in `.kube-workflow/env/$ENVIRONMENT/templates` will be merged with the helm Chart `templates` folder before the build, according to the `environment` input (dev | preprod | prod).
+Every yaml files in `.kube-workflow/$ENVIRONMENT/templates` will be merged with the helm Chart `templates` folder before the build, according to the `environment` input (dev | preprod | prod).
 
 All theses files can use the Helm templating syntax.
 
 Usually, that's where you put your ConfigMap and SealedSecrets ressources.
 
-## Override and extends kustomizations
+## Hack the manifests
+You can modify anything you want using `post-renderer` executable that you can put at `.kube-workflow/post-renderer`.
+This can be a simple script and use `jq`, or you can call kustomize from it.
+The post-renderer will receive manifest in json format, for easier usage with `jq`:
+`/kube-workflow/post-render`:
+```sh
+#!/bin/sh
 
-The kustomization patches are applied after Helm template rendering.
+# load into variable from standard input
+manifest=$(cat /dev/stdin)
 
-The kustomization entrypoint is `$KUBEWORKFLOW_ACTION/env/$ENVIRONMENT/kustomization.yaml`.
+# arbitrary modify some stuf
+manifest=`echo "$manifest" | jq 'select(.kind = Ingress) | .annotation.foo = "bar"'`
 
-To override it, create a file called `.kube-workflow/env/$ENVIRONMENT/kustomization.yaml` in your project and containing:
-
-```yaml
-resources:
-  - ../../common
-
-patches:
-# ... put your patches here
+# output
+echo "$manifest"
 ```
-
-By doing this way you just optouted from generic kustomization for the selected environment.
-
-If you want (and more often you want) to keep the generic kustomization, containing some infra logic defined by the advised SRE team, you can extends it like this.
-
-```yaml
-resources:
-  - ../../common.autodevops
-
-patches:
-# ... put your patches here
-```
-
-You can do it as well for the common base file called by environment kustomizations, just add a file called `.kube-workflow/common/kustomization.yaml` in your project and containing:
-
-```yaml
-resources:
-  # - ../base # here is if you want to optout
-  - ../common.autodevops # here is if you want to extends from autodevops default settings
-
-patches:
-  - target:
-      kind: Ingress
-    patch: |
-      - op: add
-        path: "/metadata/annotations~1nginx.ingress.kubernetes.io~1configuration-snippet"
-        value: |
-            more_set_headers "Content-Security-Policy: default-src 'none'; connect-src 'self' https://*.gouv.fr; font-src 'self'; img-src 'self'; prefetch-src 'self' https://*.gouv.fr; script-src 'self' https://*.gouv.fr; frame-src 'self' https://*.gouv.fr; style-src 'self' 'unsafe-inline'";
-            more_set_headers "X-Frame-Options: deny";
-            more_set_headers "X-XSS-Protection: 1; mode=block";
-            more_set_headers "X-Content-Type-Options: nosniff";
-```
-
-If you think you patches can be reused by other project, contribute to [common/patches](common/patches) and `env/*/patches` folders of the action by sharing them.
+see [jq documentation](https://stedolan.github.io/jq/manual/#Invokingjq)
 
 ## Charts re-use
 
@@ -260,16 +226,13 @@ To upgrade snapshots run `yarn test -u`.
 ### Contribute adding more Helm charts
 
 New charts are welcome in folder [charts/](charts/).
-More options on existing charts will be carefully design, in case of doubt, or if you don't want to wait, you can hack everything using kustomize from your repository. Feel free, then give us feedback to ensure we follow best practices and are preserving project maintainability.
+More options on existing charts will be carefully design, in case of doubt, or if you don't want to wait, you can hack everything using post-renderer from your repository. Feel free, then give us feedback to ensure we follow best practices and are preserving project maintainability.
 
 Wee need:
 
 - oauth2-proxy-service
   ... (many things that we don't know that we need until we'll have them)
 
-### Contribute adding more kustomize patches
-
-New patches are welcome in folders [common/patches/](common/patches/) and `env/*/patches/`
 
 ### Contribute adding more jobs
 

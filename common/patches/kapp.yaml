@@ -1,6 +1,0 @@
-- op: add
-  path: "/metadata/annotations/kapp.k14s.io~1disable-default-ownership-label-rules"
-  value: ""
-- op: add
-  path: "/metadata/annotations/kapp.k14s.io~1disable-default-label-scoping-rules"
-  value: ""

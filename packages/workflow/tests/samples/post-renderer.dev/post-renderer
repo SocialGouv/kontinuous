@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# load into variable from standard input
+manifest=$(cat /dev/stdin)
+
+# arbitrary modify some stuf
+manifest=`echo "$manifest" | jq '.foo = "bar"'`
+
+# output
+echo "$manifest"

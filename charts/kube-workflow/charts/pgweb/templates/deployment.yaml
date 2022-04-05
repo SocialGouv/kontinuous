@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: {{ or .Values.component .Chart.Name }}
+    application: {{ .Values.global.repositoryName }}
+  name: {{ or .Values.component .Chart.Name }}
+  namespace: {{ .Values.global.namespace }}
+  annotations:
+    {{- include "annotations.kapp-deployment" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: {{ or .Values.component .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        component: {{ or .Values.component .Chart.Name }}
+        application: {{ .Values.global.repositoryName }}
+    spec:
+      envFrom:
+        - secretRef:
+            name: {{ or .Values.pgSecretName .Values.global.pgSecretName }}
+      initContainers:
+      {{- if .Values.waitForPostgres }}
+        {{- include "init-containers.wait-for-postgres" . | nindent 8 }}
+      {{- end }}
+      containers:
+        - image: sosedoff/pgweb:0.11.8
+          name: pgweb
+          ports:
+            - containerPort: 8081
+              name: http
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+          

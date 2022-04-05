@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`redirect.prod.prod 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: '1234'
+    kubeWorkflow/gitBranch: feature-branch-1
+    kubeWorkflow/mainNamespace: 'true'
+  labels:
+    application: test-redirect.prod
+  name: test-redirect.prod
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-redirect.prod
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-redirect.prod
+automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: test-redirect.prod
+  name: app
+  namespace: test-redirect.prod
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app
+    application: test-redirect.prod
+  name: app
+  namespace: test-redirect.prod
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/nonce: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/change-group: kube-workflow/test-redirect.prod
+    kapp.k14s.io/change-group.app: kube-workflow/app.test-redirect.prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  template:
+    metadata:
+      labels:
+        component: app
+        application: test-redirect.prod
+    spec:
+      initContainers: null
+      volumes: null
+      containers:
+        - image: ghcr.io/socialgouv/test-redirect.prod/app:prod
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          env: null
+          envFrom: null
+          volumeMounts: null
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io: cluster-issuer
+    kubernetes.io/tls-acme: 'true'
+  labels:
+    component: app
+    application: test-redirect.prod
+  name: app
+  namespace: test-redirect.prod
+spec:
+  rules:
+    - host: transco.travail-emploi.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - transco.travail-emploi.gouv.fr
+      secretName: app-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-redirect
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/permanent-redirect: https://transco.travail-emploi.gouv.fr$request_uri
+  namespace: test-redirect.prod
+spec:
+  rules:
+    - host: test-redirect.prod.fabrique.social.gouv.fr
+  tls:
+    - hosts:
+        - test-redirect.prod.fabrique.social.gouv.fr
+      secretName: app-redirect
+"
+`;

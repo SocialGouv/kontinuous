@@ -8,3 +8,6 @@ README.md
 .gitignore
 .gitlab-ci.yml
 .npmignore
+**/node_modules
+**/.gitignore
+**/.npmignore

@@ -1,0 +1,7 @@
+jobs:
+  enabled: true
+  runs:
+    - name: db
+      use: ../../../../../jobs/create-db
+      with:
+        pgAdminSecretRefName: pg-scaleway
