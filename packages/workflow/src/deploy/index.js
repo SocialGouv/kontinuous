@@ -148,17 +148,16 @@ module.exports = async (options) => {
   }
 
   const deployWithKapp = async () => {
-    // const inlineCmd = `kapp \
-    const inlineCmd = `/tmp/test \
-    deploy
-      --kubeconfig-context ${kubeconfigContext} \
-      --app ${repositoryName} \
-      --namespace ${namespace} \
-      --logs-all \
-      --dangerous-override-ownership-of-existing-resources \
-      --yes \
-      -f ${manifestsFile}
-  `
+    const inlineCmd = `kapp \
+      deploy
+        --kubeconfig-context ${kubeconfigContext} \
+        --app ${repositoryName} \
+        --namespace ${namespace} \
+        --logs-all \
+        --dangerous-override-ownership-of-existing-resources \
+        --yes \
+        -f ${manifestsFile}
+    `
     const [cmd, ...args] = inlineCmd
       .split(" ")
       .map((a) => a.trim())
