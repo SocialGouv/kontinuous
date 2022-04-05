@@ -59,13 +59,17 @@ module.exports = async (envVars) => {
   await fs.ensureDir(KWBUILD_PATH)
 
   logger.debug("Import charts")
-  await fs.copy(`${KUBEWORKFLOW_PATH}/chart`, `${KWBUILD_PATH}/chart`, {
-    dereference: true,
-  })
+  await Promise.all([
+    fs.copy(`${KUBEWORKFLOW_PATH}/Chart.yaml`, `${KWBUILD_PATH}/Chart.yaml`),
+    fs.copy(`${KUBEWORKFLOW_PATH}/values.yaml`, `${KWBUILD_PATH}/values.yaml`),
+    fs.copy(`${KUBEWORKFLOW_PATH}/templates`, `${KWBUILD_PATH}/templates`),
+    fs.copy(`${KUBEWORKFLOW_PATH}/charts`, `${KWBUILD_PATH}/charts`),
+  ])
 
   const workspaceKubeworkflowPath = `${WORKSPACE_PATH}${WORKSPACE_SUBPATH}`
+  const buildKubeworkflowPath = `${KWBUILD_PATH}/.kube-workflow`
   if (await fs.pathExists(workspaceKubeworkflowPath)) {
-    await fs.copy(`${workspaceKubeworkflowPath}`, `${KWBUILD_PATH}`, {
+    await fs.copy(workspaceKubeworkflowPath, buildKubeworkflowPath, {
       dereference: true,
     })
   }
@@ -74,8 +78,8 @@ module.exports = async (envVars) => {
   const getValuesFile = async (...files) => {
     for (const file of files) {
       for (const filePath of [
-        `${KWBUILD_PATH}/${file}.yaml`,
-        `${KWBUILD_PATH}/${file}.yml`,
+        `${buildKubeworkflowPath}/${file}.yaml`,
+        `${buildKubeworkflowPath}/${file}.yml`,
       ]) {
         if (await fs.pathExists(filePath)) {
           return yaml.load(await fs.readFile(filePath, { encoding: "utf-8" }))
@@ -90,7 +94,6 @@ module.exports = async (envVars) => {
     getValuesFile(`${ENVIRONMENT}/values`, `env/${ENVIRONMENT}/values`),
   ])
   const values = defautlsDeep({}, envValues, commonValues, defaultValues)
-
   logger.debug("Compiling jobs")
   await compileJobs(values)
 
@@ -101,32 +104,18 @@ module.exports = async (envVars) => {
   const chart = await compileChart(values)
 
   logger.debug("Merge .kube-workflow templates")
-  for (const dir of ["templates", "common/templates"]) {
-    const templatesDir = `${KWBUILD_PATH}/${dir}`
-    if (await fs.pathExists(templatesDir)) {
-      await fs.copy(templatesDir, `${KWBUILD_PATH}/templates`, {
-        dereference: true,
-      })
-    }
-  }
   for (const dir of [
+    "templates",
+    "common/templates",
     `${ENVIRONMENT}/templates`,
     `env/${ENVIRONMENT}/templates`,
   ]) {
-    const templatesDir = `${KWBUILD_PATH}/${dir}`
+    const templatesDir = `${buildKubeworkflowPath}/${dir}`
     if (await fs.pathExists(templatesDir)) {
       await fs.copy(templatesDir, `${KWBUILD_PATH}/templates`, {
         dereference: true,
       })
     }
-  }
-
-  logger.debug(`Import template in kube-workflow chart`)
-  if (await fs.pathExists(`${KWBUILD_PATH}/templates`)) {
-    await fs.copy(
-      `${KWBUILD_PATH}/templates`,
-      `${KWBUILD_PATH}/chart/templates`
-    )
   }
 
   if (COMPONENTS) {
@@ -147,7 +136,7 @@ module.exports = async (envVars) => {
         -f values.json
         --post-renderer ${KUBEWORKFLOW_PATH}/bin/post-renderer
         ${HELM_ARGS}
-        chart
+        .
     `,
     { cwd: KWBUILD_PATH }
   )

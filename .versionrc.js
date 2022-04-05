@@ -41,7 +41,7 @@ for (const dir of packageDirs){
   bumpFiles.push({ filename: `packages/${dir}/package.json`, type: "json" })
 }
 
-const getChartsRecursive = (dir = "charts", list=[])=>{
+const getChartsRecursive = (dir = "packages", list=[])=>{
   const chartList = getDirectoriesSync(dir)
   list.push(...chartList.map(c => fs.realpathSync(`${dir}/${c}`)))
   for (const chartName of chartList){
@@ -53,7 +53,6 @@ const getChartsRecursive = (dir = "charts", list=[])=>{
   return list
 }
 const charts = getChartsRecursive()
-
 bumpFiles.push(...charts.map((chartDir) => ({
   filename: `${chartDir}/Chart.yaml`,
   updater: chartsUpdater

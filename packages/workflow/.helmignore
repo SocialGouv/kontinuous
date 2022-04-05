@@ -1,0 +1,8 @@
+bin
+node_modules
+src
+tests
+Dockerfile
+package.json
+.gitignore
+.npmignore
