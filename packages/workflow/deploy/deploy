@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-set -e
-$(dirname $0)/namespace.sh
-$(dirname $0)/kapp.sh
