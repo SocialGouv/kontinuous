@@ -7,7 +7,7 @@ on:
 
 concurrency:
   cancel-in-progress: true
-  group: release-${{ github.ref_name }}
+  group: release-github-${{ github.ref_name }}
 
 jobs:
   build:

@@ -5,7 +5,7 @@ on:
     
 concurrency:
   cancel-in-progress: true
-  group: release-${{ github.ref_name }}
+  group: trigger-release-${{ github.ref_name }}
 
 jobs:
   yarn-release:
