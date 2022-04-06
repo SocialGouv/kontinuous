@@ -110,7 +110,7 @@ spec:
       {{- end }}
       containers:          
         - name: job
-          image: "{{ or $run.image $.Values.image }}"
+          image: "{{ tpl (or $run.image $.Values.image) $ }}"
           imagePullPolicy: IfNotPresent
           workingDir: "{{ or $run.workingDir "/workspace" }}"
           {{- if $run.envFrom }}
