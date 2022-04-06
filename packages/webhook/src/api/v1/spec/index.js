@@ -1,6 +1,6 @@
 async function createApiSpecV1(options = {}) {
-  console.log(options)
-
+  const port = process.env.KUBEWEBHOOK_EXPOSED_PORT || options.port
+  const host = process.env.KUBEWEBHOOK_EXPOSED_HOST || options.host
   const apiSpec = {
     openapi: "3.0.3",
     info: {
@@ -14,7 +14,7 @@ async function createApiSpecV1(options = {}) {
     },
     servers: [
       {
-        url: `http://${options.host}:${options.port}${options.path}`,
+        url: `http://${host}:${port}${options.path}`,
       },
     ],
     components: {
@@ -22,7 +22,7 @@ async function createApiSpecV1(options = {}) {
     },
     paths: {},
     "x-security-sets": {
-      auth: ["githubWebhookToken", "gitlabWebhookToken"],
+      auth: ["githubWebhookToken", "gitlabWebhookToken", "httpToken"],
     },
   }
   return apiSpec

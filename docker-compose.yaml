@@ -10,7 +10,8 @@ services:
     volumes:
       - ./:/app
     ports:
-      - ${KUBEWORKFLOW_WEBHOOK_EXPOSE_PORT:-7530}:3000
+      - ${KUBEWEBHOOK_EXPOSED_PORT:-7530}:3000
     environment:
       LOG_REQUESTS: ${LOG_REQUESTS:-false}
       KUBEWEBHOOK_TOKEN: ${KUBEWEBHOOK_TOKEN:-"1234"}
+      KUBEWEBHOOK_EXPOSED_PORT: ${KUBEWEBHOOK_EXPOSED_PORT:-7530}
