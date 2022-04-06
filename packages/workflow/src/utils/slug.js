@@ -6,6 +6,14 @@ slugify.extend({ "!": "-", ".": "-", "/": "-", "@": "-", _: "-", "~": "-" })
 const KUBERNETS_MAX_NAME_LENGTH = 63
 const SUFFIX_SHA_LENGTH = 8
 
+const suffix = (name) => {
+  const hex = Buffer.from(
+    createHash("sha256").update(name).digest("hex")
+  ).toString()
+
+  return parseInt(hex, 16).toString(36).slice(0, 6)
+}
+
 const slugString = (name, len) => {
   let slugified = slugify(name, {
     lower: true,
@@ -22,14 +30,6 @@ const slugString = (name, len) => {
     )}`
   }
   return slugified
-}
-
-const suffix = (name) => {
-  const hex = Buffer.from(
-    createHash("sha256").update(name).digest("hex")
-  ).toString()
-
-  return parseInt(hex, 16).toString(36).slice(0, 6)
 }
 
 const slug = (mixed, options = {}) => {

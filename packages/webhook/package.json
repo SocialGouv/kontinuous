@@ -13,14 +13,14 @@
     "test": "jest tests --passWithNoTests"
   },
   "dependencies": {
+    "@modjo-plugins/core": "latest",
+    "@modjo-plugins/microservice-oapi": "^1.0.5",
     "@vercel/ncc": "^0.33.3",
     "link-module-alias": "^1.2.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
-  },
-  "peerDependencies": {
-    "kube-webhook": "*"
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15"
   },
   "engines": {
     "node": ">=14"

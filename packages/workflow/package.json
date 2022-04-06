@@ -16,9 +16,9 @@
     "link-module-alias": "^1.2.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.defaultsdeep": "^4.6.1",
-    "nctx": "^1.0.1",
-    "pino": "^7.9.0",
-    "pino-pretty": "^7.5.4",
+    "nctx": "^1.2.0",
+    "pino": "^7.9.2",
+    "pino-pretty": "^7.6.0",
     "pretty-ms": "^7.0.1",
     "slugify": "^1.6.5"
   },
@@ -26,9 +26,6 @@
     "dotenv": "^16.0.0",
     "jest": "^27.5.1",
     "jest-specific-snapshot": "^5.0.0"
-  },
-  "peerDependencies": {
-    "kube-workflow": "*"
   },
   "jest": {
     "testTimeout": 10000

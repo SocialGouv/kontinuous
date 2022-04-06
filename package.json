@@ -7,28 +7,46 @@
   "workspaces": [
     "packages/*"
   ],
+  "dependencies": {
+    "link-module-alias": "^1.2.0"
+  },
   "devDependencies": {
-    "eslint": "^7.32.0",
+    "eslint": "^8.12.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-node": "^4.1.0",
-    "eslint-config-prettier": "^7",
-    "eslint-plugin-import": "^2.25.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
-    "lint-staged": "^11.1.2",
-    "prettier": "^2.5.1",
+    "lint-staged": "^12.3.7",
+    "prettier": "^2.6.2",
     "standard-version": "^9.3.2"
+  },
+  "resolutions": {
+    "@modjo-plugins/http-server": "latest",
+    "@modjo-plugins/core": "latest",
+    "@modjo-plugins/config": "latest",
+    "@modjo-plugins/express": "latest",
+    "@modjo-plugins/express-monitor": "latest",
+    "@modjo-plugins/http-logger": "latest",
+    "@modjo-plugins/lightship": "latest",
+    "@modjo-plugins/logger": "latest",
+    "@modjo-plugins/microservice-oapi": "latest",
+    "@modjo-plugins/oa": "latest",
+    "@modjo-plugins/shutdown-handlers": "latest"
   },
   "scripts": {
     "precommit": "lint-staged",
     "prepare": "husky install",
-    "lint": "yarn workspaces run --parallel lint",
+    "lint": "eslint .",
     "release": "standard-version",
     "retag": "TAG=$(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1) && git tag -f $TAG && git push origin :refs/tags/$TAG && git push -f origin master --tags",
     "push": "git push -f --follow-tags origin master",
     "delivery": "yarn release && yarn push",
-    "test": "yarn workspaces run --parallel test"
+    "test": "yarn workspaces foreach --no-private --parallel run test",
+    "dev:webhook": "docker-compose up --build webhook",
+    "upgrade:modjo": "yarn up -R @modjo-plugins/*"
   },
   "lint-staged": {
     "*.js": [
@@ -42,5 +60,6 @@
   },
   "engines": {
     "node": ">=14"
-  }
+  },
+  "packageManager": "yarn@3.2.0"
 }

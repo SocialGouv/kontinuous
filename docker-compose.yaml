@@ -8,9 +8,9 @@ services:
       context: .
       dockerfile: ./packages/webhook/Dockerfile.dev
     volumes:
-      - ./.dev-secrets:/secrets:ro
       - ./:/app
     ports:
       - ${KUBEWORKFLOW_WEBHOOK_EXPOSE_PORT:-7530}:3000
     environment:
       LOG_REQUESTS: ${LOG_REQUESTS:-false}
+      KUBEWEBHOOK_TOKEN: ${KUBEWEBHOOK_TOKEN:-"1234"}
