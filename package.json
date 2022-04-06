@@ -46,7 +46,7 @@
     "delivery": "yarn release && yarn push",
     "test": "yarn workspaces foreach --no-private --parallel run test",
     "dev:webhook": "docker-compose up --build webhook",
-    "upgrade:modjo": "yarn up -R @modjo-plugins/*"
+    "upgrade:modjo": "yarn up -R \"@modjo-plugins/*\""
   },
   "lint-staged": {
     "*.js": [

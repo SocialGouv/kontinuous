@@ -732,18 +732,18 @@ __metadata:
   linkType: hard
 
 "@modjo-plugins/config@npm:latest":
-  version: 1.0.5
-  resolution: "@modjo-plugins/config@npm:1.0.5"
+  version: 1.0.6
+  resolution: "@modjo-plugins/config@npm:1.0.6"
   dependencies:
     lodash.defaultsdeep: ^4.6.1
     nctx: ^1.2.0
-  checksum: cf324cc4b932543f5f41140ac3321bac1df67f5096195e9aa5abd40f60219125f208906d6201a2eda0d631b434f9900f6b68ca58e3ffccb534acb6ebac5fdfd6
+  checksum: 681c67748345386abb7c1c00557650a9c619033c9faf2d1eaf672b91f60011d7785a91f856f7ab8270f23ea4a763ff319f6115bba7efe902f68b5749c1cf98e2
   languageName: node
   linkType: hard
 
 "@modjo-plugins/core@npm:latest":
-  version: 1.0.5
-  resolution: "@modjo-plugins/core@npm:1.0.5"
+  version: 1.0.6
+  resolution: "@modjo-plugins/core@npm:1.0.6"
   dependencies:
     commander: ^9.1.0
     fs-extra: ^10.0.1
@@ -761,23 +761,23 @@ __metadata:
     nctx: ^1.2.0
     pretty-ms: ^7.0.1
     yup: ^0.32.11
-  checksum: a6f9abdea143f6b5465b925b536a46fa43a3327e6732fecb1dc798f899d6aeecbebf4fc4998ff4daabb7d009bc1e5faf93aa4d10bb3f6c75cae7a4c65fd80740
+  checksum: 6a646922d3e7ebc063dbb92b9f2922aadf17c32ec61c033ddc87fd04d96361cc1bb56b66ac58f09323a27f05700521816fd3552c3213cba8ee90bfc20ca6dc5c
   languageName: node
   linkType: hard
 
 "@modjo-plugins/express-monitor@npm:latest":
-  version: 1.0.5
-  resolution: "@modjo-plugins/express-monitor@npm:1.0.5"
+  version: 1.0.6
+  resolution: "@modjo-plugins/express-monitor@npm:1.0.6"
   dependencies:
     express-status-monitor: ^1.3.4
     nctx: ^1.2.0
-  checksum: 961e6e50d448ba720849c15f78cb7d6ca91d35920d816c1aac3d1c98b9a2fb818448d04d487720baf38b069133425dfa8d535b7b538438c9e3ae6f84afdfe292
+  checksum: 11bd7d72db1ec695b1e39f34d3710e738354c68e1b79dfc59d3c020880da28a68a00bf3a22f4f3b0f58eac3e1f983e28e7260ddcb10feea1a673bf98e653f145
   languageName: node
   linkType: hard
 
 "@modjo-plugins/express@npm:latest":
-  version: 1.0.5
-  resolution: "@modjo-plugins/express@npm:1.0.5"
+  version: 1.0.6
+  resolution: "@modjo-plugins/express@npm:1.0.6"
   dependencies:
     "@modjo-plugins/config": latest
     "@modjo-plugins/http-logger": latest
@@ -787,59 +787,59 @@ __metadata:
     cors: ^2.8.5
     express: ^5.0.0-beta.1
     nctx: ^1.2.0
-  checksum: 769c21e851b3b2fa0d6514c006d16babe8c449f10b2877e7a6f7853f2c878f0e887d700efd8ac96bbb9ffc1d57c40807d530a869946f0c68d14b1e275b12223b
+  checksum: b45133cf6b14d817e8969757f428b8058ade5e6d5aaa05b9162f6da7b49aa84a067d1d475c216ec520e1008905df0840b31413d4564393ef21d30ec13d3eeef9
   languageName: node
   linkType: hard
 
 "@modjo-plugins/http-logger@npm:latest":
-  version: 1.0.5
-  resolution: "@modjo-plugins/http-logger@npm:1.0.5"
+  version: 1.0.6
+  resolution: "@modjo-plugins/http-logger@npm:1.0.6"
   dependencies:
     "@modjo-plugins/config": latest
     nctx: ^1.2.0
-  checksum: ca1d9afb12eab08f0c932c3fa10a42b95c3b00d20f41c664b298e71b9692323cd8535d03eb229577ce8aab62cdf8f66e6e422adca4e5447541eccf261d72834d
+  checksum: 651ef151a36451c4b8e963810e7f0fd28a4ae085de1355f0be0c2424d5eef9abb54c2d91ab2f41f147ae7ffbb27899333544d7f76e090f7c805c8ad8ba5abb85
   languageName: node
   linkType: hard
 
 "@modjo-plugins/http-server@npm:latest":
-  version: 1.0.5
-  resolution: "@modjo-plugins/http-server@npm:1.0.5"
+  version: 1.0.6
+  resolution: "@modjo-plugins/http-server@npm:1.0.6"
   dependencies:
     "@modjo-plugins/config": latest
     "@modjo-plugins/lightship": latest
     "@modjo-plugins/logger": latest
     "@modjo-plugins/shutdown-handlers": latest
     nctx: ^1.2.0
-  checksum: 1dec676f71f334ed129ccdf8cd978a3c3ed59320c20ea6685099bbc5ab1c2c80bc22404c14e4bb516491c04e48373640f6f330bcd13debe70c4de3bcf833b616
+  checksum: 1885dcf565695c754389f26929055fdaf0712bbc23266261fc3a4ed95c253623b31939e43609c6a8f950ac3e4cb1123573e9dcbda394a415d81a6aad65f4da8e
   languageName: node
   linkType: hard
 
 "@modjo-plugins/lightship@npm:latest":
-  version: 1.0.5
-  resolution: "@modjo-plugins/lightship@npm:1.0.5"
+  version: 1.0.6
+  resolution: "@modjo-plugins/lightship@npm:1.0.6"
   dependencies:
     "@modjo-plugins/logger": latest
     lightship: ^7.0.2
     nctx: ^1.2.0
-  checksum: 60e3b51b1a83675901f42d064cd1075032bf04b059a2a3d3a422dc2d648ff459ac40158eafee4bdf6bfd7af1333b47be2d73ea5d61dbfa2355c8b2cd223aec39
+  checksum: 96f0259d4af4991d3dff564e1ab03a37c323c5543b4d3f64397b50ebc7a010bd96516a9c14910fcfb93d85d0cd1b60accfcb394e1d3037d24f3fab7aefd2150b
   languageName: node
   linkType: hard
 
 "@modjo-plugins/logger@npm:latest":
-  version: 1.0.5
-  resolution: "@modjo-plugins/logger@npm:1.0.5"
+  version: 1.0.6
+  resolution: "@modjo-plugins/logger@npm:1.0.6"
   dependencies:
     "@modjo-plugins/logger": latest
     nctx: ^1.2.0
     pino: ^7.9.2
     pino-pretty: ^7.6.0
-  checksum: 8db52afb44fbed6d142de634b91249550d7ef50bbd4d5da22cf5e3baba7f1f72cfd47cbbfe058d627215a60677838a274140ce8b10e99e5f9cdaf860445d8ef9
+  checksum: 2aa252e3a83b47d4e8903576a6a63fc7ea9931b2465043e7c15dfe4b5324cda4437a7128e4315af7ca40895bacaa1b6c4ac125c8f635d620dfb2090271d17656
   languageName: node
   linkType: hard
 
 "@modjo-plugins/microservice-oapi@npm:latest":
-  version: 1.0.5
-  resolution: "@modjo-plugins/microservice-oapi@npm:1.0.5"
+  version: 1.0.6
+  resolution: "@modjo-plugins/microservice-oapi@npm:1.0.6"
   dependencies:
     "@modjo-plugins/core": latest
     "@modjo-plugins/express": latest
@@ -852,13 +852,13 @@ __metadata:
     "@modjo-plugins/oa": latest
     "@modjo-plugins/shutdown-handlers": latest
     nctx: ^1.2.0
-  checksum: 6390ca76a2ae7a643c79bfb3d2d660d0beffdd8ef7cb1608800821d50b9bf400baf92742ee1327b2bd74d2546b04cf615804b54290299d5bc9f0614823478fe8
+  checksum: 14d7a2d62f64d3a1d8cef0b96e67fd19776e24cbc398b970d38017b5a0358c62fc6f2223f6a8c3cc65a96b9558f64498970415611e56ca0a07a9616c5813b2fd
   languageName: node
   linkType: hard
 
 "@modjo-plugins/oa@npm:latest":
-  version: 1.0.5
-  resolution: "@modjo-plugins/oa@npm:1.0.5"
+  version: 1.0.6
+  resolution: "@modjo-plugins/oa@npm:1.0.6"
   dependencies:
     "@modjo-plugins/config": latest
     "@modjo-plugins/core": latest
@@ -880,17 +880,17 @@ __metadata:
     openapi-schema-validator: ^10.0.0
     swagger-ui-dist: ^4.10.0
     swagger-ui-express: ^4.3.0
-  checksum: 6fff8900cb752cce4a1dac65fbf8268582d6391f801433e6436d247d4f60668ce9e35dfe078cb42c041ef68aa2af07fa3d7ae7aa0b6cd16767d0d76aa82484b0
+  checksum: c36489765d21ad5e64d2bf774ca204ebe180487d4426b72dcbbf722451c05108a1dcef14555108e0ff2523dbb08371546cf77e1571906423256b52d777752106
   languageName: node
   linkType: hard
 
 "@modjo-plugins/shutdown-handlers@npm:latest":
-  version: 1.0.5
-  resolution: "@modjo-plugins/shutdown-handlers@npm:1.0.5"
+  version: 1.0.6
+  resolution: "@modjo-plugins/shutdown-handlers@npm:1.0.6"
   dependencies:
     "@modjo-plugins/lightship": latest
     nctx: ^1.2.0
-  checksum: 7474c765fc439ae8195e8b5fd2892a2fb7764e9df21d7924cdc03f4f026edd86945b331d1a5de01998553b0145049242fbdda367ff88622c08d8b5fe3fdf2d92
+  checksum: eb175046d545c90a5cf4dc7cca0d6e7f143af3a67ef37d8eb884023274bcb0bbe2719ee2f66e5fdb52c67373e8ff77005f7b36d1c20b02a6514069f4f858f714
   languageName: node
   linkType: hard
 

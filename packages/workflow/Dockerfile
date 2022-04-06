@@ -59,7 +59,7 @@ RUN node -e " \
   const package = JSON.parse(fs.readFileSync('package.json')); \
   const packageZero = { ...package, version: '0.0.0' };  \
   fs.writeFileSync('package.json', JSON.stringify(packageZero));"
-RUN yarn install --frozen-lockfile --production --ignore-scripts \
+RUN yarn install --immutable --production --ignore-scripts \
   && yarn cache clean
 COPY packages/workflow/ ./
 RUN yarn postinstall

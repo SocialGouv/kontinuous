@@ -22,7 +22,7 @@ COPY package.json yarn.lock .eslintrc.yaml /app/
 COPY libs/modjo/package.json /app/libs/modjo/
 COPY libs/common/package.json /app/libs/common/
 #### YARN INSTALL
-RUN yarn --frozen-lockfile --ignore-scripts
+RUN yarn --immutable --ignore-scripts
 
 ### COPY (package sources)
 COPY packages/webhook /app/packages/webhook/
