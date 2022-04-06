@@ -1,0 +1,10 @@
+app:
+  enabled: true
+  needs: [seed]
+
+jobs:
+  enabled: true
+  runs:
+    - name: seed
+      image: "{{ .Values.global.registry }}/{{ .Values.global.imageRepository }}/app:{{ .Values.global.imageTag }}"
+      run: "yarn seed"
