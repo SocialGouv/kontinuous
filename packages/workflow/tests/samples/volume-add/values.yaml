@@ -1,3 +1,4 @@
 app:
+  enabled: true
   addVolumes:
     - docs
