@@ -1,0 +1,24 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - "*"
+
+concurrency:
+  cancel-in-progress: true
+  group: tests-${{ github.ref_name }}
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn --immutable
+
+      - name: Run tests
+        run: yarn test
