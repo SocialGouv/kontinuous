@@ -38,16 +38,11 @@ runs:
         mkdir -p $KWBUILD_PATH
         echo "KWBUILD_PATH=$KWBUILD_PATH" >> $GITHUB_ENV
 
-    - name: Node setup
-      uses: actions/setup-node@v2
-      with:
-        node-version: "14"
-
     - name: Install dependencies
       shell: bash
       working-directory: "${{ github.action_path }}"
       run: |
-        yarn --frozen-lockfile --prefer-offline --production --ignore-optional
+        yarn --immutable --production
 
     - name: Build manifests
       shell: bash
