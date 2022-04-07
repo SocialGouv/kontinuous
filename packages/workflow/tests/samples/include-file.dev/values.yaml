@@ -1,0 +1,6 @@
+jobs:
+  enabled: true
+  runs:
+    - name: say-hello
+      run: |
+        {{ .Files.Get "workspace/testify.txt" }}

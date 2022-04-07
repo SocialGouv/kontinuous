@@ -6,8 +6,9 @@ const yaml = require("js-yaml")
 const mergeWith = require("lodash.mergewith")
 
 const asyncShell = require("~/utils/async-shell")
-
 const globalLogger = require("~/utils/logger")
+const getDirectories = require("~/utils/get-directories")
+
 const getEnv = require("~/env")
 const generateValues = require("./values")
 const compileJobs = require("./compile-jobs")
@@ -141,6 +142,15 @@ module.exports = async (envVars) => {
   logger.debug("Write values file")
   await fs.writeFile(`${KWBUILD_PATH}/values.json`, JSON.stringify(values))
 
+  logger.debug("Link workspace to charts")
+  const chartNames = await getDirectories(`${KUBEWORKFLOW_PATH}/charts`)
+  await Promise.all([
+    fs.symlink(WORKSPACE_PATH, `${KWBUILD_PATH}/workspace`),
+    ...chartNames.map(chartName => {
+      return fs.symlink(WORKSPACE_PATH, `${KWBUILD_PATH}/charts/${chartName}/workspace`)
+    })
+  ])
+  
   logger.debug("Build base manifest using helm")
   let manifests = await asyncShell(
     `
