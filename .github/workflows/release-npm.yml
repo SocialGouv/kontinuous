@@ -3,7 +3,7 @@ name: Release NPM
 on:
   push:
     tags:
-      - "v*"
+      - v*.*
 
 concurrency:
   cancel-in-progress: true
