@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.6.8 (2022-04-07)
+
+
+### Bug Fixes
+
+* Handle jobs with trailing back slashes ([deaf838](https://github.com/SocialGouv/kube-workflow/commit/deaf838cfb54f285315aef6a97077b0a06b03b7b))
+
 ### 1.6.7 (2022-04-07)
 
 ### [1.6.6](https://github.com/SocialGouv/kube-workflow/compare/v1.6.5...v1.6.6) (2022-04-07)
