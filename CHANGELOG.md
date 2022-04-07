@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.6](https://github.com/SocialGouv/kube-workflow/compare/v1.6.5...v1.6.6) (2022-04-07)
+
+
+### Bug Fixes
+
+* deploy rancherProjectName ([802d49a](https://github.com/SocialGouv/kube-workflow/commit/802d49aae0487b8c9ae9a20067d64078790bbf1c))
+
 ### [1.6.5](https://github.com/SocialGouv/kube-workflow/compare/v1.6.4...v1.6.5) (2022-04-07)
 
 
