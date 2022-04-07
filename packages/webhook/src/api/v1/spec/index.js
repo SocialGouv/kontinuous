@@ -22,7 +22,7 @@ async function createApiSpecV1(options = {}) {
     },
     paths: {},
     "x-security-sets": {
-      auth: ["githubWebhookToken", "gitlabWebhookToken", "httpToken"],
+      auth: ["githubWebhookToken", "gitlabWebhookToken", "manualWebhookToken"],
     },
   }
   return apiSpec
