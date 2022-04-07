@@ -23,7 +23,7 @@ const requireUse = async (use) => {
         await fs.copy(src, target)
       } else {
         logger.debug(`degit ${use}`)
-        await degit(use).clone(target)
+        await degit(use,{force: true}).clone(target)
       }
     })()
   }
