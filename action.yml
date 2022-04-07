@@ -42,7 +42,7 @@ runs:
       shell: bash
       working-directory: "${{ github.action_path }}"
       run: |
-        yarn --immutable --production
+        yarn --immutable
 
     - name: Build manifests
       shell: bash
