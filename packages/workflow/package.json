@@ -16,6 +16,7 @@
     "link-module-alias": "^1.2.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.defaultsdeep": "^4.6.1",
+    "lodash.mergewith": "^4.6.2",
     "nctx": "^1.2.0",
     "pino": "^7.9.2",
     "pino-pretty": "^7.6.0",

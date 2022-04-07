@@ -3,7 +3,7 @@ const path = require("path")
 const { mkdtemp } = require("fs/promises")
 const fs = require("fs-extra")
 const yaml = require("js-yaml")
-const defautlsDeep = require("lodash.defaultsdeep")
+const mergeWith = require("lodash.mergewith")
 
 const asyncShell = require("~/utils/async-shell")
 
@@ -94,7 +94,11 @@ module.exports = async (envVars) => {
     getValuesFile("values", "common/values"),
     getValuesFile(`${ENVIRONMENT}/values`, `env/${ENVIRONMENT}/values`),
   ])
-  const values = defautlsDeep({}, envValues, commonValues, defaultValues)
+  const values = mergeWith({}, defaultValues, commonValues, envValues, (objValue, srcValue)=>{
+    if (Array.isArray(objValue)) {
+      return srcValue;
+    }
+  })
   logger.debug("Compiling jobs")
   await compileJobs(values)
 
