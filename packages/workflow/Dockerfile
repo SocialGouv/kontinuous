@@ -74,5 +74,5 @@ ENV HOME=/home/ubuntu
 RUN chmod a+rw $HOME
 ENV KUBECONFIG=$HOME/.kube/config
 RUN mkdir $HOME/.kube
-ENTRYPOINT ["/opt/kube-workflow/bin/cli.js"]
+ENTRYPOINT ["/opt/kube-workflow/bin/kube-workflow"]
 CMD ["deploy"]
