@@ -17,16 +17,8 @@ jobs:
         with:
           token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
 
-      - name: Node setup
-        uses: actions/setup-node@v2
-        with:
-          node-version: "14"
-
-      - name: Yarn cache setup
-        uses: c-hive/gha-yarn-cache@v1
-
       - name: Install dependencies
-        run: yarn --frozen-lockfile --prefer-offline
+        run: yarn --immutable
 
       - name: Run release
         env:
