@@ -96,9 +96,10 @@ runs:
       working-directory: "${{ github.action_path }}"
       env:
         GIT_REPOSITORY: ${{ github.repository }}
-      run: |
-        set -e
-        packages/workflow/bin/kube-workflow deploy --cwd ${{ github.workspace }} -f ${{ env.KWBUILD_PATH }}/manifests.yaml
+        ENVIRONMENT: ${{ inputs.environment }}
+        RANCHER_PROJECT_ID: ${{ inputs.rancherProjectId }}
+        RANCHER_PROJECT_NAME: ${{ inputs.rancherProjectName }}
+      run: packages/workflow/bin/kube-workflow deploy --cwd ${{ github.workspace }} -f ${{ env.KWBUILD_PATH }}/manifests.yaml
 
     - name: Define environment URL
       id: environment-url
