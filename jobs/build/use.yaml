@@ -30,4 +30,3 @@ runs:
         {{ if $.with.target -}}
         --target="{{ $.with.target }}" \
         {{- end -}}
-        ;
