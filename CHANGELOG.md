@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.2](https://github.com/SocialGouv/kube-workflow/compare/v1.7.1...v1.7.2) (2022-04-07)
+
+
+### Bug Fixes
+
+* remove yarn cache ([f13c9c6](https://github.com/SocialGouv/kube-workflow/commit/f13c9c63818c4fd4c0e0d5c1e70cb9e0db46539b))
+* remove yarn cache tracking ([e07611b](https://github.com/SocialGouv/kube-workflow/commit/e07611b76c1c8a76aa2ff641de39db182ed65687))
+
 ### 1.7.1 (2022-04-07)
 
 
