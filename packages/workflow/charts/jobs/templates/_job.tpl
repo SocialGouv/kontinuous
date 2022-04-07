@@ -138,6 +138,8 @@ spec:
               set -e
               {{- if $run.run }}
               {{- nindent 14 (tpl $run.run $) }}
+              {{/* Keep empty line below to handle commands with trailing backslashes  */}}
+
               {{- else if $run.action }}
               /action/action.sh
               {{- end }}
