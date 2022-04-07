@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.7.1 (2022-04-07)
+
+
+### Bug Fixes
+
+* release ([#26](https://github.com/SocialGouv/kube-workflow/issues/26)) ([f4b8a1b](https://github.com/SocialGouv/kube-workflow/commit/f4b8a1b741a551a76a20cebcd2d6b82115737f63))
+
 ## [1.7.0](https://github.com/SocialGouv/kube-workflow/compare/v1.6.8...v1.7.0) (2022-04-07)
 
 
