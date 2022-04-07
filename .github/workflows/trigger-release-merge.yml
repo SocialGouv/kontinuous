@@ -1,0 +1,39 @@
+name: Trigger Release
+
+on: 
+  pull_request:
+    types: [closed]
+    
+concurrency:
+  cancel-in-progress: true
+  group: trigger-release-${{ github.ref_name }}
+
+jobs:
+  yarn-release:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    name: Create release using standard-version
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
+
+      - name: Install dependencies
+        run: yarn --immutable
+
+      - name: Run release
+        env:
+          GIT_AUTHOR_EMAIL: ${{ secrets.SOCIALGROOVYBOT_EMAIL }}
+          GIT_AUTHOR_NAME: ${{ secrets.SOCIALGROOVYBOT_NAME }}
+          GIT_COMMITTER_EMAIL: ${{ secrets.SOCIALGROOVYBOT_EMAIL }}
+          GIT_COMMITTER_NAME: ${{ secrets.SOCIALGROOVYBOT_NAME }}
+        run: yarn release
+      
+      - name: Push release
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git remote set-url --push origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git push -f --follow-tags origin master
