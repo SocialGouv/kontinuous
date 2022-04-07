@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.6.2 (2022-04-07)
+
+
+### Bug Fixes
+
+* up release to yarn v3 ([e13b7d2](https://github.com/SocialGouv/kube-workflow/commit/e13b7d2ec29c39a5135ffa9d7ce0f24cae616f84))
+
 ### [1.6.1](https://github.com/SocialGouv/kube-workflow/compare/v1.6.0...v1.6.1) (2022-04-05)
 
 
