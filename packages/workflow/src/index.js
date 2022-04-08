@@ -17,7 +17,10 @@ program
       "select environment, default autodetect from current git branch"
     ).choices(["dev", "preprod", "prod"])
   )
-  .option("--components, -c <components>", "comma separated list of components to enable")
+  .option(
+    "--components, -c <components>",
+    "comma separated list of components to enable"
+  )
   .option("--helm-args, -a <args>", "add extra helm arguments")
   .option("--cwd <path>", "set current working directory")
   .option("--debug, -d", "enable debugging loglevel")
