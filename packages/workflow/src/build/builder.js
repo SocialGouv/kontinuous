@@ -106,9 +106,13 @@ const builder = async (envVars) => {
   logger.debug("Compiling outputs")
   await compileOutputs(values)
 
-  logger.debug("Compiling additional subcharts instances")
-  const chart = await compileChart(values)
-
+  logger.debug("Merge project charts")
+  const chartsDir = `${buildKubeworkflowPath}/charts`
+  if (await fs.pathExists(chartsDir)) {
+    await fs.copy(chartsDir, `${KWBUILD_PATH}/charts`, {
+      dereference: true,
+    })
+  }
   logger.debug("Merge project templates")
   for (const dir of [
     "templates",
@@ -130,6 +134,9 @@ const builder = async (envVars) => {
       dereference: true,
     })
   }
+
+  logger.debug("Compiling chart and subcharts")
+  const chart = await compileChart(values)
 
   if (COMPONENTS) {
     logger.debug(`Enable only components: "${COMPONENTS}"`)

@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`charts.dev 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    janitor/ttl: 7d
+    field.cattle.io/projectId: '1234'
+    kubeWorkflow/gitBranch: feature-branch-1
+    kubeWorkflow/mainNamespace: 'true'
+  labels:
+    application: test-charts
+    cert: wildcard
+  name: test-charts-feature-branch-1
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-charts-feature-branch-1
+  annotations:
+    kapp.k14s.io/disable-original: ''
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-charts-feature-branch-1
+  annotations:
+    kapp.k14s.io/disable-original: ''
+automountServiceAccountToken: false
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-extra
+  namespace: awesome-ci
+  annotations:
+    kapp.k14s.io/nonce: ''
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/disable-original: ''
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata: {}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: my-job
+          image: debian:stable
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/bash
+            - '-c'
+            - |
+              set -e
+              echo Hello World
+"
+`;

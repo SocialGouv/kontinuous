@@ -1,7 +1,18 @@
 const fs = require("fs-extra")
 const yaml = require("js-yaml")
+const getDirectories = require("~/utils/get-directories")
 
 const { buildCtx } = require("./ctx")
+
+const defaultChart = (name, umbrellaChart)=>{
+  const { apiVersion, appVersion, version } = umbrellaChart
+  return {
+    apiVersion,
+    version,
+    appVersion,
+    name,
+  }
+}
 
 module.exports = async (values) => {
   const { KWBUILD_PATH: rootDir } = buildCtx.require("env")
@@ -13,6 +24,26 @@ module.exports = async (values) => {
 
   const { dependencies } = chart
 
+  // import subcharts from project
+  const allChartNames = await getDirectories(`${rootDir}/charts`)
+  for (const c of allChartNames){
+    const chartDir = `${rootDir}/charts/${c}`
+    const chartFile = `${chartDir}/Chart.yaml`
+    if(!(await fs.pathExists(chartFile))){
+      await fs.writeFile(chartFile, yaml.dump(defaultChart(c, chart)))
+    }
+    const subchart = yaml.load(await fs.readFile(chartFile))
+    if (!dependencies.find(dependency => dependency.name === subchart.name)){
+      dependencies.push({
+        name: subchart.name,
+        repository: `file://./charts/${c}`,
+        condition: `${subchart.name}.enabled`,
+        version: subchart.version,
+      })
+    }
+  }
+  
+  // compile extra instances from values
   const dependenciesByName = dependencies.reduce((acc, value) => {
     acc[value.name] = value
     return acc
