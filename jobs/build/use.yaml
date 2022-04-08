@@ -18,15 +18,19 @@ runs:
       /kaniko/executor \
         --context=dir:///workspace{{ if $.with.context }}/{{ $.with.context }}{{ end }} \
         --dockerfile=/workspace{{ if $.with.context }}/{{ $.with.context }}{{ end }}/{{ or $.with.dockerfile "Dockerfile" }} \
+        {{ if $.with.noPush -}}
+        --no-push \
+        {{ else -}}
         --destination=$DOCKER_IMAGE \
         --cache=true \
+        {{ end -}}
         --snapshotMode=time \
         --use-new-run \
         {{ if $.with.buildArgs -}}
         {{- range $key, $val := $.with.buildArgs -}}
         --build-arg="{{ $key }}={{ $val }}" \
-        {{- end -}}
-        {{- end -}}
+        {{ end -}}
+        {{ end -}}
         {{ if $.with.target -}}
         --target="{{ $.with.target }}" \
-        {{- end -}}
+        {{ end -}}
