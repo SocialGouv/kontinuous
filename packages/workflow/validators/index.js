@@ -1,4 +1,4 @@
-const validators = ["resources-uniqness", "missing-keys"]
+const validators = ["resources-uniqness", "missing-keys", "needs"]
 
 module.exports = (manifests, values) => {
   for (const validator of validators) {

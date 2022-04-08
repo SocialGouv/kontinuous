@@ -13,7 +13,7 @@ app:
       name: upload
 
 hasura:
-  needs: [db]
+  needs: []
 
 pgweb:
-  needs: [db]
+  needs: []

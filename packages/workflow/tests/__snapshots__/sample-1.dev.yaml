@@ -317,7 +317,6 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: kube-workflow/test-sample-1-feature-branch-1
     kapp.k14s.io/change-group.hasura: kube-workflow/hasura.test-sample-1-feature-branch-1
-    kapp.k14s.io/change-rule.db: upsert after upserting kube-workflow/db.test-sample-1-feature-branch-1
     kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
@@ -392,7 +391,6 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: kube-workflow/test-sample-1-feature-branch-1
     kapp.k14s.io/change-group.pgweb: kube-workflow/pgweb.test-sample-1-feature-branch-1
-    kapp.k14s.io/change-rule.db: upsert after upserting kube-workflow/db.test-sample-1-feature-branch-1
     kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
