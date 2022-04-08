@@ -82,5 +82,6 @@ spec:
             - |
               set -e
               echo Hello World
+              FOO=\\"barjo\\"\\"
 "
 `;

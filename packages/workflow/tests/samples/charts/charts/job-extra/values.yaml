@@ -2,3 +2,5 @@
 annotations: {}
 labels: {}
 image: debian:stable
+
+foo: bar

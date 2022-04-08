@@ -3,7 +3,7 @@ const path = require("path")
 const { mkdtemp } = require("fs/promises")
 const fs = require("fs-extra")
 const yaml = require("js-yaml")
-const mergeWith = require("lodash.mergewith")
+const deepmerge = require("~/utils/deepmerge")
 
 const asyncShell = require("~/utils/async-shell")
 const globalLogger = require("~/utils/logger")
@@ -96,11 +96,7 @@ const builder = async (envVars) => {
     getValuesFile("values", "common/values"),
     getValuesFile(`${ENVIRONMENT}/values`, `env/${ENVIRONMENT}/values`),
   ])
-  const values = mergeWith({}, defaultValues, commonValues, envValues, (objValue, srcValue) => {
-    if (Array.isArray(objValue)) {
-      return srcValue;
-    }
-  })
+  const values = deepmerge({}, defaultValues, commonValues, envValues)
   logger.debug("Compiling jobs")
   await compileJobs(values)
 
@@ -137,9 +133,33 @@ const builder = async (envVars) => {
   const chartNames = await getDirectories(`${KWBUILD_PATH}/charts`)
   logger.debug("Merge env templates in charts")
   for (const chartName of chartNames){
-    const envChartTemplatesDir = `${KWBUILD_PATH}/charts/${chartName}/${ENVIRONMENT}`
+    const chartDir = `${KWBUILD_PATH}/charts/${chartName}`
+    const envChartDir = `${chartDir}/${ENVIRONMENT}`
+    const envChartTemplatesDir = `${envChartDir}//templates`
     if (await fs.pathExists(envChartTemplatesDir)){
       await fs.copy(envChartTemplatesDir, `${KWBUILD_PATH}/charts/${chartName}/templates`, {dereference: true})
+    }
+    const envValuesFiles = [`${envChartDir}/values.yaml`, `${envChartDir}/values.yml`]
+    let envValuesFile
+    for (const f of envValuesFiles) {
+      if (await fs.pathExists(f)) {
+        envValuesFile = f
+        break
+      }
+    }
+    if (envValuesFile){
+      const valuesFiles = [`${chartDir}/values.yaml`, `${chartDir}/values.yml`]
+      let valuesFile
+      for (const f of valuesFiles) {
+        if (await fs.pathExists(f)) {
+          valuesFile = f
+          break
+        }
+      }
+      let valuesObj = yaml.load(await fs.readFile(valuesFile))
+      valuesEnv = yaml.load(await fs.readFile(envValuesFile))
+      valuesObj = deepmerge(valuesObj, valuesEnv)
+      await fs.writeFile(valuesFile, yaml.dump(valuesObj))
     }
   }
 

@@ -37,3 +37,4 @@ spec:
             - |
               set -e
               echo Hello World
+              FOO="{{ .Values.foo }}""

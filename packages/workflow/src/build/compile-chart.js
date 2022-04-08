@@ -1,6 +1,6 @@
 const fs = require("fs-extra")
 const yaml = require("js-yaml")
-const mergeWith = require("lodash.mergewith")
+const deepmerge = require("~/utils/deepmerge")
 
 const getDirectories = require("~/utils/get-directories")
 
@@ -60,11 +60,7 @@ module.exports = async (values) => {
     } else {
       values = yaml.load(await fs.readFile(valuesFile))
     }
-    const defaultValuesObj = mergeWith(values, defaultValues(c, chart), (objValue, srcValue) => {
-      if (Array.isArray(objValue)) {
-        return srcValue;
-      }
-    })
+    const defaultValuesObj = deepmerge(values, defaultValues(c, chart))
     await fs.writeFile(valuesFile, yaml.dump(defaultValuesObj))
     
     // import subcharts in umbrella chart dependencies
