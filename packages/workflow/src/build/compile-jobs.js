@@ -106,6 +106,9 @@ async function compile(
         }
         newRun.needs = newRun.needs.map((r2) => [scope[0], r2].join(".."))
         newRun.needs = [...new Set([...newRun.needs, ...run.needs])]
+        if(run.stage){
+          newRun.stage = run.stage
+        }
         return newRun
       })
     })

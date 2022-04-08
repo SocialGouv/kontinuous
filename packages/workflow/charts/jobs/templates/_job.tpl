@@ -36,6 +36,9 @@ metadata:
     kapp.k14s.io/nonce: ""
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: "kube-workflow/{{ $val.global.namespace }}"
+    {{- if $run.stage }}
+    kapp.k14s.io/change-group.kube-workflow-stage: "kube-workflow/{{ $run.stage }}.{{ $val.global.namespace }}"
+    {{- end }}
     {{- range $scope := $run.scopes }}
     kapp.k14s.io/change-group.{{ $scope }}: "kube-workflow/{{ $scope }}.{{ $val.global.namespace }}"
     {{- end }}

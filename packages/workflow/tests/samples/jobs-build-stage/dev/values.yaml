@@ -3,7 +3,7 @@ global:
 
 app:
   enabled: true
-  needs: [build-app]
+  needs: [build]
   imagePackage: app
   probesPath: /healthz
   envFrom:
@@ -16,8 +16,7 @@ app:
 
 hasura:
   enabled: true
-  needs: [build-hasura,db]
-  # waitForPostgres: true
+  needs: [build,db]
   envFrom:
     - secretRef:
         name: "{{ .Values.global.pgSecretName }}"
@@ -26,23 +25,19 @@ hasura:
     - configMapRef:
         name: hasura-configmap
 
-pgweb:
-  enabled: true
-  needs: [db]
-
 jobs:
   enabled: true
   runs:
 
     - name: build-app
-      # use: SocialGouv/kube-workflow/jobs/build@master
+      stage: build
       use: ../../../../../jobs/build
       with:
         registrySecretRefName: harbor
         imagePackage: app
 
     - name: build-hasura
-      # use: SocialGouv/kube-workflow/jobs/build@master
+      stage: build
       use: ../../../../../jobs/build
       with:
         registrySecretRefName: harbor
@@ -50,7 +45,6 @@ jobs:
         context: hasura
 
     - name: test-app
-      # use: SocialGouv/kube-workflow/jobs/test@master
       use: ../../../../../jobs/test
       needs: [build-app]
       with:
@@ -60,7 +54,6 @@ jobs-dev:
   enabled: true
   runs:
     - name: db
-      # use: SocialGouv/kube-workflow/jobs/create-db@master
       use: ../../../../../jobs/create-db
       with:
         pgAdminSecretRefName: pg-scaleway
