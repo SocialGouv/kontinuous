@@ -17,7 +17,14 @@ program
       "select environment, default autodetect from current git branch"
     ).choices(["dev", "preprod", "prod"])
   )
-  .option("--components, -c <components>", "comma separated list of components to enable")
+  .option(
+    "--charts <charts>",
+    "comma separated list of charts to enable as standalone"
+  )
+  .option(
+    "--subcharts <subcharts>",
+    "comma separated list of subcharts to enable as a part of the main chart"
+  )
   .option("--helm-args, -a <args>", "add extra helm arguments")
   .option("--cwd <path>", "set current working directory")
   .option("--debug, -d", "enable debugging loglevel")

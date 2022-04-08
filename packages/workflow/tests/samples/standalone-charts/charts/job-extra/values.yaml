@@ -1,0 +1,4 @@
+# default values for the chart
+annotations: {}
+labels: {}
+image: debian:stable

@@ -50,7 +50,8 @@ const builder = async (envVars) => {
     ENVIRONMENT,
     WORKSPACE_PATH,
     WORKSPACE_SUBPATH = "/.kube-workflow",
-    COMPONENTS,
+    KW_CHARTS,
+    KW_SUBCHARTS,
     HELM_ARGS = "",
   } = envVars
 
@@ -64,7 +65,7 @@ const builder = async (envVars) => {
   await Promise.all([
     fs.copy(`${KUBEWORKFLOW_PATH}/Chart.yaml`, `${KWBUILD_PATH}/Chart.yaml`),
     fs.copy(`${KUBEWORKFLOW_PATH}/values.yaml`, `${KWBUILD_PATH}/values.yaml`),
-    fs.copy(`${KUBEWORKFLOW_PATH}/templates`, `${KWBUILD_PATH}/templates`),
+    ...(KW_CHARTS ? [] : [fs.copy(`${KUBEWORKFLOW_PATH}/templates`, `${KWBUILD_PATH}/templates`)]),
     fs.copy(`${KUBEWORKFLOW_PATH}/charts`, `${KWBUILD_PATH}/charts`),
     fs.symlink(`${KUBEWORKFLOW_PATH}/patches`, `${KWBUILD_PATH}/patches`),
     fs.symlink(`${KUBEWORKFLOW_PATH}/validators`, `${KWBUILD_PATH}/validators`),
@@ -113,32 +114,44 @@ const builder = async (envVars) => {
       dereference: true,
     })
   }
-  logger.debug("Merge project templates")
-  for (const dir of [
-    "templates",
-    "common/templates",
-    `${ENVIRONMENT}/templates`,
-    `env/${ENVIRONMENT}/templates`,
-  ]) {
-    const templatesDir = `${buildKubeworkflowPath}/${dir}`
-    if (await fs.pathExists(templatesDir)) {
-      await fs.copy(templatesDir, `${KWBUILD_PATH}/templates`, {
-        dereference: true,
-      })
+  if (!KW_CHARTS){
+    logger.debug("Merge project templates")
+    for (const dir of [
+      "templates",
+      "common/templates",
+      `${ENVIRONMENT}/templates`,
+      `env/${ENVIRONMENT}/templates`,
+    ]) {
+      const templatesDir = `${buildKubeworkflowPath}/${dir}`
+      if (await fs.pathExists(templatesDir)) {
+        await fs.copy(templatesDir, `${KWBUILD_PATH}/templates`, {
+          dereference: true,
+        })
+      }
     }
   }
 
   logger.debug("Compiling chart and subcharts")
   const chart = await compileChart(values)
 
-  if (COMPONENTS) {
-    logger.debug(`Enable only components: "${COMPONENTS}"`)
-    const components = COMPONENTS.split(",")
+  if (KW_CHARTS) {
+    logger.debug(`Enable only standalone charts: "${KW_CHARTS}"`)
+    const enableCharts = KW_CHARTS.split(",")
     for (const key of chart.dependencies.map(dep => dep.alias || dep.name)) {
       if (!values[key]) {
         values[key] = {}
       }
-      values[key].enabled = components.includes(key)
+      values[key].enabled = enableCharts.includes(key)
+    }
+  }
+  if (KW_SUBCHARTS) {
+    logger.debug(`Enable only subcharts: "${KW_SUBCHARTS}"`)
+    const enableSubcharts = KW_SUBCHARTS.split(",")
+    for (const key of chart.dependencies.map(dep => dep.alias || dep.name)) {
+      if (!values[key]) {
+        values[key] = {}
+      }
+      values[key].enabled = enableSubcharts.includes(key)
     }
   }
 
