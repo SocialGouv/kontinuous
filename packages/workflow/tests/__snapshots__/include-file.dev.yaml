@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`include-file.dev.dev 1`] = `
+exports[`include-file.dev 1`] = `
 "apiVersion: v1
 kind: Namespace
 metadata:
@@ -10,15 +10,15 @@ metadata:
     kubeWorkflow/gitBranch: feature-branch-1
     kubeWorkflow/mainNamespace: 'true'
   labels:
-    application: test-include-file.dev
+    application: test-include-file
     cert: wildcard
-  name: test-include-file-dev-feature-branch-1-2ye1gt
+  name: test-include-file-feature-branch-1
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: netpol-ingress
-  namespace: test-include-file-dev-feature-branch-1-2ye1gt
+  namespace: test-include-file-feature-branch-1
   annotations:
     kapp.k14s.io/disable-original: ''
 spec:
@@ -41,7 +41,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: default
-  namespace: test-include-file-dev-feature-branch-1-2ye1gt
+  namespace: test-include-file-feature-branch-1
   annotations:
     kapp.k14s.io/disable-original: ''
 automountServiceAccountToken: false
@@ -70,8 +70,8 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-include-file-dev-feature-branch-1-2ye1gt
-    kapp.k14s.io/change-group.say-hello: kube-workflow/say-hello.test-include-file-dev-feature-branch-1-2ye1gt
+    kapp.k14s.io/change-group: kube-workflow/test-include-file-feature-branch-1
+    kapp.k14s.io/change-group.say-hello: kube-workflow/say-hello.test-include-file-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
 spec:
@@ -92,7 +92,7 @@ spec:
             - sh
             - '-c'
             - |
-              npx degit kube-workflow/test-include-file.dev#feature-branch-1 \\\\
+              npx degit kube-workflow/test-include-file#feature-branch-1 \\\\
                 /workspace
           securityContext:
             runAsUser: 1000
@@ -136,15 +136,13 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: jobci-post-operations-test-include-file-dev-feature-branch-1-2ye1gt
+  name: jobci-post-operations-test-include-file-feature-branch-1
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/post-test-include-file-dev-feature-branch-1-2ye1gt
-    kapp.k14s.io/change-rule: >-
-      upsert after upserting
-      kube-workflow/test-include-file-dev-feature-branch-1-2ye1gt
+    kapp.k14s.io/change-group: kube-workflow/post-test-include-file-feature-branch-1
+    kapp.k14s.io/change-rule: upsert after upserting kube-workflow/test-include-file-feature-branch-1
     kapp.k14s.io/disable-original: ''
 spec:
   backoffLimit: 1

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`jobs-build.dev.dev 1`] = `
+exports[`jobs-build.dev 1`] = `
 "apiVersion: v1
 kind: Namespace
 metadata:
@@ -10,15 +10,15 @@ metadata:
     kubeWorkflow/gitBranch: feature-branch-1
     kubeWorkflow/mainNamespace: 'true'
   labels:
-    application: test-jobs-build.dev
+    application: test-jobs-build
     cert: wildcard
-  name: test-jobs-build-dev-feature-branch-1-312rwy
+  name: test-jobs-build-feature-branch-1
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: netpol-ingress
-  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+  namespace: test-jobs-build-feature-branch-1
   annotations:
     kapp.k14s.io/disable-original: ''
 spec:
@@ -41,7 +41,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: default
-  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+  namespace: test-jobs-build-feature-branch-1
   annotations:
     kapp.k14s.io/disable-original: ''
 automountServiceAccountToken: false
@@ -67,9 +67,9 @@ kind: Service
 metadata:
   labels:
     component: app
-    application: test-jobs-build.dev
+    application: test-jobs-build
   name: app
-  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+  namespace: test-jobs-build-feature-branch-1
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
@@ -88,9 +88,9 @@ kind: Service
 metadata:
   labels:
     component: hasura
-    application: test-jobs-build.dev
+    application: test-jobs-build
   name: hasura
-  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+  namespace: test-jobs-build-feature-branch-1
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
@@ -109,9 +109,9 @@ kind: Service
 metadata:
   labels:
     component: pgweb
-    application: test-jobs-build.dev
+    application: test-jobs-build
   name: pgweb
-  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+  namespace: test-jobs-build-feature-branch-1
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
@@ -130,20 +130,20 @@ kind: Deployment
 metadata:
   labels:
     component: app
-    application: test-jobs-build.dev
+    application: test-jobs-build
   name: app
-  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+  namespace: test-jobs-build-feature-branch-1
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.app: kube-workflow/app.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.app: kube-workflow/app.test-jobs-build-feature-branch-1
     kapp.k14s.io/change-rule.build-app: >-
       upsert after upserting
-      kube-workflow/build-app.test-jobs-build-dev-feature-branch-1-312rwy
+      kube-workflow/build-app.test-jobs-build-feature-branch-1
     kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
@@ -154,11 +154,11 @@ spec:
     metadata:
       labels:
         component: app
-        application: test-jobs-build.dev
+        application: test-jobs-build
     spec:
       containers:
         - image: >-
-            harbor.fabrique.social.gouv.fr/test-jobs-build.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+            harbor.fabrique.social.gouv.fr/test-jobs-build/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           livenessProbe:
             failureThreshold: 15
             httpGet:
@@ -206,23 +206,21 @@ kind: Deployment
 metadata:
   labels:
     component: hasura
-    application: test-jobs-build.dev
+    application: test-jobs-build
   name: hasura
-  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+  namespace: test-jobs-build-feature-branch-1
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.hasura: kube-workflow/hasura.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.hasura: kube-workflow/hasura.test-jobs-build-feature-branch-1
     kapp.k14s.io/change-rule.build-hasura: >-
       upsert after upserting
-      kube-workflow/build-hasura.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-rule.db: >-
-      upsert after upserting
-      kube-workflow/db.test-jobs-build-dev-feature-branch-1-312rwy
+      kube-workflow/build-hasura.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-rule.db: upsert after upserting kube-workflow/db.test-jobs-build-feature-branch-1
     kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
@@ -233,11 +231,11 @@ spec:
     metadata:
       labels:
         component: hasura
-        application: test-jobs-build.dev
+        application: test-jobs-build
     spec:
       containers:
         - image: >-
-            harbor.fabrique.social.gouv.fr/test-jobs-build.dev/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
+            harbor.fabrique.social.gouv.fr/test-jobs-build/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
           livenessProbe:
             failureThreshold: 15
             httpGet:
@@ -286,20 +284,18 @@ kind: Deployment
 metadata:
   labels:
     component: pgweb
-    application: test-jobs-build.dev
+    application: test-jobs-build
   name: pgweb
-  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+  namespace: test-jobs-build-feature-branch-1
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.pgweb: kube-workflow/pgweb.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-rule.db: >-
-      upsert after upserting
-      kube-workflow/db.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.pgweb: kube-workflow/pgweb.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-rule.db: upsert after upserting kube-workflow/db.test-jobs-build-feature-branch-1
     kapp.k14s.io/disable-original: ''
 spec:
   replicas: 1
@@ -310,7 +306,7 @@ spec:
     metadata:
       labels:
         component: pgweb
-        application: test-jobs-build.dev
+        application: test-jobs-build
     spec:
       envFrom:
         - secretRef:
@@ -377,11 +373,10 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.db: kube-workflow/db.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.db.create-secret: kube-workflow/db.create-secret.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.db..create-secret: >-
-      kube-workflow/db..create-secret.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.db: kube-workflow/db.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.db.create-secret: kube-workflow/db.create-secret.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.db..create-secret: kube-workflow/db..create-secret.test-jobs-build-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
 spec:
@@ -425,7 +420,7 @@ spec:
             - name: JOB_NAMESPACE
               value: awesome-ci
             - name: NAMESPACE
-              value: test-jobs-build-dev-feature-branch-1-312rwy
+              value: test-jobs-build-feature-branch-1
             - name: PGDATABASE
               value: autodevops_feature-branch-1
             - name: PGUSER
@@ -465,13 +460,13 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.db: kube-workflow/db.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.db.create-db: kube-workflow/db.create-db.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.db..create-db: kube-workflow/db..create-db.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.db: kube-workflow/db.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.db.create-db: kube-workflow/db.create-db.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.db..create-db: kube-workflow/db..create-db.test-jobs-build-feature-branch-1
     kapp.k14s.io/change-rule.db..create-secret: >-
       upsert after upserting
-      kube-workflow/db..create-secret.test-jobs-build-dev-feature-branch-1-312rwy
+      kube-workflow/db..create-secret.test-jobs-build-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
 spec:
@@ -565,11 +560,10 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.build-app: kube-workflow/build-app.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.build-app.kaniko: kube-workflow/build-app.kaniko.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.build-app..kaniko: >-
-      kube-workflow/build-app..kaniko.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.build-app: kube-workflow/build-app.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.build-app.kaniko: kube-workflow/build-app.kaniko.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.build-app..kaniko: kube-workflow/build-app..kaniko.test-jobs-build-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
 spec:
@@ -590,7 +584,7 @@ spec:
             - sh
             - '-c'
             - |
-              npx degit kube-workflow/test-jobs-build.dev#feature-branch-1 \\\\
+              npx degit kube-workflow/test-jobs-build#feature-branch-1 \\\\
                 /workspace
           securityContext:
             runAsUser: 1000
@@ -620,7 +614,7 @@ spec:
               > /kaniko/.docker/config.json
 
               export
-              DOCKER_IMAGE=$CI_REGISTRY/test-jobs-build.dev/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+              DOCKER_IMAGE=$CI_REGISTRY/test-jobs-build/app:sha-ffac537e6cbbf934b08745a378932722df287a53
 
               /kaniko/executor \\\\
                 --context=dir:///workspace \\\\
@@ -674,12 +668,10 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.build-hasura: kube-workflow/build-hasura.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.build-hasura.kaniko: >-
-      kube-workflow/build-hasura.kaniko.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.build-hasura..kaniko: >-
-      kube-workflow/build-hasura..kaniko.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.build-hasura: kube-workflow/build-hasura.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.build-hasura.kaniko: kube-workflow/build-hasura.kaniko.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.build-hasura..kaniko: kube-workflow/build-hasura..kaniko.test-jobs-build-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
 spec:
@@ -700,7 +692,7 @@ spec:
             - sh
             - '-c'
             - |
-              npx degit kube-workflow/test-jobs-build.dev#feature-branch-1 \\\\
+              npx degit kube-workflow/test-jobs-build#feature-branch-1 \\\\
                 /workspace
           securityContext:
             runAsUser: 1000
@@ -730,7 +722,7 @@ spec:
               > /kaniko/.docker/config.json
 
               export
-              DOCKER_IMAGE=$CI_REGISTRY/test-jobs-build.dev/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
+              DOCKER_IMAGE=$CI_REGISTRY/test-jobs-build/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
 
               /kaniko/executor \\\\
                 --context=dir:///workspace/hasura \\\\
@@ -785,13 +777,13 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.test-app: kube-workflow/test-app.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.test-app.test: kube-workflow/test-app.test.test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-group.test-app..test: kube-workflow/test-app..test.test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.test-app: kube-workflow/test-app.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.test-app.test: kube-workflow/test-app.test.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.test-app..test: kube-workflow/test-app..test.test-jobs-build-feature-branch-1
     kapp.k14s.io/change-rule.build-app: >-
       upsert after upserting
-      kube-workflow/build-app.test-jobs-build-dev-feature-branch-1-312rwy
+      kube-workflow/build-app.test-jobs-build-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
 spec:
@@ -838,15 +830,13 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: jobci-post-operations-test-jobs-build-dev-feature-branch-1-312rwy
+  name: jobci-post-operations-test-jobs-build-feature-branch-1
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/post-test-jobs-build-dev-feature-branch-1-312rwy
-    kapp.k14s.io/change-rule: >-
-      upsert after upserting
-      kube-workflow/test-jobs-build-dev-feature-branch-1-312rwy
+    kapp.k14s.io/change-group: kube-workflow/post-test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-rule: upsert after upserting kube-workflow/test-jobs-build-feature-branch-1
     kapp.k14s.io/disable-original: ''
 spec:
   backoffLimit: 1
@@ -933,12 +923,12 @@ metadata:
     kapp.k14s.io/disable-original: ''
   labels:
     component: app
-    application: test-jobs-build.dev
+    application: test-jobs-build
   name: app
-  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+  namespace: test-jobs-build-feature-branch-1
 spec:
   rules:
-    - host: test-jobs-build-dev-feature-branch-1-312rwy.dev.fabrique.social.gouv.fr
+    - host: test-jobs-build-feature-branch-1.dev.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -950,8 +940,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - >-
-          test-jobs-build-dev-feature-branch-1-312rwy.dev.fabrique.social.gouv.fr
+        - test-jobs-build-feature-branch-1.dev.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -962,13 +951,12 @@ metadata:
     kapp.k14s.io/disable-original: ''
   labels:
     component: hasura
-    application: test-jobs-build.dev
+    application: test-jobs-build
   name: hasura
-  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+  namespace: test-jobs-build-feature-branch-1
 spec:
   rules:
-    - host: >-
-        hasura-test-jobs-build-dev-feature-branch-1-312rwy.dev.fabrique.social.gouv.fr
+    - host: hasura-test-jobs-build-feature-branch-1.dev.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -980,8 +968,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - >-
-          hasura-test-jobs-build-dev-feature-branch-1-312rwy.dev.fabrique.social.gouv.fr
+        - hasura-test-jobs-build-feature-branch-1.dev.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -992,13 +979,12 @@ metadata:
     kapp.k14s.io/disable-original: ''
   labels:
     component: pgweb
-    application: test-jobs-build.dev
+    application: test-jobs-build
   name: pgweb
-  namespace: test-jobs-build-dev-feature-branch-1-312rwy
+  namespace: test-jobs-build-feature-branch-1
 spec:
   rules:
-    - host: >-
-        pgweb-test-jobs-build-dev-feature-branch-1-312rwy.dev.fabrique.social.gouv.fr
+    - host: pgweb-test-jobs-build-feature-branch-1.dev.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -1010,8 +996,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - >-
-          pgweb-test-jobs-build-dev-feature-branch-1-312rwy.dev.fabrique.social.gouv.fr
+        - pgweb-test-jobs-build-feature-branch-1.dev.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

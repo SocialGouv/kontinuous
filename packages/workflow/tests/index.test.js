@@ -29,7 +29,11 @@ for (const testdir of testdirs) {
   if (afterDot === "disabled") {
     continue
   }
-  const environments = allEnvs.includes(afterDot) ? [afterDot] : allEnvs
+  const subdirs = getDirectoriesSync(`${samplesDir}/${testdir}`)
+  const environments = allEnvs.filter((envName) => subdirs.includes(envName))
+  if (environments.length === 0) {
+    environments.push(allEnvs[0])
+  }
   for (const environment of environments) {
     cases.push([testdir, environment])
   }
