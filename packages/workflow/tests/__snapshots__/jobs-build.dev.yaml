@@ -624,7 +624,6 @@ spec:
                 --snapshotMode=time \\\\
                 --use-new-run \\\\
                 
-
               mkdir -p \\"$(dirname /workflow/vars/build-app/DOCKER_IMAGE)\\"
 
               echo \\"$DOCKER_IMAGE\\">/workflow/vars/build-app/DOCKER_IMAGE
@@ -732,7 +731,6 @@ spec:
                 --snapshotMode=time \\\\
                 --use-new-run \\\\
                 
-
               mkdir -p \\"$(dirname /workflow/vars/build-hasura/DOCKER_IMAGE)\\"
 
               echo \\"$DOCKER_IMAGE\\">/workflow/vars/build-hasura/DOCKER_IMAGE
