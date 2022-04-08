@@ -1,4 +1,5 @@
 const fs = require("fs-extra")
+const path = require("path")
 
 const yaml = require("js-yaml")
 const degit = require("degit")
@@ -7,10 +8,12 @@ const slug = require("~/utils/slug")
 const miniHash = require("~/utils/mini-hash")
 const { buildCtx } = require("./ctx")
 
+const selfReference = "SocialGouv/kube-workflow/"
+
 const requireUse = async (use) => {
   const logger = buildCtx.require("logger")
   const downloadingPromises = buildCtx.require("downloadingPromises")
-  const { KWBUILD_PATH: rootDir, WORKSPACE_PATH: userDir } =
+  const { KWBUILD_PATH: rootDir, WORKSPACE_PATH: userDir, KUBEWORKFLOW_PATH } =
     buildCtx.require("env")
   const useSlug = slug(use)
   use = use.replace("@", "#")
@@ -21,6 +24,11 @@ const requireUse = async (use) => {
         const src = `${userDir}/${use}`
         logger.debug(`import local ${src}`)
         await fs.copy(src, target)
+      } else if (!use.includes("#") && use.startsWith(selfReference)) {
+        const nativeJob = use.slice(selfReference.length)
+        const dir = path.join(KUBEWORKFLOW_PATH, "../..", nativeJob)
+        logger.debug(`use native job: ${nativeJob}`)
+        await fs.copy(dir, target)
       } else {
         logger.debug(`degit ${use}`)
         await degit(use,{force: true}).clone(target)
