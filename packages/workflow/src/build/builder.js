@@ -140,8 +140,11 @@ const builder = async (envVars) => {
 
   if (COMPONENTS) {
     logger.debug(`Enable only components: "${COMPONENTS}"`)
-    const components = COMPONENTS.split(" ")
-    for (const key of Object.keys(chart.dependencies)) {
+    const components = COMPONENTS.split(",")
+    for (const key of chart.dependencies.map(dep => dep.alias || dep.name)) {
+      if (!values[key]) {
+        values[key] = {}
+      }
       values[key].enabled = components.includes(key)
     }
   }
