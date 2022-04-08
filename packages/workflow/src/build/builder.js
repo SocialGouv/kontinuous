@@ -144,12 +144,15 @@ module.exports = async (envVars) => {
 
   logger.debug("Link workspace to charts")
   const chartNames = await getDirectories(`${KUBEWORKFLOW_PATH}/charts`)
-  await Promise.all([
-    fs.symlink(WORKSPACE_PATH, `${KWBUILD_PATH}/workspace`),
-    ...chartNames.map(chartName => {
-      return fs.symlink(WORKSPACE_PATH, `${KWBUILD_PATH}/charts/${chartName}/workspace`)
-    })
-  ])
+  const filesPath = `${workspaceKubeworkflowPath}/files}`
+  if (await fs.pathExists(filesPath)){
+    await Promise.all([
+      fs.symlink(filesPath, `${KWBUILD_PATH}/files`),
+      ...chartNames.map(chartName => {
+        return fs.symlink(filesPath, `${KWBUILD_PATH}/charts/${chartName}/files`)
+      })
+    ])
+  }
   
   logger.debug("Build base manifest using helm")
   let manifests = await asyncShell(
