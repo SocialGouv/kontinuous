@@ -14,10 +14,10 @@ inputs:
     description: "The Kubernetes authentication configuration"
   token:
     description: "The Github authentication token"
-  helmArgs:
-    description: "Add extra args to Helm template command"
-  components:
-    description: "list of components to enable separated by spaces, default to app"
+  charts:
+    description: "comma separated list of charts to enable as standalone"
+  subcharts:
+    description: "comma separated list of subcharts to enable as a part of the main chart"
   actionName:
     description: "override manifests name as manifest-$name.yaml, default to manifest-$environment.yaml"
 outputs:
@@ -50,8 +50,8 @@ runs:
         ENVIRONMENT: ${{ inputs.environment }}
         RANCHER_PROJECT_ID: ${{ inputs.rancherProjectId }}
         RANCHER_PROJECT_NAME: ${{ inputs.rancherProjectName }}
-        COMPONENTS: ${{ inputs.components }}
-        HELM_ARGS: ${{ inputs.helmArgs }}
+        KW_CHARTS: ${{ inputs.charts }}
+        KW_SUBCHARTS: ${{ inputs.subcharts }}
         DEBUG: "true"
       working-directory: "${{ github.action_path }}"
       run: packages/workflow/bin/kube-workflow build --cwd ${{ github.workspace }}
