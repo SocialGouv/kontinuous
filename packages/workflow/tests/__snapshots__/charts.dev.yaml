@@ -40,6 +40,15 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  name: kaniko
+  namespace: test-charts-feature-branch-1
+  annotations:
+    kapp.k14s.io/disable-original: ''
+automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
   name: default
   namespace: test-charts-feature-branch-1
   annotations:

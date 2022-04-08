@@ -118,9 +118,9 @@ const builder = async (envVars) => {
     logger.debug("Merge project templates")
     for (const dir of [
       "templates",
-      "common/templates",
+      "common/templates", // deprecated, retrocompat
       `${ENVIRONMENT}/templates`,
-      `env/${ENVIRONMENT}/templates`,
+      `env/${ENVIRONMENT}/templates`, // deprecated, retrocompat
     ]) {
       const templatesDir = `${buildKubeworkflowPath}/${dir}`
       if (await fs.pathExists(templatesDir)) {
@@ -133,6 +133,15 @@ const builder = async (envVars) => {
 
   logger.debug("Compiling chart and subcharts")
   const chart = await compileChart(values)
+  
+  const chartNames = await getDirectories(`${KWBUILD_PATH}/charts`)
+  logger.debug("Merge env templates in charts")
+  for (const chartName of chartNames){
+    const envChartTemplatesDir = `${KWBUILD_PATH}/charts/${chartName}/${ENVIRONMENT}`
+    if (await fs.pathExists(envChartTemplatesDir)){
+      await fs.copy(envChartTemplatesDir, `${KWBUILD_PATH}/charts/${chartName}/templates`, {dereference: true})
+    }
+  }
 
   if (KW_CHARTS) {
     logger.debug(`Enable only standalone charts: "${KW_CHARTS}"`)
@@ -159,7 +168,6 @@ const builder = async (envVars) => {
   await fs.writeFile(`${KWBUILD_PATH}/values.json`, JSON.stringify(values))
 
   logger.debug("Link workspace to charts")
-  const chartNames = await getDirectories(`${KUBEWORKFLOW_PATH}/charts`)
   const filesPath = `${KWBUILD_PATH}/.kube-workflow/files`
   if (await fs.pathExists(filesPath)) {
     await Promise.all([
