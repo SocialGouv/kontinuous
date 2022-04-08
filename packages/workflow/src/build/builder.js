@@ -18,9 +18,7 @@ const compileFinal = require("./compile-final")
 
 const { buildCtx } = require("./ctx")
 
-module.exports = async (envVars) => {
-  buildCtx.provide()
-  asyncShell.ctx.provide()
+const builder = async (envVars) => {
 
   if (!envVars) {
     envVars = getEnv()
@@ -93,7 +91,7 @@ module.exports = async (envVars) => {
     getValuesFile("values", "common/values"),
     getValuesFile(`${ENVIRONMENT}/values`, `env/${ENVIRONMENT}/values`),
   ])
-  const values = mergeWith({}, defaultValues, commonValues, envValues, (objValue, srcValue)=>{
+  const values = mergeWith({}, defaultValues, commonValues, envValues, (objValue, srcValue) => {
     if (Array.isArray(objValue)) {
       return srcValue;
     }
@@ -143,7 +141,7 @@ module.exports = async (envVars) => {
   logger.debug("Link workspace to charts")
   const chartNames = await getDirectories(`${KUBEWORKFLOW_PATH}/charts`)
   const filesPath = `${KWBUILD_PATH}/.kube-workflow/files`
-  if (await fs.pathExists(filesPath)){
+  if (await fs.pathExists(filesPath)) {
     await Promise.all([
       fs.symlink(filesPath, `${KWBUILD_PATH}/files`),
       ...chartNames.map(chartName => {
@@ -151,7 +149,7 @@ module.exports = async (envVars) => {
       })
     ])
   }
-  
+
   logger.debug("Build base manifest using helm")
   let manifests = await asyncShell(
     `
@@ -178,4 +176,10 @@ module.exports = async (envVars) => {
     manifests,
     values,
   }
+}
+
+module.exports = (envVars) => {
+  buildCtx.provide()
+  asyncShell.ctx.provide()
+  return builder(envVars)
 }
