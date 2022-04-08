@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/SocialGouv/kube-workflow/compare/v1.9.0...v1.10.0) (2022-04-08)
+
+
+### Features
+
+* node first class citizen patch and validate ([81e4e4c](https://github.com/SocialGouv/kube-workflow/commit/81e4e4ce637abad55c6c1286a113a34547c1d1c1))
+
 ## [1.9.0](https://github.com/SocialGouv/kube-workflow/compare/v1.8.0...v1.9.0) (2022-04-08)
 
 
