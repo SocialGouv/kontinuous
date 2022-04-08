@@ -3,4 +3,4 @@ jobs:
   runs:
     - name: say-hello
       run: |
-        {{ .Files.Get "workspace/testify.txt" }}
+        {{ .Files.Get "files/testify.txt" }}

@@ -71,9 +71,7 @@ module.exports = async (envVars) => {
   const workspaceKubeworkflowPath = `${WORKSPACE_PATH}${WORKSPACE_SUBPATH}`
   const buildKubeworkflowPath = `${KWBUILD_PATH}/.kube-workflow`
   if (await fs.pathExists(workspaceKubeworkflowPath)) {
-    await fs.copy(workspaceKubeworkflowPath, buildKubeworkflowPath, {
-      dereference: true,
-    })
+    await fs.copy(workspaceKubeworkflowPath, buildKubeworkflowPath)
   }
 
   logger.debug("Generate values file")
@@ -144,7 +142,7 @@ module.exports = async (envVars) => {
 
   logger.debug("Link workspace to charts")
   const chartNames = await getDirectories(`${KUBEWORKFLOW_PATH}/charts`)
-  const filesPath = `${workspaceKubeworkflowPath}/files}`
+  const filesPath = `${KWBUILD_PATH}/.kube-workflow/files`
   if (await fs.pathExists(filesPath)){
     await Promise.all([
       fs.symlink(filesPath, `${KWBUILD_PATH}/files`),

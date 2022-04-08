@@ -45,6 +45,7 @@
     "push": "git push -f --follow-tags origin master",
     "delivery": "yarn release && yarn push",
     "test": "yarn workspaces foreach --no-private --parallel run test",
+    "test:workflow": "yarn workspace kube-workflow test",
     "dev:webhook": "docker-compose up --build webhook",
     "upgrade:modjo": "yarn up -R \"@modjo-plugins/*\""
   },

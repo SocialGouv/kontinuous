@@ -111,6 +111,7 @@ spec:
             - '-c'
             - |
               set -e
+              Hello World !
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
