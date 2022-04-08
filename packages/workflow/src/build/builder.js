@@ -97,6 +97,11 @@ const builder = async (envVars) => {
     getValuesFile(`${ENVIRONMENT}/values`, `env/${ENVIRONMENT}/values`),
   ])
   const values = deepmerge({}, defaultValues, commonValues, envValues)
+  for (const key of Object.keys(values)){
+    if(!Object.keys(values[key]).includes('enabled')){
+      values[key].enabled = true
+    }
+  }
   logger.debug("Compiling jobs")
   await compileJobs(values)
 

@@ -14,7 +14,6 @@ module.exports = (manifests) => {
         key.startsWith(`${changeGroupPrefix}.`)
       ) {
         changeGroups.add(value)
-        console.log(value)
       }
     }
   }
