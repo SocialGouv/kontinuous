@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.3](https://github.com/SocialGouv/kube-workflow/compare/v1.10.2...v1.10.3) (2022-04-08)
+
+
+### Bug Fixes
+
+* env templates for charts ([f9abd84](https://github.com/SocialGouv/kube-workflow/commit/f9abd84a5651537546fa5d7d626440dbfbeb80a8))
+
 ### 1.10.2 (2022-04-08)
 
 
