@@ -5,6 +5,7 @@ const logger = pino(
   pretty({
     translateTime: "yyyy-mm-dd HH:mm:ss",
     ignore: "pid,hostname",
+    destination: 2,
   })
 )
 
