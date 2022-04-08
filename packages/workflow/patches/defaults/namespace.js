@@ -1,11 +1,13 @@
-module.exports = (manifest, values) => {
-  if (manifest.kind !== "Namespace") {
-    if (!manifest.metadata) {
-      manifest.metadata = {}
-    }
-    if (!manifest.metadata.namespace) {
-      manifest.metadata.namespace = values.global.namespace
+module.exports = (manifests, values) => {
+  for (const manifest of manifests) {
+    if (manifest.kind !== "Namespace") {
+      if (!manifest.metadata) {
+        manifest.metadata = {}
+      }
+      if (!manifest.metadata.namespace) {
+        manifest.metadata.namespace = values.global.namespace
+      }
     }
   }
-  return manifest
+  return manifests
 }

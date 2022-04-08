@@ -1,9 +1,9 @@
 const patches = ["defaults"]
 
-module.exports = (manifest, values) => {
+module.exports = (manifests, values) => {
   for (const patch of patches) {
     // eslint-disable-next-line import/no-extraneous-dependencies
-    manifest = require(`./${patch}`)(manifest, values)
+    manifests = require(`./${patch}`)(manifests, values)
   }
-  return manifest
+  return manifests
 }

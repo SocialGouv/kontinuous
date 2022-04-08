@@ -14,7 +14,10 @@ const generateValues = require("./values")
 const compileJobs = require("./compile-jobs")
 const compileOutputs = require("./compile-outputs")
 const compileChart = require("./compile-chart")
-const compileFinal = require("./compile-final")
+const compilePatches = require("./compile-patches")
+const loadManifests = require("./load-manifests")
+const validateManifests = require("./validate-manifests")
+const displayInfos = require("./display-infos")
 
 const { buildCtx } = require("./ctx")
 
@@ -64,6 +67,7 @@ const builder = async (envVars) => {
     fs.copy(`${KUBEWORKFLOW_PATH}/templates`, `${KWBUILD_PATH}/templates`),
     fs.copy(`${KUBEWORKFLOW_PATH}/charts`, `${KWBUILD_PATH}/charts`),
     fs.copy(`${KUBEWORKFLOW_PATH}/patches`, `${KWBUILD_PATH}/patches`),
+    fs.copy(`${KUBEWORKFLOW_PATH}/validators`, `${KWBUILD_PATH}/validators`),
   ])
 
   const workspaceKubeworkflowPath = `${WORKSPACE_PATH}${WORKSPACE_SUBPATH}`
@@ -162,8 +166,20 @@ const builder = async (envVars) => {
     { cwd: KWBUILD_PATH }
   )
 
-  logger.debug("Set default namespace")
-  manifests = await compileFinal(manifests, values)
+  logger.debug("Load manifests")
+  manifests = await loadManifests(manifests, values)
+
+  logger.debug("Apply patches")
+  manifests = await compilePatches(manifests, values)
+  
+  logger.debug("Validate manifests")
+  await validateManifests(manifests, values)
+  
+  logger.debug("Display infos")
+  await displayInfos(manifests, values)
+  
+  logger.debug("Build final output")
+  manifests = manifests.map(manifest => yaml.dump(manifest)).join("---\n")
 
   logger.debug("Write manifests file")
   const manifestsFile = `${KWBUILD_PATH}/manifests.yaml`
