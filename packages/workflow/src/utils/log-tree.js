@@ -14,7 +14,7 @@ class LogTree {
     return `${parentPre}${hasNext ? "├" : "└"}── `
   }
 
-  static setTransferPre(parentPre = "", hasNext) {
+  static setTransferPre(parentPre = "", hasNext = false) {
     return `${parentPre}${hasNext ? "│" : " "}   `
   }
 

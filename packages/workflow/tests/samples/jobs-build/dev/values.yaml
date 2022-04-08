@@ -66,3 +66,4 @@ jobs-dev:
       use: ../../../../../jobs/create-db
       with:
         pgAdminSecretRefName: pg-scaleway
+

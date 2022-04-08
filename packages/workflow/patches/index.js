@@ -1,4 +1,4 @@
-const patches = ["defaults"]
+const patches = ["namespace", "kapp"]
 
 module.exports = (manifests, values) => {
   for (const patch of patches) {

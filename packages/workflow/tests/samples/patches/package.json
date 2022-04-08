@@ -1,0 +1,6 @@
+{
+  "name": "kube-workflow-test-patches",
+  "dependencies": {
+    "hashed-release-name": "^1.0.1"
+  }
+}

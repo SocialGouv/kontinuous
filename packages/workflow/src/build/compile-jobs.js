@@ -41,8 +41,11 @@ async function compile(
   parentWith = {},
   file = null
 ) {
+  if (!values.runs){
+    return
+  }
   const newRuns = await Promise.all(
-    (values.runs || []).map(async (run) => {
+    values.runs.map(async (run) => {
       if (!run.name) {
         run.name = miniHash(file)
       }

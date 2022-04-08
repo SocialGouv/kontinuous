@@ -66,8 +66,8 @@ const builder = async (envVars) => {
     fs.copy(`${KUBEWORKFLOW_PATH}/values.yaml`, `${KWBUILD_PATH}/values.yaml`),
     fs.copy(`${KUBEWORKFLOW_PATH}/templates`, `${KWBUILD_PATH}/templates`),
     fs.copy(`${KUBEWORKFLOW_PATH}/charts`, `${KWBUILD_PATH}/charts`),
-    fs.copy(`${KUBEWORKFLOW_PATH}/patches`, `${KWBUILD_PATH}/patches`),
-    fs.copy(`${KUBEWORKFLOW_PATH}/validators`, `${KWBUILD_PATH}/validators`),
+    fs.symlink(`${KUBEWORKFLOW_PATH}/patches`, `${KWBUILD_PATH}/patches`),
+    fs.symlink(`${KUBEWORKFLOW_PATH}/validators`, `${KWBUILD_PATH}/validators`),
   ])
 
   const workspaceKubeworkflowPath = `${WORKSPACE_PATH}${WORKSPACE_SUBPATH}`
@@ -127,13 +127,6 @@ const builder = async (envVars) => {
       })
     }
   }
-  logger.debug("Merge project patches")
-  const patchesDir = `${buildKubeworkflowPath}/patches`
-  if (await fs.pathExists(patchesDir)) {
-    await fs.copy(patchesDir, `${KWBUILD_PATH}/patches`, {
-      dereference: true,
-    })
-  }
 
   logger.debug("Compiling chart and subcharts")
   const chart = await compileChart(values)
@@ -175,6 +168,18 @@ const builder = async (envVars) => {
 
   logger.debug("Load manifests")
   manifests = await loadManifests(manifests, values)
+
+  logger.debug("Prepare .kube-workflow package")
+  if (
+    await fs.pathExists(`${workspaceKubeworkflowPath}/package.json`) &&
+    !await fs.pathExists(`${workspaceKubeworkflowPath}/node_modules`) &&
+    !await fs.pathExists(`${workspaceKubeworkflowPath}/.pnp.cjs`)
+  ){
+    await asyncShell("yarn", { cwd: workspaceKubeworkflowPath },(proc)=>{
+      proc.stdout.pipe(process.stdout)
+      proc.stderr.pipe(process.stderr)
+    })
+  }
 
   logger.debug("Apply patches")
   manifests = await compilePatches(manifests, values)
