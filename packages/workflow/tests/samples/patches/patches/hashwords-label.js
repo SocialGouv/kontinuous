@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+// eslint-disable-next-line
 const hrn = require("hashed-release-name")
 
 module.exports = async (manifests) => {

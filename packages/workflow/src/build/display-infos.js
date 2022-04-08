@@ -13,7 +13,7 @@ getTreeInfos.Ingress = (resource)=>{
   const redirect = manifest.metadata?.annotations["nginx.ingress.kubernetes.io/permanent-redirect"]
   return [...(manifest.spec?.rules ? [{
     name: "hosts",
-    children: manifest.spec.rules.map(({host})=>({name:host}))
+    children: manifest.spec.rules.map(({host})=>({name:`https://${host}`}))
   }] : []), ...(redirect ? [{
     name: "redirect",
     children: [{name: redirect}]
@@ -23,6 +23,7 @@ getTreeInfos.Ingress = (resource)=>{
 getTreeInfos.Deployment = (resource) => {
   const { manifest } = resource
   const containers = manifest.spec?.template?.spec?.containers
+  const initContainers = manifest.spec?.template?.spec?.initContainers
   return [...(containers ? containers.map(container=>{
     return {name:container.name, children: [
       {
@@ -31,8 +32,14 @@ getTreeInfos.Deployment = (resource) => {
       {
         name: `port${container.ports.length>1?"s":""}: ${container.ports.map(({ containerPort }) => containerPort).join(",")}`,
       },
-  ]}
-  }) : [])]
+  ]}}) : []),
+  ...(initContainers ? initContainers.map(container=>{
+    return {name: `${container.name} (init)`, children: [
+      {
+        name: `image: ${container.image}`,
+      },
+  ]}}) : []),
+  ]
 }
 
 getTreeInfos.Service = (resource) => {
