@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/SocialGouv/kube-workflow/compare/v1.8.0...v1.9.0) (2022-04-08)
+
+
+### Features
+
+* add charts ([97ed531](https://github.com/SocialGouv/kube-workflow/commit/97ed5313065cd5a404cdc6df655fbf1dc98aa5d5))
+
 ## [1.8.0](https://github.com/SocialGouv/kube-workflow/compare/v1.7.9...v1.8.0) (2022-04-08)
 
 
