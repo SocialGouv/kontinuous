@@ -25,8 +25,8 @@ runs:
         {{ if $.with.buildArgs -}}
         {{- range $key, $val := $.with.buildArgs -}}
         --build-arg="{{ $key }}={{ $val }}" \
-        {{- end -}}
-        {{- end -}}
+        {{ end -}}
+        {{ end -}}
         {{ if $.with.target -}}
         --target="{{ $.with.target }}" \
-        {{- end -}}
+        {{ end -}}
