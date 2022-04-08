@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/SocialGouv/kube-workflow/compare/v1.10.4...v1.11.0) (2022-04-08)
+
+
+### Features
+
+* jobs self ref ([06ba0c0](https://github.com/SocialGouv/kube-workflow/commit/06ba0c05a90849c064a6a9c2a77a9ac24008b42c))
+* needs stage ([5db69ba](https://github.com/SocialGouv/kube-workflow/commit/5db69baf24a70fa6b61f82991cdfe2fb7d9f48dc))
+
+
+### Bug Fixes
+
+* auto enable when key ([e2c7df8](https://github.com/SocialGouv/kube-workflow/commit/e2c7df8fced2446aee571ef77cbbf21c9473b451))
+* missing needs validator ([2ffed75](https://github.com/SocialGouv/kube-workflow/commit/2ffed755f37da00130e00181cf60d13e893c4ef2))
+* write logger output to stderr ([a48dd60](https://github.com/SocialGouv/kube-workflow/commit/a48dd60bea5cedbc358b331fd94429cb57f790e8))
+
 ### [1.10.4](https://github.com/SocialGouv/kube-workflow/compare/v1.10.3...v1.10.4) (2022-04-08)
 
 
