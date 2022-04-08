@@ -71,7 +71,9 @@ module.exports = async (envVars) => {
   const workspaceKubeworkflowPath = `${WORKSPACE_PATH}${WORKSPACE_SUBPATH}`
   const buildKubeworkflowPath = `${KWBUILD_PATH}/.kube-workflow`
   if (await fs.pathExists(workspaceKubeworkflowPath)) {
-    await fs.copy(workspaceKubeworkflowPath, buildKubeworkflowPath)
+    await fs.copy(workspaceKubeworkflowPath, buildKubeworkflowPath, {
+      dereference: true
+    })
   }
 
   logger.debug("Generate values file")
