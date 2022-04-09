@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.1](https://github.com/SocialGouv/kube-workflow/compare/v1.12.0...v1.12.1) (2022-04-09)
+
+
+### Bug Fixes
+
+* jobs runs as map ([a421478](https://github.com/SocialGouv/kube-workflow/commit/a42147869b76a26fd66da6eeaf3a0f5ba271bfd8))
+
 ## [1.12.0](https://github.com/SocialGouv/kube-workflow/compare/v1.11.0...v1.12.0) (2022-04-09)
 
 
