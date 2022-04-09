@@ -126,7 +126,7 @@ const builder = async (envVars) => {
     ]) {
       const templatesDir = `${buildKubeworkflowPath}/${dir}`
       if (await fs.pathExists(templatesDir)) {
-        await fs.copy(templatesDir, `${KWBUILD_PATH}/templates`, {
+        await fs.copy(templatesDir, `${KWBUILD_PATH}/templates/project/${dir}`, {
           dereference: true,
         })
       }
@@ -141,9 +141,9 @@ const builder = async (envVars) => {
   for (const chartName of chartNames){
     const chartDir = `${KWBUILD_PATH}/charts/${chartName}`
     const envChartDir = `${chartDir}/${ENVIRONMENT}`
-    const envChartTemplatesDir = `${envChartDir}//templates`
+    const envChartTemplatesDir = `${envChartDir}/templates`
     if (await fs.pathExists(envChartTemplatesDir)){
-      await fs.copy(envChartTemplatesDir, `${KWBUILD_PATH}/charts/${chartName}/templates`, {dereference: true})
+      await fs.copy(envChartTemplatesDir, `${KWBUILD_PATH}/charts/${chartName}/templates/env`, {dereference: true})
     }
     const envValues = await loadYamlFile(`${envChartDir}/values`)
     if (envValues){
