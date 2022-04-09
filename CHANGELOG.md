@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/SocialGouv/kube-workflow/compare/v1.11.0...v1.12.0) (2022-04-09)
+
+
+### Features
+
+* values.js ([f816034](https://github.com/SocialGouv/kube-workflow/commit/f816034f1afef4df2bb22c967b2ae8f0a372c196))
+
+
+### Bug Fixes
+
+* avoid templates collisions ([abfd681](https://github.com/SocialGouv/kube-workflow/commit/abfd6817b080372d4c7bd2838270770a2ff00213))
+* improve tree infos ([00edb48](https://github.com/SocialGouv/kube-workflow/commit/00edb48131d14d1dd20c1f26c65c0c623f05e753))
+* lint improve ([0d44569](https://github.com/SocialGouv/kube-workflow/commit/0d445692156ab140b492e841a14b85caa10446fe))
+
 ## [1.11.0](https://github.com/SocialGouv/kube-workflow/compare/v1.10.4...v1.11.0) (2022-04-08)
 
 
