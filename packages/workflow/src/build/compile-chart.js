@@ -3,6 +3,8 @@ const yaml = require("js-yaml")
 const deepmerge = require("~/utils/deepmerge")
 
 const getDirectories = require("~/utils/get-directories")
+const loadYamlFile = require("~/utils/load-yaml-file")
+const getYamlPath = require("~/utils/get-yaml-path")
 
 const { buildCtx } = require("./ctx")
 
@@ -45,22 +47,12 @@ module.exports = async (values) => {
     }
     
     // default values files with minimum
-    const valuesFiles = [`${chartDir}/values.yaml`, `${chartDir}/values.yml`]
-    let valuesFile
-    for (const f of valuesFiles){
-      if (await fs.pathExists(f)){
-        valuesFile = f
-        break
-      }
-    }
-    let values
-    if (!valuesFile){
-      [valuesFile] = valuesFiles
-      values = {}
-    } else {
-      values = yaml.load(await fs.readFile(valuesFile))
-    }
+    let valuesFile = await getYamlPath(`${chartDir}/values`)
+    const values = valuesFile ? yaml.load(await fs.readFile(valuesFile,{encoding:"utf8"})) : {}
     const defaultValuesObj = deepmerge(values, defaultValues(c, chart))
+    if (!valuesFile){
+      valuesFile = `${chartDir}/values.yaml`
+    }
     await fs.writeFile(valuesFile, yaml.dump(defaultValuesObj))
     
     // import subcharts in umbrella chart dependencies

@@ -18,6 +18,8 @@ const compilePatches = require("./compile-patches")
 const loadManifests = require("./load-manifests")
 const validateManifests = require("./validate-manifests")
 const displayInfos = require("./display-infos")
+const getYamlPath = require("~/utils/get-yaml-path")
+const loadYamlFile = require("~/utils/load-yaml-file")
 
 const { buildCtx } = require("./ctx")
 
@@ -78,23 +80,10 @@ const builder = async (envVars) => {
   }
 
   logger.debug("Generate values file")
-  const getValuesFile = async (...files) => {
-    for (const file of files) {
-      for (const filePath of [
-        `${buildKubeworkflowPath}/${file}.yaml`,
-        `${buildKubeworkflowPath}/${file}.yml`,
-      ]) {
-        if (await fs.pathExists(filePath)) {
-          return yaml.load(await fs.readFile(filePath, { encoding: "utf-8" }))
-        }
-      }
-    }
-    return null
-  }
   const defaultValues = generateValues()
   const [commonValues, envValues] = await Promise.all([
-    getValuesFile("values", "common/values"),
-    getValuesFile(`${ENVIRONMENT}/values`, `env/${ENVIRONMENT}/values`),
+    loadYamlFile(`${buildKubeworkflowPath}/values`, `${buildKubeworkflowPath}/common/values`),
+    loadYamlFile(`${buildKubeworkflowPath}/${ENVIRONMENT}/values`, `${buildKubeworkflowPath}/env/${ENVIRONMENT}/values`),
   ])
   const values = deepmerge({}, defaultValues, commonValues, envValues)
   for (const key of Object.keys(values)){
@@ -102,6 +91,7 @@ const builder = async (envVars) => {
       values[key].enabled = true
     }
   }
+
   logger.debug("Compiling jobs")
   await compileJobs(values)
 
@@ -144,26 +134,11 @@ const builder = async (envVars) => {
     if (await fs.pathExists(envChartTemplatesDir)){
       await fs.copy(envChartTemplatesDir, `${KWBUILD_PATH}/charts/${chartName}/templates`, {dereference: true})
     }
-    const envValuesFiles = [`${envChartDir}/values.yaml`, `${envChartDir}/values.yml`]
-    let envValuesFile
-    for (const f of envValuesFiles) {
-      if (await fs.pathExists(f)) {
-        envValuesFile = f
-        break
-      }
-    }
-    if (envValuesFile){
-      const valuesFiles = [`${chartDir}/values.yaml`, `${chartDir}/values.yml`]
-      let valuesFile
-      for (const f of valuesFiles) {
-        if (await fs.pathExists(f)) {
-          valuesFile = f
-          break
-        }
-      }
-      let valuesObj = yaml.load(await fs.readFile(valuesFile))
-      valuesEnv = yaml.load(await fs.readFile(envValuesFile))
-      valuesObj = deepmerge(valuesObj, valuesEnv)
+    const envValues = await loadYamlFile(`${envChartDir}/values`)
+    if (envValues){
+      let valuesObj = await loadYamlFile(`${chartDir}/values`)
+      valuesObj = deepmerge(valuesObj || {}, envValues)
+      const valuesFile = await getYamlPath(`${chartDir}/values`)
       await fs.writeFile(valuesFile, yaml.dump(valuesObj))
     }
   }
