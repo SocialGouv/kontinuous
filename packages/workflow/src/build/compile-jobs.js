@@ -52,6 +52,14 @@ async function compile(
   if (!values.runs){
     return
   }
+  if(!Array.isArray(values.runs)){
+    values.runs = Object.entries(values.runs).map(([name, run])=>{
+      if(!run.name){
+        run.name = name
+      }
+      return run
+    })
+  }
   const newRuns = await Promise.all(
     values.runs.map(async (run) => {
       if (!run.name) {
