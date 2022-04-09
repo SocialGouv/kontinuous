@@ -33,13 +33,8 @@ module.exports = {
       alias: true,
     },
   },
-  extends: [
-    "airbnb-base",
-    "prettier",
-    "plugin:prettier/recommended",
-    "plugin:import/recommended",
-  ],
-  plugins: [],
+  extends: ["airbnb-base", "prettier"],
+  plugins: ["prettier", "import"],
   rules: {
     "node/no-extraneous-require": [0],
     "import/no-commonjs": [0],
@@ -98,6 +93,11 @@ module.exports = {
       "error",
       {
         semi: false,
+        // printWidth: 80,
+        // tabWidth: 2,
+        // useTabs: false,
+        // singleQuote: false,
+        // bracketSpacing: true,
       },
     ],
   },

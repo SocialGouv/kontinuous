@@ -1,7 +1,6 @@
-module.exports = (values) => {
-  return Object.assign(values, {
+module.exports = (values) =>
+  Object.assign(values, {
     app: {
       enabled: true,
     },
   })
-}
