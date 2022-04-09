@@ -17,7 +17,7 @@ const compileChart = require("./compile-chart")
 const compilePatches = require("./compile-patches")
 const loadManifests = require("./load-manifests")
 const validateManifests = require("./validate-manifests")
-const displayInfos = require("./display-infos")
+const outputInfos = require("./output-infos")
 const getYamlPath = require("~/utils/get-yaml-path")
 const loadYamlFile = require("~/utils/load-yaml-file")
 
@@ -143,7 +143,9 @@ const builder = async (envVars) => {
     const envChartDir = `${chartDir}/${ENVIRONMENT}`
     const envChartTemplatesDir = `${envChartDir}/templates`
     if (await fs.pathExists(envChartTemplatesDir)){
-      await fs.copy(envChartTemplatesDir, `${KWBUILD_PATH}/charts/${chartName}/templates/env`, {dereference: true})
+      await fs.copy(envChartTemplatesDir, `${KWBUILD_PATH}/charts/${chartName}/templates/env`, {
+        dereference: true
+      })
     }
     const envValues = await loadYamlFile(`${envChartDir}/values`)
     if (envValues){
@@ -211,7 +213,7 @@ const builder = async (envVars) => {
   await validateManifests(manifests, values)
   
   logger.debug("Display infos")
-  await displayInfos(manifests, values)
+  await outputInfos(manifests, values)
   
   logger.debug("Build final output")
   manifests = manifests.map(manifest => yaml.dump(manifest)).join("---\n")

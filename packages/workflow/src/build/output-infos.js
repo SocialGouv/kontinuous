@@ -1,3 +1,5 @@
+const fs = require("fs-extra")
+
 const { buildCtx } = require("~/build/ctx")
 const logTree = require("~/utils/log-tree")
 
@@ -65,8 +67,64 @@ getTreeInfos.SealedSecret = (resource) => {
   return [{ name: `name: ${manifest.metadata.name}` }]
 }
 
+getTreeInfos.Job = (resource) => {
+  const { manifest } = resource
+  const containers = manifest.spec?.template?.spec?.containers
+  const initContainers = manifest.spec?.template?.spec?.initContainers
+  return [...(containers ? containers.map(container => {
+    return {
+      name: container.name, children: [
+        {
+          name: `image: ${container.image}`,
+        },
+      ]
+    }
+  }) : []),
+  ...(initContainers ? initContainers.map(container => {
+    return {
+      name: `${container.name} (init)`, children: [
+        {
+          name: `image: ${container.image}`,
+        },
+      ]
+    }
+  }) : []),
+  ]
+}
+
+getTreeInfos.CronJob = (resource) => {
+  const { manifest } = resource
+  const containers = manifest.spec?.jobTemplate?.spec?.template?.spec?.containers
+  const initContainers = manifest.spec?.jobTemplate?.spec?.template?.spec?.initContainers
+  return [...(containers ? containers.map(container => {
+    return {
+      name: container.name, children: [
+        {
+          name: `image: ${container.image}`,
+        },
+      ]
+    }
+  }) : []),
+  ...(initContainers ? initContainers.map(container => {
+    return {
+      name: `${container.name} (init)`, children: [
+        {
+          name: `image: ${container.image}`,
+        },
+      ]
+    }
+  }) : []),
+  ]
+}
+
 module.exports = async (manifests, values) => {
   const logger = buildCtx.require("logger")
+  const env = buildCtx.require("env")
+  const {
+    KWBUILD_PATH,
+    KW_NO_TREE,
+  } = env
+
   const componentResources = {}
   const globalResources = {kinds: {}}
   for (let manifest of manifests) {
@@ -128,7 +186,6 @@ module.exports = async (manifests, values) => {
       children,
     })
   }
-  
   const tree = [
     {
       name: "components",
@@ -140,5 +197,12 @@ module.exports = async (manifests, values) => {
     },
   ]
 
-  logger.info("\n"+logTree(tree))
+  const treeStr = logTree(tree)
+  
+  if (!KW_NO_TREE){
+    logger.info("\n"+treeStr)
+  }
+
+  await fs.writeFile(`${KWBUILD_PATH}/manifests.tree.md`, `\`\`\`\n${treeStr}\n\`\`\``)
+  
 }

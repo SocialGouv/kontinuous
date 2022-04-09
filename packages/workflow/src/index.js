@@ -25,6 +25,7 @@ program
     "--subcharts <subcharts>",
     "comma separated list of subcharts to enable as a part of the main chart"
   )
+  .option("--no-tree", "disable manifests tree display")
   .option("--helm-args, -a <args>", "add extra helm arguments")
   .option("--cwd <path>", "set current working directory")
   .option("--debug, -d", "enable debugging loglevel")

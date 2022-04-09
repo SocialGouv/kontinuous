@@ -23,6 +23,7 @@ module.exports = async (options) => {
     ENVIRONMENT: selectedEnv,
     KW_CHARTS: options.charts,
     KW_SUBCHARTS: options.subcharts,
+    KW_NO_TREE: options.noTree,
     HELM_ARGS: options.A,
 
     GIT_REF,

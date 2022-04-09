@@ -49,6 +49,8 @@ test.each(cases)(`%s.%s`, async (testdir, environment) => {
       ? "/.kube-workflow"
       : "",
     GIT_REPOSITORY: `kube-workflow/test-${testdir}`,
+    KW_NO_TREE:
+      process.env.KW_NO_TREE !== "false" && process.env.KW_NO_TREE !== "0",
   }
   const envFile = `${testdirPath}/.env`
   if (fs.pathExistsSync(envFile)) {
