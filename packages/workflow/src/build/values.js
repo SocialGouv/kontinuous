@@ -1,10 +1,12 @@
 const slug = require("~/utils/slug")
+const deepmerge = require("~/utils/deepmerge")
 
 const { buildCtx } = require("./ctx")
 
 const versionTagRe = /v[0-9]*/
 
-module.exports = () => {
+module.exports = (values) => {
+  
   const {
     ENVIRONMENT,
     RANCHER_PROJECT_ID,
@@ -103,7 +105,7 @@ module.exports = () => {
   const imageProject = ""
   // const imageProject = rancherProjectName
 
-  return {
+  const defaultValues = {
     global: {
       repository,
       repositoryName,
@@ -137,4 +139,14 @@ module.exports = () => {
       },
     },
   }
+
+  values = deepmerge({}, defaultValues, values)
+
+  for (const key of Object.keys(values)) {
+    if (!Object.keys(values[key]).includes('enabled')) {
+      values[key].enabled = true
+    }
+  }
+
+  return values
 }

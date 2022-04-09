@@ -10,7 +10,7 @@ const globalLogger = require("~/utils/logger")
 const getDirectories = require("~/utils/get-directories")
 
 const getEnv = require("~/env")
-const generateValues = require("./values")
+const setDefaultValues = require("./values")
 const compileJobs = require("./compile-jobs")
 const compileOutputs = require("./compile-outputs")
 const compileChart = require("./compile-chart")
@@ -79,17 +79,28 @@ const builder = async (envVars) => {
     await fs.symlink(workspaceKubeworkflowPath, buildKubeworkflowPath)
   }
 
-  logger.debug("Generate values file")
-  const defaultValues = generateValues()
+  logger.debug("Prepare .kube-workflow package")
+  if (
+    await fs.pathExists(`${workspaceKubeworkflowPath}/package.json`) &&
+    !await fs.pathExists(`${workspaceKubeworkflowPath}/node_modules`) &&
+    !await fs.pathExists(`${workspaceKubeworkflowPath}/.pnp.cjs`)
+  ) {
+    await asyncShell("yarn", { cwd: workspaceKubeworkflowPath }, (proc) => {
+      proc.stdout.pipe(process.stdout)
+      proc.stderr.pipe(process.stderr)
+    })
+  }
+
+  logger.debug("Generate values")
   const [commonValues, envValues] = await Promise.all([
     loadYamlFile(`${buildKubeworkflowPath}/values`, `${buildKubeworkflowPath}/common/values`),
     loadYamlFile(`${buildKubeworkflowPath}/${ENVIRONMENT}/values`, `${buildKubeworkflowPath}/env/${ENVIRONMENT}/values`),
   ])
-  const values = deepmerge({}, defaultValues, commonValues, envValues)
-  for (const key of Object.keys(values)){
-    if(!Object.keys(values[key]).includes('enabled')){
-      values[key].enabled = true
-    }
+  let values = deepmerge(commonValues, envValues)
+  values = setDefaultValues(values)
+  projectValuesJsFile = `${buildKubeworkflowPath}/values.js`
+  if (await fs.pathExists(projectValuesJsFile)){
+    values = require(projectValuesJsFile)(values)
   }
 
   logger.debug("Compiling jobs")
@@ -192,18 +203,6 @@ const builder = async (envVars) => {
 
   logger.debug("Load manifests")
   manifests = await loadManifests(manifests, values)
-
-  logger.debug("Prepare .kube-workflow package")
-  if (
-    await fs.pathExists(`${workspaceKubeworkflowPath}/package.json`) &&
-    !await fs.pathExists(`${workspaceKubeworkflowPath}/node_modules`) &&
-    !await fs.pathExists(`${workspaceKubeworkflowPath}/.pnp.cjs`)
-  ){
-    await asyncShell("yarn", { cwd: workspaceKubeworkflowPath },(proc)=>{
-      proc.stdout.pipe(process.stdout)
-      proc.stderr.pipe(process.stderr)
-    })
-  }
 
   logger.debug("Apply patches")
   manifests = await compilePatches(manifests, values)
