@@ -85,7 +85,7 @@ const builder = async (envVars) => {
     !await fs.pathExists(`${workspaceKubeworkflowPath}/node_modules`) &&
     !await fs.pathExists(`${workspaceKubeworkflowPath}/.pnp.cjs`)
   ) {
-    await asyncShell("yarn --immutable", { cwd: workspaceKubeworkflowPath }, (proc) => {
+    await asyncShell("yarn", { cwd: workspaceKubeworkflowPath }, (proc) => {
       proc.stdout.pipe(process.stdout)
       proc.stderr.pipe(process.stderr)
     })
