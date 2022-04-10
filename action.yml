@@ -42,7 +42,8 @@ runs:
       shell: bash
       working-directory: "${{ github.action_path }}"
       run: |
-        yarn --immutable
+        # yarn --immutable
+        yarn workspaces focus kube-workflow --production
 
     - name: Build manifests
       shell: bash
