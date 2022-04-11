@@ -10,6 +10,7 @@ metadata:
     kubeWorkflow/mainNamespace: 'true'
   labels:
     application: test-sample-1
+    cert: wildcard
   name: test-sample-1-preprod
 ---
 apiVersion: networking.k8s.io/v1

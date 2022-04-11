@@ -10,7 +10,7 @@ metadata:
     kubeWorkflow/mainNamespace: "true"
   labels:
     application: {{ .Values.global.repositoryName }}
-    {{- if .Values.global.isDev }}
+    {{- if not .Values.global.isProd }}
     cert: wildcard
     {{- end }}
   name: {{ .Values.global.namespace }}
