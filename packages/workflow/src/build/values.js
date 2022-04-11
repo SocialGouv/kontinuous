@@ -64,15 +64,11 @@ module.exports = (values) => {
     imageTag = `sha-${sha}`
   }
 
-  const MAX_HOSTNAME_SIZE = 53
-  const shortenHost = (hostname) =>
-    hostname.slice(0, MAX_HOSTNAME_SIZE).replace(/-+$/, "")
-
   const rootSocialGouvDomain = "fabrique.social.gouv.fr"
 
   const domain = isProd ? rootSocialGouvDomain : `dev.${rootSocialGouvDomain}`
 
-  const host = `${shortenHost(subdomain)}.${domain}`
+  const host = `${subdomain}.${domain}`
 
   const registry = "ghcr.io/socialgouv"
   const imageRepository = repositoryName

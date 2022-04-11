@@ -7,6 +7,8 @@ const { configureDebug } = require("~/utils/logger")
 const build = require("~/build")
 const deploy = require("~/deploy")
 
+const slug = require("~/utils/slug")
+
 program
   .name("kube-workflow")
   .description("CI pipeline running on Kubernetes deploying to Kubernetes 🚀")
@@ -73,6 +75,17 @@ program
     const options = command.optsWithGlobals()
     configureDebug(options.D)
     await deploy(options)
+  })
+
+program
+  .command("slugify")
+  .alias("slug")
+  .description(
+    "Generate slug from string compatible with kubernetes and dns naming"
+  )
+  .argument("<raw-string>", "the raw string to slugify")
+  .action(async (rawString, _options, _command) => {
+    process.stdout.write(slug(rawString))
   })
 
 program.parse(process.argv)

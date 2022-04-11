@@ -23,6 +23,8 @@ const slugString = (name, len) => {
     slugified = `env-${slugified}`
   }
 
+  slugified = slugified.replace(/-+$/, "") // domain doesn't support --
+
   if (slugified.length > len || slugified !== name) {
     const shortSlug = slugified.slice(0, len - SUFFIX_SHA_LENGTH)
     slugified = `${shortSlug}${shortSlug.endsWith("-") ? "" : "-"}${suffix(
