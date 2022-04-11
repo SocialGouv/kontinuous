@@ -2,7 +2,7 @@ runs:
   - name: seed-db
     checkout: true
     image: ghcr.io/socialgouv/docker/psql:7.0.0
-    namespace: "{{ or $.with.namespace .Values.global.namespace }}"
+    namespace: "{{ or $.with.namespace .Values.global.namespace }}"
     envFrom:
       - secretRef:
           name: "{{ or $.with.secretRefName $.Values.global.pgSecretName }}"
