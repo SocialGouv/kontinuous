@@ -12,7 +12,6 @@ concurrency:
 jobs:
 
   release-charts:
-    needs: [test]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     name: Release Helm Charts
