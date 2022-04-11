@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/SocialGouv/kube-workflow/compare/v1.12.5...v1.13.0) (2022-04-11)
+
+
+### Features
+
+* add job restore-db ([dfe7b45](https://github.com/SocialGouv/kube-workflow/commit/dfe7b459624dfa0f0a9a0f2785d75f0ecd609b19))
+* command slug ([22a742c](https://github.com/SocialGouv/kube-workflow/commit/22a742c01de0b770815411cf0febbb11633dbe22))
+
 ### [1.12.5](https://github.com/SocialGouv/kube-workflow/compare/v1.12.4...v1.12.5) (2022-04-11)
 
 
