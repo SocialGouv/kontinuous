@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.1](https://github.com/SocialGouv/kube-workflow/compare/v1.13.0...v1.13.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* ingress crt ([3fa53fe](https://github.com/SocialGouv/kube-workflow/commit/3fa53fe1f0193a9ed936cc44bac329fd80a2d230))
+
 ## [1.13.0](https://github.com/SocialGouv/kube-workflow/compare/v1.12.5...v1.13.0) (2022-04-11)
 
 
