@@ -209,7 +209,7 @@ spec:
             periodSeconds: 5
           envFrom:
             - secretRef:
-                name: pg-user-preprod
+                name: pg-user
             - secretRef:
                 name: app-sealed-secret
             - configMapRef:
@@ -282,7 +282,7 @@ spec:
             periodSeconds: 5
           envFrom:
             - secretRef:
-                name: pg-user-preprod
+                name: pg-user
             - secretRef:
                 name: app-sealed-secret
             - configMapRef:
@@ -356,7 +356,7 @@ spec:
           env: []
           envFrom:
             - secretRef:
-                name: pg-user-preprod
+                name: pg-user
             - secretRef:
                 name: hasura-sealed-secret
             - configMapRef:
@@ -392,7 +392,7 @@ spec:
     spec:
       envFrom:
         - secretRef:
-            name: pg-user-preprod
+            name: pg-user
       initContainers:
         - name: wait-for-postgres
           image: ghcr.io/socialgouv/docker/wait-for-postgres:6.56.1
@@ -402,7 +402,7 @@ spec:
               value: '24'
           envFrom:
             - secretRef:
-                name: pg-user-preprod
+                name: pg-user
           resources:
             limits:
               cpu: 20m
