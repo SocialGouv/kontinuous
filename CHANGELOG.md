@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.14.1](https://github.com/SocialGouv/kube-workflow/compare/v1.14.0...v1.14.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* gh wf ([f2086f9](https://github.com/SocialGouv/kube-workflow/commit/f2086f971abafa12bf7629a5da81b1bee38668cd))
+* seed-db char ([3211801](https://github.com/SocialGouv/kube-workflow/commit/32118019a97891bfacb96a9c972716ea8a4963da))
+
 ## [1.14.0](https://github.com/SocialGouv/kube-workflow/compare/v1.13.5...v1.14.0) (2022-04-11)
 
 
