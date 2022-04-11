@@ -23,7 +23,7 @@ module.exports = async (options) => {
 
   const repositoryName = path.basename(GIT_REPOSITORY)
 
-  const selectedEnv = selectEnv(options, cwd)
+  const selectedEnv = selectEnv({ options, cwd })
 
   let { kubeconfigContext } = options
   if (!kubeconfigContext) {

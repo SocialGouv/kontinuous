@@ -3,6 +3,7 @@ const { Command, Option } = require("commander")
 const program = new Command()
 
 const { configureDebug } = require("~/utils/logger")
+const selectEnv = require("~/utils/select-env")
 
 const build = require("~/build")
 const deploy = require("~/deploy")
@@ -86,6 +87,25 @@ program
   .argument("<raw-string>", "the raw string to slugify")
   .action(async (rawString, _options, _command) => {
     process.stdout.write(slug(rawString))
+  })
+
+program
+  .command("env")
+  .description("Infer env from ref or branch")
+  .option(
+    "--detect-current-tags",
+    "detect current commit tags to infer prod environment"
+  )
+  .argument("[ref]", "the ref")
+  .action(async (ref, _options, command) => {
+    const options = command.optsWithGlobals()
+    const env = selectEnv({
+      options,
+      ref,
+      cwd: options.cwd,
+      detectCurrentTags: options.detectCurrentTags || false,
+    })
+    process.stdout.write(env)
   })
 
 program.parse(process.argv)

@@ -3,7 +3,7 @@ const deepmerge = require("~/utils/deepmerge")
 
 const { buildCtx } = require("./ctx")
 
-const versionTagRe = /v[0-9]*/
+const versionTagRe = /v[0-9][0-9]*/
 
 module.exports = (values) => {
   

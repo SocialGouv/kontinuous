@@ -16,7 +16,7 @@ module.exports = async (options) => {
 
   const { GIT_REF, GIT_SHA, GIT_REPOSITORY } = getGitInfos(cwd)
 
-  const selectedEnv = selectEnv(options, cwd)
+  const selectedEnv = selectEnv({ options, cwd })
 
   const envVars = {
     ...process.env,
