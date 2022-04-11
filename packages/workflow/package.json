@@ -1,6 +1,6 @@
 {
   "name": "kube-workflow",
-  "version": "1.13.2",
+  "version": "1.13.3",
   "repository": "git@github.com:SocialGouv/kube-workflow.git",
   "license": "MIT",
   "main": "src/index",
