@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: "jobci-post-operations-{{ .Values.global.namespace }}"
+  name: "jobci-post-operations-{{ .Values.global.shortSha }}"
   namespace: {{ .Values.global.jobNamespace }}
   annotations:
     kapp.k14s.io/nonce: ""
