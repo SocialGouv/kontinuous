@@ -136,7 +136,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: jobci-post-operations-test-include-file-feature-branch-1
+  name: jobci-post-operations-ffac537
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
