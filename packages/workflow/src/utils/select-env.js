@@ -8,6 +8,7 @@ module.exports = ({ options = {}, cwd, ref, detectCurrentTags = true }) => {
   }
 
   if (ref) {
+    ref = ref.replace("refs/heads/", "").replace("refs/tags/", "")
     if (ref === "master" || ref === "main") {
       return "preprod"
     }
