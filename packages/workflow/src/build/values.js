@@ -78,7 +78,7 @@ module.exports = (values) => {
   const pgSecretName = isProd
     ? "pg-user"
     : isPreProd
-    ? "pg-user-preprod"
+    ? "pg-user"
     : `pg-user-${branchSlug}`
 
   const productionDatabase = repositoryName
