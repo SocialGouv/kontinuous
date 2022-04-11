@@ -28,7 +28,7 @@ runs:
         --use-new-run \
         {{ if $.with.buildArgs -}}
         {{- range $key, $val := $.with.buildArgs -}}
-        --build-arg="{{ $key }}={{ $val }}" \
+        --build-arg="{{ tpl $key $ }}={{ tpl $val $ }}" \
         {{ end -}}
         {{ end -}}
         {{ if $.with.target -}}
