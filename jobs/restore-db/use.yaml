@@ -1,0 +1,11 @@
+runs:
+  - name: restore-db
+    checkout: true
+    image: ghcr.io/socialgouv/docker/psql:7.0.0
+    envFrom:
+      - secretRef:
+          name: "{{ $.Values.global.pgSecretName }}"
+    env:
+      - name: RESTORE_PATH
+        value: "{{ $.with.restorePath }}"
+    run: /action/restore-db.sh
