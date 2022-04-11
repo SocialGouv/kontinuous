@@ -483,7 +483,7 @@ spec:
   tls:
     - hosts:
         - app-2nd-instance-test-sample-1-preprod.dev.fabrique.social.gouv.fr
-      secretName: app-2nd-instance-crt
+      secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -522,7 +522,7 @@ spec:
   tls:
     - hosts:
         - test-sample-1-preprod.dev.fabrique.social.gouv.fr
-      secretName: app-crt
+      secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -550,7 +550,7 @@ spec:
   tls:
     - hosts:
         - hasura-test-sample-1-preprod.dev.fabrique.social.gouv.fr
-      secretName: hasura-crt
+      secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -578,7 +578,7 @@ spec:
   tls:
     - hosts:
         - pgweb-test-sample-1-preprod.dev.fabrique.social.gouv.fr
-      secretName: pgweb-crt
+      secretName: wildcard-crt
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
