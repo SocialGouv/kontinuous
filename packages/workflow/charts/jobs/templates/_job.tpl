@@ -31,7 +31,11 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ $run.jobName }}
-  namespace: {{ or $run.namespace $val.namespace $val.global.jobNamespace }}
+  {{ if $run.namespace }}
+  namespace: {{ tpl $run.namespace $ }}
+  {{ else }}
+  namespace: {{ or $val.namespace $val.global.jobNamespace }}
+  {{ end }}
   annotations:
     kapp.k14s.io/nonce: ""
     kapp.k14s.io/update-strategy: fallback-on-replace
