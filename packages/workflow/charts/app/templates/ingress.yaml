@@ -32,8 +32,8 @@ spec:
     - hosts:
         - >-
           {{- include "defaults.ingress-host" . | nindent 10 }}
-      {{- if .Values.global.isDev }}
-      secretName: "wildcard-crt"
-      {{- else }}
+      {{- if .Values.global.isProd }}
       secretName: {{ or .Values.certSecretName (print (or .Values.component .Chart.Name) "-crt") }}
+      {{- else }}
+      secretName: "wildcard-crt"
       {{- end }}
