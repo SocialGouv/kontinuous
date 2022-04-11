@@ -1,11 +1,24 @@
 runs:
-  - name: seed-db
-    checkout: true
-    image: ghcr.io/socialgouv/docker/psql:7.0.0
-    namespace: "{{ or $.with.namespace .Values.global.namespace }}"
+  - name: import-secret
+    checkout: false
+    image: bitnami/kubectl:latest
+    user: 1001
     envFrom:
       - secretRef:
-          name: "{{ or $.with.secretRefName $.Values.global.pgSecretName }}"
+          name: kubeconfig
+    vars:
+      DB_SECRET_NAME: "{{ $.Values.global.pgSecretName }}"
+      NAMESPACE: "{{ $.Values.global.namespace }}"
+      JOB_NAMESPACE: "{{ $.Values.global.jobNamespace }}"
+    run: /action/import-secret.sh
+
+  - name: seed-db
+    needs: [import-secret]
+    checkout: true
+    image: ghcr.io/socialgouv/docker/psql:7.0.0
+    envFrom:
+      - secretRef:
+          name: "{{ $.Values.global.pgSecretName }}"
     env:
       - name: SEED_PATH
         value: "{{ $.with.seedPath }}"
