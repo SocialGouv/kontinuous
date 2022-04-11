@@ -11,19 +11,6 @@ concurrency:
 
 jobs:
 
-  test:
-    name: Test application
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: yarn --immutable
-
-      - name: Run tests
-        run: yarn test
-
   release-charts:
     needs: [test]
     runs-on: ubuntu-latest
