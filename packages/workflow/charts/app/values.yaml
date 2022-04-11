@@ -38,6 +38,7 @@ volumes: []
 volumeMounts: []
 redirectFrom: []
 ingress:
+  enabled: true
   annotations: {}
 needs: []
 entrypoint:
