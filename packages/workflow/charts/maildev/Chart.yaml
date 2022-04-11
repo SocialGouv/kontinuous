@@ -1,6 +1,6 @@
 apiVersion: v2
 name: maildev
-version: 1.14.3
+version: 1.14.4
 home: https://github.com/SocialGouv
 description: Classic frontend app
 icon: https://avatars.githubusercontent.com/u/45039513?v=4
@@ -9,4 +9,4 @@ sources:
 maintainers:
   - name: Fabrique numérique des Ministères Sociaux
     email: dsi-incubateur@sg.social.gouv.fr
-appVersion: 1.14.3
+appVersion: 1.14.4
