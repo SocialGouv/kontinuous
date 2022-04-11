@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.2](https://github.com/SocialGouv/kube-workflow/compare/v1.12.1...v1.12.2) (2022-04-11)
+
+
+### Bug Fixes
+
+* test ([68ecbee](https://github.com/SocialGouv/kube-workflow/commit/68ecbeec290db427a0c7306719e9bd38349724c9))
+* tests ([f8e4594](https://github.com/SocialGouv/kube-workflow/commit/f8e4594f1eaa7905facc89d1ea727f115d242f17))
+* up to yarn v4 + workspaces focus ([1931547](https://github.com/SocialGouv/kube-workflow/commit/193154778c2858c12e010099fb6a6dfbe9e489a2))
+
 ### [1.12.1](https://github.com/SocialGouv/kube-workflow/compare/v1.12.0...v1.12.1) (2022-04-09)
 
 
