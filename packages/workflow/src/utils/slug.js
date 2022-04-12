@@ -7,9 +7,9 @@ const KUBERNETS_MAX_NAME_LENGTH = 63
 const SUFFIX_SHA_LENGTH = 8
 
 const suffix = (name) => {
-  const hex = Buffer.from(createHash("sha256").update(name).digest("hex"))
-    .toString()
-    .toLowerCase()
+  const hex = Buffer.from(
+    createHash("sha256").update(name).digest("hex")
+  ).toString()
 
   return parseInt(hex, 16).toString(36).slice(0, 6)
 }
