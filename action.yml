@@ -20,6 +20,8 @@ inputs:
     description: "comma separated list of subcharts to enable as a part of the main chart"
   actionName:
     description: "override manifests name as manifest-$name.yaml, default to manifest-$environment.yaml"
+  timeout:
+    description: "override default kapp --wait-timeout, default to 15m0s"
 outputs:
   url:
     description: "Main deployment URL"
@@ -100,6 +102,7 @@ runs:
         ENVIRONMENT: ${{ inputs.environment }}
         RANCHER_PROJECT_ID: ${{ inputs.rancherProjectId }}
         RANCHER_PROJECT_NAME: ${{ inputs.rancherProjectName }}
+        KW_DEPLOY_TIMEOUT: ${{ inputs.timeout }}
       run: packages/workflow/bin/kube-workflow deploy --cwd ${{ github.workspace }} -f ${{ env.KWBUILD_PATH }}/manifests.yaml
 
     - name: Define environment URL

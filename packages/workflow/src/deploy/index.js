@@ -152,12 +152,16 @@ module.exports = async (options) => {
 
   const kappApp = charts ? slug(`${repositoryName}-${charts}`) : repositoryName
 
+  const kappWaitTimeout =
+    options.timeout || process.env.KW_DEPLOY_TIMEOUT || "15m0s"
+
   const deployWithKapp = async () => {
     const inlineCmd = `kapp \
       deploy
         --kubeconfig-context ${kubeconfigContext} \
         --app label:kubeworkflow/kapp=${kappApp} \
         --logs-all \
+        --wait-timeout ${kappWaitTimeout} \
         --dangerous-override-ownership-of-existing-resources \
         --yes \
         -f ${manifestsFile}
