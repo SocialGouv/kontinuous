@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.14.6](https://github.com/SocialGouv/kube-workflow/compare/v1.14.5...v1.14.6) (2022-04-12)
+
+
+### Bug Fixes
+
+* add ns to charts ([b49c0e3](https://github.com/SocialGouv/kube-workflow/commit/b49c0e3e5345e6ec71cc1a7910bbfc601bf26623))
+
 ### [1.14.5](https://github.com/SocialGouv/kube-workflow/compare/v1.14.4...v1.14.5) (2022-04-12)
 
 
