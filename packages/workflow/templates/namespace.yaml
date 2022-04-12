@@ -6,8 +6,9 @@ metadata:
     janitor/ttl: "{{ .Values.global.ttl }}"
     {{- end }}
     field.cattle.io/projectId: "{{ .Values.global.rancherProjectId }}"
-    kubeWorkflow/gitBranch: "{{ or .Values.global.gitBranch "" }}"
-    kubeWorkflow/mainNamespace: "true"
+    kubeworkflow/gitBranch: "{{ or .Values.global.gitBranch "" }}"
+    kubeworkflow/mainNamespace: "true"
+    kapp.k14s.io/exists: ""
   labels:
     application: {{ .Values.global.repositoryName }}
     {{- if not .Values.global.isProd }}

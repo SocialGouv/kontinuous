@@ -7,8 +7,8 @@ metadata:
   annotations:
     janitor/ttl: 7d
     field.cattle.io/projectId: '1234'
-    kubeWorkflow/gitBranch: feature-branch-1
-    kubeWorkflow/mainNamespace: 'true'
+    kubeworkflow/gitBranch: feature-branch-1
+    kubeworkflow/mainNamespace: 'true'
   labels:
     application: test-patches
     cert: wildcard

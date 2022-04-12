@@ -11,6 +11,7 @@ const timeLogger = require("~/utils/time-logger")
 const build = require("~/build")
 const getGitInfos = require("~/utils/get-git-infos")
 const selectEnv = require("~/utils/select-env")
+const slug = require("~/utils/slug")
 
 module.exports = async (options) => {
   const elapsed = timeLogger({
@@ -67,7 +68,7 @@ module.exports = async (options) => {
   const namespaceManifest = allManifests.find(
     (manifest) =>
       manifest.kind === "Namespace" &&
-      manifest.metadata?.annotations?.["kubeWorkflow/mainNamespace"]
+      manifest.metadata?.annotations?.["kubeworkflow/mainNamespace"]
   )
 
   const namespace = namespaceManifest.metadata.name
@@ -147,12 +148,15 @@ module.exports = async (options) => {
     )
   }
 
+  const charts = options.charts || process.env.KW_CHARTS
+
+  const kappApp = charts ? slug(`${repositoryName}-${charts}`) : repositoryName
+
   const deployWithKapp = async () => {
     const inlineCmd = `kapp \
       deploy
         --kubeconfig-context ${kubeconfigContext} \
-        --app ${repositoryName} \
-        --namespace ${namespace} \
+        --app label:kubeworkflow/kapp=${kappApp} \
         --logs-all \
         --dangerous-override-ownership-of-existing-resources \
         --yes \

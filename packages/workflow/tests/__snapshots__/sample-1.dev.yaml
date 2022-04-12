@@ -7,8 +7,9 @@ metadata:
   annotations:
     janitor/ttl: 7d
     field.cattle.io/projectId: '1234'
-    kubeWorkflow/gitBranch: feature-branch-1
-    kubeWorkflow/mainNamespace: 'true'
+    kubeworkflow/gitBranch: feature-branch-1
+    kubeworkflow/mainNamespace: 'true'
+    kapp.k14s.io/exists: ''
   labels:
     application: test-sample-1
     cert: wildcard
@@ -152,14 +153,12 @@ metadata:
   name: app-2nd-instance
   namespace: test-sample-1-feature-branch-1
   annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: kube-workflow/test-sample-1-feature-branch-1
     kapp.k14s.io/change-group.app-2nd-instance: kube-workflow/app-2nd-instance.test-sample-1-feature-branch-1
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/nonce: ''
 spec:
   replicas: 1
   selector:
@@ -225,14 +224,12 @@ metadata:
   name: app
   namespace: test-sample-1-feature-branch-1
   annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: kube-workflow/test-sample-1-feature-branch-1
     kapp.k14s.io/change-group.app: kube-workflow/app.test-sample-1-feature-branch-1
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/nonce: ''
 spec:
   replicas: 1
   selector:
@@ -310,14 +307,12 @@ metadata:
   name: hasura
   namespace: test-sample-1-feature-branch-1
   annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: kube-workflow/test-sample-1-feature-branch-1
     kapp.k14s.io/change-group.hasura: kube-workflow/hasura.test-sample-1-feature-branch-1
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/nonce: ''
 spec:
   replicas: 1
   selector:
@@ -384,14 +379,12 @@ metadata:
   name: pgweb
   namespace: test-sample-1-feature-branch-1
   annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: kube-workflow/test-sample-1-feature-branch-1
     kapp.k14s.io/change-group.pgweb: kube-workflow/pgweb.test-sample-1-feature-branch-1
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/nonce: ''
 spec:
   replicas: 1
   selector:

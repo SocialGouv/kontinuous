@@ -7,8 +7,9 @@ metadata:
   annotations:
     janitor/ttl: 7d
     field.cattle.io/projectId: '1234'
-    kubeWorkflow/gitBranch: feature-branch-1
-    kubeWorkflow/mainNamespace: 'true'
+    kubeworkflow/gitBranch: feature-branch-1
+    kubeworkflow/mainNamespace: 'true'
+    kapp.k14s.io/exists: ''
   labels:
     application: test-include-file
     cert: wildcard
@@ -74,6 +75,7 @@ metadata:
     kapp.k14s.io/change-group.say-hello: kube-workflow/say-hello.test-include-file-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -144,6 +146,7 @@ metadata:
     kapp.k14s.io/change-group: kube-workflow/post-test-include-file-feature-branch-1
     kapp.k14s.io/change-rule: upsert after upserting kube-workflow/test-include-file-feature-branch-1
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
@@ -178,6 +181,9 @@ metadata:
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/nonce: ''
 spec:
   schedule: 0 0 * * *
   jobTemplate:

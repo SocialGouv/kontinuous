@@ -1,9 +1,4 @@
 {{- define "annotations.kapp-deployment" -}}
-kapp.k14s.io/disable-default-ownership-label-rules: ""
-kapp.k14s.io/disable-default-label-scoping-rules: ""
-kapp.k14s.io/nonce: ""
-kapp.k14s.io/create-strategy: fallback-on-update
-kapp.k14s.io/update-strategy: fallback-on-replace
 kapp.k14s.io/change-group: "kube-workflow/{{ $.Values.global.namespace }}"
 {{- if $.Values.stage }}
 kapp.k14s.io/change-group.kube-workflow-stage: "kube-workflow/{{ $.Values.stage }}.{{ $.Values.global.namespace }}"

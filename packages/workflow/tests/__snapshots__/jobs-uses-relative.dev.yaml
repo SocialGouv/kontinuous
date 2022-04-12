@@ -7,8 +7,9 @@ metadata:
   annotations:
     janitor/ttl: 7d
     field.cattle.io/projectId: '1234'
-    kubeWorkflow/gitBranch: feature-branch-1
-    kubeWorkflow/mainNamespace: 'true'
+    kubeworkflow/gitBranch: feature-branch-1
+    kubeworkflow/mainNamespace: 'true'
+    kapp.k14s.io/exists: ''
   labels:
     application: test-jobs-uses-relative
     cert: wildcard
@@ -76,6 +77,7 @@ metadata:
     kapp.k14s.io/change-group.db..create-secret: kube-workflow/db..create-secret.test-jobs-uses-relative-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -166,6 +168,7 @@ metadata:
       kube-workflow/db..create-secret.test-jobs-uses-relative-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -262,6 +265,7 @@ metadata:
       upsert after upserting
       kube-workflow/test-jobs-uses-relative-feature-branch-1
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
@@ -296,6 +300,9 @@ metadata:
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/nonce: ''
 spec:
   schedule: 0 0 * * *
   jobTemplate:
