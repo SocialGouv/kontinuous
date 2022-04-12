@@ -66,7 +66,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-feature-branch-1-db-create-secret-3ea5t8
+  name: job-test-jobs-uses-relative-feature-branch-1-db-create-2w732p
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -154,7 +154,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-feature-branch-1-db-create-db-13oc8a
+  name: job-test-jobs-uses-relative-feature-branch-1-db-create-58nity
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''

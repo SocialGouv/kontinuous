@@ -154,7 +154,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-feature-branch-1-seed
+  name: job-test-init-container-feature-branch-1-seed
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''

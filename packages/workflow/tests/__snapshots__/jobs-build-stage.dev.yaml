@@ -260,7 +260,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-feature-branch-1-db-create-secret-3ea5t8
+  name: job-test-jobs-build-stage-feature-branch-1-db-create-se-127cnw
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -348,7 +348,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-feature-branch-1-db-create-db-13oc8a
+  name: job-test-jobs-build-stage-feature-branch-1-db-create-db-13oc8a
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -449,7 +449,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-feature-branch-1-build-app-kaniko-3zekn9
+  name: job-test-jobs-build-stage-feature-branch-1-build-app-ka-4fyeqd
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -558,7 +558,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-feature-branch-1-build-hasura-kaniko-3d6853
+  name: job-test-jobs-build-stage-feature-branch-1-build-hasura-1zhkhr
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -668,7 +668,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-feature-branch-1-test-app-test-5gwurw
+  name: job-test-jobs-build-stage-feature-branch-1-test-app-test-5gwurw
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
