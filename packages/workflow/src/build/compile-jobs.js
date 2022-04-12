@@ -89,6 +89,7 @@ async function compile(
 
       const jobName = slug([
         "job",
+        Values.global.repositoryName,
         [Values.global.gitBranch, 30],
         currentScope.join("--"),
       ])
