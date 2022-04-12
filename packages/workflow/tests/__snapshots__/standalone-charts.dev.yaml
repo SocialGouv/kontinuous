@@ -1,7 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`standalone-charts.dev 1`] = `
-"apiVersion: batch/v1
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    janitor/ttl: 7d
+    field.cattle.io/projectId: '1234'
+    kubeWorkflow/gitBranch: feature-branch-1
+    kubeWorkflow/mainNamespace: 'true'
+  labels:
+    application: test-standalone-charts
+    cert: wildcard
+  name: test-standalone-charts-feature-branch-1
+---
+apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-extra

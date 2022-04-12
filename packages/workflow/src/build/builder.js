@@ -67,7 +67,17 @@ const builder = async (envVars) => {
   await Promise.all([
     fs.copy(`${KUBEWORKFLOW_PATH}/Chart.yaml`, `${KWBUILD_PATH}/Chart.yaml`),
     fs.copy(`${KUBEWORKFLOW_PATH}/values.yaml`, `${KWBUILD_PATH}/values.yaml`),
-    ...(KW_CHARTS ? [] : [fs.copy(`${KUBEWORKFLOW_PATH}/templates`, `${KWBUILD_PATH}/templates`)]),
+    ...(KW_CHARTS ?
+        [
+          fs.copy(
+            `${KUBEWORKFLOW_PATH}/templates/namespace.yaml`,
+            `${KWBUILD_PATH}/templates/namespace.yaml`
+          )
+        ] :
+        [
+          fs.copy(`${KUBEWORKFLOW_PATH}/templates`, `${KWBUILD_PATH}/templates`)
+        ]
+    ),
     fs.copy(`${KUBEWORKFLOW_PATH}/charts`, `${KWBUILD_PATH}/charts`),
     fs.symlink(`${KUBEWORKFLOW_PATH}/patches`, `${KWBUILD_PATH}/patches`),
     fs.symlink(`${KUBEWORKFLOW_PATH}/validators`, `${KWBUILD_PATH}/validators`),
