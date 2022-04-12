@@ -21,10 +21,10 @@ module.exports = async (options) => {
   const envVars = {
     ...process.env,
     ENVIRONMENT: selectedEnv,
-    KW_CHARTS: options.charts,
-    KW_SUBCHARTS: options.subcharts,
+    KW_CHARTS: options.charts || process.env.KW_CHARTS,
+    KW_SUBCHARTS: options.subcharts || process.env.KW_SUBCHARTS,
     KW_NO_TREE: options.noTree,
-    HELM_ARGS: options.A,
+    HELM_ARGS: options.A || process.env.HELM_ARGS,
 
     GIT_REF,
     GIT_SHA,
