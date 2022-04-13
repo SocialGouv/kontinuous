@@ -79,7 +79,14 @@ describe("kube-webhook service", () => {
     const agent = await getAgent()
 
     const response = await agent.get("/api/v1/spec").send()
-    expect(yaml.dump(response.body)).toMatchSpecificSnapshot(
+    const data = {
+      ...response.body,
+      info: {
+        ...response.body.info,
+        version: "0.0.0",
+      },
+    }
+    expect(yaml.dump(data)).toMatchSpecificSnapshot(
       `./__snapshots__/api.v1.spec.yaml`
     )
   })

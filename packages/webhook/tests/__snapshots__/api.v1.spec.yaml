@@ -42,7 +42,7 @@ exports[`kube-webhook service expose open-api spec 1`] = `
 openapi: 3.0.3
 info:
   title: Kube-Workflow Webhook API
-  version: 1.14.11
+  version: 0.0.0
   description: Run workflow in kube from webhook call
   license:
     name: MIT
