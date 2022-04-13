@@ -34,34 +34,29 @@ RUN curl -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/${KAP
   && mv /tmp/kapp /usr/local/bin/kapp \
   && chmod +x /usr/local/bin/kapp
 
-# ARG KUSTOMIZE_VERSION=v4.5.2
-# ENV KUSTOMIZE_VERSION=$KUSTOMIZE_VERSION
-# RUN curl -sL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_v4.5.2_linux_amd64.tar.gz | tar xz -C /tmp/ \
-#   && mv /tmp/kustomize /usr/local/bin/kustomize \
-#   && chmod +x /usr/local/bin/kustomize
-
-# ARG KUBEVAL_VERSION=v0.16.1
-# ENV KUBEVAL_VERSION=$KUBEVAL_VERSION
-# RUN curl -sL https://github.com/instrumenta/kubeval/releases/download/${KUBEVAL_VERSION}/kubeval-linux-amd64.tar.gz | tar xz -C /tmp/ \
-#   && mv /tmp/kubeval /usr/local/bin/kubeval \
-#   && chmod +x /usr/local/bin/kubeval
-
 RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1001 ubuntu
 RUN mkdir -p /opt && chown 1001:1001 /opt
 
 RUN mkdir -p /opt/kube-workflow
 WORKDIR /opt/kube-workflow
-COPY packages/workflow/package.json yarn.lock ./
+COPY yarn.lock ./
+COPY packages/workflow/package.json ./packages/workflow/package.json
+COPY packages/common/package.json ./packages/common/package.json
 RUN chown -R 1001:1001 .
 
 # Keep yarn install cache when bumping version and dependencies still the sames
 RUN node -e " \
-  const package = JSON.parse(fs.readFileSync('package.json')); \
+  const package = JSON.parse(fs.readFileSync('packages/workflow/package.json')); \
   const packageZero = { ...package, version: '0.0.0' };  \
-  fs.writeFileSync('package.json', JSON.stringify(packageZero));"
-RUN yarn install --immutable --production --ignore-scripts \
+  fs.writeFileSync('packages/workflow/package.json', JSON.stringify(packageZero));"
+RUN node -e " \
+  const package = JSON.parse(fs.readFileSync('packages/common/package.json')); \
+  const packageZero = { ...package, version: '0.0.0' };  \
+  fs.writeFileSync('packages/common/package.json', JSON.stringify(packageZero));"
+RUN yarn workspaces focus kube-workflow --production --ignore-scripts \
   && yarn cache clean
-COPY packages/workflow/ ./
+COPY packages/workflow/ ./packages/workflow/
+COPY packages/common/ ./packages/common/
 RUN yarn postinstall
 
 RUN chown -R 1001:1001 .

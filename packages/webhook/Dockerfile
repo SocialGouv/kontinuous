@@ -8,7 +8,9 @@ WORKDIR /app
 ## PREPARE (package.json to avoid node_modules cache invalidation on version bumpgin)
 FROM node as preparation
 COPY packages/webhook/package.json /app/packages/webhook/
+COPY packages/common/package.json /app/packages/common/
 RUN node -e "fs.writeFileSync('/app/packages/webhook/package.json', JSON.stringify({ ...JSON.parse(fs.readFileSync('/app/packages/webhook/package.json')), version: '0.0.0' }));"
+RUN node -e "fs.writeFileSync('/app/packages/common/package.json', JSON.stringify({ ...JSON.parse(fs.readFileSync('/app/packages/common/package.json')), version: '0.0.0' }));"
 
 ## BUILD ENVIRONMENTS
 FROM node as builder
@@ -17,19 +19,16 @@ ENV NODE_ENV=$NODE_ENV
 
 ### INSTALL (node modules)
 COPY --from=preparation /app/packages/webhook/package.json /app/packages/webhook/
+COPY --from=preparation /app/packages/common/package.json /app/packages/common/
 COPY package.json yarn.lock .eslintrc.yaml /app/
-#### CUSTOM COPY LIBS
-COPY libs/modjo/package.json /app/libs/modjo/
-COPY libs/common/package.json /app/libs/common/
 #### YARN INSTALL
-RUN yarn --immutable --ignore-scripts
+RUN yarn workspaces focus kube-workflow --ignore-scripts
 
 ### COPY (package sources)
 COPY packages/webhook /app/packages/webhook/
 
 ### CUSTOMS COPY (before build)
-COPY libs/modjo /app/libs/modjo/
-COPY libs/common /app/libs/common/
+COPY packages/common /app/packages/common/
 
 #### CUSTOMS ARG and ENV
 # ARG FOO
@@ -43,7 +42,6 @@ RUN mkdir -p /app/packages/webhook/build
 RUN yarn workspace webhook postinstall
 
 ### CUSTOM RUN PREBUILD
-RUN yarn workspace modjo postinstall
 
 ### RUN BUILD
 RUN yarn workspace webhook build

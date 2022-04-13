@@ -13,6 +13,7 @@
     "fs-extra": "^10.0.1",
     "git-url-parse": "^11.6.0",
     "js-yaml": "^4.1.0",
+    "kube-workflow-common": "link:../common",
     "link-module-alias": "^1.2.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.defaultsdeep": "^4.6.1",
@@ -37,8 +38,8 @@
   "scripts": {
     "lint": "eslint .",
     "test": "jest tests",
-    "test:debug": "DEBUG=1 jest tests",
-    "test:update-snapshots": "jest tests -u",
+    "test:debug": "DEBUG=1 yarn test",
+    "test:update-snapshots": "yarn test -u",
     "postinstall": "link-module-alias"
   },
   "_moduleAliases": {

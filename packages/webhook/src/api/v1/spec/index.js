@@ -21,9 +21,6 @@ async function createApiSpecV1(options = {}) {
       schemas: {},
     },
     paths: {},
-    "x-security-sets": {
-      auth: ["githubWebhookToken", "gitlabWebhookToken", "manualWebhookToken"],
-    },
   }
   return apiSpec
 }

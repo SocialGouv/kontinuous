@@ -1,10 +1,15 @@
+const isVersionTag = require("kube-workflow-common/utils/is-version-tag")
 const getGitInfos = require("./get-git-infos")
 
-const versionTagRe = /v[0-9][0-9]*/
+const envs = ["dev", "preprod", "prod"]
 
 module.exports = ({ options = {}, cwd, ref, detectCurrentTags = true }) => {
   if (options.E) {
     return options.E
+  }
+
+  if (process.env.ENVIRONMENT && envs.includes(process.env.ENVIRONMENT)) {
+    return process.env.ENVIRONMENT
   }
 
   if (ref) {
@@ -12,17 +17,17 @@ module.exports = ({ options = {}, cwd, ref, detectCurrentTags = true }) => {
     if (ref === "master" || ref === "main") {
       return "preprod"
     }
-    if (versionTagRe.test(ref)) {
+    if (isVersionTag(ref)) {
       return "prod"
     }
     return "dev"
   }
 
   const { GIT_REF, GIT_TAGS } = getGitInfos(cwd)
-  if (detectCurrentTags && GIT_TAGS.some((tag) => versionTagRe.test(tag))) {
+  if (detectCurrentTags && GIT_TAGS.some((tag) => isVersionTag(tag))) {
     return "prod"
   }
-  if (versionTagRe.test(GIT_REF)) {
+  if (isVersionTag(GIT_REF)) {
     return "prod"
   }
   if (GIT_REF === "master" || GIT_REF === "main") {

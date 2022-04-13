@@ -1,0 +1,32 @@
+security: 
+  - gitlab-hmac: ["webhook"]
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          ref:
+            type: string
+        required:
+          - ref
+
+responses:
+  202:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+  204:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string

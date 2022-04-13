@@ -1,0 +1,209 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`kube-webhook service expose open-api spec 1`] = `
+"components:
+  parameters: {}
+  schemas:
+    error:
+      type: object
+      additionalProperties: true
+      properties:
+        message:
+          type: string
+        code:
+          type: integer
+    httpError:
+      type: object
+      additionalProperties: true
+      properties:
+        message:
+          type: string
+        code:
+          type: integer
+          minimum: 400
+          maximum: 599
+  securitySchemes:
+    giteaHmac:
+      type: apiKey
+      in: header
+      name: X-Gitea-Signature
+    githubHmac:
+      type: apiKey
+      in: header
+      name: X-Hub-Signature-256
+    gitlabToken:
+      type: apiKey
+      in: header
+      name: X-Gitlab-Token
+    token:
+      type: apiKey
+      in: query
+      name: token
+openapi: 3.0.3
+info:
+  title: Kube-Workflow Webhook API
+  version: 1.14.11
+  description: Run workflow in kube from webhook call
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: http://0.0.0.0:3000/api/v1/oas
+paths:
+  /hooks/github:
+    post:
+      security:
+        - github-hmac:
+            - webhook
+      parameters:
+        - in: query
+          name: event
+          schema:
+            type: string
+            enum:
+              - pushed
+              - created
+              - deleted
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ref:
+                  type: string
+              required:
+                - ref
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+          description: 'Default description: HTTP 202 for addOneHooksGithub'
+        '204':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+          description: 'Default description: HTTP 204 for addOneHooksGithub'
+      operationId: addOneHooksGithub
+      description: 'Default description: Insert mutation: addOneHooksGithub'
+      summary: addOneHooksGithub
+    parameters: []
+    description: /hooks/github
+  /hooks/gitlab:
+    post:
+      security:
+        - gitlab-hmac:
+            - webhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ref:
+                  type: string
+              required:
+                - ref
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+          description: 'Default description: HTTP 202 for addOneHooksGitlab'
+        '204':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+          description: 'Default description: HTTP 204 for addOneHooksGitlab'
+      operationId: addOneHooksGitlab
+      description: 'Default description: Insert mutation: addOneHooksGitlab'
+      summary: addOneHooksGitlab
+    parameters: []
+    description: /hooks/gitlab
+  /hooks/user:
+    post:
+      security:
+        - token:
+            - webhook
+      parameters:
+        - in: query
+          name: event
+          schema:
+            type: string
+            enum:
+              - pushed
+              - created
+              - deleted
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ref:
+                  type: string
+              required:
+                - ref
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+          description: 'Default description: HTTP 202 for addOneHooksUser'
+        '204':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+          description: 'Default description: HTTP 204 for addOneHooksUser'
+      operationId: addOneHooksUser
+      description: 'Default description: Insert mutation: addOneHooksUser'
+      summary: addOneHooksUser
+    parameters: []
+    description: /hooks/user
+  /healthz:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+          description: 'Default description: Success results getOneHealthz'
+      operationId: getOneHealthz
+      description: 'Default description: Query: getOneHealthz'
+      summary: getOneHealthz
+    parameters: []
+    description: /healthz
+"
+`;

@@ -20,7 +20,7 @@ module.exports = async (options) => {
 
   const envVars = {
     ...process.env,
-    ENVIRONMENT: process.env.ENVIRONMENT || selectedEnv,
+    ENVIRONMENT: selectedEnv,
     KW_CHARTS: options.charts || process.env.KW_CHARTS,
     KW_SUBCHARTS: options.subcharts || process.env.KW_SUBCHARTS,
     KW_NO_TREE: options.noTree,

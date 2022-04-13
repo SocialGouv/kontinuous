@@ -1,4 +1,4 @@
-const GitUrlParse = require("git-url-parse")
+const repositoryFromGitUrl = require("kube-workflow-common/utils/repository-from-git-url")
 const shell = require("~/utils/shell")
 const logger = require("~/utils/logger")
 
@@ -14,15 +14,8 @@ module.exports = (cwd = process.cwd(), reloadCache = false) => {
       GIT_SHA = shell("git show -s --format=%H", { cwd }).trim()
 
       const gitUrl = shell("git remote get-url origin", { cwd }).trim()
-      const url = GitUrlParse(gitUrl)
-      let { pathname } = url
-      if (pathname.startsWith("/")) {
-        pathname = pathname.slice(1)
-      }
-      if (pathname.endsWith(".git")) {
-        pathname = pathname.slice(0, -4)
-      }
-      GIT_REPOSITORY = pathname
+
+      GIT_REPOSITORY = repositoryFromGitUrl(gitUrl)
     } catch (e) {
       logger.error(
         "Unable to retrieve git info, ensure that you have git installed and the current directroy is a git repository"

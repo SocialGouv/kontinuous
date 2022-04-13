@@ -1,0 +1,13 @@
+{
+  "name": "kube-workflow-common",
+  "version": "1.14.11",
+  "description": "",
+  "license": "MIT",
+  "author": "",
+  "dependencies": {
+    "git-url-parse": "^11.6.0"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

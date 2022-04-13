@@ -3,7 +3,7 @@ const deepmerge = require("~/utils/deepmerge")
 
 const { buildCtx } = require("./ctx")
 
-const versionTagRe = /v[0-9][0-9]*/
+const isVersionTag = require("kube-workflow-common/utils/is-version-tag")
 
 module.exports = (values) => {
   
@@ -55,7 +55,7 @@ module.exports = (values) => {
   if (isPreProd) {
     imageTag = `preprod-${sha}`
   } else if (isProd) {
-    if (versionTagRe.test(gitBranch)) {
+    if (isVersionTag(gitBranch)) {
       gitBranch.substring(1)
     } else {
       imageTag = "prod"

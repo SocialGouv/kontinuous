@@ -33,8 +33,8 @@ module.exports = {
       alias: true,
     },
   },
-  extends: ["airbnb-base", "prettier"],
-  plugins: ["prettier", "import"],
+  extends: ["airbnb-base", "prettier", "plugin:jest/recommended"],
+  plugins: ["prettier", "import", "jest"],
   rules: {
     "node/no-extraneous-require": [0],
     "import/no-commonjs": [0],
