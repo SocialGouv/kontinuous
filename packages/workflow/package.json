@@ -53,7 +53,16 @@
     "post-renderer": "./bin/post-renderer"
   },
   "files": [
-    "**"
+    "bin",
+    "charts",
+    "common",
+    "patches",
+    "src",
+    "templates",
+    "validators",
+    "Chart.yaml",
+    "package.json",
+    "values.yaml"
   ],
   "publishConfig": {
     "access": "public"

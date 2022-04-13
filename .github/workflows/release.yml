@@ -15,7 +15,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-          
+      
+      - name: prepublish
+        shell: bash
+        run: |
+          yarn workspace kube-workflow prepublish
+
       - id: publish-kube-workflow
         uses: JS-DevTools/npm-publish@v1
         with:
