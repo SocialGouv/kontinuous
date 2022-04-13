@@ -17,7 +17,6 @@
     "@modjo-plugins/express": "^1.0.14",
     "@modjo-plugins/microservice-oapi": "^1.0.5",
     "@vercel/ncc": "^0.33.3",
-    "kube-workflow-common": "file:./common/",
     "link-module-alias": "^1.2.0"
   },
   "devDependencies": {
@@ -29,6 +28,7 @@
     "node": ">=14"
   },
   "_moduleAliases": {
-    "~": "src"
+    "~": "src",
+    "kube-workflow-common": "./common"
   }
 }

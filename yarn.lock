@@ -5974,30 +5974,11 @@ __metadata:
     "@modjo-plugins/microservice-oapi": "npm:^1.0.5"
     "@vercel/ncc": "npm:^0.33.3"
     jest: "npm:^27.5.1"
-    kube-workflow-common: "file:./common/"
     link-module-alias: "npm:^1.2.0"
     nodemon: "npm:^2.0.15"
     supertest: "npm:^6.2.2"
   languageName: unknown
   linkType: soft
-
-"kube-workflow-common@file:./common/::locator=kube-webhook%40workspace%3Apackages%2Fwebhook":
-  version: 1.14.12
-  resolution: "kube-workflow-common@file:./common/#./common/::hash=e529ca&locator=kube-webhook%40workspace%3Apackages%2Fwebhook"
-  dependencies:
-    git-url-parse: "npm:^11.6.0"
-  checksum: d2cca8d25b2e538a70ebb2b14913f504e7c33010624b8dbf70b70c71000c04944bb427a652def30f6ce32ed46d21ee1965a411fff23f8e41b0f5c56ca0e9b78e
-  languageName: node
-  linkType: hard
-
-"kube-workflow-common@file:./common/::locator=kube-workflow%40workspace%3Apackages%2Fworkflow":
-  version: 1.14.12
-  resolution: "kube-workflow-common@file:./common/#./common/::hash=e529ca&locator=kube-workflow%40workspace%3Apackages%2Fworkflow"
-  dependencies:
-    git-url-parse: "npm:^11.6.0"
-  checksum: d2cca8d25b2e538a70ebb2b14913f504e7c33010624b8dbf70b70c71000c04944bb427a652def30f6ce32ed46d21ee1965a411fff23f8e41b0f5c56ca0e9b78e
-  languageName: node
-  linkType: hard
 
 "kube-workflow-common@workspace:packages/common":
   version: 0.0.0-use.local
@@ -6042,7 +6023,6 @@ __metadata:
     jest: "npm:^27.5.1"
     jest-specific-snapshot: "npm:^5.0.0"
     js-yaml: "npm:^4.1.0"
-    kube-workflow-common: "file:./common/"
     link-module-alias: "npm:^1.2.0"
     lodash.camelcase: "npm:^4.3.0"
     lodash.defaultsdeep: "npm:^4.6.1"

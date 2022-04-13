@@ -13,7 +13,6 @@
     "fs-extra": "^10.0.1",
     "git-url-parse": "^11.6.0",
     "js-yaml": "^4.1.0",
-    "kube-workflow-common": "file:./common/",
     "link-module-alias": "^1.2.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.defaultsdeep": "^4.6.1",
@@ -41,11 +40,12 @@
     "test:debug": "DEBUG=1 yarn test",
     "test:update-snapshots": "yarn test -u",
     "prepublish": "rm -f common && cp -r ../common ./",
-    "postpublish": "rm -rf common && ln -s ../common ./",
+    "postpublish": "rm -rf common && link-module-alias",
     "postinstall": "link-module-alias"
   },
   "_moduleAliases": {
-    "~": "src"
+    "~": "src",
+    "kube-workflow-common": "./common"
   },
   "bin": {
     "kube-workflow": "./bin/kube-workflow",
