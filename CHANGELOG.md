@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.14.16](https://github.com/SocialGouv/kube-workflow/compare/v1.14.15...v1.14.16) (2022-04-13)
+
+
+### Bug Fixes
+
+* npm workspace ([b908058](https://github.com/SocialGouv/kube-workflow/commit/b9080588129239e0e1acca08ab92a24c827e3a67))
+
 ### [1.14.15](https://github.com/SocialGouv/kube-workflow/compare/v1.14.14...v1.14.15) (2022-04-13)
 
 
