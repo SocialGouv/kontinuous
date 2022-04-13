@@ -5974,15 +5974,14 @@ __metadata:
     "@modjo-plugins/microservice-oapi": "npm:^1.0.5"
     "@vercel/ncc": "npm:^0.33.3"
     jest: "npm:^27.5.1"
+    kube-workflow-common: "npm:*"
     link-module-alias: "npm:^1.2.0"
     nodemon: "npm:^2.0.15"
     supertest: "npm:^6.2.2"
-  peerDependencies:
-    kube-workflow-common: "*"
   languageName: unknown
   linkType: soft
 
-"kube-workflow-common@workspace:packages/common":
+"kube-workflow-common@npm:*, kube-workflow-common@workspace:packages/common":
   version: 0.0.0-use.local
   resolution: "kube-workflow-common@workspace:packages/common"
   dependencies:
@@ -6025,6 +6024,7 @@ __metadata:
     jest: "npm:^27.5.1"
     jest-specific-snapshot: "npm:^5.0.0"
     js-yaml: "npm:^4.1.0"
+    kube-workflow-common: "npm:*"
     link-module-alias: "npm:^1.2.0"
     lodash.camelcase: "npm:^4.3.0"
     lodash.defaultsdeep: "npm:^4.6.1"
@@ -6034,8 +6034,6 @@ __metadata:
     pino-pretty: "npm:^7.6.0"
     pretty-ms: "npm:^7.0.1"
     slugify: "npm:^1.6.5"
-  peerDependencies:
-    kube-workflow-common: "*"
   bin:
     kube-workflow: ./bin/kube-workflow
     post-renderer: ./bin/post-renderer

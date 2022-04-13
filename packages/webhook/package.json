@@ -21,11 +21,9 @@
   },
   "devDependencies": {
     "jest": "^27.5.1",
+    "kube-workflow-common": "*",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2"
-  },
-  "peerDependencies": {
-    "kube-workflow-common": "*"
   },
   "engines": {
     "node": ">=14"

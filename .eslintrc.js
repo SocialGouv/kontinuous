@@ -21,7 +21,7 @@ const noExtraneousRule = [
   {
     devDependencies: true,
     optionalDependencies: false,
-    peerDependencies: true,
+    peerDependencies: false,
     packageDir,
   },
 ]

@@ -1,6 +1,6 @@
 {
   "name": "kube-workflow",
-  "version": "1.14.15",
+  "version": "1.14.14",
   "repository": "git@github.com:SocialGouv/kube-workflow.git",
   "license": "MIT",
   "main": "src/index",
@@ -26,9 +26,7 @@
   "devDependencies": {
     "dotenv": "^16.0.0",
     "jest": "^27.5.1",
-    "jest-specific-snapshot": "^5.0.0"
-  },
-  "peerDependencies": {
+    "jest-specific-snapshot": "^5.0.0",
     "kube-workflow-common": "*"
   },
   "jest": {
