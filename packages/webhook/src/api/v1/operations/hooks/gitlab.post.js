@@ -3,7 +3,7 @@ const { reqCtx } = require("@modjo-plugins/express/ctx")
 const isVersionTag = require("kube-workflow-common/utils/is-version-tag")
 
 const getEventName = (req) => {
-  const { event_name: eventName } = req.params
+  const { event_name: eventName } = req.body
   if (
     Object.keys(req.body).includes("checkout_sha") &&
     req.body.checkout_sha === null &&
@@ -35,11 +35,10 @@ module.exports = function ({ services: { pushed, created, deleted } }) {
 
       const { body } = req
       const { ref } = body
-      const { ssh_url: repositoryUrl, path_with_namespace: repository } =
-        body.project
+      const { ssh_url: repositoryUrl } = body.project
 
       try {
-        await eventHandlers[eventName]({ ref, repository, repositoryUrl })
+        await eventHandlers[eventName]({ ref, repositoryUrl })
       } catch (err) {
         const logger = reqCtx.require("logger")
         logger.error(err)

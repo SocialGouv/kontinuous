@@ -1,5 +1,5 @@
 security: 
-  - github-hmac: ["webhook"]
+  - githubHmac: ["webhook"]
 
 parameters:
   - in: query
@@ -14,11 +14,21 @@ requestBody:
     application/json:
       schema:
         type: object
+        required:
+          - ref
         properties:
           ref:
             type: string
-        required:
-          - ref
+            example: feat/space-flight
+          project:
+            type: object
+            required:
+              - ssh_url
+            properties:
+              ssh_url:
+                type: string
+                example: git@example.com:gitlabhq/gitlab-test.git
+
 
 responses:
   202:

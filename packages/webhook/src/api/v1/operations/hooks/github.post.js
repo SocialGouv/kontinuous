@@ -7,17 +7,17 @@ module.exports = function ({ services: { pushed, created, deleted } }) {
     async (req, res) => {
       const { body } = req
 
-      const eventName = req.params.event
+      const eventName = req.query.event
       if (!eventName || !eventHandlers[eventName]) {
         return res.status(204).json({ message: "no-op" })
       }
 
       const { ref } = body
 
-      const { full_name: repository, ssh_url: repositoryUrl } = body.repository
+      const { ssh_url: repositoryUrl } = body.repository
 
       try {
-        await eventHandlers[eventName]({ ref, repository, repositoryUrl })
+        await eventHandlers[eventName]({ ref, repositoryUrl })
       } catch (err) {
         const logger = reqCtx.require("logger")
         logger.error(err)

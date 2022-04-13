@@ -18,8 +18,13 @@ requestBody:
         properties:
           ref:
             type: string
+            example: feat/space-flight
+          repositoryUrl:
+            type: string
+            example: git@github.com:SocialGouv/sample-next-app.git
         required:
           - ref
+          - repositoryUrl
 
 responses:
   202:

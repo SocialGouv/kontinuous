@@ -1,5 +1,5 @@
 security: 
-  - gitlab-hmac: ["webhook"]
+  - gitlabHmac: ["webhook"]
 
 requestBody:
   required: true
@@ -10,8 +10,15 @@ requestBody:
         properties:
           ref:
             type: string
-        required:
-          - ref
+            example: feat/space-flight
+          repository:
+            type: object
+            required:
+              - ssh_url
+            properties:
+              ssh_url:
+                type: string
+                example: git@github.com:SocialGouv/sample-next-app.git
 
 responses:
   202:
