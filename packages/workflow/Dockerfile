@@ -39,7 +39,7 @@ RUN mkdir -p /opt && chown 1001:1001 /opt
 
 RUN mkdir -p /opt/kube-workflow
 WORKDIR /opt/kube-workflow
-COPY yarn.lock ./
+COPY yarn.lock .yarn ./
 COPY packages/workflow/package.json ./packages/workflow/package.json
 COPY packages/common/package.json ./packages/common/package.json
 RUN chown -R 1001:1001 .

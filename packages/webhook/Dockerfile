@@ -20,7 +20,7 @@ ENV NODE_ENV=$NODE_ENV
 ### INSTALL (node modules)
 COPY --from=preparation /app/packages/webhook/package.json /app/packages/webhook/
 COPY --from=preparation /app/packages/common/package.json /app/packages/common/
-COPY package.json yarn.lock .eslintrc.yaml /app/
+COPY yarn.lock .yarn /app/
 #### YARN INSTALL
 RUN yarn workspaces focus kube-workflow --ignore-scripts
 
