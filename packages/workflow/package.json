@@ -28,6 +28,9 @@
     "jest": "^27.5.1",
     "jest-specific-snapshot": "^5.0.0"
   },
+  "peerDependencies": {
+    "kube-workflow-common": "*"
+  },
   "jest": {
     "testTimeout": 10000
   },
@@ -40,12 +43,12 @@
     "test:debug": "DEBUG=1 yarn test",
     "test:update-snapshots": "yarn test -u",
     "prepublish": "rm -f common && cp -r ../common ./",
-    "postpublish": "rm -rf common && link-module-alias",
+    "postpublish": "rm -rf common && ln -s ../common ./",
     "postinstall": "link-module-alias"
   },
   "_moduleAliases": {
     "~": "src",
-    "kube-workflow-common": "./common"
+    "kube-workflow-common": "common"
   },
   "bin": {
     "kube-workflow": "./bin/kube-workflow",

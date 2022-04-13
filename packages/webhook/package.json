@@ -24,11 +24,14 @@
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2"
   },
+  "peerDependencies": {
+    "kube-workflow-common": "*"
+  },
   "engines": {
     "node": ">=14"
   },
   "_moduleAliases": {
     "~": "src",
-    "kube-workflow-common": "./common"
+    "kube-workflow-common": "common"
   }
 }

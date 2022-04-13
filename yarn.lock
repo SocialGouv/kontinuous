@@ -5977,6 +5977,8 @@ __metadata:
     link-module-alias: "npm:^1.2.0"
     nodemon: "npm:^2.0.15"
     supertest: "npm:^6.2.2"
+  peerDependencies:
+    kube-workflow-common: "*"
   languageName: unknown
   linkType: soft
 
@@ -6032,6 +6034,8 @@ __metadata:
     pino-pretty: "npm:^7.6.0"
     pretty-ms: "npm:^7.0.1"
     slugify: "npm:^1.6.5"
+  peerDependencies:
+    kube-workflow-common: "*"
   bin:
     kube-workflow: ./bin/kube-workflow
     post-renderer: ./bin/post-renderer
