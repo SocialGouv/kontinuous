@@ -40,8 +40,6 @@
     "test": "jest tests",
     "test:debug": "DEBUG=1 yarn test",
     "test:update-snapshots": "yarn test -u",
-    "prepublish": "rm -f common && cp -r ../common ./",
-    "postpublish": "rm -rf common && ln -s ../common ./",
     "postinstall": "link-module-alias"
   },
   "_moduleAliases": {

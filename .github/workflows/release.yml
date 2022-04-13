@@ -19,7 +19,8 @@ jobs:
       - name: prepublish
         shell: bash
         run: |
-          yarn workspace kube-workflow prepublish
+          cd packages/workflow
+          rm -f common && cp -r ../common ./
 
       - id: publish-kube-workflow
         uses: JS-DevTools/npm-publish@v1
