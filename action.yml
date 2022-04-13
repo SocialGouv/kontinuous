@@ -1,15 +1,14 @@
 name: "Autodevops deploy"
 description: "Autodevops deploy using Helm template and kapp"
 inputs:
-  environment:
-    description: "The deployment environment (dev | preprod | prod)"
-    required: true
   rancherProjectId:
     description: "The Rancher project ID, usually secrets.RANCHER_PROJECT_ID"
     required: true
   rancherProjectName:
     description: "The Rancher project name, usually secrets.RANCHER_PROJECT_NAME, usefull jobs that needs secrets or ci namespaces"
     required: true
+  environment:
+    description: "The deployment environment (dev | preprod | prod), default to prod on version tag, preprod on master or main, else dev"
   kubeconfig:
     description: "The Kubernetes authentication configuration"
   token:
@@ -22,6 +21,10 @@ inputs:
     description: "override manifests name as manifest-$name.yaml, default to manifest-$environment.yaml"
   timeout:
     description: "override default kapp --wait-timeout, default to 15m0s"
+  cwd:
+    description: "working directory where is located .kube-workflow"
+  kubeconfigContext:
+    description: "override kubeconfig context, default dev or prod according to environment"
 outputs:
   url:
     description: "Main deployment URL"
@@ -38,7 +41,9 @@ runs:
       run: |
         KWBUILD_PATH=/tmp/autodevops
         mkdir -p $KWBUILD_PATH
+        PROJECT_PATH="${{ github.workspace }}/${{ inputs.cwd }}"
         echo "KWBUILD_PATH=$KWBUILD_PATH" >> $GITHUB_ENV
+        echo "PROJECT_PATH=$PROJECT_PATH" >> $GITHUB_ENV
 
     - name: Install dependencies
       shell: bash
@@ -57,7 +62,7 @@ runs:
         KW_SUBCHARTS: ${{ inputs.subcharts }}
         DEBUG: "true"
       working-directory: "${{ github.action_path }}"
-      run: packages/workflow/bin/kube-workflow build --cwd ${{ github.workspace }}
+      run: packages/workflow/bin/kube-workflow build --cwd ${{ env.PROJECT_PATH }}
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2
@@ -90,6 +95,9 @@ runs:
     - name: Create kubernetes config
       shell: bash
       run: |
+        if [ -z "${{ inputs.kubeconfig }}" ]; then
+          exit 0
+        fi
         mkdir -p ~/.kube
         touch ~/.kube/config
         echo ${{ inputs.kubeconfig }} | base64 -d > ~/.kube/config
@@ -102,8 +110,9 @@ runs:
         ENVIRONMENT: ${{ inputs.environment }}
         RANCHER_PROJECT_ID: ${{ inputs.rancherProjectId }}
         RANCHER_PROJECT_NAME: ${{ inputs.rancherProjectName }}
+        KUBECONFIG_CONTEXT: ${{ inputs.kubeconfigContext }}
         KW_DEPLOY_TIMEOUT: ${{ inputs.timeout }}
-      run: packages/workflow/bin/kube-workflow deploy --cwd ${{ github.workspace }} -f ${{ env.KWBUILD_PATH }}/manifests.yaml
+      run: packages/workflow/bin/kube-workflow deploy --cwd ${{ env.PROJECT_PATH }} -f ${{ env.KWBUILD_PATH }}/manifests.yaml
 
     - name: Define environment URL
       id: environment-url

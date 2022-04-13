@@ -27,7 +27,8 @@ module.exports = async (options) => {
 
   const selectedEnv = selectEnv({ options, cwd })
 
-  let { kubeconfigContext } = options
+  let kubeconfigContext =
+    options.kubeconfigContext || process.env.KUBECONFIG_CONTEXT
   if (!kubeconfigContext) {
     const { kubeconfigContextNoDetect } = options
     if (kubeconfigContextNoDetect) {
