@@ -1,4 +1,6 @@
 const path = require("path")
+const os = require("os")
+const { mkdtemp } = require("fs/promises")
 const { spawn } = require("child_process")
 const fs = require("fs-extra")
 const yaml = require("js-yaml")
@@ -29,11 +31,21 @@ module.exports = async (options) => {
 
   let { kubeconfigContext } = options
   if (!kubeconfigContext) {
-    if (selectedEnv === "prod") {
+    const { kubeconfigContextNoDetect } = options
+    if (kubeconfigContextNoDetect) {
+      kubeconfigContext = shell("kubectl config current-context")
+    } else if (selectedEnv === "prod") {
       kubeconfigContext = "prod"
     } else {
       kubeconfigContext = "dev"
     }
+  }
+
+  if (process.env.KUBECONFIG && process.env.KUBECONFIG.includes("\n")) {
+    const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))
+    const kubeconfigFile = `${tmpDir}/.kubeconfig`
+    await fs.writeFile(kubeconfigFile, process.env.KUBECONFIG)
+    process.env.KUBECONFIG = kubeconfigFile
   }
 
   const getRancherProjectId = (rancherProjectName) => {

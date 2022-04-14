@@ -68,6 +68,7 @@ program
     "--kubeconfig-context <context>",
     "kubeconfig context, default inferred from environment"
   )
+  .option("--kubeconfig-context-no-detect", "don't infer kubeconfig context")
   .option("--timeout <timeout>", "deploy wait timeout, default 15m0s")
   .description(
     "Deploy manifests using kapp with current directory configuration"

@@ -1,5 +1,5 @@
-// const image = "harbor.fabrique.social.gouv.fr/sre/kube-workflow:latest"
-const image = "ghcr.io/socialgouv/kube-workflow:latest"
+const image = "harbor.fabrique.social.gouv.fr/sre/kube-workflow:latest"
+// const image = "ghcr.io/socialgouv/kube-workflow:latest"
 const checkoutImage = image
 
 module.exports = ({
@@ -48,9 +48,15 @@ module.exports = ({
           {
             name: "pipeline",
             image,
-            // imagePullPolicy: "IfNotPresent",
             imagePullPolicy: "Always",
             args,
+            envFrom: [
+              {
+                secretRef: {
+                  name: "kubeconfig",
+                },
+              },
+            ],
             volumeMounts: [
               {
                 name: "workspace",
