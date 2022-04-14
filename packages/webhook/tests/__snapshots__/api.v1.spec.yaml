@@ -53,7 +53,7 @@ paths:
   /hooks/github:
     post:
       security:
-        - github-hmac:
+        - githubHmac:
             - webhook
       parameters:
         - in: query
@@ -70,11 +70,20 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - ref
               properties:
                 ref:
                   type: string
-              required:
-                - ref
+                  example: feat/space-flight
+                project:
+                  type: object
+                  required:
+                    - ssh_url
+                  properties:
+                    ssh_url:
+                      type: string
+                      example: git@example.com:gitlabhq/gitlab-test.git
       responses:
         '202':
           content:
@@ -102,7 +111,7 @@ paths:
   /hooks/gitlab:
     post:
       security:
-        - gitlab-hmac:
+        - gitlabHmac:
             - webhook
       requestBody:
         required: true
@@ -113,8 +122,15 @@ paths:
               properties:
                 ref:
                   type: string
-              required:
-                - ref
+                  example: feat/space-flight
+                repository:
+                  type: object
+                  required:
+                    - ssh_url
+                  properties:
+                    ssh_url:
+                      type: string
+                      example: git@github.com:SocialGouv/sample-next-app.git
       responses:
         '202':
           content:
@@ -162,8 +178,13 @@ paths:
               properties:
                 ref:
                   type: string
+                  example: feat/space-flight
+                repositoryUrl:
+                  type: string
+                  example: git@github.com:SocialGouv/sample-next-app.git
               required:
                 - ref
+                - repositoryUrl
       responses:
         '202':
           content:
