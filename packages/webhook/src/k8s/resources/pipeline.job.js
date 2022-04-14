@@ -48,7 +48,8 @@ module.exports = ({
           {
             name: "pipeline",
             image,
-            imagePullPolicy: "IfNotPresent",
+            // imagePullPolicy: "IfNotPresent",
+            imagePullPolicy: "Always",
             args,
             volumeMounts: [
               {

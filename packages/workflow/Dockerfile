@@ -61,14 +61,13 @@ RUN rm -rf packages/workflow/src && rm -rf packages/workflow/common
 COPY packages/workflow/ ./packages/workflow/
 COPY packages/common/ ./packages/common/
 
-RUN git config --global --add safe.directory /workspace
-
 RUN chown -R 1001:1001 .
 RUN mkdir -p /workspace
 RUN chown -R 1001:1001 /workspace
 WORKDIR /workspace
 
 USER 1001
+RUN git config --global --add safe.directory /workspace
 ENV HOME=/home/ubuntu
 RUN chmod a+rw $HOME
 ENV KUBECONFIG=$HOME/.kube/config
