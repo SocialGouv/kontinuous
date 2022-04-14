@@ -11,6 +11,7 @@ const timeLogger = require("~common/utils/time-logger")
 const getGitInfos = require("~common/utils/get-git-infos")
 const selectEnv = require("~common/utils/select-env")
 const slug = require("~common/utils/slug")
+const parseCommand = require("~common/utils/parse-command")
 const build = require("~/build")
 
 module.exports = async (options) => {
@@ -156,20 +157,16 @@ module.exports = async (options) => {
     options.timeout || process.env.KW_DEPLOY_TIMEOUT || "15m0s"
 
   const deployWithKapp = async () => {
-    const inlineCmd = `kapp \
-      deploy
-        --kubeconfig-context ${kubeconfigContext} \
-        --app label:kubeworkflow/kapp=${kappApp} \
-        --logs-all \
-        --wait-timeout ${kappWaitTimeout} \
-        --dangerous-override-ownership-of-existing-resources \
-        --yes \
+    const [cmd, args] = parseCommand(`
+      kapp deploy
+        --kubeconfig-context ${kubeconfigContext}
+        --app label:kubeworkflow/kapp=${kappApp}
+        --logs-all
+        --wait-timeout ${kappWaitTimeout}
+        --dangerous-override-ownership-of-existing-resources
+        --yes
         -f ${manifestsFile}
-    `
-    const [cmd, ...args] = inlineCmd
-      .split(" ")
-      .map((a) => a.trim())
-      .filter((a) => !!a)
+    `)
 
     try {
       await new Promise((resolve, reject) => {
