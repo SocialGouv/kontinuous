@@ -57,6 +57,7 @@ RUN node -e " \
 RUN mkdir -p packages/workflow/src && mkdir -p packages/workflow/common
 RUN yarn workspaces focus kube-workflow --production \
   && yarn cache clean
+RUN rm -rf packages/workflow/src && rm -rf packages/workflow/common
 COPY packages/workflow/ ./packages/workflow/
 COPY packages/common/ ./packages/common/
 
