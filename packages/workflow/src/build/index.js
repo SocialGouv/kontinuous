@@ -5,10 +5,10 @@ const fs = require("fs-extra")
 
 const { highlight, fromJson: themeFromJson } = require("cli-highlight")
 
-const logger = require("~/utils/logger")
+const logger = require("~common/utils/logger")
 
-const getGitInfos = require("~/utils/get-git-infos")
-const selectEnv = require("~/utils/select-env")
+const getGitInfos = require("~common/utils/get-git-infos")
+const selectEnv = require("~common/utils/select-env")
 const builder = require("./builder")
 
 module.exports = async (options) => {

@@ -1,6 +1,6 @@
 const { reqCtx } = require("@modjo-plugins/express/ctx")
 
-const isVersionTag = require("kube-workflow-common/utils/is-version-tag")
+const isVersionTag = require("~common/utils/is-version-tag")
 
 const getEventName = (req) => {
   const { event_name: eventName } = req.body

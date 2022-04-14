@@ -2,13 +2,12 @@ const { Command, Option } = require("commander")
 
 const program = new Command()
 
-const { configureDebug } = require("~/utils/logger")
-const selectEnv = require("~/utils/select-env")
+const { configureDebug } = require("~common/utils/logger")
+const selectEnv = require("~common/utils/select-env")
 
+const slug = require("~common/utils/slug")
 const build = require("~/build")
 const deploy = require("~/deploy")
-
-const slug = require("~/utils/slug")
 
 program
   .name("kube-workflow")

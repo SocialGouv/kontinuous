@@ -4,14 +4,14 @@ const fs = require("fs-extra")
 const yaml = require("js-yaml")
 const retry = require("async-retry")
 
-const logger = require("~/utils/logger")
-const shell = require("~/utils/shell")
+const logger = require("~common/utils/logger")
+const shell = require("~common/utils/shell")
 
-const timeLogger = require("~/utils/time-logger")
+const timeLogger = require("~common/utils/time-logger")
+const getGitInfos = require("~common/utils/get-git-infos")
+const selectEnv = require("~common/utils/select-env")
+const slug = require("~common/utils/slug")
 const build = require("~/build")
-const getGitInfos = require("~/utils/get-git-infos")
-const selectEnv = require("~/utils/select-env")
-const slug = require("~/utils/slug")
 
 module.exports = async (options) => {
   const elapsed = timeLogger({

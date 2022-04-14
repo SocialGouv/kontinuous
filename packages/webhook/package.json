@@ -30,6 +30,6 @@
   },
   "_moduleAliases": {
     "~": "src",
-    "kube-workflow-common": "common"
+    "~common": "common"
   }
 }

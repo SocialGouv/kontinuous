@@ -1,5 +1,5 @@
 const { ctx } = require("@modjo-plugins/core")
-const repositoryFromGitUrl = require("kube-workflow-common/utils/repository-from-git-url")
+const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 
 module.exports = function () {
   const logger = ctx.require("logger")

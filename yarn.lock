@@ -5984,8 +5984,16 @@ __metadata:
 "kube-workflow-common@npm:*, kube-workflow-common@workspace:packages/common":
   version: 0.0.0-use.local
   resolution: "kube-workflow-common@workspace:packages/common"
-  dependencies:
-    git-url-parse: "npm:^11.6.0"
+  peerDependencies:
+    fs-extra: ^10.0.1
+    git-url-parse: ^11.6.0
+    js-yaml: ^4.1.0
+    lodash.mergewith: ^4.6.2
+    nctx: ^1.2.0
+    pino: ^7.10.0
+    pino-pretty: ^7.6.1
+    pretty-ms: ^7.0.1
+    slugify: ^1.6.5
   languageName: unknown
   linkType: soft
 

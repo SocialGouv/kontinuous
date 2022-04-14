@@ -1,6 +1,6 @@
 const yaml = require("js-yaml")
 
-const removeNulls = require("~/utils/remove-nulls")
+const removeNulls = require("~common/utils/remove-nulls")
 
 module.exports = async (manifestsDocument) => {
   const iterator = yaml.loadAll(manifestsDocument)

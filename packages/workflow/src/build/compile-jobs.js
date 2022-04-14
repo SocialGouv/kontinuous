@@ -3,9 +3,9 @@ const path = require("path")
 
 const yaml = require("js-yaml")
 const degit = require("degit")
-const slug = require("~/utils/slug")
+const slug = require("~common/utils/slug")
 
-const miniHash = require("~/utils/mini-hash")
+const miniHash = require("~common/utils/mini-hash")
 const { buildCtx } = require("./ctx")
 
 const selfReference = "SocialGouv/kube-workflow/"

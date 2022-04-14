@@ -3,9 +3,8 @@ require("jest-specific-snapshot")
 const path = require("path")
 const fs = require("fs-extra")
 const dotenv = require("dotenv")
+const getDirectoriesSync = require("~common/utils/get-directories-sync")
 const builder = require("~/build/builder")
-
-const getDirectoriesSync = require("~/utils/get-directories-sync")
 
 const rootPath = path.resolve(`${__dirname}/..`)
 

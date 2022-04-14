@@ -1,4 +1,4 @@
-const isVersionTag = require("kube-workflow-common/utils/is-version-tag")
+const isVersionTag = require("./is-version-tag")
 const getGitInfos = require("./get-git-infos")
 
 const envs = ["dev", "preprod", "prod"]

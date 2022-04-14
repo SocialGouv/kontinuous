@@ -44,7 +44,7 @@
   },
   "_moduleAliases": {
     "~": "src",
-    "kube-workflow-common": "common"
+    "~common": "common"
   },
   "bin": {
     "kube-workflow": "./bin/kube-workflow",

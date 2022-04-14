@@ -1,7 +1,7 @@
 const fs = require("fs-extra")
 
 const { buildCtx } = require("~/build/ctx")
-const logTree = require("~/utils/log-tree")
+const logTree = require("~common/utils/log-tree")
 
 const getTreeInfos = {}
 

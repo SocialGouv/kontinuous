@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fs = require("fs-extra")
 const yaml = require("js-yaml")
-const asyncShell = require("~/utils/async-shell")
+const asyncShell = require("~common/utils/async-shell")
 
 const main = async () => {
   if (!(await fs.pathExists(`${process.env.KWBUILD_PATH}/post-renderer`))) {

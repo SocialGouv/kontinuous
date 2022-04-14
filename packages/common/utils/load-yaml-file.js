@@ -1,7 +1,7 @@
 const fs = require("fs-extra")
 const yaml = require("js-yaml")
 
-const getYamlPath = require("~/utils/get-yaml-path")
+const getYamlPath = require("./get-yaml-path")
 
 module.exports = async (...files) => {
   for (const f of files) {

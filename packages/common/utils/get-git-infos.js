@@ -1,6 +1,6 @@
-const repositoryFromGitUrl = require("kube-workflow-common/utils/repository-from-git-url")
-const shell = require("~/utils/shell")
-const logger = require("~/utils/logger")
+const repositoryFromGitUrl = require("./repository-from-git-url")
+const shell = require("./shell")
+const logger = require("./logger")
 
 let gitInfos
 

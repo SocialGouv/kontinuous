@@ -1,9 +1,9 @@
-const slug = require("~/utils/slug")
-const deepmerge = require("~/utils/deepmerge")
+const slug = require("~common/utils/slug")
+const deepmerge = require("~common/utils/deepmerge")
 
 const { buildCtx } = require("./ctx")
 
-const isVersionTag = require("kube-workflow-common/utils/is-version-tag")
+const isVersionTag = require("~common/utils/is-version-tag")
 
 module.exports = (values) => {
   

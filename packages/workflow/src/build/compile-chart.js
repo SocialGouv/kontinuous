@@ -1,10 +1,10 @@
 const fs = require("fs-extra")
 const yaml = require("js-yaml")
-const deepmerge = require("~/utils/deepmerge")
+const deepmerge = require("~common/utils/deepmerge")
 
-const getDirectories = require("~/utils/get-directories")
-const loadYamlFile = require("~/utils/load-yaml-file")
-const getYamlPath = require("~/utils/get-yaml-path")
+const getDirectories = require("~common/utils/get-directories")
+const loadYamlFile = require("~common/utils/load-yaml-file")
+const getYamlPath = require("~common/utils/get-yaml-path")
 
 const { buildCtx } = require("./ctx")
 
