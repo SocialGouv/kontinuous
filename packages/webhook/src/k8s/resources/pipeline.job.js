@@ -1,7 +1,6 @@
-const image = "harbor.fabrique.social.gouv.fr/sre/kube-workflow:latest"
-// const image = "ghcr.com/socialgouv/kube-workflow:latest"
-
-const checkoutImage = "node:17"
+// const image = "harbor.fabrique.social.gouv.fr/sre/kube-workflow:latest"
+const image = "ghcr.io/socialgouv/kube-workflow:latest"
+const checkoutImage = "alpine/git:v2.30.0"
 
 module.exports = ({
   namespace,
@@ -30,25 +29,21 @@ module.exports = ({
                 {
                   name: "checkout",
                   image: checkoutImage,
-                  env: [
-                    {
-                      name: "npm_config_cache",
-                      value: "/tmp/npm-cache",
-                    },
-                  ],
                   command: [
                     "sh",
                     "-c",
-                    `npx degit ${repositoryUrl}#${ref} /workspace`,
+                    `git clone --depth 1 ${repositoryUrl} --branch ${ref} --single-branch /workspace`,
                   ],
                   securityContext: {
                     runAsUser: 1000,
                     runAsGroup: 1000,
                   },
-                  volumeMounts: {
-                    name: "workspace",
-                    mountPath: "/workspace",
-                  },
+                  volumeMounts: [
+                    {
+                      name: "workspace",
+                      mountPath: "/workspace",
+                    },
+                  ],
                 },
               ],
             }
@@ -59,10 +54,12 @@ module.exports = ({
             image,
             imagePullPolicy: "IfNotPresent",
             args,
-            volumeMounts: {
-              name: "workspace",
-              mountPath: "/workspace",
-            },
+            volumeMounts: [
+              {
+                name: "workspace",
+                mountPath: "/workspace",
+              },
+            ],
           },
         ],
         volumes: [{ name: "workspace", emptyDir: {} }],
