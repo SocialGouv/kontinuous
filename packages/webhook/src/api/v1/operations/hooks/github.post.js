@@ -14,7 +14,7 @@ module.exports = function ({ services: { pushed, created, deleted } }) {
 
       const { ref } = body
 
-      const { ssh_url: repositoryUrl } = body.repository
+      const { clone_url: repositoryUrl } = body.repository
 
       try {
         await eventHandlers[eventName]({ ref, repositoryUrl })

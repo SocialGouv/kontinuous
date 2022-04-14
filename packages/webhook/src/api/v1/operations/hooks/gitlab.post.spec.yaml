@@ -14,11 +14,11 @@ requestBody:
           repository:
             type: object
             required:
-              - ssh_url
+              - git_http_url
             properties:
-              ssh_url:
+              git_http_url:
                 type: string
-                example: git@github.com:SocialGouv/sample-next-app.git
+                example: http://example.com/gitlabhq/gitlab-test.git
 
 responses:
   202:

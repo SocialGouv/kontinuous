@@ -79,11 +79,11 @@ paths:
                 project:
                   type: object
                   required:
-                    - ssh_url
+                    - clone_url
                   properties:
-                    ssh_url:
+                    clone_url:
                       type: string
-                      example: git@example.com:gitlabhq/gitlab-test.git
+                      example: https://github.com/SocialGouv/sample-next-app.git
       responses:
         '202':
           content:
@@ -126,11 +126,11 @@ paths:
                 repository:
                   type: object
                   required:
-                    - ssh_url
+                    - git_http_url
                   properties:
-                    ssh_url:
+                    git_http_url:
                       type: string
-                      example: git@github.com:SocialGouv/sample-next-app.git
+                      example: http://example.com/gitlabhq/gitlab-test.git
       responses:
         '202':
           content:
@@ -178,10 +178,10 @@ paths:
               properties:
                 ref:
                   type: string
-                  example: feat/space-flight
+                  example: test-ci
                 repositoryUrl:
                   type: string
-                  example: git@github.com:SocialGouv/sample-next-app.git
+                  example: https://github.com/SocialGouv/sample-next-app.git
               required:
                 - ref
                 - repositoryUrl

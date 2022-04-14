@@ -1,6 +1,6 @@
 // const image = "harbor.fabrique.social.gouv.fr/sre/kube-workflow:latest"
 const image = "ghcr.io/socialgouv/kube-workflow:latest"
-const checkoutImage = "alpine/git:v2.30.0"
+const checkoutImage = image
 
 module.exports = ({
   namespace,
@@ -23,6 +23,11 @@ module.exports = ({
     template: {
       spec: {
         restartPolicy: "Never",
+        securityContext: {
+          runAsUser: 1001,
+          runAsGroup: 1001,
+          fsGroup: 1001,
+        },
         ...(checkout
           ? {
               initContainers: [
@@ -35,8 +40,8 @@ module.exports = ({
                     `git clone --depth 1 ${repositoryUrl} --branch ${ref} --single-branch /workspace`,
                   ],
                   securityContext: {
-                    runAsUser: 1000,
-                    runAsGroup: 1000,
+                    runAsUser: 1001,
+                    runAsGroup: 1001,
                   },
                   volumeMounts: [
                     {

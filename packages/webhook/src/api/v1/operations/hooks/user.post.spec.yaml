@@ -18,10 +18,10 @@ requestBody:
         properties:
           ref:
             type: string
-            example: feat/space-flight
+            example: test-ci
           repositoryUrl:
             type: string
-            example: git@github.com:SocialGouv/sample-next-app.git
+            example: https://github.com/SocialGouv/sample-next-app.git
         required:
           - ref
           - repositoryUrl

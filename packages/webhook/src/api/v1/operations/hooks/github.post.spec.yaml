@@ -23,11 +23,11 @@ requestBody:
           project:
             type: object
             required:
-              - ssh_url
+              - clone_url
             properties:
-              ssh_url:
+              clone_url:
                 type: string
-                example: git@example.com:gitlabhq/gitlab-test.git
+                example: https://github.com/SocialGouv/sample-next-app.git
 
 
 responses:
