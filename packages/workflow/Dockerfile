@@ -39,7 +39,8 @@ RUN mkdir -p /opt && chown 1001:1001 /opt
 
 RUN mkdir -p /opt/kube-workflow
 WORKDIR /opt/kube-workflow
-COPY yarn.lock .yarn ./
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn .yarn
 COPY packages/workflow/package.json ./packages/workflow/package.json
 COPY packages/common/package.json ./packages/common/package.json
 RUN chown -R 1001:1001 .
@@ -53,11 +54,11 @@ RUN node -e " \
   const package = JSON.parse(fs.readFileSync('packages/common/package.json')); \
   const packageZero = { ...package, version: '0.0.0' };  \
   fs.writeFileSync('packages/common/package.json', JSON.stringify(packageZero));"
-RUN yarn workspaces focus kube-workflow --production --ignore-scripts \
+RUN mkdir -p packages/workflow/src && mkdir -p packages/workflow/common
+RUN yarn workspaces focus kube-workflow --production \
   && yarn cache clean
 COPY packages/workflow/ ./packages/workflow/
 COPY packages/common/ ./packages/common/
-RUN yarn postinstall
 
 RUN chown -R 1001:1001 .
 RUN mkdir -p /workspace
@@ -69,5 +70,5 @@ ENV HOME=/home/ubuntu
 RUN chmod a+rw $HOME
 ENV KUBECONFIG=$HOME/.kube/config
 RUN mkdir $HOME/.kube
-ENTRYPOINT ["/opt/kube-workflow/bin/kube-workflow"]
-CMD ["deploy"]
+ENTRYPOINT ["/opt/kube-workflow/packages/workflow/bin/kube-workflow"]
+CMD ["help"]
