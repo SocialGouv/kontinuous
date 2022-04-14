@@ -59,7 +59,6 @@ const builder = async (envVars) => {
 
   const logger = globalLogger.child({ KWBUILD_PATH, WORKSPACE_PATH })
   buildCtx.set("logger", logger)
-  asyncShell.ctx.set("logger", logger)
 
   await fs.ensureDir(KWBUILD_PATH)
 
@@ -243,6 +242,5 @@ const builder = async (envVars) => {
 
 module.exports = (envVars) => {
   buildCtx.provide()
-  asyncShell.ctx.provide()
   return builder(envVars)
 }

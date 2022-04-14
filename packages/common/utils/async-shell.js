@@ -1,14 +1,8 @@
 const { spawn } = require("child_process")
 
-const nctx = require("nctx")
-
 const globalLogger = require("./logger")
 
-const ctx = nctx.create("asyncShell")
-
-const promiseFromChildProcess = (child, callback) => {
-  const logger = ctx.get("logger") || globalLogger
-
+const promiseFromChildProcess = (child, callback, logger) => {
   const out = []
   child.stdout.on("data", (data) => {
     out.push(data)
@@ -37,7 +31,12 @@ const promiseFromChildProcess = (child, callback) => {
   })
 }
 
-const asyncShell = (arg, options = {}, callback = null) => {
+module.exports = (
+  arg,
+  options = {},
+  callback = null,
+  logger = globalLogger
+) => {
   if (typeof arg === "string") {
     arg = arg
       .split(" ")
@@ -47,8 +46,5 @@ const asyncShell = (arg, options = {}, callback = null) => {
   const [cmd, ...args] = arg
   const defaultOptions = { encoding: "utf8" }
   const childProcess = spawn(cmd, args, { ...defaultOptions, ...options })
-  return promiseFromChildProcess(childProcess, callback)
+  return promiseFromChildProcess(childProcess, callback, logger)
 }
-
-module.exports = asyncShell
-module.exports.ctx = ctx
