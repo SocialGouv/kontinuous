@@ -22,6 +22,9 @@ exports[`kube-webhook service expose open-api spec 1`] = `
           type: integer
           minimum: 400
           maximum: 599
+    textStream:
+      type: string
+      description: A stream of text
   securitySchemes:
     giteaHmac:
       type: apiKey
@@ -64,6 +67,7 @@ paths:
               - pushed
               - created
               - deleted
+          required: true
       requestBody:
         required: true
         content:
@@ -169,6 +173,7 @@ paths:
               - pushed
               - created
               - deleted
+          required: true
       requestBody:
         required: true
         content:
@@ -209,6 +214,61 @@ paths:
       summary: addOneHooksUser
     parameters: []
     description: /hooks/user
+  /logs/pipeline:
+    get:
+      security:
+        - token:
+            - logs
+      parameters:
+        - in: query
+          name: ref
+          schema:
+            type: string
+            example: feat/space-flight
+          required: true
+        - in: query
+          name: event
+          schema:
+            type: string
+            enum:
+              - pushed
+              - created
+              - deleted
+          required: true
+        - in: query
+          name: repository
+          schema:
+            type: string
+            example: socialgouv/sample-next-app
+          required: true
+        - in: query
+          name: follow
+          schema:
+            type: boolean
+        - in: query
+          name: since
+          schema:
+            type: string
+            format: humanDuration
+            description: 'human duration format, eg: 24h'
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/textStream'
+          description: 'Default description: Success results getOneLogsPipeline'
+        '204':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: 'Default description: HTTP 204 for getOneLogsPipeline'
+      operationId: getOneLogsPipeline
+      description: 'Default description: Query: getOneLogsPipeline'
+      summary: getOneLogsPipeline
+    parameters: []
+    description: /logs/pipeline
   /healthz:
     get:
       responses:

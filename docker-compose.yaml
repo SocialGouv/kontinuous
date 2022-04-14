@@ -9,7 +9,7 @@ services:
       dockerfile: ./packages/webhook/Dockerfile.dev
     volumes:
       - ./:/app
-      - /lab/fabrique/.kube/config:/home/ubuntu/.kube/config:ro
+      - ${KUBECONFIG:-$HOME/.kube/config}:/home/ubuntu/.kube/config:ro
     ports:
       - ${KUBEWEBHOOK_EXPOSED_PORT:-7530}:3000
     environment:

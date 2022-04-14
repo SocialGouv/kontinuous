@@ -1,0 +1,44 @@
+security: 
+  - token: ["logs"]
+
+parameters:
+  - in: query
+    name: ref
+    schema:
+      type: string
+      example: feat/space-flight
+    required: true
+  - in: query
+    name: event
+    schema:
+      type: string
+      enum: ["pushed","created","deleted"]
+    required: true
+  - in: query
+    name: repository
+    schema:
+      type: string
+      example: socialgouv/sample-next-app
+    required: true
+  - in: query
+    name: follow
+    schema:
+      type: boolean
+  - in: query
+    name: since
+    schema:
+      type: string
+      format: humanDuration
+      description: "human duration format, eg: 24h"
+
+responses:
+  200:
+    content:
+      text/plain:
+        schema:
+          $ref: "#/components/schemas/textStream"
+  204:
+    content:
+      text/plain:
+        schema:
+          type: string
