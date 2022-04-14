@@ -4,5 +4,6 @@ module.exports = function () {
   const logger = ctx.require("logger")
   return ({ ref, repository, repositoryUrl }) => {
     logger.debug({ event: "deleted", ref, repository, repositoryUrl })
+    logger.info("not yet implemented")
   }
 }

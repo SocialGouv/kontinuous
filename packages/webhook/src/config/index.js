@@ -1,5 +1,13 @@
 module.exports = async function createConfig() {
-  const config = {}
+  const rancherProjectName = process.env.RANCHER_PROJECT_NAME
+  const jobNamespace = `${rancherProjectName}-ci`
+
+  const config = {
+    project: {
+      rancherProjectName,
+      jobNamespace,
+    },
+  }
 
   return config
 }

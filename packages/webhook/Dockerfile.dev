@@ -1,5 +1,31 @@
-ARG NODE_VERSION=17-alpine
-FROM node:$NODE_VERSION as node
+ARG UBUNTU_VERSION=20.04
+ARG KAIL_VERSION=v0.15.0
+FROM abozanich/kail:$KAIL_VERSION as kail
+FROM ubuntu:$UBUNTU_VERSION
+
+COPY --from=kail /kail /usr/local/bin/kail
+
+RUN apt-get update && \
+  apt-get install -y \
+    curl \
+    wget \
+    git \
+  && rm -rf /var/lib/apt/lists/*
+
+ARG NODE_VERSION=17
+ENV NODE_VERSION=$NODE_VERSION
+RUN wget -qO- https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
+  && apt-get install nodejs \
+  && npm install -g yarn \
+  && rm -rf /var/lib/apt/lists/*
+
+ARG KUBECTL_VERSION=v1.23.4
+ENV KUBECTL_VERSION=$KUBECTL_VERSION
+RUN curl -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
+  && chmod +x /usr/local/bin/kubectl
+
+RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 ubuntu
+RUN mkdir -p /opt && chown 1000:1000 /opt
 
 WORKDIR /app
 

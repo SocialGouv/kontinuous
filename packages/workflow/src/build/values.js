@@ -4,6 +4,7 @@ const deepmerge = require("~common/utils/deepmerge")
 const { buildCtx } = require("./ctx")
 
 const isVersionTag = require("~common/utils/is-version-tag")
+const cleanGitRef = require("~common/utils/clean-git-ref")
 
 module.exports = (values) => {
   
@@ -17,9 +18,7 @@ module.exports = (values) => {
     GIT_HEAD_REF,
   } = buildCtx.require("env")
 
-  const gitBranch = (GIT_HEAD_REF || GIT_REF)
-    .replace("refs/heads/", "")
-    .replace("refs/tags/", "")
+  const gitBranch = cleanGitRef(GIT_HEAD_REF || GIT_REF)
 
   const branchSlug = slug(gitBranch)
 
