@@ -18,9 +18,9 @@ metadata:
 spec:
   rules:
     - host: >-
-        {{- if .Values.host -}}
-        {{- tpl .Values.host $ | nindent 8 }}
-        {{- else -}}
+        {{- if .Values.host }}
+        {{ tpl .Values.host $ | nindent 8 }}
+        {{- else }}
         webhook-{{ .Values.rancherProjectName }}.{{ .Values.baseDomain }}
         {{- end }}
       http:
@@ -36,8 +36,8 @@ spec:
     - hosts:
         - >-
           {{- if .Values.host -}}
-          {{- tpl .Values.host $ | nindent 10 }}
-          {{- else -}}
+          {{ tpl .Values.host $ | nindent 10 }}
+          {{- else }}
           webhook-{{ .Values.rancherProjectName }}.{{ .Values.baseDomain }}
           {{- end }}
       {{- if .Values.isProdCluster }}
