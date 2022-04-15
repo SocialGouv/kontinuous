@@ -115,7 +115,7 @@ spec:
         component: metabase
     spec:
       containers:
-        - image: metabase/metabase:v0.41.6
+        - image: metabase/metabase:v0.42.4
           name: metabase
           envFrom:
             - configMapRef:
