@@ -15,8 +15,9 @@ resources:
   requests:
     cpu: 50m
     memory: 128Mi
-    
+
 ## optional
+namespace: ""
 rancherProjectId: ""
 component: ""
 certSecretName: ""

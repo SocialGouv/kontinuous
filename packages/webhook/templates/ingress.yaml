@@ -9,11 +9,11 @@ metadata:
     {{- end }}
   labels:
     component: {{ or .Values.component .Chart.Name }}
-  name: {{ or .Values.component .Chart.Name }}
+  name: "{{ or .Values.component .Chart.Name }}"
   {{- if .Values.namespace }}
-  namespace: {{ .Values.namespace }}
+  namespace: "{{ .Values.namespace }}"
   {{- else }}
-  namespace: webhook-{{ .Values.rancherProjectName }}
+  namespace: "webhook-{{ .Values.rancherProjectName }}"
   {{- end }}
 spec:
   rules:
