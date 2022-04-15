@@ -2,7 +2,11 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: netpol-ingress
-  namespace: {{ .Values.global.namespace }}
+  {{- if .Values.namespace }}
+  namespace: {{ .Values.namespace }}
+  {{- else }}
+  namespace: webhook-{{ .Values.rancherProjectName }}
+  {{- end }}
 spec:
   ingress:
     - from:
