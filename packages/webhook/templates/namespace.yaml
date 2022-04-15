@@ -1,9 +1,10 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  annotations:
+  labels:
     kubed.appscode.com/sync: kubewebhook={{ .Values.rancherProjectName }}
     kubed.appscode.com/sync: kubeconfig={{ .Values.rancherProjectName }}
+  annotations:
     {{ if .Values.rancherProjectId }}
     field.cattle.io/projectId: "{{ .Values.rancherProjectId }}"
     {{- end }}
