@@ -2,7 +2,7 @@ apiVersion: v2
 name: kube-workflow
 version: 1.14.18
 home: https://github.com/SocialGouv/kube-workflow
-description: Helm template for Kubernetes
+description: Workflow CI for for Kubernetes
 icon: https://avatars.githubusercontent.com/u/45039513?v=4
 sources:
   - https://github.com/SocialGouv/kube-workflow

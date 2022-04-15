@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    kubed.appscode.com/sync: kubewebhook={{ .Values.rancherProjectName }}
+    kubed.appscode.com/sync: kubeconfig={{ .Values.rancherProjectName }}
+    {{ if .Values.rancherProjectId }}
+    field.cattle.io/projectId: "{{ .Values.rancherProjectId }}"
+    {{- end }}
+    {{ if not .Values.isProdCluster }}
+    cert: wildcard
+    {{- end }}
+  {{- if .Values.namespace }}
+  name: {{ .Values.namespace }}
+  {{- else }}
+  name: webhook-{{ .Values.rancherProjectName }}
+  {{- end }}

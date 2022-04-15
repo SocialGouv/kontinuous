@@ -5,6 +5,9 @@ node_modules
 tests
 CHANGELOG.md
 README.md
+Dockerfile
+Dockerfile.dev
+.dockerignore
 .gitignore
 .gitlab-ci.yml
 .npmignore

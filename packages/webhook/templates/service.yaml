@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ or .Values.component .Chart.Name }}
+  {{- if .Values.namespace }}
+  namespace: {{ .Values.namespace }}
+  {{- else }}
+  namespace: webhook-{{ .Values.rancherProjectName }}
+  {{- end }}
+  labels:
+    component: {{ or .Values.component .Chart.Name }}
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: {{ or .Values.component .Chart.Name }}
+  type: ClusterIP

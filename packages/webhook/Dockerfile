@@ -22,8 +22,6 @@ RUN curl -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubect
   && chmod +x /usr/local/bin/kubectl
 
 RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 ubuntu
-RUN mkdir -p /opt && chown 1000:1000 /opt
-
 
 WORKDIR /app
 
@@ -44,8 +42,12 @@ COPY --from=preparation /app/packages/webhook/package.json /app/packages/webhook
 COPY --from=preparation /app/packages/common/package.json /app/packages/common/
 COPY package.json yarn.lock .yarnrc.yml /app/
 COPY .yarn .yarn
+
 #### YARN INSTALL
-RUN yarn workspaces focus kube-workflow --ignore-scripts
+RUN mkdir -p packages/webhook/src && mkdir -p packages/webhook/common
+RUN yarn workspaces focus kube-webhook --production \
+  && yarn cache clean
+RUN rm -rf packages/webhook/src && rm -rf packages/webhook/common
 
 ### COPY (package sources)
 COPY packages/webhook /app/packages/webhook/
@@ -60,14 +62,12 @@ COPY packages/common /app/packages/common/
 #### CUSTOMS RUN
 RUN mkdir -p /app/packages/webhook/build
 
-
 ### RUN PREBUILD
-RUN yarn workspace webhook postinstall
 
 ### CUSTOM RUN PREBUILD
 
 ### RUN BUILD
-RUN yarn workspace webhook build
+RUN yarn workspace kube-webhook build
 
 # NODE PROJECT RUNNER
 ## SERVER
@@ -77,6 +77,8 @@ ENV NODE_ENV=$NODE_ENV
 
 WORKDIR /app
 
+## USER AND PERMS
+RUN chown -R 1000:1000 /app
 USER 1000
 
 CMD ["node","/app/dist/index.js","start"]

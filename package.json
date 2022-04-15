@@ -49,6 +49,7 @@
     "test:workflow": "yarn workspace kube-workflow test",
     "test:webhook": "yarn workspace kube-webhook test",
     "dev:webhook": "docker-compose up --build webhook",
+    "dev:webhook:built": "docker-compose -f docker-compose.built.yaml up --build webhook",
     "upgrade:modjo": "yarn up -R \"@modjo-plugins/*\""
   },
   "lint-staged": {

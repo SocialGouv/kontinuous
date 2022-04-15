@@ -1,0 +1,51 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    {{ range $key, $val := (merge .Values.global.ingress.annotations .Values.ingress.annotations) }}
+    "{{ $key }}": |
+      {{- $val | nindent 6 }}
+    {{ end }}
+    {{ if .Values.isProdCluster }}
+    cert-manager.io: cluster-issuer
+    kubernetes.io/tls-acme: 'true'
+    {{- end }}
+  labels:
+    component: {{ or .Values.component .Chart.Name }}
+  name: {{ or .Values.component .Chart.Name }}
+  {{- if .Values.namespace }}
+  namespace: {{ .Values.namespace }}
+  {{- else }}
+  namespace: webhook-{{ .Values.rancherProjectName }}
+  {{- end }}
+spec:
+  rules:
+    - host: >-
+        {{- if .Values.host -}}
+        {{- tpl .Values.host $ | nindent 8 }}
+        {{- else -}}
+        webhook-{{ .Values.rancherProjectName }}.{{ .Values.baseDomain }}
+        {{- end }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: {{ or .Values.component .Chart.Name }}
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - >-
+          {{- if .Values.host -}}
+          {{- tpl .Values.host $ | nindent 10 }}
+          {{- else -}}
+          webhook-{{ .Values.rancherProjectName }}.{{ .Values.baseDomain }}
+          {{- end }}
+      {{- if .Values.isProdCluster }}
+      secretName: {{ or .Values.certSecretName (print (or .Values.component .Chart.Name) "-crt") }}
+      {{- else }}
+      secretName: "wildcard-crt"
+      {{- end }}

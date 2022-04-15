@@ -2,13 +2,12 @@ version: "3.8"
 
 services:
   webhook:
-    image: kubeworkflow_webhook
+    image: kubeworkflow_webhook_prod
     restart: always
     build:
       context: .
-      dockerfile: ./packages/webhook/Dockerfile.dev
+      dockerfile: ./packages/webhook/Dockerfile
     volumes:
-      - ./:/app
       - ${KUBECONFIG:-$HOME/.kube/config}:/home/ubuntu/.kube/config:ro
     ports:
       - ${KUBEWEBHOOK_EXPOSED_PORT:-7530}:3000
@@ -16,3 +15,4 @@ services:
       RANCHER_PROJECT_NAME: ${RANCHER_PROJECT_NAME:-sample-next-app}
       KUBEWEBHOOK_TOKEN: ${KUBEWEBHOOK_TOKEN:-1234}
       KUBEWEBHOOK_EXPOSED_PORT: ${KUBEWEBHOOK_EXPOSED_PORT:-7530}
+

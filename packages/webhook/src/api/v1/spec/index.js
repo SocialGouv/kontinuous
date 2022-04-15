@@ -1,6 +1,20 @@
 async function createApiSpecV1(options = {}) {
   const port = process.env.KUBEWEBHOOK_EXPOSED_PORT || options.port
   const host = process.env.KUBEWEBHOOK_EXPOSED_HOST || options.host
+  const https =
+    process.env.KUBEWEBHOOK_EXPOSED_HTTPS &&
+    process.env.KUBEWEBHOOK_EXPOSED_HTTPS !== "false"
+
+  let uri = "http"
+  if (https) {
+    uri += "s"
+  }
+  uri += `://${host}`
+  const defaultPort = https ? "443" : "80"
+  if (port && port.toString() !== defaultPort) {
+    uri += `:${port}`
+  }
+
   const apiSpec = {
     openapi: "3.0.3",
     info: {
@@ -14,7 +28,7 @@ async function createApiSpecV1(options = {}) {
     },
     servers: [
       {
-        url: `http://${host}:${port}${options.path}`,
+        url: `${uri}${options.path}`,
       },
     ],
     components: {

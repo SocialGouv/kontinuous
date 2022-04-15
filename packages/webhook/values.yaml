@@ -1,0 +1,19 @@
+## mandatory
+rancherProjectName: ""
+
+
+## default
+replicas: 1
+isProdCluster: true
+image: ghcr.io/socialgouv/kube-workflow/webhook:latest
+# image: harbor.fabrique.social.gouv.fr/sre/kube-workflow/webhook:latest
+baseDomain: "fabrique.social.gouv.fr"
+
+## optional
+rancherProjectId: ""
+component: ""
+certSecretName: ""
+host: ""
+secretRefNames:
+  - kubeconfig
+  - kubewebhook

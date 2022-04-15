@@ -15,4 +15,3 @@ metadata:
     cert: wildcard
     {{- end }}
   name: {{ .Values.global.namespace }}
-# automountServiceAccountToken: false
