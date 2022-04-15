@@ -1,4 +1,4 @@
-build:
+docker-build-workflow:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
@@ -12,6 +12,24 @@ build:
         --dockerfile="${CI_PROJECT_DIR}/packages/workflow/Dockerfile" \
         --destination="${HARBOR}/${CI_PROJECT_PATH}:${CI_COMMIT_TAG:-$CI_COMMIT_REF_NAME}" \
         --destination="${HARBOR}/${CI_PROJECT_PATH}:latest" \
+        --cache=true
+  rules:
+    - if: $CI_COMMIT_REF_NAME == 'master' || $CI_COMMIT_TAG
+
+docker-build-webhook:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: ["/busybox/sh","-c"]
+  script:
+    - |
+      mkdir -p /kaniko/.docker
+      echo "{\"auths\":{\"$HARBOR\":{\"username\":\"$HARBOR_USER\",\"password\":\"$HARBOR_PASSWORD\"}}}" > /kaniko/.docker/config.json
+      /kaniko/executor \
+        --context="dir://${CI_PROJECT_DIR}" \
+        --dockerfile="${CI_PROJECT_DIR}/packages/webhook/Dockerfile" \
+        --destination="${HARBOR}/${CI_PROJECT_PATH}/webhook:${CI_COMMIT_TAG:-$CI_COMMIT_REF_NAME}" \
+        --destination="${HARBOR}/${CI_PROJECT_PATH}/webhook:latest" \
         --cache=true
   rules:
     - if: $CI_COMMIT_REF_NAME == 'master' || $CI_COMMIT_TAG
