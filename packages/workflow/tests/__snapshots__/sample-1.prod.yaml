@@ -453,6 +453,7 @@ metadata:
 
       more_set_headers \\"X-Content-Type-Options: nosniff\\";
     cert-manager.io: cluster-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
     kapp.k14s.io/disable-original: ''
   labels:
@@ -494,6 +495,7 @@ metadata:
 
       more_set_headers \\"X-Content-Type-Options: nosniff\\";
     cert-manager.io: cluster-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
     kapp.k14s.io/disable-original: ''
   labels:
@@ -524,6 +526,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io: cluster-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
     kapp.k14s.io/disable-original: ''
   labels:
@@ -554,6 +557,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io: cluster-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
     kapp.k14s.io/disable-original: ''
   labels:
