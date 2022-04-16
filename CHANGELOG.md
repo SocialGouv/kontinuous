@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.14.21](https://github.com/SocialGouv/kube-workflow/compare/v1.14.20...v1.14.21) (2022-04-16)
+
+
+### Bug Fixes
+
+* redirect letsencrypt ([dde7d5e](https://github.com/SocialGouv/kube-workflow/commit/dde7d5e79d209959b47799cb5fa2b52605b9406d))
+
 ### [1.14.20](https://github.com/SocialGouv/kube-workflow/compare/v1.14.19...v1.14.20) (2022-04-16)
 
 
