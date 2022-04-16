@@ -6,6 +6,7 @@ metadata:
     {{ if .Values.isProdCluster }}
     cert-manager.io: cluster-issuer
     kubernetes.io/tls-acme: 'true'
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     {{- end }}
   labels:
     component: {{ or .Values.component .Chart.Name }}
