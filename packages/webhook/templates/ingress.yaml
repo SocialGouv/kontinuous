@@ -19,7 +19,7 @@ spec:
   rules:
     - host: >-
         {{- if .Values.host }}
-        {{ tpl .Values.host $ | nindent 8 }}
+        {{- tpl .Values.host $ | nindent 8 }}
         {{- else }}
         webhook-{{ .Values.rancherProjectName }}.{{ .Values.baseDomain }}
         {{- end }}
@@ -35,8 +35,8 @@ spec:
   tls:
     - hosts:
         - >-
-          {{- if .Values.host -}}
-          {{ tpl .Values.host $ | nindent 10 }}
+          {{- if .Values.host }}
+          {{- tpl .Values.host $ | nindent 10 }}
           {{- else }}
           webhook-{{ .Values.rancherProjectName }}.{{ .Values.baseDomain }}
           {{- end }}
