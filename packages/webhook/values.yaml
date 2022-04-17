@@ -26,5 +26,6 @@ component: ""
 certSecretName: ""
 host: ""
 secretRefNames:
-  - kubeconfig
+  - kubeconfig-dev
+  - kubeconfig-prod
   - kubewebhook
