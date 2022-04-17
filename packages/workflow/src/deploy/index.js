@@ -41,11 +41,22 @@ module.exports = async (options) => {
     }
   }
 
-  if (process.env.KUBECONFIG && process.env.KUBECONFIG.includes("\n")) {
-    const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))
-    const kubeconfigFile = `${tmpDir}/.kubeconfig`
-    await fs.writeFile(kubeconfigFile, process.env.KUBECONFIG)
-    process.env.KUBECONFIG = kubeconfigFile
+  const kubeconfigVarNames = [
+    "KUBECONFIG",
+    `KUBECONFIG_${selectedEnv.toUpperCase()}`,
+  ]
+
+  for (const kubeconfigVarName of kubeconfigVarNames) {
+    if (
+      process.env[kubeconfigVarName] &&
+      process.env[kubeconfigVarName].includes("\n")
+    ) {
+      const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))
+      const kubeconfigFile = `${tmpDir}/.kubeconfig`
+      await fs.writeFile(kubeconfigFile, process.env[kubeconfigVarName])
+      process.env[kubeconfigVarName] = kubeconfigFile
+      break
+    }
   }
 
   const getRancherProjectId = (rancherProjectName) => {
