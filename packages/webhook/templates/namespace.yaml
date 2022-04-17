@@ -1,9 +1,7 @@
+{{ if .Values.createNamespace }}
 apiVersion: v1
 kind: Namespace
 metadata:
-  labels:
-    kubewebhook: "{{ .Values.rancherProjectName }}"
-    kubeconfig: "{{ .Values.rancherProjectName }}"
   annotations:
     {{ if .Values.rancherProjectId }}
     field.cattle.io/projectId: "{{ .Values.rancherProjectId }}"
@@ -16,3 +14,4 @@ metadata:
   {{- else }}
   name: webhook-{{ .Values.rancherProjectName }}
   {{- end }}
+{{ end }}

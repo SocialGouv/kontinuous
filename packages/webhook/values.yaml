@@ -3,6 +3,7 @@ rancherProjectName: ""
 
 
 ## default
+createNamespace: false
 replicas: 1
 isProdCluster: true
 image: ghcr.io/socialgouv/kube-workflow/webhook:latest
