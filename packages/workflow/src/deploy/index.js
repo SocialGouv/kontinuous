@@ -1,6 +1,4 @@
 const path = require("path")
-const os = require("os")
-const { mkdtemp } = require("fs/promises")
 const { spawn } = require("child_process")
 const fs = require("fs-extra")
 const yaml = require("js-yaml")
@@ -8,12 +6,12 @@ const retry = require("async-retry")
 
 const logger = require("~common/utils/logger")
 const shell = require("~common/utils/shell")
-
 const timeLogger = require("~common/utils/time-logger")
 const getGitInfos = require("~common/utils/get-git-infos")
 const selectEnv = require("~common/utils/select-env")
 const slug = require("~common/utils/slug")
 const parseCommand = require("~common/utils/parse-command")
+const writeKubeconfig = require("~common/utils/write-kubeconfig")
 const build = require("~/build")
 
 module.exports = async (options) => {
@@ -41,23 +39,10 @@ module.exports = async (options) => {
     }
   }
 
-  const kubeconfigVarNames = [
+  await writeKubeconfig([
     "KUBECONFIG",
     `KUBECONFIG_${selectedEnv.toUpperCase()}`,
-  ]
-
-  for (const kubeconfigVarName of kubeconfigVarNames) {
-    if (
-      process.env[kubeconfigVarName] &&
-      process.env[kubeconfigVarName].includes("\n")
-    ) {
-      const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))
-      const kubeconfigFile = `${tmpDir}/.kubeconfig`
-      await fs.writeFile(kubeconfigFile, process.env[kubeconfigVarName])
-      process.env[kubeconfigVarName] = kubeconfigFile
-      break
-    }
-  }
+  ])
 
   const getRancherProjectId = (rancherProjectName) => {
     const jobNamespace = `${rancherProjectName}-ci`

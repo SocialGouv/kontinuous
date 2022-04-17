@@ -10,7 +10,14 @@ const pipelineJob = require("~/k8s/resources/pipeline.job")
 module.exports = () => {
   const logger = ctx.require("logger")
   const { jobNamespace } = ctx.require("config.project")
-  return async ({ eventName, ref, repositoryUrl, args, checkout }) => {
+  return async ({
+    eventName,
+    kubecontext,
+    ref,
+    repositoryUrl,
+    args,
+    checkout,
+  }) => {
     const repository = repositoryFromGitUrl(repositoryUrl)
     logger.debug({
       eventName,
@@ -35,7 +42,7 @@ module.exports = () => {
       ref,
     })
     try {
-      await jobRun(manifest)
+      await jobRun(manifest, kubecontext)
       logger.debug(
         `pipeline job "${jobName}" launched in namespace "${jobNamespace}"`
       )

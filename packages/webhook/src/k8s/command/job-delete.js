@@ -3,9 +3,9 @@ const { spawn } = require("child_process")
 const parseCommand = require("~common/utils/parse-command")
 const logger = require("~common/utils/logger")
 
-module.exports = async (namespace, name) => {
+module.exports = async (namespace, name, kubecontext) => {
   const [cmd, args] = parseCommand(
-    `kubectl -n ${namespace} delete jobs.batch ${name}`
+    `kubectl --context ${kubecontext} -n ${namespace} delete jobs.batch ${name}`
   )
   try {
     await new Promise((resolve, reject) => {

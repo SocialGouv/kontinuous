@@ -3,8 +3,10 @@ const { spawn } = require("child_process")
 const parseCommand = require("~common/utils/parse-command")
 const logger = require("~common/utils/logger")
 
-module.exports = async (manifest) => {
-  const [cmd, args] = parseCommand(`kubectl apply -f -`)
+module.exports = async (manifest, kubecontext) => {
+  const [cmd, args] = parseCommand(
+    `kubectl --context ${kubecontext} apply -f -`
+  )
   try {
     await new Promise((resolve, reject) => {
       const proc = spawn(cmd, args, {

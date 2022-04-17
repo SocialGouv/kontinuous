@@ -3,6 +3,7 @@ module.exports =
   async ({ ref, repositoryUrl }) =>
     services.pipeline({
       eventName: "pushed",
+      kubecontext: "dev",
       ref,
       repositoryUrl,
       args: ["deploy"],
