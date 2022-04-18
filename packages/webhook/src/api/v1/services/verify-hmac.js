@@ -6,6 +6,6 @@ module.exports = function () {
   return ({ signature, body, secret }) => {
     const hmac = crypto.createHmac("sha256", secret)
     hmac.update(body, "utf-8")
-    return signature === `sha1=${hmac.digest("hex")}`
+    return signature === `sha256=${hmac.digest("hex")}`
   }
 }
