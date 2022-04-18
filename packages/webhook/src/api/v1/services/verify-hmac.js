@@ -8,8 +8,6 @@ module.exports = function () {
     const hmac = crypto.createHmac(sigHashAlg, secret)
     const hex = `${sigHashAlg}=${hmac.update(body).digest("hex")}`
     const digest = Buffer.from(hex, "utf8")
-    console.log(hex)
-    console.log("signature", signature)
     return sig.length === digest.length && crypto.timingSafeEqual(digest, sig)
   }
 }
