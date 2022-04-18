@@ -1,7 +1,7 @@
 module.exports =
   ({ services: { verifyHmac } }) =>
   async (req, _scopes, _schema) => {
-    const signature = req.headers["X-Gitea-Signature"]
+    const signature = req.get("X-Gitea-Signature")
     if (!signature) {
       return false
     }
