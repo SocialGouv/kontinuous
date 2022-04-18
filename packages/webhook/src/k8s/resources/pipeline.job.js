@@ -17,7 +17,7 @@ module.exports = ({
     namespace,
   },
   spec: {
-    backoffLimit: 0,
+    backoffLimit: 2,
     activeDeadlineSeconds: 3600,
     ttlSecondsAfterFinished: 1800,
     template: {
