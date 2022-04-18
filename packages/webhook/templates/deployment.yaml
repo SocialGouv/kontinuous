@@ -23,26 +23,9 @@ spec:
         - name: webhook
           image: {{ .Values.image }}
           imagePullPolicy: Always
-          livenessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: {{ .Values.probesPath }}
-              port: http
-            initialDelaySeconds: 30
-            periodSeconds: 5
-            timeoutSeconds: 5
           ports:
             - containerPort: {{ .Values.containerPort }}
               name: http
-          readinessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: {{ .Values.probesPath }}
-              port: http
-            initialDelaySeconds: 0
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}
@@ -50,12 +33,6 @@ spec:
             requests:
               cpu: {{ .Values.resources.requests.cpu }}
               memory: {{ .Values.resources.requests.memory }}
-          startupProbe:
-            failureThreshold: 12
-            httpGet:
-              path: {{ .Values.probesPath }}
-              port: http
-            periodSeconds: 5
           env:
             - name: RANCHER_PROJECT_NAME
               value: "{{ required "rancherProjectName value is required" .Values.rancherProjectName }}"
@@ -70,4 +47,40 @@ spec:
             - secretRef:
                 name: "{{ $secretRefName }}"
             {{ end }}
-            
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 9000
+            failureThreshold: 1
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /live
+              port: 9000
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            # Allow sufficient amount of time (90 seconds = periodSeconds * failureThreshold)
+            # for the registered shutdown handlers to run to completion.
+            periodSeconds: 30
+            successThreshold: 1
+            # Setting a very low timeout value (e.g. 1 second) can cause false-positive
+            # checks and service interruption.
+            timeoutSeconds: 5
+
+          # As per Kubernetes documentation (https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#when-should-you-use-a-startup-probe),
+          # startup probe should point to the same endpoint as the liveness probe.
+          #
+          # Startup probe is only needed when container is taking longer to start than
+          # `initialDelaySeconds + failureThreshold × periodSeconds` of the liveness probe.
+          startupProbe:
+            httpGet:
+              path: /live
+              port: 9000
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
