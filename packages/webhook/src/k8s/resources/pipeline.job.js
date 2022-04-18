@@ -8,7 +8,7 @@ module.exports = ({
   args = [],
   checkout,
   repositoryUrl,
-  ref,
+  gitBranch,
 }) => ({
   apiVersion: "batch/v1",
   kind: "Job",
@@ -32,7 +32,7 @@ module.exports = ({
                   command: [
                     "sh",
                     "-c",
-                    `git clone --depth 1 ${repositoryUrl} --branch ${ref} --single-branch /workspace`,
+                    `git clone --depth 1 ${repositoryUrl} --branch ${gitBranch} --single-branch /workspace`,
                   ],
                   volumeMounts: [
                     {

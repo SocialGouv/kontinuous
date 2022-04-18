@@ -39,7 +39,7 @@ module.exports = () => {
       args,
       checkout,
       repositoryUrl,
-      ref,
+      gitBranch,
     })
     try {
       await jobRun(manifest, kubecontext)
