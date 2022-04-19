@@ -119,7 +119,13 @@ spec:
         - name: job
           image: "{{ tpl (or $run.image $.Values.image) $ }}"
           imagePullPolicy: IfNotPresent
+          {{ if $run.image }}
+          {{ if  $run.workingDir }}
+          workingDir: "{{ $run.workingDir }}"
+          {{- end }}
+          {{ else }}
           workingDir: "{{ or $run.workingDir "/workspace" }}"
+          {{- end }}
           {{- if $run.envFrom }}
           envFrom: {{ tpl ($run.envFrom | toJson) $ }}
           {{- end }}
