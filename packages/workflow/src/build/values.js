@@ -55,7 +55,7 @@ module.exports = (values) => {
     imageTag = `preprod-${sha}`
   } else if (isProd) {
     if (isVersionTag(gitBranch)) {
-      gitBranch.substring(1)
+      imageTag = gitBranch.substring(1)
     } else {
       imageTag = "prod"
     }
