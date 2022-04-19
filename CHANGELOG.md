@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.14.24](https://github.com/SocialGouv/kube-workflow/compare/v1.14.23...v1.14.24) (2022-04-19)
+
+
+### Bug Fixes
+
+* implicit workingDir when image ([4274700](https://github.com/SocialGouv/kube-workflow/commit/427470059ee5ef63f4ce8d398cbce7bb806b27cb))
+* tests -u ([8829fd5](https://github.com/SocialGouv/kube-workflow/commit/8829fd5108d547bffe0e0e4e37cd9d9035d3d940))
+
 ### [1.14.23](https://github.com/SocialGouv/kube-workflow/compare/v1.14.22...v1.14.23) (2022-04-19)
 
 
