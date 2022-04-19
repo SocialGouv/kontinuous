@@ -1,6 +1,7 @@
 const repositoryFromGitUrl = require("./repository-from-git-url")
 const shell = require("./shell")
 const logger = require("./logger")
+const isVersionTag = require("./is-version-tag")
 
 let gitInfos
 
@@ -30,6 +31,11 @@ module.exports = (cwd = process.cwd(), reloadCache = false) => {
     } catch (_e) {
       // not on a tag
       GIT_TAGS = []
+    }
+    if (!GIT_REF) {
+      GIT_REF = GIT_TAGS.filter((t) => isVersionTag(t))
+        .sort()
+        .pop()
     }
     gitInfos = {
       GIT_REPOSITORY,
