@@ -196,7 +196,6 @@ spec:
           image: >-
             ghcr.io/socialgouv/test-init-container/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           imagePullPolicy: IfNotPresent
-          workingDir: /workspace
           command:
             - /bin/bash
             - '-c'

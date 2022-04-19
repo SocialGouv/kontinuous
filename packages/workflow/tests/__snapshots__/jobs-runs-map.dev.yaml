@@ -107,7 +107,6 @@ spec:
         - name: job
           image: bitnami/kubectl:latest
           imagePullPolicy: IfNotPresent
-          workingDir: /workspace
           envFrom:
             - secretRef:
                 name: pg-scaleway
@@ -198,7 +197,6 @@ spec:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:6.70.0
           imagePullPolicy: IfNotPresent
-          workingDir: /workspace
           envFrom:
             - secretRef:
                 name: pg-scaleway
