@@ -1,0 +1,14 @@
+app:
+  needs: [seed]
+
+jobs:
+  runs:
+    - name: db
+      use: ../../../../../jobs/create-db
+      with:
+        pgAdminSecretRefName: azure-pg-admin-user
+    - name: seed
+      needs: [db]
+      use: ../../../../../jobs/seed-db
+      with:
+        seedPath: hasura/seeds/carnet_de_bord/seed-data.sql
