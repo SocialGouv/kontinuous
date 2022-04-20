@@ -13,7 +13,9 @@ for (const dir of packageDirs) {
         fs.lstatSync(path.resolve(__dirname, dir, entry)).isDirectory()
     )) {
     const fullpath = path.resolve(__dirname, dir, d)
-    packageDir.push(fullpath)
+    if (fs.existsSync(`${fullpath}/package.json`)) {
+      packageDir.push(fullpath)
+    }
   }
 }
 const noExtraneousRule = [
