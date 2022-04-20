@@ -269,22 +269,5 @@ paths:
       summary: getOneLogsPipeline
     parameters: []
     description: /logs/pipeline
-  /healthz:
-    get:
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-          description: 'Default description: Success results getOneHealthz'
-      operationId: getOneHealthz
-      description: 'Default description: Query: getOneHealthz'
-      summary: getOneHealthz
-    parameters: []
-    description: /healthz
 "
 `;

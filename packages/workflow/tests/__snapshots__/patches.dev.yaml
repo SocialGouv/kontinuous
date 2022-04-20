@@ -9,6 +9,7 @@ metadata:
     field.cattle.io/projectId: '1234'
     kubeworkflow/gitBranch: feature-branch-1
     kubeworkflow/mainNamespace: 'true'
+    kapp.k14s.io/exists: ''
   labels:
     application: test-patches
     cert: wildcard
@@ -21,8 +22,6 @@ metadata:
   namespace: test-patches-feature-branch-1
   annotations:
     kapp.k14s.io/disable-original: ''
-  labels:
-    hashwords: elfin church
 spec:
   ingress:
     - from:
@@ -46,8 +45,6 @@ metadata:
   namespace: test-patches-feature-branch-1
   annotations:
     kapp.k14s.io/disable-original: ''
-  labels:
-    hashwords: different play
 automountServiceAccountToken: false
 "
 `;
