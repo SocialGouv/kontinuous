@@ -174,7 +174,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: docker pull ghcr.io/socialgouv/kube-workflow/degit:latest
+          image: ghcr.io/socialgouv/kube-workflow/degit:latest
           env:
             - name: npm_config_cache
               value: /tmp/npm-cache

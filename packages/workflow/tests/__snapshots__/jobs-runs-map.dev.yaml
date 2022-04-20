@@ -88,7 +88,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: docker pull ghcr.io/socialgouv/kube-workflow/degit:latest
+          image: ghcr.io/socialgouv/kube-workflow/degit:latest
           env:
             - name: npm_config_cache
               value: /tmp/npm-cache
@@ -178,7 +178,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: docker pull ghcr.io/socialgouv/kube-workflow/degit:latest
+          image: ghcr.io/socialgouv/kube-workflow/degit:latest
           env:
             - name: npm_config_cache
               value: /tmp/npm-cache
