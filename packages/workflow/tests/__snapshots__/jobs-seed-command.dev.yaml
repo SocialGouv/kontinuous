@@ -177,9 +177,6 @@ spec:
       initContainers:
         - name: degit-action
           image: ghcr.io/socialgouv/kube-workflow/degit:latest
-          env:
-            - name: npm_config_cache
-              value: /tmp/npm-cache
           command:
             - sh
             - '-c'
@@ -267,9 +264,6 @@ spec:
       initContainers:
         - name: degit-action
           image: ghcr.io/socialgouv/kube-workflow/degit:latest
-          env:
-            - name: npm_config_cache
-              value: /tmp/npm-cache
           command:
             - sh
             - '-c'

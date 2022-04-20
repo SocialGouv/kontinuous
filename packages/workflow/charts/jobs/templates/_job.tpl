@@ -97,9 +97,6 @@ spec:
       {{- if $run.action }}
         - name: degit-action
           image: {{ .Values.degitImage }}
-          env:
-            - name: npm_config_cache
-              value: /tmp/npm-cache
           command:
             - sh
             - -c
