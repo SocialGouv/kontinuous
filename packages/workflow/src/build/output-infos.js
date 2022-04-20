@@ -96,7 +96,9 @@ getTreeInfos.CronJob = (resource) => {
   const { manifest } = resource
   const containers = manifest.spec?.jobTemplate?.spec?.template?.spec?.containers
   const initContainers = manifest.spec?.jobTemplate?.spec?.template?.spec?.initContainers
-  return [...(containers ? containers.map(container => {
+  return [
+   { name: `schedule: ${manifest.spec.schedule}` },
+   ...(containers ? containers.map(container => {
     return {
       name: container.name, children: [
         {
