@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = (values) =>
   Object.assign(values, {
     global: {
