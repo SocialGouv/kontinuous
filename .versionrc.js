@@ -38,7 +38,10 @@ const chartsUpdater = {
 const bumpFiles = [{ filename: "package.json", type: "json" }]
 const packageDirs = getDirectoriesSync("packages")
 for (const dir of packageDirs){
-  bumpFiles.push({ filename: `packages/${dir}/package.json`, type: "json" })
+  const filename = `packages/${dir}/package.json`
+  if(fs.pathExistsSync(filename)){
+    bumpFiles.push({ filename, type: "json" })
+  }
 }
 
 const getChartsRecursive = (dir = "packages", list=[])=>{

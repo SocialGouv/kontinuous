@@ -18,16 +18,10 @@ runs:
   using: "composite"
   steps:
     
-    - name: Install dependencies
-      shell: bash
-      working-directory: "${{ github.action_path }}"
-      run: |
-        yarn --frozen-lockfile --prefer-offline --production
-    
     - name: Display logs of kube pipeline
       shell: bash
       working-directory: "${{ github.action_path }}"
-      run: yarn share-with-github-ci
+      # run: 
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2

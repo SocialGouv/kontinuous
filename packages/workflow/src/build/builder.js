@@ -9,7 +9,6 @@ const asyncShell = require("~common/utils/async-shell")
 const globalLogger = require("~common/utils/logger")
 const getDirectories = require("~common/utils/get-directories")
 
-const getEnv = require("~/env")
 const setDefaultValues = require("./values")
 const compileJobs = require("./compile-jobs")
 const compileOutputs = require("./compile-outputs")
@@ -24,10 +23,6 @@ const loadYamlFile = require("~common/utils/load-yaml-file")
 const { buildCtx } = require("./ctx")
 
 const builder = async (envVars) => {
-
-  if (!envVars) {
-    envVars = getEnv()
-  }
   buildCtx.set("env", envVars)
 
   for (const requiredEnv of [

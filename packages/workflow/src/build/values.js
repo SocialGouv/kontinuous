@@ -15,10 +15,9 @@ module.exports = (values) => {
     GIT_REPOSITORY,
     GIT_REF,
     GIT_SHA,
-    GIT_HEAD_REF,
   } = buildCtx.require("env")
 
-  const gitBranch = cleanGitRef(GIT_HEAD_REF || GIT_REF)
+  const gitBranch = cleanGitRef(GIT_REF)
 
   const branchSlug = slug(gitBranch)
 

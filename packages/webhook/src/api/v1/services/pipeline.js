@@ -14,6 +14,7 @@ module.exports = () => {
     eventName,
     kubecontext,
     ref,
+    after,
     repositoryUrl,
     args,
     checkout,
@@ -40,6 +41,7 @@ module.exports = () => {
       checkout,
       repositoryUrl,
       gitBranch,
+      gitCommit: after,
     })
     try {
       await jobRun(manifest, kubecontext)

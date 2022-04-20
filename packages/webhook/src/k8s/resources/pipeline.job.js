@@ -9,12 +9,18 @@ module.exports = ({
   checkout,
   repositoryUrl,
   gitBranch,
+  gitCommit,
 }) => ({
   apiVersion: "batch/v1",
   kind: "Job",
   metadata: {
     name,
     namespace,
+    labels: {
+      "kubeworkflow/gitBranch": gitBranch,
+      "kubeworkflow/gitCommit": gitCommit,
+      "kubeworkflow/repositoryUrl": repositoryUrl,
+    },
   },
   spec: {
     backoffLimit: 2,
@@ -32,7 +38,7 @@ module.exports = ({
                   command: [
                     "sh",
                     "-c",
-                    `git clone --depth 1 ${repositoryUrl} --branch ${gitBranch} --single-branch /workspace`,
+                    `git clone --depth 1 ${repositoryUrl} --branch ${gitBranch} /workspace`,
                   ],
                   volumeMounts: [
                     {

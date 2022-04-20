@@ -12,12 +12,12 @@ module.exports = function ({ services: { pushed, created, deleted } }) {
         return res.status(204).json({ message: "no-op" })
       }
 
-      const { ref } = body
+      const { ref, after } = body
 
       const { clone_url: repositoryUrl } = body.repository
 
       try {
-        await eventHandlers[eventName]({ ref, repositoryUrl })
+        await eventHandlers[eventName]({ ref, after, repositoryUrl })
       } catch (err) {
         const logger = reqCtx.require("logger")
         logger.error(err)
