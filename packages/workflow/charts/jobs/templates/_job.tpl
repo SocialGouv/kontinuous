@@ -79,7 +79,7 @@ spec:
       initContainers:
       {{- if or (not (hasKey $run "checkout")) $run.checkout }}
         - name: degit-repository
-          image: node:17
+          image: {{ .Values.degitImage }}
           env:
             - name: npm_config_cache
               value: /tmp/npm-cache
@@ -99,7 +99,7 @@ spec:
       {{- end }}
       {{- if $run.action }}
         - name: degit-action
-          image: node:17
+          image: {{ .Values.degitImage }}
           env:
             - name: npm_config_cache
               value: /tmp/npm-cache

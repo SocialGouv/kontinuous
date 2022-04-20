@@ -282,7 +282,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: node:17
+          image: docker pull ghcr.io/socialgouv/kube-workflow/degit:latest
           env:
             - name: npm_config_cache
               value: /tmp/npm-cache
@@ -372,7 +372,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: node:17
+          image: docker pull ghcr.io/socialgouv/kube-workflow/degit:latest
           env:
             - name: npm_config_cache
               value: /tmp/npm-cache
@@ -470,7 +470,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: node:17
+          image: docker pull ghcr.io/socialgouv/kube-workflow/degit:latest
           env:
             - name: npm_config_cache
               value: /tmp/npm-cache
@@ -578,7 +578,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: node:17
+          image: docker pull ghcr.io/socialgouv/kube-workflow/degit:latest
           env:
             - name: npm_config_cache
               value: /tmp/npm-cache

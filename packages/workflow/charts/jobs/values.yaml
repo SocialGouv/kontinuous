@@ -3,5 +3,7 @@ namespace:
 repository: 
 gitBranch: 
 runs: []
-image: "debian:stable"
 needs: []
+image: "debian:stable"
+# degitImage: node:17
+degitImage: docker pull ghcr.io/socialgouv/kube-workflow/degit:latest

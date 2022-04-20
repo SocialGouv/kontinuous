@@ -80,6 +80,10 @@ paths:
                 ref:
                   type: string
                   example: feat/space-flight
+                after:
+                  type: string
+                  example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed
+                  format: sha1
                 project:
                   type: object
                   required:
@@ -127,6 +131,10 @@ paths:
                 ref:
                   type: string
                   example: feat/space-flight
+                after:
+                  type: string
+                  example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed
+                  format: sha1
                 repository:
                   type: object
                   required:
