@@ -183,7 +183,7 @@ spec:
           command:
             - sh
             - '-c'
-            - npx degit ../../../../../jobs/create-db /action
+            - degit ../../../../../jobs/create-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -273,7 +273,7 @@ spec:
           command:
             - sh
             - '-c'
-            - npx degit ../../../../../jobs/create-db /action
+            - degit ../../../../../jobs/create-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -373,7 +373,7 @@ spec:
           command:
             - sh
             - '-c'
-            - npx degit ../../../../../jobs/seed-db /action
+            - degit ../../../../../jobs/seed-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -454,14 +454,11 @@ spec:
       initContainers:
         - name: degit-repository
           image: ghcr.io/socialgouv/kube-workflow/degit:latest
-          env:
-            - name: npm_config_cache
-              value: /tmp/npm-cache
           command:
             - sh
             - '-c'
             - |
-              npx degit kube-workflow/test-jobs-seed-sql#feature-branch-1 \\\\
+              degit kube-workflow/test-jobs-seed-sql#feature-branch-1 \\\\
                 /workspace
           securityContext:
             runAsUser: 1000
@@ -478,7 +475,7 @@ spec:
           command:
             - sh
             - '-c'
-            - npx degit ../../../../../jobs/seed-db /action
+            - degit ../../../../../jobs/seed-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

@@ -80,14 +80,11 @@ spec:
       {{- if or (not (hasKey $run "checkout")) $run.checkout }}
         - name: degit-repository
           image: {{ .Values.degitImage }}
-          env:
-            - name: npm_config_cache
-              value: /tmp/npm-cache
           command:
             - sh
             - -c
             - |
-              npx degit {{ or $val.repository $val.global.repository }}#{{ or $val.gitBranch $val.global.gitBranch }} \
+              degit {{ or $val.repository $val.global.repository }}#{{ or $val.gitBranch $val.global.gitBranch }} \
                 /workspace
           securityContext:
             runAsUser: 1000
@@ -106,7 +103,7 @@ spec:
           command:
             - sh
             - -c
-            - npx degit {{ $run.action | replace "@" "#" }} /action
+            - degit {{ $run.action | replace "@" "#" }} /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
