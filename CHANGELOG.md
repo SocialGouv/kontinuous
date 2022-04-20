@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.15.0 (2022-04-20)
+
+
+### Features
+
+* **tree:** add cronjob.spec.schedule ([977a84c](https://github.com/SocialGouv/kube-workflow/commit/977a84c3873e8a52c4a84e4d217cc01157d72fac))
+
 ### 1.14.27 (2022-04-20)
 
 ### 1.14.26 (2022-04-20)
