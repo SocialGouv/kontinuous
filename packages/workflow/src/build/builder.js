@@ -66,6 +66,10 @@ const builder = async (envVars) => {
           fs.copy(
             `${KUBEWORKFLOW_PATH}/templates/namespace.yaml`,
             `${KWBUILD_PATH}/templates/namespace.yaml`
+          ),
+          fs.copy(
+            `${KUBEWORKFLOW_PATH}/templates/helpers`,
+            `${KWBUILD_PATH}/templates/helpers`
           )
         ] :
         [
