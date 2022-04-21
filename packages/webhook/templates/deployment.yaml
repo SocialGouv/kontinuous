@@ -4,11 +4,7 @@ metadata:
   labels:
     component: {{ or .Values.component .Chart.Name }}
   name: {{ or .Values.component .Chart.Name }}
-  {{- if .Values.namespace }}
-  namespace: {{ .Values.namespace }}
-  {{- else }}
-  namespace: webhook-{{ .Values.rancherProjectName }}
-  {{- end }}
+  {{- include "metadata.namespace" . | nindent 2 }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
@@ -19,6 +15,10 @@ spec:
       labels:
         component: {{ or .Values.component .Chart.Name }}
     spec:
+      volumes:
+        - name: artifacts
+          persistentVolumeClaim:
+            claimName: artifacts
       containers:
         - name: webhook
           image: {{ .Values.image }}
@@ -26,13 +26,9 @@ spec:
           ports:
             - containerPort: {{ .Values.containerPort }}
               name: http
-          resources:
-            limits:
-              cpu: {{ .Values.resources.limits.cpu }}
-              memory: {{ .Values.resources.limits.memory }}
-            requests:
-              cpu: {{ .Values.resources.requests.cpu }}
-              memory: {{ .Values.resources.requests.memory }}
+          volumeMounts:
+            - name: artifacts
+              mountPath: /artifacts
           env:
             - name: RANCHER_PROJECT_NAME
               value: "{{ required "rancherProjectName value is required" .Values.rancherProjectName }}"
@@ -47,6 +43,13 @@ spec:
             - secretRef:
                 name: "{{ $secretRefName }}"
             {{ end }}
+          resources:
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
           readinessProbe:
             httpGet:
               path: /ready

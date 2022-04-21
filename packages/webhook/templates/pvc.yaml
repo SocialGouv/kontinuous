@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: artifacts
+  annotations: {}
+  labels: {}
+  {{- include "metadata.namespace" . | nindent 2 }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.artifacts.storage.size }}
+  storageClassName: {{ .Values.artifacts.storage.className }}

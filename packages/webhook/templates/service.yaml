@@ -2,11 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ or .Values.component .Chart.Name }}
-  {{- if .Values.namespace }}
-  namespace: {{ .Values.namespace }}
-  {{- else }}
-  namespace: webhook-{{ .Values.rancherProjectName }}
-  {{- end }}
+  {{- include "metadata.namespace" . | nindent 2 }}
   labels:
     component: {{ or .Values.component .Chart.Name }}
 spec:

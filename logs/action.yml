@@ -1,32 +1,69 @@
 name: "Autodevops deploy"
 description: "Autodevops deploy using Helm template and kapp"
 inputs:
-  environment:
-    description: "The deployment environment (dev | preprod | prod)"
-    required: true
-  kubeconfig:
-    description: "The Kubernetes authentication configuration"
   token:
     description: "The Github authentication token"
-  actionName:
-    description: "override manifests name as manifest-$name.yaml, default to manifest-$environment.yaml"
+  kubewebhookToken:
+    description: "The Webhook authentication token, usually secrets.KUBEWEBHOOK_TOKEN"
+  rancherProjectName:
+    description: "The Rancher project name, usually secrets.RANCHER_PROJECT_NAME, usefull jobs that needs secrets or ci namespaces"
+  webhookUrl:
+    description: "Override webhook url"
 outputs:
   url:
     description: "Main deployment URL"
     value: ${{ steps.environment-url.outputs.url }}
+
 runs:
   using: "composite"
   steps:
     
-    - name: Display logs of kube pipeline
+    - name: Auto-detect environment
       shell: bash
-      working-directory: "${{ github.action_path }}"
-      # run: 
+      id: environment
+      run:
+        if [ -n "$GITHUB_HEAD_REF" ]; then
+          GIT_BRANCH=$GITHUB_HEAD_REF
+        else
+          GIT_BRANCH=$GITHUB_REF
+        fi
+        GIT_BRANCH=${GIT_BRANCH#refs/heads/}
+        GIT_BRANCH=${GIT_BRANCH#refs/tags/}
+        if [[ "$GIT_BRANCH" =~ ^v[0-9]+\.[0-9]+ ]]; then
+          ENV=prod
+        elif [ "$GIT_BRANCH" = "master" ] || [ "$GIT_BRANCH" = "main" ]; then
+          ENV=preprod
+        else
+          ENV=dev
+        fi
+
+        if [ -n "${{ inputs.webhookUrl }}" ]; then
+          WEBHOOK_URI=${{ inputs.webhookUrl }}
+        else
+          WEBHOOK_URI=https://webhook-${{ inputs.rancherProjectName }}.fabrique.social.gouv.fr
+        fi
+        
+        echo "::set-output env=$ENV"
+        
+        echo "WEBHOOK_URI=$WEBHOOK_URI">>$GITHUB_ENV
+        echo "KUBEWEBHOOK_TOKEN=${{ inputs.kubewebhookToken }}">>$GITHUB_ENV
+        echo "GIT_BRANCH=$GIT_BRANCH">>$GITHUB_ENV
+        echo "GIT_COMMIT=$GITHUB_SHA">>$GITHUB_ENV
+
+    - name: Stream logs of kube pipeline
+      shell: bash
+      run:
+        curl "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?catch=true&follow=true&branch={GIT_BRANCH}&commit=${GIT_COMMIT}&token=${KUBEWEBHOOK_TOKEN}"
+    
+    - name: Download manifests artifact
+      shell: bash
+      run: 
+        curl "${WEBHOOK_URI}/api/v1/oas/artifcats/manifests?branch={GIT_BRANCH}&commit=${GIT_COMMIT}&token=${KUBEWEBHOOK_TOKEN}"
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2
       with:
-        name: manifests-${{ inputs.actionName || inputs.environment }}.yaml
+        name: manifests.yaml
         path: manifests.yaml
 
     - name: Setup namespace env var
@@ -36,21 +73,13 @@ runs:
         echo "NAMESPACE=$NAMESPACE" >> $GITHUB_ENV
 
     - name: Notify deployment start
-      uses: bobheadxi/deployments@v0.4.3
+      uses: bobheadxi/deployments@v1
       id: deployment
       with:
         step: start
         token: ${{ inputs.token }}
         desc: "Deploying environment: ${{ env.NAMESPACE }}"
-        env: ${{ inputs.environment == 'dev' && env.NAMESPACE || inputs.environment == 'preproduction' && 'preproduction' || 'production' }}
-        
-
-    - name: Create kubernetes config
-      shell: bash
-      run: |
-        mkdir -p ~/.kube
-        touch ~/.kube/config
-        echo ${{ inputs.kubeconfig }} | base64 -d > ~/.kube/config
+        env: ${{ steps.environment.outputs.env == 'dev' && env.NAMESPACE || steps.environment.outputs.env == 'preprod' && 'preproduction' || 'production' }}
     
     - name: Define environment URL
       id: environment-url
@@ -62,13 +91,14 @@ runs:
         echo "::set-output name=url::https://$HOST"
 
     - name: Notify deployment end
-      uses: bobheadxi/deployments@v0.4.3
+      uses: bobheadxi/deployments@v1
       with:
         step: finish
         status: ${{ job.status }}
         token: ${{ inputs.token }}
         deployment_id: ${{ steps.deployment.outputs.deployment_id }}
         env_url: ${{ steps.environment-url.outputs.url }}
+        env: ${{ steps.deployment.outputs.env }}
 
     - name: Debug manifests
       uses: SocialGouv/actions/k8s-manifests-debug@v1
