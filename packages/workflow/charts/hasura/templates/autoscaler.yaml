@@ -3,7 +3,7 @@ apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ or .Values.component .Chart.Name }}
-  namespace: {{ .Values.global.namespace }}
+  namespace: {{ or .Values.namespace .Values.global.namespace }}
   labels:
     component: {{ or .Values.component .Chart.Name }}
 spec:

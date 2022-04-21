@@ -5,7 +5,7 @@ metadata:
     component: {{ or .Values.component .Chart.Name }}
     application: {{ .Values.global.repositoryName }}
   name: {{ or .Values.component .Chart.Name }}
-  namespace: {{ .Values.global.namespace }}
+  namespace: {{ or .Values.namespace .Values.global.namespace }}
 data:
   MB_APPLICATION_NAME: {{ or .Values.component .Chart.Name }}
   MB_DB_TYPE: "postgres"

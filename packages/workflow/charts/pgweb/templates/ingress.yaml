@@ -14,7 +14,7 @@ metadata:
     component: {{ or .Values.component .Chart.Name }}
     application: {{ .Values.global.repositoryName }}
   name: {{ or .Values.component .Chart.Name }}
-  namespace: {{ .Values.global.namespace }}
+  namespace: {{ or .Values.namespace .Values.global.namespace }}
 spec:
   rules:
     - host: >-
