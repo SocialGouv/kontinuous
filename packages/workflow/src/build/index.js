@@ -61,7 +61,7 @@ module.exports = async (options) => {
     logger.info(`Built manifests file: ${manifestsFile}`)
   }
   
-  const uploadUrl = options.upload || env.KUBEWORKFLOW_BUILD_UPLOAD_URL
+  const uploadUrl = options.upload || process.env.KUBEWORKFLOW_BUILD_UPLOAD_URL
   if(uploadUrl){
     await upload({ uploadUrl, manifests })
   }
