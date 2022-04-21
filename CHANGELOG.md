@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.1](https://github.com/SocialGouv/kube-workflow/compare/v1.15.0...v1.15.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* add ns chart override ([3dc5834](https://github.com/SocialGouv/kube-workflow/commit/3dc5834f763e3e1a5d92c16fbb2a6b8ef1bdc6c7))
+* degit clean + up tests ([d4674d4](https://github.com/SocialGouv/kube-workflow/commit/d4674d44fd8f4d82bd10cd2dbe2d82ca53f94f08))
+* degit clean + up tests ([3cb5023](https://github.com/SocialGouv/kube-workflow/commit/3cb5023ddbbac584b52a807bf2c7cc23dc5b547c))
+* degit wip + up tests ([af8b059](https://github.com/SocialGouv/kube-workflow/commit/af8b059655b4357edf76c8e4b459a4d3a08ec633))
+* degit wip + up tests ([cab0850](https://github.com/SocialGouv/kube-workflow/commit/cab0850da0f84caa5382b5bbd205920c831eaddb))
+* degit wip + up tests ([1b578a5](https://github.com/SocialGouv/kube-workflow/commit/1b578a54ac44efbdee5c71292bda6095804a41ea))
+* refacto workflow cli ([4751871](https://github.com/SocialGouv/kube-workflow/commit/4751871cfa5b98fb7409264436ccc94f470a6d42))
+* test lint ([3e4358d](https://github.com/SocialGouv/kube-workflow/commit/3e4358d3eddc2277d60737bb85edd0e594f71bbb))
+* test lint ([fca14a9](https://github.com/SocialGouv/kube-workflow/commit/fca14a9468cbdae357bd6f14938a948028c69171))
+* webhook wip ([56f3f6e](https://github.com/SocialGouv/kube-workflow/commit/56f3f6eda1ad0f67aa895806e50e05817896d57b))
+* workflow rm github env + webhook wip + degit ([f6de5da](https://github.com/SocialGouv/kube-workflow/commit/f6de5da546eef67bdd69efea122a3df444966ca6))
+
 ## 1.15.0 (2022-04-20)
 
 
