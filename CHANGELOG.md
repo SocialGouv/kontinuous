@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.2](https://github.com/SocialGouv/kube-workflow/compare/v1.15.1...v1.15.2) (2022-04-21)
+
+
+### Bug Fixes
+
+* charts include tpl helpers ([1e0e015](https://github.com/SocialGouv/kube-workflow/commit/1e0e01510fd872a8d8031aeb33dd5f69833f0637))
+
 ### [1.15.1](https://github.com/SocialGouv/kube-workflow/compare/v1.15.0...v1.15.1) (2022-04-21)
 
 
