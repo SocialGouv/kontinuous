@@ -1,19 +1,7 @@
-async function createApiSpecV1(options = {}) {
-  const port = process.env.KUBEWEBHOOK_EXPOSED_PORT || options.port
-  const host = process.env.KUBEWEBHOOK_EXPOSED_HOST || options.host
-  const https =
-    process.env.KUBEWEBHOOK_EXPOSED_HTTPS &&
-    process.env.KUBEWEBHOOK_EXPOSED_HTTPS !== "false"
+const { ctx } = require("@modjo-plugins/core")
 
-  let uri = "http"
-  if (https) {
-    uri += "s"
-  }
-  uri += `://${host}`
-  const defaultPort = https ? "443" : "80"
-  if (port && port.toString() !== defaultPort) {
-    uri += `:${port}`
-  }
+async function createApiSpecV1(options = {}) {
+  const uri = ctx.require("config.project.oas.uri")
 
   const apiSpec = {
     openapi: "3.0.3",

@@ -17,6 +17,7 @@ module.exports = program
   .addOption(options.noTree)
   .addOption(options.helmArgs)
   .addOption(options.cwd)
+  .addOption(options.upload)
   .option("--output, -o", "enable direct output of manifest")
   .option(
     "--syntax-highlight, -s",

@@ -4,5 +4,7 @@ require("./command.build")
 require("./command.deploy")
 require("./command.env")
 require("./command.slugify")
+require("./command.upload")
+require("./command.commit-token")
 
 module.exports = (args = process.argv) => program.parse(args)

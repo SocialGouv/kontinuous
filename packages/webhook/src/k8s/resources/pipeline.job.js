@@ -10,6 +10,7 @@ module.exports = ({
   repositoryUrl,
   gitBranch,
   gitCommit,
+  uploadUrl,
 }) => ({
   apiVersion: "batch/v1",
   kind: "Job",
@@ -62,6 +63,11 @@ module.exports = ({
                   name: "kubeconfig",
                 },
               },
+            ],
+            env: [
+              ...(uploadUrl
+                ? [{ name: "KUBEWORKFLOW_BUILD_UPLOAD_URL", value: uploadUrl }]
+                : []),
             ],
             volumeMounts: [
               {

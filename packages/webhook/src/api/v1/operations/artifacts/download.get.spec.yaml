@@ -1,0 +1,32 @@
+security: 
+  - token: ["artifacts"]
+  - commitToken: ["artifacts"]
+
+parameters:
+  - in: query
+    name: repository
+    schema:
+      type: string
+      example: socialgouv/sample-next-app
+    required: true
+  - in: query
+    name: branch
+    schema:
+      type: string
+      example: feat/space-flight
+    required: true
+  - in: query
+    name: commit
+    schema:
+      type: string
+      example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed
+      format: sha1
+    required: true
+
+responses:
+  200:
+    content:
+      text/x-yaml:
+        schema:
+          type: string
+          format: binary

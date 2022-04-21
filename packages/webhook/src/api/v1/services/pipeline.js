@@ -7,7 +7,7 @@ const cleanGitRef = require("~common/utils/clean-git-ref")
 const jobRun = require("~/k8s/command/job-run")
 const pipelineJob = require("~/k8s/resources/pipeline.job")
 
-module.exports = () => {
+module.exports = ({ services }) => {
   const logger = ctx.require("logger")
   const { jobNamespace } = ctx.require("config.project")
   return async ({
@@ -42,6 +42,11 @@ module.exports = () => {
       repositoryUrl,
       gitBranch,
       gitCommit: after,
+      uploadUrl: services.getUploadUrl({
+        repositoryUrl,
+        gitBranch,
+        gitCommit: after,
+      }),
     })
     try {
       await jobRun(manifest, kubecontext)

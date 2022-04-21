@@ -1,3 +1,5 @@
+const { ctx } = require("@modjo-plugins/core")
+
 module.exports =
   ({ services: { verifyHmac } }) =>
   async (req, _scopes, _schema) => {
@@ -5,9 +7,10 @@ module.exports =
     if (!signature) {
       return false
     }
+    const webhookToken = ctx.require("config.project.webhook.token")
     return verifyHmac({
       signature,
       body: req.rawBody,
-      secret: process.env.KUBEWEBHOOK_TOKEN,
+      secret: webhookToken,
     })
   }

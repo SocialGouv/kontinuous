@@ -14,6 +14,7 @@ module.exports = program
   .addOption(options.noTree)
   .addOption(options.helmArgs)
   .addOption(options.cwd)
+  .addOption(options.upload)
   .option(
     "--file, -f <file>",
     "select a manifests yaml file, default will build one"
