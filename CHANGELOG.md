@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.3](https://github.com/SocialGouv/kube-workflow/compare/v1.15.2...v1.15.3) (2022-04-21)
+
+
+### Bug Fixes
+
+* add ns on app if ns defined locally ([ddfb15a](https://github.com/SocialGouv/kube-workflow/commit/ddfb15a05aefbd65fd87f27f502177a888a24d1e))
+
 ### [1.15.2](https://github.com/SocialGouv/kube-workflow/compare/v1.15.1...v1.15.2) (2022-04-21)
 
 
