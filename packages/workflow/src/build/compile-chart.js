@@ -25,9 +25,10 @@ const defaultValues = (_name, _umbrellaChart) => {
 }
 
 module.exports = async (values) => {
-  const { KWBUILD_PATH: rootDir } = buildCtx.require("env")
+  const { KWBUILD_PATH, WORKSPACE_PATH, WORKSPACE_SUBPATH } = buildCtx.require("env")
+  
   const chart = yaml.load(
-    await fs.readFile(`${rootDir}/Chart.yaml`, {
+    await fs.readFile(`${KWBUILD_PATH}/Chart.yaml`, {
       encoding: "utf-8",
     })
   )
@@ -35,10 +36,16 @@ module.exports = async (values) => {
   const { dependencies } = chart
 
   // import subcharts from project
-  const allChartNames = await getDirectories(`${rootDir}/charts`)
+  const allChartNames = [...(new Set(
+    (await Promise.all([
+      getDirectories(`${KWBUILD_PATH}/charts`),
+      getDirectories(`${WORKSPACE_PATH}/${WORKSPACE_SUBPATH}/charts`),
+    ])).reduce((acc, dirNames) => [...acc, ...dirNames], [])
+  ))]
+
   for (const c of allChartNames){
     
-    const chartDir = `${rootDir}/charts/${c}`
+    const chartDir = `${KWBUILD_PATH}/charts/${c}`
     
     // default Chart file
     const chartFile = `${chartDir}/Chart.yaml`
@@ -48,8 +55,8 @@ module.exports = async (values) => {
     
     // default values files with minimum
     let valuesFile = await getYamlPath(`${chartDir}/values`)
-    const values = valuesFile ? yaml.load(await fs.readFile(valuesFile,{encoding:"utf8"})) : {}
-    const defaultValuesObj = deepmerge(values, defaultValues(c, chart))
+    const chartValues = valuesFile ? yaml.load(await fs.readFile(valuesFile,{encoding:"utf8"})) : {}
+    const defaultValuesObj = deepmerge(chartValues, defaultValues(c, chart))
     if (!valuesFile){
       valuesFile = `${chartDir}/values.yaml`
     }
@@ -91,13 +98,13 @@ module.exports = async (values) => {
       // enable common extra features for used components
       if (
         (componentKey === name || isAnInstanceOf) &&
-        values.global.extra[name]
+        values.global.extra[name] && values[name].enabled
       ) {
         values.global.extra[name].enabled = true
       }
     }
   }
-  await fs.writeFile(`${rootDir}/Chart.yaml`, yaml.dump(chart))
+  await fs.writeFile(`${KWBUILD_PATH}/Chart.yaml`, yaml.dump(chart))
 
   return chart
 }

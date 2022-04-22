@@ -136,11 +136,5 @@ module.exports = (values) => {
 
   values = deepmerge({}, defaultValues, values)
 
-  for (const key of Object.keys(values)) {
-    if (!Object.keys(values[key]).includes('enabled')) {
-      values[key].enabled = true
-    }
-  }
-
   return values
 }

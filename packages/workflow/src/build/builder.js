@@ -17,7 +17,6 @@ const compilePatches = require("./compile-patches")
 const loadManifests = require("./load-manifests")
 const validateManifests = require("./validate-manifests")
 const outputInfos = require("./output-infos")
-const getYamlPath = require("~common/utils/get-yaml-path")
 const loadYamlFile = require("~common/utils/load-yaml-file")
 const getGitInfos = require("~/utils/get-git-infos")
 const selectEnv = require("~/utils/select-env")
@@ -95,6 +94,31 @@ const builder = async (envVars, options) => {
     await fs.symlink(workspaceKubeworkflowPath, buildKubeworkflowPath)
   }
 
+  logger.debug("Merge project charts")
+  const chartsDir = `${buildKubeworkflowPath}/charts`
+  if (await fs.pathExists(chartsDir)) {
+    await fs.copy(chartsDir, `${KWBUILD_PATH}/charts`, {
+      dereference: true,
+    })
+  }
+
+  const chartNames = await getDirectories(`${KWBUILD_PATH}/charts`)
+  logger.debug("Merge env templates and import values from charts")
+  const chartsValues = {}
+  for (const chartName of chartNames){
+    const chartDir = `${KWBUILD_PATH}/charts/${chartName}`
+    const envChartDir = `${chartDir}/${ENVIRONMENT}`
+    const envChartTemplatesDir = `${envChartDir}/templates`
+    let chartValues = await loadYamlFile(`${chartDir}/values`)
+    if (await fs.pathExists(envChartTemplatesDir)){
+      await fs.copy(envChartTemplatesDir, `${KWBUILD_PATH}/charts/${chartName}/templates/env`, {
+        dereference: true
+      })
+    }
+    const envValues = await loadYamlFile(`${envChartDir}/values`)
+    chartsValues[chartName] = deepmerge(chartValues || {}, envValues || {})
+  }
+
   logger.debug("Prepare .kube-workflow package")
   if (
     await fs.pathExists(`${workspaceKubeworkflowPath}/package.json`) &&
@@ -112,26 +136,47 @@ const builder = async (envVars, options) => {
     loadYamlFile(`${buildKubeworkflowPath}/values`, `${buildKubeworkflowPath}/common/values`),
     loadYamlFile(`${buildKubeworkflowPath}/${ENVIRONMENT}/values`, `${buildKubeworkflowPath}/env/${ENVIRONMENT}/values`),
   ])
+
+  // values: values.yaml + $env/values.yaml
   let values = deepmerge(commonValues, envValues)
+  
+  // keep it before we merge all charts values
+  const autoEnabledKeys = []
+  for (const key of Object.keys(values)) {
+    if (!Object.keys(values[key]).includes('enabled')) {
+      autoEnabledKeys.push(key)
+    }
+  }
+  
+  // values: import defaults from charts
+  values = deepmerge(chartsValues, values)
+  
+  // values: apply default values.js
   values = setDefaultValues(values)
+  
+  // values: inline
+  if(KW_INLINE_VALUES) {
+    const kwValues = yaml.load(KW_INLINE_VALUES)
+    values = deepmerge(values, kwValues)
+  }
+  
+  // values: apply project values.js
   projectValuesJsFile = `${buildKubeworkflowPath}/values.js`
   if (await fs.pathExists(projectValuesJsFile)){
     values = require(projectValuesJsFile)(values)
   }
-
+  
+  // values: auto enable user defined keys
+  for (const key of autoEnabledKeys) {
+    values[key].enabled = true
+  }
+  
   logger.debug("Compiling jobs")
   await compileJobs(values)
-
+  
   logger.debug("Compiling outputs")
   await compileOutputs(values)
-
-  logger.debug("Merge project charts")
-  const chartsDir = `${buildKubeworkflowPath}/charts`
-  if (await fs.pathExists(chartsDir)) {
-    await fs.copy(chartsDir, `${KWBUILD_PATH}/charts`, {
-      dereference: true,
-    })
-  }
+  
   if (!KW_CHARTS){
     logger.debug("Merge project templates")
     for (const dir of [
@@ -148,29 +193,9 @@ const builder = async (envVars, options) => {
       }
     }
   }
-
+  
   logger.debug("Compiling chart and subcharts")
   const chart = await compileChart(values)
-  
-  const chartNames = await getDirectories(`${KWBUILD_PATH}/charts`)
-  logger.debug("Merge env templates in charts")
-  for (const chartName of chartNames){
-    const chartDir = `${KWBUILD_PATH}/charts/${chartName}`
-    const envChartDir = `${chartDir}/${ENVIRONMENT}`
-    const envChartTemplatesDir = `${envChartDir}/templates`
-    if (await fs.pathExists(envChartTemplatesDir)){
-      await fs.copy(envChartTemplatesDir, `${KWBUILD_PATH}/charts/${chartName}/templates/env`, {
-        dereference: true
-      })
-    }
-    const envValues = await loadYamlFile(`${envChartDir}/values`)
-    if (envValues){
-      let valuesObj = await loadYamlFile(`${chartDir}/values`)
-      valuesObj = deepmerge(valuesObj || {}, envValues)
-      const valuesFile = await getYamlPath(`${chartDir}/values`)
-      await fs.writeFile(valuesFile, yaml.dump(valuesObj))
-    }
-  }
 
   if (KW_CHARTS) {
     logger.debug(`Enable only standalone charts: "${KW_CHARTS}"`)
@@ -191,11 +216,6 @@ const builder = async (envVars, options) => {
       }
       values[key].enabled = enableSubcharts.includes(key)
     }
-  }
-
-  if(KW_INLINE_VALUES) {
-    const kwValues = yaml.load(KW_INLINE_VALUES)
-    values = deepmerge(values, kwValues)
   }
 
   logger.debug("Write values file")
