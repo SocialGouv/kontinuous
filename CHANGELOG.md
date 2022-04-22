@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.2](https://github.com/SocialGouv/kube-workflow/compare/v1.16.1...v1.16.2) (2022-04-22)
+
+
+### Bug Fixes
+
+* input helmArgs ([05cdde9](https://github.com/SocialGouv/kube-workflow/commit/05cdde9c1505baa4d4a0ac52c6c59a8deef069b7))
+
 ### [1.16.1](https://github.com/SocialGouv/kube-workflow/compare/v1.16.0...v1.16.1) (2022-04-22)
 
 
