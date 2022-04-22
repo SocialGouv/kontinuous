@@ -1,4 +1,5 @@
 const isVersionTag = require("~common/utils/is-version-tag")
+const refEnv = require("~common/utils/ref-env")
 const getGitInfos = require("~/utils/get-git-infos")
 
 const { buildCtx } = require("~/build/ctx")
@@ -21,25 +22,12 @@ module.exports = ({
   }
 
   if (ref) {
-    ref = ref.replace("refs/heads/", "").replace("refs/tags/", "")
-    if (ref === "master" || ref === "main") {
-      return "preprod"
-    }
-    if (isVersionTag(ref)) {
-      return "prod"
-    }
-    return "dev"
+    return refEnv(ref)
   }
 
   const { GIT_REF, GIT_TAGS } = getGitInfos(cwd, env)
   if (detectCurrentTags && GIT_TAGS.some((tag) => isVersionTag(tag))) {
     return "prod"
   }
-  if (isVersionTag(GIT_REF)) {
-    return "prod"
-  }
-  if (GIT_REF === "master" || GIT_REF === "main") {
-    return "preprod"
-  }
-  return "dev"
+  return refEnv(GIT_REF)
 }

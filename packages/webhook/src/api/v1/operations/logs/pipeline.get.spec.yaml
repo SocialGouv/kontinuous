@@ -25,6 +25,10 @@ parameters:
     schema:
       type: boolean
   - in: query
+    name: catch
+    schema:
+      type: boolean
+  - in: query
     name: since
     schema:
       type: string
