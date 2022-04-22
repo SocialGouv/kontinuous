@@ -1,6 +1,6 @@
 apiVersion: v2
 name: kube-webhook
-version: 1.16.0
+version: 1.16.1
 home: https://github.com/SocialGouv/kube-workflow
 description: Webhook CI for Kubernetes
 icon: https://avatars.githubusercontent.com/u/45039513?v=4
@@ -9,4 +9,4 @@ sources:
 maintainers:
   - name: Fabrique numérique des Ministères Sociaux
     email: dsi-incubateur@sg.social.gouv.fr
-appVersion: 1.16.0
+appVersion: 1.16.1
