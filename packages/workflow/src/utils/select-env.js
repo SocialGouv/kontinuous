@@ -1,15 +1,23 @@
-const isVersionTag = require("./is-version-tag")
-const getGitInfos = require("./get-git-infos")
+const isVersionTag = require("~common/utils/is-version-tag")
+const getGitInfos = require("~/utils/get-git-infos")
+
+const { buildCtx } = require("~/build/ctx")
 
 const envs = ["dev", "preprod", "prod"]
 
-module.exports = ({ options = {}, cwd, ref, detectCurrentTags = true }) => {
+module.exports = ({
+  options = {},
+  cwd,
+  env = buildCtx.get("env") || process.env,
+  ref,
+  detectCurrentTags = true,
+}) => {
   if (options.E) {
     return options.E
   }
 
-  if (process.env.ENVIRONMENT && envs.includes(process.env.ENVIRONMENT)) {
-    return process.env.ENVIRONMENT
+  if (env.ENVIRONMENT && envs.includes(env.ENVIRONMENT)) {
+    return env.ENVIRONMENT
   }
 
   if (ref) {
@@ -23,7 +31,7 @@ module.exports = ({ options = {}, cwd, ref, detectCurrentTags = true }) => {
     return "dev"
   }
 
-  const { GIT_REF, GIT_TAGS } = getGitInfos(cwd)
+  const { GIT_REF, GIT_TAGS } = getGitInfos(cwd, env)
   if (detectCurrentTags && GIT_TAGS.some((tag) => isVersionTag(tag))) {
     return "prod"
   }

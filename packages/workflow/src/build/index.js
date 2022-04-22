@@ -6,8 +6,6 @@ const { highlight, fromJson: themeFromJson } = require("cli-highlight")
 
 const logger = require("~common/utils/logger")
 
-const getGitInfos = require("~common/utils/get-git-infos")
-const selectEnv = require("~common/utils/select-env")
 const builder = require("./builder")
 
 const upload = require("~/upload")
@@ -15,30 +13,21 @@ const upload = require("~/upload")
 module.exports = async (options) => {
   const cwd = options.cwd || process.cwd()
 
-  const { GIT_REF, GIT_SHA, GIT_REPOSITORY } = getGitInfos(cwd)
-
-  const selectedEnv = selectEnv({ options, cwd })
-
   const envVars = {
     ...process.env,
-    ENVIRONMENT: selectedEnv,
     KW_CHARTS: options.charts || process.env.KW_CHARTS,
     KW_SUBCHARTS: options.subcharts || process.env.KW_SUBCHARTS,
     KW_NO_TREE: options.noTree,
     HELM_ARGS: options.A || process.env.HELM_ARGS,
 
-    GIT_REF,
-    GIT_SHA,
-
     KUBEWORKFLOW_PATH: path.resolve(`${__dirname}/../..`),
     WORKSPACE_PATH: cwd,
-    GIT_REPOSITORY,
     KWBUILD_PATH:
       process.env.KWBUILD_PATH ||
       (await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))),
   }
 
-  const result = await builder(envVars)
+  const result = await builder(envVars, options)
 
   const { manifestsFile, manifests } = result
 

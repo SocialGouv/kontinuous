@@ -1,4 +1,4 @@
-const selectEnv = require("~common/utils/select-env")
+const selectEnv = require("~/utils/select-env")
 
 const program = require("./program")
 

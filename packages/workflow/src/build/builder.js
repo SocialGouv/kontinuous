@@ -19,20 +19,27 @@ const validateManifests = require("./validate-manifests")
 const outputInfos = require("./output-infos")
 const getYamlPath = require("~common/utils/get-yaml-path")
 const loadYamlFile = require("~common/utils/load-yaml-file")
+const getGitInfos = require("~/utils/get-git-infos")
+const selectEnv = require("~/utils/select-env")
 
 const { buildCtx } = require("./ctx")
 
-const builder = async (envVars) => {
+const builder = async (envVars, options) => {
   buildCtx.set("env", envVars)
 
   for (const requiredEnv of [
     "KUBEWORKFLOW_PATH",
     "WORKSPACE_PATH",
-    "ENVIRONMENT",
   ]) {
     if (!envVars[requiredEnv]) {
       throw new Error(`Missing mandatory var "${requiredEnv}"`)
     }
+  }
+
+  Object.assign(envVars, getGitInfos(envVars.WORKSPACE_PATH, envVars, true))
+  
+  if(!envVars.ENVIRONMENT){
+    envVars.ENVIRONMENT = selectEnv({ options, cwd: envVars.WORKSPACE_PATH, env: envVars })
   }
 
   if (!envVars.KWBUILD_PATH) {
@@ -239,7 +246,7 @@ const builder = async (envVars) => {
   }
 }
 
-module.exports = (envVars) => {
+module.exports = (envVars, options) => {
   buildCtx.provide()
-  return builder(envVars)
+  return builder(envVars, options)
 }

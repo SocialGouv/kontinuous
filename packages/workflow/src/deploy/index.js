@@ -7,14 +7,16 @@ const retry = require("async-retry")
 const logger = require("~common/utils/logger")
 const shell = require("~common/utils/shell")
 const timeLogger = require("~common/utils/time-logger")
-const getGitInfos = require("~common/utils/get-git-infos")
-const selectEnv = require("~common/utils/select-env")
 const slug = require("~common/utils/slug")
 const parseCommand = require("~common/utils/parse-command")
 const writeKubeconfig = require("~common/utils/write-kubeconfig")
+const getGitInfos = require("~/utils/get-git-infos")
 const build = require("~/build")
+const selectEnv = require("~/utils/select-env")
 
-module.exports = async (options) => {
+const { buildCtx } = require("~/build/ctx")
+
+const deployer = async (options) => {
   const elapsed = timeLogger({
     logger,
     logLevel: "info",
@@ -210,4 +212,9 @@ module.exports = async (options) => {
   elapsed.end({
     label: `🚀 kube-workflow pipeline ${repositoryName} ${selectedEnv} to "${namespace}"`,
   })
+}
+
+module.exports = (options) => {
+  buildCtx.provide()
+  return deployer(options)
 }
