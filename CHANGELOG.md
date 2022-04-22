@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.17.1](https://github.com/SocialGouv/kube-workflow/compare/v1.17.0...v1.17.1) (2022-04-22)
+
+
+### Bug Fixes
+
+* notree + set option wip ([53c051a](https://github.com/SocialGouv/kube-workflow/commit/53c051ac4f9be7aa68e564a960deb3581a0fdea1))
+* subpath + patches + validators ([bbd8ec1](https://github.com/SocialGouv/kube-workflow/commit/bbd8ec1ba188bbced6f877f77b484d989b668ba0))
+
 ## 1.17.0 (2022-04-22)
 
 
