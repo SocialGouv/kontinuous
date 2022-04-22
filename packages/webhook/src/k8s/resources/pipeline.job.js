@@ -1,6 +1,7 @@
-const image = "harbor.fabrique.social.gouv.fr/sre/kube-workflow:latest"
-// const image = "ghcr.io/socialgouv/kube-workflow:latest"
-const checkoutImage = image
+const imageBase = "ghcr.io/socialgouv"
+// const imageBase = "harbor.fabrique.social.gouv.fr/sre"
+const image = `${imageBase}/kube-workflow:latest`
+const checkoutImage = `${imageBase}/kube-workflow/degit:latest`
 
 module.exports = ({
   namespace,
@@ -36,10 +37,24 @@ module.exports = ({
                 {
                   name: "checkout",
                   image: checkoutImage,
+                  env: [
+                    {
+                      name: "GIT_REPOSITORY_URL",
+                      value: repositoryUrl,
+                    },
+                    {
+                      name: "GIT_REF",
+                      value: gitBranch,
+                    },
+                    {
+                      name: "GIT_SHA",
+                      value: gitCommit,
+                    },
+                  ],
                   command: [
                     "sh",
                     "-c",
-                    `git clone --depth 1 ${repositoryUrl} --branch ${gitBranch} /workspace`,
+                    `degit ${repositoryUrl}#${gitCommit} /workspace`,
                   ],
                   volumeMounts: [
                     {
