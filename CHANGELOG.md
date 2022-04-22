@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/SocialGouv/kube-workflow/compare/v1.15.3...v1.16.0) (2022-04-22)
+
+
+### Features
+
+* webhook artifact up and down + refactos ([66e9a94](https://github.com/SocialGouv/kube-workflow/commit/66e9a94196104024e596096f5ce5a8ef8cd75c5a))
+
+
+### Bug Fixes
+
+* command build ([96fc59e](https://github.com/SocialGouv/kube-workflow/commit/96fc59e01bd733241a7a7e26e27e8fb775044ac9))
+* git infos override from env + refacto ([2a45728](https://github.com/SocialGouv/kube-workflow/commit/2a457280cbe111c1b8f5de157a51a93ca28fdce2))
+* ns global optional ([7a91a28](https://github.com/SocialGouv/kube-workflow/commit/7a91a28c67b0abf6ff8992f7ef9fa7f1a4bb9abc))
+
 ### [1.15.3](https://github.com/SocialGouv/kube-workflow/compare/v1.15.2...v1.15.3) (2022-04-21)
 
 
