@@ -1,0 +1,12 @@
+apiVersion: v2
+name: redis
+version: 1.16.4
+home: https://github.com/SocialGouv
+description: redis app
+icon: https://avatars.githubusercontent.com/u/45039513?v=4
+sources:
+  - https://github.com/SocialGouv/kube-workflow
+maintainers:
+  - name: Fabrique numérique des Ministères Sociaux
+    email: dsi-incubateur@sg.social.gouv.fr
+appVersion: 1.16.4

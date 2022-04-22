@@ -16,7 +16,7 @@ global:
       sharedStorage:
         enabled: false
         size: 2Gi
-        className: 'azurefile'
+        className: "azurefile"
 
 app:
   enabled: false
@@ -29,4 +29,6 @@ maildev:
 pgweb:
   enabled: false
 metabase:
+  enabled: false
+redis:
   enabled: false
