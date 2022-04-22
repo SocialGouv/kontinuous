@@ -1,3 +1,4 @@
+{{ if .Values.global.namespace }}
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -15,3 +16,4 @@ metadata:
     cert: wildcard
     {{- end }}
   name: {{ or .Values.namespace .Values.global.namespace }}
+{{ end }}
