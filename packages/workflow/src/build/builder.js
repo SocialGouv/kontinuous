@@ -24,7 +24,7 @@ const selectEnv = require("~/utils/select-env")
 const { buildCtx } = require("./ctx")
 const set = require("lodash.set")
 
-const builder = async (envVars, options) => {
+const builder = async (envVars, options = {}) => {
   buildCtx.set("env", envVars)
 
   
@@ -185,7 +185,7 @@ const builder = async (envVars, options) => {
       set(values, key, val)
     }
   }
-  
+
   // values: --set option
   if(options.set){
     for(const s of options.set){
