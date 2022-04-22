@@ -25,6 +25,8 @@ inputs:
     description: "working directory where is located .kube-workflow"
   kubeconfigContext:
     description: "override kubeconfig context, default dev or prod according to environment"
+  helmArgs:
+    description: "Add extra args to Helm template command"
 outputs:
   url:
     description: "Main deployment URL"
@@ -60,6 +62,7 @@ runs:
         RANCHER_PROJECT_NAME: ${{ inputs.rancherProjectName }}
         KW_CHARTS: ${{ inputs.charts }}
         KW_SUBCHARTS: ${{ inputs.subcharts }}
+        HELM_ARGS: ${{ inputs.helmArgs }}
         DEBUG: "true"
       working-directory: "${{ github.action_path }}"
       run: packages/workflow/bin/kube-workflow build --cwd ${{ env.PROJECT_PATH }}
