@@ -13,6 +13,7 @@ module.exports = program
   .addOption(options.subcharts)
   .addOption(options.noTree)
   .addOption(options.helmArgs)
+  .addOption(options.inlineValues)
   .addOption(options.cwd)
   .addOption(options.upload)
   .option(

@@ -19,6 +19,7 @@ module.exports = async (options) => {
     KW_SUBCHARTS: options.subcharts || process.env.KW_SUBCHARTS,
     KW_NO_TREE: options.noTree,
     HELM_ARGS: options.A || process.env.HELM_ARGS,
+    KW_INLINE_VALUES: options.inlineValues || process.env.KW_INLINE_VALUES,
 
     KUBEWORKFLOW_PATH: path.resolve(`${__dirname}/../..`),
     WORKSPACE_PATH: cwd,

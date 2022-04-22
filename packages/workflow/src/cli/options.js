@@ -25,6 +25,11 @@ module.exports.helmArgs = new Option(
   "add extra helm arguments"
 )
 
+module.exports.inlineValues = new Option(
+  "--inline-values <yaml>",
+  "final deep override of values"
+)
+
 module.exports.cwd = new Option("--cwd <path>", "set current working directory")
 
 module.exports.debug = new Option("--debug, -d", "enable debugging loglevel")

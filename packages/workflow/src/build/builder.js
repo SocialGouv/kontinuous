@@ -56,6 +56,7 @@ const builder = async (envVars, options) => {
     WORKSPACE_SUBPATH = "/.kube-workflow",
     KW_CHARTS,
     KW_SUBCHARTS,
+    KW_INLINE_VALUES,
     HELM_ARGS = "",
   } = envVars
 
@@ -190,6 +191,11 @@ const builder = async (envVars, options) => {
       }
       values[key].enabled = enableSubcharts.includes(key)
     }
+  }
+
+  if(KW_INLINE_VALUES) {
+    const kwValues = yaml.load(KW_INLINE_VALUES)
+    values = deepmerge(values, kwValues)
   }
 
   logger.debug("Write values file")
