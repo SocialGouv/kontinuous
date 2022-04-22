@@ -12,12 +12,11 @@ const upload = require("~/upload")
 
 module.exports = async (options) => {
   const cwd = options.cwd || process.cwd()
-
   const envVars = {
     ...process.env,
     KW_CHARTS: options.charts || process.env.KW_CHARTS,
     KW_SUBCHARTS: options.subcharts || process.env.KW_SUBCHARTS,
-    KW_NO_TREE: options.noTree,
+    KW_DISPLAY_TREE: options.tree,
     HELM_ARGS: options.A || process.env.HELM_ARGS,
     KW_INLINE_VALUES: options.inlineValues || process.env.KW_INLINE_VALUES,
 
@@ -27,8 +26,8 @@ module.exports = async (options) => {
       process.env.KWBUILD_PATH ||
       (await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))),
   }
-
   const result = await builder(envVars, options)
+  
 
   const { manifestsFile, manifests } = result
 

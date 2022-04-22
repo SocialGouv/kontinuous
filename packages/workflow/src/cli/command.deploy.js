@@ -16,6 +16,7 @@ module.exports = program
   .addOption(options.inlineValues)
   .addOption(options.cwd)
   .addOption(options.upload)
+  .addOption(options.set)
   .option(
     "--file, -f <file>",
     "select a manifests yaml file, default will build one"

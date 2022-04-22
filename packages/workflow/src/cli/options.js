@@ -30,6 +30,11 @@ module.exports.inlineValues = new Option(
   "final deep override of values"
 )
 
+module.exports.set = new Option(
+  "--set <pair...>",
+  "update value key or subkey, syntax is --set global.namespace=test, you can call it multiple times"
+)
+
 module.exports.cwd = new Option("--cwd <path>", "set current working directory")
 
 module.exports.debug = new Option("--debug, -d", "enable debugging loglevel")

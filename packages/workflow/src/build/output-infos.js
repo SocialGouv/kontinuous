@@ -119,12 +119,12 @@ getTreeInfos.CronJob = (resource) => {
   ]
 }
 
-module.exports = async (manifests, values) => {
+module.exports = async (manifests, _values) => {
   const logger = buildCtx.require("logger")
   const env = buildCtx.require("env")
   const {
     KWBUILD_PATH,
-    KW_NO_TREE,
+    KW_DISPLAY_TREE,
   } = env
 
   const componentResources = {}
@@ -200,8 +200,7 @@ module.exports = async (manifests, values) => {
   ]
 
   const treeStr = logTree(tree)
-  
-  if (!KW_NO_TREE){
+  if (KW_DISPLAY_TREE){
     logger.info("\n"+treeStr)
   }
 

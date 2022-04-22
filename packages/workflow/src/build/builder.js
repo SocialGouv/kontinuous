@@ -26,6 +26,7 @@ const { buildCtx } = require("./ctx")
 const builder = async (envVars, options) => {
   buildCtx.set("env", envVars)
 
+  
   for (const requiredEnv of [
     "KUBEWORKFLOW_PATH",
     "WORKSPACE_PATH",
@@ -34,13 +35,13 @@ const builder = async (envVars, options) => {
       throw new Error(`Missing mandatory var "${requiredEnv}"`)
     }
   }
-
+  
   Object.assign(envVars, getGitInfos(envVars.WORKSPACE_PATH, envVars, true))
   
   if(!envVars.ENVIRONMENT){
     envVars.ENVIRONMENT = selectEnv({ options, cwd: envVars.WORKSPACE_PATH, env: envVars })
   }
-
+  
   if (!envVars.KWBUILD_PATH) {
     envVars.KWBUILD_PATH = await mkdtemp(
       path.join(os.tmpdir(), `kube-workflow`)
