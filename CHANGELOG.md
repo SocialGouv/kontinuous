@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.17.0 (2022-04-22)
+
+
+### Features
+
+* add redis chart ([#40](https://github.com/SocialGouv/kube-workflow/issues/40)) ([51e9ae4](https://github.com/SocialGouv/kube-workflow/commit/51e9ae4e58397aaf1f06a67411399c371f47dffb))
+
 ### [1.16.4](https://github.com/SocialGouv/kube-workflow/compare/v1.16.3...v1.16.4) (2022-04-22)
 
 
