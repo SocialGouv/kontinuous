@@ -14,7 +14,7 @@ module.exports = async (manifests, values) => {
   }catch(_e){
     requirable = false
   }
-  console.log({requirable})
+
   if (requirable){
     patched = await require(`${workspaceKubeworkflowPath}/patches`)(manifests, values)
   }

@@ -42,6 +42,10 @@ const builder = async (envVars, options) => {
     envVars.ENVIRONMENT = selectEnv({ options, cwd: envVars.WORKSPACE_PATH, env: envVars })
   }
   
+  if(!envVars.WORKSPACE_SUBPATH){
+    envVars.WORKSPACE_SUBPATH = "/.kube-workflow"
+  }
+  
   if (!envVars.KWBUILD_PATH) {
     envVars.KWBUILD_PATH = await mkdtemp(
       path.join(os.tmpdir(), `kube-workflow`)
@@ -53,7 +57,7 @@ const builder = async (envVars, options) => {
     KUBEWORKFLOW_PATH,
     ENVIRONMENT,
     WORKSPACE_PATH,
-    WORKSPACE_SUBPATH = "/.kube-workflow",
+    WORKSPACE_SUBPATH,
     KW_CHARTS,
     KW_SUBCHARTS,
     KW_INLINE_VALUES,
