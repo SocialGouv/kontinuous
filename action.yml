@@ -26,7 +26,9 @@ inputs:
   kubeconfigContext:
     description: "override kubeconfig context, default dev or prod according to environment"
   inlineValues:
-    description: "deep final override of values"
+    description: "deep final override of values in yaml format"
+  inlineSet:
+    description: "override final values using in yaml format, supporting subkeys"
 outputs:
   url:
     description: "Main deployment URL"
@@ -63,6 +65,7 @@ runs:
         KW_CHARTS: ${{ inputs.charts }}
         KW_SUBCHARTS: ${{ inputs.subcharts }}
         KW_INLINE_VALUES: ${{ inputs.inlineValues }}
+        KW_INLINE_SET: ${{ inputs.inlineSet }}
         DEBUG: "true"
       working-directory: "${{ github.action_path }}"
       run: packages/workflow/bin/kube-workflow build --cwd ${{ env.PROJECT_PATH }}

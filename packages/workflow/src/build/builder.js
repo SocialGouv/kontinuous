@@ -22,6 +22,7 @@ const getGitInfos = require("~/utils/get-git-infos")
 const selectEnv = require("~/utils/select-env")
 
 const { buildCtx } = require("./ctx")
+const set = require("lodash.set")
 
 const builder = async (envVars, options) => {
   buildCtx.set("env", envVars)
@@ -61,6 +62,7 @@ const builder = async (envVars, options) => {
     KW_CHARTS,
     KW_SUBCHARTS,
     KW_INLINE_VALUES,
+    KW_INLINE_SET,
     HELM_ARGS = "",
   } = envVars
 
@@ -174,6 +176,28 @@ const builder = async (envVars, options) => {
   // values: auto enable user defined keys
   for (const key of autoEnabledKeys) {
     values[key].enabled = true
+  }
+
+  // values: env KW_INLINE_SET
+  if(KW_INLINE_SET){
+    const sets = yaml.load(KW_INLINE_SET)
+    for(const [key, val] of Object.entries(sets)){
+      set(values, key, val)
+    }
+  }
+  
+  // values: --set option
+  if(options.set){
+    for(const s of options.set){
+      const index = s.indexOf("=");
+      if(index===-1){
+        logger.warn("bad format for --set option, expected: foo=bar")
+        continue
+      }
+      const key = s.slice(0, index)
+      const val = s.slice(index+1)
+      set(values, key, val)
+    }
   }
   
   logger.debug("Compiling jobs")
