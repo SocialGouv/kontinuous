@@ -1,6 +1,6 @@
 apiVersion: v2
 name: kube-workflow
-version: 1.17.1
+version: 1.17.2
 home: https://github.com/SocialGouv/kube-workflow
 description: Workflow CI for for Kubernetes
 icon: https://avatars.githubusercontent.com/u/45039513?v=4
@@ -13,25 +13,25 @@ dependencies:
   - name: app
     repository: file://./charts/app
     condition: app.enabled
-    version: 1.17.1
+    version: 1.17.2
   - name: hasura
     repository: file://./charts/hasura
     condition: hasura.enabled
-    version: 1.17.1
+    version: 1.17.2
   - name: maildev
     repository: file://./charts/maildev
     condition: maildev.enabled
-    version: 1.17.1
+    version: 1.17.2
   - name: metabase
     repository: file://./charts/metabase
     condition: metabase.enabled
-    version: 1.17.1
+    version: 1.17.2
   - name: pgweb
     repository: file://./charts/pgweb
     condition: pgweb.enabled
-    version: 1.17.1
+    version: 1.17.2
   - name: jobs
     repository: file://./charts/jobs
     condition: jobs.enabled
-    version: 1.17.1
-appVersion: 1.17.1
+    version: 1.17.2
+appVersion: 1.17.2
