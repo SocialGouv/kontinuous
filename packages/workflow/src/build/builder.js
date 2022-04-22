@@ -43,7 +43,7 @@ const builder = async (envVars, options = {}) => {
     envVars.ENVIRONMENT = selectEnv({ options, cwd: envVars.WORKSPACE_PATH, env: envVars })
   }
   
-  if(!envVars.WORKSPACE_SUBPATH){
+  if(envVars.WORKSPACE_SUBPATH===undefined){
     envVars.WORKSPACE_SUBPATH = "/.kube-workflow"
   }
   
