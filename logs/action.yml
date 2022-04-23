@@ -58,7 +58,7 @@ runs:
     - name: Download manifests artifact
       shell: bash
       run: |
-        curl "${WEBHOOK_URI}/api/v1/oas/artifacts/manifests?branch=${GIT_BRANCH}&commit=${GIT_COMMIT}&token=${KUBEWEBHOOK_TOKEN}" --ouput manifests.yaml
+        curl --ouput manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/manifests?branch=${GIT_BRANCH}&commit=${GIT_COMMIT}&token=${KUBEWEBHOOK_TOKEN}"
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2
