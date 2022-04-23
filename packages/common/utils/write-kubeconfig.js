@@ -51,6 +51,5 @@ module.exports = async (
     const kubeconfigFile = `${tmpDir}/.kubeconfig`
     await fs.writeFile(kubeconfigFile, yaml.dump(kubeconfig))
     process.env.KUBECONFIG = kubeconfigFile
-    console.log(yaml.dump(kubeconfig))
   }
 }
