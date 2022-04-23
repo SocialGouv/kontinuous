@@ -3,8 +3,6 @@ const imageBase = "ghcr.io/socialgouv"
 const image = `${imageBase}/kube-workflow:latest`
 const checkoutImage = `${imageBase}/kube-workflow/degit:latest`
 
-const slug = require("~common/utils/slug")
-
 module.exports = ({
   namespace,
   name,
