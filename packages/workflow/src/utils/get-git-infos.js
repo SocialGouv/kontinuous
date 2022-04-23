@@ -18,8 +18,10 @@ module.exports = (
     if (!infos.GIT_TAGS) {
       if (env.GIT_TAGS) {
         infos.GIT_TAGS = env.GIT_TAGS.split(",")
-      } else {
+      } else if (env.GIT_TAGS === undefined || env.GIT_TAGS === null) {
         infos.GIT_TAGS = getGitTags(cwd)
+      } else {
+        infos.GIT_TAGS = []
       }
     }
     if (!infos.GIT_REF) {
