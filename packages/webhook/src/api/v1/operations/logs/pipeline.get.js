@@ -112,7 +112,7 @@ module.exports = function () {
     let tryIteration = 0
     const waitingCallback = () => {
       if (tryIteration === 0) {
-        res.write(`🔭  waiting for job ${jobName}...`)
+        res.write(`🔭 waiting for job ${jobName}...`)
       }
       res.write(".")
       tryIteration++
