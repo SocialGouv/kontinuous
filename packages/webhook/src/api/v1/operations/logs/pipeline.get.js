@@ -12,26 +12,16 @@ const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 module.exports = function () {
   const { jobNamespace } = ctx.require("config.project")
   const readyToLogPhases = ["Running", "Succeeded", "Failed"]
-  const checkJobExists = async ({ jobName, kubecontext }) => {
+  const checkJobExists = async ({ jobName, commit, kubecontext }) => {
     try {
-      const [jsonStatus, jsonPodStatus] = await Promise.all([
-        asyncShell(`kubectl
+      const jsonPodStatus = await asyncShell(`kubectl
           --context ${kubecontext}
           -n ${jobNamespace}
-          get job.batch/${jobName}
-          --output=jsonpath={.status}
-        `),
-        asyncShell(`kubectl
-        --context ${kubecontext}
-        -n ${jobNamespace}
-        get pods --selector=job-name=${jobName}
-        --output=jsonpath={.items[0].status}
-      `),
-      ])
-      const jobStatus = JSON.parse(jsonStatus)
-      if (!(jobStatus.active || jobStatus.succeeded || jobStatus.failed)) {
-        return false
-      }
+          get pods
+          --selector=job-name=${jobName}
+          --selector="kubeworkflow/gitCommit=${commit}"
+          --output=jsonpath={.items[0].status}
+      `)
       const podStatus = JSON.parse(jsonPodStatus)
       const { phase } = podStatus
       return readyToLogPhases.includes(phase)
@@ -96,11 +86,12 @@ module.exports = function () {
   async function getOneLogsPipeline(req, res) {
     const {
       event,
-      ref,
       repository: repositoryMixed,
+      ref,
+      commit,
       follow,
-      since,
       catch: catchJob,
+      since,
     } = req.query
     const repository = repositoryFromGitUrl(repositoryMixed)
     const repositoryName = repository.split("/").pop()
@@ -128,7 +119,7 @@ module.exports = function () {
     }
 
     if (catchJob) {
-      await waitJobExists({ jobName, kubecontext }, waitingCallback)
+      await waitJobExists({ jobName, commit, kubecontext }, waitingCallback)
       if (tryIteration > 0) {
         res.write("\n")
       }

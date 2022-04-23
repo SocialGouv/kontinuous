@@ -3,12 +3,6 @@ security:
 
 parameters:
   - in: query
-    name: ref
-    schema:
-      type: string
-      example: feat/space-flight
-    required: true
-  - in: query
     name: event
     schema:
       type: string
@@ -19,6 +13,19 @@ parameters:
     schema:
       type: string
       example: socialgouv/sample-next-app
+    required: true
+  - in: query
+    name: ref
+    schema:
+      type: string
+      example: feat/space-flight
+    required: true
+  - in: query
+    name: commit
+    schema:
+      type: string
+      example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed
+      format: sha1
     required: true
   - in: query
     name: follow

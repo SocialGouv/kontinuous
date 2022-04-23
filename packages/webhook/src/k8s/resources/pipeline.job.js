@@ -3,7 +3,7 @@ const imageBase = "ghcr.io/socialgouv"
 const image = `${imageBase}/kube-workflow:latest`
 const checkoutImage = `${imageBase}/kube-workflow/degit:latest`
 
-// const slug = require("~common/utils/slug")
+const slug = require("~common/utils/slug")
 
 module.exports = ({
   namespace,
@@ -20,11 +20,11 @@ module.exports = ({
   metadata: {
     name,
     namespace,
-    // labels: {
-    //   "kubeworkflow/gitBranchSlug": slug(gitBranch),
-    //   "kubeworkflow/gitCommit": gitCommit,
-    //   "kubeworkflow/repositoryUrlSlug": slug(repositoryUrl),
-    // },
+    labels: {
+      "kubeworkflow/gitCommit": gitCommit,
+      "kubeworkflow/gitBranchSlug": slug(gitBranch),
+      "kubeworkflow/repositoryUrlSlug": slug(repositoryUrl),
+    },
     annotations: {
       "kubeworkflow/gitBranch": gitBranch,
       "kubeworkflow/gitCommit": gitCommit,

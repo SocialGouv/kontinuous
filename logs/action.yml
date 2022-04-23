@@ -53,12 +53,12 @@ runs:
     - name: Stream logs of kube pipeline
       shell: bash
       run:
-        curl "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?catch=true&follow=true&branch={GIT_BRANCH}&commit=${GIT_COMMIT}&token=${KUBEWEBHOOK_TOKEN}"
+        curl "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?ref=${GIT_BRANCH}&commit=${GIT_COMMIT}&catch=true&follow=true&token=${KUBEWEBHOOK_TOKEN}"
     
     - name: Download manifests artifact
       shell: bash
       run: 
-        curl "${WEBHOOK_URI}/api/v1/oas/artifcats/manifests?branch={GIT_BRANCH}&commit=${GIT_COMMIT}&token=${KUBEWEBHOOK_TOKEN}"
+        curl "${WEBHOOK_URI}/api/v1/oas/artifacts/manifests?branch=${GIT_BRANCH}&commit=${GIT_COMMIT}&token=${KUBEWEBHOOK_TOKEN}" --ouput manifests.yaml
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2
