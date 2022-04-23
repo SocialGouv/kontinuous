@@ -34,6 +34,11 @@ module.exports = ({
     activeDeadlineSeconds: 3600,
     ttlSecondsAfterFinished: 1800,
     template: {
+      metadata: {
+        labels: {
+          "commit-sha": gitCommit,
+        },
+      },
       spec: {
         restartPolicy: "Never",
         ...(checkout

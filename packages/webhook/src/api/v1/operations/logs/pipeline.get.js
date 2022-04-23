@@ -15,12 +15,11 @@ module.exports = function () {
   const checkJobExists = async ({ jobName, commit, kubecontext }) => {
     try {
       const jsonPodStatus = await asyncShell(`kubectl
-          --context ${kubecontext}
-          -n ${jobNamespace}
-          get pods
-          --selector=job-name=${jobName}
-          --selector="commit-sha=${commit}"
-          --output=jsonpath={.items[0].status}
+        --context ${kubecontext}
+        -n ${jobNamespace}
+        get pods
+        --selector=job-name=${jobName},commit-sha=${commit}
+        --output=jsonpath={.items[0].status}
       `)
       const podStatus = JSON.parse(jsonPodStatus)
       const { phase } = podStatus
@@ -112,7 +111,7 @@ module.exports = function () {
     let tryIteration = 0
     const waitingCallback = () => {
       if (tryIteration === 0) {
-        res.write(`🔭 waiting for job ${jobName} #${commit} ..`)
+        res.write(`🔭 waiting for job ${jobName} #${commit}..`)
       }
       res.write(".")
       tryIteration++
