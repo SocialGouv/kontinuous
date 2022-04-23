@@ -106,7 +106,7 @@ module.exports = function () {
       "Transfer-Encoding": "chunked",
     })
 
-    res.write("🛰️  webhook service is connecting to kubernetes...\n")
+    res.write("🛰️ webhook service is connecting to kubernetes...\n")
 
     let tryIteration = 0
     const waitingCallback = () => {
@@ -128,14 +128,14 @@ module.exports = function () {
         res.write(
           `\n💀 error: unable to find expected job "${jobName}" #${commit}\n`
         )
+        res.end()
+        return
       }
-      res.end()
-      return
     }
 
     try {
       await runLogStream({ res, kubecontext, follow, since, jobName })
-      res.write(`🏁 end of logging succeeded\n`)
+      res.write(`\n🏁 end of logging succeeded\n`)
     } catch (err) {
       logger.error(err)
       res.write(
