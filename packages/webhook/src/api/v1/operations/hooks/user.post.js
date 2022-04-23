@@ -12,10 +12,10 @@ module.exports = function ({ services: { pushed, created, deleted } }) {
         return res.status(204).json({ message: "no-op" })
       }
 
-      const { ref, repositoryUrl } = body
+      const { ref, repositoryUrl, commit } = body
 
       try {
-        await eventHandlers[eventName]({ ref, repositoryUrl })
+        await eventHandlers[eventName]({ ref, repositoryUrl, after: commit })
       } catch (err) {
         const logger = reqCtx.require("logger")
         logger.error(err)
