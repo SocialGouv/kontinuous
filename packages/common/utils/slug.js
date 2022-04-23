@@ -1,7 +1,15 @@
 const { createHash } = require("crypto")
 const slugify = require("slugify")
 
-slugify.extend({ "!": "-", ".": "-", "/": "-", "@": "-", _: "-", "~": "-" })
+slugify.extend({
+  "!": "-",
+  ".": "-",
+  "/": "-",
+  "@": "-",
+  _: "-",
+  "~": "-",
+  ":": "-",
+})
 
 const KUBERNETS_MAX_NAME_LENGTH = 63
 const SUFFIX_SHA_LENGTH = 8
