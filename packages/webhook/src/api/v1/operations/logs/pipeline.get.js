@@ -11,25 +11,47 @@ const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = function () {
   const { jobNamespace } = ctx.require("config.project")
-
+  const readyToLogPhases = ["Running", "Succeeded", "Failed"]
   const checkJobExists = async ({ jobName, kubecontext }) => {
     try {
-      asyncShell(
-        `kubectl --context ${kubecontext} -n ${jobNamespace} get job.batch/${jobName}`
-      )
+      const [jsonStatus, jsonPodStatus] = await Promise.all([
+        asyncShell(`kubectl
+          --context ${kubecontext}
+          -n ${jobNamespace}
+          get job.batch/${jobName}
+          --output=jsonpath={.status}
+        `),
+        asyncShell(`kubectl
+        --context ${kubecontext}
+        -n ${jobNamespace}
+        get pods --selector=job-name=${jobName}
+        --output=jsonpath={.items[0].status}
+      `),
+      ])
+      const jobStatus = JSON.parse(jsonStatus)
+      if (!(jobStatus.active || jobStatus.succeeded || jobStatus.failed)) {
+        return false
+      }
+      const podStatus = JSON.parse(jsonPodStatus)
+      console.log(JSON.stringify(podStatus, null, 2))
+      const { phase } = podStatus
+      return readyToLogPhases.includes(phase)
     } catch (_e) {
       // do nothing
     }
     return false
   }
 
-  const waitJobExists = async (params) => {
+  const waitJobExists = async (params, waitingCallback) => {
     await retry(
-      async () => {
-        if (!checkJobExists(params)) {
-          throw Error("job doesn't exists yet")
-        }
-      },
+      () =>
+        new Promise(async (resolve, reject) => {
+          if (!(await checkJobExists(params))) {
+            waitingCallback()
+            reject(new Error("job doesn't exists yet"))
+          }
+          resolve()
+        }),
       {
         retries: 20,
         factor: 1,
@@ -37,6 +59,39 @@ module.exports = function () {
         maxTimeout: 3000,
       }
     )
+  }
+
+  const runLogStream = async ({ res, kubecontext, follow, since, jobName }) => {
+    const [cmd, args] = parseCommand(`
+      kubectl
+        --context ${kubecontext}
+        -n ${jobNamespace}
+        logs
+        ${since ? `--since=${since}` : ""}
+        ${follow && follow !== "false" ? "--follow" : ""}
+        job.batch/${jobName}
+    `)
+    try {
+      await new Promise((resolve, reject) => {
+        const proc = spawn(cmd, args, {
+          encoding: "utf-8",
+        })
+        proc.stdout.pipe(res)
+        proc.stderr.pipe(res)
+        proc.on("close", (code) => {
+          if (code === 0) {
+            resolve()
+          } else {
+            reject(new Error(`kubectl logs exit with code ${code}`))
+          }
+        })
+      })
+    } catch (err) {
+      logger.error(err)
+      throw err
+    } finally {
+      res.end()
+    }
   }
 
   async function getOneLogsPipeline(req, res) {
@@ -59,43 +114,37 @@ module.exports = function () {
       gitBranch,
     })
 
-    if (catchJob) {
-      await waitJobExists({ jobName, kubecontext })
-    }
-
-    const [cmd, args] = parseCommand(`
-      kubectl
-        --context ${kubecontext}
-        -n ${jobNamespace}
-        logs
-        ${since ? `--since=${since}` : ""}
-        ${follow && follow !== "false" ? "--follow" : ""}
-        job.batch/${jobName}
-    `)
     res.writeHead(200, {
       "Content-Type": "text/plain",
       "Transfer-Encoding": "chunked",
     })
+
+    let tryIteration = 0
+    const waitingCallback = () => {
+      if (tryIteration === 0) {
+        res.write(`waiting for job ${jobName}...`)
+      }
+      res.write(".")
+      tryIteration++
+    }
+
+    if (catchJob) {
+      await waitJobExists({ jobName, kubecontext }, waitingCallback)
+      if (tryIteration > 0) {
+        res.write("\n")
+      }
+    }
+
     try {
-      await new Promise((resolve, reject) => {
-        const proc = spawn(cmd, args, {
-          encoding: "utf-8",
-        })
-        proc.stdout.pipe(res)
-        proc.stderr.pipe(res)
-        proc.on("close", (code) => {
-          if (code === 0) {
-            resolve()
-          } else {
-            reject(new Error(`kubectl logs exit with code ${code}`))
-          }
-        })
-      })
+      await runLogStream({ res, kubecontext, follow, since, jobName })
     } catch (err) {
-      logger.error(err)
-      throw err
-    } finally {
-      res.end()
+      // retry once to handle job status race on job replace
+      tryIteration = 0
+      await waitJobExists({ jobName, kubecontext }, waitingCallback)
+      if (tryIteration > 0) {
+        res.write("\n")
+      }
+      await runLogStream({ res, kubecontext, follow, since, jobName })
     }
   }
 
