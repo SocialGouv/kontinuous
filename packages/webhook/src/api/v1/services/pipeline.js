@@ -2,10 +2,10 @@ const { ctx } = require("@modjo-plugins/core")
 
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 
-const slug = require("~common/utils/slug")
 const cleanGitRef = require("~common/utils/clean-git-ref")
 const jobRun = require("~/k8s/command/job-run")
 const pipelineJob = require("~/k8s/resources/pipeline.job")
+const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = ({ services }) => {
   const logger = ctx.require("logger")
@@ -28,12 +28,11 @@ module.exports = ({ services }) => {
     })
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)
-    const jobName = slug([
-      "pipeline",
+    const jobName = pipelineJobName({
       eventName,
       repositoryName,
-      [gitBranch, 30],
-    ])
+      gitBranch,
+    })
     const manifest = pipelineJob({
       namespace: jobNamespace,
       name: jobName,

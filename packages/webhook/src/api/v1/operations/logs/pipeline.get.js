@@ -4,10 +4,10 @@ const { ctx } = require("@modjo-plugins/core")
 const cleanGitRef = require("~common/utils/clean-git-ref")
 const parseCommand = require("~common/utils/parse-command")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
-const slug = require("~common/utils/slug")
 const logger = require("~common/utils/logger")
 const asyncShell = require("~common/utils/async-shell")
 const refKubecontext = require("~common/utils/ref-kubecontext")
+const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = function () {
   const { jobNamespace } = ctx.require("config.project")
@@ -51,11 +51,13 @@ module.exports = function () {
     const repository = repositoryFromGitUrl(repositoryMixed)
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)
-    const branchSlug = slug(gitBranch)
 
     const kubecontext = refKubecontext(ref)
-
-    const jobName = `pipeline-${event}-${repositoryName}-${branchSlug}`
+    const jobName = pipelineJobName({
+      eventName: event,
+      repositoryName,
+      gitBranch,
+    })
 
     if (catchJob) {
       await waitJobExists({ jobName, kubecontext })
