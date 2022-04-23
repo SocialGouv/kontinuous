@@ -49,13 +49,15 @@ runs:
           WEBHOOK_URI=https://webhook-${{ inputs.rancherProjectName }}.fabrique.social.gouv.fr
         fi
         
-        echo "::set-output env=$ENV"
+        GIT_REPOSITORY_URLENCODED=$(echo $GITHUB_REPOSITORY | sed 's/\//\%2f/g')
         
+        echo "::set-output env=$ENV"
+
         echo "WEBHOOK_URI=$WEBHOOK_URI">>$GITHUB_ENV
         echo "KUBEWEBHOOK_TOKEN=${{ inputs.kubewebhookToken }}">>$GITHUB_ENV
         echo "GIT_BRANCH=$GIT_BRANCH">>$GITHUB_ENV
         echo "GIT_COMMIT=$GITHUB_SHA">>$GITHUB_ENV
-        echo "GIT_REPOSITORY=$GITHUB_REPOSITORY">>$GITHUB_ENV
+        echo "GIT_REPOSITORY_URLENCODED=$GIT_REPOSITORY_URLENCODED">>$GITHUB_ENV
         echo "EVENT_NAME=$EVENT_NAME">>$GITHUB_ENV
 
     - name: Stream logs of kube pipeline
