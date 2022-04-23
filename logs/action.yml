@@ -60,12 +60,12 @@ runs:
     - name: Stream logs of kube pipeline
       shell: bash
       run: |
-        curl -sSL --fail "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?event=${EVENT_NAME}&ref=${GIT_BRANCH}&commit=${GIT_COMMIT}&catch=true&follow=true&token=${KUBEWEBHOOK_TOKEN}"
+        wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?event=${EVENT_NAME}&ref=${GIT_BRANCH}&commit=${GIT_COMMIT}&catch=true&follow=true&token=${KUBEWEBHOOK_TOKEN}"
     
     - name: Download manifests artifact
       shell: bash
       run: |
-        curl -sSL --fail -o manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/manifests?branch=${GIT_BRANCH}&commit=${GIT_COMMIT}&token=${KUBEWEBHOOK_TOKEN}"
+        wget --content-on-error -q -O manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/manifests?branch=${GIT_BRANCH}&commit=${GIT_COMMIT}&token=${KUBEWEBHOOK_TOKEN}"
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2
