@@ -37,6 +37,12 @@ runs:
           ENV=dev
         fi
 
+        if [ "$EVENT_NAME" = "prod" ]; then
+          EVENT_NAME=created
+        else
+          EVENT_NAME=pushed
+        fi
+
         if [ -n "${{ inputs.webhookUrl }}" ]; then
           WEBHOOK_URI=${{ inputs.webhookUrl }}
         else
@@ -49,7 +55,7 @@ runs:
         echo "KUBEWEBHOOK_TOKEN=${{ inputs.kubewebhookToken }}">>$GITHUB_ENV
         echo "GIT_BRANCH=$GIT_BRANCH">>$GITHUB_ENV
         echo "GIT_COMMIT=$GITHUB_SHA">>$GITHUB_ENV
-        echo "EVENT_NAME=$GITHUB_EVENT_NAME">>$GITHUB_ENV
+        echo "EVENT_NAME=$EVENT_NAME">>$GITHUB_ENV
 
     - name: Stream logs of kube pipeline
       shell: bash
