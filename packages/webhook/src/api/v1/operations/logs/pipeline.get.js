@@ -19,7 +19,8 @@ module.exports = function () {
         -n ${jobNamespace}
         get pods
         --selector=job-name=${jobName},commit-sha=${commit}
-        --output=jsonpath={.items[0].status}
+        --sort-by=.metadata.creationTimestamp
+        --output=jsonpath={.items[-1].status}
       `)
       const podStatus = JSON.parse(jsonPodStatus)
       const { phase } = podStatus
