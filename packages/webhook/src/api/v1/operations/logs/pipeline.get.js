@@ -33,7 +33,6 @@ module.exports = function () {
         return false
       }
       const podStatus = JSON.parse(jsonPodStatus)
-      console.log(JSON.stringify(podStatus, null, 2))
       const { phase } = podStatus
       return readyToLogPhases.includes(phase)
     } catch (_e) {
