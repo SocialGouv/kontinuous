@@ -33,19 +33,17 @@ module.exports = function () {
 
   const waitJobExists = async (params, waitingCallback) => {
     await retry(
-      () =>
-        new Promise(async (resolve, reject) => {
-          if (!(await checkJobExists(params))) {
-            waitingCallback()
-            reject(new Error("job doesn't exists yet"))
-          }
-          resolve()
-        }),
+      async (_bail) => {
+        if (!(await checkJobExists(params))) {
+          throw new Error("job doesn't exists yet")
+        }
+      },
       {
         retries: 20,
         factor: 1,
         minTimeout: 1000,
         maxTimeout: 3000,
+        onRetry: waitingCallback,
       }
     )
   }
@@ -109,10 +107,12 @@ module.exports = function () {
       "Transfer-Encoding": "chunked",
     })
 
+    res.write("🛰️  webhook service is connecting to kubernetes...\n")
+
     let tryIteration = 0
     const waitingCallback = () => {
       if (tryIteration === 0) {
-        res.write(`waiting for job ${jobName}...`)
+        res.write(`🔭  waiting for job ${jobName}...`)
       }
       res.write(".")
       tryIteration++
@@ -136,6 +136,7 @@ module.exports = function () {
       }
       await runLogStream({ res, kubecontext, follow, since, jobName })
     }
+    res.write(`🏁 end of logging succeeded`)
   }
 
   return [getOneLogsPipeline]
