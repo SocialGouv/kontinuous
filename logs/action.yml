@@ -55,7 +55,7 @@ runs:
         echo "KUBEWEBHOOK_TOKEN=${{ inputs.kubewebhookToken }}">>$GITHUB_ENV
         echo "GIT_BRANCH=$GIT_BRANCH">>$GITHUB_ENV
         echo "GIT_COMMIT=$GITHUB_SHA">>$GITHUB_ENV
-        echo "GIT_REPOSITORY=$GITHUB_ACTION_REPOSITORY">>$GITHUB_ENV
+        echo "GIT_REPOSITORY=$GITHUB_REPOSITORY">>$GITHUB_ENV
         echo "EVENT_NAME=$EVENT_NAME">>$GITHUB_ENV
 
     - name: Stream logs of kube pipeline
