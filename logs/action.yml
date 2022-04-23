@@ -21,7 +21,7 @@ runs:
     - name: Auto-detect environment
       shell: bash
       id: environment
-      run:
+      run: |
         if [ -n "$GITHUB_HEAD_REF" ]; then
           GIT_BRANCH=$GITHUB_HEAD_REF
         else
@@ -52,12 +52,12 @@ runs:
 
     - name: Stream logs of kube pipeline
       shell: bash
-      run:
+      run: |
         curl "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?ref=${GIT_BRANCH}&commit=${GIT_COMMIT}&catch=true&follow=true&token=${KUBEWEBHOOK_TOKEN}"
     
     - name: Download manifests artifact
       shell: bash
-      run: 
+      run: |
         curl "${WEBHOOK_URI}/api/v1/oas/artifacts/manifests?branch=${GIT_BRANCH}&commit=${GIT_COMMIT}&token=${KUBEWEBHOOK_TOKEN}" --ouput manifests.yaml
 
     - name: Archive manifest
