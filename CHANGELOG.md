@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.18.0](https://github.com/SocialGouv/kube-workflow/compare/v1.17.3...v1.18.0) (2022-04-23)
+
+
+### Features
+
+* cli logs ([93bb69e](https://github.com/SocialGouv/kube-workflow/commit/93bb69ea522140af87f3c21f4c8fa2f73857563b))
+
+
+### Bug Fixes
+
+* async get git infos ([1e0fc28](https://github.com/SocialGouv/kube-workflow/commit/1e0fc28ce9c9d18495d6c970d13711a83cd08b5a))
+* clean ([182cc28](https://github.com/SocialGouv/kube-workflow/commit/182cc289041e7912e1edccd25c9f7f51c884c150))
+* clean debug ([2189527](https://github.com/SocialGouv/kube-workflow/commit/2189527e50c1c7a27d01bcaf2444d3bbc150a2c9))
+* gh action logs ([c3d293e](https://github.com/SocialGouv/kube-workflow/commit/c3d293eaa47e6a9e5bcfefc1ec6734c4df57c74c))
+* gh action logs ([e92756e](https://github.com/SocialGouv/kube-workflow/commit/e92756e50eb18eef742aa99d34c064e527468e85))
+* gh action logs ([3abac5b](https://github.com/SocialGouv/kube-workflow/commit/3abac5b076a174e1a5ab9a01115cbcde3121580a))
+* gh action logs ([4347185](https://github.com/SocialGouv/kube-workflow/commit/43471857c51cdf52ff314802b69b0502865cf59a))
+* gh action logs ([74c5a30](https://github.com/SocialGouv/kube-workflow/commit/74c5a30906eed18cbc0e63dc25a90675b1397e9e))
+* gh action logs ([7ae5bc8](https://github.com/SocialGouv/kube-workflow/commit/7ae5bc871ba2d3b23ac69f145227629c31cf24d4))
+* gh action logs ([c931470](https://github.com/SocialGouv/kube-workflow/commit/c9314703d1eefae294aa275809a9e011d971179a))
+* gh action logs ([48ec772](https://github.com/SocialGouv/kube-workflow/commit/48ec77213ce989a5750ebf5f0a28e97606ca7a6a))
+* gh action logs ([d45a3df](https://github.com/SocialGouv/kube-workflow/commit/d45a3df5b8fb215c2ebe9e0d566b615b43a764de))
+* gh action logs ([303f6b7](https://github.com/SocialGouv/kube-workflow/commit/303f6b70d894f64c9bd487c6ab8f7ee55ffc7546))
+* gh action logs ([0897815](https://github.com/SocialGouv/kube-workflow/commit/0897815b990e26246cba632b8b730d88b818dcbf))
+* gh action logs ([21ac0a5](https://github.com/SocialGouv/kube-workflow/commit/21ac0a5fa2fb9894d41edbca8cd849e73676f4d6))
+* git env ([eb6947c](https://github.com/SocialGouv/kube-workflow/commit/eb6947c6ca8407fdc7befff4c5b0c8c866cebb0b))
+* git tags retrieve optional ([47d64eb](https://github.com/SocialGouv/kube-workflow/commit/47d64ebd9dda5000417ba75c773fab9125db4aa0))
+* kubeconfig chmod warning ([e164280](https://github.com/SocialGouv/kube-workflow/commit/e16428054ee9ec94719af7c773b5868a5f971fbd))
+* slug ([b4a50f4](https://github.com/SocialGouv/kube-workflow/commit/b4a50f4419be98fcb8c85ff9f538a54cc2c466d4))
+* webhook ([35b0e2b](https://github.com/SocialGouv/kube-workflow/commit/35b0e2b7b0b1e15abfda4853df8c6935f4487012))
+* webhook artifact cleaner ([8834ff2](https://github.com/SocialGouv/kube-workflow/commit/8834ff23e5be2f381d216f96cd2297e02abb1ac6))
+* webhook async-retry ([321dcb8](https://github.com/SocialGouv/kube-workflow/commit/321dcb8a3299999b5d9353cb5df551507d75b6e6))
+* webhook clean debug ([3506103](https://github.com/SocialGouv/kube-workflow/commit/3506103b0cb44055067a88d984d6abc492b647d2))
+* webhook labels ([1de7d04](https://github.com/SocialGouv/kube-workflow/commit/1de7d04e5d223d46d28f974eb96b752a80c032a8))
+* webhook labels ([264c5c5](https://github.com/SocialGouv/kube-workflow/commit/264c5c5599a542e85e2039b9559d7bb15a3a4b9e))
+* webhook logs ([c702fc3](https://github.com/SocialGouv/kube-workflow/commit/c702fc383b6414a512d9de41a4e39ac1ce00be3b))
+* webhook logs ([7ca9524](https://github.com/SocialGouv/kube-workflow/commit/7ca9524224be0dfdab9f856f661602a3130bdbec))
+* webhook logs catch wip ([6c84253](https://github.com/SocialGouv/kube-workflow/commit/6c8425337b89ee9e9b93d8fca340332668a18911))
+* webhook ncc compilation ([8fb05b3](https://github.com/SocialGouv/kube-workflow/commit/8fb05b3a68203abdc60dafee6354582006f2780d))
+* webhook pipeline + logs ([5963dbe](https://github.com/SocialGouv/kube-workflow/commit/5963dbe15b2d490a737df6a76eedead0862a28d3))
+* webhook pipeline job labels ([53eabe0](https://github.com/SocialGouv/kube-workflow/commit/53eabe01bba5a6f523f96f304a6f17536a6115cc))
+* webhook pipeline job name ([127cf91](https://github.com/SocialGouv/kube-workflow/commit/127cf910dfae90043783b879bf9f416617e039b8))
+* webhook pipeline logs catch ([f480555](https://github.com/SocialGouv/kube-workflow/commit/f480555f0e04ff212f476d05305d7a78019ce354))
+
 ### [1.17.3](https://github.com/SocialGouv/kube-workflow/compare/v1.17.2...v1.17.3) (2022-04-22)
 
 
