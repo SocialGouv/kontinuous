@@ -20,12 +20,6 @@ module.exports = ({ services }) => {
     checkout,
   }) => {
     const repository = repositoryFromGitUrl(repositoryUrl)
-    logger.debug({
-      eventName,
-      ref,
-      repository,
-      repositoryUrl,
-    })
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)
     const jobName = pipelineJobName({
@@ -33,6 +27,9 @@ module.exports = ({ services }) => {
       repositoryName,
       gitBranch,
     })
+    logger.info(
+      `event ${eventName} triggering workflow on ${repository}#${ref} ${after}`
+    )
     const manifest = pipelineJob({
       namespace: jobNamespace,
       name: jobName,

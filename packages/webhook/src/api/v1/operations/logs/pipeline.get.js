@@ -19,14 +19,14 @@ module.exports = function () {
           -n ${jobNamespace}
           get pods
           --selector=job-name=${jobName}
-          --selector="kubeworkflow/gitCommit=${commit}"
+          --selector="commit-sha=${commit}"
           --output=jsonpath={.items[0].status}
       `)
       const podStatus = JSON.parse(jsonPodStatus)
       const { phase } = podStatus
       return readyToLogPhases.includes(phase)
     } catch (_e) {
-      // do nothing
+      // do nothing, job is not found
     }
     return false
   }
@@ -39,7 +39,7 @@ module.exports = function () {
         }
       },
       {
-        retries: 20,
+        retries: 10,
         factor: 1,
         minTimeout: 1000,
         maxTimeout: 3000,
@@ -112,31 +112,38 @@ module.exports = function () {
     let tryIteration = 0
     const waitingCallback = () => {
       if (tryIteration === 0) {
-        res.write(`🔭 waiting for job ${jobName}...`)
+        res.write(`🔭 waiting for job ${jobName} #${commit} ..`)
       }
       res.write(".")
       tryIteration++
     }
 
     if (catchJob) {
-      await waitJobExists({ jobName, commit, kubecontext }, waitingCallback)
-      if (tryIteration > 0) {
-        res.write("\n")
+      try {
+        await waitJobExists({ jobName, commit, kubecontext }, waitingCallback)
+        if (tryIteration > 0) {
+          res.write("\n")
+        }
+      } catch (err) {
+        logger.error(err)
+        res.write(
+          `\n💀 error: unable to find expected job "${jobName}" #${commit}\n`
+        )
       }
+      res.end()
+      return
     }
 
     try {
       await runLogStream({ res, kubecontext, follow, since, jobName })
+      res.write(`🏁 end of logging succeeded\n`)
     } catch (err) {
-      // retry once to handle job status race on job replace
-      tryIteration = 0
-      await waitJobExists({ jobName, kubecontext }, waitingCallback)
-      if (tryIteration > 0) {
-        res.write("\n")
-      }
-      await runLogStream({ res, kubecontext, follow, since, jobName })
+      logger.error(err)
+      res.write(
+        `\n❌ end of logging with error, consult webhook service pod logs for full details\n`
+      )
     }
-    res.write(`🏁 end of logging succeeded`)
+    res.end()
   }
 
   return [getOneLogsPipeline]

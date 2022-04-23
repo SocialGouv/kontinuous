@@ -21,9 +21,7 @@ module.exports = ({
     name,
     namespace,
     labels: {
-      "kubeworkflow/gitCommit": gitCommit,
-      "kubeworkflow/gitBranchSlug": slug(gitBranch),
-      "kubeworkflow/repositoryUrlSlug": slug(repositoryUrl),
+      "commit-sha": gitCommit,
     },
     annotations: {
       "kubeworkflow/gitBranch": gitBranch,
