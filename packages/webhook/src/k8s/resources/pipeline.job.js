@@ -44,20 +44,6 @@ module.exports = ({
                 {
                   name: "checkout",
                   image: checkoutImage,
-                  env: [
-                    {
-                      name: "GIT_REPOSITORY_URL",
-                      value: repositoryUrl,
-                    },
-                    {
-                      name: "GIT_REF",
-                      value: gitBranch,
-                    },
-                    {
-                      name: "GIT_SHA",
-                      value: gitCommit,
-                    },
-                  ],
                   command: [
                     "sh",
                     "-c",
@@ -87,6 +73,18 @@ module.exports = ({
               },
             ],
             env: [
+              {
+                name: "GIT_REPOSITORY_URL",
+                value: repositoryUrl,
+              },
+              {
+                name: "GIT_REF",
+                value: gitBranch,
+              },
+              {
+                name: "GIT_SHA",
+                value: gitCommit,
+              },
               ...(uploadUrl
                 ? [{ name: "KUBEWORKFLOW_BUILD_UPLOAD_URL", value: uploadUrl }]
                 : []),
