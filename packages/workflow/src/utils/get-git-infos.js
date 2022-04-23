@@ -8,7 +8,7 @@ const getGitRepository = require("~common/utils/get-git-repository")
 const getGitUrl = require("~common/utils/get-git-url")
 const { buildCtx } = require("~/build/ctx")
 
-module.exports = (
+module.exports = async (
   cwd = process.cwd(),
   env = buildCtx.get("env") || process.env,
   reloadCache = false
@@ -19,7 +19,7 @@ module.exports = (
       if (env.GIT_TAGS) {
         infos.GIT_TAGS = env.GIT_TAGS.split(",")
       } else if (env.GIT_TAGS === undefined || env.GIT_TAGS === null) {
-        infos.GIT_TAGS = getGitTags(cwd)
+        infos.GIT_TAGS = await getGitTags(cwd)
       } else {
         infos.GIT_TAGS = []
       }
@@ -27,18 +27,21 @@ module.exports = (
     if (!infos.GIT_REF) {
       infos.GIT_REF =
         env.GIT_REF ||
-        getGitRef(cwd) ||
+        (await getGitRef(cwd)) ||
         infos.GIT_TAGS.filter((t) => isVersionTag(t))
           .sort()
           .pop()
     }
     if (!infos.GIT_SHA) {
-      infos.GIT_SHA = env.GIT_SHA || getGitSha(cwd)
+      infos.GIT_SHA = env.GIT_SHA || (await getGitSha(cwd))
     }
     if (!infos.GIT_REPOSITORY) {
       infos.GIT_REPOSITORY =
         env.GIT_REPOSITORY ||
-        getGitRepository(cwd, env.GIT_REPOSITORY_URL || getGitUrl(cwd))
+        (await getGitRepository(
+          cwd,
+          env.GIT_REPOSITORY_URL || (await getGitUrl(cwd))
+        ))
     }
   } catch (e) {
     logger.error(

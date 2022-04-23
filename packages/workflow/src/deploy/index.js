@@ -23,11 +23,11 @@ const deployer = async (options) => {
   })
 
   const cwd = options.cwd || process.cwd()
-  const { GIT_REPOSITORY } = getGitInfos(cwd)
+  const { GIT_REPOSITORY } = await getGitInfos(cwd)
 
   const repositoryName = path.basename(GIT_REPOSITORY)
 
-  const selectedEnv = selectEnv({ options, cwd })
+  const selectedEnv = await selectEnv({ options, cwd })
 
   let kubeconfigContext =
     options.kubeconfigContext || process.env.KUBECONFIG_CONTEXT

@@ -1,9 +1,9 @@
-const shell = require("./shell")
+const asyncShell = require("./async-shell")
 
-module.exports = (cwd = process.cwd()) => {
+module.exports = async (cwd = process.cwd()) => {
   let GIT_TAGS
   try {
-    GIT_TAGS = shell("git tag --points-at HEAD", { cwd })
+    GIT_TAGS = (await asyncShell("git tag --points-at HEAD", { cwd }))
       .split("\n")
       .map((tag) => tag.trim())
   } catch (_e) {

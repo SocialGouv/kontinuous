@@ -1,4 +1,4 @@
-const shell = require("./shell")
+const asyncShell = require("./async-shell")
 
-module.exports = (cwd = process.cwd()) =>
-  shell("git remote get-url origin", { cwd }).trim()
+module.exports = async (cwd = process.cwd()) =>
+  (await asyncShell("git remote get-url origin", { cwd })).trim()

@@ -37,10 +37,10 @@ const builder = async (envVars, options = {}) => {
     }
   }
   
-  Object.assign(envVars, getGitInfos(envVars.WORKSPACE_PATH, envVars, true))
+  Object.assign(envVars, await getGitInfos(envVars.WORKSPACE_PATH, envVars, true))
   
   if(!envVars.ENVIRONMENT){
-    envVars.ENVIRONMENT = selectEnv({ options, cwd: envVars.WORKSPACE_PATH, env: envVars })
+    envVars.ENVIRONMENT = await selectEnv({ options, cwd: envVars.WORKSPACE_PATH, env: envVars })
   }
   
   if(envVars.WORKSPACE_SUBPATH===undefined){

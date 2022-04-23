@@ -1,4 +1,6 @@
-const shell = require("./shell")
+const asyncShell = require("./async-shell")
 
-module.exports = (cwd = process.cwd()) =>
-  shell("git show -s --format=%H", { cwd }).trim()
+module.exports = async (cwd = process.cwd(), branch = "HEAD") => {
+  const res = await asyncShell(`git rev-parse ${branch}`, { cwd })
+  return res.trim()
+}

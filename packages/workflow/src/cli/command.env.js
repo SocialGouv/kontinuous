@@ -18,7 +18,7 @@ module.exports = program
   .action(async (ref, _opts, command) => {
     const opts = command.optsWithGlobals()
     buildCtx.provide()
-    const env = selectEnv({
+    const env = await selectEnv({
       opts,
       ref,
       cwd: opts.cwd,
