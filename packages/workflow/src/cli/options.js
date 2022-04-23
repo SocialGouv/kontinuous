@@ -40,3 +40,13 @@ module.exports.cwd = new Option("--cwd <path>", "set current working directory")
 module.exports.debug = new Option("--debug, -d", "enable debugging loglevel")
 
 module.exports.upload = new Option("--upload <url>", "upload manifests to url")
+
+module.exports.rancherProjectName = new Option(
+  "--rancher-project-name <project>",
+  "rancher project name, default to repository basename"
+)
+
+module.exports.rancherProjectId = new Option(
+  "--rancher-project-id <project-id>",
+  "rancher project id, default retrieved from ci namespace"
+)

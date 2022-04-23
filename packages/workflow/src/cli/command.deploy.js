@@ -17,17 +17,11 @@ module.exports = program
   .addOption(options.cwd)
   .addOption(options.upload)
   .addOption(options.set)
+  .addOption(options.rancherProjectName)
+  .addOption(options.rancherProjectId)
   .option(
     "--file, -f <file>",
     "select a manifests yaml file, default will build one"
-  )
-  .option(
-    "--rancher-project-name <project>",
-    "rancher project name, default to repository basename"
-  )
-  .option(
-    "--rancher-project-id <project-id>",
-    "rancher project id, default retrieved from ci namespace"
   )
   .option(
     "--kubeconfig-context <context>",
