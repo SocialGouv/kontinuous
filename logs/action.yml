@@ -54,7 +54,7 @@ runs:
     - name: Stream logs of kube pipeline
       shell: bash
       run: |
-        curl "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?event=${EVENT_NAME}&ref=${GIT_BRANCH}&commit=${GIT_COMMIT}&catch=true&follow=true&token=${KUBEWEBHOOK_TOKEN}"
+        curl -sSL --fail "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?event=${EVENT_NAME}&ref=${GIT_BRANCH}&commit=${GIT_COMMIT}&catch=true&follow=true&token=${KUBEWEBHOOK_TOKEN}"
     
     - name: Download manifests artifact
       shell: bash
