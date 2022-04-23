@@ -50,7 +50,7 @@ runs:
         fi
         
         GIT_REPOSITORY_URLENCODED=$(echo $GITHUB_REPOSITORY | sed 's/\//\%2f/g')
-        
+
         echo "::set-output env=$ENV"
 
         echo "WEBHOOK_URI=$WEBHOOK_URI">>$GITHUB_ENV
@@ -63,12 +63,12 @@ runs:
     - name: Stream logs of kube pipeline
       shell: bash
       run: |
-        wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${GIT_REPOSITORY}&event=${EVENT_NAME}&ref=${GIT_BRANCH}&commit=${GIT_COMMIT}&catch=true&follow=true&token=${KUBEWEBHOOK_TOKEN}"
+        wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${GIT_REPOSITORY_URLENCODED}&event=${EVENT_NAME}&ref=${GIT_BRANCH}&commit=${GIT_COMMIT}&catch=true&follow=true&token=${KUBEWEBHOOK_TOKEN}"
     
     - name: Download manifests artifact
       shell: bash
       run: |
-        wget --content-on-error -q -O manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/manifests?repository=${GIT_REPOSITORY}&branch=${GIT_BRANCH}&commit=${GIT_COMMIT}&token=${KUBEWEBHOOK_TOKEN}"
+        wget --content-on-error -q -O manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/manifests?repository=${GIT_REPOSITORY_URLENCODED}&branch=${GIT_BRANCH}&commit=${GIT_COMMIT}&token=${KUBEWEBHOOK_TOKEN}"
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2
