@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.1](https://github.com/SocialGouv/kube-workflow/compare/v1.18.0...v1.18.1) (2022-04-25)
+
+
+### Bug Fixes
+
+* cli add env config loader ([a038be9](https://github.com/SocialGouv/kube-workflow/commit/a038be98d6ff12fcdc9b39bc0e793d0ab39c56f9))
+* dns length limit ([2047b9b](https://github.com/SocialGouv/kube-workflow/commit/2047b9be87bb8a2020ee254c729a377a74695386))
+* refacto env prefix KW ([afd4ed0](https://github.com/SocialGouv/kube-workflow/commit/afd4ed0956ef69fb78d6e4a8c79549ce989451b9))
+* refacto env prefix KW + wip ([b696bbc](https://github.com/SocialGouv/kube-workflow/commit/b696bbc3565075ee8648b40ab21852915e26e66e))
+* refacto env prefix KW + wip ([ccc8e4f](https://github.com/SocialGouv/kube-workflow/commit/ccc8e4fc71ea6a26fcd4a614658ae21c7901b3ac))
+* refacto kw dir ([d134bfd](https://github.com/SocialGouv/kube-workflow/commit/d134bfdc676c5953bfcbef779357b865dda64964))
+* refacto subpath to .kw ([06472ac](https://github.com/SocialGouv/kube-workflow/commit/06472ace5d8edf08eeac953094170efa16bac00e))
+* test fix async ([6726f73](https://github.com/SocialGouv/kube-workflow/commit/6726f7397e2939d54b56caeca8ee4a0d6d58322d))
+* webhook sort pods ([18e37ef](https://github.com/SocialGouv/kube-workflow/commit/18e37ef65788e54e2f5806b12f90e282c8d32e5b))
+* webhook test -u ([5686266](https://github.com/SocialGouv/kube-workflow/commit/56862666ff0f642f1a877ca6ca275c0fd7abcd67))
+* webhook token var name ([fdbeceb](https://github.com/SocialGouv/kube-workflow/commit/fdbeceb94d2dab12b3f331f8684168ca373633f5))
+* webhook user hook ([90c181b](https://github.com/SocialGouv/kube-workflow/commit/90c181b6c67113c0e4e2e98e6eff815df79a31c6))
+
 ## [1.18.0](https://github.com/SocialGouv/kube-workflow/compare/v1.17.3...v1.18.0) (2022-04-23)
 
 
