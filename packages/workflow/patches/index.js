@@ -1,4 +1,4 @@
-const patches = ["namespace", "kapp"]
+const patches = ["namespace", "kapp", "dns-truncate"]
 
 module.exports = (manifests, values) => {
   for (const patch of patches) {

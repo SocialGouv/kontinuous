@@ -6,6 +6,8 @@ const { buildCtx } = require("./ctx")
 const isVersionTag = require("~common/utils/is-version-tag")
 const cleanGitRef = require("~common/utils/clean-git-ref")
 
+const MAX_DNS_LENGTH = 63
+
 module.exports = (values) => {
   
   const {
@@ -29,11 +31,15 @@ module.exports = (values) => {
   const repository = KW_GIT_REPOSITORY
   const repositoryName = repository.split("/").pop()
 
+  const globalHostMaxLength = MAX_DNS_LENGTH - Math.max(...Object.keys(values).map(key=>key.length))
+
+  
   const subdomain = isProd
-    ? repositoryName
-    : isPreProd
-    ? `${repositoryName}-preprod`
-    : slug(`${repositoryName}-${gitBranch}`)
+  ? repositoryName
+  : isPreProd
+  ? `${repositoryName}-preprod`
+  : slug(`${repositoryName}-${gitBranch}`, {maxLength: globalHostMaxLength})
+
 
   const namespace = isProd
     ? repositoryName
@@ -63,9 +69,9 @@ module.exports = (values) => {
   }
 
   const rootSocialGouvDomain = "fabrique.social.gouv.fr"
-
+  
   const domain = isProd ? rootSocialGouvDomain : `dev.${rootSocialGouvDomain}`
-
+  
   const host = `${subdomain}.${domain}`
 
   const registry = "ghcr.io/socialgouv"
