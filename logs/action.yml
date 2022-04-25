@@ -3,7 +3,7 @@ description: "Autodevops deploy using Helm template and kapp"
 inputs:
   token:
     description: "The Github authentication token"
-  kubewebhookToken:
+  webhookToken:
     description: "The Webhook authentication token, usually secrets.KUBEWEBHOOK_TOKEN"
   rancherProjectName:
     description: "The Rancher project name, usually secrets.RANCHER_PROJECT_NAME, usefull jobs that needs secrets or ci namespaces"
@@ -54,7 +54,7 @@ runs:
         echo "::set-output env=$ENV"
 
         echo "WEBHOOK_URI=$WEBHOOK_URI">>$GITHUB_ENV
-        echo "KUBEWEBHOOK_TOKEN=${{ inputs.kubewebhookToken }}">>$GITHUB_ENV
+        echo "KW_WEBHOOK_TOKEN=${{ inputs.webhookToken }}">>$GITHUB_ENV
         echo "KW_GIT_BRANCH=$KW_GIT_BRANCH">>$GITHUB_ENV
         echo "KW_GIT_COMMIT=$GITHUB_SHA">>$GITHUB_ENV
         echo "KW_GIT_REPOSITORY_URLENCODED=$KW_GIT_REPOSITORY_URLENCODED">>$GITHUB_ENV
@@ -63,12 +63,12 @@ runs:
     - name: Stream logs of kube pipeline
       shell: bash
       run: |
-        wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${KW_GIT_REPOSITORY_URLENCODED}&event=${EVENT_NAME}&ref=${KW_GIT_BRANCH}&commit=${KW_GIT_COMMIT}&catch=true&follow=true&token=${KUBEWEBHOOK_TOKEN}"
+        wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${KW_GIT_REPOSITORY_URLENCODED}&event=${EVENT_NAME}&ref=${KW_GIT_BRANCH}&commit=${KW_GIT_COMMIT}&catch=true&follow=true&token=${KW_WEBHOOK_TOKEN}"
     
     - name: Download manifests artifact
       shell: bash
       run: |
-        wget --content-on-error -q -O manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/download?repository=${KW_GIT_REPOSITORY_URLENCODED}&branch=${KW_GIT_BRANCH}&commit=${KW_GIT_COMMIT}&token=${KUBEWEBHOOK_TOKEN}"
+        wget --content-on-error -q -O manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/download?repository=${KW_GIT_REPOSITORY_URLENCODED}&branch=${KW_GIT_BRANCH}&commit=${KW_GIT_COMMIT}&token=${KW_WEBHOOK_TOKEN}"
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2

@@ -8,6 +8,7 @@ const getGitRef = require("~common/utils/get-git-ref")
 const getGitSha = require("~common/utils/get-git-sha")
 const getGitRepository = require("~common/utils/get-git-repository")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
+const normalizeEnvKey = require("~common/utils/normalize-env-key")
 
 const eventFromBranch = (branch) => {
   const env = refEnv(branch)
@@ -47,7 +48,10 @@ module.exports = async (options) => {
     `https://webhook-${rancherProjectName}.fabrique.social.gouv.fr`
 
   const repositoryUrlencoded = encodeURIComponent(repository)
-  const token = options.token || process.env.KUBEWEBHOOK_TOKEN
+  const token =
+    options.token ||
+    process.env[`KW_WEBHOOK_TOKEN_${normalizeEnvKey(rancherProjectName)}`] ||
+    process.env.KW_WEBHOOK_TOKEN
   const url = `${webhookUri}/api/v1/oas/logs/pipeline?repository=${repositoryUrlencoded}&event=${event}&ref=${branch}&commit=${commit}&catch=true&follow=true&token=${token}`
 
   const finished = promisify(stream.finished)
