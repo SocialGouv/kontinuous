@@ -50,7 +50,7 @@ const builder = async (envVars, options = {}) => {
   }
   
   if(envVars.KW_WORKSPACE_SUBPATH===undefined){
-    if(await fs.pathExists(".kube-workflow")){
+    if(await fs.pathExists(`${envVars.KW_WORKSPACE_PATH}/.kube-workflow`)){
       envVars.KW_WORKSPACE_SUBPATH = "/.kube-workflow"
     } else {
       envVars.KW_WORKSPACE_SUBPATH = "/.kw"
