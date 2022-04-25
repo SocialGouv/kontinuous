@@ -11,6 +11,7 @@
     "commander": "^9.1.0",
     "degit": "^2.8.4",
     "delay": "^5.0.0",
+    "dotenv": "^16.0.0",
     "form-data": "^4.0.0",
     "fs-extra": "^10.0.1",
     "git-url-parse": "^11.6.0",
@@ -26,7 +27,6 @@
     "slugify": "^1.6.5"
   },
   "devDependencies": {
-    "dotenv": "^16.0.0",
     "jest": "^27.5.1",
     "jest-specific-snapshot": "^5.0.0",
     "kube-workflow-common": "*"
