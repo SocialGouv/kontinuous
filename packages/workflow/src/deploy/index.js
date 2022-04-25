@@ -23,9 +23,9 @@ const deployer = async (options) => {
   })
 
   const cwd = options.cwd || process.cwd()
-  const { GIT_REPOSITORY } = await getGitInfos(cwd)
+  const { KW_GIT_REPOSITORY } = await getGitInfos(cwd)
 
-  const repositoryName = path.basename(GIT_REPOSITORY)
+  const repositoryName = path.basename(KW_GIT_REPOSITORY)
 
   const selectedEnv = await selectEnv({ options, cwd })
 
@@ -57,12 +57,12 @@ const deployer = async (options) => {
   }
 
   if (options.rancherProjectName) {
-    process.env.RANCHER_PROJECT_NAME = options.rancherProjectName
+    process.env.KW_RANCHER_PROJECT_NAME = options.rancherProjectName
   }
-  if (!process.env.RANCHER_PROJECT_ID) {
-    process.env.RANCHER_PROJECT_ID =
+  if (!process.env.KW_RANCHER_PROJECT_ID) {
+    process.env.KW_RANCHER_PROJECT_ID =
       options.rancherProjectId ||
-      getRancherProjectId(process.env.RANCHER_PROJECT_NAME || repositoryName)
+      getRancherProjectId(process.env.KW_RANCHER_PROJECT_NAME || repositoryName)
   }
 
   let manifestsFile = options.F

@@ -17,8 +17,8 @@ module.exports = async ({
     return options.E
   }
 
-  if (env.ENVIRONMENT && envs.includes(env.ENVIRONMENT)) {
-    return env.ENVIRONMENT
+  if (env.KW_ENVIRONMENT && envs.includes(env.KW_ENVIRONMENT)) {
+    return env.KW_ENVIRONMENT
   }
 
   if (ref) {

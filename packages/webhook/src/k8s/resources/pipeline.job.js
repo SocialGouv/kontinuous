@@ -75,15 +75,15 @@ module.exports = ({
             ],
             env: [
               {
-                name: "GIT_REPOSITORY_URL",
+                name: "KW_GIT_REPOSITORY_URL",
                 value: repositoryUrl,
               },
               {
-                name: "GIT_REF",
+                name: "KW_GIT_REF",
                 value: gitBranch,
               },
               {
-                name: "GIT_SHA",
+                name: "KW_GIT_SHA",
                 value: gitCommit,
               },
               ...(uploadUrl

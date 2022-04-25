@@ -2,10 +2,10 @@ name: "Autodevops deploy"
 description: "Autodevops deploy using Helm template and kapp"
 inputs:
   rancherProjectId:
-    description: "The Rancher project ID, usually secrets.RANCHER_PROJECT_ID"
+    description: "The Rancher project ID, usually secrets.KW_RANCHER_PROJECT_ID"
     required: true
   rancherProjectName:
-    description: "The Rancher project name, usually secrets.RANCHER_PROJECT_NAME, usefull jobs that needs secrets or ci namespaces"
+    description: "The Rancher project name, usually secrets.KW_RANCHER_PROJECT_NAME, usefull jobs that needs secrets or ci namespaces"
     required: true
   environment:
     description: "The deployment environment (dev | preprod | prod), default to prod on version tag, preprod on master or main, else dev"
@@ -43,10 +43,10 @@ runs:
     - name: Setup env
       shell: bash
       run: |
-        KWBUILD_PATH=/tmp/autodevops
-        mkdir -p $KWBUILD_PATH
+        KW_BUILD_PATH=/tmp/autodevops
+        mkdir -p $KW_BUILD_PATH
         PROJECT_PATH="${{ github.workspace }}/${{ inputs.cwd }}"
-        echo "KWBUILD_PATH=$KWBUILD_PATH" >> $GITHUB_ENV
+        echo "KW_BUILD_PATH=$KW_BUILD_PATH" >> $GITHUB_ENV
         echo "PROJECT_PATH=$PROJECT_PATH" >> $GITHUB_ENV
 
     - name: Install dependencies
@@ -59,14 +59,14 @@ runs:
     - name: Build manifests
       shell: bash
       env:
-        ENVIRONMENT: ${{ inputs.environment }}
-        RANCHER_PROJECT_ID: ${{ inputs.rancherProjectId }}
-        RANCHER_PROJECT_NAME: ${{ inputs.rancherProjectName }}
+        KW_ENVIRONMENT: ${{ inputs.environment }}
+        KW_RANCHER_PROJECT_ID: ${{ inputs.rancherProjectId }}
+        KW_RANCHER_PROJECT_NAME: ${{ inputs.rancherProjectName }}
         KW_CHARTS: ${{ inputs.charts }}
         KW_SUBCHARTS: ${{ inputs.subcharts }}
         KW_INLINE_VALUES: ${{ inputs.inlineValues }}
         KW_INLINE_SET: ${{ inputs.inlineSet }}
-        DEBUG: "true"
+        KW_DEBUG: "true"
       working-directory: "${{ github.action_path }}"
       run: packages/workflow/bin/kube-workflow build --cwd ${{ env.PROJECT_PATH }}
 
@@ -74,11 +74,11 @@ runs:
       uses: actions/upload-artifact@v2
       with:
         name: manifests-${{ inputs.actionName || inputs.environment }}.yaml
-        path: ${{ env.KWBUILD_PATH }}/manifests.yaml
+        path: ${{ env.KW_BUILD_PATH }}/manifests.yaml
 
     - name: Setup namespace env var
       shell: bash
-      working-directory: ${{ env.KWBUILD_PATH }}
+      working-directory: ${{ env.KW_BUILD_PATH }}
       run: |
         NAMESPACE=$(cat manifests.yaml | yq eval-all 'select(.kind=="Namespace").metadata.name')
         echo "NAMESPACE=$NAMESPACE" >> $GITHUB_ENV
@@ -112,18 +112,18 @@ runs:
       shell: bash
       working-directory: "${{ github.action_path }}"
       env:
-        GIT_REPOSITORY: ${{ github.repository }}
-        ENVIRONMENT: ${{ inputs.environment }}
-        RANCHER_PROJECT_ID: ${{ inputs.rancherProjectId }}
-        RANCHER_PROJECT_NAME: ${{ inputs.rancherProjectName }}
+        KW_GIT_REPOSITORY: ${{ github.repository }}
+        KW_ENVIRONMENT: ${{ inputs.environment }}
+        KW_RANCHER_PROJECT_ID: ${{ inputs.rancherProjectId }}
+        KW_RANCHER_PROJECT_NAME: ${{ inputs.rancherProjectName }}
         KUBECONFIG_CONTEXT: ${{ inputs.kubeconfigContext }}
         KW_DEPLOY_TIMEOUT: ${{ inputs.timeout }}
-      run: packages/workflow/bin/kube-workflow deploy --cwd ${{ env.PROJECT_PATH }} -f ${{ env.KWBUILD_PATH }}/manifests.yaml
+      run: packages/workflow/bin/kube-workflow deploy --cwd ${{ env.PROJECT_PATH }} -f ${{ env.KW_BUILD_PATH }}/manifests.yaml
 
     - name: Define environment URL
       id: environment-url
       shell: bash
-      working-directory: ${{ env.KWBUILD_PATH }}
+      working-directory: ${{ env.KW_BUILD_PATH }}
       run: |
         HOSTS=$(cat manifests.yaml | yq eval-all '.spec.rules[] .host')
         HOST=$(echo "$HOSTS" | head -n 1)
@@ -143,4 +143,4 @@ runs:
       uses: SocialGouv/actions/k8s-manifests-debug@v1
       with:
         token: ${{ inputs.token }}
-        path: ${{ env.KWBUILD_PATH }}/manifests.yaml
+        path: ${{ env.KW_BUILD_PATH }}/manifests.yaml

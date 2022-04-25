@@ -13,7 +13,7 @@ const selfReference = "SocialGouv/kube-workflow/"
 const requireUse = async (use) => {
   const logger = buildCtx.require("logger")
   const downloadingPromises = buildCtx.require("downloadingPromises")
-  const { KWBUILD_PATH: rootDir, WORKSPACE_PATH: userDir, KUBEWORKFLOW_PATH } =
+  const { KW_BUILD_PATH: rootDir, KW_WORKSPACE_PATH: userDir, KW_KUBEWORKFLOW_PATH } =
     buildCtx.require("env")
   const useSlug = slug(use)
   use = use.replace("@", "#")
@@ -26,7 +26,7 @@ const requireUse = async (use) => {
         await fs.copy(src, target)
       } else if (!use.includes("#") && use.startsWith(selfReference)) {
         const nativeJob = use.slice(selfReference.length)
-        const dir = path.join(KUBEWORKFLOW_PATH, "../..", nativeJob)
+        const dir = path.join(KW_KUBEWORKFLOW_PATH, "../..", nativeJob)
         logger.debug(`use native job: ${nativeJob}`)
         await fs.copy(dir, target)
       } else {

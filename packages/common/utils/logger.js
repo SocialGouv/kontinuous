@@ -15,7 +15,7 @@ const configureDebug = (debug) => {
   }
 }
 
-configureDebug(process.env.DEBUG)
+configureDebug(process.env.KW_DEBUG || process.env.DEBUG)
 
 module.exports = logger
 module.exports.configureDebug = configureDebug

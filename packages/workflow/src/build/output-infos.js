@@ -123,7 +123,7 @@ module.exports = async (manifests, _values) => {
   const logger = buildCtx.require("logger")
   const env = buildCtx.require("env")
   const {
-    KWBUILD_PATH,
+    KW_BUILD_PATH,
     KW_DISPLAY_TREE,
   } = env
 
@@ -204,6 +204,6 @@ module.exports = async (manifests, _values) => {
     logger.info("\n"+treeStr)
   }
 
-  await fs.writeFile(`${KWBUILD_PATH}/manifests.tree.md`, `\`\`\`\n${treeStr}\n\`\`\``)
+  await fs.writeFile(`${KW_BUILD_PATH}/manifests.tree.md`, `\`\`\`\n${treeStr}\n\`\`\``)
   
 }

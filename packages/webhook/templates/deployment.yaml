@@ -30,7 +30,7 @@ spec:
             - name: artifacts
               mountPath: /artifacts
           env:
-            - name: RANCHER_PROJECT_NAME
+            - name: KW_RANCHER_PROJECT_NAME
               value: "{{ required "rancherProjectName value is required" .Values.rancherProjectName }}"
             - name: KUBEWEBHOOK_EXPOSED_HOST
               value: "{{ .Values.host }}"

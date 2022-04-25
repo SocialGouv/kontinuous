@@ -3,7 +3,7 @@ const writeKubeconfig = require("~common/utils/write-kubeconfig")
 const oasUri = require("./oas-uri")
 
 module.exports = async function createConfig() {
-  const rancherProjectName = process.env.RANCHER_PROJECT_NAME
+  const rancherProjectName = process.env.KW_RANCHER_PROJECT_NAME
   const jobNamespace = `${rancherProjectName}-ci`
 
   await writeKubeconfig(["KUBECONFIG", "KUBECONFIG_DEV", "KUBECONFIG_PROD"])

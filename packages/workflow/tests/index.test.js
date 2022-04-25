@@ -12,11 +12,11 @@ const samplesDir = `${__dirname}/samples`
 const testdirs = getDirectoriesSync(samplesDir)
 
 const defaultEnv = {
-  GIT_REF: "refs/heads/feature-branch-1",
-  GIT_SHA: "ffac537e6cbbf934b08745a378932722df287a53",
-  ENVIRONMENT: "dev",
-  RANCHER_PROJECT_ID: "1234",
-  RANCHER_PROJECT_NAME: "awesome",
+  KW_GIT_REF: "refs/heads/feature-branch-1",
+  KW_GIT_SHA: "ffac537e6cbbf934b08745a378932722df287a53",
+  KW_ENVIRONMENT: "dev",
+  KW_RANCHER_PROJECT_ID: "1234",
+  KW_RANCHER_PROJECT_NAME: "awesome",
 }
 
 const allEnvs = ["dev", "preprod", "prod"]
@@ -41,13 +41,13 @@ test.each(cases)(`%s.%s`, async (testdir, environment) => {
   const env = {
     ...process.env,
     ...defaultEnv,
-    ENVIRONMENT: environment,
-    KUBEWORKFLOW_PATH: rootPath,
-    WORKSPACE_PATH: testdirPath,
-    WORKSPACE_SUBPATH: (await fs.pathExists(`${testdirPath}/.kw`))
+    KW_ENVIRONMENT: environment,
+    KW_KUBEWORKFLOW_PATH: rootPath,
+    KW_WORKSPACE_PATH: testdirPath,
+    KW_WORKSPACE_SUBPATH: (await fs.pathExists(`${testdirPath}/.kw`))
       ? "/.kw"
       : "",
-    GIT_REPOSITORY: `kube-workflow/test-${testdir}`,
+    KW_GIT_REPOSITORY: `kube-workflow/test-${testdir}`,
     KW_NO_TREE:
       process.env.KW_NO_TREE !== "false" && process.env.KW_NO_TREE !== "0",
   }

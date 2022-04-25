@@ -9,24 +9,24 @@ const cleanGitRef = require("~common/utils/clean-git-ref")
 module.exports = (values) => {
   
   const {
-    ENVIRONMENT,
-    RANCHER_PROJECT_ID,
-    RANCHER_PROJECT_NAME,
-    GIT_REPOSITORY,
-    GIT_REF,
-    GIT_SHA,
+    KW_ENVIRONMENT,
+    KW_RANCHER_PROJECT_ID,
+    KW_RANCHER_PROJECT_NAME,
+    KW_GIT_REPOSITORY,
+    KW_GIT_REF,
+    KW_GIT_SHA,
   } = buildCtx.require("env")
 
-  const gitBranch = cleanGitRef(GIT_REF)
+  const gitBranch = cleanGitRef(KW_GIT_REF)
 
   const branchSlug = slug(gitBranch)
 
-  const env = ENVIRONMENT
+  const env = KW_ENVIRONMENT
   const isProd = env === "prod"
   const isPreProd = env === "preprod"
   const isDev = !(isProd || isPreProd)
 
-  const repository = GIT_REPOSITORY
+  const repository = KW_GIT_REPOSITORY
   const repositoryName = repository.split("/").pop()
 
   const subdomain = isProd
@@ -45,7 +45,7 @@ module.exports = (values) => {
 
   const ttl = isDev ? (isRenovate ? "1d" : "7d") : ""
 
-  const sha = GIT_SHA
+  const sha = KW_GIT_SHA
 
   const shortSha = sha.slice(0, 7)
 
@@ -71,7 +71,7 @@ module.exports = (values) => {
   const registry = "ghcr.io/socialgouv"
   const imageRepository = repositoryName
 
-  const rancherProjectId = RANCHER_PROJECT_ID
+  const rancherProjectId = KW_RANCHER_PROJECT_ID
 
   const pgSecretName = isProd
     ? "pg-user"
@@ -93,7 +93,7 @@ module.exports = (values) => {
     ? "preprod"
     : `user_${branchSlug}`
 
-  const rancherProjectName = RANCHER_PROJECT_NAME || repositoryName
+  const rancherProjectName = KW_RANCHER_PROJECT_NAME || repositoryName
   const jobNamespace = `${rancherProjectName}-ci`
 
   const imageProject = ""

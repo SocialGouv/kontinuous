@@ -29,102 +29,108 @@ const builder = async (envVars, options = {}) => {
 
   
   for (const requiredEnv of [
-    "KUBEWORKFLOW_PATH",
-    "WORKSPACE_PATH",
+    "KW_KUBEWORKFLOW_PATH",
+    "KW_WORKSPACE_PATH",
   ]) {
     if (!envVars[requiredEnv]) {
       throw new Error(`Missing mandatory var "${requiredEnv}"`)
     }
   }
   
-  Object.assign(envVars, await getGitInfos(envVars.WORKSPACE_PATH, envVars, true))
+  const { GIT_REF, GIT_TAGS, GIT_SHA, GIT_REPOSITORY } = await getGitInfos(envVars.KW_WORKSPACE_PATH, envVars, true)
+  Object.assign(envVars, {
+    KW_GIT_REF: GIT_REF,
+    KW_GIT_TAGS: GIT_TAGS,
+    KW_GIT_SHA: GIT_SHA,
+    KW_GIT_REPOSITORY: GIT_REPOSITORY
+  })
   
-  if(!envVars.ENVIRONMENT){
-    envVars.ENVIRONMENT = await selectEnv({ options, cwd: envVars.WORKSPACE_PATH, env: envVars })
+  if(!envVars.KW_ENVIRONMENT){
+    envVars.KW_ENVIRONMENT = await selectEnv({ options, cwd: envVars.KW_WORKSPACE_PATH, env: envVars })
   }
   
-  if(envVars.WORKSPACE_SUBPATH===undefined){
+  if(envVars.KW_WORKSPACE_SUBPATH===undefined){
     if(await fs.pathExists(".kube-workflow")){
-      envVars.WORKSPACE_SUBPATH = "/.kube-workflow"
+      envVars.KW_WORKSPACE_SUBPATH = "/.kube-workflow"
     } else {
-      envVars.WORKSPACE_SUBPATH = "/.kw"
+      envVars.KW_WORKSPACE_SUBPATH = "/.kw"
     }
   }
 
 
-  envVars.WORKSPACE_KW_PATH = path.join(envVars.WORKSPACE_PATH, envVars.WORKSPACE_SUBPATH)
+  envVars.KW_WORKSPACE_KW_PATH = path.join(envVars.KW_WORKSPACE_PATH, envVars.KW_WORKSPACE_SUBPATH)
   
-  if (!envVars.KWBUILD_PATH) {
-    envVars.KWBUILD_PATH = await mkdtemp(
+  if (!envVars.KW_BUILD_PATH) {
+    envVars.KW_BUILD_PATH = await mkdtemp(
       path.join(os.tmpdir(), `kube-workflow`)
     )
   }
 
   const {
-    KWBUILD_PATH,
-    KUBEWORKFLOW_PATH,
-    ENVIRONMENT,
-    WORKSPACE_PATH,
-    WORKSPACE_KW_PATH,
+    KW_BUILD_PATH,
+    KW_KUBEWORKFLOW_PATH,
+    KW_ENVIRONMENT,
+    KW_WORKSPACE_PATH,
+    KW_WORKSPACE_KW_PATH,
     KW_CHARTS,
     KW_SUBCHARTS,
     KW_INLINE_VALUES,
     KW_INLINE_SET,
-    HELM_ARGS = "",
+    KW_HELM_ARGS = "",
   } = envVars
 
-  const logger = globalLogger.child({ KWBUILD_PATH, WORKSPACE_PATH })
+  const logger = globalLogger.child({ KW_BUILD_PATH, KW_WORKSPACE_PATH })
   buildCtx.set("logger", logger)
 
-  await fs.ensureDir(KWBUILD_PATH)
+  await fs.ensureDir(KW_BUILD_PATH)
 
   logger.debug("Import kube-workflow charts and patches")
   await Promise.all([
-    fs.copy(`${KUBEWORKFLOW_PATH}/Chart.yaml`, `${KWBUILD_PATH}/Chart.yaml`),
-    fs.copy(`${KUBEWORKFLOW_PATH}/values.yaml`, `${KWBUILD_PATH}/values.yaml`),
+    fs.copy(`${KW_KUBEWORKFLOW_PATH}/Chart.yaml`, `${KW_BUILD_PATH}/Chart.yaml`),
+    fs.copy(`${KW_KUBEWORKFLOW_PATH}/values.yaml`, `${KW_BUILD_PATH}/values.yaml`),
     ...(KW_CHARTS ?
         [
           fs.copy(
-            `${KUBEWORKFLOW_PATH}/templates/namespace.yaml`,
-            `${KWBUILD_PATH}/templates/namespace.yaml`
+            `${KW_KUBEWORKFLOW_PATH}/templates/namespace.yaml`,
+            `${KW_BUILD_PATH}/templates/namespace.yaml`
           ),
           fs.copy(
-            `${KUBEWORKFLOW_PATH}/templates/helpers`,
-            `${KWBUILD_PATH}/templates/helpers`
+            `${KW_KUBEWORKFLOW_PATH}/templates/helpers`,
+            `${KW_BUILD_PATH}/templates/helpers`
           )
         ] :
         [
-          fs.copy(`${KUBEWORKFLOW_PATH}/templates`, `${KWBUILD_PATH}/templates`)
+          fs.copy(`${KW_KUBEWORKFLOW_PATH}/templates`, `${KW_BUILD_PATH}/templates`)
         ]
     ),
-    fs.copy(`${KUBEWORKFLOW_PATH}/charts`, `${KWBUILD_PATH}/charts`),
-    fs.symlink(`${KUBEWORKFLOW_PATH}/patches`, `${KWBUILD_PATH}/patches`),
-    fs.symlink(`${KUBEWORKFLOW_PATH}/validators`, `${KWBUILD_PATH}/validators`),
+    fs.copy(`${KW_KUBEWORKFLOW_PATH}/charts`, `${KW_BUILD_PATH}/charts`),
+    fs.symlink(`${KW_KUBEWORKFLOW_PATH}/patches`, `${KW_BUILD_PATH}/patches`),
+    fs.symlink(`${KW_KUBEWORKFLOW_PATH}/validators`, `${KW_BUILD_PATH}/validators`),
   ])
 
-  const buildKubeworkflowPath = `${KWBUILD_PATH}/.kw`
-  if (await fs.pathExists(WORKSPACE_KW_PATH)) {
-    await fs.symlink(WORKSPACE_KW_PATH, buildKubeworkflowPath)
+  const buildKubeworkflowPath = `${KW_BUILD_PATH}/.kw`
+  if (await fs.pathExists(KW_WORKSPACE_KW_PATH)) {
+    await fs.symlink(KW_WORKSPACE_KW_PATH, buildKubeworkflowPath)
   }
 
   logger.debug("Merge project charts")
   const chartsDir = `${buildKubeworkflowPath}/charts`
   if (await fs.pathExists(chartsDir)) {
-    await fs.copy(chartsDir, `${KWBUILD_PATH}/charts`, {
+    await fs.copy(chartsDir, `${KW_BUILD_PATH}/charts`, {
       dereference: true,
     })
   }
 
-  const chartNames = await getDirectories(`${KWBUILD_PATH}/charts`)
+  const chartNames = await getDirectories(`${KW_BUILD_PATH}/charts`)
   logger.debug("Merge env templates and import values from charts")
   const chartsValues = {}
   for (const chartName of chartNames){
-    const chartDir = `${KWBUILD_PATH}/charts/${chartName}`
-    const envChartDir = `${chartDir}/${ENVIRONMENT}`
+    const chartDir = `${KW_BUILD_PATH}/charts/${chartName}`
+    const envChartDir = `${chartDir}/${KW_ENVIRONMENT}`
     const envChartTemplatesDir = `${envChartDir}/templates`
     let chartValues = await loadYamlFile(`${chartDir}/values`)
     if (await fs.pathExists(envChartTemplatesDir)){
-      await fs.copy(envChartTemplatesDir, `${KWBUILD_PATH}/charts/${chartName}/templates/env`, {
+      await fs.copy(envChartTemplatesDir, `${KW_BUILD_PATH}/charts/${chartName}/templates/env`, {
         dereference: true
       })
     }
@@ -134,11 +140,11 @@ const builder = async (envVars, options = {}) => {
 
   logger.debug("Prepare .kw package")
   if (
-    await fs.pathExists(`${WORKSPACE_KW_PATH}/package.json`) &&
-    !await fs.pathExists(`${WORKSPACE_KW_PATH}/node_modules`) &&
-    !await fs.pathExists(`${WORKSPACE_KW_PATH}/.pnp.cjs`)
+    await fs.pathExists(`${KW_WORKSPACE_KW_PATH}/package.json`) &&
+    !await fs.pathExists(`${KW_WORKSPACE_KW_PATH}/node_modules`) &&
+    !await fs.pathExists(`${KW_WORKSPACE_KW_PATH}/.pnp.cjs`)
   ) {
-    await asyncShell("yarn", { cwd: WORKSPACE_KW_PATH }, (proc) => {
+    await asyncShell("yarn", { cwd: KW_WORKSPACE_KW_PATH }, (proc) => {
       proc.stdout.pipe(process.stdout)
       proc.stderr.pipe(process.stderr)
     })
@@ -147,7 +153,7 @@ const builder = async (envVars, options = {}) => {
   logger.debug("Generate values")
   const [commonValues, envValues] = await Promise.all([
     loadYamlFile(`${buildKubeworkflowPath}/values`, `${buildKubeworkflowPath}/common/values`),
-    loadYamlFile(`${buildKubeworkflowPath}/${ENVIRONMENT}/values`, `${buildKubeworkflowPath}/env/${ENVIRONMENT}/values`),
+    loadYamlFile(`${buildKubeworkflowPath}/${KW_ENVIRONMENT}/values`, `${buildKubeworkflowPath}/env/${KW_ENVIRONMENT}/values`),
   ])
 
   // values: values.yaml + $env/values.yaml
@@ -217,12 +223,12 @@ const builder = async (envVars, options = {}) => {
     for (const dir of [
       "templates",
       "common/templates", // deprecated, retrocompat
-      `${ENVIRONMENT}/templates`,
-      `env/${ENVIRONMENT}/templates`, // deprecated, retrocompat
+      `${KW_ENVIRONMENT}/templates`,
+      `env/${KW_ENVIRONMENT}/templates`, // deprecated, retrocompat
     ]) {
       const templatesDir = `${buildKubeworkflowPath}/${dir}`
       if (await fs.pathExists(templatesDir)) {
-        await fs.copy(templatesDir, `${KWBUILD_PATH}/templates/project/${dir}`, {
+        await fs.copy(templatesDir, `${KW_BUILD_PATH}/templates/project/${dir}`, {
           dereference: true,
         })
       }
@@ -254,15 +260,15 @@ const builder = async (envVars, options = {}) => {
   }
 
   logger.debug("Write values file")
-  await fs.writeFile(`${KWBUILD_PATH}/values.json`, JSON.stringify(values))
+  await fs.writeFile(`${KW_BUILD_PATH}/values.json`, JSON.stringify(values))
 
   logger.debug("Link workspace to charts")
-  const filesPath = `${KWBUILD_PATH}/.kw/files`
+  const filesPath = `${KW_BUILD_PATH}/.kw/files`
   if (await fs.pathExists(filesPath)) {
     await Promise.all([
-      fs.symlink(filesPath, `${KWBUILD_PATH}/files`),
+      fs.symlink(filesPath, `${KW_BUILD_PATH}/files`),
       ...chartNames.map(chartName => {
-        return fs.symlink(filesPath, `${KWBUILD_PATH}/charts/${chartName}/files`)
+        return fs.symlink(filesPath, `${KW_BUILD_PATH}/charts/${chartName}/files`)
       })
     ])
   }
@@ -272,11 +278,11 @@ const builder = async (envVars, options = {}) => {
     `
       helm template
         -f values.json
-        --post-renderer ${KUBEWORKFLOW_PATH}/bin/post-renderer
-        ${HELM_ARGS}
+        --post-renderer ${KW_KUBEWORKFLOW_PATH}/bin/post-renderer
+        ${KW_HELM_ARGS}
         .
     `,
-    { cwd: KWBUILD_PATH }
+    { cwd: KW_BUILD_PATH }
   )
 
   logger.debug("Load manifests")
@@ -295,7 +301,7 @@ const builder = async (envVars, options = {}) => {
   manifests = manifests.map(manifest => yaml.dump(manifest)).join("---\n")
 
   logger.debug("Write manifests file")
-  const manifestsFile = `${KWBUILD_PATH}/manifests.yaml`
+  const manifestsFile = `${KW_BUILD_PATH}/manifests.yaml`
   await fs.writeFile(manifestsFile, manifests)
 
   logger.debug(`Built manifests: ${manifestsFile}`)

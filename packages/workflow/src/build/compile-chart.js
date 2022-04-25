@@ -25,10 +25,10 @@ const defaultValues = (_name, _umbrellaChart) => {
 }
 
 module.exports = async (values) => {
-  const { KWBUILD_PATH, WORKSPACE_KW_PATH } = buildCtx.require("env")
+  const { KW_BUILD_PATH, KW_WORKSPACE_KW_PATH } = buildCtx.require("env")
   
   const chart = yaml.load(
-    await fs.readFile(`${KWBUILD_PATH}/Chart.yaml`, {
+    await fs.readFile(`${KW_BUILD_PATH}/Chart.yaml`, {
       encoding: "utf-8",
     })
   )
@@ -38,14 +38,14 @@ module.exports = async (values) => {
   // import subcharts from project
   const allChartNames = [...(new Set(
     (await Promise.all([
-      getDirectories(`${KWBUILD_PATH}/charts`),
-      getDirectories(`${WORKSPACE_KW_PATH}/charts`),
+      getDirectories(`${KW_BUILD_PATH}/charts`),
+      getDirectories(`${KW_WORKSPACE_KW_PATH}/charts`),
     ])).reduce((acc, dirNames) => [...acc, ...dirNames], [])
   ))]
 
   for (const c of allChartNames){
     
-    const chartDir = `${KWBUILD_PATH}/charts/${c}`
+    const chartDir = `${KW_BUILD_PATH}/charts/${c}`
     
     // default Chart file
     const chartFile = `${chartDir}/Chart.yaml`
@@ -104,7 +104,7 @@ module.exports = async (values) => {
       }
     }
   }
-  await fs.writeFile(`${KWBUILD_PATH}/Chart.yaml`, yaml.dump(chart))
+  await fs.writeFile(`${KW_BUILD_PATH}/Chart.yaml`, yaml.dump(chart))
 
   return chart
 }

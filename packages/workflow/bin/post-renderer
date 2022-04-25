@@ -4,7 +4,7 @@ const yaml = require("js-yaml")
 const asyncShell = require("~common/utils/async-shell")
 
 const main = async () => {
-  if (!(await fs.pathExists(`${process.env.KWBUILD_PATH}/post-renderer`))) {
+  if (!(await fs.pathExists(`${process.env.KW_BUILD_PATH}/post-renderer`))) {
     process.stdin.pipe(process.stdout)
     return
   }
@@ -12,7 +12,7 @@ const main = async () => {
   const manifests = yaml.loadAll(stdin)
   const json = JSON.stringify(manifests)
   const rendered = await asyncShell(
-    `${process.env.KWBUILD_PATH}/post-renderer`,
+    `${process.env.KW_BUILD_PATH}/post-renderer`,
     {},
     (proc) => {
       proc.stdin.write(json)

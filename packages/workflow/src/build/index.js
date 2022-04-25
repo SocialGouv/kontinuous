@@ -17,13 +17,13 @@ module.exports = async (options) => {
     KW_CHARTS: options.charts || process.env.KW_CHARTS,
     KW_SUBCHARTS: options.subcharts || process.env.KW_SUBCHARTS,
     KW_DISPLAY_TREE: options.tree,
-    HELM_ARGS: options.A || process.env.HELM_ARGS,
+    KW_HELM_ARGS: options.A || process.env.KW_HELM_ARGS,
     KW_INLINE_VALUES: options.inlineValues || process.env.KW_INLINE_VALUES,
 
-    KUBEWORKFLOW_PATH: path.resolve(`${__dirname}/../..`),
-    WORKSPACE_PATH: cwd,
-    KWBUILD_PATH:
-      process.env.KWBUILD_PATH ||
+    KW_KUBEWORKFLOW_PATH: path.resolve(`${__dirname}/../..`),
+    KW_WORKSPACE_PATH: cwd,
+    KW_BUILD_PATH:
+      process.env.KW_BUILD_PATH ||
       (await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))),
   }
   const result = await builder(envVars, options)
