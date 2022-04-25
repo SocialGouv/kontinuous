@@ -23,9 +23,9 @@ const deployer = async (options) => {
   })
 
   const cwd = options.cwd || process.cwd()
-  const { KW_GIT_REPOSITORY } = await getGitInfos(cwd)
+  const { GIT_REPOSITORY } = await getGitInfos(cwd)
 
-  const repositoryName = path.basename(KW_GIT_REPOSITORY)
+  const repositoryName = path.basename(GIT_REPOSITORY)
 
   const selectedEnv = await selectEnv({ options, cwd })
 
