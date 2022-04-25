@@ -54,7 +54,7 @@ test.each(cases)(`%s.%s`, async (testdir, environment) => {
   const envFile = `${testdirPath}/.env`
   if (fs.pathExistsSync(envFile)) {
     const dotenvConfig = dotenv.parse(
-      fs.readFileSync(envFile, { encoding: "utf-8" })
+      await fs.readFile(envFile, { encoding: "utf-8" })
     )
     Object.assign(env, dotenvConfig)
   }
