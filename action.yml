@@ -116,7 +116,7 @@ runs:
         KW_ENVIRONMENT: ${{ inputs.environment }}
         KW_RANCHER_PROJECT_ID: ${{ inputs.rancherProjectId }}
         KW_RANCHER_PROJECT_NAME: ${{ inputs.rancherProjectName }}
-        KUBECONFIG_CONTEXT: ${{ inputs.kubeconfigContext }}
+        KW_KUBECONFIG_CONTEXT: ${{ inputs.kubeconfigContext }}
         KW_DEPLOY_TIMEOUT: ${{ inputs.timeout }}
       run: packages/workflow/bin/kube-workflow deploy --cwd ${{ env.PROJECT_PATH }} -f ${{ env.KW_BUILD_PATH }}/manifests.yaml
 

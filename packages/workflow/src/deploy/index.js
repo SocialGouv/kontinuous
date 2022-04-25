@@ -30,7 +30,7 @@ const deployer = async (options) => {
   const selectedEnv = await selectEnv({ options, cwd })
 
   let kubeconfigContext =
-    options.kubeconfigContext || process.env.KUBECONFIG_CONTEXT
+    options.kubeconfigContext || process.env.KW_KUBECONFIG_CONTEXT
   if (!kubeconfigContext) {
     const { kubeconfigContextNoDetect } = options
     if (kubeconfigContextNoDetect) {
