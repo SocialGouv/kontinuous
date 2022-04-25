@@ -25,7 +25,7 @@ const defaultValues = (_name, _umbrellaChart) => {
 }
 
 module.exports = async (values) => {
-  const { KWBUILD_PATH, WORKSPACE_PATH, WORKSPACE_SUBPATH } = buildCtx.require("env")
+  const { KWBUILD_PATH, WORKSPACE_KW_PATH } = buildCtx.require("env")
   
   const chart = yaml.load(
     await fs.readFile(`${KWBUILD_PATH}/Chart.yaml`, {
@@ -39,7 +39,7 @@ module.exports = async (values) => {
   const allChartNames = [...(new Set(
     (await Promise.all([
       getDirectories(`${KWBUILD_PATH}/charts`),
-      getDirectories(`${WORKSPACE_PATH}/${WORKSPACE_SUBPATH}/charts`),
+      getDirectories(`${WORKSPACE_KW_PATH}/charts`),
     ])).reduce((acc, dirNames) => [...acc, ...dirNames], [])
   ))]
 

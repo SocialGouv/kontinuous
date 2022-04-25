@@ -44,8 +44,15 @@ const builder = async (envVars, options = {}) => {
   }
   
   if(envVars.WORKSPACE_SUBPATH===undefined){
-    envVars.WORKSPACE_SUBPATH = "/.kube-workflow"
+    if(await fs.pathExists(".kube-workflow")){
+      envVars.WORKSPACE_SUBPATH = "/.kube-workflow"
+    } else {
+      envVars.WORKSPACE_SUBPATH = "/.kw"
+    }
   }
+
+
+  envVars.WORKSPACE_KW_PATH = path.join(envVars.WORKSPACE_PATH, envVars.WORKSPACE_SUBPATH)
   
   if (!envVars.KWBUILD_PATH) {
     envVars.KWBUILD_PATH = await mkdtemp(
@@ -58,7 +65,7 @@ const builder = async (envVars, options = {}) => {
     KUBEWORKFLOW_PATH,
     ENVIRONMENT,
     WORKSPACE_PATH,
-    WORKSPACE_SUBPATH,
+    WORKSPACE_KW_PATH,
     KW_CHARTS,
     KW_SUBCHARTS,
     KW_INLINE_VALUES,
@@ -95,10 +102,9 @@ const builder = async (envVars, options = {}) => {
     fs.symlink(`${KUBEWORKFLOW_PATH}/validators`, `${KWBUILD_PATH}/validators`),
   ])
 
-  const workspaceKubeworkflowPath = `${WORKSPACE_PATH}${WORKSPACE_SUBPATH}`
-  const buildKubeworkflowPath = `${KWBUILD_PATH}/.kube-workflow`
-  if (await fs.pathExists(workspaceKubeworkflowPath)) {
-    await fs.symlink(workspaceKubeworkflowPath, buildKubeworkflowPath)
+  const buildKubeworkflowPath = `${KWBUILD_PATH}/.kw`
+  if (await fs.pathExists(WORKSPACE_KW_PATH)) {
+    await fs.symlink(WORKSPACE_KW_PATH, buildKubeworkflowPath)
   }
 
   logger.debug("Merge project charts")
@@ -126,13 +132,13 @@ const builder = async (envVars, options = {}) => {
     chartsValues[chartName] = deepmerge(chartValues || {}, envValues || {})
   }
 
-  logger.debug("Prepare .kube-workflow package")
+  logger.debug("Prepare .kw package")
   if (
-    await fs.pathExists(`${workspaceKubeworkflowPath}/package.json`) &&
-    !await fs.pathExists(`${workspaceKubeworkflowPath}/node_modules`) &&
-    !await fs.pathExists(`${workspaceKubeworkflowPath}/.pnp.cjs`)
+    await fs.pathExists(`${WORKSPACE_KW_PATH}/package.json`) &&
+    !await fs.pathExists(`${WORKSPACE_KW_PATH}/node_modules`) &&
+    !await fs.pathExists(`${WORKSPACE_KW_PATH}/.pnp.cjs`)
   ) {
-    await asyncShell("yarn", { cwd: workspaceKubeworkflowPath }, (proc) => {
+    await asyncShell("yarn", { cwd: WORKSPACE_KW_PATH }, (proc) => {
       proc.stdout.pipe(process.stdout)
       proc.stderr.pipe(process.stderr)
     })
@@ -251,7 +257,7 @@ const builder = async (envVars, options = {}) => {
   await fs.writeFile(`${KWBUILD_PATH}/values.json`, JSON.stringify(values))
 
   logger.debug("Link workspace to charts")
-  const filesPath = `${KWBUILD_PATH}/.kube-workflow/files`
+  const filesPath = `${KWBUILD_PATH}/.kw/files`
   if (await fs.pathExists(filesPath)) {
     await Promise.all([
       fs.symlink(filesPath, `${KWBUILD_PATH}/files`),

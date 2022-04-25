@@ -22,7 +22,7 @@ inputs:
   timeout:
     description: "override default kapp --wait-timeout, default to 15m0s"
   cwd:
-    description: "working directory where is located .kube-workflow"
+    description: "working directory where is located .kw"
   kubeconfigContext:
     description: "override kubeconfig context, default dev or prod according to environment"
   inlineValues:

@@ -21,7 +21,7 @@ Call it in review, preprod, and prod github workflows
 
 ## Configure your project
 
-`.kube-workflow/values.yaml`
+`.kw/values.yaml`
 
 ```yaml
 # here you define variables shared by all helm subcharts/components
@@ -42,8 +42,8 @@ From kube-workflow repository:
 
 From your project repository:
 
-- `.kube-workflow/values.yaml`
-- `.kube-workflow/$ENVIRONMENT/values.yaml`
+- `.kw/values.yaml`
+- `.kw/$ENVIRONMENT/values.yaml`
 
 ## Generate manifests
 
@@ -127,7 +127,7 @@ jobs:
   enabled: true
   runs:
     - name: db
-      # use: ./.kube-workflow/jobs/create-db # local job, defined in project repository
+      # use: ./.kw/jobs/create-db # local job, defined in project repository
       # use: https://github.com/SocialGouv/kube-workflow/jobs/create-db # degit full url
       use: SocialGouv/kube-workflow/jobs/create-db # degit implicit github
       with:
@@ -158,7 +158,7 @@ Same as other components, you can define multiple instance of jobs, for example,
 
 ## Merge common manifests as helm templates
 
-Every yaml file in `.kube-workflow/templates` will be merged with the helm Chart `templates` folder before the build.
+Every yaml file in `.kw/templates` will be merged with the helm Chart `templates` folder before the build.
 
 All theses files can use the Helm templating syntax (or not if you don't need it, helm template is a superset of yaml).
 
@@ -166,17 +166,17 @@ Both extensions yaml and yml are accepted.
 
 ## Merge manifests per environment as helm templates
 
-Every yaml files in `.kube-workflow/$ENVIRONMENT/templates` will be merged with the helm Chart `templates` folder before the build, according to the `environment` input (dev | preprod | prod).
+Every yaml files in `.kw/$ENVIRONMENT/templates` will be merged with the helm Chart `templates` folder before the build, according to the `environment` input (dev | preprod | prod).
 
 All theses files can use the Helm templating syntax.
 
 Usually, that's where you put your ConfigMap and SealedSecrets ressources.
 
 ## Hack the manifests
-You can modify anything you want using `post-renderer` executable that you can put at `.kube-workflow/post-renderer`.
+You can modify anything you want using `post-renderer` executable that you can put at `.kw/post-renderer`.
 This can be a simple script and use `jq`, or you can call kustomize from it.
 The post-renderer will receive manifest in json format, for easier usage with `jq`:
-`/kube-workflow/post-render`:
+`/.kw/post-render`:
 ```sh
 #!/bin/sh
 
@@ -219,7 +219,7 @@ Releasing follow semantic versioning using [standard-version tool](https://githu
 
 ### Test
 
-all directories added to [tests/samples](tests/samples) are like a `.kube-workflow` directory in a project, it will be automatically tested when you will run `yarn test`.
+all directories added to [tests/samples](tests/samples) are like a `.kw` directory in a project, it will be automatically tested when you will run `yarn test`.
 To run only one test at once you can run `yarn test -t name-of-my-test`.
 To upgrade snapshots run `yarn test -u`.
 

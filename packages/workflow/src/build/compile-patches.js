@@ -2,21 +2,20 @@ const { buildCtx } = require("~/build/ctx")
 
 module.exports = async (manifests, values) => {
   const env = buildCtx.require("env")
-  const { KWBUILD_PATH, WORKSPACE_PATH, WORKSPACE_SUBPATH } = env
+  const { KWBUILD_PATH, WORKSPACE_KW_PATH } = env
   
   let patched = await require(`${KWBUILD_PATH}/patches`)(manifests, values)
   
-  const workspaceKubeworkflowPath = `${WORKSPACE_PATH}${WORKSPACE_SUBPATH}`
   let requirable
   try {
-    require.resolve(`${workspaceKubeworkflowPath}/patches`)
+    require.resolve(`${WORKSPACE_KW_PATH}/patches`)
     requirable = true
   }catch(_e){
     requirable = false
   }
 
   if (requirable){
-    patched = await require(`${workspaceKubeworkflowPath}/patches`)(manifests, values)
+    patched = await require(`${WORKSPACE_KW_PATH}/patches`)(manifests, values)
   }
 
   return patched

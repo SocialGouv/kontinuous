@@ -44,8 +44,8 @@ test.each(cases)(`%s.%s`, async (testdir, environment) => {
     ENVIRONMENT: environment,
     KUBEWORKFLOW_PATH: rootPath,
     WORKSPACE_PATH: testdirPath,
-    WORKSPACE_SUBPATH: (await fs.pathExists(`${testdirPath}/.kube-workflow`))
-      ? "/.kube-workflow"
+    WORKSPACE_SUBPATH: (await fs.pathExists(`${testdirPath}/.kw`))
+      ? "/.kw"
       : "",
     GIT_REPOSITORY: `kube-workflow/test-${testdir}`,
     KW_NO_TREE:
