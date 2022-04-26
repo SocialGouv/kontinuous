@@ -20,10 +20,10 @@ module.exports = async ({
   }
 
   if (ref) {
-    return refEnv()
+    return refEnv(ref)
   }
   if (env.KW_GIT_REF) {
-    return refEnv()
+    return refEnv(env.KW_GIT_REF)
   }
 
   const GIT_REF = await getGitRef(cwd)
