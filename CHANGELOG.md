@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.8](https://github.com/SocialGouv/kube-workflow/compare/v1.18.7...v1.18.8) (2022-04-26)
+
+
+### Bug Fixes
+
+* add app image override ([9742297](https://github.com/SocialGouv/kube-workflow/commit/9742297af373e7707d5fab25060ee605be74b5e8))
+
 ### [1.18.7](https://github.com/SocialGouv/kube-workflow/compare/v1.18.6...v1.18.7) (2022-04-26)
 
 ### [1.18.6](https://github.com/SocialGouv/kube-workflow/compare/v1.18.5...v1.18.6) (2022-04-26)
