@@ -1,4 +1,3 @@
-const isVersionTag = require("~common/utils/is-version-tag")
 const refEnv = require("~common/utils/ref-env")
 
 const getGitRef = require("~common/utils/get-git-ref")
@@ -23,6 +22,10 @@ module.exports = async ({
   if (ref) {
     return refEnv()
   }
+  if (env.KW_GIT_REF) {
+    return refEnv()
+  }
 
-  return refEnv(ref || env.KW_GIT_REF)
+  const GIT_REF = await getGitRef(cwd)
+  return refEnv(GIT_REF)
 }
