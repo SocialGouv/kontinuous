@@ -37,10 +37,9 @@ const builder = async (envVars, options = {}) => {
     }
   }
   
-  const { GIT_REF, GIT_TAGS, GIT_SHA, GIT_REPOSITORY } = await getGitInfos(envVars.KW_WORKSPACE_PATH, envVars, true)
+  const { GIT_REF, GIT_SHA, GIT_REPOSITORY } = await getGitInfos(envVars.KW_WORKSPACE_PATH, envVars, true)
   Object.assign(envVars, {
     KW_GIT_REF: GIT_REF,
-    KW_GIT_TAGS: GIT_TAGS,
     KW_GIT_SHA: GIT_SHA,
     KW_GIT_REPOSITORY: GIT_REPOSITORY
   })

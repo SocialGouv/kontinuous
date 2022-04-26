@@ -15,22 +15,8 @@ module.exports = async (
 ) => {
   const infos = reloadCache ? {} : buildCtx.get("gitInfos") || {}
   try {
-    if (!infos.GIT_TAGS) {
-      if (env.KW_GIT_TAGS) {
-        infos.GIT_TAGS = env.KW_GIT_TAGS.split(",")
-      } else if (env.KW_GIT_TAGS === undefined || env.KW_GIT_TAGS === null) {
-        infos.GIT_TAGS = await getGitTags(cwd)
-      } else {
-        infos.GIT_TAGS = []
-      }
-    }
     if (!infos.GIT_REF) {
-      infos.GIT_REF =
-        env.KW_GIT_REF ||
-        (await getGitRef(cwd)) ||
-        infos.GIT_TAGS.filter((t) => isVersionTag(t))
-          .sort()
-          .pop()
+      infos.GIT_REF = env.KW_GIT_REF || (await getGitRef(cwd))
     }
     if (!infos.GIT_SHA) {
       infos.GIT_SHA = env.KW_GIT_SHA || (await getGitSha(cwd))

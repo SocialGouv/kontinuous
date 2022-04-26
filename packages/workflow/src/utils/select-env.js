@@ -1,7 +1,7 @@
 const isVersionTag = require("~common/utils/is-version-tag")
 const refEnv = require("~common/utils/ref-env")
-const getGitInfos = require("~/utils/get-git-infos")
 
+const getGitRef = require("~common/utils/get-git-ref")
 const { buildCtx } = require("~/build/ctx")
 
 const envs = ["dev", "preprod", "prod"]
@@ -11,7 +11,6 @@ module.exports = async ({
   cwd,
   env = buildCtx.get("env") || process.env,
   ref,
-  detectCurrentTags = true,
 }) => {
   if (options.E) {
     return options.E
@@ -22,12 +21,8 @@ module.exports = async ({
   }
 
   if (ref) {
-    return refEnv(ref)
+    return refEnv()
   }
 
-  const { GIT_REF, GIT_TAGS } = await getGitInfos(cwd, env)
-  if (detectCurrentTags && GIT_TAGS.some((tag) => isVersionTag(tag))) {
-    return "prod"
-  }
-  return refEnv(GIT_REF)
+  return refEnv(ref || env.KW_GIT_REF)
 }
