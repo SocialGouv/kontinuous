@@ -19,7 +19,7 @@ module.exports = function () {
     const dir = `${artifactPath}/${repositorySlug}/${branchSlug}/${commit}`
     const file = `${dir}/manifests.yaml`
     if (!(await fs.pathExists(file))) {
-      return res.status(404)
+      return res.status(404).json({ error: "not found" })
     }
     const content = await fs.readFile(file, "binary")
     res.setHeader("Content-Type", "text/x-yaml")

@@ -732,8 +732,8 @@ __metadata:
   linkType: hard
 
 "@modjo-plugins/core@npm:latest":
-  version: 1.0.20
-  resolution: "@modjo-plugins/core@npm:1.0.20"
+  version: 1.0.21
+  resolution: "@modjo-plugins/core@npm:1.0.21"
   dependencies:
     commander: "npm:^9.1.0"
     fs-extra: "npm:^10.0.1"
@@ -751,7 +751,7 @@ __metadata:
     nctx: "npm:^1.2.0"
     pretty-ms: "npm:^7.0.1"
     yup: "npm:^0.32.11"
-  checksum: d542252397862f22822b6f0e20cbd4f01f99e9d839295efd036d7cef01be2dfaf808433345fd3a86d2364b021b4c6e7b5d3686d7e0252f457844a52c6230a2d1
+  checksum: 2d2d896621298e9acc6985e5bd4bb52839fbcd6db860031e63d53847e1ff33efd6d299903244a676f73f4e4d34e8f1bc4e5c3ab47411d44ede61a8ccba1ce13a
   languageName: node
   linkType: hard
 
@@ -828,8 +828,8 @@ __metadata:
   linkType: hard
 
 "@modjo-plugins/microservice-oapi@npm:latest":
-  version: 1.0.20
-  resolution: "@modjo-plugins/microservice-oapi@npm:1.0.20"
+  version: 1.0.21
+  resolution: "@modjo-plugins/microservice-oapi@npm:1.0.21"
   dependencies:
     "@modjo-plugins/core": "npm:*"
     "@modjo-plugins/express": "npm:*"
@@ -842,7 +842,7 @@ __metadata:
     "@modjo-plugins/oa": "npm:*"
     "@modjo-plugins/shutdown-handlers": "npm:*"
     nctx: "npm:^1.2.0"
-  checksum: 2dbf9bc72a7123db1612f9cd6ff7b7056e2fc1b025aa3c0f9a9ec3184da172e0b01db3f1ce9ee172ebf9f83ac4ddd364bb3c4af4407e4228225d65e143e7f28b
+  checksum: 019328c75f6f07e6073da44fc23159017016afea6c7ba99580139d442eeb319e4766a1faede649f5b3a5ab2d748fc9a287cc136a67eb7ddc0437d508c0526e93
   languageName: node
   linkType: hard
 
