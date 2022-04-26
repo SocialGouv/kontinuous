@@ -7,6 +7,7 @@ imageProject:
 imageRepository:
 imagePackage: app
 imageTag: 
+image: 
 ttl: 
 rancherProjectId: my-cluser-id:my-project-id
 isProd: false
