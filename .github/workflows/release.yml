@@ -21,6 +21,7 @@ jobs:
         run: |
           cd packages/workflow
           rm -f common && cp -r ../common ./
+          rm -f jobs && cp -r ../../jobs ./
 
       - id: publish-kube-workflow
         uses: JS-DevTools/npm-publish@v1

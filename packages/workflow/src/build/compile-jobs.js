@@ -26,7 +26,7 @@ const requireUse = async (use) => {
         await fs.copy(src, target)
       } else if (!use.includes("#") && use.startsWith(selfReference)) {
         const nativeJob = use.slice(selfReference.length)
-        const dir = path.join(KW_KUBEWORKFLOW_PATH, "../..", nativeJob)
+        const dir = path.join(KW_KUBEWORKFLOW_PATH, nativeJob)
         logger.debug(`use native job: ${nativeJob}`)
         await fs.copy(dir, target)
       } else {
