@@ -1,8 +1,6 @@
 const logger = require("~common/utils/logger")
-const isVersionTag = require("~common/utils/is-version-tag")
 
 const getGitRef = require("~common/utils/get-git-ref")
-const getGitTags = require("~common/utils/get-git-tags")
 const getGitSha = require("~common/utils/get-git-sha")
 const getGitRepository = require("~common/utils/get-git-repository")
 const getGitUrl = require("~common/utils/get-git-url")
