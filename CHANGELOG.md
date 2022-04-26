@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.2](https://github.com/SocialGouv/kube-workflow/compare/v1.18.1...v1.18.2) (2022-04-26)
+
+
+### Bug Fixes
+
+* git get branch ([b232c55](https://github.com/SocialGouv/kube-workflow/commit/b232c559e0113431092f4f1d6e88126267e34395))
+* log input typo ([678e0f3](https://github.com/SocialGouv/kube-workflow/commit/678e0f3f174942c51c596554dc1cb7bc05156595))
+* native jobs ([1f84efc](https://github.com/SocialGouv/kube-workflow/commit/1f84efcfb20154168856a6f75821ea589baea422))
+* up modjo openapi return handler ([d628872](https://github.com/SocialGouv/kube-workflow/commit/d628872796a0df466e0841eff8e69997b91adb6a))
+* variabilize hardcoded socialgouv values ([5062c24](https://github.com/SocialGouv/kube-workflow/commit/5062c2450df26b005c324656155c3fe6be1602a6))
+
 ### [1.18.1](https://github.com/SocialGouv/kube-workflow/compare/v1.18.0...v1.18.1) (2022-04-25)
 
 
