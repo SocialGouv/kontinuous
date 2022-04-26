@@ -14,9 +14,6 @@ module.exports = async (
   reloadCache = false
 ) => {
   const infos = reloadCache ? {} : buildCtx.get("gitInfos") || {}
-  console.log({ infos })
-  console.log(env)
-  console.log("ref", await getGitRef(cwd))
   try {
     if (!infos.GIT_TAGS) {
       if (env.KW_GIT_TAGS) {
@@ -52,7 +49,6 @@ module.exports = async (
     )
     throw e
   }
-  console.log("final", { infos })
   buildCtx.set("gitInfos", infos)
   return infos
 }

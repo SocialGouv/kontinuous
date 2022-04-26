@@ -1,4 +1,4 @@
 const asyncShell = require("./async-shell")
 
 module.exports = async (cwd = process.cwd()) =>
-  (await asyncShell("git branch --show-current", { cwd })).trim()
+  (await asyncShell("git name-rev --name-only HEAD", { cwd })).trim()
