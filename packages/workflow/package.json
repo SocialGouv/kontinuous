@@ -60,6 +60,7 @@
     "src",
     "templates",
     "validators",
+    "jobs",
     "Chart.yaml",
     "package.json",
     "values.yaml"
