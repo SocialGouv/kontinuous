@@ -7,6 +7,9 @@ inputs:
     description: "The Webhook authentication token, usually secrets.KUBEWEBHOOK_TOKEN"
   rancherProjectName:
     description: "The Rancher project name, usually secrets.RANCHER_PROJECT_NAME, usefull jobs that needs secrets or ci namespaces"
+  webhookBaseDomain:
+    description: "Base domain for webhook, no effect when webhookUrl is set"
+    default: "fabrique.social.gouv.fr"
   webhookUrl:
     description: "Override webhook url"
 outputs:
@@ -46,7 +49,7 @@ runs:
         if [ -n "${{ inputs.webhookUrl }}" ]; then
           WEBHOOK_URI=${{ inputs.webhookUrl }}
         else
-          WEBHOOK_URI=https://webhook-${{ inputs.rancherProjectName }}.fabrique.social.gouv.fr
+          WEBHOOK_URI=https://webhook-${{ inputs.rancherProjectName }}.{{ inputs.webhookBaseDomain }}
         fi
         
         KW_GIT_REPOSITORY_URLENCODED=$(echo $GITHUB_REPOSITORY | sed 's/\//\%2f/g')

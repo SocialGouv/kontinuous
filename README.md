@@ -14,7 +14,7 @@ Call it in review, preprod, and prod github workflows
     environment: dev
     token: ${{ secrets.GITHUB_TOKEN }}
     kubeconfig: ${{ secrets.KUBECONFIG }}
-    rancherProjectId: ${{ secrets.KW_RANCHER_PROJECT_ID }}
+    rancherProjectId: ${{ secrets.RANCHER_PROJECT_ID }}
     rancherProjectName: ${{ secrets.RANCHER_PROJECT_NAME }}
     # components: app hasura
 ```

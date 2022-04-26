@@ -10,6 +10,8 @@ const getGitRepository = require("~common/utils/get-git-repository")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const normalizeEnvKey = require("~common/utils/normalize-env-key")
 
+const defaults = require("~/config/defaults")
+
 const eventFromBranch = (branch) => {
   const env = refEnv(branch)
   if (env === "prod") {
@@ -42,10 +44,15 @@ module.exports = async (options) => {
     process.env.KW_RANCHER_PROJECT_NAME ||
     repositoryName
 
+  const webhookBaseDomain =
+    options.webhookBaseDomain ||
+    process.env.KW_WEBHOOK_BASE_DOMAIN ||
+    defaults.webhookBaseDomain
+
   const webhookUri =
     options.webhookUri ||
     process.env.KUBEWEBHOOK_URI ||
-    `https://webhook-${rancherProjectName}.fabrique.social.gouv.fr`
+    `https://webhook-${rancherProjectName}.${webhookBaseDomain}`
 
   const repositoryUrlencoded = encodeURIComponent(repository)
   const token =

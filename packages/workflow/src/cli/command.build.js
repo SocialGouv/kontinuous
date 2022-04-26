@@ -20,6 +20,8 @@ module.exports = program
   .addOption(options.cwd)
   .addOption(options.upload)
   .addOption(options.set)
+  .addOption(options.baseDomain)
+  .addOption(options.registry)
   .option("--output, -o", "enable direct output of manifest")
   .option(
     "--syntax-highlight, -s",

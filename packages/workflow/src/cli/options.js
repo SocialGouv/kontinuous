@@ -50,3 +50,15 @@ module.exports.rancherProjectId = new Option(
   "--rancher-project-id <project-id>",
   "rancher project id, default retrieved from ci namespace"
 )
+
+module.exports.baseDomain = new Option("--base-domain <host>", "base domain")
+
+module.exports.webhookBaseDomain = new Option(
+  "--webhook-base-domain <host>",
+  "webhook base domain"
+)
+
+module.exports.registry = new Option(
+  "--registry <uri>",
+  "docker registry target"
+)

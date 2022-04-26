@@ -66,6 +66,14 @@ const builder = async (envVars, options = {}) => {
     )
   }
 
+  if (options.baseDomain) {
+    envVars.KW_BASE_DOMAIN = options.baseDomain
+  }
+
+  if (options.registry) {
+    envVars.KW_REGISTRY = options.registry
+  }
+
   const {
     KW_BUILD_PATH,
     KW_KUBEWORKFLOW_PATH,

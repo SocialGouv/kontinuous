@@ -12,6 +12,7 @@ module.exports = program
   .description("stream logs pipeline from webhook")
   .addOption(options.cwd)
   .addOption(options.rancherProjectName)
+  .addOption(options.webhookBaseDomain)
   .option("--repository", "git repository url, default to current")
   .option("--branch", "git branch, default to current")
   .option("--commit", "git commit sha, default to last commit of branch")

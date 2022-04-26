@@ -8,6 +8,8 @@ const cleanGitRef = require("~common/utils/clean-git-ref")
 
 const MAX_DNS_LENGTH = 63
 
+const defaults = require("~/config/defaults")
+
 module.exports = (values) => {
   
   const {
@@ -17,6 +19,8 @@ module.exports = (values) => {
     KW_GIT_REPOSITORY,
     KW_GIT_REF,
     KW_GIT_SHA,
+    KW_BASE_DOMAIN,
+    KW_REGISTRY,
   } = buildCtx.require("env")
 
   const gitBranch = cleanGitRef(KW_GIT_REF)
@@ -68,13 +72,17 @@ module.exports = (values) => {
     imageTag = `sha-${sha}`
   }
 
-  const rootSocialGouvDomain = "fabrique.social.gouv.fr"
+  let domain
+  if(KW_BASE_DOMAIN){
+    domain = KW_BASE_DOMAIN
+  } else {
+    domain = isProd ? defaults.rootDomain : `dev.${defaults.rootDomain}`
+  }
   
-  const domain = isProd ? rootSocialGouvDomain : `dev.${rootSocialGouvDomain}`
   
   const host = `${subdomain}.${domain}`
 
-  const registry = "ghcr.io/socialgouv"
+  const registry = KW_REGISTRY || defaults.registry
   const imageRepository = repositoryName
 
   const rancherProjectId = KW_RANCHER_PROJECT_ID

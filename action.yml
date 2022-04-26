@@ -2,10 +2,10 @@ name: "Autodevops deploy"
 description: "Autodevops deploy using Helm template and kapp"
 inputs:
   rancherProjectId:
-    description: "The Rancher project ID, usually secrets.KW_RANCHER_PROJECT_ID"
+    description: "The Rancher project ID, usually secrets.RANCHER_PROJECT_ID"
     required: true
   rancherProjectName:
-    description: "The Rancher project name, usually secrets.KW_RANCHER_PROJECT_NAME, usefull jobs that needs secrets or ci namespaces"
+    description: "The Rancher project name, usually secrets.RANCHER_PROJECT_NAME, usefull jobs that needs secrets or ci namespaces"
     required: true
   environment:
     description: "The deployment environment (dev | preprod | prod), default to prod on version tag, preprod on master or main, else dev"
@@ -29,6 +29,10 @@ inputs:
     description: "deep final override of values in yaml format"
   inlineSet:
     description: "override final values using in yaml format, supporting subkeys"
+  baseDomain:
+    description: "set base domain, usually secrets.SOCIALGOUV_BASE_DOMAIN"
+  registry:
+    description: "set docker registry uri"
 outputs:
   url:
     description: "Main deployment URL"
@@ -118,6 +122,8 @@ runs:
         KW_RANCHER_PROJECT_NAME: ${{ inputs.rancherProjectName }}
         KW_KUBECONFIG_CONTEXT: ${{ inputs.kubeconfigContext }}
         KW_DEPLOY_TIMEOUT: ${{ inputs.timeout }}
+        KW_BASE_DOMAIN: ${{ inputs.baseDomain }}
+        KW_REGISTRY: ${{ inputs.registry }}
       run: packages/workflow/bin/kube-workflow deploy --cwd ${{ env.PROJECT_PATH }} -f ${{ env.KW_BUILD_PATH }}/manifests.yaml
 
     - name: Define environment URL

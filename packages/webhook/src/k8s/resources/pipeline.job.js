@@ -1,7 +1,9 @@
-const imageBase = "ghcr.io/socialgouv"
-// const imageBase = "harbor.fabrique.social.gouv.fr/sre"
-const image = `${imageBase}/kube-workflow:latest`
-const checkoutImage = `${imageBase}/kube-workflow/degit:latest`
+// const image = "ghcr.io/socialgouv/kube-workflow:latest"
+// const checkoutImage = "ghcr.io/socialgouv/kube-workflow/degit:latest"
+
+const image = "harbor.fabrique.social.gouv.fr/sre/kube-workflow:latest"
+const checkoutImage =
+  "harbor.fabrique.social.gouv.fr/sre/kube-workflow/degit:latest"
 
 module.exports = ({
   namespace,
@@ -12,6 +14,7 @@ module.exports = ({
   gitBranch,
   gitCommit,
   uploadUrl,
+  baseDomain,
 }) => ({
   apiVersion: "batch/v1",
   kind: "Job",
@@ -75,6 +78,10 @@ module.exports = ({
             ],
             env: [
               {
+                name: "KW_BASE_DOMAIN",
+                value: baseDomain,
+              },
+              {
                 name: "KW_GIT_REPOSITORY_URL",
                 value: repositoryUrl,
               },
@@ -87,7 +94,7 @@ module.exports = ({
                 value: gitCommit,
               },
               ...(uploadUrl
-                ? [{ name: "KUBEWORKFLOW_BUILD_UPLOAD_URL", value: uploadUrl }]
+                ? [{ name: "KW_BUILD_UPLOAD_URL", value: uploadUrl }]
                 : []),
             ],
             volumeMounts: [
