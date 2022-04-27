@@ -36,7 +36,7 @@ spec:
         - {{- if .Values.image }}
           image: "{{ .Values.image }}"
           {{- else }}
-          image: "{{ or .Values.registry .Values.global.registry }}{{ if (or .Values.imageProject .Values.global.imageProject) }}{{ (print "/" (or .Values.imageProject .Values.global.imageProject)) }}{{ end }}/{{ or .Values.imageRepository .Values.global.imageRepository }}{{ if .Values.imagePackage }}{{ (print "/" .Values.imagePackage) }}{{ end }}:{{ or .Values.imageTag .Values.global.imageTag }}"
+          image: "{{ or .Values.registry .Values.global.registry }}{{ if (or .Values.imageProject .Values.global.imageProject) }}{{ (print "/" (or .Values.imageProject .Values.global.imageProject)) }}{{ end }}{{ if (or .Values.imageRepository .Values.global.imageRepository) }}{{ (print "/" (or .Values.imageRepository .Values.global.imageRepository)) }}{{ end }}{{ if .Values.imagePackage }}{{ (print "/" .Values.imagePackage) }}{{ end }}:{{ or .Values.imageTag .Values.global.imageTag }}"
           {{- end }}
           {{- if .Values.entrypoint }}
           command: |

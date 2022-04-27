@@ -55,3 +55,53 @@ jobs:
         run: kubectl get pods -n test-namespace --field-selector=status.phase=Running | grep "app"
       - name: ingress
         run: kubectl get ingress -n test-namespace --field-selector metadata.name=app -o=jsonpath='{.items[0].spec.rules[0].host}' | grep "test.demo.net"
+  app-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Kubernetes KinD Cluster
+        uses: helm/kind-action@v1.2.0
+      - run: kubectl create ns test-project-ci
+      - name: test app-simple
+        uses: "./"
+        with:
+          environment: prod
+          token: ${{ secrets.GITHUB_TOKEN }}
+          rancherProjectId: "cluster:project"
+          rancherProjectName: "test-project"
+          cwd: .github/e2e/app-simple
+          kubeconfigContext: kind-chart-testing
+          inlineValues: |
+            app:
+              image: nginx
+              containerPort: 80
+      - run: kubectl get pods -n kube-workflow
+      - run: kubectl get pods -n kube-workflow  --field-selector=status.phase=Running | grep "app"
+  app-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Kubernetes KinD Cluster
+        uses: helm/kind-action@v1.2.0
+      - run: kubectl create ns test-project-ci
+      - name: test app-simple
+        uses: "./"
+        with:
+          environment: prod
+          token: ${{ secrets.GITHUB_TOKEN }}
+          rancherProjectId: "cluster:project"
+          rancherProjectName: "test-project"
+          cwd: .github/e2e/app-simple
+          kubeconfigContext: kind-chart-testing
+          inlineValues: |
+            global:
+              imageRepository: ""
+            app:
+              imagePackage: nginx
+              imageRepository: ""
+              registry: docker.io
+              containerPort: 80
+        env:
+          KW_GIT_REF: v1.21.6
+      - run: kubectl get pods -n kube-workflow
+      - run: kubectl get pods -n kube-workflow  --field-selector=status.phase=Running | grep "app"
