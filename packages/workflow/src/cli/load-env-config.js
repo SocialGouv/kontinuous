@@ -6,6 +6,6 @@ module.exports = async (cwd = process.cwd()) => {
   await loadEnvConfigFiles({
     filePrefix: ".kw",
     envPrefix: "KW_",
-    dirs: [cwd, homedir],
+    dirs: [cwd, `${cwd}/.kw`, `${cwd}/.kube-workflow`, homedir],
   })
 }
