@@ -76,7 +76,7 @@ jobs:
               image: nginx
               containerPort: 80
       - run: kubectl get pods -n kube-workflow
-      - run: kubectl get pods -n kube-workflow  --field-selector=status.phase=Running | grep "app"
+      - run: kubectl get pods -n kube-workflow --field-selector=status.phase=Running | grep "app"
   app-tag:
     runs-on: ubuntu-latest
     steps:
@@ -104,4 +104,7 @@ jobs:
         env:
           KW_GIT_REF: v1.21.6
       - run: kubectl get pods -n kube-workflow
-      - run: kubectl get pods -n kube-workflow  --field-selector=status.phase=Running | grep "app"
+      - run: kubectl get pods -n kube-workflow --field-selector=status.phase=Running | grep "app"
+      - name: "use tagged image"
+        run:
+          kubectl get pods -n kube-workflow --field-selector=status.phase=Running -o jsonpath="{.items[*].spec.containers[*].image}" | grep "docker.io/nginx:1.21.6" 

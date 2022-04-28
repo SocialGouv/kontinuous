@@ -32,3 +32,5 @@ metabase:
   enabled: false
 redis:
   enabled: false
+oauth2-proxy:
+  enabled: false

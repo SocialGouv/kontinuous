@@ -26,6 +26,10 @@ dependencies:
     repository: file://./charts/metabase
     condition: metabase.enabled
     version: 1.18.10
+  - name: oauth2-proxy
+    repository: file://./charts/oauth2-proxy
+    condition: oauth2-proxy.enabled
+    version: 1.18.10
   - name: pgweb
     repository: file://./charts/pgweb
     condition: pgweb.enabled

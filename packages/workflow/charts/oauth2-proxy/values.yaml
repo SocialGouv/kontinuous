@@ -1,10 +1,12 @@
 enabled:
 namespace:
 host:
-certSecretName:
+rancherProjectId: my-cluser-id:my-project-id
+isProd: false
+isPreProd: false
 env: []
 envFrom: []
 ingress:
   enabled: true
   annotations: {}
-needs: []
+upstream: 

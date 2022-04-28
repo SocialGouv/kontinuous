@@ -1,0 +1,12 @@
+apiVersion: v2
+name: oauth2-proxy
+version: 1.18.10
+home: https://github.com/SocialGouv
+description: oauth2-proxy
+icon: https://avatars.githubusercontent.com/u/45039513?v=4
+sources:
+  - https://github.com/SocialGouv/actions
+maintainers:
+  - name: Fabrique numérique des Ministères Sociaux
+    email: dsi-incubateur@sg.social.gouv.fr
+appVersion: 1.18.10

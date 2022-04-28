@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: oauth2-proxy
+    application: {{ .Values.global.repositoryName }}
+  name: oauth2-proxy
+  namespace: {{ or .Values.namespace .Values.global.namespace }}
+  annotations:
+    {{- include "annotations.kapp-deployment" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: oauth2-proxy
+  template:
+    metadata:
+      labels:
+        component: oauth2-proxy
+        application: {{ .Values.global.repositoryName }}
+    spec:
+      containers:
+        - image: quay.io/oauth2-proxy/oauth2-proxy:v7.2.1
+          args: ["--upstream",  {{ .Values.upstream }}]
+          name: app
+          ports:
+            - containerPort: 4180
+              name: http
+          resources:
+            limits:
+              cpu: 0.5
+              memory: 256Mi
+            requests:
+              cpu: 0.2
+              memory: 128Mi
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: "/ping"
+              port: http
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: "/ping"
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: "/ping"
+              port: http
+            periodSeconds: 5
+            initialDelaySeconds: 30
+          env:
+            - name: "OAUTH2_PROXY_REDIRECT_URL"
+              value: https://{{ or .Values.host .Values.global.host }}/oauth2/callback
+            {{- if gt (len .Values.env) 0 }}
+            {{- tpl (.Values.env | toYaml) . | nindent 12 }}
+            {{- end }}
+          envFrom:
+            {{- if gt (len .Values.envFrom) 0 }}
+            {{- tpl (.Values.envFrom | toYaml) . | nindent 12 }}
+            {{- end }}
+          

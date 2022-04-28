@@ -12,9 +12,9 @@ metadata:
     {{- include "annotations.letsencrypt-cert" . | nindent 4 }}
     {{- end }}
   labels:
-    component: {{ or .Values.component .Chart.Name }}
+    component: oauth2-proxy
     application: {{ .Values.global.repositoryName }}
-  name: {{ or .Values.component .Chart.Name }}
+  name: oauth2-proxy
   namespace: {{ or .Values.namespace .Values.global.namespace }}
 spec:
   rules:
@@ -38,4 +38,4 @@ spec:
       {{- else }}
       secretName: "wildcard-crt"
       {{- end }}
-{{- end }}
+{{ end }}

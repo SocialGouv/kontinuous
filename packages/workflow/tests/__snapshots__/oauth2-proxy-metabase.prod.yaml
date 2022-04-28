@@ -1,0 +1,287 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`oauth2-proxy-metabase.prod 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: '1234'
+    kubeworkflow/gitBranch: feature-branch-1
+    kubeworkflow/mainNamespace: 'true'
+    kapp.k14s.io/exists: ''
+  labels:
+    application: test-oauth2-proxy-metabase
+  name: test-oauth2-proxy-metabase
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-oauth2-proxy-metabase
+  annotations:
+    kapp.k14s.io/disable-original: ''
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-oauth2-proxy-metabase
+  annotations:
+    kapp.k14s.io/disable-original: ''
+automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    component: metabase
+    application: test-oauth2-proxy-metabase
+  name: metabase
+  namespace: test-oauth2-proxy-metabase
+  annotations:
+    kapp.k14s.io/disable-original: ''
+data:
+  MB_APPLICATION_NAME: metabase
+  MB_DB_TYPE: postgres
+  MB_ADMIN_EMAIL: admin@fabrique.social.gouv.fr
+  MB_ANON_TRACKING_ENABLED: 'false'
+  MB_APPLICATION_LOGO_URL: https://socialgouv.github.io/support/_media/marianne.jpeg
+  MB_EMAIL_FROM_ADDRESS: contact@fabrique.social.gouv.fr
+  MB_ENABLE_EMBEDDING: 'true'
+  MB_ENABLE_PUBLIC_SHARING: 'true'
+  MB_SITE_LOCALE: fr
+  MB_SITE_NAME: Fabrique des ministères sociaux
+  MB_SITE_URL: https://metabase-test-oauth2-proxy-metabase.fabrique.social.gouv.fr
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: metabase
+    application: test-oauth2-proxy-metabase
+  name: metabase
+  namespace: test-oauth2-proxy-metabase
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: metabase
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: oauth2-proxy
+    application: test-oauth2-proxy-metabase
+  name: oauth2-proxy
+  namespace: test-oauth2-proxy-metabase
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 4180
+  selector:
+    component: oauth2-proxy
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: metabase
+    application: test-oauth2-proxy-metabase
+  name: metabase
+  namespace: test-oauth2-proxy-metabase
+  annotations:
+    kapp.k14s.io/change-group: kube-workflow/test-oauth2-proxy-metabase
+    kapp.k14s.io/change-group.metabase: kube-workflow/metabase.test-oauth2-proxy-metabase
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/nonce: ''
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: metabase
+  template:
+    metadata:
+      labels:
+        component: metabase
+    spec:
+      containers:
+        - image: metabase/metabase:v0.42.4
+          name: metabase
+          envFrom:
+            - configMapRef:
+                name: metabase
+          ports:
+            - containerPort: 3000
+              name: http
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 10
+            initialDelaySeconds: 240
+            successThreshold: 1
+            timeoutSeconds: 10
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: oauth2-proxy
+    application: test-oauth2-proxy-metabase
+  name: oauth2-proxy
+  namespace: test-oauth2-proxy-metabase
+  annotations:
+    kapp.k14s.io/change-group: kube-workflow/test-oauth2-proxy-metabase
+    kapp.k14s.io/change-group.oauth2-proxy: kube-workflow/oauth2-proxy.test-oauth2-proxy-metabase
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/nonce: ''
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: oauth2-proxy
+  template:
+    metadata:
+      labels:
+        component: oauth2-proxy
+        application: test-oauth2-proxy-metabase
+    spec:
+      containers:
+        - image: quay.io/oauth2-proxy/oauth2-proxy:v7.2.1
+          args:
+            - '--upstream'
+            - http://metabase
+          name: app
+          ports:
+            - containerPort: 4180
+              name: http
+          resources:
+            limits:
+              cpu: 0.5
+              memory: 256Mi
+            requests:
+              cpu: 0.2
+              memory: 128Mi
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /ping
+              port: http
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /ping
+              port: http
+            periodSeconds: 5
+            initialDelaySeconds: 30
+          env:
+            - name: OAUTH2_PROXY_REDIRECT_URL
+              value: >-
+                https://test-oauth2-proxy-metabase.fabrique.social.gouv.fr/oauth2/callback
+            - name: SOME_ENV
+              value: some value
+          envFrom:
+            - secretRef:
+                name: some-secret
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io: cluster-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-original: ''
+  labels:
+    component: oauth2-proxy
+    application: test-oauth2-proxy-metabase
+  name: oauth2-proxy
+  namespace: test-oauth2-proxy-metabase
+spec:
+  rules:
+    - host: oauth2-proxy-test-oauth2-proxy-metabase.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: oauth2-proxy
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - oauth2-proxy-test-oauth2-proxy-metabase.fabrique.social.gouv.fr
+      secretName: oauth2-proxy-crt
+"
+`;
