@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-set -x
 
 # check mandatory environment variables
 MANDATORY_VARS="PGPASSWORD PGHOST PGUSER PGDATABASE RESTORE_PATH"
