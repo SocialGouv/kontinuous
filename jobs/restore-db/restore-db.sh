@@ -39,4 +39,6 @@ pg_restore \
 
 set -e
 
-psql -v ON_ERROR_STOP=1 "$PGDATABASE" -c "ALTER SCHEMA public owner to \"${PGUSER}\";"
+OWNER=${PGUSER%%@*}
+
+psql -v ON_ERROR_STOP=1 "$PGDATABASE" -c "ALTER SCHEMA public owner to \"${OWNER}\";"
