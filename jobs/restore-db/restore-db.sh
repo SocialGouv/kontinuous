@@ -2,7 +2,7 @@
 set -e
 
 # check mandatory environment variables
-MANDATORY_VARS="PGPASSWORD PGHOST PGUSER PGDATABASE"
+MANDATORY_VARS="PGPASSWORD PGHOST PGUSER PGDATABASE RESTORE_PATH"
 for VAR in $MANDATORY_VARS; do
   if [[ -z "${!VAR}" ]]; then
     echo "${VAR} environment variable is empty"
@@ -12,12 +12,11 @@ done
 
 PGPORT=${PGPORT:-5432}
 
-if [ -n "$RESTORE_PATH" ]; then
-  DUMP="$RESTORE_PATH"
-else
-  LATEST=$(ls -1Fr /mnt/data | head -n 1);
-  DUMP="/mnt/data/\${LATEST}\${FILE}"
+MOUNT_PATH=${$MOUNT_PATH:-""}
+if [ -n "$MOUNT_PATH" ]; then
+  export LATEST=$(ls -1Fr $MOUNT_PATH | head -n 1);
 fi
+DUMP=$(eval "${MOUNT_PATH}${RESTORE_PATH}")
 
 echo "Restore ${DUMP} into ${PGDATABASE}"
 
