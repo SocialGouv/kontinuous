@@ -95,17 +95,20 @@ module.exports = (values) => {
 
   const productionDatabase = repositoryName
 
+  const branchSlug32 = slug(gitBranch, 32)
+
   const pgDatabase = isProd
     ? productionDatabase
     : isPreProd
     ? "preprod"
-    : `autodevops_${branchSlug}`
+    : `autodevops_${branchSlug32}`
 
   const pgUser = isProd
     ? productionDatabase
     : isPreProd
     ? "preprod"
-    : `user_${branchSlug}`
+    : `user_${branchSlug32}`
+  
 
   const rancherProjectName = KW_RANCHER_PROJECT_NAME || repositoryName
   const jobNamespace = `${rancherProjectName}-ci`
