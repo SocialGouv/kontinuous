@@ -19,17 +19,15 @@ else
   DUMP="/mnt/data/\${LATEST}\${FILE}"
 fi
 
-echo "Restore \${DUMP} into \${PGDATABASE}";
+echo "Restore ${DUMP} into ${PGDATABASE}"
 
-pg_isready;
+pg_isready
 
 pg_restore \
-  --dbname \${PGDATABASE} \
+  --dbname "${PGDATABASE}" \
   --clean --if-exists \
   --exclude-schema=audit \
   --no-owner \
   --no-acl \
   --verbose \
-  \${DUMP};
-
-
+  "${DUMP}"
