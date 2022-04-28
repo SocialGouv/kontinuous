@@ -1,6 +1,6 @@
 {
   "name": "kube-webhook",
-  "version": "1.18.10",
+  "version": "1.19.0",
   "description": "",
   "license": "MIT",
   "author": "",
