@@ -2,7 +2,7 @@
 set -e
 
 # check mandatory environment variables
-MANDATORY_VARS="PGPASSWORD PGHOST PGUSER PGDATABASE RESTORE_PATH"
+MANDATORY_VARS="PGPASSWORD PGHOST PGUSER PGDATABASE RESTORE_PATH OWNER"
 for VAR in $MANDATORY_VARS; do
   if [[ -z "${!VAR}" ]]; then
     echo "${VAR} environment variable is empty"
@@ -39,6 +39,6 @@ pg_restore \
 
 set -e
 
-OWNER=${PGUSER%%@*}
+OWNER=${OWNER%%@*}
 
-psql -v ON_ERROR_STOP=1 "$PGDATABASE" -c "ALTER SCHEMA public owner to \"${OWNER}\";"
+psql -v ON_ERROR_STOP=1 "$PGDATABASE" -c "ALTER SCHEMA public OWNER TO \"${OWNER}\";"
