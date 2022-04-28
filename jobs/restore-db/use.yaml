@@ -8,4 +8,6 @@ runs:
     env:
       - name: RESTORE_PATH
         value: "{{ $.with.restorePath }}"
+      - name: MOUNT_PATH
+        value: "{{ $.with.mountPath }}"
     run: /action/restore-db.sh
