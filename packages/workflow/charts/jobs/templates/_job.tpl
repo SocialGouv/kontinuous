@@ -180,6 +180,9 @@ spec:
             - name: workflow
               mountPath: /workflow
               subPath: {{ $val.global.branchSlug }}/{{ $val.global.sha }}
+            {{- if $run.volumeMounts }}
+            {{- tpl ($run.volumeMounts | toYaml) . | nindent 12 }}
+            {{- end }}
 
       volumes:
         - name: workspace
