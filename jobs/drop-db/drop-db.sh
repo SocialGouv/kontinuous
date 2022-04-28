@@ -12,4 +12,4 @@ done
 
 PGPORT=${PGPORT:-5432}
 
-dropdb "$DATABASE"
+dropdb -f "$DATABASE"
