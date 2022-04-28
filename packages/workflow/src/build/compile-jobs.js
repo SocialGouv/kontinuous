@@ -117,7 +117,13 @@ async function compile(
           }
           newRun[key] = r[key]
         }
-        newRun.with = run.with
+        const jobRunOmitKeys = ["use", "name", "jobName", "needs", "scope", "scopes", "parentWith"]
+        for (const key of Object.keys(run)) {
+          if (jobRunOmitKeys.includes(key)){  
+            continue
+          }
+          newRun[key] = run[key]
+        }
         if (!newRun.needs) {
           newRun.needs = []
         }
