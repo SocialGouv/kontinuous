@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.19.1 (2022-04-28)
+
+
+### Bug Fixes
+
+* increase app default resources ([#44](https://github.com/SocialGouv/kube-workflow/issues/44)) ([202aaef](https://github.com/SocialGouv/kube-workflow/commit/202aaef77436b7960a1d6883d20f1d8be6be4a3b))
+
 ## 1.19.0 (2022-04-28)
 
 
