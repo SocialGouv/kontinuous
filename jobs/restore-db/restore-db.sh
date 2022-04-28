@@ -2,7 +2,7 @@
 set -e
 
 # check mandatory environment variables
-MANDATORY_VARS="PGPASSWORD PGHOST PGUSER PGDATABASE SEED_PATH"
+MANDATORY_VARS="PGPASSWORD PGHOST PGUSER PGDATABASE"
 for VAR in $MANDATORY_VARS; do
   if [[ -z "${!VAR}" ]]; then
     echo "${VAR} environment variable is empty"
