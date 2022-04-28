@@ -12,7 +12,7 @@ done
 
 PGPORT=${PGPORT:-5432}
 
-MOUNT_PATH=${$MOUNT_PATH:-""}
+MOUNT_PATH=${MOUNT_PATH:-""}
 if [ -n "$MOUNT_PATH" ]; then
   export LATEST=$(ls -1Fr $MOUNT_PATH | head -n 1);
 fi
