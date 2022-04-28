@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -x
 
 # check mandatory environment variables
 MANDATORY_VARS="PGPASSWORD PGHOST PGUSER PGDATABASE RESTORE_PATH"
@@ -16,7 +17,7 @@ MOUNT_PATH=${MOUNT_PATH:-""}
 if [ -n "$MOUNT_PATH" ]; then
   export LATEST=$(ls -1Fr $MOUNT_PATH | head -n 1);
 fi
-DUMP=$(eval "${MOUNT_PATH}${RESTORE_PATH}")
+DUMP=$(eval echo "${MOUNT_PATH}${RESTORE_PATH}")
 
 echo "Restore ${DUMP} into ${PGDATABASE}"
 
