@@ -25,6 +25,8 @@ echo "Restore ${DUMP} into ${PGDATABASE}"
 
 pg_isready
 
+set +e
+
 pg_restore \
   --dbname "$PGDATABASE" \
   --clean --if-exists \
@@ -34,5 +36,7 @@ pg_restore \
   --no-acl \
   --verbose \
   "${DUMP}"
+
+set -e
 
 psql -v ON_ERROR_STOP=1 "$PGDATABASE" -c "ALTER SCHEMA public owner to ${PGUSER};"
