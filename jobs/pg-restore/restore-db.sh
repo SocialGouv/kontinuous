@@ -23,7 +23,10 @@ if [ -n "$MOUNT_PATH" ]; then
     export MOUNT_PATH="$MOUNT_PATH/"
   fi
 fi
+
 DUMP=$(eval echo "${MOUNT_PATH}${RESTORE_PATH}")
+
+OWNER=${OWNER%%@*}
 
 echo "Restore ${DUMP} into ${PGDATABASE}"
 
@@ -36,13 +39,12 @@ pg_restore \
   --clean --if-exists \
   --exclude-schema=audit \
   --no-owner \
-  --role "$PGUSER" \
+  --role "$OWNER" \
   --no-acl \
   --verbose \
   "${DUMP}"
 
 set -e
 
-OWNER=${OWNER%%@*}
 
 psql -v ON_ERROR_STOP=1 "$PGDATABASE" -c "ALTER SCHEMA public OWNER TO \"${OWNER}\";"
