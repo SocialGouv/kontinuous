@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 # check mandatory environment variables
 MANDATORY_VARS="PGPASSWORD PGHOST PGUSER DATABASE"
@@ -12,4 +11,4 @@ done
 
 PGPORT=${PGPORT:-5432}
 
-dropdb "$DATABASE"
+dropdb "$DATABASE" || true
