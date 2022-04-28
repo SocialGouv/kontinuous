@@ -12,4 +12,4 @@ done
 
 PGPORT=${PGPORT:-5432}
 
-psql -c "DROP DATABASE \"${DATABASE}\";"
+dropdb "$DATABASE"
