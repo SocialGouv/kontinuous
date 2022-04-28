@@ -118,10 +118,10 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 200m
-              memory: 256Mi
+              cpu: 500m
+              memory: 512Mi
             requests:
-              cpu: 50m
+              cpu: 100m
               memory: 128Mi
           startupProbe:
             failureThreshold: 12

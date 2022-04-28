@@ -1,14 +1,14 @@
 enabled:
-namespace: 
-host: 
-registry: 
+namespace:
+host:
+registry:
 imagePath:
 imageProject:
 imageRepository:
 imagePackage: app
-imageTag: 
-image: 
-ttl: 
+imageTag:
+image:
+ttl:
 rancherProjectId: my-cluser-id:my-project-id
 isProd: false
 isPreProd: false
@@ -20,10 +20,10 @@ envFrom: []
 probesPath: /index.html
 resources:
   limits:
-    cpu: 200m
-    memory: 256Mi
+    cpu: 500m
+    memory: 512Mi
   requests:
-    cpu: 50m
+    cpu: 100m
     memory: 128Mi
 autoscale:
   enabled: false
@@ -32,7 +32,7 @@ autoscale:
   averageUtilization:
     cpu: 100
     memory: 100
-certSecretName: 
+certSecretName:
 waitForPostgres: false
 addVolumes: []
 volumes: []
