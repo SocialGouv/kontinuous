@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+if [ -n "$INPUT_PGDATABASE" ]; then
+  PGDATABASE="$INPUT_PGDATABASE"
+fi
+
 # check mandatory environment variables
 MANDATORY_VARS="PGPASSWORD PGHOST PGUSER PGDATABASE RESTORE_PATH OWNER"
 for VAR in $MANDATORY_VARS; do
