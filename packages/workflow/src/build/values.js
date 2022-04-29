@@ -136,6 +136,7 @@ module.exports = (values) => {
       imageRepository,
       imageTag,
       branchSlug,
+      branchSlug32,
       gitBranch,
       jobNamespace,
       sha,
