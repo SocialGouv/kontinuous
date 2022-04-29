@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.21.0](https://github.com/SocialGouv/kube-workflow/compare/v1.20.4...v1.21.0) (2022-04-29)
+
+
+### Features
+
+* support retrocompat yaml 1-1 ([f0edcb4](https://github.com/SocialGouv/kube-workflow/commit/f0edcb425727a1c0ec4ea9b0dbc569bbccf86511))
+
 ### [1.20.4](https://github.com/SocialGouv/kube-workflow/compare/v1.20.3...v1.20.4) (2022-04-29)
 
 
