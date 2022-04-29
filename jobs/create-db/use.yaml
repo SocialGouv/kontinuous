@@ -23,12 +23,16 @@ runs:
     envFrom:
       - secretRef:
           name: "{{ or $.with.pgAdminSecretRefName $.parentWith.pgAdminSecretRefName }}"
-    env:
+    env: |
       - name: NEW_DB_NAME
+        {{- if $.with.database }}
+        value: {{ $.with.database }}
+        {{- else }}
         valueFrom:
           secretKeyRef:
             key: PGDATABASE
-            name: "{{ or $.with.database $.Values.global.pgSecretName }}"
+            name: "{{ $.Values.global.pgSecretName }}"
+        {{- end }}
       - name: NEW_USER
         valueFrom:
           secretKeyRef:

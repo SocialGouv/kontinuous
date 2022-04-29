@@ -282,29 +282,29 @@ spec:
           envFrom:
             - secretRef:
                 name: azure-pg-admin-user
-          env:
+          env: |
             - name: NEW_DB_NAME
               valueFrom:
                 secretKeyRef:
                   key: PGDATABASE
-                  name: pg-user-feature-branch-1
+                  name: \\"pg-user-feature-branch-1\\"
             - name: NEW_USER
               valueFrom:
                 secretKeyRef:
                   key: PGUSER
-                  name: pg-user-feature-branch-1
+                  name: \\"pg-user-feature-branch-1\\"
             - name: NEW_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: PGPASSWORD
-                  name: pg-user-feature-branch-1
+                  name: \\"pg-user-feature-branch-1\\"
             - name: PGHOST
               valueFrom:
                 secretKeyRef:
                   key: PGHOST
-                  name: pg-user-feature-branch-1
+                  name: \\"pg-user-feature-branch-1\\"
             - name: NEW_DB_EXTENSIONS
-              value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
+              value: \\"hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent\\"
           command:
             - /bin/bash
             - '-c'
