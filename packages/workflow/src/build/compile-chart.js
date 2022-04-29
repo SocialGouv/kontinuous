@@ -3,7 +3,6 @@ const yaml = require("js-yaml")
 const deepmerge = require("~common/utils/deepmerge")
 
 const getDirectories = require("~common/utils/get-directories")
-const loadYamlFile = require("~common/utils/load-yaml-file")
 const getYamlPath = require("~common/utils/get-yaml-path")
 
 const { buildCtx } = require("./ctx")
@@ -83,6 +82,13 @@ module.exports = async (values) => {
   const componentKeys = Object.keys(values)
 
   for (const { name } of [...dependencies]) {
+    if(!values[name]){
+      values[name] = {}
+    }
+    if(values[name].enabled===undefined){
+      values[name].enabled = false
+    }
+
     for (const componentKey of componentKeys) {
       const isAnInstanceOf = componentKey.startsWith(`${name}-`)
 
