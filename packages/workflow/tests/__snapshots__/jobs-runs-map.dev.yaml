@@ -196,7 +196,7 @@ spec:
                 name: pg-scaleway
           env:
             - name: NEW_DB_NAME
-              value: {}
+              value: autodevops_feature-branch-1
             - name: NEW_USER
               valueFrom:
                 secretKeyRef:

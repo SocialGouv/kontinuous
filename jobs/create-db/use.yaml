@@ -25,7 +25,7 @@ runs:
           name: "{{ tpl (or $.with.pgAdminSecretRefName $.parentWith.pgAdminSecretRefName) . }}"
     env:
       - name: NEW_DB_NAME
-        value: {{ tpl (or $.with.database $.Values.global.pgDatabase) .  }}
+        value: "{{ tpl (or $.with.database $.Values.global.pgDatabase) .  }}"
       - name: NEW_USER
         valueFrom:
           secretKeyRef:
