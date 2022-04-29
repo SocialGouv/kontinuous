@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const fs = require("fs-extra")
-const yaml = require("js-yaml")
+const yaml = require("~common/utils/yaml")
 const asyncShell = require("~common/utils/async-shell")
 
 const main = async () => {

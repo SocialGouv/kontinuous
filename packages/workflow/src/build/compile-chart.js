@@ -1,5 +1,5 @@
 const fs = require("fs-extra")
-const yaml = require("js-yaml")
+const yaml = require("~common/utils/yaml")
 const deepmerge = require("~common/utils/deepmerge")
 
 const getDirectories = require("~common/utils/get-directories")
@@ -62,7 +62,7 @@ module.exports = async (values) => {
     await fs.writeFile(valuesFile, yaml.dump(defaultValuesObj))
     
     // import subcharts in umbrella chart dependencies
-    const subchart = yaml.load(await fs.readFile(chartFile))
+    const subchart = yaml.load(await fs.readFile(chartFile,{encoding:"utf8"}))
     if (!dependencies.find(dependency => dependency.name === subchart.name)){
       dependencies.push({
         name: subchart.name,

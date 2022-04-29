@@ -1,4 +1,4 @@
-const yaml = require("js-yaml")
+const yaml = require("~common/utils/yaml")
 
 const slug = require("~common/utils/slug")
 const logger = require("~common/utils/logger")

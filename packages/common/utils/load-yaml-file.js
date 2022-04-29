@@ -1,5 +1,5 @@
 const fs = require("fs-extra")
-const yaml = require("js-yaml")
+const yaml = require("./yaml")
 
 const getYamlPath = require("./get-yaml-path")
 

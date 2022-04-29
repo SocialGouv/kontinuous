@@ -1,4 +1,4 @@
-const yaml = require("js-yaml")
+const yaml = require("~common/utils/yaml")
 
 const removeNulls = require("~common/utils/remove-nulls")
 

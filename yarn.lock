@@ -5999,12 +5999,15 @@ __metadata:
     rimraf: "npm:^3.0.2"
     slugify: "npm:^1.6.5"
     supertest: "npm:^6.2.2"
+    yaml: "npm:^2.0.1"
   languageName: unknown
   linkType: soft
 
 "kube-workflow-common@npm:*, kube-workflow-common@workspace:packages/common":
   version: 0.0.0-use.local
   resolution: "kube-workflow-common@workspace:packages/common"
+  dependencies:
+    yaml: "npm:^2.0.1"
   peerDependencies:
     fs-extra: ^10.0.1
     git-url-parse: ^11.6.0
@@ -6064,6 +6067,7 @@ __metadata:
     pino-pretty: "npm:^7.6.0"
     pretty-ms: "npm:^7.0.1"
     slugify: "npm:^1.6.5"
+    yaml: "npm:^2.0.1"
   bin:
     kube-workflow: ./bin/kube-workflow
     post-renderer: ./bin/post-renderer
@@ -9814,6 +9818,13 @@ __metadata:
   version: 1.10.2
   resolution: "yaml@npm:1.10.2"
   checksum: d6f04384bdf1105256581aef39991f825e358f3f48f081974b0e0f39ff5240c60ccafb5842cb79d1287517efa2b9ee172c702f2e4855ba6cc46948b40a43aa6e
+  languageName: node
+  linkType: hard
+
+"yaml@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "yaml@npm:2.0.1"
+  checksum: 0f5ad305547f2a9dfd33c7950a4c2fd3e74b7f1d49276cc39371469703a9efc523f4f318a09f7ec681ed0114fc47bf2d8d5deb130573683e079a937e2e7c4a9b
   languageName: node
   linkType: hard
 

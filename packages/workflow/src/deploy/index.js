@@ -1,7 +1,7 @@
 const path = require("path")
 const { spawn } = require("child_process")
 const fs = require("fs-extra")
-const yaml = require("js-yaml")
+const yaml = require("~common/utils/yaml")
 const retry = require("async-retry")
 
 const logger = require("~common/utils/logger")

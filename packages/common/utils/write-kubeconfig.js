@@ -2,8 +2,8 @@ const path = require("path")
 const os = require("os")
 const { mkdtemp } = require("fs/promises")
 const fs = require("fs-extra")
-const yaml = require("js-yaml")
 const mergeWith = require("lodash.mergewith")
+const yaml = require("./yaml")
 
 const configMergeKeys = ["clusters", "users", "contexts"]
 

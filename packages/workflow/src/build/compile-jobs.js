@@ -1,7 +1,7 @@
 const fs = require("fs-extra")
 const path = require("path")
 
-const yaml = require("js-yaml")
+const yaml = require("~common/utils/yaml")
 const degit = require("degit")
 const slug = require("~common/utils/slug")
 

@@ -15,6 +15,6 @@ module.exports = program
   .action(async (file, uploadUrl, _opts, command) => {
     const opts = command.optsWithGlobals()
     configureDebug(opts.D)
-    const manifests = await fs.readFile(file)
+    const manifests = await fs.readFile(file, { encoding: "utf8" })
     await upload({ uploadUrl, manifests })
   })

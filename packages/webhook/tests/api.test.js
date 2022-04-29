@@ -3,7 +3,7 @@ require("jest-specific-snapshot")
 const modjo = require("@modjo-plugins/core")
 
 const request = require("supertest")
-const yaml = require("js-yaml")
+const yaml = require("~common/utils/yaml")
 
 const server = require("../src/server")
 

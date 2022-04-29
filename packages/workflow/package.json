@@ -24,7 +24,8 @@
     "pino": "^7.10.0",
     "pino-pretty": "^7.6.0",
     "pretty-ms": "^7.0.1",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "yaml": "^2.0.1"
   },
   "devDependencies": {
     "jest": "^27.5.1",

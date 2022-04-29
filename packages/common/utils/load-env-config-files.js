@@ -1,14 +1,13 @@
 const fs = require("fs-extra")
 const dotenv = require("dotenv")
-const yaml = require("js-yaml")
 const flattenObject = require("./flatten-object")
 const normalizeEnvKey = require("./normalize-env-key")
+const yaml = require("./yaml")
 
 const getConfigYaml = async (file) => {
   if (!(await fs.pathExists(file))) {
     return
   }
-
   const config = yaml.load(await fs.readFile(file, { encoding: "utf-8" }))
   return flattenObject(config, {
     glue: "_",

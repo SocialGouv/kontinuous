@@ -2,7 +2,7 @@ const os = require("os")
 const path = require("path")
 const { mkdtemp } = require("fs/promises")
 const fs = require("fs-extra")
-const yaml = require("js-yaml")
+const yaml = require("~common/utils/yaml")
 const deepmerge = require("~common/utils/deepmerge")
 
 const asyncShell = require("~common/utils/async-shell")
@@ -218,7 +218,7 @@ const builder = async (envVars, options = {}) => {
       set(values, key, val)
     }
   }
-  
+
   logger.debug("Compiling jobs")
   await compileJobs(values)
   
@@ -241,10 +241,11 @@ const builder = async (envVars, options = {}) => {
       }
     }
   }
+
   
   logger.debug("Compiling chart and subcharts")
   const chart = await compileChart(values)
-
+  
   if (KW_CHARTS) {
     logger.debug(`Enable only standalone charts: "${KW_CHARTS}"`)
     const enableCharts = KW_CHARTS.split(",")
@@ -265,7 +266,7 @@ const builder = async (envVars, options = {}) => {
       values[key].enabled = enableSubcharts.includes(key)
     }
   }
-
+  
   logger.debug("Write values file")
   await fs.writeFile(`${KW_BUILD_PATH}/values.json`, JSON.stringify(values))
 

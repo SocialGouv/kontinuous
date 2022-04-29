@@ -29,7 +29,8 @@
     "pretty-ms": "^7.0.1",
     "qs": "^6.10.3",
     "rimraf": "^3.0.2",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "yaml": "^2.0.1"
   },
   "devDependencies": {
     "jest": "^27.5.1",

@@ -16,5 +16,8 @@
   },
   "engines": {
     "node": ">=14"
+  },
+  "dependencies": {
+    "yaml": "^2.0.1"
   }
 }
