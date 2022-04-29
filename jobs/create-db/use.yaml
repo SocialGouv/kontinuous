@@ -28,7 +28,7 @@ runs:
         valueFrom:
           secretKeyRef:
             key: PGDATABASE
-            name: "{{ $.Values.global.pgSecretName }}"
+            name: "{{ or $.with.database $.Values.global.pgSecretName }}"
       - name: NEW_USER
         valueFrom:
           secretKeyRef:
