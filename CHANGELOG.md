@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.20.0](https://github.com/SocialGouv/kube-workflow/compare/v1.19.1...v1.20.0) (2022-04-29)
+
+
+### Features
+
+* add keycloak chart ([51dd2d5](https://github.com/SocialGouv/kube-workflow/commit/51dd2d5a82731bc523f00f62fd12c28ae0772e5e))
+
+
+### Bug Fixes
+
+* add job create db with database ([d8204e2](https://github.com/SocialGouv/kube-workflow/commit/d8204e2f86e516a666fa42524299654c29db0002))
+* auto disable imported charts ([c699f2d](https://github.com/SocialGouv/kube-workflow/commit/c699f2d2ef8e1da2fa3922ae13f1306fc9977d30))
+* git ref ([36dc904](https://github.com/SocialGouv/kube-workflow/commit/36dc904d74e999c32b05b76b78246a65cc9e539a))
+
 ### 1.19.1 (2022-04-28)
 
 
