@@ -1,5 +1,5 @@
 {
-  "name": "kube-webhook",
+  "name": "~webhook",
   "version": "1.21.0",
   "description": "",
   "license": "MIT",
@@ -34,9 +34,9 @@
   },
   "devDependencies": {
     "jest": "^27.5.1",
-    "kube-workflow-common": "*",
     "nodemon": "^2.0.15",
-    "supertest": "^6.2.2"
+    "supertest": "^6.2.2",
+    "~common": "*"
   },
   "engines": {
     "node": ">=14"

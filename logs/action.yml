@@ -26,15 +26,15 @@ runs:
       id: environment
       run: |
         if [ -n "$GITHUB_HEAD_REF" ]; then
-          KW_GIT_BRANCH=$GITHUB_HEAD_REF
+          KS_GIT_BRANCH=$GITHUB_HEAD_REF
         else
-          KW_GIT_BRANCH=$GITHUB_REF
+          KS_GIT_BRANCH=$GITHUB_REF
         fi
-        KW_GIT_BRANCH=${KW_GIT_BRANCH#refs/heads/}
-        KW_GIT_BRANCH=${KW_GIT_BRANCH#refs/tags/}
-        if [[ "$KW_GIT_BRANCH" =~ ^v[0-9]+\.[0-9]+ ]]; then
+        KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/heads/}
+        KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/tags/}
+        if [[ "$KS_GIT_BRANCH" =~ ^v[0-9]+\.[0-9]+ ]]; then
           ENV=prod
-        elif [ "$KW_GIT_BRANCH" = "master" ] || [ "$KW_GIT_BRANCH" = "main" ]; then
+        elif [ "$KS_GIT_BRANCH" = "master" ] || [ "$KS_GIT_BRANCH" = "main" ]; then
           ENV=preprod
         else
           ENV=dev
@@ -52,26 +52,26 @@ runs:
           WEBHOOK_URI=https://webhook-${{ inputs.rancherProjectName }}.${{ inputs.webhookBaseDomain }}
         fi
         
-        KW_GIT_REPOSITORY_URLENCODED=$(echo $GITHUB_REPOSITORY | sed 's/\//\%2f/g')
+        KS_GIT_REPOSITORY_URLENCODED=$(echo $GITHUB_REPOSITORY | sed 's/\//\%2f/g')
 
         echo "::set-output env=$ENV"
 
         echo "WEBHOOK_URI=$WEBHOOK_URI">>$GITHUB_ENV
-        echo "KW_WEBHOOK_TOKEN=${{ inputs.webhookToken }}">>$GITHUB_ENV
-        echo "KW_GIT_BRANCH=$KW_GIT_BRANCH">>$GITHUB_ENV
-        echo "KW_GIT_COMMIT=$GITHUB_SHA">>$GITHUB_ENV
-        echo "KW_GIT_REPOSITORY_URLENCODED=$KW_GIT_REPOSITORY_URLENCODED">>$GITHUB_ENV
+        echo "KS_WEBHOOK_TOKEN=${{ inputs.webhookToken }}">>$GITHUB_ENV
+        echo "KS_GIT_BRANCH=$KS_GIT_BRANCH">>$GITHUB_ENV
+        echo "KS_GIT_COMMIT=$GITHUB_SHA">>$GITHUB_ENV
+        echo "KS_GIT_REPOSITORY_URLENCODED=$KS_GIT_REPOSITORY_URLENCODED">>$GITHUB_ENV
         echo "EVENT_NAME=$EVENT_NAME">>$GITHUB_ENV
 
     - name: Stream logs of kube pipeline
       shell: bash
       run: |
-        wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${KW_GIT_REPOSITORY_URLENCODED}&event=${EVENT_NAME}&ref=${KW_GIT_BRANCH}&commit=${KW_GIT_COMMIT}&catch=true&follow=true&token=${KW_WEBHOOK_TOKEN}"
+        wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${KS_GIT_REPOSITORY_URLENCODED}&event=${EVENT_NAME}&ref=${KS_GIT_BRANCH}&commit=${KS_GIT_COMMIT}&catch=true&follow=true&token=${KS_WEBHOOK_TOKEN}"
     
     - name: Download manifests artifact
       shell: bash
       run: |
-        wget --content-on-error -q -O manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/download?repository=${KW_GIT_REPOSITORY_URLENCODED}&branch=${KW_GIT_BRANCH}&commit=${KW_GIT_COMMIT}&token=${KW_WEBHOOK_TOKEN}"
+        wget --content-on-error -q -O manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/download?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH}&commit=${KS_GIT_COMMIT}&token=${KS_WEBHOOK_TOKEN}"
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2

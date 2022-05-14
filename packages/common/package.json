@@ -1,5 +1,5 @@
 {
-  "name": "kube-workflow-common",
+  "name": "~common",
   "version": "1.21.0",
   "description": "",
   "license": "MIT",

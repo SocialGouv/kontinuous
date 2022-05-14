@@ -1,5 +1,5 @@
 {
-  "name": "kube-workflow-dev",
+  "name": "~dev",
   "version": "1.21.0",
   "repository": "git@github.com:SocialGouv/kube-workflow.git",
   "license": "MIT",

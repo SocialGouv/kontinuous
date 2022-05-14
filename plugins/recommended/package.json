@@ -1,0 +1,10 @@
+{
+  "name": "values-compilers",
+  "private": true,
+  "packageManager": "yarn@4.0.0-rc.1",
+  "dependencies": {
+    "lodash.get": "^4.4.2",
+    "lodash.mergewith": "^4.6.2",
+    "lodash.set": "^4.3.2"
+  }
+}

@@ -1,0 +1,13 @@
+validators:
+  # dns-limit:
+  #   dir: ./validators/dns-limit
+  # missing-keys:
+  #   dir: ./validators/missing-keys
+  # needs:
+  #   dir: ./validators/needs
+  # resources-uniqness:
+  #   dir: ./validators/resources-uniqness
+
+values-compilers:
+  jobs:
+    dir: ./values-compilers/jobs

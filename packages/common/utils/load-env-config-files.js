@@ -28,7 +28,7 @@ const getConfigEnv = async (file) => {
 }
 
 module.exports = async ({
-  filePrefix,
+  fileName = "config",
   envPrefix,
   dirs = [],
   assign = true,
@@ -38,9 +38,9 @@ module.exports = async ({
     Object.assign(env, src)
   }
   for (const dir of dirs) {
-    extendsEnv(await getConfigYaml(`${dir}/${filePrefix}.yaml`))
-    extendsEnv(await getConfigYaml(`${dir}/${filePrefix}.yml`))
-    extendsEnv(await getConfigEnv(`${dir}/${filePrefix}.env`))
+    extendsEnv(await getConfigYaml(`${dir}/${fileName}.yaml`))
+    extendsEnv(await getConfigYaml(`${dir}/${fileName}.yml`))
+    extendsEnv(await getConfigEnv(`${dir}/${fileName}.env`))
   }
 
   const prefixedEnv = {}

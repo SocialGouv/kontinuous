@@ -2,7 +2,9 @@ const yaml = require("yaml")
 const jsYaml = require("js-yaml")
 
 const load = (input, retroCompat = true) =>
-  retroCompat ? yaml.parse(input, { schema: "yaml-1.1" }) : jsYaml.load(input)
+  retroCompat
+    ? yaml.parse(input.toString(), { schema: "yaml-1.1" })
+    : jsYaml.load(input)
 
 // module.exports.dump = (input) => yaml.stringify(input)
 const dump = (input) => jsYaml.dump(input)
