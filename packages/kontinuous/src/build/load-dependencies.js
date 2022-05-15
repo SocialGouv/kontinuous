@@ -18,7 +18,8 @@ const dependenciesDirName = "dependencies"
 
 const validateName = /^[a-zA-Z\d-_]+$/
 
-const registerSubcharts = async (chart, chartsDir)=>{
+const registerSubcharts = async (chart, chartsDirName, target)=>{
+  const chartsDir = `${target}/${chartsDirName}`
   if(!await fs.pathExists(chartsDir)){
     return
   }
@@ -38,7 +39,7 @@ const registerSubcharts = async (chart, chartsDir)=>{
       name: subchart.name,
       version: subchart.version,
       condition: `${subchart.name}.enabled`,
-      repository: `file://./charts/${chartDir}`
+      repository: `file://./${chartsDirName}/${chartDir}`
     })
   }
 }
@@ -51,11 +52,8 @@ const buildChartFile = async (target, name)=>{
     chart.name = name
   } else {
     chart = createChart(name)
-    const chartsDir = `${target}/charts`
-    await registerSubcharts(chart, chartsDir)
-    
-    const dependenciesDir = `${target}/${dependenciesDirName}`
-    await registerSubcharts(chart, dependenciesDir)
+    await registerSubcharts(chart, "charts", target)
+    await registerSubcharts(chart, dependenciesDirName, target)
 
   }
   await fs.writeFile(chartFile, yaml.dump(chart))
@@ -400,6 +398,49 @@ const resolveAliasOf = (values, rootValues=values, scope=[], chartsAliasMap=new 
   return chartsAliasMap
 }
 
+const valuesEnableStandaloneCharts = (values, config)=>{
+  if (!(config.chart && config.chart.length > 0)) {
+    return
+  }
+  const enableCharts = config.chart
+  for (const val of Object.values(values)) {
+    val.enabled = false
+  }
+  for (const key of enableCharts) {
+    if(!values[key]){
+      values[key] = {}
+    }
+    values[key].enabled = true
+  }
+}
+const valuesOverride = (values, config)=>{
+  if(config.inlineValues) {
+    const inlineValues = yaml.load(config.inlineValues)
+    values = deepmerge(values, inlineValues)
+  }
+
+  const setValues = config.set
+  if(setValues){
+    if(Array.isArray(setValues)){
+      for(const s of setValues){
+        const index = s.indexOf("=");
+        if(index===-1){
+          logger.warn("bad format for --set option, expected: foo=bar")
+          continue
+        }
+        const key = s.slice(0, index)
+        const val = s.slice(index+1)
+        set(values, `${key}`, yaml.parse(val))
+      }
+
+    } else {
+      for(const [key, val] of Object.entries(setValues)){
+        set(values, key, val)
+      }
+    }
+  }
+}
+
 const compileValues = async (config) => {
   let values = {}
   const {buildPath, environment} = config
@@ -444,9 +485,11 @@ const compileValues = async (config) => {
   const buildProjectPath = `${buildPath}/${dependenciesDirName}/project`
   await mergeYamlFileValues(`${buildProjectPath}/values`, values, beforeMergeProjectValues)
   await mergeYamlFileValues(`${buildProjectPath}/env/${environment}/values`, values, beforeMergeProjectValues)
+
+  valuesEnableStandaloneCharts(values, config)
+  valuesOverride(values, config)
+
   values = await require(`${buildProjectPath}/values-compilers`)(values, config)
-
-
 
   const valuesJsFile = `${buildProjectPath}/values.js`
   if(await fs.pathExists(valuesJsFile)){
@@ -460,10 +503,44 @@ const compileValues = async (config) => {
   return values
 }
 
+const copyFilesDir = async (config) => {
+  const {workspaceSubPath, buildPath} = config
+  const filesDir = `${workspaceSubPath}/files`
+  if(!await fs.pathExists(filesDir)){
+    return
+  }
+  await fs.copy(filesDir,`${buildPath}/files`,{dereference: true})
+  await recurseDependency({
+    config,
+    afterChildren: async ({
+      target,
+    })=>{
+      const chartsDir = `${target}/charts`
+      if(!fs.pathExists(chartsDir)){
+        return
+      }
+      const chartDirs = await fs.readdir(chartsDir)
+      for(const chartDir of chartDirs){
+        const chartDirPath = `${chartsDir}/${chartDir}`
+        if(!(await fs.stat(chartDirPath)).isDirectory){
+          continue
+        }
+        const filesPath = `${chartDirPath}/files`
+        if(!fs.pathExists(filesPath)){
+          fs.symlink(filesDir ,filesPath)
+        }
+        const filesPathKontinuous = `${chartDirPath}/kontinuous-files`
+        fs.symlink(filesDir ,filesPathKontinuous)
+      }
+    }
+  })
+}
+
 module.exports = async (config)=>{
   await downloadAndBuildDependencies(config)
   await installPackages(config)
   await mergeEnvTemplates(config)
+  await copyFilesDir(config)
   const values = await compileValues(config)
   
   const {buildPath} = config

@@ -4,21 +4,18 @@ const yaml = require("~common/utils/yaml")
 const asyncShell = require("~common/utils/async-shell")
 
 const main = async () => {
-  if (!(await fs.pathExists(`${process.env.KS_BUILD_PATH}/post-renderer`))) {
+  const postRendererPath = `${process.cwd()}/dependencies/project/post-renderer`
+  if (!(await fs.pathExists(postRendererPath))) {
     process.stdin.pipe(process.stdout)
     return
   }
   const stdin = fs.readFileSync(0, "utf-8")
   const manifests = yaml.loadAll(stdin)
   const json = JSON.stringify(manifests)
-  const rendered = await asyncShell(
-    `${process.env.KS_BUILD_PATH}/post-renderer`,
-    {},
-    (proc) => {
-      proc.stdin.write(json)
-      proc.stdin.end()
-    }
-  )
+  const rendered = await asyncShell(postRendererPath, {}, (proc) => {
+    proc.stdin.write(json)
+    proc.stdin.end()
+  })
   for (const manifest of yaml.loadAll(rendered)) {
     if (!manifest) {
       continue

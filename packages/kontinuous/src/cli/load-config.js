@@ -9,6 +9,7 @@ const getGitSha = require("~common/utils/get-git-sha")
 const getGitRepository = require("~common/utils/get-git-repository")
 const getGitUrl = require("~common/utils/get-git-url")
 const refEnv = require("~common/utils/ref-env")
+const yaml = require("~common/utils/yaml")
 
 const { version } = require(`${__dirname}/../../package.json`)
 
@@ -50,9 +51,9 @@ module.exports = async (opts = {}) => {
       env: "KS_INLINE_VALUES",
       option: "inline-values",
     },
-    inlineSet: {
+    set: {
       env: "KS_INLINE_SET",
-      envParser: (str) => JSON.parse(str),
+      envParser: (str) => yaml.load(str),
       option: "set",
     },
     buildPath: {

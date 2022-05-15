@@ -12,13 +12,13 @@ module.exports = program
     "Build manifests using kube-workflow with current directory configuration"
   )
   .addOption(options.env)
-  .addOption(options.charts)
-  .addOption(options.noTree)
+  .addOption(options.chart)
   .addOption(options.inlineValues)
+  .addOption(options.set)
+  .addOption(options.noTree)
   .addOption(options.helmArgs)
   .addOption(options.cwd)
   .addOption(options.upload)
-  .addOption(options.set)
   .option("--output, -o", "enable direct output of manifest")
   .option(
     "--syntax-highlight, -s",

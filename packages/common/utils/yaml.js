@@ -35,6 +35,7 @@ const loadAll = (input, retroCompat = true) => {
 }
 
 module.exports = {
+  parse: yaml.parse,
   load,
   loadAll,
   dump,

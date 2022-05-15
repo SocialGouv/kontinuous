@@ -5,7 +5,7 @@ module.exports.env = new Option(
   "select environment, default autodetect from current git branch"
 ).choices(["dev", "preprod", "prod"])
 
-module.exports.charts = new Option(
+module.exports.chart = new Option(
   "--chart <chart...>",
   "chart to enable as standalone, you can call it multiple times"
 )
@@ -22,7 +22,7 @@ module.exports.helmArgs = new Option(
 
 module.exports.inlineValues = new Option(
   "--inline-values <yaml>",
-  "final deep override of values"
+  "deep override of values"
 )
 
 module.exports.set = new Option(

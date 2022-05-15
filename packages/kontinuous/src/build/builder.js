@@ -1,22 +1,16 @@
 const fs = require("fs-extra")
 const yaml = require("~common/utils/yaml")
-const deepmerge = require("~common/utils/deepmerge")
 
 const asyncShell = require("~common/utils/async-shell")
 const globalLogger = require("~common/utils/logger")
-const getDirectories = require("~common/utils/get-directories")
 
-const compileChart = require("./compile-chart")
 const compilePatches = require("./compile-patches")
 const loadManifests = require("./load-manifests")
 const validateManifests = require("./validate-manifests")
 const outputInfos = require("./output-infos")
-const loadYamlFile = require("~common/utils/load-yaml-file")
-const createChart = require("~common/utils/create-chart")
 const loadDependencies = require("./load-dependencies")
 
 const ctx = require("~/ctx")
-const set = require("lodash.set")
 
 module.exports = async (options = {}) => {
   const config = ctx.require("config")
@@ -24,7 +18,6 @@ module.exports = async (options = {}) => {
   const {
     buildPath,
     buildProjectPath,
-    environment,
     workspacePath,
     workspaceKsPath,
     kontinuousPath,
@@ -47,82 +40,37 @@ module.exports = async (options = {}) => {
       }
     })
   }
-
   
+  logger.debug("Load and compile dependencies")
   const {chart, values} = await loadDependencies(config)
 
-  // console.log(JSON.stringify(values, null, 2))
-
-
-  process.exit()
   
-  // values: inline
-  if(config.inlineValues) {
-    const inlineValues = yaml.load(config.inlineValues)
-    values = deepmerge(values, inlineValues)
-  }
-
-  // values: env KS_INLINE_SET
-  if(config.inlineSet){
-    const inlineSet = yaml.load(config.inlineSet)
-    for(const [key, val] of Object.entries(inlineSet)){
-      set(values, key, val)
-    }
-  }
-
-  // values: --set option
-  if(options.set){
-    for(const s of options.set){
-      const index = s.indexOf("=");
-      if(index===-1){
-        logger.warn("bad format for --set option, expected: foo=bar")
-        continue
-      }
-      const key = s.slice(0, index)
-      const val = s.slice(index+1)
-      set(values, key, val)
-    }
-  }
-  
-  if (config.chart) {
-    logger.debug(`Enable only standalone charts: "${config.chart}"`)
-    const enableCharts = config.chart
-    for (const key of chart.dependencies.map(dep => dep.alias || dep.name)) {
-      if (!values[key]) {
-        values[key] = {}
-      }
-      values[key].enabled = enableCharts.includes(key)
-    }
-  }
-    
-  logger.debug("Write values file")
-  await fs.writeFile(`${buildPath}/values.json`, JSON.stringify(values))
-
-  logger.debug("Link workspace to charts")
-  const filesPath = `${buildPath}/.kw/files`
-  if (await fs.pathExists(filesPath)) {
-    await Promise.all([
-      fs.symlink(filesPath, `${buildPath}/files`),
-      ...chartNames.map(chartName => {
-        return fs.symlink(filesPath, `${buildPath}/charts/${chartName}/files`)
-      })
-    ])
-  }
-
-  logger.debug("Build base manifest using helm")
-  let manifests = await asyncShell(
-    `
-      helm template
-        -f values.json
-        --post-renderer ${kontinuousPath}/bin/post-renderer
-        ${config.helmArgs}
-        .
-    `,
+  logger.debug("Build helm dependencies")
+  await asyncShell(
+    `helm dependencies build --skip-refresh`,
     { cwd: buildPath }
   )
-
+  logger.debug("Build base manifest using helm")
+  
+  logger.debug("Values: \n"+yaml.dump(values))
+  
+  let manifests = await asyncShell(
+    `
+    helm template
+    -f values.yaml
+    --post-renderer ${kontinuousPath}/bin/post-renderer
+    ${config.helmArgs}
+    .
+    `,
+    { cwd: buildPath }
+    )
+    
+    
   logger.debug("Load manifests")
   manifests = await loadManifests(manifests, values)
+  
+  logger.debug("Manifests: \n"+yaml.dump(manifests))
+  process.exit()
 
   logger.debug("Apply patches")
   manifests = await compilePatches(manifests, values)
