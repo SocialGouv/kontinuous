@@ -1,9 +1,5 @@
-const get = require("lodash.get")
-const set = require("lodash.set")
-const deepmerge = require("./utils/deepmerge")
-
-module.exports = (values, methods, config) => {
-  const findScope = (
+module.exports = async (values, config) => {
+  const findAliasOf = async (
     key,
     dependencies = { project: { dependencies: config.dependencies } },
     subValues = values,
@@ -11,14 +7,11 @@ module.exports = (values, methods, config) => {
   ) => {
     for (const ck of Object.keys(dependencies)) {
       for (const vk of Object.keys(subValues[ck])) {
-        if (key.startsWith(`${vk}-`)) {
-          return [...scope, ck, key]
-        }
-        if (vk === key) {
+        if (vk === key || key.startsWith(`${vk}-`)) {
           return [...scope, ck, vk]
         }
       }
-      const found = findScope(
+      const found = await findAliasOf(
         key,
         dependencies[ck].dependencies || {},
         subValues[ck],
@@ -31,18 +24,15 @@ module.exports = (values, methods, config) => {
   }
 
   for (const [key, val] of Object.entries(values)) {
-    if (key !== "global" && key !== "project") {
-      const scope = findScope(key)
-      if (scope) {
-        const dotKey = scope.join(".")
-        let nestedVal = get(values, dotKey)
-        if (!nestedVal) {
-          nestedVal = {}
-          set(values, dotKey, nestedVal)
-        }
-        deepmerge(nestedVal, val)
-        delete values[key]
-      }
+    if (key === "global" && key === "project") {
+      continue
+    }
+    if (val._aliasOf) {
+      continue
+    }
+    const scope = await findAliasOf(key)
+    if (scope) {
+      val._aliasOf = scope.join(".")
     }
   }
   return values

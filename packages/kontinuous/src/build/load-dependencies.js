@@ -18,6 +18,31 @@ const dependenciesDirName = "dependencies"
 
 const validateName = /^[a-zA-Z\d-_]+$/
 
+const registerSubcharts = async (chart, chartsDir)=>{
+  if(!await fs.pathExists(chartsDir)){
+    return
+  }
+  const chartDirs = await fs.readdir(chartsDir)
+  for(const chartDir of chartDirs){
+    const chartDirPath = `${chartsDir}/${chartDir}`
+    if(!(await fs.stat(chartDirPath)).isDirectory()){
+      continue
+    }
+    const subchartFile = `${chartDirPath}/Chart.yaml`
+    if(!await fs.pathExists(subchartFile)){
+      await buildChartFile(chartDirPath, chartDir)
+    }
+    const subchartContent = await fs.readFile(subchartFile)
+    const subchart = yaml.load(subchartContent)
+    chart.dependencies.push({
+      name: subchart.name,
+      version: subchart.version,
+      condition: `${subchart.name}.enabled`,
+      repository: `file://./charts/${chartDir}`
+    })
+  }
+}
+
 const buildChartFile = async (target, name)=>{
   const chartFile = `${target}/Chart.yaml`
   let chart
@@ -26,6 +51,12 @@ const buildChartFile = async (target, name)=>{
     chart.name = name
   } else {
     chart = createChart(name)
+    const chartsDir = `${target}/charts`
+    await registerSubcharts(chart, chartsDir)
+    
+    const dependenciesDir = `${target}/${dependenciesDirName}`
+    await registerSubcharts(chart, dependenciesDir)
+
   }
   await fs.writeFile(chartFile, yaml.dump(chart))
 }
@@ -92,7 +123,7 @@ const buildJsFile = async (target, type, definition)=>{
   
   const {dependencies={}} = definition
   for(const name of Object.keys(dependencies)){
-    const indexFile = `../dependencies/${name}/${type}`
+    const indexFile = `../${dependenciesDirName}/${name}/${type}`
     processors.push([indexFile,{}])
   }
 
@@ -302,6 +333,73 @@ const mergeYamlFileValues = async (valuesFileBasename, subValues, beforeMerge)=>
   deepmerge(subValues, val)
 }
 
+const mergeEnvTemplates = async (config) => {
+  const {buildPath, environment} = config
+  const buildProjectPath = `${buildPath}/${dependenciesDirName}/project`
+  const envTemplatesPath = `${buildProjectPath}/env/${environment}/templates`
+  await fs.copy(envTemplatesPath, `${buildProjectPath}/templates`, {dereference: true})
+}
+
+const writeChartsAlias = async (chartsAliasMap, config)=>{
+  const {buildPath} = config
+  for(const [scope, aliasMap] of chartsAliasMap.entries()){
+    const p = []
+    for(const s of scope){
+      p.push(dependenciesDirName)
+      p.push(s)
+    }
+    const chartFile = `${buildPath}/${path.join(...p)}/Chart.yaml`
+    const chartContent = await fs.readFile(chartFile)
+    const chart = yaml.load(chartContent)
+    for(const [alias, name] of Object.entries(aliasMap)){
+      const aliasOf = chart.dependencies.find(dep=>dep.name===name)
+      chart.dependencies.push({
+        ...aliasOf,
+        alias,
+      })
+    }
+    await fs.writeFile(chartFile, yaml.dump(chart))
+  }
+}
+
+const resolveAliasOf = (values, rootValues=values, scope=[], chartsAliasMap=new Map())=>{
+  for (const [key, val] of Object.entries(values)) {
+    if (typeof val !== "object" || val === null) {
+      continue
+    }
+    if(val._aliasOf){
+      let aliasOf = val._aliasOf
+      if(aliasOf.startsWith(".")){
+        aliasOf = `${scope.join(".")}${dotKey}`
+      }
+      const scope = aliasOf.split(".")
+      
+      const adjacentChartAlias = scope.pop()
+      if(adjacentChartAlias!==key){
+        let aliasMap = chartsAliasMap.get(scope)
+        if(!aliasMap){
+          aliasMap = {}
+          chartsAliasMap.set(scope, aliasMap)
+        }
+        aliasMap[key] = adjacentChartAlias
+      }
+
+      const dotKey = [...scope, key].join(".")
+      let nestedVal = get(rootValues, dotKey)
+      if (!nestedVal) {
+        nestedVal = {}
+        set(rootValues, dotKey, nestedVal)
+      }
+      deepmerge(nestedVal, val)
+      delete values[key]
+    } else {
+      resolveAliasOf(values[key], rootValues, [...scope, key])
+    }
+  }
+
+  return chartsAliasMap
+}
+
 const compileValues = async (config) => {
   let values = {}
   const {buildPath, environment} = config
@@ -343,17 +441,10 @@ const compileValues = async (config) => {
     }
   })
 
-  const addAlias = async (alias)=>{
-    // TODO
-    console.log("TODO....")
-  }
-  
-  const methods = {addAlias}
-
-  const buildProjectPath = `${buildPath}/dependencies/project`
+  const buildProjectPath = `${buildPath}/${dependenciesDirName}/project`
   await mergeYamlFileValues(`${buildProjectPath}/values`, values, beforeMergeProjectValues)
   await mergeYamlFileValues(`${buildProjectPath}/env/${environment}/values`, values, beforeMergeProjectValues)
-  values = await require(`${buildProjectPath}/values-compilers`)(values, methods, config)
+  values = await require(`${buildProjectPath}/values-compilers`)(values, config)
 
 
 
@@ -361,6 +452,8 @@ const compileValues = async (config) => {
   if(await fs.pathExists(valuesJsFile)){
     values = await require(valuesJsFile)(values)
   }
+  const chartsAliasMap = resolveAliasOf(values)
+  await writeChartsAlias(chartsAliasMap, config)
   removeNotEnabledValues(values)
   cleanMetaValues(values)
 
@@ -370,7 +463,14 @@ const compileValues = async (config) => {
 module.exports = async (config)=>{
   await downloadAndBuildDependencies(config)
   await installPackages(config)
+  await mergeEnvTemplates(config)
   const values = await compileValues(config)
-  console.log(JSON.stringify(values, null, 2))
   
+  const {buildPath} = config
+  await Promise.all([
+    buildChartFile(buildPath, "kontinuous-umbrella"),
+    fs.writeFile(`${buildPath}/values.yaml`, yaml.dump(values)),
+  ])
+
+  return { values } 
 }

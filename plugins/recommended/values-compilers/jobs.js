@@ -1,1 +1,1 @@
-module.exports = async (values, _methods, _options = {}) => values
+module.exports = async (values, _options = {}) => values
