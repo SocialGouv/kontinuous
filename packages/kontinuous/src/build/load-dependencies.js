@@ -153,10 +153,14 @@ const buildJsFile = async (target, type, definition)=>{
     processors.push([req, options])
   }
 
-  const jsSrc = `const processors = [${processors.map(p=>JSON.stringify(p)).join(",")}]
-module.exports = async (data, ...params)=>{
+  const processorsSnippet = processors.map(p=>
+    `[require(${JSON.stringify(p[0])}),${JSON.stringify(p.slice(1))}]`
+  ).join(",")
+
+  const jsSrc = `const processors = [${processorsSnippet}]
+module.exports = async (data, options, context)=>{
   for(const [inc, options] of processors){
-    data = await require(inc)(data, ...params, options)
+    data = await inc(data, options, context)
   }
   return data
 }
@@ -307,16 +311,21 @@ const cleanMetaValues = (values)=>{
 }
 
 const removeNotEnabledValues = (values) => {
+  let hasEnabledValue
   for (const [key,val] of Object.entries(values)) {
     if (typeof val !== "object" || val === null) {
       continue
     }
-    if (val._isChartValues && !val.enabled) {
+    const childrenHasEnabledValue = removeNotEnabledValues(values[key])
+    if (childrenHasEnabledValue) {
+      hasEnabledValue = true
+      val.enabled = true
+    }
+    if(val._isChartValues && !val.enabled){
       delete values[key]
-    } else {
-      removeNotEnabledValues(values[key], key, values)
     }
   }
+  return hasEnabledValue || (values._isChartValues && values.enabled)
 }
 
 
@@ -366,23 +375,27 @@ const resolveAliasOf = (values, rootValues=values, scope=[], chartsAliasMap=new 
       continue
     }
     if(val._aliasOf){
+      
+      const parentDotKey = [...scope, key].join(".")
+
       let aliasOf = val._aliasOf
       if(aliasOf.startsWith(".")){
-        aliasOf = `${scope.join(".")}${dotKey}`
+        aliasOf = `${scope.join(".")}${parentDotKey}`
       }
-      const scope = aliasOf.split(".")
-      
-      const adjacentChartAlias = scope.pop()
+
+      const aliasScope = aliasOf.split(".")
+      const adjacentChartAlias = aliasScope.pop()
       if(adjacentChartAlias!==key){
-        let aliasMap = chartsAliasMap.get(scope)
+        let aliasMap = chartsAliasMap.get(aliasScope)
         if(!aliasMap){
           aliasMap = {}
-          chartsAliasMap.set(scope, aliasMap)
+          chartsAliasMap.set(aliasScope, aliasMap)
         }
         aliasMap[key] = adjacentChartAlias
       }
+      
+      const dotKey = `${aliasScope.join(".")}.${key}`
 
-      const dotKey = [...scope, key].join(".")
       let nestedVal = get(rootValues, dotKey)
       if (!nestedVal) {
         nestedVal = {}
@@ -413,7 +426,7 @@ const valuesEnableStandaloneCharts = (values, config)=>{
     values[key].enabled = true
   }
 }
-const valuesOverride = (values, config)=>{
+const valuesOverride = (values, config, logger)=>{
   if(config.inlineValues) {
     const inlineValues = yaml.load(config.inlineValues)
     values = deepmerge(values, inlineValues)
@@ -441,7 +454,7 @@ const valuesOverride = (values, config)=>{
   }
 }
 
-const compileValues = async (config) => {
+const compileValues = async (config, logger) => {
   let values = {}
   const {buildPath, environment} = config
 
@@ -487,13 +500,14 @@ const compileValues = async (config) => {
   await mergeYamlFileValues(`${buildProjectPath}/env/${environment}/values`, values, beforeMergeProjectValues)
 
   valuesEnableStandaloneCharts(values, config)
-  valuesOverride(values, config)
+  valuesOverride(values, config, logger)
 
-  values = await require(`${buildProjectPath}/values-compilers`)(values, config)
+  const context = {config, logger}
+  values = await require(`${buildProjectPath}/values-compilers`)(values, {}, context)
 
   const valuesJsFile = `${buildProjectPath}/values.js`
   if(await fs.pathExists(valuesJsFile)){
-    values = await require(valuesJsFile)(values)
+    values = await require(valuesJsFile)(values, {}, context)
   }
   const chartsAliasMap = resolveAliasOf(values)
   await writeChartsAlias(chartsAliasMap, config)
@@ -536,18 +550,20 @@ const copyFilesDir = async (config) => {
   })
 }
 
-module.exports = async (config)=>{
+module.exports = async (config, logger)=>{
   await downloadAndBuildDependencies(config)
   await installPackages(config)
   await mergeEnvTemplates(config)
   await copyFilesDir(config)
-  const values = await compileValues(config)
+  const values = await compileValues(config, logger)
   
   const {buildPath} = config
   await Promise.all([
     buildChartFile(buildPath, "kontinuous-umbrella"),
     fs.writeFile(`${buildPath}/values.yaml`, yaml.dump(values)),
   ])
+
+  await fs.symlink(`${buildPath}/${dependenciesDirName}`, `${buildPath}/charts`)
 
   return { values } 
 }

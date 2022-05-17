@@ -1,21 +1,21 @@
 const ctx = require("~/ctx")
 
 module.exports = async (manifests, values) => {
-  const env = ctx.require("env")
-  const { KS_BUILD_PATH, KS_WORKSPACE_KS_PATH } = env
+  const config = ctx.require("config")
+  const { buildPath, workspaceSubPath } = config
   
-  let patched = await require(`${KS_BUILD_PATH}/patches`)(manifests, values)
+  let patched = await require(`${buildPath}/dependencies/project/patches`)(manifests, values)
   
   let requirable
   try {
-    require.resolve(`${KS_WORKSPACE_KS_PATH}/patches`)
+    require.resolve(`${workspaceSubPath}/patches`)
     requirable = true
   }catch(_e){
     requirable = false
   }
 
   if (requirable){
-    patched = await require(`${KS_WORKSPACE_KS_PATH}/patches`)(manifests, values)
+    patched = await require(`${workspaceSubPath}/patches`)(manifests, values)
   }
 
   return patched

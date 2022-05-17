@@ -12,7 +12,7 @@ const implicitEnabled = (values, scope = []) => {
   }
 }
 
-module.exports = (values, _config) => {
+module.exports = (values, _options, _config) => {
   implicitEnabled(values)
   return values
 }

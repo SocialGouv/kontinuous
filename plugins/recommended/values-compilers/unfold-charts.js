@@ -1,4 +1,4 @@
-module.exports = async (values, config) => {
+module.exports = async (values, _options, { config }) => {
   const findAliasOf = async (
     key,
     dependencies = { project: { dependencies: config.dependencies } },

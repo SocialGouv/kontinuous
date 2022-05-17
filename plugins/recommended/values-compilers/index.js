@@ -1,14 +1,14 @@
 // eslint-disable import/no-extraneous-dependencies
 const compilers = [
-  "./unfold-charts",
-  "./dash-instances",
-  "./implicit-enabled",
-  "./jobs",
+  require("./unfold-charts"),
+  require("./dash-instances"),
+  require("./implicit-enabled"),
+  // require("./jobs"),
 ]
 
-module.exports = async (values, options = {}) => {
+module.exports = async (values, options, context) => {
   for (const compiler of compilers) {
-    values = await require(compiler)(values, options)
+    values = await compiler(values, options, context)
   }
   return values
 }

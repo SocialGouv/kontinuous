@@ -42,18 +42,12 @@ module.exports = async (options = {}) => {
   }
   
   logger.debug("Load and compile dependencies")
-  const {chart, values} = await loadDependencies(config)
+  const {chart, values} = await loadDependencies(config, logger)
 
-  
-  logger.debug("Build helm dependencies")
-  await asyncShell(
-    `helm dependencies build --skip-refresh`,
-    { cwd: buildPath }
-  )
-  logger.debug("Build base manifest using helm")
-  
   logger.debug("Values: \n"+yaml.dump(values))
   
+  
+  logger.debug("Build base manifest using helm")
   let manifests = await asyncShell(
     `
     helm template
@@ -63,17 +57,21 @@ module.exports = async (options = {}) => {
     .
     `,
     { cwd: buildPath }
-    )
+  )
     
     
   logger.debug("Load manifests")
   manifests = await loadManifests(manifests, values)
   
   logger.debug("Manifests: \n"+yaml.dump(manifests))
-  process.exit()
-
+  
   logger.debug("Apply patches")
   manifests = await compilePatches(manifests, values)
+
+  console.log(yaml.dump(values))
+  // console.log(yaml.dump(manifests))
+  
+  process.exit()
   
   logger.debug("Validate manifests")
   await validateManifests(manifests, values)
