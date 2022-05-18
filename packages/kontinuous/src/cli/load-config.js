@@ -62,7 +62,7 @@ module.exports = async (opts = {}) => {
     },
     buildProjectPath: {
       defaultFunction: (config) =>
-        path.join(config.buildPath, "dependencies", "project"),
+        path.join(config.buildPath, "charts", "project"),
     },
     uploadUrl: {
       env: "KS_BUILD_UPLOAD_URL",

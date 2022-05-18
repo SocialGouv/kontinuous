@@ -10,8 +10,6 @@ const getGitRepository = require("~common/utils/get-git-repository")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const normalizeEnvKey = require("~common/utils/normalize-env-key")
 
-const defaults = require("~/config/defaults")
-
 const eventFromBranch = (branch) => {
   const env = refEnv(branch)
   if (env === "prod") {
@@ -45,9 +43,7 @@ module.exports = async (options) => {
     repositoryName
 
   const webhookBaseDomain =
-    options.webhookBaseDomain ||
-    process.env.KS_WEBHOOK_BASE_DOMAIN ||
-    defaults.webhookBaseDomain
+    options.webhookBaseDomain || process.env.KS_WEBHOOK_BASE_DOMAIN
 
   const webhookUri =
     options.webhookUri ||

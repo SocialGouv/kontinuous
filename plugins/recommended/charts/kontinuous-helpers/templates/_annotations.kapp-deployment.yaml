@@ -1,4 +1,4 @@
-{{- define "annotations.kapp-deployment" -}}
+{{- define "kontinuous-helpers.annotations.kapp-deployment" -}}
 kapp.k14s.io/change-group: "kube-workflow/{{ $.Values.global.namespace }}"
 {{- if $.Values.stage }}
 kapp.k14s.io/change-group.kube-workflow-stage: "kube-workflow/{{ $.Values.stage }}.{{ $.Values.global.namespace }}"

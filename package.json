@@ -46,7 +46,7 @@
     "push": "git push -f --follow-tags origin master",
     "delivery": "yarn release && yarn push",
     "test": "yarn workspaces foreach --no-private --parallel run test",
-    "test:workflow": "yarn workspace kube-workflow test",
+    "test:kontinuous": "yarn workspace kontinuous test",
     "test:webhook": "yarn workspace kube-webhook test",
     "dev:webhook": "docker-compose up --build webhook",
     "dev:webhook:built": "docker-compose -f docker-compose.built.yaml up --build webhook",

@@ -14,9 +14,13 @@ const decompress = require('decompress')
 const downloadFile = require("~common/utils/download-file")
 const slug = require("~common/utils/slug")
 
-const dependenciesDirName = "dependencies"
+const isVersionTag = require("~common/utils/is-version-tag")
+
+const dependenciesDirName = "charts"
 
 const validateName = /^[a-zA-Z\d-_]+$/
+
+const sharedMethods = {slug, deepmerge, isVersionTag}
 
 const registerSubcharts = async (chart, chartsDirName, target)=>{
   const chartsDir = `${target}/${chartsDirName}`
@@ -35,12 +39,18 @@ const registerSubcharts = async (chart, chartsDirName, target)=>{
     }
     const subchartContent = await fs.readFile(subchartFile)
     const subchart = yaml.load(subchartContent)
-    chart.dependencies.push({
+    if(chart.dependencies.some((dependency)=>(dependency.alias||dependency.name===subchart.name))){
+      continue
+    }
+    const dependency = {
       name: subchart.name,
       version: subchart.version,
-      condition: `${subchart.name}.enabled`,
       repository: `file://./${chartsDirName}/${chartDir}`
-    })
+    }
+    if(subchart.type!=="library"){
+      dependency.condition = `${subchart.name}.enabled`
+    }
+    chart.dependencies.push(dependency)
   }
 }
 
@@ -51,11 +61,9 @@ const buildChartFile = async (target, name)=>{
     chart = yaml.load(await fs.readFile(chartFile))
     chart.name = name
   } else {
-    chart = createChart(name)
-    await registerSubcharts(chart, "charts", target)
-    await registerSubcharts(chart, dependenciesDirName, target)
-
+    chart = createChart(name)  
   }
+  await registerSubcharts(chart, dependenciesDirName, target)
   await fs.writeFile(chartFile, yaml.dump(chart))
 }
 
@@ -160,7 +168,10 @@ const buildJsFile = async (target, type, definition, scope)=>{
   const jsSrc = `const processors = [${processorsSnippet}]
 module.exports = async (data, _options, context, _scope)=>{
   for(const [inc, [options, scope]] of processors){
-    data = await inc(data, options, context, scope)
+    const result = await inc(data, options, context, scope)
+    if(result){
+      data = result
+    }
   }
   return data
 }
@@ -323,7 +334,8 @@ const removeNotEnabledValues = (values) => {
       val.enabled = true
     }
     if(val._isChartValues && !val.enabled){
-      delete values[key]
+      // delete values[key]
+      values[key] = {enabled: false}
     }
   }
   return hasEnabledValue || (values._isChartValues && values.enabled)
@@ -503,7 +515,8 @@ const compileValues = async (config, logger) => {
   valuesEnableStandaloneCharts(values, config)
   valuesOverride(values, config, logger)
 
-  const context = {config, logger}
+  const methods = sharedMethods
+  const context = {config, logger, methods}
   values = await require(`${buildProjectPath}/values-compilers`)(values, {}, context)
 
   const valuesJsFile = `${buildProjectPath}/values.js`
@@ -564,7 +577,7 @@ module.exports = async (config, logger)=>{
     fs.writeFile(`${buildPath}/values.yaml`, yaml.dump(values)),
   ])
 
-  await fs.symlink(`${buildPath}/${dependenciesDirName}`, `${buildPath}/charts`)
+  await fs.writeFile(`${buildPath}/.helmignore`, ["node_modules",".yarn"].join("\n"))
 
   return { values } 
 }

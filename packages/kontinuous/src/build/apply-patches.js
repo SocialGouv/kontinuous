@@ -5,5 +5,6 @@ module.exports = async (manifests, values)=>{
   const logger = ctx.require("logger")
   const context = {config, logger}
   const {buildProjectPath} = config
-  await require(`${buildProjectPath}/validators`)(manifests, values, {}, context)
+  manifests = await require(`${buildProjectPath}/patches`)(manifests, values, {}, context)
+  return manifests
 }

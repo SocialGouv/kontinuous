@@ -4,7 +4,7 @@ const yaml = require("~common/utils/yaml")
 const asyncShell = require("~common/utils/async-shell")
 
 const main = async () => {
-  const postRendererPath = `${process.cwd()}/dependencies/project/post-renderer`
+  const postRendererPath = `${process.cwd()}/charts/project/post-renderer`
   if (!(await fs.pathExists(postRendererPath))) {
     process.stdin.pipe(process.stdout)
     return

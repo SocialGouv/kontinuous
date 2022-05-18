@@ -121,11 +121,11 @@ getTreeInfos.CronJob = (resource) => {
 
 module.exports = async (manifests, _values) => {
   const logger = ctx.require("logger")
-  const env = ctx.require("env")
+  const config = ctx.require("config")
   const {
-    KS_BUILD_PATH,
-    KS_DISPLAY_TREE,
-  } = env
+    buildPath,
+    tree: optionTree,
+  } = config
 
   const componentResources = {}
   const globalResources = {kinds: {}}
@@ -200,10 +200,10 @@ module.exports = async (manifests, _values) => {
   ]
 
   const treeStr = logTree(tree)
-  if (KS_DISPLAY_TREE){
+  if (optionTree){
     logger.info("\n"+treeStr)
   }
 
-  await fs.writeFile(`${KS_BUILD_PATH}/manifests.tree.md`, `\`\`\`\n${treeStr}\n\`\`\``)
+  await fs.writeFile(`${buildPath}/manifests.tree.md`, `\`\`\`\n${treeStr}\n\`\`\``)
   
 }

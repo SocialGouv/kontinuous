@@ -5,7 +5,6 @@
   "dependencies": {
     "fs-extra": "^10.1.0",
     "js-yaml": "^4.1.0",
-    "slugify": "^1.6.5",
     "tiged": "^2.11.2"
   }
 }

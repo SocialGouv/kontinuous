@@ -4,12 +4,15 @@ const fs = require("fs-extra")
 const degit = require("tiged")
 const yaml = require("js-yaml")
 
-const slug = require("./utils/slug")
 const miniHash = require("./utils/mini-hash")
 
 const selfReference = "SocialGouv/kontinuous/"
 
-const requireUse = async (use, { config, logger, downloadingPromises }) => {
+const requireUse = async (
+  use,
+  { config, logger, downloadingPromises, methods }
+) => {
+  const { slug } = methods
   const { buildPath, workspacePath, workspaceSubPath } = config
   const useSlug = slug(use)
   use = use.replace("@", "#")
@@ -50,8 +53,7 @@ const requireUse = async (use, { config, logger, downloadingPromises }) => {
 
 async function compile(
   context,
-  values = {},
-  Values = {},
+  values,
   parentScope = [],
   parentWith = {},
   file = null,
@@ -60,6 +62,8 @@ async function compile(
   if (!values.runs) {
     return
   }
+  const { config, methods } = context
+  const { slug } = methods
   if (!Array.isArray(values.runs)) {
     values.runs = Object.entries(values.runs).map(([name, run]) => {
       if (!run.name) {
@@ -95,16 +99,13 @@ async function compile(
         run.needs = []
       }
 
-      console.log([
-        "job",
-        Values.global.repositoryName,
-        [Values.global.gitBranch, 30],
-        currentScope.join("--"),
-      ])
+      const { gitRepository, gitRef } = config
+      const repositoryName = path.basename(gitRepository)
+
       const jobName = slug([
         "job",
-        Values.global.repositoryName,
-        [Values.global.gitBranch, 30],
+        repositoryName,
+        [gitRef, 30],
         currentScope.join("--"),
       ])
       run.jobName = jobName
@@ -113,10 +114,8 @@ async function compile(
         return [run]
       }
 
-      const { config, logger } = context
       const { target } = await requireUse(run.use, {
-        config,
-        logger,
+        ...context,
         downloadingPromises,
       })
       const runValues = yaml.load(
@@ -125,7 +124,6 @@ async function compile(
       await compile(
         context,
         runValues,
-        Values,
         scope,
         run.parentWith,
         target,
@@ -182,7 +180,7 @@ module.exports = async (values, _options, context, scope) => {
   await Promise.all(
     Object.values(values).map(async (subValues) => {
       if (subValues._aliasOf === jobsAlias) {
-        // await compile(context, subValues)
+        await compile(context, subValues)
       }
     })
   )

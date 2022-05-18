@@ -1,4 +1,4 @@
 apiVersion: v2
-name: helpers
+name: kontinuous-helpers
 version: 1.0.0
 type: library

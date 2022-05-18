@@ -132,7 +132,7 @@ spec:
               value: "{{ tpl $value $ }}"
             {{- end }}
           
-          {{- if or $run.entrypoint $run.run $run.action $run.outputs }}
+          {{- if or $run.entrypoint $run.run $run.action }}
           command:
             {{- if $run.entrypoint }}
             {{- tpl ($run.entrypoint | toYaml) $ | nindent 12 }}
@@ -140,25 +140,13 @@ spec:
             - /bin/{{ or $run.shell "bash" }}
             - -c
             {{- end }}
-            {{- if or $run.run $run.action $run.outputs }}
+            {{- if or $run.run $run.action }}
             - |
               set -e
               {{- if $run.run }}
               {{- nindent 14 (tpl $run.run $) }}
               {{- else if $run.action }}
               /action/action.sh
-              {{- end }}
-              {{- if $run.outputs }}
-              {{- range $output := $run.outputs }}
-              {{- range $i, $scope := $run.scopes }}
-              mkdir -p "$(dirname /workflow/vars/{{ $scope }}/{{ $output }})"
-              {{- if eq $i 0 }}
-              echo "${{ $output }}">/workflow/vars/{{ $scope }}/{{ $output }}
-              {{- else }}
-              ln -s -f /workflow/vars/{{ index $run.scopes 0 }}/{{ $output }} /workflow/vars/{{ $scope }}/{{ $output }}
-              {{- end }}
-              {{- end }}
-              {{- end }}
               {{- end }}
             {{- end }}
           {{- end }}
@@ -189,11 +177,13 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
-        {{ if .Values.global.extra.jobs.sharedStorage.enabled }}
+        {{/*
+        {{ if and .Values.global.extra.jobs.sharedStorage.enabled }}
         - name: workflow
           persistentVolumeClaim:
             claimName: jobs-shared-storage
         {{- end }}
+        */}}
         {{- if $run.volumes }}
           {{- tpl ($run.volumes | toYaml) $ | nindent 8 }}
         {{- end }}
