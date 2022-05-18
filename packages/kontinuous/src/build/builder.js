@@ -68,7 +68,7 @@ module.exports = async (options = {}) => {
   logger.debug("Apply patches")
   manifests = await compilePatches(manifests, values)
 
-  console.log(yaml.dump(values))
+  // console.log(yaml.dump(values))
   // console.log(yaml.dump(manifests))
   
   process.exit()

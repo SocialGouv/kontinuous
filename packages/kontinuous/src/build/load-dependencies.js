@@ -112,7 +112,7 @@ const downloadRemoteRepository = async (target, name)=>{
   }
 }
 
-const buildJsFile = async (target, type, definition)=>{
+const buildJsFile = async (target, type, definition, scope)=>{
   const jsFile = `${target}/${type}/index.js`
   if(await fs.pathExists(jsFile)){
     return
@@ -122,7 +122,7 @@ const buildJsFile = async (target, type, definition)=>{
   const {dependencies={}} = definition
   for(const name of Object.keys(dependencies)){
     const indexFile = `../${dependenciesDirName}/${name}/${type}`
-    processors.push([indexFile,{}])
+    processors.push([indexFile,{},[...scope, name]])
   }
 
   let loads = definition[type]
@@ -150,7 +150,7 @@ const buildJsFile = async (target, type, definition)=>{
       req = `./${name}`
     }
     const {options={}} = load
-    processors.push([req, options])
+    processors.push([req, options, scope])
   }
 
   const processorsSnippet = processors.map(p=>
@@ -158,9 +158,9 @@ const buildJsFile = async (target, type, definition)=>{
   ).join(",")
 
   const jsSrc = `const processors = [${processorsSnippet}]
-module.exports = async (data, options, context)=>{
-  for(const [inc, options] of processors){
-    data = await inc(data, options, context)
+module.exports = async (data, _options, context, _scope)=>{
+  for(const [inc, [options, scope]] of processors){
+    data = await inc(data, options, context, scope)
   }
   return data
 }
@@ -249,12 +249,13 @@ const downloadAndBuildDependencies = async (config)=>{
       name,
       target,
       definition,
+      scope,
     })=>{
       await buildChartFile(target, name)
       await downloadRemoteRepository(target, name)
-      await buildJsFile(target, "values-compilers", definition)
-      await buildJsFile(target, "patches", definition)
-      await buildJsFile(target, "validators", definition)
+      await buildJsFile(target, "values-compilers", definition, scope)
+      await buildJsFile(target, "patches", definition, scope)
+      await buildJsFile(target, "validators", definition, scope)
     }
   })
 }

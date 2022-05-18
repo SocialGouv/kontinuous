@@ -177,14 +177,14 @@ async function compile(
   }, [])
 }
 
-module.exports = async (values, _options, context) => {
-  console.log({ values })
+module.exports = async (values, _options, context, scope) => {
+  const jobsAlias = `${scope.join(".")}.jobs`
   await Promise.all(
-    Object.values(values).map(async (values) => {
-      // console.log(values)
-      // if (key === "jobs" || key.startsWith("jobs-")) {
-      //   await compile(context, values[key], values)
-      // }
+    Object.values(values).map(async (subValues) => {
+      if (subValues._aliasOf === jobsAlias) {
+        // await compile(context, subValues)
+      }
     })
   )
+  return values
 }
