@@ -10,11 +10,6 @@ module.exports.chart = new Option(
   "chart to enable as standalone, you can call it multiple times"
 )
 
-module.exports.noTree = new Option(
-  "--no-tree",
-  "disable manifests tree display"
-)
-
 module.exports.helmArgs = new Option(
   "--helm-args, -a <args>",
   "add extra helm arguments"

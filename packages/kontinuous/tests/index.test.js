@@ -17,8 +17,8 @@ const defaultEnv = {
   KS_GIT_REF: "refs/heads/feature-branch-1",
   KS_GIT_SHA: "ffac537e6cbbf934b08745a378932722df287a53",
   KS_ENVIRONMENT: "dev",
-  KS_RANCHER_PROJECT_ID: "1234",
-  KS_RANCHER_PROJECT_NAME: "awesome",
+  FABRIQUE_JOB_NAMESPACE: "awesome-ci",
+  FABRIQUE_RANCHER_PROJECT_ID: "1234",
 }
 
 const allEnvs = ["dev", "preprod", "prod"]
@@ -50,10 +50,6 @@ test.each(cases)(`%s.%s`, async (testdir, environment) => {
       ? "/.kontinuous"
       : "",
     KS_GIT_REPOSITORY: `kube-workflow/test-${testdir}`,
-    KS_DISPLAY_TREE: !(
-      process.env.KS_DISPLAY_TREE === "false" ||
-      process.env.KS_DISPLAY_TREE === "0"
-    ),
   }
   const envFile = `${testdirPath}/.env`
   if (fs.pathExistsSync(envFile)) {

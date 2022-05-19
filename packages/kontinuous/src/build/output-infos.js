@@ -124,7 +124,6 @@ module.exports = async (manifests, _values) => {
   const config = ctx.require("config")
   const {
     buildPath,
-    tree: optionTree,
   } = config
 
   const componentResources = {}
@@ -200,9 +199,7 @@ module.exports = async (manifests, _values) => {
   ]
 
   const treeStr = logTree(tree)
-  if (optionTree){
-    logger.info("\n"+treeStr)
-  }
+  logger.debug("\n"+treeStr)
 
   await fs.writeFile(`${buildPath}/manifests.tree.md`, `\`\`\`\n${treeStr}\n\`\`\``)
   

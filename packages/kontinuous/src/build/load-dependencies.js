@@ -17,6 +17,8 @@ const slug = require("~common/utils/slug")
 
 const utils = require("~common/utils")
 
+const ctx = require("~/ctx")
+
 const dependenciesDirName = "charts"
 
 const validateName = /^[a-zA-Z\d-_]+$/
@@ -39,16 +41,17 @@ const registerSubcharts = async (chart, chartsDirName, target)=>{
     }
     const subchartContent = await fs.readFile(subchartFile)
     const subchart = yaml.load(subchartContent)
-    if(chart.dependencies.some((dependency)=>(dependency.alias||dependency.name===subchart.name))){
-      continue
-    }
     const dependency = {
       name: subchart.name,
       version: subchart.version,
-      repository: `file://./${chartsDirName}/${chartDir}`
+      repository: `file://./${chartsDirName}/${chartDir}`,
     }
     if(subchart.type!=="library"){
       dependency.condition = `${subchart.name}.enabled`
+    }
+    const definedDependency = chart.dependencies.find((dependency)=>(dependency.alias||dependency.name===subchart.name))
+    if(definedDependency){
+      Object.assign(definedDependency, dependency)
     }
     chart.dependencies.push(dependency)
   }
@@ -518,7 +521,7 @@ const compileValues = async (config, logger) => {
   valuesEnableStandaloneCharts(values, config)
   valuesOverride(values, config, logger)
 
-  const context = {config, logger, utils}
+  const context = {config, logger, utils, ctx}
   values = await require(`${buildProjectPath}/values-compilers`)(values, {}, context)
 
   const valuesJsFile = `${buildProjectPath}/values.js`

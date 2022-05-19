@@ -59,10 +59,6 @@ module.exports = async (opts = {}) => {
       envParser: (str) => (str[0] === "[" ? JSON.parse(str) : str.split(",")),
       option: "chart",
     },
-    tree: {
-      env: "KS_DISPLAY_TREE",
-      option: "tree",
-    },
     helmArgs: {
       env: "KS_HELM_ARGS",
       option: "A",

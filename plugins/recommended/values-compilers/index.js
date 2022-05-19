@@ -1,4 +1,3 @@
-// eslint-disable import/no-extraneous-dependencies
 const compilers = [
   require("./unfold-charts"),
   require("./dash-instances"),

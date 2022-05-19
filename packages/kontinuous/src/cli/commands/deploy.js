@@ -9,7 +9,6 @@ module.exports = (program) =>
     .alias("d")
     .addOption(options.env)
     .addOption(options.chart)
-    .addOption(options.noTree)
     .addOption(options.helmArgs)
     .addOption(options.inlineValues)
     .addOption(options.set)
