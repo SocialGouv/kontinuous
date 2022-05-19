@@ -10,12 +10,10 @@ const ctx = require("~/ctx")
 module.exports = async (options) => {
   const config = ctx.require("config")
 
-  logger.info(`Build path file://${config.buildPath}`)
-
   const result = await builder(options)
   
   const { manifestsFile, manifests } = result
-
+  
   if (options.O) {
     let m = manifests
     if (options.S) {
@@ -32,7 +30,8 @@ module.exports = async (options) => {
     }
     process.stdout.write(m)
   } else {
-    logger.info(`Built manifests file://${manifestsFile}`)
+    logger.info(`buildPath: file://${config.buildPath}`)
+    logger.info(`manifests: file://${manifestsFile}`)
   }
   
   const uploadUrl = config.uploadUrl

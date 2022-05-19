@@ -333,7 +333,7 @@ const removeNotEnabledValues = (values) => {
       continue
     }
     const childrenHasEnabledValue = removeNotEnabledValues(values[key])
-    if (childrenHasEnabledValue) {
+    if (childrenHasEnabledValue && val.enabled !== false) {
       hasEnabledValue = true
       val.enabled = true
     }
@@ -518,16 +518,23 @@ const compileValues = async (config, logger) => {
   await mergeYamlFileValues(`${buildProjectPath}/values`, values, beforeMergeProjectValues)
   await mergeYamlFileValues(`${buildProjectPath}/env/${environment}/values`, values, beforeMergeProjectValues)
 
-  valuesEnableStandaloneCharts(values, config)
-  valuesOverride(values, config, logger)
+  valuesEnableStandaloneCharts(values.project, config)
+  valuesOverride(values.project, config, logger)
 
   const context = {config, logger, utils, ctx}
-  values = await require(`${buildProjectPath}/values-compilers`)(values, {}, context)
 
   const valuesJsFile = `${buildProjectPath}/values.js`
   if(await fs.pathExists(valuesJsFile)){
     values = await require(valuesJsFile)(values, {}, context)
   }
+
+  values = await require(`${buildProjectPath}/values-compilers`)(values, {}, context)
+
+  const valuesFinalJsFile = `${buildProjectPath}/values.final.js`
+  if(await fs.pathExists(valuesFinalJsFile)){
+    values = await require(valuesFinalJsFile)(values, {}, context)
+  }
+
   const chartsAliasMap = resolveAliasOf(values)
   await writeChartsAlias(chartsAliasMap, config)
   removeNotEnabledValues(values)

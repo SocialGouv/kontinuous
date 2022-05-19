@@ -12,10 +12,12 @@ const main = async () => {
   const stdin = fs.readFileSync(0, "utf-8")
   const manifests = yaml.loadAll(stdin)
   const json = JSON.stringify(manifests)
+
   const rendered = await asyncShell(postRendererPath, {}, (proc) => {
     proc.stdin.write(json)
     proc.stdin.end()
   })
+
   for (const manifest of yaml.loadAll(rendered)) {
     if (!manifest) {
       continue

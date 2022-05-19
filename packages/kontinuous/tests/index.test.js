@@ -28,8 +28,12 @@ for (const testdir of testdirs) {
   if (afterDot === "disabled") {
     continue
   }
-  const subdirs = getDirectoriesSync(`${samplesDir}/${testdir}`)
-  const environments = allEnvs.filter((envName) => subdirs.includes(envName))
+  const envDir = `${samplesDir}/${testdir}/env`
+  let environments = []
+  if (fs.pathExistsSync(envDir)) {
+    const subdirs = getDirectoriesSync(envDir)
+    environments = allEnvs.filter((envName) => subdirs.includes(envName))
+  }
   if (environments.length === 0) {
     environments.push(allEnvs[0])
   }

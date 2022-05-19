@@ -1,10 +1,12 @@
 #!/bin/sh
 
+set -e
+
 # load into variable from standard input
-manifest=$(cat /dev/stdin)
+manifest=$(cat)<&0
 
 # arbitrary modify some stuf
-manifest=`echo "$manifest" | jq '.foo = "bar"'`
+manifest=`echo "$manifest" | jq 'map(select(.kind == "Namespace").metadata.labels.foo = "bar")'`
 
 # output
 echo "$manifest"

@@ -5,12 +5,13 @@ exports[`values-js.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: ''
-    kubeworkflow/gitBranch: ''
+    janitor/ttl: 7d
+    field.cattle.io/projectId: '1234'
+    kubeworkflow/gitBranch: feature-branch-1
     kubeworkflow/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
   labels:
-    application: the-awesome
+    application: test-values-js
     cert: wildcard
   name: test-namespace
 ---
@@ -51,7 +52,7 @@ kind: Service
 metadata:
   labels:
     component: app
-    application: the-awesome
+    application: test-values-js
   name: app
   namespace: test-namespace
   annotations:
@@ -72,7 +73,7 @@ kind: Deployment
 metadata:
   labels:
     component: app
-    application: the-awesome
+    application: test-values-js
   name: app
   namespace: test-namespace
   annotations:
@@ -91,7 +92,7 @@ spec:
     metadata:
       labels:
         component: app
-        application: the-awesome
+        application: test-values-js
     spec:
       containers:
         - image: docker.io/library/nginx:latest
@@ -138,7 +139,7 @@ metadata:
     kapp.k14s.io/disable-original: ''
   labels:
     component: app
-    application: the-awesome
+    application: test-values-js
   name: app
   namespace: test-namespace
 spec:
