@@ -10,10 +10,10 @@ const selfReference = "SocialGouv/kontinuous/"
 
 const requireUse = async (
   use,
-  { config, logger, downloadingPromises, methods }
+  { config, logger, downloadingPromises, utils }
 ) => {
-  const { slug } = methods
-  const { buildPath, workspacePath, workspaceSubPath } = config
+  const { slug } = utils
+  const { buildPath, workspacePath, workspaceKsPath } = config
   const useSlug = slug(use)
   use = use.replace("@", "#")
   let target = `${buildPath}/uses/${useSlug}`
@@ -26,7 +26,7 @@ const requireUse = async (
         await fs.copy(src, target)
       } else if (!use.includes("#") && use.startsWith(selfReference)) {
         const nativeJob = use.slice(selfReference.length)
-        const dir = path.join(workspaceSubPath, nativeJob)
+        const dir = path.join(workspaceKsPath, nativeJob)
         logger.debug(`use native job: ${nativeJob}`)
         await fs.copy(dir, target)
       } else if (
@@ -62,8 +62,8 @@ async function compile(
   if (!values.runs) {
     return
   }
-  const { config, methods } = context
-  const { slug } = methods
+  const { config, utils } = context
+  const { slug } = utils
   if (!Array.isArray(values.runs)) {
     values.runs = Object.entries(values.runs).map(([name, run]) => {
       if (!run.name) {

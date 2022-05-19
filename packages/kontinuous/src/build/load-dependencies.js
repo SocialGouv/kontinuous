@@ -12,15 +12,15 @@ const set = require("lodash.set")
 const {default: axios} = require('axios')
 const decompress = require('decompress')
 const downloadFile = require("~common/utils/download-file")
+
 const slug = require("~common/utils/slug")
 
-const isVersionTag = require("~common/utils/is-version-tag")
+const utils = require("~common/utils")
 
 const dependenciesDirName = "charts"
 
 const validateName = /^[a-zA-Z\d-_]+$/
 
-const sharedMethods = {slug, deepmerge, isVersionTag}
 
 const registerSubcharts = async (chart, chartsDirName, target)=>{
   const chartsDir = `${target}/${chartsDirName}`
@@ -61,9 +61,10 @@ const buildChartFile = async (target, name)=>{
     chart = yaml.load(await fs.readFile(chartFile))
     chart.name = name
   } else {
-    chart = createChart(name)  
+    chart = createChart(name)
   }
   await registerSubcharts(chart, dependenciesDirName, target)
+  await fs.ensureDir(target)
   await fs.writeFile(chartFile, yaml.dump(chart))
 }
 
@@ -236,19 +237,19 @@ const downloadAndBuildDependencies = async (config)=>{
       config,
     })=>{
       const {links={}} = config
-
+      
       // import dependency
       const { import: importTarget } = definition
       if(importTarget){
         if(links[importTarget]){
           await fs.ensureDir(target)
           await fs.copy(links[importTarget],target)
-      
+          
         }else{
           await degit(importTarget).clone(target)
         }
       }
-
+      
       // load config file
       const pluginConfigFile = `${target}/kontinuous.yaml`
       if((await fs.pathExists(pluginConfigFile))){
@@ -357,7 +358,9 @@ const mergeEnvTemplates = async (config) => {
   const {buildPath, environment} = config
   const buildProjectPath = `${buildPath}/${dependenciesDirName}/project`
   const envTemplatesPath = `${buildProjectPath}/env/${environment}/templates`
-  await fs.copy(envTemplatesPath, `${buildProjectPath}/templates`, {dereference: true})
+  if(await fs.pathExists(envTemplatesPath)){
+    await fs.copy(envTemplatesPath, `${buildProjectPath}/templates`, {dereference: true})
+  }
 }
 
 const writeChartsAlias = async (chartsAliasMap, config)=>{
@@ -515,8 +518,7 @@ const compileValues = async (config, logger) => {
   valuesEnableStandaloneCharts(values, config)
   valuesOverride(values, config, logger)
 
-  const methods = sharedMethods
-  const context = {config, logger, methods}
+  const context = {config, logger, utils}
   values = await require(`${buildProjectPath}/values-compilers`)(values, {}, context)
 
   const valuesJsFile = `${buildProjectPath}/values.js`
@@ -532,8 +534,8 @@ const compileValues = async (config, logger) => {
 }
 
 const copyFilesDir = async (config) => {
-  const {workspaceSubPath, buildPath} = config
-  const filesDir = `${workspaceSubPath}/files`
+  const {workspaceKsPath, buildPath} = config
+  const filesDir = `${workspaceKsPath}/files`
   if(!await fs.pathExists(filesDir)){
     return
   }

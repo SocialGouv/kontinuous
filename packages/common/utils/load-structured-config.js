@@ -15,7 +15,7 @@ const emptyAsUndefinedCheck = (val) =>
 
 module.exports = async ({
   configBasename = "config",
-  configDirs,
+  configDirs = [],
   configOverride,
   env = process.env,
   options,

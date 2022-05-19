@@ -1,16 +1,20 @@
 const ctx = require("~/ctx")
 
-const program = require("./program")
+const createProgram = require("./program")
 
-require("./command.build")
-require("./command.deploy")
-require("./command.env")
-require("./command.slugify")
-require("./command.upload")
-require("./command.commit-token")
-require("./command.logs")
+const addCommands = [
+  require("./commands/build"),
+  require("./commands/deploy"),
+  require("./commands/env"),
+  require("./commands/slugify"),
+  require("./commands/upload"),
+  require("./commands/commit-token"),
+  require("./commands/logs"),
+]
 
 module.exports = async (args = process.argv) => {
   ctx.provide()
+  const program = createProgram()
+  addCommands.forEach((addCommand) => addCommand(program))
   return program.parseAsync(args)
 }

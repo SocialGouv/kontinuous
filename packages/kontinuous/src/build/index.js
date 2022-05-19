@@ -14,8 +14,6 @@ module.exports = async (options) => {
 
   const result = await builder(options)
   
-
-
   const { manifestsFile, manifests } = result
 
   if (options.O) {

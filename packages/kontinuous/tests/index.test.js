@@ -4,7 +4,9 @@ const path = require("path")
 const fs = require("fs-extra")
 const dotenv = require("dotenv")
 const getDirectoriesSync = require("~common/utils/get-directories-sync")
-const builder = require("~/build/builder")
+const cli = require("~/cli")
+
+const ctx = require("~/ctx")
 
 const rootPath = path.resolve(`${__dirname}/..`)
 
@@ -42,10 +44,10 @@ test.each(cases)(`%s.%s`, async (testdir, environment) => {
     ...process.env,
     ...defaultEnv,
     KS_ENVIRONMENT: environment,
-    KS_KUBEWORKFLOW_PATH: rootPath,
+    KS_KONTINUOUS_PATH: rootPath,
     KS_WORKSPACE_PATH: testdirPath,
-    KS_WORKSPACE_SUBPATH: (await fs.pathExists(`${testdirPath}/.kw`))
-      ? "/.kw"
+    KS_WORKSPACE_SUBPATH: (await fs.pathExists(`${testdirPath}/.kontinuous`))
+      ? "/.kontinuous"
       : "",
     KS_GIT_REPOSITORY: `kube-workflow/test-${testdir}`,
     KS_DISPLAY_TREE: !(
@@ -60,7 +62,11 @@ test.each(cases)(`%s.%s`, async (testdir, environment) => {
     )
     Object.assign(env, dotenvConfig)
   }
-  const { manifests } = await builder(env)
+  ctx.provide()
+  ctx.set("env", env)
+  await cli([...process.argv.slice(0, 2), "build"])
+  const result = ctx.require("result")
+  const { manifests } = result
   expect(manifests).toMatchSpecificSnapshot(
     `./__snapshots__/${testdir}.${environment}.yaml`
   )

@@ -6,17 +6,21 @@ const options = require("./options")
 
 const loadConfig = require("./load-config")
 
-const program = new Command()
+module.exports = () => {
+  const program = new Command()
 
-program
-  .name("kube-workflow")
-  .description("CI pipeline running on Kubernetes deploying to Kubernetes 🚀")
-  .version(require(`${__dirname}/../../package.json`).version)
-  .addOption(options.debug)
-  .hook("preAction", async (_thisCommand, actionCommand) => {
-    const opts = actionCommand.optsWithGlobals()
-    const config = await loadConfig(opts)
-    ctx.set("config", config)
-  })
+  program
+    .name("kontinuous")
+    .description(
+      "CI/CD on Kubernetes to Kubernetes (Helm + Kapp + some Kung-Fu) 🚀"
+    )
+    .version(require(`${__dirname}/../../package.json`).version)
+    .addOption(options.debug)
+    .hook("preAction", async (_thisCommand, actionCommand) => {
+      const opts = actionCommand.optsWithGlobals()
+      const config = await loadConfig(opts)
+      ctx.set("config", config)
+    })
 
-module.exports = program
+  return program
+}

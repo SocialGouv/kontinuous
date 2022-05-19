@@ -11,28 +11,48 @@ const getGitUrl = require("~common/utils/get-git-url")
 const refEnv = require("~common/utils/ref-env")
 const yaml = require("~common/utils/yaml")
 
+const ctx = require("~/ctx")
+
 const { version } = require(`${__dirname}/../../package.json`)
 
+const configAsDefaultOverride = (config) =>
+  Object.entries(config).reduce((acc, [key, value]) => {
+    acc[key] = { default: value }
+    return acc
+  }, {})
+
 module.exports = async (opts = {}) => {
-  const configDirs = []
-  const homedir = os.homedir()
-  if (homedir) {
-    configDirs.push(`${homedir}/.kontinuous`)
+  const env = ctx.get("env") || process.env
+
+  const rootConfigOverride = {
+    workspacePath: {
+      env: "KS_WORKSPACE_PATH",
+      option: "cwd",
+      default: process.cwd(),
+    },
+    workspaceSubPath: {
+      env: "KS_WORKSPACE_SUBPATH",
+      default: ".kontinuous",
+    },
+    workspaceKsPath: {
+      defaultFunction: (config) =>
+        path.join(config.workspacePath, config.workspaceSubPath),
+    },
   }
-  const cwd = opts.cwd || process.cwd()
-  configDirs.push(`${cwd}/.kontinuous`)
+  const rootConfig = await loadStructuredConfig({
+    configOverride: rootConfigOverride,
+    options: opts,
+    env,
+  })
 
   const configOverride = {
+    ...configAsDefaultOverride(rootConfig),
     kontinuousPath: {
       env: "KS_KONTINUOUS_PATH",
       default: path.resolve(`${__dirname}/../..`),
     },
     version: {
       default: version,
-    },
-    workspacePath: {
-      option: "cwd",
-      default: process.cwd(),
     },
     chart: {
       env: "KS_CHART",
@@ -90,21 +110,21 @@ module.exports = async (opts = {}) => {
       option: "E",
       defaultFunction: (config) => refEnv(config.gitRef),
     },
-    workspaceSubPath: {
-      default: "/.kontinuous",
-    },
-    workspaceKsPath: {
-      defaultFunction: (config) =>
-        path.join(config.workspacePath, config.workspaceSubPath),
-    },
   }
+
+  const configDirs = []
+  const homedir = os.homedir()
+  if (homedir) {
+    configDirs.push(`${homedir}/.kontinuous`)
+  }
+  configDirs.push(rootConfig.workspaceKsPath)
 
   const config = await loadStructuredConfig({
     configBasename: "config",
     configDirs,
     configOverride,
     options: opts,
-    env: process.env,
+    env,
   })
 
   return config
