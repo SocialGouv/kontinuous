@@ -357,12 +357,11 @@ const mergeYamlFileValues = async (valuesFileBasename, subValues, beforeMerge)=>
   deepmerge(subValues, val)
 }
 
-const mergeEnvTemplates = async (config) => {
-  const {buildPath, environment} = config
-  const buildProjectPath = `${buildPath}/${dependenciesDirName}/project`
-  const envTemplatesPath = `${buildProjectPath}/env/${environment}/templates`
+const mergeEnvTemplates = async (rootPath, config) => {
+  const {environment} = config
+  const envTemplatesPath = `${rootPath}/env/${environment}/templates`
   if(await fs.pathExists(envTemplatesPath)){
-    await fs.copy(envTemplatesPath, `${buildProjectPath}/templates`, {dereference: true})
+    await fs.copy(envTemplatesPath, `${rootPath}/templates`, {dereference: true})
   }
 }
 
@@ -505,7 +504,8 @@ const compileValues = async (config, logger) => {
         
         await mergeYamlFileValues(`${chartsPath}/${chartDir}/values`, subValues, beforeMergeChartValues)
         await mergeYamlFileValues(`${chartsPath}/${chartDir}/env/${environment}/values`, subValues, beforeMergeChartValues)
-        
+        await mergeEnvTemplates(`${chartsPath}/${chartDir}`, config)
+
         if(definition.values){
           deepmerge(subValues, definition.values)
         }
@@ -578,13 +578,14 @@ const copyFilesDir = async (config) => {
 }
 
 module.exports = async (config, logger)=>{
+  const {buildPath} = config
+
   await downloadAndBuildDependencies(config)
   await installPackages(config)
-  await mergeEnvTemplates(config)
+  await mergeEnvTemplates(`${buildPath}/${dependenciesDirName}/project`, config)
   await copyFilesDir(config)
   const values = await compileValues(config, logger)
   
-  const {buildPath} = config
   await Promise.all([
     buildChartFile(buildPath, "kontinuous-umbrella"),
     fs.writeFile(`${buildPath}/values.yaml`, yaml.dump(values)),
