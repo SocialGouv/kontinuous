@@ -1,8 +1,4 @@
 const path = require("path")
-const fs = require("fs-extra")
-
-const degit = require("tiged")
-const yaml = require("js-yaml")
 
 const miniHash = require("./utils/mini-hash")
 
@@ -12,7 +8,7 @@ const requireUse = async (
   use,
   { config, logger, downloadingPromises, utils }
 ) => {
-  const { slug } = utils
+  const { slug, degit, fs } = utils
   const { buildPath, workspacePath, workspaceKsPath } = config
   const useSlug = slug(use)
   use = use.replace("@", "#")
@@ -64,7 +60,7 @@ async function compile(
     return
   }
   const { config, utils } = context
-  const { slug } = utils
+  const { slug, yaml, fs } = utils
   if (!Array.isArray(values.runs)) {
     values.runs = Object.entries(values.runs).map(([name, run]) => {
       if (!run.name) {
