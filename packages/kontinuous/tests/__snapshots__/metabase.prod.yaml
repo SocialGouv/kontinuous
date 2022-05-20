@@ -302,10 +302,10 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
-    kapp.k14s.io/disable-original: ''
   labels:
     component: metabase-app1
     application: test-metabase
@@ -333,10 +333,10 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
-    kapp.k14s.io/disable-original: ''
   labels:
     component: metabase-app2
     application: test-metabase

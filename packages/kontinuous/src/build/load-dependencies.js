@@ -46,12 +46,12 @@ const registerSubcharts = async (chart, chartsDirName, target)=>{
       version: subchart.version,
       repository: `file://./${chartsDirName}/${chartDir}`,
     }
-    if(subchart.type!=="library"){
-      dependency.condition = `${subchart.name}.enabled`
-    }
     const definedDependency = chart.dependencies.find((dependency)=>(dependency.alias||dependency.name===subchart.name))
     if(definedDependency){
       Object.assign(definedDependency, dependency)
+    }
+    if(subchart.type!=="library"&&!dependency.condition){
+      dependency.condition = `${dependency.alias || dependency.name}.enabled`
     }
     chart.dependencies.push(dependency)
   }
@@ -382,6 +382,7 @@ const writeChartsAlias = async (chartsAliasMap, config)=>{
       chart.dependencies.push({
         ...aliasOf,
         alias,
+        condition: `${alias}.enabled`
       })
     }
     await fs.writeFile(chartFile, yaml.dump(chart))

@@ -1,5 +1,4 @@
 const dashInstances = (values, scope = []) => {
-  // console.log(scope.join("."), Object.keys(values))
   for (const key of Object.keys(values)) {
     if (
       typeof values[key] !== "object" ||

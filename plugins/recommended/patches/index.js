@@ -1,4 +1,8 @@
-const patches = [require("./namespace"), require("./kapp")]
+const patches = [
+  require("./namespace"),
+  require("./kapp"),
+  require("./dns-truncate"),
+]
 
 module.exports = async (manifests, options, context, scope) => {
   for (const patch of patches) {

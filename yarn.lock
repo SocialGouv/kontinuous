@@ -6232,6 +6232,7 @@ __metadata:
     js-yaml: "npm:^4.1.0"
     link-module-alias: "npm:^1.2.0"
     lodash.camelcase: "npm:^4.3.0"
+    lodash.clonedeep: "npm:^4.5.0"
     lodash.defaultsdeep: "npm:^4.6.1"
     lodash.mergewith: "npm:^4.6.2"
     nctx: "npm:^1.2.0"
