@@ -6244,8 +6244,7 @@ __metadata:
     yaml: "npm:^2.0.1"
     ~common: "npm:*"
   bin:
-    kube-workflow: ./bin/kube-workflow
-    post-renderer: ./bin/post-renderer
+    kontinuous: ./bin/kontinuous
   languageName: unknown
   linkType: soft
 

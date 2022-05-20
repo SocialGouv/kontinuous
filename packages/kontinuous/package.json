@@ -52,9 +52,7 @@
     "~": "src",
     "~common": "common"
   },
-  "bin": {
-    "kontinuous": "./bin/kontinuous"
-  },
+  "bin": "./bin/kontinuous",
   "files": [
     "bin",
     "common",
