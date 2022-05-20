@@ -161,7 +161,7 @@ const deployer = async (options) => {
     )
   }
 
-  const charts = config.chart.join(",")
+  const charts = config.chart?.join(",")
 
   const kappApp = charts ? slug(`${repositoryName}-${charts}`) : repositoryName
 
