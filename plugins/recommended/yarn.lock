@@ -305,7 +305,6 @@ __metadata:
   dependencies:
     fs-extra: "npm:^10.1.0"
     js-yaml: "npm:^4.1.0"
-    slugify: "npm:^1.6.5"
     tiged: "npm:^2.11.2"
   languageName: unknown
   linkType: soft
@@ -340,13 +339,6 @@ __metadata:
     mkdirp: "npm:^0.5.1"
     rimraf: "npm:^2.5.2"
   checksum: 3193e741458e3e50feb41b9fd31bafb38b905693ef8a1b1cab0e15aa57ccca2525eb82b0454f19737c6d4ef8f6102a17be717fb68094bb5903982f8ec3e5c78a
-  languageName: node
-  linkType: hard
-
-"slugify@npm:^1.6.5":
-  version: 1.6.5
-  resolution: "slugify@npm:1.6.5"
-  checksum: e47396fbae0b89a729df9b28300972bf45c053396b5ee23b0d603db77518a8b7516bae824b928867c26d7956b86dabde537dc6a156473d945fcab4a665f1acad
   languageName: node
   linkType: hard
 
