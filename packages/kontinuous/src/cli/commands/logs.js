@@ -10,7 +10,6 @@ module.exports = (program) =>
     .command("logs")
     .description("stream logs pipeline from webhook")
     .addOption(options.cwd)
-    .addOption(options.rancherProjectName)
     .addOption(options.webhookBaseDomain)
     .option("--repository <repo>", "git repository url, default to current")
     .option("--branch <ref>", "git branch, default to current")

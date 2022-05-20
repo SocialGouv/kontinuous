@@ -14,8 +14,6 @@ module.exports = (program) =>
     .addOption(options.set)
     .addOption(options.cwd)
     .addOption(options.upload)
-    .addOption(options.rancherProjectName)
-    .addOption(options.rancherProjectId)
     .option(
       "--file, -f <file>",
       "select a manifests yaml file, default will build one"

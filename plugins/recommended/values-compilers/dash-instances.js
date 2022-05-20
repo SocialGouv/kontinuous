@@ -1,10 +1,23 @@
 const dashInstances = (values, scope = []) => {
-  if (typeof values !== "object" || values === null) {
-    return
-  }
+  // console.log(scope.join("."), Object.keys(values))
   for (const key of Object.keys(values)) {
+    if (
+      typeof values[key] !== "object" ||
+      values[key] === null ||
+      Array.isArray(values[key])
+    ) {
+      continue
+    }
     dashInstances(values[key], [...scope, key])
     for (const k of Object.keys(values)) {
+      if (
+        typeof values[k] !== "object" ||
+        values[k] === null ||
+        Array.isArray(values[key]) ||
+        !values[k]._isProjectValues
+      ) {
+        continue
+      }
       if (k.startsWith(`${key}-`) && !values[k]._aliasOf) {
         values[k]._aliasOf = `.${key}`
       }

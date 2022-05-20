@@ -522,7 +522,7 @@ const compileValues = async (config, logger) => {
   valuesOverride(values.project, config, logger)
 
   const context = {config, logger, utils, ctx}
-
+  
   const valuesJsFile = `${buildProjectPath}/values.js`
   if(await fs.pathExists(valuesJsFile)){
     values = await require(valuesJsFile)(values, {}, context)

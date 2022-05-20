@@ -1,10 +1,5 @@
 module.exports = async (values, _options, { config }) => {
-  const findAliasOf = async (
-    key,
-    dependencies = { project: { dependencies: config.dependencies } },
-    subValues = values,
-    scope = []
-  ) => {
+  const findAliasOf = async (key, dependencies, subValues, scope = []) => {
     for (const ck of Object.keys(dependencies)) {
       for (const vk of Object.keys(subValues[ck])) {
         if (vk === key || key.startsWith(`${vk}-`)) {
@@ -30,7 +25,13 @@ module.exports = async (values, _options, { config }) => {
     if (val._aliasOf) {
       continue
     }
-    const scope = await findAliasOf(key)
+    const scope = await findAliasOf(
+      key,
+      {
+        project: { dependencies: config.dependencies },
+      },
+      values
+    )
     if (scope) {
       val._aliasOf = scope.join(".")
     }
