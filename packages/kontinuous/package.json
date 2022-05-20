@@ -60,10 +60,7 @@
     "bin",
     "common",
     "src",
-    "templates",
-    "Chart.yaml",
-    "package.json",
-    "values.yaml"
+    "package.json"
   ],
   "publishConfig": {
     "access": "public"
