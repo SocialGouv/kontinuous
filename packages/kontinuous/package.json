@@ -53,8 +53,7 @@
     "~common": "common"
   },
   "bin": {
-    "kube-workflow": "./bin/kube-workflow",
-    "post-renderer": "./bin/post-renderer"
+    "kontinuous": "./bin/kontinuous"
   },
   "files": [
     "bin",
