@@ -51,7 +51,7 @@ const createSampleSnapTest = (testdir, environment) => async () => {
     KS_WORKSPACE_SUBPATH: (await fs.pathExists(`${testdirPath}/.kontinuous`))
       ? "/.kontinuous"
       : "",
-    KS_GIT_REPOSITORY: `kube-workflow/test-${testdir}`,
+    KS_GIT_REPOSITORY: `kontinuous/test-${testdir}`,
   }
   const envFile = `${testdirPath}/.env`
   if (fs.pathExistsSync(envFile)) {

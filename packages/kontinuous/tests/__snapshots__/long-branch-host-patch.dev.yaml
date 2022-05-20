@@ -7,8 +7,8 @@ metadata:
   annotations:
     janitor/ttl: 7d
     field.cattle.io/projectId: '1234'
-    kubeworkflow/gitBranch: a-very-very-very-long-branch-name-to-test-host-truncation
-    kubeworkflow/mainNamespace: 'true'
+    kontinuous/gitBranch: a-very-very-very-long-branch-name-to-test-host-truncation
+    kontinuous/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
   labels:
     application: test-long-branch-host-patch
@@ -77,10 +77,9 @@ metadata:
   name: app
   namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
   annotations:
-    kapp.k14s.io/change-group: >-
-      kube-workflow/test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
+    kapp.k14s.io/change-group: kontinuous/test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
     kapp.k14s.io/change-group.app: >-
-      kube-workflow/app.test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
+      kontinuous/app.test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace

@@ -7,8 +7,8 @@ metadata:
   annotations:
     janitor/ttl: 7d
     field.cattle.io/projectId: '1234'
-    kubeworkflow/gitBranch: feature-branch-1
-    kubeworkflow/mainNamespace: 'true'
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
   labels:
     application: test-values-js
@@ -77,8 +77,8 @@ metadata:
   name: app
   namespace: test-namespace
   annotations:
-    kapp.k14s.io/change-group: kube-workflow/test-namespace
-    kapp.k14s.io/change-group.app: kube-workflow/app.test-namespace
+    kapp.k14s.io/change-group: kontinuous/test-namespace
+    kapp.k14s.io/change-group.app: kontinuous/app.test-namespace
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace

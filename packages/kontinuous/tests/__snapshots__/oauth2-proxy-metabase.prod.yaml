@@ -6,8 +6,8 @@ kind: Namespace
 metadata:
   annotations:
     field.cattle.io/projectId: '1234'
-    kubeworkflow/gitBranch: feature-branch-1
-    kubeworkflow/mainNamespace: 'true'
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
   labels:
     application: test-oauth2-proxy-metabase
@@ -119,8 +119,8 @@ metadata:
   name: metabase
   namespace: test-oauth2-proxy-metabase
   annotations:
-    kapp.k14s.io/change-group: kube-workflow/test-oauth2-proxy-metabase
-    kapp.k14s.io/change-group.metabase: kube-workflow/metabase.test-oauth2-proxy-metabase
+    kapp.k14s.io/change-group: kontinuous/test-oauth2-proxy-metabase
+    kapp.k14s.io/change-group.metabase: kontinuous/metabase.test-oauth2-proxy-metabase
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -187,8 +187,8 @@ metadata:
   name: oauth2-proxy
   namespace: test-oauth2-proxy-metabase
   annotations:
-    kapp.k14s.io/change-group: kube-workflow/test-oauth2-proxy-metabase
-    kapp.k14s.io/change-group.oauth2-proxy: kube-workflow/oauth2-proxy.test-oauth2-proxy-metabase
+    kapp.k14s.io/change-group: kontinuous/test-oauth2-proxy-metabase
+    kapp.k14s.io/change-group.oauth2-proxy: kontinuous/oauth2-proxy.test-oauth2-proxy-metabase
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace

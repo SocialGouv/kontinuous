@@ -7,8 +7,8 @@ metadata:
   annotations:
     janitor/ttl: 7d
     field.cattle.io/projectId: '1234'
-    kubeworkflow/gitBranch: feature-branch-1
-    kubeworkflow/mainNamespace: 'true'
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
   labels:
     application: test-init-container
@@ -77,11 +77,11 @@ metadata:
   name: app
   namespace: test-init-container-feature-branch-1
   annotations:
-    kapp.k14s.io/change-group: kube-workflow/test-init-container-feature-branch-1
-    kapp.k14s.io/change-group.app: kube-workflow/app.test-init-container-feature-branch-1
+    kapp.k14s.io/change-group: kontinuous/test-init-container-feature-branch-1
+    kapp.k14s.io/change-group.app: kontinuous/app.test-init-container-feature-branch-1
     kapp.k14s.io/change-rule.seed: >-
       upsert after upserting
-      kube-workflow/seed.test-init-container-feature-branch-1
+      kontinuous/seed.test-init-container-feature-branch-1
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -143,8 +143,8 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-init-container-feature-branch-1
-    kapp.k14s.io/change-group.seed: kube-workflow/seed.test-init-container-feature-branch-1
+    kapp.k14s.io/change-group: kontinuous/test-init-container-feature-branch-1
+    kapp.k14s.io/change-group.seed: kontinuous/seed.test-init-container-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
@@ -158,12 +158,12 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kube-workflow/degit:latest
+          image: ghcr.io/socialgouv/kontinuous/degit:latest
           command:
             - sh
             - '-c'
             - |
-              degit kube-workflow/test-init-container#feature-branch-1 \\\\
+              degit kontinuous/test-init-container#feature-branch-1 \\\\
                 /workspace
           securityContext:
             runAsUser: 1000

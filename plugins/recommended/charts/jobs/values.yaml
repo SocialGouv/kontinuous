@@ -5,7 +5,7 @@ gitBranch:
 runs: []
 needs: []
 image: "debian:stable"
-degitImage: ghcr.io/socialgouv/kube-workflow/degit:latest
+degitImage: ghcr.io/socialgouv/kontinuous/degit:latest
 # extra:
 #   jobs:
 #     sharedStorage:

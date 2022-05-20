@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   webhook:
-    image: kubeworkflow_webhook
+    image: kontinuous_webhook
     restart: always
     build:
       context: .

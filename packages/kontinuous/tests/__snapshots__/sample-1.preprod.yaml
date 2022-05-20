@@ -6,8 +6,8 @@ kind: Namespace
 metadata:
   annotations:
     field.cattle.io/projectId: '1234'
-    kubeworkflow/gitBranch: feature-branch-1
-    kubeworkflow/mainNamespace: 'true'
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
   labels:
     application: test-sample-1
@@ -152,8 +152,8 @@ metadata:
   name: app-2nd-instance
   namespace: test-sample-1-preprod
   annotations:
-    kapp.k14s.io/change-group: kube-workflow/test-sample-1-preprod
-    kapp.k14s.io/change-group.app-2nd-instance: kube-workflow/app-2nd-instance.test-sample-1-preprod
+    kapp.k14s.io/change-group: kontinuous/test-sample-1-preprod
+    kapp.k14s.io/change-group.app-2nd-instance: kontinuous/app-2nd-instance.test-sample-1-preprod
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -223,8 +223,8 @@ metadata:
   name: app
   namespace: test-sample-1-preprod
   annotations:
-    kapp.k14s.io/change-group: kube-workflow/test-sample-1-preprod
-    kapp.k14s.io/change-group.app: kube-workflow/app.test-sample-1-preprod
+    kapp.k14s.io/change-group: kontinuous/test-sample-1-preprod
+    kapp.k14s.io/change-group.app: kontinuous/app.test-sample-1-preprod
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -294,8 +294,8 @@ metadata:
   name: hasura
   namespace: test-sample-1-preprod
   annotations:
-    kapp.k14s.io/change-group: kube-workflow/test-sample-1-preprod
-    kapp.k14s.io/change-group.hasura: kube-workflow/hasura.test-sample-1-preprod
+    kapp.k14s.io/change-group: kontinuous/test-sample-1-preprod
+    kapp.k14s.io/change-group.hasura: kontinuous/hasura.test-sample-1-preprod
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -366,8 +366,8 @@ metadata:
   name: pgweb
   namespace: test-sample-1-preprod
   annotations:
-    kapp.k14s.io/change-group: kube-workflow/test-sample-1-preprod
-    kapp.k14s.io/change-group.pgweb: kube-workflow/pgweb.test-sample-1-preprod
+    kapp.k14s.io/change-group: kontinuous/test-sample-1-preprod
+    kapp.k14s.io/change-group.pgweb: kontinuous/pgweb.test-sample-1-preprod
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace

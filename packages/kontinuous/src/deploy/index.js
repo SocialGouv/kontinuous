@@ -81,7 +81,7 @@ const deployer = async (options) => {
   const namespaceManifest = allManifests.find(
     (manifest) =>
       manifest.kind === "Namespace" &&
-      manifest.metadata?.annotations?.["kubeworkflow/mainNamespace"]
+      manifest.metadata?.annotations?.["kontinuous/mainNamespace"]
   )
 
   const namespace = namespaceManifest.metadata.name
@@ -172,7 +172,7 @@ const deployer = async (options) => {
     const [cmd, args] = parseCommand(`
       kapp deploy
         --kubeconfig-context ${kubeconfigContext}
-        --app label:kubeworkflow/kapp=${kappApp}
+        --app label:kontinuous/kapp=${kappApp}
         --logs-all
         --wait-timeout ${kappWaitTimeout}
         --dangerous-override-ownership-of-existing-resources

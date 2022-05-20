@@ -47,7 +47,7 @@ module.exports = async (
   }
 
   if (found) {
-    const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kube-workflow`))
+    const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kontinuous`))
     const kubeconfigFile = `${tmpDir}/.kubeconfig`
     await fs.writeFile(kubeconfigFile, yaml.dump(kubeconfig))
     await fs.chmod(kubeconfigFile, 0o400)

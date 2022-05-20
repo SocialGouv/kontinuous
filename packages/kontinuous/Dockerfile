@@ -37,28 +37,28 @@ RUN curl -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/${KAP
 RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1001 ubuntu
 RUN mkdir -p /opt && chown 1001:1001 /opt
 
-RUN mkdir -p /opt/kube-workflow
-WORKDIR /opt/kube-workflow
+RUN mkdir -p /opt/kontinuous
+WORKDIR /opt/kontinuous
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn .yarn
-COPY packages/workflow/package.json ./packages/workflow/package.json
+COPY packages/kontinuous/package.json ./packages/kontinuous/package.json
 COPY packages/common/package.json ./packages/common/package.json
 RUN chown -R 1001:1001 .
 
 # Keep yarn install cache when bumping version and dependencies still the sames
 RUN node -e " \
-  const package = JSON.parse(fs.readFileSync('packages/workflow/package.json')); \
+  const package = JSON.parse(fs.readFileSync('packages/kontinuous/package.json')); \
   const packageZero = { ...package, version: '0.0.0' };  \
-  fs.writeFileSync('packages/workflow/package.json', JSON.stringify(packageZero));"
+  fs.writeFileSync('packages/kontinuous/package.json', JSON.stringify(packageZero));"
 RUN node -e " \
   const package = JSON.parse(fs.readFileSync('packages/common/package.json')); \
   const packageZero = { ...package, version: '0.0.0' };  \
   fs.writeFileSync('packages/common/package.json', JSON.stringify(packageZero));"
-RUN mkdir -p packages/workflow/src && mkdir -p packages/workflow/common
-RUN yarn workspaces focus kube-workflow --production \
+RUN mkdir -p packages/kontinuous/src && mkdir -p packages/kontinuous/common
+RUN yarn workspaces focus kontinuous --production \
   && yarn cache clean
-RUN rm -rf packages/workflow/src && rm -rf packages/workflow/common
-COPY packages/workflow/ ./packages/workflow/
+RUN rm -rf packages/kontinuous/src && rm -rf packages/kontinuous/common
+COPY packages/kontinuous/ ./packages/kontinuous/
 COPY packages/common/ ./packages/common/
 
 RUN chown -R 1001:1001 .
@@ -72,5 +72,5 @@ RUN chmod a+rw $HOME
 RUN git config --global --add safe.directory /workspace
 ENV KUBECONFIG=$HOME/.kube/config
 RUN mkdir $HOME/.kube
-ENTRYPOINT ["/opt/kube-workflow/packages/workflow/bin/kube-workflow"]
+ENTRYPOINT ["/opt/kontinuous/packages/kontinuous/bin/kontinuous"]
 CMD ["help"]

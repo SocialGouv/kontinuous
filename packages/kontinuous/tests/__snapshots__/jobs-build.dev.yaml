@@ -7,8 +7,8 @@ metadata:
   annotations:
     janitor/ttl: 7d
     field.cattle.io/projectId: '1234'
-    kubeworkflow/gitBranch: feature-branch-1
-    kubeworkflow/mainNamespace: 'true'
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
   labels:
     application: test-jobs-build
@@ -119,11 +119,11 @@ metadata:
   name: app
   namespace: test-jobs-build-feature-branch-1
   annotations:
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.app: kube-workflow/app.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.app: kontinuous/app.test-jobs-build-feature-branch-1
     kapp.k14s.io/change-rule.build-app: >-
       upsert after upserting
-      kube-workflow/build-app.test-jobs-build-feature-branch-1
+      kontinuous/build-app.test-jobs-build-feature-branch-1
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -193,12 +193,12 @@ metadata:
   name: hasura
   namespace: test-jobs-build-feature-branch-1
   annotations:
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.hasura: kube-workflow/hasura.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.hasura: kontinuous/hasura.test-jobs-build-feature-branch-1
     kapp.k14s.io/change-rule.build-hasura: >-
       upsert after upserting
-      kube-workflow/build-hasura.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-rule.db: upsert after upserting kube-workflow/db.test-jobs-build-feature-branch-1
+      kontinuous/build-hasura.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db.test-jobs-build-feature-branch-1
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -269,9 +269,9 @@ metadata:
   name: pgweb
   namespace: test-jobs-build-feature-branch-1
   annotations:
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.pgweb: kube-workflow/pgweb.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-rule.db: upsert after upserting kube-workflow/db.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.pgweb: kontinuous/pgweb.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db.test-jobs-build-feature-branch-1
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -352,10 +352,10 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.db: kube-workflow/db.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.db.create-secret: kube-workflow/db.create-secret.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.db..create-secret: kube-workflow/db..create-secret.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.db: kontinuous/db.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.db.create-secret: kontinuous/db.create-secret.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.db..create-secret: kontinuous/db..create-secret.test-jobs-build-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
@@ -369,7 +369,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kube-workflow/degit:latest
+          image: ghcr.io/socialgouv/kontinuous/degit:latest
           command:
             - sh
             - '-c'
@@ -433,13 +433,13 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.db: kube-workflow/db.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.db.create-db: kube-workflow/db.create-db.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.db..create-db: kube-workflow/db..create-db.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.db: kontinuous/db.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.db.create-db: kontinuous/db.create-db.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.db..create-db: kontinuous/db..create-db.test-jobs-build-feature-branch-1
     kapp.k14s.io/change-rule.db..create-secret: >-
       upsert after upserting
-      kube-workflow/db..create-secret.test-jobs-build-feature-branch-1
+      kontinuous/db..create-secret.test-jobs-build-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
@@ -453,7 +453,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kube-workflow/degit:latest
+          image: ghcr.io/socialgouv/kontinuous/degit:latest
           command:
             - sh
             - '-c'
@@ -524,10 +524,10 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.build-app: kube-workflow/build-app.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.build-app.kaniko: kube-workflow/build-app.kaniko.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.build-app..kaniko: kube-workflow/build-app..kaniko.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.build-app: kontinuous/build-app.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.build-app.kaniko: kontinuous/build-app.kaniko.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.build-app..kaniko: kontinuous/build-app..kaniko.test-jobs-build-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
@@ -541,12 +541,12 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kube-workflow/degit:latest
+          image: ghcr.io/socialgouv/kontinuous/degit:latest
           command:
             - sh
             - '-c'
             - |
-              degit kube-workflow/test-jobs-build#feature-branch-1 \\\\
+              degit kontinuous/test-jobs-build#feature-branch-1 \\\\
                 /workspace
           securityContext:
             runAsUser: 1000
@@ -611,10 +611,10 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.build-hasura: kube-workflow/build-hasura.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.build-hasura.kaniko: kube-workflow/build-hasura.kaniko.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.build-hasura..kaniko: kube-workflow/build-hasura..kaniko.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.build-hasura: kontinuous/build-hasura.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.build-hasura.kaniko: kontinuous/build-hasura.kaniko.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.build-hasura..kaniko: kontinuous/build-hasura..kaniko.test-jobs-build-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
@@ -628,12 +628,12 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kube-workflow/degit:latest
+          image: ghcr.io/socialgouv/kontinuous/degit:latest
           command:
             - sh
             - '-c'
             - |
-              degit kube-workflow/test-jobs-build#feature-branch-1 \\\\
+              degit kontinuous/test-jobs-build#feature-branch-1 \\\\
                 /workspace
           securityContext:
             runAsUser: 1000

@@ -6,8 +6,8 @@ kind: Namespace
 metadata:
   annotations:
     field.cattle.io/projectId: '1234'
-    kubeworkflow/gitBranch: feature-branch-1
-    kubeworkflow/mainNamespace: 'true'
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
   labels:
     application: test-ingress-annotations
@@ -98,8 +98,8 @@ metadata:
   name: metabase
   namespace: test-ingress-annotations
   annotations:
-    kapp.k14s.io/change-group: kube-workflow/test-ingress-annotations
-    kapp.k14s.io/change-group.metabase: kube-workflow/metabase.test-ingress-annotations
+    kapp.k14s.io/change-group: kontinuous/test-ingress-annotations
+    kapp.k14s.io/change-group.metabase: kontinuous/metabase.test-ingress-annotations
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace

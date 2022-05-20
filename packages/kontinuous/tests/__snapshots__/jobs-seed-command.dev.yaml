@@ -7,8 +7,8 @@ metadata:
   annotations:
     janitor/ttl: 7d
     field.cattle.io/projectId: '1234'
-    kubeworkflow/gitBranch: feature-branch-1
-    kubeworkflow/mainNamespace: 'true'
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
   labels:
     application: test-jobs-seed-command
@@ -77,11 +77,11 @@ metadata:
   name: app
   namespace: test-jobs-seed-command-feature-branch-1
   annotations:
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-seed-command-feature-branch-1
-    kapp.k14s.io/change-group.app: kube-workflow/app.test-jobs-seed-command-feature-branch-1
+    kapp.k14s.io/change-group: kontinuous/test-jobs-seed-command-feature-branch-1
+    kapp.k14s.io/change-group.app: kontinuous/app.test-jobs-seed-command-feature-branch-1
     kapp.k14s.io/change-rule.seed: >-
       upsert after upserting
-      kube-workflow/seed.test-jobs-seed-command-feature-branch-1
+      kontinuous/seed.test-jobs-seed-command-feature-branch-1
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -143,10 +143,10 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-seed-command-feature-branch-1
-    kapp.k14s.io/change-group.db: kube-workflow/db.test-jobs-seed-command-feature-branch-1
-    kapp.k14s.io/change-group.db.create-secret: kube-workflow/db.create-secret.test-jobs-seed-command-feature-branch-1
-    kapp.k14s.io/change-group.db..create-secret: kube-workflow/db..create-secret.test-jobs-seed-command-feature-branch-1
+    kapp.k14s.io/change-group: kontinuous/test-jobs-seed-command-feature-branch-1
+    kapp.k14s.io/change-group.db: kontinuous/db.test-jobs-seed-command-feature-branch-1
+    kapp.k14s.io/change-group.db.create-secret: kontinuous/db.create-secret.test-jobs-seed-command-feature-branch-1
+    kapp.k14s.io/change-group.db..create-secret: kontinuous/db..create-secret.test-jobs-seed-command-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
@@ -160,7 +160,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kube-workflow/degit:latest
+          image: ghcr.io/socialgouv/kontinuous/degit:latest
           command:
             - sh
             - '-c'
@@ -224,13 +224,13 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-seed-command-feature-branch-1
-    kapp.k14s.io/change-group.db: kube-workflow/db.test-jobs-seed-command-feature-branch-1
-    kapp.k14s.io/change-group.db.create-db: kube-workflow/db.create-db.test-jobs-seed-command-feature-branch-1
-    kapp.k14s.io/change-group.db..create-db: kube-workflow/db..create-db.test-jobs-seed-command-feature-branch-1
+    kapp.k14s.io/change-group: kontinuous/test-jobs-seed-command-feature-branch-1
+    kapp.k14s.io/change-group.db: kontinuous/db.test-jobs-seed-command-feature-branch-1
+    kapp.k14s.io/change-group.db.create-db: kontinuous/db.create-db.test-jobs-seed-command-feature-branch-1
+    kapp.k14s.io/change-group.db..create-db: kontinuous/db..create-db.test-jobs-seed-command-feature-branch-1
     kapp.k14s.io/change-rule.db..create-secret: >-
       upsert after upserting
-      kube-workflow/db..create-secret.test-jobs-seed-command-feature-branch-1
+      kontinuous/db..create-secret.test-jobs-seed-command-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
@@ -244,7 +244,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kube-workflow/degit:latest
+          image: ghcr.io/socialgouv/kontinuous/degit:latest
           command:
             - sh
             - '-c'
@@ -315,11 +315,11 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-seed-command-feature-branch-1
-    kapp.k14s.io/change-group.seed: kube-workflow/seed.test-jobs-seed-command-feature-branch-1
+    kapp.k14s.io/change-group: kontinuous/test-jobs-seed-command-feature-branch-1
+    kapp.k14s.io/change-group.seed: kontinuous/seed.test-jobs-seed-command-feature-branch-1
     kapp.k14s.io/change-rule.db: >-
       upsert after upserting
-      kube-workflow/db.test-jobs-seed-command-feature-branch-1
+      kontinuous/db.test-jobs-seed-command-feature-branch-1
     janitor/ttl: '1800'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update

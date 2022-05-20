@@ -9,7 +9,7 @@ module.exports = (program) =>
     .command("build")
     .alias("b")
     .description(
-      "Build manifests using kube-workflow with current directory configuration"
+      "Build manifests using kontinuous with current directory configuration"
     )
     .addOption(options.env)
     .addOption(options.chart)

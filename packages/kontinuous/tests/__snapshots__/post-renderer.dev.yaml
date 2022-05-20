@@ -7,8 +7,8 @@ exports[`post-renderer.dev 1`] = `
     annotations:
       janitor/ttl: 7d
       field.cattle.io/projectId: '1234'
-      kubeworkflow/gitBranch: feature-branch-1
-      kubeworkflow/mainNamespace: 'true'
+      kontinuous/gitBranch: feature-branch-1
+      kontinuous/mainNamespace: 'true'
       kapp.k14s.io/exists: ''
     labels:
       application: test-post-renderer
@@ -67,8 +67,8 @@ exports[`post-renderer.dev 1`] = `
     name: app
     namespace: test-post-renderer-feature-branch-1
     annotations:
-      kapp.k14s.io/change-group: kube-workflow/test-post-renderer-feature-branch-1
-      kapp.k14s.io/change-group.app: kube-workflow/app.test-post-renderer-feature-branch-1
+      kapp.k14s.io/change-group: kontinuous/test-post-renderer-feature-branch-1
+      kapp.k14s.io/change-group.app: kontinuous/app.test-post-renderer-feature-branch-1
   spec:
     replicas: 1
     selector:
