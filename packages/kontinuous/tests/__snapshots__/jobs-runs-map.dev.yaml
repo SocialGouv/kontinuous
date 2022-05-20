@@ -119,9 +119,6 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
-            - name: workflow
-              mountPath: /workflow
-              subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
       volumes:
         - name: workspace
           emptyDir: {}
@@ -210,9 +207,6 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
-            - name: workflow
-              mountPath: /workflow
-              subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
       volumes:
         - name: workspace
           emptyDir: {}
