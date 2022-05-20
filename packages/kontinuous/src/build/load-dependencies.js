@@ -247,7 +247,6 @@ const downloadAndBuildDependencies = async (config)=>{
         if(links[importTarget]){
           await fs.ensureDir(target)
           await fs.copy(links[importTarget],target)
-          
         }else{
           await degit(importTarget).clone(target)
         }

@@ -47,7 +47,7 @@
     "delivery": "yarn release && yarn push",
     "test": "yarn workspaces foreach --no-private --parallel run test",
     "test:kontinuous": "yarn workspace kontinuous test",
-    "test:webhook": "yarn workspace kube-webhook test",
+    "test:webhook": "yarn workspace ~webhook test",
     "dev:webhook": "docker-compose up --build webhook",
     "dev:webhook:built": "docker-compose -f docker-compose.built.yaml up --build webhook",
     "upgrade:modjo": "yarn up -R \"@modjo-plugins/*\""

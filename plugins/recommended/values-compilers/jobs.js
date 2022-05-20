@@ -17,7 +17,7 @@ const requireUse = async (
   const useSlug = slug(use)
   use = use.replace("@", "#")
   let target = `${buildPath}/uses/${useSlug}`
-  const { links } = config
+  const { links = {} } = config
   if (!downloadingPromises[useSlug]) {
     downloadingPromises[useSlug] = (async () => {
       if (use.startsWith(".") || use.startsWith("/")) {
