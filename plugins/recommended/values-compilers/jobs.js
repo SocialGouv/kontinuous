@@ -33,11 +33,12 @@ const requireUse = async (
         !use.includes("#") &&
         Object.keys(links).some((key) => use.startsWith(key))
       ) {
-        const [_, linkPath] = Object.entries(links).find(([key]) =>
+        const [linkKey, linkPath] = Object.entries(links).find(([key]) =>
           use.startsWith(key)
         )
+        const from = linkPath + use.substr(linkKey.length)
         logger.debug(`use linked job: ${use} -> ${linkPath}`)
-        await fs.copy(linkPath, target)
+        await fs.copy(from, target)
       } else {
         logger.debug(`degit ${use}`)
         await degit(use, { force: true }).clone(target)
@@ -99,13 +100,13 @@ async function compile(
         run.needs = []
       }
 
-      const { gitRepository, gitRef } = config
+      const { gitRepository, gitBranch } = config
       const repositoryName = path.basename(gitRepository)
 
       const jobName = slug([
         "job",
         repositoryName,
-        [gitRef, 30],
+        [gitBranch, 30],
         currentScope.join("--"),
       ])
       run.jobName = jobName

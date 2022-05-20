@@ -31,30 +31,24 @@ jobs:
 
     - name: build-app
       stage: build
-      use: ../../../../../jobs/build
+      use: SocialGouv/kontinuous-fabrique/jobs/build
       with:
         registrySecretRefName: harbor
         imagePackage: app
 
     - name: build-hasura
       stage: build
-      use: ../../../../../jobs/build
+      use: SocialGouv/kontinuous-fabrique/jobs/build
       with:
         registrySecretRefName: harbor
         imagePackage: hasura
         context: hasura
 
-    - name: test-app
-      use: ../../../../../jobs/test
-      needs: [build-app]
-      with:
-        dockerImage: '{{ printf $.outputs.buildApp "DOCKER_IMAGE" }}'
-
 jobs-dev:
   enabled: true
   runs:
     - name: db
-      use: ../../../../../jobs/create-db
+      use: SocialGouv/kontinuous-fabrique/jobs/create-db
       with:
         pgAdminSecretRefName: pg-scaleway
 

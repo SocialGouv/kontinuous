@@ -4,7 +4,7 @@ app:
 jobs:
   runs:
     - name: db
-      use: ../../../../../jobs/create-db
+      use: SocialGouv/kontinuous-fabrique/jobs/create-db
       with:
         pgAdminSecretRefName: azure-pg-admin-user
     - name: seed

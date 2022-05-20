@@ -48,22 +48,6 @@ metadata:
 automountServiceAccountToken: false
 ---
 apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: jobs-shared-storage
-  annotations:
-    kapp.k14s.io/disable-original: ''
-  labels: {}
-  namespace: awesome-ci
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 2Gi
-  storageClassName: azurefile
----
-apiVersion: v1
 kind: Service
 metadata:
   labels:
@@ -286,7 +270,7 @@ spec:
           command:
             - sh
             - '-c'
-            - degit ../../../../../jobs/create-db /action
+            - degit SocialGouv/kontinuous-fabrique/jobs/create-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -337,9 +321,6 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
-        - name: workflow
-          persistentVolumeClaim:
-            claimName: jobs-shared-storage
 ---
 apiVersion: batch/v1
 kind: Job
@@ -373,7 +354,7 @@ spec:
           command:
             - sh
             - '-c'
-            - degit ../../../../../jobs/create-db /action
+            - degit SocialGouv/kontinuous-fabrique/jobs/create-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -431,9 +412,6 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
-        - name: workflow
-          persistentVolumeClaim:
-            claimName: jobs-shared-storage
 ---
 apiVersion: batch/v1
 kind: Job
@@ -505,20 +483,6 @@ spec:
                 --snapshotMode=time \\\\
                 --use-new-run \\\\
                 
-              mkdir -p \\"$(dirname /workflow/vars/build-app/DOCKER_IMAGE)\\"
-
-              echo \\"$DOCKER_IMAGE\\">/workflow/vars/build-app/DOCKER_IMAGE
-
-              mkdir -p \\"$(dirname /workflow/vars/build-app.kaniko/DOCKER_IMAGE)\\"
-
-              ln -s -f /workflow/vars/build-app/DOCKER_IMAGE
-              /workflow/vars/build-app.kaniko/DOCKER_IMAGE
-
-              mkdir -p \\"$(dirname
-              /workflow/vars/build-app..kaniko/DOCKER_IMAGE)\\"
-
-              ln -s -f /workflow/vars/build-app/DOCKER_IMAGE
-              /workflow/vars/build-app..kaniko/DOCKER_IMAGE
           securityContext:
             runAsUser: 0
             runAsGroup: 0
@@ -536,9 +500,6 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
-        - name: workflow
-          persistentVolumeClaim:
-            claimName: jobs-shared-storage
 ---
 apiVersion: batch/v1
 kind: Job
@@ -610,21 +571,6 @@ spec:
                 --snapshotMode=time \\\\
                 --use-new-run \\\\
                 
-              mkdir -p \\"$(dirname /workflow/vars/build-hasura/DOCKER_IMAGE)\\"
-
-              echo \\"$DOCKER_IMAGE\\">/workflow/vars/build-hasura/DOCKER_IMAGE
-
-              mkdir -p \\"$(dirname
-              /workflow/vars/build-hasura.kaniko/DOCKER_IMAGE)\\"
-
-              ln -s -f /workflow/vars/build-hasura/DOCKER_IMAGE
-              /workflow/vars/build-hasura.kaniko/DOCKER_IMAGE
-
-              mkdir -p \\"$(dirname
-              /workflow/vars/build-hasura..kaniko/DOCKER_IMAGE)\\"
-
-              ln -s -f /workflow/vars/build-hasura/DOCKER_IMAGE
-              /workflow/vars/build-hasura..kaniko/DOCKER_IMAGE
           securityContext:
             runAsUser: 0
             runAsGroup: 0
@@ -642,162 +588,6 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
-        - name: workflow
-          persistentVolumeClaim:
-            claimName: jobs-shared-storage
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: job-test-jobs-build-stage-feature-branch-1-test-app-test-5gwurw
-  namespace: awesome-ci
-  annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/test-jobs-build-stage-feature-branch-1
-    kapp.k14s.io/change-group.test-app: kube-workflow/test-app.test-jobs-build-stage-feature-branch-1
-    kapp.k14s.io/change-group.test-app.test: kube-workflow/test-app.test.test-jobs-build-stage-feature-branch-1
-    kapp.k14s.io/change-group.test-app..test: kube-workflow/test-app..test.test-jobs-build-stage-feature-branch-1
-    kapp.k14s.io/change-rule.build-app: >-
-      upsert after upserting
-      kube-workflow/build-app.test-jobs-build-stage-feature-branch-1
-    janitor/ttl: '1800'
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-spec:
-  backoffLimit: 2
-  activeDeadlineSeconds: 3600
-  ttlSecondsAfterFinished: 1800
-  template:
-    metadata: {}
-    spec:
-      restartPolicy: Never
-      containers:
-        - name: job
-          image: debian:stable
-          imagePullPolicy: IfNotPresent
-          workingDir: /workspace
-          command:
-            - /bin/bash
-            - '-c'
-            - |
-              set -e
-              DOCKER_IMAGE=\\"$(cat \\"/workflow/vars/build-app/DOCKER_IMAGE\\")\\"
-              echo \\"my DOCKER_IMAGE is '$DOCKER_IMAGE' !!!\\"
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-          volumeMounts:
-            - name: workspace
-              mountPath: /workspace
-            - name: action
-              mountPath: /action
-            - name: workflow
-              mountPath: /workflow
-              subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
-      volumes:
-        - name: workspace
-          emptyDir: {}
-        - name: action
-          emptyDir: {}
-        - name: workflow
-          persistentVolumeClaim:
-            claimName: jobs-shared-storage
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: jobci-post-operations-ffac537
-  namespace: awesome-ci
-  annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/post-test-jobs-build-stage-feature-branch-1
-    kapp.k14s.io/change-rule: >-
-      upsert after upserting
-      kube-workflow/test-jobs-build-stage-feature-branch-1
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-spec:
-  backoffLimit: 1
-  activeDeadlineSeconds: 3600
-  ttlSecondsAfterFinished: 1800
-  template:
-    metadata:
-      annotations: {}
-      labels: {}
-    spec:
-      restartPolicy: Never
-      containers:
-        - name: job
-          image: debian:stable
-          imagePullPolicy: IfNotPresent
-          command:
-            - /bin/sh
-            - '-c'
-            - rm -rf /workflow/*
-          volumeMounts:
-            - name: workflow
-              mountPath: /workflow
-              subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
-      volumes:
-        - name: workflow
-          persistentVolumeClaim:
-            claimName: jobs-shared-storage
----
-apiVersion: batch/v1beta1
-kind: CronJob
-metadata:
-  name: jobci-clean-workflow
-  namespace: awesome-ci
-  annotations:
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/nonce: ''
-spec:
-  schedule: 0 0 * * *
-  jobTemplate:
-    spec:
-      template:
-        spec:
-          restartPolicy: Never
-          containers:
-            - name: job
-              image: bitnami/kubectl:latest
-              imagePullPolicy: IfNotPresent
-              envFrom:
-                - secretRef:
-                    name: kubeconfig
-              command:
-                - /bin/bash
-                - '-c'
-                - >
-                  echo \\"$KUBECONFIG\\" > ~/.kube/config
-
-                  export KUBECONFIG=~/.kube/config
-
-                  export JOB_NAMESPACE=\\"awesome-ci\\"
-
-                  ACTIVE_JOBS=$(kubectl get jobs -n $JOB_NAMESPACE -o json | jq
-                  \\".items | .[] | select(.status.active > 0).metadata.name\\")
-
-                  for subdir in /workflow/*; do
-                    [ -d \\"$subdir\\" ] || continue
-                    subdir_basename=\${subdir##*/}
-                    if ! echo $ACTIVE_JOBS | grep -e \\"job-\${subdir_basename}\\"; then
-                      echo \\"Cleaning '$subdir'\\"
-                      rm -rf $subdir
-                    fi
-                  done
-              volumeMounts:
-                - name: workflow
-                  mountPath: /workflow
-          volumes:
-            - name: workflow
-              persistentVolumeClaim:
-                claimName: jobs-shared-storage
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

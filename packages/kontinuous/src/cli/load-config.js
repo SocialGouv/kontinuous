@@ -8,6 +8,7 @@ const getGitRef = require("~common/utils/get-git-ref")
 const getGitSha = require("~common/utils/get-git-sha")
 const getGitRepository = require("~common/utils/get-git-repository")
 const getGitUrl = require("~common/utils/get-git-url")
+const cleanGitRef = require("~common/utils/clean-git-ref")
 const refEnv = require("~common/utils/ref-env")
 const yaml = require("~common/utils/yaml")
 
@@ -87,6 +88,9 @@ module.exports = async (opts = {}) => {
     gitRef: {
       env: "KS_GIT_REF",
       defaultFunction: (config) => getGitRef(config.workspacePath),
+    },
+    gitBranch: {
+      defaultFunction: (config) => cleanGitRef(config.gitRef),
     },
     gitSha: {
       env: "KS_GIT_SHA",

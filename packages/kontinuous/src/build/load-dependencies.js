@@ -567,11 +567,11 @@ const copyFilesDir = async (config) => {
           continue
         }
         const filesPath = `${chartDirPath}/files`
-        if(!fs.pathExists(filesPath)){
-          fs.symlink(filesDir ,filesPath)
+        if(!await fs.pathExists(filesPath)){
+          fs.symlink(filesDir, filesPath)
         }
         const filesPathKontinuous = `${chartDirPath}/kontinuous-files`
-        fs.symlink(filesDir ,filesPathKontinuous)
+        fs.symlink(filesDir, filesPathKontinuous)
       }
     }
   })

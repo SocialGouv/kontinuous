@@ -47,22 +47,6 @@ metadata:
     kapp.k14s.io/disable-original: ''
 automountServiceAccountToken: false
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: jobs-shared-storage
-  annotations:
-    kapp.k14s.io/disable-original: ''
-  labels: {}
-  namespace: awesome-ci
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 2Gi
-  storageClassName: azurefile
----
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -143,9 +127,6 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
-        - name: workflow
-          persistentVolumeClaim:
-            claimName: jobs-shared-storage
 ---
 apiVersion: batch/v1
 kind: Job
@@ -237,102 +218,5 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
-        - name: workflow
-          persistentVolumeClaim:
-            claimName: jobs-shared-storage
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: jobci-post-operations-ffac537
-  namespace: awesome-ci
-  annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kube-workflow/post-test-jobs-uses-self-ref-feature-branch-1
-    kapp.k14s.io/change-rule: >-
-      upsert after upserting
-      kube-workflow/test-jobs-uses-self-ref-feature-branch-1
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-spec:
-  backoffLimit: 1
-  activeDeadlineSeconds: 3600
-  ttlSecondsAfterFinished: 1800
-  template:
-    metadata:
-      annotations: {}
-      labels: {}
-    spec:
-      restartPolicy: Never
-      containers:
-        - name: job
-          image: debian:stable
-          imagePullPolicy: IfNotPresent
-          command:
-            - /bin/sh
-            - '-c'
-            - rm -rf /workflow/*
-          volumeMounts:
-            - name: workflow
-              mountPath: /workflow
-              subPath: feature-branch-1/ffac537e6cbbf934b08745a378932722df287a53
-      volumes:
-        - name: workflow
-          persistentVolumeClaim:
-            claimName: jobs-shared-storage
----
-apiVersion: batch/v1beta1
-kind: CronJob
-metadata:
-  name: jobci-clean-workflow
-  namespace: awesome-ci
-  annotations:
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/nonce: ''
-spec:
-  schedule: 0 0 * * *
-  jobTemplate:
-    spec:
-      template:
-        spec:
-          restartPolicy: Never
-          containers:
-            - name: job
-              image: bitnami/kubectl:latest
-              imagePullPolicy: IfNotPresent
-              envFrom:
-                - secretRef:
-                    name: kubeconfig
-              command:
-                - /bin/bash
-                - '-c'
-                - >
-                  echo \\"$KUBECONFIG\\" > ~/.kube/config
-
-                  export KUBECONFIG=~/.kube/config
-
-                  export JOB_NAMESPACE=\\"awesome-ci\\"
-
-                  ACTIVE_JOBS=$(kubectl get jobs -n $JOB_NAMESPACE -o json | jq
-                  \\".items | .[] | select(.status.active > 0).metadata.name\\")
-
-                  for subdir in /workflow/*; do
-                    [ -d \\"$subdir\\" ] || continue
-                    subdir_basename=\${subdir##*/}
-                    if ! echo $ACTIVE_JOBS | grep -e \\"job-\${subdir_basename}\\"; then
-                      echo \\"Cleaning '$subdir'\\"
-                      rm -rf $subdir
-                    fi
-                  done
-              volumeMounts:
-                - name: workflow
-                  mountPath: /workflow
-          volumes:
-            - name: workflow
-              persistentVolumeClaim:
-                claimName: jobs-shared-storage
 "
 `;
