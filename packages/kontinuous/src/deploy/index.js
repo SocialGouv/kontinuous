@@ -1,4 +1,3 @@
-const path = require("path")
 const { spawn } = require("child_process")
 const fs = require("fs-extra")
 const yaml = require("~common/utils/yaml")
@@ -10,12 +9,13 @@ const timeLogger = require("~common/utils/time-logger")
 const slug = require("~common/utils/slug")
 const parseCommand = require("~common/utils/parse-command")
 const writeKubeconfig = require("~common/utils/write-kubeconfig")
-const getGitRepository = require("~common/utils/get-git-repository")
 const build = require("~/build")
 
 const ctx = require("~/ctx")
 
-const deployer = async (options) => {
+module.exports = async (options) => {
+  ctx.provide()
+
   const elapsed = timeLogger({
     logger,
     logLevel: "info",
@@ -23,12 +23,7 @@ const deployer = async (options) => {
 
   const config = ctx.require("config")
 
-  const { environment } = config
-
-  const cwd = options.cwd || process.cwd()
-  const gitRepository = await getGitRepository(cwd)
-
-  const repositoryName = path.basename(gitRepository)
+  const { environment, gitRepositoryName: repositoryName } = config
 
   let kubeconfigContext =
     options.kubeconfigContext || process.env.KS_KUBECONFIG_CONTEXT
@@ -50,6 +45,9 @@ const deployer = async (options) => {
 
   const getRancherProjectId = (rancherProjectName) => {
     const jobNamespace = `${rancherProjectName}-ci`
+    console.log(
+      `kubectl --context ${kubeconfigContext} get ns ${jobNamespace} -o json`
+    )
     const json = shell(
       `kubectl --context ${kubeconfigContext} get ns ${jobNamespace} -o json`
     )
@@ -65,6 +63,7 @@ const deployer = async (options) => {
       options.rancherProjectId ||
       getRancherProjectId(process.env.KS_RANCHER_PROJECT_NAME || repositoryName)
   }
+  console.log("KS_RANCHER_PROJECT_ID", process.env.KS_RANCHER_PROJECT_ID)
 
   let manifestsFile = options.F
   let manifests
@@ -213,9 +212,4 @@ const deployer = async (options) => {
   elapsed.end({
     label: `🚀 kontinuous pipeline ${repositoryName} ${environment} to "${namespace}"`,
   })
-}
-
-module.exports = (options) => {
-  ctx.provide()
-  return deployer(options)
 }

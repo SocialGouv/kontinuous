@@ -105,6 +105,9 @@ module.exports = async (opts = {}) => {
       defaultFunction: (config) =>
         getGitRepository(config.workspacePath, config.url),
     },
+    gitRepositoryName: {
+      defaultFunction: (config) => path.basename(config.gitRepository),
+    },
     environment: {
       env: "KS_ENVIRONMENT",
       option: "E",

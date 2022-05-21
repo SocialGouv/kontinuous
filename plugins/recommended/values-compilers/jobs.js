@@ -96,8 +96,7 @@ async function compile(
         run.needs = []
       }
 
-      const { gitRepository, gitBranch } = config
-      const repositoryName = path.basename(gitRepository)
+      const { gitBranch, gitRepositoryName: repositoryName } = config
 
       const jobName = slug([
         "job",
