@@ -67,7 +67,7 @@ RUN mkdir -p /app/packages/webhook/build
 ### CUSTOM RUN PREBUILD
 
 ### RUN BUILD
-RUN yarn workspace kube-webhook build
+RUN yarn workspace ~webhook build
 
 # NODE PROJECT RUNNER
 ## SERVER
