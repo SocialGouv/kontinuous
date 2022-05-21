@@ -45,7 +45,7 @@ COPY .yarn .yarn
 
 #### YARN INSTALL
 RUN mkdir -p packages/webhook/src && mkdir -p packages/webhook/common
-RUN yarn workspaces focus kube-webhook --production \
+RUN yarn workspaces focus ~webhook --production \
   && yarn cache clean
 RUN rm -rf packages/webhook/src && rm -rf packages/webhook/common
 
