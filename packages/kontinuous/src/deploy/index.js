@@ -82,9 +82,6 @@ module.exports = async (options) => {
       manifest.metadata?.annotations?.["kontinuous/mainNamespace"]
   )
 
-  console.log({ namespaceManifest })
-  console.log("allManifests", JSON.stringify(allManifests, null, 2))
-
   const namespace = namespaceManifest.metadata.name
 
   const checkNamespaceIsAvailable = () => {
