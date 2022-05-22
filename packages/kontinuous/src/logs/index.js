@@ -39,7 +39,7 @@ module.exports = async (options) => {
 
   const rancherProjectName =
     options.rancherProjectName ||
-    process.env.KS_RANCHER_PROJECT_NAME ||
+    process.env.RANCHER_PROJECT_NAME ||
     repositoryName
 
   const webhookBaseDomain =

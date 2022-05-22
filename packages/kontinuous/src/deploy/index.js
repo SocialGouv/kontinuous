@@ -56,14 +56,13 @@ module.exports = async (options) => {
   }
 
   if (options.rancherProjectName) {
-    process.env.KS_RANCHER_PROJECT_NAME = options.rancherProjectName
+    process.env.RANCHER_PROJECT_NAME = options.rancherProjectName
   }
-  if (!process.env.KS_RANCHER_PROJECT_ID) {
-    process.env.KS_RANCHER_PROJECT_ID =
+  if (!process.env.RANCHER_PROJECT_ID) {
+    process.env.RANCHER_PROJECT_ID =
       options.rancherProjectId ||
-      getRancherProjectId(process.env.KS_RANCHER_PROJECT_NAME || repositoryName)
+      getRancherProjectId(process.env.RANCHER_PROJECT_NAME || repositoryName)
   }
-  console.log("KS_RANCHER_PROJECT_ID", process.env.KS_RANCHER_PROJECT_ID)
 
   let manifestsFile = options.F
   let manifests
@@ -82,6 +81,9 @@ module.exports = async (options) => {
       manifest.kind === "Namespace" &&
       manifest.metadata?.annotations?.["kontinuous/mainNamespace"]
   )
+
+  console.log({ namespaceManifest })
+  console.log("allManifests", JSON.stringify(allManifests, null, 2))
 
   const namespace = namespaceManifest.metadata.name
 
