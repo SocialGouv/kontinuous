@@ -16,8 +16,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: write .kontinuous/config.yaml
         shell: bash
-        env:
-          GITHUB_ACTION_PATH: ${{ github.action_path }}
         run: ./.github/scripts/write-kontinuous-config-yaml.sh
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.2.0
@@ -42,8 +40,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: write .kontinuous/config.yaml
         shell: bash
-        env:
-          GITHUB_ACTION_PATH: ${{ github.action_path }}
         run: ./.github/scripts/write-kontinuous-config-yaml.sh
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.2.0
@@ -71,8 +67,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: write .kontinuous/config.yaml
         shell: bash
-        env:
-          GITHUB_ACTION_PATH: ${{ github.action_path }}
         run: ./.github/scripts/write-kontinuous-config-yaml.sh
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.2.0
@@ -98,8 +92,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: write .kontinuous/config.yaml
         shell: bash
-        env:
-          GITHUB_ACTION_PATH: ${{ github.action_path }}
         run: ./.github/scripts/write-kontinuous-config-yaml.sh
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.2.0
