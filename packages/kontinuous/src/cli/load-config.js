@@ -128,6 +128,7 @@ module.exports = async (opts = {}) => {
     configOverride,
     options: opts,
     env,
+    emptyAsUndefined: true,
   })
 
   return config

@@ -20,6 +20,7 @@ module.exports = async ({
   env = process.env,
   options,
   mergeWith = deepmerge,
+  emptyAsUndefined: defaultEmptyAsUndefined = false,
 }) => {
   const config = {}
   const extendsConfig = (src = {}) => {
@@ -40,7 +41,7 @@ module.exports = async ({
       option: optionKey,
       default: defaultValue,
       defaultFunction,
-      emptyAsUndefined = false,
+      emptyAsUndefined = defaultEmptyAsUndefined,
     } = def
 
     const isUndefined = emptyAsUndefined
