@@ -1,6 +1,8 @@
+const dependenciesPatches = ["../charts/recommended/patches"]
+
 const patches = [
-  require("../charts/recommended/patches"),
-  
+  ...dependenciesPatches.map((patch) => require(patch)),
+
   require("./cert-letsencrypt-issuer"),
   require("./cert-wildcard"),
 ]

@@ -71,5 +71,6 @@ const createSampleSnapTest = (testdir, environment) => async () => {
 }
 
 for (const [testdir, environment] of cases) {
+  // eslint-disable-next-line jest/expect-expect
   test(`${testdir}.${environment}`, createSampleSnapTest(testdir, environment))
 }
