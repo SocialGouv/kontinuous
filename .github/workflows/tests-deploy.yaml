@@ -1,4 +1,4 @@
-name: Kind tests
+name: Tests deploy
 
 on:
   push:
@@ -7,13 +7,16 @@ on:
 
 concurrency:
   cancel-in-progress: true
-  group: kind-${{ github.ref_name }}
+  group: tests-deploy-${{ github.ref_name }}
 
 jobs:
   test-standalone-charts:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: write .kontinuous/config.yaml
+        shell: bash
+        run: ./.github/scripts/write-kontinuous-config-yaml.sh
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.2.0
       - run: kubectl cluster-info
@@ -35,6 +38,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: write .kontinuous/config.yaml
+        shell: bash
+        run: ./.github/scripts/write-kontinuous-config-yaml.sh
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.2.0
       - run: kubectl cluster-info
@@ -59,6 +65,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: write .kontinuous/config.yaml
+        shell: bash
+        run: ./.github/scripts/write-kontinuous-config-yaml.sh
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.2.0
       - run: kubectl create ns test-project-ci
@@ -81,6 +90,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: write .kontinuous/config.yaml
+        shell: bash
+        run: ./.github/scripts/write-kontinuous-config-yaml.sh
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.2.0
       - run: kubectl create ns test-project-ci

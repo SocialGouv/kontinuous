@@ -1,4 +1,4 @@
-name: Tests
+name: Tests build
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 concurrency:
   cancel-in-progress: true
-  group: tests-${{ github.ref_name }}
+  group: tests-build-${{ github.ref_name }}
 
 jobs:
   tests:
@@ -16,6 +16,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      
+      - name: write .kontinuous/config.yaml
+        shell: bash
+        run: ./.github/scripts/write-kontinuous-config-yaml.sh
 
       - name: Install dependencies
         run: yarn --immutable
