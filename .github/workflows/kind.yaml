@@ -21,7 +21,7 @@ jobs:
       - run: kubectl get pods -n kube-system
       - run: kubectl create ns test-project-ci
       - name: test standalone-charts
-        uses: "./"
+        uses: "./deploy"
         with:
           environment: prod
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -42,7 +42,7 @@ jobs:
       - run: kubectl get pods -n kube-system
       - run: kubectl create ns test-project-ci
       - name: test values-js
-        uses: "./"
+        uses: "./deploy"
         with:
           environment: prod
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -63,7 +63,7 @@ jobs:
         uses: helm/kind-action@v1.2.0
       - run: kubectl create ns test-project-ci
       - name: test app-simple
-        uses: "./"
+        uses: "./deploy"
         with:
           environment: prod
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -85,7 +85,7 @@ jobs:
         uses: helm/kind-action@v1.2.0
       - run: kubectl create ns test-project-ci
       - name: test app-simple
-        uses: "./"
+        uses: "./deploy"
         with:
           environment: prod
           token: ${{ secrets.GITHUB_TOKEN }}

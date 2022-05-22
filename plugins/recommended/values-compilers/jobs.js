@@ -1,15 +1,11 @@
-const path = require("path")
-
 const miniHash = require("./utils/mini-hash")
-
-const selfReference = "SocialGouv/kontinuous/"
 
 const requireUse = async (
   use,
   { config, logger, downloadingPromises, utils }
 ) => {
   const { slug, degit, fs } = utils
-  const { buildPath, workspacePath, workspaceKsPath } = config
+  const { buildPath, workspacePath } = config
   const useSlug = slug(use)
   use = use.replace("@", "#")
   let target = `${buildPath}/uses/${useSlug}`
@@ -20,11 +16,6 @@ const requireUse = async (
         const src = `${workspacePath}/${use}`
         logger.debug(`import local ${src}`)
         await fs.copy(src, target)
-      } else if (!use.includes("#") && use.startsWith(selfReference)) {
-        const nativeJob = use.slice(selfReference.length)
-        const dir = path.join(workspaceKsPath, nativeJob)
-        logger.debug(`use native job: ${nativeJob}`)
-        await fs.copy(dir, target)
       } else if (
         !use.includes("#") &&
         Object.keys(links).some((key) => use.startsWith(key))

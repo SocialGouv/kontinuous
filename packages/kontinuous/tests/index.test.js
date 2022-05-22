@@ -16,8 +16,8 @@ const defaultEnv = {
   KS_GIT_REF: "refs/heads/feature-branch-1",
   KS_GIT_SHA: "ffac537e6cbbf934b08745a378932722df287a53",
   KS_ENVIRONMENT: "dev",
-  FABRIQUE_JOB_NAMESPACE: "awesome-ci",
-  FABRIQUE_RANCHER_PROJECT_ID: "1234",
+  KUBE_JOB_NAMESPACE: "awesome-ci",
+  RANCHER_PROJECT_ID: "1234",
 }
 
 const allEnvs = ["dev", "preprod", "prod"]

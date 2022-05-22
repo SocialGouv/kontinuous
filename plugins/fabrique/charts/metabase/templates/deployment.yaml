@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: {{ or .Values.component .Chart.Name }}
+    application: {{ .Values.global.repositoryName }}
+  name: {{ or .Values.component .Chart.Name }}
+  namespace: {{ or .Values.namespace .Values.global.namespace }}
+  annotations:
+    {{- include "kontinuous-helpers.annotations.kapp-deployment" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: {{ or .Values.component .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        component: {{ or .Values.component .Chart.Name }}
+        application: {{ .Values.application }}
+    spec:
+      containers:
+        - image: metabase/metabase:v0.42.4
+          name: metabase
+          env:
+            {{- if gt (len .Values.env) 0 }}
+            {{- tpl (.Values.env | toYaml) . | nindent 12 }}
+            {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ or .Values.component .Chart.Name }}
+            {{- if gt (len .Values.envFrom) 0 }}
+            {{- tpl (.Values.envFrom | toYaml) . | nindent 12 }}
+            {{- end }}
+          ports:
+            - containerPort: 3000
+              name: http
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 10
+            initialDelaySeconds: 240
+            successThreshold: 1
+            timeoutSeconds: 10
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 500m
+              memory: 512Mi

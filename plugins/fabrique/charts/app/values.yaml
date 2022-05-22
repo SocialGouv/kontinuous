@@ -1,0 +1,46 @@
+enabled:
+namespace:
+host:
+registry:
+imagePath:
+imageProject:
+imageRepository:
+imagePackage: app
+imageTag:
+image:
+ttl:
+rancherProjectId: my-cluser-id:my-project-id
+isProd: false
+isPreProd: false
+replicas: 1
+containerPort: 3000
+servicePort: 80
+env: []
+envFrom: []
+probesPath: /index.html
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+autoscale:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 10
+  averageUtilization:
+    cpu: 100
+    memory: 100
+certSecretName:
+waitForPostgres: false
+addVolumes: []
+volumes: []
+volumeMounts: []
+redirectFrom: []
+ingress:
+  enabled: true
+  annotations: {}
+needs: []
+entrypoint:
+args: []

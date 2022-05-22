@@ -1,0 +1,8 @@
+enabled:
+namespace: 
+host: 
+servicePort: 1025
+certSecretName: 
+ingress:
+  annotations: {}
+needs: []

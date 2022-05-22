@@ -1,0 +1,11 @@
+runs:
+  - name: drop-db
+    checkout: false
+    image: ghcr.io/socialgouv/docker/psql:7.0.0
+    envFrom:
+      - secretRef:
+          name: "{{ or $.with.pgSecretRefName $.Values.global.pgSecretName }}"
+    env:
+      - name: DATABASE
+        value: "{{ or $.with.database $.Values.global.pgDatabase }}"
+    run: /action/drop-db.sh

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: {{ or .Values.component .Chart.Name }}
+    application: {{ .Values.global.repositoryName }}
+  name: {{ or .Values.component .Chart.Name }}
+  namespace: {{ or .Values.namespace .Values.global.namespace }}
+  annotations:
+    {{- include "kontinuous-helpers.annotations.kapp-deployment" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: {{ or .Values.component .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        component: {{ or .Values.component .Chart.Name }}
+        application: {{ .Values.global.repositoryName }}
+    spec:
+      containers:
+        - image: maildev/maildev:latest
+          name: maildev
+          ports:
+            - containerPort: 1080
+              name: http
+            - containerPort: 1025
+              name: smtp
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+          

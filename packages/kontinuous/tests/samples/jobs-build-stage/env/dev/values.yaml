@@ -31,14 +31,14 @@ jobs:
 
     - name: build-app
       stage: build
-      use: SocialGouv/kontinuous-fabrique/jobs/build
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
       with:
         registrySecretRefName: harbor
         imagePackage: app
 
     - name: build-hasura
       stage: build
-      use: SocialGouv/kontinuous-fabrique/jobs/build
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
       with:
         registrySecretRefName: harbor
         imagePackage: hasura
@@ -48,7 +48,7 @@ jobs-dev:
   enabled: true
   runs:
     - name: db
-      use: SocialGouv/kontinuous-fabrique/jobs/create-db
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/create-db
       with:
         pgAdminSecretRefName: pg-scaleway
 

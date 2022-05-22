@@ -128,13 +128,13 @@ jobs:
   runs:
     - name: db
       # use: ./.kw/jobs/create-db # local job, defined in project repository
-      # use: https://github.com/SocialGouv/kontinuous-fabrique/jobs/create-db # degit full url
-      use: SocialGouv/kontinuous-fabrique/jobs/create-db # degit implicit github
+      # use: https://github.com/SocialGouv/kontinuous/plugins/fabrique/jobs/create-db # degit full url
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/create-db # degit implicit github
       with:
         pgAdminSecretRefName: pg-scaleway
     - name: seed
       needs: [hasura]
-      use: SocialGouv/kontinuous-fabrique/jobs/seed-db
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/seed-db
       with:
         seedPath: path/in/repo.sql
 ```

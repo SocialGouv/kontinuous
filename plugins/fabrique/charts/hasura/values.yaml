@@ -1,0 +1,39 @@
+enabled:
+namespace: 
+host: 
+registry: 
+imagePath:
+imageProject:
+imageRepository:
+imagePackage: hasura
+imageTag: 
+ttl: 
+rancherProjectId: my-cluser-id:my-project-id
+isProd: false
+isPreProd: false
+replicas: 1
+containerPort: 8080
+servicePort: 80
+env: []
+envFrom: []
+envConfigName: 
+probesPath: /healthz
+resources:
+  limits:
+    cpu: 500m
+    memory: 1280Mi
+  requests:
+    cpu: 50m
+    memory: 128Mi
+autoscale:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 10
+  averageUtilization:
+    cpu: 100
+    memory: 100
+certSecretName: 
+waitForPostgres: false
+ingress:
+  annotations: {}
+needs: []
