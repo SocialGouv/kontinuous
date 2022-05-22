@@ -35,3 +35,15 @@ module.exports.webhookBaseDomain = new Option(
   "--webhook-base-domain <host>",
   "webhook base domain"
 )
+
+module.exports.ciNamespace = new Option("--ci-namespace <ns>", "ci namespace")
+
+module.exports.rancherProjectId = new Option(
+  "--rancher-project-id <project-id>",
+  "rancher project id, default retrieved from ci namespace"
+)
+
+module.exports.rancherProjectName = new Option(
+  "--rancher-project-name <project>",
+  "rancher project name, default to repository basename"
+)

@@ -34,7 +34,7 @@ metadata:
   {{ if $run.namespace }}
   namespace: {{ tpl $run.namespace $ }}
   {{ else }}
-  namespace: {{ or $val.namespace $val.global.jobNamespace }}
+  namespace: {{ or $val.namespace $val.global.ciNamespace }}
   {{ end }}
   annotations:
     kapp.k14s.io/nonce: ""

@@ -29,7 +29,7 @@ jobs:
           environment: prod
           token: ${{ secrets.GITHUB_TOKEN }}
           rancherProjectId: "cluster:project"
-          rancherProjectName: "test-project"
+          ciNamespace: "test-project-ci"
           cwd: .github/e2e/standalone-charts
           kubeconfigContext: kind-chart-testing
       - run: kubectl get jobs -n test-project-ci
@@ -53,7 +53,7 @@ jobs:
           environment: prod
           token: ${{ secrets.GITHUB_TOKEN }}
           rancherProjectId: "cluster:project"
-          rancherProjectName: "test-project"
+          ciNamespace: "test-project-ci"
           cwd: .github/e2e/values-js
           kubeconfigContext: kind-chart-testing
       - run: kubectl get pods -n test-namespace
@@ -77,7 +77,7 @@ jobs:
           environment: prod
           token: ${{ secrets.GITHUB_TOKEN }}
           rancherProjectId: "cluster:project"
-          rancherProjectName: "test-project"
+          ciNamespace: "test-project-ci"
           cwd: .github/e2e/app-simple
           kubeconfigContext: kind-chart-testing
           inlineValues: |
@@ -102,7 +102,7 @@ jobs:
           environment: prod
           token: ${{ secrets.GITHUB_TOKEN }}
           rancherProjectId: "cluster:project"
-          rancherProjectName: "test-project"
+          ciNamespace: "test-project-ci"
           cwd: .github/e2e/app-simple
           kubeconfigContext: kind-chart-testing
           inlineValues: |

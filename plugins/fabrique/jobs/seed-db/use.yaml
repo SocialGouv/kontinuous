@@ -9,7 +9,7 @@ runs:
     vars:
       DB_SECRET_NAME: "{{ $.Values.global.pgSecretName }}"
       NAMESPACE: "{{ $.Values.global.namespace }}"
-      JOB_NAMESPACE: "{{ $.Values.global.jobNamespace }}"
+      JOB_NAMESPACE: "{{ $.Values.global.ciNamespace }}"
     run: /action/import-secret.sh
 
   - name: seed-db

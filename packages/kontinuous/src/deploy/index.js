@@ -43,25 +43,20 @@ module.exports = async (options) => {
     `KUBECONFIG_${environment.toUpperCase()}`,
   ])
 
-  const getRancherProjectId = (rancherProjectName) => {
-    const jobNamespace = `${rancherProjectName}-ci`
-    console.log(
-      `kubectl --context ${kubeconfigContext} get ns ${jobNamespace} -o json`
-    )
+  const getRancherProjectId = (ciNamespace) => {
     const json = shell(
-      `kubectl --context ${kubeconfigContext} get ns ${jobNamespace} -o json`
+      `kubectl --context ${kubeconfigContext} get ns ${ciNamespace} -o json`
     )
     const data = JSON.parse(json)
     return data.metadata.annotations["field.cattle.io/projectId"]
   }
 
-  if (options.rancherProjectName) {
-    process.env.RANCHER_PROJECT_NAME = options.rancherProjectName
-  }
+  const ciNamespace =
+    options.ciNamespace || process.env.KS_CI_NAMESPACE || `${repositoryName}-ci`
+
   if (!process.env.RANCHER_PROJECT_ID) {
     process.env.RANCHER_PROJECT_ID =
-      options.rancherProjectId ||
-      getRancherProjectId(process.env.RANCHER_PROJECT_NAME || repositoryName)
+      options.rancherProjectId || getRancherProjectId(ciNamespace)
   }
 
   let manifestsFile = options.F

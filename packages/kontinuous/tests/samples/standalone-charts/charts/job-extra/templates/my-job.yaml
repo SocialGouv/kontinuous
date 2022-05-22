@@ -3,7 +3,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ or .Values.component .Chart.Name }}
-  namespace: {{ or .Values.namespace .Values.global.jobNamespace }}
+  namespace: {{ or .Values.namespace .Values.global.ciNamespace }}
   annotations:
     kapp.k14s.io/nonce: ""
     kapp.k14s.io/update-strategy: fallback-on-replace

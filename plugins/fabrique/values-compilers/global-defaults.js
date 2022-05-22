@@ -8,7 +8,7 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
 
   const processEnv = ctx.get("env") || process.env
 
-  const { KUBE_INGRESS_BASE_DOMAIN, RANCHER_PROJECT_ID, KUBE_JOB_NAMESPACE } =
+  const { KUBE_INGRESS_BASE_DOMAIN, RANCHER_PROJECT_ID, KS_CI_NAMESPACE } =
     processEnv
 
   const { environment, gitBranch, gitRepository, gitSha } = config
@@ -96,7 +96,7 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
     ? "preprod"
     : `user_${branchSlug32}`
 
-  const jobNamespace = KUBE_JOB_NAMESPACE || `${repositoryName}-ci`
+  const ciNamespace = KS_CI_NAMESPACE || `${repositoryName}-ci`
 
   const imageProject = ""
 
@@ -123,7 +123,7 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
       branchSlug,
       branchSlug32,
       gitBranch,
-      jobNamespace,
+      ciNamespace,
       sha,
       shortSha,
       env,
