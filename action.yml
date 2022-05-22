@@ -5,7 +5,7 @@ inputs:
     description: "The Rancher project ID, usually secrets.RANCHER_PROJECT_ID"
     required: true
   ciNamespace:
-    description: "The Rancher project name, usually ${{ secrets.RANCHER_PROJECT_NAME }}-ci, usefull jobs that needs secrets or ci namespaces"
+    description: "The Rancher project name, usually $RANCHER_PROJECT_NAME-ci, usefull jobs that needs secrets or ci namespaces"
     required: true
   environment:
     description: "The deployment environment (dev | preprod | prod), default to prod on version tag, preprod on master or main, else dev"
