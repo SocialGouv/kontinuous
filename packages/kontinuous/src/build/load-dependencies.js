@@ -523,7 +523,7 @@ const compileValues = async (config, logger) => {
   await mergeYamlFileValues(`${buildProjectPath}/values`, values, beforeMergeProjectValues)
   await mergeYamlFileValues(`${buildProjectPath}/env/${environment}/values`, values, beforeMergeProjectValues)
 
-  valuesEnableStandaloneCharts(values.project, config)
+  valuesEnableStandaloneCharts(values, config)
   valuesOverride(values, config, logger)
 
   const context = {config, logger, utils, ctx}
