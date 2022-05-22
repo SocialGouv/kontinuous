@@ -241,12 +241,17 @@ const downloadAndBuildDependencies = async (config)=>{
     })=>{
       const {links={}} = config
       
-      // import dependency
       const { import: importTarget } = definition
+      
       if(importTarget){
-        if(links[importTarget]){
+        const matchLink = Object.entries(links).find(([key]) =>
+          importTarget.startsWith(key)
+        )
+        if(matchLink){
+          const [linkKey, linkPath] = matchLink
+          const from = linkPath + importTarget.substr(linkKey.length)
           await fs.ensureDir(target)
-          await fs.copy(links[importTarget],target)
+          await fs.copy(from,target)
         }else{
           await degit(importTarget).clone(target)
         }
