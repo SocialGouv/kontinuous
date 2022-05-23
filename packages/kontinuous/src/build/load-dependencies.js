@@ -435,13 +435,20 @@ const resolveAliasOf = (values, rootValues=values, scope=[], chartsAliasMap=new 
 }
 
 const valuesEnableStandaloneCharts = (values, config)=>{
-  if (!(config.chart && config.chart.length > 0)) {
+  const hasAll = !(config.chart && config.chart.length > 0)
+  values.global.kontinuous.hasChart = !hasAll
+  values.global.kontinuous.hasAll = hasAll
+  if (hasAll) {
     return
   }
-  const enableCharts = config.chart
-  for (const val of Object.values(values)) {
+  values.global.kontinuous.chart = config.chart
+  for (const [key,val] of Object.entries(values)) {
+    if(key==="project" || key==="global"){
+      continue
+    }
     val.enabled = false
   }
+  const enableCharts = config.chart
   for (const key of enableCharts) {
     if(!values[key]){
       values[key] = {}
@@ -522,6 +529,14 @@ const compileValues = async (config, logger) => {
   const buildProjectPath = `${buildPath}/${dependenciesDirName}/project`
   await mergeYamlFileValues(`${buildProjectPath}/values`, values, beforeMergeProjectValues)
   await mergeYamlFileValues(`${buildProjectPath}/env/${environment}/values`, values, beforeMergeProjectValues)
+
+  if(!values.global){
+    values.global = {}
+  }
+  if(!values.global.kontinuous){
+    values.global.kontinuous = {}
+  }
+  
 
   valuesEnableStandaloneCharts(values, config)
   valuesOverride(values, config, logger)

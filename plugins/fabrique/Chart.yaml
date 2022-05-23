@@ -6,6 +6,17 @@ dependencies:
   repository: https://codecentric.github.io/helm-charts
   version: 17.0.3
   condition: keycloak.enabled
+  
+- name: rancher-namespace
+  repository: file://./charts/rancher-namespace
+  version: 1.0.0
+  condition: global.kontinuous.hasAll,rancher-namespace.enabled
+
+- name: security-policies
+  repository: file://./charts/security-policies
+  version: 1.0.0
+  condition: global.kontinuous.hasAll,security-policies.enabled
+
 # - name: kontinuous-helpers
 #   repository: file://./charts/recommended/charts/kontinuous-helpers
 #   version: 1.0.0
