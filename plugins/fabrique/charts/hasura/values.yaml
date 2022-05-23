@@ -1,13 +1,13 @@
 enabled:
-namespace: 
-host: 
-registry: 
+namespace:
+host:
+registry:
 imagePath:
 imageProject:
 imageRepository:
 imagePackage: hasura
-imageTag: 
-ttl: 
+imageTag:
+ttl:
 rancherProjectId: my-cluser-id:my-project-id
 isProd: false
 isPreProd: false
@@ -16,7 +16,7 @@ containerPort: 8080
 servicePort: 80
 env: []
 envFrom: []
-envConfigName: 
+envConfigName:
 probesPath: /healthz
 resources:
   limits:
@@ -32,8 +32,9 @@ autoscale:
   averageUtilization:
     cpu: 100
     memory: 100
-certSecretName: 
+certSecretName:
 waitForPostgres: false
 ingress:
+  enabled: true
   annotations: {}
 needs: []

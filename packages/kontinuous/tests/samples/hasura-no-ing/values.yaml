@@ -1,0 +1,4 @@
+hasura:
+  enabled: true
+  ingress:
+    enabled: false

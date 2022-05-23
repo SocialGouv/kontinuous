@@ -11,6 +11,9 @@ metadata:
 spec:
   ports:
     - name: http
+      port: 1080
+      targetPort: 1080
+    - name: smtp
       port: {{ .Values.servicePort }}
       targetPort: 1025
   selector:

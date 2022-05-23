@@ -1,3 +1,4 @@
+{{ if .Values.ingress.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -34,3 +35,4 @@ spec:
       {{- else }}
       secretName: "wildcard-crt"
       {{- end }}
+{{- end }}
