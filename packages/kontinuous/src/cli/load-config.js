@@ -12,6 +12,7 @@ const cleanGitRef = require("~common/utils/clean-git-ref")
 const refEnv = require("~common/utils/ref-env")
 const yaml = require("~common/utils/yaml")
 
+const deepmerge = require("~common/utils/deepmerge")
 const ctx = require("~/ctx")
 
 const { version } = require(`${__dirname}/../../package.json`)
@@ -130,6 +131,11 @@ module.exports = async (opts = {}) => {
     env,
     emptyAsUndefined: true,
   })
+
+  const { projects, gitRepositoryName } = config
+  if (projects && projects[gitRepositoryName]) {
+    deepmerge(config, projects[gitRepositoryName])
+  }
 
   return config
 }
