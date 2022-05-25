@@ -4,7 +4,7 @@ const yaml = require("~common/utils/yaml")
 const retry = require("async-retry")
 
 const logger = require("~common/utils/logger")
-const shell = require("~common/utils/shell")
+const asyncShell = require("~common/utils/async-shell")
 const timeLogger = require("~common/utils/time-logger")
 const slug = require("~common/utils/slug")
 const parseCommand = require("~common/utils/parse-command")
@@ -30,21 +30,25 @@ module.exports = async (options) => {
   if (!kubeconfigContext) {
     const { kubeconfigContextNoDetect } = options
     if (kubeconfigContextNoDetect) {
-      kubeconfigContext = shell("kubectl config current-context")
+      kubeconfigContext = await asyncShell("kubectl config current-context")
     } else if (environment === "prod") {
       kubeconfigContext = "prod"
     } else {
       kubeconfigContext = "dev"
     }
   }
+  logger.info(`kubeconfig context: "${kubeconfigContext}"`)
 
   await writeKubeconfig([
     "KUBECONFIG",
     `KUBECONFIG_${environment.toUpperCase()}`,
   ])
 
-  const getRancherProjectId = (ciNamespace) => {
-    const json = shell(
+  const getRancherProjectId = async (ciNamespace) => {
+    logger.info(
+      `option rancher-project-id not provided, getting from cluster using ci-namespace "${ciNamespace}"`
+    )
+    const json = await asyncShell(
       `kubectl --context ${kubeconfigContext} get ns ${ciNamespace} -o json`
     )
     const data = JSON.parse(json)
@@ -61,7 +65,7 @@ module.exports = async (options) => {
 
   if (!process.env.RANCHER_PROJECT_ID) {
     process.env.RANCHER_PROJECT_ID =
-      options.rancherProjectId || getRancherProjectId(ciNamespace)
+      options.rancherProjectId || (await getRancherProjectId(ciNamespace))
   }
 
   let manifestsFile = options.F
@@ -71,7 +75,7 @@ module.exports = async (options) => {
     manifestsFile = result.manifestsFile
     manifests = result.manifests
   } else {
-    manifests = fs.readFileSync(manifestsFile, { encoding: "utf-8" })
+    manifests = await fs.readFile(manifestsFile, { encoding: "utf-8" })
   }
 
   const allManifests = yaml.loadAll(manifests)
@@ -84,9 +88,10 @@ module.exports = async (options) => {
 
   const namespace = namespaceManifest.metadata.name
 
-  const checkNamespaceIsAvailable = () => {
+  const checkNamespaceIsAvailable = async () => {
+    logger.debug("checking if namespace is available")
     try {
-      const json = shell(
+      const json = await asyncShell(
         `kubectl --context ${kubeconfigContext} get ns ${namespace} -o json`
       )
       const data = JSON.parse(json)
@@ -98,13 +103,14 @@ module.exports = async (options) => {
   }
 
   const createNamespace = async () => {
-    if (checkNamespaceIsAvailable()) {
+    if (await checkNamespaceIsAvailable()) {
       return
     }
 
     try {
       let ignoreError
       await new Promise((resolve, reject) => {
+        logger.info("creating namespace")
         const proc = spawn(
           "kubectl",
           [`--context=${kubeconfigContext}`, "create", "-f", "-"],
@@ -122,7 +128,7 @@ module.exports = async (options) => {
           const message = data.toString()
           if (message.includes("AlreadyExists")) {
             ignoreError = true
-            logger.info("Namespace already exists")
+            logger.info("namespace already exists")
           } else {
             logger.warn(message)
           }
@@ -132,7 +138,7 @@ module.exports = async (options) => {
             resolve()
           } else {
             reject(
-              new Error(`Creating namespace failed with exit code ${code}`)
+              new Error(`creating namespace failed with exit code ${code}`)
             )
           }
         })
@@ -146,8 +152,8 @@ module.exports = async (options) => {
 
     await retry(
       async () => {
-        if (!checkNamespaceIsAvailable()) {
-          throw Error("Namespace is not available")
+        if (!(await checkNamespaceIsAvailable())) {
+          throw Error("namespace is not available")
         }
       },
       {
@@ -202,10 +208,10 @@ module.exports = async (options) => {
     }
   }
 
-  logger.info(`Ensure namespace "${namespace}" is active`)
+  logger.info(`ensure namespace "${namespace}" is active`)
   await createNamespace()
 
-  logger.info(`Deploying ${repositoryName} to ${namespace}`)
+  logger.info(`deploying ${repositoryName} to ${namespace}`)
   await deployWithKapp()
 
   elapsed.end({
