@@ -36,6 +36,21 @@ module.exports.webhookBaseDomain = new Option(
   "webhook base domain"
 )
 
+module.exports.webhookUriPattern = new Option(
+  "--webhook-uri-pattern <pattern>",
+  "webhook uri pattern, defaut to https://webhook-${repositoryName}.${baseDomain}"
+)
+
+module.exports.webhookToken = new Option(
+  "--webhook-token <token>",
+  "webhook token"
+)
+
+module.exports.webhookUri = new Option(
+  "--webhook-uri <uri>",
+  "webhook uri, default will use webhook-uri-pattern and webhook-base-domain to generate uri"
+)
+
 module.exports.ciNamespace = new Option("--ci-namespace <ns>", "ci namespace")
 
 module.exports.rancherProjectId = new Option(
@@ -46,4 +61,19 @@ module.exports.rancherProjectId = new Option(
 module.exports.rancherProjectName = new Option(
   "--rancher-project-name <project>",
   "rancher project name, default to repository basename"
+)
+
+module.exports.repository = new Option(
+  "--repository <repo>",
+  "git repository url, default to current"
+)
+
+module.exports.branch = new Option(
+  "--branch <ref>",
+  "git branch, default to current"
+)
+
+module.exports.commit = new Option(
+  "--commit <commit>",
+  "git commit sha, default to last commit of branch"
 )

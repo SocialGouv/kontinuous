@@ -17,6 +17,9 @@ module.exports = (program) =>
     .addOption(options.set)
     .addOption(options.helmArgs)
     .addOption(options.cwd)
+    .addOption(options.repository)
+    .addOption(options.branch)
+    .addOption(options.commit)
     .addOption(options.upload)
     .option("--output, -o", "enable direct output of manifest")
     .option(

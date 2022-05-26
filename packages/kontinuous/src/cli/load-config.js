@@ -6,8 +6,8 @@ const loadStructuredConfig = require("~common/utils/load-structured-config")
 
 const getGitRef = require("~common/utils/get-git-ref")
 const getGitSha = require("~common/utils/get-git-sha")
-const getGitRepository = require("~common/utils/get-git-repository")
 const getGitUrl = require("~common/utils/get-git-url")
+const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const cleanGitRef = require("~common/utils/clean-git-ref")
 const refEnv = require("~common/utils/ref-env")
 const yaml = require("~common/utils/yaml")
@@ -22,6 +22,21 @@ const configAsDefaultOverride = (config) =>
     acc[key] = { default: value }
     return acc
   }, {})
+
+const mergeProjectsAndOrganizations = (config) => {
+  const { organizations, projects, gitRepositoryName } = config
+  if (projects && projects[gitRepositoryName]) {
+    const project = projects[gitRepositoryName]
+    const { organization } = project
+    if (organization && organizations[organization]) {
+      const org = organizations[organization]
+      deepmerge(config, org)
+    }
+    deepmerge(config, project)
+  }
+}
+
+const defaultRepositoryProvider = "https://github.com" // degit/tiged like
 
 module.exports = async (opts = {}) => {
   const env = ctx.get("env") || process.env
@@ -86,25 +101,44 @@ module.exports = async (opts = {}) => {
       env: "KS_BUILD_UPLOAD_URL",
       option: "upload",
     },
-    gitRef: {
-      env: "KS_GIT_REF",
-      defaultFunction: (config) => getGitRef(config.workspacePath),
-    },
     gitBranch: {
-      defaultFunction: (config) => cleanGitRef(config.gitRef),
+      defaultFunction: async (config, { options, env: environ }) => {
+        let ref
+        if (options.branch) {
+          ref = options.branch
+        } else if (environ.KS_GIT_BRANCH) {
+          ref = environ.KS_GIT_BRANCH
+        } else if (environ.KS_GIT_REF) {
+          ref = environ.KS_GIT_REF
+        } else {
+          ref = await getGitRef(config.workspacePath)
+        }
+        return cleanGitRef(ref)
+      },
     },
     gitSha: {
       env: "KS_GIT_SHA",
+      option: "commit",
       defaultFunction: (config) => getGitSha(config.workspacePath),
     },
     gitRepositoryUrl: {
-      env: "KS_GIT_REPOSITORY_URL",
-      defaultFunction: (config) => getGitUrl(config.workspacePath),
+      defaultFunction: (config, { options, env: environ }) => {
+        if (environ.KS_GIT_REPOSITORY_URL) {
+          return environ.KS_GIT_REPOSITORY_URL
+        }
+        const repository = options.repository || environ.KS_GIT_REPOSITORY
+        if (repository) {
+          if (repository.includes(":")) {
+            return repository
+          }
+          return `${defaultRepositoryProvider}/${repository}`
+        }
+        return getGitUrl(config.workspacePath)
+      },
     },
     gitRepository: {
-      env: "KS_GIT_REPOSITORY",
       defaultFunction: (config) =>
-        getGitRepository(config.workspacePath, config.url),
+        repositoryFromGitUrl(config.gitRepositoryUrl),
     },
     gitRepositoryName: {
       defaultFunction: (config) => path.basename(config.gitRepository),
@@ -113,6 +147,37 @@ module.exports = async (opts = {}) => {
       env: "KS_ENVIRONMENT",
       option: "E",
       defaultFunction: (config) => refEnv(config.gitRef),
+    },
+    webhookToken: {
+      option: "webhook-token",
+      env: "KS_WEBHOOK_TOKEN",
+      defaultFunction: (config) => config.webhook?.token,
+    },
+    webhookBaseDomain: {
+      option: "webhook-base-domain",
+      env: "KS_WEBHOOK_BASE_DOMAIN",
+      defaultFunction: (config) => config.webhook?.baseDomain,
+    },
+    webhookUriPattern: {
+      option: "webhook-uri-pattern",
+      env: "KS_WEBHOOK_URI_PATTERN",
+      defaultFunction: (config) => config.webhook?.uriPattern,
+    },
+    webhookUri: {
+      option: "webhook-uri",
+      env: "KS_WEBHOOK_URI",
+      defaultFunction: (config) => {
+        if (config.webhook?.uri) {
+          return config.webhook.uri
+        }
+        const { webhookUriPattern } = config
+        if (!webhookUriPattern) {
+          return null
+        }
+        return webhookUriPattern
+          .replace("${repositoryName}", config.repositoryName)
+          .replace("${baseDomain}", config.webhookBaseDomain)
+      },
     },
   }
 
@@ -126,16 +191,12 @@ module.exports = async (opts = {}) => {
   const config = await loadStructuredConfig({
     configBasename: "config",
     configDirs,
+    configCompilers: [mergeProjectsAndOrganizations],
     configOverride,
     options: opts,
     env,
     emptyAsUndefined: true,
   })
-
-  const { projects, gitRepositoryName } = config
-  if (projects && projects[gitRepositoryName]) {
-    deepmerge(config, projects[gitRepositoryName])
-  }
 
   return config
 }

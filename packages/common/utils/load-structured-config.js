@@ -16,6 +16,7 @@ const emptyAsUndefinedCheck = (val) =>
 module.exports = async ({
   configBasename = "config",
   configDirs = [],
+  configCompilers = [],
   configOverride,
   env = process.env,
   options,
@@ -29,6 +30,9 @@ module.exports = async ({
   for (const dir of configDirs) {
     extendsConfig(await getConfigYaml(`${dir}/${configBasename}.yaml`))
     extendsConfig(await getConfigYaml(`${dir}/${configBasename}.yml`))
+  }
+  for (const configCompiler of configCompilers) {
+    configCompiler(config)
   }
 
   const optionKeys = Object.keys(options)

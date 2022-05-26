@@ -91,6 +91,7 @@ module.exports = {
     "no-await-in-loop": [0],
     "consistent-return": [0],
     "no-underscore-dangle": [0],
+    "no-template-curly-in-string": [0],
     semi: ["error", "never"],
     "prettier/prettier": [
       "error",

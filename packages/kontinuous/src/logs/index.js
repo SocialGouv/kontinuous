@@ -10,6 +10,8 @@ const getGitRepository = require("~common/utils/get-git-repository")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const normalizeEnvKey = require("~common/utils/normalize-env-key")
 
+const ctx = require("~/ctx")
+
 const eventFromBranch = (branch) => {
   const env = refEnv(branch)
   if (env === "prod") {
@@ -19,6 +21,8 @@ const eventFromBranch = (branch) => {
 }
 
 module.exports = async (options) => {
+  // const config = ctx.require("config")
+
   const cwd = options.cwd || process.cwd()
   let { event, repository: repositoryMixed, branch, commit } = options
   if (!repositoryMixed) {

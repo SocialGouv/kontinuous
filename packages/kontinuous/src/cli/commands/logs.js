@@ -10,15 +10,13 @@ module.exports = (program) =>
     .command("logs")
     .description("stream logs pipeline from webhook")
     .addOption(options.cwd)
+    .addOption(options.repository)
+    .addOption(options.branch)
+    .addOption(options.commit)
+    .addOption(options.webhookToken)
     .addOption(options.webhookBaseDomain)
-    .option("--repository <repo>", "git repository url, default to current")
-    .option("--branch <ref>", "git branch, default to current")
-    .option(
-      "--commit <commit>",
-      "git commit sha, default to last commit of branch"
-    )
-    .option("--token <token>", "kubewebook token")
-    .option("--webhook-uri <uri>", "kubewebook uri")
+    .addOption(options.webhookUriPattern)
+    .addOption(options.webhookUri)
     .addOption(
       new Option(
         "event",
