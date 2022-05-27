@@ -17,12 +17,6 @@ const ctx = require("~/ctx")
 
 const { version } = require(`${__dirname}/../../package.json`)
 
-const configAsDefaultOverride = (config) =>
-  Object.entries(config).reduce((acc, [key, value]) => {
-    acc[key] = { default: value }
-    return acc
-  }, {})
-
 const mergeProjectsAndOrganizations = (config) => {
   const { organizations, projects, gitRepositoryName } = config
   if (projects && projects[gitRepositoryName]) {
@@ -54,52 +48,6 @@ module.exports = async (opts = {}) => {
     workspaceKsPath: {
       defaultFunction: (config) =>
         path.join(config.workspacePath, config.workspaceSubPath),
-    },
-  }
-  const rootConfig = await loadStructuredConfig({
-    configOverride: rootConfigOverride,
-    options: opts,
-    env,
-  })
-
-  const configOverride = {
-    ...configAsDefaultOverride(rootConfig),
-    kontinuousPath: {
-      env: "KS_KONTINUOUS_PATH",
-      default: path.resolve(`${__dirname}/../..`),
-    },
-    version: {
-      default: version,
-    },
-    chart: {
-      env: "KS_CHART",
-      envParser: (str) => (str[0] === "[" ? JSON.parse(str) : str.split(",")),
-      option: "chart",
-    },
-    helmArgs: {
-      env: "KS_HELM_ARGS",
-      option: "A",
-    },
-    inlineValues: {
-      env: "KS_INLINE_VALUES",
-      option: "inline-values",
-    },
-    set: {
-      env: "KS_INLINE_SET",
-      envParser: (str) => yaml.load(str),
-      option: "set",
-    },
-    buildPath: {
-      env: "KS_BUILD_PATH",
-      defaultFunction: () => mkdtemp(path.join(os.tmpdir(), "kontinuous-")),
-    },
-    buildProjectPath: {
-      defaultFunction: (config) =>
-        path.join(config.buildPath, "charts", "project"),
-    },
-    uploadUrl: {
-      env: "KS_BUILD_UPLOAD_URL",
-      option: "upload",
     },
     gitBranch: {
       defaultFunction: async (config, { options, env: environ }) => {
@@ -143,6 +91,46 @@ module.exports = async (opts = {}) => {
     gitRepositoryName: {
       defaultFunction: (config) => path.basename(config.gitRepository),
     },
+  }
+
+  const configOverride = {
+    kontinuousPath: {
+      env: "KS_KONTINUOUS_PATH",
+      default: path.resolve(`${__dirname}/../..`),
+    },
+    version: {
+      default: version,
+    },
+    chart: {
+      env: "KS_CHART",
+      envParser: (str) => (str[0] === "[" ? JSON.parse(str) : str.split(",")),
+      option: "chart",
+    },
+    helmArgs: {
+      env: "KS_HELM_ARGS",
+      option: "A",
+    },
+    inlineValues: {
+      env: "KS_INLINE_VALUES",
+      option: "inline-values",
+    },
+    set: {
+      env: "KS_INLINE_SET",
+      envParser: (str) => yaml.load(str),
+      option: "set",
+    },
+    buildPath: {
+      env: "KS_BUILD_PATH",
+      defaultFunction: () => mkdtemp(path.join(os.tmpdir(), "kontinuous-")),
+    },
+    buildProjectPath: {
+      defaultFunction: (config) =>
+        path.join(config.buildPath, "charts", "project"),
+    },
+    uploadUrl: {
+      env: "KS_BUILD_UPLOAD_URL",
+      option: "upload",
+    },
     environment: {
       env: "KS_ENVIRONMENT",
       option: "E",
@@ -181,6 +169,12 @@ module.exports = async (opts = {}) => {
     },
   }
 
+  const rootConfig = await loadStructuredConfig({
+    configOverride: rootConfigOverride,
+    options: opts,
+    env,
+  })
+
   const configDirs = []
   const homedir = os.homedir()
   if (homedir) {
@@ -189,6 +183,7 @@ module.exports = async (opts = {}) => {
   configDirs.push(rootConfig.workspaceKsPath)
 
   const config = await loadStructuredConfig({
+    rootConfig,
     configBasename: "config",
     configDirs,
     configCompilers: [mergeProjectsAndOrganizations],

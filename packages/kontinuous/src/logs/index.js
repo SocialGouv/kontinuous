@@ -8,7 +8,6 @@ const getGitRef = require("~common/utils/get-git-ref")
 const getGitSha = require("~common/utils/get-git-sha")
 const getGitRepository = require("~common/utils/get-git-repository")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
-const normalizeEnvKey = require("~common/utils/normalize-env-key")
 
 const ctx = require("~/ctx")
 
@@ -21,7 +20,7 @@ const eventFromBranch = (branch) => {
 }
 
 module.exports = async (options) => {
-  // const config = ctx.require("config")
+  const config = ctx.require("config")
 
   const cwd = options.cwd || process.cwd()
   let { event, repository: repositoryMixed, branch, commit } = options
@@ -39,26 +38,10 @@ module.exports = async (options) => {
   }
 
   const repository = repositoryFromGitUrl(repositoryMixed)
-  const repositoryName = repository.split("/").pop()
 
-  const rancherProjectName =
-    options.rancherProjectName ||
-    process.env.RANCHER_PROJECT_NAME ||
-    repositoryName
-
-  const webhookBaseDomain =
-    options.webhookBaseDomain || process.env.KS_WEBHOOK_BASE_DOMAIN
-
-  const webhookUri =
-    options.webhookUri ||
-    process.env.KUBEWEBHOOK_URI ||
-    `https://webhook-${rancherProjectName}.${webhookBaseDomain}`
+  const { webhookUri, webhookToken: token } = config
 
   const repositoryUrlencoded = encodeURIComponent(repository)
-  const token =
-    options.token ||
-    process.env[`KS_WEBHOOK_TOKEN_${normalizeEnvKey(rancherProjectName)}`] ||
-    process.env.KS_WEBHOOK_TOKEN
   const url = `${webhookUri}/api/v1/oas/logs/pipeline?repository=${repositoryUrlencoded}&event=${event}&ref=${branch}&commit=${commit}&catch=true&follow=true&token=${token}`
 
   const finished = promisify(stream.finished)

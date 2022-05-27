@@ -22,8 +22,8 @@ module.exports = async ({
   options,
   mergeWith = deepmerge,
   emptyAsUndefined: defaultEmptyAsUndefined = false,
+  rootConfig: config = {},
 }) => {
-  const config = {}
   const extendsConfig = (src = {}) => {
     mergeWith(config, src)
   }
@@ -32,7 +32,7 @@ module.exports = async ({
     extendsConfig(await getConfigYaml(`${dir}/${configBasename}.yml`))
   }
   for (const configCompiler of configCompilers) {
-    configCompiler(config)
+    await configCompiler(config)
   }
 
   const optionKeys = Object.keys(options)
