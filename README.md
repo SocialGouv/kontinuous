@@ -63,10 +63,15 @@ When you import recursively there is an arborescence autobuild.
     1. [tests]
     1. [jobs]
 
-8. [Links]
+8. [How to]
+    1. [How to deploy using github-action](#81-)
+    2. [How to deploy using webhook](#82-)
+    3. [How to logs from github-action the webhook pipeline](#83-)
+
+9. [Links]
 
 
-### 8. Links
+### 9. Links
 
 - [config](docs/config.md)
 - [plugins](docs/plugins/index.md):

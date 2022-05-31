@@ -12,7 +12,7 @@ const loadDependencies = require("./load-dependencies")
 
 const ctx = require("~/ctx")
 
-module.exports = async (options = {}) => {
+module.exports = async (_options = {}) => {
   const config = ctx.require("config")
   
   const {

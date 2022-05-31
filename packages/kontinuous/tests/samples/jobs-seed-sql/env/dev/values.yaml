@@ -3,11 +3,11 @@ app:
 
 jobs:
   runs:
-    - name: db
+    db:
       use: SocialGouv/kontinuous/plugins/fabrique/jobs/create-db
       with:
         pgAdminSecretRefName: azure-pg-admin-user
-    - name: seed
+    seed:
       needs: [db]
       use: SocialGouv/kontinuous/plugins/fabrique/jobs/seed-db
       with:

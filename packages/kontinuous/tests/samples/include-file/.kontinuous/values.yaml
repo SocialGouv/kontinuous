@@ -1,6 +1,6 @@
 jobs:
   enabled: true
   runs:
-    - name: say-hello
+    say-hello:
       run: |
         {{ .Files.Get "files/testify.txt" }}

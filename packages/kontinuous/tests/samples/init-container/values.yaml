@@ -5,6 +5,6 @@ app:
 jobs:
   enabled: true
   runs:
-    - name: seed
+    seed:
       image: "{{ .Values.global.registry }}/{{ .Values.global.imageRepository }}/app:{{ .Values.global.imageTag }}"
       run: "yarn seed"

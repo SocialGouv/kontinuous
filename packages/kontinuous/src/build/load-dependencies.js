@@ -12,6 +12,7 @@ const set = require("lodash.set")
 const {default: axios} = require('axios')
 const decompress = require('decompress')
 const downloadFile = require("~common/utils/download-file")
+const getYamlPath = require("~common/utils/get-yaml-path")
 
 const slug = require("~common/utils/slug")
 
@@ -560,6 +561,11 @@ const compileValues = async (config, logger) => {
   removeNotEnabledValues(values)
   cleanMetaValues(values)
 
+  const projectValuesFile = await getYamlPath(`${buildProjectPath}/values`)
+  if(projectValuesFile){
+    await fs.unlink(projectValuesFile)
+  }
+
   return values
 }
 
@@ -604,7 +610,7 @@ module.exports = async (config, logger)=>{
   await mergeEnvTemplates(`${buildPath}/${dependenciesDirName}/project`, config)
   await copyFilesDir(config)
   const values = await compileValues(config, logger)
-  
+
   await Promise.all([
     buildChartFile(buildPath, "kontinuous-umbrella"),
     fs.writeFile(`${buildPath}/values.yaml`, yaml.dump(values)),

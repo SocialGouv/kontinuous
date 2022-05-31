@@ -34,13 +34,13 @@ jobs:
   enabled: true
   runs:
 
-    - name: build-app
+    build-app:
       use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
       with:
         registrySecretRefName: harbor
         imagePackage: app
 
-    - name: build-hasura
+    build-hasura:
       use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
       with:
         registrySecretRefName: harbor

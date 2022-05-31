@@ -130,15 +130,15 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
       ingress: {
         annotations: {},
       },
-      extra: {
-        jobs: {
-          sharedStorage: {
-            enabled: true,
-            size: "2Gi",
-            className: "azurefile",
-          },
-        },
-      },
+      // extra: {
+      //   jobs: {
+      //     sharedStorage: {
+      //       enabled: true,
+      //       size: "2Gi",
+      //       className: "azurefile",
+      //     },
+      //   },
+      // },
     },
   }
 

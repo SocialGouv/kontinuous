@@ -29,14 +29,14 @@ jobs:
   enabled: true
   runs:
 
-    - name: build-app
+    build-app:
       stage: build
       use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
       with:
         registrySecretRefName: harbor
         imagePackage: app
 
-    - name: build-hasura
+    build-hasura:
       stage: build
       use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
       with:
