@@ -11,7 +11,9 @@ metadata:
   labels:
     component: {{ or .Values.component .Chart.Name }}
   name: "{{ or .Values.component .Chart.Name }}"
-  namespace: "{{ .Values.namespace }}"
+  {{ if ne .Release.Namespace "default" }}
+  namespace: "{{ .Release.Namespace }}"
+  {{ end }}
 spec:
   rules:
     - host: >-

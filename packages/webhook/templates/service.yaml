@@ -2,7 +2,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ or .Values.component .Chart.Name }}
-  namespace: "{{ .Values.namespace }}"
+  {{ if ne .Release.Namespace "default" }}
+  namespace: "{{ .Release.Namespace }}"
+  {{ end }}
   labels:
     component: {{ or .Values.component .Chart.Name }}
 spec:

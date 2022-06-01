@@ -9,5 +9,5 @@ metadata:
     {{ if not .Values.isProdCluster }}
     cert: wildcard
     {{- end }}
-  name: {{ .Values.namespace }}
+  namespace: "{{ .Release.Namespace }}"
 {{ end }}

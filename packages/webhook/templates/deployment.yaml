@@ -4,7 +4,9 @@ metadata:
   labels:
     component: {{ or .Values.component .Chart.Name }}
   name: {{ or .Values.component .Chart.Name }}
-  namespace: "{{ required "namespace value is required" .Values.namespace }}"
+  {{ if ne .Release.Namespace "default" }}
+  namespace: "{{ .Release.Namespace }}"
+  {{ end }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
@@ -30,7 +32,7 @@ spec:
             - name: artifacts
               mountPath: /artifacts
           env:
-            - name: KS_RANCHER_PROJECT_NAME
+            - name: KS_CI_NAMESPACE
               value: "{{ required "ciNamespace value is required" .Values.ciNamespace }}"
             - name: KUBEWEBHOOK_EXPOSED_HOST
               value: "{{ .Values.host }}"

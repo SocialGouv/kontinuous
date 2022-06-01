@@ -4,7 +4,9 @@ metadata:
   name: artifacts
   annotations: {}
   labels: {}
-  namespace: "{{ .Values.namespace }}"
+  {{ if ne .Release.Namespace "default" }}
+  namespace: "{{ .Release.Namespace }}"
+  {{ end }}
 spec:
   accessModes:
     - ReadWriteMany
