@@ -78,6 +78,10 @@ module.exports = ({
             ],
             env: [
               {
+                name: "KS_WORKSPACE_PATH",
+                value: "/workspace",
+              },
+              {
                 name: "KS_WEBHOOK_URI",
                 value: webhookUri,
               },
