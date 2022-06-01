@@ -167,6 +167,11 @@ module.exports = async (opts = {}) => {
           .replace("${baseDomain}", config.webhookBaseDomain)
       },
     },
+    ciNamespace: {
+      option: "ci-namespace",
+      env: "KS_CI_NAMESPACE",
+      defaultFunction: (config) => `${config.repositoryName}-ci`,
+    },
   }
 
   const rootConfig = await loadStructuredConfig({
