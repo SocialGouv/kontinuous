@@ -1,9 +1,9 @@
 // const image = "ghcr.io/socialgouv/kube-workflow:latest"
 // const checkoutImage = "ghcr.io/socialgouv/kube-workflow/degit:latest"
 
-const image = "harbor.fabrique.social.gouv.fr/sre/kube-workflow:latest"
+const image = "harbor.fabrique.social.gouv.fr/sre/kontinuous:latest"
 const checkoutImage =
-  "harbor.fabrique.social.gouv.fr/sre/kube-workflow/degit:latest"
+  "harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:latest"
 
 module.exports = ({
   namespace,

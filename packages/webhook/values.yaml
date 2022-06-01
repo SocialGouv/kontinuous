@@ -8,8 +8,8 @@ createNamespace: false
 replicas: 1
 isProdCluster: true
 containerPort: 3000
-image: harbor.fabrique.social.gouv.fr/sre/kube-workflow/webhook:latest
-# image: ghcr.io/socialgouv/kube-workflow/webhook:latest
+image: harbor.fabrique.social.gouv.fr/sre/kontinuous/webhook:latest
+# image: ghcr.io/socialgouv/kontinuous/webhook:latest
 resources:
   limits:
     cpu: 200m
