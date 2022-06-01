@@ -5,30 +5,24 @@ Hey, you work at the marvelous Fabrique Numérique des Ministères Sociaux ?
 
 ## Why ?
 
-Was needing a flexible, scalable and independent CI/CD pipelines system running on Kubernetes.
+Was needing a flexible, scalable and independent CI+CD system running on Kubernetes with fine grained control over pipelines.
 
 ## The approach
 
-### Helm + Kapp + some NodeJS Kung-Fu
+**K8S Manifest as pipeline**
 
-- Helm: to be interoperable with it's mostly adopted ecosystem
-- Kapp: to deploy in order and follow deployment state
-- some customization kung-fu: to expose adapted and simplified logic to final dev users, with ready to use values system corresponding to our infra
+All CI+CD pipeline is reproductible running kapp cli deploy command on the built yaml manifest.
 
-### Core
+**Philosophy**
 
-The `core` is responsible to merge config, values, templates and process plugins, most of the logic is delegated to plugins. The core is also responsible of tree directory structure creation in temporary folder, yarn install when needed, then helm template calling.
+Keep as close as possible of battle tested and confident tech paradigms as native kubernetes, helm and kapp, so we can use all theirs powers and abilities.
 
-### Plugins
 
-All custom logic can be implemented in plugins. By creating plugins you can covers all uses cases. There are differents type of plugins:
-- charts: it's basically all helm charts, you can import from helm repository or declare your own in git repository
-- values-compilers: transform user defined values to be consummed by charts
-- patches: patches applies to final generated kubernetes manifests
-- validators: make custom conformity checks on final generated kubernetes manifests
-- import: you can combine multiples plugins in on repository using import plugin
-All plugins follow a recursive design pattern, imported `import` plugin can import another repo (example project import fabrique, fabrique import recommended etc...), all charts can have subcharts, that can have subchart etc..., it the same for values-compilers, patches, and validators.
-When you import recursively there is an arborescence autobuild.
+**Stack: (Helm ⛵ + Kapp 🌞) x NodeJS for customization Kung-Fu 🥷**
+
+- [helm](https://helm.sh/): build manifests from helm templates, so kontinuous is interoperable with the ecosystem of the most popular package manager for kubernetes, and use the only one templating language in go (also used in kubernetes cli)
+- [carvel/kapp](https://carvel.dev/kapp/): to deploy ordered pipelines with advanced dependencies declarative system and following deployment state and reconciliation
+- the kung-fu: to expose adapted and simplified logic to final dev users, with ready to use values system corresponding to infra, flexible patching system, easy to use plugin charts system etc...
 
 ## Documentation
 
@@ -86,10 +80,32 @@ Here is a sample of a boilerplate made for `La Fabrique` and that you can merge 
 ### 1.1.1 Fabrique Quickstart
 Run this command in your project to retrieve boilerplate config for kontinuous and corresponding github workflows, then adjust the config in `.kontinuous` folder.
 
-⚠️ Pay attention, this command will overwrite files if same names are used, you should commit you work before running it.
+⚠️ Pay attention, this command will overwrite files if sames names are used, you should commit your work before running it.
 ```sh
 npx -y tiged SocialGouv/kontinuous/plugins/fabrique/boilerplate --force
 ```
+
+# 2. Plugins
+
+
+**Core**
+
+The core is responsible to merge config, values, templates and process plugins, most of the logic is delegated to plugins. The core is also responsible of tree directory structure creation in temporary folder, yarn install when needed, then helm template calling.
+
+**Plugins**
+
+All custom logic can be implemented in plugins. By creating plugins you can covers all uses cases. 
+
+## 2.1 Types
+
+There are differents type of plugins:
+- charts: it's basically all helm charts, you can import from helm repository or declare your own in git repository
+- values-compilers: transform user defined values to be consummed by charts
+- patches: patches applies to final generated kubernetes manifests
+- validators: make custom conformity checks on final generated kubernetes manifests
+- import: you can combine multiples plugins in on repository using import plugin
+All plugins follow a recursive design pattern, imported `import` plugin can import another repo (example project import fabrique, fabrique import recommended etc...), all charts can have subcharts, that can have subchart etc..., it the same for values-compilers, patches, and validators.
+When you import recursively there is an arborescence autobuild.
 
 # 6. Links
 
