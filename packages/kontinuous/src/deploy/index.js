@@ -55,13 +55,8 @@ module.exports = async (options) => {
     return data.metadata.annotations["field.cattle.io/projectId"]
   }
 
-  const rancherProjectName =
-    options.rancherProjectName || process.env.RANCHER_PROJECT_NAME
-
   const ciNamespace =
-    options.ciNamespace ||
-    process.env.KS_CI_NAMESPACE ||
-    `${rancherProjectName || repositoryName}-ci`
+    options.ciNamespace || process.env.KS_CI_NAMESPACE || `${repositoryName}-ci`
 
   if (!process.env.RANCHER_PROJECT_ID) {
     process.env.RANCHER_PROJECT_ID =

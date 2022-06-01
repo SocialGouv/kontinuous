@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: netpol-ingress
-  {{- include "metadata.namespace" . | nindent 2 }}
+  namespace: "{{ .Values.namespace }}"
 spec:
   ingress:
     - from:

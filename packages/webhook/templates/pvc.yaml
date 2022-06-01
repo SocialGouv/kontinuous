@@ -4,7 +4,7 @@ metadata:
   name: artifacts
   annotations: {}
   labels: {}
-  {{- include "metadata.namespace" . | nindent 2 }}
+  namespace: "{{ .Values.namespace }}"
 spec:
   accessModes:
     - ReadWriteMany

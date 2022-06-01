@@ -27,6 +27,7 @@ module.exports = ({ services }) => {
       repositoryName,
       gitBranch,
     })
+    const webhookUri = ctx.require("config.project.oas.uri")
     logger.info(
       `event ${eventName} triggering workflow on ${repository}#${ref} ${after}`
     )
@@ -43,6 +44,7 @@ module.exports = ({ services }) => {
         gitBranch,
         gitCommit: after,
       }),
+      webhookUri,
     })
     try {
       await jobRun(manifest, kubecontext)

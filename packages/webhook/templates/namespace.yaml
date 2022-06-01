@@ -9,9 +9,5 @@ metadata:
     {{ if not .Values.isProdCluster }}
     cert: wildcard
     {{- end }}
-  {{- if .Values.namespace }}
   name: {{ .Values.namespace }}
-  {{- else }}
-  name: webhook-{{ .Values.rancherProjectName }}
-  {{- end }}
 {{ end }}

@@ -2,16 +2,11 @@ name: "Autodevops deploy"
 description: "Autodevops deploy using Helm template and kapp"
 inputs:
   token:
-    description: "The Github authentication token"
+    description: "The github authentication token"
   webhookToken:
-    description: "The Webhook authentication token, usually secrets.KUBEWEBHOOK_TOKEN"
-  rancherProjectName:
-    description: "The Rancher project name, usually secrets.RANCHER_PROJECT_NAME, usefull jobs that needs secrets or ci namespaces"
-  webhookBaseDomain:
-    description: "Base domain for webhook, no effect when webhookUrl is set"
-    default: "fabrique.social.gouv.fr"
-  webhookUrl:
-    description: "Override webhook url"
+    description: "The webhook authentication token, usually secrets.KUBEWEBHOOK_TOKEN"
+  webhookUri:
+    description: "The webhook uri"
 outputs:
   url:
     description: "Main deployment URL"
@@ -46,11 +41,7 @@ runs:
           EVENT_NAME=pushed
         fi
 
-        if [ -n "${{ inputs.webhookUrl }}" ]; then
-          WEBHOOK_URI=${{ inputs.webhookUrl }}
-        else
-          WEBHOOK_URI=https://webhook-${{ inputs.rancherProjectName }}.${{ inputs.webhookBaseDomain }}
-        fi
+        WEBHOOK_URI=${{ inputs.webhookUri }}
         
         KS_GIT_REPOSITORY_URLENCODED=$(echo $GITHUB_REPOSITORY | sed 's/\//\%2f/g')
 

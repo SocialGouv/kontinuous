@@ -11,15 +11,11 @@ metadata:
   labels:
     component: {{ or .Values.component .Chart.Name }}
   name: "{{ or .Values.component .Chart.Name }}"
-  {{- include "metadata.namespace" . | nindent 2 }}
+  namespace: "{{ .Values.namespace }}"
 spec:
   rules:
     - host: >-
-        {{- if .Values.host }}
-        {{- tpl .Values.host $ | nindent 8 }}
-        {{- else }}
-        webhook-{{ .Values.rancherProjectName }}.{{ .Values.baseDomain }}
-        {{- end }}
+        {{- tpl (required "host value is required" .Values.host) $ | nindent 8 }}
       http:
         paths:
           - backend:
@@ -32,11 +28,7 @@ spec:
   tls:
     - hosts:
         - >-
-          {{- if .Values.host }}
           {{- tpl .Values.host $ | nindent 10 }}
-          {{- else }}
-          webhook-{{ .Values.rancherProjectName }}.{{ .Values.baseDomain }}
-          {{- end }}
       {{- if .Values.isProdCluster }}
       secretName: {{ or .Values.certSecretName (print (or .Values.component .Chart.Name) "-crt") }}
       {{- else }}

@@ -1,5 +1,7 @@
 ## mandatory
-rancherProjectName: ""
+ciNamespace: ""
+host: ""
+namespace: ""
 
 
 ## default
@@ -9,7 +11,6 @@ isProdCluster: true
 containerPort: 3000
 image: harbor.fabrique.social.gouv.fr/sre/kube-workflow/webhook:latest
 # image: ghcr.io/socialgouv/kube-workflow/webhook:latest
-baseDomain: "fabrique.social.gouv.fr"
 resources:
   limits:
     cpu: 200m
@@ -19,11 +20,9 @@ resources:
     memory: 128Mi
 
 ## optional
-namespace: ""
 rancherProjectId: ""
 component: ""
 certSecretName: ""
-host: ""
 secretRefNames:
   - kubeconfig-dev
   - kubeconfig-prod

@@ -4,7 +4,7 @@ metadata:
   labels:
     component: {{ or .Values.component .Chart.Name }}
   name: {{ or .Values.component .Chart.Name }}
-  {{- include "metadata.namespace" . | nindent 2 }}
+  namespace: "{{ required "namespace value is required" .Values.namespace }}"
 spec:
   replicas: {{ .Values.replicas }}
   selector:
@@ -30,8 +30,8 @@ spec:
             - name: artifacts
               mountPath: /artifacts
           env:
-            - name: KW_RANCHER_PROJECT_NAME
-              value: "{{ required "rancherProjectName value is required" .Values.rancherProjectName }}"
+            - name: KS_RANCHER_PROJECT_NAME
+              value: "{{ required "ciNamespace value is required" .Values.ciNamespace }}"
             - name: KUBEWEBHOOK_EXPOSED_HOST
               value: "{{ .Values.host }}"
             - name: KUBEWEBHOOK_EXPOSED_HTTPS

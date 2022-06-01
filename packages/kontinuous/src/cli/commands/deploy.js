@@ -15,7 +15,6 @@ module.exports = (program) =>
     .addOption(options.cwd)
     .addOption(options.upload)
     .addOption(options.rancherProjectId)
-    .addOption(options.rancherProjectName)
     .addOption(options.ciNamespace)
     .option(
       "--file, -f <file>",

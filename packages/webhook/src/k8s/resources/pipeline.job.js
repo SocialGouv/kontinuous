@@ -14,7 +14,7 @@ module.exports = ({
   gitBranch,
   gitCommit,
   uploadUrl,
-  baseDomain,
+  webhookUri,
 }) => ({
   apiVersion: "batch/v1",
   kind: "Job",
@@ -78,23 +78,23 @@ module.exports = ({
             ],
             env: [
               {
-                name: "KW_BASE_DOMAIN",
-                value: baseDomain,
+                name: "KS_WEBHOOK_URI",
+                value: webhookUri,
               },
               {
-                name: "KW_GIT_REPOSITORY_URL",
+                name: "KS_GIT_REPOSITORY_URL",
                 value: repositoryUrl,
               },
               {
-                name: "KW_GIT_REF",
+                name: "KS_GIT_REF",
                 value: gitBranch,
               },
               {
-                name: "KW_GIT_SHA",
+                name: "KS_GIT_SHA",
                 value: gitCommit,
               },
               ...(uploadUrl
-                ? [{ name: "KW_BUILD_UPLOAD_URL", value: uploadUrl }]
+                ? [{ name: "KS_BUILD_UPLOAD_URL", value: uploadUrl }]
                 : []),
             ],
             volumeMounts: [

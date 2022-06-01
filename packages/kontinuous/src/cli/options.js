@@ -58,11 +58,6 @@ module.exports.rancherProjectId = new Option(
   "rancher project id, default retrieved from ci namespace"
 )
 
-module.exports.rancherProjectName = new Option(
-  "--rancher-project-name <project>",
-  "rancher project name, default to repository basename"
-)
-
 module.exports.repository = new Option(
   "--repository <repo>",
   "git repository url, default to current"
