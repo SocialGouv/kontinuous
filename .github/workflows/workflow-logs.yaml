@@ -1,10 +1,9 @@
-name: Logs
-
 on:
   workflow_call:
 
 jobs:
-  follow-deploy:
+  logs:
+    name: logs
     runs-on: ubuntu-latest
     steps:
       - name: kontinuous pipeline
