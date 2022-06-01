@@ -1,5 +1,8 @@
 # Kontinuous - CI+CD on Kubernetes 🚀
 
+Hey, you work at the marvelous Fabrique Numérique des Ministères Sociaux ?
+[Go here for quickstart](#899-fabrique-quickstart)
+
 ## Why ?
 
 Was needing a flexible, scalable and independent CI/CD pipelines system running on Kubernetes.
@@ -67,9 +70,17 @@ When you import recursively there is an arborescence autobuild.
     1. [How to deploy using github-action](#81-)
     2. [How to deploy using webhook](#82-)
     3. [How to logs from github-action the webhook pipeline](#83-)
+    99. [How to logs from github-action the webhook pipeline](#899-fabrique-quickstart)
 
 9. [Links]
 
+### 8 How to ?
+
+### 8.99 Fabrique Quickstart
+run this command in your project to retrieve boilerplate config for kontinuous and corresponding github workflows, then adjust the config in `.kontinuous` folder
+```sh
+npx -y tiged SocialGouv/kontinuous/plugins/fabrique/boilerplate --force
+```
 
 ### 9. Links
 
@@ -81,6 +92,5 @@ When you import recursively there is an arborescence autobuild.
     - [patches](docs/plugins/patches.md)
     - [validators](docs/plugins/validators.md)
 - [](docs/.md)
-
 
 

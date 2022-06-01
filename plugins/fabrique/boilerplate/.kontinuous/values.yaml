@@ -1,0 +1,17 @@
+global:
+  registry: harbor.fabrique.social.gouv.fr
+
+app:
+  # chart: fabrique.app # implicited by `app` and `app-*` chart root key caller
+  needs: [build-app]
+  imagePackage: app
+  probesPath: /healthz
+
+jobs:
+  runs:
+    build-app:
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/build@master
+      with:
+        registrySecretRefName: harbor
+        imagePackage: app
+
