@@ -82,6 +82,10 @@ module.exports = ({
                 value: "/workspace",
               },
               {
+                name: "KS_CI_NAMESPACE",
+                value: namespace,
+              },
+              {
                 name: "KS_WEBHOOK_URI",
                 value: webhookUri,
               },

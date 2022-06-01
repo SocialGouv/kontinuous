@@ -170,7 +170,8 @@ module.exports = async (opts = {}) => {
     ciNamespace: {
       option: "ci-namespace",
       env: "KS_CI_NAMESPACE",
-      defaultFunction: (config) => `${config.repositoryName}-ci`,
+      defaultFunction: (config) =>
+        config.repositoryName ? `${config.repositoryName}-ci` : null,
     },
   }
 
