@@ -35,7 +35,7 @@ module.exports = function () {
     await retry(
       async (_bail) => {
         if (!(await checkJobExists(params))) {
-          throw new Error("job doesn't exists yet")
+          throw new Error("job doesn't exists")
         }
       },
       {
