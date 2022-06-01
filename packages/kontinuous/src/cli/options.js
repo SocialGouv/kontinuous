@@ -31,6 +31,11 @@ module.exports.debug = new Option("--debug, -d", "enable debugging loglevel")
 
 module.exports.upload = new Option("--upload <url>", "upload manifests to url")
 
+module.exports.statusUrl = new Option(
+  "--status-url <url>",
+  "post status to url"
+)
+
 module.exports.webhookBaseDomain = new Option(
   "--webhook-base-domain <host>",
   "webhook base domain"

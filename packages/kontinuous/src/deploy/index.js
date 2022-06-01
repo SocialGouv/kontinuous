@@ -23,7 +23,11 @@ module.exports = async (options) => {
 
   const config = ctx.require("config")
 
-  const { environment, gitRepositoryName: repositoryName } = config
+  const { environment, gitRepositoryName: repositoryName, statusUrl } = config
+
+  if (statusUrl) {
+    // TODO
+  }
 
   let kubeconfigContext =
     options.kubeconfigContext || process.env.KS_KUBECONFIG_CONTEXT

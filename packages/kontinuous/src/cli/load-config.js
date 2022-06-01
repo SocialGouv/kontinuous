@@ -131,6 +131,10 @@ module.exports = async (opts = {}) => {
       env: "KS_BUILD_UPLOAD_URL",
       option: "upload",
     },
+    statusUrl: {
+      env: "KS_DEPLOY_STATUS_URL",
+      option: "status-url",
+    },
     environment: {
       env: "KS_ENVIRONMENT",
       option: "E",
