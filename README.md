@@ -1,8 +1,8 @@
-# Kontinuous - CI on Kubernetes 🚀
+# Kontinuous - CI+CD on Kubernetes 🚀
 
 ## Why ?
 
-Was needing a flexible, scalable and independent CI/CD pipeline running on Kubernetes.
+Was needing a flexible, scalable and independent CI/CD pipelines system running on Kubernetes.
 
 ## The approach
 

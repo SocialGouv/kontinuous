@@ -1,0 +1,17 @@
+name: Deploy
+
+on:
+  workflow_call:
+
+jobs:
+  deploy:
+    name: Deploy application
+    runs-on: ubuntu-latest
+    steps:
+      - name: kontinuous pipeline
+        uses: SocialGouv/kontinuous@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+          rancherProjectId: ${{ secrets.RANCHER_PROJECT_ID }}
+          ciNamespace: "${{ secrets.RANCHER_PROJECT_NAME }}-ci"

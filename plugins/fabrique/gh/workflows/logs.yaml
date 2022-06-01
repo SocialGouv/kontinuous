@@ -1,0 +1,16 @@
+name: Follow deployment
+
+on:
+  workflow_call:
+
+jobs:
+  follow-deploy:
+    name: Follow deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: kontinuous pipeline
+        uses: SocialGouv/kontinuous/logs@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          webhookToken: ${{ secrets.KUBEWEBHOOK_TOKEN }}
+          webhookUri: https://webhook-${{ secrets.RANCHER_PROJECT_NAME }}.fabrique.social.gouv.fr
