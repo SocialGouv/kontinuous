@@ -97,6 +97,122 @@ paths:
       summary: getOneArtifactsDownload
     parameters: []
     description: /artifacts/download
+  /artifacts/status:
+    get:
+      security:
+        - token:
+            - status
+        - commitToken:
+            - status
+      parameters:
+        - in: query
+          name: repository
+          schema:
+            type: string
+            example: socialgouv/sample-next-app
+          required: true
+        - in: query
+          name: branch
+          schema:
+            type: string
+            example: feat/space-flight
+          required: true
+        - in: query
+          name: commit
+          schema:
+            type: string
+            example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed
+            format: sha1
+          required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - loading
+                      - success
+                      - failed
+                      - timeout
+                  ok:
+                    type: boolean
+          description: 'Default description: Success results getOneArtifactsStatus'
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+          description: 'Default description: HTTP 404 for getOneArtifactsStatus'
+      operationId: getOneArtifactsStatus
+      description: 'Default description: Query: getOneArtifactsStatus'
+      summary: getOneArtifactsStatus
+    post:
+      security:
+        - token:
+            - status
+        - commitToken:
+            - status
+      parameters:
+        - in: query
+          name: repository
+          schema:
+            type: string
+            example: socialgouv/sample-next-app
+          required: true
+        - in: query
+          name: branch
+          schema:
+            type: string
+            example: feat/space-flight
+          required: true
+        - in: query
+          name: commit
+          schema:
+            type: string
+            example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed
+            format: sha1
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+                - ok
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - loading
+                    - success
+                    - failed
+                    - timeout
+                ok:
+                  type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+          description: 'Default description: Success results addOneArtifactsStatus'
+      operationId: addOneArtifactsStatus
+      description: 'Default description: Insert mutation: addOneArtifactsStatus'
+      summary: addOneArtifactsStatus
+    parameters: []
+    description: /artifacts/status
   /artifacts/upload:
     post:
       security:

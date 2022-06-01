@@ -22,11 +22,7 @@ parameters:
       example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed
       format: sha1
     required: true
-  - in: query
-    schema:
-      type: boolean
-    required: true
-
+  
 requestBody:
   required: true
   content:
