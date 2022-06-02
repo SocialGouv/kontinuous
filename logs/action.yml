@@ -59,7 +59,10 @@ runs:
       run: |
         if [ "$GITHUB_RUN_ATTEMPT" -gt "1" ]; then
           echo "Trigger webhook for rerun attempt #${GITHUB_RUN_ATTEMPT}"
-          wget --content-on-error -qO- --post-data "repositoryUrl=${KS_GIT_REPOSITORY_URLENCODED}&ref=${KS_GIT_BRANCH}&commit=${KS_GIT_COMMIT}" "${WEBHOOK_URI}/api/v1/oas/hooks/user?event=${EVENT_NAME}&token=${KS_WEBHOOK_TOKEN}"
+          wget --content-on-error -qO- \
+            --post-data "{\"repositoryUrl\":\"${KS_GIT_REPOSITORY_URLENCODED}\",\"ref\":\"${KS_GIT_BRANCH}\",\"commit\":\"${KS_GIT_COMMIT}\"}" \
+            --header='Content-Type:application/json' \
+            "${WEBHOOK_URI}/api/v1/oas/hooks/user?event=${EVENT_NAME}&token=${KS_WEBHOOK_TOKEN}"
         fi
 
     - name: Stream logs of kube pipeline
