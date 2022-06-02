@@ -4,6 +4,7 @@ const camelcase = require("lodash.camelcase")
 const ctx = require("~/ctx")
 
 const streamToString = require("~common/utils/stream-to-string")
+const javaExists = require("~common/utils/java-exists")
 
 const changeGroupPrefix = "kapp.k14s.io/change-group"
 const changeRulePrefix = "kapp.k14s.io/change-rule"
@@ -11,6 +12,12 @@ const changeRuleValuePrefix = "upsert after upserting kontinuous/"
 
 module.exports = async(manifests)=>{
   const logger = ctx.require("logger")
+
+  if(!await javaExists()){
+    logger.debug("unable to display dependencies diagram, java not available, skipping")
+    return
+  }
+
   // const config = ctx.require("config")
   
   const flatDependencies = {}
