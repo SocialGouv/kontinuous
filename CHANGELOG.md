@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.6](https://github.com/SocialGouv/kontinuous/compare/v1.21.5...v1.21.6) (2022-06-02)
+
+
+### Bug Fixes
+
+* add java to docker image ([73870e8](https://github.com/SocialGouv/kontinuous/commit/73870e853c51481e06efa7e520b1caaf0fb5e237))
+
 ### [1.21.5](https://github.com/SocialGouv/kontinuous/compare/v1.21.4...v1.21.5) (2022-06-02)
 
 
