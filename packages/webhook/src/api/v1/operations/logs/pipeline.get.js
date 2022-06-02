@@ -39,7 +39,7 @@ module.exports = function () {
         }
       },
       {
-        retries: 10,
+        retries: 20,
         factor: 1,
         minTimeout: 1000,
         maxTimeout: 3000,
