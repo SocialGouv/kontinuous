@@ -6040,6 +6040,7 @@ __metadata:
     lodash.defaultsdeep: "npm:^4.6.1"
     lodash.mergewith: "npm:^4.6.2"
     nctx: "npm:^1.2.0"
+    node-plantuml: "npm:^0.9.0"
     pino: "npm:^7.10.0"
     pino-pretty: "npm:^7.6.0"
     pretty-ms: "npm:^7.0.1"
@@ -6863,6 +6864,42 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-nailgun-client@npm:^0.1.0":
+  version: 0.1.2
+  resolution: "node-nailgun-client@npm:0.1.2"
+  dependencies:
+    commander: "npm:^2.8.1"
+  bin:
+    node-nailgun-client: index.js
+  checksum: 6bc0af24071cd18855c5ae1c9222457d0fe632e1f1c683ef3483afed48c794f23c27f7f112dcc40947c62ac3d2a429e86670b7de702de1f791a7bb05911b3c96
+  languageName: node
+  linkType: hard
+
+"node-nailgun-server@npm:^0.1.4":
+  version: 0.1.4
+  resolution: "node-nailgun-server@npm:0.1.4"
+  dependencies:
+    commander: "npm:^2.8.1"
+  bin:
+    node-nailgun-server: index.js
+  checksum: 72afa0d712b8452361d44be6cf8ab5991f20b97de65fdaf7f1d1b86b3425d8491b7add89419dfc9ec2c8e3ed4879f8da777b09afed1b34d17b11e2e8e7c8833f
+  languageName: node
+  linkType: hard
+
+"node-plantuml@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "node-plantuml@npm:0.9.0"
+  dependencies:
+    commander: "npm:^2.8.1"
+    node-nailgun-client: "npm:^0.1.0"
+    node-nailgun-server: "npm:^0.1.4"
+    plantuml-encoder: "npm:^1.2.5"
+  bin:
+    puml: index.js
+  checksum: 546ae80d82f47e6df2ff76cb7539b12d4d8924a02b1f7f3d50e5b611a04361846633ec6f767343f1db4ceb5216407549fefccd7c224c4420dc8ff783f5e26dcc
+  languageName: node
+  linkType: hard
+
 "node-releases@npm:^2.0.2":
   version: 2.0.2
   resolution: "node-releases@npm:2.0.2"
@@ -7593,6 +7630,13 @@ __metadata:
   dependencies:
     find-up: "npm:^4.0.0"
   checksum: 220ae78b93ef48d6cd81958ff3bdda5f5e6268c9887ca430aa974370499669c72886d85db0a768898a0a09114be14aab9a7171356033c082c0d2e65f384a5886
+  languageName: node
+  linkType: hard
+
+"plantuml-encoder@npm:^1.2.5":
+  version: 1.4.0
+  resolution: "plantuml-encoder@npm:1.4.0"
+  checksum: 1144dff1390ae5d91d2da9ed51469ab11f69cc5c49a55f36bf002acb7611b9fcc4595d926ccc9fe629c2dfbae35e765e43de1c99feb21301235bb508bb360c0d
   languageName: node
   linkType: hard
 
