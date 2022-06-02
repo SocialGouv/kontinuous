@@ -44,6 +44,11 @@ module.exports = ({ services }) => {
         gitBranch,
         gitCommit: after,
       }),
+      statusUrl: services.getStatusUrl({
+        repositoryUrl,
+        gitBranch,
+        gitCommit: after,
+      }),
       webhookUri,
     })
     try {

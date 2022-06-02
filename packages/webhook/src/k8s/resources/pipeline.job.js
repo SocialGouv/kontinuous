@@ -14,6 +14,7 @@ module.exports = ({
   gitBranch,
   gitCommit,
   uploadUrl,
+  statusUrl,
   webhookUri,
 }) => ({
   apiVersion: "batch/v1",
@@ -103,6 +104,9 @@ module.exports = ({
               },
               ...(uploadUrl
                 ? [{ name: "KS_BUILD_UPLOAD_URL", value: uploadUrl }]
+                : []),
+              ...(statusUrl
+                ? [{ name: "KS_DEPLOY_STATUS_URL", value: statusUrl }]
                 : []),
             ],
             volumeMounts: [

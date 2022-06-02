@@ -137,7 +137,6 @@ paths:
                       - loading
                       - success
                       - failed
-                      - timeout
                   ok:
                     type: boolean
           description: 'Default description: Success results getOneArtifactsStatus'
@@ -187,7 +186,6 @@ paths:
               type: object
               required:
                 - status
-                - ok
               properties:
                 status:
                   type: string
@@ -195,7 +193,6 @@ paths:
                     - loading
                     - success
                     - failed
-                    - timeout
                 ok:
                   type: boolean
       responses:

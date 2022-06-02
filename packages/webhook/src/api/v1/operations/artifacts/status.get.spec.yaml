@@ -32,7 +32,7 @@ responses:
           properties:
             status:
               type: string
-              enum: [loading,success,failed,timeout]
+              enum: [loading,success,failed]
             ok:
               type: boolean
   404:
