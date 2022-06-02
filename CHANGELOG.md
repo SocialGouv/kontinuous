@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.5](https://github.com/SocialGouv/kontinuous/compare/v1.21.4...v1.21.5) (2022-06-02)
+
+
+### Bug Fixes
+
+* add dep tree plantuml ([fe35b2c](https://github.com/SocialGouv/kontinuous/commit/fe35b2c0ed9c1efd38f3934f858e24c3bce03cab))
+* increase wait ([3146322](https://github.com/SocialGouv/kontinuous/commit/3146322d6e92507863b2f9ab38ae0899c9e0c607))
+* ready to use priorityClassName and sa on jobs ([f38f126](https://github.com/SocialGouv/kontinuous/commit/f38f126bea260b5480d3bfa627abdbaffe12b3b2))
+* up modjo without express monitor ([cb2333b](https://github.com/SocialGouv/kontinuous/commit/cb2333b7f282a62008b13de865e7ccf38c302277))
+* up modjo without express monitor ([2c95df3](https://github.com/SocialGouv/kontinuous/commit/2c95df31e0b20252f4257cf386fee0c93667a70d))
+* up title ([3263c99](https://github.com/SocialGouv/kontinuous/commit/3263c99d2c80eff52eee900980968c1f71a8b8af))
+
 ### [1.21.4](https://github.com/SocialGouv/kontinuous/compare/v1.21.3...v1.21.4) (2022-06-02)
 
 
