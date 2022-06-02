@@ -3,11 +3,15 @@ ARG UBUNTU_VERSION=20.04
 FROM ubuntu:$UBUNTU_VERSION
 
 RUN apt-get update && \
-  apt-get install -y \
+  DEBIAN_FRONTEND=noninteractive apt-get install -yq \
     curl \
     wget \
     git \
+    openjdk-11-jdk \
+    ca-certificates-java \
   && rm -rf /var/lib/apt/lists/*
+
+ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64/
 
 ARG KUBECTL_VERSION=v1.23.4
 ENV KUBECTL_VERSION=$KUBECTL_VERSION
