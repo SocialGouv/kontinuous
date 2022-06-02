@@ -16,10 +16,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 17
       
       - name: write .kontinuous/config.yaml
         shell: bash
@@ -32,4 +28,4 @@ jobs:
         run: yarn lint
 
       - name: Run tests
-        run: yarn test
+        run: NODE_OPTIONS=--experimental-vm-modules yarn test
