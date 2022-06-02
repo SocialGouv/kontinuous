@@ -1,10 +1,11 @@
 // const fs = require("fs-extra")
-const plantuml = require("node-plantuml")
+const remarkUml = require('remark-uml');
 const camelcase = require("lodash.camelcase")
 const ctx = require("~/ctx")
 
-const streamToString = require("~common/utils/stream-to-string")
 const javaExists = require("~common/utils/java-exists")
+
+const remarkImport = import('remark');
 
 const changeGroupPrefix = "kapp.k14s.io/change-group"
 const changeRulePrefix = "kapp.k14s.io/change-rule"
@@ -62,10 +63,16 @@ module.exports = async(manifests)=>{
     return
   }
   
-  const gen = plantuml.generate(uml.join("\n"), {
-    format: "ascii"
-  });
-  const result = await streamToString(gen.out)
+  const content = "@startuml\n"+uml.join("\n")+"\n@enduml"
+
+  const {remark} = await remarkImport
+  let result = await remark()
+    .use(remarkUml, { format: 'txt' })
+    .process(content)
+
+  result = result.toString()
+  result = result.slice(6, result.length-4)
+  
   logger.debug("\n"+result)
   
   // await fs.writeFile(`${config.buildPath}/dependencies.tree.md`, `uml\`\`\`\n${result}\n\`\`\``)
