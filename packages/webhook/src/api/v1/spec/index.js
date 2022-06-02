@@ -6,7 +6,7 @@ async function createApiSpecV1(options = {}) {
   const apiSpec = {
     openapi: "3.0.3",
     info: {
-      title: "Kube-Workflow Webhook API",
+      title: "Kontinuous Webhook API 🚀",
       version: require(`${process.cwd()}/package.json`).version,
       description: "Run workflow in kube from webhook call",
       license: {

@@ -48,7 +48,7 @@ exports[`kube-webhook service expose open-api spec 1`] = `
       name: token
 openapi: 3.0.3
 info:
-  title: Kube-Workflow Webhook API
+  title: Kontinuous Webhook API 🚀
   version: 0.0.0
   description: Run workflow in kube from webhook call
   license:
