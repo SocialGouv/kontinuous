@@ -43,7 +43,8 @@ runs:
 
         WEBHOOK_URI=${{ inputs.webhookUri }}
         
-        KS_GIT_REPOSITORY_URLENCODED=$(echo $GITHUB_REPOSITORY | sed 's/\//\%2f/g')
+        KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
+        KS_GIT_REPOSITORY_URLENCODED=$(echo $KS_GIT_REPOSITORY | sed 's/\//\%2f/g')
 
         echo "::set-output env=$ENV"
 
@@ -51,6 +52,7 @@ runs:
         echo "KS_WEBHOOK_TOKEN=${{ inputs.webhookToken }}">>$GITHUB_ENV
         echo "KS_GIT_BRANCH=$KS_GIT_BRANCH">>$GITHUB_ENV
         echo "KS_GIT_COMMIT=$GITHUB_SHA">>$GITHUB_ENV
+        echo "KS_GIT_REPOSITORY=$KS_GIT_REPOSITORY">>$GITHUB_ENV
         echo "KS_GIT_REPOSITORY_URLENCODED=$KS_GIT_REPOSITORY_URLENCODED">>$GITHUB_ENV
         echo "EVENT_NAME=$EVENT_NAME">>$GITHUB_ENV
 
@@ -60,7 +62,7 @@ runs:
         if [ "$GITHUB_RUN_ATTEMPT" -gt "1" ]; then
           echo "Trigger webhook for rerun attempt #${GITHUB_RUN_ATTEMPT}"
           wget --content-on-error -qO- \
-            --post-data "{\"repositoryUrl\":\"${KS_GIT_REPOSITORY_URLENCODED}\",\"ref\":\"${KS_GIT_BRANCH}\",\"commit\":\"${KS_GIT_COMMIT}\"}" \
+            --post-data "{\"repositoryUrl\":\"${KS_GIT_REPOSITORY}\",\"ref\":\"${KS_GIT_BRANCH}\",\"commit\":\"${KS_GIT_COMMIT}\"}" \
             --header='Content-Type:application/json' \
             "${WEBHOOK_URI}/api/v1/oas/hooks/user?event=${EVENT_NAME}&token=${KS_WEBHOOK_TOKEN}"
         fi
