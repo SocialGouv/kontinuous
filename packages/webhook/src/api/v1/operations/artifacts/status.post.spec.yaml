@@ -37,6 +37,7 @@ requestBody:
             enum: [loading,success,failed]
           ok:
             type: boolean
+            nullable: true
 
 responses:
   200:

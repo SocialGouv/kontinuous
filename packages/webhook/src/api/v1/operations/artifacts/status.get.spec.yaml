@@ -35,6 +35,7 @@ responses:
               enum: [loading,success,failed]
             ok:
               type: boolean
+              nullable: true
   404:
     content:
       application/json:

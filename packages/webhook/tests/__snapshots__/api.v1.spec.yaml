@@ -139,6 +139,7 @@ paths:
                       - failed
                   ok:
                     type: boolean
+                    nullable: true
           description: 'Default description: Success results getOneArtifactsStatus'
         '404':
           content:
@@ -195,6 +196,7 @@ paths:
                     - failed
                 ok:
                   type: boolean
+                  nullable: true
       responses:
         '200':
           content:
