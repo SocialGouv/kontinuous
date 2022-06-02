@@ -10,3 +10,5 @@ degitImage: ghcr.io/socialgouv/kontinuous/degit:latest
 #   jobs:
 #     sharedStorage:
 #       enabled:
+priorityClassName: ""
+serviceAccountName: ""

@@ -130,6 +130,10 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
       ingress: {
         annotations: {},
       },
+      jobsConfig: {
+        // serviceAccountName: "job-account",
+        // priorityClassName: "ci-jobs-priority",
+      },
       // extra: {
       //   jobs: {
       //     sharedStorage: {

@@ -72,8 +72,11 @@ spec:
       {{- end }}
       {{- end }}
     spec:
-      {{- if $run.serviceAccountName }}
-      serviceAccountName: "{{ $run.serviceAccountName }}"
+      {{- if or $run.priorityClassName .Values.priorityClassName .Values.global.jobsConfig.priorityClassName }}
+      priorityClassName: "{{ or $run.priorityClassName .Values.priorityClassName .Values.global.jobsConfig.priorityClassName }}"
+      {{- end }}
+      {{- if or $run.serviceAccountName .Values.serviceAccountName .Values.global.jobsConfig.serviceAccountName }}
+      serviceAccountName: "{{ or $run.serviceAccountName .Values.serviceAccountName .Values.global.jobsConfig.serviceAccountName }}"
       {{- end }}
       restartPolicy: Never
       initContainers:
