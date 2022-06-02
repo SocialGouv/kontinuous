@@ -54,6 +54,14 @@ runs:
         echo "KS_GIT_REPOSITORY_URLENCODED=$KS_GIT_REPOSITORY_URLENCODED">>$GITHUB_ENV
         echo "EVENT_NAME=$EVENT_NAME">>$GITHUB_ENV
 
+    - name: Handle action rerun
+      shell: bash
+      run: |
+        if [ "$GITHUB_RUN_ATTEMPT" -gt "1" ]; then
+          echo "Rerun trigger webhook"
+          wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/hooks/user?repositoryUrl=${KS_GIT_REPOSITORY_URLENCODED}&event=${EVENT_NAME}&ref=${KS_GIT_BRANCH}&commit=${KS_GIT_COMMIT}&token=${KS_WEBHOOK_TOKEN}"
+        fi
+
     - name: Stream logs of kube pipeline
       shell: bash
       run: |
