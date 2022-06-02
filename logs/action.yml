@@ -73,7 +73,7 @@ runs:
     - name: Get status of pipeline
       shell: bash
       run: |
-        set -x
+        echo "wget --content-on-error -q -O deployment-status.json ${WEBHOOK_URI}/api/v1/oas/artifacts/status?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH}&commit=${KS_GIT_COMMIT}&token=${KS_WEBHOOK_TOKEN}" | base64
         wget --content-on-error -q -O deployment-status.json "${WEBHOOK_URI}/api/v1/oas/artifacts/status?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH}&commit=${KS_GIT_COMMIT}&token=${KS_WEBHOOK_TOKEN}"
         DEPLOYMENT_STATUS=$(cat deployment-status.json)
         echo "status: " $(echo "$DEPLOYMENT_STATUS" | jq .status)
