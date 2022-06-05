@@ -36,26 +36,26 @@ Keep as close as possible of battle tested and confident tech paradigms as nativ
     4. [CLI config](#14-cli-config)
     5. [Variables](#15-variables)
 
-2. [Build manifests](#12-)
+2. [Build manifests](#2-build-manifests)
 
-    1. CLI
+    1. [CLI](#21-cli)
 
-    2. Values
+    2. [Values](#22-values)
   
-    3. [Plugins]
-        1. [Types]
-            1. [repository]
-            1. [charts]
-            1. [values compilers]
-            1. [patches]
-            1. [validators]
-        2. [Official plugins]
-            1. [recommended]
-                1. values-compilers
-            1. [fabrique]
-                1. charts
+3. [Plugins](#3-plugins)
+    1. [types](#31-types)
+    2. [repository](#32-repository)
+    3. [charts](#33-charts)
+    4. [values compilers](#34-values-compilers)
+    5. [patches](#35-patches)
+    6. [validators](#36-validators)
+    7. [Official plugins](#37-official-plugins)
+      1. [recommended](#371-recommended)
+        1. values-compilers
+      1. [fabrique]
+        1. charts
 
-3. [Deploy](#12-)
+4. [Deploy](#12-)
     1. CLI
     2. using Github Action
     3. using webhook service
@@ -65,13 +65,13 @@ Keep as close as possible of battle tested and confident tech paradigms as nativ
         2. configure webhook on repository
             1. Github
 
-4. [Development]
+6. [Development]
     1. [tests]
     1. [jobs]
 
-5. [Samples]
+6. [Samples]
 
-6. [Links]
+7. [Links]
 
 # 1. Configuration
 
@@ -279,7 +279,48 @@ Here are the main (titles are config keys):
     Used to create namespace when running `deploy` command and provided as global chart value from plugin [`fabrique/values-compilers/global-defaults`](plugins/fabrique/values-compilers/global-defaults.js) on `build` command.
 
 
-# 2. Plugins
+# 2. Build manifests
+
+## 2.1 CLI
+
+Go into to the repository directory containing `.kontinuous` dir, then run `npx kontinuous build -o`.
+You well see the generated manifests.
+
+You can also redirect it to file like this:
+```sh
+npx kontinuous build -o > manifests.yaml
+```
+
+If you want syntaxic coloration in shell:
+```sh
+npx kontinuous build -so
+```
+
+
+You can debug like this:
+```sh
+npx kontinuous build -d
+```
+
+To see all available options:
+```sh
+npx kontinuous build --help
+```
+
+For development (require helm):
+```
+git clone https://github.com/SocialGouv/kontinuous.git ~/repos/kontinuous
+cd ~/repos/kontinuous
+yarn install
+
+cd ~/repos/my-project
+~/repos/kontinuous/packages/kontinuous/bin/kontinuous build
+```
+
+Obviously you can replace `~/repos/my-project` and `~/repos/kontinuous` by any directory path.
+
+
+## 3 Plugins
 
 
 **Core**
@@ -290,7 +331,7 @@ The core is responsible to merge config, values, templates and process plugins, 
 
 All custom logic can be implemented in plugins. By creating plugins you can covers all uses cases. 
 
-## 2.1 Types
+## 3.1 types
 
 There are differents type of plugins:
 - charts: it's basically all helm charts, you can import from helm repository or declare your own in git repository
@@ -300,6 +341,41 @@ There are differents type of plugins:
 - import: you can combine multiples plugins in on repository using import plugin
 All plugins follow a recursive design pattern, imported `import` plugin can import another repo (example project import fabrique, fabrique import recommended etc...), all charts can have subcharts, that can have subchart etc..., it the same for values-compilers, patches, and validators.
 When you import recursively there is an arborescence autobuild.
+
+## 3.2 repository
+
+A repository plugin is the container for all other plugins types. It's basically a git repository, or subdirectory of a git repository. It can be versioned as a git repo.
+A repository plugin can import other repository plugin and again, dependencies are recursives.
+You can import repository plugins from `.kontinuous/config.yaml` in your project and in `kontinous.yaml` in the plugin directory.
+You have to name the import from the plugin caller using key. This name will be used for subchart values autolinking.
+Charts, values-compilers, patches and validators will be autolinked and implicitely applied recursively. You can control order, or optout by creating index.js in each values-compilers, patches or validators, then you can include from plugins yourself.
+
+example:
+
+`$PROJECT_WORKSPACE/.kontinuous/config.yaml`
+```
+dependencies:
+  fabrique:
+    import: SocialGouv/kontinuous/plugins/fabrique
+```
+
+`SocialGouv/plugins/fabrique/kontinuous.yaml`
+```yaml
+dependencies:
+  recommended:
+    import: SocialGouv/kontinuous/plugins/recommended
+```
+
+`$PROJECT_WORKSPACE/.kontinuous/values.yaml`
+```
+fabrique:
+  recommended:
+    some-chart:
+      aValueToBeConsumedByAppSomeChartOfRecommendedPlugin: Hello World !
+```
+
+## 3.3 
+
 
 # 6. Links
 
