@@ -51,28 +51,20 @@ Keep as close as possible of battle tested and confident tech paradigms as nativ
     5. [patches](#35-patches)
         - 5-bis [post-renderer](#35-bis-post-renderer)
     6. [validators](#36-validators)
+    7. [Offical plugins](#37-official-plugins)
     
 
-4. [Deploy](#4-deploy)
-    1. [CLI](#41-cli)
-    2. [Github Action](#42-github-action)
-    3. [using webhook service](#43-using-webhook-service)
-        1. [deploy service](#431-deploy-service)
-            1. [using helm](#4311-using-helm)
-            2. [using argocd](#4312-using-argocd)
-        2. [configure webhook on repository](#432-configure-webhook-on-repository)
-            1. [Github](#4321-github)
+4. [Samples](#4-samples)
 
-
-5. [Samples]
-    1. [Official plugins](#37-official-plugins)
-        1. [recommended](#371-recommended)
-            1. values-compilers
-        1. [fabrique]
-            1. charts
-    1. [tests]
-    1. [jobs]
-
+5. [Deploy](#5-deploy)
+    1. [CLI](#51-cli)
+    2. [Github Action](#52-github-action)
+    3. [using webhook service](#53-using-webhook-service)
+        1. [deploy service](#531-deploy-service)
+            1. [using helm](#5311-using-helm)
+            2. [using argocd](#5312-using-argocd)
+        2. [configure webhook on repository](#532-configure-webhook-on-repository)
+            1. [Github](#5321-github)
 
 6. [Development](#6-development)
 
@@ -425,7 +417,7 @@ Instead or additionaly to using a `values.yaml`, you can use a project level onl
 ## 3.5 patches
 
 Patches are pure nodeJS file used to modify final `manifests` after compiled by `helm template`. <br>
-Same as `values-compilers` patches has to expose a function using commonJS. This function will receive the kubernetes manifests as an array of object that you can mutate directly or use to produce a new one that you will return. <br>
+Same as `values-compilers` and `validators`, patches has to expose a function using commonJS. This function will receive the kubernetes manifests as an array of object that you can mutate directly or use to produce a new one that you will return. <br>
 Here are the args that the function will receive: `module.exports = (values, options, { config, utils, ctx, logger, values }) => values` <br>
 See [values-compilers doc for details on arguments](#34-values-compilers)
 
@@ -464,13 +456,57 @@ kustomize build .
 ```
 
 
-## 3.6 official plugins
+## 3.6 validators
+Validators are pure nodeJS file used to validate final `manifests` after compiled by `helm template`. <br>
+Same as `values-compilers` and `patches`, validators has to expose a function using commonJS. This function will receive the kubernetes manifests as an array of object. <br>
+When a manifest contain an invalid definition you have to throw an error this way `throw new Error("error message")`.
+
+Here are the args that the function will receive: `module.exports = (manifests, values, options, { config, utils, ctx, logger }) => {}` <br>
+See [values-compilers doc for details on arguments](#34-values-compilers)
 
 
-# 4. Deploy
+
+## 3.7 official plugins
+
+Official plugins are here [plugins/recommended/](plugins/recommended/). They could be put in another git repository, but was kept in main repository for testing purpose.
+
+**[recommended](plugins/recommended/)**
+- [charts/jobs](plugins/recommended/charts/jobs) <br>
+    generic kubernetes jobs chart, used for easily declare CI pipelines from values <br>
+    look at [samples](#4-samples) <br>
+    it require [values-compilers/jobs](plugins/recommended/values-compilers/jobs.js)
+
+- [charts/kontinuous-helpers](plugins/recommended/charts/kontinuous-helpers) <br>
+    common helm [library chart](https://helm.sh/docs/topics/library_charts/), contains helpers helm templating snippets that can be reused in any subchart, helping you to keep your charts DRY
+
+- [patches/namespace](plugins/recommended/patches/namespace.js) <br>
+    Add the current kubernetes namespace from [kontinuous config](#15-variables) to all manifests that doesn't declare explicitly a namespace
+
+- [patches/dns-truncate](plugins/recommended/patches/dns-truncate.js) <br>
+    Truncate and hash all manifests name and ingress domains that is over the max allowed 63 characters.
+
+- [patches/kapp](plugins/recommended/patches/kapp.js) <br>
+
+- [validators/dns-limit](plugins/recommended/validators/dns-limit.js) <br>
+    Check that all manifests name and ingress domains is not over the max allowed 63 characters. This should never fail if you use [patches/dns-truncate](plugins/recommended/patches/dns-truncate.js).
+
+- [validators/needs](plugins/recommended/validators/needs.js) <br>
+
+- [validators/resources-uniqness](plugins/recommended/validators/resources-uniqness.js) <br>
+
+- [values-compilers/dash-instances](plugins/recommended/values-compilers/dash-instances.js) <br>
+
+- [values-compilers/implicit-enabled](plugins/recommended/values-compilers/implicit-enabled.js) <br>
+
+- [values-compilers/jobs](plugins/recommended/values-compilers/jobs.js) <br>
+
+- [values-compilers/unfold-charts](plugins/recommended/values-compilers/unfold-charts.js) <br>
 
 
-# 5. Samples
+# 4. Samples
+
+
+# 5. Deploy
 
 
 # 6. Development
