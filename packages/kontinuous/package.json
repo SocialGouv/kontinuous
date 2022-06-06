@@ -45,7 +45,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "jest tests",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest tests",
     "test:debug": "DEBUG=1 yarn test",
     "test:update-snapshots": "yarn test -u",
     "postinstall": "link-module-alias"

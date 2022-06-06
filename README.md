@@ -47,31 +47,38 @@ Keep as close as possible of battle tested and confident tech paradigms as nativ
     2. [repository](#32-repository)
     3. [charts](#33-charts)
     4. [values compilers](#34-values-compilers)
+        - 4-bis [values.js](#34-bis-valuesjs)
     5. [patches](#35-patches)
+        - 5-bis [post-renderer](#35-bis-post-renderer)
     6. [validators](#36-validators)
-    7. [Official plugins](#37-official-plugins)
-      1. [recommended](#371-recommended)
-        1. values-compilers
-      1. [fabrique]
-        1. charts
+    
 
-4. [Deploy](#12-)
-    1. CLI
-    2. using Github Action
-    3. using webhook service
-        1. deploy service
-            1. using helm
-            2. using argocd
-        2. configure webhook on repository
-            1. Github
+4. [Deploy](#4-deploy)
+    1. [CLI](#41-cli)
+    2. [Github Action](#42-github-action)
+    3. [using webhook service](#43-using-webhook-service)
+        1. [deploy service](#431-deploy-service)
+            1. [using helm](#4311-using-helm)
+            2. [using argocd](#4312-using-argocd)
+        2. [configure webhook on repository](#432-configure-webhook-on-repository)
+            1. [Github](#4321-github)
 
-6. [Development]
+
+5. [Samples]
+    1. [Official plugins](#37-official-plugins)
+        1. [recommended](#371-recommended)
+            1. values-compilers
+        1. [fabrique]
+            1. charts
     1. [tests]
     1. [jobs]
 
-6. [Samples]
 
-7. [Links]
+6. [Development](#6-development)
+
+
+7. [Links](#7-links)
+
 
 # 1. Configuration
 
@@ -79,7 +86,7 @@ Keep as close as possible of battle tested and confident tech paradigms as nativ
 
 Here is a sample of a boilerplate made for `La Fabrique` and that you can merge with files of your project.
 
-### 1.1.1 Fabrique Quickstart
+### 1.1.1 Fabrique quickstart
 
 Run this command in your project to retrieve boilerplate config for kontinuous and corresponding github workflows, then adjust the config in `.kontinuous` folder.
 
@@ -344,11 +351,10 @@ When you import recursively there is an arborescence autobuild.
 
 ## 3.2 repository
 
-A repository plugin is the container for all other plugins types. It's basically a git repository, or subdirectory of a git repository. It can be versioned as a git repo.
-A repository plugin can import other repository plugin and again, dependencies are recursives.
-You can import repository plugins from `.kontinuous/config.yaml` in your project and in `kontinous.yaml` in the plugin directory.
-You have to name the import from the plugin caller using key. This name will be used for subchart values autolinking.
-Charts, values-compilers, patches and validators will be autolinked and implicitely applied recursively. You can control order, or optout by creating index.js in each values-compilers, patches or validators, then you can include from plugins yourself.
+A repository plugin is the container for all other plugins types. It's basically a git repository, or subdirectory of a git repository. It can be versioned as a git repo. <br>
+A repository plugin can import other repository plugin, dependencies are recursives. <br>
+You can import repository plugins from `.kontinuous/config.yaml` in your project and in `kontinous.yaml` in the plugin directory. <br>
+You have to name the import from the plugin caller using key. This name will be used for subchart values autolinking. <br>
 
 example:
 
@@ -374,18 +380,114 @@ fabrique:
       aValueToBeConsumedByAppSomeChartOfRecommendedPlugin: Hello World !
 ```
 
-## 3.3 
+
+`charts`, `values-compilers`, `patches` and `validators` will be autolinked and implicitely applied recursively. You can control order, or optout by creating index.js in each `values-compilers`, `patches` or `validators` directories, then you can include from dependencies plugins yourself. <br>
+See [plugins/fabrique/patches/index.js](plugins/fabrique/patches/index.js) for example.
+
+You can create and use `charts`, `values-compilers`, `patches` and `validators` directories in `.kontinuous` at project level in your project path, or in plugin root path. Project level plugins can consume plugins in the same way the plugins can consume other plugins.
+
+You can add a `package.json` and a `yarn.lock` file at root of your kontinuous plugin directory, kontinuous will install it using `yarn`, so you can use node dependencies in your `values-compilers`, `patches` and `validators`.
+
+## 3.3 charts
+
+Charts plugin are basically helm charts, that can be autolinked from the umbrella (name for the main chart in helm jargon). <br>
+If you doesn't create a `Chart.yaml` in a chart repository, a default on will be created for you by kontinuous. <br>
+A parent chart will be automatically created from project/plugin path, charts that are present in the `charts` directory will be automatically added to this chart as subcharts (`dependencies` key in `Chart.yaml`). <br>
 
 
-# 6. Links
+## 3.4 values-compilers
 
-- [config](docs/config.md)
-- [plugins](docs/plugins/index.md):
-    - [import](docs/plugins/import.md)
-    - [charts](docs/plugins/charts.md)
-    - [values-compilers](docs/plugins/values-compilers.md)
-    - [patches](docs/plugins/patches.md)
-    - [validators](docs/plugins/validators.md)
-- [](docs/.md)
+As it's name suggest it, it's values compilers, that will transform values declared in `values.yaml` files in final values that will be consumed by `helm`. <br>
+Most often values-compilers are here to make values leaner to declare for final dev user. <br>
+Values compilers are pure nodeJS file that have to export commonJS function that will receive values object and has to return values object or undefined. Returned values object will be used if returned, else you can mutate values object directly. <br>
+Here are the args that the function will receive: `module.exports = (values, options, { config, utils, ctx }) => values` <br>
+- `values` is the values object
+- `options` is the options that can be defined at plugin/project level, eg:
+    `$PROJECT_WORKSPACE/.kontinuous/values.yaml`
+    ```
+    dependencies:
+      fabrique:
+        import: SocialGouv/kontinuous/plugins/fabrique
+        values-compilers:
+          global-defaults:
+            options:
+              foo: bar
+    ```
+- `config` is the current [kontinuous config](#15-variables)
+- `utils` is a toolset of helpers function used in kontinuous itself and exposed, all are defined here: [packages/common/utils](packages/common/utils)
+- `ctx` is the async context dependency injection container of kontinous, it can be used to retrieve config or logger, eg: `logger = ctx.get("logger")`
+
+## 3.4-bis values.js
+
+Instead or additionaly to using a `values.yaml`, you can use a project level only values compiler, that will be runned before all others (bu after retrieving and merging values from `values.yaml` files), creating a values.js file.
 
 
+## 3.5 patches
+
+Patches are pure nodeJS file used to modify final `manifests` after compiled by `helm template`. <br>
+Same as `values-compilers` patches has to expose a function using commonJS. This function will receive the kubernetes manifests as an array of object that you can mutate directly or use to produce a new one that you will return. <br>
+Here are the args that the function will receive: `module.exports = (values, options, { config, utils, ctx, logger, values }) => values` <br>
+See [values-compilers doc for details on arguments](#34-values-compilers)
+
+
+NodeJS patches are more flexible than `kustomize` patches that had be abandonned for following reasons:
+- https://github.com/kubernetes-sigs/kustomize/issues/947
+- https://github.com/kubernetes-sigs/kustomize/issues/1493
+If you want to use `kustomize` anyway, the easiest way is to use [`post-renderer`](#35-bis-post-renderer)
+
+
+## 3.5-bis post-renderer
+
+By creating an executable file called `post-renderer` in `.kontinuous` directory at project level, you can declare an helm post-renderer. So you can modify your manifest easily using [`jq`](https://stedolan.github.io/jq/) Eg:
+```sh
+#!/bin/sh
+
+set -e
+
+# load into variable from standard input
+manifest=$(cat)<&0
+
+# arbitrary modify some stuf
+manifest=`echo "$manifest" | jq 'map(select(.kind == "Namespace").metadata.labels.foo = "bar")'`
+
+# output
+echo "$manifest"
+```
+
+Or if you want to use kustomize (not recommended for reasons explained in [patches documentation chapter](#35-patches)
+
+```sh
+#!/bin/sh
+manifest=$(cat)<&0
+echo "$manifest" > base.yaml
+kustomize build .
+```
+
+
+## 3.6 official plugins
+
+
+# 4. Deploy
+
+
+# 5. Samples
+
+
+# 6. Development
+
+
+# 7. Links
+
+## Developers resources
+
+**helm templates**
+
+to enable correct syntax recognition and coloration of yaml helm templates in vscode, enable [Kubernetes extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools)
+
+**learning**:
+
+- [Learn YAML in Y minutes](https://learnxinyminutes.com/docs/yaml/)
+- [JSON to YAML](https://www.json2yaml.com/)
+- [Kubernetes doc](https://kubernetes.io/docs/concepts/)
+- [Helm doc](https://helm.sh/docs/)
+- [Kapp doc](https://carvel.dev/kapp/)

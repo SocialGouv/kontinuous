@@ -28,4 +28,4 @@ jobs:
         run: yarn lint
 
       - name: Run tests
-        run: NODE_OPTIONS=--experimental-vm-modules yarn test
+        run: yarn test
