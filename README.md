@@ -40,7 +40,12 @@ Keep as close as possible of battle tested and confident tech paradigms as nativ
 
     1. [CLI](#21-cli)
 
-    2. [Values](#22-values)
+    2. [Environment](#22-environment)
+    
+    3. [Values](#23-values)
+    
+    4. [Templates](#24-templates)
+    
   
 3. [Plugins](#3-plugins)
     1. [types](#31-types)
@@ -283,7 +288,17 @@ Here are the main (titles are config keys):
 ## 2.1 CLI
 
 Go into to the repository directory containing `.kontinuous` dir, then run `npx kontinuous build -o`.
-You well see the generated manifests.
+You will see the generated manifests.
+
+pre-requisites:
+
+- helm v3 [install guide](https://helm.sh/docs/intro/install/)
+  ```sh
+  curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+  ```
+- node >= 14
+- yarn
+
 
 You can also redirect it to file like this:
 ```sh
@@ -317,6 +332,35 @@ cd ~/repos/my-project
 ```
 
 Obviously you can replace `~/repos/my-project` and `~/repos/kontinuous` by any directory path.
+
+### 2.2 Environment
+
+Environment can be provided using `KS_ENVIRONMENT` environment variable, `--env` option, or is autoselected from `.git`. It will be `prod` on tag ref matching with `v*`, will be `preprod` when branch name is `main` or `master`, otherwise it will be `dev`.
+
+`values.yaml` files and `templates` directories will be merged from `.kontinuous/env/${env}`.
+
+### 2.3 Values
+
+Defaults values are loaded from charts `values.yaml` files
+
+Values are merged from project paths:
+- `.kontinuous/values.yaml` (optional)
+- `.kontinuous/${env}/values.yaml` (optional)
+- `.kontinuous/values.js`  (optional)
+
+Then `values-compilers` will modify values. See also [official plugins](#37-official-plugins).
+
+Some values can contain templating and use others values variables, but only if `tpl` Helm function is used to load value in Helm templates.
+
+### 2.4 Templates
+
+Every yaml file in `.kontinuous/templates` and `.kontinuous/${env}/templates` will be merged with the helm Chart `templates` folder before the build.
+
+All theses files can use the Helm templating syntax (or not if you don't need it, helm template is a superset of yaml).
+
+Both extensions yaml and yml are accepted.
+
+Usually, that's where you put your CronJob, ConfigMap and SealedSecret ressources.
 
 
 ## 3 Plugins
@@ -430,6 +474,8 @@ If you want to use `kustomize` anyway, the easiest way is to use [`post-renderer
 
 ## 3.5-bis post-renderer
 
+Aka *Hack the manifests*
+
 By creating an executable file called `post-renderer` in `.kontinuous` directory at project level, you can declare an helm post-renderer. So you can modify your manifest easily using [`jq`](https://stedolan.github.io/jq/) Eg:
 ```sh
 #!/bin/sh
@@ -473,8 +519,40 @@ Official plugins are here [plugins/recommended/](plugins/recommended/). They cou
 - **[recommended](plugins/recommended/)**
     - [charts/jobs](plugins/recommended/charts/jobs) <br>
         generic kubernetes jobs chart, used for easily declare CI pipelines from values <br>
-        look at [samples](#4-samples) <br>
-        it require [values-compilers/jobs](plugins/recommended/values-compilers/jobs.js)
+        *it require [values-compilers/jobs](plugins/recommended/values-compilers/jobs.js)*
+
+        example `.kontinuous/values.yaml`:
+        ```yaml
+        hasura:
+          needs: [db]
+
+        jobs:
+          runs:
+            db:
+              # use: ./.kontinous/jobs/create-db # local job, defined in project repository
+              # use: https://github.com/SocialGouv/kontinuous/plugins/fabrique/jobs/create-db # degit full url
+              use: SocialGouv/kontinuous/plugins/fabrique/jobs/create-db # degit implicit github
+              with:
+                pgAdminSecretRefName: pg-scaleway
+            seed:
+              needs: [hasura]
+              use: SocialGouv/kontinuous/plugins/fabrique/jobs/seed-db
+              with:
+                seedPath: path/in/repo.sql
+        ```
+
+        see [plugins/fabrique/jobs/create-db/use.yaml](plugins/fabrique/jobs/create-db/use.yaml) for full example.
+        All vues from `runs` keys will be interpolated in the job, but you can also uses all parameters directly, except the `with` parameter that is reserved to be used with `use` and inject variable to the called job.
+
+        All others components can declare dependencies on jobs using the `needs` key, and all jobs can declare depencencies on other jobs and other components too, using instances names.
+
+        Mains jobs parameters are:
+
+        - `use` and `with`: to include job definition from elsewhere, usage can be recursive (job can use job, that can use job etc...)
+        - `image` the docker image file that will run the job (default is debian for now, in future this will be a generic image with almost all needed tooling)
+        - `action` repository (or subfolder in a repository) that will be degitted in mountpoint `/action/` in the job execition
+        - `run` a custom command that will override docker image default run, can be a full bash script or just a call to a command
+        - `checkout` (default `true`), this enable the degit of the repository at current commit in mountpoint `/workspace/` in the job
 
     - [charts/kontinuous-helpers](plugins/recommended/charts/kontinuous-helpers) <br>
         common helm [library chart](https://helm.sh/docs/topics/library_charts/), contains helpers helm templating snippets that can be reused in any subchart, helping you to keep your charts DRY
@@ -499,6 +577,26 @@ Official plugins are here [plugins/recommended/](plugins/recommended/). They cou
 
     - [values-compilers/dash-instances](plugins/recommended/values-compilers/dash-instances.js) <br>
         Compile values key at root level that start with existing chart name, including dependencies chart name, as `${chartName}-arbitrary-instance-name`, to make a chart alias and implement an instance the chart.
+
+        You can declare as many instances as you want of a chart, the name must start with the chart's name suffixed by `-`, eg:
+
+        ```yaml
+        app:
+          host: ozensemble.fr
+          redirectFrom:
+            - "{{ .Values.global.host }}"
+            - www.ozensemble.fr
+
+        app-2nd-instance:
+          probesPath: /healthz
+          envFrom:
+            - secretRef:
+                name: "{{ .Values.global.pgSecretName }}"
+            - secretRef:
+                name: app-sealed-secret
+            - configMapRef:
+                name: app-configmap
+        ```
 
     - [values-compilers/unfold-charts](plugins/recommended/values-compilers/unfold-charts.js) <br>
         Refacto the value tree on the fly matching the root level key name with dependencies subcharts names. Example, if you import `fabrique` kontinous plugin in your project: <br>
@@ -695,6 +793,8 @@ kapp deploy /tmp/manifests.yaml
 Using the webhook service you can be totally independent and self-hosted for running you CI/CD workflow.
 The service can be deployed using an [official Helm chart](packages/webhook/Chart.yaml).
 
+[![schema](./docs/webhook-schema.png)](https://excalidraw.com/#json=gKk7kOn6a9tbmkRZlPige,IQnqqMuiEPgmWbd39GlUYg)
+
 ### 5.3.1. deploy service
 
 #### 5.3.1.1. using [Helm](https://helm.sh/)
@@ -784,6 +884,37 @@ cd /lab/fabrique/sre/template
 ```
 
 You can start to create new plugins or modify kontinous core (no, seriously, don't do that if you don't know what you're doing and you havent really try to find a way to accomplish your goal using plugin, theorically you'll can accomplish almost everything with plugins system).
+
+## Releasing
+
+### Automatic
+
+Execute the [Trigger Release](https://github.com/SocialGouv/kontinuous/actions/workflows/trigger-release.yml) workflow to trigger a new release of actions and helm charts.
+
+### Manual
+
+Releasing follow semantic versioning using [standard-version tool](https://github.com/conventional-changelog/standard-version). Versioning can be trigerred manually on dev machine to not block rapid iteration of master branch code : just run `yarn release` on master branch and CHANGELOG will be feeded with informations from commits using the conventionnal commit standard, then package will be bumped, as the charts versions and commited, then tagged. Then just follow cli instruction that say: `git push --follow-tags`. Then the action will publish automatically new version of npm cli, and charts index.
+
+## Contributing (developments on kontinuous)
+
+### Test
+
+all directories added to [packages/kontinuous/tests/samples](packages/kontinuous/tests/samples) are like a `.kontinuous` directory in a project, it will be automatically tested when you will run `yarn test:kontinuous`. <br>
+To run only one test at once you can run `yarn test:kontinuous -t name-of-my-test`. <br>
+To upgrade snapshots run `yarn test:kontinuous -u`. <br>
+
+### Contribute adding more Helm charts
+
+New charts are welcome in folders [plugins/recommended/charts/](plugins/recommended/charts/) (when universal) and [plugins/fabrique/charts/](plugins/fabrique/charts/) (when more *La Fabrique* opinionated, in doubt, purpose it here).
+More options on existing charts will be carefully design, in case of doubt, or if you don't want to wait, you can hack everything using [post-renderer](#35-bis-post-renderer) or [patches](#35-patches) from your repository. Feel free, then give us feedback to ensure we follow best practices and are preserving project maintainability.
+
+### Contribute adding more plugins
+
+New patches are welcome in folder [plugins/fabrique/patches/](plugins/fabrique/patches/). <br>
+New validators are welcome in folder [plugins/fabrique/validators/](plugins/fabrique/validators/). <br>
+New jobs are welcome in folder [plugins/fabrique/jobs/](plugins/fabrique/jobs/). <br>
+New values-compilers are welcome in folder [plugins/fabrique/values-compilers/](plugins/fabrique/values-compilers/). <br>
+
 
 # 7. Links
 
