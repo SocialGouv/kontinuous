@@ -58,7 +58,7 @@ Keep as close as possible of battle tested and confident tech paradigms as nativ
 
 5. [Deploy](#5-deploy)
     1. [CLI](#51-cli)
-    2. [Github Action](#52-github-action)
+    2. [Github Actions](#52-github-actions)
     3. [using webhook service](#53-using-webhook-service)
         1. [deploy service](#531-deploy-service)
             1. [using helm](#5311-using-helm)
@@ -76,7 +76,7 @@ Keep as close as possible of battle tested and confident tech paradigms as nativ
 
 ## 1.1 Boilerplate
 
-Here is a sample of a boilerplate made for `La Fabrique` and that you can merge with files of your project.
+Here is a sample of a boilerplate made for ***La Fabrique*** and that you can merge with files of your project.
 
 ### 1.1.1 Fabrique quickstart
 
@@ -509,7 +509,7 @@ Official plugins are here [plugins/recommended/](plugins/recommended/). They cou
         will be compiled into: <br>
         ```yaml
         fabrique:
-        app: {}
+          app: {}
         ```
         And if you use `jobs` chart values key of `recommended` plugin that is imported by `fabrique` plugin: <br>
         `.kontinous/values.yaml`
@@ -519,7 +519,7 @@ Official plugins are here [plugins/recommended/](plugins/recommended/). They cou
         will be compiled in: <br>
         ```yaml
         fabrique:
-        recommended:
+          recommended:
             jobs: {}
         ```
         And so, on helm template compilation run, the values of jobs can be consumed by `jobs` chart, that is a subchart of `recommended`, that is itself a subchart of `fabrique`. FYI helm subcharts are natively recursive.
@@ -565,7 +565,7 @@ Official plugins are here [plugins/recommended/](plugins/recommended/). They cou
         add label `cert: "wildcard"` on main namespace so `kubed` will copy wildcard cert on dev environment namespaces.
         
     - [values-compilers/global-defaults](plugins/fabrique/values-compilers/global-defaults.js) <br>
-        All defaults values for "la Fabrique" are defined here.
+        All defaults values for ***La Fabrique*** are defined here.
         Here is available global values that you can consume in every charts's templates:
         - certSecretName
         - repository
@@ -616,6 +616,138 @@ Official plugins are here [plugins/recommended/](plugins/recommended/). They cou
 
 # 5. Deploy
 
+## 5.1. CLI
+
+Run `npx kontinuous deploy` from your project repository. Depending of your infra, you will need to pass options as `--ci-namespace <ns>` (needed at ***La Fabrique*** for example).
+
+for help call:
+`npx kontinuous deploy --help`
+
+You can also generate the manifests and then deploy it using [carvel/kapp](https://carvel.dev/kapp/)
+```sh
+npx kontinuous build -o > /tmp/manifests.yaml
+
+kapp deploy /tmp/manifests.yaml
+  --app label:kontinuous/kapp=name-of-my-app \
+  --logs-all \
+  --dangerous-override-ownership-of-existing-resources \
+  -f /tmp/manifests.yaml
+```
+
+
+## 5.2. Github Actions
+
+- Option 1: **webhook + github logs**  (the recommended one)
+
+    CI/CD pipeline are triggered using the [webhook service](#53-using-webhook-service) and the github CI is only responsible of deployment logging and manifests artifact retrieving and publishing. Retrying an action is trigerring a new pipeline using the webhook endpoint 😉. <br>
+    To do this way you have to configure the [webhook service](#53-using-webhook-service) first, then, if you want to use github (no obligation), you can implement it as [reusable workflow](.github/workflows/workflow-logs.yaml) or [composite action](logs/action.yml):
+
+    reusable workflow (the recommended one):
+    ```yaml
+    jobs:
+      follow-deployment:
+        uses: SocialGouv/kontinuous/.github/workflows/workflow-logs.yaml@master
+        secrets: inherit
+    ```
+
+    see also [plugins/fabrique/boilerplate/.github/workflows](plugins/fabrique/boilerplate/.github/workflows) for [generic setup of ***La Fabrique***](#111-fabrique-quickstart).
+
+
+    composite action:
+    ```yaml
+    jobs:
+      logs:
+        name: logs
+        runs-on: ubuntu-latest
+        steps:
+        - name: kontinuous pipeline
+            uses: SocialGouv/kontinuous/logs@master
+            with:
+              token: ${{ secrets.GITHUB_TOKEN }}
+              webhookToken: ${{ secrets.KUBEWEBHOOK_TOKEN }}
+              webhookUri: https://webhook-${{ secrets.RANCHER_PROJECT_NAME }}.fabrique.social.gouv.fr
+    ```
+
+- Option 2: **rely on Github CI**:
+
+    You can deploy using github actions, running kontinuous deploy in the github CI
+    ```yaml
+    jobs:
+      deploy:
+        name: deploy
+        runs-on: ubuntu-latest
+        steps:
+        - name: kontinuous pipeline
+            uses: SocialGouv/kontinuous@master
+            with:
+              token: ${{ secrets.GITHUB_TOKEN }}
+              kubeconfig: ${{ secrets.KUBECONFIG }}
+              rancherProjectId: ${{ secrets.RANCHER_PROJECT_ID }}
+              rancherProjectName: ${{ secrets.RANCHER_PROJECT_NAME }}
+    ```
+
+## 5.3. using webhook service
+
+Using the webhook service you can be totally independent and self-hosted for running you CI/CD workflow.
+The service can be deployed using an [official Helm chart](packages/webhook/Chart.yaml).
+
+### 5.3.1. deploy service
+
+#### 5.3.1.1. using [Helm](https://helm.sh/)
+
+It require you have predefined these secrets (in the namespace `myproject-ci` in example): <br>
+- kubeconfig-dev
+- kubeconfig-prod
+- kubewebhook
+
+*You can replace secrets names using values key `secretRefNames`.*
+
+Secrets should contains following environment variables:
+- `KUBEWEBHOOK_TOKEN`
+- `KUBECONFIG` and/or `KUBECONFIG_DEV`+`KUBECONFIG_PROD`,
+
+
+To see all avaiables values and defaults see [packages/webhook/values.yaml](packages/webhook/values.yaml).
+
+
+```sh
+npx -y tiged SocialGouv/kontinuous/packages/webhook@master kontinuous-webhook
+
+cd ./kontinuous-webhook
+
+helm template .  \
+    --set ciNamespace=myproject-ci \
+    --set host=webhook-myproject.fabrique.social.gouv.fr \
+    > manifests.yaml
+
+kubectl --namespace myproject-ci apply manifests.yaml
+```
+
+#### 5.3.1.2. using [ArgoCD](https://github.com/argoproj/argo-cd/)
+
+Here is a sample of an [ArgoCD ApplicationSet](https://argo-cd.readthedocs.io/en/stable/roadmap/#applicationset): [plugins/fabrique/samples/argocd/kontinuous-webhooks.yaml](plugins/fabrique/samples/argocd/kontinuous-webhooks.yaml)
+
+### 5.3.2. configure webhook on repository
+
+You should configure webhook event on push event on repository (from github, gitlab (should be tested), gitea (should be dev))
+
+#### 5.3.2.1. Github
+
+In the github repository, go to **settings** -> **Webhooks** -> **Add webhook**
+
+in *Payload URL* field put the endpoint: https://webhook-myproject.fabrique.social.gouv.fr/api/v1/oas/hooks/github?event=pushed
+
+In *Which events would you like to trigger this webhook?*
+select "Just the push event".
+
+Check the *Active* checkbox.
+
+Then click to *Add webhook* and you're good for **dev** env.
+
+For **prod**, do the same but replace endpoint by: https://webhook-myproject.fabrique.social.gouv.fr/api/v1/oas/hooks/github?event=created <br>
+and after selecting *Let me select individual events*, ensure you have all unchecked (uncheck *push* event that is generally checked by default) and check *Branch or tag creation*
+
+If you have to configure for many repo and you want to make it automatically and *infra as code*, here is a terraform snippet sample: [plugins/fabrique/samples/terraform/rancher-config-setup/github.tf](plugins/fabrique/samples/terraform/rancher-config-setup/github.tf)
 
 # 6. Development
 
