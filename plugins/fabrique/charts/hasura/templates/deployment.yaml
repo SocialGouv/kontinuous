@@ -21,7 +21,7 @@ spec:
     spec:
       initContainers:
       {{- if .Values.waitForPostgres }}
-        {{- include "init-containers.wait-for-postgres" . | nindent 8 }}
+        {{- include "fabrique-helpers.init-containers.wait-for-postgres" . | nindent 8 }}
       {{- end }}
       containers:
         - image: "{{ or .Values.registry .Values.global.registry }}{{ if (or .Values.imageProject .Values.global.imageProject) }}{{ (print "/" (or .Values.imageProject .Values.global.imageProject)) }}{{ end }}/{{ or .Values.imageRepository .Values.global.imageRepository }}{{ if .Values.imagePackage }}{{ (print "/" .Values.imagePackage) }}{{ end }}:{{ or .Values.imageTag .Values.global.imageTag }}"

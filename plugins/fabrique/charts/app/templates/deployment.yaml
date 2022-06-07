@@ -21,7 +21,7 @@ spec:
     spec:
       initContainers:
       {{- if .Values.waitForPostgres }}
-        {{- include "init-containers.wait-for-postgres" . | nindent 8 }}
+        {{- include "fabrique-helpers.init-containers.wait-for-postgres" . | nindent 8 }}
       {{- end }}
       volumes:
         {{- if gt (len .Values.volumes) 0 }}

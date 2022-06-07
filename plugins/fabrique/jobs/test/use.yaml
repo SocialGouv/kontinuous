@@ -1,7 +1,0 @@
-runs:
-  - name: test
-    checkout: false
-    action: false
-    run: |
-      DOCKER_IMAGE={{ tpl $.with.dockerImage $ }}
-      echo "my DOCKER_IMAGE is '$DOCKER_IMAGE' !!!"

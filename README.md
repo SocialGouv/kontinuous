@@ -470,38 +470,146 @@ See [values-compilers doc for details on arguments](#34-values-compilers)
 
 Official plugins are here [plugins/recommended/](plugins/recommended/). They could be put in another git repository, but was kept in main repository for testing purpose.
 
-**[recommended](plugins/recommended/)**
-- [charts/jobs](plugins/recommended/charts/jobs) <br>
-    generic kubernetes jobs chart, used for easily declare CI pipelines from values <br>
-    look at [samples](#4-samples) <br>
-    it require [values-compilers/jobs](plugins/recommended/values-compilers/jobs.js)
+- **[recommended](plugins/recommended/)**
+    - [charts/jobs](plugins/recommended/charts/jobs) <br>
+        generic kubernetes jobs chart, used for easily declare CI pipelines from values <br>
+        look at [samples](#4-samples) <br>
+        it require [values-compilers/jobs](plugins/recommended/values-compilers/jobs.js)
 
-- [charts/kontinuous-helpers](plugins/recommended/charts/kontinuous-helpers) <br>
-    common helm [library chart](https://helm.sh/docs/topics/library_charts/), contains helpers helm templating snippets that can be reused in any subchart, helping you to keep your charts DRY
+    - [charts/kontinuous-helpers](plugins/recommended/charts/kontinuous-helpers) <br>
+        common helm [library chart](https://helm.sh/docs/topics/library_charts/), contains helpers helm templating snippets that can be reused in any subchart, helping you to keep your charts DRY
 
-- [patches/namespace](plugins/recommended/patches/namespace.js) <br>
-    Add the current kubernetes namespace from [kontinuous config](#15-variables) to all manifests that doesn't declare explicitly a namespace
+    - [patches/namespace](plugins/recommended/patches/namespace.js) <br>
+        Add the current kubernetes namespace from [kontinuous config](#15-variables) to all manifests that doesn't declare explicitly a namespace
 
-- [patches/dns-truncate](plugins/recommended/patches/dns-truncate.js) <br>
-    Truncate and hash all manifests name and ingress domains that is over the max allowed 63 characters.
+    - [patches/dns-truncate](plugins/recommended/patches/dns-truncate.js) <br>
+        Truncate and hash all manifests name and ingress domains that is over the max allowed 63 characters.
 
-- [patches/kapp](plugins/recommended/patches/kapp.js) <br>
+    - [patches/kapp](plugins/recommended/patches/kapp.js) <br>
+        Add `fallback-on-update` and `fallback-on-replace` update and create strategies, and `disable-original` to fix kapp issue [#472](https://github.com/vmware-tanzu/carvel-kapp/issues/472)
 
-- [validators/dns-limit](plugins/recommended/validators/dns-limit.js) <br>
-    Check that all manifests name and ingress domains is not over the max allowed 63 characters. This should never fail if you use [patches/dns-truncate](plugins/recommended/patches/dns-truncate.js).
+    - [validators/dns-limit](plugins/recommended/validators/dns-limit.js) <br>
+        Check that all manifests name and ingress domains is not over the max allowed 63 characters. This should never fail if you use [patches/dns-truncate](plugins/recommended/patches/dns-truncate.js).
 
-- [validators/needs](plugins/recommended/validators/needs.js) <br>
+    - [validators/needs](plugins/recommended/validators/needs.js) <br>
+        Check that there is no delcared as required resource that doesn't exists in the manifests.
 
-- [validators/resources-uniqness](plugins/recommended/validators/resources-uniqness.js) <br>
+    - [validators/resources-uniqness](plugins/recommended/validators/resources-uniqness.js) <br>
+        Check that there is no duplicate resource name for the same kind.
 
-- [values-compilers/dash-instances](plugins/recommended/values-compilers/dash-instances.js) <br>
+    - [values-compilers/dash-instances](plugins/recommended/values-compilers/dash-instances.js) <br>
+        Compile values key at root level that start with existing chart name, including dependencies chart name, as `${chartName}-arbitrary-instance-name`, to make a chart alias and implement an instance the chart.
 
-- [values-compilers/implicit-enabled](plugins/recommended/values-compilers/implicit-enabled.js) <br>
+    - [values-compilers/unfold-charts](plugins/recommended/values-compilers/unfold-charts.js) <br>
+        Refacto the value tree on the fly matching the root level key name with dependencies subcharts names. Example, if you import `fabrique` kontinous plugin in your project: <br>
+        `.kontinous/values.yaml`
+        ```yaml
+        app: {}
+        ```
+        will be compiled into: <br>
+        ```yaml
+        fabrique:
+        app: {}
+        ```
+        And if you use `jobs` chart values key of `recommended` plugin that is imported by `fabrique` plugin: <br>
+        `.kontinous/values.yaml`
+        ```yaml
+        jobs: {}
+        ```
+        will be compiled in: <br>
+        ```yaml
+        fabrique:
+        recommended:
+            jobs: {}
+        ```
+        And so, on helm template compilation run, the values of jobs can be consumed by `jobs` chart, that is a subchart of `recommended`, that is itself a subchart of `fabrique`. FYI helm subcharts are natively recursive.
 
-- [values-compilers/jobs](plugins/recommended/values-compilers/jobs.js) <br>
+    - [values-compilers/implicit-enabled](plugins/recommended/values-compilers/implicit-enabled.js) <br>
+        Compile declared charts's values to implicit set `enabled` to `true`.
 
-- [values-compilers/unfold-charts](plugins/recommended/values-compilers/unfold-charts.js) <br>
+    - [values-compilers/jobs](plugins/recommended/values-compilers/jobs.js) <br>
+        Compile jobs simple values to be used by final chart, it includes the downloading of reusable `jobs` (using the `use` keyword) and merging of values from the imported job.
+        
+- **[fabrique](plugins/fabrique/)**
+    - [charts/rancher-namespace](plugins/fabrique/charts/rancher-namespace) <br>
+        add a namespace configured with provided with rancherProjectId for [rancher](https://rancher.com/) right management. Enabled by default when `chart` kontinuous config is not provided.
 
+    - [charts/security-policies](plugins/fabrique/charts/security-policies) <br>
+        add some default kube security policies. Enabled by default when `chart` kontinuous config is not provided.
+
+    - [charts/app](plugins/fabrique/charts/app) <br>
+        Generic chart that can be used to deploy differents apps targeting a docker image, as frontend, backend etc...
+        
+    - [charts/hasura](plugins/fabrique/charts/hasura) <br>
+        deploy an instance of [hasura](https://hasura.io/)
+    
+    - [charts/pgweb](plugins/fabrique/charts/pgweb) <br>
+        deploy an instance of [pgweb](https://github.com/sosedoff/pgweb)
+    
+    - [charts/maildev](plugins/fabrique/charts/maildev) <br>
+        deploy an instance of [maildev](https://github.com/maildev/maildev)
+    
+    - [charts/metabase](plugins/fabrique/charts/metabase) <br>
+        deploy an instance of [metabase](https://www.metabase.com/)
+
+    - [charts/oauth2-proxy](plugins/fabrique/charts/oauth2-proxy) <br>
+        deploy an instance of [oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy)
+
+    - [charts/redis](plugins/fabrique/charts/redis) <br>
+        deploy an instance of [redis](https://redis.io/)
+        
+    - [patches/cert-letsencrypt-issuer](plugins/fabrique/patches/cert-letsencrypt-issuer) <br>
+        add annotation to use `letsencrypt-prod` cluster-issuer using `cert-manager` on `ingress` to prod manifests.
+    
+    - [patches/cert-wildcard](plugins/fabrique/patches/cert-wildcard) <br>
+        add label `cert: "wildcard"` on main namespace so `kubed` will copy wildcard cert on dev environment namespaces.
+        
+    - [values-compilers/global-defaults](plugins/fabrique/values-compilers/global-defaults.js) <br>
+        All defaults values for "la Fabrique" are defined here.
+        Here is available global values that you can consume in every charts's templates:
+        - certSecretName
+        - repository
+        - repositoryName
+        - isDev
+        - isProd
+        - isPreProd
+        - ttl
+        - namespace
+        - rancherProjectId
+        - pgSecretName
+        - pgDatabase
+        - pgUser
+        - host
+        - domain
+        - registry
+        - imageProject
+        - imageRepository
+        - imageTag
+        - branchSlug
+        - branchSlug32
+        - gitBranch
+        - ciNamespace
+        - sha
+        - shortSha
+        - env
+    
+    - [jobs/build](plugins/fabrique/jobs/build) <br>
+        Build `docker` image from project Dockerfile and directory using `kaniko`.
+    
+    - [jobs/create-db](plugins/fabrique/jobs/create-db) <br>
+        Create DB and associated new user for review branches using pg admin user.
+    
+    - [jobs/drop-db](plugins/fabrique/jobs/drop-db) <br>
+        Drop a DB using pg admin user. Can be used before create-db to keep a pristine db on review branch.
+
+    - [jobs/pg-restore](plugins/fabrique/jobs/pg-restore) <br>
+        Restore a DB from backup using pg_restore.
+    
+    - [jobs/psql](plugins/fabrique/jobs/psql) <br>
+        Run a sql file on DB from project repository.
+
+    - [jobs/seed-db](plugins/fabrique/jobs/seed-db) <br>
+        Run a sql file on DB from project repository using pg secret from target namespace.
 
 # 4. Samples
 
