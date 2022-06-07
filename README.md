@@ -613,6 +613,10 @@ Official plugins are here [plugins/recommended/](plugins/recommended/). They cou
 
 # 4. Samples
 
+There are many sample here [packages/kontinuous/tests/samples](packages/kontinuous/tests/samples). <br>
+Except in case there is a `.kontinuous` file here, the directories are assumed to be the `.kontinuous` dir of projects. The `.env` files are only consumed in tests and will be ignored by kontinuous in real build and deployments.
+
+More samples will be added on demand when feedback for this current documentation will reveal that it's not easy to find and understand how to do a thing. Don't hesitate to ask for enrichment of this section 😉.
 
 # 5. Deploy
 
