@@ -751,6 +751,35 @@ If you have to configure for many repo and you want to make it automatically and
 
 # 6. Development
 
+```sh
+git clone git@github.com:SocialGouv/kontinuous.git
+cd kontinuous
+yarn
+```
+
+Setup [global config as in doc example](#13-global-config); I attire your attention on the fact that you can override remote repo to local directory using `links` key.
+
+to run tests:
+
+```sh
+# to run all tests
+yarn test
+
+# to run kontinuous cli tests
+yarn test:kontinuous
+
+# to run webhook tests
+yarn test:webhook
+```
+
+To run manifests build command in repo:
+
+```sh
+cd /lab/fabrique/sre/template
+/lab/fabrique/sre/kontinuous/packages/kontinuous/bin/kontinuous build -so -d
+```
+
+You can start to create new plugins or modify kontinous core (no, seriously, don't do that if you don't know what you're doing and you havent really try to find a way to accomplish your goal using plugin, theorically you'll can accomplish almost everything with plugins system).
 
 # 7. Links
 
