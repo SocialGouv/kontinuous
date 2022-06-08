@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.9](https://github.com/SocialGouv/kontinuous/compare/v1.21.8...v1.21.9) (2022-06-08)
+
+
+### Bug Fixes
+
+* tests esm ([eb3a104](https://github.com/SocialGouv/kontinuous/commit/eb3a104426ca1bd14b34296f3462a5b0113b082d))
+* tests node version ([dfe6977](https://github.com/SocialGouv/kontinuous/commit/dfe6977769af93ce23c697d32893edd28594d169))
+
 ### [1.21.8](https://github.com/SocialGouv/kontinuous/compare/v1.21.7...v1.21.8) (2022-06-02)
 
 
