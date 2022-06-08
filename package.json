@@ -36,7 +36,8 @@
     "@modjo-plugins/microservice-oapi": "latest",
     "@modjo-plugins/oa": "latest",
     "@modjo-plugins/shutdown-handlers": "latest",
-    "tar": "^6.1.9"
+    "tar": "^6.1.9",
+    "multer": "^1.4.4-lts.1"
   },
   "scripts": {
     "precommit": "lint-staged",
