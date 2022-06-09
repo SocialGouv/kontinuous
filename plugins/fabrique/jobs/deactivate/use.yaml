@@ -1,0 +1,18 @@
+runs:
+  drop-db:
+    use: SocialGouv/kontinuous/plugins/fabrique/jobs/drop-db
+    with:
+      pgAdminSecretRefName: "{{ $.with.pgAdminSecretRefName }}"
+      database: "{{ $.with.database }}"
+
+  delete-namespace:
+    checkout: false
+    image: bitnami/kubectl:latest
+    user: 1001
+    envFrom:
+      - secretRef:
+          name: kubeconfig
+    vars:
+      NAMESPACE: "{{ $.Values.global.namespace }}"
+    run: |
+      kubectl delete namespace "$NAMESPACE"
