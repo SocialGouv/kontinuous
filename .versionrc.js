@@ -44,7 +44,7 @@ for (const dir of packageDirs){
   }
 }
 
-const getChartsRecursive = (dir = "packages", list=[])=>{
+const getChartsRecursive = (dir, list=[])=>{
   const chartList = getDirectoriesSync(dir)
   list.push(...chartList.map(c => fs.realpathSync(`${dir}/${c}`)))
   for (const chartName of chartList){
@@ -55,11 +55,16 @@ const getChartsRecursive = (dir = "packages", list=[])=>{
   }
   return list
 }
-const charts = getChartsRecursive()
+const charts = getChartsRecursive("plugins")
 bumpFiles.push(...charts.map((chartDir) => ({
   filename: `${chartDir}/Chart.yaml`,
   updater: chartsUpdater
 })))
+
+bumpFiles.push({
+  filename: `packages/webhook/Chart.yaml`,
+  updater: chartsUpdater
+})
 
 module.exports = {
   bumpFiles,

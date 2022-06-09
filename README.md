@@ -37,13 +37,9 @@ Keep as close as possible of battle tested and confident tech paradigms as nativ
     5. [Variables](#15-variables)
 
 2. [Build manifests](#2-build-manifests)
-
     1. [CLI](#21-cli)
-
     2. [Environment](#22-environment)
-    
     3. [Values](#23-values)
-    
     4. [Templates](#24-templates)
     
   
@@ -57,7 +53,6 @@ Keep as close as possible of battle tested and confident tech paradigms as nativ
         - 5-bis [post-renderer](#35-bis-post-renderer)
     6. [validators](#36-validators)
     7. [Offical plugins](#37-official-plugins)
-    
 
 4. [Samples](#4-samples)
 
@@ -72,7 +67,6 @@ Keep as close as possible of battle tested and confident tech paradigms as nativ
             1. [Github](#5321-github)
 
 6. [Development](#6-development)
-
 
 7. [Links](#7-links)
 
