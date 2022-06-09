@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.1](https://github.com/SocialGouv/kontinuous/compare/v1.22.0...v1.22.1) (2022-06-09)
+
+
+### Bug Fixes
+
+* default chart dependencies condition ([584d875](https://github.com/SocialGouv/kontinuous/commit/584d8756728f14ea771ed41d7ee46f884833a259))
+* default chart values ([230fea4](https://github.com/SocialGouv/kontinuous/commit/230fea4adc67a3a57dd26192d0181df01c8bf249))
+
 ## [1.22.0](https://github.com/SocialGouv/kontinuous/compare/v1.21.10...v1.22.0) (2022-06-09)
 
 
