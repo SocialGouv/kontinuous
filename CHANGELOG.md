@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.10](https://github.com/SocialGouv/kontinuous/compare/v1.21.9...v1.21.10) (2022-06-09)
+
+
+### Bug Fixes
+
+* boilerplate add main ([f170481](https://github.com/SocialGouv/kontinuous/commit/f17048165364bc61379d3874323a42932d231fb6))
+* webhook ad deleted event ([677af4b](https://github.com/SocialGouv/kontinuous/commit/677af4b14a4e6e95f67c64db7fbebf74923bc60b))
+
 ### [1.21.9](https://github.com/SocialGouv/kontinuous/compare/v1.21.8...v1.21.9) (2022-06-08)
 
 
