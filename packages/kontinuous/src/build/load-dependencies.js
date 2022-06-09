@@ -60,12 +60,11 @@ const registerSubcharts = async (chart, chartsDirName, target)=>{
 
 const buildChartFile = async (target, name)=>{
   const chartFile = `${target}/Chart.yaml`
-  let chart
+  const chart = createChart(name)
   if(await fs.pathExists(chartFile)){
-    chart = yaml.load(await fs.readFile(chartFile))
+    const extendChart = yaml.load(await fs.readFile(chartFile))
+    Object.assign(chart, extendChart)
     chart.name = name
-  } else {
-    chart = createChart(name)
   }
   await registerSubcharts(chart, dependenciesDirName, target)
   await fs.ensureDir(target)
