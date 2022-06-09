@@ -547,6 +547,7 @@ Official plugins are here [plugins/recommended/](plugins/recommended/). They cou
         - `action` repository (or subfolder in a repository) that will be degitted in mountpoint `/action/` in the job execition
         - `run` a custom command that will override docker image default run, can be a full bash script or just a call to a command
         - `checkout` (default `true`), this enable the degit of the repository at current commit in mountpoint `/workspace/` in the job
+        - `if` condition to include the job, can contain variables from values
 
     - [charts/kontinuous-helpers](plugins/recommended/charts/kontinuous-helpers) <br>
         common helm [library chart](https://helm.sh/docs/topics/library_charts/), contains helpers helm templating snippets that can be reused in any subchart, helping you to keep your charts DRY
