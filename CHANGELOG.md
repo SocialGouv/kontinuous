@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.22.0](https://github.com/SocialGouv/kontinuous/compare/v1.21.10...v1.22.0) (2022-06-09)
+
+
+### Features
+
+* add job deactivate ([cbd17d8](https://github.com/SocialGouv/kontinuous/commit/cbd17d840554eda6b0bb2338fad5f9fa51e95ed4))
+* job if ([1d37c8b](https://github.com/SocialGouv/kontinuous/commit/1d37c8bed4f90bae2fd19028df75017be05c4153))
+* open in editor ([411d5ee](https://github.com/SocialGouv/kontinuous/commit/411d5ee33a5b29ee55af462feb6b81f93eff5e52))
+
+
+### Bug Fixes
+
+* add bin symlink to root path ([9173392](https://github.com/SocialGouv/kontinuous/commit/9173392ee8c6a44e6eb1970534ac9d4abea6de47))
+* boilerplate add review deactivate sample ([f3e54a4](https://github.com/SocialGouv/kontinuous/commit/f3e54a45d32257fdc1995ccc0c531004f21884ff))
+* versionrc charts ([0d6fc0f](https://github.com/SocialGouv/kontinuous/commit/0d6fc0f257e45cccdb0cde51d6f60472676aa9b3))
+
 ### [1.21.10](https://github.com/SocialGouv/kontinuous/compare/v1.21.9...v1.21.10) (2022-06-09)
 
 
