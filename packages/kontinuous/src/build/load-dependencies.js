@@ -65,6 +65,12 @@ const buildChartFile = async (target, name)=>{
     const extendChart = yaml.load(await fs.readFile(chartFile))
     Object.assign(chart, extendChart)
     chart.name = name
+    for(const dep of chart.dependencies){
+      if(dep.condition){
+        continue
+      }
+      dep.condition = `${dep.alias || dep.name}.enabled`
+    }
   }
   await registerSubcharts(chart, dependenciesDirName, target)
   await fs.ensureDir(target)
