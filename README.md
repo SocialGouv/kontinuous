@@ -328,7 +328,7 @@ cd ~/repos/kontinuous
 yarn install
 
 cd ~/repos/my-project
-~/repos/kontinuous/packages/kontinuous/bin/kontinuous build
+~/repos/kontinuous/kontinuous build
 ```
 
 Obviously you can replace `~/repos/my-project` and `~/repos/kontinuous` by any directory path.
