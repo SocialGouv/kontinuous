@@ -6279,6 +6279,7 @@ __metadata:
     jest: "npm:^27.5.1"
     jest-specific-snapshot: "npm:^5.0.0"
     js-yaml: "npm:^4.1.0"
+    launch-editor: "npm:^2.4.0"
     link-module-alias: "npm:^1.2.0"
     lodash.camelcase: "npm:^4.3.0"
     lodash.clonedeep: "npm:^4.5.0"
@@ -6305,6 +6306,16 @@ __metadata:
   dependencies:
     package-json: "npm:^6.3.0"
   checksum: 212765a6cc0f19dd0e56957046edc5df33bce7eadf3fcdb0aef079f15c838a645a7ea09064fc9be8a43888a91dfa90f9dfd9adeb658c2635cce70cc9a7c4991a
+  languageName: node
+  linkType: hard
+
+"launch-editor@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "launch-editor@npm:2.4.0"
+  dependencies:
+    picocolors: "npm:^1.0.0"
+    shell-quote: "npm:^1.6.1"
+  checksum: 020854b95a2fe90079e78289c20b82fdfd5a697bffef5988a0499cbb21be218bf110541ceb972293a215fbcc8ab402adb3a37e7ebd58a2e6f4cd56c03233d0cc
   languageName: node
   linkType: hard
 
@@ -9122,6 +9133,13 @@ __metadata:
   version: 3.0.0
   resolution: "shebang-regex@npm:3.0.0"
   checksum: 6be1588a86ed74d05481d09a6ef6a8db44550fda9785ae08c3df06717abc2e5e9a11804b1d0ac9b0641870c5ebf545e18c8d348bc105ba09227e6a32415ea1d6
+  languageName: node
+  linkType: hard
+
+"shell-quote@npm:^1.6.1":
+  version: 1.7.3
+  resolution: "shell-quote@npm:1.7.3"
+  checksum: 223de5ed640ca7d5e81b65568065e8be615aa3e87fb3d9e52bca1f99f8832a97244440ead5e2154c392d9b44e5a67468693ad0637654947de2868fa53f744af8
   languageName: node
   linkType: hard
 

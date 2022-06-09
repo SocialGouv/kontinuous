@@ -21,7 +21,8 @@ module.exports = (program) =>
     .addOption(options.branch)
     .addOption(options.commit)
     .addOption(options.upload)
-    .option("--output, -o", "enable direct output of manifest")
+    .option("--output, -o", "enable direct output of manifests")
+    .option("--open", "open manifests file with default application")
     .option(
       "--syntax-highlight, -s",
       "enable syntax highlight for yaml when used with -o"

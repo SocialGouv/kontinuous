@@ -1,3 +1,4 @@
+const launch = require('launch-editor')
 const { highlight, fromJson: themeFromJson } = require("cli-highlight")
 
 const logger = require("~common/utils/logger")
@@ -37,6 +38,10 @@ module.exports = async (options) => {
   const { uploadUrl } = config
   if(uploadUrl){
     await upload({ uploadUrl, manifests })
+  }
+
+  if(options.open){
+    launch(manifestsFile)
   }
 
   return result
