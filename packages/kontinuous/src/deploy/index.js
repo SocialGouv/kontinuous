@@ -32,11 +32,6 @@ module.exports = async (options) => {
     kubeconfigContext,
   } = config
 
-  if (options.X) {
-    console.log(config)
-    return
-  }
-
   const statusSet = async (status, ok = null) => {
     if (statusUrl) {
       await setStatus({ url: statusUrl, status, ok })
@@ -46,13 +41,6 @@ module.exports = async (options) => {
   await statusSet("loading")
 
   try {
-    logger.info(`kubeconfig context: "${kubeconfigContext}"`)
-
-    await writeKubeconfig([
-      "KUBECONFIG",
-      `KUBECONFIG_${environment.toUpperCase()}`,
-    ])
-
     let manifestsFile = options.F
     let manifests
     if (!manifestsFile) {
@@ -62,6 +50,18 @@ module.exports = async (options) => {
     } else {
       manifests = await fs.readFile(manifestsFile, { encoding: "utf-8" })
     }
+
+    if (options.X) {
+      console.log(config)
+      return
+    }
+
+    logger.info(`kubeconfig context: "${kubeconfigContext}"`)
+
+    await writeKubeconfig([
+      "KUBECONFIG",
+      `KUBECONFIG_${environment.toUpperCase()}`,
+    ])
     const allManifests = yaml.loadAll(manifests)
 
     const charts = config.chart?.join(",")
