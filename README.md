@@ -375,7 +375,7 @@ There are differents type of plugins:
 - values-compilers: transform user defined values to be consummed by charts
 - patches: patches applies to final generated kubernetes manifests
 - validators: make custom conformity checks on final generated kubernetes manifests
-- import: you can combine multiples plugins in on repository using import plugin
+- import: you can combine multiples plugins in one repository using import plugin
 All plugins follow a recursive design pattern, imported `import` plugin can import another repo (example project import fabrique, fabrique import recommended etc...), all charts can have subcharts, that can have subchart etc..., it the same for values-compilers, patches, and validators.
 When you import recursively there is an arborescence autobuild.
 
