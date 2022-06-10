@@ -17,6 +17,14 @@ module.exports = (program) =>
     .addOption(options.statusUrl)
     .addOption(options.rancherProjectId)
     .addOption(options.ciNamespace)
+    .addOption(options.webhookToken)
+    .addOption(options.webhookBaseDomain)
+    .addOption(options.webhookUriPattern)
+    .addOption(options.webhookUri)
+    .option(
+      "--on-webhook, -x",
+      "trigger built manifests deploying via webhook endpoint"
+    )
     .option(
       "--file, -f <file>",
       "select a manifests yaml file, default will build one"

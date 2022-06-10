@@ -1,14 +1,13 @@
 const { spawn } = require("child_process")
 const fs = require("fs-extra")
 const yaml = require("~common/utils/yaml")
-const retry = require("async-retry")
 
 const logger = require("~common/utils/logger")
-const asyncShell = require("~common/utils/async-shell")
 const timeLogger = require("~common/utils/time-logger")
 const slug = require("~common/utils/slug")
 const parseCommand = require("~common/utils/parse-command")
 const writeKubeconfig = require("~common/utils/write-kubeconfig")
+const kubeEnsureNamespace = require("~common/utils/kube-ensure-namespace")
 const build = require("~/build")
 const { setStatus } = require("~/status")
 
@@ -24,7 +23,19 @@ module.exports = async (options) => {
 
   const config = ctx.require("config")
 
-  const { environment, gitRepositoryName: repositoryName, statusUrl } = config
+  const {
+    environment,
+    gitRepositoryName: repositoryName,
+    statusUrl,
+    // webhookUri,
+    // webhookToken: token,
+    kubeconfigContext,
+  } = config
+
+  if (options.X) {
+    console.log(config)
+    return
+  }
 
   const statusSet = async (status, ok = null) => {
     if (statusUrl) {
@@ -35,42 +46,12 @@ module.exports = async (options) => {
   await statusSet("loading")
 
   try {
-    let kubeconfigContext =
-      options.kubeconfigContext || process.env.KS_KUBECONFIG_CONTEXT
-    if (!kubeconfigContext) {
-      const { kubeconfigContextNoDetect } = options
-      if (kubeconfigContextNoDetect) {
-        kubeconfigContext = await asyncShell("kubectl config current-context")
-      } else if (environment === "prod") {
-        kubeconfigContext = "prod"
-      } else {
-        kubeconfigContext = "dev"
-      }
-    }
     logger.info(`kubeconfig context: "${kubeconfigContext}"`)
 
     await writeKubeconfig([
       "KUBECONFIG",
       `KUBECONFIG_${environment.toUpperCase()}`,
     ])
-
-    const getRancherProjectId = async (ciNamespace) => {
-      logger.info(
-        `option rancher-project-id not provided, getting from cluster using ci-namespace "${ciNamespace}"`
-      )
-      const json = await asyncShell(
-        `kubectl --context ${kubeconfigContext} get ns ${ciNamespace} -o json`
-      )
-      const data = JSON.parse(json)
-      return data.metadata.annotations["field.cattle.io/projectId"]
-    }
-
-    const { ciNamespace } = config
-
-    if (!process.env.RANCHER_PROJECT_ID) {
-      process.env.RANCHER_PROJECT_ID =
-        options.rancherProjectId || (await getRancherProjectId(ciNamespace))
-    }
 
     let manifestsFile = options.F
     let manifests
@@ -81,93 +62,7 @@ module.exports = async (options) => {
     } else {
       manifests = await fs.readFile(manifestsFile, { encoding: "utf-8" })
     }
-
     const allManifests = yaml.loadAll(manifests)
-
-    const namespaceManifest = allManifests.find(
-      (manifest) =>
-        manifest.kind === "Namespace" &&
-        manifest.metadata?.annotations?.["kontinuous/mainNamespace"]
-    )
-
-    const namespace = namespaceManifest.metadata.name
-
-    const checkNamespaceIsAvailable = async () => {
-      logger.debug("checking if namespace is available")
-      try {
-        const json = await asyncShell(
-          `kubectl --context ${kubeconfigContext} get ns ${namespace} -o json`
-        )
-        const data = JSON.parse(json)
-        return data?.status.phase === "Active"
-      } catch (_e) {
-        // do nothing
-      }
-      return false
-    }
-
-    const createNamespace = async () => {
-      if (await checkNamespaceIsAvailable()) {
-        return
-      }
-
-      try {
-        let ignoreError
-        await new Promise((resolve, reject) => {
-          logger.info("creating namespace")
-          const proc = spawn(
-            "kubectl",
-            [`--context=${kubeconfigContext}`, "create", "-f", "-"],
-            {
-              encoding: "utf-8",
-            }
-          )
-
-          proc.stdin.write(JSON.stringify(namespaceManifest))
-
-          proc.stdout.on("data", (data) => {
-            process.stdout.write(data.toString())
-          })
-          proc.stderr.on("data", (data) => {
-            const message = data.toString()
-            if (message.includes("AlreadyExists")) {
-              ignoreError = true
-              logger.info("namespace already exists")
-            } else {
-              logger.warn(message)
-            }
-          })
-          proc.on("close", (code) => {
-            if (code === 0 || ignoreError) {
-              resolve()
-            } else {
-              reject(
-                new Error(`creating namespace failed with exit code ${code}`)
-              )
-            }
-          })
-
-          proc.stdin.end()
-        })
-      } catch (err) {
-        logger.error(err)
-        throw err
-      }
-
-      await retry(
-        async () => {
-          if (!(await checkNamespaceIsAvailable())) {
-            throw Error("namespace is not available")
-          }
-        },
-        {
-          retries: 10,
-          factor: 1,
-          minTimeout: 1000,
-          maxTimeout: 3000,
-        }
-      )
-    }
 
     const charts = config.chart?.join(",")
 
@@ -214,14 +109,27 @@ module.exports = async (options) => {
       }
     }
 
-    logger.info(`ensure namespace "${namespace}" is active`)
-    await createNamespace()
+    const rancherNamespacesManifests = allManifests.filter(
+      (manifest) =>
+        manifest.kind === "Namespace" &&
+        manifest.metadata?.annotations?.["field.cattle.io/projectId"]
+    )
 
-    logger.info(`deploying ${repositoryName} to ${namespace}`)
+    await Promise.all(
+      rancherNamespacesManifests.map((manifest) =>
+        kubeEnsureNamespace(kubeconfigContext, manifest)
+      )
+    )
+
+    const namespaces = rancherNamespacesManifests
+      .map((manifest) => manifest.metadata.name)
+      .join(",")
+
+    logger.info(`deploying ${repositoryName} to ${namespaces}`)
     await deployWithKapp()
 
     elapsed.end({
-      label: `🚀 kontinuous pipeline ${repositoryName} ${environment} to "${namespace}"`,
+      label: `🚀 kontinuous pipeline ${repositoryName} ${environment} to "${namespaces}"`,
     })
 
     await statusSet("success", true)

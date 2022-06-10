@@ -5,11 +5,15 @@ const patches = [
 
   require("./cert-letsencrypt-issuer"),
   require("./cert-wildcard"),
+  require("./rancher-project-id"),
 ]
 
 module.exports = async (manifests, options, context, scope) => {
   for (const patch of patches) {
-    manifests = await patch(manifests, options, context, scope)
+    const result = await patch(manifests, options, context, scope)
+    if (result) {
+      manifests = result
+    }
   }
   return manifests
 }

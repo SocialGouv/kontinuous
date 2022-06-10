@@ -11,6 +11,7 @@ const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const cleanGitRef = require("~common/utils/clean-git-ref")
 const refEnv = require("~common/utils/ref-env")
 const yaml = require("~common/utils/yaml")
+const asyncShell = require("~common/utils/async-shell")
 
 const deepmerge = require("~common/utils/deepmerge")
 const ctx = require("~/ctx")
@@ -90,6 +91,9 @@ module.exports = async (opts = {}) => {
     },
     gitRepositoryName: {
       defaultFunction: (config) => path.basename(config.gitRepository),
+    },
+    repositoryName: {
+      defaultFunction: (config) => config.gitRepositoryName,
     },
   }
 
@@ -176,6 +180,23 @@ module.exports = async (opts = {}) => {
       env: "KS_CI_NAMESPACE",
       defaultFunction: (config) =>
         config.repositoryName ? `${config.repositoryName}-ci` : null,
+    },
+    kubeconfigContext: {
+      option: "kubeconfigContext",
+      env: "KS_KUBECONFIG_CONTEXT",
+      defaultFunction: async (config, { options }) => {
+        const { environment } = config
+        const { kubeconfigContextNoDetect } = options
+        let kubeconfigContext
+        if (kubeconfigContextNoDetect) {
+          kubeconfigContext = await asyncShell("kubectl config current-context")
+        } else if (environment === "prod") {
+          kubeconfigContext = "prod"
+        } else {
+          kubeconfigContext = "dev"
+        }
+        return kubeconfigContext
+      },
     },
   }
 
