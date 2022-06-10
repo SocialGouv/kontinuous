@@ -1,8 +1,8 @@
 const { spawn } = require("child_process")
 const retry = require("async-retry")
-const asyncShell = require("~common/utils/async-shell")
+const asyncShell = require("./async-shell")
 
-const defaultLogger = require("~common/utils/logger")
+const defaultLogger = require("./logger")
 
 const checkNamespaceIsAvailable = async (
   kubeconfigContext,
