@@ -269,6 +269,56 @@ paths:
       summary: addOneArtifactsUpload
     parameters: []
     description: /artifacts/upload
+  /hooks/custom:
+    post:
+      security:
+        - token:
+            - webhook
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                env:
+                  type: string
+                  enum:
+                    - dev
+                    - prod
+                manifests:
+                  type: string
+                  format: binary
+              required:
+                - manifests
+                - env
+            encoding:
+              manifests:
+                contentType: text/x-yaml, text/yaml, application/x-yaml, application/yaml
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+          description: 'Default description: HTTP 202 for addOneHooksCustom'
+        '204':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+          description: 'Default description: HTTP 204 for addOneHooksCustom'
+      operationId: addOneHooksCustom
+      description: 'Default description: Insert mutation: addOneHooksCustom'
+      summary: addOneHooksCustom
+    parameters: []
+    description: /hooks/custom
   /hooks/github:
     post:
       security:
