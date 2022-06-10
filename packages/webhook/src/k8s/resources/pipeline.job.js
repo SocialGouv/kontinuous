@@ -16,6 +16,7 @@ module.exports = ({
   uploadUrl,
   statusUrl,
   webhookUri,
+  initContainers = [],
 }) => ({
   apiVersion: "batch/v1",
   kind: "Job",
@@ -43,27 +44,26 @@ module.exports = ({
       },
       spec: {
         restartPolicy: "Never",
-        ...(checkout
-          ? {
-              initContainers: [
-                {
-                  name: "checkout",
-                  image: checkoutImage,
-                  command: [
-                    "sh",
-                    "-c",
-                    `degit ${repositoryUrl}#${gitCommit} /workspace`,
-                  ],
-                  volumeMounts: [
-                    {
-                      name: "workspace",
-                      mountPath: "/workspace",
-                    },
-                  ],
-                },
-              ],
-            }
-          : {}),
+        initContainers: [
+          ...(checkout
+            ? {
+                name: "checkout",
+                image: checkoutImage,
+                command: [
+                  "sh",
+                  "-c",
+                  `degit ${repositoryUrl}#${gitCommit} /workspace`,
+                ],
+                volumeMounts: [
+                  {
+                    name: "workspace",
+                    mountPath: "/workspace",
+                  },
+                ],
+              }
+            : {}),
+          ...initContainers,
+        ],
         containers: [
           {
             name: "pipeline",

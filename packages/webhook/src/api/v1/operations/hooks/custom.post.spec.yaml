@@ -1,0 +1,40 @@
+security: 
+  - token: ["webhook"]
+
+requestBody:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          env:
+            type: string
+            enum: [dev, prod]
+          manifests:
+            type: string
+            format: binary
+        required:
+          - manifests
+          - env
+      encoding:
+        manifests:
+          contentType: text/x-yaml, text/yaml, application/x-yaml, application/yaml
+
+responses:
+  202:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+  204:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
