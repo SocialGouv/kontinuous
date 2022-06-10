@@ -463,6 +463,7 @@ See [values-compilers doc for details on arguments](#34-values-compilers)
 NodeJS patches are more flexible than `kustomize` patches that had be abandonned for following reasons:
 - https://github.com/kubernetes-sigs/kustomize/issues/947
 - https://github.com/kubernetes-sigs/kustomize/issues/1493
+
 If you want to use `kustomize` anyway, the easiest way is to use [`post-renderer`](#35-bis-post-renderer)
 
 
@@ -486,7 +487,7 @@ manifest=`echo "$manifest" | jq 'map(select(.kind == "Namespace").metadata.label
 echo "$manifest"
 ```
 
-Or if you want to use kustomize (not recommended for reasons explained in [patches documentation chapter](#35-patches)
+Or if you want to use kustomize (not recommended for reasons explained in [patches documentation chapter](#35-patches))
 
 ```sh
 #!/bin/sh
