@@ -1,6 +1,6 @@
 module.exports =
   ({ services }) =>
-  async ({ env, manifests }) => {
+  async ({ env, hash, manifests, repositoryUrl }) => {
     const initContainers = [
       {
         name: "write-custom-manifest",
@@ -26,9 +26,9 @@ EOF
     return services.pipeline({
       eventName: "custom",
       kubecontext: env,
-      ref: null,
+      ref: hash,
       after: null,
-      repositoryUrl: null,
+      repositoryUrl,
       args: ["deploy"],
       checkout: false,
       initContainers,

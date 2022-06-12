@@ -55,6 +55,9 @@ const slug = (mixed, options = {}) => {
 
   const parts = []
   for (const part of mixed) {
+    if (!part) {
+      continue
+    }
     let name
     let pml
     if (Array.isArray(part)) {

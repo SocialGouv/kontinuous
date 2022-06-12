@@ -74,7 +74,7 @@ afterAll(async () => {
   await Promise.all([lightship.shutdown(), httpServer.close()])
 })
 
-describe("kube-webhook service", () => {
+describe("kontinuous webhook service", () => {
   it(`expose open-api spec`, async () => {
     const agent = await getAgent()
 

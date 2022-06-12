@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`kube-webhook service expose open-api spec 1`] = `
+exports[`kontinuous webhook service expose open-api spec 1`] = `
 "components:
   parameters: {}
   schemas:

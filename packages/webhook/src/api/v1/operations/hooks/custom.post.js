@@ -3,11 +3,11 @@ const { reqCtx } = require("@modjo-plugins/express/ctx")
 module.exports = function ({ services: { custom } }) {
   return [
     async (req, res) => {
-      const { env } = req.body
+      const { env, hash, repositoryUrl } = req.query
       const [manifests] = req.files
 
       try {
-        await custom({ env, manifests })
+        await custom({ env, hash, repositoryUrl, manifests })
       } catch (err) {
         const logger = reqCtx.require("logger")
         logger.error(err)

@@ -1,6 +1,27 @@
 security: 
   - token: ["webhook"]
 
+
+parameters:
+  - in: query
+    name: env
+    schema:
+      type: string
+      enum: [dev, prod]
+    required: true
+  - in: query
+    name: hash
+    schema:
+      type: string
+      format: md5
+    required: true
+  - in: query
+    name: repositoryUrl
+    schema:
+      type: string
+      example: https://github.com/SocialGouv/sample-next-app.git
+    required: false
+
 requestBody:
   required: true
   content:
@@ -8,15 +29,11 @@ requestBody:
       schema:
         type: object
         properties:
-          env:
-            type: string
-            enum: [dev, prod]
           manifests:
             type: string
             format: binary
         required:
           - manifests
-          - env
       encoding:
         manifests:
           contentType: text/x-yaml, text/yaml, application/x-yaml, application/yaml

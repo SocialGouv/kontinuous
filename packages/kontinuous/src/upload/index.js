@@ -4,7 +4,7 @@ const FormData = require("form-data")
 const logger = require("~common/utils/logger")
 
 module.exports = async ({ uploadUrl, manifests }) => {
-  logger.info("Uploading manifests")
+  logger.info("uploading manifests artifact")
 
   const form = new FormData()
   form.append("manifests", manifests, {
@@ -20,7 +20,7 @@ module.exports = async ({ uploadUrl, manifests }) => {
       headers: form.getHeaders(),
     })
     logger.debug(response.data)
-    logger.info("Uploaded manifests")
+    logger.info("uploaded manifests artifact")
     return true
   } catch (error) {
     if (error.response) {

@@ -34,4 +34,4 @@ ENV NODE_ENV=development
 
 USER 1000:1000
 
-CMD [ "/bin/sh", "-c", "yarn workspace kube-webhook dev" ]
+CMD [ "/bin/sh", "-c", "yarn workspace ~webhook dev" ]

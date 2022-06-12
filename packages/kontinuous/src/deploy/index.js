@@ -1,7 +1,11 @@
 const { spawn } = require("child_process")
-const fs = require("fs-extra")
-const yaml = require("~common/utils/yaml")
+const crypto = require("crypto")
 
+const fs = require("fs-extra")
+const axios = require("axios")
+const FormData = require("form-data")
+
+const yaml = require("~common/utils/yaml")
 const logger = require("~common/utils/logger")
 const timeLogger = require("~common/utils/time-logger")
 const slug = require("~common/utils/slug")
@@ -16,29 +20,17 @@ const ctx = require("~/ctx")
 module.exports = async (options) => {
   ctx.provide()
 
-  const elapsed = timeLogger({
-    logger,
-    logLevel: "info",
-  })
-
   const config = ctx.require("config")
 
   const {
     environment,
+    gitRepositoryUrl,
     gitRepositoryName: repositoryName,
     statusUrl,
-    // webhookUri,
-    // webhookToken: token,
+    webhookUri,
+    webhookToken: token,
     kubeconfigContext,
   } = config
-
-  const statusSet = async (status, ok = null) => {
-    if (statusUrl) {
-      await setStatus({ url: statusUrl, status, ok })
-    }
-  }
-
-  await statusSet("loading")
 
   try {
     let manifestsFile = options.F
@@ -52,8 +44,49 @@ module.exports = async (options) => {
     }
 
     if (options.X) {
-      console.log(config)
+      const manifestsHash = crypto.createHmac("md5", manifests).digest("hex")
+
+      logger.info(
+        `deploying via webhook ${repositoryName} manifests#md5:${manifestsHash}`
+      )
+
+      logger.info("uploading custom manifests to deploy")
+
+      const form = new FormData()
+      form.append("manifests", manifests, {
+        filename: "manifests.yaml",
+        contentType: "text/x-yaml",
+      })
+
+      const url = `${webhookUri}/api/v1/oas/hooks/custom?env=${environment}&token=${token}&hash=${manifestsHash}&repositoryUrl=${gitRepositoryUrl}`
+      try {
+        const response = await axios.request({
+          method: "POST",
+          url,
+          data: form,
+          headers: form.getHeaders(),
+        })
+        logger.debug(response.data)
+        logger.info("uploaded custom manifests to deploy")
+      } catch (error) {
+        if (error.response) {
+          logger.error(`upload error: status ${error.response.status}`)
+          logger.error(error.response.data)
+          logger.debug(error.response.headers)
+          logger.error(error.request)
+        } else if (error.request) {
+          logger.error(`upload error: request`)
+          logger.error(error.request)
+        } else {
+          logger.error(`upload error: ${error.message}`)
+        }
+      }
+
       return
+    }
+
+    if (statusUrl) {
+      await setStatus({ url: statusUrl, status: "loading", ok: null })
     }
 
     logger.info(`kubeconfig context: "${kubeconfigContext}"`)
@@ -121,20 +154,37 @@ module.exports = async (options) => {
       )
     )
 
-    const namespaces = rancherNamespacesManifests
-      .map((manifest) => manifest.metadata.name)
-      .join(",")
+    const namespaces = rancherNamespacesManifests.map(
+      (manifest) => manifest.metadata.name
+    )
 
-    logger.info(`deploying ${repositoryName} to ${namespaces}`)
+    let namespacesLabel = ""
+    if (namespaces.length > 0) {
+      namespacesLabel = `to namespace${
+        namespaces.length > 1 ? "s" : ""
+      } "${namespaces.join('","')}"`
+    }
+
+    logger.info(`deploying ${repositoryName} ${namespacesLabel}`)
+
+    const elapsed = timeLogger({
+      logger,
+      logLevel: "info",
+    })
+
     await deployWithKapp()
 
     elapsed.end({
-      label: `🚀 kontinuous pipeline ${repositoryName} ${environment} to "${namespaces}"`,
+      label: `🚀 kontinuous pipeline ${repositoryName} ${environment} ${namespacesLabel}`,
     })
 
-    await statusSet("success", true)
+    if (statusUrl) {
+      await setStatus({ url: statusUrl, status: "success", ok: true })
+    }
   } catch (err) {
-    await statusSet("failed", false)
+    if (statusUrl) {
+      await setStatus({ url: statusUrl, status: "failed", ok: false })
+    }
     throw err
   }
 }
