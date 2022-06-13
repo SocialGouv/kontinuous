@@ -4,12 +4,12 @@ const { ctx } = require("@modjo-plugins/core")
 const cleanGitRef = require("~common/utils/clean-git-ref")
 const parseCommand = require("~common/utils/parse-command")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
-const logger = require("~common/utils/logger")
 const asyncShell = require("~common/utils/async-shell")
 const refKubecontext = require("~common/utils/ref-kubecontext")
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = function () {
+  const logger = ctx.require("logger")
   const { jobNamespace } = ctx.require("config.project")
   const readyToLogPhases = ["Running", "Succeeded", "Failed"]
   const checkJobExists = async ({ jobName, commit, kubecontext }) => {

@@ -1,9 +1,11 @@
 const { spawn } = require("child_process")
 
+const { ctx } = require("@modjo-plugins/core")
+
 const parseCommand = require("~common/utils/parse-command")
-const logger = require("~common/utils/logger")
 
 module.exports = async (manifest, kubecontext) => {
+  const logger = ctx.require("logger")
   const [cmd, args] = parseCommand(
     `kubectl --context ${kubecontext} apply -f -`
   )

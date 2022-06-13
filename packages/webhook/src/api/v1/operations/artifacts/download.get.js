@@ -4,7 +4,6 @@ const fs = require("fs-extra")
 const cleanGitRef = require("~common/utils/clean-git-ref")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const slug = require("~common/utils/slug")
-// const logger = require("~common/utils/logger")
 
 const artifactPath = "/artifacts"
 
