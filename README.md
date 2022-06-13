@@ -652,13 +652,13 @@ Official plugins are here [plugins/recommended/](plugins/recommended/). They cou
     - [charts/redis](plugins/fabrique/charts/redis) <br>
         deploy an instance of [redis](https://redis.io/)
         
-    - [patches/cert-letsencrypt-issuer](plugins/fabrique/patches/cert-letsencrypt-issuer) <br>
+    - [patches/cert-letsencrypt-issuer](plugins/fabrique/patches/cert-letsencrypt-issuer.js) <br>
         add annotation to use `letsencrypt-prod` cluster-issuer using `cert-manager` on `ingress` to prod manifests.
     
-    - [patches/cert-wildcard](plugins/fabrique/patches/cert-wildcard) <br>
+    - [patches/cert-wildcard](plugins/fabrique/patches/cert-wildcard.js) <br>
         add label `cert: "wildcard"` on main namespace so `kubed` will copy wildcard cert on dev environment namespaces.
     
-    - [patches/rancher-project-id](plugins/fabrique/patches/rancher-project-id) <br>
+    - [patches/rancher-project-id](plugins/fabrique/patches/rancher-project-id.js) <br>
         if namespace containing an empty `field.cattle.io/projectId` annotation, and `ciNamespace` config is defined (usually when `deploy` command is used), it will try to retrieve rancher project id from the `ciNamespace` to fill it.
         
     - [values-compilers/global-defaults](plugins/fabrique/values-compilers/global-defaults.js) <br>
