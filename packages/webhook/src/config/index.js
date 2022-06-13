@@ -7,6 +7,8 @@ module.exports = async function createConfig() {
 
   await writeKubeconfig(["KUBECONFIG", "KUBECONFIG_DEV", "KUBECONFIG_PROD"])
 
+  const token = process.env.KUBEWEBHOOK_TOKEN
+
   const config = {
     project: {
       jobNamespace,
@@ -14,8 +16,11 @@ module.exports = async function createConfig() {
         uri: oasUri(),
       },
       webhook: {
-        token: process.env.KUBEWEBHOOK_TOKEN,
+        token,
       },
+    },
+    httpLogger: {
+      hideSecrets: [token],
     },
   }
 
