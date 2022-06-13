@@ -112,6 +112,7 @@ module.exports = async (options) => {
         event: "custom",
         repository: gitRepositoryUrl,
         branch: jobHash,
+        commit: "0000000000000000000000000000000000000000",
       })
 
       return

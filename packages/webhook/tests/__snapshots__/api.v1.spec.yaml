@@ -348,6 +348,7 @@ paths:
               - pushed
               - created
               - deleted
+              - custom
           required: true
       requestBody:
         required: true
@@ -462,6 +463,7 @@ paths:
               - pushed
               - created
               - deleted
+              - custom
           required: true
       requestBody:
         required: true
@@ -521,6 +523,7 @@ paths:
               - pushed
               - created
               - deleted
+              - custom
           required: true
         - in: query
           name: repository

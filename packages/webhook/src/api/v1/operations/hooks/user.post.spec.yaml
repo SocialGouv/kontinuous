@@ -6,7 +6,7 @@ parameters:
     name: event
     schema:
       type: string
-      enum: [pushed, created, deleted]
+      enum: [pushed, created, deleted, custom]
     required: true
  
 
