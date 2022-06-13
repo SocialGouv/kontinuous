@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.1](https://github.com/SocialGouv/kontinuous/compare/v1.23.0...v1.23.1) (2022-06-13)
+
+
+### Bug Fixes
+
+* on-webhook custom hook wip ([1e2718b](https://github.com/SocialGouv/kontinuous/commit/1e2718bc6e39df3e321f9119e0c1bb02575df106))
+
 ## [1.23.0](https://github.com/SocialGouv/kontinuous/compare/v1.22.1...v1.23.0) (2022-06-13)
 
 
