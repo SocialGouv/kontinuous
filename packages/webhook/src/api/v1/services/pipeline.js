@@ -23,6 +23,7 @@ module.exports = ({ services }) => {
     const repository = repositoryFromGitUrl(repositoryUrl)
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)
+    const gitCommit = after || "0000000000000000000000000000000000000000"
 
     const jobName = pipelineJobName({
       eventName,
@@ -32,24 +33,20 @@ module.exports = ({ services }) => {
 
     const webhookUri = ctx.require("config.project.oas.uri")
     logger.info(
-      `event ${eventName} triggering workflow on ${repository}#${ref} ${after}`
+      `event ${eventName} triggering workflow on ${repository}#${ref} ${gitCommit}`
     )
 
-    const statusUrl = after
-      ? services.getStatusUrl({
-          repositoryUrl,
-          gitBranch,
-          gitCommit: after,
-        })
-      : null
+    const statusUrl = services.getStatusUrl({
+      repositoryUrl,
+      gitBranch,
+      gitCommit,
+    })
 
-    const uploadUrl = after
-      ? services.getUploadUrl({
-          repositoryUrl,
-          gitBranch,
-          gitCommit: after,
-        })
-      : null
+    const uploadUrl = services.getUploadUrl({
+      repositoryUrl,
+      gitBranch,
+      gitCommit,
+    })
 
     const manifest = pipelineJob({
       namespace: jobNamespace,
@@ -59,7 +56,7 @@ module.exports = ({ services }) => {
       checkout,
       repositoryUrl,
       gitBranch,
-      gitCommit: after,
+      gitCommit,
       uploadUrl,
       statusUrl,
       webhookUri,
