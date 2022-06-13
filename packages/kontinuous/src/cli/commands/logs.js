@@ -21,7 +21,7 @@ module.exports = (program) =>
       new Option(
         "event",
         `pipeline event, default to "created" on version tag, "pushed" else`
-      ).choices(["pushed", "deleted", "created"])
+      ).choices(["pushed", "deleted", "created", "custom"])
     )
     .action(async (_opts, command) => {
       const opts = command.optsWithGlobals()

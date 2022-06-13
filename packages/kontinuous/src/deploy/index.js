@@ -12,10 +12,12 @@ const slug = require("~common/utils/slug")
 const parseCommand = require("~common/utils/parse-command")
 const writeKubeconfig = require("~common/utils/write-kubeconfig")
 const kubeEnsureNamespace = require("~common/utils/kube-ensure-namespace")
-const build = require("~/build")
-const { setStatus } = require("~/status")
+const validateMd5 = require("~common/utils/validate-md5")
 
 const ctx = require("~/ctx")
+const build = require("~/build")
+const logs = require("~/logs")
+const { setStatus } = require("~/status")
 
 module.exports = async (options) => {
   ctx.provide()
@@ -46,8 +48,19 @@ module.exports = async (options) => {
     if (options.X) {
       const manifestsHash = crypto.createHmac("md5", manifests).digest("hex")
 
+      let jobHash
+      if (options.jobHash) {
+        if (validateMd5(options.jobHash)) {
+          jobHash = options.jobHash
+        } else {
+          jobHash = crypto.createHmac("md5", options.jobHash).digest("hex")
+        }
+      } else {
+        jobHash = manifestsHash
+      }
+
       logger.info(
-        `deploying via webhook ${repositoryName} manifests#md5:${manifestsHash}`
+        `deploying via webhook ${repositoryName} job#${jobHash} manifests#md5:${manifestsHash}`
       )
 
       logger.info("uploading custom manifests to deploy")
@@ -58,7 +71,7 @@ module.exports = async (options) => {
         contentType: "text/x-yaml",
       })
 
-      const url = `${webhookUri}/api/v1/oas/hooks/custom?env=${environment}&token=${token}&hash=${manifestsHash}&repositoryUrl=${gitRepositoryUrl}`
+      const url = `${webhookUri}/api/v1/oas/hooks/custom?env=${environment}&token=${token}&hash=${jobHash}&repositoryUrl=${gitRepositoryUrl}`
       try {
         const response = await axios.request({
           method: "POST",
@@ -81,6 +94,17 @@ module.exports = async (options) => {
           logger.error(`upload error: ${error.message}`)
         }
       }
+
+      if (options.onWebhookDetach) {
+        return
+      }
+
+      await logs({
+        ...options,
+        event: "custom",
+        repository: gitRepositoryUrl,
+        branch: jobHash,
+      })
 
       return
     }

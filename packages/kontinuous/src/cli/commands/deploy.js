@@ -26,6 +26,14 @@ module.exports = (program) =>
       "trigger built manifests deploying via webhook endpoint"
     )
     .option(
+      "--on-webhook-detach",
+      "don't follow logs from webhook custom manifest deploy, no effect if not used with --on-webhook/-x"
+    )
+    .option(
+      "--job-hash <jobHash>",
+      "job hash, default to generated manifests hash"
+    )
+    .option(
       "--file, -f <file>",
       "select a manifests yaml file, default will build one"
     )

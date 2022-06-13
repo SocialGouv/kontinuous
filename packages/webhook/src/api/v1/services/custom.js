@@ -29,7 +29,7 @@ EOF
       ref: hash,
       after: null,
       repositoryUrl,
-      args: ["deploy"],
+      args: ["deploy", "-f", "/workspace/manifests.yaml"],
       checkout: false,
       initContainers,
     })
