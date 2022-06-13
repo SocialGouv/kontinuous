@@ -46,22 +46,24 @@ module.exports = ({
         restartPolicy: "Never",
         initContainers: [
           ...(checkout
-            ? {
-                name: "checkout",
-                image: checkoutImage,
-                command: [
-                  "sh",
-                  "-c",
-                  `degit ${repositoryUrl}#${gitCommit} /workspace`,
-                ],
-                volumeMounts: [
-                  {
-                    name: "workspace",
-                    mountPath: "/workspace",
-                  },
-                ],
-              }
-            : {}),
+            ? [
+                {
+                  name: "checkout",
+                  image: checkoutImage,
+                  command: [
+                    "sh",
+                    "-c",
+                    `degit ${repositoryUrl}#${gitCommit} /workspace`,
+                  ],
+                  volumeMounts: [
+                    {
+                      name: "workspace",
+                      mountPath: "/workspace",
+                    },
+                  ],
+                },
+              ]
+            : []),
           ...initContainers,
         ],
         containers: [

@@ -3,6 +3,7 @@ const crypto = require("crypto")
 
 const fs = require("fs-extra")
 const axios = require("axios")
+const qs = require("qs")
 const FormData = require("form-data")
 
 const yaml = require("~common/utils/yaml")
@@ -45,7 +46,7 @@ module.exports = async (options) => {
       manifests = await fs.readFile(manifestsFile, { encoding: "utf-8" })
     }
 
-    if (options.X) {
+    if (options.W) {
       const manifestsHash = crypto.createHmac("md5", manifests).digest("hex")
 
       let jobHash
@@ -71,7 +72,14 @@ module.exports = async (options) => {
         contentType: "text/x-yaml",
       })
 
-      const url = `${webhookUri}/api/v1/oas/hooks/custom?env=${environment}&token=${token}&hash=${jobHash}&repositoryUrl=${gitRepositoryUrl}`
+      const query = qs.stringify({
+        env: environment,
+        token,
+        hash: jobHash,
+        repositoryUrl: gitRepositoryUrl,
+      })
+
+      const url = `${webhookUri}/api/v1/oas/hooks/custom?${query}`
       try {
         const response = await axios.request({
           method: "POST",

@@ -22,12 +22,12 @@ module.exports = (program) =>
     .addOption(options.webhookUriPattern)
     .addOption(options.webhookUri)
     .option(
-      "--on-webhook, -x",
+      "--on-webhook, -w",
       "trigger built manifests deploying via webhook endpoint"
     )
     .option(
       "--on-webhook-detach",
-      "don't follow logs from webhook custom manifest deploy, no effect if not used with --on-webhook/-x"
+      "don't follow logs from webhook custom manifest deploy, no effect if not used with --on-webhook/-w"
     )
     .option(
       "--job-hash <jobHash>",
