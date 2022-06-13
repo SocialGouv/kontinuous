@@ -41,11 +41,15 @@ module.exports = async (manifests, options, { config, logger, utils }) => {
   } else if (process.env.RANCHER_PROJECT_ID) {
     rancherProjectId = process.env.RANCHER_PROJECT_ID
   } else {
-    const json = await asyncShell(
-      `kubectl --context ${kubeconfigContext} get ns ${ciNamespace} -o json`
-    )
-    const data = JSON.parse(json)
-    rancherProjectId = data.metadata.annotations["field.cattle.io/projectId"]
+    try {
+      const json = await asyncShell(
+        `kubectl --context ${kubeconfigContext} get ns ${ciNamespace} -o json`
+      )
+      const data = JSON.parse(json)
+      rancherProjectId = data.metadata.annotations["field.cattle.io/projectId"]
+    } catch (e) {
+      logger.warn("unable to retrieve missing rancher projectId from cluster")
+    }
   }
 
   for (const manifest of rancherNsMissingProjectId) {
