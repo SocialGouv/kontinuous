@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.23.0](https://github.com/SocialGouv/kontinuous/compare/v1.22.1...v1.23.0) (2022-06-13)
+
+
+### Features
+
+* add gh token provider script ([e351559](https://github.com/SocialGouv/kontinuous/commit/e351559172727bf07c84fb4b0b12c56c874e1c4a))
+
+
+### Bug Fixes
+
+* decouple rancherProjectId + on-webhook wip ([9447b3d](https://github.com/SocialGouv/kontinuous/commit/9447b3d9d016741bc3fe76a842cfab93feb914c8))
+* on-webhook custom hook wip ([a9dea7e](https://github.com/SocialGouv/kontinuous/commit/a9dea7e67932479a61ca1fde1032a8c7ba885738))
+* on-webhook custom hook wip ([4e874d7](https://github.com/SocialGouv/kontinuous/commit/4e874d772847d54e77f76d2d71d0ac3bdc75ac19))
+* on-webhook custom hook wip ([3c28eb2](https://github.com/SocialGouv/kontinuous/commit/3c28eb29b055015b876f3386e641693c58ce22fd))
+* on-webhook custom hook wip ([a040de0](https://github.com/SocialGouv/kontinuous/commit/a040de099ffd9db3b9a5f92f081015693581119b))
+* on-webhook custom hook wip ([552f002](https://github.com/SocialGouv/kontinuous/commit/552f002e73a52b579bfc808ccbc5bf69527c884a))
+* on-webhook wip ([6c8e03e](https://github.com/SocialGouv/kontinuous/commit/6c8e03e01e7683ccc974627cb739b0210a5e0235))
+* typo on readme ([15a359e](https://github.com/SocialGouv/kontinuous/commit/15a359e3448928841856b6ec3bc4fdeb9179db1a))
+* typo on readme ([acdd2db](https://github.com/SocialGouv/kontinuous/commit/acdd2db4a07e1ebdb6beee31ec408ac9f2ea6507))
+* utils ([8564dbf](https://github.com/SocialGouv/kontinuous/commit/8564dbff127d8e16b2b86a7f6cdbdd052b33e077))
+
 ### [1.22.1](https://github.com/SocialGouv/kontinuous/compare/v1.22.0...v1.22.1) (2022-06-09)
 
 
