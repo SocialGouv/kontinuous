@@ -316,7 +316,7 @@ npx kontinuous build --help
 ```
 
 For development (require helm):
-```
+```sh
 git clone https://github.com/SocialGouv/kontinuous.git ~/repos/kontinuous
 cd ~/repos/kontinuous
 yarn install
@@ -657,6 +657,9 @@ Official plugins are here [plugins/recommended/](plugins/recommended/). They cou
     
     - [patches/cert-wildcard](plugins/fabrique/patches/cert-wildcard) <br>
         add label `cert: "wildcard"` on main namespace so `kubed` will copy wildcard cert on dev environment namespaces.
+    
+    - [patches/rancher-project-id](plugins/fabrique/patches/rancher-project-id) <br>
+        if namespace containing an empty `field.cattle.io/projectId` annotation, and `ciNamespace` config is defined (usually when `deploy` command is used), it will try to retrieve rancher project id from the `ciNamespace` to fill it.
         
     - [values-compilers/global-defaults](plugins/fabrique/values-compilers/global-defaults.js) <br>
         All defaults values for ***La Fabrique*** are defined here.
@@ -893,6 +896,32 @@ Releasing follow semantic versioning using [standard-version tool](https://githu
 
 ## Contributing (developments on kontinuous)
 
+### Run locally
+
+#### prepare kontinuous
+
+```sh
+git clone https://github.com/SocialGouv/kontinuous.git
+cd kontinuous
+yarn install
+```
+
+#### kontinuous cli
+
+```sh
+cd ~/repos/my-project
+~/repos/kontinuous/kontinuous --help
+```
+
+##### kontinuous webhook service
+
+```sh
+yarn dev:webhook
+```
+
+open your navigator on [http://localhost:7530/api/v1/swagger/](http://localhost:7530/api/v1/swagger/) to test the OpenAPI using the provided and awesome Swagger.
+
+
 ### Test
 
 all directories added to [packages/kontinuous/tests/samples](packages/kontinuous/tests/samples) are like a `.kontinuous` directory in a project, it will be automatically tested when you will run `yarn test:kontinuous`. <br>
@@ -910,6 +939,23 @@ New patches are welcome in folder [plugins/fabrique/patches/](plugins/fabrique/p
 New validators are welcome in folder [plugins/fabrique/validators/](plugins/fabrique/validators/). <br>
 New jobs are welcome in folder [plugins/fabrique/jobs/](plugins/fabrique/jobs/). <br>
 New values-compilers are welcome in folder [plugins/fabrique/values-compilers/](plugins/fabrique/values-compilers/). <br>
+
+### *La Fabrique* images CI build
+
+To be independent from github, the images used by default by the webhook Chart is retrieved from our GitLab instance at https://gitlab.fabrique.social.gouv.fr
+
+To push on GitLab and be able to deploy new version of webhook you have to add GitLab remote to your local git. <br>
+You can do it running this command:
+
+```sh
+git remote add gitlab git@gitlab.fabrique.social.gouv.fr:sre/kontinuous.git
+```
+
+then to push
+
+```sh
+yarn push:gitlab
+```
 
 
 # 7. Links
