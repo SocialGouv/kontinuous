@@ -4,7 +4,9 @@ module.exports = function ({ services: { custom } }) {
   return [
     async (req, res) => {
       const { env, hash, repositoryUrl } = req.query
-      const [manifests] = req.files
+      const [manifestsFile] = req.files
+
+      const manifests = manifestsFile.buffer.toString("utf-8")
 
       try {
         await custom({ env, hash, repositoryUrl, manifests })
