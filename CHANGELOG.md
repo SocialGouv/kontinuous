@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.5](https://github.com/SocialGouv/kontinuous/compare/v1.23.4...v1.23.5) (2022-06-13)
+
+
+### Bug Fixes
+
+* warn only missing rancher projectId ([5b6e08a](https://github.com/SocialGouv/kontinuous/commit/5b6e08ab0e20db422683e00f1690e9d5c933d6fd))
+
 ### [1.23.4](https://github.com/SocialGouv/kontinuous/compare/v1.23.3...v1.23.4) (2022-06-13)
 
 
