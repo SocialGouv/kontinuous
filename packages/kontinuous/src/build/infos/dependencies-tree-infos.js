@@ -28,9 +28,14 @@ module.exports = async(manifests)=>{
     if (!annotations || !annotations[changeGroupPrefix]) {
       continue
     }
-    const depKey = Object.keys(annotations)
+    
+    let depKey = Object.keys(annotations)
       .find(key => key.startsWith(`${changeGroupPrefix}.`))
-      .split(".").pop()
+    if(!depKey){
+      continue
+    }
+    depKey = depKey.split(".").pop()
+
 
     for (const [key, value] of Object.entries(annotations)) {
       if (

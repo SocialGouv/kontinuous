@@ -45,13 +45,14 @@ module.exports = async (_options = {}) => {
   const {values} = await loadDependencies(config, logger)
 
   logger.debug("Values: \n"+yaml.dump(values))
-  
+
   logger.debug("Build base manifest using helm")
   let manifests = await asyncShell(
     `
     helm template
-    -f values.yaml
-    --post-renderer ${kontinuousPath}/bin/post-renderer
+    --values=values.yaml
+    --release-name
+    --post-renderer=${kontinuousPath}/bin/post-renderer
     ${config.helmArgs}
     .
     `,
