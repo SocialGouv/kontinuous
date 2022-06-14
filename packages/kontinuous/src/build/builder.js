@@ -88,7 +88,7 @@ module.exports = async (_options = {}) => {
 
   return {
     manifestsFile,
-    manifests,
+    manifests: manifestsDump,
     values,
   }
 }
