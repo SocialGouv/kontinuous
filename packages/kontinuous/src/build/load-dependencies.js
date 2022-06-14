@@ -47,7 +47,9 @@ const registerSubcharts = async (chart, chartsDirName, target)=>{
       version: subchart.version,
       repository: `file://./${chartsDirName}/${chartDir}`,
     }
-    const definedDependency = chart.dependencies.find((dependency)=>(dependency.alias||dependency.name===subchart.name))
+    const definedDependency = chart.dependencies.find((dependency)=>
+      ((dependency.alias||dependency.name)===subchart.name)
+    )
     if(definedDependency){
       Object.assign(definedDependency, dependency)
     }
@@ -120,9 +122,15 @@ const downloadRemoteRepository = async (target, name)=>{
       }
     }
 
-    
     await decompress(zfile, `${target}/charts`)
-    dependency.repository = `file://./charts/${dependency.name}`
+    
+    let chartName = dependency.name
+    if(dependency.alias){
+      chartName = dependency.alias
+      await fs.rename(`${target}/charts/${dependency.name}`, `${target}/charts/${dependency.alias}`)
+    }
+
+    dependency.repository = `file://./charts/${chartName}`
     touched = true
   }
   if(touched){
