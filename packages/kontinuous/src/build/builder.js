@@ -71,21 +71,20 @@ module.exports = async (_options = {}) => {
   // console.log(yaml.dump(manifests))
   // console.log(JSON.stringify(manifests, null, 2))
   
+  logger.debug("Build final output")
+  const manifestsDump = manifests.map(manifest => yaml.dump(manifest)).join("---\n")
+
+  logger.debug("Write manifests file")
+  const manifestsFile = `${buildPath}/manifests.yaml`
+  await fs.writeFile(manifestsFile, manifestsDump)
+
+  logger.debug(`Built manifests: file://${manifestsFile}`)
   
   logger.debug("Validate manifests")
   await validateManifests(manifests, values)
   
   logger.debug("Display infos")
   await outputInfos(manifests, values)
-  
-  logger.debug("Build final output")
-  manifests = manifests.map(manifest => yaml.dump(manifest)).join("---\n")
-
-  logger.debug("Write manifests file")
-  const manifestsFile = `${buildPath}/manifests.yaml`
-  await fs.writeFile(manifestsFile, manifests)
-
-  logger.debug(`Built manifests: ${manifestsFile}`)
 
   return {
     manifestsFile,
