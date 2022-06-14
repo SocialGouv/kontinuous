@@ -13,5 +13,8 @@ concurrency:
 
 jobs:
   follow-deployment:
+    environment:
+      name: preproduction
+      url: https://my-app-preprod.dev.fabrique.social.gouv.fr
     uses: SocialGouv/kontinuous/.github/workflows/workflow-logs.yaml@master
     secrets: inherit
