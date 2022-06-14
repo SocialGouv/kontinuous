@@ -113,6 +113,7 @@ module.exports = async (opts = {}) => {
     helmArgs: {
       env: "KS_HELM_ARGS",
       option: "A",
+      defaultFunction: () => "",
     },
     inlineValues: {
       env: "KS_INLINE_VALUES",

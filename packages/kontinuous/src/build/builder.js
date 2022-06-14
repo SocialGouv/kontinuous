@@ -50,11 +50,10 @@ module.exports = async (_options = {}) => {
   let manifests = await asyncShell(
     `
     helm template
+    .
     --values=values.yaml
-    --release-name
     --post-renderer=${kontinuousPath}/bin/post-renderer
     ${config.helmArgs}
-    .
     `,
     { cwd: buildPath }
   )
