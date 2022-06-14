@@ -14,5 +14,5 @@ jobs:
     environment:
       name: production
       url: https://my-app.fabrique.social.gouv.fr
-    uses: SocialGouv/kontinuous/.github/workflows/workflow-logs.yaml@master
+    uses: SocialGouv/kontinuous/.github/workflows/workflow-logs.yaml@v1
     secrets: inherit
