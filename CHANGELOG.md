@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.8](https://github.com/SocialGouv/kontinuous/compare/v1.23.6...v1.23.8) (2022-06-14)
+
+
+### Bug Fixes
+
+* helm release name + config default ([d537ba6](https://github.com/SocialGouv/kontinuous/commit/d537ba6de29b9689274b24691b9f5a3db36e8e61))
+
 ### [1.23.7](https://github.com/SocialGouv/kontinuous/compare/v1.23.6...v1.23.7) (2022-06-14)
 
 
