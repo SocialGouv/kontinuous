@@ -104,6 +104,10 @@ module.exports = ({
                 name: "KS_GIT_SHA",
                 value: gitCommit,
               },
+              {
+                name: "KS_DEBUG",
+                value: "true",
+              },
               ...(uploadUrl
                 ? [{ name: "KS_BUILD_UPLOAD_URL", value: uploadUrl }]
                 : []),
