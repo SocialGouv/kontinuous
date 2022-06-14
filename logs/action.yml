@@ -27,6 +27,7 @@ runs:
         fi
         KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/heads/}
         KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/tags/}
+        KS_GIT_BRANCH_URLENCODED=$(echo $KS_GIT_BRANCH | sed 's/\//\%2f/g')
         if [[ "$KS_GIT_BRANCH" =~ ^v[0-9]+\.[0-9]+ ]]; then
           ENV=prod
         elif [ "$KS_GIT_BRANCH" = "master" ] || [ "$KS_GIT_BRANCH" = "main" ]; then
@@ -51,6 +52,7 @@ runs:
         echo "WEBHOOK_URI=$WEBHOOK_URI">>$GITHUB_ENV
         echo "KS_WEBHOOK_TOKEN=${{ inputs.webhookToken }}">>$GITHUB_ENV
         echo "KS_GIT_BRANCH=$KS_GIT_BRANCH">>$GITHUB_ENV
+        echo "KS_GIT_BRANCH_URLENCODED=$KS_GIT_BRANCH_URLENCODED">>$GITHUB_ENV
         echo "KS_GIT_COMMIT=$GITHUB_SHA">>$GITHUB_ENV
         echo "KS_GIT_REPOSITORY=$KS_GIT_REPOSITORY">>$GITHUB_ENV
         echo "KS_GIT_REPOSITORY_URLENCODED=$KS_GIT_REPOSITORY_URLENCODED">>$GITHUB_ENV
@@ -70,12 +72,12 @@ runs:
     - name: Stream logs of kube pipeline
       shell: bash
       run: |
-        wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${KS_GIT_REPOSITORY_URLENCODED}&event=${EVENT_NAME}&ref=${KS_GIT_BRANCH}&commit=${KS_GIT_COMMIT}&catch=true&follow=true&token=${KS_WEBHOOK_TOKEN}"
+        wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${KS_GIT_REPOSITORY_URLENCODED}&event=${EVENT_NAME}&ref=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_COMMIT}&catch=true&follow=true&token=${KS_WEBHOOK_TOKEN}"
     
     - name: Download manifests artifact
       shell: bash
       run: |
-        wget --content-on-error -q -O manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/download?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH}&commit=${KS_GIT_COMMIT}&token=${KS_WEBHOOK_TOKEN}"
+        wget --content-on-error -q -O manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/download?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_COMMIT}&token=${KS_WEBHOOK_TOKEN}"
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2
@@ -86,7 +88,7 @@ runs:
     - name: Get status of pipeline
       shell: bash
       run: |
-        wget --content-on-error -q -O deployment-status.json "${WEBHOOK_URI}/api/v1/oas/artifacts/status?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH}&commit=${KS_GIT_COMMIT}&token=${KS_WEBHOOK_TOKEN}"
+        wget --content-on-error -q -O deployment-status.json "${WEBHOOK_URI}/api/v1/oas/artifacts/status?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_COMMIT}&token=${KS_WEBHOOK_TOKEN}"
         DEPLOYMENT_STATUS=$(cat deployment-status.json)
         echo "status: " $(echo "$DEPLOYMENT_STATUS" | jq .status)
         OK=$(echo "$DEPLOYMENT_STATUS" | jq .ok)
