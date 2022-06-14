@@ -1,4 +1,4 @@
 apiVersion: v2
 name: rancher-namespace
-version: 1.23.11
-appVersion: 1.23.11
+version: 1.23.12
+appVersion: 1.23.12

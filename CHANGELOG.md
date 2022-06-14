@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.12](https://github.com/SocialGouv/kontinuous/compare/v1.23.11...v1.23.12) (2022-06-14)
+
+
+### Bug Fixes
+
+* chart dependencies aliasing + deep typo bug ([ab961c4](https://github.com/SocialGouv/kontinuous/commit/ab961c4833bbac42faeb01f43f657e9b51132fed))
+* improve validation feedback ([99b0a53](https://github.com/SocialGouv/kontinuous/commit/99b0a5381a6309a2ddfadf50742ac1f2f45234ef))
+
 ### [1.23.11](https://github.com/SocialGouv/kontinuous/compare/v1.23.10...v1.23.11) (2022-06-14)
 
 
