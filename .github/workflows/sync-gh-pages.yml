@@ -4,16 +4,24 @@ on:
   push:
     branches:
       - master
-  workflow_dispatch:
+    paths:
+      - README.md
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@master
 
       - name: Run GitHub File Sync
-        uses: BetaHuhn/repo-file-sync-action@v1
-        with:
-          GH_PAT: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git checkout gh-pages
+          git checkout master -- README.md
+          rm index.md
+          mv README.md index.md
+          git add index.md
+          git commit -a -m "Sync README.md in master branch to index.md in gh-pages"
+          git remote set-url --push origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git push origin gh-pages
