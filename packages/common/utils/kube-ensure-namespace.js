@@ -15,9 +15,12 @@ const checkNamespaceIsAvailable = async (
       `kubectl --context ${kubeconfigContext} get ns ${namespace} -o json`
     )
     const data = JSON.parse(json)
-    return data?.status.phase === "Active"
-  } catch (_e) {
+    const phase = data?.status.phase
+    logger.debug(`namespace "${namespace}" phase is "${phase}"`)
+    return phase === "Active"
+  } catch (err) {
     // do nothing
+    logger.debug(err)
   }
   return false
 }
