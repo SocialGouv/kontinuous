@@ -961,7 +961,8 @@ yarn push:gitlab
 
 **to use official docker image**
 ```sh
-docker run \
+docker run 
+  -t \
   -u $UID \
   -v $PWD:/workspace \
   -v $HOME/.kube:/home/ubuntu/.kube \
@@ -983,6 +984,7 @@ docker build -f packages/kontinuous/Dockerfile . -t kontinuous
 cd ~/repos/my-project
 
 docker run \
+  -t \
   -u $UID \
   -v $PWD:/workspace \
   -v $HOME/.kube:/home/ubuntu/.kube \
