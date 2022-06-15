@@ -990,6 +990,35 @@ docker run \
   --help
 ```
 
+### Going further (R&D investigations)
+
+#### Running the full CI Locally
+
+Here is the gap between our infra, at ***La Fabrique***, and a fresh minikube install on a developer's personal laptop:
+
+- operators (kubernetes)
+    - [kubeseal](https://github.com/bitnami-labs/sealed-secrets)
+    - [kubed](https://appscode.com/products/kubed/v0.12.0/setup/)
+    - [cert-manager](https://cert-manager.io/docs/)
+- services
+    - registry (docker)
+    - postgres
+- manifests
+    - namespace-ci with secret kubeconfig + custom db_secret
+- helm values
+    - storageClassName (azurefile -> ???)
+    - registry (harbor -> ???)
+    - PG (pgSecretName, pgUser, pgDatabase)
+    - domain
+- host
+    - find a way to redirect *.local to 127.0.0.1
+    - use [mkcert](https://github.com/FiloSottile/mkcert) to allow selfsigned and mount in minikube
+
+Without emulating/mocking these it's not possible in many case to run the full ci process locally without any interaction with the infra.
+
+But for now, we can run manifests build, retrieve logs and many things communicating with the webhook service or with kube directly from the developer's personal laptop.
+
+
 
 # 7. Links
 
@@ -1006,3 +1035,9 @@ to enable correct syntax recognition and coloration of yaml helm templates in vs
 - [Kubernetes doc](https://kubernetes.io/docs/concepts/)
 - [Helm doc](https://helm.sh/docs/)
 - [Kapp doc](https://carvel.dev/kapp/)
+
+## Others CI/CD software
+
+List of continuous integration software that doesn't fit our needs (CI+CD + run on [Kubernetes](https://kubernetes.io) with declarative fine grained control + OpenSource + SelfHostable)
+- [https://github.com/ligurio/awesome-ci](https://github.com/ligurio/awesome-ci)
+- [https://en.wikipedia.org/wiki/Comparison_of_continuous_integration_software](https://en.wikipedia.org/wiki/Comparison_of_continuous_integration_software)
