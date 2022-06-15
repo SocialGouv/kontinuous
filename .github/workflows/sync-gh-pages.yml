@@ -20,6 +20,10 @@ jobs:
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_AUTHOR_EMAIL: ${{ secrets.SOCIALGROOVYBOT_EMAIL }}
+          GIT_AUTHOR_NAME: ${{ secrets.SOCIALGROOVYBOT_NAME }}
+          GIT_COMMITTER_EMAIL: ${{ secrets.SOCIALGROOVYBOT_EMAIL }}
+          GIT_COMMITTER_NAME: ${{ secrets.SOCIALGROOVYBOT_NAME }}
         run: |
           set -x
           git remote set-url --push origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
