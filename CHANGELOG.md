@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.15](https://github.com/SocialGouv/kontinuous/compare/v1.23.14...v1.23.15) (2022-06-15)
+
+
+### Bug Fixes
+
+* increase verbosity of unavailable ns ([4ce60d1](https://github.com/SocialGouv/kontinuous/commit/4ce60d1f621cc27aa544b0970ffd3895082ad028))
+
 ### [1.23.14](https://github.com/SocialGouv/kontinuous/compare/v1.23.13...v1.23.14) (2022-06-15)
 
 
