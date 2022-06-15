@@ -9,6 +9,7 @@ RUN apt-get update && \
     git \
     openjdk-11-jdk \
     ca-certificates-java \
+    graphviz \
   && rm -rf /var/lib/apt/lists/*
 
 ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64/
