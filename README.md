@@ -1043,3 +1043,4 @@ to enable correct syntax recognition and coloration of yaml helm templates in vs
 List of continuous integration software that doesn't fit our needs (CI+CD + run on [Kubernetes](https://kubernetes.io) with declarative fine grained control + OpenSource + SelfHostable)
 - [https://github.com/ligurio/awesome-ci](https://github.com/ligurio/awesome-ci)
 - [https://en.wikipedia.org/wiki/Comparison_of_continuous_integration_software](https://en.wikipedia.org/wiki/Comparison_of_continuous_integration_software)
+
