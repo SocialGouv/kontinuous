@@ -16,11 +16,11 @@ const checkNamespaceIsAvailable = async (
     )
     const data = JSON.parse(json)
     const phase = data?.status.phase
-    logger.debug(`namespace "${namespace}" phase is "${phase}"`)
+    // logger.debug(`namespace "${namespace}" phase is "${phase}"`)
     return phase === "Active"
-  } catch (err) {
+  } catch (_err) {
     // do nothing
-    logger.debug(err)
+    // logger.debug(err)
   }
   return false
 }
