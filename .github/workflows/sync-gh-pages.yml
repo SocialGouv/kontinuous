@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - master
-    paths:
-      - README.md
+    # paths:
+    #   - README.md
 
 jobs:
   sync:
@@ -15,12 +15,13 @@ jobs:
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
-          
+
       - name: Run GitHub File Sync
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -x
           git checkout gh-pages
           git checkout master -- README.md
           rm index.md
