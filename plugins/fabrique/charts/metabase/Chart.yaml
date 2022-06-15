@@ -1,4 +1,4 @@
 apiVersion: v2
 name: metabase
-version: 1.23.12
-appVersion: 1.23.12
+version: 1.23.13
+appVersion: 1.23.13

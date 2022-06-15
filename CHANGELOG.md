@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.13](https://github.com/SocialGouv/kontinuous/compare/v1.23.12...v1.23.13) (2022-06-15)
+
+
+### Bug Fixes
+
+* missing graphviz ([15b5f71](https://github.com/SocialGouv/kontinuous/commit/15b5f7199c7147c62d593e0641cc569f800bfc1e))
+
 ### [1.23.12](https://github.com/SocialGouv/kontinuous/compare/v1.23.11...v1.23.12) (2022-06-14)
 
 
