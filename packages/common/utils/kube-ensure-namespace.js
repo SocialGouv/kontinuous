@@ -80,7 +80,7 @@ module.exports = async (
       if (
         !(await checkNamespaceIsAvailable(kubeconfigContext, namespace, logger))
       ) {
-        throw Error("namespace is not available")
+        throw Error(`namespace "${namespace}" is not available`)
       }
     },
     {
