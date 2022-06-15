@@ -957,6 +957,39 @@ then to push
 yarn push:gitlab
 ```
 
+### Docker image kontinuous cli
+
+**to use official docker image**
+```sh
+docker run \
+  -u $UID \
+  -v $PWD:/workspace \
+  -v $HOME/.kube:/home/ubuntu/.kube \
+  harbor.fabrique.social.gouv.fr/sre/kontinuous \
+  --help
+```
+
+
+
+**to build local docker image**
+```sh
+cd ~/repos/kontinuous
+
+docker build -f packages/kontinuous/Dockerfile . -t kontinuous
+```
+
+**to run local docker image**
+```sh
+cd ~/repos/my-project
+
+docker run \
+  -u $UID \
+  -v $PWD:/workspace \
+  -v $HOME/.kube:/home/ubuntu/.kube \
+  kontinuous \
+  --help
+```
+
 
 # 7. Links
 
