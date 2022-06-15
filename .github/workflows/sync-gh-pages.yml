@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
 
@@ -22,11 +22,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -x
+          git remote set-url --push origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git fetch gh-pages:gh-pages
           git checkout gh-pages
           git checkout master -- README.md
           rm index.md
           mv README.md index.md
           git add index.md
           git commit -a -m "Sync README.md in master branch to index.md in gh-pages"
-          git remote set-url --push origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push origin gh-pages
