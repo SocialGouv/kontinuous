@@ -151,23 +151,21 @@ const buildJsFile = async (target, type, definition, scope)=>{
     processors.push([indexFile,{},[...scope, name]])
   }
 
-  let loads = definition[type]
-  if(!loads){
-    const typeDir = `${target}/${type}`
-    if(await fs.pathExists(typeDir)){
-      const paths = await fs.readdir(typeDir)
-      loads = {}
-      for(const p of paths){
-        let key
-        if((await fs.stat(`${typeDir}/${p}`)).isDirectory()){
-          key = p
-        } else {
-          key = p.substring(0, p.lastIndexOf('.'))
-        }
-        loads[key] = {require: `./${p}`, options: {}}
+  let loads = definition[type] || {}
+  const typeDir = `${target}/${type}`
+  if(await fs.pathExists(typeDir)){
+    const paths = await fs.readdir(typeDir)
+    for(const p of paths){
+      let key
+      if((await fs.stat(`${typeDir}/${p}`)).isDirectory()){
+        key = p
+      } else {
+        key = p.substring(0, p.lastIndexOf('.'))
       }
-    } else {
-      loads = {}
+      if(!loads[key]){
+        loads[key] = {}
+      }
+      loads[key].require = `./${p}`
     }
   }
   for(const [name, load] of Object.entries(loads)){
