@@ -19,6 +19,7 @@ const slug = require("~common/utils/slug")
 const utils = require("~common/utils")
 
 const ctx = require("~/ctx")
+const camelCase = require('lodash.camelcase')
 
 const dependenciesDirName = "charts"
 
@@ -151,7 +152,8 @@ const buildJsFile = async (target, type, definition, scope)=>{
     processors.push([indexFile,{},[...scope, name]])
   }
 
-  let loads = definition[type] || {}
+  const typeKey = camelCase(type)
+  let loads = definition[typeKey] || {}
   const typeDir = `${target}/${type}`
   if(await fs.pathExists(typeDir)){
     const paths = await fs.readdir(typeDir)
@@ -162,6 +164,7 @@ const buildJsFile = async (target, type, definition, scope)=>{
       } else {
         key = p.substring(0, p.lastIndexOf('.'))
       }
+      key = camelCase(key)
       if(!loads[key]){
         loads[key] = {}
       }
