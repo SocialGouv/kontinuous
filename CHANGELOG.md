@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.24.3](https://github.com/SocialGouv/kontinuous/compare/v1.24.2...v1.24.3) (2022-06-17)
+
+
+### Bug Fixes
+
+* gitlab-ci kaniko ([2da4530](https://github.com/SocialGouv/kontinuous/commit/2da4530c0e0137761261c67c6070ba0fb7f88014))
+* gitlab-ci kaniko ([74d3239](https://github.com/SocialGouv/kontinuous/commit/74d3239c36e27b9fc2fd9b5c0abe83a127651230))
+
 ### [1.24.2](https://github.com/SocialGouv/kontinuous/compare/v1.24.1...v1.24.2) (2022-06-17)
 
 
