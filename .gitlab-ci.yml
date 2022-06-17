@@ -38,7 +38,7 @@ docker-build-webhook:
         --context="dir://${CI_PROJECT_DIR}" \
         --dockerfile="${CI_PROJECT_DIR}/packages/webhook/Dockerfile" \
         --destination="${HARBOR}/${CI_PROJECT_PATH}/webhook:${CI_COMMIT_TAG:-$CI_COMMIT_REF_NAME}" \
-        DESTINATION=--destination="${HARBOR}/${CI_PROJECT_PATH}/webhook:latest" \
+        --destination="${HARBOR}/${CI_PROJECT_PATH}/webhook:latest" \
         $DESTINATION \
         --cache=true
   rules:
