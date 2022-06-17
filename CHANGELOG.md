@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.24.1](https://github.com/SocialGouv/kontinuous/compare/v1.24.0...v1.24.1) (2022-06-17)
+
+
+### Bug Fixes
+
+* add config inline and set ([1ee1ef0](https://github.com/SocialGouv/kontinuous/commit/1ee1ef0abf36816930f5c5cad37592ac69edbad4))
+* write kubeconfig before build in deploy cmd ([d4c347b](https://github.com/SocialGouv/kontinuous/commit/d4c347b4071a25331fc5c990e7c44e3ef9aeefa8))
+
 ## [1.24.0](https://github.com/SocialGouv/kontinuous/compare/v1.23.15...v1.24.0) (2022-06-17)
 
 
