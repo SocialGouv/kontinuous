@@ -1,6 +1,6 @@
 # Kontinuous - CI+CD on Kubernetes 🚀
 
-Hey, you work at the marvelous Fabrique Numérique des Ministères Sociaux ?
+Hey, you work at the marvelous *[Fabrique Numérique des Ministères Sociaux](https://www.fabrique.social.gouv.fr/)* ?
 [Go here for quickstart](#111-fabrique-quickstart)
 
 ## Why ?
@@ -815,7 +815,7 @@ kapp deploy /tmp/manifests.yaml
 Using the webhook service you can be totally independent and self-hosted for running you CI/CD workflow.
 The service can be deployed using an [official Helm chart](packages/webhook/Chart.yaml).
 
-[![schema](./docs/webhook-schema.png)](https://excalidraw.com/#json=gKk7kOn6a9tbmkRZlPige,IQnqqMuiEPgmWbd39GlUYg)
+[![schema](./docs/webhook-schema.png)](https://excalidraw.com/#json=OoAm9RLHobXlWw9DmzC6x,R0CXD2-2gYj8D-9OvJS3GA)
 
 ### 5.3.1. deploy service
 
