@@ -47,7 +47,7 @@ runs:
         KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
         KS_GIT_REPOSITORY_URLENCODED=$(echo $KS_GIT_REPOSITORY | sed 's/\//\%2f/g')
 
-        echo "::set-output env=$ENV"
+        echo "::set-output name=env::$ENV"
 
         echo "WEBHOOK_URI=$WEBHOOK_URI">>$GITHUB_ENV
         echo "KS_WEBHOOK_TOKEN=${{ inputs.webhookToken }}">>$GITHUB_ENV
