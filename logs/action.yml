@@ -36,7 +36,7 @@ runs:
           ENV=dev
         fi
 
-        if [ "$EVENT_NAME" = "prod" ]; then
+        if [ "$ENV" = "prod" ]; then
           EVENT_NAME=created
         else
           EVENT_NAME=pushed
