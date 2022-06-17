@@ -125,6 +125,13 @@ projects:
     organization: fabrique
     webhook:
       token: "********************************"
+
+dependencies:
+  fabrique:
+    patches:
+      rancherProjectId:
+        options:
+          resolve: optional # one of required(default),optional,skip
 ```
 
 ### 1.4 CLI config
