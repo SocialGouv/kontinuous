@@ -197,6 +197,22 @@ Here are the main (titles are config keys):
     commands: `build`,`deploy` <br>
     Extra args for `helm template` command.
 
+- **inlineConfig** <br>
+    env: `KS_INLINE_CONFIG` <br>
+    option: `--inline-config` <br>
+    commands: * <br>
+    deep override of config
+
+- **configSet** <br>
+    env: `KS_INLINE_CONFIG_SET` <br>
+    option: `--config-set` <br>
+    commands: * <br>
+    Override config using dot key notation (see [lodash.set method](https://lodash.com/docs/4.17.15#set)). Can be provided as flat yaml/json object from envrionment variable or multiple call to `--config-set` option (eg: `--config-set foo=bar --config-set bar=jo`)
+    sample:
+    ```yaml
+    a.sub.key.override: newValue
+    ```
+
 - **inlineValues** <br>
     env: `KS_INLINE_VALUES` <br>
     option: `--inline-values` <br>
