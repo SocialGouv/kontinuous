@@ -35,6 +35,11 @@ module.exports = async (options) => {
     kubeconfigContext,
   } = config
 
+  await writeKubeconfig([
+    "KUBECONFIG",
+    `KUBECONFIG_${environment.toUpperCase()}`,
+  ])
+
   try {
     let manifestsFile = options.F
     let manifests
@@ -124,10 +129,6 @@ module.exports = async (options) => {
 
     logger.info(`kubeconfig context: "${kubeconfigContext}"`)
 
-    await writeKubeconfig([
-      "KUBECONFIG",
-      `KUBECONFIG_${environment.toUpperCase()}`,
-    ])
     const allManifests = yaml.loadAll(manifests)
 
     const charts = config.chart?.join(",")
