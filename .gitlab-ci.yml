@@ -7,11 +7,16 @@ docker-build-kontinuous:
     - |
       mkdir -p /kaniko/.docker
       echo "{\"auths\":{\"$HARBOR\":{\"username\":\"$HARBOR_USER\",\"password\":\"$HARBOR_PASSWORD\"}}}" > /kaniko/.docker/config.json
+      if [ -n "$CI_COMMIT_TAG" ]; then
+        MAIN_VERSION=${CI_COMMIT_TAG%%.*}
+        DESTINATION=--destination="${HARBOR}/${CI_PROJECT_PATH}:${MAIN_VERSION}"
+      fi
       /kaniko/executor \
         --context="dir://${CI_PROJECT_DIR}" \
         --dockerfile="${CI_PROJECT_DIR}/packages/kontinuous/Dockerfile" \
         --destination="${HARBOR}/${CI_PROJECT_PATH}:${CI_COMMIT_TAG:-$CI_COMMIT_REF_NAME}" \
         --destination="${HARBOR}/${CI_PROJECT_PATH}:latest" \
+        "$DESTINATION" \
         --cache=true
   rules:
     - if: $CI_COMMIT_REF_NAME == 'master' || $CI_COMMIT_TAG
@@ -25,11 +30,16 @@ docker-build-webhook:
     - |
       mkdir -p /kaniko/.docker
       echo "{\"auths\":{\"$HARBOR\":{\"username\":\"$HARBOR_USER\",\"password\":\"$HARBOR_PASSWORD\"}}}" > /kaniko/.docker/config.json
+      if [ -n "$CI_COMMIT_TAG" ]; then
+        MAIN_VERSION=${CI_COMMIT_TAG%%.*}
+        DESTINATION=--destination="${HARBOR}/${CI_PROJECT_PATH}/webhook:${MAIN_VERSION}"
+      fi
       /kaniko/executor \
         --context="dir://${CI_PROJECT_DIR}" \
         --dockerfile="${CI_PROJECT_DIR}/packages/webhook/Dockerfile" \
         --destination="${HARBOR}/${CI_PROJECT_PATH}/webhook:${CI_COMMIT_TAG:-$CI_COMMIT_REF_NAME}" \
-        --destination="${HARBOR}/${CI_PROJECT_PATH}/webhook:latest" \
+        DESTINATION=--destination="${HARBOR}/${CI_PROJECT_PATH}/webhook:latest" \
+        "$DESTINATION" \
         --cache=true
   rules:
     - if: $CI_COMMIT_REF_NAME == 'master' || $CI_COMMIT_TAG
@@ -43,11 +53,16 @@ docker-build-degit:
     - |
       mkdir -p /kaniko/.docker
       echo "{\"auths\":{\"$HARBOR\":{\"username\":\"$HARBOR_USER\",\"password\":\"$HARBOR_PASSWORD\"}}}" > /kaniko/.docker/config.json
+      if [ -n "$CI_COMMIT_TAG" ]; then
+        MAIN_VERSION=${CI_COMMIT_TAG%%.*}
+        DESTINATION=--destination="${HARBOR}/${CI_PROJECT_PATH}/degit:${MAIN_VERSION}"
+      fi
       /kaniko/executor \
         --context="dir://${CI_PROJECT_DIR}" \
         --dockerfile="${CI_PROJECT_DIR}/packages/degit/Dockerfile" \
         --destination="${HARBOR}/${CI_PROJECT_PATH}/degit:${CI_COMMIT_TAG:-$CI_COMMIT_REF_NAME}" \
         --destination="${HARBOR}/${CI_PROJECT_PATH}/degit:latest" \
+        "$DESTINATION" \
         --cache=true
   rules:
     - if: $CI_COMMIT_REF_NAME == 'master' || $CI_COMMIT_TAG
