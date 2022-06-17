@@ -1,6 +1,7 @@
 const os = require("os")
 const path = require("path")
 const { mkdtemp } = require("fs/promises")
+const set = require("lodash.set")
 
 const loadStructuredConfig = require("~common/utils/load-structured-config")
 
@@ -12,8 +13,9 @@ const cleanGitRef = require("~common/utils/clean-git-ref")
 const refEnv = require("~common/utils/ref-env")
 const yaml = require("~common/utils/yaml")
 const asyncShell = require("~common/utils/async-shell")
-
 const deepmerge = require("~common/utils/deepmerge")
+const logger = require("~common/utils/logger")
+
 const ctx = require("~/ctx")
 
 const { version } = require(`${__dirname}/../../package.json`)
@@ -114,6 +116,15 @@ module.exports = async (opts = {}) => {
       env: "KS_HELM_ARGS",
       option: "A",
       defaultFunction: () => "",
+    },
+    inlineConfig: {
+      env: "KS_INLINE_CONFIG",
+      option: "inline-config",
+    },
+    configSet: {
+      env: "KS_INLINE_CONFIG_SET",
+      envParser: (str) => yaml.load(str),
+      option: "config-set",
     },
     inlineValues: {
       env: "KS_INLINE_VALUES",
@@ -224,6 +235,31 @@ module.exports = async (opts = {}) => {
     env,
     emptyAsUndefined: true,
   })
+
+  if (config.inlineConfig) {
+    const inlineConfig = yaml.load(config.inlineConfig)
+    deepmerge(config, inlineConfig)
+  }
+
+  const { configSet } = config
+  if (configSet) {
+    if (Array.isArray(configSet)) {
+      for (const s of configSet) {
+        const index = s.indexOf("=")
+        if (index === -1) {
+          logger.warn("bad format for --config-set option, expected: foo=bar")
+          continue
+        }
+        const key = s.slice(0, index)
+        const val = s.slice(index + 1)
+        set(config, `${key}`, yaml.parse(val))
+      }
+    } else {
+      for (const [key, val] of Object.entries(configSet)) {
+        set(config, key, val)
+      }
+    }
+  }
 
   return config
 }

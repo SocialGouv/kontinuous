@@ -4,8 +4,6 @@ module.exports = async (manifests, options, { config, logger, utils }) => {
 
   const { resolve = "auto" } = options
 
-  // console.log({ options, resolve })
-
   if (resolve === "skip") {
     return
   }

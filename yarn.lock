@@ -6285,6 +6285,7 @@ __metadata:
     lodash.clonedeep: "npm:^4.5.0"
     lodash.defaultsdeep: "npm:^4.6.1"
     lodash.mergewith: "npm:^4.6.2"
+    lodash.set: "npm:^4.3.2"
     nctx: "npm:^1.2.0"
     pino: "npm:^7.10.0"
     pino-pretty: "npm:^7.6.0"

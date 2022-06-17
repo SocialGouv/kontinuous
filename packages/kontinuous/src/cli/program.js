@@ -16,6 +16,8 @@ module.exports = () => {
     )
     .version(require(`${__dirname}/../../package.json`).version)
     .addOption(options.debug)
+    .addOption(options.inlineConfig)
+    .addOption(options.configSet)
     .hook("preAction", async (_thisCommand, actionCommand) => {
       const opts = actionCommand.optsWithGlobals()
       const config = await loadConfig(opts)
