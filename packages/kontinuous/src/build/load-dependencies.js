@@ -186,24 +186,9 @@ const buildJsFile = async (target, type, definition)=>{
   }
 
   const jsSrc = `const processors = [${processors.map(p=>JSON.stringify(p)).join(",")}]
-module.exports = async (data, _options, context, parentScope)=>{
+module.exports = async (data, _options, context, scope)=>{
   for(const inc of processors){
-    const { config, getOptions, getScope } = context
-    const scope = getScope({scope: parentScope, inc, type: ${JSON.stringify(type)}})
-    const result = await require(inc)(
-      data,
-      getOptions({
-        scope,
-        inc,
-        type: ${JSON.stringify(type)},
-        config,
-      }),
-      context,
-      scope
-    )
-    if(result){
-      data = result
-    }
+    data = await context.require(inc, scope)(data)
   }
   return data
 }
@@ -296,7 +281,6 @@ const downloadAndBuildDependencies = async (config)=>{
       name,
       target,
       definition,
-      // scope,
     })=>{
       await buildChartFile(target, name)
       await downloadRemoteRepository(target, name)
@@ -569,7 +553,7 @@ const compileValues = async (config, logger) => {
   valuesEnableStandaloneCharts(values, config)
   valuesOverride(values, config, logger)
 
-  const context = createContext()
+  const context = createContext({type: "values-compilers"})
   
   const valuesJsFile = `${buildProjectPath}/values.js`
   if(await fs.pathExists(valuesJsFile)){
