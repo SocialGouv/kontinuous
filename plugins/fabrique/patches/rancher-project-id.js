@@ -1,8 +1,18 @@
+const resolveEnum = ["required", "skip", "optional"]
+
 module.exports = async (manifests, options, { config, logger, utils }) => {
   const { writeKubeconfig, asyncShell } = utils
   const { ciNamespace, environment, kubeconfigContext } = config
 
-  const { resolve = "auto" } = options
+  const { resolve = "required" } = options
+
+  if (!resolveEnum.includes(resolve)) {
+    throw new Error(
+      `invalid 'resolve' option "${resolve}" for rancher-project-id patch, expected one of ${resolveEnum.join(
+        ","
+      )}`
+    )
+  }
 
   if (resolve === "skip") {
     return
