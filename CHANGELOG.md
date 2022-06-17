@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.24.0](https://github.com/SocialGouv/kontinuous/compare/v1.23.15...v1.24.0) (2022-06-17)
+
+
+### Features
+
+* config option refacto ([3287505](https://github.com/SocialGouv/kontinuous/commit/32875056e17bd76cb5102b4b789feaa78c85b68b))
+
+
+### Bug Fixes
+
+* add build option ci-namespace ([8768b1c](https://github.com/SocialGouv/kontinuous/commit/8768b1c2831224556418a0d6d7865026487100e3))
+* config options keys ([004d9c3](https://github.com/SocialGouv/kontinuous/commit/004d9c3a658769b8318b952bb440fac3910edeeb))
+* config plugin options keys camelcase ([0b294bf](https://github.com/SocialGouv/kontinuous/commit/0b294bf5b0baadf419e0e58d930b0178e98e7bc5))
+* deep config plugin options bug ([a57ab70](https://github.com/SocialGouv/kontinuous/commit/a57ab70c7b00a8dfee3d00842c290a2b1d8a8f71))
+* reduce verbosity of unavailable ns ([20502c5](https://github.com/SocialGouv/kontinuous/commit/20502c50201163858d10d504e777338648c78583))
+
 ### [1.23.15](https://github.com/SocialGouv/kontinuous/compare/v1.23.14...v1.23.15) (2022-06-15)
 
 
