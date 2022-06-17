@@ -18,15 +18,9 @@ const getYamlPath = require("~common/utils/get-yaml-path")
 
 const slug = require("~common/utils/slug")
 
-const utils = require("~common/utils")
-
-const ctx = require("~/ctx")
-
-const getOptions = require("./get-options")
-const getScope = require("./get-scope")
+const createContext = require("./context")
 
 const validateName = /^[a-zA-Z\d-_]+$/
-
 
 const registerSubcharts = async (chart, chartsDirName, target)=>{
   const chartsDir = `${target}/${chartsDirName}`
@@ -575,7 +569,7 @@ const compileValues = async (config, logger) => {
   valuesEnableStandaloneCharts(values, config)
   valuesOverride(values, config, logger)
 
-  const context = {config, logger, utils, ctx, getOptions, getScope}
+  const context = createContext()
   
   const valuesJsFile = `${buildProjectPath}/values.js`
   if(await fs.pathExists(valuesJsFile)){
