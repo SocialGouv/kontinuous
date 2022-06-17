@@ -406,7 +406,7 @@ dependencies:
 ```
 fabrique:
   recommended:
-    some-chart:
+    someChart:
       aValueToBeConsumedByAppSomeChartOfRecommendedPlugin: Hello World !
 ```
 
@@ -430,7 +430,7 @@ A parent chart will be automatically created from project/plugin path, charts th
 As it's name suggest it, it's values compilers, that will transform values declared in `values.yaml` files in final values that will be consumed by `helm`. <br>
 Most often values-compilers are here to make values leaner to declare for final dev user. <br>
 Values compilers are pure nodeJS file that have to export commonJS function that will receive values object and has to return values object or undefined. Returned values object will be used if returned, else you can mutate values object directly. <br>
-Here are the args that the function will receive: `module.exports = (values, options, { config, utils, ctx }) => values` <br>
+Here are the args that the function will receive: `module.exports = (values, options, { config, utils, ctx, getOptions, getScope }) => values` <br>
 - `values` is the values object
 - `options` is the options that can be defined at plugin/project level, eg:
     `$PROJECT_WORKSPACE/.kontinuous/values.yaml`
@@ -438,8 +438,8 @@ Here are the args that the function will receive: `module.exports = (values, opt
     dependencies:
       fabrique:
         import: SocialGouv/kontinuous/plugins/fabrique
-        values-compilers:
-          global-defaults:
+        valuesCompilers:
+          globalDefaults:
             options:
               foo: bar
     ```
@@ -456,7 +456,7 @@ Instead or additionaly to using a `values.yaml`, you can use a project level onl
 
 Patches are pure nodeJS file used to modify final `manifests` after compiled by `helm template`. <br>
 Same as `values-compilers` and `validators`, patches has to expose a function using commonJS. This function will receive the kubernetes manifests as an array of object that you can mutate directly or use to produce a new one that you will return. <br>
-Here are the args that the function will receive: `module.exports = (values, options, { config, utils, ctx, logger, values }) => values` <br>
+Here are the args that the function will receive: `module.exports = (values, options, { config, utils, ctx, logger, values, getOptions, getScope }) => values` <br>
 See [values-compilers doc for details on arguments](#34-values-compilers)
 
 
@@ -502,7 +502,7 @@ Validators are pure nodeJS file used to validate final `manifests` after compile
 Same as `values-compilers` and `patches`, validators has to expose a function using commonJS. This function will receive the kubernetes manifests as an array of object. <br>
 When a manifest contain an invalid definition you have to throw an error this way `throw new Error("error message")`.
 
-Here are the args that the function will receive: `module.exports = (manifests, values, options, { config, utils, ctx, logger }) => {}` <br>
+Here are the args that the function will receive: `module.exports = (manifests, options, { values, config, utils, ctx, logger, getOptions, getScope }) => {}` <br>
 See [values-compilers doc for details on arguments](#34-values-compilers)
 
 

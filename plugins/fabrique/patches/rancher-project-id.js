@@ -2,6 +2,14 @@ module.exports = async (manifests, options, { config, logger, utils }) => {
   const { writeKubeconfig, asyncShell } = utils
   const { ciNamespace, environment, kubeconfigContext } = config
 
+  const { resolve = "auto" } = options
+
+  // console.log({ options, resolve })
+
+  if (resolve === "skip") {
+    return
+  }
+
   const rancherNsMissingProjectId = []
   for (const manifest of manifests) {
     if (
@@ -48,7 +56,16 @@ module.exports = async (manifests, options, { config, logger, utils }) => {
       const data = JSON.parse(json)
       rancherProjectId = data.metadata.annotations["field.cattle.io/projectId"]
     } catch (e) {
-      logger.warn("unable to retrieve missing rancher projectId from cluster")
+      if (resolve === "required") {
+        const errorMsg =
+          "unable to retrieve required missing rancher projectId from cluster"
+        logger.error(errorMsg)
+        throw new Error(errorMsg)
+      } else {
+        logger.warn(
+          "unable to retrieve optional missing rancher projectId from cluster"
+        )
+      }
     }
   }
 

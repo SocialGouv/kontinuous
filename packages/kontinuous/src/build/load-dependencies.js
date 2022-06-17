@@ -2,15 +2,17 @@ const os = require('os')
 const path = require("path")
 const fs = require("fs-extra")
 const degit = require("tiged")
+const camelCase = require('lodash.camelcase')
+const get = require("lodash.get")
+const set = require("lodash.set")
+const {default: axios} = require('axios')
+const decompress = require('decompress')
+
 const yaml = require("~common/utils/yaml")
 const asyncShell = require("~common/utils/async-shell")
 const deepmerge = require("~common/utils/deepmerge")
 const createChart = require("~common/utils/create-chart")
 const loadYamlFile = require("~common/utils/load-yaml-file")
-const get = require("lodash.get")
-const set = require("lodash.set")
-const {default: axios} = require('axios')
-const decompress = require('decompress')
 const downloadFile = require("~common/utils/download-file")
 const getYamlPath = require("~common/utils/get-yaml-path")
 
@@ -19,9 +21,9 @@ const slug = require("~common/utils/slug")
 const utils = require("~common/utils")
 
 const ctx = require("~/ctx")
-const camelCase = require('lodash.camelcase')
 
-const dependenciesDirName = "charts"
+const getOptions = require("./get-options")
+const getScope = require("./get-scope")
 
 const validateName = /^[a-zA-Z\d-_]+$/
 
@@ -75,7 +77,7 @@ const buildChartFile = async (target, name)=>{
       dep.condition = `${dep.alias || dep.name}.enabled`
     }
   }
-  await registerSubcharts(chart, dependenciesDirName, target)
+  await registerSubcharts(chart, "charts", target)
   await fs.ensureDir(target)
   await fs.writeFile(chartFile, yaml.dump(chart))
 }
@@ -139,7 +141,7 @@ const downloadRemoteRepository = async (target, name)=>{
   }
 }
 
-const buildJsFile = async (target, type, definition, scope)=>{
+const buildJsFile = async (target, type, definition)=>{
   const jsFile = `${target}/${type}/index.js`
   if(await fs.pathExists(jsFile)){
     return
@@ -148,21 +150,30 @@ const buildJsFile = async (target, type, definition, scope)=>{
   
   const {dependencies={}} = definition
   for(const name of Object.keys(dependencies)){
-    const indexFile = `../${dependenciesDirName}/${name}/${type}`
-    processors.push([indexFile,{},[...scope, name]])
+    const indexFile = `../charts/${name}/${type}`
+    processors.push(indexFile)
   }
 
   const typeKey = camelCase(type)
   let loads = definition[typeKey] || {}
   const typeDir = `${target}/${type}`
+
+  const exts = [".js"]
   if(await fs.pathExists(typeDir)){
     const paths = await fs.readdir(typeDir)
     for(const p of paths){
       let key
       if((await fs.stat(`${typeDir}/${p}`)).isDirectory()){
+        if(!await fs.pathExists(`${typeDir}/${p}/index.js`)){
+          continue
+        }
         key = p
       } else {
-        key = p.substring(0, p.lastIndexOf('.'))
+        const ext = path.extname(p)
+        if(!exts.includes(ext)){
+          continue
+        }
+        key = p.substring(0, p.length-ext.length)
       }
       key = camelCase(key)
       if(!loads[key]){
@@ -171,23 +182,31 @@ const buildJsFile = async (target, type, definition, scope)=>{
       loads[key].require = `./${p}`
     }
   }
+
   for(const [name, load] of Object.entries(loads)){
     let {require: req} = load
     if(!req){
       req = `./${name}`
     }
-    const {options={}} = load
-    processors.push([req, options, scope])
+    processors.push(req)
   }
 
-  const processorsSnippet = processors.map(p=>
-    `[require(${JSON.stringify(p[0])}),${JSON.stringify(p.slice(1))}]`
-  ).join(",")
-
-  const jsSrc = `const processors = [${processorsSnippet}]
-module.exports = async (data, _options, context, _scope)=>{
-  for(const [inc, [options, scope]] of processors){
-    const result = await inc(data, options, context, scope)
+  const jsSrc = `const processors = [${processors.map(p=>JSON.stringify(p)).join(",")}]
+module.exports = async (data, _options, context, parentScope)=>{
+  for(const inc of processors){
+    const { config, getOptions, getScope } = context
+    const scope = getScope({scope: parentScope, inc, type: ${JSON.stringify(type)}})
+    const result = await require(inc)(
+      data,
+      getOptions({
+        scope,
+        inc,
+        type: ${JSON.stringify(type)},
+        config,
+      }),
+      context,
+      scope
+    )
     if(result){
       data = result
     }
@@ -216,7 +235,7 @@ const recurseDependency = async (param={})=>{
 
   const scope = [...(param.scope || []), name]
   const subpath = path.join(...scope.reduce((acc, item)=>{
-    acc.push(dependenciesDirName, item)
+    acc.push("charts", item)
     return acc
   },[]))
   const target = `${buildPath}/${subpath}`
@@ -283,13 +302,13 @@ const downloadAndBuildDependencies = async (config)=>{
       name,
       target,
       definition,
-      scope,
+      // scope,
     })=>{
       await buildChartFile(target, name)
       await downloadRemoteRepository(target, name)
-      await buildJsFile(target, "values-compilers", definition, scope)
-      await buildJsFile(target, "patches", definition, scope)
-      await buildJsFile(target, "validators", definition, scope)
+      await buildJsFile(target, "values-compilers", definition)
+      await buildJsFile(target, "patches", definition)
+      await buildJsFile(target, "validators", definition)
     }
   })
 }
@@ -389,7 +408,7 @@ const writeChartsAlias = async (chartsAliasMap, config)=>{
   for(const [scope, aliasMap] of chartsAliasMap.entries()){
     const p = []
     for(const s of scope){
-      p.push(dependenciesDirName)
+      p.push("charts")
       p.push(s)
     }
     const chartFile = `${buildPath}/${path.join(...p)}/Chart.yaml`
@@ -541,7 +560,7 @@ const compileValues = async (config, logger) => {
     }
   })
 
-  const buildProjectPath = `${buildPath}/${dependenciesDirName}/project`
+  const buildProjectPath = `${buildPath}/charts/project`
   await mergeYamlFileValues(`${buildProjectPath}/values`, values, beforeMergeProjectValues)
   await mergeYamlFileValues(`${buildProjectPath}/env/${environment}/values`, values, beforeMergeProjectValues)
 
@@ -556,7 +575,7 @@ const compileValues = async (config, logger) => {
   valuesEnableStandaloneCharts(values, config)
   valuesOverride(values, config, logger)
 
-  const context = {config, logger, utils, ctx}
+  const context = {config, logger, utils, ctx, getOptions, getScope}
   
   const valuesJsFile = `${buildProjectPath}/values.js`
   if(await fs.pathExists(valuesJsFile)){
@@ -621,7 +640,7 @@ module.exports = async (config, logger)=>{
 
   await downloadAndBuildDependencies(config)
   await installPackages(config)
-  await mergeEnvTemplates(`${buildPath}/${dependenciesDirName}/project`, config)
+  await mergeEnvTemplates(`${buildPath}/charts/project`, config)
   await copyFilesDir(config)
   const values = await compileValues(config, logger)
 
