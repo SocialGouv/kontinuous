@@ -1,4 +1,6 @@
 const fs = require("fs-extra")
+const camelCase = require("lodash.camelcase")
+
 const yaml = require("./yaml")
 const deepmerge = require("./deepmerge")
 
@@ -42,11 +44,12 @@ module.exports = async ({
     const {
       env: envKey,
       envParser,
-      option: optionKey,
       default: defaultValue,
       defaultFunction,
       emptyAsUndefined = defaultEmptyAsUndefined,
     } = def
+
+    const optionKey = camelCase(def.option)
 
     const isUndefined = emptyAsUndefined
       ? emptyAsUndefinedCheck
