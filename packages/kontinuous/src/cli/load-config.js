@@ -154,7 +154,7 @@ module.exports = async (opts = {}) => {
     environment: {
       env: "KS_ENVIRONMENT",
       option: "E",
-      defaultFunction: (config) => refEnv(config.gitRef),
+      defaultFunction: (config) => refEnv(config.gitBranch),
     },
     webhookToken: {
       option: "webhook-token",
