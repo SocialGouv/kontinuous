@@ -1,9 +1,16 @@
 /* eslint-disable no-undef */
 require("jest-specific-snapshot")
+
 const path = require("path")
 const fs = require("fs-extra")
 const dotenv = require("dotenv")
+
+const loggerFactory = require("~common/utils/logger-factory")
+
+jest.doMock("~common/utils/logger", () => loggerFactory({ sync: true }))
+
 const getDirectoriesSync = require("~common/utils/get-directories-sync")
+
 const cli = require("~/cli")
 
 const ctx = require("~/ctx")
