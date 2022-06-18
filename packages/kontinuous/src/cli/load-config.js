@@ -4,7 +4,7 @@ const { mkdtemp } = require("fs/promises")
 const set = require("lodash.set")
 
 const loadStructuredConfig = require("~common/utils/load-structured-config")
-
+const writeKubeconfig = require("~common/utils/write-kubeconfig")
 const getGitRef = require("~common/utils/get-git-ref")
 const getGitSha = require("~common/utils/get-git-sha")
 const getGitUrl = require("~common/utils/get-git-url")
@@ -192,6 +192,13 @@ module.exports = async (opts = {}) => {
       env: "KS_CI_NAMESPACE",
       defaultFunction: (config) =>
         config.repositoryName ? `${config.repositoryName}-ci` : null,
+    },
+    kubeconfigPath: {
+      defaultFunction: (config) =>
+        writeKubeconfig([
+          "KUBECONFIG",
+          `KUBECONFIG_${config.environment.toUpperCase()}`,
+        ]),
     },
     kubeconfigContext: {
       option: "kubeconfigContext",

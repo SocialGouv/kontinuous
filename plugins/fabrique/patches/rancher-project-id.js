@@ -1,8 +1,8 @@
 const resolveEnum = ["required", "skip", "optional"]
 
 module.exports = async (manifests, options, { config, logger, utils }) => {
-  const { writeKubeconfig, asyncShell } = utils
-  const { ciNamespace, environment, kubeconfigContext } = config
+  const { asyncShell } = utils
+  const { ciNamespace, kubeconfigContext } = config
 
   const { resolve = "required" } = options
 
@@ -34,11 +34,6 @@ module.exports = async (manifests, options, { config, logger, utils }) => {
   if (rancherNsMissingProjectId.length === 0) {
     return
   }
-
-  await writeKubeconfig([
-    "KUBECONFIG",
-    `KUBECONFIG_${environment.toUpperCase()}`,
-  ])
 
   if (!ciNamespace) {
     logger.warn(

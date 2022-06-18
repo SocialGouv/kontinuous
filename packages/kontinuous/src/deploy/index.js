@@ -11,7 +11,6 @@ const logger = require("~common/utils/logger")
 const timeLogger = require("~common/utils/time-logger")
 const slug = require("~common/utils/slug")
 const parseCommand = require("~common/utils/parse-command")
-const writeKubeconfig = require("~common/utils/write-kubeconfig")
 const kubeEnsureNamespace = require("~common/utils/kube-ensure-namespace")
 const validateMd5 = require("~common/utils/validate-md5")
 
@@ -34,11 +33,6 @@ module.exports = async (options) => {
     webhookToken: token,
     kubeconfigContext,
   } = config
-
-  await writeKubeconfig([
-    "KUBECONFIG",
-    `KUBECONFIG_${environment.toUpperCase()}`,
-  ])
 
   try {
     let manifestsFile = options.F

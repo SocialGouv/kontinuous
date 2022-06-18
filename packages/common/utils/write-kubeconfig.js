@@ -53,4 +53,5 @@ module.exports = async (
     await fs.chmod(kubeconfigFile, 0o400)
     process.env.KUBECONFIG = kubeconfigFile
   }
+  return process.env.KUBECONFIG
 }
