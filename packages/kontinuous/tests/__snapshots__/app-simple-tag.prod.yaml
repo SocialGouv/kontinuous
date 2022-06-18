@@ -93,7 +93,7 @@ spec:
         application: test-app-simple-tag
     spec:
       containers:
-        - image: ghcr.io/socialgouv/test-app-simple-tag/app:1.2.3
+        - image: harbor.fabrique.social.gouv.fr/test-app-simple-tag/app:1.2.3
           livenessProbe:
             failureThreshold: 15
             httpGet:

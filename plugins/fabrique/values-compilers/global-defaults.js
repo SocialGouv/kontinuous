@@ -1,6 +1,7 @@
 const MAX_DNS_LENGTH = 63
 
-const defaultRegistry = "ghcr.io/socialgouv"
+// const defaultRegistry = "ghcr.io/socialgouv"
+const defaultRegistry = "harbor.fabrique.social.gouv.fr"
 const defaultRootDomain = "fabrique.social.gouv.fr"
 
 module.exports = async (values, _options, { config, utils, ctx }) => {

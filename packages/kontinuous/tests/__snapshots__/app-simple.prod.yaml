@@ -93,7 +93,7 @@ spec:
         application: test-app-simple
     spec:
       containers:
-        - image: ghcr.io/socialgouv/test-app-simple/app:prod
+        - image: harbor.fabrique.social.gouv.fr/test-app-simple/app:prod
           livenessProbe:
             failureThreshold: 15
             httpGet:

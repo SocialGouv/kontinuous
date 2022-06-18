@@ -172,7 +172,7 @@ spec:
     spec:
       containers:
         - image: >-
-            ghcr.io/socialgouv/test-sample-1/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+            harbor.fabrique.social.gouv.fr/test-sample-1/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           livenessProbe:
             failureThreshold: 15
             httpGet:
@@ -250,7 +250,7 @@ spec:
             claimName: docs
       containers:
         - image: >-
-            ghcr.io/socialgouv/test-sample-1/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+            harbor.fabrique.social.gouv.fr/test-sample-1/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           livenessProbe:
             failureThreshold: 15
             httpGet:
@@ -326,7 +326,7 @@ spec:
     spec:
       containers:
         - image: >-
-            ghcr.io/socialgouv/test-sample-1/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
+            harbor.fabrique.social.gouv.fr/test-sample-1/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
           livenessProbe:
             failureThreshold: 15
             httpGet:

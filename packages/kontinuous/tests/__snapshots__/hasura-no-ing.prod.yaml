@@ -93,7 +93,7 @@ spec:
         application: test-hasura-no-ing
     spec:
       containers:
-        - image: ghcr.io/socialgouv/test-hasura-no-ing/hasura:prod
+        - image: harbor.fabrique.social.gouv.fr/test-hasura-no-ing/hasura:prod
           livenessProbe:
             failureThreshold: 15
             httpGet:

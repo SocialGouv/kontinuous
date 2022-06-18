@@ -99,7 +99,7 @@ spec:
     spec:
       containers:
         - image: >-
-            ghcr.io/socialgouv/test-jobs-seed-command/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+            harbor.fabrique.social.gouv.fr/test-jobs-seed-command/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           livenessProbe:
             failureThreshold: 15
             httpGet:
@@ -332,7 +332,7 @@ spec:
       containers:
         - name: job
           image: >-
-            ghcr.io/socialgouv/test-jobs-seed-command/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+            harbor.fabrique.social.gouv.fr/test-jobs-seed-command/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:

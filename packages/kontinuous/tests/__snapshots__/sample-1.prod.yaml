@@ -169,7 +169,7 @@ spec:
         application: test-sample-1
     spec:
       containers:
-        - image: ghcr.io/socialgouv/test-sample-1/app:prod
+        - image: harbor.fabrique.social.gouv.fr/test-sample-1/app:prod
           livenessProbe:
             failureThreshold: 15
             httpGet:
@@ -239,7 +239,7 @@ spec:
         application: test-sample-1
     spec:
       containers:
-        - image: ghcr.io/socialgouv/test-sample-1/app:prod
+        - image: harbor.fabrique.social.gouv.fr/test-sample-1/app:prod
           livenessProbe:
             failureThreshold: 15
             httpGet:
@@ -309,7 +309,7 @@ spec:
         application: test-sample-1
     spec:
       containers:
-        - image: ghcr.io/socialgouv/test-sample-1/hasura:prod
+        - image: harbor.fabrique.social.gouv.fr/test-sample-1/hasura:prod
           livenessProbe:
             failureThreshold: 15
             httpGet:
