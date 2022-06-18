@@ -19,6 +19,7 @@ const getYamlPath = require("~common/utils/get-yaml-path")
 const slug = require("~common/utils/slug")
 
 const createContext = require("./context")
+const copyFilter = require('./copy-filter')
 
 const validateName = /^[a-zA-Z\d-_]+$/
 
@@ -264,7 +265,7 @@ const downloadAndBuildDependencies = async (config)=>{
           const [linkKey, linkPath] = matchLink
           const from = linkPath + importTarget.substr(linkKey.length)
           await fs.ensureDir(target)
-          await fs.copy(from,target)
+          await fs.copy(from, target, { filter: copyFilter })
         }else{
           await degit(importTarget).clone(target)
         }
@@ -380,7 +381,10 @@ const mergeEnvTemplates = async (rootPath, config) => {
   const {environment} = config
   const envTemplatesPath = `${rootPath}/env/${environment}/templates`
   if(await fs.pathExists(envTemplatesPath)){
-    await fs.copy(envTemplatesPath, `${rootPath}/templates`, {dereference: true})
+    await fs.copy(envTemplatesPath, `${rootPath}/templates`, {
+      dereference: true,
+      filter: copyFilter
+    })
   }
 }
 
@@ -591,7 +595,10 @@ const copyFilesDir = async (config) => {
   if(!await fs.pathExists(filesDir)){
     return
   }
-  await fs.copy(filesDir,`${buildPath}/files`,{dereference: true})
+  await fs.copy(filesDir,`${buildPath}/files`,{
+    dereference: true,
+    filter: copyFilter,
+  })
   await recurseDependency({
     config,
     afterChildren: async ({

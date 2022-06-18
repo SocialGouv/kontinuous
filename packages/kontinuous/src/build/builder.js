@@ -9,6 +9,7 @@ const loadManifests = require("./load-manifests")
 const validateManifests = require("./validate-manifests")
 const outputInfos = require("./output-infos")
 const loadDependencies = require("./load-dependencies")
+const copyFilter = require("./copy-filter")
 
 const ctx = require("~/ctx")
 
@@ -32,12 +33,7 @@ module.exports = async (_options = {}) => {
   if (await fs.pathExists(workspaceKsPath)) {
     await fs.copy(workspaceKsPath, buildProjectPath, {
       dereference: true,
-      filter: (src)=>{
-        if(src.includes("node_modules/")){
-          return false
-        }
-        return true
-      }
+      filter: copyFilter,
     })
   }
   
