@@ -86,8 +86,8 @@ const downloadRemoteRepository = async (target, name)=>{
     if(repository.startsWith("file://")){
       continue
     }
-    
     const localArchive = `${target}/charts/${dependency.name}-${dependency.version}.tgz`
+    let zfile
     if(await fs.pathExists(localArchive)){
       zfile = localArchive
     } else {
@@ -152,7 +152,7 @@ const buildJsFile = async (target, type, definition)=>{
   let loads = definition[typeKey] || {}
   const typeDir = `${target}/${type}`
 
-  const exts = [".js"]
+  const exts = [".js",".ts"]
   if(await fs.pathExists(typeDir)){
     const paths = await fs.readdir(typeDir)
     for(const p of paths){
@@ -323,6 +323,9 @@ const beforeMergeProjectValues = (values)=>{
     if(key==="global"){
       continue
     }
+    if(typeof subValues !== "object" || subValues===null){
+      continue
+    }
     subValues._isProjectValues = true
   }
   return values
@@ -458,11 +461,14 @@ const valuesEnableStandaloneCharts = (values, config)=>{
     if(key==="project" || key==="global"){
       continue
     }
+    if (typeof values[key] !== "object" || values[key] === null) {
+      continue
+    }
     val.enabled = false
   }
   const enableCharts = config.chart
   for (const key of enableCharts) {
-    if(!values[key]){
+    if (typeof values[key] !== "object" || values[key] === null) {
       values[key] = {}
     }
     values[key].enabled = true
@@ -549,7 +555,6 @@ const compileValues = async (config, logger) => {
     values.global.kontinuous = {}
   }
   
-
   valuesEnableStandaloneCharts(values, config)
   valuesOverride(values, config, logger)
 

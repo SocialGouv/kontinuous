@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {                        
+    "target": "es6",
+    "module": "es2020",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "noImplicitAny": false,
+    "isolatedModules": false
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "exclude":[
+    "./node_modules"
+  ]
+}

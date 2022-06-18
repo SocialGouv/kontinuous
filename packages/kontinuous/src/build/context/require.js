@@ -1,4 +1,14 @@
 const path = require("path")
+const { register } = require('ts-node');
+
+const { compilerOptions } = require(`${__dirname}/../../../tsconfig.json`);
+
+register({ compilerOptions });
+
+function requireTs(filePath) {  
+  const result = require(filePath);
+  return result.default || result;
+}
 
 module.exports = (type, context)=>{
   const { config, getOptions, getScope } = context
@@ -18,9 +28,19 @@ module.exports = (type, context)=>{
       type,
       inc
     )
-      
+
+    
     return async (data)=>{
-      const plugin = require(rPath)
+      const ext = path.extname(inc)
+
+      let requireFunc
+      if(ext===".ts"){
+        requireFunc = requireTs
+      }else{
+        requireFunc = (r)=>require(r)
+      }
+
+      const plugin = requireFunc(rPath)
     
       const result = await plugin(
         data,
