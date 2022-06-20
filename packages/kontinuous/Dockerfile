@@ -1,6 +1,6 @@
 ARG UBUNTU_VERSION=20.04
 
-FROM ubuntu:$UBUNTU_VERSION
+FROM ubuntu:$UBUNTU_VERSION as base
 
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq \
@@ -44,6 +44,10 @@ RUN mkdir -p /opt && chown 1001:1001 /opt
 
 RUN mkdir -p /opt/kontinuous
 WORKDIR /opt/kontinuous
+
+
+FROM base as packages
+
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn .yarn
 COPY packages/kontinuous/package.json ./packages/kontinuous/package.json
@@ -52,6 +56,10 @@ RUN chown -R 1001:1001 .
 
 # Keep yarn install cache when bumping version and dependencies still the sames
 RUN node -e " \
+  const package = JSON.parse(fs.readFileSync('package.json')); \
+  const packageZero = { ...package, version: '0.0.0' };  \
+  fs.writeFileSync('package.json', JSON.stringify(packageZero));"
+RUN node -e " \
   const package = JSON.parse(fs.readFileSync('packages/kontinuous/package.json')); \
   const packageZero = { ...package, version: '0.0.0' };  \
   fs.writeFileSync('packages/kontinuous/package.json', JSON.stringify(packageZero));"
@@ -59,7 +67,18 @@ RUN node -e " \
   const package = JSON.parse(fs.readFileSync('packages/common/package.json')); \
   const packageZero = { ...package, version: '0.0.0' };  \
   fs.writeFileSync('packages/common/package.json', JSON.stringify(packageZero));"
+
+FROM base as server
+
 RUN mkdir -p packages/kontinuous/src && mkdir -p packages/kontinuous/common
+
+COPY --from=packages /opt/kontinuous/package.json /opt/kontinuous/package.json
+COPY --from=packages /opt/kontinuous/yarn.lock /opt/kontinuous/yarn.lock
+COPY --from=packages /opt/kontinuous/.yarnrc.yml /opt/kontinuous/.yarnrc.yml
+COPY --from=packages /opt/kontinuous/.yarn /opt/kontinuous/.yarn
+COPY --from=packages /opt/kontinuous/packages/kontinuous/package.json /opt/kontinuous/packages/kontinuous/package.json
+COPY --from=packages /opt/kontinuous/packages/common/package.json /opt/kontinuous/packages/common/package.json
+
 RUN yarn workspaces focus kontinuous --production \
   && yarn cache clean
 RUN rm -rf packages/kontinuous/src && rm -rf packages/kontinuous/common
