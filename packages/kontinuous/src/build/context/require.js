@@ -1,9 +1,6 @@
+require('~/ts-node');
+
 const path = require("path")
-const { register } = require('ts-node');
-
-const { compilerOptions } = require(`${__dirname}/../../../tsconfig.json`);
-
-register({ compilerOptions });
 
 function requireTs(filePath) {  
   const result = require(filePath);
