@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.9](https://github.com/SocialGouv/kontinuous/compare/v1.25.8...v1.25.9) (2022-06-21)
+
+
+### Bug Fixes
+
+* webhook missing dep uuid ([153aac5](https://github.com/SocialGouv/kontinuous/commit/153aac5b049232ea9df42b0f921f02aa2a2a7f3b))
+
 ### [1.25.8](https://github.com/SocialGouv/kontinuous/compare/v1.25.7...v1.25.8) (2022-06-21)
 
 
