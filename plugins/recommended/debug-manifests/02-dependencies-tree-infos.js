@@ -1,6 +1,5 @@
 const path = require("path")
 const camelcase = require("lodash.camelcase")
-const plantuml = require("node-plantuml")
 const fs = require("fs-extra")
 
 const changeGroupPrefix = "kapp.k14s.io/change-group"
