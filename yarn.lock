@@ -11557,6 +11557,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uuid@npm:^8.3.2":
+  version: 8.3.2
+  resolution: "uuid@npm:8.3.2"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 236a12282c6fa32f326aa1b6d5699a843572e9ab7de84a1507a6b7c315fdcf55bf6ed333fd37d35c5c656f4cb96af998844e1c8cae281c442a1ec3b66df62962
+  languageName: node
+  linkType: hard
+
 "v8-compile-cache-lib@npm:^3.0.1":
   version: 3.0.1
   resolution: "v8-compile-cache-lib@npm:3.0.1"
@@ -12000,6 +12009,7 @@ __metadata:
     rimraf: "npm:^3.0.2"
     slugify: "npm:^1.6.5"
     supertest: "npm:^6.2.2"
+    uuid: "npm:^8.3.2"
     yaml: "npm:^2.0.1"
     ~common: "npm:*"
   languageName: unknown
