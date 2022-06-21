@@ -5,13 +5,6 @@ __metadata:
   version: 7
   cacheKey: 9
 
-"@types/node@npm:^18.0.0":
-  version: 18.0.0
-  resolution: "@types/node@npm:18.0.0"
-  checksum: 5d902615a9732fe86ff71edc04b6d35599b447a6fe3b572b12ea002a3460572f8e4d8990bf3983c2890e2335ea8625b78bc51ab542df492ef12e6dcd0da0865a
-  languageName: node
-  linkType: hard
-
 "commander@npm:^2.8.1":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
@@ -109,26 +102,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.7.4":
-  version: 4.7.4
-  resolution: "typescript@npm:4.7.4"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 0cec8f1c0fb0c6a9b437ee4e17819510eb294aad85291e940188fc4542a5554ffe1f73e4bc396c77d0a4d7dd1c17fd795634d50938fc3558e34f32d8a682118b
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@npm%3A^4.7.4#optional!builtin<compat/typescript>":
-  version: 4.7.4
-  resolution: "typescript@patch:typescript@npm%3A4.7.4#optional!builtin<compat/typescript>::version=4.7.4&hash=bda367"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 9070bd07e7d9b64acf23202cc35b1a01d0c864e8d56ec6bc13582adb717646806926e5085282f5ee54d2ddac28089d3ea0b9e4cd1166adcdc715b5e0f23333b7
-  languageName: node
-  linkType: hard
-
 "universalify@npm:^2.0.0":
   version: 2.0.0
   resolution: "universalify@npm:2.0.0"
@@ -140,11 +113,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "~recommended@workspace:."
   dependencies:
-    "@types/node": "npm:^18.0.0"
     fs-extra: "npm:^10.1.0"
     lodash.camelcase: "npm:^4.3.0"
     node-plantuml: "git+https://github.com/betagouv/node-plantuml.git#master"
     puml: "npm:^1.0.1"
-    typescript: "npm:^4.7.4"
   languageName: unknown
   linkType: soft
