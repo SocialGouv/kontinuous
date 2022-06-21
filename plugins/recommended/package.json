@@ -1,6 +1,7 @@
 {
   "name": "~recommended",
   "dependencies": {
+    "@types/node": "^18.0.0",
     "fs-extra": "^10.1.0",
     "lodash.camelcase": "^4.3.0",
     "node-plantuml": "git+https://github.com/betagouv/node-plantuml.git#master",

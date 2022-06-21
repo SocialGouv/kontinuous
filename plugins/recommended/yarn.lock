@@ -5,6 +5,13 @@ __metadata:
   version: 7
   cacheKey: 9
 
+"@types/node@npm:^18.0.0":
+  version: 18.0.0
+  resolution: "@types/node@npm:18.0.0"
+  checksum: 5d902615a9732fe86ff71edc04b6d35599b447a6fe3b572b12ea002a3460572f8e4d8990bf3983c2890e2335ea8625b78bc51ab542df492ef12e6dcd0da0865a
+  languageName: node
+  linkType: hard
+
 "commander@npm:^2.8.1":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
@@ -113,6 +120,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "~recommended@workspace:."
   dependencies:
+    "@types/node": "npm:^18.0.0"
     fs-extra: "npm:^10.1.0"
     lodash.camelcase: "npm:^4.3.0"
     node-plantuml: "git+https://github.com/betagouv/node-plantuml.git#master"
