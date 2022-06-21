@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.2](https://github.com/SocialGouv/kontinuous/compare/v1.25.1...v1.25.2) (2022-06-21)
+
+
+### Bug Fixes
+
+* npx missing tsconfig ([563f992](https://github.com/SocialGouv/kontinuous/commit/563f9923e9c6a45db2a55199d18f9c4a0ed4f83c))
+* optimize docker image ([1c9ed69](https://github.com/SocialGouv/kontinuous/commit/1c9ed6970dc83eecdd18250430110c801d6bb382))
+
 ### [1.25.1](https://github.com/SocialGouv/kontinuous/compare/v1.25.0...v1.25.1) (2022-06-21)
 
 
