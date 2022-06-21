@@ -48,11 +48,10 @@ WORKDIR /opt/kontinuous
 
 FROM base as packages
 
-COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn .yarn
-COPY packages/kontinuous/package.json ./packages/kontinuous/package.json
-COPY packages/common/package.json ./packages/common/package.json
-RUN chown -R 1001:1001 .
+COPY --chown=1001:1001 package.json yarn.lock .yarnrc.yml ./
+COPY --chown=1001:1001 .yarn .yarn
+COPY --chown=1001:1001 packages/kontinuous/package.json ./packages/kontinuous/package.json
+COPY --chown=1001:1001 packages/common/package.json ./packages/common/package.json
 
 # Keep yarn install cache when bumping version and dependencies still the sames
 RUN node -e " \
@@ -70,27 +69,39 @@ RUN node -e " \
 
 FROM base as server
 
-RUN mkdir -p packages/kontinuous/src && mkdir -p packages/kontinuous/common
+RUN mkdir -p /workspace
+RUN chown 1001:1001 /workspace
 
-COPY --from=packages /opt/kontinuous/package.json /opt/kontinuous/package.json
-COPY --from=packages /opt/kontinuous/yarn.lock /opt/kontinuous/yarn.lock
-COPY --from=packages /opt/kontinuous/.yarnrc.yml /opt/kontinuous/.yarnrc.yml
-COPY --from=packages /opt/kontinuous/.yarn /opt/kontinuous/.yarn
-COPY --from=packages /opt/kontinuous/packages/kontinuous/package.json /opt/kontinuous/packages/kontinuous/package.json
-COPY --from=packages /opt/kontinuous/packages/common/package.json /opt/kontinuous/packages/common/package.json
-
-RUN yarn workspaces focus kontinuous --production \
-  && yarn cache clean
-RUN rm -rf packages/kontinuous/src && rm -rf packages/kontinuous/common
-COPY packages/kontinuous/ ./packages/kontinuous/
-COPY packages/common/ ./packages/common/
+RUN mkdir /yarn
+RUN chown 1001:1001 /yarn
+ENV YARN_CACHE_FOLDER /yarn
 
 RUN chown -R 1001:1001 .
-RUN mkdir -p /workspace
-RUN chown -R 1001:1001 /workspace
-WORKDIR /workspace
 
 USER 1001
+
+RUN mkdir -p packages/kontinuous/src && mkdir -p packages/kontinuous/common
+
+COPY --from=packages --chown=1001:1001 /opt/kontinuous/package.json /opt/kontinuous/package.json
+COPY --from=packages --chown=1001:1001 /opt/kontinuous/yarn.lock /opt/kontinuous/yarn.lock
+COPY --from=packages --chown=1001:1001 /opt/kontinuous/.yarnrc.yml /opt/kontinuous/.yarnrc.yml
+COPY --from=packages --chown=1001:1001 /opt/kontinuous/.yarn /opt/kontinuous/.yarn
+COPY --from=packages --chown=1001:1001 /opt/kontinuous/packages/kontinuous/package.json /opt/kontinuous/packages/kontinuous/package.json
+COPY --from=packages --chown=1001:1001 /opt/kontinuous/packages/common/package.json /opt/kontinuous/packages/common/package.json
+
+RUN yarn workspaces focus kontinuous --production
+
+ENV KS_INLINE_CONFIG_SET "links.SocialGouv/kontinuous=/opt/kontinuous"
+COPY --chown=1001:1001 plugins/ ./plugins/
+RUN cd plugins/recommended && yarn
+RUN cd plugins/fabrique && yarn
+
+RUN rm -rf packages/kontinuous/src && rm -rf packages/kontinuous/common
+COPY --chown=1001:1001 packages/kontinuous/ ./packages/kontinuous/
+COPY --chown=1001:1001 packages/common/ ./packages/common/
+
+WORKDIR /workspace
+
 ENV HOME=/home/ubuntu
 RUN chmod a+rw $HOME
 RUN git config --global --add safe.directory /workspace

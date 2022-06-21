@@ -1,6 +1,5 @@
+const ignoreYarnState = require("~common/utils/ignore-yarn-state")
+
 module.exports = (src)=>{
-  if(src.includes("node_modules/")){
-    return false
-  }
-  return true
+  return ignoreYarnState(src)
 }

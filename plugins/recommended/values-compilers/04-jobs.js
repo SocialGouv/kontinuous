@@ -1,17 +1,10 @@
 const miniHash = require("./utils/mini-hash")
 
-const copyFilter = (src) => {
-  if (src.includes("node_modules/")) {
-    return false
-  }
-  return true
-}
-
 const requireUse = async (
   use,
   { config, logger, downloadingPromises, utils }
 ) => {
-  const { slug, degit, fs } = utils
+  const { slug, degit, fs, ignoreYarnState } = utils
   const { buildPath, workspacePath } = config
   const useSlug = slug(use)
   use = use.replace("@", "#")
@@ -23,7 +16,7 @@ const requireUse = async (
         const src = `${workspacePath}/${use}`
         logger.debug(`import local ${src}`)
         await fs.copy(src, target, {
-          filter: copyFilter,
+          filter: ignoreYarnState,
         })
       } else if (
         !use.includes("#") &&
@@ -35,7 +28,7 @@ const requireUse = async (
         const from = linkPath + use.substr(linkKey.length)
         logger.debug(`use linked job: ${use} -> ${linkPath}`)
         await fs.copy(from, target, {
-          filter: copyFilter,
+          filter: ignoreYarnState,
         })
       } else {
         logger.debug(`degit ${use}`)

@@ -9,12 +9,12 @@ const {default: axios} = require('axios')
 const decompress = require('decompress')
 
 const yaml = require("~common/utils/yaml")
-const asyncShell = require("~common/utils/async-shell")
 const deepmerge = require("~common/utils/deepmerge")
 const createChart = require("~common/utils/create-chart")
 const loadYamlFile = require("~common/utils/load-yaml-file")
 const downloadFile = require("~common/utils/download-file")
 const getYamlPath = require("~common/utils/get-yaml-path")
+const yarnInstall = require("~common/utils/yarn-install")
 
 const slug = require("~common/utils/slug")
 
@@ -286,6 +286,7 @@ const downloadAndBuildDependencies = async (config)=>{
       await buildChartFile(target, name)
       await downloadRemoteRepository(target, name)
       await buildJsFile(target, "values-compilers", definition)
+      await buildJsFile(target, "debug-manifests", definition)
       await buildJsFile(target, "patches", definition)
       await buildJsFile(target, "validators", definition)
     }
@@ -299,16 +300,10 @@ const installPackages = async (config) => {
       target,
     })=>{
       if (
-        await fs.pathExists(`${target}/package.json`) &&
-        !await fs.pathExists(`${target}/node_modules`) &&
-        !await fs.pathExists(`${target}/.pnp.cjs`)
+        await fs.pathExists(`${target}/package.json`)
       ) {
-        await asyncShell("yarn", { cwd: target }, (proc) => {
-          proc.stdout.pipe(process.stderr)
-          proc.stderr.pipe(process.stderr)
-        })
+        await yarnInstall(target)
       }
-
     }
   })
 }

@@ -7,7 +7,7 @@ const globalLogger = require("~common/utils/logger")
 const applyPatches = require("./apply-patches")
 const loadManifests = require("./load-manifests")
 const validateManifests = require("./validate-manifests")
-const outputInfos = require("./output-infos")
+const debugManifests = require("./debug-manifests")
 const loadDependencies = require("./load-dependencies")
 const copyFilter = require("./copy-filter")
 
@@ -40,7 +40,7 @@ module.exports = async (_options = {}) => {
   logger.debug("Load and compile dependencies")
   const {values} = await loadDependencies(config, logger)
 
-  logger.debug("Values: \n"+yaml.dump(values))
+  logger.trace("Values: \n"+yaml.dump(values))
 
   logger.debug("Build base manifest using helm")
   let manifests = await asyncShell(
@@ -58,7 +58,7 @@ module.exports = async (_options = {}) => {
   logger.debug("Load manifests")
   manifests = await loadManifests(manifests, values)
   
-  logger.debug("Manifests: \n"+yaml.dump(manifests))
+  logger.trace("Manifests: \n"+yaml.dump(manifests))
   
   logger.debug("Apply patches")
   manifests = await applyPatches(manifests, values)
@@ -85,8 +85,8 @@ module.exports = async (_options = {}) => {
     throw error
   }
   
-  logger.debug("Display infos")
-  await outputInfos(manifests, values)
+  logger.debug("Debug manifests")
+  await debugManifests(manifests, values)
 
   return {
     manifestsFile,

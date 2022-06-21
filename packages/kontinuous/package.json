@@ -32,8 +32,6 @@
     "pino-pretty": "^7.6.0",
     "pretty-ms": "^7.0.1",
     "qs": "^6.10.5",
-    "remark": "^14.0.2",
-    "remark-uml": "^1.0.3",
     "slugify": "^1.6.5",
     "tiged": "^2.11.2",
     "ts-node": "^10.8.1",
@@ -41,7 +39,7 @@
     "yaml": "^2.0.1"
   },
   "devDependencies": {
-    "jest": "^27.5.1",
+    "jest": "^28.1.1",
     "jest-specific-snapshot": "^5.0.0",
     "~common": "*"
   },
