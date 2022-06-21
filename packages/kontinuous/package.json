@@ -1,6 +1,6 @@
 {
   "name": "kontinuous",
-  "version": "1.25.0",
+  "version": "1.25.1",
   "repository": "https://github.com/SocialGouv/kci.git",
   "license": "MIT",
   "main": "src/index",

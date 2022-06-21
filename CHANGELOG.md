@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.1](https://github.com/SocialGouv/kontinuous/compare/v1.25.0...v1.25.1) (2022-06-21)
+
+
+### Bug Fixes
+
+* kaniko group ([d2d0b01](https://github.com/SocialGouv/kontinuous/commit/d2d0b017df5cb6e2b82848fb3d3f060a695b9494))
+* linter ([fafb274](https://github.com/SocialGouv/kontinuous/commit/fafb27400b1c6de1da06d1440955790f46429721))
+
 ## [1.25.0](https://github.com/SocialGouv/kontinuous/compare/v1.24.6...v1.25.0) (2022-06-21)
 
 
