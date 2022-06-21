@@ -39,7 +39,7 @@ RUN curl -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/${KAP
   && mv /tmp/kapp /usr/local/bin/kapp \
   && chmod +x /usr/local/bin/kapp
 
-RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1001 ubuntu
+RUN groupadd -g 1001 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1001 ubuntu
 RUN mkdir -p /opt && chown 1001:1001 /opt
 
 RUN mkdir -p /opt/kontinuous
