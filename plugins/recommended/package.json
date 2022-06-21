@@ -5,7 +5,8 @@
     "fs-extra": "^10.1.0",
     "lodash.camelcase": "^4.3.0",
     "node-plantuml": "git+https://github.com/betagouv/node-plantuml.git#master",
-    "puml": "^1.0.1"
+    "puml": "^1.0.1",
+    "typescript": "^4.7.4"
   },
   "license": "MIT",
   "private": true
