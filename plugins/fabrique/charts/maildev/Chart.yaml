@@ -1,4 +1,4 @@
 apiVersion: v2
 name: maildev
-version: 1.25.4
-appVersion: 1.25.4
+version: 1.25.5
+appVersion: 1.25.5
