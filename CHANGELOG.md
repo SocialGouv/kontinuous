@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.25.0](https://github.com/SocialGouv/kontinuous/compare/v1.24.6...v1.25.0) (2022-06-21)
+
+
+### Features
+
+* plugins debug + better yarn + better docker ([38c1ef4](https://github.com/SocialGouv/kontinuous/commit/38c1ef4f2793cd3ab1b3a44a60ed7a37d5197ce0))
+* ts-support experimental ([3da20f1](https://github.com/SocialGouv/kontinuous/commit/3da20f1e28aea250bb3d1021e1a4c01d3b156fd5))
+
+
+### Bug Fixes
+
+* default fabrique registry to harbor ([ab5228d](https://github.com/SocialGouv/kontinuous/commit/ab5228d7fbcfd83c6f317528515557f5c4b6f2ff))
+* dockerfile deps optimization ([aa1c07b](https://github.com/SocialGouv/kontinuous/commit/aa1c07bca2b61a42a188c43529217d191fdd9774))
+* filter node_modules in all copy ([350c3ea](https://github.com/SocialGouv/kontinuous/commit/350c3ea8c1affc0556c2384a91bdfab7a1ebbea5))
+* kubeconfig auto write ([5fc8fd2](https://github.com/SocialGouv/kontinuous/commit/5fc8fd220d7ffd825a0c4a9266750c3e1bb3454c))
+* mock logger as sync for tests ([22ada06](https://github.com/SocialGouv/kontinuous/commit/22ada0681b1cd4cd477bad12767b163947f5d39d))
+* ts @types/node ([bd07645](https://github.com/SocialGouv/kontinuous/commit/bd076456309833a6fe5e2eff17cece82c6c609c9))
+
 ### [1.24.6](https://github.com/SocialGouv/kontinuous/compare/v1.24.5...v1.24.6) (2022-06-17)
 
 
