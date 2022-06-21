@@ -65,7 +65,8 @@
     "bin",
     "common",
     "src",
-    "package.json"
+    "package.json",
+    "tsconfig.json"
   ],
   "publishConfig": {
     "access": "public"
