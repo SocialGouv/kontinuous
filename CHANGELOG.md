@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.8](https://github.com/SocialGouv/kontinuous/compare/v1.25.7...v1.25.8) (2022-06-21)
+
+
+### Bug Fixes
+
+* clean ([14bdcdc](https://github.com/SocialGouv/kontinuous/commit/14bdcdc1c543ea147026c3ef5d30f7c0a1ba0423))
+* husky postinstall ([e1c5d3d](https://github.com/SocialGouv/kontinuous/commit/e1c5d3d0d795dcff5118fc9835b70bd362ef50d0))
+* ts-node ! ([bc48c39](https://github.com/SocialGouv/kontinuous/commit/bc48c39e8ecd838bf397930ac0fc62c02b5389b7))
+
 ### [1.25.7](https://github.com/SocialGouv/kontinuous/compare/v1.25.6...v1.25.7) (2022-06-21)
 
 
