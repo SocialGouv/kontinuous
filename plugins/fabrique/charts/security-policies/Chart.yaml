@@ -1,4 +1,4 @@
 apiVersion: v2
 name: security-policies
-version: 1.25.3
-appVersion: 1.25.3
+version: 1.25.4
+appVersion: 1.25.4
