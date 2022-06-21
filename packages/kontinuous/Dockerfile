@@ -7,12 +7,10 @@ RUN apt-get update && \
     curl \
     wget \
     git \
-    openjdk-11-jdk \
-    ca-certificates-java \
-    graphviz \
+    openjdk-17-jre-headless \
   && rm -rf /var/lib/apt/lists/*
 
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64/
+ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64/
 
 ARG KUBECTL_VERSION=v1.23.4
 ENV KUBECTL_VERSION=$KUBECTL_VERSION
@@ -89,8 +87,9 @@ COPY --from=packages --chown=1001:1001 /opt/kontinuous/.yarn /opt/kontinuous/.ya
 COPY --from=packages --chown=1001:1001 /opt/kontinuous/packages/kontinuous/package.json /opt/kontinuous/packages/kontinuous/package.json
 COPY --from=packages --chown=1001:1001 /opt/kontinuous/packages/common/package.json /opt/kontinuous/packages/common/package.json
 
-RUN yarn workspaces focus kontinuous --production
+RUN yarn workspaces focus kontinuous --production && yarn cache clean
 
+# pre-cache yarn package for official plugins optimization
 ENV KS_INLINE_CONFIG_SET "links.SocialGouv/kontinuous=/opt/kontinuous"
 COPY --chown=1001:1001 plugins/ ./plugins/
 RUN cd plugins/recommended && yarn
