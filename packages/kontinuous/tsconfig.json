@@ -1,15 +1,11 @@
 {
-  "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {                        
-    "module": "node16",
+    "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "allowJs": true,
     "noImplicitAny": false,
     "isolatedModules": false
-  },
-  "parserOptions": {
-    "sourceType": "module"
   },
   "exclude":[
     "./node_modules"
