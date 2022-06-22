@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.26.0](https://github.com/SocialGouv/kontinuous/compare/v1.25.12...v1.26.0) (2022-06-22)
+
+
+### Features
+
+* webhook custom artifacts ([1e36c46](https://github.com/SocialGouv/kontinuous/commit/1e36c4637c1bbdce8f1f17b5868ff86f4e2f5a9d))
+
+
+### Bug Fixes
+
+* clean debug + rename ([5e3bea4](https://github.com/SocialGouv/kontinuous/commit/5e3bea49f45f360f5a9598f9829df724799a53b7))
+* kaniko build optimize ([78c76b4](https://github.com/SocialGouv/kontinuous/commit/78c76b4ad1e96421df4f7e7e8fd3e87d19525f04))
+* logger flushSync ([c6bca51](https://github.com/SocialGouv/kontinuous/commit/c6bca51420483c63bcd02a90d5434131a0d3dd36))
+* snapshots ([faea451](https://github.com/SocialGouv/kontinuous/commit/faea45179681740e110bc3073cc98b71dd81bb1f))
+* up webhook snapshots ([9d07489](https://github.com/SocialGouv/kontinuous/commit/9d07489cdb282ff56421766bddcc69897e44c5b5))
+* upload param improve detect ([e616655](https://github.com/SocialGouv/kontinuous/commit/e616655771e9802e1abfae3145901f05149aa731))
+* webhook write kubeconfig enforce path ([757ebd7](https://github.com/SocialGouv/kontinuous/commit/757ebd7f6ccc41109401d37916e45606fedbb7c3))
+
 ### [1.25.12](https://github.com/SocialGouv/kontinuous/compare/v1.25.11...v1.25.12) (2022-06-22)
 
 
