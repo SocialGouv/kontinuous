@@ -7,7 +7,7 @@ parameters:
     name: env
     schema:
       type: string
-      enum: [dev, prod]
+      enum: [dev, preprod, prod]
     required: true
   - in: query
     name: hash

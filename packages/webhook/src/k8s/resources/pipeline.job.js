@@ -10,6 +10,7 @@ module.exports = ({
   args = [],
   checkout,
   repositoryUrl,
+  env,
   gitBranch,
   gitCommit,
   uploadUrl,
@@ -95,6 +96,7 @@ module.exports = ({
                 name: "KS_GIT_REPOSITORY_URL",
                 value: repositoryUrl,
               },
+              ...(env ? [{ name: "KS_ENVIRONMENT", value: env }] : []),
               {
                 name: "KS_GIT_REF",
                 value: gitBranch,

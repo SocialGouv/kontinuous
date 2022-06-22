@@ -25,7 +25,8 @@ EOF
 
     return services.pipeline({
       eventName: "custom",
-      kubecontext: env,
+      env,
+      kubecontext: env === "prod" ? "prod" : "dev",
       ref: hash,
       after: null,
       repositoryUrl,

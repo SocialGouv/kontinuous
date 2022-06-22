@@ -12,6 +12,7 @@ module.exports = ({ services }) => {
   const { jobNamespace } = ctx.require("config.project")
   return async ({
     eventName,
+    env,
     kubecontext,
     ref,
     after,
@@ -55,6 +56,7 @@ module.exports = ({ services }) => {
       initContainers,
       checkout,
       repositoryUrl,
+      env,
       gitBranch,
       gitCommit,
       uploadUrl,
