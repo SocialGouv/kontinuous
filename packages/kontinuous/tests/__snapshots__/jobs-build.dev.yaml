@@ -369,7 +369,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:latest
+          image: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
           command:
             - sh
             - '-c'
@@ -452,7 +452,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:latest
+          image: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
           command:
             - sh
             - '-c'
@@ -539,7 +539,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:latest
+          image: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
           command:
             - sh
             - '-c'
@@ -623,7 +623,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:latest
+          image: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
           command:
             - sh
             - '-c'
