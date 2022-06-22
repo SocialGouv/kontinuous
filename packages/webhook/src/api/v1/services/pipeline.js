@@ -7,7 +7,7 @@ const jobRun = require("~/k8s/command/job-run")
 const pipelineJob = require("~/k8s/resources/pipeline.job")
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
-module.exports = ({ services }) => {
+module.exports = () => {
   const logger = ctx.require("logger")
   const { jobNamespace } = ctx.require("config.project")
   return async ({
