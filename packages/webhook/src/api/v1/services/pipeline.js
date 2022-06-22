@@ -32,22 +32,12 @@ module.exports = ({ services }) => {
       gitBranch,
     })
 
-    const webhookUri = ctx.require("config.project.oas.uri")
     logger.info(
       `event ${eventName} triggering workflow on ${repository}#${ref} ${gitCommit}`
     )
 
-    const statusUrl = services.getStatusUrl({
-      repositoryUrl,
-      gitBranch,
-      gitCommit,
-    })
-
-    const uploadUrl = services.getUploadUrl({
-      repositoryUrl,
-      gitBranch,
-      gitCommit,
-    })
+    const webhookUri = ctx.require("config.project.oas.uri")
+    const webhookToken = ctx.require("config.project.webhook.token")
 
     const manifest = pipelineJob({
       namespace: jobNamespace,
@@ -59,9 +49,8 @@ module.exports = ({ services }) => {
       env,
       gitBranch,
       gitCommit,
-      uploadUrl,
-      statusUrl,
       webhookUri,
+      webhookToken,
     })
     try {
       await jobRun(manifest, kubecontext)
