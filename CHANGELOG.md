@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.26.2](https://github.com/SocialGouv/kontinuous/compare/v1.26.1...v1.26.2) (2022-06-22)
+
+
+### Bug Fixes
+
+* env and kubecontext ([27bfa59](https://github.com/SocialGouv/kontinuous/commit/27bfa5986120288e0b99e5d239c59a52e0bfc9f6))
+
 ### [1.26.1](https://github.com/SocialGouv/kontinuous/compare/v1.26.0...v1.26.1) (2022-06-22)
 
 
