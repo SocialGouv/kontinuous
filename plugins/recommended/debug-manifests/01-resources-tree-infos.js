@@ -1,5 +1,10 @@
 const getTreeInfos = {}
 
+getTreeInfos.default = (resource) => {
+  const { manifest } = resource
+  return [{ name: `name: ${manifest.metadata.name}` }]
+}
+
 getTreeInfos.Namespace = (resource) => {
   const { manifest } = resource
   return [{ name: `name: ${manifest.metadata.name}` }]
@@ -208,8 +213,10 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
   for (const [kind, kindResources] of Object.entries(globalResources.kinds)) {
     const children = []
     for (const resource of kindResources) {
-      if (getTreeInfos[kind]) {
+      if (getTreeInfos[kind] && false) {
         children.push(...getTreeInfos[kind](resource))
+      } else {
+        children.push(...getTreeInfos.default(resource))
       }
     }
     globalsTree.push({
@@ -229,5 +236,5 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
   ]
 
   const treeStr = utils.logTree(tree)
-  logger.debug(`\n${treeStr}`)
+  logger.debug(`resources summary:\n${treeStr}`)
 }
