@@ -17,7 +17,6 @@ const yaml = require("~common/utils/yaml")
 const asyncShell = require("~common/utils/async-shell")
 const deepmerge = require("~common/utils/deepmerge")
 const logger = require("~common/utils/logger")
-const commitToken = require("~common/utils/commit-token")
 
 const ctx = require("~/ctx")
 
@@ -194,12 +193,11 @@ module.exports = async (opts = {}) => {
         if (!(webhookUri && webhookToken)) {
           return
         }
-        const token = commitToken(config.gitSha, webhookToken)
         const query = qs.stringify({
           repository: config.gitRepositoryUrl,
           branch: config.gitBranch,
           commit: config.gitSha,
-          token,
+          token: webhookToken,
         })
         return `${webhookUri}/api/v1/oas/artifacts/upload?${query}`
       },
@@ -212,12 +210,11 @@ module.exports = async (opts = {}) => {
         if (!(webhookUri && webhookToken)) {
           return
         }
-        const token = commitToken(config.gitSha, webhookToken)
         const query = qs.stringify({
           repository: config.gitRepositoryUrl,
           branch: config.gitBranch,
           commit: config.gitSha,
-          token,
+          token: webhookToken,
         })
         return `${webhookUri}/api/v1/oas/artifacts/status?${query}`
       },

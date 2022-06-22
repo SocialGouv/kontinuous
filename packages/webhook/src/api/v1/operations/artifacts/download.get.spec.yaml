@@ -1,6 +1,5 @@
 security: 
   - token: ["artifacts"]
-  - commitToken: ["artifacts"]
 
 parameters:
   - in: query

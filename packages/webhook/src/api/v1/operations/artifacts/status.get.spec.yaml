@@ -1,6 +1,5 @@
 security: 
   - token: ["status"]
-  - commitToken: ["status"]
 
 parameters:
   - in: query

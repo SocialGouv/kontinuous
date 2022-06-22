@@ -62,8 +62,6 @@ paths:
       security:
         - token:
             - artifacts
-        - commitToken:
-            - artifacts
       parameters:
         - in: query
           name: repository
@@ -109,8 +107,6 @@ paths:
     get:
       security:
         - token:
-            - status
-        - commitToken:
             - status
       parameters:
         - in: query
@@ -164,8 +160,6 @@ paths:
     post:
       security:
         - token:
-            - status
-        - commitToken:
             - status
       parameters:
         - in: query
@@ -224,8 +218,6 @@ paths:
     post:
       security:
         - token:
-            - artifacts
-        - commitToken:
             - artifacts
       parameters:
         - in: query

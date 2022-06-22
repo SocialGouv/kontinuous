@@ -8,7 +8,6 @@ const addCommands = [
   require("./commands/env"),
   require("./commands/slugify"),
   require("./commands/upload"),
-  require("./commands/commit-token"),
   require("./commands/logs"),
 ]
 
