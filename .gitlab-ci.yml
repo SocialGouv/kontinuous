@@ -17,7 +17,9 @@ docker-build-kontinuous:
         --destination="${HARBOR}/${CI_PROJECT_PATH}:${CI_COMMIT_TAG:-$CI_COMMIT_REF_NAME}" \
         --destination="${HARBOR}/${CI_PROJECT_PATH}:latest" \
         $DESTINATION \
-        --cache=true
+        --cache=true \
+        --snapshotMode=time \
+        --use-new-run
   rules:
     - if: $CI_COMMIT_REF_NAME == 'master' || $CI_COMMIT_TAG
 
@@ -40,7 +42,9 @@ docker-build-webhook:
         --destination="${HARBOR}/${CI_PROJECT_PATH}/webhook:${CI_COMMIT_TAG:-$CI_COMMIT_REF_NAME}" \
         --destination="${HARBOR}/${CI_PROJECT_PATH}/webhook:latest" \
         $DESTINATION \
-        --cache=true
+        --cache=true \
+        --snapshotMode=time \
+        --use-new-run
   rules:
     - if: $CI_COMMIT_REF_NAME == 'master' || $CI_COMMIT_TAG
 
@@ -63,6 +67,8 @@ docker-build-degit:
         --destination="${HARBOR}/${CI_PROJECT_PATH}/degit:${CI_COMMIT_TAG:-$CI_COMMIT_REF_NAME}" \
         --destination="${HARBOR}/${CI_PROJECT_PATH}/degit:latest" \
         $DESTINATION \
-        --cache=true
+        --cache=true \
+        --snapshotMode=time \
+        --use-new-run
   rules:
     - if: $CI_COMMIT_REF_NAME == 'master' || $CI_COMMIT_TAG
