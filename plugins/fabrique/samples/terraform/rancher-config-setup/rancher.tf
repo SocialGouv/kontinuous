@@ -71,6 +71,24 @@ resource "rancher2_secret" "kubewebhook_prod" {
   }
 }
 
+resource "rancher2_secret" "kubewebhook_ci_prod" {
+  name         = "kubewebhook"
+  project_id   = rancher2_project.prod_team_project.id
+  namespace_id = "${local.project_name}-ci"
+  data = {
+    KUBEWEBHOOK_TOKEN = base64encode(format("%s", random_password.kubewebhook_token.result))
+  }
+}
+
+resource "rancher2_secret" "kubewebhook_ci_dev" {
+  name         = "kubewebhook"
+  project_id   = rancher2_project.dev_team_project.id
+  namespace_id = "${local.project_name}-ci"
+  data = {
+    KUBEWEBHOOK_TOKEN = base64encode(format("%s", random_password.kubewebhook_token.result))
+  }
+}
+
 resource "rancher2_secret" "kubeconfig_webhook_dev" {
   name         = "kubeconfig-dev"
   namespace_id = "webhook-${local.project_name}"
