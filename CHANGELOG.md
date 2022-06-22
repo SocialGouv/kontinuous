@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.11](https://github.com/SocialGouv/kontinuous/compare/v1.25.10...v1.25.11) (2022-06-22)
+
+
+### Bug Fixes
+
+* env to cluster env for custom deploy webhook ([3de9764](https://github.com/SocialGouv/kontinuous/commit/3de97641c40dfe0a86ffb8ef16315a2f1883c60e))
+
 ### [1.25.10](https://github.com/SocialGouv/kontinuous/compare/v1.25.9...v1.25.10) (2022-06-22)
 
 
