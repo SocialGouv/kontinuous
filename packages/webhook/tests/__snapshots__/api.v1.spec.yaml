@@ -84,6 +84,14 @@ paths:
             example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed
             format: sha1
           required: true
+        - in: query
+          name: name
+          schema:
+            type: string
+            minLength: 1
+            example: manifests
+            default: manifests
+          required: false
       responses:
         '200':
           content:
@@ -239,6 +247,14 @@ paths:
             example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed
             format: sha1
           required: true
+        - in: query
+          name: name
+          schema:
+            type: string
+            minLength: 1
+            example: manifests
+            default: manifests
+          required: false
       requestBody:
         required: true
         content:
