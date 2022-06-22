@@ -9,7 +9,8 @@ const configMergeKeys = ["clusters", "users", "contexts"]
 
 module.exports = async (
   kubeconfigVarNames = ["KUBECONFIG"],
-  kubeconfig = {}
+  kubeconfig = {},
+  dest = null
 ) => {
   let found
 
@@ -47,11 +48,15 @@ module.exports = async (
   }
 
   if (found) {
-    const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kontinuous`))
-    const kubeconfigFile = `${tmpDir}/.kubeconfig`
-    await fs.writeFile(kubeconfigFile, yaml.dump(kubeconfig))
-    await fs.chmod(kubeconfigFile, 0o400)
-    process.env.KUBECONFIG = kubeconfigFile
+    if (!dest) {
+      const tmpDir = await mkdtemp(path.join(os.tmpdir(), `kontinuous`))
+      dest = `${tmpDir}/.kubeconfig`
+    } else {
+      await fs.ensureDir(path.dirname(dest))
+    }
+    await fs.writeFile(dest, yaml.dump(kubeconfig))
+    await fs.chmod(dest, 0o400)
+    process.env.KUBECONFIG = dest
   }
   return process.env.KUBECONFIG
 }
