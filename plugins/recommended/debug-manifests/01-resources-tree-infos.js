@@ -213,7 +213,7 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
   for (const [kind, kindResources] of Object.entries(globalResources.kinds)) {
     const children = []
     for (const resource of kindResources) {
-      if (getTreeInfos[kind] && false) {
+      if (getTreeInfos[kind]) {
         children.push(...getTreeInfos[kind](resource))
       } else {
         children.push(...getTreeInfos.default(resource))
@@ -226,7 +226,7 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
   }
   const tree = [
     {
-      name: "components",
+      name: "resources",
       children: componentsTree,
     },
     {
