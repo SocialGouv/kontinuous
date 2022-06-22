@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.12](https://github.com/SocialGouv/kontinuous/compare/v1.25.11...v1.25.12) (2022-06-22)
+
+
+### Bug Fixes
+
+* add default resource debug ([79a218a](https://github.com/SocialGouv/kontinuous/commit/79a218ae9e7f8cf630449e4e174579790fe3f9de))
+* secret line return ([db9a488](https://github.com/SocialGouv/kontinuous/commit/db9a488c12362a140147a8155768c0c5a2a96ce3))
+* use harbor for degit image ([2fa845c](https://github.com/SocialGouv/kontinuous/commit/2fa845c1eacea5b28f1fbbd405496bb921646a33))
+
 ### [1.25.11](https://github.com/SocialGouv/kontinuous/compare/v1.25.10...v1.25.11) (2022-06-22)
 
 
