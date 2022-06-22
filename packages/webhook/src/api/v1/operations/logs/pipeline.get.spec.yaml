@@ -28,6 +28,12 @@ parameters:
       format: sha1
     required: true
   - in: query
+    name: env
+    schema:
+      type: string
+      enum: [dev, preprod, prod]
+    required: false
+  - in: query
     name: follow
     schema:
       type: boolean

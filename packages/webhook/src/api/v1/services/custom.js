@@ -1,3 +1,5 @@
+const refKubecontext = require("~common/utils/ref-kubecontext")
+
 module.exports =
   ({ services }) =>
   async ({ env, hash, manifests, repositoryUrl }) => {
@@ -23,10 +25,12 @@ EOF
       },
     ]
 
+    const kubecontext = refKubecontext(hash, env)
+
     return services.pipeline({
       eventName: "custom",
       env,
-      kubecontext: env === "prod" ? "prod" : "dev",
+      kubecontext,
       ref: hash,
       after: null,
       repositoryUrl,

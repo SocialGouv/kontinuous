@@ -8,6 +8,7 @@ const getGitRef = require("~common/utils/get-git-ref")
 const getGitSha = require("~common/utils/get-git-sha")
 const getGitRepository = require("~common/utils/get-git-repository")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
+const qs = require("qs")
 
 const ctx = require("~/ctx")
 
@@ -39,10 +40,21 @@ module.exports = async (options) => {
 
   const repository = repositoryFromGitUrl(repositoryMixed)
 
+  const { env } = options
+
   const { webhookUri, webhookToken: token } = config
 
-  const repositoryUrlencoded = encodeURIComponent(repository)
-  const url = `${webhookUri}/api/v1/oas/logs/pipeline?repository=${repositoryUrlencoded}&event=${event}&ref=${branch}&commit=${commit}&catch=true&follow=true&token=${token}`
+  const query = qs.stringify({
+    repository,
+    event,
+    env,
+    ref: branch,
+    commit,
+    catch: true,
+    follow: true,
+    token,
+  })
+  const url = `${webhookUri}/api/v1/oas/logs/pipeline?${query}`
 
   const finished = promisify(stream.finished)
   const writeStream = process.stdout

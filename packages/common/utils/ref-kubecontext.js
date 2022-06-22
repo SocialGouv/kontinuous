@@ -1,4 +1,4 @@
 const refEnv = require("./ref-env")
 const envKubecontext = require("./env-kubecontext")
 
-module.exports = (ref) => envKubecontext(refEnv(ref))
+module.exports = (ref, env) => envKubecontext(env || refEnv(ref))

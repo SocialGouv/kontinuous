@@ -90,12 +90,13 @@ module.exports = function () {
       follow,
       catch: catchJob,
       since,
+      env,
     } = req.query
     const repository = repositoryFromGitUrl(repositoryMixed)
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)
 
-    const kubecontext = refKubecontext(ref)
+    const kubecontext = refKubecontext(ref, env)
     const jobName = pipelineJobName({
       eventName: event,
       repositoryName,

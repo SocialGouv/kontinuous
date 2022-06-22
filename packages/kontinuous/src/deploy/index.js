@@ -74,7 +74,7 @@ module.exports = async (options) => {
       })
 
       const query = qs.stringify({
-        env: environment === "prod" ? "prod" : "dev",
+        env: environment,
         token,
         hash: jobHash,
         repositoryUrl: gitRepositoryUrl,
@@ -110,14 +110,16 @@ module.exports = async (options) => {
 
       await logs({
         ...options,
+        env: environment,
         event: "custom",
         repository: gitRepositoryUrl,
         branch: jobHash,
         commit: "0000000000000000000000000000000000000000",
       })
-
+      console.log({ statusUrl })
       if (statusUrl) {
         const { status, ok } = await getStatus({ url: statusUrl })
+        console.log({ status, ok })
         if (ok !== true) {
           const errorMsg = `status not ok, it returned: ${status}`
           logger.error(errorMsg)
