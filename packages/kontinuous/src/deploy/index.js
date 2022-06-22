@@ -17,7 +17,7 @@ const validateMd5 = require("~common/utils/validate-md5")
 const ctx = require("~/ctx")
 const build = require("~/build")
 const logs = require("~/logs")
-const { setStatus } = require("~/status")
+const { getStatus, setStatus } = require("~/status")
 
 module.exports = async (options) => {
   ctx.provide()
@@ -113,6 +113,15 @@ module.exports = async (options) => {
         branch: jobHash,
         commit: "0000000000000000000000000000000000000000",
       })
+
+      if (statusUrl) {
+        const { status, ok } = await getStatus({ url: statusUrl })
+        if (ok !== true) {
+          const errorMsg = `status not ok, it returned: ${status}`
+          logger.error(errorMsg)
+          throw new Error(errorMsg)
+        }
+      }
 
       return
     }

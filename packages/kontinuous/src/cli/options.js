@@ -39,7 +39,11 @@ module.exports.cwd = new Option("--cwd <path>", "set current working directory")
 
 module.exports.debug = new Option("--debug, -d", "enable debugging loglevel")
 
-module.exports.upload = new Option("--upload <url>", "upload manifests to url")
+module.exports.upload = new Option("--upload", "upload manifests")
+module.exports.uploadUrl = new Option(
+  "--upload-url  <url>",
+  "url to upload manifests, --upload-url must be used to activate"
+)
 
 module.exports.statusUrl = new Option(
   "--status-url <url>",

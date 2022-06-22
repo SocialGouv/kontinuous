@@ -1,7 +1,9 @@
 const os = require("os")
 const path = require("path")
 const { mkdtemp } = require("fs/promises")
+
 const set = require("lodash.set")
+const qs = require("qs")
 
 const loadStructuredConfig = require("~common/utils/load-structured-config")
 const writeKubeconfig = require("~common/utils/write-kubeconfig")
@@ -15,6 +17,7 @@ const yaml = require("~common/utils/yaml")
 const asyncShell = require("~common/utils/async-shell")
 const deepmerge = require("~common/utils/deepmerge")
 const logger = require("~common/utils/logger")
+const commitToken = require("~common/utils/commit-token")
 
 const ctx = require("~/ctx")
 
@@ -143,14 +146,6 @@ module.exports = async (opts = {}) => {
       defaultFunction: (config) =>
         path.join(config.buildPath, "charts", "project"),
     },
-    uploadUrl: {
-      env: "KS_BUILD_UPLOAD_URL",
-      option: "upload",
-    },
-    statusUrl: {
-      env: "KS_DEPLOY_STATUS_URL",
-      option: "status-url",
-    },
     environment: {
       env: "KS_ENVIRONMENT",
       option: "E",
@@ -185,6 +180,46 @@ module.exports = async (opts = {}) => {
         return webhookUriPattern
           .replace("${repositoryName}", config.repositoryName)
           .replace("${baseDomain}", config.webhookBaseDomain)
+      },
+    },
+    upload: {
+      env: "KS_BUILD_UPLOAD",
+      option: "upload",
+    },
+    uploadUrl: {
+      env: "KS_BUILD_UPLOAD_URL",
+      option: "upload-url",
+      defaultFunction: (config) => {
+        const { webhookUri, webhookToken } = config
+        if (!(webhookUri && webhookToken)) {
+          return
+        }
+        const token = commitToken(config.gitSha, webhookToken)
+        const query = qs.stringify({
+          repository: config.gitRepositoryUrl,
+          branch: config.gitBranch,
+          commit: config.gitSha,
+          token,
+        })
+        return `${webhookUri}/api/v1/oas/artifacts/upload?${query}`
+      },
+    },
+    statusUrl: {
+      env: "KS_DEPLOY_STATUS_URL",
+      option: "status-url",
+      defaultFunction: (config) => {
+        const { webhookUri, webhookToken } = config
+        if (!(webhookUri && webhookToken)) {
+          return
+        }
+        const token = commitToken(config.gitSha, webhookToken)
+        const query = qs.stringify({
+          repository: config.gitRepositoryUrl,
+          branch: config.gitBranch,
+          commit: config.gitSha,
+          token,
+        })
+        return `${webhookUri}/api/v1/oas/artifacts/status?${query}`
       },
     },
     ciNamespace: {

@@ -35,8 +35,9 @@ module.exports = async (options) => {
     logger.info(`manifests: file://${manifestsFile}`)
   }
   
-  const { uploadUrl } = config
-  if(uploadUrl){
+  const { upload } = config
+  if(upload){
+    const { uploadUrl } = config
     await upload({ uploadUrl, manifests })
   }
 

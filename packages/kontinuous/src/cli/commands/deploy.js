@@ -14,6 +14,7 @@ module.exports = (program) =>
     .addOption(options.set)
     .addOption(options.cwd)
     .addOption(options.upload)
+    .addOption(options.uploadUrl)
     .addOption(options.statusUrl)
     .addOption(options.rancherProjectId)
     .addOption(options.ciNamespace)

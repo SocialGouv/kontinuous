@@ -27,6 +27,32 @@ const setStatus = async ({ url, status, ok = null }) => {
   }
 }
 
+const getStatus = async ({ url }) => {
+  logger.debug(`getting deploy status`)
+  try {
+    const response = await axios.request({
+      method: "GET",
+      url,
+    })
+    logger.debug(`deploy status: ${response.data.status}`)
+    return response.data
+  } catch (error) {
+    if (error.response) {
+      logger.error(`get status error: status ${error.response.status}`)
+      logger.error(error.response.data)
+      logger.debug(error.response.headers)
+      logger.error(error.request)
+    } else if (error.request) {
+      logger.error(`get status error: request`)
+      logger.error(error.request)
+    } else {
+      logger.error(`get status error: ${error.message}`)
+    }
+    return false
+  }
+}
+
 module.exports = {
+  getStatus,
   setStatus,
 }

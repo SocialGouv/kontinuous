@@ -108,7 +108,10 @@ module.exports = ({
                 value: "true",
               },
               ...(uploadUrl
-                ? [{ name: "KS_BUILD_UPLOAD_URL", value: uploadUrl }]
+                ? [
+                    { name: "KS_BUILD_UPLOAD", value: "true" },
+                    { name: "KS_BUILD_UPLOAD_URL", value: uploadUrl },
+                  ]
                 : []),
               ...(statusUrl
                 ? [{ name: "KS_DEPLOY_STATUS_URL", value: statusUrl }]

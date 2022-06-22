@@ -21,6 +21,7 @@ module.exports = (program) =>
     .addOption(options.branch)
     .addOption(options.commit)
     .addOption(options.upload)
+    .addOption(options.uploadUrl)
     .addOption(options.ciNamespace)
     .option("--output, -o", "enable direct output of manifests")
     .option("--open", "open manifests file with default application")
