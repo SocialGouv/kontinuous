@@ -5,7 +5,8 @@ gitBranch:
 runs: []
 needs: []
 image: "debian:stable"
-degitImage: ghcr.io/socialgouv/kontinuous/degit:latest
+# degitImage: ghcr.io/socialgouv/kontinuous/degit:latest
+degitImage: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
 # extra:
 #   jobs:
 #     sharedStorage:
