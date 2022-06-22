@@ -72,7 +72,7 @@ module.exports = async (options) => {
       })
 
       const query = qs.stringify({
-        env: environment,
+        env: environment === "prod" ? "prod" : "dev",
         token,
         hash: jobHash,
         repositoryUrl: gitRepositoryUrl,
