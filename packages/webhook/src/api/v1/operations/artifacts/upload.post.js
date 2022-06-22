@@ -9,7 +9,7 @@ const artifactPath = "/artifacts"
 
 module.exports = function () {
   async function addOneArtifactsUpload(req, res) {
-    const { repository: repositoryMixed, branch, commit } = req.query
+    const { repository: repositoryMixed, branch, commit, name } = req.query
     const repository = repositoryFromGitUrl(repositoryMixed)
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(branch)
@@ -18,7 +18,7 @@ module.exports = function () {
     const [manifests] = req.files
     const dir = `${artifactPath}/${repositorySlug}/${branchSlug}/${commit}`
     await fs.ensureDir(dir)
-    const file = `${dir}/manifests.yaml`
+    const file = `${dir}/${name}.yaml`
     await fs.writeFile(file, manifests.buffer)
     return res.status(201).json({ success: true })
   }

@@ -9,20 +9,20 @@ const artifactPath = "/artifacts"
 
 module.exports = function () {
   async function addOneArtifactsUpload(req, res) {
-    const { repository: repositoryMixed, branch, commit } = req.query
+    const { repository: repositoryMixed, branch, commit, name } = req.query
     const repository = repositoryFromGitUrl(repositoryMixed)
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(branch)
     const branchSlug = slug(gitBranch)
     const repositorySlug = slug(repositoryName)
     const dir = `${artifactPath}/${repositorySlug}/${branchSlug}/${commit}`
-    const file = `${dir}/manifests.yaml`
+    const file = `${dir}/${name}.yaml`
     if (!(await fs.pathExists(file))) {
       return res.status(404).json({ error: "not found" })
     }
     const content = await fs.readFile(file, "binary")
     res.setHeader("Content-Type", "text/x-yaml")
-    res.setHeader("Content-Disposition", "attachment; filename=manifests.yaml")
+    res.setHeader(`Content-Disposition", "attachment; filename=${name}.yaml`)
     res.setHeader("Content-Length", content.length)
     res.write(content, "binary")
     res.end()
