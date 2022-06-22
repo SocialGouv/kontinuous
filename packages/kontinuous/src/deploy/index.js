@@ -65,6 +65,8 @@ module.exports = async (options) => {
 
       logger.info("uploading custom manifests to deploy")
 
+      logger.flushSync()
+
       const form = new FormData()
       form.append("manifests", manifests, {
         filename: "manifests.yaml",

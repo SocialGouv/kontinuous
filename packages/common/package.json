@@ -18,6 +18,7 @@
     "node": ">=14"
   },
   "dependencies": {
+    "sonic-boom": "^3.0.0",
     "yaml": "^2.0.1"
   }
 }

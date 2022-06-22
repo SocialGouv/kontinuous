@@ -10512,6 +10512,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sonic-boom@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "sonic-boom@npm:3.0.0"
+  dependencies:
+    atomic-sleep: "npm:^1.0.0"
+  checksum: b5bab7a09067c8e216f2a0a618b512409c21a912be4f5b3d35091effa9767769813c827e7f3c9c4a8d508a175d60306ad430df3af7d4a7ff4e12a9c6b5a12312
+  languageName: node
+  linkType: hard
+
 "source-map-support@npm:0.5.13":
   version: 0.5.13
   resolution: "source-map-support@npm:0.5.13"
@@ -11952,6 +11961,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "~common@workspace:packages/common"
   dependencies:
+    sonic-boom: "npm:^3.0.0"
     yaml: "npm:^2.0.1"
   peerDependencies:
     fs-extra: ^10.0.1
