@@ -8,7 +8,7 @@ const yaml = require("./yaml")
 const configMergeKeys = ["clusters", "users", "contexts"]
 
 module.exports = async (
-  kubeconfigVarNames = ["KUBECONFIG"],
+  kubeconfigVarNames = ["KUBECONFIG", "KUBECONFIG_DEV", "KUBECONFIG_PROD"],
   kubeconfig = {},
   dest = null
 ) => {

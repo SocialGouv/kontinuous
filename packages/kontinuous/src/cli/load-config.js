@@ -229,11 +229,7 @@ module.exports = async (opts = {}) => {
         config.repositoryName ? `${config.repositoryName}-ci` : null,
     },
     kubeconfigPath: {
-      defaultFunction: (config) =>
-        writeKubeconfig([
-          "KUBECONFIG",
-          `KUBECONFIG_${config.environment.toUpperCase()}`,
-        ]),
+      defaultFunction: () => writeKubeconfig(),
     },
     kubeconfigContext: {
       option: "kubeconfigContext",
