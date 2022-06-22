@@ -25,7 +25,7 @@ for nsressource in $NAMESPACES; do
     secret=$(kubectl --context $KUBECONTEXT -n $namespace get secrets kubewebhook -o json)
     token=$(echo $secret | jq -r ".data.KUBEWEBHOOK_TOKEN" | base64 -d)
     if [ ! -z "$token" ]; then
-      encryptedToken=$(echo "$token" | ./encrypt-secret-for-github-api.js)
+      encryptedToken=$(echo -n "$token" | ./encrypt-secret-for-github-api.js)
       projectName=${namespace#*webhook-}
       projectName=${projectName^^}
       projectName=$(echo "$projectName" | sed "s/[^[:alnum:]_]//g")
