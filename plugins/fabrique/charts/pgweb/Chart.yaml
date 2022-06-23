@@ -1,4 +1,4 @@
 apiVersion: v2
 name: pgweb
-version: 1.26.2
-appVersion: 1.26.2
+version: 1.26.3
+appVersion: 1.26.3

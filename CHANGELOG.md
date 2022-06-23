@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.26.3](https://github.com/SocialGouv/kontinuous/compare/v1.26.2...v1.26.3) (2022-06-23)
+
+
+### Bug Fixes
+
+* add script to copy webhook secrets to ci ns ([8680e63](https://github.com/SocialGouv/kontinuous/commit/8680e6315df28f8d4cbd74b909cb225fa4e68e6a))
+* linter ([4dbf214](https://github.com/SocialGouv/kontinuous/commit/4dbf21413acf1cac8436d1c2e5c7f8925bfdd500))
+* refacto remove commitToken ([e3b40b8](https://github.com/SocialGouv/kontinuous/commit/e3b40b8755ee571b0e1d226d9dcfb108300b9a43))
+* refacto remove explicit tokened uri ([6bdb52c](https://github.com/SocialGouv/kontinuous/commit/6bdb52c947d38e2204b4fe7501b7a8ab3ef8cddf))
+* up rancher.tf sample ([7eeaddf](https://github.com/SocialGouv/kontinuous/commit/7eeaddf2b6d3a367351294bfdf438fba08cf4348))
+
 ### [1.26.2](https://github.com/SocialGouv/kontinuous/compare/v1.26.1...v1.26.2) (2022-06-22)
 
 
