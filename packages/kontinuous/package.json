@@ -1,6 +1,6 @@
 {
   "name": "kontinuous",
-  "version": "1.26.5",
+  "version": "1.27.0",
   "repository": "https://github.com/SocialGouv/kontinuous.git",
   "license": "MIT",
   "main": "src/index",
@@ -74,9 +74,9 @@
     "access": "public"
   },
   "author": {
-    "name" : "La Fabrique Numérique des Ministères Sociaux",
-    "email" : "DSI-incubateur@sg.social.gouv.fr",
-    "url" : "https://www.fabrique.social.gouv.fr/"
+    "name": "La Fabrique Numérique des Ministères Sociaux",
+    "email": "DSI-incubateur@sg.social.gouv.fr",
+    "url": "https://www.fabrique.social.gouv.fr/"
   },
   "contributors": []
 }

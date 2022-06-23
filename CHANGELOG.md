@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.27.0](https://github.com/SocialGouv/kontinuous/compare/v1.26.5...v1.27.0) (2022-06-23)
+
+
+### Features
+
+* easy webhook upload and download with npx ([6e40388](https://github.com/SocialGouv/kontinuous/commit/6e403887c14a8b8b5528773b9e0a53d1e2ad5737))
+
+
+### Bug Fixes
+
+* add clean command ([1e0c5fa](https://github.com/SocialGouv/kontinuous/commit/1e0c5fa2d600895639b5d7eabfb4dcad8039ea30))
+* default hpa values ([c7af3ab](https://github.com/SocialGouv/kontinuous/commit/c7af3abd370995ff681a9d33dc8848860ba25041))
+* dependabot sec issue ([38228e4](https://github.com/SocialGouv/kontinuous/commit/38228e416d88469363fe38b2d6654823ad318d76))
+* package, add fabrique author field ([0d97fea](https://github.com/SocialGouv/kontinuous/commit/0d97feaded193ef7235bc760fbbd75d777c79a78))
+* readme, license and gh-release note ([5553a12](https://github.com/SocialGouv/kontinuous/commit/5553a12ad80ad75a61b173339d773ecdcf3040ff))
+
 ### 1.26.5 (2022-06-23)
 
 
