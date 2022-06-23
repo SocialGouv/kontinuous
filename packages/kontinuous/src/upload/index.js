@@ -1,10 +1,30 @@
 const axios = require("axios")
 const FormData = require("form-data")
+const qs = require("qs")
+const fs = require("fs-extra")
 
 const logger = require("~common/utils/logger")
+const ctx = require("~/ctx")
 
-module.exports = async ({ uploadUrl, manifests }) => {
-  logger.info("uploading manifests artifact")
+module.exports = async ({ name, file }) => {
+  const manifests = await fs.readFile(file, { encoding: "utf8" })
+
+  const dest = name || "manifests"
+
+  logger.info(`uploading "${file}" as artifact "${dest}"`)
+
+  const config = ctx.require("config")
+
+  let { uploadUrl } = config
+
+  if (name) {
+    const url = new URL(uploadUrl)
+    url.search = qs.stringify({
+      ...qs.parse(url.search.slice(1)),
+      name,
+    })
+    uploadUrl = url.toString()
+  }
 
   const form = new FormData()
   form.append("manifests", manifests, {
@@ -20,7 +40,7 @@ module.exports = async ({ uploadUrl, manifests }) => {
       headers: form.getHeaders(),
     })
     logger.debug(response.data)
-    logger.info("uploaded manifests artifact")
+    logger.info(`uploaded "${file}" as artifact "${dest}"`)
     return true
   } catch (error) {
     if (error.response) {

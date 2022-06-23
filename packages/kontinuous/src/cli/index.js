@@ -7,9 +7,10 @@ const addCommands = [
   require("./commands/deploy"),
   require("./commands/env"),
   require("./commands/slugify"),
-  require("./commands/upload"),
   require("./commands/logs"),
   require("./commands/clean"),
+  require("./commands/upload"),
+  require("./commands/download"),
 ]
 
 module.exports = async (args = process.argv) => {

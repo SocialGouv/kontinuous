@@ -42,7 +42,12 @@ module.exports.debug = new Option("--debug, -d", "enable debugging loglevel")
 module.exports.upload = new Option("--upload", "upload manifests")
 module.exports.uploadUrl = new Option(
   "--upload-url  <url>",
-  "url to upload manifests, --upload-url must be used to activate"
+  "url to upload artifacts"
+)
+
+module.exports.downloadUrl = new Option(
+  "--download-url  <url>",
+  "url to download artifacts"
 )
 
 module.exports.statusUrl = new Option(

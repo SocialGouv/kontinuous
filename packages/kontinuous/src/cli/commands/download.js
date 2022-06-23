@@ -1,17 +1,17 @@
 const { configureDebug } = require("~common/utils/logger")
-const upload = require("~/upload")
+const download = require("~/download")
 
 const options = require("../options")
 
 module.exports = (program) =>
   program
-    .command("upload")
-    .argument("<file>", "the file to upload")
+    .command("download")
     .argument("[name]", `the manifests name to download, default "manifests"`)
-    .addOption(options.uploadUrl)
+    .argument("[file]", 'default "${name}.yaml"')
+    .addOption(options.downloadUrl)
     .description("Upload manifests")
-    .action(async (file, name, _opts, command) => {
+    .action(async (name, file, _opts, command) => {
       const opts = command.optsWithGlobals()
       configureDebug(opts.D)
-      await upload({ name, file })
+      await download({ name, file })
     })

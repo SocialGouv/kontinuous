@@ -211,6 +211,23 @@ module.exports = async (opts = {}) => {
         return `${webhookUri}/api/v1/oas/artifacts/upload?${query}`
       },
     },
+    downloadUrl: {
+      env: "KS_DOWNLOAD_URL",
+      option: "download-url",
+      defaultFunction: (config) => {
+        const { webhookUri, webhookToken } = config
+        if (!(webhookUri && webhookToken)) {
+          return
+        }
+        const query = qs.stringify({
+          repository: config.gitRepositoryUrl,
+          branch: config.gitBranch,
+          commit: config.gitSha,
+          token: webhookToken,
+        })
+        return `${webhookUri}/api/v1/oas/artifacts/download?${query}`
+      },
+    },
     statusUrl: {
       env: "KS_DEPLOY_STATUS_URL",
       option: "status-url",
