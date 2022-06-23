@@ -17,7 +17,8 @@ else
   PGSSLMODE=require
   PGUSER_URLENCODED=$(printf %s "$PGUSER" |jq -sRr @uri)
   PGPASSWORD_URLENCODED=$(printf %s "$PGPASSWORD" |jq -sRr @uri)
-  DATABASE_URL=postgresql://${PGUSER_URLENCODED}:${PGPASSWORD_URLENCODED}@${PGHOST}/${PGDATABASE}?sslmode=${PGSSLMODE}
+  PGPORT="${PGPORT:-5432}"
+  DATABASE_URL=postgresql://${PGUSER_URLENCODED}:${PGPASSWORD_URLENCODED}@${PGHOST}:${PGPORT}/${PGDATABASE}?sslmode=${PGSSLMODE}
 
   kubectl -n $NAMESPACE create secret generic $DB_SECRET_NAME \
     --from-literal="PGPASSWORD=$PGPASSWORD" \
