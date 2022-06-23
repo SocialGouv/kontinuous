@@ -22,7 +22,7 @@ module.exports = function () {
     }
     const content = await fs.readFile(file, "binary")
     res.setHeader("Content-Type", "text/x-yaml")
-    res.setHeader(`Content-Disposition", "attachment; filename=${name}.yaml`)
+    res.setHeader("Content-Disposition", `attachment; filename=${name}.yaml`)
     res.setHeader("Content-Length", content.length)
     res.write(content, "binary")
     res.end()
