@@ -41,6 +41,11 @@ runs:
           secretKeyRef:
             key: PGHOST
             name: "{{ tpl (or $.with.pgSecretName $.Values.global.pgSecretName) . }}"
+      - name: PGPORT
+        valueFrom:
+          secretKeyRef:
+            key: PGPORT
+            name: "{{ tpl (or $.with.pgSecretName $.Values.global.pgSecretName) . }}"
       - name: NEW_DB_EXTENSIONS
         value: "hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent"
     run: /action/ensure-db.sh

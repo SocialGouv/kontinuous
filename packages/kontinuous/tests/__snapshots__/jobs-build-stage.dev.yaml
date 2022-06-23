@@ -388,6 +388,11 @@ spec:
                 secretKeyRef:
                   key: PGHOST
                   name: pg-user-feature-branch-1
+            - name: PGPORT
+              valueFrom:
+                secretKeyRef:
+                  key: PGPORT
+                  name: pg-user-feature-branch-1
             - name: NEW_DB_EXTENSIONS
               value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
           command:
