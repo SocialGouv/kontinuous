@@ -72,5 +72,11 @@
   ],
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "author": {
+    "name" : "La Fabrique Numérique des Ministères Sociaux",
+    "email" : "DSI-incubateur@sg.social.gouv.fr",
+    "url" : "https://www.fabrique.social.gouv.fr/"
+  },
+  "contributors": []
 }
