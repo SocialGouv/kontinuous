@@ -116,10 +116,8 @@ module.exports = async (options) => {
         branch: jobHash,
         commit: "0000000000000000000000000000000000000000",
       })
-      console.log({ statusUrl })
       if (statusUrl) {
         const { status, ok } = await getStatus({ url: statusUrl })
-        console.log({ status, ok })
         if (ok !== true) {
           const errorMsg = `status not ok, it returned: ${status}`
           logger.error(errorMsg)
