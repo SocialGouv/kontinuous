@@ -53,7 +53,7 @@ runs:
         echo "KS_WEBHOOK_TOKEN=${{ inputs.webhookToken }}">>$GITHUB_ENV
         echo "KS_GIT_BRANCH=$KS_GIT_BRANCH">>$GITHUB_ENV
         echo "KS_GIT_BRANCH_URLENCODED=$KS_GIT_BRANCH_URLENCODED">>$GITHUB_ENV
-        echo "KS_GIT_COMMIT=$GITHUB_SHA">>$GITHUB_ENV
+        echo "KS_GIT_SHA=$GITHUB_SHA">>$GITHUB_ENV
         echo "KS_GIT_REPOSITORY=$KS_GIT_REPOSITORY">>$GITHUB_ENV
         echo "KS_GIT_REPOSITORY_URLENCODED=$KS_GIT_REPOSITORY_URLENCODED">>$GITHUB_ENV
         echo "EVENT_NAME=$EVENT_NAME">>$GITHUB_ENV
@@ -64,7 +64,7 @@ runs:
         if [ "$GITHUB_RUN_ATTEMPT" -gt "1" ]; then
           echo "Trigger webhook for rerun attempt #${GITHUB_RUN_ATTEMPT}"
           wget --content-on-error -qO- \
-            --post-data "{\"repositoryUrl\":\"${KS_GIT_REPOSITORY}\",\"ref\":\"${KS_GIT_BRANCH}\",\"commit\":\"${KS_GIT_COMMIT}\"}" \
+            --post-data "{\"repositoryUrl\":\"${KS_GIT_REPOSITORY}\",\"ref\":\"${KS_GIT_BRANCH}\",\"commit\":\"${KS_GIT_SHA}\"}" \
             --header='Content-Type:application/json' \
             "${WEBHOOK_URI}/api/v1/oas/hooks/user?event=${EVENT_NAME}&token=${KS_WEBHOOK_TOKEN}"
         fi
@@ -72,12 +72,12 @@ runs:
     - name: Stream logs of kube pipeline
       shell: bash
       run: |
-        wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${KS_GIT_REPOSITORY_URLENCODED}&event=${EVENT_NAME}&ref=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_COMMIT}&catch=true&follow=true&token=${KS_WEBHOOK_TOKEN}"
+        wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${KS_GIT_REPOSITORY_URLENCODED}&event=${EVENT_NAME}&ref=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&catch=true&follow=true&token=${KS_WEBHOOK_TOKEN}"
     
     - name: Download manifests artifact
       shell: bash
       run: |
-        wget --content-on-error -q -O manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/download?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_COMMIT}&token=${KS_WEBHOOK_TOKEN}"
+        wget --content-on-error -q -O manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/download?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2
@@ -88,7 +88,7 @@ runs:
     - name: Get status of pipeline
       shell: bash
       run: |
-        wget --content-on-error -q -O deployment-status.json "${WEBHOOK_URI}/api/v1/oas/artifacts/status?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_COMMIT}&token=${KS_WEBHOOK_TOKEN}"
+        wget --content-on-error -q -O deployment-status.json "${WEBHOOK_URI}/api/v1/oas/artifacts/status?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
         DEPLOYMENT_STATUS=$(cat deployment-status.json)
         echo "status: " $(echo "$DEPLOYMENT_STATUS" | jq .status)
         OK=$(echo "$DEPLOYMENT_STATUS" | jq .ok)
