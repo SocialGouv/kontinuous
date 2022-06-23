@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.26.5 (2022-06-23)
+
+
+### Bug Fixes
+
+* **create-db:** use PGPORT ([bc5fed4](https://github.com/SocialGouv/kontinuous/commit/bc5fed467be8e830fbeb5a54505868c306607962))
+
 ### [1.26.4](https://github.com/SocialGouv/kontinuous/compare/v1.26.3...v1.26.4) (2022-06-23)
 
 
