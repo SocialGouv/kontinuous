@@ -66,6 +66,8 @@
     "common",
     "src",
     "package.json",
+    "README.md",
+    "LICENSE",
     "tsconfig.json"
   ],
   "publishConfig": {
