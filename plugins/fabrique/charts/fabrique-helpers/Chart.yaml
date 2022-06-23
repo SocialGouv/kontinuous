@@ -1,5 +1,5 @@
 apiVersion: v2
 name: fabrique-helpers
-version: 1.26.3
+version: 1.26.4
 type: library
-appVersion: 1.26.3
+appVersion: 1.26.4
