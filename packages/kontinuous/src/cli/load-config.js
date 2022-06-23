@@ -2,6 +2,7 @@ const os = require("os")
 const path = require("path")
 const { mkdtemp } = require("fs/promises")
 
+const fs = require("fs-extra")
 const set = require("lodash.set")
 const qs = require("qs")
 
@@ -137,9 +138,17 @@ module.exports = async (opts = {}) => {
       envParser: (str) => yaml.load(str),
       option: "set",
     },
+    buildRootPath: {
+      env: "KS_BUILD_ROOT_PATH",
+      defaultFunction: () => path.join(os.tmpdir(), "kontinuous"),
+    },
     buildPath: {
       env: "KS_BUILD_PATH",
-      defaultFunction: () => mkdtemp(path.join(os.tmpdir(), "kontinuous-")),
+      defaultFunction: async (config) => {
+        const { buildRootPath } = config
+        await fs.ensureDir(buildRootPath)
+        return mkdtemp(path.join(buildRootPath, "build-"))
+      },
     },
     buildProjectPath: {
       defaultFunction: (config) =>
