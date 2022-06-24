@@ -5,8 +5,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     {{ range $key, $val := (merge .Values.global.ingress.annotations .Values.ingress.annotations) }}
-    "{{ $key }}": |
-      {{- $val | nindent 6 }}
+    "{{ $key }}": {{ $val | quote }}
     {{ end }}
   labels:
     component: oauth2-proxy
