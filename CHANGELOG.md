@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.3](https://github.com/SocialGouv/kontinuous/compare/v1.27.2...v1.27.3) (2022-06-24)
+
+
+### Bug Fixes
+
+* add homepage to packge.json ([0a41ed7](https://github.com/SocialGouv/kontinuous/commit/0a41ed79403e89c57374b0ed851033544d177e5f))
+* metabase ([cd1ef52](https://github.com/SocialGouv/kontinuous/commit/cd1ef52a793ebb5633b0563968d89241a943f6ec))
+
 ### [1.27.2](https://github.com/SocialGouv/kontinuous/compare/v1.27.1...v1.27.2) (2022-06-24)
 
 
