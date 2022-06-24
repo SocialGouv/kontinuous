@@ -1,4 +1,4 @@
-{{ if matomo.cronjob.enabled }}
+{{ if .Values.matomo.cronjob.enabled }}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
