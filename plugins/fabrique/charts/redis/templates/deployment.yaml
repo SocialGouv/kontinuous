@@ -17,7 +17,6 @@ spec:
     metadata:
       labels:
         component: {{ or .Values.component .Chart.Name }}
-        application: {{ .Values.application }}
     spec:
       containers:
         - image: redis:6.2.5-alpine3.14
