@@ -2,6 +2,7 @@
   "name": "kontinuous",
   "version": "1.27.2",
   "repository": "https://github.com/SocialGouv/kontinuous.git",
+  "homepage": "https://socialgouv.github.io/kontinuous/",
   "license": "MIT",
   "main": "src/index",
   "dependencies": {
