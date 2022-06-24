@@ -1,0 +1,39 @@
+{{ if matomo.cronjob.enabled }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  labels:
+    component: {{ or .Values.component .Chart.Name }}
+    application: {{ or .Values.component .Chart.Name }}
+  name: {{ or .Values.component .Chart.Name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  schedule: 0 * * * *
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            component: {{ or .Values.component .Chart.Name }}
+            application: {{ or .Values.component .Chart.Name }}
+          name: {{ or .Values.component .Chart.Name }}
+          namespace: {{ .Values.namespace }}
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: {{ or .Values.component .Chart.Name }}-container
+              image: node:14-alpine
+              command:
+                - sh
+                - "-c"
+                - npx @socialgouv/matomo-postgres
+              envFrom:
+                - secretRef:
+                    name: {{ or .Values.component .Chart.Name }}-cronjob
+              env:
+                - name: STARTDATE
+                  value: "2019-01-01"
+                - name: DEBUG
+                  value: "*"
+{{ end }}
