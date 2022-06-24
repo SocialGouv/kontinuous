@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.2](https://github.com/SocialGouv/kontinuous/compare/v1.27.1...v1.27.2) (2022-06-24)
+
+
+### Bug Fixes
+
+* metabase chart extend ([20f3f05](https://github.com/SocialGouv/kontinuous/commit/20f3f05f0171797fb7138c87723dc3911e516219))
+* var naming ([b4bca96](https://github.com/SocialGouv/kontinuous/commit/b4bca96367c4ba3e5033c1bfd5b26b44ddc6ef43))
+
 ### [1.27.1](https://github.com/SocialGouv/kontinuous/compare/v1.27.0...v1.27.1) (2022-06-23)
 
 
