@@ -252,6 +252,7 @@ const downloadAndBuildDependencies = async (config)=>{
       target,
       definition,
       config,
+      scope,
     })=>{
       const {links={}} = config
       
@@ -267,7 +268,12 @@ const downloadAndBuildDependencies = async (config)=>{
           await fs.ensureDir(target)
           await fs.copy(from, target, { filter: copyFilter })
         }else{
-          await degit(importTarget).clone(target)
+          try {
+            await degit(importTarget).clone(target)
+          }catch(error){
+            logger.error({error, scope}, `Unable to degit ${importTarget}`)
+            throw error
+          }
         }
       }
       

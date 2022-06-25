@@ -32,7 +32,12 @@ const requireUse = async (
         })
       } else {
         logger.debug(`degit ${use}`)
-        await degit(use, { force: true }).clone(target)
+        try {
+          await degit(use, { force: true }).clone(target)
+        } catch (error) {
+          logger.error({ error }, `Unable to degit job ${use}`)
+          throw error
+        }
       }
     })()
   }
