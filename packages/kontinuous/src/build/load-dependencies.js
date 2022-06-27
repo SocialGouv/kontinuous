@@ -245,7 +245,7 @@ const recurseDependency = async (param={})=>{
   await afterChildren(callbackParam)
 }
 
-const downloadAndBuildDependencies = async (config)=>{
+const downloadAndBuildDependencies = async (config, logger)=>{
   await recurseDependency({
     config,
     beforeChildren: async ({
@@ -253,11 +253,11 @@ const downloadAndBuildDependencies = async (config)=>{
       definition,
       config,
       scope,
+      name,
     })=>{
       const {links={}} = config
       
       const { import: importTarget } = definition
-      
       if(importTarget){
         const matchLink = Object.entries(links).find(([key]) =>
           importTarget.startsWith(key)
@@ -266,14 +266,11 @@ const downloadAndBuildDependencies = async (config)=>{
           const [linkKey, linkPath] = matchLink
           const from = linkPath + importTarget.substr(linkKey.length)
           await fs.ensureDir(target)
+          logger.debug({scope}, `copy ${name} from "${from}"`)
           await fs.copy(from, target, { filter: copyFilter })
         }else{
-          try {
-            await degit(importTarget).clone(target)
-          }catch(error){
-            logger.error({error, scope}, `Unable to degit ${importTarget}`)
-            throw error
-          }
+          logger.debug({scope}, `degit ${name} from "${importTarget}"`)
+          await degit(importTarget).clone(target)
         }
       }
       
@@ -629,7 +626,7 @@ const copyFilesDir = async (config) => {
 module.exports = async (config, logger)=>{
   const {buildPath} = config
 
-  await downloadAndBuildDependencies(config)
+  await downloadAndBuildDependencies(config, logger)
   await installPackages(config)
   await mergeEnvTemplates(`${buildPath}/charts/project`, config)
   await copyFilesDir(config)
