@@ -19,8 +19,8 @@ module.exports = async (target) => {
         logger.warn(data.toString())
       })
     })
-  } catch (err) {
-    logger.error(`yarn failed in "${target}" ${err}`)
-    throw err
+  } catch (error) {
+    logger.error({ error }, `yarn failed in "${target}"`)
+    throw error
   }
 }
