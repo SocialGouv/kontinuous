@@ -4,7 +4,8 @@ const logger = require("./logger")
 
 module.exports = async (target) => {
   if (
-    (await fs.pathExists(`${target}/node_modules`)) ||
+    ((await fs.pathExists(`${target}/node_modules`)) &&
+      (await fs.readdir(`${target}/node_modules`)).length > 0) ||
     (await fs.pathExists(`${target}/.pnp.cjs`))
   ) {
     return
