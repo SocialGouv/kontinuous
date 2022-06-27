@@ -26,11 +26,10 @@ module.exports = ({scope, inc, type, config})=>{
     dotInc =  [...scope, inc]
   }
 
-  dotInc = dotInc.map(k => k.
+  dotInc = dotInc.flatMap(k => k.
     replaceAll("/",".")
     .split(".")
     .map( k2 => camelCase(k2) )
-    .join(".")
   ).join(".")
 
   return get(config.dependencies, `${dotInc}.options`) || {}
