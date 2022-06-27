@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.29.0](https://github.com/SocialGouv/kontinuous/compare/v1.28.0...v1.29.0) (2022-06-27)
+
+
+### Features
+
+* shared node_modules links ([4ca3d0b](https://github.com/SocialGouv/kontinuous/commit/4ca3d0b857a746c27d03ce1de1cc2b6720207724))
+
+
+### Bug Fixes
+
+* improve yarn install ([de2329c](https://github.com/SocialGouv/kontinuous/commit/de2329c6133e0b96f9206161de2f0dcd3acb6ea9))
+* protect delivery from overwrite ([4d6a6e1](https://github.com/SocialGouv/kontinuous/commit/4d6a6e1b948a8e3d6b2fda2bd3bff13cca2ccbff))
+* remove legacy ([8175cf9](https://github.com/SocialGouv/kontinuous/commit/8175cf9339c1b05c47fa969f1e93f4c943eb973a))
+* tests warn ([d83599c](https://github.com/SocialGouv/kontinuous/commit/d83599c043aacde6d8a7749bce4bb78aac723253))
+* ts-node ([59ad454](https://github.com/SocialGouv/kontinuous/commit/59ad4540a033168943f7413dc6f36021ed8ec2dd))
+* ts-node transpile-only ([41ab65e](https://github.com/SocialGouv/kontinuous/commit/41ab65e3ba9c3191d97c49e1269f085e36899782))
+
 ## [1.28.0](https://github.com/SocialGouv/kontinuous/compare/v1.27.5...v1.28.0) (2022-06-27)
 
 
