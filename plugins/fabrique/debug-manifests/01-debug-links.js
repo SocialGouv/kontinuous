@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/extensions, import/no-extraneous-dependencies
 const toTextImport = import("@socialgouv/parse-manifests/src/toText.js")
 
 module.exports = async (manifests, _options, { logger, utils }) => {
