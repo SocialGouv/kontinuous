@@ -48,7 +48,7 @@
     "retag": "TAG=$(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1) && git tag -f $TAG && git push origin :refs/tags/$TAG && git push -f origin master --tags",
     "push": "git push -f --follow-tags origin master",
     "push:gitlab": "git push -f --follow-tags gitlab master",
-    "delivery": "yarn release && yarn push && yarn push:gitlab",
+    "delivery": "git push && yarn release && yarn push && yarn push:gitlab",
     "test": "yarn workspaces foreach --no-private --parallel run test",
     "test:kontinuous": "yarn workspace kontinuous test",
     "test:webhook": "yarn workspace ~webhook test",
