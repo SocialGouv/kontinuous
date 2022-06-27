@@ -8,7 +8,10 @@ module.exports = async (manifests, _options, { logger, utils }) => {
   const manifestsDump = manifests
     .map((manifest) => yaml.dump(manifest))
     .join("---\n")
-
-  const result = toText(manifestsDump)
-  logger.debug(`\n${result}`)
+  try {
+    const result = toText(manifestsDump)
+    logger.debug(`\n${result}`)
+  } catch (error) {
+    logger.warn({ error }, `unable to run parse-manifests`)
+  }
 }
