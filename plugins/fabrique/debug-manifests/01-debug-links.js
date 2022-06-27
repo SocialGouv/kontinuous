@@ -11,11 +11,7 @@ module.exports = async (manifests, _options, { logger }) => {
   const getManifestsSummary = (await getManifestsSummaryImport).default
   const summaryToText = (await summaryToTextImport).default
 
-  try {
-    const infos = getManifestsSummary(manifests)
-    const result = summaryToText(infos)
-    logger.debug(`\n${result}`)
-  } catch (error) {
-    logger.warn({ error }, `unable to run parse-manifests`)
-  }
+  const infos = getManifestsSummary(manifests)
+  const result = summaryToText(infos)
+  logger.debug(`\n${result}`)
 }
