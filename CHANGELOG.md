@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.28.0](https://github.com/SocialGouv/kontinuous/compare/v1.27.5...v1.28.0) (2022-06-27)
+
+
+### Features
+
+* debug manifests links ([5461f48](https://github.com/SocialGouv/kontinuous/commit/5461f489c414d664067836debc0258f821c40d45))
+
+
+### Bug Fixes
+
+* compat es6 ([ad83b38](https://github.com/SocialGouv/kontinuous/commit/ad83b3861acba46dea53eff0e0ed2b2bf790657a))
+* debug manifests links ([6a1f035](https://github.com/SocialGouv/kontinuous/commit/6a1f035741a5d7e799cfe99301c48666d454dcc2))
+* degit/tiged error try catch verbosity ([ac85c8f](https://github.com/SocialGouv/kontinuous/commit/ac85c8fb84478547123dab6eef86914a956cd589))
+* improve syntax ([1740d45](https://github.com/SocialGouv/kontinuous/commit/1740d457cb0355c0ec6379a3492a79cc15011d07))
+* lint ([014793e](https://github.com/SocialGouv/kontinuous/commit/014793e6b0109918786917a7a26a223bff4545bf))
+* linter ([d3a7eb4](https://github.com/SocialGouv/kontinuous/commit/d3a7eb4af223329bbd364c81d5bd19164ff7ec88))
+* plugin fabrique yarn ([c3e1092](https://github.com/SocialGouv/kontinuous/commit/c3e1092595251cb5202002e2690d46d19999d633))
+* up parse-manifests ([fafcde2](https://github.com/SocialGouv/kontinuous/commit/fafcde2c537ed68d4ef0e7d51eb64e319decd3cd))
+* up yarn.lock ([1926efa](https://github.com/SocialGouv/kontinuous/commit/1926efab9e7c40f43e3eb1aa40da814297e61eab))
+* wip ([f79b18b](https://github.com/SocialGouv/kontinuous/commit/f79b18b607146178caf979f37f11b047675b846a))
+
 ### [1.27.5](https://github.com/SocialGouv/kontinuous/compare/v1.27.4...v1.27.5) (2022-06-24)
 
 
