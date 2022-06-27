@@ -1,11 +1,9 @@
-// eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies, import/no-unresolved, import/extensions */
+
 const getManifestsSummaryImport = import(
-  // eslint-disable-next-line import/extensions
   "@socialgouv/parse-manifests/src/getManifestsSummary.js"
 )
-// eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 const summaryToTextImport = import(
-  // eslint-disable-next-line import/extensions
   "@socialgouv/parse-manifests/src/summaryToText.js"
 )
 
