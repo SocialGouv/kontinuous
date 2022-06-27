@@ -1,5 +1,6 @@
 const os = require('os')
 const path = require("path")
+
 const fs = require("fs-extra")
 const degit = require("tiged")
 const camelCase = require('lodash.camelcase')
@@ -15,6 +16,7 @@ const loadYamlFile = require("~common/utils/load-yaml-file")
 const downloadFile = require("~common/utils/download-file")
 const getYamlPath = require("~common/utils/get-yaml-path")
 const yarnInstall = require("~common/utils/yarn-install")
+const fileHash = require("~common/utils/file-hash")
 
 const slug = require("~common/utils/slug")
 
@@ -303,10 +305,29 @@ const installPackages = async (config) => {
       target,
     })=>{
       if (
-        await fs.pathExists(`${target}/package.json`)
+        !await fs.pathExists(`${target}/package.json`)
       ) {
-        await yarnInstall(target)
+        return
       }
+
+      let hash
+      if (
+        !await fs.pathExists(`${target}/yarn.lock`)
+      ) {
+        hash = await fileHash(`${target}/yarn.lock`)
+      } else {
+        hash = await fileHash(`${target}/package.json`)
+      }
+      const homedir = os.homedir()
+      
+      const sharedDir = `${homedir}/.kontinuous/cache/shared-node_modules/${hash}/node_modules`
+      
+      await fs.ensureDir(sharedDir)
+      fs.symlink(sharedDir, `${target}/node_modules`)
+      
+      await yarnInstall(target)
+      
+
     }
   })
 }

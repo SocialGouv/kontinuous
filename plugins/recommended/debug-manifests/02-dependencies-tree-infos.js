@@ -67,14 +67,19 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
   const binSourceDir = `${rootPluginDir}/node_modules/puml/bin/${platform}`
   const binTargetDir = `${rootPluginDir}/node_modules/node-plantuml/vendor`
   await fs.ensureDir(binTargetDir)
-  await Promise.all([
-    fs.symlink(
-      `${binSourceDir}/j2v8_${platform}_x86_64-3.1.6.jar`,
-      `${binTargetDir}/j2v8_${platform}_x86_64-3.1.6.jar`
-    ),
-    fs.symlink(`${binSourceDir}/plantuml.jar`, `${binTargetDir}/plantuml.jar`),
-    fs.symlink(`${binSourceDir}/vizjs.jar`, `${binTargetDir}/vizjs.jar`),
-  ])
+
+  const symlinkMap = {
+    [`${binTargetDir}/j2v8_${platform}_x86_64-3.1.6.jar`]: `${binSourceDir}/j2v8_${platform}_x86_64-3.1.6.jar`,
+    [`${binTargetDir}/plantuml.jar`]: `${binSourceDir}/plantuml.jar`,
+    [`${binTargetDir}/vizjs.jar`]: `${binSourceDir}/vizjs.jar`,
+  }
+  await Promise.all(
+    Object.entries(symlinkMap).map(async ([key, value]) => {
+      if (!(await fs.pathExists(key))) {
+        await fs.symlink(value, key)
+      }
+    })
+  )
 
   const result = await utils.asyncShell(
     [
