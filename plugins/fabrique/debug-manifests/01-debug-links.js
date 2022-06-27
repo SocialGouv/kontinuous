@@ -1,15 +1,21 @@
-// eslint-disable-next-line import/extensions, import/no-unresolved, import/no-extraneous-dependencies
-const toTextImport = import("@socialgouv/parse-manifests/src/toText.js")
+// eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
+const getManifestsSummaryImport = import(
+  // eslint-disable-next-line import/extensions
+  "@socialgouv/parse-manifests/src/getManifestsSummary.js"
+)
+// eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
+const summaryToTextImport = import(
+  // eslint-disable-next-line import/extensions
+  "@socialgouv/parse-manifests/src/summaryToText.js"
+)
 
-module.exports = async (manifests, _options, { logger, utils }) => {
-  const toText = (await toTextImport).default
+module.exports = async (manifests, _options, { logger }) => {
+  const getManifestsSummary = (await getManifestsSummaryImport).default
+  const summaryToText = (await summaryToTextImport).default
 
-  const { yaml } = utils
-  const manifestsDump = manifests
-    .map((manifest) => yaml.dump(manifest))
-    .join("---\n")
   try {
-    const result = toText(manifestsDump)
+    const infos = getManifestsSummary(manifests)
+    const result = summaryToText(infos)
     logger.debug(`\n${result}`)
   } catch (error) {
     logger.warn({ error }, `unable to run parse-manifests`)
