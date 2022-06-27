@@ -1,6 +1,8 @@
 const path = require("path")
-
-process.env.TS_NODE_PROJECT = path.resolve(`${__dirname}/../tsconfig.json`)
 const { register } = require("ts-node")
 
-register()
+process.env.TS_NODE_PROJECT = path.resolve(`${__dirname}/../tsconfig.json`)
+
+register({
+  transpileOnly: true,
+})
