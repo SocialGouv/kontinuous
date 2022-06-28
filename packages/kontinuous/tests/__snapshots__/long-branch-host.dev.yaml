@@ -39,6 +39,39 @@ spec:
     - Ingress
 ---
 apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: security-quota
+  namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+  annotations:
+    kapp.k14s.io/disable-original: ''
+spec:
+  hard:
+    count/services.loadbalancers: 0
+    count/services.nodeports: 0
+    count/persistentvolumeclaims: 10
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: default-limits
+  namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+  annotations:
+    kapp.k14s.io/disable-original: ''
+spec:
+  limits:
+    - type: Container
+      default:
+        cpu: 500m
+        memory: 512Mi
+      defaultRequest:
+        cpu: 100m
+        memory: 128Mi
+      max:
+        cpu: 3
+        memory: 8Gi
+---
+apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: default
@@ -94,7 +127,23 @@ spec:
       labels:
         component: app-api
         application: test-long-branch-host
+        namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: namespace
+                    operator: In
+                    values:
+                      - >-
+                        test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+                  - key: component
+                    operator: In
+                    values:
+                      - app-api
+              topologyKey: kubernetes.io/hostname
       containers:
         - image: >-
             harbor.fabrique.social.gouv.fr/test-long-branch-host/app:sha-ffac537e6cbbf934b08745a378932722df287a53
