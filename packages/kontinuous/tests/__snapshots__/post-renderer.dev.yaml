@@ -35,23 +35,6 @@ exports[`post-renderer.dev 1`] = `
     policyTypes:
       - Ingress
 - apiVersion: v1
-  kind: LimitRange
-  metadata:
-    name: default-limits
-    namespace: test-post-renderer-feature-branch-1
-  spec:
-    limits:
-      - type: Container
-        default:
-          cpu: 500m
-          memory: 512Mi
-        defaultRequest:
-          cpu: 100m
-          memory: 128Mi
-        max:
-          cpu: 3
-          memory: 8Gi
-- apiVersion: v1
   kind: ServiceAccount
   metadata:
     name: default
@@ -175,5 +158,6 @@ exports[`post-renderer.dev 1`] = `
       - hosts:
           - test-post-renderer-feature-branch-1.dev.fabrique.social.gouv.fr
         secretName: wildcard-crt
+- null
 "
 `;
