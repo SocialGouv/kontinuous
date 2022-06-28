@@ -33,7 +33,12 @@ const requireUse = async (
       } else {
         logger.debug(`degit ${use}`)
         try {
-          await degit(use, { force: true }).clone(target)
+          const tagHasChanged = await utils.degitTagHasChanged(use)
+          const cache = !tagHasChanged
+          if (tagHasChanged) {
+            logger.debug({ degit: use }, `tag has changed, renew cache`)
+          }
+          await degit(use, { cache, force: true }).clone(target)
         } catch (error) {
           logger.error({ error }, `Unable to degit job ${use}`)
           throw error

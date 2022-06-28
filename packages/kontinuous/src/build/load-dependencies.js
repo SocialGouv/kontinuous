@@ -17,6 +17,7 @@ const downloadFile = require("~common/utils/download-file")
 const getYamlPath = require("~common/utils/get-yaml-path")
 const yarnInstall = require("~common/utils/yarn-install")
 const fileHash = require("~common/utils/file-hash")
+const degitTagHasChanged = require("~common/utils/degit-tag-has-changed")
 
 const slug = require("~common/utils/slug")
 
@@ -259,8 +260,9 @@ const downloadAndBuildDependencies = async (config, logger)=>{
     })=>{
       const {links={}} = config
       
-      const { import: importTarget } = definition
+      let { import: importTarget } = definition
       if(importTarget){
+        importTarget = importTarget.replace("@", "#")
         const matchLink = Object.entries(links).find(([key]) =>
           importTarget.startsWith(key)
         )
@@ -271,8 +273,13 @@ const downloadAndBuildDependencies = async (config, logger)=>{
           logger.debug({scope}, `copy ${name} from "${from}"`)
           await fs.copy(from, target, { filter: copyFilter })
         }else{
+          const tagHasChanged = await degitTagHasChanged(importTarget)
+          const cache = !tagHasChanged
           logger.debug({scope}, `degit ${name} from "${importTarget}"`)
-          await degit(importTarget).clone(target)
+          if(tagHasChanged){
+            logger.debug({scope, degit: importTarget}, `tag has changed, renew cache`)
+          }
+          await degit(importTarget, {cache}).clone(target)
         }
       }
       
