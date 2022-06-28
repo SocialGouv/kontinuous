@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.30.0 (2022-06-28)
+
+
+### Features
+
+* **app:** antiAffinity + LimitRange + Quotas ([22c4194](https://github.com/SocialGouv/kontinuous/commit/22c419444f1753ddb54b35d852e42dad18838d9a))
+
 ### [1.29.1](https://github.com/SocialGouv/kontinuous/compare/v1.29.0...v1.29.1) (2022-06-28)
 
 
