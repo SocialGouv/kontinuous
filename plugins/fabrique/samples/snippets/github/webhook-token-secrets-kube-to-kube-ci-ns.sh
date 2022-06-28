@@ -14,14 +14,12 @@ for nsressource in $NAMESPACES; do
     kubectl --context $KUBECONTEXT get secret "kubewebhook" --namespace="$namespaceWebhook" -ojson \
       | jq 'del(.metadata.namespace,.metadata.resourceVersion,.metadata.uid) | .metadata.creationTimestamp=null' \
       | jq 'del(.metadata.managedFields,.metadata.ownerReferences)' \
-      | jq '.metadata.annotations["janitor/ttl"] = "24h"' \
       | kubectl --context dev -n "$namespaceCi" apply -f -      
 
     echo "copy secret 'kubewebhook' from '$namespaceWebhook' to 'prod'.'$namespaceCi'"
     kubectl --context $KUBECONTEXT get secret "kubewebhook" --namespace="$namespaceWebhook" -ojson \
       | jq 'del(.metadata.namespace,.metadata.resourceVersion,.metadata.uid) | .metadata.creationTimestamp=null' \
       | jq 'del(.metadata.managedFields,.metadata.ownerReferences)' \
-      | jq '.metadata.annotations["janitor/ttl"] = "24h"' \
       | kubectl --context prod -n "$namespaceCi" apply -f -      
   fi
 done
