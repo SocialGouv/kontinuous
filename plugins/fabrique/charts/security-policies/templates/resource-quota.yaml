@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: security-quota
+  namespace: {{ or .Values.namespace .Values.global.namespace }}
+spec:
+  hard:
+    count/services.loadbalancers: {{ .Values.quotas.svcLoadBalancer }}
+    count/services.nodeports: 0
+    count/persistentvolumeclaims: {{ .Values.quotas.pvc }}

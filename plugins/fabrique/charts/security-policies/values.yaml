@@ -1,2 +1,5 @@
 enabled: true
 namespace:
+quotas:
+  svcLoadBalancer: 0
+  pvc: 10
