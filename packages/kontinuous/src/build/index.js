@@ -36,8 +36,7 @@ module.exports = async (options) => {
   }
   
   if(config.upload){
-    const { uploadUrl } = config
-    await upload({ uploadUrl, manifests })
+    await upload({ file: manifestsFile })
   }
 
   if(options.open){
