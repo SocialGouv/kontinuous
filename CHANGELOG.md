@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.3](https://github.com/SocialGouv/kontinuous/compare/v1.30.2...v1.30.3) (2022-06-28)
+
+
+### Bug Fixes
+
+* tmp disable resourcequotas ([20e0048](https://github.com/SocialGouv/kontinuous/commit/20e0048813358d3c1d0b6086909db8fc80b9a703))
+
 ### [1.30.2](https://github.com/SocialGouv/kontinuous/compare/v1.30.1...v1.30.2) (2022-06-28)
 
 
