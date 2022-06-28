@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.4](https://github.com/SocialGouv/kontinuous/compare/v1.30.3...v1.30.4) (2022-06-28)
+
+
+### Bug Fixes
+
+* tmp disable limitranges ([a31ecc6](https://github.com/SocialGouv/kontinuous/commit/a31ecc66dc8f663ebbd084719b5768719b4f2d70))
+
 ### [1.30.3](https://github.com/SocialGouv/kontinuous/compare/v1.30.2...v1.30.3) (2022-06-28)
 
 
