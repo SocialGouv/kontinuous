@@ -9,7 +9,7 @@ metadata:
   annotations:
     {{- include "kontinuous-helpers.annotations.kapp-deployment" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicas }}
+  replicas: {{ or .Values.replicas .Values.global.replicas }}
   selector:
     matchLabels:
       component: {{ or .Values.component .Chart.Name }}
@@ -18,7 +18,22 @@ spec:
       labels:
         component: {{ or .Values.component .Chart.Name }}
         application: {{ .Values.global.repositoryName }}
+        namespace: {{ or .Values.namespace .Values.global.namespace }}
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: namespace
+                operator: In
+                values: 
+                - {{ or .Values.namespace .Values.global.namespace }}
+              - key: component
+                operator: In
+                values:
+                - {{ or .Values.component .Chart.Name }}
+            topologyKey: "kubernetes.io/hostname"
       initContainers:
       {{- if .Values.waitForPostgres }}
         {{- include "fabrique-helpers.init-containers.wait-for-postgres" . | nindent 8 }}

@@ -100,6 +100,8 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
 
   const imageProject = ""
 
+  const replicas = isProd ? 2 : 1
+
   const defaultValues = {
     global: {
       certSecretName: "wildcard-crt",
@@ -117,6 +119,7 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
       host,
       domain,
       registry,
+      replicas,
       imageProject,
       imageRepository,
       imageTag,
