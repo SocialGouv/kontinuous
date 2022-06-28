@@ -47,6 +47,9 @@ module.exports = async (target) => {
   const repo = parse(target)
   const dir = path.join(base, repo.site, repo.user, repo.name)
   const mapJsonFile = path.join(dir, "map.json")
+  if (!(await fs.pathExists(mapJsonFile))) {
+    return true
+  }
   const mapJson = await fs.readFile(mapJsonFile, { encoding: "utf-8" })
   const map = JSON.parse(mapJson)
   const hash = map[repo.ref]
