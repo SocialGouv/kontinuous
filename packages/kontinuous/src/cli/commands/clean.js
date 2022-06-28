@@ -26,12 +26,19 @@ module.exports = (program) =>
         process.exit(1)
       }
 
+      const homeOrTmpDir = os.homedir || os.tmpdir
       if (opts.cache) {
-        const homeOrTmpDir = os.homedir || os.tmpdir
-        const cacheDir = `${homeOrTmpDir}/.kontinuous/cache`
-        logger.info(`cleaning cache ${cacheDir}`)
         try {
-          await fs.remove(buildRootPath)
+          const cacheDirs = [
+            `${homeOrTmpDir}/.kontinuous/cache`,
+            `${homeOrTmpDir}/.degit`,
+          ]
+          await Promise.all(
+            cacheDirs.map(async (cacheDir) => {
+              logger.info(`cleaning cache ${cacheDir}`)
+              await fs.remove(cacheDir)
+            })
+          )
         } catch (error) {
           logger.error(error)
           process.exit(1)
