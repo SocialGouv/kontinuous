@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.31.1](https://github.com/SocialGouv/kontinuous/compare/v1.31.0...v1.31.1) (2022-06-28)
+
+
+### Bug Fixes
+
+* check mapjson exists ([d972e5d](https://github.com/SocialGouv/kontinuous/commit/d972e5df7058c34f8b8ed685102eac1188de8862))
+
 ## [1.31.0](https://github.com/SocialGouv/kontinuous/compare/v1.30.4...v1.31.0) (2022-06-28)
 
 
