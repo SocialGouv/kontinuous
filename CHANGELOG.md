@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.31.0](https://github.com/SocialGouv/kontinuous/compare/v1.30.4...v1.31.0) (2022-06-28)
+
+
+### Features
+
+* detect degit tag changed ([015792b](https://github.com/SocialGouv/kontinuous/commit/015792b891fd9cdfa7aceafc2ccc06fc0d892283))
+
 ### [1.30.4](https://github.com/SocialGouv/kontinuous/compare/v1.30.3...v1.30.4) (2022-06-28)
 
 
