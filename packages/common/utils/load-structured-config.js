@@ -47,6 +47,7 @@ module.exports = async ({
       default: defaultValue,
       defaultFunction,
       emptyAsUndefined = defaultEmptyAsUndefined,
+      transform,
     } = def
 
     const optionKey = camelCase(def.option)
@@ -74,6 +75,9 @@ module.exports = async ({
     }
     if (defaultValue && isUndefined(config[key])) {
       config[key] = defaultValue
+    }
+    if (transform) {
+      config[key] = transform(config[key])
     }
   }
 

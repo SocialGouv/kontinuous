@@ -311,6 +311,15 @@ module.exports = async (opts = {}) => {
         return kubeconfigContext
       },
     },
+    dependencies: {
+      transform: (dependencies) =>
+        Object.entries(dependencies)
+          .filter(([_key, value]) => value.enabled !== false && value.import)
+          .reduce((acc, [key, value]) => {
+            acc[key] = value
+            return acc
+          }, {}),
+    },
   }
 
   const rootConfig = await loadStructuredConfig({
