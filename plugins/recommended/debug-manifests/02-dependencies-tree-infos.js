@@ -64,7 +64,7 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
   const rootPluginDir = path.resolve(`${__dirname}/..`)
 
   const platform = process.platform === "darwin" ? "macosx" : process.platform
-  const binSourceDir = `${rootPluginDir}/node_modules/puml/bin/${platform}`
+  const binSourceDir = `../../puml/bin/${platform}`
   const binTargetDir = `${rootPluginDir}/node_modules/node-plantuml/vendor`
   await fs.ensureDir(binTargetDir)
 
