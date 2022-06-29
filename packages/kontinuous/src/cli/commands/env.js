@@ -9,6 +9,7 @@ module.exports = (program) =>
     .description("Infer env from ref or branch")
     .addOption(options.env)
     .addOption(options.cwd)
+    .addOption(options.subpath)
     .argument("[ref]", "the ref")
     .action(async (ref, _opts, _command) => {
       let env

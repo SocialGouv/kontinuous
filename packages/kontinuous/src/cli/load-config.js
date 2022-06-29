@@ -49,6 +49,7 @@ module.exports = async (opts = {}) => {
     },
     workspaceSubPath: {
       env: "KS_WORKSPACE_SUBPATH",
+      option: "subpath",
       default: ".kontinuous",
     },
     workspaceKsPath: {

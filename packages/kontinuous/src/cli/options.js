@@ -36,6 +36,10 @@ module.exports.configSet = new Option(
 )
 
 module.exports.cwd = new Option("--cwd <path>", "set current working directory")
+module.exports.subpath = new Option(
+  "--subpath <path>",
+  "override .kontinuous directory path"
+)
 
 module.exports.debug = new Option("--debug, -d", "enable debugging loglevel")
 

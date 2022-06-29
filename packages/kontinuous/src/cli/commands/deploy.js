@@ -13,6 +13,7 @@ module.exports = (program) =>
     .addOption(options.inlineValues)
     .addOption(options.set)
     .addOption(options.cwd)
+    .addOption(options.subpath)
     .addOption(options.upload)
     .addOption(options.uploadUrl)
     .addOption(options.statusUrl)

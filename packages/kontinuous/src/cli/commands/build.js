@@ -17,6 +17,7 @@ module.exports = (program) =>
     .addOption(options.set)
     .addOption(options.helmArgs)
     .addOption(options.cwd)
+    .addOption(options.subpath)
     .addOption(options.repository)
     .addOption(options.branch)
     .addOption(options.commit)

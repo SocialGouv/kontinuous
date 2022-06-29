@@ -10,6 +10,7 @@ module.exports = (program) =>
     .command("logs")
     .description("stream logs pipeline from webhook")
     .addOption(options.cwd)
+    .addOption(options.subpath)
     .addOption(options.repository)
     .addOption(options.branch)
     .addOption(options.commit)
