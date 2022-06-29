@@ -6,7 +6,7 @@ module.exports = async (manifestsDocument) => {
   const iterator = yaml.loadAll(manifestsDocument)
   const manifests = []
 
-  for (let manifest of iterator) {
+  for (const manifest of iterator) {
     if (!manifest) {
       continue
     }

@@ -1,13 +1,12 @@
-const os = require('os')
 const path = require("path")
 
 const fs = require("fs-extra")
 const degit = require("tiged")
-const camelCase = require('lodash.camelcase')
+const camelCase = require("lodash.camelcase")
 const get = require("lodash.get")
 const set = require("lodash.set")
-const {default: axios} = require('axios')
-const decompress = require('decompress')
+const { default: axios } = require("axios")
+const decompress = require("decompress")
 
 const yaml = require("~common/utils/yaml")
 const deepmerge = require("~common/utils/deepmerge")
@@ -22,29 +21,35 @@ const degitTagHasChanged = require("~common/utils/degit-tag-has-changed")
 const slug = require("~common/utils/slug")
 
 const createContext = require("./context")
-const copyFilter = require('./copy-filter')
-const configDependencyKey = require('./context/config-dependency-key')
+const copyFilter = require("./copy-filter")
+const configDependencyKey = require("./context/config-dependency-key")
 
 const validateName = /^[a-zA-Z\d-_]+$/
 
-const registerSubcharts = async (chart, chartsDirName, target, definition={})=>{
+const registerSubcharts = async (
+  chart,
+  chartsDirName,
+  target,
+  definition = {}
+) => {
   const chartsDir = `${target}/${chartsDirName}`
-  if(!await fs.pathExists(chartsDir)){
+  if (!(await fs.pathExists(chartsDir))) {
     return
   }
   const chartDirs = await fs.readdir(chartsDir)
-  for(const chartDir of chartDirs){
+  for (const chartDir of chartDirs) {
     const chartDirPath = `${chartsDir}/${chartDir}`
-    if(!(await fs.stat(chartDirPath)).isDirectory()){
+    if (!(await fs.stat(chartDirPath)).isDirectory()) {
       continue
     }
-    if(definition.charts?.[configDependencyKey(chartDir)]?.enabled===false){
+    if (definition.charts?.[configDependencyKey(chartDir)]?.enabled === false) {
       await fs.remove(chartDirPath)
       continue
     }
 
     const subchartFile = `${chartDirPath}/Chart.yaml`
-    if(!await fs.pathExists(subchartFile)){
+    if (!(await fs.pathExists(subchartFile))) {
+      // eslint-disable-next-line no-use-before-define
       await buildChartFile(chartDirPath, chartDir, definition[chartDir])
     }
     const subchartContent = await fs.readFile(subchartFile)
@@ -54,81 +59,87 @@ const registerSubcharts = async (chart, chartsDirName, target, definition={})=>{
       version: subchart.version,
       repository: `file://./${chartsDirName}/${chartDir}`,
     }
-    const definedDependency = chart.dependencies.find((dependency)=>
-      ((dependency.alias||dependency.name)===subchart.name)
+    const definedDependency = chart.dependencies.find(
+      (d) => (d.alias || d.name) === subchart.name
     )
-    if(definedDependency){
+    if (definedDependency) {
       Object.assign(definedDependency, dependency)
     } else {
       chart.dependencies.push(dependency)
     }
-    if(subchart.type!=="library" && !dependency.condition){
+    if (subchart.type !== "library" && !dependency.condition) {
       dependency.condition = `${dependency.alias || dependency.name}.enabled`
     }
   }
 }
 
-const buildChartFile = async (target, name, definition={})=>{
+const buildChartFile = async (target, name, definition = {}) => {
   const chartFile = `${target}/Chart.yaml`
   const chart = createChart(name)
-  if(await fs.pathExists(chartFile)){
+  if (await fs.pathExists(chartFile)) {
     const extendChart = yaml.load(await fs.readFile(chartFile))
     Object.assign(chart, extendChart)
     chart.name = name
-    for(const dep of chart.dependencies){
-      if(dep.condition){
+    for (const dep of chart.dependencies) {
+      if (dep.condition) {
         continue
       }
       dep.condition = `${dep.alias || dep.name}.enabled`
     }
   }
-  
+
   await registerSubcharts(chart, "charts", target, definition)
 
-  chart.dependencies = chart.dependencies.filter(dep=>
-    definition.charts?.[configDependencyKey(dep.name)]?.enabled!==false
+  chart.dependencies = chart.dependencies.filter(
+    (dep) =>
+      definition.charts?.[configDependencyKey(dep.name)]?.enabled !== false
   )
-  
+
   await fs.ensureDir(target)
   await fs.writeFile(chartFile, yaml.dump(chart))
 }
 
-const downloadRemoteRepository = async (target, _name, config)=>{
+const downloadRemoteRepository = async (target, _name, config) => {
   const chartFile = `${target}/Chart.yaml`
   const chart = yaml.load(await fs.readFile(chartFile))
-  const {dependencies=[]} = chart
+  const { dependencies = [] } = chart
   let touched = false
-  for(const dependency of dependencies){
-    const {repository} = dependency
-    if(repository.startsWith("file://")){
+  for (const dependency of dependencies) {
+    const { repository } = dependency
+    if (repository.startsWith("file://")) {
       continue
     }
     const localArchive = `${target}/charts/${dependency.name}-${dependency.version}.tgz`
     let zfile
-    if(await fs.pathExists(localArchive)){
+    if (await fs.pathExists(localArchive)) {
       zfile = localArchive
     } else {
       const cacheDir = `${config.kontinuousHomeDir}/cache/charts`
-      const archiveSlug = slug([dependency.name, dependency.version, repository])
+      const archiveSlug = slug([
+        dependency.name,
+        dependency.version,
+        repository,
+      ])
       zfile = `${cacheDir}/${archiveSlug}.tgz`
-      if(!await fs.pathExists(zfile)){
+      if (!(await fs.pathExists(zfile))) {
         await fs.ensureDir(cacheDir)
         const chartRepository = `${repository}/index.yaml`
         let repositoryIndex
         try {
           repositoryIndex = await axios.get(chartRepository)
-        }
-        catch(e){
+        } catch (e) {
           throw Error(`Unable to download ${chartRepository}: ${e.message}`)
         }
         const repo = yaml.load(repositoryIndex.data)
-        const {entries} = repo
+        const { entries } = repo
         const entryVersions = entries[dependency.name]
-        const version = entryVersions.find(entry=>{
-          return entry.version.toString() === dependency.version.toString()
-        })
-        if(!version){
-          throw new Exception(`version ${dependency.version} not found for ${dependency.name}`)
+        const version = entryVersions.find(
+          (entry) => entry.version.toString() === dependency.version.toString()
+        )
+        if (!version) {
+          throw new Error(
+            `version ${dependency.version} not found for ${dependency.name}`
+          )
         }
         const url = version.urls[0]
         await downloadFile(url, zfile)
@@ -136,30 +147,33 @@ const downloadRemoteRepository = async (target, _name, config)=>{
     }
 
     await decompress(zfile, `${target}/charts`)
-    
+
     let chartName = dependency.name
-    if(dependency.alias){
+    if (dependency.alias) {
       chartName = dependency.alias
-      await fs.rename(`${target}/charts/${dependency.name}`, `${target}/charts/${dependency.alias}`)
+      await fs.rename(
+        `${target}/charts/${dependency.name}`,
+        `${target}/charts/${dependency.alias}`
+      )
     }
 
     dependency.repository = `file://./charts/${chartName}`
     touched = true
   }
-  if(touched){
+  if (touched) {
     await fs.writeFile(chartFile, yaml.dump(chart))
   }
 }
 
-const buildJsFile = async (target, type, definition)=>{
+const buildJsFile = async (target, type, definition) => {
   const jsFile = `${target}/${type}/index.js`
-  if(await fs.pathExists(jsFile)){
+  if (await fs.pathExists(jsFile)) {
     return
   }
   const processors = []
-  
-  const {dependencies={}} = definition
-  for(const name of Object.keys(dependencies)){
+
+  const { dependencies = {} } = definition
+  for (const name of Object.keys(dependencies)) {
     const indexFile = `../charts/${name}/${type}`
     processors.push(indexFile)
   }
@@ -168,25 +182,25 @@ const buildJsFile = async (target, type, definition)=>{
   let loads = definition[typeKey] || {}
   const typeDir = `${target}/${type}`
 
-  const exts = [".js",".ts"]
-  if(await fs.pathExists(typeDir)){
+  const exts = [".js", ".ts"]
+  if (await fs.pathExists(typeDir)) {
     const paths = await fs.readdir(typeDir)
-    for(const p of paths){
+    for (const p of paths) {
       let key
-      if((await fs.stat(`${typeDir}/${p}`)).isDirectory()){
-        if(!await fs.pathExists(`${typeDir}/${p}/index.js`)){
+      if ((await fs.stat(`${typeDir}/${p}`)).isDirectory()) {
+        if (!(await fs.pathExists(`${typeDir}/${p}/index.js`))) {
           continue
         }
         key = p
       } else {
         const ext = path.extname(p)
-        if(!exts.includes(ext)){
+        if (!exts.includes(ext)) {
           continue
         }
-        key = p.substring(0, p.length-ext.length)
+        key = p.substring(0, p.length - ext.length)
       }
       key = configDependencyKey(key)
-      if(!loads[key]){
+      if (!loads[key]) {
         loads[key] = {}
       }
       loads[key].require = `./${p}`
@@ -200,15 +214,17 @@ const buildJsFile = async (target, type, definition)=>{
       return acc
     }, {})
 
-  for(const [name, load] of Object.entries(loads)){
-    let {require: req} = load
-    if(!req){
+  for (const [name, load] of Object.entries(loads)) {
+    let { require: req } = load
+    if (!req) {
       req = `./${name}`
     }
     processors.push(req)
   }
 
-  const jsSrc = `const processors = [${processors.map(p=>JSON.stringify(p)).join(",")}]
+  const jsSrc = `const processors = [${processors
+    .map((p) => JSON.stringify(p))
+    .join(",")}]
 module.exports = async (data, _options, context, scope)=>{
   for(const inc of processors){
     data = await context.require(inc, scope)(data)
@@ -220,156 +236,146 @@ module.exports = async (data, _options, context, scope)=>{
   await fs.writeFile(jsFile, jsSrc)
 }
 
-const recurseDependency = async (param={})=>{
+const recurseDependency = async (param = {}) => {
   const {
     name = "project",
     config,
     definition = config,
-    beforeChildren = ()=>{},
-    afterChildren = ()=>{},
+    beforeChildren = () => {},
+    afterChildren = () => {},
   } = param
 
-  const {buildPath} = config
+  const { buildPath } = config
 
-  if(!validateName.test(name)){
-    throw new Exception(`invalid import name format, expected only alphanumerics hyphens and underscores characters, received: "${name}"`)
+  if (!validateName.test(name)) {
+    throw new Error(
+      `invalid import name format, expected only alphanumerics hyphens and underscores characters, received: "${name}"`
+    )
   }
 
   const scope = [...(param.scope || []), name]
-  const subpath = path.join(...scope.reduce((acc, item)=>{
-    acc.push("charts", item)
-    return acc
-  },[]))
+  const subpath = path.join(
+    ...scope.reduce((acc, item) => {
+      acc.push("charts", item)
+      return acc
+    }, [])
+  )
   const target = `${buildPath}/${subpath}`
-  
+
   const callbackParam = {
     name,
     definition,
     scope,
     config,
-    target
+    target,
   }
 
   await beforeChildren(callbackParam)
-  
-  const {dependencies} = definition
-  if(dependencies){
-    await Promise.all(Object.entries(dependencies).map(([name, definition])=>
-      recurseDependency({
-        ...param,
-        name,
-        definition,
-        scope
-      })
-    ))
+
+  const { dependencies } = definition
+  if (dependencies) {
+    await Promise.all(
+      Object.entries(dependencies).map(([childName, childDefinition]) =>
+        recurseDependency({
+          ...param,
+          name: childName,
+          definition: childDefinition,
+          scope,
+        })
+      )
+    )
   }
-  
+
   await afterChildren(callbackParam)
 }
 
-const downloadAndBuildDependencies = async (config, logger)=>{
+const downloadAndBuildDependencies = async (config, logger) => {
   await recurseDependency({
     config,
-    beforeChildren: async ({
-      target,
-      definition,
-      config,
-      scope,
-      name,
-    })=>{
-      const {links={}} = config
-      
+    beforeChildren: async ({ target, definition, scope, name }) => {
+      const { links = {} } = config
+
       let { import: importTarget } = definition
-      if(importTarget){
+      if (importTarget) {
         importTarget = importTarget.replace("@", "#")
         const matchLink = Object.entries(links).find(([key]) =>
           importTarget.startsWith(key)
         )
-        if(matchLink){
+        if (matchLink) {
           const [linkKey, linkPath] = matchLink
           const from = linkPath + importTarget.substr(linkKey.length)
           await fs.ensureDir(target)
-          logger.debug({scope}, `copy ${name} from "${from}"`)
+          logger.debug({ scope }, `copy ${name} from "${from}"`)
           await fs.copy(from, target, { filter: copyFilter })
-        }else{
+        } else {
           const tagHasChanged = await degitTagHasChanged(importTarget)
           const cache = !tagHasChanged
-          logger.debug({scope}, `degit ${name} from "${importTarget}"`)
-          if(tagHasChanged){
-            logger.debug({scope, degit: importTarget}, `tag has changed, renew cache`)
+          logger.debug({ scope }, `degit ${name} from "${importTarget}"`)
+          if (tagHasChanged) {
+            logger.debug(
+              { scope, degit: importTarget },
+              `tag has changed, renew cache`
+            )
           }
-          await degit(importTarget, {cache}).clone(target)
+          await degit(importTarget, { cache }).clone(target)
         }
       }
-      
+
       // load config file
       const pluginConfigFile = `${target}/kontinuous.yaml`
-      if((await fs.pathExists(pluginConfigFile))){
+      if (await fs.pathExists(pluginConfigFile)) {
         const pluginConfig = yaml.load(await fs.readFile(pluginConfigFile))
         Object.assign(definition, deepmerge({}, pluginConfig, definition))
       }
     },
-    afterChildren: async ({
-      name,
-      target,
-      definition,
-      config,
-    })=>{
+    afterChildren: async ({ name, target, definition }) => {
       await buildChartFile(target, name, definition)
       await downloadRemoteRepository(target, name, config)
       await buildJsFile(target, "values-compilers", definition)
       await buildJsFile(target, "debug-manifests", definition)
       await buildJsFile(target, "patches", definition)
       await buildJsFile(target, "validators", definition)
-    }
+    },
   })
 }
 
 const installPackages = async (config) => {
   await recurseDependency({
     config,
-    afterChildren: async ({
-      target,
-    })=>{
-      if (
-        !await fs.pathExists(`${target}/package.json`)
-      ) {
+    afterChildren: async ({ target }) => {
+      if (!(await fs.pathExists(`${target}/package.json`))) {
         return
       }
 
       let hash
-      if (
-        !await fs.pathExists(`${target}/yarn.lock`)
-      ) {
+      if (!(await fs.pathExists(`${target}/yarn.lock`))) {
         hash = await fileHash(`${target}/yarn.lock`)
       } else {
         hash = await fileHash(`${target}/package.json`)
       }
-      
+
       const sharedDir = `${config.kontinuousHomeDir}/cache/shared-node_modules/${hash}/node_modules`
-      
+
       await fs.ensureDir(sharedDir)
       fs.symlink(sharedDir, `${target}/node_modules`)
-      
-      await yarnInstall(target)
-      
 
-    }
+      await yarnInstall(target)
+    },
   })
 }
 
-const beforeMergeChartValues = (values)=>{
+const beforeMergeChartValues = (values) => {
   values._isChartValues = true
   return values
 }
 
-const beforeMergeProjectValues = (values)=>{
+const beforeMergeProjectValues = (values) => {
   values = beforeMergeChartValues(values)
-  for(const [key, subValues] of Object.entries(values)){
-    if(key==="global"){
+  for (const [key, subValues] of Object.entries(values)) {
+    if (key === "global") {
       continue
     }
-    if(typeof subValues !== "object" || subValues===null){
+    if (typeof subValues !== "object" || subValues === null) {
       continue
     }
     subValues._isProjectValues = true
@@ -377,15 +383,14 @@ const beforeMergeProjectValues = (values)=>{
   return values
 }
 
-const cleanMetaValues = (values)=>{
-  if(typeof values !== 'object' || values === null){
+const cleanMetaValues = (values) => {
+  if (typeof values !== "object" || values === null) {
     return
   }
-  for(const key of Object.keys(values)){
-    if(key.startsWith("_")){
+  for (const key of Object.keys(values)) {
+    if (key.startsWith("_")) {
       delete values[key]
-    }
-    else{
+    } else {
       cleanMetaValues(values[key])
     }
   }
@@ -393,7 +398,7 @@ const cleanMetaValues = (values)=>{
 
 const removeNotEnabledValues = (values) => {
   let hasEnabledValue
-  for (const [key,val] of Object.entries(values)) {
+  for (const [key, val] of Object.entries(values)) {
     if (typeof val !== "object" || val === null) {
       continue
     }
@@ -402,85 +407,92 @@ const removeNotEnabledValues = (values) => {
       hasEnabledValue = true
       val.enabled = true
     }
-    if(val._isChartValues && !val.enabled){
+    if (val._isChartValues && !val.enabled) {
       // delete values[key]
-      values[key] = {enabled: false}
+      values[key] = { enabled: false }
     }
   }
   return hasEnabledValue || (values._isChartValues && values.enabled)
 }
 
-
-const mergeYamlFileValues = async (valuesFileBasename, subValues, beforeMerge)=>{
+const mergeYamlFileValues = async (
+  valuesFileBasename,
+  subValues,
+  beforeMerge
+) => {
   let val = await loadYamlFile(valuesFileBasename)
-  if(!val){
+  if (!val) {
     return
   }
-  if(beforeMerge){
+  if (beforeMerge) {
     val = beforeMerge(val)
   }
   deepmerge(subValues, val)
 }
 
 const mergeEnvTemplates = async (rootPath, config) => {
-  const {environment} = config
+  const { environment } = config
   const envTemplatesPath = `${rootPath}/env/${environment}/templates`
-  if(await fs.pathExists(envTemplatesPath)){
+  if (await fs.pathExists(envTemplatesPath)) {
     await fs.copy(envTemplatesPath, `${rootPath}/templates`, {
       dereference: true,
-      filter: copyFilter
+      filter: copyFilter,
     })
   }
 }
 
-const writeChartsAlias = async (chartsAliasMap, config)=>{
-  const {buildPath} = config
-  for(const [scope, aliasMap] of chartsAliasMap.entries()){
+const writeChartsAlias = async (chartsAliasMap, config) => {
+  const { buildPath } = config
+  for (const [scope, aliasMap] of chartsAliasMap.entries()) {
     const p = []
-    for(const s of scope){
+    for (const s of scope) {
       p.push("charts")
       p.push(s)
     }
     const chartFile = `${buildPath}/${path.join(...p)}/Chart.yaml`
     const chartContent = await fs.readFile(chartFile)
     const chart = yaml.load(chartContent)
-    for(const [alias, name] of Object.entries(aliasMap)){
-      const aliasOf = chart.dependencies.find(dep=>dep.name===name)
+    for (const [alias, name] of Object.entries(aliasMap)) {
+      const aliasOf = chart.dependencies.find((dep) => dep.name === name)
       chart.dependencies.push({
         ...aliasOf,
         alias,
-        condition: `${alias}.enabled`
+        condition: `${alias}.enabled`,
       })
     }
     await fs.writeFile(chartFile, yaml.dump(chart))
   }
 }
 
-const resolveAliasOf = (values, rootValues=values, scope=[], chartsAliasMap=new Map())=>{
+const resolveAliasOf = (
+  values,
+  rootValues = values,
+  scope = [],
+  chartsAliasMap = new Map()
+) => {
   for (const [key, val] of Object.entries(values)) {
     if (typeof val !== "object" || val === null) {
       continue
     }
-    if(val._aliasOf){
-      
+    if (val._aliasOf) {
       const parentDotKey = [...scope, key].join(".")
 
       let aliasOf = val._aliasOf
-      if(aliasOf.startsWith(".")){
+      if (aliasOf.startsWith(".")) {
         aliasOf = `${scope.join(".")}${parentDotKey}`
       }
 
       const aliasScope = aliasOf.split(".")
       const adjacentChartAlias = aliasScope.pop()
-      if(adjacentChartAlias!==key){
+      if (adjacentChartAlias !== key) {
         let aliasMap = chartsAliasMap.get(aliasScope)
-        if(!aliasMap){
+        if (!aliasMap) {
           aliasMap = {}
           chartsAliasMap.set(aliasScope, aliasMap)
         }
         aliasMap[key] = adjacentChartAlias
       }
-      
+
       const dotKey = `${aliasScope.join(".")}.${key}`
 
       let nestedVal = get(rootValues, dotKey)
@@ -498,7 +510,7 @@ const resolveAliasOf = (values, rootValues=values, scope=[], chartsAliasMap=new 
   return chartsAliasMap
 }
 
-const valuesEnableStandaloneCharts = (values, config)=>{
+const valuesEnableStandaloneCharts = (values, config) => {
   const hasAll = !(config.chart && config.chart.length > 0)
   values.global.kontinuous.hasChart = !hasAll
   values.global.kontinuous.hasAll = hasAll
@@ -506,8 +518,8 @@ const valuesEnableStandaloneCharts = (values, config)=>{
     return
   }
   values.global.kontinuous.chart = config.chart
-  for (const [key,val] of Object.entries(values)) {
-    if(key==="project" || key==="global"){
+  for (const [key, val] of Object.entries(values)) {
+    if (key === "project" || key === "global") {
       continue
     }
     if (typeof values[key] !== "object" || values[key] === null) {
@@ -523,28 +535,27 @@ const valuesEnableStandaloneCharts = (values, config)=>{
     values[key].enabled = true
   }
 }
-const valuesOverride = (values, config, logger)=>{
-  if(config.inlineValues) {
+const valuesOverride = (values, config, logger) => {
+  if (config.inlineValues) {
     const inlineValues = yaml.load(config.inlineValues)
     values = deepmerge(values, inlineValues)
   }
 
   const setValues = config.set
-  if(setValues){
-    if(Array.isArray(setValues)){
-      for(const s of setValues){
-        const index = s.indexOf("=");
-        if(index===-1){
+  if (setValues) {
+    if (Array.isArray(setValues)) {
+      for (const s of setValues) {
+        const index = s.indexOf("=")
+        if (index === -1) {
           logger.warn("bad format for --set option, expected: foo=bar")
           continue
         }
         const key = s.slice(0, index)
-        const val = s.slice(index+1)
+        const val = s.slice(index + 1)
         set(values, `${key}`, yaml.parse(val))
       }
-
     } else {
-      for(const [key, val] of Object.entries(setValues)){
+      for (const [key, val] of Object.entries(setValues)) {
         set(values, key, val)
       }
     }
@@ -553,71 +564,85 @@ const valuesOverride = (values, config, logger)=>{
 
 const compileValues = async (config, logger) => {
   let values = {}
-  const {buildPath, environment} = config
+  const { buildPath, environment } = config
 
   await recurseDependency({
     config,
-    afterChildren: async ({
-      target,
-      definition,
-      scope,
-    }) => {
+    afterChildren: async ({ target, definition, scope }) => {
       const chartsPath = `${target}/charts`
-      if(!await fs.pathExists(chartsPath)){
+      if (!(await fs.pathExists(chartsPath))) {
         return
       }
 
       const chartDirs = await fs.readdir(chartsPath)
-      for(const chartDir of chartDirs){
-        if(!(await fs.stat(`${chartsPath}/${chartDir}`)).isDirectory()){
+      for (const chartDir of chartDirs) {
+        if (!(await fs.stat(`${chartsPath}/${chartDir}`)).isDirectory()) {
           continue
         }
         const chartName = chartDir
         const dotKey = [...scope, chartName].join(".")
         let subValues = get(values, dotKey)
-        if(!subValues){
+        if (!subValues) {
           subValues = {}
           set(values, dotKey, subValues)
         }
-        
-        await mergeYamlFileValues(`${chartsPath}/${chartDir}/values`, subValues, beforeMergeChartValues)
-        await mergeYamlFileValues(`${chartsPath}/${chartDir}/env/${environment}/values`, subValues, beforeMergeChartValues)
+
+        await mergeYamlFileValues(
+          `${chartsPath}/${chartDir}/values`,
+          subValues,
+          beforeMergeChartValues
+        )
+        await mergeYamlFileValues(
+          `${chartsPath}/${chartDir}/env/${environment}/values`,
+          subValues,
+          beforeMergeChartValues
+        )
         await mergeEnvTemplates(`${chartsPath}/${chartDir}`, config)
 
-        if(definition.values){
+        if (definition.values) {
           deepmerge(subValues, definition.values)
         }
-
       }
-
-    }
+    },
   })
 
   const buildProjectPath = `${buildPath}/charts/project`
-  await mergeYamlFileValues(`${buildProjectPath}/values`, values, beforeMergeProjectValues)
-  await mergeYamlFileValues(`${buildProjectPath}/env/${environment}/values`, values, beforeMergeProjectValues)
+  await mergeYamlFileValues(
+    `${buildProjectPath}/values`,
+    values,
+    beforeMergeProjectValues
+  )
+  await mergeYamlFileValues(
+    `${buildProjectPath}/env/${environment}/values`,
+    values,
+    beforeMergeProjectValues
+  )
 
-  if(!values.global){
+  if (!values.global) {
     values.global = {}
   }
-  if(!values.global.kontinuous){
+  if (!values.global.kontinuous) {
     values.global.kontinuous = {}
   }
-  
+
   valuesEnableStandaloneCharts(values, config)
   valuesOverride(values, config, logger)
 
-  const context = createContext({type: "values-compilers"})
-  
+  const context = createContext({ type: "values-compilers" })
+
   const valuesJsFile = `${buildProjectPath}/values.js`
-  if(await fs.pathExists(valuesJsFile)){
+  if (await fs.pathExists(valuesJsFile)) {
     values = await require(valuesJsFile)(values, {}, context)
   }
 
-  values = await require(`${buildProjectPath}/values-compilers`)(values, {}, context)
+  values = await require(`${buildProjectPath}/values-compilers`)(
+    values,
+    {},
+    context
+  )
 
   const valuesFinalJsFile = `${buildProjectPath}/values.final.js`
-  if(await fs.pathExists(valuesFinalJsFile)){
+  if (await fs.pathExists(valuesFinalJsFile)) {
     values = await require(valuesFinalJsFile)(values, {}, context)
   }
 
@@ -627,7 +652,7 @@ const compileValues = async (config, logger) => {
   cleanMetaValues(values)
 
   const projectValuesFile = await getYamlPath(`${buildProjectPath}/values`)
-  if(projectValuesFile){
+  if (projectValuesFile) {
     await fs.unlink(projectValuesFile)
   }
 
@@ -635,43 +660,41 @@ const compileValues = async (config, logger) => {
 }
 
 const copyFilesDir = async (config) => {
-  const {workspaceKsPath, buildPath} = config
+  const { workspaceKsPath, buildPath } = config
   const filesDir = `${workspaceKsPath}/files`
-  if(!await fs.pathExists(filesDir)){
+  if (!(await fs.pathExists(filesDir))) {
     return
   }
-  await fs.copy(filesDir,`${buildPath}/files`,{
+  await fs.copy(filesDir, `${buildPath}/files`, {
     dereference: true,
     filter: copyFilter,
   })
   await recurseDependency({
     config,
-    afterChildren: async ({
-      target,
-    })=>{
+    afterChildren: async ({ target }) => {
       const chartsDir = `${target}/charts`
-      if(!fs.pathExists(chartsDir)){
+      if (!fs.pathExists(chartsDir)) {
         return
       }
       const chartDirs = await fs.readdir(chartsDir)
-      for(const chartDir of chartDirs){
+      for (const chartDir of chartDirs) {
         const chartDirPath = `${chartsDir}/${chartDir}`
-        if(!(await fs.stat(chartDirPath)).isDirectory){
+        if (!(await fs.stat(chartDirPath)).isDirectory) {
           continue
         }
         const filesPath = `${chartDirPath}/files`
-        if(!await fs.pathExists(filesPath)){
+        if (!(await fs.pathExists(filesPath))) {
           fs.symlink(filesDir, filesPath)
         }
         const filesPathKontinuous = `${chartDirPath}/kontinuous-files`
         fs.symlink(filesDir, filesPathKontinuous)
       }
-    }
+    },
   })
 }
 
-module.exports = async (config, logger)=>{
-  const {buildPath} = config
+module.exports = async (config, logger) => {
+  const { buildPath } = config
 
   await downloadAndBuildDependencies(config, logger)
   await installPackages(config)
@@ -684,7 +707,10 @@ module.exports = async (config, logger)=>{
     fs.writeFile(`${buildPath}/values.yaml`, yaml.dump(values)),
   ])
 
-  await fs.writeFile(`${buildPath}/.helmignore`, ["node_modules",".yarn"].join("\n"))
+  await fs.writeFile(
+    `${buildPath}/.helmignore`,
+    ["node_modules", ".yarn"].join("\n")
+  )
 
-  return { values } 
+  return { values }
 }

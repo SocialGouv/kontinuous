@@ -1,20 +1,19 @@
-const launch = require('launch-editor')
+const launch = require("launch-editor")
 const { highlight, fromJson: themeFromJson } = require("cli-highlight")
 
 const logger = require("~common/utils/logger")
 
-const builder = require("./builder")
-
 const upload = require("~/upload")
 const ctx = require("~/ctx")
+const builder = require("./builder")
 
 module.exports = async (options) => {
   const config = ctx.require("config")
 
   const result = await builder(options)
-  
+
   const { manifestsFile, manifests } = result
-  
+
   if (options.O) {
     let m = manifests
     if (options.S) {
@@ -34,12 +33,12 @@ module.exports = async (options) => {
     logger.info(`buildPath: file://${config.buildPath}`)
     logger.info(`manifests: file://${manifestsFile}`)
   }
-  
-  if(config.upload){
+
+  if (config.upload) {
     await upload({ file: manifestsFile })
   }
 
-  if(options.open){
+  if (options.open) {
     launch(manifestsFile)
   }
 
