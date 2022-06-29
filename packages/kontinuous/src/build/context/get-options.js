@@ -2,6 +2,8 @@ const path = require("path")
 
 const get = require("lodash.get")
 
+const deepmerge = require("~common/utils/deepmerge")
+
 const configDependencyKey = require("./config-dependency-key")
 
 module.exports = ({ scope, inc, type, config }) => {
@@ -19,22 +21,25 @@ module.exports = ({ scope, inc, type, config }) => {
   }
 
   scope = scope.slice(1)
-  if (inc.startsWith("./")) {
-    inc = inc.slice(2)
-    dotInc = [...scope, type, inc]
-  } else if (inc.startsWith(rootDir)) {
-    inc = inc.slice(rootDir.length)
-    dotInc = [...scope, inc]
+  inc = inc.split("/").pop()
+  dotInc = [...scope]
+  if (inc !== type) {
+    dotInc.push(type)
+  }
+  dotInc.push(inc)
+
+  dotInc = dotInc.flatMap((k) =>
+    k.split(".").map((k2) => configDependencyKey(k2))
+  )
+
+  const options = {}
+
+  for (let i = 1; i <= dotInc.length; i++) {
+    const dots = [...dotInc.slice(0, i), "options"]
+    const key = dots.join(".")
+    const opts = get(config.dependencies, key) || {}
+    deepmerge(options, opts)
   }
 
-  dotInc = dotInc
-    .flatMap((k) =>
-      k
-        .replaceAll("/", ".")
-        .split(".")
-        .map((k2) => configDependencyKey(k2))
-    )
-    .join(".")
-
-  return get(config.dependencies, `${dotInc}.options`) || {}
+  return options
 }
