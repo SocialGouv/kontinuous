@@ -23,6 +23,7 @@ const slug = require("~common/utils/slug")
 
 const createContext = require("./context")
 const copyFilter = require('./copy-filter')
+const configDependencyKey = require('./context/config-dependency-key')
 
 const validateName = /^[a-zA-Z\d-_]+$/
 
@@ -37,7 +38,7 @@ const registerSubcharts = async (chart, chartsDirName, target, definition={})=>{
     if(!(await fs.stat(chartDirPath)).isDirectory()){
       continue
     }
-    if(definition.charts?.[camelCase(chartDir)]?.enabled===false){
+    if(definition.charts?.[configDependencyKey(chartDir)]?.enabled===false){
       await fs.remove(chartDirPath)
       continue
     }
@@ -85,7 +86,7 @@ const buildChartFile = async (target, name, definition={})=>{
   await registerSubcharts(chart, "charts", target, definition)
 
   chart.dependencies = chart.dependencies.filter(dep=>
-    definition.charts?.[camelCase(dep.name)]?.enabled!==false
+    definition.charts?.[configDependencyKey(dep.name)]?.enabled!==false
   )
   
   await fs.ensureDir(target)
@@ -184,7 +185,7 @@ const buildJsFile = async (target, type, definition)=>{
         }
         key = p.substring(0, p.length-ext.length)
       }
-      key = camelCase(key)
+      key = configDependencyKey(key)
       if(!loads[key]){
         loads[key] = {}
       }

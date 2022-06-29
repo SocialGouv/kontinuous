@@ -1,7 +1,8 @@
-const path = require('path')
+const path = require("path")
 
-const camelCase = require('lodash.camelcase')
 const get = require("lodash.get")
+
+const configDependencyKey = require("./config-dependency-key")
 
 module.exports = ({scope, inc, type, config})=>{
   const rootDir = `../charts/`
@@ -29,7 +30,7 @@ module.exports = ({scope, inc, type, config})=>{
   dotInc = dotInc.flatMap(k => k.
     replaceAll("/",".")
     .split(".")
-    .map( k2 => camelCase(k2) )
+    .map( k2 => configDependencyKey(k2) )
   ).join(".")
 
   return get(config.dependencies, `${dotInc}.options`) || {}

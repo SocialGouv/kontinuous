@@ -2,7 +2,7 @@ require('~/ts-node');
 
 const path = require("path")
 
-const camelCase = require("lodash.camelcase")
+const configDependencyKey = require('./config-dependency-key');
 
 function requireTs(filePath) {  
   const result = require(filePath);
@@ -33,7 +33,7 @@ module.exports = (type, context)=>{
     const pluginName = ([
       scope.slice(1),
       type,
-      camelCase(path.basename(inc).slice(0, -1*ext.length)),
+      configDependencyKey(path.basename(inc).slice(0, -1*ext.length)),
     ]).flatMap(v=>v).join("/")
     context.logger = context.logger.child({plugin: pluginName})
     
