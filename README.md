@@ -130,8 +130,9 @@ dependencies:
   fabrique:
     patches:
       rancherProjectId:
-        options:
-          resolve: optional # one of required(default),optional,skip
+        enabled: false
+        # options:
+        #   required: false
 ```
 
 ### 1.4 CLI config

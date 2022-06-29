@@ -1,22 +1,8 @@
-const resolveEnum = ["required", "skip", "optional"]
-
 module.exports = async (manifests, options, { config, logger, utils }) => {
   const { asyncShell } = utils
   const { ciNamespace, kubeconfigContext } = config
 
-  const { resolve = "required" } = options
-
-  if (!resolveEnum.includes(resolve)) {
-    throw new Error(
-      `invalid 'resolve' option "${resolve}" for rancher-project-id patch, expected one of ${resolveEnum.join(
-        ","
-      )}`
-    )
-  }
-
-  if (resolve === "skip") {
-    return
-  }
+  const { required = true } = options
 
   const rancherNsMissingProjectId = []
   for (const manifest of manifests) {
@@ -59,7 +45,7 @@ module.exports = async (manifests, options, { config, logger, utils }) => {
       const data = JSON.parse(json)
       rancherProjectId = data.metadata.annotations["field.cattle.io/projectId"]
     } catch (e) {
-      if (resolve === "required") {
+      if (required) {
         const errorMsg =
           "unable to retrieve required missing rancher projectId from cluster"
         logger.error(errorMsg)

@@ -80,7 +80,7 @@ const buildChartFile = async (target, name)=>{
   await fs.writeFile(chartFile, yaml.dump(chart))
 }
 
-const downloadRemoteRepository = async (target, name)=>{
+const downloadRemoteRepository = async (target, _name)=>{
   const chartFile = `${target}/Chart.yaml`
   const chart = yaml.load(await fs.readFile(chartFile))
   const {dependencies=[]} = chart
@@ -180,6 +180,13 @@ const buildJsFile = async (target, type, definition)=>{
       loads[key].require = `./${p}`
     }
   }
+
+  loads = Object.entries(loads)
+    .filter(([_key, value]) => value.enabled !== false)
+    .reduce((acc, [key, value]) => {
+      acc[key] = value
+      return acc
+    }, {})
 
   for(const [name, load] of Object.entries(loads)){
     let {require: req} = load
