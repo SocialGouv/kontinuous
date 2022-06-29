@@ -56,6 +56,12 @@ module.exports = async (opts = {}) => {
       defaultFunction: (config) =>
         path.join(config.workspacePath, config.workspaceSubPath),
     },
+    git: {
+      env: "KS_GIT",
+      envParser: (str) => yaml.load(str),
+      defaultFunction: (config) =>
+        fs.pathExists(`${config.workspaceKsPath}/.git`),
+    },
     gitBranch: {
       defaultFunction: async (config, { options, env: environ }) => {
         let ref
@@ -65,8 +71,13 @@ module.exports = async (opts = {}) => {
           ref = environ.KS_GIT_BRANCH
         } else if (environ.KS_GIT_REF) {
           ref = environ.KS_GIT_REF
-        } else {
+        } else if (config.git) {
           ref = await getGitRef(config.workspacePath)
+        } else {
+          logger.warn(
+            `no git branch defined and can't be inferred, default to "imaginary"`
+          )
+          ref = "imaginary"
         }
         return cleanGitRef(ref)
       },
@@ -74,7 +85,15 @@ module.exports = async (opts = {}) => {
     gitSha: {
       env: "KS_GIT_SHA",
       option: "commit",
-      defaultFunction: (config) => getGitSha(config.workspacePath),
+      defaultFunction: (config) => {
+        if (config.git) {
+          return getGitSha(config.workspacePath)
+        }
+        logger.warn(
+          `no git sha defined and can't be inferred, default to "0000000000000000000000000000000000000000"`
+        )
+        return "0000000000000000000000000000000000000000"
+      },
     },
     gitRepositoryUrl: {
       defaultFunction: (config, { options, env: environ }) => {
@@ -88,12 +107,26 @@ module.exports = async (opts = {}) => {
           }
           return `${defaultRepositoryProvider}/${repository}`
         }
-        return getGitUrl(config.workspacePath)
+        if (config.git) {
+          return getGitUrl(config.workspacePath)
+        }
+        logger.warn(
+          `no git repository url defined and can't be inferred, default to ""`
+        )
+        return ""
       },
     },
     gitRepository: {
-      defaultFunction: (config) =>
-        repositoryFromGitUrl(config.gitRepositoryUrl),
+      defaultFunction: (config) => {
+        if (config.gitRepositoryUrl) {
+          return repositoryFromGitUrl(config.gitRepositoryUrl)
+        }
+        const dirname = path.basename(config.workspacePath)
+        logger.warn(
+          `no git repository url defined, repository will default to dirname "${dirname}"`
+        )
+        return dirname
+      },
     },
     gitRepositoryName: {
       defaultFunction: (config) => path.basename(config.gitRepository),
