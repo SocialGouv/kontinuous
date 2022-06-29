@@ -7,8 +7,6 @@ const deepmerge = require("~common/utils/deepmerge")
 const configDependencyKey = require("./config-dependency-key")
 
 module.exports = ({ scope, inc, type, config }) => {
-  const rootDir = `../charts/`
-
   let dotInc
 
   const ext = path.extname(inc)
