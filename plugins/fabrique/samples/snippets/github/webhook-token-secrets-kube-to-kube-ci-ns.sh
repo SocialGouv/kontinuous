@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+# set -e
 
 KUBECONTEXT=${KUBECONTEXT:-prod}
 NAMESPACES=$(kubectl --context $KUBECONTEXT get namespaces -o name)
