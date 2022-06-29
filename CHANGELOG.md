@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.34.1](https://github.com/SocialGouv/kontinuous/compare/v1.34.0...v1.34.1) (2022-06-29)
+
+
+### Bug Fixes
+
+* deploy ctx ([d6bb8eb](https://github.com/SocialGouv/kontinuous/commit/d6bb8eb4076f1172353d10d2014e079c8f8e84f5))
+
 ## [1.34.0](https://github.com/SocialGouv/kontinuous/compare/v1.33.0...v1.34.0) (2022-06-29)
 
 
