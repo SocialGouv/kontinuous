@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.34.0](https://github.com/SocialGouv/kontinuous/compare/v1.33.0...v1.34.0) (2022-06-29)
+
+
+### Features
+
+* deploy hooks ([f13947c](https://github.com/SocialGouv/kontinuous/commit/f13947c53cf601a457d9aa0256a617d23f752d8a))
+
+
+### Bug Fixes
+
+* linter ([8af5212](https://github.com/SocialGouv/kontinuous/commit/8af5212607c443b196ee5271c9638eef9bc53dd4))
+
 ## [1.33.0](https://github.com/SocialGouv/kontinuous/compare/v1.32.0...v1.33.0) (2022-06-29)
 
 
