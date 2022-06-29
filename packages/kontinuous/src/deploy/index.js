@@ -20,9 +20,7 @@ const { getStatus, setStatus } = require("~/status")
 
 const deployHooks = require("./deploy-hooks")
 
-module.exports = async (options) => {
-  ctx.provide()
-
+const deploy = async (options) => {
   const config = ctx.require("config")
 
   const {
@@ -220,4 +218,9 @@ module.exports = async (options) => {
     }
     throw err
   }
+}
+
+module.exports = async (options) => {
+  ctx.provide()
+  await deploy(options)
 }
