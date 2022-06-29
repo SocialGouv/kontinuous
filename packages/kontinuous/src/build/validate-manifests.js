@@ -1,6 +1,6 @@
 const ctx = require("~/ctx")
 
-const createContext = require("./context")
+const createContext = require("~/plugins/context")
 const ValidationError = require("./validation-error")
 
 module.exports = async (manifests, values) => {

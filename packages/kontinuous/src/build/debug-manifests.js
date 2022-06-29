@@ -1,6 +1,6 @@
 const ctx = require("~/ctx")
 
-const createContext = require("./context")
+const createContext = require("~/plugins/context")
 
 module.exports = async (manifests, values) => {
   const config = ctx.require("config")

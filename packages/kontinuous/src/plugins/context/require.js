@@ -60,6 +60,7 @@ module.exports = (type, context) => {
         )
         throw error
       }
+      context.logger.flushSync()
 
       return data
     }

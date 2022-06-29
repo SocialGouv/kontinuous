@@ -20,9 +20,9 @@ const degitTagHasChanged = require("~common/utils/degit-tag-has-changed")
 
 const slug = require("~common/utils/slug")
 
-const createContext = require("./context")
+const createContext = require("~/plugins/context")
+const configDependencyKey = require("~/plugins/context/config-dependency-key")
 const copyFilter = require("./copy-filter")
-const configDependencyKey = require("./context/config-dependency-key")
 
 const validateName = /^[a-zA-Z\d-_]+$/
 
@@ -335,6 +335,8 @@ const downloadAndBuildDependencies = async (config, logger) => {
       await buildJsFile(target, "debug-manifests", definition)
       await buildJsFile(target, "patches", definition)
       await buildJsFile(target, "validators", definition)
+      await buildJsFile(target, "pre-deploy", definition)
+      await buildJsFile(target, "post-deploy", definition)
     },
   })
 }

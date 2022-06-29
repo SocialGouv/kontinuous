@@ -11,13 +11,14 @@ const logger = require("~common/utils/logger")
 const timeLogger = require("~common/utils/time-logger")
 const slug = require("~common/utils/slug")
 const parseCommand = require("~common/utils/parse-command")
-const kubeEnsureNamespace = require("~common/utils/kube-ensure-namespace")
 const validateMd5 = require("~common/utils/validate-md5")
 
 const ctx = require("~/ctx")
 const build = require("~/build")
 const logs = require("~/logs")
 const { getStatus, setStatus } = require("~/status")
+
+const deployHooks = require("./deploy-hooks")
 
 module.exports = async (options) => {
   ctx.provide()
@@ -181,29 +182,20 @@ module.exports = async (options) => {
       }
     }
 
-    const rancherNamespacesManifests = allManifests.filter(
-      (manifest) =>
-        manifest.kind === "Namespace" &&
-        manifest.metadata?.annotations?.["field.cattle.io/projectId"]
-    )
+    await deployHooks(allManifests, "pre")
 
-    await Promise.all(
-      rancherNamespacesManifests.map((manifest) =>
-        kubeEnsureNamespace(kubeconfigContext, manifest)
-      )
+    const namespacesManifests = allManifests.filter(
+      (manifest) => manifest.kind === "Namespace"
     )
-
-    const namespaces = rancherNamespacesManifests.map(
+    const namespaces = namespacesManifests.map(
       (manifest) => manifest.metadata.name
     )
-
     let namespacesLabel = ""
     if (namespaces.length > 0) {
       namespacesLabel = `to namespace${
         namespaces.length > 1 ? "s" : ""
       } "${namespaces.join('","')}"`
     }
-
     logger.info(`deploying ${repositoryName} ${namespacesLabel}`)
 
     const elapsed = timeLogger({
@@ -212,6 +204,8 @@ module.exports = async (options) => {
     })
 
     await deployWithKapp()
+
+    await deployHooks(allManifests, "post")
 
     elapsed.end({
       label: `🚀 kontinuous pipeline ${repositoryName} ${environment} ${namespacesLabel}`,
