@@ -2,6 +2,8 @@ require('~/ts-node');
 
 const path = require("path")
 
+const camelCase = require("lodash.camelcase")
+
 function requireTs(filePath) {  
   const result = require(filePath);
   return result.default || result;
@@ -38,6 +40,9 @@ module.exports = (type, context)=>{
       }
 
       const plugin = requireFunc(rPath)
+
+      const pluginName = scope.slice(1).join("/")+"/"+camelCase(path.basename(inc).slice(0, -1*ext.length))
+      context.logger = context.logger.child({plugin: pluginName})
     
       const result = await plugin(
         data,
