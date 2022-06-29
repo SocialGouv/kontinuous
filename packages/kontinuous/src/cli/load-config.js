@@ -59,8 +59,14 @@ module.exports = async (opts = {}) => {
     git: {
       env: "KS_GIT",
       envParser: (str) => yaml.load(str),
-      defaultFunction: (config) =>
-        fs.pathExists(`${config.workspacePath}/.git`),
+      defaultFunction: async (config) => {
+        try {
+          await asyncShell("git status", { cwd: config.workspacePath })
+          return true
+        } catch (_err) {
+          return false
+        }
+      },
     },
     gitBranch: {
       defaultFunction: async (config, { options, env: environ }) => {
