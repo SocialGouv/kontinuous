@@ -17,11 +17,11 @@ const getYamlPath = require("~common/utils/get-yaml-path")
 const yarnInstall = require("~common/utils/yarn-install")
 const fileHash = require("~common/utils/file-hash")
 const degitTagHasChanged = require("~common/utils/degit-tag-has-changed")
-
 const slug = require("~common/utils/slug")
 
 const createContext = require("~/plugins/context")
 const configDependencyKey = require("~/plugins/context/config-dependency-key")
+
 const copyFilter = require("./copy-filter")
 
 const validateName = /^[a-zA-Z\d-_]+$/

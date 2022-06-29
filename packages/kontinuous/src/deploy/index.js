@@ -12,6 +12,7 @@ const timeLogger = require("~common/utils/time-logger")
 const slug = require("~common/utils/slug")
 const parseCommand = require("~common/utils/parse-command")
 const validateMd5 = require("~common/utils/validate-md5")
+const globalLogger = require("~common/utils/logger")
 
 const ctx = require("~/ctx")
 const build = require("~/build")
@@ -20,8 +21,11 @@ const { getStatus, setStatus } = require("~/status")
 
 const deployHooks = require("./deploy-hooks")
 
-const deploy = async (options) => {
+module.exports = async (options) => {
+  ctx.provide()
+
   const config = ctx.require("config")
+  ctx.set("logger", globalLogger)
 
   const {
     environment,
@@ -218,9 +222,4 @@ const deploy = async (options) => {
     }
     throw err
   }
-}
-
-module.exports = async (options) => {
-  ctx.provide()
-  await deploy(options)
 }
