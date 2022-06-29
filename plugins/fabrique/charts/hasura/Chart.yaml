@@ -1,4 +1,4 @@
 apiVersion: v2
 name: hasura
-version: 1.34.1
-appVersion: 1.34.1
+version: 1.34.2
+appVersion: 1.34.2
