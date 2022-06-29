@@ -42,6 +42,13 @@ module.exports = async (opts = {}) => {
   const env = ctx.get("env") || process.env
 
   const rootConfigOverride = {
+    kontinuousHomeDir: {
+      env: "KS_HOMEDIR",
+      defaultFunction: () => {
+        const homeOrTmpDir = os.homedir() || os.tmpdir()
+        return `${homeOrTmpDir}/.kontinuous`
+      },
+    },
     workspacePath: {
       env: "KS_WORKSPACE_PATH",
       option: "cwd",
@@ -312,7 +319,7 @@ module.exports = async (opts = {}) => {
       },
     },
     dependencies: {
-      transform: (dependencies) =>
+      transform: (dependencies = {}) =>
         Object.entries(dependencies)
           .filter(([_key, value]) => value.enabled !== false && value.import)
           .reduce((acc, [key, value]) => {
@@ -329,9 +336,9 @@ module.exports = async (opts = {}) => {
   })
 
   const configDirs = []
-  const homedir = os.homedir()
-  if (homedir) {
-    configDirs.push(`${homedir}/.kontinuous`)
+  const { kontinuousHomeDir } = rootConfig
+  if (kontinuousHomeDir) {
+    configDirs.push(kontinuousHomeDir)
   }
   configDirs.push(rootConfig.workspaceKsPath)
 

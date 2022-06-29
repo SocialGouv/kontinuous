@@ -2,6 +2,8 @@
 require("jest-specific-snapshot")
 
 const path = require("path")
+const os = require("os")
+
 const fs = require("fs-extra")
 const dotenv = require("dotenv")
 
@@ -50,6 +52,7 @@ for (const testdir of testdirs) {
 
 const createSampleSnapTest = (testdir, environment) => async () => {
   const testdirPath = `${samplesDir}/${testdir}`
+  const tmpdir = os.tmpdir()
   const env = {
     ...process.env,
     ...defaultEnv,
@@ -62,6 +65,7 @@ const createSampleSnapTest = (testdir, environment) => async () => {
     KS_INLINE_CONFIG_SET: `links.SocialGouv/kontinuous: "${path.resolve(
       `${__dirname}/../../..`
     )}"`,
+    KS_HOMEDIR: `${tmpdir}/kontinuous/test-homedir`,
   }
   const envFile = `${testdirPath}/.env`
   if (fs.pathExistsSync(envFile)) {

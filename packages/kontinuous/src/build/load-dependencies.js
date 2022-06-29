@@ -92,7 +92,7 @@ const buildChartFile = async (target, name, definition={})=>{
   await fs.writeFile(chartFile, yaml.dump(chart))
 }
 
-const downloadRemoteRepository = async (target, _name)=>{
+const downloadRemoteRepository = async (target, _name, config)=>{
   const chartFile = `${target}/Chart.yaml`
   const chart = yaml.load(await fs.readFile(chartFile))
   const {dependencies=[]} = chart
@@ -107,8 +107,7 @@ const downloadRemoteRepository = async (target, _name)=>{
     if(await fs.pathExists(localArchive)){
       zfile = localArchive
     } else {
-      const homeOrTmpDir = os.homedir || os.tmpdir
-      const cacheDir = `${homeOrTmpDir}/.kontinuous/cache/charts`
+      const cacheDir = `${config.kontinuousHomeDir}/cache/charts`
       const archiveSlug = slug([dependency.name, dependency.version, repository])
       zfile = `${cacheDir}/${archiveSlug}.tgz`
       if(!await fs.pathExists(zfile)){
@@ -313,9 +312,10 @@ const downloadAndBuildDependencies = async (config, logger)=>{
       name,
       target,
       definition,
+      config,
     })=>{
       await buildChartFile(target, name, definition)
-      await downloadRemoteRepository(target, name)
+      await downloadRemoteRepository(target, name, config)
       await buildJsFile(target, "values-compilers", definition)
       await buildJsFile(target, "debug-manifests", definition)
       await buildJsFile(target, "patches", definition)
@@ -344,9 +344,8 @@ const installPackages = async (config) => {
       } else {
         hash = await fileHash(`${target}/package.json`)
       }
-      const homedir = os.homedir()
       
-      const sharedDir = `${homedir}/.kontinuous/cache/shared-node_modules/${hash}/node_modules`
+      const sharedDir = `${config.kontinuousHomeDir}/cache/shared-node_modules/${hash}/node_modules`
       
       await fs.ensureDir(sharedDir)
       fs.symlink(sharedDir, `${target}/node_modules`)

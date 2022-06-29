@@ -26,11 +26,11 @@ module.exports = (program) =>
         process.exit(1)
       }
 
-      const homeOrTmpDir = os.homedir || os.tmpdir
+      const homeOrTmpDir = os.homedir() || os.tmpdir()
       if (opts.cache) {
         try {
           const cacheDirs = [
-            `${homeOrTmpDir}/.kontinuous/cache`,
+            `${config.kontinuousHomeDir}/cache`,
             `${homeOrTmpDir}/.degit`,
           ]
           await Promise.all(
