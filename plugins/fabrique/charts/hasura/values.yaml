@@ -8,7 +8,6 @@ imageRepository:
 imagePackage: hasura
 imageTag:
 ttl:
-rancherProjectId: my-cluser-id:my-project-id
 isProd: false
 isPreProd: false
 replicas: 1

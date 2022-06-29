@@ -27,10 +27,17 @@ module.exports = (type, context)=>{
       type,
       inc
     )
-
+    
+    const ext = path.extname(inc)
+    
+    const pluginName = ([
+      scope.slice(1),
+      type,
+      camelCase(path.basename(inc).slice(0, -1*ext.length)),
+    ]).flatMap(v=>v).join("/")
+    context.logger = context.logger.child({plugin: pluginName})
     
     return async (data)=>{
-      const ext = path.extname(inc)
 
       let requireFunc
       if(ext===".ts"){
@@ -40,20 +47,22 @@ module.exports = (type, context)=>{
       }
 
       const plugin = requireFunc(rPath)
-
-      const pluginName = scope.slice(1).join("/")+"/"+camelCase(path.basename(inc).slice(0, -1*ext.length))
-      context.logger = context.logger.child({plugin: pluginName})
-    
-      const result = await plugin(
-        data,
-        pluginOptions,
-        context,
-        scope
-      )
-
-      if(result){
-        data = result
+      
+      try {
+        const result = await plugin(
+          data,
+          pluginOptions,
+          context,
+          scope
+        )
+        if(result){
+          data = result
+        }
+      }catch(error){
+        context.logger.error({error: error.toString(),...(error.data || {})}, `plugin error`)
+        throw error
       }
+
       
       return data
     }

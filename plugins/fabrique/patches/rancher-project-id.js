@@ -2,8 +2,6 @@ module.exports = async (manifests, options, { config, logger, utils }) => {
   const { asyncShell } = utils
   const { ciNamespace, kubeconfigContext } = config
 
-  const { required = true } = options
-
   const rancherNsMissingProjectId = []
   for (const manifest of manifests) {
     if (
@@ -32,7 +30,7 @@ module.exports = async (manifests, options, { config, logger, utils }) => {
     `missing rancher projectId, getting from cluster using ci-namespace "${ciNamespace}"`
   )
 
-  let rancherProjectId
+  let rancherProjectId = ""
   if (options.rancherProjectId) {
     rancherProjectId = options.rancherProjectId
   } else if (process.env.RANCHER_PROJECT_ID) {
@@ -44,17 +42,11 @@ module.exports = async (manifests, options, { config, logger, utils }) => {
       )
       const data = JSON.parse(json)
       rancherProjectId = data.metadata.annotations["field.cattle.io/projectId"]
-    } catch (e) {
-      if (required) {
-        const errorMsg =
-          "unable to retrieve required missing rancher projectId from cluster"
-        logger.error(errorMsg)
-        throw new Error(errorMsg)
-      } else {
-        logger.warn(
-          "unable to retrieve optional missing rancher projectId from cluster"
-        )
-      }
+    } catch (error) {
+      logger.warn(
+        { error },
+        "unable to retrieve optional missing rancher projectId from cluster"
+      )
     }
   }
 

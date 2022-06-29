@@ -9,7 +9,7 @@ imagePackage: app
 imageTag:
 image:
 ttl:
-rancherProjectId: my-cluser-id:my-project-id
+rancherProjectId:
 isProd: false
 isPreProd: false
 replicas: 1

@@ -318,6 +318,10 @@ module.exports = async (opts = {}) => {
         return kubeconfigContext
       },
     },
+    isLocal: {
+      env: "KS_ISLOCAL",
+      default: false,
+    },
     dependencies: {
       transform: (dependencies = {}) =>
         Object.entries(dependencies)

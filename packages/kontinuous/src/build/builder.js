@@ -77,13 +77,7 @@ module.exports = async (_options = {}) => {
   logger.debug(`Built manifests: file://${manifestsFile}`)
   
   logger.debug("Validate manifests")
-  try {
-    await validateManifests(manifests, values)
-  }
-  catch(error){
-    logger.error(`manifests validation error for manifests file://${manifestsFile}`)
-    throw error
-  }
+  await validateManifests(manifests, values)
   
   logger.debug("Debug manifests")
   await debugManifests(manifests, values)
