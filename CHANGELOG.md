@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.33.0](https://github.com/SocialGouv/kontinuous/compare/v1.32.0...v1.33.0) (2022-06-29)
+
+
+### Features
+
+* common config options ([bb3c03f](https://github.com/SocialGouv/kontinuous/commit/bb3c03f5124e7566bde92ab8c3213822fbbaff81))
+* isLocal+decouple validateRancherId+imp error ([3e7bfa7](https://github.com/SocialGouv/kontinuous/commit/3e7bfa73b72fd3e00d005fca2bcf053873ab39c2))
+
+
+### Bug Fixes
+
+* linter build pattern ([ea18622](https://github.com/SocialGouv/kontinuous/commit/ea186228320b25171936e6ae1e572c521f097938))
+* normalize dep key (remove number) ([47cc83c](https://github.com/SocialGouv/kontinuous/commit/47cc83c68b11fe3fd2b2d165f4d78f7c9a3f835a))
+* use relative symlink ([51d2b06](https://github.com/SocialGouv/kontinuous/commit/51d2b0684fa58092cfd9f2baa65f541584b9ce7d))
+
 ## [1.32.0](https://github.com/SocialGouv/kontinuous/compare/v1.31.1...v1.32.0) (2022-06-29)
 
 
