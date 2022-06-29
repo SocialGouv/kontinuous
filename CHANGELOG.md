@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.32.0](https://github.com/SocialGouv/kontinuous/compare/v1.31.1...v1.32.0) (2022-06-29)
+
+
+### Features
+
+* enabled param for js deps ([10cdc01](https://github.com/SocialGouv/kontinuous/commit/10cdc01689bed469055270480f67670cd79c5106))
+
+
+### Bug Fixes
+
+* add subpath option ([f7c7ee8](https://github.com/SocialGouv/kontinuous/commit/f7c7ee806f8de98523dd8779137fe4f8feff0b92))
+* config.yaml charts enabled key ([b6eb5ad](https://github.com/SocialGouv/kontinuous/commit/b6eb5adc1761b64401ceabad15329810cec4512d))
+* empty dependencies ([2d67ee2](https://github.com/SocialGouv/kontinuous/commit/2d67ee242e6f8c2fa1094a86e5c45068a126c589))
+* git config ([a2f881f](https://github.com/SocialGouv/kontinuous/commit/a2f881f81dd5f0525a0de3333bad660ade19ce7d))
+* git config ([94c0983](https://github.com/SocialGouv/kontinuous/commit/94c0983eee8662095992f89561b87993bec4f0a1))
+* homedir + ignore local config on tests ([fdabb60](https://github.com/SocialGouv/kontinuous/commit/fdabb60b58817a2defd300bf0b0f2ee9c0620c3e))
+* increase tests timeout ([1ca7a43](https://github.com/SocialGouv/kontinuous/commit/1ca7a4352e3a4861860147c43c53fcb3ba6f0666))
+* no git dir ([031c69a](https://github.com/SocialGouv/kontinuous/commit/031c69aa0e34a2d077db7c632b324cdef334209c))
+* plugin name contextual logger ([7732ca1](https://github.com/SocialGouv/kontinuous/commit/7732ca1adb9552e7d4b7be82291febee2b7469fe))
+* quick fix ([1908ed8](https://github.com/SocialGouv/kontinuous/commit/1908ed8c1ab1cfc396f6088131ece9485c060bff))
+* rm janitor ([d514cf1](https://github.com/SocialGouv/kontinuous/commit/d514cf16523caa19e8c21942ff72c86e10c8e953))
+* tests auto self-ref ([2375a0d](https://github.com/SocialGouv/kontinuous/commit/2375a0d647c9f0d3eea4e3b2728a9d73a2dd4447))
+
 ### [1.31.1](https://github.com/SocialGouv/kontinuous/compare/v1.31.0...v1.31.1) (2022-06-28)
 
 
