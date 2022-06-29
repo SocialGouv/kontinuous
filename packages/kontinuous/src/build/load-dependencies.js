@@ -26,7 +26,7 @@ const copyFilter = require('./copy-filter')
 
 const validateName = /^[a-zA-Z\d-_]+$/
 
-const registerSubcharts = async (chart, chartsDirName, target)=>{
+const registerSubcharts = async (chart, chartsDirName, target, definition={})=>{
   const chartsDir = `${target}/${chartsDirName}`
   if(!await fs.pathExists(chartsDir)){
     return
@@ -37,9 +37,14 @@ const registerSubcharts = async (chart, chartsDirName, target)=>{
     if(!(await fs.stat(chartDirPath)).isDirectory()){
       continue
     }
+    if(definition.charts?.[camelCase(chartDir)]?.enabled===false){
+      await fs.remove(chartDirPath)
+      continue
+    }
+
     const subchartFile = `${chartDirPath}/Chart.yaml`
     if(!await fs.pathExists(subchartFile)){
-      await buildChartFile(chartDirPath, chartDir)
+      await buildChartFile(chartDirPath, chartDir, definition[chartDir])
     }
     const subchartContent = await fs.readFile(subchartFile)
     const subchart = yaml.load(subchartContent)
@@ -53,15 +58,16 @@ const registerSubcharts = async (chart, chartsDirName, target)=>{
     )
     if(definedDependency){
       Object.assign(definedDependency, dependency)
+    } else {
+      chart.dependencies.push(dependency)
     }
-    if(subchart.type!=="library"&&!dependency.condition){
+    if(subchart.type!=="library" && !dependency.condition){
       dependency.condition = `${dependency.alias || dependency.name}.enabled`
     }
-    chart.dependencies.push(dependency)
   }
 }
 
-const buildChartFile = async (target, name)=>{
+const buildChartFile = async (target, name, definition={})=>{
   const chartFile = `${target}/Chart.yaml`
   const chart = createChart(name)
   if(await fs.pathExists(chartFile)){
@@ -75,7 +81,13 @@ const buildChartFile = async (target, name)=>{
       dep.condition = `${dep.alias || dep.name}.enabled`
     }
   }
-  await registerSubcharts(chart, "charts", target)
+  
+  await registerSubcharts(chart, "charts", target, definition)
+
+  chart.dependencies = chart.dependencies.filter(dep=>
+    definition.charts?.[camelCase(dep.name)]?.enabled!==false
+  )
+  
   await fs.ensureDir(target)
   await fs.writeFile(chartFile, yaml.dump(chart))
 }
@@ -302,7 +314,7 @@ const downloadAndBuildDependencies = async (config, logger)=>{
       target,
       definition,
     })=>{
-      await buildChartFile(target, name)
+      await buildChartFile(target, name, definition)
       await downloadRemoteRepository(target, name)
       await buildJsFile(target, "values-compilers", definition)
       await buildJsFile(target, "debug-manifests", definition)
