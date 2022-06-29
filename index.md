@@ -111,6 +111,8 @@ All keys are same except `projects` and `organizations`:
 
 sample for `~/.kontinuous/config.yaml` :
 ```yaml
+isLocal: true
+
 links:
   SocialGouv/kontinuous: /lab/fabrique/sre/kontinuous
 
