@@ -1,0 +1,16 @@
+isLocal: true
+
+# links:
+#   SocialGouv/kontinuous: /absolute/path/to/kontinuous/repo/dir
+
+# organizations:
+#   my-orga:
+#     webhooks:
+#       baseDomain: dev.my-orga.com
+#       uriPattern: https://webhook-${repositoryName}.${baseDomain}
+
+# projects:
+#   my-app-repo:
+#     organization: my-orga
+#     webhook:
+#       token: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

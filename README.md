@@ -29,8 +29,9 @@ Keep as close as possible of battle tested and confident tech paradigms as nativ
 ### Summary
 
 1. [Configuration](#1-configuration)
-    1. [Boilerplate](#11-boilerplate)
+    1. [Boilerplates](#11-boilerplates)
         1. [Fabrique quickstart](#111-fabrique-quickstart)
+        2. [Local dev home config](#112-local-dev-home-config)
     2. [Repository config](#12-repository-config)
     3. [Global config](#13-global-config)
     4. [CLI config](#14-cli-config)
@@ -73,7 +74,7 @@ Keep as close as possible of battle tested and confident tech paradigms as nativ
 
 # 1. Configuration
 
-## 1.1 Boilerplate
+## 1.1 Boilerplates
 
 Here is a sample of a boilerplate made for ***La Fabrique*** and that you can merge with files of your project.
 
@@ -83,7 +84,12 @@ Run this command in your project to retrieve boilerplate config for kontinuous a
 
 ⚠️ Pay attention, this command will overwrite files if sames names are used, you should commit your work before running it.
 ```sh
-npx -y tiged SocialGouv/kontinuous/plugins/fabrique/boilerplate --force
+npx tiged SocialGouv/kontinuous/plugins/fabrique/boilerplates/workspace --force
+```
+
+### 1.1.2 Local dev home config
+```sh
+npx tiged SocialGouv/kontinuous/plugins/fabrique/boilerplates/local-dev-home --force ~/.kontinuous
 ```
 
 ### 1.2 Repository config
@@ -777,7 +783,7 @@ kapp deploy /tmp/manifests.yaml
         secrets: inherit
     ```
 
-    see also [plugins/fabrique/boilerplate/.github/workflows](plugins/fabrique/boilerplate/.github/workflows) for [generic setup of ***La Fabrique***](#111-fabrique-quickstart).
+    see also [plugins/fabrique/boilerplates/workspace/.github/workflows](plugins/fabrique/boilerplates/workspace/.github/workflows) for [generic setup of ***La Fabrique***](#111-fabrique-quickstart).
 
 
     composite action:
