@@ -1,7 +1,6 @@
 const path = require("path")
 
 const fs = require("fs-extra")
-const degit = require("tiged")
 const camelCase = require("lodash.camelcase")
 const get = require("lodash.get")
 const set = require("lodash.set")
@@ -16,8 +15,9 @@ const downloadFile = require("~common/utils/download-file")
 const getYamlPath = require("~common/utils/get-yaml-path")
 const yarnInstall = require("~common/utils/yarn-install")
 const fileHash = require("~common/utils/file-hash")
-const degitTagHasChanged = require("~common/utils/degit-tag-has-changed")
+const degitWithCacheCheck = require("~common/utils/degit-with-cache-check")
 const slug = require("~common/utils/slug")
+const normalizeDegitUri = require("~common/utils/normalize-degit-uri")
 
 const createContext = require("~/plugins/context")
 const configDependencyKey = require("~/plugins/context/config-dependency-key")
@@ -99,67 +99,105 @@ const buildChartFile = async (target, name, definition = {}) => {
   await fs.writeFile(chartFile, yaml.dump(chart))
 }
 
-const downloadRemoteRepository = async (target, _name, config) => {
+const downloadDependencyFromHelmRepo = async (
+  dependency,
+  target,
+  config,
+  _logger
+) => {
+  const { repository, version } = dependency
+  const localArchive = `${target}/charts/${dependency.name}-${version}.tgz`
+  let zfile
+  if (await fs.pathExists(localArchive)) {
+    zfile = localArchive
+  } else {
+    const cacheDir = `${config.kontinuousHomeDir}/cache/charts`
+    const archiveSlug = slug([dependency.name, version, repository])
+    zfile = `${cacheDir}/${archiveSlug}.tgz`
+    if (!(await fs.pathExists(zfile))) {
+      await fs.ensureDir(cacheDir)
+      const chartRepository = `${repository}/index.yaml`
+      let repositoryIndex
+      try {
+        repositoryIndex = await axios.get(chartRepository)
+      } catch (e) {
+        throw Error(`Unable to download ${chartRepository}: ${e.message}`)
+      }
+      const repo = yaml.load(repositoryIndex.data)
+      const { entries } = repo
+      const entryVersions = entries[dependency.name]
+      const versionEntry = entryVersions.find(
+        (entry) => entry.version.toString() === dependency.version.toString()
+      )
+      if (!versionEntry) {
+        throw new Error(`version ${version} not found for ${dependency.name}`)
+      }
+      const url = versionEntry.urls[0]
+      await downloadFile(url, zfile)
+    }
+  }
+
+  await decompress(zfile, `${target}/charts`)
+
+  let chartName = dependency.name
+  if (dependency.alias) {
+    chartName = dependency.alias
+    await fs.rename(
+      `${target}/charts/${dependency.name}`,
+      `${target}/charts/${dependency.alias}`
+    )
+  }
+
+  dependency.repository = `file://./charts/${chartName}`
+}
+
+const downloadDependencyFromGitRepo = async (
+  dependency,
+  target,
+  _config,
+  logger
+) => {
+  const { degit: degitUri } = dependency
+  if (dependency.repository) {
+    throw new Error(
+      `repository and degit variable are mutually exclusive for chart dependency: ${JSON.stringify(
+        dependency,
+        null,
+        2
+      )}`
+    )
+  }
+  const chartName = dependency.alias || dependency.name
+  await degitWithCacheCheck(degitUri, `${target}/charts/${chartName}`, {
+    logger: logger.child({
+      dependency,
+    }),
+  })
+  dependency.repository = `file://./charts/${chartName}`
+  delete dependency.degit
+}
+
+const downloadRemoteRepository = async (target, _name, config, logger) => {
   const chartFile = `${target}/Chart.yaml`
   const chart = yaml.load(await fs.readFile(chartFile))
   const { dependencies = [] } = chart
   let touched = false
   for (const dependency of dependencies) {
+    let { degit: degitUri } = dependency
+    if (degitUri) {
+      degitUri = normalizeDegitUri(degitUri)
+    }
     const { repository } = dependency
-    if (repository.startsWith("file://")) {
-      continue
-    }
-    const localArchive = `${target}/charts/${dependency.name}-${dependency.version}.tgz`
-    let zfile
-    if (await fs.pathExists(localArchive)) {
-      zfile = localArchive
-    } else {
-      const cacheDir = `${config.kontinuousHomeDir}/cache/charts`
-      const archiveSlug = slug([
-        dependency.name,
-        dependency.version,
-        repository,
-      ])
-      zfile = `${cacheDir}/${archiveSlug}.tgz`
-      if (!(await fs.pathExists(zfile))) {
-        await fs.ensureDir(cacheDir)
-        const chartRepository = `${repository}/index.yaml`
-        let repositoryIndex
-        try {
-          repositoryIndex = await axios.get(chartRepository)
-        } catch (e) {
-          throw Error(`Unable to download ${chartRepository}: ${e.message}`)
-        }
-        const repo = yaml.load(repositoryIndex.data)
-        const { entries } = repo
-        const entryVersions = entries[dependency.name]
-        const version = entryVersions.find(
-          (entry) => entry.version.toString() === dependency.version.toString()
-        )
-        if (!version) {
-          throw new Error(
-            `version ${dependency.version} not found for ${dependency.name}`
-          )
-        }
-        const url = version.urls[0]
-        await downloadFile(url, zfile)
-      }
-    }
 
-    await decompress(zfile, `${target}/charts`)
-
-    let chartName = dependency.name
-    if (dependency.alias) {
-      chartName = dependency.alias
-      await fs.rename(
-        `${target}/charts/${dependency.name}`,
-        `${target}/charts/${dependency.alias}`
-      )
+    if (degitUri) {
+      await downloadDependencyFromGitRepo(dependency, target, config, logger)
+      touched = true
+    } else if (!repository.startsWith("file://")) {
+      await downloadDependencyFromHelmRepo(dependency, target, config, logger)
+      touched = true
     }
-
-    dependency.repository = `file://./charts/${chartName}`
-    touched = true
   }
+
   if (touched) {
     await fs.writeFile(chartFile, yaml.dump(chart))
   }
@@ -297,7 +335,7 @@ const downloadAndBuildDependencies = async (config, logger) => {
 
       let { import: importTarget } = definition
       if (importTarget) {
-        importTarget = importTarget.replace("@", "#")
+        importTarget = normalizeDegitUri(importTarget)
         const matchLink = Object.entries(links).find(([key]) =>
           importTarget.startsWith(key)
         )
@@ -308,16 +346,12 @@ const downloadAndBuildDependencies = async (config, logger) => {
           logger.debug({ scope }, `copy ${name} from "${from}"`)
           await fs.copy(from, target, { filter: copyFilter })
         } else {
-          const tagHasChanged = await degitTagHasChanged(importTarget)
-          const cache = !tagHasChanged
-          logger.debug({ scope }, `degit ${name} from "${importTarget}"`)
-          if (tagHasChanged) {
-            logger.debug(
-              { scope, degit: importTarget },
-              `tag has changed, renew cache`
-            )
-          }
-          await degit(importTarget, { cache }).clone(target)
+          await degitWithCacheCheck(importTarget, target, {
+            logger: logger.child({
+              scope,
+              name,
+            }),
+          })
         }
       }
 
@@ -330,7 +364,7 @@ const downloadAndBuildDependencies = async (config, logger) => {
     },
     afterChildren: async ({ name, target, definition }) => {
       await buildChartFile(target, name, definition)
-      await downloadRemoteRepository(target, name, config)
+      await downloadRemoteRepository(target, name, config, logger)
       await buildJsFile(target, "values-compilers", definition)
       await buildJsFile(target, "debug-manifests", definition)
       await buildJsFile(target, "patches", definition)

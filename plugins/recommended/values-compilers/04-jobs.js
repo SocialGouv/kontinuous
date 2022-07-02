@@ -4,10 +4,11 @@ const requireUse = async (
   use,
   { config, logger, downloadingPromises, utils }
 ) => {
-  const { slug, degit, fs, ignoreYarnState } = utils
+  const { slug, degitWithCacheCheck, fs, ignoreYarnState, normalizeDegitUri } =
+    utils
   const { buildPath, workspacePath } = config
   const useSlug = slug(use)
-  use = use.replace("@", "#")
+  use = normalizeDegitUri(use)
   let target = `${buildPath}/uses/${useSlug}`
   const { links = {} } = config
   if (!downloadingPromises[useSlug]) {
@@ -32,17 +33,7 @@ const requireUse = async (
         })
       } else {
         logger.debug(`degit ${use}`)
-        try {
-          const tagHasChanged = await utils.degitTagHasChanged(use)
-          const cache = !tagHasChanged
-          if (tagHasChanged) {
-            logger.debug({ degit: use }, `tag has changed, renew cache`)
-          }
-          await degit(use, { cache, force: true }).clone(target)
-        } catch (error) {
-          logger.error({ error }, `Unable to degit job ${use}`)
-          throw error
-        }
+        await degitWithCacheCheck(use, target, { logger, force: true })
       }
     })()
   }
