@@ -4,8 +4,7 @@ const requireUse = async (
   use,
   { config, logger, downloadingPromises, utils }
 ) => {
-  const { slug, degitWithCacheCheck, fs, ignoreYarnState, normalizeDegitUri } =
-    utils
+  const { slug, degitImproved, fs, ignoreYarnState, normalizeDegitUri } = utils
   const { buildPath, workspacePath } = config
   const useSlug = slug(use)
   use = normalizeDegitUri(use)
@@ -33,7 +32,7 @@ const requireUse = async (
         })
       } else {
         logger.debug(`degit ${use}`)
-        await degitWithCacheCheck(use, target, { logger, force: true })
+        await degitImproved(use, target, { logger, force: true })
       }
     })()
   }

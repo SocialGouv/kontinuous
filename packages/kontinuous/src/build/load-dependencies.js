@@ -15,7 +15,7 @@ const downloadFile = require("~common/utils/download-file")
 const getYamlPath = require("~common/utils/get-yaml-path")
 const yarnInstall = require("~common/utils/yarn-install")
 const fileHash = require("~common/utils/file-hash")
-const degitWithCacheCheck = require("~common/utils/degit-with-cache-check")
+const degitImproved = require("~common/utils/degit-improved")
 const slug = require("~common/utils/slug")
 const normalizeDegitUri = require("~common/utils/normalize-degit-uri")
 
@@ -168,7 +168,7 @@ const downloadDependencyFromGitRepo = async (
     )
   }
   const chartName = dependency.alias || dependency.name
-  await degitWithCacheCheck(degitUri, `${target}/charts/${chartName}`, {
+  await degitImproved(degitUri, `${target}/charts/${chartName}`, {
     logger: logger.child({
       dependency,
     }),
@@ -346,7 +346,7 @@ const downloadAndBuildDependencies = async (config, logger) => {
           logger.debug({ scope }, `copy ${name} from "${from}"`)
           await fs.copy(from, target, { filter: copyFilter })
         } else {
-          await degitWithCacheCheck(importTarget, target, {
+          await degitImproved(importTarget, target, {
             logger: logger.child({
               scope,
               name,
