@@ -40,36 +40,36 @@ getTreeInfos.Ingress = (resource) => {
 
 getTreeInfos.Deployment = (resource) => {
   const { manifest } = resource
-  const containers = manifest.spec?.template?.spec?.containers
-  const initContainers = manifest.spec?.template?.spec?.initContainers
+  const containers = manifest.spec?.template?.spec?.containers || []
+  const initContainers = manifest.spec?.template?.spec?.initContainers || []
   return [
-    ...(containers
-      ? containers.map((container) => ({
-          name: container.name,
-          children: [
-            {
-              name: `image: ${container.image}`,
-            },
-            {
-              name: `port${
-                container.ports.length > 1 ? "s" : ""
-              }: ${container.ports
-                .map(({ containerPort }) => containerPort)
-                .join(",")}`,
-            },
-          ],
-        }))
-      : []),
-    ...(initContainers
-      ? initContainers.map((container) => ({
-          name: `${container.name} (init)`,
-          children: [
-            {
-              name: `image: ${container.image}`,
-            },
-          ],
-        }))
-      : []),
+    ...containers.map((container) => ({
+      name: container.name,
+      children: [
+        {
+          name: `image: ${container.image}`,
+        },
+        ...(container.ports
+          ? [
+              {
+                name: `port${
+                  container.ports.length > 1 ? "s" : ""
+                }: ${container.ports
+                  .map(({ containerPort }) => containerPort)
+                  .join(",")}`,
+              },
+            ]
+          : []),
+      ],
+    })),
+    ...initContainers.map((container) => ({
+      name: `${container.name} (init)`,
+      children: [
+        {
+          name: `image: ${container.image}`,
+        },
+      ],
+    })),
   ]
 }
 
