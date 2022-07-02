@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.35.1](https://github.com/SocialGouv/kontinuous/compare/v1.35.0...v1.35.1) (2022-07-02)
+
+
+### Bug Fixes
+
+* add gitea support ([dd8d96d](https://github.com/SocialGouv/kontinuous/commit/dd8d96dbc1b5e93077e8f2351f67fcd3aa484520))
+* degit improved subgroup support ([827d39c](https://github.com/SocialGouv/kontinuous/commit/827d39c6af7dd2b80401420634abb7af13c3f9a5))
+
 ## [1.35.0](https://github.com/SocialGouv/kontinuous/compare/v1.34.2...v1.35.0) (2022-07-02)
 
 
