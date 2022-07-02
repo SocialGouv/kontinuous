@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.35.0](https://github.com/SocialGouv/kontinuous/compare/v1.34.2...v1.35.0) (2022-07-02)
+
+
+### Features
+
+* helm chart degit ! +fix norm degit +refacto ([451d14e](https://github.com/SocialGouv/kontinuous/commit/451d14e2747c4a02f04219942ef274206110062b))
+
+
+### Bug Fixes
+
+* boilerplate improve ([9bfe78e](https://github.com/SocialGouv/kontinuous/commit/9bfe78ea3d460c9071f69db3da9be855febe6996))
+* debug containers when no port ([f7bd2f8](https://github.com/SocialGouv/kontinuous/commit/f7bd2f80a4ee13be0bfb5940d3d48b862167f076))
+* drop-db consistent with key ([e16ad85](https://github.com/SocialGouv/kontinuous/commit/e16ad852a6c0f2b3cf12dab67d6cc0e5816f73a8))
+* link detect self-reference for dev ([8570957](https://github.com/SocialGouv/kontinuous/commit/8570957117cec1861df00d9f881a2ac41eed77c8))
+
 ### [1.34.2](https://github.com/SocialGouv/kontinuous/compare/v1.34.1...v1.34.2) (2022-06-29)
 
 
