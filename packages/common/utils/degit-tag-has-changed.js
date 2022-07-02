@@ -8,6 +8,7 @@ const supported = {
   github: ".com",
   gitlab: ".com",
   bitbucket: ".com",
+  gitea: ".com",
   "git.sr.ht": ".ht",
 }
 
