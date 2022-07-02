@@ -77,7 +77,7 @@ module.exports = async ({
       config[key] = defaultValue
     }
     if (transform) {
-      config[key] = transform(config[key])
+      config[key] = await transform(config[key], config)
     }
   }
 

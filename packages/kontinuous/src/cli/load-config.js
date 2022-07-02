@@ -331,6 +331,19 @@ module.exports = async (opts = {}) => {
             return acc
           }, {}),
     },
+    links: {
+      transform: async (links = {}) => {
+        if (!links["SocialGouv/kontinuous"]) {
+          const real = await fs.realpath(process.argv[1])
+          if (real.endsWith("packages/kontinuous/bin/kontinuous")) {
+            links["SocialGouv/kontinuous"] = path.resolve(
+              `${path.dirname(real)}/../../..`
+            )
+          }
+        }
+        return links
+      },
+    },
   }
 
   const rootConfig = await loadStructuredConfig({
