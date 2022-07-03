@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.36.0](https://github.com/SocialGouv/kontinuous/compare/v1.35.1...v1.36.0) (2022-07-03)
+
+
+### Features
+
+* reloader annotation ([f3965c5](https://github.com/SocialGouv/kontinuous/commit/f3965c50bd5603acecd5eb37c956e8351da323e9))
+* sealed-secret verify ([5d96982](https://github.com/SocialGouv/kontinuous/commit/5d96982e893393f946874761f7f7f9e960aff3e8))
+
+
+### Bug Fixes
+
+* clean ([769be0c](https://github.com/SocialGouv/kontinuous/commit/769be0cb429101225874d1a7780ede5363f3a82b))
+* sync gitlab over gh action ([a65d816](https://github.com/SocialGouv/kontinuous/commit/a65d8166630f9aa1c7b61cbb070705c6b6fd5140))
+
 ### [1.35.1](https://github.com/SocialGouv/kontinuous/compare/v1.35.0...v1.35.1) (2022-07-02)
 
 
