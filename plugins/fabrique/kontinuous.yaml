@@ -1,3 +1,14 @@
 dependencies:
   recommended:
     import: SocialGouv/kontinuous/plugins/recommended
+
+options:
+  clusters:
+    dev:
+      kubesealEndpoint: "https://kubeseal.dev2.fabrique.social.gouv.fr"
+    prod:
+      kubesealEndpoint: "https://kubeseal.prod2.fabrique.social.gouv.fr"
+
+validators:
+  sealedSecrets:
+    enabled: false

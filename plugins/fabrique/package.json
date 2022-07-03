@@ -1,7 +1,9 @@
 {
   "name": "~fabrique",
   "dependencies": {
-    "@socialgouv/parse-manifests": "^1.13.8"
+    "@socialgouv/parse-manifests": "^1.13.8",
+    "async-retry": "^1.3.3",
+    "axios": "^0.27.2"
   },
   "license": "MIT",
   "private": true
