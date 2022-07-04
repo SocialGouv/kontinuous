@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.37.0](https://github.com/SocialGouv/kontinuous/compare/v1.36.1...v1.37.0) (2022-07-04)
+
+
+### Features
+
+* add environmentPatterns config ([e001d89](https://github.com/SocialGouv/kontinuous/commit/e001d899d485b8c2c3532bc81bae1020e63814f9))
+* add environmentPatterns to webhook ([8bdb4a0](https://github.com/SocialGouv/kontinuous/commit/8bdb4a0fdfdeaa56e04d80d9913725f99e34ec1d))
+
+
+### Bug Fixes
+
+* gitlab mirror action ([d3ccd1b](https://github.com/SocialGouv/kontinuous/commit/d3ccd1b778e5a74bc8ba65f31b97ddd4273e1f63))
+
 ### [1.36.1](https://github.com/SocialGouv/kontinuous/compare/v1.36.0...v1.36.1) (2022-07-04)
 
 
