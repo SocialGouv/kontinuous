@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.37.2 (2022-07-04)
+
+
+### Bug Fixes
+
+* **metabase:** reduce startupDelay ([e30a709](https://github.com/SocialGouv/kontinuous/commit/e30a709e5113cec3d5564f76eff60883adf7b402))
+
 ### [1.37.1](https://github.com/SocialGouv/kontinuous/compare/v1.37.0...v1.37.1) (2022-07-04)
 
 
