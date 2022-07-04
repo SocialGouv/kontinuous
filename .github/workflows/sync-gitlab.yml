@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Mirror + trigger CI
-      uses: SvanBoxel/gitlab-mirror-and-ci-action@0.3
+      uses: SocialGouv/gitlab-mirror-and-ci-action@v1
       with:
         args: "https://gitlab.fabrique.social.gouv.fr/SRE/kontinuous"
       env:
