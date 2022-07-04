@@ -29,14 +29,6 @@ runs:
         KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/tags/}
         KS_GIT_BRANCH_URLENCODED=$(echo $KS_GIT_BRANCH | sed 's/\//\%2f/g')
         if [[ "$KS_GIT_BRANCH" =~ ^v[0-9]+\.[0-9]+ ]]; then
-          ENV=prod
-        elif [ "$KS_GIT_BRANCH" = "master" ] || [ "$KS_GIT_BRANCH" = "main" ]; then
-          ENV=preprod
-        else
-          ENV=dev
-        fi
-
-        if [ "$ENV" = "prod" ]; then
           EVENT_NAME=created
         else
           EVENT_NAME=pushed
@@ -47,6 +39,7 @@ runs:
         KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
         KS_GIT_REPOSITORY_URLENCODED=$(echo $KS_GIT_REPOSITORY | sed 's/\//\%2f/g')
 
+        ENV=$(npx kontinuous env)
         echo "::set-output name=env::$ENV"
 
         echo "WEBHOOK_URI=$WEBHOOK_URI">>$GITHUB_ENV
