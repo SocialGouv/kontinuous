@@ -2,7 +2,6 @@ const stream = require("stream")
 const { promisify } = require("util")
 const axios = require("axios")
 
-const refEnv = require("~common/utils/ref-env")
 const logger = require("~common/utils/logger")
 const getGitRef = require("~common/utils/get-git-ref")
 const getGitSha = require("~common/utils/get-git-sha")
@@ -10,10 +9,12 @@ const getGitRepository = require("~common/utils/get-git-repository")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const qs = require("qs")
 
+const refEnv = require("~/env")
+
 const ctx = require("~/ctx")
 
-const eventFromBranch = (branch) => {
-  const env = refEnv(branch)
+const eventFromBranch = (branch, environmentPatterns) => {
+  const env = refEnv(branch, environmentPatterns)
   if (env === "prod") {
     return "created"
   }
@@ -35,7 +36,7 @@ module.exports = async (options) => {
     commit = await getGitSha(cwd, branch)
   }
   if (!event) {
-    event = eventFromBranch(branch)
+    event = eventFromBranch(branch, config.environmentPatterns)
   }
 
   const repository = repositoryFromGitUrl(repositoryMixed)

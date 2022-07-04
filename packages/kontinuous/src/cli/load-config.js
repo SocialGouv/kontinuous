@@ -13,11 +13,11 @@ const getGitSha = require("~common/utils/get-git-sha")
 const getGitUrl = require("~common/utils/get-git-url")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const cleanGitRef = require("~common/utils/clean-git-ref")
-const refEnv = require("~common/utils/ref-env")
 const yaml = require("~common/utils/yaml")
 const asyncShell = require("~common/utils/async-shell")
 const deepmerge = require("~common/utils/deepmerge")
 const logger = require("~common/utils/logger")
+const refEnv = require("~/env")
 
 const ctx = require("~/ctx")
 
@@ -201,10 +201,19 @@ module.exports = async (opts = {}) => {
       defaultFunction: (config) =>
         path.join(config.buildPath, "charts", "project"),
     },
+    environmentPatterns: {
+      transform: (value) => ({
+        prod: "v[0-9]*",
+        preprod: ["main", "master"],
+        dev: "*",
+        ...(value || {}),
+      }),
+    },
     environment: {
       env: "KS_ENVIRONMENT",
       option: "E",
-      defaultFunction: (config) => refEnv(config.gitBranch),
+      defaultFunction: (config) =>
+        refEnv(config.gitBranch, config.environmentPatterns),
     },
     webhookToken: {
       option: "webhook-token",

@@ -7958,6 +7958,7 @@ __metadata:
     lodash.get: "npm:^4.4.2"
     lodash.mergewith: "npm:^4.6.2"
     lodash.set: "npm:^4.3.2"
+    micromatch: "npm:^4.0.5"
     nctx: "npm:^1.2.0"
     pino: "npm:^7.10.0"
     pino-pretty: "npm:^7.6.0"

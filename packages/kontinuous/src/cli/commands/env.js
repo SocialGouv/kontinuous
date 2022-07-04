@@ -1,4 +1,4 @@
-const refEnv = require("~common/utils/ref-env")
+const refEnv = require("~/env")
 const ctx = require("~/ctx")
 
 const options = require("../options")
@@ -12,11 +12,11 @@ module.exports = (program) =>
     .addOption(options.subpath)
     .argument("[ref]", "the ref")
     .action(async (ref, _opts, _command) => {
+      const config = ctx.require("config")
       let env
       if (ref) {
-        env = refEnv(ref)
+        env = refEnv(ref, config.environmentPatterns)
       } else {
-        const config = ctx.require("config")
         env = config.environment
       }
       process.stdout.write(env)
