@@ -50,7 +50,8 @@ module.exports = async ({
       transform,
     } = def
 
-    const optionKey = camelCase(def.option)
+    const optionKey =
+      def.option && def.option.length > 1 ? camelCase(def.option) : def.option
 
     const isUndefined = emptyAsUndefined
       ? emptyAsUndefinedCheck
@@ -63,6 +64,7 @@ module.exports = async ({
       }
       config[key] = envValue
     }
+
     if (
       optionKey &&
       optionKeys.includes(optionKey) &&
