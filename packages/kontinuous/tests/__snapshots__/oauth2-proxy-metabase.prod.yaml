@@ -146,12 +146,12 @@ spec:
             - containerPort: 3000
               name: http
           startupProbe:
-            failureThreshold: 12
+            failureThreshold: 30
             httpGet:
               path: /api/health
               port: http
             periodSeconds: 10
-            initialDelaySeconds: 240
+            initialDelaySeconds: 60
             successThreshold: 1
             timeoutSeconds: 10
           readinessProbe:
