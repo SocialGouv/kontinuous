@@ -17,7 +17,8 @@ const yaml = require("~common/utils/yaml")
 const asyncShell = require("~common/utils/async-shell")
 const deepmerge = require("~common/utils/deepmerge")
 const logger = require("~common/utils/logger")
-const refEnv = require("~/env")
+const refEnv = require("~common/utils/ref-env")
+const defaultEnvironmentPatterns = require("~common/utils/default-environment-patterns")
 
 const ctx = require("~/ctx")
 
@@ -203,9 +204,7 @@ module.exports = async (opts = {}) => {
     },
     environmentPatterns: {
       transform: (value) => ({
-        prod: "v[0-9]*",
-        preprod: ["main", "master"],
-        dev: "*",
+        ...defaultEnvironmentPatterns,
         ...(value || {}),
       }),
     },

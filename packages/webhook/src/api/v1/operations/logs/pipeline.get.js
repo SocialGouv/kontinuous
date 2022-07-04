@@ -5,7 +5,8 @@ const cleanGitRef = require("~common/utils/clean-git-ref")
 const parseCommand = require("~common/utils/parse-command")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const asyncShell = require("~common/utils/async-shell")
-const refKubecontext = require("~common/utils/ref-kubecontext")
+
+const refKubecontext = require("~/git/ref-kubecontext")
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = function () {
@@ -96,7 +97,7 @@ module.exports = function () {
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)
 
-    const kubecontext = refKubecontext(ref, env)
+    const kubecontext = await refKubecontext(repositoryMixed, ref, env)
     const jobName = pipelineJobName({
       eventName: event,
       repositoryName,

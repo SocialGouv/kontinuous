@@ -1,4 +1,5 @@
-const refEnv = require("~/env")
+const refEnv = require("~common/utils/ref-env")
+
 const ctx = require("~/ctx")
 
 const options = require("../options")

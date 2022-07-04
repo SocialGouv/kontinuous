@@ -3,7 +3,6 @@ module.exports =
   async ({ ref, after, repositoryUrl }) =>
     services.pipeline({
       eventName: "created",
-      kubecontext: "prod",
       ref,
       after,
       repositoryUrl,

@@ -9,7 +9,7 @@ const getGitRepository = require("~common/utils/get-git-repository")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const qs = require("qs")
 
-const refEnv = require("~/env")
+const refEnv = require("~common/utils/ref-env")
 
 const ctx = require("~/ctx")
 

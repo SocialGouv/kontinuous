@@ -1,12 +1,10 @@
-const isVersionTag = require("./is-version-tag")
+const micromatch = require("micromatch")
 
-module.exports = (ref = "") => {
-  ref = ref.replace("refs/heads/", "").replace("refs/tags/", "")
-  if (ref === "master" || ref === "main") {
-    return "preprod"
+module.exports = (ref, patterns) => {
+  for (const [key, pattern] of Object.entries(patterns)) {
+    if (micromatch.isMatch(ref, pattern)) {
+      return key
+    }
   }
-  if (isVersionTag(ref)) {
-    return "prod"
-  }
-  return "dev"
+  return null
 }

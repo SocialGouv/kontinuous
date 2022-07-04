@@ -6,6 +6,7 @@ const cleanGitRef = require("~common/utils/clean-git-ref")
 const jobRun = require("~/k8s/command/job-run")
 const pipelineJob = require("~/k8s/resources/pipeline.job")
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
+const refKubecontext = require("~/git/ref-kubecontext")
 
 module.exports = () => {
   const logger = ctx.require("logger")
@@ -25,6 +26,10 @@ module.exports = () => {
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)
     const gitCommit = after || "0000000000000000000000000000000000000000"
+
+    if (!kubecontext) {
+      kubecontext = await refKubecontext(repositoryUrl, gitBranch, env)
+    }
 
     const jobName = pipelineJobName({
       eventName,

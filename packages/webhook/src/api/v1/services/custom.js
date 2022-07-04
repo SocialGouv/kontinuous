@@ -1,4 +1,4 @@
-const refKubecontext = require("~common/utils/ref-kubecontext")
+const envKubecontext = require("~common/utils/env-kubecontext")
 
 module.exports =
   ({ services }) =>
@@ -25,7 +25,7 @@ EOF
       },
     ]
 
-    const kubecontext = refKubecontext(hash, env)
+    const kubecontext = envKubecontext(env)
 
     return services.pipeline({
       eventName: "custom",
