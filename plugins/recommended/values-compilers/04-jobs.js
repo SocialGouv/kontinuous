@@ -1,3 +1,5 @@
+const micromatch = require("micromatch")
+
 const miniHash = require("./utils/mini-hash")
 
 const requireUse = async (
@@ -55,6 +57,7 @@ async function compile(
     return
   }
   const { config, utils } = context
+
   const { slug, yaml, fs } = utils
   if (!Array.isArray(values.runs)) {
     values.runs = Object.entries(values.runs).map(([name, run]) => {
@@ -64,102 +67,116 @@ async function compile(
       return run
     })
   }
-  const newRuns = await Promise.all(
-    values.runs.map(async (run) => {
-      if (!run.name) {
-        run.name = miniHash(file)
-      }
-      if (!run.with) {
-        run.with = {}
-      }
 
-      const scope = [...parentScope, run.name]
-      run.scope = scope
-      const scopes = []
-      const currentScope = []
-      for (const sc of scope) {
-        currentScope.push(sc)
-        scopes.push(currentScope.join("."))
+  const { changedPaths } = config
+  const filteredRuns = values.runs.filter((run) => {
+    let { paths } = run
+    if (paths) {
+      if (!Array.isArray(paths)) {
+        paths = [paths]
       }
-      if (scope.length > 1) {
-        scopes.push([scope[0], scope[scope.length - 1]].join(".."))
-      }
-      run.scopes = scopes
-      run.parentWith = { ...parentWith, ...run.with }
+      return changedPaths.some((p) => micromatch.isMatch(p, paths))
+    }
+    return true
+  })
 
-      if (!run.needs) {
-        run.needs = []
-      }
+  const promises = filteredRuns.map(async (run) => {
+    if (!run.name) {
+      run.name = miniHash(file)
+    }
+    if (!run.with) {
+      run.with = {}
+    }
 
-      const { gitBranch, gitRepositoryName: repositoryName } = config
+    const scope = [...parentScope, run.name]
+    run.scope = scope
+    const scopes = []
+    const currentScope = []
+    for (const sc of scope) {
+      currentScope.push(sc)
+      scopes.push(currentScope.join("."))
+    }
+    if (scope.length > 1) {
+      scopes.push([scope[0], scope[scope.length - 1]].join(".."))
+    }
+    run.scopes = scopes
+    run.parentWith = { ...parentWith, ...run.with }
 
-      const jobName = slug([
-        "job",
-        repositoryName,
-        [gitBranch, 30],
-        currentScope.join("--"),
-      ])
-      run.jobName = jobName
+    if (!run.needs) {
+      run.needs = []
+    }
 
-      if (!run.use) {
-        return [run]
-      }
+    const { gitBranch, gitRepositoryName: repositoryName } = config
 
-      const { target } = await requireUse(run.use, {
-        ...context,
-        downloadingPromises,
-      })
-      const runValues = yaml.load(
-        await fs.readFile(target, { encoding: "utf-8" })
-      )
-      await compile(
-        context,
-        runValues,
-        scope,
-        run.parentWith,
-        target,
-        downloadingPromises
-      )
-      if (!runValues.runs) {
-        return []
-      }
-      return runValues.runs.map((r) => {
-        const newRun = {
-          action: run.use,
-        }
-        for (const key of Object.keys(r)) {
-          if (key === "use") {
-            continue
-          }
-          newRun[key] = r[key]
-        }
-        const jobRunOmitKeys = [
-          "use",
-          "name",
-          "jobName",
-          "needs",
-          "scope",
-          "scopes",
-          "parentWith",
-        ]
-        for (const key of Object.keys(run)) {
-          if (jobRunOmitKeys.includes(key)) {
-            continue
-          }
-          newRun[key] = run[key]
-        }
-        if (!newRun.needs) {
-          newRun.needs = []
-        }
-        newRun.needs = newRun.needs.map((r2) => [scope[0], r2].join(".."))
-        newRun.needs = [...new Set([...newRun.needs, ...run.needs])]
-        if (run.stage) {
-          newRun.stage = run.stage
-        }
-        return newRun
-      })
+    const jobName = slug([
+      "job",
+      repositoryName,
+      [gitBranch, 30],
+      currentScope.join("--"),
+    ])
+    run.jobName = jobName
+
+    if (!run.use) {
+      return [run]
+    }
+
+    const { target } = await requireUse(run.use, {
+      ...context,
+      downloadingPromises,
     })
-  )
+    const runValues = yaml.load(
+      await fs.readFile(target, { encoding: "utf-8" })
+    )
+    await compile(
+      context,
+      runValues,
+      scope,
+      run.parentWith,
+      target,
+      downloadingPromises
+    )
+    if (!runValues.runs) {
+      return []
+    }
+    return runValues.runs.map((r) => {
+      const newRun = {
+        action: run.use,
+      }
+      for (const key of Object.keys(r)) {
+        if (key === "use") {
+          continue
+        }
+        newRun[key] = r[key]
+      }
+      const jobRunOmitKeys = [
+        "use",
+        "name",
+        "jobName",
+        "needs",
+        "scope",
+        "scopes",
+        "parentWith",
+      ]
+      for (const key of Object.keys(run)) {
+        if (jobRunOmitKeys.includes(key)) {
+          continue
+        }
+        newRun[key] = run[key]
+      }
+      if (!newRun.needs) {
+        newRun.needs = []
+      }
+      newRun.needs = newRun.needs.map((r2) => [scope[0], r2].join(".."))
+      newRun.needs = [...new Set([...newRun.needs, ...run.needs])]
+      if (run.stage) {
+        newRun.stage = run.stage
+      }
+      return newRun
+    })
+  })
+
+  const newRuns = await Promise.all(promises)
+
   values.runs = newRuns.reduce((acc, run) => {
     acc.push(...run)
     return acc

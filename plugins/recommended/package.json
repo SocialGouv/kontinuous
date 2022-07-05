@@ -3,6 +3,7 @@
   "dependencies": {
     "fs-extra": "^10.1.0",
     "lodash.camelcase": "^4.3.0",
+    "micromatch": "^4.0.5",
     "node-plantuml": "git+https://github.com/betagouv/node-plantuml.git#master",
     "puml": "^1.0.1"
   },
