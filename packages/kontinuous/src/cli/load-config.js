@@ -352,6 +352,60 @@ module.exports = async (opts = {}) => {
         return links
       },
     },
+    commits: {
+      env: "KS_COMMITS",
+      envParser: (str) => yaml.load(str),
+      defaultFunction: async (config) => {
+        const commits = {
+          added: [],
+          modified: [],
+          removed: [],
+        }
+        if (!config.git) {
+          return commits
+        }
+        const { gitBranch } = config
+        try {
+          const diffOutput = await asyncShell(
+            `git diff --name-status remotes/origin/${gitBranch}..${gitBranch}`
+          )
+          const diff = diffOutput.split("\n").map((line) => {
+            const [status, file] = line.trim().split(/\t|\s+/)
+            return [status, file]
+          })
+          for (const [status, file] of diff) {
+            switch (status) {
+              case "A":
+                commits.added.push(file)
+                break
+              case "D":
+                commits.removed.push(file)
+                break
+              case "M":
+                commits.modified.push(file)
+                break
+              case "R":
+                commits.added.push(file)
+                commits.removed.push(file)
+                break
+              default:
+            }
+          }
+        } catch (error) {
+          if (error.code !== 128) {
+            logger.error({ error }, "unable to git diff")
+            throw error
+          }
+        }
+        return commits
+      },
+      changedPaths: {
+        defaultFunction: (config) => {
+          const { commits } = config
+          return Object.values(commits).flatMap((files) => files)
+        },
+      },
+    },
   }
 
   const rootConfig = await loadStructuredConfig({

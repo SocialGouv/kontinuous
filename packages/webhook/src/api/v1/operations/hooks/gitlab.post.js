@@ -34,11 +34,11 @@ module.exports = function ({ services: { pushed, created, deleted } }) {
       }
 
       const { body } = req
-      const { ref, after } = body
+      const { ref, after, commits } = body
       const { git_http_url: repositoryUrl } = body.project
 
       try {
-        await eventHandlers[eventName]({ ref, after, repositoryUrl })
+        await eventHandlers[eventName]({ ref, after, repositoryUrl, commits })
       } catch (err) {
         const logger = reqCtx.require("logger")
         logger.error(err)

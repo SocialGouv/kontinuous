@@ -375,6 +375,23 @@ paths:
                   type: string
                   example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed
                   format: sha1
+                commits:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      added:
+                        type: array
+                        items:
+                          type: string
+                      modified:
+                        type: array
+                        items:
+                          type: string
+                      removed:
+                        type: array
+                        items:
+                          type: string
                 project:
                   type: object
                   required:
@@ -426,6 +443,23 @@ paths:
                   type: string
                   example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed
                   format: sha1
+                commits:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      added:
+                        type: array
+                        items:
+                          type: string
+                      modified:
+                        type: array
+                        items:
+                          type: string
+                      removed:
+                        type: array
+                        items:
+                          type: string
                 repository:
                   type: object
                   required:
@@ -491,6 +525,23 @@ paths:
                   type: string
                   example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed
                   format: sha1
+                commits:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      added:
+                        type: array
+                        items:
+                          type: string
+                      modified:
+                        type: array
+                        items:
+                          type: string
+                      removed:
+                        type: array
+                        items:
+                          type: string
               required:
                 - ref
                 - repositoryUrl

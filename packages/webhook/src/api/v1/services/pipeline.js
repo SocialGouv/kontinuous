@@ -21,6 +21,7 @@ module.exports = () => {
     args,
     checkout,
     initContainers,
+    commits,
   }) => {
     const repository = repositoryFromGitUrl(repositoryUrl)
     const repositoryName = repository.split("/").pop()
@@ -56,6 +57,7 @@ module.exports = () => {
       gitCommit,
       webhookUri,
       webhookToken,
+      commits,
     })
     try {
       await jobRun(manifest, kubecontext)

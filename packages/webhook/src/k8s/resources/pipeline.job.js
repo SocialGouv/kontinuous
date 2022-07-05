@@ -16,6 +16,7 @@ module.exports = ({
   webhookUri,
   webhookToken,
   initContainers = [],
+  commits,
 }) => ({
   apiVersion: "batch/v1",
   kind: "Job",
@@ -99,7 +100,14 @@ module.exports = ({
                 name: "KS_GIT_REPOSITORY_URL",
                 value: repositoryUrl,
               },
-              ...(env ? [{ name: "KS_ENVIRONMENT", value: env }] : []),
+              ...(env
+                ? [
+                    {
+                      name: "KS_ENVIRONMENT",
+                      value: env,
+                    },
+                  ]
+                : []),
               {
                 name: "KS_GIT_REF",
                 value: gitBranch,
@@ -116,6 +124,14 @@ module.exports = ({
                 name: "KS_BUILD_UPLOAD",
                 value: "true",
               },
+              ...(commits
+                ? [
+                    {
+                      name: "KS_COMMITS",
+                      value: JSON.stringify(commits),
+                    },
+                  ]
+                : []),
             ],
             volumeMounts: [
               {

@@ -14,10 +14,10 @@ module.exports = function ({ services: { pushed, created, deleted } }) {
 
       const { ref, after } = body
 
-      const { clone_url: repositoryUrl } = body.repository
+      const { clone_url: repositoryUrl, commits } = body.repository
 
       try {
-        await eventHandlers[eventName]({ ref, after, repositoryUrl })
+        await eventHandlers[eventName]({ ref, after, repositoryUrl, commits })
       } catch (err) {
         const logger = reqCtx.require("logger")
         logger.error(err)

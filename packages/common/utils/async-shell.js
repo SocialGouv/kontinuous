@@ -26,7 +26,9 @@ const promiseFromChildProcess = (child, callback, logger) => {
         }
         resolve(Buffer.concat(out).toString())
       } else {
-        reject(err.join())
+        const error = new Error(err.join())
+        error.code = code
+        reject(error)
       }
     })
   })
