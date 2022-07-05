@@ -1,15 +1,11 @@
-name: Preproduction
+name: Deployment
+
 on:
   push:
-    branches:
-      - master
-      - main
-    tags-ignore:
-      - v*
 
 concurrency:
   cancel-in-progress: true
-  group: preproduction
+  group: deploy-${{ github.ref }}
 
 jobs:
   follow-deployment:
