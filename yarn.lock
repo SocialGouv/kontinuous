@@ -3070,6 +3070,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^0.27.2":
+  version: 0.27.2
+  resolution: "axios@npm:0.27.2"
+  dependencies:
+    follow-redirects: "npm:^1.14.9"
+    form-data: "npm:^4.0.0"
+  checksum: 4cd898afe90caaf05307fc5a0da4c61012493b6bfd4937fff9774455c01d368db583b17c4737e73853f149b32e615487930b491661682a1f69a1973b1f533bb7
+  languageName: node
+  linkType: hard
+
 "babel-jest@npm:^27.5.1":
   version: 27.5.1
   resolution: "babel-jest@npm:27.5.1"
@@ -5595,7 +5605,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.14.8":
+"follow-redirects@npm:^1.14.8, follow-redirects@npm:^1.14.9":
   version: 1.15.1
   resolution: "follow-redirects@npm:1.15.1"
   peerDependenciesMeta:
@@ -12028,6 +12038,7 @@ __metadata:
     "@modjo-plugins/microservice-oapi": "npm:^1.0.5"
     "@vercel/ncc": "npm:^0.33.3"
     async-retry: "npm:^1.3.3"
+    axios: "npm:^0.27.2"
     fs-extra: "npm:^10.0.1"
     git-url-parse: "npm:^11.6.0"
     jest: "npm:^27.5.1"
