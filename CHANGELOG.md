@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.38.4](https://github.com/SocialGouv/kontinuous/compare/v1.38.3...v1.38.4) (2022-07-05)
+
+
+### Bug Fixes
+
+* simply boilerplate ([6b860f7](https://github.com/SocialGouv/kontinuous/commit/6b860f77b0e0bc7ef92a6f2b33b303dc8e1bea77))
+* wip ([3ee3de6](https://github.com/SocialGouv/kontinuous/commit/3ee3de6f1b76dc790895de4cc1bb28e3c3f4a7a4))
+* workflow logs wip ([652deb8](https://github.com/SocialGouv/kontinuous/commit/652deb8423e5052c428506526e7e984de47829eb))
+
 ### [1.38.3](https://github.com/SocialGouv/kontinuous/compare/v1.38.2...v1.38.3) (2022-07-05)
 
 
