@@ -53,6 +53,18 @@ module.exports = () => {
     const webhookUri = ctx.require("config.project.oas.uri")
     const webhookToken = ctx.require("config.project.webhook.token")
 
+    if (commits) {
+      commits = commits.reduce(
+        (acc, commit) => {
+          acc.added.push(...commit.added)
+          acc.modified.push(...commit.modified)
+          acc.removed.push(...commit.removed)
+          return acc
+        },
+        { added: [], modified: [], removed: [] }
+      )
+    }
+
     const manifest = pipelineJob({
       namespace: jobNamespace,
       name: jobName,
