@@ -1,13 +1,19 @@
 const { reqCtx } = require("@modjo-plugins/express/ctx")
 
-module.exports = function ({ services: { pushed, created, deleted } }) {
-  const eventHandlers = { pushed, created, deleted }
+module.exports = function ({ services: { pushed, deleted } }) {
+  const eventHandlers = { pushed, deleted }
 
   return [
     async (req, res) => {
       const { body } = req
 
-      const eventName = req.query.event
+      let eventName = req.query.event
+
+      if (eventName === "created") {
+        // deprecated
+        eventName = "pushed"
+      }
+
       if (!eventName || !eventHandlers[eventName]) {
         return res.status(204).json({ message: "no-op" })
       }

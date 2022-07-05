@@ -19,10 +19,11 @@ module.exports = (program) =>
     .addOption(options.webhookUriPattern)
     .addOption(options.webhookUri)
     .addOption(
-      new Option(
-        "event",
-        `pipeline event, default to "created" on version tag, "pushed" else`
-      ).choices(["pushed", "deleted", "created", "custom"])
+      new Option("event", `pipeline event, default to "pushed"`).choices([
+        "pushed",
+        "deleted",
+        "custom",
+      ])
     )
     .action(async (_opts, command) => {
       const opts = command.optsWithGlobals()

@@ -30,11 +30,6 @@ runs:
         KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/heads/}
         KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/tags/}
         KS_GIT_BRANCH_URLENCODED=$(echo $KS_GIT_BRANCH | sed 's/\//\%2f/g')
-        if [[ "$KS_GIT_BRANCH" =~ ^v[0-9]+\.[0-9]+ ]]; then
-          EVENT_NAME=created
-        else
-          EVENT_NAME=pushed
-        fi
 
         WEBHOOK_URI=${{ inputs.webhookUri }}
         
@@ -57,7 +52,6 @@ runs:
         echo "KS_GIT_SHA=$GITHUB_SHA">>$GITHUB_ENV
         echo "KS_GIT_REPOSITORY=$KS_GIT_REPOSITORY">>$GITHUB_ENV
         echo "KS_GIT_REPOSITORY_URLENCODED=$KS_GIT_REPOSITORY_URLENCODED">>$GITHUB_ENV
-        echo "EVENT_NAME=$EVENT_NAME">>$GITHUB_ENV
 
     - name: Handle action rerun
       shell: bash
@@ -67,13 +61,13 @@ runs:
           wget --content-on-error -qO- \
             --post-data "{\"repositoryUrl\":\"${KS_GIT_REPOSITORY}\",\"ref\":\"${KS_GIT_BRANCH}\",\"commit\":\"${KS_GIT_SHA}\"}" \
             --header='Content-Type:application/json' \
-            "${WEBHOOK_URI}/api/v1/oas/hooks/user?event=${EVENT_NAME}&token=${KS_WEBHOOK_TOKEN}"
+            "${WEBHOOK_URI}/api/v1/oas/hooks/user?event=pushed&token=${KS_WEBHOOK_TOKEN}"
         fi
 
     - name: Stream logs of kube pipeline
       shell: bash
       run: |
-        # wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${KS_GIT_REPOSITORY_URLENCODED}&event=${EVENT_NAME}&ref=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&catch=true&follow=true&token=${KS_WEBHOOK_TOKEN}"
+        # wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${KS_GIT_REPOSITORY_URLENCODED}&event=pushed&ref=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&catch=true&follow=true&token=${KS_WEBHOOK_TOKEN}"
         npx kontinuous logs
     
     - name: Download manifests artifact

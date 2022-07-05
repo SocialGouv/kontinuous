@@ -6,7 +6,8 @@ parameters:
     name: event
     schema:
       type: string
-      enum: [pushed, created, deleted, custom]
+      enum: [pushed, deleted, custom, created] # deprecated
+      # enum: [pushed, deleted, custom]
     required: true
 
 requestBody:

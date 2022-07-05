@@ -1,9 +1,6 @@
 const { reqCtx } = require("@modjo-plugins/express/ctx")
 
-const isVersionTag = require("~common/utils/is-version-tag")
-
 const getEventName = (req) => {
-  const { event_name: eventName } = req.body
   if (
     Object.keys(req.body).includes("checkout_sha") &&
     req.body.checkout_sha === null &&
@@ -12,20 +9,14 @@ const getEventName = (req) => {
     // see https://gitlab.com/gitlab-org/gitlab/-/issues/25305
     return "deleted "
   }
-  if (eventName === "tag_push") {
-    const { body } = req
-    const { ref } = body
-    const gitBranch = ref.replace("refs/heads/", "").replace("refs/tags/", "")
-    if (isVersionTag(gitBranch)) {
-      return "created"
-    }
-    return null
-  }
+  // const { event_name: eventName } = req.body
+  // if (eventName === "tag_push") {
+  // }
   return "pushed"
 }
 
-module.exports = function ({ services: { pushed, created, deleted } }) {
-  const eventHandlers = { pushed, created, deleted }
+module.exports = function ({ services: { pushed, deleted } }) {
+  const eventHandlers = { pushed, deleted }
   return [
     async (req, res) => {
       const eventName = getEventName(req)

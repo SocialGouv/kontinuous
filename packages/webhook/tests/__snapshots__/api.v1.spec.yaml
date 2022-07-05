@@ -355,9 +355,9 @@ paths:
             type: string
             enum:
               - pushed
-              - created
               - deleted
               - custom
+              - created
           required: true
       requestBody:
         required: true
@@ -504,7 +504,6 @@ paths:
             type: string
             enum:
               - pushed
-              - created
               - deleted
               - custom
           required: true
@@ -581,7 +580,6 @@ paths:
             type: string
             enum:
               - pushed
-              - created
               - deleted
               - custom
           required: true

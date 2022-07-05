@@ -1,7 +1,7 @@
 const { reqCtx } = require("@modjo-plugins/express/ctx")
 
-module.exports = function ({ services: { pushed, created, deleted } }) {
-  const eventHandlers = { pushed, created, deleted }
+module.exports = function ({ services: { pushed, deleted } }) {
+  const eventHandlers = { pushed, deleted }
 
   return [
     async (req, res) => {

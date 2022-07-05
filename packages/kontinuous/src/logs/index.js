@@ -13,22 +13,12 @@ const refEnv = require("~common/utils/ref-env")
 
 const ctx = require("~/ctx")
 
-const eventFromBranch = (branch, environmentPatterns) => {
-  const env = refEnv(branch, environmentPatterns)
-  if (env === "prod") {
-    return "created"
-  }
-  if (env === "preprod" || env === "dev") {
-    return "pushed"
-  }
-  return false
-}
-
 module.exports = async (options) => {
   const config = ctx.require("config")
 
   const cwd = options.cwd || process.cwd()
-  let { event, repository: repositoryMixed, branch, commit } = options
+  let { repository: repositoryMixed, branch, commit } = options
+  const { event } = options
   if (!repositoryMixed) {
     repositoryMixed = await getGitRepository(cwd)
   }
@@ -38,17 +28,16 @@ module.exports = async (options) => {
   if (!commit) {
     commit = await getGitSha(cwd, branch)
   }
-  if (!event) {
-    event = eventFromBranch(branch, config.environmentPatterns)
+  let { env } = options
+  if (!env) {
+    env = refEnv(branch, config.environmentPatterns)
   }
-  if (!event) {
+  if (!env) {
     logger.warn("no env matching for current branch")
     return
   }
 
   const repository = repositoryFromGitUrl(repositoryMixed)
-
-  const { env } = options
 
   const { webhookUri, webhookToken: token } = config
 
