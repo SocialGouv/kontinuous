@@ -16,10 +16,12 @@ runs:
   using: "composite"
   steps:
     
-    - name: Auto-detect environment
+    - name: Init
       shell: bash
       id: environment
       run: |
+        npm i -g kontinuous
+
         if [ -n "$GITHUB_HEAD_REF" ]; then
           KS_GIT_BRANCH=$GITHUB_HEAD_REF
         else
@@ -38,6 +40,12 @@ runs:
         
         KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
         KS_GIT_REPOSITORY_URLENCODED=$(echo $KS_GIT_REPOSITORY | sed 's/\//\%2f/g')
+        
+        KS_GIT_SHA=$
+
+        export KS_GIT_REPOSITORY
+        export KS_GIT_BRANCH
+        export KS_GIT_SHA
 
         ENV=$(npx kontinuous env)
         echo "::set-output name=env::$ENV"
@@ -65,12 +73,14 @@ runs:
     - name: Stream logs of kube pipeline
       shell: bash
       run: |
-        wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${KS_GIT_REPOSITORY_URLENCODED}&event=${EVENT_NAME}&ref=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&catch=true&follow=true&token=${KS_WEBHOOK_TOKEN}"
+        # wget --content-on-error -qO- "${WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${KS_GIT_REPOSITORY_URLENCODED}&event=${EVENT_NAME}&ref=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&catch=true&follow=true&token=${KS_WEBHOOK_TOKEN}"
+        npx kontinuous logs
     
     - name: Download manifests artifact
       shell: bash
       run: |
-        wget --content-on-error -q -O manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/download?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
+        # wget --content-on-error -q -O manifests.yaml "${WEBHOOK_URI}/api/v1/oas/artifacts/download?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
+        npx kontinuous download manifests manifests.yaml
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2
