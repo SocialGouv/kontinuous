@@ -13,6 +13,9 @@ module.exports = async (repositoryUrl, ref, env) => {
 
   if (!env) {
     const url = GitUrlParse(repositoryUrl)
+    if (!url.source) {
+      url.source = "github.com"
+    }
     const rawUrl = `${GitUrlParse.stringify(
       url,
       "https"
