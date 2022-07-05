@@ -779,7 +779,7 @@ kapp deploy /tmp/manifests.yaml
     ```yaml
     jobs:
       follow-deployment:
-        uses: SocialGouv/kontinuous/.github/workflows/workflow-logs.yaml@master
+        uses: SocialGouv/kontinuous/.github/workflows/workflow-logs.yaml@v1
         secrets: inherit
     ```
 
@@ -794,7 +794,7 @@ kapp deploy /tmp/manifests.yaml
         runs-on: ubuntu-latest
         steps:
         - name: kontinuous pipeline
-            uses: SocialGouv/kontinuous/logs@master
+            uses: SocialGouv/kontinuous/logs@v1
             with:
               token: ${{ secrets.GITHUB_TOKEN }}
               webhookToken: ${{ secrets.KUBEWEBHOOK_TOKEN }}
