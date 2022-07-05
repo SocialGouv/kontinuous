@@ -1,5 +1,5 @@
 apiVersion: v2
 name: kontinuous-helpers
-version: 1.39.1
+version: 1.39.2
 type: library
-appVersion: 1.39.1
+appVersion: 1.39.2
