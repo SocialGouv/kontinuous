@@ -20,7 +20,7 @@ runs:
       shell: bash
       id: environment
       run: |
-        npm i -g kontinuous
+        npm i --location=global kontinuous
 
         if [ -n "$GITHUB_HEAD_REF" ]; then
           KS_GIT_BRANCH=$GITHUB_HEAD_REF
