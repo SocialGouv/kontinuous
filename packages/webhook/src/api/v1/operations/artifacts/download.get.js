@@ -9,7 +9,12 @@ const artifactPath = "/artifacts"
 
 module.exports = function () {
   async function addOneArtifactsUpload(req, res) {
-    const { repository: repositoryMixed, branch, commit, name } = req.query
+    const {
+      repository: repositoryMixed,
+      branch,
+      commit,
+      name = "manifests",
+    } = req.query
     const repository = repositoryFromGitUrl(repositoryMixed)
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(branch)
