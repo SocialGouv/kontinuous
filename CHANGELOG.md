@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.39.1](https://github.com/SocialGouv/kontinuous/compare/v1.39.0...v1.39.1) (2022-07-05)
+
+
+### Bug Fixes
+
+* download and upload default name ([233fcfd](https://github.com/SocialGouv/kontinuous/commit/233fcfd0cdc98f01fd612c254f6294e7538fb989))
+
 ## [1.39.0](https://github.com/SocialGouv/kontinuous/compare/v1.38.12...v1.39.0) (2022-07-05)
 
 
