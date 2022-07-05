@@ -36,8 +36,6 @@ runs:
         KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
         KS_GIT_REPOSITORY_URLENCODED=$(echo $KS_GIT_REPOSITORY | sed 's/\//\%2f/g')
         
-        KS_GIT_SHA=$
-
         export KS_GIT_REPOSITORY
         export KS_GIT_BRANCH
         export KS_GIT_SHA

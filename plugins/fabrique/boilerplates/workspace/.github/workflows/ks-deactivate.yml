@@ -5,7 +5,7 @@ on:
 
 concurrency:
   cancel-in-progress: true
-  group: review-deactivate-${{ github.ref }}
+  group: deactivate-${{ github.ref }}
 
 jobs:
   follow-deactivation:
