@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.39.0](https://github.com/SocialGouv/kontinuous/compare/v1.38.12...v1.39.0) (2022-07-05)
+
+
+### Features
+
+* job filter using paths ([6f9d4b8](https://github.com/SocialGouv/kontinuous/commit/6f9d4b89092339685e1841645e526109d86ca2f3))
+
+
+### Bug Fixes
+
+* logs event ([9f90694](https://github.com/SocialGouv/kontinuous/commit/9f906941584eba36b723a6a6b84ef56827d8eca8))
+
 ### [1.38.12](https://github.com/SocialGouv/kontinuous/compare/v1.38.11...v1.38.12) (2022-07-05)
 
 
