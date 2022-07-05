@@ -14,7 +14,6 @@ module.exports = async (options) => {
   const config = ctx.require("config")
 
   let { repository: repositoryMixed, branch, commit } = options
-  const { event } = options
   if (!repositoryMixed) {
     repositoryMixed = config.gitRepositoryUrl
   }
@@ -24,6 +23,7 @@ module.exports = async (options) => {
   if (!commit) {
     commit = config.gitSha
   }
+
   let { env } = options
   if (!env) {
     env = refEnv(branch, config.environmentPatterns)
@@ -31,6 +31,11 @@ module.exports = async (options) => {
   if (!env) {
     logger.warn("no env matching for current branch")
     return
+  }
+
+  let { event } = options
+  if (!event) {
+    event = "pushed"
   }
 
   const repository = repositoryFromGitUrl(repositoryMixed)
