@@ -24,6 +24,7 @@
     "js-yaml": "^4.1.0",
     "link-module-alias": "^1.2.0",
     "lodash.mergewith": "^4.6.2",
+    "micromatch": "^4.0.5",
     "node-cron": "^3.0.0",
     "pino": "^7.10.0",
     "pino-pretty": "^7.6.1",

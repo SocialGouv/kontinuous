@@ -12045,6 +12045,7 @@ __metadata:
     js-yaml: "npm:^4.1.0"
     link-module-alias: "npm:^1.2.0"
     lodash.mergewith: "npm:^4.6.2"
+    micromatch: "npm:^4.0.5"
     node-cron: "npm:^3.0.0"
     nodemon: "npm:^2.0.15"
     pino: "npm:^7.10.0"
