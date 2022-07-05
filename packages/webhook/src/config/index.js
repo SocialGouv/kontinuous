@@ -23,6 +23,9 @@ module.exports = async function createConfig() {
         token,
       },
     },
+    logger: {
+      level: "debug",
+    },
     httpLogger: {
       hideSecrets: [token],
     },

@@ -37,7 +37,7 @@ module.exports = () => {
         { repositoryUrl, gitBranch },
         "no env matching for current ref"
       )
-      return
+      return false
     }
 
     const jobName = pipelineJobName({
@@ -89,6 +89,9 @@ module.exports = () => {
         `failed to launch pipeline job "${jobName}" in namespace "${jobNamespace}"`
       )
       logger.error(err)
+      throw err
     }
+
+    return true
   }
 }

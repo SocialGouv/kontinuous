@@ -23,7 +23,15 @@ module.exports = function ({ services: { pushed, deleted } }) {
       const { clone_url: repositoryUrl, commits } = body.repository
 
       try {
-        await eventHandlers[eventName]({ ref, after, repositoryUrl, commits })
+        const trigger = await eventHandlers[eventName]({
+          ref,
+          after,
+          repositoryUrl,
+          commits,
+        })
+        if (!trigger) {
+          return res.status(204).json({ message: "no-op" })
+        }
       } catch (err) {
         const logger = reqCtx.require("logger")
         logger.error(err)
