@@ -3,9 +3,6 @@ const { promisify } = require("util")
 const axios = require("axios")
 
 const logger = require("~common/utils/logger")
-const getGitRef = require("~common/utils/get-git-ref")
-const getGitSha = require("~common/utils/get-git-sha")
-const getGitRepository = require("~common/utils/get-git-repository")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const qs = require("qs")
 
@@ -16,17 +13,16 @@ const ctx = require("~/ctx")
 module.exports = async (options) => {
   const config = ctx.require("config")
 
-  const cwd = options.cwd || process.cwd()
   let { repository: repositoryMixed, branch, commit } = options
   const { event } = options
   if (!repositoryMixed) {
-    repositoryMixed = await getGitRepository(cwd)
+    repositoryMixed = config.gitRepositoryUrl
   }
   if (!branch) {
-    branch = await getGitRef(cwd)
+    branch = config.gitBranch
   }
   if (!commit) {
-    commit = await getGitSha(cwd, branch)
+    commit = config.gitSha
   }
   let { env } = options
   if (!env) {
