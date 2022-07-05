@@ -1,4 +1,4 @@
 apiVersion: v2
 name: redis
-version: 1.38.8
-appVersion: 1.38.8
+version: 1.38.9
+appVersion: 1.38.9
