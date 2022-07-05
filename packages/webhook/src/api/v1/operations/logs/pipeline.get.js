@@ -98,6 +98,16 @@ module.exports = function () {
     const gitBranch = cleanGitRef(ref)
 
     const kubecontext = await refKubecontext(repositoryMixed, ref, env)
+
+    if (!kubecontext) {
+      res.writeHead(204, {
+        "Content-Type": "text/plain",
+      })
+      res.write("no env matching for current ref\n")
+      res.end()
+      return
+    }
+
     const jobName = pipelineJobName({
       eventName: event,
       repositoryName,

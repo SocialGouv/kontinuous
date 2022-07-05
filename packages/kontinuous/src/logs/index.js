@@ -18,7 +18,10 @@ const eventFromBranch = (branch, environmentPatterns) => {
   if (env === "prod") {
     return "created"
   }
-  return "pushed"
+  if (env === "preprod" || env === "dev") {
+    return "pushed"
+  }
+  return false
 }
 
 module.exports = async (options) => {
@@ -37,6 +40,10 @@ module.exports = async (options) => {
   }
   if (!event) {
     event = eventFromBranch(branch, config.environmentPatterns)
+  }
+  if (!event) {
+    logger.warn("no env matching for current branch")
+    return
   }
 
   const repository = repositoryFromGitUrl(repositoryMixed)

@@ -32,6 +32,14 @@ module.exports = () => {
       kubecontext = await refKubecontext(repositoryUrl, gitBranch, env)
     }
 
+    if (!kubecontext) {
+      logger.debug(
+        { repositoryUrl, gitBranch },
+        "no env matching for current ref"
+      )
+      return
+    }
+
     const jobName = pipelineJobName({
       eventName,
       repositoryName,

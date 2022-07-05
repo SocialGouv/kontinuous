@@ -36,5 +36,5 @@ module.exports = async (repositoryUrl, ref, env) => {
     }
   }
 
-  return envKubecontext(env)
+  return env ? envKubecontext(env) : false
 }
