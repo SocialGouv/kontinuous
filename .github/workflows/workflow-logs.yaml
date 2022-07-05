@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: kontinuous pipeline
-        uses: SocialGouv/kontinuous/logs@master
+        uses: SocialGouv/kontinuous/logs@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           webhookToken: ${{ secrets.KUBEWEBHOOK_TOKEN }}

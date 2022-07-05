@@ -8,6 +8,6 @@ concurrency:
   group: deploy-${{ github.ref }}
 
 jobs:
-  follow-deployment:
+  deploy:
     uses: SocialGouv/kontinuous/.github/workflows/workflow-logs.yaml@v1
     secrets: inherit

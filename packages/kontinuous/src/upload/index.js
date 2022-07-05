@@ -45,9 +45,9 @@ module.exports = async ({ name, file }) => {
   } catch (error) {
     if (error.response) {
       logger.error(`upload error: status ${error.response.status}`)
-      logger.error(error.response.data)
+      logger.error(`${error.response.statusText}: ${error.response.data.msg}`)
       logger.debug(error.response.headers)
-      logger.error(error.request)
+      // logger.error(error.request)
     } else if (error.request) {
       logger.error(`upload error: request`)
       logger.error(error.request)

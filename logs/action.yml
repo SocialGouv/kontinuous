@@ -37,10 +37,12 @@ runs:
         KS_GIT_REPOSITORY_URLENCODED=$(echo $KS_GIT_REPOSITORY | sed 's/\//\%2f/g')
         
         KS_GIT_SHA=$GITHUB_SHA
+        KS_DEBUG=true
 
         export KS_GIT_REPOSITORY
         export KS_GIT_BRANCH
         export KS_GIT_SHA
+        export KS_DEBUG
 
         ENV=$(npx kontinuous env)
         echo "::set-output name=env::$ENV"
@@ -52,6 +54,7 @@ runs:
         echo "KS_GIT_SHA=$KS_GIT_SHA">>$GITHUB_ENV
         echo "KS_GIT_REPOSITORY=$KS_GIT_REPOSITORY">>$GITHUB_ENV
         echo "KS_GIT_REPOSITORY_URLENCODED=$KS_GIT_REPOSITORY_URLENCODED">>$GITHUB_ENV
+        echo "KS_DEBUG=$KS_DEBUG">>$GITHUB_ENV
 
     - name: Handle action rerun
       shell: bash
