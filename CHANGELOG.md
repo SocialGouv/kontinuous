@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.38.0](https://github.com/SocialGouv/kontinuous/compare/v1.37.2...v1.38.0) (2022-07-05)
+
+
+### Features
+
+* commits paths wip ([c6683d6](https://github.com/SocialGouv/kontinuous/commit/c6683d6ac22e88a12b62669bc125faec84569e2d))
+
+
+### Bug Fixes
+
+* hanlde no env matching trigger ([cc7c308](https://github.com/SocialGouv/kontinuous/commit/cc7c30818d327a399cf3cc87a5892f8a6865318a))
+* missing lib ([3bb275b](https://github.com/SocialGouv/kontinuous/commit/3bb275b59222bc1937a1c8e8ea4371d151114e1d))
+
 ### 1.37.2 (2022-07-04)
 
 
