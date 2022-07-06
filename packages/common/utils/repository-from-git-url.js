@@ -7,7 +7,7 @@ module.exports = (gitUrl) => {
     pathname = pathname.slice(1)
   }
   if (pathname.endsWith(".git")) {
-    pathname = pathname.slice(0, -4)
+    pathname = pathname.slice(0, pathname.length - 4)
   }
   return pathname
 }
