@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.39.6](https://github.com/SocialGouv/kontinuous/compare/v1.39.5...v1.39.6) (2022-07-06)
+
+
+### Bug Fixes
+
+* get remote env config ([1c63312](https://github.com/SocialGouv/kontinuous/commit/1c63312c66ada27f789318dfe6c61d537306485f))
+
 ### [1.39.5](https://github.com/SocialGouv/kontinuous/compare/v1.39.4...v1.39.5) (2022-07-06)
 
 
