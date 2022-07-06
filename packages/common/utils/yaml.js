@@ -10,6 +10,11 @@ const load = (input, retroCompat = true) =>
 const dump = (input) => jsYaml.dump(input)
 
 const loadAll = (input, retroCompat = true) => {
+  if (input.trimStart().slice(0, 1) === "[") {
+    const obj = load(`arr: ${input}`, retroCompat)
+    return obj.arr
+  }
+
   const documents = []
 
   const append = (arr) => {
