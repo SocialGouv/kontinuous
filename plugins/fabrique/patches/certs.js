@@ -25,9 +25,10 @@ module.exports = (manifests, _options, { config }) => {
         if (!manifest.metadata.annotations) {
           manifest.metadata.annotations = {}
         }
-        const clusterIssuer = isProd
-          ? "letsencrypt-prod"
-          : "letsencrypt-staging"
+        // const clusterIssuer = isProd
+        //   ? "letsencrypt-prod"
+        //   : "letsencrypt-staging"
+        const clusterIssuer = "letsencrypt-prod"
         Object.assign(manifest.metadata.annotations, {
           "cert-manager.io": "cluster-issuer",
           "cert-manager.io/cluster-issuer": clusterIssuer,
