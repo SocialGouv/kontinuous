@@ -29,9 +29,5 @@ spec:
     - hosts:
         - >-
           {{- include "fabrique-helpers.ingress-host" . | nindent 10 }}
-      {{- if .Values.global.isProd }}
-      secretName: {{ or .Values.certSecretName (print (or .Values.component .Chart.Name) "-crt") }}
-      {{- else }}
-      secretName: "wildcard-crt"
-      {{- end }}
+      {{ include "fabrique-helpers.ingress-secret" . | nindent 6 }}
 {{- end }}
