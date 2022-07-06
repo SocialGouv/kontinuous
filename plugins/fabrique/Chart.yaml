@@ -1,6 +1,6 @@
 apiVersion: v2
 name: fabrique
-version: 1.39.7
+version: 1.39.8
 dependencies:
   - name: keycloak
     repository: https://codecentric.github.io/helm-charts
@@ -8,10 +8,10 @@ dependencies:
     condition: keycloak.enabled
   - name: rancher-namespace
     repository: file://./charts/rancher-namespace
-    version: 1.39.7
+    version: 1.39.8
     condition: global.kontinuous.hasAll,rancher-namespace.enabled
   - name: security-policies
     repository: file://./charts/security-policies
-    version: 1.39.7
+    version: 1.39.8
     condition: global.kontinuous.hasAll,security-policies.enabled
-appVersion: 1.39.7
+appVersion: 1.39.8

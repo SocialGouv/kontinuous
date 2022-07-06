@@ -1,4 +1,4 @@
 apiVersion: v2
 name: app
-version: 1.39.7
-appVersion: 1.39.7
+version: 1.39.8
+appVersion: 1.39.8
