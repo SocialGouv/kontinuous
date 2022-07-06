@@ -28,10 +28,7 @@ module.exports = async (options) => {
     return
   }
 
-  let { event } = options
-  if (!event) {
-    event = "pushed"
-  }
+  const { event } = config
 
   const repository = repositoryFromGitUrl(repositoryMixed)
 

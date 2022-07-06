@@ -100,3 +100,8 @@ module.exports.commit = new Option(
   "--commit <commit>",
   "git commit sha, default to last commit of branch"
 )
+
+module.exports.event = new Option(
+  "event",
+  `pipeline event, default to "pushed"`
+).choices(["pushed", "deleted", "custom"])

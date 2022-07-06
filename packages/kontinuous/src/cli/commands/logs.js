@@ -1,5 +1,3 @@
-const { Option } = require("commander")
-
 const { configureDebug } = require("~common/utils/logger")
 const logs = require("~/logs")
 
@@ -19,13 +17,7 @@ module.exports = (program) =>
     .addOption(options.webhookBaseDomain)
     .addOption(options.webhookUriPattern)
     .addOption(options.webhookUri)
-    .addOption(
-      new Option("event", `pipeline event, default to "pushed"`).choices([
-        "pushed",
-        "deleted",
-        "custom",
-      ])
-    )
+    .addOption(options.event)
     .action(async (_opts, command) => {
       const opts = command.optsWithGlobals()
       configureDebug(opts.D)

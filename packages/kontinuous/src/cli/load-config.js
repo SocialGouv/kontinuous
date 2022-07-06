@@ -406,6 +406,11 @@ module.exports = async (opts = {}) => {
         },
       },
     },
+    event: {
+      env: "KS_EVENT",
+      options: "event",
+      default: "pushed",
+    },
   }
 
   const rootConfig = await loadStructuredConfig({

@@ -46,6 +46,13 @@ runs:
 
         KS_ENVIRONMENT=$(npx kontinuous env --remote)
         echo "::set-output name=env::$KS_ENVIRONMENT"
+        
+
+        if [ "$GITHUB_EVENT_NAME" = "pull_request"  ] && [ "${{ github.event.action }}" = "closed" ]; then
+          KS_EVENT=deleted
+        else
+          KS_EVENT=pushed
+        fi
 
         echo "KS_WEBHOOK_URI=$KS_WEBHOOK_URI">>$GITHUB_ENV
         echo "KS_WEBHOOK_TOKEN=${{ inputs.webhookToken }}">>$GITHUB_ENV
@@ -55,6 +62,7 @@ runs:
         echo "KS_GIT_REPOSITORY=$KS_GIT_REPOSITORY">>$GITHUB_ENV
         echo "KS_GIT_REPOSITORY_URLENCODED=$KS_GIT_REPOSITORY_URLENCODED">>$GITHUB_ENV
         echo "KS_ENVIRONMENT=$KS_ENVIRONMENT">>$GITHUB_ENV
+        echo "KS_EVENT=$KS_EVENT">>$GITHUB_ENV
         echo "KS_DEBUG=$KS_DEBUG">>$GITHUB_ENV
 
     - name: Handle action rerun
