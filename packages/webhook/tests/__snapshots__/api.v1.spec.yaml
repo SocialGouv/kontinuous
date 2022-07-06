@@ -375,6 +375,13 @@ paths:
                   type: string
                   example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed
                   format: sha1
+                repository:
+                  type: object
+                  properties:
+                    default_branch:
+                      type: string
+                    clone_url:
+                      type: string
                 commits:
                   type: array
                   items:

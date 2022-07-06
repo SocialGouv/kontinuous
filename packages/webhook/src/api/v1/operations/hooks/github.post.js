@@ -9,8 +9,8 @@ module.exports = function ({ services: { pushed, deleted } }) {
 
       let eventName = req.query.event
 
+      // deprecated
       if (eventName === "created") {
-        // deprecated
         eventName = "pushed"
       }
 
@@ -20,7 +20,11 @@ module.exports = function ({ services: { pushed, deleted } }) {
 
       const { ref, after } = body
 
-      const { clone_url: repositoryUrl, commits } = body.repository
+      const {
+        clone_url: repositoryUrl,
+        commits,
+        default_branch: defaultBranch,
+      } = body.repository
 
       try {
         const trigger = await eventHandlers[eventName]({
@@ -28,6 +32,7 @@ module.exports = function ({ services: { pushed, deleted } }) {
           after,
           repositoryUrl,
           commits,
+          defaultBranch,
         })
         if (!trigger) {
           return res.status(204).json({ message: "no-op" })
