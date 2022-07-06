@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.39.9](https://github.com/SocialGouv/kontinuous/compare/v1.39.8...v1.39.9) (2022-07-06)
+
+
+### Bug Fixes
+
+* delete job ([9e25d64](https://github.com/SocialGouv/kontinuous/commit/9e25d6496e1b8bb27265978b9a0d7184e25d2e52))
+
 ### [1.39.8](https://github.com/SocialGouv/kontinuous/compare/v1.39.7...v1.39.8) (2022-07-06)
 
 
