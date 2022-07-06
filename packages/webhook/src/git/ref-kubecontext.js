@@ -16,10 +16,11 @@ module.exports = async (repositoryUrl, ref, env) => {
     if (!url.resource) {
       url.resource = "github.com"
     }
-    const rawUrl = `${GitUrlParse.stringify(
-      url,
-      "https"
-    )}/raw/${ref}/.kontinuous/config.yaml`
+    let repoUrl = GitUrlParse.stringify(url, "https")
+    if (repoUrl.endsWith(".git")) {
+      repoUrl = repoUrl.slice(-4)
+    }
+    const rawUrl = `${repoUrl}/raw/${ref}/.kontinuous/config.yaml`
 
     try {
       const response = await axios.get(rawUrl)
