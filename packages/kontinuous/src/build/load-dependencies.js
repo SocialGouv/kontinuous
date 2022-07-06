@@ -196,7 +196,10 @@ const downloadRemoteRepository = async (target, definition, config, logger) => {
       const name = dependency.alias || dependency.name
       const chartDir = `${target}/charts`
       await fs.ensureDir(chartDir)
-      await fs.symlink(`../${repository.slice(7)}`, `${chartDir}/${name}`)
+      const symlinkTarget = `${chartDir}/${name}`
+      // if (!(await fs.pathExists(symlinkTarget))) {
+      await fs.symlink(`../${repository.slice(7)}`, symlinkTarget)
+      // }
       touched = true
     } else if (!repository.startsWith("file://")) {
       await downloadDependencyFromHelmRepo(dependency, target, config, logger)
@@ -579,10 +582,12 @@ const valuesEnableStandaloneCharts = (values, config) => {
   }
   const enableCharts = config.chart
   for (const key of enableCharts) {
-    if (typeof values[key] !== "object" || values[key] === null) {
-      values[key] = {}
+    let v = get(values, key)
+    if (typeof v !== "object" || v === null) {
+      v = {}
+      set(values, key, v)
     }
-    values[key].enabled = true
+    v.enabled = true
   }
 }
 const valuesOverride = (values, config, logger) => {
