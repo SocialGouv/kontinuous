@@ -9,7 +9,7 @@ metadata:
   annotations:
     {{- include "kontinuous-helpers.annotations.kapp-deployment" . | nindent 4 }}
 spec:
-  replicas: {{ or .Values.replicas .Values.global.replicas }}
+  replicas: {{ or .Values.replicas .Values.global.replicas 1 }}
   selector:
     matchLabels:
       component: {{ or .Values.component .Chart.Name }}
