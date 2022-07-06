@@ -24,10 +24,7 @@ module.exports = async (options) => {
     commit = config.gitSha
   }
 
-  let { env } = options
-  if (!env) {
-    env = refEnv(branch, config.environmentPatterns)
-  }
+  const env = config.environment
   if (!env) {
     logger.warn("no env matching for current branch")
     return

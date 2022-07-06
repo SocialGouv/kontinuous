@@ -14,6 +14,7 @@ module.exports = (program) =>
     .addOption(options.repository)
     .addOption(options.branch)
     .addOption(options.commit)
+    .addOption(options.env)
     .addOption(options.webhookToken)
     .addOption(options.webhookBaseDomain)
     .addOption(options.webhookUriPattern)
