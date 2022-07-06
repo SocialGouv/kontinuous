@@ -36,9 +36,9 @@ module.exports = async (_options = {}) => {
   }
 
   logger.debug("Load and compile dependencies")
-  const { values } = await loadDependencies(config, logger)
+  const { values, valuesDump } = await loadDependencies(config, logger)
 
-  logger.trace(`Values: \n${yaml.dump(values)}`)
+  logger.trace(`Values: \n${valuesDump}`)
 
   logger.debug("Build base manifest using helm")
   let manifests = await asyncShell(

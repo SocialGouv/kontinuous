@@ -612,51 +612,80 @@ const valuesOverride = (values, config, logger) => {
   }
 }
 
+const mergeValuesFromDir = async ({
+  values,
+  target,
+  definition,
+  scope,
+  config,
+}) => {
+  const { environment } = config
+
+  const chartsPath = `${target}/charts`
+  if (!(await fs.pathExists(chartsPath))) {
+    return
+  }
+
+  const chartDirs = await fs.readdir(chartsPath)
+  for (const subchartDir of chartDirs) {
+    const subchartDirPath = `${chartsPath}/${subchartDir}`
+    if (!(await fs.stat(subchartDirPath)).isDirectory()) {
+      continue
+    }
+    const subchartScope = [...scope, subchartDir]
+    const dotKey = subchartScope.join(".")
+    let subValues = get(values, dotKey)
+    if (!subValues) {
+      subValues = {}
+      set(values, dotKey, subValues)
+    }
+
+    await mergeYamlFileValues(
+      `${subchartDirPath}/values`,
+      subValues,
+      beforeMergeChartValues
+    )
+    await mergeYamlFileValues(
+      `${subchartDirPath}/env/${environment}/values`,
+      subValues,
+      beforeMergeChartValues
+    )
+    await mergeEnvTemplates(subchartDirPath, config)
+
+    if (definition.values) {
+      deepmerge(subValues, definition.values)
+    }
+
+    await mergeValuesFromDir({
+      values,
+      target: subchartDirPath,
+      definition: definition[subchartDir] || {},
+      scope: subchartScope,
+      config,
+    })
+  }
+}
+
 const compileValues = async (config, logger) => {
   let values = {}
   const { buildPath, environment } = config
 
-  await recurseDependency({
+  const buildProjectPath = `${buildPath}/charts/project`
+
+  // await recurseDependency({
+  //   config,
+  //   afterChildren: async ({ target, definition, scope }) => {
+  //     await mergeValuesFromDir({ values, target, definition, scope, config })
+  //   },
+  // })
+  await mergeValuesFromDir({
+    values,
+    target: buildProjectPath,
+    definition: config,
+    scope: ["project"],
     config,
-    afterChildren: async ({ target, definition, scope }) => {
-      const chartsPath = `${target}/charts`
-      if (!(await fs.pathExists(chartsPath))) {
-        return
-      }
-
-      const chartDirs = await fs.readdir(chartsPath)
-      for (const chartDir of chartDirs) {
-        if (!(await fs.stat(`${chartsPath}/${chartDir}`)).isDirectory()) {
-          continue
-        }
-        const chartName = chartDir
-        const dotKey = [...scope, chartName].join(".")
-        let subValues = get(values, dotKey)
-        if (!subValues) {
-          subValues = {}
-          set(values, dotKey, subValues)
-        }
-
-        await mergeYamlFileValues(
-          `${chartsPath}/${chartDir}/values`,
-          subValues,
-          beforeMergeChartValues
-        )
-        await mergeYamlFileValues(
-          `${chartsPath}/${chartDir}/env/${environment}/values`,
-          subValues,
-          beforeMergeChartValues
-        )
-        await mergeEnvTemplates(`${chartsPath}/${chartDir}`, config)
-
-        if (definition.values) {
-          deepmerge(subValues, definition.values)
-        }
-      }
-    },
   })
 
-  const buildProjectPath = `${buildPath}/charts/project`
   await mergeYamlFileValues(
     `${buildProjectPath}/values`,
     values,
@@ -752,9 +781,11 @@ module.exports = async (config, logger) => {
   await copyFilesDir(config)
   const values = await compileValues(config, logger)
 
+  const valuesDump = yaml.dump(values)
+
   await Promise.all([
     buildChartFile(buildPath, "kontinuous-umbrella"),
-    fs.writeFile(`${buildPath}/values.yaml`, yaml.dump(values)),
+    fs.writeFile(`${buildPath}/values.yaml`, valuesDump),
   ])
 
   await fs.writeFile(
@@ -762,5 +793,5 @@ module.exports = async (config, logger) => {
     ["node_modules", ".yarn"].join("\n")
   )
 
-  return { values }
+  return { values, valuesDump }
 }

@@ -3,6 +3,7 @@ name: deactivate
 version: 1.39.12
 appVersion: 1.39.12
 dependencies:
-  - name: recommended
-    repository: file://../recommended
+  - name: jobs
+    repository: file://../recommended/charts/jobs
+    condition: "true"
     
