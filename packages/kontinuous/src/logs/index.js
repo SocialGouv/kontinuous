@@ -6,8 +6,6 @@ const logger = require("~common/utils/logger")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const qs = require("qs")
 
-const refEnv = require("~common/utils/ref-env")
-
 const ctx = require("~/ctx")
 
 module.exports = async (options) => {
