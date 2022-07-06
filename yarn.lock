@@ -11995,6 +11995,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "~common@workspace:packages/common"
   dependencies:
+    axios: "npm:^0.27.2"
     sonic-boom: "npm:^3.0.0"
     yaml: "npm:^2.0.1"
   peerDependencies:

@@ -44,7 +44,7 @@ runs:
         export KS_GIT_SHA
         export KS_DEBUG
 
-        KS_ENVIRONMENT=$(npx kontinuous env)
+        KS_ENVIRONMENT=$(npx kontinuous env --remote)
         echo "::set-output name=env::$KS_ENVIRONMENT"
 
         echo "KS_WEBHOOK_URI=$KS_WEBHOOK_URI">>$GITHUB_ENV
