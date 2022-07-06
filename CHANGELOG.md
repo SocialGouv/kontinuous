@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.39.3](https://github.com/SocialGouv/kontinuous/compare/v1.39.2...v1.39.3) (2022-07-06)
+
+
+### Bug Fixes
+
+* certs as unified patch ([ce874fa](https://github.com/SocialGouv/kontinuous/commit/ce874fa64818c0ec1a44534f6b068b9b661de48f))
+* decouple jest config ([0d908a1](https://github.com/SocialGouv/kontinuous/commit/0d908a1724fc18b5ac0463647bd2a32262495a3f))
+* raw git url ([01f7c56](https://github.com/SocialGouv/kontinuous/commit/01f7c56ddb9e083ade09b123812d8f92f0b03413))
+* refacto ingress secret ([6f7d1bc](https://github.com/SocialGouv/kontinuous/commit/6f7d1bcbcd2ff602dda3646badb258797d40f9a6))
+* yaml multi doc json format ([7cce0dc](https://github.com/SocialGouv/kontinuous/commit/7cce0dc86aff83cf29d6b32eb0acd8b574641e7c))
+
 ### [1.39.2](https://github.com/SocialGouv/kontinuous/compare/v1.39.1...v1.39.2) (2022-07-05)
 
 

@@ -1,4 +1,4 @@
 apiVersion: v2
 name: oauth2-proxy
-version: 1.39.2
-appVersion: 1.39.2
+version: 1.39.3
+appVersion: 1.39.3
