@@ -46,9 +46,6 @@
     "jest-specific-snapshot": "^5.0.0",
     "~common": "*"
   },
-  "jest": {
-    "testTimeout": 15000
-  },
   "engines": {
     "node": ">=14.0.0"
   },
