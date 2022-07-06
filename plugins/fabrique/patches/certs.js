@@ -1,9 +1,9 @@
 const hasWildcard = (host) => host.endsWith(".dev.fabrique.social.gouv.fr")
 
-module.exports = (manifests, _options, { config }) => {
-  const { environment } = config
+module.exports = (manifests, _options, { _config }) => {
+  // const { environment } = config
 
-  const isProd = environment === "prod"
+  // const isProd = environment === "prod"
 
   const wildcardNamespaces = new Set()
 
