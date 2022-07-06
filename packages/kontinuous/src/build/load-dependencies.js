@@ -177,7 +177,7 @@ const downloadDependencyFromGitRepo = async (
   delete dependency.degit
 }
 
-const downloadRemoteRepository = async (target, _name, config, logger) => {
+const downloadRemoteRepository = async (target, definition, config, logger) => {
   const chartFile = `${target}/Chart.yaml`
   const chart = yaml.load(await fs.readFile(chartFile))
   const { dependencies = [] } = chart
@@ -192,6 +192,12 @@ const downloadRemoteRepository = async (target, _name, config, logger) => {
     if (degitUri) {
       await downloadDependencyFromGitRepo(dependency, target, config, logger)
       touched = true
+    } else if (repository.startsWith("file://../")) {
+      const name = dependency.alias || dependency.name
+      const chartDir = `${target}/charts`
+      await fs.ensureDir(chartDir)
+      await fs.symlink(`../${repository.slice(7)}`, `${chartDir}/${name}`)
+      touched = true
     } else if (!repository.startsWith("file://")) {
       await downloadDependencyFromHelmRepo(dependency, target, config, logger)
       touched = true
@@ -200,6 +206,14 @@ const downloadRemoteRepository = async (target, _name, config, logger) => {
 
   if (touched) {
     await fs.writeFile(chartFile, yaml.dump(chart))
+  }
+
+  for (const dependency of dependencies) {
+    const name = dependency.alias || dependency.name
+    const subchartDir = `${target}/charts/${name}`
+    const subDefinition = definition[name] || {}
+    await buildChartFile(subchartDir, name, subDefinition)
+    await downloadRemoteRepository(subchartDir, subDefinition, config, logger)
   }
 }
 
@@ -364,7 +378,7 @@ const downloadAndBuildDependencies = async (config, logger) => {
     },
     afterChildren: async ({ name, target, definition }) => {
       await buildChartFile(target, name, definition)
-      await downloadRemoteRepository(target, name, config, logger)
+      await downloadRemoteRepository(target, definition, config, logger)
       await buildJsFile(target, "values-compilers", definition)
       await buildJsFile(target, "debug-manifests", definition)
       await buildJsFile(target, "patches", definition)

@@ -1,4 +1,4 @@
-jobs-deactivate:
+deactivate:
   enabled: false
   runs:
     deactivate:
