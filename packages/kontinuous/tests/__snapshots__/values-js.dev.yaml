@@ -12,7 +12,6 @@ metadata:
     kapp.k14s.io/exists: ''
   labels:
     application: test-values-js
-    cert: wildcard
   name: test-namespace
 ---
 apiVersion: networking.k8s.io/v1
@@ -153,6 +152,9 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kapp.k14s.io/disable-original: ''
+    cert-manager.io: cluster-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    kubernetes.io/tls-acme: 'true'
   labels:
     component: app
     application: test-values-js
@@ -173,6 +175,6 @@ spec:
   tls:
     - hosts:
         - test.demo.net
-      secretName: wildcard-crt
+      secretName: app-crt
 "
 `;

@@ -29,5 +29,5 @@ spec:
     - hosts:
         - >-
           {{- include "fabrique-helpers.ingress-host" . | nindent 10 }}
-      # {{ include "fabrique-helpers.ingress-secret" . | nindent 6 }}
+      {{ include "fabrique-helpers.ingress-secret" . | nindent 6 }}
 {{ end }}

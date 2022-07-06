@@ -12,7 +12,6 @@ metadata:
     kapp.k14s.io/exists: ''
   labels:
     application: test-jobs-uses-relative
-    cert: wildcard
   name: test-jobs-uses-relative-feature-branch-1
 ---
 apiVersion: networking.k8s.io/v1

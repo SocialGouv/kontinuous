@@ -12,7 +12,6 @@ metadata:
     kapp.k14s.io/exists: ''
   labels:
     application: test-include-file
-    cert: wildcard
   name: test-include-file-feature-branch-1
 ---
 apiVersion: networking.k8s.io/v1
