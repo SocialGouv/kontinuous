@@ -15,7 +15,7 @@ module.exports = async ({
   }
   let repoUrl = GitUrlParse.stringify(url, "https")
   if (repoUrl.endsWith(".git")) {
-    repoUrl = repoUrl.slice(-4)
+    repoUrl = repoUrl.slice(0, -4)
   }
 
   const rawUrlParts = [repoUrl, "raw", ref, file]
