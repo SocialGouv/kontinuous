@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.40.0 (2022-07-07)
+
+
+### Features
+
+* composition + deactivate and jobs as maps ([c9e9009](https://github.com/SocialGouv/kontinuous/commit/c9e9009816c45afbc91a0b49ac37529fe9c41acf))
+
 ### [1.39.12](https://github.com/SocialGouv/kontinuous/compare/v1.39.11...v1.39.12) (2022-07-06)
 
 
