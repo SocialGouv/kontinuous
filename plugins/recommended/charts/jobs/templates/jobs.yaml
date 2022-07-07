@@ -1,9 +1,11 @@
 {{- range $name, $run := $.Values.runs }}
+  {{- if not (eq $run.enabled false) }}
 ---
-  {{- $context := (merge (dict "run" $run "with" $run.with "parentWith" $run.parentWith) $) -}}
-  {{- if not $run.if }}
-    {{- include "job" $context }}
-  {{- else if (tpl $run.if $context) }}
-    {{- include "job" $context }}
+    {{- $context := (merge (dict "run" $run "with" $run.with "parentWith" $run.parentWith) $) -}}
+    {{- if not $run.if }}
+      {{- include "job" $context }}
+    {{- else if (tpl $run.if $context) }}
+      {{- include "job" $context }}
+    {{- end }}
   {{- end }}
 {{- end }}

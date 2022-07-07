@@ -115,6 +115,7 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
     if (!run.use) {
       newRuns[key] = run
     } else {
+      newRuns[key] = { enabled: false }
       const { target } = await requireUse(run.use, context)
       const runValues = yaml.load(
         await fs.readFile(target, { encoding: "utf-8" })
