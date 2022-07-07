@@ -1,6 +1,4 @@
-const micromatch = require("micromatch")
-
-const miniHash = require("./utils/mini-hash")
+// const micromatch = require("micromatch")
 
 const requireUse = async (
   use,
@@ -45,44 +43,45 @@ const requireUse = async (
   return { slug: useSlug, use, target }
 }
 
-async function compile(
-  context,
-  values,
-  parentScope = [],
-  parentWith = {},
-  file = null,
-  downloadingPromises = {}
-) {
-  if (!values.runs) {
-    return
+const runsArrayToMap = (runs) => {
+  if (!Array.isArray(runs)) {
+    return runs || {}
   }
-  const { config, utils } = context
-
-  const { slug, yaml, fs } = utils
-  if (!Array.isArray(values.runs)) {
-    values.runs = Object.entries(values.runs).map(([name, run]) => {
-      if (!run.name) {
-        run.name = name
-      }
-      return run
-    })
-  }
-
-  const { changedPaths } = config
-  const filteredRuns = values.runs.filter((run) => {
-    let { paths } = run
-    if (paths) {
-      if (!Array.isArray(paths)) {
-        paths = [paths]
-      }
-      return changedPaths.some((p) => micromatch.isMatch(p, paths))
+  return runs.reduce((acc, run, i) => {
+    let { name } = run
+    if (!name) {
+      name = i
+      run.name = name
     }
-    return true
-  })
+    acc[name] = run
+    return acc
+  }, {})
+}
 
-  const promises = filteredRuns.map(async (run) => {
+async function compile(context, values, parentScope = [], parentWith = {}) {
+  values.runs = runsArrayToMap(values.runs)
+
+  const { config, utils } = context
+  const { gitBranch, gitRepositoryName: repositoryName } = config
+  const { slug, yaml, fs } = utils
+
+  // const { changedPaths } = config
+  // for (const [key, run] of Object.entries(values.runs)) {
+  //   let { paths } = run
+  //   if (paths) {
+  //     if (!Array.isArray(paths)) {
+  //       paths = [paths]
+  //     }
+  //     if (!changedPaths.some((p) => micromatch.isMatch(p, paths))) {
+  //       delete values.runs[key]
+  //     }
+  //   }
+  // }
+
+  const newRuns = {}
+  for (const [key, run] of Object.entries(values.runs)) {
     if (!run.name) {
-      run.name = miniHash(file)
+      run.name = key
     }
     if (!run.with) {
       run.with = {}
@@ -106,81 +105,62 @@ async function compile(
       run.needs = []
     }
 
-    const { gitBranch, gitRepositoryName: repositoryName } = config
-
-    const jobName = slug([
+    run.jobName = slug([
       "job",
       repositoryName,
       [gitBranch, 30],
       currentScope.join("--"),
     ])
-    run.jobName = jobName
 
     if (!run.use) {
-      return [run]
-    }
+      newRuns[key] = run
+    } else {
+      const { target } = await requireUse(run.use, context)
+      const runValues = yaml.load(
+        await fs.readFile(target, { encoding: "utf-8" })
+      )
+      await compile(context, runValues, scope, run.parentWith)
 
-    const { target } = await requireUse(run.use, {
-      ...context,
-      downloadingPromises,
-    })
-    const runValues = yaml.load(
-      await fs.readFile(target, { encoding: "utf-8" })
-    )
-    await compile(
-      context,
-      runValues,
-      scope,
-      run.parentWith,
-      target,
-      downloadingPromises
-    )
-    if (!runValues.runs) {
-      return []
-    }
-    return runValues.runs.map((r) => {
-      const newRun = {
-        action: run.use,
-      }
-      for (const key of Object.keys(r)) {
-        if (key === "use") {
-          continue
+      for (const [runKey, r] of Object.entries(runValues.runs)) {
+        const newRun = {
+          action: run.use,
         }
-        newRun[key] = r[key]
-      }
-      const jobRunOmitKeys = [
-        "use",
-        "name",
-        "jobName",
-        "needs",
-        "scope",
-        "scopes",
-        "parentWith",
-      ]
-      for (const key of Object.keys(run)) {
-        if (jobRunOmitKeys.includes(key)) {
-          continue
+        for (const k of Object.keys(r)) {
+          if (k === "use") {
+            continue
+          }
+          newRun[k] = r[k]
         }
-        newRun[key] = run[key]
+        const jobRunOmitKeys = [
+          "use",
+          "name",
+          "jobName",
+          "needs",
+          "scope",
+          "scopes",
+          "parentWith",
+        ]
+        for (const k of Object.keys(run)) {
+          if (jobRunOmitKeys.includes(k)) {
+            continue
+          }
+          newRun[k] = run[k]
+        }
+        if (!newRun.needs) {
+          newRun.needs = []
+        }
+        newRun.needs = newRun.needs.map((r2) => [scope[0], r2].join(".."))
+        newRun.needs = [...new Set([...newRun.needs, ...run.needs])]
+        if (run.stage) {
+          newRun.stage = run.stage
+        }
+        const subKey = [key, runKey].join(".")
+        newRun.name = subKey
+        newRuns[subKey] = newRun
       }
-      if (!newRun.needs) {
-        newRun.needs = []
-      }
-      newRun.needs = newRun.needs.map((r2) => [scope[0], r2].join(".."))
-      newRun.needs = [...new Set([...newRun.needs, ...run.needs])]
-      if (run.stage) {
-        newRun.stage = run.stage
-      }
-      return newRun
-    })
-  })
-
-  const newRuns = await Promise.all(promises)
-
-  values.runs = newRuns.reduce((acc, run) => {
-    acc.push(...run)
-    return acc
-  }, [])
+    }
+  }
+  values.runs = newRuns
 }
 
 const compileValues = async (values, context) => {
@@ -194,15 +174,7 @@ const compileValues = async (values, context) => {
         return
       }
       if (subValues._pluginValuesCompilerRecommendedJobs) {
-        console.log(subValues.runs)
         await compile(context, subValues)
-        console.log(subValues.runs)
-        const runsMap = {}
-        for (const run of subValues.runs) {
-          runsMap[run.name] = run
-        }
-        subValues.runs = runsMap
-        console.log(subValues.runs)
       } else {
         await compileValues(subValues, context)
       }
@@ -211,6 +183,7 @@ const compileValues = async (values, context) => {
 }
 
 module.exports = async (values, _options, context, _scope) => {
+  context = { ...context, downloadingPromises: {} }
   await compileValues(values, context)
   return values
 }
