@@ -183,14 +183,34 @@ async function compile(
   }, [])
 }
 
-module.exports = async (values, _options, context, scope) => {
-  const jobsAlias = `${scope.join(".")}.jobs`
+const compileValues = async (values, context) => {
   await Promise.all(
     Object.values(values).map(async (subValues) => {
-      if (subValues._aliasOf === jobsAlias) {
+      if (
+        typeof subValues !== "object" ||
+        subValues === null ||
+        Array.isArray(subValues)
+      ) {
+        return
+      }
+      if (subValues._pluginValuesCompilerRecommendedJobs) {
+        console.log(subValues.runs)
         await compile(context, subValues)
+        console.log(subValues.runs)
+        const runsMap = {}
+        for (const run of subValues.runs) {
+          runsMap[run.name] = run
+        }
+        subValues.runs = runsMap
+        console.log(subValues.runs)
+      } else {
+        await compileValues(subValues, context)
       }
     })
   )
+}
+
+module.exports = async (values, _options, context, _scope) => {
+  await compileValues(values, context)
   return values
 }

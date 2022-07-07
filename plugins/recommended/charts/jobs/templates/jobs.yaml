@@ -1,4 +1,4 @@
-{{- range $run := $.Values.runs }}
+{{- range $name, $run := $.Values.runs }}
 ---
   {{- $context := (merge (dict "run" $run "with" $run.with "parentWith" $run.parentWith) $) -}}
   {{- if not $run.if }}

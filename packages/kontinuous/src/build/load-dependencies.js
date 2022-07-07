@@ -645,22 +645,6 @@ const mergeValuesFromDir = async ({
       set(values, dotKey, subValues)
     }
 
-    await mergeYamlFileValues(
-      `${subchartDirPath}/values`,
-      subValues,
-      beforeMergeChartValues
-    )
-    await mergeYamlFileValues(
-      `${subchartDirPath}/env/${environment}/values`,
-      subValues,
-      beforeMergeChartValues
-    )
-    await mergeEnvTemplates(subchartDirPath, config)
-
-    if (definition.values) {
-      deepmerge(subValues, definition.values)
-    }
-
     await mergeValuesFromDir({
       values,
       target: subchartDirPath,
@@ -668,6 +652,24 @@ const mergeValuesFromDir = async ({
       scope: subchartScope,
       config,
     })
+
+    await mergeYamlFileValues(
+      `${subchartDirPath}/values`,
+      subValues,
+      beforeMergeChartValues
+    )
+
+    await mergeYamlFileValues(
+      `${subchartDirPath}/env/${environment}/values`,
+      subValues,
+      beforeMergeChartValues
+    )
+
+    await mergeEnvTemplates(subchartDirPath, config)
+
+    if (definition.values) {
+      deepmerge(subValues, definition.values)
+    }
   }
 }
 
@@ -683,11 +685,13 @@ const compileValues = async (config, logger) => {
   //     await mergeValuesFromDir({ values, target, definition, scope, config })
   //   },
   // })
+  const scope = ["project"]
+
   await mergeValuesFromDir({
     values,
     target: buildProjectPath,
     definition: config,
-    scope: ["project"],
+    scope,
     config,
   })
 
