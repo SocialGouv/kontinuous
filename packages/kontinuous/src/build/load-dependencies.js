@@ -517,52 +517,6 @@ const writeChartsAlias = async (chartsAliasMap, config) => {
   }
 }
 
-const resolveAliasOf = (
-  values,
-  rootValues = values,
-  scope = [],
-  chartsAliasMap = new Map()
-) => {
-  for (const [key, val] of Object.entries(values)) {
-    if (typeof val !== "object" || val === null) {
-      continue
-    }
-    if (val._aliasOf) {
-      const parentDotKey = [...scope, key].join(".")
-
-      let aliasOf = val._aliasOf
-      if (aliasOf.startsWith(".")) {
-        aliasOf = `${scope.join(".")}${parentDotKey}`
-      }
-
-      const aliasScope = aliasOf.split(".")
-      const adjacentChartAlias = aliasScope.pop()
-      if (adjacentChartAlias !== key) {
-        let aliasMap = chartsAliasMap.get(aliasScope)
-        if (!aliasMap) {
-          aliasMap = {}
-          chartsAliasMap.set(aliasScope, aliasMap)
-        }
-        aliasMap[key] = adjacentChartAlias
-      }
-
-      const dotKey = `${aliasScope.join(".")}.${key}`
-
-      let nestedVal = get(rootValues, dotKey)
-      if (!nestedVal) {
-        nestedVal = {}
-        set(rootValues, dotKey, nestedVal)
-      }
-      deepmerge(nestedVal, val)
-      delete values[key]
-    } else {
-      resolveAliasOf(values[key], rootValues, [...scope, key])
-    }
-  }
-
-  return chartsAliasMap
-}
-
 const valuesEnableStandaloneCharts = (values, config) => {
   const hasAll = !(config.chart && config.chart.length > 0)
   values.global.kontinuous.hasChart = !hasAll
@@ -645,22 +599,6 @@ const mergeValuesFromDir = async ({
       set(values, dotKey, subValues)
     }
 
-    await mergeYamlFileValues(
-      `${subchartDirPath}/values`,
-      subValues,
-      beforeMergeChartValues
-    )
-    await mergeYamlFileValues(
-      `${subchartDirPath}/env/${environment}/values`,
-      subValues,
-      beforeMergeChartValues
-    )
-    await mergeEnvTemplates(subchartDirPath, config)
-
-    if (definition.values) {
-      deepmerge(subValues, definition.values)
-    }
-
     await mergeValuesFromDir({
       values,
       target: subchartDirPath,
@@ -668,6 +606,24 @@ const mergeValuesFromDir = async ({
       scope: subchartScope,
       config,
     })
+
+    await mergeYamlFileValues(
+      `${subchartDirPath}/values`,
+      subValues,
+      beforeMergeChartValues
+    )
+
+    await mergeYamlFileValues(
+      `${subchartDirPath}/env/${environment}/values`,
+      subValues,
+      beforeMergeChartValues
+    )
+
+    await mergeEnvTemplates(subchartDirPath, config)
+
+    if (definition.values) {
+      deepmerge(subValues, definition.values)
+    }
   }
 }
 
@@ -683,11 +639,13 @@ const compileValues = async (config, logger) => {
   //     await mergeValuesFromDir({ values, target, definition, scope, config })
   //   },
   // })
+  const scope = ["project"]
+
   await mergeValuesFromDir({
     values,
     target: buildProjectPath,
     definition: config,
-    scope: ["project"],
+    scope,
     config,
   })
 
@@ -712,7 +670,8 @@ const compileValues = async (config, logger) => {
   valuesEnableStandaloneCharts(values, config)
   valuesOverride(values, config, logger)
 
-  const context = createContext({ type: "values-compilers" })
+  const chartsAliasMap = new Map()
+  const context = createContext({ type: "values-compilers", chartsAliasMap })
 
   const valuesJsFile = `${buildProjectPath}/values.js`
   if (await fs.pathExists(valuesJsFile)) {
@@ -730,7 +689,6 @@ const compileValues = async (config, logger) => {
     values = await require(valuesFinalJsFile)(values, {}, context)
   }
 
-  const chartsAliasMap = resolveAliasOf(values)
   await writeChartsAlias(chartsAliasMap, config)
   removeNotEnabledValues(values)
   cleanMetaValues(values)

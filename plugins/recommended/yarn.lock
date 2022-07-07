@@ -75,6 +75,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.clonedeep@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "lodash.clonedeep@npm:4.5.0"
+  checksum: 0c14df1824c21e8387a8ee586a8f6bddf5c4592ab9eb20950d1bb6beac5a6d64fe48091da904152155da66a8e0b141ce3064fad2d4bd26634906a17118264286
+  languageName: node
+  linkType: hard
+
+"lodash.get@npm:^4.4.2":
+  version: 4.4.2
+  resolution: "lodash.get@npm:4.4.2"
+  checksum: 779e6f3d2c59b82cfee2407abe0fb7f2cefb6eda9a23ffd7caa1390ebcd40697a03a46622294a10f99e9fc0197fb844f3c433400d67584d722aa46b606c43590
+  languageName: node
+  linkType: hard
+
+"lodash.set@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "lodash.set@npm:4.3.2"
+  checksum: ab96f4cede88b54515e9f694da9e5b6d35b1fbf96c80d1023834d134f167ac9630690f0f1846827d07fcbf9ab622321a80acd5e0617bbb9b37806f48e02cc596
+  languageName: node
+  linkType: hard
+
 "micromatch@npm:^4.0.5":
   version: 4.0.5
   resolution: "micromatch@npm:4.0.5"
@@ -166,6 +187,9 @@ __metadata:
   dependencies:
     fs-extra: "npm:^10.1.0"
     lodash.camelcase: "npm:^4.3.0"
+    lodash.clonedeep: "npm:^4.5.0"
+    lodash.get: "npm:^4.4.2"
+    lodash.set: "npm:^4.3.2"
     micromatch: "npm:^4.0.5"
     node-plantuml: "git+https://github.com/betagouv/node-plantuml.git#master"
     puml: "npm:^1.0.1"

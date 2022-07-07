@@ -2,7 +2,7 @@ enabled:
 namespace: 
 repository: 
 gitBranch: 
-runs: []
+runs: {}
 needs: []
 image: "debian:stable"
 # degitImage: ghcr.io/socialgouv/kontinuous/degit:latest
@@ -13,3 +13,4 @@ degitImage: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
 #       enabled:
 priorityClassName: ""
 serviceAccountName: ""
+_pluginValuesCompilerRecommendedJobs: true

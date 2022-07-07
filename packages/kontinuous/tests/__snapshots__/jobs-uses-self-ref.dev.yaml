@@ -49,86 +49,6 @@ automountServiceAccountToken: false
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-jobs-uses-self-ref-feature-branch-1-db-create-2oa7d4
-  namespace: awesome-ci
-  annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kontinuous/test-jobs-uses-self-ref-feature-branch-1
-    kapp.k14s.io/change-group.db: kontinuous/db.test-jobs-uses-self-ref-feature-branch-1
-    kapp.k14s.io/change-group.db.create-secret: kontinuous/db.create-secret.test-jobs-uses-self-ref-feature-branch-1
-    kapp.k14s.io/change-group.db..create-secret: kontinuous/db..create-secret.test-jobs-uses-self-ref-feature-branch-1
-    janitor/ttl: '1800'
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-spec:
-  backoffLimit: 2
-  activeDeadlineSeconds: 3600
-  ttlSecondsAfterFinished: 1800
-  template:
-    metadata: {}
-    spec:
-      restartPolicy: Never
-      initContainers:
-        - name: degit-action
-          image: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
-          command:
-            - sh
-            - '-c'
-            - >-
-              degit SocialGouv/kontinuous/plugins/fabrique/jobs/create-db
-              /action
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1001
-          volumeMounts:
-            - name: action
-              mountPath: /action
-      containers:
-        - name: job
-          image: bitnami/kubectl:latest
-          imagePullPolicy: IfNotPresent
-          envFrom:
-            - secretRef:
-                name: pg-scaleway
-            - secretRef:
-                name: kubeconfig
-          env:
-            - name: DB_SECRET_NAME
-              value: pg-user-feature-branch-1
-            - name: JOB_NAMESPACE
-              value: awesome-ci
-            - name: NAMESPACE
-              value: test-jobs-uses-self-ref-feature-branch-1
-            - name: PGDATABASE
-              value: autodevops_feature-branch-1
-            - name: PGUSER
-              value: user_feature-branch-1
-          command:
-            - /bin/bash
-            - '-c'
-            - |
-              set -e
-              /action/create-secret.sh
-          securityContext:
-            runAsUser: 1001
-            runAsGroup: 1001
-            fsGroup: 1001
-          volumeMounts:
-            - name: workspace
-              mountPath: /workspace
-            - name: action
-              mountPath: /action
-      volumes:
-        - name: workspace
-          emptyDir: {}
-        - name: action
-          emptyDir: {}
----
-apiVersion: batch/v1
-kind: Job
-metadata:
   name: job-test-jobs-uses-self-ref-feature-branch-1-db-create-53d4rg
   namespace: awesome-ci
   annotations:
@@ -210,6 +130,86 @@ spec:
             runAsUser: 1000
             runAsGroup: 1000
             fsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-test-jobs-uses-self-ref-feature-branch-1-db-create-2oa7d4
+  namespace: awesome-ci
+  annotations:
+    kapp.k14s.io/nonce: ''
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/change-group: kontinuous/test-jobs-uses-self-ref-feature-branch-1
+    kapp.k14s.io/change-group.db: kontinuous/db.test-jobs-uses-self-ref-feature-branch-1
+    kapp.k14s.io/change-group.db.create-secret: kontinuous/db.create-secret.test-jobs-uses-self-ref-feature-branch-1
+    kapp.k14s.io/change-group.db..create-secret: kontinuous/db..create-secret.test-jobs-uses-self-ref-feature-branch-1
+    janitor/ttl: '1800'
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata: {}
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-action
+          image: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
+          command:
+            - sh
+            - '-c'
+            - >-
+              degit SocialGouv/kontinuous/plugins/fabrique/jobs/create-db
+              /action
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1001
+          volumeMounts:
+            - name: action
+              mountPath: /action
+      containers:
+        - name: job
+          image: bitnami/kubectl:latest
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: pg-scaleway
+            - secretRef:
+                name: kubeconfig
+          env:
+            - name: DB_SECRET_NAME
+              value: pg-user-feature-branch-1
+            - name: JOB_NAMESPACE
+              value: awesome-ci
+            - name: NAMESPACE
+              value: test-jobs-uses-self-ref-feature-branch-1
+            - name: PGDATABASE
+              value: autodevops_feature-branch-1
+            - name: PGUSER
+              value: user_feature-branch-1
+          command:
+            - /bin/bash
+            - '-c'
+            - |
+              set -e
+              /action/create-secret.sh
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: 1001
+            fsGroup: 1001
           volumeMounts:
             - name: workspace
               mountPath: /workspace

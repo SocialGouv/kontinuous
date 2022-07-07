@@ -1,4 +1,7 @@
+enabled: false
 jobs:
+  enabled: true
   runs:
-    - name: deactivate
-      use: SocialGouv/kontinuous/plugins/fabrique/jobs/deactivate@master
+    deactivate:
+      # use: SocialGouv/kontinuous/plugins/fabrique/jobs/deactivate@master
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/deactivate
