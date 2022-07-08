@@ -16,12 +16,9 @@ runs:
   using: "composite"
   steps:
     
-    - name: Setup environment
+    - name: Setup env vars
       shell: bash
-      id: environment
       run: |
-        npm i --location=global kontinuous
-
         if [ -n "$GITHUB_HEAD_REF" ]; then
           KS_GIT_BRANCH=$GITHUB_HEAD_REF
         else
@@ -44,10 +41,6 @@ runs:
         export KS_GIT_SHA
         export KS_DEBUG
 
-        KS_ENVIRONMENT=$(npx kontinuous env --remote)
-        echo "::set-output name=env::$KS_ENVIRONMENT"
-        
-
         if [ "$GITHUB_EVENT_NAME" = "pull_request"  ] && [ "${{ github.event.action }}" = "closed" ]; then
           KS_EVENT=deleted
         else
@@ -61,7 +54,6 @@ runs:
         echo "KS_GIT_SHA=$KS_GIT_SHA">>$GITHUB_ENV
         echo "KS_GIT_REPOSITORY=$KS_GIT_REPOSITORY">>$GITHUB_ENV
         echo "KS_GIT_REPOSITORY_URLENCODED=$KS_GIT_REPOSITORY_URLENCODED">>$GITHUB_ENV
-        echo "KS_ENVIRONMENT=$KS_ENVIRONMENT">>$GITHUB_ENV
         echo "KS_EVENT=$KS_EVENT">>$GITHUB_ENV
         echo "KS_DEBUG=$KS_DEBUG">>$GITHUB_ENV
 
@@ -76,16 +68,23 @@ runs:
             "${KS_WEBHOOK_URI}/api/v1/oas/hooks/user?event=pushed&token=${KS_WEBHOOK_TOKEN}"
         fi
 
+    - name: Setup environment
+      shell: bash
+      id: environment
+      run: |
+        npm i --location=global kontinuous
+        KS_ENVIRONMENT=$(npx kontinuous env --remote)
+        echo "::set-output name=env::$KS_ENVIRONMENT"
+        echo "KS_ENVIRONMENT=$KS_ENVIRONMENT">>$GITHUB_ENV
+
     - name: Stream logs of kube pipeline
       shell: bash
       run: |
-        # wget --content-on-error -qO- "${KS_WEBHOOK_URI}/api/v1/oas/logs/pipeline?repository=${KS_GIT_REPOSITORY_URLENCODED}&event=pushed&ref=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&catch=true&follow=true&token=${KS_WEBHOOK_TOKEN}"
         npx kontinuous logs
     
     - name: Download manifests artifact
       shell: bash
       run: |
-        # wget --content-on-error -q -O manifests.yaml "${KS_WEBHOOK_URI}/api/v1/oas/artifacts/download?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
         npx kontinuous download manifests manifests.yaml
 
     - name: Archive manifest
