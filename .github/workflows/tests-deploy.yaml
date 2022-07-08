@@ -27,6 +27,8 @@ jobs:
         uses: "./"
         with:
           environment: prod
+          inlineSet: |
+            global.antiAffinity.enabled: false
           token: ${{ secrets.GITHUB_TOKEN }}
           rancherProjectId: "cluster:project"
           ciNamespace: "test-project-ci"
@@ -51,6 +53,8 @@ jobs:
         uses: "./"
         with:
           environment: prod
+          inlineSet: |
+            global.antiAffinity.enabled: false
           token: ${{ secrets.GITHUB_TOKEN }}
           rancherProjectId: "cluster:project"
           ciNamespace: "test-project-ci"
@@ -75,6 +79,8 @@ jobs:
         uses: "./"
         with:
           environment: prod
+          inlineSet: |
+            global.antiAffinity.enabled: false
           token: ${{ secrets.GITHUB_TOKEN }}
           rancherProjectId: "cluster:project"
           ciNamespace: "test-project-ci"
@@ -100,6 +106,8 @@ jobs:
         uses: "./"
         with:
           environment: prod
+          inlineSet: |
+            global.antiAffinity.enabled: false
           token: ${{ secrets.GITHUB_TOKEN }}
           rancherProjectId: "cluster:project"
           ciNamespace: "test-project-ci"

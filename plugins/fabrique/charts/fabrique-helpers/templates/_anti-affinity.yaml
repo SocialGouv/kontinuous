@@ -1,0 +1,27 @@
+{{- define "fabrique-helpers.anti-affinity" -}}
+
+{{ $antiAffinity := false }}
+
+{{ if not  (kindIs "invalid" .Values.antiAffinity.enabled) }}
+{{ $antiAffinity = .Values.antiAffinity }}
+{{ else if and  (not (kindIs "invalid" .Values.global.antiAffinity)) .Values.global.antiAffinity.enabled }}
+{{ $antiAffinity = true }}
+{{ end }}
+
+{{- if $antiAffinity }}
+podAntiAffinity:
+  requiredDuringSchedulingIgnoredDuringExecution:
+  - labelSelector:
+      matchExpressions:
+      - key: namespace
+        operator: In
+        values: 
+        - {{ or .Values.namespace .Values.global.namespace }}
+      - key: component
+        operator: In
+        values:
+        - {{ or .Values.component .Chart.Name }}
+    topologyKey: "kubernetes.io/hostname"
+{{ end }}
+
+{{- end -}}

@@ -44,3 +44,5 @@ ingress:
 needs: []
 entrypoint:
 args: []
+antiAffinity:
+  enabled: 

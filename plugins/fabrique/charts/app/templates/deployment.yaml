@@ -21,19 +21,7 @@ spec:
         namespace: {{ or .Values.namespace .Values.global.namespace }}
     spec:
       affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: namespace
-                operator: In
-                values: 
-                - {{ or .Values.namespace .Values.global.namespace }}
-              - key: component
-                operator: In
-                values:
-                - {{ or .Values.component .Chart.Name }}
-            topologyKey: "kubernetes.io/hostname"
+        {{- include "fabrique-helpers.anti-affinity" . | nindent 8}}
       initContainers:
       {{- if .Values.waitForPostgres }}
         {{- include "fabrique-helpers.init-containers.wait-for-postgres" . | nindent 8 }}
