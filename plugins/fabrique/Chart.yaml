@@ -14,4 +14,3 @@ dependencies:
     repository: file://./charts/security-policies
     version: 1.40.0
     condition: global.kontinuous.hasAll,security-policies.enabled
-appVersion: 1.40.0

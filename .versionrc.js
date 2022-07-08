@@ -22,7 +22,6 @@ const chartsUpdater = {
   writeVersion: (contents, version) => {
     let chart = yaml.load(contents, 'utf8');
     chart.version = version;
-    chart.appVersion = version;
     const { dependencies } = chart
     if (dependencies) {
       for (const dependency of dependencies) {
