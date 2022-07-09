@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.40.1](https://github.com/SocialGouv/kontinuous/compare/v1.40.0...v1.40.1) (2022-07-09)
+
+
+### Bug Fixes
+
+* add deactivate test ([ab154b5](https://github.com/SocialGouv/kontinuous/commit/ab154b565596e4c1ad5a89d673d12fb30d9d44e3))
+* antiAffinity as help, option +fix deploy test ([270e0d6](https://github.com/SocialGouv/kontinuous/commit/270e0d664eeacd487661edcf5e5dfb12238d54bb))
+* boilerplate event ([2ac2deb](https://github.com/SocialGouv/kontinuous/commit/2ac2deb8e58864b5594cb89449511fc2a92550d2))
+* clean remove appVersion ([5544116](https://github.com/SocialGouv/kontinuous/commit/5544116817db847432b3e2cac987f8f311580dff))
+* fix deploy test ([740707d](https://github.com/SocialGouv/kontinuous/commit/740707d68d2f182fc68627c4ee0fc3a1f5240f93))
+* optimize logs action on retry ([e396c57](https://github.com/SocialGouv/kontinuous/commit/e396c5770eea50e5001d506bf108a23139fbf2bd))
+
 ## 1.40.0 (2022-07-07)
 
 
