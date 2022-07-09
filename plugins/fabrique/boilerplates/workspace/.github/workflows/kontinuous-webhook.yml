@@ -1,8 +1,7 @@
 name: Kontinuous
 on:
   push:
-  pull_request:
-    types: [closed]
+  delete:
 
 concurrency:
   cancel-in-progress: true
