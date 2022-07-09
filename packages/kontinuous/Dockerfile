@@ -24,7 +24,7 @@ RUN curl -sL https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar x
   && chmod +x /usr/local/bin/helm \
   && rm -r /tmp/linux-amd64
 
-ARG NODE_VERSION=17
+ARG NODE_VERSION=18
 ENV NODE_VERSION=$NODE_VERSION
 RUN wget -qO- https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
   && apt-get install nodejs \
