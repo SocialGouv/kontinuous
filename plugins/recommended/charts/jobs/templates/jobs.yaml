@@ -1,5 +1,5 @@
 {{- range $name, $run := $.Values.runs }}
-  {{- if not (eq $run.enabled false) }}
+  {{- if or (kindIs "invalid" $run.enabled) $run.enabled }}
 ---
     {{- $context := (merge (dict "run" $run "with" $run.with "parentWith" $run.parentWith) $) -}}
     {{- if not $run.if }}
