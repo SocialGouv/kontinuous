@@ -36,8 +36,10 @@ runs:
         KS_GIT_SHA=$GITHUB_SHA
         KS_DEBUG=true
 
-        if [ "$GITHUB_EVENT_NAME" = "pull_request"  ] && [ "${{ github.event.action }}" = "closed" ]; then
+        if [ "$GITHUB_EVENT_NAME" = "delete"  ]; then
           KS_EVENT=deleted
+          KS_GIT_BRANCH="${{ github.event.repository.default_branch }}"
+          KS_GIT_SHA="0000000000000000000000000000000000000000"
         else
           KS_EVENT=pushed
         fi
