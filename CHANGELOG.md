@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.41.3](https://github.com/SocialGouv/kontinuous/compare/v1.41.2...v1.41.3) (2022-07-10)
+
+
+### Bug Fixes
+
+* delete ns job kubeconfig ([4e4b78b](https://github.com/SocialGouv/kontinuous/commit/4e4b78b2bd16d603139c3fd1a9482db131a25983))
+* retry one time ([8a869dd](https://github.com/SocialGouv/kontinuous/commit/8a869ddee089e19c4e033d6c096839539a7c9cfa))
+
 ### [1.41.2](https://github.com/SocialGouv/kontinuous/compare/v1.41.1...v1.41.2) (2022-07-10)
 
 
