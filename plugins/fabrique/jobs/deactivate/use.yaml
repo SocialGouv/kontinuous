@@ -16,4 +16,8 @@ runs:
     vars:
       NAMESPACE: "{{ $.Values.global.namespace }}"
     run: |
+      mkdir -p /tmp/.kube
+      echo "$KUBECONFIG" > /tmp/.kube/config
+      export KUBECONFIG=/tmp/.kube/config
+
       kubectl delete namespace "$NAMESPACE"
