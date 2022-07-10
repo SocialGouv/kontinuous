@@ -13,6 +13,7 @@ module.exports = ({
   env,
   gitBranch,
   gitCommit,
+  defaultBranch,
   webhookUri,
   webhookToken,
   initContainers = [],
@@ -53,7 +54,9 @@ module.exports = ({
                   command: [
                     "sh",
                     "-c",
-                    `degit ${repositoryUrl}#${gitCommit} /workspace`,
+                    `degit ${repositoryUrl}#${
+                      gitCommit || defaultBranch
+                    } /workspace`,
                   ],
                   volumeMounts: [
                     {
@@ -114,7 +117,7 @@ module.exports = ({
               },
               {
                 name: "KS_GIT_SHA",
-                value: gitCommit,
+                value: gitCommit || "0000000000000000000000000000000000000000",
               },
               {
                 name: "KS_DEBUG",
