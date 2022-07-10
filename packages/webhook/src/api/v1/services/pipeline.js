@@ -27,7 +27,7 @@ module.exports = () => {
     const repository = repositoryFromGitUrl(repositoryUrl)
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)
-    const gitCommit = after || "0000000000000000000000000000000000000000"
+    const gitCommit = after || ""
 
     if (!kubecontext) {
       kubecontext = await refKubecontext(repositoryUrl, gitBranch, env)
