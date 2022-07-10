@@ -3,8 +3,8 @@ module.exports = function ({ services }) {
     services.pipeline({
       eventName: "deleted",
       kubecontext: "dev",
-      ref,
-      after: after || defaultBranch,
+      ref: ref || defaultBranch,
+      after,
       repositoryUrl,
       args: ["deploy", "--chart", "deactivate"],
       checkout: true,
