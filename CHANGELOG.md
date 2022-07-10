@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.41.0](https://github.com/SocialGouv/kontinuous/compare/v1.40.2...v1.41.0) (2022-07-10)
+
+
+### Features
+
+* add KS_LOG_LEVEL ([7416ced](https://github.com/SocialGouv/kontinuous/commit/7416ced71aec490c55e592efcc15a4e76a966ac7))
+
+
+### Bug Fixes
+
+* job drop-db improve ([e085fe6](https://github.com/SocialGouv/kontinuous/commit/e085fe6448310d02299fc15bf51acbcfd741c584))
+* up to node 18 ([6ba5743](https://github.com/SocialGouv/kontinuous/commit/6ba57431626d7684957088ad4a5563e3e69c679b))
+* webhook deleted ([c4af418](https://github.com/SocialGouv/kontinuous/commit/c4af41865e34301c97f9f58fd129f722a4c34da1))
+
 ### [1.40.2](https://github.com/SocialGouv/kontinuous/compare/v1.40.1...v1.40.2) (2022-07-09)
 
 
