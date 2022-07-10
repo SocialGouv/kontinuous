@@ -38,5 +38,5 @@ module.exports = (program) =>
         env = config.environment
       }
 
-      process.stdout.write(env)
+      process.stdout.write(env || "")
     })
