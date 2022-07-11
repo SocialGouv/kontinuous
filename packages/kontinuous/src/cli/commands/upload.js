@@ -9,6 +9,7 @@ module.exports = (program) =>
     .argument("<file>", "the file to upload")
     .argument("[name]", `the manifests name to download, default "manifests"`)
     .addOption(options.uploadUrl)
+    .addOption(options.webhookUri)
     .description("Upload manifests")
     .action(async (file, name, _opts, command) => {
       const opts = command.optsWithGlobals()

@@ -9,6 +9,7 @@ module.exports = (program) =>
     .argument("[name]", `the manifests name to download, default "manifests"`)
     .argument("[file]", 'default "${name}.yaml"')
     .addOption(options.downloadUrl)
+    .addOption(options.webhookUri)
     .description("Upload manifests")
     .action(async (name, file, _opts, command) => {
       const opts = command.optsWithGlobals()
