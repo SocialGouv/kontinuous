@@ -7,6 +7,8 @@ inputs:
     description: "The webhook authentication token, usually secrets.KUBEWEBHOOK_TOKEN"
   webhookUri:
     description: "The webhook uri"
+  triggerWebhook:
+    description: "Trigger webhook on first call, useful when webhooks are not configured on the repo"
 outputs:
   url:
     description: "Main deployment URL"
@@ -57,8 +59,12 @@ runs:
     - name: Handle action rerun
       shell: bash
       run: |
-        if [ "$GITHUB_RUN_ATTEMPT" -gt "1" ]; then
-          echo "Trigger webhook for rerun attempt #${GITHUB_RUN_ATTEMPT}"
+        if [ -n "${{ inputs.triggerWebhook }}" ] || [ "$GITHUB_RUN_ATTEMPT" -gt "1" ]; then
+          if [ "$GITHUB_RUN_ATTEMPT" -gt "1" ]; then
+            echo "Trigger webhook from action for rerun attempt #${GITHUB_RUN_ATTEMPT}"
+          else
+            echo "Trigger webhook from action"
+          fi
           wget --content-on-error -qO- \
             --post-data "{\"repositoryUrl\":\"${KS_GIT_REPOSITORY}\",\"ref\":\"${KS_GIT_BRANCH}\",\"commit\":\"${KS_GIT_SHA}\"}" \
             --header='Content-Type:application/json' \
