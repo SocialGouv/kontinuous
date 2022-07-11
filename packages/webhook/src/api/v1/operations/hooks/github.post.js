@@ -26,23 +26,17 @@ module.exports = function ({ services: { pushed, deleted } }) {
         default_branch: defaultBranch,
       } = body.repository
 
-      try {
-        const trigger = await eventHandlers[eventName]({
-          ref,
-          after,
-          repositoryUrl,
-          commits,
-          defaultBranch,
-        })
-        if (!trigger) {
-          return res.status(204).json({ message: "no-op" })
-        }
-      } catch (err) {
-        const logger = reqCtx.require("logger")
-        logger.error(err)
-        return res.status(500).json({ message: "error" })
+      const runJob = await eventHandlers[eventName]({
+        ref,
+        after,
+        repositoryUrl,
+        commits,
+        defaultBranch,
+      })
+      if (!runJob) {
+        return res.status(204).json({ message: "no-op" })
       }
-
+      runJob()
       return res.status(202).json({ message: "accepted" })
     },
   ]

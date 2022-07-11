@@ -81,19 +81,22 @@ module.exports = () => {
       webhookToken,
       commits,
     })
-    try {
-      await jobRun(manifest, kubecontext)
-      logger.debug(
-        `pipeline job "${jobName}" launched in namespace "${jobNamespace}"`
-      )
-    } catch (err) {
-      logger.error(
-        `failed to launch pipeline job "${jobName}" in namespace "${jobNamespace}"`
-      )
-      logger.error(err)
-      throw err
-    }
 
-    return true
+    return async () => {
+      try {
+        await jobRun(manifest, kubecontext)
+        logger.debug(
+          `pipeline job "${jobName}" launched in namespace "${jobNamespace}"`
+        )
+      } catch (err) {
+        logger.error(
+          `failed to launch pipeline job "${jobName}" in namespace "${jobNamespace}"`
+        )
+        logger.error(err)
+        throw err
+      }
+
+      return true
+    }
   }
 }
