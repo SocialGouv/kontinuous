@@ -55,7 +55,10 @@ module.exports = ({
                     "sh",
                     "-c",
                     `degit ${repositoryUrl}#${
-                      gitCommit || defaultBranch
+                      gitCommit &&
+                      gitCommit !== "0000000000000000000000000000000000000000"
+                        ? gitCommit
+                        : defaultBranch
                     } /workspace`,
                   ],
                   volumeMounts: [
