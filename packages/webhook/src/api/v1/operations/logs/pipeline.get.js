@@ -40,7 +40,8 @@ module.exports = function () {
         }
       },
       {
-        retries: 20,
+        retries: 0,
+        // retries: 20,
         factor: 1,
         minTimeout: 1000,
         maxTimeout: 3000,
@@ -138,7 +139,10 @@ module.exports = function () {
           res.write("\n")
         }
       } catch (err) {
-        logger.error(err)
+        logger.error(
+          { kubecontext, jobNamespace, jobName },
+          "expected job not found"
+        )
         res.write(
           `\n💀 error: unable to find expected job "${jobName}" #${commit}\n`
         )

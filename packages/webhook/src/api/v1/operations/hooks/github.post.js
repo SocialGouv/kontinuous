@@ -12,9 +12,9 @@ module.exports = function ({ services: { pushed, deleted } }) {
         eventName = "pushed"
       }
 
-      const { ref, after, created } = body
+      const { ref, after } = body
 
-      if (created && eventName === "pushed" && !ref.startsWith("refs/tags/")) {
+      if (eventName === "pushed" && !after) {
         return res.status(204).json({ message: "no-op" })
       }
 
