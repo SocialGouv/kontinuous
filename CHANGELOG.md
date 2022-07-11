@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.41.10](https://github.com/SocialGouv/kontinuous/compare/v1.41.9...v1.41.10) (2022-07-11)
+
+
+### Bug Fixes
+
+* default branch for user wh ([980ad56](https://github.com/SocialGouv/kontinuous/commit/980ad56b697398f4c795fc99a78549bbc5dbfc71))
+* logger time format ([49bd0f9](https://github.com/SocialGouv/kontinuous/commit/49bd0f90d3d44bad9314b3c8404cf36161b44cb9))
+
 ### [1.41.9](https://github.com/SocialGouv/kontinuous/compare/v1.41.8...v1.41.9) (2022-07-11)
 
 
