@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.41.20](https://github.com/SocialGouv/kontinuous/compare/v1.41.19...v1.41.20) (2022-07-11)
+
+
+### Bug Fixes
+
+* get env config from HEAD on deleted ([e5f4e6e](https://github.com/SocialGouv/kontinuous/commit/e5f4e6e8bff9ddbcdbe1c8bf5d0948f5060684f0))
+* git sha for deleted event ([909773d](https://github.com/SocialGouv/kontinuous/commit/909773dcbc8fccdce93bccb9657795eca8db0ab3))
+
 ### [1.41.19](https://github.com/SocialGouv/kontinuous/compare/v1.41.18...v1.41.19) (2022-07-11)
 
 
