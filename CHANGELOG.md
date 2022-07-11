@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.41.7](https://github.com/SocialGouv/kontinuous/compare/v1.41.6...v1.41.7) (2022-07-11)
+
+
+### Bug Fixes
+
+* linter ([429041f](https://github.com/SocialGouv/kontinuous/commit/429041f8e130a5d853ffa4cb93994ab3e0466078))
+* webhook deleted get config branch ([986db1d](https://github.com/SocialGouv/kontinuous/commit/986db1dfed5a5ac59948799bfef57b4cda25554b))
+
 ### [1.41.6](https://github.com/SocialGouv/kontinuous/compare/v1.41.5...v1.41.6) (2022-07-11)
 
 
