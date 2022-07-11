@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.41.18](https://github.com/SocialGouv/kontinuous/compare/v1.41.17...v1.41.18) (2022-07-11)
+
+
+### Bug Fixes
+
+* add options webhookUri ([7f08998](https://github.com/SocialGouv/kontinuous/commit/7f0899890417f1026538210a5b36f25077b1d6dd))
+* event config file ([f157a5d](https://github.com/SocialGouv/kontinuous/commit/f157a5d1305013ced6259e928555ed7e83cec842))
+
 ### [1.41.17](https://github.com/SocialGouv/kontinuous/compare/v1.41.16...v1.41.17) (2022-07-11)
 
 
