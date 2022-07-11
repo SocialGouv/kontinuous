@@ -1,5 +1,3 @@
-const { reqCtx } = require("@modjo-plugins/express/ctx")
-
 module.exports = function ({ services: { pushed, deleted } }) {
   const eventHandlers = { pushed, deleted }
 
