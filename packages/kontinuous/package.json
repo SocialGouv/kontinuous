@@ -31,6 +31,7 @@
     "lodash.set": "^4.3.2",
     "micromatch": "^4.0.5",
     "nctx": "^1.2.0",
+    "parse-github-url": "^1.0.2",
     "pino": "^7.10.0",
     "pino-pretty": "^7.6.0",
     "pretty-ms": "^7.0.1",

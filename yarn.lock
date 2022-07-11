@@ -7956,6 +7956,7 @@ __metadata:
     lodash.set: "npm:^4.3.2"
     micromatch: "npm:^4.0.5"
     nctx: "npm:^1.2.0"
+    parse-github-url: "npm:^1.0.2"
     pino: "npm:^7.10.0"
     pino-pretty: "npm:^7.6.0"
     pretty-ms: "npm:^7.0.1"
@@ -9176,6 +9177,15 @@ __metadata:
   dependencies:
     callsites: "npm:^3.0.0"
   checksum: ac26e4d08ec70f2e03c7e7b80c384fc3201576c04102ecf8cfef29051980208bd41a552802f1c46d6f3c1f0f864ce4f3cfc1f3077c19561a08df214d7b3fe3ec
+  languageName: node
+  linkType: hard
+
+"parse-github-url@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "parse-github-url@npm:1.0.2"
+  bin:
+    parse-github-url: ./cli.js
+  checksum: 54025f822bf8d7a616f7deb361f795d6f83c257905159c371c7ac02a2eb5c3b8407f83d1271ff51148b035ee6465c2af996784bfc681ea1c3c2018d8995637f1
   languageName: node
   linkType: hard
 
@@ -11960,6 +11970,7 @@ __metadata:
   resolution: "~common@workspace:packages/common"
   dependencies:
     axios: "npm:^0.27.2"
+    parse-github-url: "npm:^1.0.2"
     sonic-boom: "npm:^3.0.0"
     yaml: "npm:^2.0.1"
   peerDependencies:
@@ -12013,6 +12024,7 @@ __metadata:
     micromatch: "npm:^4.0.5"
     node-cron: "npm:^3.0.0"
     nodemon: "npm:^2.0.15"
+    parse-github-url: "npm:^1.0.2"
     pino: "npm:^7.10.0"
     pino-pretty: "npm:^7.6.1"
     pretty-ms: "npm:^7.0.1"

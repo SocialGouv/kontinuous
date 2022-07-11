@@ -32,7 +32,7 @@ module.exports = () => {
     const gitCommit = after || ""
 
     if (!defaultBranch) {
-      const repoUrl = await normalizeRepositoryUrl(repositoryUrl)
+      const repoUrl = normalizeRepositoryUrl(repositoryUrl)
       defaultBranch = await getGitRemoteDefaultBranch(repoUrl)
     }
 
