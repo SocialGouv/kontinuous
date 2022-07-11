@@ -411,6 +411,12 @@ module.exports = async (opts = {}) => {
       options: "event",
       default: "pushed",
     },
+    ignoreProjectTemplates: {
+      env: "KS_IGNORE_PROJECT_TEMPLATES",
+      envParser: (str) => yaml.load(str),
+      option: "ignoreProjectTemplates",
+      default: false,
+    },
   }
 
   const rootConfig = await loadStructuredConfig({

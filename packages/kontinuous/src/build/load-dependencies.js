@@ -740,7 +740,12 @@ module.exports = async (config, logger) => {
 
   await downloadAndBuildDependencies(config, logger)
   await installPackages(config)
-  await mergeEnvTemplates(`${buildPath}/charts/project`, config)
+  if (!config.ignoreProjectTemplates) {
+    await mergeEnvTemplates(`${buildPath}/charts/project`, config)
+  }
+  if (config.ignoreProjectTemplates) {
+    await fs.remove(`${buildPath}/charts/project/templates`)
+  }
   await copyFilesDir(config)
   const values = await compileValues(config, logger)
 

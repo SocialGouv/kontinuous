@@ -102,6 +102,11 @@ module.exports.commit = new Option(
 )
 
 module.exports.event = new Option(
-  "event",
+  "--event",
   `pipeline event, default to "pushed"`
 ).choices(["pushed", "deleted", "custom"])
+
+module.exports.ignoreProjectTemplates = new Option(
+  "--ignore-project-templates",
+  "don't merge project's root templates and env templates"
+)

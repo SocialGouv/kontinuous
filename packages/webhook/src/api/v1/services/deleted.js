@@ -7,7 +7,7 @@ module.exports = function ({ services }) {
       defaultBranch,
       after,
       repositoryUrl,
-      args: ["deploy", "--chart", "deactivate"],
+      args: ["deploy", "--chart", "deactivate", "--ignore-project-templates"],
       checkout: true,
     })
 }

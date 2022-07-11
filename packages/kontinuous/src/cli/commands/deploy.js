@@ -23,6 +23,7 @@ module.exports = (program) =>
     .addOption(options.webhookBaseDomain)
     .addOption(options.webhookUriPattern)
     .addOption(options.webhookUri)
+    .addOption(options.ignoreProjectTemplates)
     .option(
       "--on-webhook, -w",
       "trigger built manifests deploying via webhook endpoint"
