@@ -12,8 +12,8 @@ image: harbor.fabrique.social.gouv.fr/sre/kontinuous/webhook:latest
 # image: ghcr.io/socialgouv/kontinuous/webhook:latest
 resources:
   limits:
-    cpu: 200m
-    memory: 256Mi
+    cpu: 500m
+    memory: 512Mi
   requests:
     cpu: 50m
     memory: 128Mi
