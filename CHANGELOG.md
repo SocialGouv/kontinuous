@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.41.8](https://github.com/SocialGouv/kontinuous/compare/v1.41.7...v1.41.8) (2022-07-11)
+
+
+### Bug Fixes
+
+* add kontinuous to path in docker image ([0b7e2eb](https://github.com/SocialGouv/kontinuous/commit/0b7e2ebdc6377d95156235c4f49f9b941d8038e3))
+* event retry ([ced7748](https://github.com/SocialGouv/kontinuous/commit/ced7748ecc461ef8f6baf9a9ed96d199d044771a))
+* no-op on create branch event ([d641de1](https://github.com/SocialGouv/kontinuous/commit/d641de1b1e238e4921d738a31c8db79ba1a27a41))
+* wip + temp retrocompat ([86f1e6e](https://github.com/SocialGouv/kontinuous/commit/86f1e6e09b6964e1e739c8f5f551c0a892d7788e))
+* workflow logs to webhook ([4aa0ddd](https://github.com/SocialGouv/kontinuous/commit/4aa0ddd2597d13cba403a4f46038e79e6005ba04))
+
 ### [1.41.7](https://github.com/SocialGouv/kontinuous/compare/v1.41.6...v1.41.7) (2022-07-11)
 
 
