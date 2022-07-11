@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.41.17](https://github.com/SocialGouv/kontinuous/compare/v1.41.16...v1.41.17) (2022-07-11)
+
+
+### Bug Fixes
+
+* event pushed ([a25a5ab](https://github.com/SocialGouv/kontinuous/commit/a25a5abdc9a96fc7dc409919e803b2f7e5c513c5))
+* job default retry 1 ([2b8544a](https://github.com/SocialGouv/kontinuous/commit/2b8544ad37b0a7bd248f2abc68d124a8f94f9e4e))
+* lint ([dc9bfcf](https://github.com/SocialGouv/kontinuous/commit/dc9bfcfa4f43823bbc7b90f09e482cb4f15e762c))
+* up tests snapshots ([87ee550](https://github.com/SocialGouv/kontinuous/commit/87ee5503c8b71eca8083003636163aea485fed79))
+
 ### [1.41.16](https://github.com/SocialGouv/kontinuous/compare/v1.41.15...v1.41.16) (2022-07-11)
 
 
