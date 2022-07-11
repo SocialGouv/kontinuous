@@ -6,7 +6,6 @@
   "author": "",
   "peerDependencies": {
     "fs-extra": "^10.0.1",
-    "git-url-parse": "^11.6.0",
     "js-yaml": "^4.1.0",
     "lodash.mergewith": "^4.6.2",
     "pino": "^7.10.0",

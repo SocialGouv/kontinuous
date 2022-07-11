@@ -19,7 +19,6 @@
     "dotenv": "^16.0.0",
     "form-data": "^4.0.0",
     "fs-extra": "^10.0.1",
-    "git-url-parse": "^11.6.0",
     "js-yaml": "^4.1.0",
     "launch-editor": "^2.4.0",
     "link-module-alias": "^1.2.0",
