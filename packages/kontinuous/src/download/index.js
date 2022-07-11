@@ -27,6 +27,7 @@ module.exports = async ({ name, file }) => {
   logger.info(`downloading artifact "${dest}" to "${file}"`)
   try {
     const writer = fs.createWriteStream(file)
+    console.log({ downloadUrl })
     const response = await axios.request({
       method: "GET",
       url: downloadUrl,

@@ -97,7 +97,8 @@ module.exports = function () {
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)
 
-    const kubecontext = await refKubecontext(repositoryMixed, ref, env)
+    const branchConfig = event === "deleted" ? "HEAD" : ref
+    const kubecontext = await refKubecontext(repositoryMixed, branchConfig, env)
 
     if (!kubecontext) {
       res.writeHead(204, {

@@ -15,5 +15,5 @@ module.exports = async (
     file: ".kontinuous/config.yaml",
     logger,
   })
-  return yaml.load(data)
+  return data ? yaml.load(data) : {}
 }
