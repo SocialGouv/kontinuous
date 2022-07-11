@@ -101,8 +101,6 @@ COPY --chown=1001:1001 packages/common/ ./packages/common/
 
 WORKDIR /workspace
 
-RUN ln -s /opt/kontinuous/packages/kontinuous/bin/kontinuous /usr/local/bin/kontinuous
-
 ENV HOME=/home/ubuntu
 RUN chmod a+rw $HOME
 RUN git config --global --add safe.directory /workspace
