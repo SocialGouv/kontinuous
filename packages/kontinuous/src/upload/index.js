@@ -32,6 +32,7 @@ module.exports = async ({ name, file }) => {
     contentType: "text/x-yaml",
   })
 
+  logger.info(`uploading "${file}" as artifact "${dest}"`)
   try {
     const response = await axios.request({
       method: "POST",

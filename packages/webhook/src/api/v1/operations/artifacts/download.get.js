@@ -1,6 +1,6 @@
 const fs = require("fs-extra")
 
-// const { ctx } = require("@modjo-plugins/core")
+const { ctx } = require("@modjo-plugins/core")
 const cleanGitRef = require("~common/utils/clean-git-ref")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const slug = require("~common/utils/slug")
@@ -8,6 +8,7 @@ const slug = require("~common/utils/slug")
 const artifactPath = "/artifacts"
 
 module.exports = function () {
+  const logger = ctx.require("logger")
   async function addOneArtifactsUpload(req, res) {
     const {
       repository: repositoryMixed,
@@ -23,6 +24,7 @@ module.exports = function () {
     const dir = `${artifactPath}/${repositorySlug}/${branchSlug}/${commit}`
     const file = `${dir}/${name}.yaml`
     if (!(await fs.pathExists(file))) {
+      logger.error({ file }, "requested file not not found")
       return res.status(404).json({ error: "not found" })
     }
     const content = await fs.readFile(file, "binary")
