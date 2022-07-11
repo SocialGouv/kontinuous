@@ -1,6 +1,6 @@
 const axios = require("axios")
-const GitUrlParse = require("git-url-parse")
 
+const normalizeRepositoryUrl = require("./normalize-repository-url")
 const defaultLogger = require("./logger")
 
 module.exports = async ({
@@ -9,15 +9,7 @@ module.exports = async ({
   repositoryUrl,
   logger = defaultLogger,
 }) => {
-  const url = GitUrlParse(repositoryUrl)
-  if (!url.resource) {
-    url.resource = "github.com"
-  }
-  let repoUrl = GitUrlParse.stringify(url, "https")
-  if (repoUrl.endsWith(".git")) {
-    repoUrl = repoUrl.slice(0, -4)
-  }
-
+  const repoUrl = normalizeRepositoryUrl(repositoryUrl)
   const rawUrlParts = [repoUrl, "raw", ref, file]
   const rawUrl = rawUrlParts.join("/")
 

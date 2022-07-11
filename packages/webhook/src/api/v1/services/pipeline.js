@@ -1,8 +1,10 @@
 const { ctx } = require("@modjo-plugins/core")
 
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
-
 const cleanGitRef = require("~common/utils/clean-git-ref")
+const getGitRemoteDefaultBranch = require("~common/utils/get-git-remote-default-branch")
+const normalizeRepositoryUrl = require("~common/utils/normalize-repository-url")
+
 const jobRun = require("~/k8s/command/job-run")
 const pipelineJob = require("~/k8s/resources/pipeline.job")
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
@@ -28,6 +30,11 @@ module.exports = () => {
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)
     const gitCommit = after || ""
+
+    if (!defaultBranch) {
+      const repoUrl = await normalizeRepositoryUrl(repositoryUrl)
+      defaultBranch = await getGitRemoteDefaultBranch(repoUrl)
+    }
 
     if (!kubecontext) {
       const branchConfig = eventName === "deleted" ? defaultBranch : gitBranch

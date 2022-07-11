@@ -1,5 +1,3 @@
-const { reqCtx } = require("@modjo-plugins/express/ctx")
-
 module.exports = function ({ services: { pushed, deleted } }) {
   const eventHandlers = { pushed, deleted }
 
@@ -14,20 +12,15 @@ module.exports = function ({ services: { pushed, deleted } }) {
 
       const { ref, repositoryUrl, commit } = body
 
-      try {
-        const trigger = await eventHandlers[eventName]({
-          ref,
-          repositoryUrl,
-          after: commit,
-        })
-        if (!trigger) {
-          return res.status(204).json({ message: "no-op" })
-        }
-      } catch (err) {
-        const logger = reqCtx.require("logger")
-        logger.error(err)
-        return res.status(500).json({ message: "error" })
+      const runJob = await eventHandlers[eventName]({
+        ref,
+        after: commit,
+        repositoryUrl,
+      })
+      if (!runJob) {
+        return res.status(204).json({ message: "no-op" })
       }
+      runJob()
 
       return res.status(202).json({ message: "accepted" })
     },
