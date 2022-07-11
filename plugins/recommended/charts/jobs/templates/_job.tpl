@@ -54,7 +54,7 @@ metadata:
     {{- end }}
     janitor/ttl: "1800"
 spec:
-  backoffLimit: 2
+  backoffLimit: 1
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
