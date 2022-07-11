@@ -277,7 +277,7 @@ metadata:
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
 spec:
-  backoffLimit: 2
+  backoffLimit: 1
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
@@ -369,7 +369,7 @@ metadata:
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
 spec:
-  backoffLimit: 2
+  backoffLimit: 1
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
@@ -450,7 +450,7 @@ metadata:
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
 spec:
-  backoffLimit: 2
+  backoffLimit: 1
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
@@ -535,7 +535,7 @@ metadata:
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
 spec:
-  backoffLimit: 2
+  backoffLimit: 1
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
