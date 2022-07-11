@@ -9222,7 +9222,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse-path@npm:^4.0.0":
+"parse-path@npm:^4.0.4":
   version: 4.0.4
   resolution: "parse-path@npm:4.0.4"
   dependencies:
@@ -9234,15 +9234,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse-url@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "parse-url@npm:6.0.0"
+"parse-url@npm:^6.0.1":
+  version: 6.0.2
+  resolution: "parse-url@npm:6.0.2"
   dependencies:
     is-ssh: "npm:^1.3.0"
     normalize-url: "npm:^6.1.0"
-    parse-path: "npm:^4.0.0"
+    parse-path: "npm:^4.0.4"
     protocols: "npm:^1.4.0"
-  checksum: 07928ef515e49cdf51ac09374e1cad573251c3d079362e32dfa323f481adc2bb7009838f06789f43bcb81ccbd03a47586e0261d1a6c76ebb017e99b82276005a
+  checksum: 59b00c9de0d9366241c5da08e9370478bf60a8a59edbad09ef33418185d108b1637e63bc30f7ddb461125db8c0a75d48eaa87586787771302963beac827b078e
   languageName: node
   linkType: hard
 
