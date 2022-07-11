@@ -8,6 +8,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
 
 jobs:
-  follow-deployment:
-    uses: SocialGouv/kontinuous/.github/workflows/workflow-logs.yaml@v1
+  stream-webhook:
+    uses: SocialGouv/kontinuous/.github/workflows/workflow-deploy.yaml@v1
     secrets: inherit
