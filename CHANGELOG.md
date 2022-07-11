@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.41.11](https://github.com/SocialGouv/kontinuous/compare/v1.41.10...v1.41.11) (2022-07-11)
+
+
+### Bug Fixes
+
+* dependabot alerts ([66a1ebf](https://github.com/SocialGouv/kontinuous/commit/66a1ebfc100fafc82ef779276125112771445a26))
+* dependabot alerts ([3393a45](https://github.com/SocialGouv/kontinuous/commit/3393a45c70c03c4de74eceaae868e5ea7d0a40f1))
+* missing await ([b99f357](https://github.com/SocialGouv/kontinuous/commit/b99f357533e2eb3d8b6a0630af65a4857e3ef39b))
+
 ### [1.41.10](https://github.com/SocialGouv/kontinuous/compare/v1.41.9...v1.41.10) (2022-07-11)
 
 
