@@ -40,6 +40,8 @@ runs:
 
         if [ "$GITHUB_EVENT_NAME" = "delete"  ]; then
           KS_EVENT=deleted
+          KS_GIT_BRANCH="${{ github.event.ref }}"
+          KS_GIT_BRANCH_URLENCODED=$(echo $KS_GIT_BRANCH | sed 's/\//\%2f/g')
           KS_GIT_SHA="0000000000000000000000000000000000000000"
         else
           KS_EVENT=pushed
