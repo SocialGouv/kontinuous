@@ -26,7 +26,7 @@ module.exports = () => {
     const repository = repositoryFromGitUrl(repositoryUrl)
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)
-    const gitCommit = after || ""
+    const gitCommit = after || "0000000000000000000000000000000000000000"
 
     if (!kubecontext) {
       const branchConfig = eventName === "deleted" ? "HEAD" : gitBranch
