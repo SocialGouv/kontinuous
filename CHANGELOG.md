@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.41.24](https://github.com/SocialGouv/kontinuous/compare/v1.41.23...v1.41.24) (2022-07-11)
+
+
+### Bug Fixes
+
+* event delete gha ([b2ba4e4](https://github.com/SocialGouv/kontinuous/commit/b2ba4e4d9484f5e89f71cd4cab5389ddac5dc7bf))
+
 ### [1.41.23](https://github.com/SocialGouv/kontinuous/compare/v1.41.22...v1.41.23) (2022-07-11)
 
 
