@@ -214,6 +214,9 @@ module.exports = async (opts = {}) => {
       defaultFunction: (config) =>
         refEnv(config.gitBranch, config.environmentPatterns),
     },
+    projectName: {
+      env: "KS_PROJECT_NAME",
+    },
     webhookToken: {
       option: "webhook-token",
       env: "KS_WEBHOOK_TOKEN",
@@ -241,7 +244,14 @@ module.exports = async (opts = {}) => {
           return null
         }
         return webhookUriPattern
-          .replace("${repositoryName}", config.repositoryName)
+          .replace(
+            "${projectName}",
+            config.projectName || config.repositoryName
+          )
+          .replace(
+            "${repositoryName}",
+            config.repositoryName || config.projectName
+          )
           .replace("${baseDomain}", config.webhookBaseDomain)
       },
     },
