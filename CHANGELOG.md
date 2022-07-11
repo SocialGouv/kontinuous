@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.41.19](https://github.com/SocialGouv/kontinuous/compare/v1.41.18...v1.41.19) (2022-07-11)
+
+
+### Bug Fixes
+
+* add projectName ([4d98ec6](https://github.com/SocialGouv/kontinuous/commit/4d98ec6ae6c9c6daaee9c683fcc7cefeed77ec3b))
+* gh webhook ([9c688fb](https://github.com/SocialGouv/kontinuous/commit/9c688fbe5c7433ce613c52eac69afd9278812631))
+* improve error logs ([be0d0d0](https://github.com/SocialGouv/kontinuous/commit/be0d0d028bd965817542bb7ce594ac818a4203d1))
+* up webhook resources limits ([34f96ca](https://github.com/SocialGouv/kontinuous/commit/34f96ca434264dc7776b67a6d7d4c785f0d06fc1))
+* up webhook resources req ([5b68c23](https://github.com/SocialGouv/kontinuous/commit/5b68c23c130237c1cd01ffb5d8eee6b83e618461))
+
 ### [1.41.18](https://github.com/SocialGouv/kontinuous/compare/v1.41.17...v1.41.18) (2022-07-11)
 
 
