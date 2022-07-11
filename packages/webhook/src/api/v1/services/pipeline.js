@@ -30,7 +30,8 @@ module.exports = () => {
     const gitCommit = after || ""
 
     if (!kubecontext) {
-      kubecontext = await refKubecontext(repositoryUrl, gitBranch, env)
+      const branchConfig = eventName === "deleted" ? defaultBranch : gitBranch
+      kubecontext = await refKubecontext(repositoryUrl, branchConfig, env)
     }
 
     if (!kubecontext) {
