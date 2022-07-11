@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.41.22](https://github.com/SocialGouv/kontinuous/compare/v1.41.21...v1.41.22) (2022-07-11)
+
+
+### Bug Fixes
+
+* boilderplate ([c8ecf69](https://github.com/SocialGouv/kontinuous/commit/c8ecf695a30f72ecb3a61b6fdc7334e8d48d7f51))
+* delete event trigger push ([4bddcfd](https://github.com/SocialGouv/kontinuous/commit/4bddcfd2c866611897a56e4f022151b3cf2acbe0))
+* improve logs ([c1034fb](https://github.com/SocialGouv/kontinuous/commit/c1034fb7c400776c4b905792085028a744f3fae2))
+
 ### [1.41.21](https://github.com/SocialGouv/kontinuous/compare/v1.41.20...v1.41.21) (2022-07-11)
 
 
