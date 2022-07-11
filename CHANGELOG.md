@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.41.16](https://github.com/SocialGouv/kontinuous/compare/v1.41.15...v1.41.16) (2022-07-11)
+
+
+### Bug Fixes
+
+* remove need of defaultBranch ([1214db2](https://github.com/SocialGouv/kontinuous/commit/1214db28e4e9c23b9b4ca480cd2aa2f09ab3f0b8))
+* replace buggy git-url-parse ([acb7cc3](https://github.com/SocialGouv/kontinuous/commit/acb7cc32b20b054592c8966cd760b499068eab8a))
+* tests ([6333b19](https://github.com/SocialGouv/kontinuous/commit/6333b193d0e6b19f72a798599409daabfbe9d6d8))
+
 ### [1.41.15](https://github.com/SocialGouv/kontinuous/compare/v1.41.14...v1.41.15) (2022-07-11)
 
 
