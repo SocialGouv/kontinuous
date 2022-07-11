@@ -59,9 +59,13 @@ module.exports = async (options) => {
     })
   } catch (error) {
     if (error.response) {
-      logger.error(`logs error: status ${error.response.status}`)
+      logger.error(
+        `log error: status ${error.response.status} ${error.response.statusText}`
+      )
+      if (error.response.data.msg) {
+        logger.error(error.response.data.msg)
+      }
       logger.error(`failed url: ${url}`)
-      logger.error(`${error.response.statusText}: ${error.response.data.msg}`)
       // logger.debug(error.response.headers)
       // logger.error(error.request)
     } else if (error.request) {
