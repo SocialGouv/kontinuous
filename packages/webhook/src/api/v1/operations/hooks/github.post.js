@@ -22,18 +22,13 @@ module.exports = function ({ services: { pushed, deleted } }) {
         return res.status(204).json({ message: "no-op" })
       }
 
-      const {
-        clone_url: repositoryUrl,
-        commits,
-        default_branch: defaultBranch,
-      } = body.repository
+      const { clone_url: repositoryUrl, commits } = body.repository
 
       const runJob = await eventHandlers[eventName]({
         ref,
         after,
         repositoryUrl,
         commits,
-        defaultBranch,
       })
       if (!runJob) {
         return res.status(204).json({ message: "no-op" })

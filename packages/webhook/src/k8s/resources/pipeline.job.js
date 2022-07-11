@@ -13,7 +13,6 @@ module.exports = ({
   env,
   gitBranch,
   gitCommit,
-  defaultBranch,
   webhookUri,
   webhookToken,
   initContainers = [],
@@ -58,7 +57,7 @@ module.exports = ({
                       gitCommit &&
                       gitCommit !== "0000000000000000000000000000000000000000"
                         ? gitCommit
-                        : defaultBranch
+                        : "HEAD"
                     } /workspace`,
                   ],
                   volumeMounts: [

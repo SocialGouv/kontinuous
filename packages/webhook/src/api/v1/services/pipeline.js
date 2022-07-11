@@ -19,7 +19,6 @@ module.exports = () => {
     kubecontext,
     ref,
     after,
-    defaultBranch,
     repositoryUrl,
     args,
     checkout,
@@ -31,13 +30,8 @@ module.exports = () => {
     const gitBranch = cleanGitRef(ref)
     const gitCommit = after || ""
 
-    if (!defaultBranch) {
-      const repoUrl = normalizeRepositoryUrl(repositoryUrl)
-      defaultBranch = await getGitRemoteDefaultBranch(repoUrl)
-    }
-
     if (!kubecontext) {
-      const branchConfig = eventName === "deleted" ? defaultBranch : gitBranch
+      const branchConfig = eventName === "deleted" ? "HEAD" : gitBranch
       kubecontext = await refKubecontext(repositoryUrl, branchConfig, env)
     }
 
@@ -84,7 +78,6 @@ module.exports = () => {
       env,
       gitBranch,
       gitCommit,
-      defaultBranch,
       webhookUri,
       webhookToken,
       commits,
