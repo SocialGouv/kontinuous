@@ -23,7 +23,8 @@ module.exports = (program) =>
 
       if (opts.remote) {
         if (!ref) {
-          ref = config.gitBranch
+          const { event } = config
+          ref = event === "deleted" ? "HEAD" : config.gitBranch
         }
         environmentPatterns = await getRemoteKontinuousEnvironmentPatterns(
           config.gitRepositoryUrl,
