@@ -14,7 +14,10 @@ module.exports = function ({ services: { pushed, deleted } }) {
 
       const { ref, after } = body
 
-      if (eventName === "pushed" && !after) {
+      if (
+        eventName === "pushed" &&
+        (!after || after === "0000000000000000000000000000000000000000")
+      ) {
         return res.status(204).json({ message: "no-op" })
       }
 
