@@ -9,7 +9,7 @@ module.exports = async ({
   repositoryUrl,
   logger = defaultLogger,
 }) => {
-  const repoUrl = normalizeRepositoryUrl(repositoryUrl)
+  const repoUrl = await normalizeRepositoryUrl(repositoryUrl)
   const rawUrlParts = [repoUrl, "raw", ref, file]
   const rawUrl = rawUrlParts.join("/")
 
