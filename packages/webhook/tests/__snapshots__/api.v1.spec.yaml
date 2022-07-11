@@ -375,6 +375,8 @@ paths:
                   type: string
                   example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed
                   format: sha1
+                created:
+                  type: boolean
                 repository:
                   type: object
                   properties:

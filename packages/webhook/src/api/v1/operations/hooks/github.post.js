@@ -12,11 +12,15 @@ module.exports = function ({ services: { pushed, deleted } }) {
         eventName = "pushed"
       }
 
-      if (!eventName || !eventHandlers[eventName]) {
+      const { ref, after, created } = body
+
+      if (created && eventName === "push" && !ref.startsWith("refs/tags/")) {
         return res.status(204).json({ message: "no-op" })
       }
 
-      const { ref, after } = body
+      if (!eventName || !eventHandlers[eventName]) {
+        return res.status(204).json({ message: "no-op" })
+      }
 
       const {
         clone_url: repositoryUrl,
