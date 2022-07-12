@@ -6,6 +6,7 @@ const addCommands = [
   require("./commands/build"),
   require("./commands/deploy"),
   require("./commands/env"),
+  require("./commands/config"),
   require("./commands/slugify"),
   require("./commands/logs"),
   require("./commands/clean"),

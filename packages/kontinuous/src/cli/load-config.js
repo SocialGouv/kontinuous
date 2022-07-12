@@ -39,7 +39,7 @@ const mergeProjectsAndOrganizations = (config) => {
 
 const defaultRepositoryProvider = "https://github.com" // degit/tiged like
 
-module.exports = async (opts = {}) => {
+module.exports = async (opts = {}, inlineConfigs = []) => {
   const env = ctx.get("env") || process.env
 
   const rootConfigOverride = {
@@ -430,6 +430,7 @@ module.exports = async (opts = {}) => {
   }
 
   const rootConfig = await loadStructuredConfig({
+    inlineConfigs,
     configOverride: rootConfigOverride,
     options: opts,
     env,

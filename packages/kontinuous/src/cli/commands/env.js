@@ -13,7 +13,7 @@ module.exports = (program) =>
     .addOption(options.subpath)
     .option(
       "--remote",
-      "select from environment using kontinuous config from remote repo"
+      "select environment using kontinuous config from remote repo"
     )
     .argument("[ref]", "the ref")
     .action(async (ref, opts, _command) => {
