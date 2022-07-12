@@ -314,7 +314,9 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
       option: "ci-namespace",
       env: "KS_CI_NAMESPACE",
       defaultFunction: (config) =>
-        config.repositoryName ? `${config.repositoryName}-ci` : null,
+        config.repositoryName
+          ? `${config.projectName || config.repositoryName}-ci`
+          : null,
     },
     kubeconfigPath: {
       defaultFunction: () => writeKubeconfig(),
