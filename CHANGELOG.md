@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.42.0](https://github.com/SocialGouv/kontinuous/compare/v1.41.24...v1.42.0) (2022-07-12)
+
+
+### Features
+
+* add config cli getter ([f1d5cfa](https://github.com/SocialGouv/kontinuous/commit/f1d5cfac0d15225693aecbb1657a1c1e4d74327e))
+* improve secret usage + cache npx ([78dfe4e](https://github.com/SocialGouv/kontinuous/commit/78dfe4e141114a77b718b28568823047e8544f6e))
+
 ### [1.41.24](https://github.com/SocialGouv/kontinuous/compare/v1.41.23...v1.41.24) (2022-07-11)
 
 
