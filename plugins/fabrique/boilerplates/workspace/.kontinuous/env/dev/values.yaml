@@ -1,5 +1,0 @@
-deactivate:
-  enabled: false
-  runs:
-    deactivate:
-      use: SocialGouv/kontinuous/plugins/fabrique/jobs/deactivate@master

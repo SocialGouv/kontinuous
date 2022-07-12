@@ -82,9 +82,8 @@ Here is a sample of a boilerplate made for ***La Fabrique*** and that you can me
 
 Run this command in your project to retrieve boilerplate config for kontinuous and corresponding github workflows, then adjust the config in `.kontinuous` folder.
 
-⚠️ Pay attention, this command will overwrite files if sames names are used, you should commit your work before running it.
 ```sh
-npx tiged SocialGouv/kontinuous/plugins/fabrique/boilerplates/workspace --force
+npx kontinuous init
 ```
 
 ### 1.1.2 Local dev home config
