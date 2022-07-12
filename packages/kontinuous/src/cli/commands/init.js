@@ -1,8 +1,9 @@
 const fs = require("fs-extra")
-const { Select, prompt } = require("enquirer")
+const { Select, Input } = require("enquirer")
 
 const degit = require("~common/utils/degit-improved")
 const logger = require("~common/utils/logger")
+const yaml = require("~common/utils/yaml")
 
 const ctx = require("~/ctx")
 
@@ -16,6 +17,7 @@ module.exports = (program) =>
     .option("--dev", "init also local dev environment config")
     .option("--boilerplate, -b", "specify boilerplate url, repository or name")
     .option("--overwrite", "overwrite existing file")
+    .option("--name", "project name")
     .action(async (opts, _command) => {
       const config = ctx.require("config")
 
@@ -44,11 +46,10 @@ module.exports = (program) =>
           boilerplate = await selectBoilerplate.run()
         }
         if (boilerplate === "other") {
-          boilerplate = await prompt({
-            type: "input",
-            name: "boilerplate",
+          const inputBoilerplate = new Input({
             message: "Select repository directory",
           })
+          boilerplate = await inputBoilerplate.run()
         }
         if (nativePluginsBoilerplate[boilerplate]) {
           boilerplate = nativePluginsBoilerplate[boilerplate]
@@ -94,6 +95,27 @@ module.exports = (program) =>
           await fs.copy(config.buildPath, config.workspacePath, {
             overwrite: overwriteResponse === "overwrite",
           })
+
+          let projectConfig = {}
+          const configFile = `${config.workspaceKsPath}/config.yaml`
+          if (await fs.pathExists(configFile)) {
+            projectConfig = yaml.load(
+              await fs.readFile(configFile, { encoding: "utf8" })
+            )
+          }
+
+          let { name } = opts
+          if (!name) {
+            const inputName = new Input({
+              message: "Project name",
+              initial: projectConfig.projectName || "",
+            })
+            name = await inputName.run()
+          }
+          if (projectConfig.projectName !== name) {
+            projectConfig.projectName = name.toString()
+            await fs.writeFile(configFile, yaml.dump(projectConfig))
+          }
         }
         logger.info("done")
       } catch (err) {
