@@ -7,7 +7,7 @@ app:
 jobs:
   runs:
     build-app:
-      use: SocialGouv/kontinuous/plugins/fabrique/jobs/build@master
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/build@v1
       with:
         registrySecretRefName: harbor
         imagePackage: app
