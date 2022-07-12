@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.43.2](https://github.com/SocialGouv/kontinuous/compare/v1.43.1...v1.43.2) (2022-07-12)
+
+
+### Bug Fixes
+
+* base ci namespace on projectName ([5f18d7e](https://github.com/SocialGouv/kontinuous/commit/5f18d7edae9ff7534e930213c3ff85484c54f436))
+* boilerplate ([bb4fdc9](https://github.com/SocialGouv/kontinuous/commit/bb4fdc98b5a53759f3d9a429cedc450e7581c605))
+* cleanup ([c2f39d0](https://github.com/SocialGouv/kontinuous/commit/c2f39d06466bea97cf8278da3cdaec6b8574921f))
+* default registry secret ref ([87e74d6](https://github.com/SocialGouv/kontinuous/commit/87e74d69d1fb49ec4fd663a9a584a6dd6542a9db))
+
 ### [1.43.1](https://github.com/SocialGouv/kontinuous/compare/v1.43.0...v1.43.1) (2022-07-12)
 
 
