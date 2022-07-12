@@ -89,6 +89,10 @@ spec:
             {{- if gt (len .Values.env) 0 }}
             {{- tpl (.Values.env | toYaml) . | nindent 12 }}
             {{- end }}
+            {{- range $name, $value := .Values.vars }}
+            - name: "{{ $name }}"
+              value: "{{ tpl $value . }}"
+            {{- end }}
           envFrom:
             {{- if gt (len .Values.envFrom) 0 }}
             {{- tpl (.Values.envFrom | toYaml) . | nindent 12 }}

@@ -16,6 +16,7 @@ replicas:
 containerPort: 3000
 servicePort: 80
 env: []
+vars: {}
 envFrom: []
 probesPath: /index.html
 resources:
