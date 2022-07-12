@@ -23,7 +23,7 @@ spec:
                 name: {{ or .Values.component .Chart.Name }}
                 port:
                   name: http
-            path: /
+            path: {{ .Values.ingress.path }}
             pathType: Prefix
   tls:
     - hosts:

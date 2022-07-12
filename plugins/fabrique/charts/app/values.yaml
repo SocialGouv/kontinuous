@@ -42,6 +42,7 @@ redirectFrom: []
 ingress:
   enabled: true
   annotations: {}
+  path: /
 needs: []
 entrypoint:
 args: []

@@ -468,6 +468,24 @@ const removeNotEnabledValues = (values) => {
   return hasEnabledValue || (values._isChartValues && values.enabled)
 }
 
+const expandTildeDotNotation = (o) => {
+  if (Array.isArray(o)) {
+    for (const value of o) {
+      expandTildeDotNotation(value)
+    }
+  } else {
+    for (const [key, value] of Object.entries(o)) {
+      if (key.slice(0, 1) === "~") {
+        set(o, key.slice(1), value)
+        delete o[key]
+      }
+      if (typeof value === "object" && value !== null) {
+        expandTildeDotNotation(value)
+      }
+    }
+  }
+}
+
 const mergeYamlFileValues = async (
   valuesFileBasename,
   subValues,
@@ -477,6 +495,7 @@ const mergeYamlFileValues = async (
   if (!val) {
     return
   }
+  expandTildeDotNotation(val)
   if (beforeMerge) {
     val = beforeMerge(val)
   }
