@@ -1,6 +1,3 @@
-global:
-  registry: harbor.fabrique.social.gouv.fr
-
 app:
   # chart: fabrique.app # implicited by `app` and `app-*` chart root key caller
   needs: [build-app]
