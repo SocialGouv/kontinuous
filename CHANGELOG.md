@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.43.4](https://github.com/SocialGouv/kontinuous/compare/v1.43.3...v1.43.4) (2022-07-12)
+
+
+### Bug Fixes
+
+* webhook run job no retry ([b116eb1](https://github.com/SocialGouv/kontinuous/commit/b116eb1e356737e8c2a0c655cad6fe54d92d087e))
+
 ### [1.43.3](https://github.com/SocialGouv/kontinuous/compare/v1.43.2...v1.43.3) (2022-07-12)
 
 
