@@ -96,10 +96,12 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
     ? "preprod"
     : `user_${branchSlug32}`
 
-  const ciNamespace =
-    config.ciNamespace || `${config.projectName || repositoryName}-ci`
+  const { projectName } = config
 
-  const imageProject = ""
+  const ciNamespace =
+    config.ciNamespace || `${projectName || repositoryName}-ci`
+
+  const imageProject = projectName || ""
 
   const replicas = isProd ? 2 : 1
 
