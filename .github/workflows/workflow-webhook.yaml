@@ -26,4 +26,4 @@ jobs:
           webhookToken: ${{ secrets.KUBEWEBHOOK_TOKEN }}
           webhookUri: ${{ inputs.webhookUri }}
           webhookUriPattern: ${{ inputs.webhookUriPattern || 'https://webhook-${projectName}.${baseDomain}' }}
-          webhookBaseDomain: ${{ inputs.webhookBaseDomain || "fabrique.social.gouv.fr" }}
+          webhookBaseDomain: ${{ inputs.webhookBaseDomain || 'fabrique.social.gouv.fr' }}
