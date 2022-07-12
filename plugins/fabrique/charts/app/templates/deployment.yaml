@@ -91,7 +91,7 @@ spec:
             {{- end }}
             {{- range $name, $value := .Values.vars }}
             - name: "{{ $name }}"
-              value: "{{ tpl $value . }}"
+              value: "{{ tpl $value $ }}"
             {{- end }}
           envFrom:
             {{- if gt (len .Values.envFrom) 0 }}
