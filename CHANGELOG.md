@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.44.0](https://github.com/SocialGouv/kontinuous/compare/v1.43.6...v1.44.0) (2022-07-12)
+
+
+### Features
+
+* tilde dot notation ([7b53c94](https://github.com/SocialGouv/kontinuous/commit/7b53c9466e2c30dde8236a61f31d71f0a97bfb9b))
+
 ### [1.43.6](https://github.com/SocialGouv/kontinuous/compare/v1.43.5...v1.43.6) (2022-07-12)
 
 
