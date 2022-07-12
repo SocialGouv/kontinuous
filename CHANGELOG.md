@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.44.2](https://github.com/SocialGouv/kontinuous/compare/v1.44.1...v1.44.2) (2022-07-12)
+
+
+### Bug Fixes
+
+* add ingress.rewriteTarget value ([597035e](https://github.com/SocialGouv/kontinuous/commit/597035e42079b67c98a43c7699e173b7a49260ef))
+
 ### [1.44.1](https://github.com/SocialGouv/kontinuous/compare/v1.44.0...v1.44.1) (2022-07-12)
 
 
