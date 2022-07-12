@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.43.6](https://github.com/SocialGouv/kontinuous/compare/v1.43.5...v1.43.6) (2022-07-12)
+
+
+### Bug Fixes
+
+* chart vars tpl ([e2a8b78](https://github.com/SocialGouv/kontinuous/commit/e2a8b78f64145953fe9dbe3b9843cd100239a945))
+
 ### [1.43.5](https://github.com/SocialGouv/kontinuous/compare/v1.43.4...v1.43.5) (2022-07-12)
 
 
