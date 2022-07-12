@@ -7,6 +7,10 @@ inputs:
     description: "The webhook authentication token, usually secrets.KUBEWEBHOOK_TOKEN"
   webhookUri:
     description: "The webhook uri"
+  webhookUriPattern:
+    description: "The webhook uri pattern"
+  webhookBaseDomain:
+    description: "The webhook base domain"
   triggerWebhook:
     description: "Trigger webhook on first call, useful when webhooks are not configured on the repo"
 outputs:
@@ -17,10 +21,22 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '18'
+    
+    - name: Cache node modules
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-cache-node-modules
     
     - name: Setup env vars
       shell: bash
+      id: environment
       run: |
+        npm i --location=global kontinuous
+        
         if [ -n "$GITHUB_HEAD_REF" ]; then
           KS_GIT_BRANCH=$GITHUB_HEAD_REF
         else
@@ -30,7 +46,12 @@ runs:
         KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/tags/}
         KS_GIT_BRANCH_URLENCODED=$(echo $KS_GIT_BRANCH | sed 's/\//\%2f/g')
 
-        KS_WEBHOOK_URI=${{ inputs.webhookUri }}
+        if [ -n '${{ inputs.webhookUri }}' ]; then
+          KS_WEBHOOK_URI='${{ inputs.webhookUri }}'
+        else
+          KS_WEBHOOK_URI_PATTERN='${{ inputs.webhookUriPattern }}'
+        fi
+        KS_WEBHOOK_BASE_DOMAIN='${{ inputs.webhookBaseDomain }}'
         
         KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
         KS_GIT_REPOSITORY_URLENCODED=$(echo $KS_GIT_REPOSITORY | sed 's/\//\%2f/g')
@@ -47,6 +68,23 @@ runs:
           KS_EVENT=pushed
         fi
 
+        export KS_WEBHOOK_URI
+        export KS_WEBHOOK_URI_PATTERN
+        export KS_WEBHOOK_BASE_DOMAIN
+        export KS_WEBHOOK_TOKEN
+        export KS_GIT_BRANCH
+        export KS_GIT_SHA
+        export KS_GIT_REPOSITORY
+        export KS_EVENT
+        export KS_DEBUG
+        KONTINUOUS_CONFIG=$(npx kontinuous config --remote --format json)
+        
+        KS_ENVIRONMENT=$(echo "$KONTINUOUS_CONFIG" | jq -r ".environment")
+        KS_WEBHOOK_URI=$(echo "$KONTINUOUS_CONFIG" | jq -r ".webhookUri")
+
+        echo "::set-output name=env::$KS_ENVIRONMENT"
+
+        echo "KS_ENVIRONMENT=$KS_ENVIRONMENT">>$GITHUB_ENV
         echo "KS_WEBHOOK_URI=$KS_WEBHOOK_URI">>$GITHUB_ENV
         echo "KS_WEBHOOK_TOKEN=${{ inputs.webhookToken }}">>$GITHUB_ENV
         echo "KS_GIT_BRANCH=$KS_GIT_BRANCH">>$GITHUB_ENV
@@ -71,15 +109,6 @@ runs:
             --header='Content-Type:application/json' \
             "${KS_WEBHOOK_URI}/api/v1/oas/hooks/user?event=${KS_EVENT}&token=${KS_WEBHOOK_TOKEN}"
         fi
-
-    - name: Setup environment
-      shell: bash
-      id: environment
-      run: |
-        npm i --location=global kontinuous
-        KS_ENVIRONMENT=$(npx kontinuous env --remote)
-        echo "::set-output name=env::$KS_ENVIRONMENT"
-        echo "KS_ENVIRONMENT=$KS_ENVIRONMENT">>$GITHUB_ENV
 
     - name: Stream logs of kube pipeline
       shell: bash

@@ -1,5 +1,20 @@
 on:
   workflow_call:
+    inputs:
+      webhookUri:
+        required: false
+        type: string
+      webhookUriPattern:
+        required: false
+        type: string
+      webhookBaseDomain:
+        required: false
+        type: string
+    secrets:
+      KUBEWEBHOOK_TOKEN:
+        required: true
+      GITHUB_TOKEN:
+        required: true
 
 jobs:
   logs:
@@ -11,4 +26,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           webhookToken: ${{ secrets.KUBEWEBHOOK_TOKEN }}
-          webhookUri: https://webhook-${{ secrets.RANCHER_PROJECT_NAME }}.fabrique.social.gouv.fr
+          webhookUri: ${{ inputs.webhookUri }}
+          webhookUriPattern: ${{ inputs.webhookUriPattern || 'https://webhook-${projectName}.${baseDomain}' }}
+          webhookBaseDomain: ${{ inputs.webhookBaseDomain || "fabrique.social.gouv.fr" }}
