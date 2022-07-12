@@ -31,7 +31,7 @@ RUN wget -qO- https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
   && npm install -g yarn \
   && rm -rf /var/lib/apt/lists/*
 
-ARG KAPP_VERSION=v0.46.0
+ARG KAPP_VERSION=v0.49.0
 ENV KAPP_VERSION=$KAPP_VERSION
 RUN curl -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/${KAPP_VERSION}/kapp-linux-amd64 > /tmp/kapp \
   && mv /tmp/kapp /usr/local/bin/kapp \
