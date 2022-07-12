@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.43.3](https://github.com/SocialGouv/kontinuous/compare/v1.43.2...v1.43.3) (2022-07-12)
+
+
+### Bug Fixes
+
+* imageProject default to projectName ([670f982](https://github.com/SocialGouv/kontinuous/commit/670f98278706c3f02fc81caa6509d061a4a7a111))
+
 ### [1.43.2](https://github.com/SocialGouv/kontinuous/compare/v1.43.1...v1.43.2) (2022-07-12)
 
 
