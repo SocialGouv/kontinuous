@@ -47,10 +47,6 @@ module.exports = () => {
       gitBranch,
     })
 
-    logger.info(
-      `event ${eventName} triggering workflow on ${repository}#${ref} ${gitCommit}`
-    )
-
     const webhookUri = ctx.require("config.project.oas.uri")
     const webhookToken = ctx.require("config.project.webhook.token")
 
@@ -82,6 +78,9 @@ module.exports = () => {
     })
 
     return async () => {
+      logger.info(
+        `event ${eventName} triggering workflow on ${repository}#${ref} ${gitCommit}`
+      )
       try {
         await jobRun(manifest, kubecontext)
         logger.debug(
