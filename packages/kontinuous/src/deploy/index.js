@@ -37,6 +37,8 @@ module.exports = async (options) => {
     kubeconfigContext,
   } = config
 
+  const onWebhook = options.W
+
   try {
     let manifestsFile = options.F
     let manifests
@@ -48,7 +50,7 @@ module.exports = async (options) => {
       manifests = await fs.readFile(manifestsFile, { encoding: "utf-8" })
     }
 
-    if (options.W) {
+    if (onWebhook) {
       const manifestsHash = crypto.createHmac("md5", manifests).digest("hex")
 
       let jobHash
@@ -184,7 +186,9 @@ module.exports = async (options) => {
       }
     }
 
-    await deployHooks(allManifests, "pre")
+    if (!onWebhook) {
+      await deployHooks(allManifests, "pre")
+    }
 
     const namespacesManifests = allManifests.filter(
       (manifest) => manifest.kind === "Namespace"
@@ -207,7 +211,9 @@ module.exports = async (options) => {
 
     await deployWithKapp()
 
-    await deployHooks(allManifests, "post")
+    if (!onWebhook) {
+      await deployHooks(allManifests, "post")
+    }
 
     elapsed.end({
       label: `🚀 kontinuous pipeline ${repositoryName} ${environment} ${namespacesLabel}`,
