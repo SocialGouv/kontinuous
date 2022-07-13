@@ -9,7 +9,6 @@ metadata:
     field.cattle.io/projectId: '1234'
     kontinuous/gitBranch: feature-branch-1
     kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
   labels:
     application: test-jobs-uses-self-ref
   name: test-jobs-uses-self-ref-feature-branch-1

@@ -9,7 +9,6 @@ metadata:
     field.cattle.io/projectId: '1234'
     kontinuous/gitBranch: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
   labels:
     application: test-long-branch-host
     cert: wildcard
