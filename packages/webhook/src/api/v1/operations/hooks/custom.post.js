@@ -1,5 +1,3 @@
-const { reqCtx } = require("@modjo-plugins/express/ctx")
-
 module.exports = function ({ services: { custom } }) {
   return [
     async (req, res) => {
@@ -8,13 +6,12 @@ module.exports = function ({ services: { custom } }) {
 
       const manifests = manifestsFile.buffer.toString("utf-8")
 
-      try {
-        await custom({ env, hash, repositoryUrl, manifests })
-      } catch (err) {
-        const logger = reqCtx.require("logger")
-        logger.error(err)
-        return res.status(500).json({ message: "error" })
+      const runJob = await custom({ env, hash, repositoryUrl, manifests })
+
+      if (!runJob) {
+        return res.status(204).json({ message: "no-op" })
       }
+      runJob()
 
       return res.status(202).json({ message: "accepted" })
     },
