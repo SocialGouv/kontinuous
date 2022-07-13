@@ -53,7 +53,7 @@ module.exports = async (_options = {}) => {
   )
 
   logger.debug("Load manifests")
-  manifests = await loadManifests(manifests, values)
+  manifests = await loadManifests(manifests, config)
 
   logger.trace(`Manifests: \n${yaml.dump(manifests)}`)
 
