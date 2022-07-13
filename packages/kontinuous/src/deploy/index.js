@@ -189,7 +189,7 @@ module.exports = async (options) => {
       }
     }
 
-    if (!hasBuild) {
+    if (hasBuild) {
       await deployHooks(allManifests, "pre")
     }
 
@@ -214,7 +214,7 @@ module.exports = async (options) => {
 
     await deployWithKapp()
 
-    if (!hasBuild) {
+    if (hasBuild) {
       await deployHooks(allManifests, "post")
     }
 
