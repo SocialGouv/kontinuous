@@ -42,12 +42,15 @@ module.exports = async (options) => {
   try {
     let manifestsFile = options.F
     let manifests
+    let hasBuild
     if (!manifestsFile) {
       const result = await build(options)
       manifestsFile = result.manifestsFile
       manifests = result.manifests
+      hasBuild = true
     } else {
       manifests = await fs.readFile(manifestsFile, { encoding: "utf-8" })
+      hasBuild = false
     }
 
     if (onWebhook) {
@@ -186,7 +189,7 @@ module.exports = async (options) => {
       }
     }
 
-    if (!onWebhook) {
+    if (!hasBuild) {
       await deployHooks(allManifests, "pre")
     }
 
@@ -211,7 +214,7 @@ module.exports = async (options) => {
 
     await deployWithKapp()
 
-    if (!onWebhook) {
+    if (!hasBuild) {
       await deployHooks(allManifests, "post")
     }
 
