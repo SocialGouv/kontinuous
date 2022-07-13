@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.44.4](https://github.com/SocialGouv/kontinuous/compare/v1.44.3...v1.44.4) (2022-07-13)
+
+
+### Bug Fixes
+
+* apply namespace ([c3d8365](https://github.com/SocialGouv/kontinuous/commit/c3d836556d037c941b934ea0e007106721c94253))
+* deploy hook for custom ([2aa7b5c](https://github.com/SocialGouv/kontinuous/commit/2aa7b5cf34b18d945b1151068cef8238a533e0d2))
+
 ### [1.44.3](https://github.com/SocialGouv/kontinuous/compare/v1.44.2...v1.44.3) (2022-07-13)
 
 
