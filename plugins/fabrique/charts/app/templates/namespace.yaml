@@ -9,6 +9,7 @@ metadata:
     field.cattle.io/projectId: "{{ or .Values.rancherProjectId .Values.global.rancherProjectId }}"
     kontinuous/gitBranch: "{{ or .Values.global.gitBranch "" }}"
     kontinuous/mainNamespace: "true"
+    kapp.k14s.io/exists: ""
   labels:
     application: {{ .Values.global.repositoryName }}
     {{- if not .Values.global.isProd }}
