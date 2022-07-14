@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.46.0](https://github.com/SocialGouv/kontinuous/compare/v1.45.3...v1.46.0) (2022-07-14)
+
+
+### Features
+
+* subchart alias composition ([958c407](https://github.com/SocialGouv/kontinuous/commit/958c40765c3828a1b4ddd67b5b1876a28f9b622e))
+
+
+### Bug Fixes
+
+* big refacto unfold charts and aliasing ([9722848](https://github.com/SocialGouv/kontinuous/commit/9722848bca8257093d0f7da5f358c8c9bc856442))
+* enable meta chart sublevel finder ([a4c8a1e](https://github.com/SocialGouv/kontinuous/commit/a4c8a1ed823d48e25d29741a60231e778b8356ac))
+* ref charts values with meta ([1af77ac](https://github.com/SocialGouv/kontinuous/commit/1af77ac95cec1bbbdc7c6b448cc31bff0754427f))
+
 ### [1.45.3](https://github.com/SocialGouv/kontinuous/compare/v1.45.2...v1.45.3) (2022-07-14)
 
 
