@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.45.2](https://github.com/SocialGouv/kontinuous/compare/v1.45.1...v1.45.2) (2022-07-14)
+
+
+### Bug Fixes
+
+* change dot notation prefix tilde to dot ([e3ddccc](https://github.com/SocialGouv/kontinuous/commit/e3ddccc60e82f67978fbc5503a75bc8ac838feb2))
+
 ### [1.45.1](https://github.com/SocialGouv/kontinuous/compare/v1.45.0...v1.45.1) (2022-07-14)
 
 
