@@ -32,51 +32,59 @@ module.exports = async (
 ) => {
   const namespace = manifest.metadata.name
 
+  const ensureNamespace = async (verb) => {
+    try {
+      let ignoreError
+      await new Promise((resolve, reject) => {
+        logger.info("creating namespace")
+        const proc = spawn(
+          "kubectl",
+          [`--context=${kubeconfigContext}`, verb, "-f", "-"],
+          {
+            encoding: "utf-8",
+          }
+        )
+
+        proc.stdin.write(JSON.stringify(manifest))
+
+        proc.stdout.on("data", (data) => {
+          process.stdout.write(data.toString())
+        })
+        proc.stderr.on("data", (data) => {
+          const message = data.toString()
+          if (message.includes("AlreadyExists")) {
+            ignoreError = true
+            logger.info({ namespace }, "namespace already exists")
+          } else {
+            logger.warn({ namespace }, message)
+          }
+        })
+        proc.on("close", (code) => {
+          if (code === 0 || ignoreError) {
+            resolve()
+          } else {
+            reject(
+              new Error(`creating namespace failed with exit code ${code}`)
+            )
+          }
+        })
+
+        proc.stdin.end()
+      })
+    } catch (err) {
+      logger.error(err)
+      throw err
+    }
+  }
+
   logger.info(`ensure namespace "${namespace}" is active`)
   if (await checkNamespaceIsAvailable(kubeconfigContext, namespace, logger)) {
+    logger.info({ namespace }, "apply namespace")
+    await ensureNamespace("apply")
     return
   }
 
-  try {
-    let ignoreError
-    await new Promise((resolve, reject) => {
-      logger.info("creating namespace")
-      const proc = spawn(
-        "kubectl",
-        [`--context=${kubeconfigContext}`, "create", "-f", "-"],
-        {
-          encoding: "utf-8",
-        }
-      )
-
-      proc.stdin.write(JSON.stringify(manifest))
-
-      proc.stdout.on("data", (data) => {
-        process.stdout.write(data.toString())
-      })
-      proc.stderr.on("data", (data) => {
-        const message = data.toString()
-        if (message.includes("AlreadyExists")) {
-          ignoreError = true
-          logger.info("namespace already exists")
-        } else {
-          logger.warn(message)
-        }
-      })
-      proc.on("close", (code) => {
-        if (code === 0 || ignoreError) {
-          resolve()
-        } else {
-          reject(new Error(`creating namespace failed with exit code ${code}`))
-        }
-      })
-
-      proc.stdin.end()
-    })
-  } catch (err) {
-    logger.error(err)
-    throw err
-  }
+  await ensureNamespace("create")
 
   await retry(
     async () => {
