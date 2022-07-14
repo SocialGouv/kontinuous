@@ -475,7 +475,7 @@ const expandTildeDotNotation = (o) => {
     }
   } else {
     for (const [key, value] of Object.entries(o)) {
-      if (key.slice(0, 1) === "~") {
+      if (key.slice(0, 1) === ".") {
         set(o, key.slice(1), value)
         delete o[key]
       }
