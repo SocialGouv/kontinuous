@@ -131,7 +131,17 @@ runs:
       run: |
         wget --content-on-error -q -O deployment-status.json "${KS_WEBHOOK_URI}/api/v1/oas/artifacts/status?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
         DEPLOYMENT_STATUS=$(cat deployment-status.json)
-        echo "status: " $(echo "$DEPLOYMENT_STATUS" | jq .status)
+        status=$(echo "$DEPLOYMENT_STATUS" | jq .status)
+        echo "status:  $status"
+        
+        if [ "$status" = "loading" ]; then
+          sleep 5
+          wget --content-on-error -q -O deployment-status.json "${KS_WEBHOOK_URI}/api/v1/oas/artifacts/status?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
+          DEPLOYMENT_STATUS=$(cat deployment-status.json)
+          status=$(echo "$DEPLOYMENT_STATUS" | jq .status)
+          echo "status:  $status"
+        fi
+
         OK=$(echo "$DEPLOYMENT_STATUS" | jq .ok)
         if [ "$OK" != "true" ]; then
           exit 1
