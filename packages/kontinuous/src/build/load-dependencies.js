@@ -749,7 +749,7 @@ const compileValues = async (config, logger) => {
 
   await writeChartsAlias(chartsAliasMap, config)
   removeNotEnabledValues(values)
-  // cleanMetaValues(values)
+  cleanMetaValues(values)
 
   const projectValuesFile = await getYamlPath(`${buildProjectPath}/values`)
   if (projectValuesFile) {
