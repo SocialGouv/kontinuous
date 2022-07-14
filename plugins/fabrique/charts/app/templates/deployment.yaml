@@ -53,9 +53,7 @@ spec:
           {{- end }}
           livenessProbe:
             failureThreshold: 15
-            httpGet:
-              path: {{ .Values.probesPath }}
-              port: http
+            {{- include "fabrique-helpers.probes" . | nindent 12 }}
             initialDelaySeconds: 30
             periodSeconds: 5
             timeoutSeconds: 5
@@ -65,13 +63,15 @@ spec:
               name: http
           readinessProbe:
             failureThreshold: 15
-            httpGet:
-              path: {{ .Values.probesPath }}
-              port: http
+            {{- include "fabrique-helpers.probes" . | nindent 12 }}
             initialDelaySeconds: 0
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
+          startupProbe:
+            {{- include "fabrique-helpers.probes" . | nindent 12 }}
+            failureThreshold: 12
+            periodSeconds: 5
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}
@@ -79,12 +79,6 @@ spec:
             requests:
               cpu: {{ .Values.resources.requests.cpu }}
               memory: {{ .Values.resources.requests.memory }}
-          startupProbe:
-            failureThreshold: 12
-            httpGet:
-              path: {{ .Values.probesPath }}
-              port: http
-            periodSeconds: 5
           env:
             {{- if gt (len .Values.env) 0 }}
             {{- tpl (.Values.env | toYaml) . | nindent 12 }}

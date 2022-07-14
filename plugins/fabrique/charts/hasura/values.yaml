@@ -17,6 +17,7 @@ env: []
 envFrom: []
 envConfigName:
 probesPath: /healthz
+probesPort: 
 resources:
   limits:
     cpu: 500m

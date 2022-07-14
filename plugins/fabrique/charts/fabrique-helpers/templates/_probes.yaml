@@ -1,0 +1,10 @@
+{{- define "fabrique-helpers.probes" -}}
+{{ if .Values.probesPort }}
+tcpSocket:
+  port: {{ .Values.probesPort }}
+{{ else if .Values.probesPath }}
+httpGet:
+  path: {{ .Values.probesPath }}
+  port: http
+{{ end }}
+{{- end -}}

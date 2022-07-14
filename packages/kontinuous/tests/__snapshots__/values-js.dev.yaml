@@ -131,6 +131,12 @@ spec:
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
+          startupProbe:
+            httpGet:
+              path: /index.html
+              port: http
+            failureThreshold: 12
+            periodSeconds: 5
           resources:
             limits:
               cpu: 500m
@@ -138,12 +144,6 @@ spec:
             requests:
               cpu: 100m
               memory: 128Mi
-          startupProbe:
-            failureThreshold: 12
-            httpGet:
-              path: /index.html
-              port: http
-            periodSeconds: 5
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

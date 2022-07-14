@@ -209,6 +209,12 @@ spec:
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            failureThreshold: 12
+            periodSeconds: 5
           resources:
             limits:
               cpu: 500m
@@ -216,12 +222,6 @@ spec:
             requests:
               cpu: 100m
               memory: 128Mi
-          startupProbe:
-            failureThreshold: 12
-            httpGet:
-              path: /healthz
-              port: http
-            periodSeconds: 5
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -303,6 +303,12 @@ spec:
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            failureThreshold: 12
+            periodSeconds: 5
           resources:
             limits:
               cpu: 500m
@@ -310,12 +316,6 @@ spec:
             requests:
               cpu: 100m
               memory: 128Mi
-          startupProbe:
-            failureThreshold: 12
-            httpGet:
-              path: /healthz
-              port: http
-            periodSeconds: 5
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
