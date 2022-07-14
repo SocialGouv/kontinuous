@@ -8,6 +8,7 @@ const fs = require("fs-extra")
 const dotenv = require("dotenv")
 
 const loggerFactory = require("~common/utils/logger-factory")
+const slug = require("~common/utils/slug")
 
 jest.doMock("~common/utils/logger", () => loggerFactory({ sync: true }))
 
@@ -53,6 +54,8 @@ for (const testdir of testdirs) {
 const createSampleSnapTest = (testdir, environment) => async () => {
   const testdirPath = `${samplesDir}/${testdir}`
   const tmpdir = os.tmpdir()
+  const buildPath = path.join(tmpdir, "kontinuous", "tests", slug(testdir))
+  await fs.emptyDir(buildPath)
   const env = {
     ...process.env,
     ...defaultEnv,
@@ -66,6 +69,7 @@ const createSampleSnapTest = (testdir, environment) => async () => {
       `${__dirname}/../../..`
     )}"`,
     KS_HOMEDIR: `${tmpdir}/kontinuous/test-homedir`,
+    KS_BUILD_PATH: buildPath,
   }
   const envFile = `${testdirPath}/.env`
   if (fs.pathExistsSync(envFile)) {
