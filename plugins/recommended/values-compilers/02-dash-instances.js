@@ -17,8 +17,8 @@ const dashInstances = (values, scope = []) => {
       ) {
         continue
       }
-      if (k.startsWith(`${key}-`) && !values[k]._aliasOf) {
-        values[k]._aliasOf = `.${key}`
+      if (k.startsWith(`${key}-`) && !values[k]._chart) {
+        values[k]._chart = `.${key}`
       }
     }
   }

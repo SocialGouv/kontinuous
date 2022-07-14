@@ -9,10 +9,10 @@ const resolveAliasOf = (values, context, rootValues = values, scope = []) => {
     if (typeof val !== "object" || val === null) {
       continue
     }
-    if (val._aliasOf) {
+    if (val._chart) {
       const parentDotKey = [...scope, key].join(".")
 
-      let aliasOf = val._aliasOf
+      let aliasOf = val._chart
       if (aliasOf.startsWith(".")) {
         aliasOf = `${scope.join(".")}${parentDotKey}`
       }

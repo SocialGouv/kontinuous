@@ -23,7 +23,7 @@ module.exports = async (values, _options, context) => {
     if (key === "global" && key === "project") {
       continue
     }
-    if (val._aliasOf) {
+    if (val._chart) {
       continue
     }
     const scope = await findAliasOf(
@@ -34,7 +34,7 @@ module.exports = async (values, _options, context) => {
       values
     )
     if (scope) {
-      val._aliasOf = scope.join(".")
+      val._chart = scope.join(".")
     }
   }
   return values
