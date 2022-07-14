@@ -457,11 +457,10 @@ const installPackages = async (config) => {
 
 const beforeMergeChartValues = (values) => {
   values._isChartValues = true
-  return values
 }
 
 const beforeMergeProjectValues = (values) => {
-  values = beforeMergeChartValues(values)
+  beforeMergeChartValues(values)
   for (const [key, subValues] of Object.entries(values)) {
     if (key === "global") {
       continue
@@ -471,7 +470,6 @@ const beforeMergeProjectValues = (values) => {
     }
     subValues._isProjectValues = true
   }
-  return values
 }
 
 const cleanMetaValues = (values) => {
@@ -493,7 +491,7 @@ const removeNotEnabledValues = (values) => {
     if (typeof val !== "object" || val === null) {
       continue
     }
-    const childrenHasEnabledValue = removeNotEnabledValues(values[key])
+    const childrenHasEnabledValue = removeNotEnabledValues(val)
     if (childrenHasEnabledValue && val.enabled !== false) {
       hasEnabledValue = true
       val.enabled = true
@@ -506,10 +504,10 @@ const removeNotEnabledValues = (values) => {
   return hasEnabledValue || (values._isChartValues && values.enabled)
 }
 
-const expandTildeDotNotation = (o) => {
+const expandDotNotation = (o) => {
   if (Array.isArray(o)) {
     for (const value of o) {
-      expandTildeDotNotation(value)
+      expandDotNotation(value)
     }
   } else {
     for (const [key, value] of Object.entries(o)) {
@@ -518,7 +516,7 @@ const expandTildeDotNotation = (o) => {
         delete o[key]
       }
       if (typeof value === "object" && value !== null) {
-        expandTildeDotNotation(value)
+        expandDotNotation(value)
       }
     }
   }
@@ -529,15 +527,9 @@ const mergeYamlFileValues = async (
   subValues,
   beforeMerge
 ) => {
-  // let val = (await loadYamlFile(valuesFileBasename)) || {}
-  let val = await loadYamlFile(valuesFileBasename)
-  if (!val) {
-    return
-  }
-  expandTildeDotNotation(val)
-  if (beforeMerge) {
-    val = beforeMerge(val)
-  }
+  const val = (await loadYamlFile(valuesFileBasename)) || {}
+  beforeMerge(val)
+  expandDotNotation(val)
   deepmerge(subValues, val)
 }
 
