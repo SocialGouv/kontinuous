@@ -42,15 +42,12 @@ module.exports = async (options) => {
   try {
     let manifestsFile = options.F
     let manifests
-    let hasBuild
     if (!manifestsFile) {
       const result = await build(options)
       manifestsFile = result.manifestsFile
       manifests = result.manifests
-      hasBuild = true
     } else {
       manifests = await fs.readFile(manifestsFile, { encoding: "utf-8" })
-      hasBuild = false
     }
 
     if (onWebhook) {
@@ -189,9 +186,7 @@ module.exports = async (options) => {
       }
     }
 
-    if (hasBuild) {
-      await deployHooks(allManifests, "pre")
-    }
+    await deployHooks(allManifests, "pre")
 
     const namespacesManifests = allManifests.filter(
       (manifest) => manifest.kind === "Namespace"
@@ -214,9 +209,7 @@ module.exports = async (options) => {
 
     await deployWithKapp()
 
-    if (hasBuild) {
-      await deployHooks(allManifests, "post")
-    }
+    await deployHooks(allManifests, "post")
 
     elapsed.end({
       label: `🚀 kontinuous pipeline ${repositoryName} ${environment} ${namespacesLabel}`,
