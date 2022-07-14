@@ -5,3 +5,4 @@ dependencies:
   - name: jobs
     repository: file://../recommended/charts/jobs
     condition: 'true'
+    alias: jobs-deactivate

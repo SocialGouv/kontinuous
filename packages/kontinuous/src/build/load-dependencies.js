@@ -193,13 +193,18 @@ const downloadRemoteRepository = async (target, definition, config, logger) => {
       await downloadDependencyFromGitRepo(dependency, target, config, logger)
       touched = true
     } else if (repository.startsWith("file://../")) {
-      const name = dependency.alias || dependency.name
+      const { name } = dependency
       const chartDir = `${target}/charts`
       await fs.ensureDir(chartDir)
-      const symlinkTarget = `${chartDir}/${name}`
-      // if (!(await fs.pathExists(symlinkTarget))) {
-      await fs.symlink(`../${repository.slice(7)}`, symlinkTarget)
-      // }
+      const subchartPath = `${chartDir}/${name}`
+      if (!(await fs.pathExists(subchartPath))) {
+        await fs.symlink(`../${repository.slice(7)}`, subchartPath)
+      }
+      // const subchart = yaml.load(
+      //   await fs.readFile(`${subchartPath}/Chart.yaml`, { encoding: "utf-8" })
+      // )
+      // dependency.version = subchart.version
+      dependency.repository = `file://./charts/${name}`
       touched = true
     } else if (!repository.startsWith("file://")) {
       await downloadDependencyFromHelmRepo(dependency, target, config, logger)
@@ -213,10 +218,42 @@ const downloadRemoteRepository = async (target, definition, config, logger) => {
 
   for (const dependency of dependencies) {
     const name = dependency.alias || dependency.name
-    const subchartDir = `${target}/charts/${name}`
+    const subchartDir = `${target}/charts/${dependency.name}`
     const subDefinition = definition[name] || {}
     await buildChartFile(subchartDir, name, subDefinition)
     await downloadRemoteRepository(subchartDir, subDefinition, config, logger)
+  }
+}
+
+// see https://github.com/helm/helm/issues/7093#issuecomment-814003563
+const setRelativeLinkVersions = async (target, definition, config, logger) => {
+  const chartFile = `${target}/Chart.yaml`
+  const chart = yaml.load(await fs.readFile(chartFile))
+  const { dependencies = [] } = chart
+  let touched = false
+  for (const dependency of dependencies) {
+    const { repository } = dependency
+    if (repository.startsWith("file://.")) {
+      const { name } = dependency
+      const chartDir = `${target}/charts`
+      const subchartPath = `${chartDir}/${name}`
+      const subchart = yaml.load(
+        await fs.readFile(`${subchartPath}/Chart.yaml`, { encoding: "utf-8" })
+      )
+      dependency.version = subchart.version
+      touched = true
+    }
+  }
+
+  if (touched) {
+    await fs.writeFile(chartFile, yaml.dump(chart))
+  }
+
+  for (const dependency of dependencies) {
+    const name = dependency.alias || dependency.name
+    const subchartDir = `${target}/charts/${dependency.name}`
+    const subDefinition = definition[name] || {}
+    await setRelativeLinkVersions(subchartDir, subDefinition, config, logger)
   }
 }
 
@@ -382,6 +419,7 @@ const downloadAndBuildDependencies = async (config, logger) => {
     afterChildren: async ({ name, target, definition }) => {
       await buildChartFile(target, name, definition)
       await downloadRemoteRepository(target, definition, config, logger)
+      await setRelativeLinkVersions(target, definition, config, logger)
       await buildJsFile(target, "values-compilers", definition)
       await buildJsFile(target, "debug-manifests", definition)
       await buildJsFile(target, "patches", definition)
@@ -491,6 +529,7 @@ const mergeYamlFileValues = async (
   subValues,
   beforeMerge
 ) => {
+  // let val = (await loadYamlFile(valuesFileBasename)) || {}
   let val = await loadYamlFile(valuesFileBasename)
   if (!val) {
     return
@@ -603,6 +642,10 @@ const mergeValuesFromDir = async ({
   if (!(await fs.pathExists(chartsPath))) {
     return
   }
+  const chart = yaml.load(
+    await fs.readFile(`${target}/Chart.yaml`, { encoding: "utf-8" })
+  )
+  const { dependencies = [] } = chart
 
   const chartDirs = await fs.readdir(chartsPath)
   for (const subchartDir of chartDirs) {
@@ -610,38 +653,49 @@ const mergeValuesFromDir = async ({
     if (!(await fs.stat(subchartDirPath)).isDirectory()) {
       continue
     }
-    const subchartScope = [...scope, subchartDir]
-    const dotKey = subchartScope.join(".")
-    let subValues = get(values, dotKey)
-    if (!subValues) {
-      subValues = {}
-      set(values, dotKey, subValues)
+
+    const subchartScopes = []
+    subchartScopes.push([...scope, subchartDir])
+
+    for (const dep of dependencies) {
+      if (dep.name === subchartDir && dep.alias) {
+        subchartScopes.push([...scope, dep.alias])
+      }
     }
 
-    await mergeValuesFromDir({
-      values,
-      target: subchartDirPath,
-      definition: definition[subchartDir] || {},
-      scope: subchartScope,
-      config,
-    })
+    for (const subchartScope of subchartScopes) {
+      const dotKey = subchartScope.join(".")
+      let subValues = get(values, dotKey)
+      if (!subValues) {
+        subValues = {}
+        set(values, dotKey, subValues)
+      }
 
-    await mergeYamlFileValues(
-      `${subchartDirPath}/values`,
-      subValues,
-      beforeMergeChartValues
-    )
+      await mergeValuesFromDir({
+        values,
+        target: subchartDirPath,
+        definition: definition[subchartDir] || {},
+        scope: subchartScope,
+        config,
+      })
 
-    await mergeYamlFileValues(
-      `${subchartDirPath}/env/${environment}/values`,
-      subValues,
-      beforeMergeChartValues
-    )
+      await mergeYamlFileValues(
+        `${subchartDirPath}/values`,
+        subValues,
+        beforeMergeChartValues
+      )
 
-    await mergeEnvTemplates(subchartDirPath, config)
+      await mergeYamlFileValues(
+        `${subchartDirPath}/env/${environment}/values`,
+        subValues,
+        beforeMergeChartValues
+      )
 
-    if (definition.values) {
-      deepmerge(subValues, definition.values)
+      await mergeEnvTemplates(subchartDirPath, config)
+
+      if (definition.values) {
+        deepmerge(subValues, definition.values)
+      }
     }
   }
 }
@@ -652,12 +706,6 @@ const compileValues = async (config, logger) => {
 
   const buildProjectPath = `${buildPath}/charts/project`
 
-  // await recurseDependency({
-  //   config,
-  //   afterChildren: async ({ target, definition, scope }) => {
-  //     await mergeValuesFromDir({ values, target, definition, scope, config })
-  //   },
-  // })
   const scope = ["project"]
 
   await mergeValuesFromDir({
