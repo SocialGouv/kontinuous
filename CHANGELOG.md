@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.45.3](https://github.com/SocialGouv/kontinuous/compare/v1.45.2...v1.45.3) (2022-07-14)
+
+
+### Bug Fixes
+
+* replace _aliasOf by _chart ([c01cfd8](https://github.com/SocialGouv/kontinuous/commit/c01cfd8c9d45ec6bccf4f36d788d901b976dbe93))
+
 ### [1.45.2](https://github.com/SocialGouv/kontinuous/compare/v1.45.1...v1.45.2) (2022-07-14)
 
 
