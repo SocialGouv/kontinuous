@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.45.0](https://github.com/SocialGouv/kontinuous/compare/v1.44.6...v1.45.0) (2022-07-14)
+
+
+### Features
+
+* chart fabrique-helpers.probes tcp ([344f2dd](https://github.com/SocialGouv/kontinuous/commit/344f2dd32dbabbf676def2896a4fe3bd5390ac88))
+
 ### [1.44.6](https://github.com/SocialGouv/kontinuous/compare/v1.44.5...v1.44.6) (2022-07-13)
 
 
