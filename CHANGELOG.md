@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.46.1](https://github.com/SocialGouv/kontinuous/compare/v1.46.0...v1.46.1) (2022-07-14)
+
+
+### Bug Fixes
+
+* lazy deploy hooks ([adb9900](https://github.com/SocialGouv/kontinuous/commit/adb9900c213b1d8e4d947c996955328caa85f7e6))
+* race retry on loading status ([9952bbf](https://github.com/SocialGouv/kontinuous/commit/9952bbfd76a5cfed8fafc30773011969939fc018))
+* tests stable paths improve debugging ([170852f](https://github.com/SocialGouv/kontinuous/commit/170852f97eed0fb033ea737e3f3ab4d1b89fc364))
+
 ## [1.46.0](https://github.com/SocialGouv/kontinuous/compare/v1.45.3...v1.46.0) (2022-07-14)
 
 
