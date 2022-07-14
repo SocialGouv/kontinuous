@@ -1,15 +1,29 @@
-const findAliasOf = async (key, dependencies, subValues, scope = []) => {
-  for (const ck of Object.keys(dependencies)) {
-    for (const vk of Object.keys(subValues[ck])) {
-      if (vk === key || key.startsWith(`${vk}-`)) {
-        return [...scope, ck, vk]
-      }
+const findAliasOf = async (
+  search,
+  values,
+  searchByKey = false,
+  scope = ["project"],
+  searchingSubkeys = []
+) => {
+  if (search.includes(".")) {
+    searchingSubkeys = search.split(".")
+    search = searchingSubkeys.shift()
+  }
+  for (const k of Object.keys(values)) {
+    const isChartValues = values[k]?._isChartValues
+    if (!isChartValues) {
+      continue
+    }
+    if (k === search || (searchByKey && search.startsWith(`${k}-`))) {
+      const foundScope = [...scope, k]
+      return foundScope
     }
     const found = await findAliasOf(
-      key,
-      dependencies[ck].dependencies || {},
-      subValues[ck],
-      [...scope, ck]
+      search,
+      values[k],
+      searchByKey,
+      [...scope, k],
+      searchingSubkeys
     )
     if (found) {
       return found
@@ -17,22 +31,24 @@ const findAliasOf = async (key, dependencies, subValues, scope = []) => {
   }
 }
 
-module.exports = async (values, _options, context) => {
-  const { config } = context
+module.exports = async (values, _options, _context) => {
   for (const [key, val] of Object.entries(values)) {
-    if (key === "global" && key === "project") {
+    if (key === "global" || key === "project") {
       continue
     }
+    let search
+    let searchByKey
     if (val._chart) {
-      continue
+      if (val._chart.slice(0, 1) === ".") {
+        continue
+      }
+      search = val._chart
+      searchByKey = false
+    } else {
+      search = key
+      searchByKey = true
     }
-    const scope = await findAliasOf(
-      key,
-      {
-        project: { dependencies: config.dependencies },
-      },
-      values
-    )
+    const scope = await findAliasOf(search, values.project, searchByKey)
     if (scope) {
       val._chart = scope.join(".")
     }

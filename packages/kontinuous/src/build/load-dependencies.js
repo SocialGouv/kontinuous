@@ -52,18 +52,23 @@ const registerSubcharts = async (
       // eslint-disable-next-line no-use-before-define
       await buildChartFile(chartDirPath, chartDir, definition[chartDir])
     }
-    const subchartContent = await fs.readFile(subchartFile)
-    const subchart = yaml.load(subchartContent)
+    const subchart = yaml.load(
+      await fs.readFile(subchartFile, {
+        encoding: "utf-8",
+      })
+    )
     const dependency = {
       name: subchart.name,
       version: subchart.version,
       repository: `file://./${chartsDirName}/${chartDir}`,
     }
-    const definedDependency = chart.dependencies.find(
-      (d) => (d.alias || d.name) === subchart.name
+    const definedDependencies = chart.dependencies.filter(
+      (d) => d.name === subchart.name
     )
-    if (definedDependency) {
-      Object.assign(definedDependency, dependency)
+    if (definedDependencies.length > 0) {
+      for (const definedDependency of definedDependencies) {
+        Object.assign(definedDependency, dependency)
+      }
     } else {
       chart.dependencies.push(dependency)
     }
@@ -200,10 +205,6 @@ const downloadRemoteRepository = async (target, definition, config, logger) => {
       if (!(await fs.pathExists(subchartPath))) {
         await fs.symlink(`../${repository.slice(7)}`, subchartPath)
       }
-      // const subchart = yaml.load(
-      //   await fs.readFile(`${subchartPath}/Chart.yaml`, { encoding: "utf-8" })
-      // )
-      // dependency.version = subchart.version
       dependency.repository = `file://./charts/${name}`
       touched = true
     } else if (!repository.startsWith("file://")) {
@@ -647,11 +648,9 @@ const mergeValuesFromDir = async ({
     }
 
     const subchartScopes = []
-    subchartScopes.push([...scope, subchartDir])
-
     for (const dep of dependencies) {
-      if (dep.name === subchartDir && dep.alias) {
-        subchartScopes.push([...scope, dep.alias])
+      if (dep.name === subchartDir) {
+        subchartScopes.push([...scope, dep.alias || dep.name])
       }
     }
 
@@ -750,7 +749,7 @@ const compileValues = async (config, logger) => {
 
   await writeChartsAlias(chartsAliasMap, config)
   removeNotEnabledValues(values)
-  cleanMetaValues(values)
+  // cleanMetaValues(values)
 
   const projectValuesFile = await getYamlPath(`${buildProjectPath}/values`)
   if (projectValuesFile) {
