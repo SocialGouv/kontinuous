@@ -19,6 +19,9 @@ env: []
 vars: {}
 envFrom: []
 probesPath: /index.html
+livenessProbe:
+readinessProbe:
+startupProbe:
 resources:
   limits:
     cpu: 500m

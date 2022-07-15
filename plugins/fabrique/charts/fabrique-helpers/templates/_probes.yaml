@@ -1,4 +1,4 @@
-{{- define "fabrique-helpers.probes" -}}
+{{- define "fabrique-helpers.probe" -}}
 {{ if .Values.probesPort }}
 tcpSocket:
   port: {{ .Values.probesPort }}
@@ -7,4 +7,28 @@ httpGet:
   path: {{ .Values.probesPath }}
   port: http
 {{ end }}
+{{- end -}}
+
+{{- define "fabrique-helpers.livenessProbe" -}}
+{{ if .Values.livenessProbe }}
+{{ .Values.livenessProbe | toYaml }}
+{{ else }}
+{{- include "fabrique-helpers.probe" . }}
+{{- end -}}
+{{- end -}}
+
+{{- define "fabrique-helpers.readinessProbe" -}}
+{{ if .Values.readinessProbe }}
+{{ .Values.readinessProbe | toYaml }}
+{{ else }}
+{{- include "fabrique-helpers.probe" . }}
+{{- end -}}
+{{- end -}}
+
+{{- define "fabrique-helpers.startupProbe" -}}
+{{ if .Values.startupProbe }}
+{{ .Values.startupProbe | toYaml }}
+{{ else }}
+{{- include "fabrique-helpers.probe" . }}
+{{- end -}}
 {{- end -}}
