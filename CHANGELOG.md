@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.46.3](https://github.com/SocialGouv/kontinuous/compare/v1.46.2...v1.46.3) (2022-07-15)
+
+
+### Bug Fixes
+
+* fabrique default repositoryName ([8f89213](https://github.com/SocialGouv/kontinuous/commit/8f8921346283f779196ac0cfebe7741e3f9bd8ab))
+
 ### [1.46.2](https://github.com/SocialGouv/kontinuous/compare/v1.46.1...v1.46.2) (2022-07-15)
 
 
