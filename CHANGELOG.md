@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.46.4](https://github.com/SocialGouv/kontinuous/compare/v1.46.3...v1.46.4) (2022-07-15)
+
+
+### Bug Fixes
+
+* up memory limit ([d84df22](https://github.com/SocialGouv/kontinuous/commit/d84df2225a670cbd993e7f2866ab484ede345297))
+
 ### [1.46.3](https://github.com/SocialGouv/kontinuous/compare/v1.46.2...v1.46.3) (2022-07-15)
 
 
