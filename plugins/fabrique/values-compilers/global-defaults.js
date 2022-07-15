@@ -11,7 +11,7 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
 
   const { KUBE_INGRESS_BASE_DOMAIN, RANCHER_PROJECT_ID } = processEnv
 
-  const { environment, gitBranch, gitRepository, gitSha } = config
+  const { environment, gitRepository, gitBranch, gitSha } = config
 
   const branchSlug = slug(gitBranch)
 
@@ -21,8 +21,7 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
   const isPreProd = env === "preprod"
   const isDev = !(isProd || isPreProd)
 
-  const repository = gitRepository
-  const repositoryName = repository.split("/").pop()
+  const { repositoryName } = config
 
   const globalHostMaxLength =
     MAX_DNS_LENGTH - Math.max(...Object.keys(values).map((key) => key.length))
@@ -109,7 +108,7 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
     global: {
       certSecretName: "wildcard-crt",
       registrySecretRefName: "harbor",
-      repository,
+      repository: gitRepository,
       repositoryName,
       isDev,
       isProd,
