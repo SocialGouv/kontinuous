@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.47.0](https://github.com/SocialGouv/kontinuous/compare/v1.46.4...v1.47.0) (2022-07-16)
+
+
+### Features
+
+* **onChangePaths:** diff + commits config improve ([0327636](https://github.com/SocialGouv/kontinuous/commit/0327636afeceef0fad81694731a980d3705ccd4f))
+
+
+### Bug Fixes
+
+* decouple probes ([a1dbd1c](https://github.com/SocialGouv/kontinuous/commit/a1dbd1c5ebbf9c62b5624504eff5bed0b8da461b))
+
 ### [1.46.4](https://github.com/SocialGouv/kontinuous/compare/v1.46.3...v1.46.4) (2022-07-15)
 
 
