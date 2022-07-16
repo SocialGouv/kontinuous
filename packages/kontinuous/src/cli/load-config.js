@@ -364,6 +364,47 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
         return links
       },
     },
+    diffBranch: {
+      defaultFunction: async (config) => {
+        if (!config.git) {
+          return
+        }
+        const { gitBranch, gitRepositoryUrl, workspacePath } = config
+        let localRemoteExists
+        if (
+          await fs.pathExists(
+            `${workspacePath}/.git/refs/remotes/origin/${gitBranch}`
+          )
+        ) {
+          localRemoteExists = true
+        } else {
+          let remoteExists
+          try {
+            await asyncShell(
+              `git ls-remote --exit-code --heads ${gitRepositoryUrl} ${gitBranch}`
+            )
+            remoteExists = true
+          } catch (error) {
+            if (error.code !== 2) {
+              throw error
+            }
+          }
+          if (remoteExists) {
+            await asyncShell(`git fetch origin ${gitBranch}`)
+            localRemoteExists = true
+          }
+        }
+
+        let diffBranch
+        if (localRemoteExists) {
+          diffBranch = gitBranch
+        } else {
+          diffBranch = "HEAD"
+        }
+
+        return diffBranch
+      },
+    },
     commits: {
       env: "KS_COMMITS",
       envParser: (str) => yaml.load(str),
@@ -378,8 +419,10 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
         }
         const { gitBranch } = config
         try {
+          const { diffBranch } = config
+
           const diffOutput = await asyncShell(
-            `git diff --name-status remotes/origin/${gitBranch}..${gitBranch}`
+            `git diff --name-status remotes/origin/${diffBranch}..${gitBranch}`
           )
           const diff = diffOutput.split("\n").map((line) => {
             const [status, file] = line.trim().split(/\t|\s+/)

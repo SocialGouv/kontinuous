@@ -10,6 +10,7 @@ const addCommands = [
   require("./commands/init"),
   require("./commands/slugify"),
   require("./commands/logs"),
+  require("./commands/diff"),
   require("./commands/clean"),
   require("./commands/upload"),
   require("./commands/download"),
