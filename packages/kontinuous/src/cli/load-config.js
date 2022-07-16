@@ -69,9 +69,6 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
       envParser: (str) => yaml.load(str),
       defaultFunction: async (config) => {
         const { workspacePath } = config
-        if (!(await fs.pathExists(`${workspacePath}/.git`))) {
-          return false
-        }
         try {
           await asyncShell("git status", { cwd: workspacePath })
           return true

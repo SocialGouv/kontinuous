@@ -64,6 +64,7 @@ const createSampleSnapTest = (testdir, environment) => async () => {
     KS_WORKSPACE_SUBPATH: (await fs.pathExists(`${testdirPath}/.kontinuous`))
       ? "/.kontinuous"
       : "",
+    KS_GIT: "false",
     KS_GIT_REPOSITORY: `kontinuous/test-${testdir}`,
     KS_INLINE_CONFIG_SET: `links.SocialGouv/kontinuous: "${path.resolve(
       `${__dirname}/../../..`
