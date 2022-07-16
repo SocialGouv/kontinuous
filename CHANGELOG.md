@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.47.1](https://github.com/SocialGouv/kontinuous/compare/v1.47.0...v1.47.1) (2022-07-16)
+
+
+### Bug Fixes
+
+* disable detect git from parent dir for tests ([72b1fed](https://github.com/SocialGouv/kontinuous/commit/72b1fed80a5682d46fbfdca81d674ce31b772b17))
+
 ## [1.47.0](https://github.com/SocialGouv/kontinuous/compare/v1.46.4...v1.47.0) (2022-07-16)
 
 
