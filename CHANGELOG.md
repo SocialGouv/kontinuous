@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.48.0](https://github.com/SocialGouv/kontinuous/compare/v1.47.2...v1.48.0) (2022-07-17)
+
+
+### Features
+
+* **onChangePaths:** implement first draft ([3912726](https://github.com/SocialGouv/kontinuous/commit/3912726ee0229a7dc629ee3a5ea07b3127a14630))
+
 ### [1.47.2](https://github.com/SocialGouv/kontinuous/compare/v1.47.1...v1.47.2) (2022-07-16)
 
 
