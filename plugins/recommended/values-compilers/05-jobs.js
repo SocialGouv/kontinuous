@@ -1,5 +1,3 @@
-// const micromatch = require("micromatch")
-
 const requireUse = async (
   use,
   { config, logger, downloadingPromises, utils }
@@ -64,19 +62,6 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
   const { config, utils } = context
   const { gitBranch, gitRepositoryName: repositoryName } = config
   const { slug, yaml, fs } = utils
-
-  // const { changedPaths } = config
-  // for (const [key, run] of Object.entries(values.runs)) {
-  //   let { paths } = run
-  //   if (paths) {
-  //     if (!Array.isArray(paths)) {
-  //       paths = [paths]
-  //     }
-  //     if (!changedPaths.some((p) => micromatch.isMatch(p, paths))) {
-  //       delete values.runs[key]
-  //     }
-  //   }
-  // }
 
   const newRuns = {}
   for (const [key, run] of Object.entries(values.runs)) {

@@ -52,3 +52,4 @@ entrypoint:
 args: []
 antiAffinity:
   enabled: 
+onChangedPaths: 
