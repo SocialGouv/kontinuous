@@ -53,3 +53,5 @@ args: []
 antiAffinity:
   enabled: 
 onChangedPaths: 
+onChangedAnnotate: 
+onChangedNeeds: 

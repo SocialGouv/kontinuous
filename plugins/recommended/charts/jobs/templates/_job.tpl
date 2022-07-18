@@ -53,12 +53,7 @@ metadata:
     kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting kontinuous/{{ $need }}.{{ $val.global.namespace }}"
     {{- end }}
     janitor/ttl: "1800"
-    {{- if $run.onChangedPaths }}
-    kontinuous/onChangedPaths: |
-      {{- range $val := $run.onChangedPaths }}
-      - {{ (tpl $val $) | quote }}
-      {{- end }}
-    {{- end }}
+    {{- include "kontinuous-helpers.annotations.on-changed" (dict "Values" $run "Template" $.Template) | nindent 4 }}
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600

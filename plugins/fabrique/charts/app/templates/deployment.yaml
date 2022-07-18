@@ -8,12 +8,7 @@ metadata:
   namespace: {{ or .Values.namespace .Values.global.namespace }}
   annotations:
     {{- include "kontinuous-helpers.annotations.kapp-deployment" . | nindent 4 }}
-    {{- if .Values.onChangedPaths }}
-    kontinuous/onChangedPaths: |
-      {{- range $val := .Values.onChangedPaths }}
-      - {{ (tpl $val $) | quote }}
-      {{- end }}
-    {{- end }}
+    {{- include "kontinuous-helpers.annotations.on-changed" . | nindent 4 }}
 spec:
   replicas: {{ or .Values.replicas .Values.global.replicas 1 }}
   selector:
