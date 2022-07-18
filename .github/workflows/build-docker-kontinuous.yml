@@ -3,7 +3,7 @@ name: Build Docker Kontinuous
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*.*.*'
 
 concurrency:
   cancel-in-progress: true

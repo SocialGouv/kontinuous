@@ -3,7 +3,7 @@ name: Sync gh-pages
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*.*.*'
     paths:
       - README.md
 
