@@ -2,8 +2,6 @@ name: Build Docker Webhook
 
 on:
   push:
-    branches:
-      - master
     tags:
       - 'v*'
 

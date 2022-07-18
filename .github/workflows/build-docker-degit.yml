@@ -2,8 +2,6 @@ name: Build Docker Degit
 
 on:
   push:
-    branches:
-      - master
     tags:
       - 'v*'
 

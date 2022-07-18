@@ -2,8 +2,6 @@ name: Build Docker Kontinuous
 
 on:
   push:
-    branches:
-      - master
     tags:
       - 'v*'
 
