@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.49.0](https://github.com/SocialGouv/kontinuous/compare/v1.48.0...v1.49.0) (2022-07-18)
+
+
+### Features
+
+* **onChange:** onChangedNeeds+onChangedAnnotate ([5ea479f](https://github.com/SocialGouv/kontinuous/commit/5ea479f8a1bf4532af24eb5fcce98444f9149283))
+
 ## [1.48.0](https://github.com/SocialGouv/kontinuous/compare/v1.47.2...v1.48.0) (2022-07-17)
 
 
