@@ -3,7 +3,9 @@ name: Tests deploy
 on:
   push:
     branches:
-      - "*"
+      - "**"
+    tags-ignore:
+      - "**"
 
 concurrency:
   cancel-in-progress: true
