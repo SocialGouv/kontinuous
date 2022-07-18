@@ -4,13 +4,15 @@ const yaml = require("~common/utils/yaml")
 const asyncShell = require("~common/utils/async-shell")
 const globalLogger = require("~common/utils/logger")
 
+const copyFilter = require("~/config/copy-filter")
+
 const ctx = require("~/ctx")
+
 const applyPatches = require("./apply-patches")
 const loadManifests = require("./load-manifests")
 const validateManifests = require("./validate-manifests")
 const debugManifests = require("./debug-manifests")
 const loadDependencies = require("./load-dependencies")
-const copyFilter = require("./copy-filter")
 
 module.exports = async (_options = {}) => {
   const config = ctx.require("config")
@@ -26,8 +28,6 @@ module.exports = async (_options = {}) => {
   const logger = globalLogger.child({ buildPath, workspacePath })
   ctx.set("logger", logger)
 
-  await fs.ensureDir(config.buildPath)
-
   if (await fs.pathExists(workspaceKsPath)) {
     await fs.copy(workspaceKsPath, buildProjectPath, {
       dereference: true,
@@ -35,7 +35,7 @@ module.exports = async (_options = {}) => {
     })
   }
 
-  logger.debug("Load and compile dependencies")
+  logger.debug("Compile dependencies")
   const { values, valuesDump } = await loadDependencies(config, logger)
 
   logger.trace(`Values: \n${valuesDump}`)

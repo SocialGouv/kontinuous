@@ -22,9 +22,8 @@ const normalizeDegitUri = require("~common/utils/normalize-degit-uri")
 const createContext = require("~/plugins/context")
 const configDependencyKey = require("~/plugins/context/config-dependency-key")
 
-const copyFilter = require("./copy-filter")
-
-const validateName = /^[a-zA-Z\d-_]+$/
+const recurseDependency = require("~/config/recurse-dependencies")
+const copyFilter = require("~/config/copy-filter")
 
 const registerSubcharts = async (
   chart,
@@ -329,94 +328,9 @@ module.exports = async (data, _options, context, scope)=>{
   await fs.writeFile(jsFile, jsSrc)
 }
 
-const recurseDependency = async (param = {}) => {
-  const {
-    name = "project",
-    config,
-    definition = config,
-    beforeChildren = () => {},
-    afterChildren = () => {},
-  } = param
-
-  const { buildPath } = config
-
-  if (!validateName.test(name)) {
-    throw new Error(
-      `invalid import name format, expected only alphanumerics hyphens and underscores characters, received: "${name}"`
-    )
-  }
-
-  const scope = [...(param.scope || []), name]
-  const subpath = path.join(
-    ...scope.reduce((acc, item) => {
-      acc.push("charts", item)
-      return acc
-    }, [])
-  )
-  const target = `${buildPath}/${subpath}`
-
-  const callbackParam = {
-    name,
-    definition,
-    scope,
-    config,
-    target,
-  }
-
-  await beforeChildren(callbackParam)
-
-  const { dependencies } = definition
-  if (dependencies) {
-    await Promise.all(
-      Object.entries(dependencies).map(([childName, childDefinition]) =>
-        recurseDependency({
-          ...param,
-          name: childName,
-          definition: childDefinition,
-          scope,
-        })
-      )
-    )
-  }
-
-  await afterChildren(callbackParam)
-}
-
-const downloadAndBuildDependencies = async (config, logger) => {
+const buildDependencies = async (config, logger) => {
   await recurseDependency({
     config,
-    beforeChildren: async ({ target, definition, scope, name }) => {
-      const { links = {} } = config
-
-      let { import: importTarget } = definition
-      if (importTarget) {
-        importTarget = normalizeDegitUri(importTarget)
-        const matchLink = Object.entries(links).find(([key]) =>
-          importTarget.startsWith(key)
-        )
-        if (matchLink) {
-          const [linkKey, linkPath] = matchLink
-          const from = linkPath + importTarget.substr(linkKey.length)
-          await fs.ensureDir(target)
-          logger.debug({ scope }, `copy ${name} from "${from}"`)
-          await fs.copy(from, target, { filter: copyFilter })
-        } else {
-          await degitImproved(importTarget, target, {
-            logger: logger.child({
-              scope,
-              name,
-            }),
-          })
-        }
-      }
-
-      // load config file
-      const pluginConfigFile = `${target}/kontinuous.yaml`
-      if (await fs.pathExists(pluginConfigFile)) {
-        const pluginConfig = yaml.load(await fs.readFile(pluginConfigFile))
-        Object.assign(definition, deepmerge({}, pluginConfig, definition))
-      }
-    },
     afterChildren: async ({ name, target, definition }) => {
       await buildChartFile(target, name, definition)
       await downloadRemoteRepository(target, definition, config, logger)
@@ -796,7 +710,7 @@ const copyFilesDir = async (config) => {
 module.exports = async (config, logger) => {
   const { buildPath } = config
 
-  await downloadAndBuildDependencies(config, logger)
+  await buildDependencies(config, logger)
   await installPackages(config)
   if (!config.ignoreProjectTemplates) {
     await mergeEnvTemplates(`${buildPath}/charts/project`, config)

@@ -19,6 +19,7 @@ const deepmerge = require("~common/utils/deepmerge")
 const logger = require("~common/utils/logger")
 const refEnv = require("~common/utils/ref-env")
 const defaultEnvironmentPatterns = require("~common/utils/default-environment-patterns")
+const loadDependencies = require("~/config/load-dependencies")
 
 const ctx = require("~/ctx")
 
@@ -198,6 +199,10 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
         await fs.ensureDir(buildRootPath)
         return mkdtemp(path.join(buildRootPath, "build-"))
       },
+      transform: async (buildPath) => {
+        await fs.ensureDir(buildPath)
+        return buildPath
+      },
     },
     buildProjectPath: {
       defaultFunction: (config) =>
@@ -342,15 +347,6 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
     isLocal: {
       env: "KS_ISLOCAL",
       default: false,
-    },
-    dependencies: {
-      transform: (dependencies = {}) =>
-        Object.entries(dependencies)
-          .filter(([_key, value]) => value.enabled !== false && value.import)
-          .reduce((acc, [key, value]) => {
-            acc[key] = value
-            return acc
-          }, {}),
     },
     links: {
       transform: async (links = {}) => {
@@ -524,6 +520,19 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
       }
     }
   }
+
+  let { dependencies } = config
+  if (!dependencies) {
+    dependencies = {}
+    config.dependencies = dependencies
+  }
+  dependencies = Object.entries(dependencies)
+    .filter(([_key, value]) => value.enabled !== false && value.import)
+    .reduce((acc, [key, value]) => {
+      acc[key] = value
+      return acc
+    }, {})
+  await loadDependencies(config)
 
   return config
 }
