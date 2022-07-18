@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.50.0](https://github.com/SocialGouv/kontinuous/compare/v1.49.0...v1.50.0) (2022-07-18)
+
+
+### Features
+
+* preload dependencies at config time ([c6202df](https://github.com/SocialGouv/kontinuous/commit/c6202dfd1cc896a5dc071cbb939336460f2f44c8))
+
+
+### Bug Fixes
+
+* config changePaths ([6e103e2](https://github.com/SocialGouv/kontinuous/commit/6e103e2347bdc0b2821ed0416e9ba54e928ffd29))
+* run some gha only on branches ([9d3e1fd](https://github.com/SocialGouv/kontinuous/commit/9d3e1fd8961161181081ee0dc55f8fee32c4c491))
+* run some gha only on tags ([1c8ed61](https://github.com/SocialGouv/kontinuous/commit/1c8ed61f893b358cd55e019dad8b8e3408c7859b))
+
 ## [1.49.0](https://github.com/SocialGouv/kontinuous/compare/v1.48.0...v1.49.0) (2022-07-18)
 
 
