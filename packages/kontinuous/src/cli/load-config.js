@@ -455,11 +455,11 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
         }
         return commits
       },
-      changedPaths: {
-        defaultFunction: (config) => {
-          const { commits } = config
-          return Object.values(commits).flatMap((files) => files)
-        },
+    },
+    changedPaths: {
+      defaultFunction: (config) => {
+        const { commits } = config
+        return Object.values(commits).flatMap((files) => files)
       },
     },
     event: {

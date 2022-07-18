@@ -68,8 +68,7 @@ const removeDependentsOf = (
 module.exports = async (manifests, _options, context) => {
   const { config, utils } = context
   const { yaml } = utils
-  const { commits } = config
-  const changedPaths = Object.values(commits).flatMap((value) => value)
+  const { changedPaths } = config
 
   const removeManifests = new Set()
   for (const manifest of manifests) {
