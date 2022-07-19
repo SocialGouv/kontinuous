@@ -327,15 +327,25 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
     kubeconfigPath: {
       defaultFunction: () => writeKubeconfig(),
     },
+    kubeconfigContextNoDetect: {
+      env: "KS_KUBECONFIG_CONTEXT_NO_DETECT",
+      envParser: (str) => yaml.load(str),
+    },
     kubeconfigContext: {
       option: "kubeconfigContext",
       env: "KS_KUBECONFIG_CONTEXT",
-      defaultFunction: async (config, { options }) => {
-        const { environment } = config
-        const { kubeconfigContextNoDetect } = options
+      defaultFunction: async (config) => {
+        const { environment, kubeconfigPath } = config
+        const { kubeconfigContextNoDetect } = config
         let kubeconfigContext
         if (kubeconfigContextNoDetect) {
-          kubeconfigContext = await asyncShell("kubectl config current-context")
+          if (!kubeconfigPath) {
+            return
+          }
+          const kubeconfig = yaml.load(
+            await fs.readFile(kubeconfigPath, { encoding: "utf-8" })
+          )
+          kubeconfigContext = kubeconfig["current-context"]
         } else if (environment === "prod") {
           kubeconfigContext = "prod"
         } else {
@@ -533,6 +543,8 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
       return acc
     }, {})
   await loadDependencies(config)
+
+  console.log({ kubeconfigContext: config.kubeconfigContext })
 
   return config
 }
