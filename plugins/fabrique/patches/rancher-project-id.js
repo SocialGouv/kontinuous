@@ -1,4 +1,8 @@
-module.exports = async (manifests, options, { config, logger, utils }) => {
+module.exports = async (
+  manifests,
+  options,
+  { config, logger, utils, needBin }
+) => {
   const { asyncShell } = utils
   const { ciNamespace, kubeconfigContext } = config
 
@@ -36,6 +40,7 @@ module.exports = async (manifests, options, { config, logger, utils }) => {
   } else if (process.env.RANCHER_PROJECT_ID) {
     rancherProjectId = process.env.RANCHER_PROJECT_ID
   } else {
+    await needBin(utils.needKubectl)
     try {
       const json = await asyncShell(
         `kubectl --context ${kubeconfigContext} get ns ${ciNamespace} -o json`

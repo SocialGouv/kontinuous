@@ -40,7 +40,7 @@ const download = async (options) => {
 
   if (!(await fs.pathExists(zfile))) {
     const downloadUrl = `https://get.helm.sh/${fileName}`
-    logger.debug(`download ${downloadUrl}`)
+    logger.info(`download ${downloadUrl}`)
     await downloadFile(downloadUrl, zfile)
   }
   const { addPath } = options

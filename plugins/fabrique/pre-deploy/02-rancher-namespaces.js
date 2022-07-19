@@ -1,4 +1,8 @@
-module.exports = async (manifests, _options, { utils, config, logger }) => {
+module.exports = async (
+  manifests,
+  _options,
+  { utils, config, logger, needBin }
+) => {
   const { kubeEnsureNamespace } = utils
   const { kubeconfigContext } = config
 
@@ -17,6 +21,9 @@ module.exports = async (manifests, _options, { utils, config, logger }) => {
   )
 
   logger.debug({ namespaces }, "ensure rancher namespaces are available")
+
+  await needBin(utils.needKubectl)
+
   await Promise.all(
     rancherNamespacesManifests.map((manifest) =>
       kubeEnsureNamespace(kubeconfigContext, manifest)
