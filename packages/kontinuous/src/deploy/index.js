@@ -6,6 +6,7 @@ const axios = require("axios")
 const qs = require("qs")
 const FormData = require("form-data")
 
+const needKapp = require("~common/utils/need-kapp")
 const yaml = require("~common/utils/yaml")
 const logger = require("~common/utils/logger")
 const timeLogger = require("~common/utils/time-logger")
@@ -14,6 +15,7 @@ const parseCommand = require("~common/utils/parse-command")
 const validateMd5 = require("~common/utils/validate-md5")
 const globalLogger = require("~common/utils/logger")
 
+const needBin = require("~/config/need-bin")
 const ctx = require("~/ctx")
 const build = require("~/build")
 const logs = require("~/logs")
@@ -149,6 +151,8 @@ module.exports = async (options) => {
 
     const kappWaitTimeout =
       options.timeout || process.env.KS_DEPLOY_TIMEOUT || "15m0s"
+
+    await needBin(needKapp)
 
     const deployWithKapp = async () => {
       const [cmd, args] = parseCommand(`

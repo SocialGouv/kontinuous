@@ -3,7 +3,9 @@ const yaml = require("~common/utils/yaml")
 
 const asyncShell = require("~common/utils/async-shell")
 const globalLogger = require("~common/utils/logger")
+const needHelm = require("~common/utils/need-helm")
 
+const needBin = require("~/config/need-bin")
 const copyFilter = require("~/config/copy-filter")
 
 const ctx = require("~/ctx")
@@ -39,6 +41,8 @@ module.exports = async (_options = {}) => {
   const { values, valuesDump } = await loadDependencies(config, logger)
 
   logger.trace(`Values: \n${valuesDump}`)
+
+  await needBin(needHelm)
 
   logger.debug("Build base manifest using helm")
   let manifests = await asyncShell(

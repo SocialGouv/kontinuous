@@ -11909,6 +11909,7 @@ __metadata:
     axios: "npm:^0.27.2"
     parse-github-url: "npm:^1.0.2"
     sonic-boom: "npm:^3.0.0"
+    which: "npm:^2.0.2"
     yaml: "npm:^2.0.1"
   peerDependencies:
     fs-extra: ^10.0.1
