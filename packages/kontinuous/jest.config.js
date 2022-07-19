@@ -1,4 +1,4 @@
 module.exports = {
   verbose: true,
-  testTimeout: 15000,
+  testTimeout: 25000,
 }
