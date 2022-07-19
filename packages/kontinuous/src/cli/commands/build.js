@@ -1,7 +1,7 @@
 const { configureDebug } = require("~common/utils/logger")
+const ctx = require("~common/ctx")
 const build = require("~/build")
 
-const ctx = require("~/ctx")
 const options = require("../options")
 
 module.exports = (program) =>

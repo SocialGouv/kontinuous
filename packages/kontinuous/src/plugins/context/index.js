@@ -1,7 +1,7 @@
 const utils = require("~common/utils")
-const ctx = require("~/ctx")
+const ctx = require("~common/ctx")
+const needBin = require("~/bin/need-bin")
 
-const needBin = require("~/config/need-bin")
 const getOptions = require("./get-options")
 const getScope = require("./get-scope")
 const createRequire = require("./require")

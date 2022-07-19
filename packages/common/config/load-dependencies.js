@@ -6,7 +6,7 @@ const globalLogger = require("~common/utils/logger")
 const degitImproved = require("~common/utils/degit-improved")
 const normalizeDegitUri = require("~common/utils/normalize-degit-uri")
 
-const copyFilter = require("~/config/copy-filter")
+const copyFilter = require("~common/config/copy-filter")
 
 const recurseDependency = require("./recurse-dependencies")
 

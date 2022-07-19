@@ -6,24 +6,23 @@ const fs = require("fs-extra")
 const set = require("lodash.set")
 const qs = require("qs")
 
-const loadStructuredConfig = require("~common/utils/load-structured-config")
-const writeKubeconfig = require("~common/utils/write-kubeconfig")
-const getGitRef = require("~common/utils/get-git-ref")
-const getGitSha = require("~common/utils/get-git-sha")
-const getGitUrl = require("~common/utils/get-git-url")
-const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
-const cleanGitRef = require("~common/utils/clean-git-ref")
-const yaml = require("~common/utils/yaml")
-const asyncShell = require("~common/utils/async-shell")
-const deepmerge = require("~common/utils/deepmerge")
-const logger = require("~common/utils/logger")
-const refEnv = require("~common/utils/ref-env")
-const defaultEnvironmentPatterns = require("~common/utils/default-environment-patterns")
-const loadDependencies = require("~/config/load-dependencies")
+const ctx = require("../ctx")
+const loadStructuredConfig = require("../utils/load-structured-config")
+const writeKubeconfig = require("../utils/write-kubeconfig")
+const getGitRef = require("../utils/get-git-ref")
+const getGitSha = require("../utils/get-git-sha")
+const getGitUrl = require("../utils/get-git-url")
+const repositoryFromGitUrl = require("../utils/repository-from-git-url")
+const cleanGitRef = require("../utils/clean-git-ref")
+const yaml = require("../utils/yaml")
+const asyncShell = require("../utils/async-shell")
+const deepmerge = require("../utils/deepmerge")
+const logger = require("../utils/logger")
+const refEnv = require("../utils/ref-env")
+const defaultEnvironmentPatterns = require("../utils/default-environment-patterns")
+const loadDependencies = require("./load-dependencies")
 
-const ctx = require("~/ctx")
-
-const { version } = require(`${__dirname}/../../package.json`)
+const { version } = require(`${__dirname}/../package.json`)
 
 const mergeProjectsAndOrganizations = (config) => {
   const { organizations, projects, gitRepositoryName } = config
@@ -155,7 +154,7 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
   const configOverride = {
     kontinuousPath: {
       env: "KS_KONTINUOUS_PATH",
-      default: path.resolve(`${__dirname}/../..`),
+      default: path.resolve(`${__dirname}/../../kontinuous`),
     },
     version: {
       default: version,

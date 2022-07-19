@@ -1,8 +1,8 @@
 const { Command } = require("commander")
 
-const ctx = require("~/ctx")
+const loadConfig = require("~common/config/load-config")
+const ctx = require("~common/ctx")
 
-const loadConfig = require("~/config/load-config")
 const options = require("./options")
 
 module.exports = () => {

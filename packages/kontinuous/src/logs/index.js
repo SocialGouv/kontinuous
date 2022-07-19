@@ -6,7 +6,7 @@ const logger = require("~common/utils/logger")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const qs = require("qs")
 
-const ctx = require("~/ctx")
+const ctx = require("~common/ctx")
 
 module.exports = async (options) => {
   const config = ctx.require("config")

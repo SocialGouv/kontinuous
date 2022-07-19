@@ -3,7 +3,7 @@ const os = require("os")
 const fs = require("fs-extra")
 
 const logger = require("~common/utils/logger")
-const ctx = require("~/ctx")
+const ctx = require("~common/ctx")
 
 module.exports = (program) =>
   program

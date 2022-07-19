@@ -1,4 +1,4 @@
-const ctx = require("~/ctx")
+const ctx = require("~common/ctx")
 
 module.exports = async (needFunc) => {
   const config = ctx.require("config")

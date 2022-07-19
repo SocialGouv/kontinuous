@@ -1,5 +1,5 @@
 const logger = require("~common/utils/logger")
-const ctx = require("~/ctx")
+const ctx = require("~common/ctx")
 
 const options = require("../options")
 

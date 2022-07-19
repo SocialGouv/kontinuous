@@ -6,8 +6,13 @@ options:
   clusters:
     dev:
       kubesealEndpoint: "https://kubeseal.dev2.fabrique.social.gouv.fr"
+      environments:
+        - dev
+        - preprod
     prod:
       kubesealEndpoint: "https://kubeseal.prod2.fabrique.social.gouv.fr"
+      environments:
+        - prod
 
 validators:
   sealedSecrets:

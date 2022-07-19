@@ -4,7 +4,7 @@ const qs = require("qs")
 const fs = require("fs-extra")
 
 const logger = require("~common/utils/logger")
-const ctx = require("~/ctx")
+const ctx = require("~common/ctx")
 
 module.exports = async ({ name, file }) => {
   const manifests = await fs.readFile(file, { encoding: "utf8" })

@@ -1,6 +1,6 @@
 const fs = require("fs-extra")
 
-const ctx = require("~/ctx")
+const ctx = require("~common/ctx")
 
 const createContext = require("~/plugins/context")
 

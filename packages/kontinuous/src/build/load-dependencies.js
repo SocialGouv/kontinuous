@@ -19,11 +19,10 @@ const degitImproved = require("~common/utils/degit-improved")
 const slug = require("~common/utils/slug")
 const normalizeDegitUri = require("~common/utils/normalize-degit-uri")
 
+const recurseDependency = require("~common/config/recurse-dependencies")
+const copyFilter = require("~common/config/copy-filter")
 const createContext = require("~/plugins/context")
 const configDependencyKey = require("~/plugins/context/config-dependency-key")
-
-const recurseDependency = require("~/config/recurse-dependencies")
-const copyFilter = require("~/config/copy-filter")
 
 const registerSubcharts = async (
   chart,

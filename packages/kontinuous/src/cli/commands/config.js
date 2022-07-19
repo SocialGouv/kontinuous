@@ -3,8 +3,8 @@ const get = require("lodash.get")
 const getRemoteKontinuousConfigFile = require("~common/utils/get-remote-kontinuous-config-file")
 const yaml = require("~common/utils/yaml")
 
-const loadConfig = require("~/config/load-config")
-const ctx = require("~/ctx")
+const loadConfig = require("~common/config/load-config")
+const ctx = require("~common/ctx")
 
 const options = require("../options")
 

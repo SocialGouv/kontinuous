@@ -4,7 +4,7 @@ const axios = require("axios")
 const qs = require("qs")
 
 const logger = require("~common/utils/logger")
-const ctx = require("~/ctx")
+const ctx = require("~common/ctx")
 
 module.exports = async ({ name, file }) => {
   const config = ctx.require("config")

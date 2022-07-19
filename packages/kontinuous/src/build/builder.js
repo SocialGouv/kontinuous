@@ -5,10 +5,9 @@ const asyncShell = require("~common/utils/async-shell")
 const globalLogger = require("~common/utils/logger")
 const needHelm = require("~common/utils/need-helm")
 
-const needBin = require("~/config/need-bin")
-const copyFilter = require("~/config/copy-filter")
-
-const ctx = require("~/ctx")
+const copyFilter = require("~common/config/copy-filter")
+const ctx = require("~common/ctx")
+const needBin = require("~/bin/need-bin")
 
 const applyPatches = require("./apply-patches")
 const loadManifests = require("./load-manifests")

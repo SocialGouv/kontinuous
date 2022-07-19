@@ -1,6 +1,6 @@
 const refEnv = require("~common/utils/ref-env")
 const getRemoteKontinuousEnvironmentPatterns = require("~common/utils/get-remote-kontinuous-environment-patterns")
-const ctx = require("~/ctx")
+const ctx = require("~common/ctx")
 
 const options = require("../options")
 
