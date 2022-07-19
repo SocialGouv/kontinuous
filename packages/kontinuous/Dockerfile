@@ -17,7 +17,7 @@ ENV KUBECTL_VERSION=$KUBECTL_VERSION
 RUN curl -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl
 
-ARG HELM_VERSION=v3.7.2
+ARG HELM_VERSION=v3.9.1
 ENV HELM_VERSION=$HELM_VERSION
 RUN curl -sL https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar xz -C /tmp/ \
   && mv /tmp/linux-amd64/helm /usr/local/bin/helm \
