@@ -1,17 +1,42 @@
-const writeKubeconfig = require("~common/utils/write-kubeconfig")
+const fs = require("fs-extra")
 
 const oasUri = require("./oas-uri")
 
 module.exports = async function createConfig() {
   const jobNamespace = process.env.KS_CI_NAMESPACE
 
-  await writeKubeconfig(
-    ["KUBECONFIG", "KUBECONFIG_DEV", "KUBECONFIG_PROD"],
-    {},
-    "/tmp/.kube/config"
-  )
+  const secretsRootPath = "/secrets"
+  const tokens = {}
+  const kubeconfigFiles = {}
+  if (await fs.pathExists(secretsRootPath)) {
+    const secretProjectDirs = await fs.readdir(secretsRootPath)
+    for (const secretProjectDir of secretProjectDirs) {
+      const secretProjectDirPath = `${secretsRootPath}/${secretProjectDir}`
+      if (!(await fs.stat(secretProjectDirPath)).isDirectory()) {
+        continue
+      }
+      const secretTokenDir = `${secretProjectDirPath}/tokens`
+      if (!(await fs.pathExists(secretTokenDir))) {
+        continue
+      }
+      const tokenFiles = await fs.readdir(secretTokenDir)
+      tokens[secretProjectDir] = []
+      for (const tokenFile of tokenFiles) {
+        const secretTokenFile = `${secretTokenDir}/${tokenFile}`
+        if (!(await fs.stat(secretTokenFile)).isFile()) {
+          continue
+        }
+        const token = await fs.readFile(secretTokenFile, {
+          encoding: "utf-8",
+        })
+        tokens[secretProjectDir].push(token)
+      }
+      const secretKubeconfigFile = `${secretProjectDirPath}/kubeconfig`
+      kubeconfigFiles[secretProjectDir] = secretKubeconfigFile
+    }
+  }
 
-  const token = process.env.KUBEWEBHOOK_TOKEN
+  const supertoken = process.env.KUBEWEBHOOK_SUPERTOKEN
 
   const config = {
     project: {
@@ -19,15 +44,20 @@ module.exports = async function createConfig() {
       oas: {
         uri: oasUri(),
       },
-      webhook: {
-        token,
+      secrets: {
+        tokens,
+        supertoken,
+        kubeconfigFiles,
       },
     },
     logger: {
       level: "debug",
     },
     httpLogger: {
-      hideSecrets: [token],
+      hideSecrets: [
+        ...Object.values(tokens).flatMap((values) => values),
+        supertoken,
+      ],
     },
   }
 

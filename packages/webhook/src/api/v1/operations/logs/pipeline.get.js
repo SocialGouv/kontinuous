@@ -92,7 +92,15 @@ module.exports = function () {
       catch: catchJob,
       since,
       env,
+      cluster,
     } = req.query
+
+    if (!(cluster || env)) {
+      return res
+        .status(400)
+        .json({ message: `need one of "cluster" or "env" query parameter` })
+    }
+
     const repository = repositoryFromGitUrl(repositoryMixed)
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)

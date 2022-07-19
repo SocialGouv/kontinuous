@@ -21,6 +21,22 @@ spec:
         - name: artifacts
           persistentVolumeClaim:
             claimName: artifacts
+        {{ range $secret := .Values.kubeconfigSecrets }}
+        - name: secret-kubeconfig-{{ $secret.name }}
+          secret:
+            secretName: {{ $secret.name }}
+            items:
+            - key: {{ or $secret.key "KUBECONFIG" }}
+              path: {{ $secret.cluster }}
+        {{ end }}
+        {{ range $index, $secret := .Values.tokenSecrets }}
+        - name: secret-token-{{ $secret.name }}
+          secret:
+            secretName: {{ $secret.name }}
+            items:
+            - key: {{ or $secret.key "TOKEN" }}
+              path: {{ $index }}
+        {{ end }}
       containers:
         - name: webhook
           image: {{ .Values.image }}
@@ -31,6 +47,14 @@ spec:
           volumeMounts:
             - name: artifacts
               mountPath: /artifacts
+            {{ range $secret := .Values.kubeconfigSecrets }}
+            - name: secret-kubeconfig-{{ $secret.name }}
+              mountPath: /secrets/{{ or $secret.project $secret.name }}/kubeconfig
+            {{ end }}
+            {{ range $secret := .Values.tokenSecrets }}
+            - name: secret-token-{{ $secret.name }}
+              mountPath: /secrets/{{ or $secret.project $secret.name }}/tokens
+            {{ end }}
           env:
             - name: KS_CI_NAMESPACE
               value: "{{ required "ciNamespace value is required" .Values.ciNamespace }}"
@@ -40,11 +64,6 @@ spec:
               value: "true"
             - name: KUBEWEBHOOK_EXPOSED_PORT
               value: "443"
-          envFrom:
-            {{ range $secretRefName := .Values.secretRefNames }}
-            - secretRef:
-                name: "{{ $secretRefName }}"
-            {{ end }}
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}

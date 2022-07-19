@@ -1,4 +1,5 @@
 const { ctx } = require("@modjo-plugins/core")
+const { reqCtx } = require("@modjo-plugins/express/ctx")
 
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const cleanGitRef = require("~common/utils/clean-git-ref")
@@ -48,7 +49,10 @@ module.exports = () => {
     })
 
     const webhookUri = ctx.require("config.project.oas.uri")
-    const webhookToken = ctx.require("config.project.webhook.token")
+    const tokens = ctx.require("config.project.secrets.tokens")
+
+    const project = reqCtx.get("project")
+    const [webhookToken] = tokens[project] || []
 
     if (commits) {
       commits = commits.reduce(

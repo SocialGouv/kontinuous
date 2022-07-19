@@ -1,8 +1,14 @@
 module.exports = function ({ services: { custom } }) {
   return [
     async (req, res) => {
-      const { env, hash, repositoryUrl } = req.query
+      const { env, cluster, hash, repositoryUrl } = req.query
       const [manifestsFile] = req.files
+
+      if (!(cluster || env)) {
+        return res
+          .status(400)
+          .json({ message: `need one of "cluster" or "env" query parameter` })
+      }
 
       const manifests = manifestsFile.buffer.toString("utf-8")
 

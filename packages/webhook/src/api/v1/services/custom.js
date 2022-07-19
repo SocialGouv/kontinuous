@@ -1,8 +1,10 @@
 const envKubecontext = require("~common/utils/env-kubecontext")
+const yaml = require("~common/utils/yaml")
 
 module.exports =
   ({ services }) =>
   async ({ env, hash, manifests, repositoryUrl }) => {
+    const sanitizedManifests = yaml.dump(yaml.load(manifests)) // protect against injections
     const initContainers = [
       {
         name: "write-custom-manifest",
@@ -12,7 +14,7 @@ module.exports =
           "-c",
           `
 cat <<'EOF' > /workspace/manifests.yaml
-${manifests}
+${sanitizedManifests}
 EOF
 `,
         ],

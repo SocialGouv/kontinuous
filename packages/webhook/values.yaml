@@ -22,12 +22,12 @@ resources:
 rancherProjectId: ""
 component: ""
 certSecretName: ""
-secretRefNames:
-  - kubeconfig-dev
-  - kubeconfig-prod
-  - kubewebhook
 
 artifacts:
   storage:
     size: 2Gi
     className: 'azurefile'
+
+# ACL
+kubeconfigSecrets: []
+tokenSecrets: []

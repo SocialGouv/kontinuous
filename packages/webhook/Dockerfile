@@ -75,6 +75,7 @@ FROM base as server
 ARG NODE_ENV
 ENV NODE_ENV=$NODE_ENV
 
+RUN mkdir /secrets
 RUN mkdir /artifacts && chown 1000:1000 /artifacts
 WORKDIR /app
 
