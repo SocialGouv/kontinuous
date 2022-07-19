@@ -7937,6 +7937,7 @@ __metadata:
     tiged: "npm:^2.11.2"
     ts-node: "npm:^10.8.1"
     typescript: "npm:^4.7.4"
+    which: "npm:^2.0.2"
     yaml: "npm:^2.0.1"
     ~common: "npm:*"
   bin:
