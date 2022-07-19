@@ -544,7 +544,5 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
     }, {})
   await loadDependencies(config)
 
-  console.log({ kubeconfigContext: config.kubeconfigContext })
-
   return config
 }
