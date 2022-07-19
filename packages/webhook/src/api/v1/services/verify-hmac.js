@@ -4,6 +4,9 @@ const crypto = require("crypto")
 
 module.exports = function () {
   return ({ signature, body, secret, sigHashAlg = "sha256" }) => {
+    if (!secret) {
+      return false
+    }
     const sig = Buffer.from(signature || "", "utf8")
     const hmac = crypto.createHmac(sigHashAlg, secret)
     const hex = `${sigHashAlg}=${hmac.update(body).digest("hex")}`

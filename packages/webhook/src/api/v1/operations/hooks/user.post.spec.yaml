@@ -3,6 +3,12 @@ security:
 
 parameters:
   - in: query
+    name: project
+    schema:
+      type: string
+      format: projectName
+    required: true
+  - in: query
     name: event
     schema:
       type: string

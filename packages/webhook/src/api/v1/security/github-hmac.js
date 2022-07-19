@@ -1,16 +1,24 @@
-const { ctx } = require("@modjo-plugins/core")
-
 module.exports =
-  ({ services: { verifyHmac } }) =>
+  ({ services: { verifyHmac, getProjectToken, projectGranted } }) =>
   async (req, _scopes, _schema) => {
     const signature = req.get("X-Hub-Signature-256")
     if (!signature) {
       return false
     }
-    const webhookToken = ctx.require("config.project.webhook.token")
-    return verifyHmac({
+    const token = getProjectToken(req)
+    if (!token) {
+      return false
+    }
+
+    const granted = await verifyHmac({
       signature,
       body: req.rawBody,
-      secret: webhookToken,
+      secret: token,
     })
+
+    if (granted) {
+      projectGranted(req)
+    }
+
+    return granted
   }
