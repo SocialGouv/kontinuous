@@ -39,11 +39,6 @@ parameters:
       type: string
       enum: [dev, preprod, prod]
   - in: query
-    name: cluster
-    schema:
-      type: string
-      format: clusterName
-  - in: query
     name: follow
     schema:
       type: boolean

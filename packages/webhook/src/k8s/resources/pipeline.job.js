@@ -77,13 +77,6 @@ module.exports = ({
             image,
             imagePullPolicy: "Always",
             args,
-            envFrom: [
-              {
-                secretRef: {
-                  name: "kubeconfig",
-                },
-              },
-            ],
             env: [
               {
                 name: "KS_WORKSPACE_PATH",
@@ -137,16 +130,38 @@ module.exports = ({
                     },
                   ]
                 : []),
+              {
+                name: "KUBECONFIG",
+                value: "/secrets/kubeconfig/cluster",
+              },
             ],
             volumeMounts: [
               {
                 name: "workspace",
                 mountPath: "/workspace",
               },
+              {
+                name: "kubeconfig",
+                mountPath: "/secrets/kubeconfig",
+              },
             ],
           },
         ],
-        volumes: [{ name: "workspace", emptyDir: {} }],
+        volumes: [
+          { name: "workspace", emptyDir: {} },
+          {
+            name: "kubeconfig",
+            secret: {
+              secretName: "kubeconfig",
+              items: [
+                {
+                  key: "KUBECONFIG",
+                  path: "cluster",
+                },
+              ],
+            },
+          },
+        ],
       },
     },
   },

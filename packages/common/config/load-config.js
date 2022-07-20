@@ -8,7 +8,6 @@ const qs = require("qs")
 
 const ctx = require("../ctx")
 const loadStructuredConfig = require("../utils/load-structured-config")
-const writeKubeconfig = require("../utils/write-kubeconfig")
 const getGitRef = require("../utils/get-git-ref")
 const getGitSha = require("../utils/get-git-sha")
 const getGitUrl = require("../utils/get-git-url")
@@ -19,7 +18,6 @@ const asyncShell = require("../utils/async-shell")
 const deepmerge = require("../utils/deepmerge")
 const logger = require("../utils/logger")
 const refEnv = require("../utils/ref-env")
-const defaultEnvironmentPatterns = require("../utils/default-environment-patterns")
 const loadDependencies = require("./load-dependencies")
 
 const { version } = require(`${__dirname}/../package.json`)
@@ -209,7 +207,11 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
     },
     environmentPatterns: {
       transform: (value) => ({
-        ...defaultEnvironmentPatterns,
+        ...{
+          prod: "v[0-9]*",
+          preprod: ["main", "master"],
+          dev: "**",
+        },
         ...(value || {}),
       }),
     },
@@ -323,35 +325,30 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
           ? `${config.projectName || config.repositoryName}-ci`
           : null,
     },
-    kubeconfigPath: {
-      defaultFunction: () => writeKubeconfig(),
+    environmentClusters: {
+      transform: (value) => ({
+        ...{
+          prod: "prod",
+          preprod: "dev",
+          dev: "dev",
+        },
+        ...(value || {}),
+      }),
     },
-    kubeconfigContextNoDetect: {
-      env: "KS_KUBECONFIG_CONTEXT_NO_DETECT",
-      envParser: (str) => yaml.load(str),
+    cluster: {
+      env: "KS_CLUSTER",
+      defaultFunction: (config) => {
+        const { environment, environmentClusters } = config
+        return environmentClusters[environment]
+      },
+    },
+    kubeconfig: {
+      option: "kubeconfig",
+      env: ["KS_KUBECONFIG", "KUBECONFIG"],
     },
     kubeconfigContext: {
       option: "kubeconfigContext",
       env: "KS_KUBECONFIG_CONTEXT",
-      defaultFunction: async (config) => {
-        const { environment, kubeconfigPath } = config
-        const { kubeconfigContextNoDetect } = config
-        let kubeconfigContext
-        if (kubeconfigContextNoDetect) {
-          if (!kubeconfigPath) {
-            return
-          }
-          const kubeconfig = yaml.load(
-            await fs.readFile(kubeconfigPath, { encoding: "utf-8" })
-          )
-          kubeconfigContext = kubeconfig["current-context"]
-        } else if (environment === "prod") {
-          kubeconfigContext = "prod"
-        } else {
-          kubeconfigContext = "dev"
-        }
-        return kubeconfigContext
-      },
     },
     isLocal: {
       env: "KS_ISLOCAL",

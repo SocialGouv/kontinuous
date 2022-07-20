@@ -12,7 +12,13 @@ module.exports = function ({ services: { custom } }) {
 
       const manifests = manifestsFile.buffer.toString("utf-8")
 
-      const runJob = await custom({ env, hash, repositoryUrl, manifests })
+      const runJob = await custom({
+        cluster,
+        env,
+        hash,
+        repositoryUrl,
+        manifests,
+      })
 
       if (!runJob) {
         return res.status(204).json({ message: "no-op" })

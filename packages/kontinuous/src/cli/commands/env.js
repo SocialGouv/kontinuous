@@ -1,5 +1,5 @@
 const refEnv = require("~common/utils/ref-env")
-const getRemoteKontinuousEnvironmentPatterns = require("~common/utils/get-remote-kontinuous-environment-patterns")
+const loadRemoteConfig = require("~common/config/load-remote-config")
 const ctx = require("~common/ctx")
 
 const options = require("../options")
@@ -26,10 +26,11 @@ module.exports = (program) =>
           const { event } = config
           ref = event === "deleted" ? "HEAD" : config.gitBranch
         }
-        environmentPatterns = await getRemoteKontinuousEnvironmentPatterns(
-          config.gitRepositoryUrl,
-          ref
-        )
+        const repositoryConfig = await loadRemoteConfig({
+          repository: config.gitRepositoryUrl,
+          ref,
+        })
+        environmentPatterns = repositoryConfig.environmentPatterns
       }
 
       let env
