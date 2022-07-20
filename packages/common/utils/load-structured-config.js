@@ -46,7 +46,6 @@ module.exports = async ({
 
   for (const [key, def] of Object.entries(configOverride)) {
     const {
-      env: envKey,
       envParser,
       default: defaultValue,
       defaultFunction,
@@ -61,12 +60,21 @@ module.exports = async ({
       ? emptyAsUndefinedCheck
       : undefinedCheck
 
-    if (envKey && envKeys.includes(envKey) && !isUndefined(env[envKey])) {
-      let envValue = env[envKey]
-      if (envParser) {
-        envValue = envParser(envValue)
+    let { env: lookupEnvKeys } = def
+    if (lookupEnvKeys) {
+      if (!Array.isArray(lookupEnvKeys)) {
+        lookupEnvKeys = [lookupEnvKeys]
       }
-      config[key] = envValue
+      for (const envKey of lookupEnvKeys) {
+        if (envKeys.includes(envKey) && !isUndefined(env[envKey])) {
+          let envValue = env[envKey]
+          if (envParser) {
+            envValue = envParser(envValue)
+          }
+          config[key] = envValue
+          break
+        }
+      }
     }
 
     if (

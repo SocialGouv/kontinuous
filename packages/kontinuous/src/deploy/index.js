@@ -36,6 +36,7 @@ module.exports = async (options) => {
     statusUrl,
     webhookUri,
     webhookToken: token,
+    kubeconfig,
     kubeconfigContext,
   } = config
 
@@ -139,7 +140,10 @@ module.exports = async (options) => {
       await setStatus({ url: statusUrl, status: "loading", ok: null })
     }
 
-    logger.info(`kubeconfig context: "${kubeconfigContext}"`)
+    logger.info(
+      { kubeconfig, kubeconfigContext },
+      "let's deploy on kubernetes with kapp"
+    )
 
     const allManifests = yaml.loadAll(manifests)
 
@@ -157,7 +161,9 @@ module.exports = async (options) => {
     const deployWithKapp = async () => {
       const [cmd, args] = parseCommand(`
         kapp deploy
-          --kubeconfig-context ${kubeconfigContext}
+          ${
+            kubeconfigContext ? `--kubeconfig-context ${kubeconfigContext}` : ""
+          }
           --app label:kontinuous/kapp=${kappApp}
           --logs-all
           --wait-timeout ${kappWaitTimeout}
@@ -168,7 +174,13 @@ module.exports = async (options) => {
 
       try {
         await new Promise((resolve, reject) => {
-          const proc = spawn(cmd, args, { encoding: "utf-8" })
+          const proc = spawn(cmd, args, {
+            encoding: "utf-8",
+            env: {
+              ...process.env,
+              ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
+            },
+          })
 
           proc.stdout.on("data", (data) => {
             process.stdout.write(data.toString())

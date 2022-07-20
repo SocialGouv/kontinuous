@@ -4,7 +4,7 @@ module.exports = async (
   { utils, config, logger, needBin }
 ) => {
   const { kubeEnsureNamespace } = utils
-  const { kubeconfigContext } = config
+  const { kubeconfig, kubeconfigContext } = config
 
   const rancherNamespacesManifests = manifests.filter(
     (manifest) =>
@@ -26,7 +26,7 @@ module.exports = async (
 
   await Promise.all(
     rancherNamespacesManifests.map((manifest) =>
-      kubeEnsureNamespace(kubeconfigContext, manifest)
+      kubeEnsureNamespace({ kubeconfig, kubeconfigContext, manifest })
     )
   )
   logger.debug({ namespaces }, "namespaces ready")
