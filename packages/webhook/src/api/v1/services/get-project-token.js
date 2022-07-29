@@ -5,6 +5,6 @@ module.exports =
   (req) => {
     const project = services.getProject(req)
     const tokens = ctx.require("config.project.secrets.tokens")
-    const supertoken = ctx.require("config.project.secrets.supertoken")
-    return [...(tokens[project] || []), supertoken]
+    const supertoken = ctx.get("config.project.secrets.supertoken")
+    return [...(tokens[project] || []), ...(supertoken ? [supertoken] : [])]
   }
