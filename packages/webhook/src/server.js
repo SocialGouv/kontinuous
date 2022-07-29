@@ -17,6 +17,10 @@ module.exports = (options = {}) => {
       oapi: {
         pluginName: "microservice-oapi",
       },
+      home: {
+        pluginName: "home",
+        dependencies: ["express"],
+      },
     },
   })
   modjo(options)
