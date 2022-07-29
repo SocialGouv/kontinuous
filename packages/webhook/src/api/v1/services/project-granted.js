@@ -5,4 +5,5 @@ module.exports =
   (req) => {
     const project = getProject(req)
     reqCtx.set("project", project)
+    reqCtx.set("jobNamespace", `${project}-ci`)
   }

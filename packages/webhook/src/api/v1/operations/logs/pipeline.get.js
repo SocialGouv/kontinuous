@@ -14,7 +14,7 @@ const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = function () {
   const logger = ctx.require("logger")
-  const { jobNamespace } = ctx.require("config.project")
+  const jobNamespace = reqCtx.require("jobNamespace")
   const readyToLogPhases = ["Running", "Succeeded", "Failed"]
   const checkJobExists = async ({ jobName, commit, kubeconfig }) => {
     try {

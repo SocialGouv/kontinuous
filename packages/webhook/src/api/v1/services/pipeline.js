@@ -11,7 +11,6 @@ const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = () => {
   const logger = ctx.require("logger")
-  const { jobNamespace } = ctx.require("config.project")
   return async ({
     eventName,
     env,
@@ -35,6 +34,7 @@ module.exports = () => {
     })
     const { cluster } = repositoryConfig
     const project = reqCtx.require("project")
+    const jobNamespace = reqCtx.require("jobNamespace")
 
     const kubeconfigs = ctx.require("config.project.secrets.kubeconfigs")
     const kubeconfig = kubeconfigs[project][cluster]

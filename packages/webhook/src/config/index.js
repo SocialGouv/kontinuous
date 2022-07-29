@@ -3,8 +3,6 @@ const fs = require("fs-extra")
 const oasUri = require("./oas-uri")
 
 module.exports = async function createConfig() {
-  const jobNamespace = process.env.KS_CI_NAMESPACE
-
   const secretsRootPath = "/secrets"
   const tokens = {}
   const kubeconfigs = {}
@@ -46,7 +44,6 @@ module.exports = async function createConfig() {
 
   const config = {
     project: {
-      jobNamespace,
       oas: {
         uri: oasUri(),
       },

@@ -56,8 +56,6 @@ spec:
               mountPath: /secrets/{{ or $secret.project $secret.name }}/tokens
             {{ end }}
           env:
-            - name: KS_CI_NAMESPACE
-              value: "{{ required "ciNamespace value is required" .Values.ciNamespace }}"
             - name: KUBEWEBHOOK_EXPOSED_HOST
               value: "{{ .Values.host }}"
             - name: KUBEWEBHOOK_EXPOSED_HTTPS
