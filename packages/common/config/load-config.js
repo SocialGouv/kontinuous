@@ -150,11 +150,12 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
       defaultFunction: (config) => config.gitRepositoryName,
     },
   }
-
   const configOverride = {
     kontinuousPath: {
       env: "KS_KONTINUOUS_PATH",
-      default: path.resolve(`${__dirname}/../../kontinuous`),
+      default: path.resolve(
+        `${path.dirname(await fs.realpath(process.argv[1]))}/..`
+      ),
     },
     version: {
       default: version,
