@@ -12,14 +12,13 @@ module.exports = (options = {}) => {
           ctx.set("customConfig", customConfig)
         },
       },
+      home: {
+        dependencies: ["express"],
+      },
     },
     dependencies: {
       oapi: {
         pluginName: "microservice-oapi",
-      },
-      home: {
-        pluginName: "home",
-        dependencies: ["express"],
       },
     },
   })
