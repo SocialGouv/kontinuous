@@ -14,9 +14,9 @@ const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = function () {
   const logger = ctx.require("logger")
-  const jobNamespace = reqCtx.require("jobNamespace")
   const readyToLogPhases = ["Running", "Succeeded", "Failed"]
   const checkJobExists = async ({ jobName, commit, kubeconfig }) => {
+    const jobNamespace = reqCtx.require("jobNamespace")
     try {
       const jsonPodStatus = await asyncShell(
         `kubectl
@@ -55,6 +55,7 @@ module.exports = function () {
   }
 
   const runLogStream = async ({ res, kubeconfig, follow, since, jobName }) => {
+    const jobNamespace = reqCtx.require("jobNamespace")
     const [cmd, args] = parseCommand(`
       kubectl
         -n ${jobNamespace}
@@ -102,6 +103,8 @@ module.exports = function () {
     } = req.query
 
     let { env } = req.query
+
+    const jobNamespace = reqCtx.require("jobNamespace")
 
     const repository = repositoryFromGitUrl(repositoryMixed)
     const repositoryName = repository.split("/").pop()
