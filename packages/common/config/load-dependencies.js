@@ -1,12 +1,12 @@
 const fs = require("fs-extra")
 
-const yaml = require("~common/utils/yaml")
-const deepmerge = require("~common/utils/deepmerge")
-const globalLogger = require("~common/utils/logger")
-const degitImproved = require("~common/utils/degit-improved")
-const normalizeDegitUri = require("~common/utils/normalize-degit-uri")
+const yaml = require("../utils/yaml")
+const deepmerge = require("../utils/deepmerge")
+const globalLogger = require("../utils/logger")
+const degitImproved = require("../utils/degit-improved")
+const normalizeDegitUri = require("../utils/normalize-degit-uri")
 
-const copyFilter = require("~common/config/copy-filter")
+const copyFilter = require("./copy-filter")
 
 const recurseDependency = require("./recurse-dependencies")
 
