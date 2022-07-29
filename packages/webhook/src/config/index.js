@@ -59,7 +59,7 @@ module.exports = async function createConfig() {
     httpLogger: {
       hideSecrets: [
         ...Object.values(tokens).flatMap((values) => values),
-        supertoken,
+        ...(supertoken ? [supertoken] : []),
       ],
     },
   }
