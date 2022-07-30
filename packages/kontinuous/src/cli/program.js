@@ -25,7 +25,9 @@ module.exports = () => {
       const config = await loadConfig(opts)
       ctx.set("config", config)
 
-      const logger = createLogger({ secrets: [config.webhookToken] })
+      const logger = createLogger({
+        secrets: [...(config.webhookToken ? [config.webhookToken] : [])],
+      })
       ctx.set("logger", logger)
       logger.configureDebug(opts.D)
       globalLogger.configureDebug(opts.D)
