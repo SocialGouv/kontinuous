@@ -7964,6 +7964,7 @@ __metadata:
     parse-github-url: "npm:^1.0.2"
     pino: "npm:^8.3.1"
     pino-abstract-transport: "npm:^1.0.0"
+    pino-bfuscate: "npm:^1.0.0"
     pino-pretty: "npm:^8.1.0"
     pretty-ms: "npm:^7.0.1"
     qs: "npm:^6.10.5"
@@ -9433,6 +9434,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pino-bfuscate@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "pino-bfuscate@npm:1.0.0"
+  dependencies:
+    on-exit-leak-free: "npm:^2.1.0"
+    pino-abstract-transport: "npm:^1.0.0"
+    pino-pretty: "npm:^8.1.0"
+    pump: "npm:^3.0.0"
+    sonic-boom: "npm:^3.2.0"
+  checksum: adb293e433feaa24784afed82289a70e750673f661322994fb16f6ef1e046e7e6dc07af418d6919514b5a3e8bebf34013e0e522c34ae74797f540a613198d353
+  languageName: node
+  linkType: hard
+
 "pino-pretty@npm:^7.6.0":
   version: 7.6.1
   resolution: "pino-pretty@npm:7.6.1"
@@ -10642,7 +10656,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sonic-boom@npm:^3.1.0":
+"sonic-boom@npm:^3.1.0, sonic-boom@npm:^3.2.0":
   version: 3.2.0
   resolution: "sonic-boom@npm:3.2.0"
   dependencies:
@@ -12129,6 +12143,7 @@ __metadata:
     parse-github-url: "npm:^1.0.2"
     pino: "npm:^8.3.1"
     pino-abstract-transport: "npm:^1.0.0"
+    pino-bfuscate: "npm:^1.0.0"
     pino-pretty: "npm:^8.1.0"
     pretty-ms: "npm:^7.0.1"
     qs: "npm:^6.10.3"

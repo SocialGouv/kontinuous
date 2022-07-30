@@ -5,7 +5,7 @@ module.exports = (options = {}) => {
     transport: {
       pipeline: [
         {
-          target: `${__dirname}/logger-secrets-replace.js`,
+          target: "pino-bfuscate",
           options: {
             pretty: true,
             prettyOptions: {
