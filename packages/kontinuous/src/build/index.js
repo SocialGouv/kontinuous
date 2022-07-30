@@ -1,14 +1,13 @@
 const launch = require("launch-editor")
 const { highlight, fromJson: themeFromJson } = require("cli-highlight")
 
-const logger = require("~common/utils/logger")
-
 const ctx = require("~common/ctx")
 const upload = require("~/upload")
 const builder = require("./builder")
 
 module.exports = async (options) => {
   const config = ctx.require("config")
+  const logger = ctx.require("logger")
 
   const result = await builder(options)
 

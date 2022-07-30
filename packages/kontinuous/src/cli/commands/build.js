@@ -1,4 +1,3 @@
-const { configureDebug } = require("~common/utils/logger")
 const ctx = require("~common/ctx")
 const build = require("~/build")
 
@@ -33,7 +32,6 @@ module.exports = (program) =>
     )
     .action(async (_opts, command) => {
       const opts = command.optsWithGlobals()
-      configureDebug(opts.D)
       const result = await build(opts)
       ctx.set("result", result)
     })

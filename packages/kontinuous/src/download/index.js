@@ -3,11 +3,11 @@ const fs = require("fs")
 const axios = require("axios")
 const qs = require("qs")
 
-const logger = require("~common/utils/logger")
 const ctx = require("~common/ctx")
 
 module.exports = async ({ name, file }) => {
   const config = ctx.require("config")
+  const logger = ctx.require("logger")
   const dest = name || "manifests"
 
   if (!file) {
@@ -53,18 +53,27 @@ module.exports = async ({ name, file }) => {
   } catch (error) {
     if (error.response) {
       logger.error(
-        `download error: status ${error.response.status} ${error.response.statusText}`
+        {
+          status: error.response.status,
+          statusText: error.response.statusText,
+          downloadUrl,
+        },
+        "download error"
       )
       if (error.response.data.msg) {
         logger.error(error.response.data.msg)
       }
-      logger.debug(error.response.headers)
       // logger.error(error.request)
     } else if (error.request) {
-      logger.error(`download error: request`)
-      logger.error(error.request)
+      logger.error(
+        { errorRequest: error.request, downloadUrl },
+        `download error`
+      )
     } else {
-      logger.error(`download error: ${error.message}`)
+      logger.error(
+        { errorMessage: error.message, downloadUrl },
+        "download error"
+      )
     }
     return false
   }

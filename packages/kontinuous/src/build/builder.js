@@ -2,7 +2,6 @@ const fs = require("fs-extra")
 const yaml = require("~common/utils/yaml")
 
 const asyncShell = require("~common/utils/async-shell")
-const globalLogger = require("~common/utils/logger")
 const needHelm = require("~common/utils/need-helm")
 
 const copyFilter = require("~common/config/copy-filter")
@@ -26,7 +25,7 @@ module.exports = async (_options = {}) => {
     kontinuousPath,
   } = config
 
-  const logger = globalLogger.child({ buildPath, workspacePath })
+  const logger = ctx.require("logger").child({ buildPath, workspacePath })
   ctx.set("logger", logger)
 
   if (await fs.pathExists(workspaceKsPath)) {

@@ -2,7 +2,6 @@ const os = require("os")
 
 const fs = require("fs-extra")
 
-const logger = require("~common/utils/logger")
 const ctx = require("~common/ctx")
 
 module.exports = (program) =>
@@ -12,6 +11,7 @@ module.exports = (program) =>
     .option("--cache", "clean degit cache")
     .action(async (opts, _command) => {
       const config = ctx.require("config")
+      const logger = ctx.require("logger")
 
       const { buildRootPath } = config
       if (!buildRootPath || buildRootPath === "/") {

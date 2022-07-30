@@ -1,4 +1,3 @@
-const { configureDebug } = require("~common/utils/logger")
 const upload = require("~/upload")
 
 const options = require("../options")
@@ -11,8 +10,6 @@ module.exports = (program) =>
     .addOption(options.uploadUrl)
     .addOption(options.webhookUri)
     .description("Upload manifests")
-    .action(async (file, name, _opts, command) => {
-      const opts = command.optsWithGlobals()
-      configureDebug(opts.D)
+    .action(async (file, name, _opts, _command) => {
       await upload({ name, file })
     })

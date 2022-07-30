@@ -2,7 +2,6 @@ const stream = require("stream")
 const { promisify } = require("util")
 const axios = require("axios")
 
-const logger = require("~common/utils/logger")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const qs = require("qs")
 
@@ -10,6 +9,7 @@ const ctx = require("~common/ctx")
 
 module.exports = async (options) => {
   const config = ctx.require("config")
+  const logger = ctx.require("logger")
 
   let { repository: repositoryMixed, branch, commit } = options
   if (!repositoryMixed) {

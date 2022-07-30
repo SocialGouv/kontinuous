@@ -1,4 +1,3 @@
-const { configureDebug } = require("~common/utils/logger")
 const deploy = require("~/deploy")
 
 const options = require("../options")
@@ -51,6 +50,5 @@ module.exports = (program) =>
     )
     .action(async (_opts, command) => {
       const opts = command.optsWithGlobals()
-      configureDebug(opts.D)
       await deploy(opts)
     })

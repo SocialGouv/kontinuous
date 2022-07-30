@@ -2,7 +2,6 @@ const fs = require("fs-extra")
 const { Select, Input } = require("enquirer")
 
 const degit = require("~common/utils/degit-improved")
-const logger = require("~common/utils/logger")
 const yaml = require("~common/utils/yaml")
 
 const ctx = require("~common/ctx")
@@ -20,6 +19,7 @@ module.exports = (program) =>
     .option("--name", "project name")
     .action(async (opts, _command) => {
       const config = ctx.require("config")
+      const logger = ctx.require("logger")
 
       try {
         let boilerplate = opts.B

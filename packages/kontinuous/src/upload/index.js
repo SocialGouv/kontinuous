@@ -3,17 +3,17 @@ const FormData = require("form-data")
 const qs = require("qs")
 const fs = require("fs-extra")
 
-const logger = require("~common/utils/logger")
 const ctx = require("~common/ctx")
 
 module.exports = async ({ name, file }) => {
+  const config = ctx.require("config")
+  const logger = ctx.require("logger")
+
   const manifests = await fs.readFile(file, { encoding: "utf8" })
 
   const dest = name || "manifests"
 
   logger.info(`uploading "${file}" as artifact "${dest}"`)
-
-  const config = ctx.require("config")
 
   let { uploadUrl } = config
 

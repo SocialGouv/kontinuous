@@ -6,16 +6,14 @@ const axios = require("axios")
 const qs = require("qs")
 const FormData = require("form-data")
 
+const ctx = require("~common/ctx")
 const needKapp = require("~common/utils/need-kapp")
 const yaml = require("~common/utils/yaml")
-const logger = require("~common/utils/logger")
 const timeLogger = require("~common/utils/time-logger")
 const slug = require("~common/utils/slug")
 const parseCommand = require("~common/utils/parse-command")
 const validateMd5 = require("~common/utils/validate-md5")
-const globalLogger = require("~common/utils/logger")
 
-const ctx = require("~common/ctx")
 const needBin = require("~/bin/need-bin")
 const build = require("~/build")
 const logs = require("~/logs")
@@ -27,7 +25,7 @@ module.exports = async (options) => {
   ctx.provide()
 
   const config = ctx.require("config")
-  ctx.set("logger", globalLogger)
+  const logger = ctx.require("logger")
 
   const {
     environment,
@@ -72,8 +70,6 @@ module.exports = async (options) => {
       )
 
       logger.info("uploading custom manifests to deploy")
-
-      logger.flushSync()
 
       const form = new FormData()
       form.append("manifests", manifests, {
