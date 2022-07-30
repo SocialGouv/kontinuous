@@ -7,7 +7,7 @@ runs:
       - secretRef:
           name: kubeconfig
     vars:
-      DB_SECRET_NAME: "{{ $.Values.global.pgSecretName }}"
+      DB_SECRET_NAME: "{{ tpl (or $.with.pgSecretName $.Values.global.pgSecretName) . }}"
       NAMESPACE: "{{ $.Values.global.namespace }}"
       JOB_NAMESPACE: "{{ $.Values.global.ciNamespace }}"
     run: /action/import-secret.sh
