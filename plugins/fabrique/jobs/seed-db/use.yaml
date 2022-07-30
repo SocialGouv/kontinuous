@@ -18,7 +18,7 @@ runs:
     image: ghcr.io/socialgouv/docker/psql:7.0.0
     envFrom:
       - secretRef:
-          name: "{{ $.Values.global.pgSecretName }}"
+          name: "{{ tpl (or $.with.pgSecretName $.Values.global.pgSecretName) . }}"
     env:
       - name: SEED_PATH
         value: "{{ $.with.seedPath }}"
