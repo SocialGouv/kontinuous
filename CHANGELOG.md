@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.50.4 (2022-07-30)
+
+
+### Bug Fixes
+
+* **seed-db:** allow with.pgSecretName ([d78dc7f](https://github.com/SocialGouv/kontinuous/commit/d78dc7f031d4b4400c65639beb1cdae8904794a6))
+
 ### [1.50.3](https://github.com/SocialGouv/kontinuous/compare/v1.50.2...v1.50.3) (2022-07-29)
 
 
