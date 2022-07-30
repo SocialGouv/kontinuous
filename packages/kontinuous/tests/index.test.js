@@ -11,6 +11,7 @@ const dotenv = require("dotenv")
 const slug = require("~common/utils/slug")
 
 // jest.doMock("~common/utils/logger", () => loggerFactory({ sync: true }))
+jest.useFakeTimers()
 
 const getDirectoriesSync = require("~common/utils/get-directories-sync")
 
