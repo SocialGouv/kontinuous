@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.50.5 (2022-07-30)
+
+
+### Bug Fixes
+
+* **seed-db:** fix DB_SECRET_NAME ([1172118](https://github.com/SocialGouv/kontinuous/commit/117211868e6f225d481a4d5d91595cdaa5f09160))
+
 ### 1.50.4 (2022-07-30)
 
 
