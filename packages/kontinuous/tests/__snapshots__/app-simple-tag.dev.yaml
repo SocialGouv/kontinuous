@@ -177,3 +177,181 @@ spec:
       secretName: wildcard-crt
 "
 `;
+
+exports[`test build manifests with snapshots app-simple-tag.dev 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    janitor/ttl: 7d
+    field.cattle.io/projectId: '1234'
+    kontinuous/gitBranch: v1.2.3
+    kontinuous/mainNamespace: 'true'
+    kapp.k14s.io/exists: ''
+  labels:
+    application: test-app-simple-tag
+    cert: wildcard
+  name: test-app-simple-tag-v1-2-3-3sg4dn
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-app-simple-tag-v1-2-3-3sg4dn
+  annotations:
+    kapp.k14s.io/disable-original: ''
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-app-simple-tag-v1-2-3-3sg4dn
+  annotations:
+    kapp.k14s.io/disable-original: ''
+automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: test-app-simple-tag
+  name: app
+  namespace: test-app-simple-tag-v1-2-3-3sg4dn
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app
+    application: test-app-simple-tag
+  name: app
+  namespace: test-app-simple-tag-v1-2-3-3sg4dn
+  annotations:
+    kapp.k14s.io/change-group: kontinuous/test-app-simple-tag-v1-2-3-3sg4dn
+    kapp.k14s.io/change-group.app: kontinuous/app.test-app-simple-tag-v1-2-3-3sg4dn
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/nonce: ''
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  template:
+    metadata:
+      labels:
+        component: app
+        application: test-app-simple-tag
+        namespace: test-app-simple-tag-v1-2-3-3sg4dn
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: namespace
+                    operator: In
+                    values:
+                      - test-app-simple-tag-v1-2-3-3sg4dn
+                  - key: component
+                    operator: In
+                    values:
+                      - app
+              topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            harbor.fabrique.social.gouv.fr/test-app-simple-tag/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            httpGet:
+              path: /index.html
+              port: http
+            failureThreshold: 12
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-original: ''
+  labels:
+    component: app
+    application: test-app-simple-tag
+  name: app
+  namespace: test-app-simple-tag-v1-2-3-3sg4dn
+spec:
+  rules:
+    - host: test-app-simple-tag-v1-2-3-3sg4dn.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - test-app-simple-tag-v1-2-3-3sg4dn.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+"
+`;

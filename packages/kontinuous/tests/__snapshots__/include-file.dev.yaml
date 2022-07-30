@@ -110,3 +110,114 @@ spec:
           emptyDir: {}
 "
 `;
+
+exports[`test build manifests with snapshots include-file.dev 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    janitor/ttl: 7d
+    field.cattle.io/projectId: '1234'
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: 'true'
+    kapp.k14s.io/exists: ''
+  labels:
+    application: test-include-file
+  name: test-include-file-feature-branch-1
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-include-file-feature-branch-1
+  annotations:
+    kapp.k14s.io/disable-original: ''
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-include-file-feature-branch-1
+  annotations:
+    kapp.k14s.io/disable-original: ''
+automountServiceAccountToken: false
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-test-include-file-feature-branch-1-say-hello
+  namespace: awesome-ci
+  annotations:
+    kapp.k14s.io/nonce: ''
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/change-group: kontinuous/test-include-file-feature-branch-1
+    kapp.k14s.io/change-group.say-hello: kontinuous/say-hello.test-include-file-feature-branch-1
+    janitor/ttl: '1800'
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata: {}
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-repository
+          image: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
+          command:
+            - sh
+            - '-c'
+            - |
+              degit kontinuous/test-include-file#feature-branch-1 \\\\
+                /workspace
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+      containers:
+        - name: job
+          image: debian:stable
+          imagePullPolicy: IfNotPresent
+          workingDir: /workspace
+          command:
+            - /bin/bash
+            - '-c'
+            - |
+              set -e
+              Hello World !
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+"
+`;

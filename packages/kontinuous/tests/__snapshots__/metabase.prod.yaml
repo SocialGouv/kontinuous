@@ -394,3 +394,398 @@ spec:
     type: Opaque
 "
 `;
+
+exports[`test build manifests with snapshots metabase.prod 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: '1234'
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: 'true'
+    kapp.k14s.io/exists: ''
+  labels:
+    application: test-metabase
+  name: test-metabase
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-metabase
+  annotations:
+    kapp.k14s.io/disable-original: ''
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: test-metabase
+  annotations:
+    kapp.k14s.io/disable-original: ''
+automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    component: metabase-app1
+    application: test-metabase
+  name: metabase-app1
+  namespace: test-metabase
+  annotations:
+    kapp.k14s.io/disable-original: ''
+data:
+  MB_APPLICATION_NAME: metabase-app1
+  MB_DB_TYPE: postgres
+  MB_ADMIN_EMAIL: admin@fabrique.social.gouv.fr
+  MB_ANON_TRACKING_ENABLED: 'false'
+  MB_APPLICATION_LOGO_URL: https://socialgouv.github.io/support/_media/marianne.jpeg
+  MB_EMAIL_FROM_ADDRESS: contact@fabrique.social.gouv.fr
+  MB_ENABLE_EMBEDDING: 'true'
+  MB_ENABLE_PUBLIC_SHARING: 'true'
+  MB_SITE_LOCALE: fr
+  MB_SITE_NAME: Fabrique des ministères sociaux
+  MB_SITE_URL: https://metabase-app1-test-metabase.fabrique.social.gouv.fr
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    component: metabase-app2
+    application: test-metabase
+  name: metabase-app2
+  namespace: test-metabase
+  annotations:
+    kapp.k14s.io/disable-original: ''
+data:
+  MB_APPLICATION_NAME: metabase-app2
+  MB_DB_TYPE: postgres
+  MB_ADMIN_EMAIL: admin@fabrique.social.gouv.fr
+  MB_ANON_TRACKING_ENABLED: 'false'
+  MB_APPLICATION_LOGO_URL: https://socialgouv.github.io/support/_media/marianne.jpeg
+  MB_EMAIL_FROM_ADDRESS: contact@fabrique.social.gouv.fr
+  MB_ENABLE_EMBEDDING: 'true'
+  MB_ENABLE_PUBLIC_SHARING: 'true'
+  MB_SITE_LOCALE: fr
+  MB_SITE_NAME: Fabrique des ministères sociaux
+  MB_SITE_URL: https://metabase-app2-test-metabase.fabrique.social.gouv.fr
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: metabase1-configmap
+  namespace: test-metabase
+  annotations:
+    kapp.k14s.io/disable-original: ''
+data:
+  METABASE_ENV: production
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: metabase2-configmap
+  namespace: test-metabase
+  annotations:
+    kapp.k14s.io/disable-original: ''
+data:
+  METABASE_ENV: production
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: metabase-app1
+    application: test-metabase
+  name: metabase-app1
+  namespace: test-metabase
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: metabase-app1
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: metabase-app2
+    application: test-metabase
+  name: metabase-app2
+  namespace: test-metabase
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/disable-original: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: metabase-app2
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: metabase-app1
+    application: test-metabase
+  name: metabase-app1
+  namespace: test-metabase
+  annotations:
+    kapp.k14s.io/change-group: kontinuous/test-metabase
+    kapp.k14s.io/change-group.metabase-app1: kontinuous/metabase-app1.test-metabase
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/nonce: ''
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: metabase-app1
+  template:
+    metadata:
+      labels:
+        component: metabase-app1
+    spec:
+      containers:
+        - image: metabase/metabase:v0.43.4
+          name: metabase
+          envFrom:
+            - configMapRef:
+                name: metabase-app1
+            - secretRef:
+                name: metabase1-sealed-secret
+            - configMapRef:
+                name: metabase1-configmap
+          ports:
+            - containerPort: 3000
+              name: http
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 10
+            initialDelaySeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 10
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: metabase-app2
+    application: test-metabase
+  name: metabase-app2
+  namespace: test-metabase
+  annotations:
+    kapp.k14s.io/change-group: kontinuous/test-metabase
+    kapp.k14s.io/change-group.metabase-app2: kontinuous/metabase-app2.test-metabase
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/nonce: ''
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: metabase-app2
+  template:
+    metadata:
+      labels:
+        component: metabase-app2
+    spec:
+      containers:
+        - image: metabase/metabase:v0.43.4
+          name: metabase
+          envFrom:
+            - configMapRef:
+                name: metabase-app2
+            - secretRef:
+                name: metabase2-sealed-secret
+            - configMapRef:
+                name: metabase2-configmap
+          ports:
+            - containerPort: 3000
+              name: http
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 10
+            initialDelaySeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 10
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-original: ''
+    cert-manager.io: cluster-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: 'true'
+  labels:
+    component: metabase-app1
+    application: test-metabase
+  name: metabase-app1
+  namespace: test-metabase
+spec:
+  rules:
+    - host: metabase-app1-test-metabase.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: metabase-app1
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - metabase-app1-test-metabase.fabrique.social.gouv.fr
+      secretName: metabase-app1-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-original: ''
+    cert-manager.io: cluster-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: 'true'
+  labels:
+    component: metabase-app2
+    application: test-metabase
+  name: metabase-app2
+  namespace: test-metabase
+spec:
+  rules:
+    - host: metabase-app2-test-metabase.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: metabase-app2
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - metabase-app2-test-metabase.fabrique.social.gouv.fr
+      secretName: metabase-app2-crt
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: metabase1-sealed-secret
+  namespace: test-metabase
+  annotations:
+    kapp.k14s.io/disable-original: ''
+spec:
+  encryptedData:
+    METABASE_SECRET: >-
+      AgBc+UqJhU2ZBfuplyiI3pPekRjm36i62WYR1lVpM9PIwK636R78mpfckIeGU09qKAxWGYBqtYtvNP3lTG8OwEUqKLnUxZPZKbtwc78GwzEzaPpnWmM+j78uBDxqHDiW+jKwnD/6XiWxsfyd1ZU/qS0LDEJBnVRoDyUI0NxzFWLxG8ylr6oK3q+oD3338D588TimklZGOvRm/hI95d5uwKsYPz0zYOj28pgHzNMVycreOXi9l562agyg2hdb8AkFD41utLEURxJOomJUl2xZIjv6FX++R9OJQzRsX6WsCAkLZPO7VEi1cvG6QzPf/uchwystfQfW5c+5ofVJer5mLJJjFcO8OfNbsg/JYlndv4F90cjH2dojSHv/qH/ddpObPgkDpVzCljdTvrir5bl3z3KeqLb20ja1hLJlwOue4zHDCQ6Fwza8VN6BjbHZLYhOO5qlYfWezjwt+B6RdFVzD8wu2JbuWsJo5w2HhMl2Nckar1B8CPxzgRXnFwc/QsFTDXOXX+rtxnC4FJfffZ/2frV745c642AhOArDxk8OGDFkrexr5OMv0iJcY15cl6K9dfZWOKfFd5mxfWFhDWUSAoUZJsz4uVxpTCCoSJBe8Nf1aKk7PkZ+bXtV5bpuktySoPh0hG1M1dUg0WsSC2i6zp75AUxVW6c4GG7d9FMsTHIwyD7fEbV3TMRanSRFYNPOmft/oI7Q3oNGOGg26KCtX414FG02EnpmrttHQguY7cnHGG7i7s8mnyGv
+  template:
+    metadata:
+      name: metabase1-sealed-secret
+    type: Opaque
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: metabase2-sealed-secret
+  namespace: test-metabase
+  annotations:
+    kapp.k14s.io/disable-original: ''
+spec:
+  encryptedData:
+    METABASE_SECRET: >-
+      AgBc+UqJhU2ZBfuplyiI3pPekRjm36i62WYR1lVpM9PIwK636R78mpfckIeGU09qKAxWGYBqtYtvNP3lTG8OwEUqKLnUxZPZKbtwc78GwzEzaPpnWmM+j78uBDxqHDiW+jKwnD/6XiWxsfyd1ZU/qS0LDEJBnVRoDyUI0NxzFWLxG8ylr6oK3q+oD3338D588TimklZGOvRm/hI95d5uwKsYPz0zYOj28pgHzNMVycreOXi9l562agyg2hdb8AkFD41utLEURxJOomJUl2xZIjv6FX++R9OJQzRsX6WsCAkLZPO7VEi1cvG6QzPf/uchwystfQfW5c+5ofVJer5mLJJjFcO8OfNbsg/JYlndv4F90cjH2dojSHv/qH/ddpObPgkDpVzCljdTvrir5bl3z3KeqLb20ja1hLJlwOue4zHDCQ6Fwza8VN6BjbHZLYhOO5qlYfWezjwt+B6RdFVzD8wu2JbuWsJo5w2HhMl2Nckar1B8CPxzgRXnFwc/QsFTDXOXX+rtxnC4FJfffZ/2frV745c642AhOArDxk8OGDFkrexr5OMv0iJcY15cl6K9dfZWOKfFd5mxfWFhDWUSAoUZJsz4uVxpTCCoSJBe8Nf1aKk7PkZ+bXtV5bpuktySoPh0hG1M1dUg0WsSC2i6zp75AUxVW6c4GG7d9FMsTHIwyD7fEbV3TMRanSRFYNPOmft/oI7Q3oNGOGg26KCtX414FG02EnpmrttHQguY7cnHGG7i7s8mnyGv
+  template:
+    metadata:
+      name: metabase2-sealed-secret
+    type: Opaque
+"
+`;
