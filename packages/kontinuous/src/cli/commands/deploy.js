@@ -23,6 +23,8 @@ module.exports = (program) =>
     .addOption(options.webhookUriPattern)
     .addOption(options.webhookUri)
     .addOption(options.ignoreProjectTemplates)
+    .addOption(options.kubeconfigContext)
+    .addOption(options.kubeconfigContextNoDetect)
     .option(
       "--on-webhook, -w",
       "trigger built manifests deploying via webhook endpoint"
@@ -39,11 +41,6 @@ module.exports = (program) =>
       "--file, -f <file>",
       "select a manifests yaml file, default will build one"
     )
-    .option(
-      "--kubeconfig-context <context>",
-      "kubeconfig context, default inferred from environment"
-    )
-    .option("--kubeconfig-context-no-detect", "don't infer kubeconfig context")
     .option("--timeout <timeout>", "deploy wait timeout, default 15m0s")
     .description(
       "Deploy manifests using kapp with current directory configuration"

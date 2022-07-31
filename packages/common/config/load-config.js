@@ -329,6 +329,10 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
           ? `${config.projectName || config.repositoryName}-ci`
           : null,
     },
+    isLocal: {
+      env: "KS_ISLOCAL",
+      default: false,
+    },
     environmentClusters: {
       transform: (value) => ({
         ...{
@@ -350,13 +354,27 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
       option: "kubeconfig",
       env: ["KS_KUBECONFIG", "KUBECONFIG"],
     },
+    environmentKubeconfigContexts: {
+      defaultFunction: (config) => config.environmentClusters,
+    },
+    kubeconfigContextNoDetect: {
+      option: "kubeconfigContextNoDetect",
+      env: "KS_KUBECONFIG_CONTEXT_NO_DETECT",
+    },
     kubeconfigContext: {
       option: "kubeconfigContext",
       env: "KS_KUBECONFIG_CONTEXT",
-    },
-    isLocal: {
-      env: "KS_ISLOCAL",
-      default: false,
+      defaultFunction: (config) => {
+        const {
+          isLocal,
+          kubeconfigContextNoDetect,
+          environment,
+          environmentKubeconfigContexts,
+        } = config
+        if (isLocal && !kubeconfigContextNoDetect) {
+          return environmentKubeconfigContexts[environment]
+        }
+      },
     },
     links: {
       transform: async (links = {}) => {
