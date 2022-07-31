@@ -26,6 +26,7 @@ module.exports = () => {
       ctx.set("config", config)
 
       const logger = createLogger({
+        sync: false,
         secrets: [...(config.webhookToken ? [config.webhookToken] : [])],
       })
       ctx.set("logger", logger)

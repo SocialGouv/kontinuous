@@ -35,6 +35,7 @@ module.exports = async (options) => {
   const { webhookUri, webhookToken: token } = config
 
   const query = qs.stringify({
+    project: config.projectName,
     repository,
     event,
     env,

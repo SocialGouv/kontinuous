@@ -1,6 +1,7 @@
 const pino = require("pino")
 
 module.exports = (options = {}) => {
+  const { sync = false, prettyOptions = {} } = options
   const logger = pino({
     transport: {
       pipeline: [
@@ -11,6 +12,8 @@ module.exports = (options = {}) => {
             prettyOptions: {
               translateTime: "yyyy-mm-dd HH:MM:ss",
               ignore: "pid,hostname",
+              sync,
+              ...prettyOptions,
             },
             destination: 2,
             level: "trace",

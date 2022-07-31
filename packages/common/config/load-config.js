@@ -276,6 +276,7 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
           return
         }
         const query = qs.stringify({
+          project: config.projectName,
           repository: config.gitRepositoryUrl,
           branch: config.gitBranch,
           commit: config.gitSha,
@@ -293,6 +294,7 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
           return
         }
         const query = qs.stringify({
+          project: config.projectName,
           repository: config.gitRepositoryUrl,
           branch: config.gitBranch,
           commit: config.gitSha,
@@ -310,6 +312,7 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
           return
         }
         const query = qs.stringify({
+          project: config.projectName,
           repository: config.gitRepositoryUrl,
           branch: config.gitBranch,
           commit: config.gitSha,

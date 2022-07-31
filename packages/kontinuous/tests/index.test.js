@@ -7,10 +7,10 @@ const os = require("os")
 const fs = require("fs-extra")
 const dotenv = require("dotenv")
 
-// const loggerFactory = require("~common/utils/logger-factory")
+const loggerFactory = require("~common/utils/logger-factory")
 const slug = require("~common/utils/slug")
 
-// jest.doMock("~common/utils/logger", () => loggerFactory({ sync: true }))
+jest.doMock("~common/utils/logger", () => loggerFactory({ sync: true }))
 
 const getDirectoriesSync = require("~common/utils/get-directories-sync")
 

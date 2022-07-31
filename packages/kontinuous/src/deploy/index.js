@@ -78,6 +78,7 @@ module.exports = async (options) => {
       })
 
       const query = qs.stringify({
+        project: config.projectName,
         env: environment,
         token,
         hash: jobHash,
