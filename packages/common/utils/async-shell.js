@@ -28,6 +28,7 @@ const promiseFromChildProcess = (child, callback, logger) => {
       } else {
         const error = new Error(err.join())
         error.code = code
+        logger.error("error running command")
         reject(error)
       }
     })
@@ -43,5 +44,9 @@ module.exports = (
   const [cmd, args] = parseCommand(arg)
   const defaultOptions = { encoding: "utf8" }
   const childProcess = spawn(cmd, args, { ...defaultOptions, ...options })
-  return promiseFromChildProcess(childProcess, callback, logger)
+  return promiseFromChildProcess(
+    childProcess,
+    callback,
+    logger.child({ cmd, args })
+  )
 }
