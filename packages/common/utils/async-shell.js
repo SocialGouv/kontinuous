@@ -22,13 +22,13 @@ const promiseFromChildProcess = (child, callback, logger) => {
     child.on("close", (code) => {
       if (code === 0) {
         if (err.length > 0) {
-          logger.warn(err.join())
+          logger.trace(err.join())
         }
         resolve(Buffer.concat(out).toString())
       } else {
         const error = new Error(err.join())
         error.code = code
-        logger.error("error running command")
+        logger.trace("error running command")
         reject(error)
       }
     })
