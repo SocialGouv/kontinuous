@@ -84,6 +84,7 @@ module.exports = () => {
       env,
       gitBranch,
       gitCommit,
+      project,
       webhookUri,
       webhookToken,
       commits,

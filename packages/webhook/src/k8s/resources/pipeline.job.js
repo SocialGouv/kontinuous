@@ -14,6 +14,7 @@ module.exports = ({
   env,
   gitBranch,
   gitCommit,
+  project,
   webhookUri,
   webhookToken,
   initContainers = [],
@@ -94,6 +95,10 @@ module.exports = ({
               {
                 name: "KS_WEBHOOK_TOKEN",
                 value: webhookToken,
+              },
+              {
+                name: "KS_PROJECT_NAME",
+                value: project,
               },
               {
                 name: "KS_GIT_REPOSITORY_URL",
