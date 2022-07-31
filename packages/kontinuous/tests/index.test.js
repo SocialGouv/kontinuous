@@ -7,10 +7,25 @@ const os = require("os")
 const fs = require("fs-extra")
 const dotenv = require("dotenv")
 
-const loggerFactory = require("~common/utils/logger-factory")
+const pino = require("pino")
+const pretty = require("pino-pretty")
+
 const slug = require("~common/utils/slug")
 
-jest.doMock("~common/utils/logger", () => loggerFactory({ sync: true }))
+jest.doMock("~common/utils/logger-factory", () => {
+  const logger = pino(pretty({ sync: true }))
+  logger.configureDebug = (debug) => {
+    if (
+      debug &&
+      debug !== "0" &&
+      debug !== "false" &&
+      pino.levels.values.debug < pino.levels.values[logger.level]
+    ) {
+      logger.level = pino.levels.values.debug
+    }
+  }
+  return () => logger
+})
 
 const getDirectoriesSync = require("~common/utils/get-directories-sync")
 
