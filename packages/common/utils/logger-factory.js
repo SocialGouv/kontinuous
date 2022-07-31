@@ -1,28 +1,35 @@
 const pino = require("pino")
+const { default: bfuscate } = require("pino-bfuscate")
 
 module.exports = (opts = {}) => {
-  const { prettyOptions = {}, ...options } = opts
-  const logger = pino({
-    transport: {
-      pipeline: [
-        {
-          target: "pino-bfuscate",
-          options: {
-            pretty: true,
-            prettyOptions: {
-              translateTime: "yyyy-mm-dd HH:MM:ss",
-              ignore: "pid,hostname",
-              ...prettyOptions,
-            },
-            destination: 2,
-            level: "trace",
-            secrets: options.secrets || [],
-            ...options,
-          },
-        },
-      ],
+  const { prettyOptions = {}, ...mergeOptions } = opts
+  const options = {
+    pretty: true,
+    prettyOptions: {
+      translateTime: "yyyy-mm-dd HH:MM:ss",
+      ignore: "pid,hostname",
+      ...prettyOptions,
     },
-  })
+    destination: 2,
+    level: "trace",
+    secrets: mergeOptions.secrets || [],
+    ...mergeOptions,
+  }
+  let logger
+  if (opts.sync) {
+    logger = pino(bfuscate(options))
+  } else {
+    logger = pino({
+      transport: {
+        pipeline: [
+          {
+            target: "pino-bfuscate",
+            options,
+          },
+        ],
+      },
+    })
+  }
 
   const configureDebug = (debug) => {
     if (
