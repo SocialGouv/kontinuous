@@ -4,12 +4,6 @@ on:
       webhookUri:
         required: false
         type: string
-      webhookUriPattern:
-        required: false
-        type: string
-      webhookBaseDomain:
-        required: false
-        type: string
     secrets:
       KUBEWEBHOOK_TOKEN:
         required: true
@@ -25,5 +19,3 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           webhookToken: ${{ secrets.KUBEWEBHOOK_TOKEN }}
           webhookUri: ${{ inputs.webhookUri }}
-          webhookUriPattern: ${{ inputs.webhookUriPattern || 'https://webhook-${projectName}.${baseDomain}' }}
-          webhookBaseDomain: ${{ inputs.webhookBaseDomain || 'fabrique.social.gouv.fr' }}

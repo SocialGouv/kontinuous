@@ -7,10 +7,6 @@ inputs:
     description: "The webhook authentication token, usually secrets.KUBEWEBHOOK_TOKEN"
   webhookUri:
     description: "The webhook uri"
-  webhookUriPattern:
-    description: "The webhook uri pattern"
-  webhookBaseDomain:
-    description: "The webhook base domain"
   triggerWebhook:
     description: "Trigger webhook on first call, useful when webhooks are not configured on the repo"
 outputs:
@@ -45,13 +41,6 @@ runs:
         KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/heads/}
         KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/tags/}
         KS_GIT_BRANCH_URLENCODED=$(echo $KS_GIT_BRANCH | sed 's/\//\%2f/g')
-
-        if [ -n '${{ inputs.webhookUri }}' ]; then
-          KS_WEBHOOK_URI='${{ inputs.webhookUri }}'
-        else
-          KS_WEBHOOK_URI_PATTERN='${{ inputs.webhookUriPattern }}'
-        fi
-        KS_WEBHOOK_BASE_DOMAIN='${{ inputs.webhookBaseDomain }}'
         
         KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
         KS_GIT_REPOSITORY_URLENCODED=$(echo $KS_GIT_REPOSITORY | sed 's/\//\%2f/g')
@@ -69,8 +58,6 @@ runs:
         fi
 
         export KS_WEBHOOK_URI
-        export KS_WEBHOOK_URI_PATTERN
-        export KS_WEBHOOK_BASE_DOMAIN
         export KS_WEBHOOK_TOKEN
         export KS_GIT_BRANCH
         export KS_GIT_SHA
@@ -81,10 +68,12 @@ runs:
         
         KS_ENVIRONMENT=$(echo "$KONTINUOUS_CONFIG" | jq -r ".environment")
         KS_WEBHOOK_URI=$(echo "$KONTINUOUS_CONFIG" | jq -r ".webhookUri")
+        KS_PROJECT_NAME=$(echo "$KONTINUOUS_CONFIG" | jq -r ".projectName")
 
         echo "::set-output name=env::$KS_ENVIRONMENT"
 
         echo "KS_ENVIRONMENT=$KS_ENVIRONMENT">>$GITHUB_ENV
+        echo "KS_PROJECT_NAME=$KS_PROJECT_NAME">>$GITHUB_ENV
         echo "KS_WEBHOOK_URI=$KS_WEBHOOK_URI">>$GITHUB_ENV
         echo "KS_WEBHOOK_TOKEN=${{ inputs.webhookToken }}">>$GITHUB_ENV
         echo "KS_GIT_BRANCH=$KS_GIT_BRANCH">>$GITHUB_ENV
@@ -107,7 +96,7 @@ runs:
           wget --content-on-error -qO- \
             --post-data "{\"repositoryUrl\":\"${KS_GIT_REPOSITORY}\",\"ref\":\"${KS_GIT_BRANCH}\",\"commit\":\"${KS_GIT_SHA}\"}" \
             --header='Content-Type:application/json' \
-            "${KS_WEBHOOK_URI}/api/v1/oas/hooks/user?event=${KS_EVENT}&token=${KS_WEBHOOK_TOKEN}"
+            "${KS_WEBHOOK_URI}/api/v1/oas/hooks/user?project=${KS_PROJECT_NAME}&event=${KS_EVENT}&token=${KS_WEBHOOK_TOKEN}"
         fi
 
     - name: Stream logs of kube pipeline
@@ -129,14 +118,14 @@ runs:
     - name: Get status of pipeline
       shell: bash
       run: |
-        wget --content-on-error -q -O deployment-status.json "${KS_WEBHOOK_URI}/api/v1/oas/artifacts/status?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
+        wget --content-on-error -q -O deployment-status.json "${KS_WEBHOOK_URI}/api/v1/oas/artifacts/status?project=${KS_PROJECT_NAME}&repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
         DEPLOYMENT_STATUS=$(cat deployment-status.json)
         status=$(echo "$DEPLOYMENT_STATUS" | jq .status)
         echo "status:  $status"
         
         if [ "$status" = "loading" ]; then
           sleep 5
-          wget --content-on-error -q -O deployment-status.json "${KS_WEBHOOK_URI}/api/v1/oas/artifacts/status?repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
+          wget --content-on-error -q -O deployment-status.json "${KS_WEBHOOK_URI}/api/v1/oas/artifacts/status?project=${KS_PROJECT_NAME}&repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
           DEPLOYMENT_STATUS=$(cat deployment-status.json)
           status=$(echo "$DEPLOYMENT_STATUS" | jq .status)
           echo "status:  $status"
