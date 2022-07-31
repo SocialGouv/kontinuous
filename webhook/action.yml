@@ -57,8 +57,6 @@ runs:
           KS_EVENT=pushed
         fi
 
-        export KS_WEBHOOK_URI
-        export KS_WEBHOOK_TOKEN
         export KS_GIT_BRANCH
         export KS_GIT_SHA
         export KS_GIT_REPOSITORY
