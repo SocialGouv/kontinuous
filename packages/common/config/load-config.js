@@ -257,7 +257,7 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
         }
         const { webhookUriPattern } = config
         if (!webhookUriPattern) {
-          return null
+          return
         }
         return webhookUriPattern
           .replace(
@@ -335,7 +335,7 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
       defaultFunction: (config) =>
         config.repositoryName
           ? `${config.projectName || config.repositoryName}-ci`
-          : null,
+          : undefined,
     },
     isLocal: {
       env: "KS_ISLOCAL",
@@ -577,6 +577,7 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
     config,
     beforeChildren: async ({ definition }) => {
       const { config: extendsConfig } = definition
+      // console.log({ extendsConfig })
       if (!extendsConfig) {
         return
       }
