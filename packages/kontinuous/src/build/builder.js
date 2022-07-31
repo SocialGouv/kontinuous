@@ -57,7 +57,7 @@ module.exports = async (_options = {}) => {
   logger.debug("Load manifests")
   manifests = await loadManifests(manifests, config)
 
-  logger.trace(`Manifests: \n${yaml.dump(manifests)}`)
+  // logger.trace(`Manifests: \n${yaml.dump(manifests)}`)
 
   logger.debug("Apply patches")
   manifests = await applyPatches(manifests, values)
@@ -67,9 +67,7 @@ module.exports = async (_options = {}) => {
   // console.log(JSON.stringify(manifests, null, 2))
 
   logger.debug("Build final output")
-  const manifestsDump = manifests
-    .map((manifest) => yaml.dump(manifest))
-    .join("---\n")
+  const manifestsDump = yaml.dumpAll(manifests)
 
   logger.debug("Write manifests file")
   const manifestsFile = `${buildPath}/manifests.yaml`
