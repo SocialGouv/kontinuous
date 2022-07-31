@@ -3,7 +3,7 @@ const yaml = require("~common/utils/yaml")
 module.exports =
   ({ services }) =>
   async ({ cluster, env, hash, manifests, repositoryUrl }) => {
-    const sanitizedManifests = yaml.dump(yaml.load(manifests)) // protect against injections
+    const sanitizedManifests = yaml.dump(yaml.loadAll(manifests)) // protect against injections
     const initContainers = [
       {
         name: "write-custom-manifest",
