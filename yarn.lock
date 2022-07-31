@@ -12094,6 +12094,7 @@ __metadata:
   peerDependencies:
     fs-extra: ^10.0.1
     js-yaml: ^4.1.0
+    lodash.defaultsdeep: ^4.6.1
     lodash.mergewith: ^4.6.2
     pino: ^7.10.0
     pino-bfuscate: ^1.0.0
@@ -12137,6 +12138,7 @@ __metadata:
     jest: "npm:^27.5.1"
     js-yaml: "npm:^4.1.0"
     link-module-alias: "npm:^1.2.0"
+    lodash.defaultsdeep: "npm:^4.6.1"
     lodash.mergewith: "npm:^4.6.2"
     micromatch: "npm:^4.0.5"
     node-cron: "npm:^3.0.0"

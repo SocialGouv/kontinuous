@@ -7,6 +7,7 @@
   "peerDependencies": {
     "fs-extra": "^10.0.1",
     "js-yaml": "^4.1.0",
+    "lodash.defaultsdeep": "^4.6.1",
     "lodash.mergewith": "^4.6.2",
     "pino": "^7.10.0",
     "pino-bfuscate": "^1.0.0",

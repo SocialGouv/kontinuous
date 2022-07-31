@@ -4,6 +4,7 @@ const { mkdtemp } = require("fs/promises")
 
 const fs = require("fs-extra")
 const set = require("lodash.set")
+const defaultsDeep = require("lodash.defaultsdeep")
 const qs = require("qs")
 
 const ctx = require("../ctx")
@@ -21,6 +22,7 @@ const refEnv = require("../utils/ref-env")
 const normalizeRepositoryUrl = require("../utils/normalize-repository-url")
 
 const loadDependencies = require("./load-dependencies")
+const recurseDependency = require("./recurse-dependencies")
 
 const { version } = require(`${__dirname}/../package.json`)
 
@@ -568,7 +570,19 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
       acc[key] = value
       return acc
     }, {})
+
   await loadDependencies(config)
+
+  await recurseDependency({
+    config,
+    beforeChildren: async ({ definition }) => {
+      const { config: extendsConfig } = definition
+      if (!extendsConfig) {
+        return
+      }
+      defaultsDeep(config, extendsConfig)
+    },
+  })
 
   return config
 }
