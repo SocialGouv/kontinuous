@@ -1,7 +1,8 @@
 // const image = "ghcr.io/socialgouv/kube-workflow:latest"
 // const checkoutImage = "ghcr.io/socialgouv/kube-workflow/degit:latest"
 
-const image = "harbor.fabrique.social.gouv.fr/sre/kontinuous:v1"
+// const image = "harbor.fabrique.social.gouv.fr/sre/kontinuous:v1"
+const image = "ghcr.io/socialgouv/kontinuous:next"
 const checkoutImage = "harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1"
 
 module.exports = ({
