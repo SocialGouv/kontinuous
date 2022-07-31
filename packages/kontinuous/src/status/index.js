@@ -1,6 +1,7 @@
 const axios = require("axios")
 
 const ctx = require("~common/ctx")
+const handleAxiosError = require("~common/utils/hanlde-axios-error")
 
 const setStatus = async ({ url, status, ok = null }) => {
   const logger = ctx.require("logger")
@@ -14,17 +15,7 @@ const setStatus = async ({ url, status, ok = null }) => {
     logger.debug(response.data)
     return true
   } catch (error) {
-    if (error.response) {
-      logger.error(`post status error: status ${error.response.status}`)
-      logger.error(error.response.data)
-      logger.debug(error.response.headers)
-      logger.error(error.request)
-    } else if (error.request) {
-      logger.error(`post status error: request`)
-      logger.error(error.request)
-    } else {
-      logger.error(`post status error: ${error.message}`)
-    }
+    handleAxiosError(error, logger)
     return false
   }
 }
@@ -40,17 +31,7 @@ const getStatus = async ({ url }) => {
     logger.debug(`deploy status: ${response.data.status}`)
     return response.data
   } catch (error) {
-    if (error.response) {
-      logger.error(`get status error: status ${error.response.status}`)
-      logger.error(error.response.data)
-      logger.debug(error.response.headers)
-      logger.error(error.request)
-    } else if (error.request) {
-      logger.error(`get status error: request`)
-      logger.error(error.request)
-    } else {
-      logger.error(`get status error: ${error.message}`)
-    }
+    handleAxiosError(error, logger)
     return false
   }
 }

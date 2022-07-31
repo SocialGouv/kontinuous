@@ -13,6 +13,7 @@ const timeLogger = require("~common/utils/time-logger")
 const slug = require("~common/utils/slug")
 const parseCommand = require("~common/utils/parse-command")
 const validateMd5 = require("~common/utils/validate-md5")
+const handleAxiosError = require("~common/utils/hanlde-axios-error")
 
 const needBin = require("~/bin/need-bin")
 const build = require("~/build")
@@ -96,17 +97,7 @@ module.exports = async (options) => {
         logger.debug(response.data)
         logger.info("uploaded custom manifests to deploy")
       } catch (error) {
-        if (error.response) {
-          logger.error(`upload error: status ${error.response.status}`)
-          logger.error(error.response.data)
-          logger.debug(error.response.headers)
-          logger.error(error.request)
-        } else if (error.request) {
-          logger.error(`upload error: request`)
-          logger.error(error.request)
-        } else {
-          logger.error(`upload error: ${error.message}`)
-        }
+        handleAxiosError(error, logger)
       }
 
       if (options.onWebhookDetach) {

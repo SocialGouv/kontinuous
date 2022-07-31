@@ -1,9 +1,10 @@
 const stream = require("stream")
 const { promisify } = require("util")
 const axios = require("axios")
+const qs = require("qs")
 
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
-const qs = require("qs")
+const handleAxiosError = require("~common/utils/hanlde-axios-error")
 
 const ctx = require("~common/ctx")
 
@@ -60,21 +61,6 @@ module.exports = async (options) => {
       return finished(writeStream)
     })
   } catch (error) {
-    if (error.response) {
-      logger.error(
-        `log error: status ${error.response.status} ${error.response.statusText}`
-      )
-      if (error.response.data.msg) {
-        logger.error(error.response.data.msg)
-      }
-      logger.error(`failed url: ${url}`)
-      // logger.debug(error.response.headers)
-      // logger.error(error.request)
-    } else if (error.request) {
-      logger.error(`logs error: request`)
-      logger.error(error.request)
-    } else {
-      logger.error(`logs error: ${error.message}`)
-    }
+    handleAxiosError(error, logger)
   }
 }

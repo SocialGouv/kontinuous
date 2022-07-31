@@ -4,6 +4,7 @@ const qs = require("qs")
 const fs = require("fs-extra")
 
 const ctx = require("~common/ctx")
+const handleAxiosError = require("~common/utils/hanlde-axios-error")
 
 module.exports = async ({ name, file }) => {
   const config = ctx.require("config")
@@ -44,21 +45,7 @@ module.exports = async ({ name, file }) => {
     logger.info(`uploaded "${file}" as artifact "${dest}"`)
     return true
   } catch (error) {
-    if (error.response) {
-      logger.error(
-        `upload error: status ${error.response.status} ${error.response.statusText}`
-      )
-      if (error.response.data.msg) {
-        logger.error(error.response.data.msg)
-      }
-      logger.debug(error.response.headers)
-      // logger.error(error.request)
-    } else if (error.request) {
-      logger.error(`upload error: request`)
-      logger.error(error.request)
-    } else {
-      logger.error(`upload error: ${error.message}`)
-    }
+    handleAxiosError(error, logger)
     return false
   }
 }

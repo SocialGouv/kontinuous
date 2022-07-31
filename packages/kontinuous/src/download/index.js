@@ -4,6 +4,7 @@ const axios = require("axios")
 const qs = require("qs")
 
 const ctx = require("~common/ctx")
+const handleAxiosError = require("~common/utils/hanlde-axios-error")
 
 module.exports = async ({ name, file }) => {
   const config = ctx.require("config")
@@ -51,30 +52,7 @@ module.exports = async ({ name, file }) => {
     logger.info(`downloaded artifact "${dest}" to "${file}"`)
     return true
   } catch (error) {
-    if (error.response) {
-      logger.error(
-        {
-          status: error.response.status,
-          statusText: error.response.statusText,
-          downloadUrl,
-        },
-        "download error"
-      )
-      if (error.response.data.msg) {
-        logger.error(error.response.data.msg)
-      }
-      // logger.error(error.request)
-    } else if (error.request) {
-      logger.error(
-        { errorRequest: error.request, downloadUrl },
-        `download error`
-      )
-    } else {
-      logger.error(
-        { errorMessage: error.message, downloadUrl },
-        "download error"
-      )
-    }
+    handleAxiosError(error, logger)
     return false
   }
 }

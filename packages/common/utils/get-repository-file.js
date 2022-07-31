@@ -2,6 +2,7 @@ const axios = require("axios")
 
 const normalizeRepositoryUrl = require("./normalize-repository-url")
 const defaultLogger = require("./logger")
+const handleAxiosError = require("./hanlde-axios-error")
 
 module.exports = async ({
   ref,
@@ -18,11 +19,6 @@ module.exports = async ({
     const response = await axios.get(rawUrl)
     return response.data
   } catch (error) {
-    if (error.response?.status === 404) {
-      logger.debug({ rawUrl, ref, file }, `file "${file}" not found`)
-    } else {
-      logger.error({ rawUrl, ref, file, error }, `unable to retrieve "${file}"`)
-      throw error
-    }
+    handleAxiosError(error, logger)
   }
 }
