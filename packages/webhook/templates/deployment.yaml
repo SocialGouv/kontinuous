@@ -29,13 +29,13 @@ spec:
             - key: {{ or $secret.key "KUBECONFIG" }}
               path: {{ $secret.cluster }}
         {{ end }}
-        {{ range $secret := .Values.tokenSecrets }}
+        {{ range $index, $secret := .Values.tokenSecrets }}
         - name: secret-token-{{ $secret.name }}
           secret:
             secretName: {{ $secret.name }}
             items:
             - key: {{ or $secret.key "TOKEN" }}
-              path: {{ $secret.project }}
+              path: "{{ or $secret.tokenId $index }}"
         {{ end }}
       containers:
         - name: webhook
