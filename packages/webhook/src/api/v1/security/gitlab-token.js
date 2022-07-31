@@ -1,13 +1,20 @@
 module.exports =
-  ({ services: { getProjectToken, projectGranted } }) =>
+  ({ services: { getProjectTokens, projectGranted } }) =>
   async (req, _scopes, _schema) => {
     const gitlabToken = req.get("X-Gitlab-Token")
-    const token = getProjectToken(req)
-    if (!token) {
+
+    const tokens = getProjectTokens(req)
+    if (tokens.length === 0) {
       return false
     }
 
-    const granted = gitlabToken === token
+    let granted
+    for (const token of tokens) {
+      granted = gitlabToken === token
+      if (granted) {
+        break
+      }
+    }
 
     if (granted) {
       projectGranted(req)

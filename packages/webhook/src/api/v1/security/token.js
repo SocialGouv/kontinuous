@@ -1,18 +1,23 @@
 module.exports =
-  ({ services: { getProjectToken, projectGranted } }) =>
+  ({ services: { getProjectTokens, projectGranted } }) =>
   async (req, _scopes, _schema) => {
     const { token: queryToken } = req.query
     if (!queryToken) {
       return false
     }
 
-    const token = getProjectToken(req)
-
-    if (!token) {
+    const tokens = getProjectTokens(req)
+    if (tokens.length === 0) {
       return false
     }
 
-    const granted = queryToken === token
+    let granted
+    for (const token of tokens) {
+      granted = queryToken === token
+      if (granted) {
+        break
+      }
+    }
 
     if (granted) {
       projectGranted(req)

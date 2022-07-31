@@ -1,20 +1,26 @@
 module.exports =
-  ({ services: { verifyHmac, getProjectToken, projectGranted } }) =>
+  ({ services: { verifyHmac, getProjectTokens, projectGranted } }) =>
   async (req, _scopes, _schema) => {
     const signature = req.get("X-Gitea-Signature")
     if (!signature) {
       return false
     }
-    const token = getProjectToken(req)
-    if (!token) {
+    const tokens = getProjectTokens(req)
+    if (tokens.length === 0) {
       return false
     }
 
-    const granted = await verifyHmac({
-      signature,
-      body: req.rawBody,
-      secret: token,
-    })
+    let granted
+    for (const token of tokens) {
+      granted = await verifyHmac({
+        signature,
+        body: req.rawBody,
+        secret: token,
+      })
+      if (granted) {
+        break
+      }
+    }
 
     if (granted) {
       projectGranted(req)
