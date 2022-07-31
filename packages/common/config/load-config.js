@@ -18,6 +18,8 @@ const asyncShell = require("../utils/async-shell")
 const deepmerge = require("../utils/deepmerge")
 const logger = require("../utils/logger")
 const refEnv = require("../utils/ref-env")
+const normalizeRepositoryUrl = require("../utils/normalize-repository-url")
+
 const loadDependencies = require("./load-dependencies")
 
 const { version } = require(`${__dirname}/../package.json`)
@@ -406,7 +408,9 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
           let remoteExists
           try {
             await asyncShell(
-              `git ls-remote --exit-code --heads ${gitRepositoryUrl} ${gitBranch}`
+              `git ls-remote --exit-code --heads ${normalizeRepositoryUrl(
+                gitRepositoryUrl
+              )} ${gitBranch}`
             )
             remoteExists = true
           } catch (error) {

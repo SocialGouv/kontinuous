@@ -4,6 +4,8 @@ const fs = require("fs-extra")
 
 const asyncShell = require("./async-shell")
 
+const normalizeRepositoryUrl = require("./normalize-repository-url")
+
 const supported = {
   github: ".com",
   gitlab: ".com",
@@ -57,7 +59,9 @@ module.exports = async (target) => {
   if (!hash) {
     return true
   }
-  const lsRemote = await asyncShell(`git ls-remote ${repo.url} ${repo.ref}`)
+  const lsRemote = await asyncShell(
+    `git ls-remote ${normalizeRepositoryUrl(repo.url)} ${repo.ref}`
+  )
   const refs = lsRemote.split("\t")
   if (refs.length < 2) {
     return true
