@@ -25,15 +25,19 @@ const loadDependencies = require("./load-dependencies")
 const { version } = require(`${__dirname}/../package.json`)
 
 const mergeProjectsAndOrganizations = (config) => {
-  const { organizations, projects, gitRepositoryName } = config
-  if (projects && projects[gitRepositoryName]) {
-    const project = projects[gitRepositoryName]
-    const { organization } = project
+  const { organizations, projects, project, gitRepositoryName } = config
+  if (projects && projects[project]) {
+    const projectConfig = projects[project]
+    const { organization } = projectConfig
     if (organization && organizations[organization]) {
       const org = organizations[organization]
       deepmerge(config, org)
     }
-    deepmerge(config, project)
+    deepmerge(config, projectConfig)
+    const repositoryConfig = projectConfig.repositories?.[gitRepositoryName]
+    if (repositoryConfig) {
+      deepmerge(config, repositoryConfig)
+    }
   }
 }
 
