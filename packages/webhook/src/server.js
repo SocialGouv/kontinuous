@@ -3,7 +3,9 @@ const defaultsDeep = require("lodash.defaultsdeep")
 
 const customConfig = require(`~/config`)
 
-module.exports = (options = {}) => {
+const commonCtx = require("~common/ctx")
+
+module.exports = async (options = {}) => {
   options = defaultsDeep(options, {
     plugins: {
       config: {
@@ -25,5 +27,6 @@ module.exports = (options = {}) => {
       },
     },
   })
-  modjo(options)
+  commonCtx.provide()
+  await modjo(options)
 }
