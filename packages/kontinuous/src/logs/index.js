@@ -28,7 +28,7 @@ module.exports = async (options) => {
     return
   }
 
-  const { event } = config
+  const event = options.event || config.event
 
   const repository = repositoryFromGitUrl(repositoryMixed)
 
@@ -49,6 +49,7 @@ module.exports = async (options) => {
 
   const finished = promisify(stream.finished)
   const writeStream = process.stdout
+
   try {
     await axios({
       method: "get",
