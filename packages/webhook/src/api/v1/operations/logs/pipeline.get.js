@@ -116,7 +116,7 @@ module.exports = function ({ services }) {
         repository: repositoryMixed,
         ref: repoConfigRef,
       },
-      { git: false }
+      { git: false, gitSha: commit }
     )
     if (!env) {
       const { environmentPatterns } = repositoryConfig

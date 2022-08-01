@@ -33,7 +33,7 @@ module.exports = ({ services }) => {
         repository: repositoryUrl,
         ref: branchConfig,
       },
-      { git: false }
+      { git: false, gitSha: gitCommit }
     )
     const { cluster } = repositoryConfig
     const project = reqCtx.require("project")
