@@ -27,7 +27,6 @@ const findAliasOf = async (
       }
       return foundScope
     }
-    // console.log([...scope, k])
     const found = await findAliasOf(
       search,
       values[k],
@@ -62,7 +61,6 @@ module.exports = async (values, _options, _context) => {
     if (scope) {
       val._chart = scope.join(".")
     }
-    // console.log(search, val._chart)
   }
   return values
 }

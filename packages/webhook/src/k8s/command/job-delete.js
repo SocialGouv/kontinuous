@@ -42,7 +42,6 @@ module.exports = async (namespace, name, kubeconfig) => {
       })
     })
   } catch (err) {
-    console.log("E", err)
     logger.error(err)
     throw err
   }

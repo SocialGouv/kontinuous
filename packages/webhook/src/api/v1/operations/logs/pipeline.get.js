@@ -118,7 +118,6 @@ module.exports = function ({ services }) {
 
     if (!env) {
       const { environmentPatterns } = repositoryConfig
-      console.log({ environmentPatterns, ref })
       env = refEnv(ref, environmentPatterns)
     }
     const { cluster } = repositoryConfig

@@ -62,10 +62,6 @@ module.exports = async (_options = {}) => {
   logger.debug("Apply patches")
   manifests = await applyPatches(manifests, values)
 
-  // console.log(yaml.dump(values))
-  // console.log(yaml.dump(manifests))
-  // console.log(JSON.stringify(manifests, null, 2))
-
   logger.debug("Build final output")
   const manifestsDump = yaml.dumpAll(manifests)
 

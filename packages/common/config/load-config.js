@@ -581,7 +581,6 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     config,
     beforeChildren: async ({ definition }) => {
       const { config: extendsConfig } = definition
-      // console.log({ extendsConfig })
       if (!extendsConfig) {
         return
       }
