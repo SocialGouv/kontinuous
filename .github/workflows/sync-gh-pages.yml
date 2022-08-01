@@ -28,6 +28,7 @@ jobs:
           set -x
           git remote set-url --push origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git fetch origin gh-pages:gh-pages
+          git fetch origin master
           git checkout gh-pages
           git checkout master -- README.md
           rm index.md
