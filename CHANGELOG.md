@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.51.7](https://github.com/SocialGouv/kontinuous/compare/v1.51.6...v1.51.7) (2022-08-01)
+
+
+### Bug Fixes
+
+* disableDiff reusable wf input ([db33670](https://github.com/SocialGouv/kontinuous/commit/db336708d1d94d56a08e1c4761ed18410e789efe))
+
 ### [1.51.6](https://github.com/SocialGouv/kontinuous/compare/v1.51.5...v1.51.6) (2022-08-01)
 
 
