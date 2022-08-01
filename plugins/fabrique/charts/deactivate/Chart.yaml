@@ -1,6 +1,6 @@
 apiVersion: v2
 name: deactivate
-version: 1.51.5
+version: 1.51.6
 dependencies:
   - name: jobs
     repository: file://../recommended/charts/jobs
