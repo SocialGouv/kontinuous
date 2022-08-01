@@ -2,6 +2,9 @@ dependencies:
   recommended:
     import: SocialGouv/kontinuous/plugins/recommended
 
+config:
+  webhookUri: https://kontinuous.fabrique.social.gouv.fr
+
 options:
   clusters:
     dev:

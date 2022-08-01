@@ -2,7 +2,6 @@ const fs = require("fs-extra")
 const yaml = require("~common/utils/yaml")
 
 const asyncShell = require("~common/utils/async-shell")
-const globalLogger = require("~common/utils/logger")
 const needHelm = require("~common/utils/need-helm")
 
 const copyFilter = require("~common/config/copy-filter")
@@ -26,7 +25,7 @@ module.exports = async (_options = {}) => {
     kontinuousPath,
   } = config
 
-  const logger = globalLogger.child({ buildPath, workspacePath })
+  const logger = ctx.require("logger").child({ buildPath, workspacePath })
   ctx.set("logger", logger)
 
   if (await fs.pathExists(workspaceKsPath)) {
@@ -58,7 +57,7 @@ module.exports = async (_options = {}) => {
   logger.debug("Load manifests")
   manifests = await loadManifests(manifests, config)
 
-  logger.trace(`Manifests: \n${yaml.dump(manifests)}`)
+  // logger.trace(`Manifests: \n${yaml.dump(manifests)}`)
 
   logger.debug("Apply patches")
   manifests = await applyPatches(manifests, values)
@@ -68,9 +67,7 @@ module.exports = async (_options = {}) => {
   // console.log(JSON.stringify(manifests, null, 2))
 
   logger.debug("Build final output")
-  const manifestsDump = manifests
-    .map((manifest) => yaml.dump(manifest))
-    .join("---\n")
+  const manifestsDump = yaml.dumpAll(manifests)
 
   logger.debug("Write manifests file")
   const manifestsFile = `${buildPath}/manifests.yaml`

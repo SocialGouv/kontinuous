@@ -6,16 +6,15 @@ const axios = require("axios")
 const qs = require("qs")
 const FormData = require("form-data")
 
+const ctx = require("~common/ctx")
 const needKapp = require("~common/utils/need-kapp")
 const yaml = require("~common/utils/yaml")
-const logger = require("~common/utils/logger")
 const timeLogger = require("~common/utils/time-logger")
 const slug = require("~common/utils/slug")
 const parseCommand = require("~common/utils/parse-command")
 const validateMd5 = require("~common/utils/validate-md5")
-const globalLogger = require("~common/utils/logger")
+const handleAxiosError = require("~common/utils/hanlde-axios-error")
 
-const ctx = require("~common/ctx")
 const needBin = require("~/bin/need-bin")
 const build = require("~/build")
 const logs = require("~/logs")
@@ -27,7 +26,7 @@ module.exports = async (options) => {
   ctx.provide()
 
   const config = ctx.require("config")
-  ctx.set("logger", globalLogger)
+  const logger = ctx.require("logger")
 
   const {
     environment,
@@ -36,6 +35,7 @@ module.exports = async (options) => {
     statusUrl,
     webhookUri,
     webhookToken: token,
+    kubeconfig,
     kubeconfigContext,
   } = config
 
@@ -72,8 +72,6 @@ module.exports = async (options) => {
 
       logger.info("uploading custom manifests to deploy")
 
-      logger.flushSync()
-
       const form = new FormData()
       form.append("manifests", manifests, {
         filename: "manifests.yaml",
@@ -81,6 +79,7 @@ module.exports = async (options) => {
       })
 
       const query = qs.stringify({
+        project: config.projectName,
         env: environment,
         token,
         hash: jobHash,
@@ -98,17 +97,7 @@ module.exports = async (options) => {
         logger.debug(response.data)
         logger.info("uploaded custom manifests to deploy")
       } catch (error) {
-        if (error.response) {
-          logger.error(`upload error: status ${error.response.status}`)
-          logger.error(error.response.data)
-          logger.debug(error.response.headers)
-          logger.error(error.request)
-        } else if (error.request) {
-          logger.error(`upload error: request`)
-          logger.error(error.request)
-        } else {
-          logger.error(`upload error: ${error.message}`)
-        }
+        handleAxiosError(error, logger)
       }
 
       if (options.onWebhookDetach) {
@@ -139,7 +128,10 @@ module.exports = async (options) => {
       await setStatus({ url: statusUrl, status: "loading", ok: null })
     }
 
-    logger.info(`kubeconfig context: "${kubeconfigContext}"`)
+    logger.info(
+      { kubeconfig, kubeconfigContext },
+      "let's deploy on kubernetes with kapp"
+    )
 
     const allManifests = yaml.loadAll(manifests)
 
@@ -157,7 +149,9 @@ module.exports = async (options) => {
     const deployWithKapp = async () => {
       const [cmd, args] = parseCommand(`
         kapp deploy
-          --kubeconfig-context ${kubeconfigContext}
+          ${
+            kubeconfigContext ? `--kubeconfig-context ${kubeconfigContext}` : ""
+          }
           --app label:kontinuous/kapp=${kappApp}
           --logs-all
           --wait-timeout ${kappWaitTimeout}
@@ -168,7 +162,13 @@ module.exports = async (options) => {
 
       try {
         await new Promise((resolve, reject) => {
-          const proc = spawn(cmd, args, { encoding: "utf-8" })
+          const proc = spawn(cmd, args, {
+            encoding: "utf-8",
+            env: {
+              ...process.env,
+              ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
+            },
+          })
 
           proc.stdout.on("data", (data) => {
             process.stdout.write(data.toString())

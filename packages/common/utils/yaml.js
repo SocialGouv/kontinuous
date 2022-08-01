@@ -9,6 +9,9 @@ const load = (input, retroCompat = true) =>
 // module.exports.dump = (input) => yaml.stringify(input)
 const dump = (input) => jsYaml.dump(input)
 
+const dumpAll = (manifests) =>
+  manifests.map((manifest) => dump(manifest)).join("---\n")
+
 const loadAll = (input, retroCompat = true) => {
   if (input.trimStart().slice(0, 1) === "[") {
     const obj = load(`arr: ${input}`, retroCompat)
@@ -44,4 +47,5 @@ module.exports = {
   load,
   loadAll,
   dump,
+  dumpAll,
 }

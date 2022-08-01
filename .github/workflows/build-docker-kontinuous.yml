@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - 'v*.*.*'
+    branches:
+      - 'next'
 
 concurrency:
   cancel-in-progress: true

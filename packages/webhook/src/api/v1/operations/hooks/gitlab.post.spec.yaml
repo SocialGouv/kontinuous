@@ -1,6 +1,14 @@
 security: 
   - gitlabHmac: ["webhook"]
 
+parameters:
+  - in: query
+    name: project
+    schema:
+      type: string
+      format: projectName
+    required: true
+
 requestBody:
   required: true
   content:

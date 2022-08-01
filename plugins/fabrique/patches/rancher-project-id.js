@@ -4,7 +4,7 @@ module.exports = async (
   { config, logger, utils, needBin }
 ) => {
   const { asyncShell } = utils
-  const { ciNamespace, kubeconfigContext } = config
+  const { ciNamespace, kubeconfig, kubeconfigContext } = config
 
   const rancherNsMissingProjectId = []
   for (const manifest of manifests) {
@@ -43,7 +43,15 @@ module.exports = async (
     await needBin(utils.needKubectl)
     try {
       const json = await asyncShell(
-        `kubectl --context ${kubeconfigContext} get ns ${ciNamespace} -o json`
+        `kubectl ${
+          kubeconfigContext ? `--context ${kubeconfigContext}` : ""
+        } get ns ${ciNamespace} -o json`,
+        {
+          env: {
+            ...process.env,
+            ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
+          },
+        }
       )
       const data = JSON.parse(json)
       rancherProjectId = data.metadata.annotations["field.cattle.io/projectId"]

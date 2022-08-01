@@ -1,7 +1,8 @@
 // const image = "ghcr.io/socialgouv/kube-workflow:latest"
 // const checkoutImage = "ghcr.io/socialgouv/kube-workflow/degit:latest"
 
-const image = "harbor.fabrique.social.gouv.fr/sre/kontinuous:v1"
+// const image = "harbor.fabrique.social.gouv.fr/sre/kontinuous:v1"
+const image = "ghcr.io/socialgouv/kontinuous:next"
 const checkoutImage = "harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1"
 
 module.exports = ({
@@ -13,6 +14,7 @@ module.exports = ({
   env,
   gitBranch,
   gitCommit,
+  project,
   webhookUri,
   webhookToken,
   initContainers = [],
@@ -77,13 +79,6 @@ module.exports = ({
             image,
             imagePullPolicy: "Always",
             args,
-            envFrom: [
-              {
-                secretRef: {
-                  name: "kubeconfig",
-                },
-              },
-            ],
             env: [
               {
                 name: "KS_WORKSPACE_PATH",
@@ -100,6 +95,10 @@ module.exports = ({
               {
                 name: "KS_WEBHOOK_TOKEN",
                 value: webhookToken,
+              },
+              {
+                name: "KS_PROJECT_NAME",
+                value: project,
               },
               {
                 name: "KS_GIT_REPOSITORY_URL",
@@ -137,16 +136,38 @@ module.exports = ({
                     },
                   ]
                 : []),
+              {
+                name: "KUBECONFIG",
+                value: "/secrets/kubeconfig/cluster",
+              },
             ],
             volumeMounts: [
               {
                 name: "workspace",
                 mountPath: "/workspace",
               },
+              {
+                name: "kubeconfig",
+                mountPath: "/secrets/kubeconfig",
+              },
             ],
           },
         ],
-        volumes: [{ name: "workspace", emptyDir: {} }],
+        volumes: [
+          { name: "workspace", emptyDir: {} },
+          {
+            name: "kubeconfig",
+            secret: {
+              secretName: "kubeconfig",
+              items: [
+                {
+                  key: "KUBECONFIG",
+                  path: "cluster",
+                },
+              ],
+            },
+          },
+        ],
       },
     },
   },

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`standalone-charts.dev 1`] = `
+exports[`test build manifests with snapshots standalone-charts.dev 1`] = `
 "apiVersion: batch/v1
 kind: Job
 metadata:

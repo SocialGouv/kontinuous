@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`app-simple-tag.dev 1`] = `
+exports[`test build manifests with snapshots app-simple-tag.dev 1`] = `
 "apiVersion: v1
 kind: Namespace
 metadata:

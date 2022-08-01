@@ -102,11 +102,21 @@ module.exports.commit = new Option(
 )
 
 module.exports.event = new Option(
-  "--event",
+  "--event <event>",
   `pipeline event, default to "pushed"`
 ).choices(["pushed", "deleted", "custom"])
 
 module.exports.ignoreProjectTemplates = new Option(
   "--ignore-project-templates",
   "don't merge project's root templates and env templates"
+)
+
+module.exports.kubeconfigContext = new Option(
+  "--kubeconfig-context <context>",
+  "kubeconfig context, default inferred from environment"
+)
+
+module.exports.kubeconfigContextNoDetect = new Option(
+  "--kubeconfig-context-no-detect",
+  "don't infer kubeconfig context"
 )

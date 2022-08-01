@@ -41,7 +41,7 @@ const download = async (options) => {
   if (!(await fs.pathExists(zfile))) {
     const downloadUrl = `https://get.helm.sh/${fileName}`
     logger.info(`download ${downloadUrl}`)
-    await downloadFile(downloadUrl, zfile)
+    await downloadFile(downloadUrl, zfile, logger)
   }
   const { addPath } = options
   await decompress(zfile, cachePath)

@@ -42,7 +42,7 @@ const lightshipMock = {
 
 const expose = new Promise((resolve) => {
   process.env.MODJO_DISABLE_NCC_REQUIRE = "true"
-  process.env.KUBEWEBHOOK_TOKEN = "1234"
+  process.env.KUBEWEBHOOK_SUPERTOKEN = "1234"
   process.argv = [process.argv[0], process.argv[1], "dev"]
   const exposer = {
     ready: () => {

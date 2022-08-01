@@ -3,11 +3,12 @@ const fs = require("fs")
 const axios = require("axios")
 const qs = require("qs")
 
-const logger = require("~common/utils/logger")
 const ctx = require("~common/ctx")
+const handleAxiosError = require("~common/utils/hanlde-axios-error")
 
 module.exports = async ({ name, file }) => {
   const config = ctx.require("config")
+  const logger = ctx.require("logger")
   const dest = name || "manifests"
 
   if (!file) {
@@ -51,21 +52,7 @@ module.exports = async ({ name, file }) => {
     logger.info(`downloaded artifact "${dest}" to "${file}"`)
     return true
   } catch (error) {
-    if (error.response) {
-      logger.error(
-        `download error: status ${error.response.status} ${error.response.statusText}`
-      )
-      if (error.response.data.msg) {
-        logger.error(error.response.data.msg)
-      }
-      logger.debug(error.response.headers)
-      // logger.error(error.request)
-    } else if (error.request) {
-      logger.error(`download error: request`)
-      logger.error(error.request)
-    } else {
-      logger.error(`download error: ${error.message}`)
-    }
+    handleAxiosError(error, logger)
     return false
   }
 }

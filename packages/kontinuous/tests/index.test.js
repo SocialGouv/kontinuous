@@ -7,10 +7,14 @@ const os = require("os")
 const fs = require("fs-extra")
 const dotenv = require("dotenv")
 
-const loggerFactory = require("~common/utils/logger-factory")
 const slug = require("~common/utils/slug")
 
-jest.doMock("~common/utils/logger", () => loggerFactory({ sync: true }))
+const legacyLoggerFactory = require("~common/utils/logger-factory")
+
+jest.doMock("~common/utils/logger-factory", () => (options = {}) => {
+  options.sync = true
+  return legacyLoggerFactory(options)
+})
 
 const getDirectoriesSync = require("~common/utils/get-directories-sync")
 
@@ -51,45 +55,42 @@ for (const testdir of testdirs) {
   }
 }
 
-const createSampleSnapTest = (testdir, environment) => async () => {
-  const testdirPath = `${samplesDir}/${testdir}`
-  const tmpdir = os.tmpdir()
-  const buildPath = path.join(tmpdir, "kontinuous", "tests", slug(testdir))
-  await fs.emptyDir(buildPath)
-  const env = {
-    ...process.env,
-    ...defaultEnv,
-    KS_ENVIRONMENT: environment,
-    KS_WORKSPACE_PATH: testdirPath,
-    KS_WORKSPACE_SUBPATH: (await fs.pathExists(`${testdirPath}/.kontinuous`))
-      ? "/.kontinuous"
-      : "",
-    KS_GIT: "false",
-    KS_GIT_REPOSITORY: `kontinuous/test-${testdir}`,
-    KS_INLINE_CONFIG_SET: `links.SocialGouv/kontinuous: "${path.resolve(
-      `${__dirname}/../../..`
-    )}"`,
-    KS_HOMEDIR: `${tmpdir}/kontinuous/test-homedir`,
-    KS_BUILD_PATH: buildPath,
-  }
-  const envFile = `${testdirPath}/.env`
-  if (fs.pathExistsSync(envFile)) {
-    const dotenvConfig = dotenv.parse(
-      await fs.readFile(envFile, { encoding: "utf-8" })
+describe("test build manifests with snapshots", () => {
+  test.each(cases)("%s.%s", async (testdir, environment) => {
+    const testdirPath = `${samplesDir}/${testdir}`
+    const tmpdir = os.tmpdir()
+    const buildPath = path.join(tmpdir, "kontinuous", "tests", slug(testdir))
+    await fs.emptyDir(buildPath)
+    const env = {
+      ...process.env,
+      ...defaultEnv,
+      KS_ENVIRONMENT: environment,
+      KS_WORKSPACE_PATH: testdirPath,
+      KS_WORKSPACE_SUBPATH: (await fs.pathExists(`${testdirPath}/.kontinuous`))
+        ? "/.kontinuous"
+        : "",
+      KS_GIT: "false",
+      KS_GIT_REPOSITORY: `kontinuous/test-${testdir}`,
+      KS_INLINE_CONFIG_SET: `links.SocialGouv/kontinuous: "${path.resolve(
+        `${__dirname}/../../..`
+      )}"`,
+      KS_HOMEDIR: `${tmpdir}/kontinuous/test-homedir`,
+      KS_BUILD_PATH: buildPath,
+    }
+    const envFile = `${testdirPath}/.env`
+    if (fs.pathExistsSync(envFile)) {
+      const dotenvConfig = dotenv.parse(
+        await fs.readFile(envFile, { encoding: "utf-8" })
+      )
+      Object.assign(env, dotenvConfig)
+    }
+    ctx.provide()
+    ctx.set("env", env)
+    await cli([...process.argv.slice(0, 2), "build"])
+    const result = ctx.require("result")
+    const { manifests } = result
+    expect(manifests).toMatchSpecificSnapshot(
+      `./__snapshots__/${testdir}.${environment}.yaml`
     )
-    Object.assign(env, dotenvConfig)
-  }
-  ctx.provide()
-  ctx.set("env", env)
-  await cli([...process.argv.slice(0, 2), "build"])
-  const result = ctx.require("result")
-  const { manifests } = result
-  expect(manifests).toMatchSpecificSnapshot(
-    `./__snapshots__/${testdir}.${environment}.yaml`
-  )
-}
-
-for (const [testdir, environment] of cases) {
-  // eslint-disable-next-line jest/expect-expect
-  test(`${testdir}.${environment}`, createSampleSnapTest(testdir, environment))
-}
+  })
+})

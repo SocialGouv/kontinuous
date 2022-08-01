@@ -3,6 +3,12 @@ security:
 
 parameters:
   - in: query
+    name: project
+    schema:
+      type: string
+      format: projectName
+    required: true
+  - in: query
     name: event
     schema:
       type: string
@@ -32,7 +38,6 @@ parameters:
     schema:
       type: string
       enum: [dev, preprod, prod]
-    required: false
   - in: query
     name: follow
     schema:

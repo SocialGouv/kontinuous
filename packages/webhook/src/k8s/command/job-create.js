@@ -4,15 +4,17 @@ const { ctx } = require("@modjo-plugins/core")
 
 const parseCommand = require("~common/utils/parse-command")
 
-module.exports = async (manifest, kubecontext) => {
+module.exports = async (manifest, kubeconfig) => {
   const logger = ctx.require("logger")
-  const [cmd, args] = parseCommand(
-    `kubectl --context ${kubecontext} apply -f -`
-  )
+  const [cmd, args] = parseCommand(`kubectl apply -f -`)
   try {
     await new Promise((resolve, reject) => {
       const proc = spawn(cmd, args, {
         encoding: "utf-8",
+        env: {
+          ...process.env,
+          KUBECONFIG: kubeconfig,
+        },
       })
       proc.stdout.on("data", (data) => {
         logger.info(data.toString())

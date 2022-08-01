@@ -1,28 +1,33 @@
 const { spawn } = require("child_process")
 const retry = require("async-retry")
 const { ctx } = require("@modjo-plugins/core")
+const { reqCtx } = require("@modjo-plugins/express/ctx")
 const cleanGitRef = require("~common/utils/clean-git-ref")
 const parseCommand = require("~common/utils/parse-command")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const asyncShell = require("~common/utils/async-shell")
 
-const refKubecontext = require("~/git/ref-kubecontext")
+const refEnv = require("~common/utils/ref-env")
+const loadRemoteConfig = require("~common/config/load-remote-config")
+
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = function () {
   const logger = ctx.require("logger")
-  const { jobNamespace } = ctx.require("config.project")
   const readyToLogPhases = ["Running", "Succeeded", "Failed"]
-  const checkJobExists = async ({ jobName, commit, kubecontext }) => {
+  const checkJobExists = async ({ jobName, commit, kubeconfig }) => {
+    const jobNamespace = reqCtx.require("jobNamespace")
     try {
-      const jsonPodStatus = await asyncShell(`kubectl
-        --context ${kubecontext}
+      const jsonPodStatus = await asyncShell(
+        `kubectl
         -n ${jobNamespace}
         get pods
         --selector=job-name=${jobName},commit-sha=${commit}
         --sort-by=.metadata.creationTimestamp
         --output=jsonpath={.items[-1].status}
-      `)
+      `,
+        { env: { ...process.env, KUBECONFIG: kubeconfig } }
+      )
       const podStatus = JSON.parse(jsonPodStatus)
       const { phase } = podStatus
       return readyToLogPhases.includes(phase)
@@ -49,10 +54,10 @@ module.exports = function () {
     )
   }
 
-  const runLogStream = async ({ res, kubecontext, follow, since, jobName }) => {
+  const runLogStream = async ({ res, kubeconfig, follow, since, jobName }) => {
+    const jobNamespace = reqCtx.require("jobNamespace")
     const [cmd, args] = parseCommand(`
       kubectl
-        --context ${kubecontext}
         -n ${jobNamespace}
         logs
         ${since ? `--since=${since}` : ""}
@@ -63,6 +68,10 @@ module.exports = function () {
       await new Promise((resolve, reject) => {
         const proc = spawn(cmd, args, {
           encoding: "utf-8",
+          env: {
+            ...process.env,
+            KUBECONFIG: kubeconfig,
+          },
         })
         proc.stdout.pipe(res)
         proc.stderr.pipe(res)
@@ -91,16 +100,28 @@ module.exports = function () {
       follow,
       catch: catchJob,
       since,
-      env,
     } = req.query
+
+    let { env } = req.query
+
+    const jobNamespace = reqCtx.require("jobNamespace")
+
     const repository = repositoryFromGitUrl(repositoryMixed)
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)
 
-    const branchConfig = event === "deleted" ? "HEAD" : ref
-    const kubecontext = await refKubecontext(repositoryMixed, branchConfig, env)
+    const repoConfigRef = event === "deleted" ? "HEAD" : gitBranch
+    const repositoryConfig = await loadRemoteConfig({
+      repository: repositoryMixed,
+      ref: repoConfigRef,
+    })
+    if (!env) {
+      const { environmentPatterns } = repositoryConfig
+      env = refEnv(ref, environmentPatterns)
+    }
+    const { cluster } = repositoryConfig
 
-    if (!kubecontext) {
+    if (!env) {
       res.writeHead(204, {
         "Content-Type": "text/plain",
       })
@@ -131,15 +152,19 @@ module.exports = function () {
       tryIteration++
     }
 
+    const kubeconfigs = ctx.require("config.project.secrets.kubeconfigs")
+    const project = reqCtx.require("project")
+    const kubeconfig = kubeconfigs[project][cluster]
+
     if (catchJob) {
       try {
-        await waitJobExists({ jobName, commit, kubecontext }, waitingCallback)
+        await waitJobExists({ jobName, commit, kubeconfig }, waitingCallback)
         if (tryIteration > 0) {
           res.write("\n")
         }
       } catch (err) {
         logger.error(
-          { kubecontext, jobNamespace, jobName },
+          { kubeconfig, jobNamespace, jobName },
           "expected job not found"
         )
         res.write(
@@ -151,7 +176,7 @@ module.exports = function () {
     }
 
     try {
-      await runLogStream({ res, kubecontext, follow, since, jobName })
+      await runLogStream({ res, kubeconfig, follow, since, jobName })
       res.write(`\n🏁 end of logging succeeded\n`)
     } catch (err) {
       logger.error(err)

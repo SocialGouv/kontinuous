@@ -7,8 +7,10 @@
   "peerDependencies": {
     "fs-extra": "^10.0.1",
     "js-yaml": "^4.1.0",
+    "lodash.defaultsdeep": "^4.6.1",
     "lodash.mergewith": "^4.6.2",
     "pino": "^7.10.0",
+    "pino-bfuscate": "^1.0.0",
     "pino-pretty": "^7.6.1",
     "pretty-ms": "^7.0.1",
     "slugify": "^1.6.5"
@@ -19,7 +21,9 @@
   "dependencies": {
     "axios": "^0.27.2",
     "parse-github-url": "^1.0.2",
+    "pino-abstract-transport": "^1.0.0",
     "sonic-boom": "^3.0.0",
+    "tiged": "^2.11.2",
     "which": "^2.0.2",
     "yaml": "^2.0.1"
   }

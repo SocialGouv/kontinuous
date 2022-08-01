@@ -4,11 +4,21 @@ security:
 
 parameters:
   - in: query
+    name: project
+    schema:
+      type: string
+      format: projectName
+    required: true
+  - in: query
     name: env
     schema:
       type: string
       enum: [dev, preprod, prod]
-    required: true
+  - in: query
+    name: cluster
+    schema:
+      type: string
+      format: clusterName
   - in: query
     name: hash
     schema:

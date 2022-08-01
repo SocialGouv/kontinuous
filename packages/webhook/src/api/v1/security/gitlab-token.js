@@ -1,7 +1,24 @@
-const { ctx } = require("@modjo-plugins/core")
+module.exports =
+  ({ services: { getProjectTokens, projectGranted } }) =>
+  async (req, _scopes, _schema) => {
+    const gitlabToken = req.get("X-Gitlab-Token")
 
-module.exports = () => async (req, _scopes, _schema) => {
-  const token = req.get("X-Gitlab-Token")
-  const webhookToken = ctx.require("config.project.webhook.token")
-  return token === webhookToken
-}
+    const tokens = getProjectTokens(req)
+    if (tokens.length === 0) {
+      return false
+    }
+
+    let granted
+    for (const token of tokens) {
+      granted = gitlabToken === token
+      if (granted) {
+        break
+      }
+    }
+
+    if (granted) {
+      projectGranted(req)
+    }
+
+    return granted
+  }

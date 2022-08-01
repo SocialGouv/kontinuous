@@ -1,4 +1,3 @@
-const { configureDebug } = require("~common/utils/logger")
 const ctx = require("~common/ctx")
 const build = require("~/build")
 
@@ -25,6 +24,8 @@ module.exports = (program) =>
     .addOption(options.uploadUrl)
     .addOption(options.ciNamespace)
     .addOption(options.ignoreProjectTemplates)
+    .addOption(options.kubeconfigContext)
+    .addOption(options.kubeconfigContextNoDetect)
     .option("--output, -o", "enable direct output of manifests")
     .option("--open", "open manifests file with default application")
     .option(
@@ -33,7 +34,6 @@ module.exports = (program) =>
     )
     .action(async (_opts, command) => {
       const opts = command.optsWithGlobals()
-      configureDebug(opts.D)
       const result = await build(opts)
       ctx.set("result", result)
     })

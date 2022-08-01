@@ -1,18 +1,35 @@
 const pino = require("pino")
-const pretty = require("pino-pretty")
-const SonicBoom = require("sonic-boom")
+const { default: bfuscate } = require("pino-bfuscate")
 
-module.exports = (options = {}) => {
-  const { destination = new SonicBoom({ fd: process.stderr.fd }) } = options
-
-  const logger = pino(
-    pretty({
+module.exports = (opts = {}) => {
+  const { prettyOptions = {}, ...mergeOptions } = opts
+  const options = {
+    pretty: true,
+    prettyOptions: {
       translateTime: "yyyy-mm-dd HH:MM:ss",
       ignore: "pid,hostname",
-      destination,
-      ...options,
+      ...prettyOptions,
+    },
+    destination: 2,
+    level: "trace",
+    secrets: mergeOptions.secrets || [],
+    ...mergeOptions,
+  }
+  let logger
+  if (opts.sync) {
+    logger = pino(bfuscate(options))
+  } else {
+    logger = pino({
+      transport: {
+        pipeline: [
+          {
+            target: "pino-bfuscate",
+            options,
+          },
+        ],
+      },
     })
-  )
+  }
 
   const configureDebug = (debug) => {
     if (
@@ -39,8 +56,6 @@ module.exports = (options = {}) => {
   configureDebug(process.env.KS_DEBUG || process.env.DEBUG)
 
   logger.configureDebug = configureDebug
-
-  logger.flushSync = () => destination.flushSync()
 
   return logger
 }

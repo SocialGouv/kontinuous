@@ -1,6 +1,7 @@
 const fs = require("fs-extra")
 
 // const { ctx } = require("@modjo-plugins/core")
+const { reqCtx } = require("@modjo-plugins/express/ctx")
 const cleanGitRef = require("~common/utils/clean-git-ref")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const slug = require("~common/utils/slug")
@@ -21,7 +22,8 @@ module.exports = function () {
     const branchSlug = slug(gitBranch)
     const repositorySlug = slug(repositoryName)
     const [manifests] = req.files
-    const dir = `${artifactPath}/${repositorySlug}/${branchSlug}/${commit}`
+    const project = reqCtx.get("project")
+    const dir = `${artifactPath}/${project}/${repositorySlug}/${branchSlug}/${commit}`
     await fs.ensureDir(dir)
     const file = `${dir}/${name}.yaml`
     await fs.writeFile(file, manifests.buffer)

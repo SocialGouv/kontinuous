@@ -34,7 +34,7 @@ const download = async (options) => {
   const downloadUrl = `https://dl.k8s.io/release/${kubectlVersion}/bin/${platform}/${arch}/kubectl`
   logger.info(`download ${downloadUrl}`)
   const dest = `${addPath}/kubectl`
-  await downloadFile(downloadUrl, dest)
+  await downloadFile(downloadUrl, dest, logger)
   await fs.chmod(dest, 0o755)
 }
 

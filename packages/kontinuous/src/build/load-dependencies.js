@@ -18,6 +18,7 @@ const fileHash = require("~common/utils/file-hash")
 const degitImproved = require("~common/utils/degit-improved")
 const slug = require("~common/utils/slug")
 const normalizeDegitUri = require("~common/utils/normalize-degit-uri")
+const handleAxiosError = require("~common/utils/hanlde-axios-error")
 
 const recurseDependency = require("~common/config/recurse-dependencies")
 const copyFilter = require("~common/config/copy-filter")
@@ -106,7 +107,7 @@ const downloadDependencyFromHelmRepo = async (
   dependency,
   target,
   config,
-  _logger
+  logger
 ) => {
   const { repository, version } = dependency
   const localArchive = `${target}/charts/${dependency.name}-${version}.tgz`
@@ -124,6 +125,7 @@ const downloadDependencyFromHelmRepo = async (
       try {
         repositoryIndex = await axios.get(chartRepository)
       } catch (e) {
+        handleAxiosError(e, logger)
         throw Error(`Unable to download ${chartRepository}: ${e.message}`)
       }
       const repo = yaml.load(repositoryIndex.data)
@@ -136,7 +138,7 @@ const downloadDependencyFromHelmRepo = async (
         throw new Error(`version ${version} not found for ${dependency.name}`)
       }
       const url = versionEntry.urls[0]
-      await downloadFile(url, zfile)
+      await downloadFile(url, zfile, logger)
     }
   }
 

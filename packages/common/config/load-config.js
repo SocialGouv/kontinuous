@@ -4,11 +4,11 @@ const { mkdtemp } = require("fs/promises")
 
 const fs = require("fs-extra")
 const set = require("lodash.set")
+const defaultsDeep = require("lodash.defaultsdeep")
 const qs = require("qs")
 
 const ctx = require("../ctx")
 const loadStructuredConfig = require("../utils/load-structured-config")
-const writeKubeconfig = require("../utils/write-kubeconfig")
 const getGitRef = require("../utils/get-git-ref")
 const getGitSha = require("../utils/get-git-sha")
 const getGitUrl = require("../utils/get-git-url")
@@ -19,21 +19,27 @@ const asyncShell = require("../utils/async-shell")
 const deepmerge = require("../utils/deepmerge")
 const logger = require("../utils/logger")
 const refEnv = require("../utils/ref-env")
-const defaultEnvironmentPatterns = require("../utils/default-environment-patterns")
+const normalizeRepositoryUrl = require("../utils/normalize-repository-url")
+
 const loadDependencies = require("./load-dependencies")
+const recurseDependency = require("./recurse-dependencies")
 
 const { version } = require(`${__dirname}/../package.json`)
 
 const mergeProjectsAndOrganizations = (config) => {
-  const { organizations, projects, gitRepositoryName } = config
-  if (projects && projects[gitRepositoryName]) {
-    const project = projects[gitRepositoryName]
-    const { organization } = project
+  const { organizations, projects, project, gitRepositoryName } = config
+  if (projects && projects[project]) {
+    const projectConfig = projects[project]
+    const { organization } = projectConfig
     if (organization && organizations[organization]) {
       const org = organizations[organization]
       deepmerge(config, org)
     }
-    deepmerge(config, project)
+    deepmerge(config, projectConfig)
+    const repositoryConfig = projectConfig.repositories?.[gitRepositoryName]
+    if (repositoryConfig) {
+      deepmerge(config, repositoryConfig)
+    }
   }
 }
 
@@ -210,7 +216,11 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
     },
     environmentPatterns: {
       transform: (value) => ({
-        ...defaultEnvironmentPatterns,
+        ...{
+          prod: "v[0-9]*",
+          preprod: ["main", "master"],
+          dev: "**",
+        },
         ...(value || {}),
       }),
     },
@@ -247,7 +257,7 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
         }
         const { webhookUriPattern } = config
         if (!webhookUriPattern) {
-          return null
+          return
         }
         return webhookUriPattern
           .replace(
@@ -274,6 +284,7 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
           return
         }
         const query = qs.stringify({
+          project: config.projectName,
           repository: config.gitRepositoryUrl,
           branch: config.gitBranch,
           commit: config.gitSha,
@@ -291,6 +302,7 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
           return
         }
         const query = qs.stringify({
+          project: config.projectName,
           repository: config.gitRepositoryUrl,
           branch: config.gitBranch,
           commit: config.gitSha,
@@ -308,6 +320,7 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
           return
         }
         const query = qs.stringify({
+          project: config.projectName,
           repository: config.gitRepositoryUrl,
           branch: config.gitBranch,
           commit: config.gitSha,
@@ -322,41 +335,54 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
       defaultFunction: (config) =>
         config.repositoryName
           ? `${config.projectName || config.repositoryName}-ci`
-          : null,
-    },
-    kubeconfigPath: {
-      defaultFunction: () => writeKubeconfig(),
-    },
-    kubeconfigContextNoDetect: {
-      env: "KS_KUBECONFIG_CONTEXT_NO_DETECT",
-      envParser: (str) => yaml.load(str),
-    },
-    kubeconfigContext: {
-      option: "kubeconfigContext",
-      env: "KS_KUBECONFIG_CONTEXT",
-      defaultFunction: async (config) => {
-        const { environment, kubeconfigPath } = config
-        const { kubeconfigContextNoDetect } = config
-        let kubeconfigContext
-        if (kubeconfigContextNoDetect) {
-          if (!kubeconfigPath) {
-            return
-          }
-          const kubeconfig = yaml.load(
-            await fs.readFile(kubeconfigPath, { encoding: "utf-8" })
-          )
-          kubeconfigContext = kubeconfig["current-context"]
-        } else if (environment === "prod") {
-          kubeconfigContext = "prod"
-        } else {
-          kubeconfigContext = "dev"
-        }
-        return kubeconfigContext
-      },
+          : undefined,
     },
     isLocal: {
       env: "KS_ISLOCAL",
       default: false,
+    },
+    environmentClusters: {
+      transform: (value) => ({
+        ...{
+          prod: "prod",
+          preprod: "dev",
+          dev: "dev",
+        },
+        ...(value || {}),
+      }),
+    },
+    cluster: {
+      env: "KS_CLUSTER",
+      defaultFunction: (config) => {
+        const { environment, environmentClusters } = config
+        return environmentClusters[environment]
+      },
+    },
+    kubeconfig: {
+      option: "kubeconfig",
+      env: ["KS_KUBECONFIG", "KUBECONFIG"],
+    },
+    environmentKubeconfigContexts: {
+      defaultFunction: (config) => config.environmentClusters,
+    },
+    kubeconfigContextNoDetect: {
+      option: "kubeconfigContextNoDetect",
+      env: "KS_KUBECONFIG_CONTEXT_NO_DETECT",
+    },
+    kubeconfigContext: {
+      option: "kubeconfigContext",
+      env: "KS_KUBECONFIG_CONTEXT",
+      defaultFunction: (config) => {
+        const {
+          isLocal,
+          kubeconfigContextNoDetect,
+          environment,
+          environmentKubeconfigContexts,
+        } = config
+        if (isLocal && !kubeconfigContextNoDetect) {
+          return environmentKubeconfigContexts[environment]
+        }
+      },
     },
     links: {
       transform: async (links = {}) => {
@@ -388,7 +414,9 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
           let remoteExists
           try {
             await asyncShell(
-              `git ls-remote --exit-code --heads ${gitRepositoryUrl} ${gitBranch}`
+              `git ls-remote --exit-code --heads ${normalizeRepositoryUrl(
+                gitRepositoryUrl
+              )} ${gitBranch}`
             )
             remoteExists = true
           } catch (error) {
@@ -542,7 +570,20 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
       acc[key] = value
       return acc
     }, {})
+
   await loadDependencies(config)
+
+  await recurseDependency({
+    config,
+    beforeChildren: async ({ definition }) => {
+      const { config: extendsConfig } = definition
+      // console.log({ extendsConfig })
+      if (!extendsConfig) {
+        return
+      }
+      defaultsDeep(config, extendsConfig)
+    },
+  })
 
   return config
 }

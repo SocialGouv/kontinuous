@@ -1,20 +1,19 @@
 const { ctx } = require("@modjo-plugins/core")
+const { reqCtx } = require("@modjo-plugins/express/ctx")
 
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const cleanGitRef = require("~common/utils/clean-git-ref")
 
+const loadRemoteConfig = require("~common/config/load-remote-config")
 const jobRun = require("~/k8s/command/job-run")
 const pipelineJob = require("~/k8s/resources/pipeline.job")
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
-const refKubecontext = require("~/git/ref-kubecontext")
 
 module.exports = () => {
   const logger = ctx.require("logger")
-  const { jobNamespace } = ctx.require("config.project")
   return async ({
     eventName,
     env,
-    kubecontext,
     ref,
     after,
     repositoryUrl,
@@ -23,17 +22,28 @@ module.exports = () => {
     initContainers,
     commits,
   }) => {
-    const repository = repositoryFromGitUrl(repositoryUrl)
-    const repositoryName = repository.split("/").pop()
+    const repositoryPath = repositoryFromGitUrl(repositoryUrl)
+    const repositoryName = repositoryPath.split("/").pop()
     const gitBranch = cleanGitRef(ref)
     const gitCommit = after || "0000000000000000000000000000000000000000"
 
-    if (!kubecontext) {
-      const branchConfig = eventName === "deleted" ? "HEAD" : gitBranch
-      kubecontext = await refKubecontext(repositoryUrl, branchConfig, env)
+    const branchConfig = eventName === "deleted" ? "HEAD" : gitBranch
+    const repositoryConfig = await loadRemoteConfig({
+      repository: repositoryUrl,
+      ref: branchConfig,
+    })
+    const { cluster } = repositoryConfig
+    const project = reqCtx.require("project")
+    const jobNamespace = reqCtx.require("jobNamespace")
+
+    const kubeconfigs = ctx.require("config.project.secrets.kubeconfigs")
+    const kubeconfig = kubeconfigs[project][cluster]
+
+    if (!env) {
+      env = repositoryConfig.env
     }
 
-    if (!kubecontext) {
+    if (!env) {
       logger.debug(
         { repositoryUrl, gitBranch },
         "no env matching for current ref"
@@ -48,7 +58,9 @@ module.exports = () => {
     })
 
     const webhookUri = ctx.require("config.project.oas.uri")
-    const webhookToken = ctx.require("config.project.webhook.token")
+    const tokens = ctx.require("config.project.secrets.tokens")
+
+    const [webhookToken] = tokens[project] || []
 
     if (commits) {
       commits = commits.reduce(
@@ -72,6 +84,7 @@ module.exports = () => {
       env,
       gitBranch,
       gitCommit,
+      project,
       webhookUri,
       webhookToken,
       commits,
@@ -79,10 +92,10 @@ module.exports = () => {
 
     return async () => {
       logger.info(
-        `event ${eventName} triggering workflow on ${repository}#${ref} ${gitCommit}`
+        `event ${eventName} triggering workflow on ${repositoryPath}#${ref} ${gitCommit}`
       )
       try {
-        await jobRun(manifest, kubecontext)
+        await jobRun(manifest, kubeconfig)
         logger.debug(
           `pipeline job "${jobName}" launched in namespace "${jobNamespace}"`
         )
