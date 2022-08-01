@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.51.2](https://github.com/SocialGouv/kontinuous/compare/v1.51.1...v1.51.2) (2022-08-01)
+
+
+### Bug Fixes
+
+* fetch master ([4142fa0](https://github.com/SocialGouv/kontinuous/commit/4142fa0121bf7c42b09c92ecbb2caf9408214296))
+* local config extends ([fdec25f](https://github.com/SocialGouv/kontinuous/commit/fdec25f44a9b5659e768c442f168860d007a0c19))
+* wip ([2542d24](https://github.com/SocialGouv/kontinuous/commit/2542d24d0f1337369accffed7a47168be4683f5c))
+
 ### [1.51.1](https://github.com/SocialGouv/kontinuous/compare/v1.51.0...v1.51.1) (2022-08-01)
 
 
