@@ -397,9 +397,12 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         return links
       },
     },
+    disableDiff: {
+      env: "KS_DISABLE_DIFF",
+    },
     diffBranch: {
       defaultFunction: async (config) => {
-        if (!config.git) {
+        if (!config.git || config.disableDiff) {
           return
         }
         const { gitBranch, gitRepositoryUrl, workspacePath } = config
