@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.51.0 (2022-08-01)
+
+
+### Features
+
+* multiproject endpoint + decouple cluster from env ([#17](https://github.com/SocialGouv/kontinuous/issues/17)) ([34f81ed](https://github.com/SocialGouv/kontinuous/commit/34f81edeb1e48c7f546cf5703f899db1bd17eab2))
+
 ### 1.50.5 (2022-07-30)
 
 
