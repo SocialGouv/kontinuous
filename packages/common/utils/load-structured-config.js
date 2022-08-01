@@ -19,7 +19,7 @@ module.exports = async ({
   configBasename = "config",
   inlineConfigs = [],
   configDirs = [],
-  configCompilers = [],
+  configPreCompilers = [],
   configOverride,
   env = process.env,
   options,
@@ -37,7 +37,7 @@ module.exports = async ({
   for (const inlineConfig of inlineConfigs) {
     extendsConfig(inlineConfig)
   }
-  for (const configCompiler of configCompilers) {
+  for (const configCompiler of configPreCompilers) {
     await configCompiler(config)
   }
 

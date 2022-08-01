@@ -27,9 +27,9 @@ const recurseDependency = require("./recurse-dependencies")
 const { version } = require(`${__dirname}/../package.json`)
 
 const mergeProjectsAndOrganizations = (config) => {
-  const { organizations, projects, project, gitRepositoryName } = config
-  if (projects && projects[project]) {
-    const projectConfig = projects[project]
+  const { organizations, projects, projectName, gitRepositoryName } = config
+  if (projects && projects[projectName]) {
+    const projectConfig = projects[projectName]
     const { organization } = projectConfig
     if (organization && organizations[organization]) {
       const org = organizations[organization]
@@ -527,7 +527,7 @@ module.exports = async (opts = {}, inlineConfigs = []) => {
     rootConfig,
     configBasename: "config",
     configDirs,
-    configCompilers: [mergeProjectsAndOrganizations],
+    configPreCompilers: [mergeProjectsAndOrganizations],
     configOverride,
     options: opts,
     env,
