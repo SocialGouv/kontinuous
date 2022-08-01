@@ -8,7 +8,6 @@ const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const asyncShell = require("~common/utils/async-shell")
 
 const refEnv = require("~common/utils/ref-env")
-const loadRemoteConfig = require("~common/config/load-remote-config")
 
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
@@ -110,16 +109,16 @@ module.exports = function ({ services }) {
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)
 
-    const repoConfigRef = event === "deleted" ? "HEAD" : gitBranch
-    const repositoryConfig = await loadRemoteConfig(
-      {
-        repository: repositoryMixed,
-        ref: repoConfigRef,
-      },
-      { git: false, gitSha: commit }
-    )
+    const repositoryConfig = await services.getRepoConfig({
+      repository: repositoryMixed,
+      gitBranch,
+      gitSha: commit,
+      event,
+    })
+
     if (!env) {
       const { environmentPatterns } = repositoryConfig
+      console.log({ environmentPatterns, ref })
       env = refEnv(ref, environmentPatterns)
     }
     const { cluster } = repositoryConfig

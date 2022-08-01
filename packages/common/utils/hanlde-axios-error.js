@@ -9,15 +9,15 @@ module.exports = (error, logger = globalLogger) => {
         statusText: error.response.statusText,
         url,
       },
-      "download error"
+      "request error"
     )
     if (error.response.data.msg) {
       logger.error(error.response.data.msg)
     }
     // logger.error(error.request)
   } else if (error.request) {
-    logger.error({ errorRequest: error.request, url }, `download error`)
+    logger.error({ errorRequest: error.request, url }, `request error`)
   } else {
-    logger.error({ errorMessage: error.message, url }, "download error")
+    logger.error({ errorMessage: error.message, url }, "request error")
   }
 }

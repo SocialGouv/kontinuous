@@ -4,7 +4,6 @@ const { reqCtx } = require("@modjo-plugins/express/ctx")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const cleanGitRef = require("~common/utils/clean-git-ref")
 
-const loadRemoteConfig = require("~common/config/load-remote-config")
 const jobRun = require("~/k8s/command/job-run")
 const pipelineJob = require("~/k8s/resources/pipeline.job")
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
@@ -21,21 +20,27 @@ module.exports = ({ services }) => {
     checkout,
     initContainers,
     commits,
+    cluster,
   }) => {
     const repositoryPath = repositoryFromGitUrl(repositoryUrl)
     const repositoryName = repositoryPath.split("/").pop()
     const gitBranch = cleanGitRef(ref)
     const gitCommit = after || "0000000000000000000000000000000000000000"
 
-    const branchConfig = eventName === "deleted" ? "HEAD" : gitBranch
-    const repositoryConfig = await loadRemoteConfig(
-      {
-        repository: repositoryUrl,
-        ref: branchConfig,
-      },
-      { git: false, gitSha: gitCommit }
-    )
-    const { cluster } = repositoryConfig
+    const repositoryConfig = await services.getRepoConfig({
+      repository: repositoryUrl,
+      gitBranch,
+      gitSha: gitCommit,
+      event: eventName,
+    })
+
+    if (!cluster) {
+      cluster = repositoryConfig.cluster
+    }
+    if (!env) {
+      env = repositoryConfig.env
+    }
+
     const project = reqCtx.require("project")
     const jobNamespace = reqCtx.require("jobNamespace")
 
@@ -44,10 +49,6 @@ module.exports = ({ services }) => {
       kubeconfig = await services.getKubeconfig(cluster)
     } catch (_error) {
       return false
-    }
-
-    if (!env) {
-      env = repositoryConfig.env
     }
 
     if (!env) {
