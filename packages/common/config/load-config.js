@@ -447,15 +447,12 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
       env: "KS_COMMITS",
       envParser: (str) => yaml.load(str),
       defaultFunction: async (config) => {
-        if (config.disableDiff) {
-          return
-        }
         const commits = {
           added: [],
           modified: [],
           removed: [],
         }
-        if (!config.git) {
+        if (!config.git || config.disableDiff) {
           return commits
         }
         const { gitBranch } = config
