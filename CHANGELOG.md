@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.51.9](https://github.com/SocialGouv/kontinuous/compare/v1.51.8...v1.51.9) (2022-08-01)
+
+
+### Bug Fixes
+
+* image pipeline tag ([3ff4255](https://github.com/SocialGouv/kontinuous/commit/3ff42550899aacb29d5f93e85d2ebcd033f6344d))
+
 ### [1.51.8](https://github.com/SocialGouv/kontinuous/compare/v1.51.7...v1.51.8) (2022-08-01)
 
 
