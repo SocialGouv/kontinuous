@@ -38,7 +38,7 @@ module.exports = ({ services }) => {
       cluster = repositoryConfig.cluster
     }
     if (!env) {
-      env = repositoryConfig.env
+      env = repositoryConfig.environment
     }
 
     const project = reqCtx.require("project")
