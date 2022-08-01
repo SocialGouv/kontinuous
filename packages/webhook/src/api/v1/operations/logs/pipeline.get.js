@@ -12,7 +12,7 @@ const loadRemoteConfig = require("~common/config/load-remote-config")
 
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
-module.exports = function () {
+module.exports = function ({ services }) {
   const logger = ctx.require("logger")
   const readyToLogPhases = ["Running", "Succeeded", "Failed"]
   const checkJobExists = async ({ jobName, commit, kubeconfig }) => {
@@ -111,10 +111,13 @@ module.exports = function () {
     const gitBranch = cleanGitRef(ref)
 
     const repoConfigRef = event === "deleted" ? "HEAD" : gitBranch
-    const repositoryConfig = await loadRemoteConfig({
-      repository: repositoryMixed,
-      ref: repoConfigRef,
-    })
+    const repositoryConfig = await loadRemoteConfig(
+      {
+        repository: repositoryMixed,
+        ref: repoConfigRef,
+      },
+      { git: false }
+    )
     if (!env) {
       const { environmentPatterns } = repositoryConfig
       env = refEnv(ref, environmentPatterns)
@@ -126,6 +129,18 @@ module.exports = function () {
         "Content-Type": "text/plain",
       })
       res.write("no env matching for current ref\n")
+      res.end()
+      return
+    }
+
+    let kubeconfig
+    try {
+      kubeconfig = await services.getKubeconfig(cluster)
+    } catch (error) {
+      res.writeHead(404, {
+        "Content-Type": "text/plain",
+      })
+      res.write(`\n💀 error: ${error.message}\n`)
       res.end()
       return
     }
@@ -151,10 +166,6 @@ module.exports = function () {
       res.write(".")
       tryIteration++
     }
-
-    const kubeconfigs = ctx.require("config.project.secrets.kubeconfigs")
-    const project = reqCtx.require("project")
-    const kubeconfig = kubeconfigs[project][cluster]
 
     if (catchJob) {
       try {

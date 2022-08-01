@@ -9,7 +9,7 @@ const jobRun = require("~/k8s/command/job-run")
 const pipelineJob = require("~/k8s/resources/pipeline.job")
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
-module.exports = () => {
+module.exports = ({ services }) => {
   const logger = ctx.require("logger")
   return async ({
     eventName,
@@ -28,16 +28,23 @@ module.exports = () => {
     const gitCommit = after || "0000000000000000000000000000000000000000"
 
     const branchConfig = eventName === "deleted" ? "HEAD" : gitBranch
-    const repositoryConfig = await loadRemoteConfig({
-      repository: repositoryUrl,
-      ref: branchConfig,
-    })
+    const repositoryConfig = await loadRemoteConfig(
+      {
+        repository: repositoryUrl,
+        ref: branchConfig,
+      },
+      { git: false }
+    )
     const { cluster } = repositoryConfig
     const project = reqCtx.require("project")
     const jobNamespace = reqCtx.require("jobNamespace")
 
-    const kubeconfigs = ctx.require("config.project.secrets.kubeconfigs")
-    const kubeconfig = kubeconfigs[project][cluster]
+    let kubeconfig
+    try {
+      kubeconfig = await services.getKubeconfig(cluster)
+    } catch (_error) {
+      return false
+    }
 
     if (!env) {
       env = repositoryConfig.env

@@ -17,3 +17,4 @@ services:
       KUBEWEBHOOK_EXPOSED_PORT: ${KUBEWEBHOOK_EXPOSED_PORT:-7530}
       RANCHER_PROJECT_NAME: ${RANCHER_PROJECT_NAME:-sample-next-app}
       KS_CI_NAMESPACE: ${KS_CI_NAMESPACE:-sample-next-app-ci}
+      KS_LOG_LEVEL: "trace"
