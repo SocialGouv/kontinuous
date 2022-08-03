@@ -27,15 +27,13 @@ spec:
             secretName: {{ $secret.name }}
             items:
             - key: {{ or $secret.key "KUBECONFIG" }}
-              path: {{ $secret.cluster }}
         {{ end }}
-        {{ range $index, $secret := .Values.tokenSecrets }}
+        {{ range $secret := .Values.tokenSecrets }}
         - name: secret-token-{{ $secret.name }}
           secret:
             secretName: {{ $secret.name }}
             items:
             - key: {{ or $secret.key "TOKEN" }}
-              path: "{{ or $secret.tokenId $index }}"
         {{ end }}
       containers:
         - name: webhook
@@ -49,11 +47,11 @@ spec:
               mountPath: /artifacts
             {{ range $secret := .Values.kubeconfigSecrets }}
             - name: secret-kubeconfig-{{ $secret.name }}
-              mountPath: /secrets/{{ or $secret.project $secret.name }}/kubeconfig
+              mountPath: /secrets/{{ or $secret.project $secret.name }}/kubeconfig/{{ $secret.cluster }}
             {{ end }}
-            {{ range $secret := .Values.tokenSecrets }}
+            {{ range $index, $secret := .Values.tokenSecrets }}
             - name: secret-token-{{ $secret.name }}
-              mountPath: /secrets/{{ or $secret.project $secret.name }}/tokens
+              mountPath: /secrets/{{ or $secret.project $secret.name }}/tokens/{{ or $secret.tokenId $index }}
             {{ end }}
           env:
             - name: KUBEWEBHOOK_EXPOSED_HOST
