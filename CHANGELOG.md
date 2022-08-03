@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.52.4](https://github.com/SocialGouv/kontinuous/compare/v1.52.3...v1.52.4) (2022-08-03)
+
+
+### Bug Fixes
+
+* env ([f1ed2d2](https://github.com/SocialGouv/kontinuous/commit/f1ed2d23b4d103cdbcef65df9a2cdd9ec54e1487))
+
 ### [1.52.3](https://github.com/SocialGouv/kontinuous/compare/v1.52.2...v1.52.3) (2022-08-03)
 
 
