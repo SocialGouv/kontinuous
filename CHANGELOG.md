@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.52.0](https://github.com/SocialGouv/kontinuous/compare/v1.51.11...v1.52.0) (2022-08-03)
+
+
+### Features
+
+* override env trigger go to prod ([8dc1eec](https://github.com/SocialGouv/kontinuous/commit/8dc1eecf48b4e77bb9a0de5c412423fba731f652))
+
 ### [1.51.11](https://github.com/SocialGouv/kontinuous/compare/v1.51.10...v1.51.11) (2022-08-01)
 
 
