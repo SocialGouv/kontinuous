@@ -355,6 +355,9 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
       env: "KS_CLUSTER",
       defaultFunction: (config) => {
         const { environment, clusterEnvironments } = config
+        if (!environment) {
+          return
+        }
         for (const [cluster, envPatterns] of Object.entries(
           clusterEnvironments
         )) {
@@ -385,7 +388,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
           environment,
           kubeconfigContextEnvironments,
         } = config
-        if (!isLocal || kubeconfigContextNoDetect) {
+        if (!isLocal || kubeconfigContextNoDetect || !environment) {
           return
         }
         for (const [context, envPatterns] of Object.entries(
