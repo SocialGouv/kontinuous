@@ -6,6 +6,7 @@ const fs = require("fs-extra")
 const set = require("lodash.set")
 const defaultsDeep = require("lodash.defaultsdeep")
 const qs = require("qs")
+const micromatch = require("micromatch")
 
 const ctx = require("../ctx")
 const loadStructuredConfig = require("../utils/load-structured-config")
@@ -341,12 +342,11 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
       env: "KS_ISLOCAL",
       default: false,
     },
-    environmentClusters: {
+    clusterEnvironments: {
       transform: (value) => ({
         ...{
           prod: "prod",
-          preprod: "dev",
-          dev: "dev",
+          dev: ["preprod", "dev"],
         },
         ...(value || {}),
       }),
@@ -354,16 +354,22 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     cluster: {
       env: "KS_CLUSTER",
       defaultFunction: (config) => {
-        const { environment, environmentClusters } = config
-        return environmentClusters[environment]
+        const { environment, clusterEnvironments } = config
+        for (const [cluster, envPatterns] of Object.entries(
+          clusterEnvironments
+        )) {
+          if (envPatterns && micromatch.isMatch(environment, envPatterns)) {
+            return cluster
+          }
+        }
       },
     },
     kubeconfig: {
       option: "kubeconfig",
       env: ["KS_KUBECONFIG", "KUBECONFIG"],
     },
-    environmentKubeconfigContexts: {
-      defaultFunction: (config) => config.environmentClusters,
+    kubeconfigContextEnvironments: {
+      defaultFunction: (config) => config.clusterEnvironments,
     },
     kubeconfigContextNoDetect: {
       option: "kubeconfigContextNoDetect",
@@ -377,10 +383,17 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
           isLocal,
           kubeconfigContextNoDetect,
           environment,
-          environmentKubeconfigContexts,
+          kubeconfigContextEnvironments,
         } = config
-        if (isLocal && !kubeconfigContextNoDetect) {
-          return environmentKubeconfigContexts[environment]
+        if (!isLocal || kubeconfigContextNoDetect) {
+          return
+        }
+        for (const [context, envPatterns] of Object.entries(
+          kubeconfigContextEnvironments
+        )) {
+          if (envPatterns && micromatch.isMatch(environment, envPatterns)) {
+            return context
+          }
         }
       },
     },

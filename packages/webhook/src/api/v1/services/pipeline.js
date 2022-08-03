@@ -34,11 +34,23 @@ module.exports = ({ services }) => {
       event: eventName,
     })
 
+    if (!env) {
+      env = repositoryConfig.environment
+    }
+    if (!env) {
+      logger.debug(
+        { repositoryUrl, gitBranch },
+        "no env matching for current ref"
+      )
+      return false
+    }
+
     if (!cluster) {
       cluster = repositoryConfig.cluster
     }
-    if (!env) {
-      env = repositoryConfig.environment
+    if (!cluster) {
+      logger.debug({ repositoryUrl, gitBranch, env }, "no cluster matching")
+      return false
     }
 
     const project = reqCtx.require("project")
@@ -48,14 +60,6 @@ module.exports = ({ services }) => {
     try {
       kubeconfig = await services.getKubeconfig(cluster)
     } catch (_error) {
-      return false
-    }
-
-    if (!env) {
-      logger.debug(
-        { repositoryUrl, gitBranch },
-        "no env matching for current ref"
-      )
       return false
     }
 

@@ -4,6 +4,9 @@ on:
       disableDiff:
         type: string
         required: false
+      environment:
+        type: string
+        required: false
 
 jobs:
   deploy:
@@ -17,4 +20,5 @@ jobs:
           kubeconfig: ${{ secrets.KUBECONFIG }}
           rancherProjectId: ${{ secrets.RANCHER_PROJECT_ID }}
           ciNamespace: "${{ secrets.RANCHER_PROJECT_NAME }}-ci"
+          environment: "${{ inputs.environment }}"
           disableDiff: "${{ inputs.disableDiff }}"

@@ -321,6 +321,7 @@ paths:
               - dev
               - preprod
               - prod
+          allowEmptyValue: true
         - in: query
           name: cluster
           schema:
@@ -569,6 +570,15 @@ paths:
               - deleted
               - custom
           required: true
+        - in: query
+          name: env
+          schema:
+            type: string
+            enum:
+              - dev
+              - preprod
+              - prod
+          allowEmptyValue: true
       requestBody:
         required: true
         content:
@@ -678,6 +688,7 @@ paths:
               - dev
               - preprod
               - prod
+          allowEmptyValue: true
         - in: query
           name: follow
           schema:

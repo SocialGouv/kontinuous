@@ -4,6 +4,12 @@ on:
       webhookUri:
         required: false
         type: string
+      triggerWebhook:
+        required: false
+        type: boolean
+      environment:
+        required: false
+        type: string
     secrets:
       KUBEWEBHOOK_TOKEN:
         required: true
@@ -19,3 +25,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           webhookToken: ${{ secrets.KUBEWEBHOOK_TOKEN }}
           webhookUri: ${{ inputs.webhookUri }}
+          triggerWebhook: ${{ inputs.triggerWebhook }}
+          environment: ${{ inputs.environment }}

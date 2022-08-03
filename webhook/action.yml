@@ -9,6 +9,8 @@ inputs:
     description: "The webhook uri"
   triggerWebhook:
     description: "Trigger webhook on first call, useful when webhooks are not configured on the repo"
+  environment:
+    description: "The deployment environment (dev | preprod | prod), default to prod on version tag, preprod on master or main, else dev"
 outputs:
   url:
     description: "Main deployment URL"
@@ -62,6 +64,7 @@ runs:
         export KS_GIT_REPOSITORY
         export KS_EVENT
         export KS_DEBUG
+        export KS_ENVIRONMENT="${{ inputs.environment }}"
         KONTINUOUS_CONFIG=$(npx kontinuous config --remote --format json)
         
         KS_ENVIRONMENT=$(echo "$KONTINUOUS_CONFIG" | jq -r ".environment")
@@ -94,7 +97,7 @@ runs:
           wget --content-on-error -qO- \
             --post-data "{\"repositoryUrl\":\"${KS_GIT_REPOSITORY}\",\"ref\":\"${KS_GIT_BRANCH}\",\"commit\":\"${KS_GIT_SHA}\"}" \
             --header='Content-Type:application/json' \
-            "${KS_WEBHOOK_URI}/api/v1/oas/hooks/user?project=${KS_PROJECT_NAME}&event=${KS_EVENT}&token=${KS_WEBHOOK_TOKEN}"
+            "${KS_WEBHOOK_URI}/api/v1/oas/hooks/user?project=${KS_PROJECT_NAME}&event=${KS_EVENT}&env=${KS_ENVIRONMENT}&token=${KS_WEBHOOK_TOKEN}"
         fi
 
     - name: Stream logs of kube pipeline
