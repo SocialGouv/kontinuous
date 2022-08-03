@@ -20,7 +20,7 @@ module.exports = async function createConfig() {
       const tokenFiles = await fs.readdir(secretTokenDir)
       tokens[secretProjectDir] = []
       for (const tokenFile of tokenFiles) {
-        const secretTokenFile = `${secretTokenDir}/${tokenFile}`
+        const secretTokenFile = `${secretTokenDir}/${tokenFile}/token`
         if (!(await fs.stat(secretTokenFile)).isFile()) {
           continue
         }
@@ -34,7 +34,7 @@ module.exports = async function createConfig() {
       const kubeconfigClusters = await fs.readdir(secretKubeconfigDir)
       kubeconfigs[secretProjectDir] = {}
       for (const kubeconfigCluster of kubeconfigClusters) {
-        const secretKubeconfigFile = `${secretKubeconfigDir}/${kubeconfigCluster}`
+        const secretKubeconfigFile = `${secretKubeconfigDir}/${kubeconfigCluster}/kubeconfig`
         kubeconfigs[secretProjectDir][kubeconfigCluster] = secretKubeconfigFile
       }
     }

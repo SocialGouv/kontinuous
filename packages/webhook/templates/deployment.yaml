@@ -27,6 +27,7 @@ spec:
             secretName: {{ $secret.name }}
             items:
             - key: {{ or $secret.key "KUBECONFIG" }}
+              path: kubeconfig
         {{ end }}
         {{ range $secret := .Values.tokenSecrets }}
         - name: secret-token-{{ $secret.name }}
@@ -34,6 +35,7 @@ spec:
             secretName: {{ $secret.name }}
             items:
             - key: {{ or $secret.key "TOKEN" }}
+              path: token
         {{ end }}
       containers:
         - name: webhook
