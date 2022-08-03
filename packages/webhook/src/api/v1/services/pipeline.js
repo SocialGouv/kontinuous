@@ -32,6 +32,7 @@ module.exports = ({ services }) => {
       gitBranch,
       gitSha: gitCommit,
       event: eventName,
+      environment: env,
     })
 
     if (!env) {

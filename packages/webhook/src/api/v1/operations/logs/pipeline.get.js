@@ -114,6 +114,7 @@ module.exports = function ({ services }) {
       gitBranch,
       gitSha: commit,
       event,
+      environment: env,
     })
 
     if (!env) {
