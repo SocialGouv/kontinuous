@@ -12,6 +12,7 @@ jobs:
   logs:
     name: logs
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: kontinuous pipeline
         uses: SocialGouv/kontinuous/webhook@v1
