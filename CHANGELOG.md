@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.52.1](https://github.com/SocialGouv/kontinuous/compare/v1.52.0...v1.52.1) (2022-08-03)
+
+
+### Bug Fixes
+
+* gotoprod reusable ([a489a6d](https://github.com/SocialGouv/kontinuous/commit/a489a6dfddd25a807f9ea7808d87439262eb21bd))
+
 ## [1.52.0](https://github.com/SocialGouv/kontinuous/compare/v1.51.11...v1.52.0) (2022-08-03)
 
 
