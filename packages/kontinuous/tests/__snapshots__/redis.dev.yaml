@@ -111,7 +111,7 @@ spec:
                 - redis-cli ping
           readinessProbe:
             failureThreshold: 15
-            initialDelaySeconds: 0
+            initialDelaySeconds: 1
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1

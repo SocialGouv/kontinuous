@@ -134,7 +134,7 @@ spec:
             httpGet:
               path: /index.html
               port: http
-            initialDelaySeconds: 0
+            initialDelaySeconds: 1
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1

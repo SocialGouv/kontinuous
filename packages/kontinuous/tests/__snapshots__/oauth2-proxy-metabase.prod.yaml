@@ -159,7 +159,7 @@ spec:
             httpGet:
               path: /api/health
               port: http
-            initialDelaySeconds: 0
+            initialDelaySeconds: 1
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
@@ -234,7 +234,7 @@ spec:
             httpGet:
               path: /ping
               port: http
-            initialDelaySeconds: 0
+            initialDelaySeconds: 1
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
