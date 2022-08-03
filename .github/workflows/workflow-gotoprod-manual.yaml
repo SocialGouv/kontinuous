@@ -1,0 +1,23 @@
+on:
+  workflow_call:
+    inputs:
+      webhookUri:
+        required: false
+        type: string
+    secrets:
+      KUBEWEBHOOK_TOKEN:
+        required: true
+
+jobs:
+  logs:
+    name: logs
+    runs-on: ubuntu-latest
+    steps:
+      - name: kontinuous pipeline
+        uses: SocialGouv/kontinuous/webhook@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          webhookToken: ${{ secrets.KUBEWEBHOOK_TOKEN }}
+          webhookUri: ${{ inputs.webhookUri }}
+          triggerWebhook: "true"
+          environment: "prod"
