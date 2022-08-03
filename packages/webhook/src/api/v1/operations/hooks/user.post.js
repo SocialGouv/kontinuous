@@ -5,7 +5,7 @@ module.exports = function ({ services: { pushed, deleted } }) {
     async (req, res) => {
       const { body } = req
 
-      const eventName = req.query.event
+      const { event: eventName, env } = req.query
       if (!eventName || !eventHandlers[eventName]) {
         return res.status(204).json({ message: "no-op" })
       }
@@ -16,6 +16,7 @@ module.exports = function ({ services: { pushed, deleted } }) {
         ref,
         after: commit,
         repositoryUrl,
+        env,
       })
       if (!runJob) {
         return res.status(204).json({ message: "no-op" })
