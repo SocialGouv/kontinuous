@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.52.11](https://github.com/SocialGouv/kontinuous/compare/v1.52.10...v1.52.11) (2022-08-04)
+
+
+### Bug Fixes
+
+* workflow webhook rename ([68e539d](https://github.com/SocialGouv/kontinuous/commit/68e539dc017c08b781bb853c8fa2d2355a059a47))
+
 ### [1.52.10](https://github.com/SocialGouv/kontinuous/compare/v1.52.9...v1.52.10) (2022-08-04)
 
 
