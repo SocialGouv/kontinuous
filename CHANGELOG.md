@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.52.14](https://github.com/SocialGouv/kontinuous/compare/v1.52.13...v1.52.14) (2022-08-04)
+
+
+### Bug Fixes
+
+* bash bool check ([90608f8](https://github.com/SocialGouv/kontinuous/commit/90608f8affc261e523eaf45013f1df3b38befd8a))
+
 ### [1.52.13](https://github.com/SocialGouv/kontinuous/compare/v1.52.12...v1.52.13) (2022-08-04)
 
 
