@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.52.12 (2022-08-04)
+
+
+### Bug Fixes
+
+* upgrade parse-manifests ([#23](https://github.com/SocialGouv/kontinuous/issues/23)) ([563126b](https://github.com/SocialGouv/kontinuous/commit/563126bfee4778b7b28839a32e445880312372cb))
+
 ### [1.52.11](https://github.com/SocialGouv/kontinuous/compare/v1.52.10...v1.52.11) (2022-08-04)
 
 
