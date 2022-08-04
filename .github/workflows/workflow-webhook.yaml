@@ -15,8 +15,8 @@ on:
         required: true
 
 jobs:
-  logs:
-    name: logs
+  apply:
+    name: apply
     runs-on: ubuntu-latest
     steps:
       - name: kontinuous pipeline
