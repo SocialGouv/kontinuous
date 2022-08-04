@@ -21,6 +21,6 @@ validators:
   sealedSecrets:
     enabled: false
 
-patches:
-  reloader:
-    enabled: false
+# patches:
+#   reloader:
+#     enabled: false
