@@ -88,8 +88,7 @@ runs:
     - name: Handle action rerun
       shell: bash
       run: |
-        echo DEBUG="${{ inputs.triggerWebhook }}"
-        if [ -n "${{ inputs.triggerWebhook }}" ] || [ "$GITHUB_RUN_ATTEMPT" -gt "1" ]; then
+        if [ -n "${{ inputs.triggerWebhook }}" ] && [ "${{ inputs.triggerWebhook }}" != "false" ] || [ "$GITHUB_RUN_ATTEMPT" -gt "1" ]; then
           if [ "$GITHUB_RUN_ATTEMPT" -gt "1" ]; then
             echo "Trigger webhook from action for rerun attempt #${GITHUB_RUN_ATTEMPT}"
           else
