@@ -22,6 +22,8 @@ const { getStatus, setStatus } = require("~/status")
 
 const deployHooks = require("./deploy-hooks")
 
+const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
+
 module.exports = async (options) => {
   ctx.provide()
 
@@ -169,6 +171,13 @@ module.exports = async (options) => {
               ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
             },
           })
+
+          for (const signal of signals) {
+            process.on(signal, () => {
+              proc.kill(signal)
+              process.exit(0)
+            })
+          }
 
           proc.stdout.on("data", (data) => {
             process.stdout.write(data.toString())
