@@ -220,7 +220,12 @@ module.exports = async (options) => {
       logLevel: "info",
     })
 
-    await deployWithKapp()
+    try {
+      await deployWithKapp()
+    } catch (error) {
+      logger.error({ error }, "kapp deploy failed")
+      process.exit(1)
+    }
 
     await deployHooks(allManifests, "post")
 
