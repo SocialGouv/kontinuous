@@ -2,7 +2,7 @@
 set -e
 
 # check mandatory environment variables
-MANDATORY_VARS="PGPASSWORD PGHOST PGUSER DATABASE"
+MANDATORY_VARS="PGPASSWORD PGHOST PGUSER DATABASE DATABASE_USER"
 for VAR in $MANDATORY_VARS; do
   if [[ -z "${!VAR}" ]]; then
     echo "${VAR} environment variable is empty"
@@ -14,7 +14,7 @@ PGPORT=${PGPORT:-5432}
 
 # arobase replacement
 PG_URL_ADMIN="postgresql://${PGUSER/@/%40}:${PGPASSWORD}@${PGHOST}:${PGPORT}/postgres"
-DROP_USER_BASE=${PGUSER%%@*} || $PGUSER
+DROP_USER_BASE=${DATABASE_USER%%@*}
 
 echo
 echo "disconnect activities on database ${DATABASE} on ${PGHOST}"
