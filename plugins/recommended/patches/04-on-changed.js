@@ -86,12 +86,17 @@ module.exports = async (manifests, _options, context) => {
       micromatch.isMatch(p, onChangedPaths)
     )
 
+    const isFirstPushOnBranch = changedPaths.length === 0
+
     const onChangedAnnotate = annotations["kontinuous/onChangedAnnotate"]
     if (onChangedAnnotate) {
       annotations["kontinuous/hasChanged"] = changed ? "true" : "false"
+      annotations["kontinuous/isFirstPushOnBranch"] = isFirstPushOnBranch
+        ? "true"
+        : "false"
     }
 
-    if (changed) {
+    if (changed || isFirstPushOnBranch) {
       continue
     }
 
