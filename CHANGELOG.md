@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.52.19](https://github.com/SocialGouv/kontinuous/compare/v1.52.18...v1.52.19) (2022-08-05)
+
+
+### Bug Fixes
+
+* try to optimize kaniko ([f8e4d9e](https://github.com/SocialGouv/kontinuous/commit/f8e4d9e84348f4f127b4e71aef1107c013b70d17))
+
 ### [1.52.18](https://github.com/SocialGouv/kontinuous/compare/v1.52.17...v1.52.18) (2022-08-05)
 
 
