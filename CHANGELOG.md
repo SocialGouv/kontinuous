@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.52.17](https://github.com/SocialGouv/kontinuous/compare/v1.52.16...v1.52.17) (2022-08-05)
+
+
+### Bug Fixes
+
+* timeout to 5 minutes ([03de5f0](https://github.com/SocialGouv/kontinuous/commit/03de5f020be875bfb169eec29a9b085e43fc46a1))
+
 ### [1.52.16](https://github.com/SocialGouv/kontinuous/compare/v1.52.15...v1.52.16) (2022-08-05)
 
 
