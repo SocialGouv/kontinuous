@@ -59,25 +59,12 @@ module.exports.statusUrl = new Option(
   "post status to url"
 )
 
-module.exports.webhookBaseDomain = new Option(
-  "--webhook-base-domain <host>",
-  "webhook base domain"
-)
-
-module.exports.webhookUriPattern = new Option(
-  "--webhook-uri-pattern <pattern>",
-  "webhook uri pattern, defaut to https://webhook-${repositoryName}.${baseDomain}"
-)
-
 module.exports.webhookToken = new Option(
   "--webhook-token <token>",
   "webhook token"
 )
 
-module.exports.webhookUri = new Option(
-  "--webhook-uri <uri>",
-  "webhook uri, default will use webhook-uri-pattern and webhook-base-domain to generate uri"
-)
+module.exports.webhookUri = new Option("--webhook-uri <uri>", "webhook uri")
 
 module.exports.ciNamespace = new Option("--ci-namespace <ns>", "ci namespace")
 

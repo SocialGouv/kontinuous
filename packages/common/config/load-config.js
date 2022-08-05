@@ -239,16 +239,6 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
       env: "KS_WEBHOOK_TOKEN",
       defaultFunction: (config) => config.webhook?.token,
     },
-    webhookBaseDomain: {
-      option: "webhook-base-domain",
-      env: "KS_WEBHOOK_BASE_DOMAIN",
-      defaultFunction: (config) => config.webhook?.baseDomain,
-    },
-    webhookUriPattern: {
-      option: "webhook-uri-pattern",
-      env: "KS_WEBHOOK_URI_PATTERN",
-      defaultFunction: (config) => config.webhook?.uriPattern,
-    },
     webhookUri: {
       option: "webhook-uri",
       env: "KS_WEBHOOK_URI",
@@ -256,20 +246,6 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         if (config.webhook?.uri) {
           return config.webhook.uri
         }
-        const { webhookUriPattern } = config
-        if (!webhookUriPattern) {
-          return
-        }
-        return webhookUriPattern
-          .replace(
-            "${projectName}",
-            config.projectName || config.repositoryName
-          )
-          .replace(
-            "${repositoryName}",
-            config.repositoryName || config.projectName
-          )
-          .replace("${baseDomain}", config.webhookBaseDomain)
       },
     },
     upload: {

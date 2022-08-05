@@ -19,8 +19,6 @@ module.exports = (program) =>
     .addOption(options.rancherProjectId)
     .addOption(options.ciNamespace)
     .addOption(options.webhookToken)
-    .addOption(options.webhookBaseDomain)
-    .addOption(options.webhookUriPattern)
     .addOption(options.webhookUri)
     .addOption(options.ignoreProjectTemplates)
     .addOption(options.kubeconfigContext)

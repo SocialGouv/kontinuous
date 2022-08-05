@@ -13,8 +13,6 @@ module.exports = (program) =>
     .addOption(options.commit)
     .addOption(options.env)
     .addOption(options.webhookToken)
-    .addOption(options.webhookBaseDomain)
-    .addOption(options.webhookUriPattern)
     .addOption(options.webhookUri)
     .addOption(options.event)
     .action(async (_opts, command) => {
