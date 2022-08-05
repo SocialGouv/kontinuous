@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.52.16](https://github.com/SocialGouv/kontinuous/compare/v1.52.15...v1.52.16) (2022-08-05)
+
+
+### Bug Fixes
+
+* clean remove webhook pattern ([f444c18](https://github.com/SocialGouv/kontinuous/commit/f444c18adfbf63c524cca2f8ebfc18cf51cc52c6))
+* cli command naming download ([43d234e](https://github.com/SocialGouv/kontinuous/commit/43d234e040f013a6832aabe9b8cab549caef9d55))
+* isFirstPushOnBranch ([4a72325](https://github.com/SocialGouv/kontinuous/commit/4a72325a7c9fc2407081dc285138f48680413610))
+
 ### [1.52.15](https://github.com/SocialGouv/kontinuous/compare/v1.52.14...v1.52.15) (2022-08-05)
 
 
