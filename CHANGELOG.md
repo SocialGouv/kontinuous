@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.52.15](https://github.com/SocialGouv/kontinuous/compare/v1.52.14...v1.52.15) (2022-08-05)
+
+
+### Bug Fixes
+
+* terminationGracePeriodSeconds ([103b253](https://github.com/SocialGouv/kontinuous/commit/103b2539ef3e8e71756aa4c5d28164c290b7bbc7))
+
 ### [1.52.14](https://github.com/SocialGouv/kontinuous/compare/v1.52.13...v1.52.14) (2022-08-04)
 
 
