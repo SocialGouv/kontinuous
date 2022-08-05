@@ -34,5 +34,5 @@ jobs:
           rm index.md
           mv README.md index.md
           git add index.md
-          git commit -a -m "Sync README.md in master branch to index.md in gh-pages"
+          git commit --allow-empty -a -m "Sync README.md in master branch to index.md in gh-pages"
           git push origin gh-pages
