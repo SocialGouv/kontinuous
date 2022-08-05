@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.52.18](https://github.com/SocialGouv/kontinuous/compare/v1.52.17...v1.52.18) (2022-08-05)
+
+
+### Bug Fixes
+
+* drop-db ([cfb79d1](https://github.com/SocialGouv/kontinuous/commit/cfb79d13da18c886f0e4a261b227a4f46561f3a3))
+* improve kapp error display ([ed9cad6](https://github.com/SocialGouv/kontinuous/commit/ed9cad6ced55e5f94fd26d513b73dfbb1a560b9d))
+* use ghcr images ([af64fd5](https://github.com/SocialGouv/kontinuous/commit/af64fd5263e5226e4797110d37c32b2a9230977d))
+
 ### [1.52.17](https://github.com/SocialGouv/kontinuous/compare/v1.52.16...v1.52.17) (2022-08-05)
 
 
