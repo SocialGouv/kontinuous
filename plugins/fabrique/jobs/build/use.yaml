@@ -24,8 +24,11 @@ runs:
         --destination=$DOCKER_IMAGE \
         --cache=true \
         {{ end -}}
-        --snapshotMode=time \
+        --snapshotMode=redo \
+        --single-snapshot \
+        --skip-unused-stages \
         --use-new-run \
+        --cache-ttl=336h \
         {{ if $.with.buildArgs -}}
         {{- range $key, $val := $.with.buildArgs -}}
         --build-arg="{{ tpl $key $ }}={{ tpl $val $ }}" \
