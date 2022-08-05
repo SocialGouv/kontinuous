@@ -500,8 +500,11 @@ spec:
                 --dockerfile=/workspace/Dockerfile \\\\
                 --destination=$DOCKER_IMAGE \\\\
                 --cache=true \\\\
-                --snapshotMode=time \\\\
+                --snapshotMode=redo \\\\
+                --single-snapshot \\\\
+                --skip-unused-stages \\\\
                 --use-new-run \\\\
+                --cache-ttl=336h \\\\
                 
           securityContext:
             runAsUser: 0
@@ -585,8 +588,11 @@ spec:
                 --dockerfile=/workspace/hasura/Dockerfile \\\\
                 --destination=$DOCKER_IMAGE \\\\
                 --cache=true \\\\
-                --snapshotMode=time \\\\
+                --snapshotMode=redo \\\\
+                --single-snapshot \\\\
+                --skip-unused-stages \\\\
                 --use-new-run \\\\
+                --cache-ttl=336h \\\\
                 
           securityContext:
             runAsUser: 0
