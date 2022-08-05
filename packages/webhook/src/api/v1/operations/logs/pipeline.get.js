@@ -44,7 +44,7 @@ module.exports = function ({ services }) {
         }
       },
       {
-        retries: 120,
+        retries: 300,
         factor: 1,
         minTimeout: 1000,
         maxTimeout: 3000,
