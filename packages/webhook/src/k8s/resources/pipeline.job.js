@@ -46,6 +46,7 @@ module.exports = ({
       },
       spec: {
         restartPolicy: "Never",
+        terminationGracePeriodSeconds: 5,
         initContainers: [
           ...(checkout
             ? [
