@@ -4,7 +4,7 @@ host: ""
 
 ## default
 createNamespace: false
-replicas: 1
+replicas: 2
 isProdCluster: true
 containerPort: 3000
 image: harbor.fabrique.social.gouv.fr/sre/kontinuous/webhook:latest
