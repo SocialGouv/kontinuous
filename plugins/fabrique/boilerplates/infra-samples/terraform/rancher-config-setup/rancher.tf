@@ -1,15 +1,19 @@
-### kube-workflow - dev - ci ###
+### kontinuous - dev - ci ###
 resource "rancher2_namespace" "dev_project_ci" {
   name       = "${local.project_name}-ci"
   project_id = rancher2_project.dev_team_project.id
 }
-
 resource "rancher2_secret" "kubeconfig_dev" {
   name         = "kubeconfig"
   project_id   = rancher2_project.dev_team_project.id
   namespace_id = "${local.project_name}-ci"
   data = {
-    KUBECONFIG         = base64encode(format("%s", data.external.kube_config.result.dev))
+    KUBECONFIG = base64encode(format("%s", data.external.kube_config.result.dev))
+  }
+  lifecycle {
+    ignore_changes = [
+      data
+    ]
   }
 }
 
@@ -18,14 +22,14 @@ resource "rancher2_secret" "harbor_dev" {
   project_id   = rancher2_project.dev_team_project.id
   namespace_id = "${local.project_name}-ci"
   data = {
-    CI_REGISTRY = base64encode(format("%s", "harbor.fabrique.social.gouv.fr"))
-    CI_REGISTRY_USER = base64encode(format("%s", harbor_robot_account.this.full_name))
+    CI_REGISTRY          = base64encode(format("%s", "harbor.fabrique.social.gouv.fr"))
+    CI_REGISTRY_USER     = base64encode(format("%s", harbor_robot_account.this.full_name))
     CI_REGISTRY_PASSWORD = base64encode(format("%s", harbor_robot_account.this.secret))
   }
 }
 
 
-### kube-workflow - prod - ci ###
+### kontinuous - prod - ci ###
 resource "rancher2_namespace" "prod_project_ci" {
   name       = "${local.project_name}-ci"
   project_id = rancher2_project.prod_team_project.id
@@ -36,7 +40,12 @@ resource "rancher2_secret" "kubeconfig_prod" {
   project_id   = rancher2_project.prod_team_project.id
   namespace_id = "${local.project_name}-ci"
   data = {
-    KUBECONFIG         = base64encode(format("%s", data.external.kube_config.result.prod))
+    KUBECONFIG = base64encode(format("%s", data.external.kube_config.result.prod))
+  }
+  lifecycle {
+    ignore_changes = [
+      data
+    ]
   }
 }
 
@@ -45,64 +54,92 @@ resource "rancher2_secret" "harbor_prod" {
   project_id   = rancher2_project.prod_team_project.id
   namespace_id = "${local.project_name}-ci"
   data = {
-    CI_REGISTRY = base64encode(format("%s", "harbor.fabrique.social.gouv.fr"))
-    CI_REGISTRY_USER = base64encode(format("%s", harbor_robot_account.this.full_name))
+    CI_REGISTRY          = base64encode(format("%s", "harbor.fabrique.social.gouv.fr"))
+    CI_REGISTRY_USER     = base64encode(format("%s", harbor_robot_account.this.full_name))
     CI_REGISTRY_PASSWORD = base64encode(format("%s", harbor_robot_account.this.secret))
   }
 }
 
-### kube-workflow - prod - webhook ###
-resource "rancher2_namespace" "prod_project_webhook" {
-  name       = "webhook-${local.project_name}"
-  project_id = rancher2_project.prod_team_project.id
+### kontinuous - prod - webhook ###
+resource "kubernetes_namespace" "kontinuous_webhook" {
+  metadata {
+    name       = "kontinuous-webhook"
+  }
 }
 
 resource "random_password" "kubewebhook_token" {
-  length           = 32
-  special           = false
+  length  = 32
+  special = false
 }
 
-resource "rancher2_secret" "kubewebhook_prod" {
-  name         = "kubewebhook"
-  project_id   = rancher2_project.prod_team_project.id
-  namespace_id = "webhook-${local.project_name}"
+resource "kubernetes_secret" "kubewebhook_prod" {
+  metadata {
+    name       = "webhook-token-${local.project_name}"
+    namespace  = "kontinuous-webhook"
+  }
   data = {
-    KUBEWEBHOOK_TOKEN = base64encode(format("%s", random_password.kubewebhook_token.result))
+    TOKEN = "${format("%s", random_password.kubewebhook_token.result)}"
   }
 }
 
-resource "rancher2_secret" "kubewebhook_ci_prod" {
-  name         = "kubewebhook"
-  project_id   = rancher2_project.prod_team_project.id
-  namespace_id = "${local.project_name}-ci"
+
+
+resource "kubernetes_secret" "kubeconfig_webhook_dev" {
+  metadata {
+    name       = "kubeconfig-dev-${local.project_name}"
+    namespace  = "kontinuous-webhook"
+  }
   data = {
-    KUBEWEBHOOK_TOKEN = base64encode(format("%s", random_password.kubewebhook_token.result))
+    KUBECONFIG = "${format("%s", data.external.kube_config.result.dev)}"
+  }
+  lifecycle {
+    ignore_changes = [
+      data
+    ]
+  }
+}
+resource "kubernetes_secret" "kubeconfig_webhook_prod" {
+  metadata {
+    name       = "kubeconfig-prod-${local.project_name}"
+    namespace  = "kontinuous-webhook"
+  }
+  data = {
+    KUBECONFIG = "${format("%s", data.external.kube_config.result.prod)}"
+  }
+  lifecycle {
+    ignore_changes = [
+      data
+    ]
   }
 }
 
-resource "rancher2_secret" "kubewebhook_ci_dev" {
-  name         = "kubewebhook"
-  project_id   = rancher2_project.dev_team_project.id
-  namespace_id = "${local.project_name}-ci"
+
+resource "kubernetes_secret" "kubewebhook_ci_prod" {
+  metadata {
+    name       = "kubewebhook"
+    namespace  = "${local.project_name}-ci"
+  }
   data = {
-    KUBEWEBHOOK_TOKEN = base64encode(format("%s", random_password.kubewebhook_token.result))
+    KUBEWEBHOOK_TOKEN = "${format("%s", random_password.kubewebhook_token.result)}"
+  }
+  lifecycle {
+    ignore_changes = [
+      data
+    ]
   }
 }
 
-resource "rancher2_secret" "kubeconfig_webhook_dev" {
-  name         = "kubeconfig-dev"
-  namespace_id = "webhook-${local.project_name}"
-  project_id   = rancher2_project.prod_team_project.id
-  data = {
-    KUBECONFIG_DEV         = base64encode(format("%s", data.external.kube_config.result.dev))
+resource "kubernetes_secret" "kubewebhook_ci_dev" {
+  metadata {
+    name       = "kubewebhook"
+    namespace  = "${local.project_name}-ci"
   }
-}
-
-resource "rancher2_secret" "kubeconfig_webhook_prod" {
-  name         = "kubeconfig-prod"
-  namespace_id = "webhook-${local.project_name}"
-  project_id   = rancher2_project.prod_team_project.id
   data = {
-    KUBECONFIG_PROD         = base64encode(format("%s", data.external.kube_config.result.prod))
+    KUBEWEBHOOK_TOKEN = "${format("%s", random_password.kubewebhook_token.result)}"
+  }
+  lifecycle {
+    ignore_changes = [
+      data
+    ]
   }
 }

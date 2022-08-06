@@ -1,0 +1,8 @@
+apiVersion: v2
+name: kontinuous-webhook
+version: 1.0.0
+dependencies:
+  - name: kontinuous-webhook
+    repository: file://./charts/kontinuous-webhook
+    version: 1.50.2
+  

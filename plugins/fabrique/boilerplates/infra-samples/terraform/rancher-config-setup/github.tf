@@ -13,17 +13,17 @@ resource "github_repository_webhook" "kubewebhook_repository_events_push" {
     for repo in local.public_repos : repo.name => repo
   }
 
-  repository      = each.value.name
+  repository = each.value.name
 
   configuration {
-    url          = "https://webhook-${local.project_name}.fabrique.social.gouv.fr/api/v1/oas/hooks/github?event=pushed"
+    url          = "https://kontinuous.fabrique.social.gouv.fr/api/v1/oas/hooks/github?project=${local.project_name}&event=pushed"
     content_type = "json"
-    secret = random_password.kubewebhook_token.result
+    secret       = random_password.kubewebhook_token.result
   }
 
   active = false
 
-  events = ["create","push"]
+  events = ["push", "create"]
 }
 
 resource "github_repository_webhook" "kubewebhook_repository_events_delete" {
@@ -31,12 +31,12 @@ resource "github_repository_webhook" "kubewebhook_repository_events_delete" {
     for repo in local.public_repos : repo.name => repo
   }
 
-  repository      = each.value.name
+  repository = each.value.name
 
   configuration {
-    url          = "https://webhook-${local.project_name}.fabrique.social.gouv.fr/api/v1/oas/hooks/github?event=deleted"
+    url          = "https://kontinuous.fabrique.social.gouv.fr/api/v1/oas/hooks/github?project=${local.project_name}&event=deleted"
     content_type = "json"
-    secret = random_password.kubewebhook_token.result
+    secret       = random_password.kubewebhook_token.result
   }
 
   active = false

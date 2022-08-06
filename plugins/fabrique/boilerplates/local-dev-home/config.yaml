@@ -1,15 +1,5 @@
 isLocal: true
 
-# links:
-#   MyOrg/MyPluginsRepo: /absolute/path/to/local/plugins/repo/dir
-
-# organizations:
-#   my-orga: {}
-
-# projects:
-#   my-project:
-#     organization: my-orga
-#     webhook:
-#       token: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-#   repositories:
-#     my-repo: {}
+projects:
+  my-project:
+    webhookToken: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
