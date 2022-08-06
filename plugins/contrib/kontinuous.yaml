@@ -1,0 +1,27 @@
+dependencies:
+  recommended:
+    import: SocialGouv/kontinuous/plugins/recommended
+
+valuesCompilers:
+  globalDefaults:
+    enabled: false
+
+patches:
+  certs:
+    enabled: false
+  rancherProjectId:
+    enabled: false
+  reloader:
+    enabled: false
+
+validators:
+  rancherProjectId:
+    enabled: false
+  sealedSecrets:
+    enabled: false
+
+preDeploy:
+  debugLinks:
+    enabled: false
+  rancherNamespaces:
+    enabled: false

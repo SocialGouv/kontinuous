@@ -1,0 +1,6 @@
+recommended:
+  kontinuous-helpers:
+    enabled: true
+
+fabrique-helpers:
+  enabled: true

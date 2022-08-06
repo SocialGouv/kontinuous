@@ -31,7 +31,7 @@ spec:
             - sh
             - '-c'
             - >-
-              degit SocialGouv/kontinuous/plugins/fabrique/jobs/deactivate
+              degit SocialGouv/kontinuous/plugins/contrib/jobs/deactivate
               /action
           securityContext:
             runAsUser: 1000
