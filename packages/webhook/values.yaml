@@ -16,6 +16,7 @@ resources:
   requests:
     cpu: 100m
     memory: 256Mi
+terminationGracePeriod: 900
 
 ## optional
 rancherProjectId: ""

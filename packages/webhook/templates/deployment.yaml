@@ -37,6 +37,7 @@ spec:
             - key: {{ or $secret.key "TOKEN" }}
               path: token
         {{ end }}
+      terminationGracePeriod: {{ .Values.terminationGracePeriod }}
       containers:
         - name: webhook
           image: {{ .Values.image }}
