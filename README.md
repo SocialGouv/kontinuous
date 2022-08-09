@@ -556,18 +556,18 @@ Official plugins are here [plugins/recommended/](plugins/recommended/). They cou
           runs:
             db:
               # use: ./.kontinous/jobs/create-db # local job, defined in project repository
-              # use: https://github.com/SocialGouv/kontinuous/plugins/contrib/jobs/create-db # degit full url
-              use: SocialGouv/kontinuous/plugins/contrib/jobs/create-db # degit implicit github
+              # use: https://github.com/SocialGouv/kontinuous/plugins/fabrique/jobs/create-db # degit full url
+              use: SocialGouv/kontinuous/plugins/fabrique/jobs/create-db # degit implicit github
               with:
                 pgAdminSecretRefName: pg-scaleway
             seed:
               needs: [hasura]
-              use: SocialGouv/kontinuous/plugins/contrib/jobs/seed-db
+              use: SocialGouv/kontinuous/plugins/fabrique/jobs/seed-db
               with:
                 seedPath: path/in/repo.sql
         ```
 
-        see [plugins/contrib/jobs/create-db/use.yaml](plugins/contrib/jobs/create-db/use.yaml) for full example.
+        see [plugins/fabrique/jobs/create-db/use.yaml](plugins/fabrique/jobs/create-db/use.yaml) for full example.
         All vues from `runs` keys will be interpolated in the job, but you can also uses all parameters directly, except the `with` parameter that is reserved to be used with `use` and inject variable to the called job.
 
         All others components can declare dependencies on jobs using the `needs` key, and all jobs can declare depencencies on other jobs and other components too, using instances names.
@@ -721,22 +721,22 @@ Official plugins are here [plugins/recommended/](plugins/recommended/). They cou
         - shortSha
         - env
     
-    - [jobs/build](plugins/contrib/jobs/build) <br>
+    - [jobs/build](plugins/fabrique/jobs/build) <br>
         Build `docker` image from project Dockerfile and directory using `kaniko`.
     
-    - [jobs/create-db](plugins/contrib/jobs/create-db) <br>
+    - [jobs/create-db](plugins/fabrique/jobs/create-db) <br>
         Create DB and associated new user for review branches using pg admin user.
     
-    - [jobs/drop-db](plugins/contrib/jobs/drop-db) <br>
+    - [jobs/drop-db](plugins/fabrique/jobs/drop-db) <br>
         Drop a DB using pg admin user. Can be used before create-db to keep a pristine db on review branch.
 
-    - [jobs/pg-restore](plugins/contrib/jobs/pg-restore) <br>
+    - [jobs/pg-restore](plugins/fabrique/jobs/pg-restore) <br>
         Restore a DB from backup using pg_restore.
     
-    - [jobs/psql](plugins/contrib/jobs/psql) <br>
+    - [jobs/psql](plugins/fabrique/jobs/psql) <br>
         Run a sql file on DB from project repository.
 
-    - [jobs/seed-db](plugins/contrib/jobs/seed-db) <br>
+    - [jobs/seed-db](plugins/fabrique/jobs/seed-db) <br>
         Run a sql file on DB from project repository using pg secret from target namespace.
 
 # 4. Samples
@@ -968,7 +968,7 @@ More options on existing charts will be carefully design, in case of doubt, or i
 
 New patches are welcome in folder [plugins/fabrique/patches/](plugins/fabrique/patches/). <br>
 New validators are welcome in folder [plugins/fabrique/validators/](plugins/fabrique/validators/). <br>
-New jobs are welcome in folder [plugins/contrib/jobs/](plugins/contrib/jobs/). <br>
+New jobs are welcome in folder [plugins/fabrique/jobs/](plugins/fabrique/jobs/). <br>
 New values-compilers are welcome in folder [plugins/fabrique/values-compilers/](plugins/fabrique/values-compilers/). <br>
 
 ### *La Fabrique* images CI build
