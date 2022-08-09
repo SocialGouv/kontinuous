@@ -3,4 +3,4 @@ jobs-deactivate:
   enabled: true
   runs:
     deactivate:
-      use: SocialGouv/kontinuous/plugins/contrib/jobs/deactivate
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/deactivate

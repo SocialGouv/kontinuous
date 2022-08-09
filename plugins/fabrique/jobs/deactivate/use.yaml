@@ -1,6 +1,6 @@
 runs:
   drop-db:
-    use: SocialGouv/kontinuous/plugins/contrib/jobs/drop-db
+    use: SocialGouv/kontinuous/plugins/fabrique/jobs/drop-db
     if: "{{ or $.with.db $.with.pgAdminSecretRefName $.with.database }}"
     with:
       pgAdminSecretRefName: "{{ $.with.pgAdminSecretRefName }}"

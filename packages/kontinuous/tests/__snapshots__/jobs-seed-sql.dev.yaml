@@ -197,7 +197,9 @@ spec:
           command:
             - sh
             - '-c'
-            - degit SocialGouv/kontinuous/plugins/contrib/jobs/create-db /action
+            - >-
+              degit SocialGouv/kontinuous/plugins/fabrique/jobs/create-db
+              /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -304,7 +306,9 @@ spec:
           command:
             - sh
             - '-c'
-            - degit SocialGouv/kontinuous/plugins/contrib/jobs/create-db /action
+            - >-
+              degit SocialGouv/kontinuous/plugins/fabrique/jobs/create-db
+              /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -399,7 +403,7 @@ spec:
           command:
             - sh
             - '-c'
-            - degit SocialGouv/kontinuous/plugins/contrib/jobs/seed-db /action
+            - degit SocialGouv/kontinuous/plugins/fabrique/jobs/seed-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -513,7 +517,7 @@ spec:
           command:
             - sh
             - '-c'
-            - degit SocialGouv/kontinuous/plugins/contrib/jobs/seed-db /action
+            - degit SocialGouv/kontinuous/plugins/fabrique/jobs/seed-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

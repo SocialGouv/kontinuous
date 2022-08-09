@@ -30,12 +30,12 @@ pgweb:
 jobs:
   runs:
     build-app:
-      use: SocialGouv/kontinuous/plugins/contrib/jobs/build
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
       with:
         registrySecretRefName: harbor
         imagePackage: app
     build-hasura:
-      use: SocialGouv/kontinuous/plugins/contrib/jobs/build
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
       with:
         registrySecretRefName: harbor
         imagePackage: hasura
@@ -44,7 +44,7 @@ jobs:
 jobs-dev:
   runs:
     db:
-      use: SocialGouv/kontinuous/plugins/contrib/jobs/create-db
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/create-db
       with:
         pgAdminSecretRefName: pg-scaleway
 
