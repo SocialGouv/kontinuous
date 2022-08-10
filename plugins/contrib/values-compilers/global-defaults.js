@@ -1,46 +1,27 @@
-const MAX_DNS_LENGTH = 63
-
-// const defaultRegistry = "ghcr.io/socialgouv"
-const defaultRegistry = "harbor.fabrique.social.gouv.fr"
-const defaultRootDomain = "fabrique.social.gouv.fr"
-
-module.exports = async (values, _options, { config, utils, ctx }) => {
+module.exports = async (values, options, { config, utils, ctx }) => {
   const { isVersionTag, slug, deepmerge } = utils
 
   const processEnv = ctx.get("env") || process.env
 
-  const { KUBE_INGRESS_BASE_DOMAIN, RANCHER_PROJECT_ID } = processEnv
+  const { RANCHER_PROJECT_ID: rancherProjectId } = processEnv
 
   const { environment, gitRepository, gitBranch, gitSha } = config
 
   const branchSlug = slug(gitBranch)
 
-  const env = environment
-
-  const isProd = env === "prod"
-  const isPreProd = env === "preprod"
+  const isProd = environment === "prod"
+  const isPreProd = environment === "preprod"
   const isDev = !(isProd || isPreProd)
 
   const { repositoryName } = config
 
-  const globalHostMaxLength =
-    MAX_DNS_LENGTH - Math.max(...Object.keys(values).map((key) => key.length))
-
-  const subdomain = isProd
-    ? repositoryName
-    : isPreProd
-    ? `${repositoryName}-preprod`
-    : slug(`${repositoryName}-${gitBranch}`, { maxLength: globalHostMaxLength })
+  const { registry } = options
 
   const namespace = isProd
     ? repositoryName
     : isPreProd
     ? `${repositoryName}-preprod`
     : slug(`${repositoryName}-${gitBranch}`)
-
-  const isRenovate = gitBranch.startsWith("renovate")
-
-  const ttl = isDev ? (isRenovate ? "1d" : "7d") : ""
 
   const sha = gitSha
 
@@ -59,41 +40,9 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
     imageTag = `sha-${sha}`
   }
 
-  let domain
-  if (KUBE_INGRESS_BASE_DOMAIN) {
-    domain = KUBE_INGRESS_BASE_DOMAIN
-  } else {
-    domain = isProd ? defaultRootDomain : `dev.${defaultRootDomain}`
-  }
-
-  const rancherProjectId = RANCHER_PROJECT_ID
-
-  const host = `${subdomain}.${domain}`
-
-  const registry = defaultRegistry
   const imageRepository = repositoryName
 
-  const pgSecretName = isProd
-    ? "pg-user"
-    : isPreProd
-    ? "pg-user"
-    : `pg-user-${branchSlug}`
-
-  const productionDatabase = repositoryName
-
   const branchSlug32 = slug(gitBranch, 32)
-
-  const pgDatabase = isProd
-    ? productionDatabase
-    : isPreProd
-    ? "preprod"
-    : `autodevops_${branchSlug32}`
-
-  const pgUser = isProd
-    ? productionDatabase
-    : isPreProd
-    ? "preprod"
-    : `user_${branchSlug32}`
 
   const { projectName } = config
 
@@ -114,14 +63,8 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
       isDev,
       isProd,
       isPreProd,
-      ttl,
       namespace,
       rancherProjectId,
-      pgSecretName,
-      pgDatabase,
-      pgUser,
-      host,
-      domain,
       registry,
       replicas,
       imageProject,
@@ -133,7 +76,7 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
       ciNamespace,
       sha,
       shortSha,
-      env,
+      env: environment,
       ingress: {
         annotations: {},
       },
