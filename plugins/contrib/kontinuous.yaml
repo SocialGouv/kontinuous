@@ -19,6 +19,8 @@ validators:
     enabled: false
   sealedSecrets:
     enabled: false
+  noPlainSecrets:
+    enabled: false
 
 preDeploy:
   debugLinks:

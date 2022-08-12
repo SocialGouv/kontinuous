@@ -17,6 +17,8 @@ dependencies:
     validators:
       rancherProjectId:
         enabled: true
+      noPlainSecrets:
+        enabled: true
       sealedSecrets:
         enabled: false
 
