@@ -42,6 +42,10 @@ module.exports = async function createConfig() {
 
   const supertoken = process.env.KUBEWEBHOOK_SUPERTOKEN
 
+  const ignoreUserAgents = (
+    process.env.KUBEWEBHOOK_HTTPLOGGER_IGNOREUSERAGENTS || ""
+  ).split(",")
+
   const config = {
     project: {
       oas: {
@@ -61,7 +65,7 @@ module.exports = async function createConfig() {
         ...Object.values(tokens).flatMap((values) => values),
         ...(supertoken ? [supertoken] : []),
       ],
-      ignoreUserAgents: ["blackbox-monitoring-fabnum"],
+      ignoreUserAgents,
     },
   }
 

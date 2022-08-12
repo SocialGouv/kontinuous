@@ -63,6 +63,8 @@ spec:
               value: "true"
             - name: KUBEWEBHOOK_EXPOSED_PORT
               value: "443"
+            - name: KUBEWEBHOOK_HTTPLOGGER_IGNOREUSERAGENTS
+              value: "{{ .Values.httpLogger.ignoreUserAgents | join "," }}"
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}

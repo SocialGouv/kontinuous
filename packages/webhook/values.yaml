@@ -28,6 +28,10 @@ artifacts:
     size: 2Gi
     className: 'azurefile'
 
+httpLogger:
+  ignoreUserAgents:
+    - blackbox-monitoring-fabnum
+
 # ACL
 kubeconfigSecrets: []
 tokenSecrets: []
