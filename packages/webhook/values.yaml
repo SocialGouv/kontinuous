@@ -32,6 +32,11 @@ httpLogger:
   ignoreUserAgents:
     - blackbox-monitoring-fabnum
 
+pipelineCheckoutImage: ghcr.io/socialgouv/kontinuous/degit:1
+pipelineImage: ghcr.io/socialgouv/kontinuous:1
+# pipelineCheckoutImage: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
+# pipelineImage: harbor.fabrique.social.gouv.fr/sre/kontinuous:v1
+
 # ACL
 kubeconfigSecrets: []
 tokenSecrets: []

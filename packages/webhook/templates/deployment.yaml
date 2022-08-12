@@ -65,6 +65,10 @@ spec:
               value: "443"
             - name: KUBEWEBHOOK_HTTPLOGGER_IGNOREUSERAGENTS
               value: "{{ .Values.httpLogger.ignoreUserAgents | join "," }}"
+            - name: KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE
+              value: {{ .Values.pipelineCheckoutImage }}
+            - name: KUBEWEBHOOK_PIPELINE_IMAGE
+              value: {{ .Values.pipelineImage }}
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}
