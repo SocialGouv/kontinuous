@@ -61,6 +61,7 @@ module.exports = async function createConfig() {
         ...Object.values(tokens).flatMap((values) => values),
         ...(supertoken ? [supertoken] : []),
       ],
+      ignoreUserAgents: ["blackbox-monitoring-fabnum"],
     },
   }
 
