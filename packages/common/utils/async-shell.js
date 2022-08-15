@@ -42,7 +42,7 @@ module.exports = (
   logger = globalLogger
 ) => {
   const [cmd, args] = parseCommand(arg)
-  const defaultOptions = { encoding: "utf8" }
+  const defaultOptions = { encoding: "utf-8" }
   const childProcess = spawn(cmd, args, { ...defaultOptions, ...options })
   return promiseFromChildProcess(
     childProcess,

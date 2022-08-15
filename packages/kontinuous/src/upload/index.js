@@ -10,7 +10,7 @@ module.exports = async ({ name, file }) => {
   const config = ctx.require("config")
   const logger = ctx.require("logger")
 
-  const manifests = await fs.readFile(file, { encoding: "utf8" })
+  const manifests = await fs.readFile(file, { encoding: "utf-8" })
 
   const dest = name || "manifests"
 
