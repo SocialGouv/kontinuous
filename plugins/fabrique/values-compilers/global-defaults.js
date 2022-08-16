@@ -106,6 +106,7 @@ module.exports = async (values, _options, { config, utils, ctx }) => {
 
   const defaultValues = {
     global: {
+      projectName,
       certSecretName: "wildcard-crt",
       registrySecretRefName: "harbor",
       repository: gitRepository,
