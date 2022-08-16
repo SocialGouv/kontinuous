@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.52.20](https://github.com/SocialGouv/kontinuous/compare/v1.52.19...v1.52.20) (2022-08-16)
+
+
+### Bug Fixes
+
+* add projectName to values ([020b0a6](https://github.com/SocialGouv/kontinuous/commit/020b0a616ca68c38eaf91b68f6fc1195dfb247f8))
+* increase default replicas ([2b1e878](https://github.com/SocialGouv/kontinuous/commit/2b1e878d1b3c650bff63aacb2da3f517d3333652))
+* increase terminationGracePeriod ([4c71d73](https://github.com/SocialGouv/kontinuous/commit/4c71d732f33d3afb9a7d21faad41c5abfa3765b3))
+
 ### [1.52.19](https://github.com/SocialGouv/kontinuous/compare/v1.52.18...v1.52.19) (2022-08-05)
 
 
