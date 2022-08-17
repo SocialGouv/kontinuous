@@ -55,7 +55,7 @@ module.exports = async ({
           "kubectl",
           [
             ...(kubeconfigContext ? [`--context=${kubeconfigContext}`] : []),
-            verb,
+            ...verb,
             "-f",
             "-",
           ],
@@ -110,11 +110,11 @@ module.exports = async ({
     })
   ) {
     logger.info({ namespace }, "apply namespace")
-    await ensureNamespace("apply")
+    await ensureNamespace(["apply"])
     return
   }
 
-  await ensureNamespace("create")
+  await ensureNamespace(["create", "--save-config"])
 
   await retry(
     async () => {
