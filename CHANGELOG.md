@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.52.22](https://github.com/SocialGouv/kontinuous/compare/v1.52.21...v1.52.22) (2022-08-17)
+
+
+### Bug Fixes
+
+* kubectl create --save-config ([8564f00](https://github.com/SocialGouv/kontinuous/commit/8564f00db2c7a1ab0ca78476310ae1515396030c))
+
 ### [1.52.21](https://github.com/SocialGouv/kontinuous/compare/v1.52.20...v1.52.21) (2022-08-17)
 
 
