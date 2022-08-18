@@ -1,7 +1,3 @@
-dependencies:
-  recommended:
-    import: SocialGouv/kontinuous/plugins/recommended
-
 valuesCompilers:
   globalDefaults:
     enabled: false

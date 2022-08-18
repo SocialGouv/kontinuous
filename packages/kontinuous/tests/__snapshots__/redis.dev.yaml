@@ -78,11 +78,11 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-redis-feature-branch-1
     kapp.k14s.io/change-group.redis: kontinuous/redis.test-redis-feature-branch-1
+    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:

@@ -164,11 +164,11 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-metabase
     kapp.k14s.io/change-group.metabase-app1: kontinuous/metabase-app1.test-metabase
+    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -237,11 +237,11 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-metabase
     kapp.k14s.io/change-group.metabase-app2: kontinuous/metabase-app2.test-metabase
+    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -304,10 +304,10 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-original: ''
   labels:
     component: metabase-app1
     application: test-metabase
@@ -335,10 +335,10 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-original: ''
   labels:
     component: metabase-app2
     application: test-metabase

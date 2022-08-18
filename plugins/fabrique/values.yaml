@@ -1,4 +1,4 @@
-recommended:
+contrib:
   kontinuous-helpers:
     enabled: true
 

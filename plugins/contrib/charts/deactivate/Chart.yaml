@@ -3,6 +3,6 @@ name: deactivate
 version: 1.52.22
 dependencies:
   - name: jobs
-    repository: file://../recommended/charts/jobs
+    repository: file://../jobs
     condition: 'true'
     alias: jobs-deactivate
