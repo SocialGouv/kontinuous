@@ -4,6 +4,8 @@ runs:
     action: false
     image: gcr.io/kaniko-project/executor:debug
     # serviceAccountName: kaniko
+    memoryLimit: 2Gi
+    memoryRequest: 1Gi
     user: 0
     entrypoint: ["/busybox/sh","-c"]
     envFrom:
