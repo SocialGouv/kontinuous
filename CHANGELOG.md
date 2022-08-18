@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.53.4](https://github.com/SocialGouv/kontinuous/compare/v1.53.3...v1.53.4) (2022-08-18)
+
+
+### Bug Fixes
+
+* increase default memoryLimit ([6779528](https://github.com/SocialGouv/kontinuous/commit/67795283fa0338b53becf3c3668c2ebde427e786))
+
 ### [1.53.3](https://github.com/SocialGouv/kontinuous/compare/v1.53.2...v1.53.3) (2022-08-18)
 
 
