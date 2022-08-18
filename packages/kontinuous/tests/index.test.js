@@ -59,7 +59,13 @@ describe("test build manifests with snapshots", () => {
   test.each(cases)("%s.%s", async (testdir, environment) => {
     const testdirPath = `${samplesDir}/${testdir}`
     const tmpdir = os.tmpdir()
-    const buildPath = path.join(tmpdir, "kontinuous", "tests", slug(testdir))
+    const buildPath = path.join(
+      tmpdir,
+      "kontinuous",
+      "tests",
+      slug(testdir),
+      environment
+    )
     await fs.emptyDir(buildPath)
     const env = {
       ...process.env,

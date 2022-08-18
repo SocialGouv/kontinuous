@@ -77,11 +77,11 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-hasura-no-ing
     kapp.k14s.io/change-group.hasura: kontinuous/hasura.test-hasura-no-ing
+    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:

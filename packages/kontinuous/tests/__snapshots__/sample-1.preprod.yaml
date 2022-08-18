@@ -154,11 +154,11 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-sample-1-preprod
     kapp.k14s.io/change-group.app-2nd-instance: kontinuous/app-2nd-instance.test-sample-1-preprod
+    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -241,11 +241,11 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-sample-1-preprod
     kapp.k14s.io/change-group.app: kontinuous/app.test-sample-1-preprod
+    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -328,11 +328,11 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-sample-1-preprod
     kapp.k14s.io/change-group.hasura: kontinuous/hasura.test-sample-1-preprod
+    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -401,11 +401,11 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-sample-1-preprod
     kapp.k14s.io/change-group.pgweb: kontinuous/pgweb.test-sample-1-preprod
+    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:

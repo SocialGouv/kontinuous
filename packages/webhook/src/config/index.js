@@ -42,6 +42,16 @@ module.exports = async function createConfig() {
 
   const supertoken = process.env.KUBEWEBHOOK_SUPERTOKEN
 
+  const ignoreUserAgents = (
+    process.env.KUBEWEBHOOK_HTTPLOGGER_IGNOREUSERAGENTS || ""
+  ).split(",")
+
+  const pipelineImage =
+    process.env.KUBEWEBHOOK_PIPELINE_IMAGE || "ghcr.io/socialgouv/kontinuous:1"
+  const pipelineCheckoutImage =
+    process.env.KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE ||
+    "ghcr.io/socialgouv/kontinuous/degit:1"
+
   const config = {
     project: {
       oas: {
@@ -52,6 +62,8 @@ module.exports = async function createConfig() {
         supertoken,
         kubeconfigs,
       },
+      pipelineImage,
+      pipelineCheckoutImage,
     },
     logger: {
       level: "debug",
@@ -61,6 +73,7 @@ module.exports = async function createConfig() {
         ...Object.values(tokens).flatMap((values) => values),
         ...(supertoken ? [supertoken] : []),
       ],
+      ignoreUserAgents,
     },
   }
 

@@ -92,7 +92,7 @@ RUN yarn workspaces focus kontinuous --production && yarn cache clean
 # pre-cache yarn package for official plugins optimization
 ENV KS_INLINE_CONFIG_SET "links.SocialGouv/kontinuous=/opt/kontinuous"
 COPY --chown=1001:1001 plugins/ ./plugins/
-RUN cd plugins/recommended && yarn
+RUN cd plugins/contrib && yarn
 RUN cd plugins/fabrique && yarn
 
 RUN rm -rf packages/kontinuous/src && rm -rf packages/kontinuous/common

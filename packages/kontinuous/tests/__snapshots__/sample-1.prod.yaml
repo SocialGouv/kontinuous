@@ -153,11 +153,11 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-sample-1
     kapp.k14s.io/change-group.app-2nd-instance: kontinuous/app-2nd-instance.test-sample-1
+    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 2
   selector:
@@ -239,11 +239,11 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-sample-1
     kapp.k14s.io/change-group.app: kontinuous/app.test-sample-1
+    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 2
   selector:
@@ -325,11 +325,11 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-sample-1
     kapp.k14s.io/change-group.hasura: kontinuous/hasura.test-sample-1
+    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -397,11 +397,11 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-sample-1
     kapp.k14s.io/change-group.pgweb: kontinuous/pgweb.test-sample-1
+    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -486,10 +486,10 @@ metadata:
       more_set_headers \\"X-XSS-Protection: 1; mode=block\\";
 
       more_set_headers \\"X-Content-Type-Options: nosniff\\";
-    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-original: ''
   labels:
     component: app-2nd-instance
     application: test-sample-1
@@ -528,10 +528,10 @@ metadata:
       more_set_headers \\"X-XSS-Protection: 1; mode=block\\";
 
       more_set_headers \\"X-Content-Type-Options: nosniff\\";
-    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-original: ''
   labels:
     component: app
     application: test-sample-1
@@ -559,10 +559,10 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-original: ''
   labels:
     component: hasura
     application: test-sample-1
@@ -590,10 +590,10 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-original: ''
   labels:
     component: pgweb
     application: test-sample-1

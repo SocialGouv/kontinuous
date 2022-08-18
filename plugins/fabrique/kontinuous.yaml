@@ -1,6 +1,33 @@
 dependencies:
-  recommended:
-    import: SocialGouv/kontinuous/plugins/recommended
+  contrib:
+    import: SocialGouv/kontinuous/plugins/contrib
+    
+    valuesCompilers:
+      globalDefaults:
+        enabled: true
+
+    patches:
+      certs:
+        enabled: true
+      rancherProjectId:
+        enabled: true
+      reloader:
+        enabled: true
+
+    validators:
+      rancherProjectId:
+        enabled: true
+      noPlainSecrets:
+        enabled: true
+      sealedSecrets:
+        enabled: false
+
+    preDeploy:
+      debugLinks:
+        enabled: true
+      rancherNamespaces:
+        enabled: true
+
 
 config:
   webhookUri: https://kontinuous.fabrique.social.gouv.fr
@@ -17,10 +44,5 @@ options:
       environments:
         - prod
 
-validators:
-  sealedSecrets:
-    enabled: false
-
-# patches:
-#   reloader:
-#     enabled: false
+  registry: "harbor.fabrique.social.gouv.fr"
+  domain: "fabrique.social.gouv.fr"
