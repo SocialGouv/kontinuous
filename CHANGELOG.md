@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.53.7](https://github.com/SocialGouv/kontinuous/compare/v1.53.6...v1.53.7) (2022-08-18)
+
+
+### Bug Fixes
+
+* increase default cpuLimit for build ([a2319f9](https://github.com/SocialGouv/kontinuous/commit/a2319f9311717158adf3beff23a130c0029a18ab))
+
 ### [1.53.6](https://github.com/SocialGouv/kontinuous/compare/v1.53.5...v1.53.6) (2022-08-18)
 
 
