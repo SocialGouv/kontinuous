@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.53.0 (2022-08-18)
+
+
+### Features
+
+* plugin contrib + ignore useragent + validator noplainsecret + refacto image as value ([#25](https://github.com/SocialGouv/kontinuous/issues/25)) ([9b7c5c5](https://github.com/SocialGouv/kontinuous/commit/9b7c5c5635f1a4bcc493a3c941f5a2a99dc30add))
+
 ### [1.52.22](https://github.com/SocialGouv/kontinuous/compare/v1.52.21...v1.52.22) (2022-08-17)
 
 
