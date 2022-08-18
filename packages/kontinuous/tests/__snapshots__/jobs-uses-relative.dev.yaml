@@ -135,7 +135,7 @@ spec:
               /action/ensure-db.sh
           resources:
             limits:
-              cpu: 500m
+              cpu: 1
               memory: 512Mi
             requests:
               cpu: 100m
@@ -229,7 +229,7 @@ spec:
               /action/create-secret.sh
           resources:
             limits:
-              cpu: 500m
+              cpu: 1
               memory: 512Mi
             requests:
               cpu: 100m

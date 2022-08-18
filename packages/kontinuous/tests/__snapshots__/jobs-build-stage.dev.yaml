@@ -347,7 +347,7 @@ spec:
               /action/ensure-db.sh
           resources:
             limits:
-              cpu: 500m
+              cpu: 1
               memory: 512Mi
             requests:
               cpu: 100m
@@ -441,7 +441,7 @@ spec:
               /action/create-secret.sh
           resources:
             limits:
-              cpu: 500m
+              cpu: 1
               memory: 512Mi
             requests:
               cpu: 100m
@@ -527,27 +527,27 @@ spec:
               \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\"
               > /kaniko/.docker/config.json
 
-              export
-              DOCKER_IMAGE=$CI_REGISTRY/test-jobs-build-stage/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+              export IMAGE_PATH=$CI_REGISTRY/test-jobs-build-stage/app
 
               /kaniko/executor \\\\
                 --context=dir:///workspace \\\\
                 --dockerfile=/workspace/Dockerfile \\\\
-                --destination=$DOCKER_IMAGE \\\\
+                --destination=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53 \\\\
+                --destination=$IMAGE_PATH:feature-branch-1 \\\\
                 --cache=true \\\\
+                --cache-repo=$IMAGE_PATH \\\\
                 --snapshotMode=redo \\\\
-                --single-snapshot \\\\
                 --skip-unused-stages \\\\
                 --use-new-run \\\\
                 --cache-ttl=336h \\\\
                 
           resources:
             limits:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 2
+              memory: 4Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 500m
+              memory: 1Gi
           securityContext:
             runAsUser: 0
             runAsGroup: 0
@@ -629,27 +629,27 @@ spec:
               \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\"
               > /kaniko/.docker/config.json
 
-              export
-              DOCKER_IMAGE=$CI_REGISTRY/test-jobs-build-stage/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
+              export IMAGE_PATH=$CI_REGISTRY/test-jobs-build-stage/hasura
 
               /kaniko/executor \\\\
                 --context=dir:///workspace/hasura \\\\
                 --dockerfile=/workspace/hasura/Dockerfile \\\\
-                --destination=$DOCKER_IMAGE \\\\
+                --destination=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53 \\\\
+                --destination=$IMAGE_PATH:feature-branch-1 \\\\
                 --cache=true \\\\
+                --cache-repo=$IMAGE_PATH \\\\
                 --snapshotMode=redo \\\\
-                --single-snapshot \\\\
                 --skip-unused-stages \\\\
                 --use-new-run \\\\
                 --cache-ttl=336h \\\\
                 
           resources:
             limits:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 2
+              memory: 4Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 500m
+              memory: 1Gi
           securityContext:
             runAsUser: 0
             runAsGroup: 0

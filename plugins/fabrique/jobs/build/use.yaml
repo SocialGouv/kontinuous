@@ -4,6 +4,8 @@ runs:
     action: false
     image: gcr.io/kaniko-project/executor:debug
     # serviceAccountName: kaniko
+    cpuLimit: "2"
+    cpuRequest: 500m
     memoryLimit: 4Gi
     memoryRequest: 1Gi
     user: 0

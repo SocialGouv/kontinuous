@@ -69,7 +69,7 @@ spec:
               kubectl delete namespace \\"$NAMESPACE\\"
           resources:
             limits:
-              cpu: 500m
+              cpu: 1
               memory: 512Mi
             requests:
               cpu: 100m
