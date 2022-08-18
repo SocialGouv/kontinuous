@@ -11,23 +11,22 @@ runs:
     envFrom:
       - secretRef:
           name: "{{ or $.with.registrySecretRefName $.Values.global.registrySecretRefName }}"
-    outputs:
-      - DOCKER_IMAGE
     run: |
       mkdir -p /kaniko/.docker
       echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-      export DOCKER_IMAGE=$CI_REGISTRY{{ if (or $.with.imageProject $.Values.global.imageProject) }}{{ (print "/" (or $.with.imageProject $.Values.global.imageProject)) }}{{ end }}/{{ or $.with.imageRepository $.Values.global.imageRepository }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}{{ if $.with.target }}{{ (print "-" $.with.target) }}{{ end }}:{{ or $.with.imageTag $.Values.global.imageTag }}
+      export IMAGE_PATH=$CI_REGISTRY{{ if (or $.with.imageProject $.Values.global.imageProject) }}{{ (print "/" (or $.with.imageProject $.Values.global.imageProject)) }}{{ end }}/{{ or $.with.imageRepository $.Values.global.imageRepository }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}{{ if $.with.target }}{{ (print "-" $.with.target) }}{{ end }}
       /kaniko/executor \
         --context=dir:///workspace{{ if $.with.context }}/{{ $.with.context }}{{ end }} \
         --dockerfile=/workspace{{ if $.with.context }}/{{ $.with.context }}{{ end }}/{{ or $.with.dockerfile "Dockerfile" }} \
         {{ if $.with.noPush -}}
         --no-push \
         {{ else -}}
-        --destination=$DOCKER_IMAGE \
+        --destination=$IMAGE_PATH:{{ or $.with.imageTag $.Values.global.imageTag }} \
+        --destination=$IMAGE_PATH:{{ $.Values.global.branchSlug32 }} \
         --cache=true \
+        --cache-repo=$IMAGE_PATH \
         {{ end -}}
         --snapshotMode=redo \
-        --single-snapshot \
         --skip-unused-stages \
         --use-new-run \
         --cache-ttl=336h \
