@@ -300,6 +300,13 @@ spec:
           volumeMounts:
             - name: action
               mountPath: /action
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:6.70.0
@@ -338,6 +345,13 @@ spec:
             - |
               set -e
               /action/ensure-db.sh
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -392,6 +406,13 @@ spec:
           volumeMounts:
             - name: action
               mountPath: /action
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -418,6 +439,13 @@ spec:
             - |
               set -e
               /action/create-secret.sh
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -473,6 +501,13 @@ spec:
           volumeMounts:
             - name: workspace
               mountPath: /workspace
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
       containers:
         - name: job
           image: gcr.io/kaniko-project/executor:debug
@@ -506,6 +541,13 @@ spec:
                 --use-new-run \\\\
                 --cache-ttl=336h \\\\
                 
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           securityContext:
             runAsUser: 0
             runAsGroup: 0
@@ -561,6 +603,13 @@ spec:
           volumeMounts:
             - name: workspace
               mountPath: /workspace
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
       containers:
         - name: job
           image: gcr.io/kaniko-project/executor:debug
@@ -594,6 +643,13 @@ spec:
                 --use-new-run \\\\
                 --cache-ttl=336h \\\\
                 
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           securityContext:
             runAsUser: 0
             runAsGroup: 0

@@ -40,6 +40,13 @@ spec:
           volumeMounts:
             - name: action
               mountPath: /action
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -60,6 +67,13 @@ spec:
               export KUBECONFIG=/tmp/.kube/config
 
               kubectl delete namespace \\"$NAMESPACE\\"
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001

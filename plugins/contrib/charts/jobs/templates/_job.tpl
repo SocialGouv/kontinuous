@@ -97,6 +97,13 @@ spec:
           volumeMounts:
             - name: workspace
               mountPath: /workspace
+          resources:
+            limits:
+              cpu: {{ or $run.degitRepositoryCpuLimit .Values.degitRepository.resources.limits.cpu }}
+              memory: {{ or $run.degitRepositoryMemoryLimit .Values.degitRepository.resources.limits.memory }}
+            requests:
+              cpu: {{ or $run.degitRepositoryCpuRequest .Values.degitRepository.resources.requests.cpu }}
+              memory: {{ or $run.degitRepositoryMemoryRequest .Values.degitRepository.resources.requests.memory }}
       {{- end }}
       {{- if $run.action }}
         - name: degit-action
@@ -112,6 +119,13 @@ spec:
           volumeMounts:
             - name: action
               mountPath: /action
+          resources:
+            limits:
+              cpu: {{ or $run.degitActionCpuLimit .Values.degitAction.resources.limits.cpu }}
+              memory: {{ or $run.degitActionMemoryLimit .Values.degitAction.resources.limits.memory }}
+            requests:
+              cpu: {{ or $run.degitActionCpuRequest .Values.degitAction.resources.requests.cpu }}
+              memory: {{ or $run.degitActionMemoryRequest .Values.degitAction.resources.requests.memory }}
       {{- end }}
       containers:          
         - name: job
@@ -160,6 +174,13 @@ spec:
             - "{{ tpl $arg $ }}"
           {{- end }}
           {{- end }}
+          resources:
+            limits:
+              cpu: {{ or $run.cpuLimit .Values.resources.limits.cpu }}
+              memory: {{ or $run.memoryLimit .Values.resources.limits.memory }}
+            requests:
+              cpu: {{ or $run.cpuRequest .Values.resources.requests.cpu }}
+              memory: {{ or $run.memoryRequest .Values.resources.requests.memory }}
           securityContext:
             runAsUser: {{ $user }}
             runAsGroup: {{ $group }}

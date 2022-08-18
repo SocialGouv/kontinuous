@@ -83,6 +83,13 @@ spec:
           volumeMounts:
             - name: workspace
               mountPath: /workspace
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
       containers:
         - name: job
           image: debian:stable
@@ -94,6 +101,13 @@ spec:
             - |
               set -e
               Hello World !
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

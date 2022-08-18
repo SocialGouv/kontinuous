@@ -13,4 +13,27 @@ degitImage: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
 #       enabled:
 priorityClassName: ""
 serviceAccountName: ""
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+degitRepository:
+  resources:
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 10m
+      memory: 64Mi
+degitAction:
+  resources:
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 10m
+      memory: 64Mi
 _pluginValuesCompilerRecommendedJobs: true
