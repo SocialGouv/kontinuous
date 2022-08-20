@@ -37,12 +37,15 @@ module.exports = async (manifestsDocument, config) => {
     removeNulls(manifest)
 
     let { source } = manifest
-    if (source && source.startsWith(sourcePrefix)) {
-      source = source.slice(sourcePrefix.length)
-      const fragments = source.split("/charts/")
-      fragments.push(fragments.pop().split("/").shift())
-      const chartPath = fragments.join(".")
-      set(manifest, "metadata.annotations[kontinuous/chartPath]", chartPath)
+    if (source) {
+      if (source.startsWith(sourcePrefix)) {
+        source = source.slice(sourcePrefix.length)
+        const fragments = source.split("/charts/")
+        fragments.push(fragments.pop().split("/").shift())
+        const chartPath = fragments.join(".")
+        set(manifest, "metadata.annotations[kontinuous/chartPath]", chartPath)
+      }
+      delete manifest.source
     }
     set(manifest, "metadata.annotations[kontinuous/source]", source)
     manifests.push(manifest)
