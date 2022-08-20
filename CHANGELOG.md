@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.54.0](https://github.com/SocialGouv/kontinuous/compare/v1.53.15...v1.54.0) (2022-08-20)
+
+
+### Features
+
+* add values patches ([1632140](https://github.com/SocialGouv/kontinuous/commit/16321402ab7c3c6f69ce10b065277cb8e747595c))
+* chartPath and source ([a243d0e](https://github.com/SocialGouv/kontinuous/commit/a243d0e0be8370f695987a63aab22e05da179e32))
+* cleaner pre-deploy plugin ([aa82782](https://github.com/SocialGouv/kontinuous/commit/aa82782550a8a2b0b8c64a21467d3065b3914642))
+
+
+### Bug Fixes
+
+* clean source ([c07ef5f](https://github.com/SocialGouv/kontinuous/commit/c07ef5f5c6a17127673eb66372e86482dbf966aa))
+* up snapshots ([5b885c7](https://github.com/SocialGouv/kontinuous/commit/5b885c7c7997c429af8cbd75b92b65672b8802bd))
+
 ### [1.53.15](https://github.com/SocialGouv/kontinuous/compare/v1.53.14...v1.53.15) (2022-08-20)
 
 
