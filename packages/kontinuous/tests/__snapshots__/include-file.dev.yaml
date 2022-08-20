@@ -122,5 +122,20 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
+---
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+rebaseRules:
+  - path:
+      - metadata
+      - annotations
+      - field.cattle.io/publicEndpoints
+    type: copy
+    sources:
+      - existing
+    resourceMatchers:
+      - apiVersionKindMatcher:
+          apiVersion: apps/v1
+          kind: Deployment
 "
 `;

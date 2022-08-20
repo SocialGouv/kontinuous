@@ -361,6 +361,21 @@ spec:
         - metabase-app2-test-metabase.fabrique.social.gouv.fr
       secretName: metabase-app2-crt
 ---
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+rebaseRules:
+  - path:
+      - metadata
+      - annotations
+      - field.cattle.io/publicEndpoints
+    type: copy
+    sources:
+      - existing
+    resourceMatchers:
+      - apiVersionKindMatcher:
+          apiVersion: apps/v1
+          kind: Deployment
+---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:

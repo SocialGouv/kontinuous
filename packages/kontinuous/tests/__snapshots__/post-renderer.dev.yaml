@@ -176,5 +176,20 @@ spec:
     - hosts:
         - test-post-renderer-feature-branch-1.dev.fabrique.social.gouv.fr
       secretName: wildcard-crt
+---
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+rebaseRules:
+  - path:
+      - metadata
+      - annotations
+      - field.cattle.io/publicEndpoints
+    type: copy
+    sources:
+      - existing
+    resourceMatchers:
+      - apiVersionKindMatcher:
+          apiVersion: apps/v1
+          kind: Deployment
 "
 `;

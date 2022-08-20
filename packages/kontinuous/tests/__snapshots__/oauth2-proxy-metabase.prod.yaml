@@ -285,5 +285,20 @@ spec:
     - hosts:
         - oauth2-proxy-test-oauth2-proxy-metabase.fabrique.social.gouv.fr
       secretName: oauth2-proxy-crt
+---
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+rebaseRules:
+  - path:
+      - metadata
+      - annotations
+      - field.cattle.io/publicEndpoints
+    type: copy
+    sources:
+      - existing
+    resourceMatchers:
+      - apiVersionKindMatcher:
+          apiVersion: apps/v1
+          kind: Deployment
 "
 `;

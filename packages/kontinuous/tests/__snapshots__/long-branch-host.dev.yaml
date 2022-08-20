@@ -179,5 +179,20 @@ spec:
         - >-
           app-api-test-long-branch-host-a-very-very-very-lo-47z9um.dev.fabrique.social.gouv.fr
       secretName: wildcard-crt
+---
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+rebaseRules:
+  - path:
+      - metadata
+      - annotations
+      - field.cattle.io/publicEndpoints
+    type: copy
+    sources:
+      - existing
+    resourceMatchers:
+      - apiVersionKindMatcher:
+          apiVersion: apps/v1
+          kind: Deployment
 "
 `;
