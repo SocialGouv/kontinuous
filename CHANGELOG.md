@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.53.10](https://github.com/SocialGouv/kontinuous/compare/v1.53.9...v1.53.10) (2022-08-20)
+
+
+### Bug Fixes
+
+* disable reloader ([81f8894](https://github.com/SocialGouv/kontinuous/commit/81f88948e8b1f3c759e6b1aae407b6fd28be1b62))
+
 ### [1.53.9](https://github.com/SocialGouv/kontinuous/compare/v1.53.8...v1.53.9) (2022-08-20)
 
 
