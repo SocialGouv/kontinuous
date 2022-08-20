@@ -1,6 +1,7 @@
 module.exports = (manifests, _options, { values }) => {
   for (const manifest of manifests) {
-    if (manifest.kind !== "Namespace") {
+    const { kind, apiVersion } = manifest
+    if (kind !== "Namespace" && !apiVersion.startsWith("kapp.k14s.io")) {
       if (!manifest.metadata) {
         manifest.metadata = {}
       }

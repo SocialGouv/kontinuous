@@ -2,7 +2,7 @@ const getTreeInfos = {}
 
 getTreeInfos.default = (resource) => {
   const { manifest } = resource
-  return [{ name: `name: ${manifest.metadata.name}` }]
+  return [{ name: `name: ${manifest.metadata?.name}` }]
 }
 
 getTreeInfos.Namespace = (resource) => {
@@ -213,6 +213,11 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
   for (const [kind, kindResources] of Object.entries(globalResources.kinds)) {
     const children = []
     for (const resource of kindResources) {
+      const { manifest } = resource
+      const { apiVersion } = manifest
+      if (apiVersion.startsWith("kapp.k14s.io")) {
+        continue
+      }
       if (getTreeInfos[kind]) {
         children.push(...getTreeInfos[kind](resource))
       } else {

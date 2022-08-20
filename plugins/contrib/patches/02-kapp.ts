@@ -35,17 +35,21 @@ const kindPatches = {
 
 module.exports = (manifests) => {
   for (const manifest of manifests) {
+    const { kind, apiVersion } = manifest
+    if (apiVersion.startsWith("kapp.k14s.io")) {
+      continue
+    }
     if (!manifest.metadata) {
       manifest.metadata = {}
     }
     if (!manifest.metadata.annotations) {
       manifest.metadata.annotations = {}
     }
-    if (manifest.kind !== "Namespace") {
+    if (kind !== "Namespace") {
       manifest.metadata.annotations["kapp.k14s.io/disable-original"] = ""
     }
-    if (kindPatches[manifest.kind]) {
-      kindPatches[manifest.kind](manifest)
+    if (kindPatches[kind]) {
+      kindPatches[kind](manifest)
     }
   }
   return manifests
