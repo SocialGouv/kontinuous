@@ -82,7 +82,6 @@ metadata:
     kapp.k14s.io/change-rule.seed: >-
       upsert after upserting
       kontinuous/seed.test-jobs-seed-command-feature-branch-1
-    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace

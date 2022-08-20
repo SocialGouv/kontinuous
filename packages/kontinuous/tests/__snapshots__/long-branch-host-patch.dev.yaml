@@ -80,7 +80,6 @@ metadata:
     kapp.k14s.io/change-group: kontinuous/test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
     kapp.k14s.io/change-group.app: >-
       kontinuous/app.test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
-    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace

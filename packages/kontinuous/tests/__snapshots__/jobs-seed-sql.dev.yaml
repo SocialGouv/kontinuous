@@ -80,7 +80,6 @@ metadata:
     kapp.k14s.io/change-group: kontinuous/test-jobs-seed-sql-feature-branch-1
     kapp.k14s.io/change-group.app: kontinuous/app.test-jobs-seed-sql-feature-branch-1
     kapp.k14s.io/change-rule.seed: upsert after upserting kontinuous/seed.test-jobs-seed-sql-feature-branch-1
-    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace

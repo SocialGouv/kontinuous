@@ -77,7 +77,6 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-oauth2-proxy
     kapp.k14s.io/change-group.oauth2-proxy: kontinuous/oauth2-proxy.test-oauth2-proxy
-    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace

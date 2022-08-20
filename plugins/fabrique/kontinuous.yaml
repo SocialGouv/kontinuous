@@ -12,7 +12,7 @@ dependencies:
       rancherProjectId:
         enabled: true
       reloader:
-        enabled: true
+        enabled: false
 
     validators:
       rancherProjectId:

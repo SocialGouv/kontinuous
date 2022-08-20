@@ -124,7 +124,6 @@ metadata:
     kapp.k14s.io/change-rule.build-app: >-
       upsert after upserting
       kontinuous/build-app.test-jobs-build-feature-branch-1
-    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -215,7 +214,6 @@ metadata:
       upsert after upserting
       kontinuous/build-hasura.test-jobs-build-feature-branch-1
     kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db.test-jobs-build-feature-branch-1
-    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -289,7 +287,6 @@ metadata:
     kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
     kapp.k14s.io/change-group.pgweb: kontinuous/pgweb.test-jobs-build-feature-branch-1
     kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db.test-jobs-build-feature-branch-1
-    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace

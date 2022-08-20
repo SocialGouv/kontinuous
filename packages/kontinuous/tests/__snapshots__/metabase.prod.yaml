@@ -164,7 +164,6 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-metabase
     kapp.k14s.io/change-group.metabase-app1: kontinuous/metabase-app1.test-metabase
-    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -237,7 +236,6 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-metabase
     kapp.k14s.io/change-group.metabase-app2: kontinuous/metabase-app2.test-metabase
-    reloader.stakater.com/auto: 'true'
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
