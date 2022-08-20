@@ -109,8 +109,8 @@ module.exports = async ({
       logger,
     })
   ) {
-    logger.info({ namespace }, "apply namespace")
-    await ensureNamespace(["apply"])
+    // logger.info({ namespace }, "apply namespace")
+    // await ensureNamespace(["apply"])
     return
   }
 
