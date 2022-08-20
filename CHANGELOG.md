@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.53.9](https://github.com/SocialGouv/kontinuous/compare/v1.53.8...v1.53.9) (2022-08-20)
+
+
+### Bug Fixes
+
+* handle kapp config ([88eba42](https://github.com/SocialGouv/kontinuous/commit/88eba427809d5d34910a06bd4083fa5314968eda))
+* kapp rancher operator rebaseRule ([f060c10](https://github.com/SocialGouv/kontinuous/commit/f060c10d8398f83269b67bcae2d0611132d5eb02))
+* rollback debugging kapp conflit wip ([4696a6a](https://github.com/SocialGouv/kontinuous/commit/4696a6a75bde4d7dc017e0369a0fb06242972f5b))
+* up snapshots ([7d2216a](https://github.com/SocialGouv/kontinuous/commit/7d2216a2e13e23ad6b8665af87a0ee03bf663164))
+
 ### [1.53.8](https://github.com/SocialGouv/kontinuous/compare/v1.53.7...v1.53.8) (2022-08-19)
 
 
