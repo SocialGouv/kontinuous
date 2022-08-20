@@ -9,6 +9,9 @@ metadata:
     kontinuous/gitBranch: feature-branch-1
     kontinuous/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
   labels:
     application: test-metabase
   name: test-metabase
@@ -19,6 +22,9 @@ metadata:
   name: netpol-ingress
   namespace: test-metabase
   annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kapp.k14s.io/disable-original: ''
 spec:
   ingress:
@@ -40,9 +46,12 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: default
-  namespace: test-metabase
   annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
+  namespace: test-metabase
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -54,6 +63,9 @@ metadata:
   name: metabase-app1
   namespace: test-metabase
   annotations:
+    kontinuous/chartPath: project.fabrique.contrib.metabase-app1
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/configmap.yaml
     kapp.k14s.io/disable-original: ''
 data:
   MB_APPLICATION_NAME: metabase-app1
@@ -77,6 +89,9 @@ metadata:
   name: metabase-app2
   namespace: test-metabase
   annotations:
+    kontinuous/chartPath: project.fabrique.contrib.metabase-app2
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/configmap.yaml
     kapp.k14s.io/disable-original: ''
 data:
   MB_APPLICATION_NAME: metabase-app2
@@ -95,9 +110,11 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: metabase1-configmap
-  namespace: test-metabase
   annotations:
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/metabase1.configmap.yaml
     kapp.k14s.io/disable-original: ''
+  namespace: test-metabase
 data:
   METABASE_ENV: production
 ---
@@ -105,9 +122,11 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: metabase2-configmap
-  namespace: test-metabase
   annotations:
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/metabase2.configmap.yaml
     kapp.k14s.io/disable-original: ''
+  namespace: test-metabase
 data:
   METABASE_ENV: production
 ---
@@ -122,6 +141,9 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kontinuous/chartPath: project.fabrique.contrib.metabase-app1
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/service.yaml
     kapp.k14s.io/disable-original: ''
 spec:
   ports:
@@ -143,6 +165,9 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kontinuous/chartPath: project.fabrique.contrib.metabase-app2
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/service.yaml
     kapp.k14s.io/disable-original: ''
 spec:
   ports:
@@ -164,6 +189,9 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-metabase
     kapp.k14s.io/change-group.metabase-app1: kontinuous/metabase-app1.test-metabase
+    kontinuous/chartPath: project.fabrique.contrib.metabase-app1
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/deployment.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -236,6 +264,9 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-metabase
     kapp.k14s.io/change-group.metabase-app2: kontinuous/metabase-app2.test-metabase
+    kontinuous/chartPath: project.fabrique.contrib.metabase-app2
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/deployment.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -302,6 +333,9 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.metabase-app1
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/ingress.yaml
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
@@ -333,6 +367,9 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.metabase-app2
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/ingress.yaml
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
@@ -369,18 +406,26 @@ rebaseRules:
     type: copy
     sources:
       - existing
+      - new
     resourceMatchers:
       - apiVersionKindMatcher:
           apiVersion: apps/v1
           kind: Deployment
+metadata:
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: metabase1-sealed-secret
-  namespace: test-metabase
   annotations:
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/metabase1.sealed-secret.yaml
     kapp.k14s.io/disable-original: ''
+  namespace: test-metabase
 spec:
   encryptedData:
     METABASE_SECRET: >-
@@ -394,9 +439,11 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: metabase2-sealed-secret
-  namespace: test-metabase
   annotations:
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/metabase2.sealed-secret.yaml
     kapp.k14s.io/disable-original: ''
+  namespace: test-metabase
 spec:
   encryptedData:
     METABASE_SECRET: >-

@@ -9,6 +9,9 @@ metadata:
     kontinuous/gitBranch: feature-branch-1
     kontinuous/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
   labels:
     application: test-sample-1
     cert: wildcard
@@ -20,6 +23,9 @@ metadata:
   name: netpol-ingress
   namespace: test-sample-1-preprod
   annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kapp.k14s.io/disable-original: ''
 spec:
   ingress:
@@ -41,18 +47,23 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: default
-  namespace: test-sample-1-preprod
   annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
+  namespace: test-sample-1-preprod
 automountServiceAccountToken: false
 ---
 kind: ConfigMap
 apiVersion: v1
 metadata:
   name: app-configmap
-  namespace: test-sample-1-preprod
   annotations:
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/app.configmap.yaml
     kapp.k14s.io/disable-original: ''
+  namespace: test-sample-1-preprod
 data:
   NODE_ENV: production
   GRAPHQL_ENDPOINT: http://hasura/v1/graphql
@@ -70,6 +81,9 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kontinuous/chartPath: project.fabrique.contrib.app-2nd-instance
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/service.yaml
     kapp.k14s.io/disable-original: ''
 spec:
   ports:
@@ -91,6 +105,8 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
     kapp.k14s.io/disable-original: ''
 spec:
   ports:
@@ -112,6 +128,9 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
     kapp.k14s.io/disable-original: ''
 spec:
   ports:
@@ -133,6 +152,8 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kontinuous/chartPath: project.fabrique.contrib.pgweb
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/pgweb/templates/service.yaml
     kapp.k14s.io/disable-original: ''
 spec:
   ports:
@@ -154,6 +175,9 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-sample-1-preprod
     kapp.k14s.io/change-group.app-2nd-instance: kontinuous/app-2nd-instance.test-sample-1-preprod
+    kontinuous/chartPath: project.fabrique.contrib.app-2nd-instance
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/deployment.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -240,6 +264,9 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-sample-1-preprod
     kapp.k14s.io/change-group.app: kontinuous/app.test-sample-1-preprod
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -326,6 +353,9 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-sample-1-preprod
     kapp.k14s.io/change-group.hasura: kontinuous/hasura.test-sample-1-preprod
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -398,6 +428,9 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-sample-1-preprod
     kapp.k14s.io/change-group.pgweb: kontinuous/pgweb.test-sample-1-preprod
+    kontinuous/chartPath: project.fabrique.contrib.pgweb
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/pgweb/templates/deployment.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -486,6 +519,9 @@ metadata:
       more_set_headers \\"X-XSS-Protection: 1; mode=block\\";
 
       more_set_headers \\"X-Content-Type-Options: nosniff\\";
+    kontinuous/chartPath: project.fabrique.contrib.app-2nd-instance
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/ingress.yaml
     kapp.k14s.io/disable-original: ''
   labels:
     component: app-2nd-instance
@@ -525,6 +561,8 @@ metadata:
       more_set_headers \\"X-XSS-Protection: 1; mode=block\\";
 
       more_set_headers \\"X-Content-Type-Options: nosniff\\";
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
     kapp.k14s.io/disable-original: ''
   labels:
     component: app
@@ -553,6 +591,9 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
     kapp.k14s.io/disable-original: ''
   labels:
     component: hasura
@@ -581,6 +622,8 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.pgweb
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/pgweb/templates/ingress.yaml
     kapp.k14s.io/disable-original: ''
   labels:
     component: pgweb
@@ -614,16 +657,24 @@ rebaseRules:
     type: copy
     sources:
       - existing
+      - new
     resourceMatchers:
       - apiVersionKindMatcher:
           apiVersion: apps/v1
           kind: Deployment
+metadata:
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   annotations:
     sealedsecrets.bitnami.com/cluster-wide: 'true'
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/hasura.sealed-secret.yaml
     kapp.k14s.io/disable-original: ''
   name: hasura-sealed-secret
   namespace: test-sample-1-preprod

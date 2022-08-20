@@ -9,6 +9,9 @@ metadata:
     kontinuous/gitBranch: feature-branch-1
     kontinuous/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
   labels:
     application: test-ingress-annotations
   name: test-ingress-annotations
@@ -19,6 +22,9 @@ metadata:
   name: netpol-ingress
   namespace: test-ingress-annotations
   annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kapp.k14s.io/disable-original: ''
 spec:
   ingress:
@@ -40,9 +46,12 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: default
-  namespace: test-ingress-annotations
   annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
+  namespace: test-ingress-annotations
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -54,6 +63,9 @@ metadata:
   name: metabase
   namespace: test-ingress-annotations
   annotations:
+    kontinuous/chartPath: project.fabrique.contrib.metabase
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase/templates/configmap.yaml
     kapp.k14s.io/disable-original: ''
 data:
   MB_APPLICATION_NAME: metabase
@@ -79,6 +91,9 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kontinuous/chartPath: project.fabrique.contrib.metabase
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase/templates/service.yaml
     kapp.k14s.io/disable-original: ''
 spec:
   ports:
@@ -100,6 +115,9 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: kontinuous/test-ingress-annotations
     kapp.k14s.io/change-group.metabase: kontinuous/metabase.test-ingress-annotations
+    kontinuous/chartPath: project.fabrique.contrib.metabase
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase/templates/deployment.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -162,6 +180,9 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.metabase
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase/templates/ingress.yaml
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
@@ -198,9 +219,15 @@ rebaseRules:
     type: copy
     sources:
       - existing
+      - new
     resourceMatchers:
       - apiVersionKindMatcher:
           apiVersion: apps/v1
           kind: Deployment
+metadata:
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 "
 `;

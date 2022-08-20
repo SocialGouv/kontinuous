@@ -10,6 +10,9 @@ metadata:
     kontinuous/gitBranch: feature-branch-1
     kontinuous/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
   labels:
     application: test-charts
   name: test-charts-feature-branch-1
@@ -20,6 +23,9 @@ metadata:
   name: netpol-ingress
   namespace: test-charts-feature-branch-1
   annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kapp.k14s.io/disable-original: ''
 spec:
   ingress:
@@ -41,18 +47,23 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: default
-  namespace: test-charts-feature-branch-1
   annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
+  namespace: test-charts-feature-branch-1
 automountServiceAccountToken: false
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: kaniko
-  namespace: test-charts-feature-branch-1
   annotations:
+    kontinuous/chartPath: project.job-extra
+    kontinuous/source: project/charts/job-extra/templates/sa.yaml
     kapp.k14s.io/disable-original: ''
+  namespace: test-charts-feature-branch-1
 automountServiceAccountToken: false
 ---
 apiVersion: batch/v1
@@ -63,6 +74,8 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
+    kontinuous/chartPath: project.job-extra
+    kontinuous/source: project/charts/job-extra/templates/my-job.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
 spec:
@@ -95,9 +108,15 @@ rebaseRules:
     type: copy
     sources:
       - existing
+      - new
     resourceMatchers:
       - apiVersionKindMatcher:
           apiVersion: apps/v1
           kind: Deployment
+metadata:
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 "
 `;

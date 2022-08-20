@@ -10,6 +10,9 @@ metadata:
     kontinuous/gitBranch: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
   labels:
     application: test-long-branch-host
     cert: wildcard
@@ -21,6 +24,9 @@ metadata:
   name: netpol-ingress
   namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
   annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kapp.k14s.io/disable-original: ''
 spec:
   ingress:
@@ -42,9 +48,12 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: default
-  namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
   annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
+  namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -58,6 +67,9 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kontinuous/chartPath: project.fabrique.contrib.app-api
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app-api/templates/service.yaml
     kapp.k14s.io/disable-original: ''
 spec:
   ports:
@@ -80,6 +92,9 @@ metadata:
     kapp.k14s.io/change-group: kontinuous/test-long-branch-host-a-very-very-very-long-branch-name-47z9um
     kapp.k14s.io/change-group.app-api: >-
       kontinuous/app-api.test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+    kontinuous/chartPath: project.fabrique.contrib.app-api
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app-api/templates/deployment.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -154,6 +169,9 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app-api
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app-api/templates/ingress.yaml
     kapp.k14s.io/disable-original: ''
   labels:
     component: app-api
@@ -189,9 +207,15 @@ rebaseRules:
     type: copy
     sources:
       - existing
+      - new
     resourceMatchers:
       - apiVersionKindMatcher:
           apiVersion: apps/v1
           kind: Deployment
+metadata:
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 "
 `;
