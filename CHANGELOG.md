@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.53.14](https://github.com/SocialGouv/kontinuous/compare/v1.53.13...v1.53.14) (2022-08-20)
+
+
+### Bug Fixes
+
+* try to fix kapp conflict issue ([f26653d](https://github.com/SocialGouv/kontinuous/commit/f26653dfa43d60d35399857374f1d401152354c2))
+
 ### [1.53.13](https://github.com/SocialGouv/kontinuous/compare/v1.53.12...v1.53.13) (2022-08-20)
 
 
