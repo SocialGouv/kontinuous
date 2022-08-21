@@ -26,4 +26,17 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: {{ or .Values.component .Chart.Name }}
+---
+# see https://carvel.dev/kapp/docs/develop/hpa-deployment-rebase/
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+rebaseRules:
+- path: [spec, replicas]
+  type: copy
+  sources: [existing, new]
+  resourceMatchers:
+  - kindNamespaceNameMatcher:
+      kind: Deployment
+      namespace: {{ or .Values.namespace .Values.global.namespace }}
+      name: {{ or .Values.component .Chart.Name }}
 {{ end }}
