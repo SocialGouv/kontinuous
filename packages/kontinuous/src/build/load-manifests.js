@@ -26,15 +26,22 @@ module.exports = async (manifestsDocument, config) => {
 
   const manifests = []
 
+  let currentSource
   for (const manifest of iterator) {
     if (!manifest) {
       continue
     }
     const keys = Object.keys(manifest)
     if (keys.length === 1 && keys.includes("source")) {
+      currentSource = manifest.source
       continue
     }
+
     removeNulls(manifest)
+
+    if (!manifest.source && currentSource) {
+      manifest.source = currentSource
+    }
 
     let { source } = manifest
     if (source) {
