@@ -9,4 +9,3 @@ waitForPostgres: true
 pgSecretName: 
 ingress:
   annotations: {}
-needs: []

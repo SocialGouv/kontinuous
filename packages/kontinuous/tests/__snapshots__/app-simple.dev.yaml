@@ -65,11 +65,11 @@ metadata:
   name: app
   namespace: test-app-simple-feature-branch-1
   annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
 spec:
   ports:
     - name: http
@@ -88,8 +88,6 @@ metadata:
   name: app
   namespace: test-app-simple-feature-branch-1
   annotations:
-    kapp.k14s.io/change-group: kontinuous/test-app-simple-feature-branch-1
-    kapp.k14s.io/change-group.app: kontinuous/app.test-app-simple-feature-branch-1
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
@@ -97,6 +95,8 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
+    kapp.k14s.io/change-group: kontinuous/test-app-simple-feature-branch-1
+    kapp.k14s.io/change-group.app: kontinuous/app.test-app-simple-feature-branch-1
 spec:
   replicas: 1
   selector:

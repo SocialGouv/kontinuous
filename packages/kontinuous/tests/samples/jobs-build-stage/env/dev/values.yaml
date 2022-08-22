@@ -2,8 +2,7 @@ global:
   registry: harbor.fabrique.social.gouv.fr
 
 app:
-  enabled: true
-  needs: [build]
+  ~needs: [build]
   imagePackage: app
   probesPath: /healthz
   envFrom:
@@ -15,8 +14,7 @@ app:
         name: app-configmap
 
 hasura:
-  enabled: true
-  needs: [build,db]
+  ~needs: [build,db]
   envFrom:
     - secretRef:
         name: "{{ .Values.global.pgSecretName }}"
@@ -26,16 +24,13 @@ hasura:
         name: hasura-configmap
 
 jobs:
-  enabled: true
   runs:
-
     build-app:
       stage: build
       use: SocialGouv/kontinuous/plugins/contrib/jobs/build
       with:
         registrySecretRefName: harbor
         imagePackage: app
-
     build-hasura:
       stage: build
       use: SocialGouv/kontinuous/plugins/contrib/jobs/build
@@ -45,7 +40,6 @@ jobs:
         context: hasura
 
 jobs-dev:
-  enabled: true
   runs:
     db:
       use: SocialGouv/kontinuous/plugins/contrib/jobs/create-db

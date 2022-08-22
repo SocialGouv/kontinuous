@@ -9,10 +9,6 @@ const resolveAliasOf = (values, context, rootValues = values, scope = []) => {
     if (typeof val !== "object" || val === null) {
       continue
     }
-    if (val._chart) {
-      // retro-compat
-      val["~chart"] = val._chart
-    }
     if (val["~chart"]) {
       const parentDotKey = [...scope, key].join(".")
 

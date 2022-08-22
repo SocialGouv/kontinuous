@@ -1,4 +1,4 @@
-{{- define "fabrique-helpers.init-containers.wait-for-postgres" -}}
+{{- define "contrib-helpers.init-containers.wait-for-postgres" -}}
 - name: wait-for-postgres
   image: ghcr.io/socialgouv/docker/wait-for-postgres:6.56.1
   imagePullPolicy: Always

@@ -1,5 +1,5 @@
 app:
-  needs: [seed]
+  ~needs: [seed]
 
 jobs:
   runs:
@@ -9,7 +9,7 @@ jobs:
         pgAdminSecretRefName: azure-pg-admin-user
     seed:
       checkout: false # no need to checkout the repo as we use the docker image
-      needs: [db]
+      ~needs: [db]
       shell: sh
       image: "{{ .Values.global.registry }}/{{ .Values.global.imageRepository }}/app:{{ .Values.global.imageTag }}"
       run: "yarn db:init"

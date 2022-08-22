@@ -2,8 +2,7 @@ global:
   registry: harbor.fabrique.social.gouv.fr
 
 app:
-  enabled: true
-  needs: [build-app]
+  ~needs: [build-app]
   imagePackage: app
   probesPath: /healthz
   envFrom:
@@ -15,8 +14,7 @@ app:
         name: app-configmap
 
 hasura:
-  enabled: true
-  needs: [build-hasura,db]
+  ~needs: [build-hasura,db]
   # waitForPostgres: true
   envFrom:
     - secretRef:
@@ -27,19 +25,15 @@ hasura:
         name: hasura-configmap
 
 pgweb:
-  enabled: true
-  needs: [db]
+  ~needs: [db]
 
 jobs:
-  enabled: true
   runs:
-
     build-app:
       use: SocialGouv/kontinuous/plugins/contrib/jobs/build
       with:
         registrySecretRefName: harbor
         imagePackage: app
-
     build-hasura:
       use: SocialGouv/kontinuous/plugins/contrib/jobs/build
       with:
@@ -48,7 +42,6 @@ jobs:
         context: hasura
 
 jobs-dev:
-  enabled: true
   runs:
     db:
       use: SocialGouv/kontinuous/plugins/contrib/jobs/create-db

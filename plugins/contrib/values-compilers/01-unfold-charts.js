@@ -47,10 +47,6 @@ module.exports = async (values, _options, _context) => {
     }
     let search
     let searchByKey
-    if (val._chart) {
-      // retro-compat
-      val["~chart"] = val._chart
-    }
     if (val["~chart"]) {
       if (val["~chart"].slice(0, 1) === ".") {
         continue

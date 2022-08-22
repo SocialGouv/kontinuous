@@ -65,12 +65,12 @@ metadata:
   name: app-api
   namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
   annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
     kontinuous/chartPath: project.fabrique.contrib.app-api
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app-api/templates/service.yaml
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
 spec:
   ports:
     - name: http
@@ -89,9 +89,6 @@ metadata:
   name: app-api
   namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
   annotations:
-    kapp.k14s.io/change-group: kontinuous/test-long-branch-host-a-very-very-very-long-branch-name-47z9um
-    kapp.k14s.io/change-group.app-api: >-
-      kontinuous/app-api.test-long-branch-host-a-very-very-very-long-branch-name-47z9um
     kontinuous/chartPath: project.fabrique.contrib.app-api
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app-api/templates/deployment.yaml
@@ -99,6 +96,9 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
+    kapp.k14s.io/change-group: kontinuous/test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+    kapp.k14s.io/change-group.app-api: >-
+      kontinuous/app-api.test-long-branch-host-a-very-very-very-long-branch-name-47z9um
 spec:
   replicas: 1
   selector:

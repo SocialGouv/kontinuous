@@ -1,4 +1,4 @@
-{{- define "fabrique-helpers.ingress-host" -}}
+{{- define "contrib-helpers.ingress-host" -}}
 {{- if eq (or .Values.component .Chart.Name) "app" -}}
 {{- tpl (or .Values.host .Values.global.host) . -}}
 {{- else -}}

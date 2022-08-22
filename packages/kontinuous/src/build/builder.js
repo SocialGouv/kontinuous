@@ -9,6 +9,7 @@ const ctx = require("~common/ctx")
 const needBin = require("~/bin/need-bin")
 
 const applyPatches = require("./apply-patches")
+const postRenderer = require("./post-renderer")
 const loadManifests = require("./load-manifests")
 const validateManifests = require("./validate-manifests")
 const debugManifests = require("./debug-manifests")
@@ -17,13 +18,7 @@ const loadDependencies = require("./load-dependencies")
 module.exports = async (_options = {}) => {
   const config = ctx.require("config")
 
-  const {
-    buildPath,
-    buildProjectPath,
-    workspacePath,
-    workspaceKsPath,
-    kontinuousPath,
-  } = config
+  const { buildPath, buildProjectPath, workspacePath, workspaceKsPath } = config
 
   const logger = ctx.require("logger").child({ buildPath, workspacePath })
   ctx.set("logger", logger)
@@ -44,13 +39,7 @@ module.exports = async (_options = {}) => {
 
   logger.debug("Build base manifest using helm")
   let manifests = await asyncShell(
-    `
-    helm template
-    .
-    --values=values.yaml
-    --post-renderer=${kontinuousPath}/bin/post-renderer
-    ${config.helmArgs}
-    `,
+    `helm template . --values=values.yaml ${config.helmArgs}`,
     { cwd: buildPath }
   )
 
@@ -61,6 +50,9 @@ module.exports = async (_options = {}) => {
 
   logger.debug("Apply patches")
   manifests = await applyPatches(manifests, values)
+
+  logger.debug("Run postRenderer")
+  manifests = await postRenderer(manifests, config)
 
   logger.debug("Build final output")
   const manifestsDump = yaml.dumpAll(manifests)

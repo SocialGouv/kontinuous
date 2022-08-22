@@ -1,6 +1,3 @@
 contrib:
-  kontinuous-helpers:
+  contrib-helpers:
     enabled: true
-
-fabrique-helpers:
-  enabled: true

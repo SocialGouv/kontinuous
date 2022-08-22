@@ -6,9 +6,7 @@ metadata:
     application: {{ .Values.global.repositoryName }}
   name: {{ or .Values.component .Chart.Name }}
   namespace: {{ or .Values.namespace .Values.global.namespace }}
-  annotations:
-    {{- include "kontinuous-helpers.annotations.kapp-deployment" . | nindent 4 }}
-    {{- include "kontinuous-helpers.annotations.on-changed" . | nindent 4 }}
+  annotations: {}
 spec:
   replicas: {{ or .Values.replicas .Values.global.replicas 1 }}
   selector:
@@ -22,10 +20,10 @@ spec:
         namespace: {{ or .Values.namespace .Values.global.namespace }}
     spec:
       affinity:
-        {{- include "fabrique-helpers.anti-affinity" . | nindent 8}}
+        {{- include "contrib-helpers.anti-affinity" . | nindent 8}}
       initContainers:
       {{- if .Values.waitForPostgres }}
-        {{- include "fabrique-helpers.init-containers.wait-for-postgres" . | nindent 8 }}
+        {{- include "contrib-helpers.init-containers.wait-for-postgres" . | nindent 8 }}
       {{- end }}
       volumes:
         {{- if gt (len .Values.volumes) 0 }}
@@ -54,7 +52,7 @@ spec:
           {{- end }}
           livenessProbe:
             failureThreshold: 15
-            {{- include "fabrique-helpers.livenessProbe" . | nindent 12 }}
+            {{- include "contrib-helpers.livenessProbe" . | nindent 12 }}
             initialDelaySeconds: 30
             periodSeconds: 5
             timeoutSeconds: 5
@@ -64,13 +62,13 @@ spec:
               name: http
           readinessProbe:
             failureThreshold: 15
-            {{- include "fabrique-helpers.readinessProbe" . | nindent 12 }}
+            {{- include "contrib-helpers.readinessProbe" . | nindent 12 }}
             initialDelaySeconds: 1
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
           startupProbe:
-            {{- include "fabrique-helpers.startupProbe" . | nindent 12 }}
+            {{- include "contrib-helpers.startupProbe" . | nindent 12 }}
             failureThreshold: 12
             periodSeconds: 5
           resources:

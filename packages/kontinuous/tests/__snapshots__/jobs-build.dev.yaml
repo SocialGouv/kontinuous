@@ -65,11 +65,11 @@ metadata:
   name: app
   namespace: test-jobs-build-feature-branch-1
   annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
 spec:
   ports:
     - name: http
@@ -88,12 +88,12 @@ metadata:
   name: hasura
   namespace: test-jobs-build-feature-branch-1
   annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
     kontinuous/chartPath: project.fabrique.contrib.hasura
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
 spec:
   ports:
     - name: http
@@ -112,11 +112,11 @@ metadata:
   name: pgweb
   namespace: test-jobs-build-feature-branch-1
   annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
     kontinuous/chartPath: project.fabrique.contrib.pgweb
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/pgweb/templates/service.yaml
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
 spec:
   ports:
     - name: http
@@ -135,11 +135,6 @@ metadata:
   name: app
   namespace: test-jobs-build-feature-branch-1
   annotations:
-    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.app: kontinuous/app.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-rule.build-app: >-
-      upsert after upserting
-      kontinuous/build-app.test-jobs-build-feature-branch-1
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
@@ -147,6 +142,11 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
+    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.app: kontinuous/app.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-rule.build-app: >-
+      upsert after upserting
+      kontinuous/build-app.test-jobs-build-feature-branch-1
 spec:
   replicas: 1
   selector:
@@ -227,12 +227,6 @@ metadata:
   name: hasura
   namespace: test-jobs-build-feature-branch-1
   annotations:
-    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.hasura: kontinuous/hasura.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-rule.build-hasura: >-
-      upsert after upserting
-      kontinuous/build-hasura.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db.test-jobs-build-feature-branch-1
     kontinuous/chartPath: project.fabrique.contrib.hasura
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
@@ -240,6 +234,12 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
+    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.hasura: kontinuous/hasura.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-rule.build-hasura: >-
+      upsert after upserting
+      kontinuous/build-hasura.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db.test-jobs-build-feature-branch-1
 spec:
   replicas: 1
   selector:
@@ -306,9 +306,6 @@ metadata:
   name: pgweb
   namespace: test-jobs-build-feature-branch-1
   annotations:
-    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.pgweb: kontinuous/pgweb.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db.test-jobs-build-feature-branch-1
     kontinuous/chartPath: project.fabrique.contrib.pgweb
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/pgweb/templates/deployment.yaml
@@ -316,6 +313,9 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
+    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.pgweb: kontinuous/pgweb.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db.test-jobs-build-feature-branch-1
 spec:
   replicas: 1
   selector:
@@ -400,8 +400,11 @@ metadata:
       upsert after upserting
       kontinuous/db..create-secret.test-jobs-build-feature-branch-1
     janitor/ttl: '1800'
+    kontinuous/chartPath: project.fabrique.contrib.jobs-dev
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs-dev/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/change-group.jobs-dev: kontinuous/jobs-dev.test-jobs-build-feature-branch-1
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
@@ -504,8 +507,11 @@ metadata:
     kapp.k14s.io/change-group.db.create-secret: kontinuous/db.create-secret.test-jobs-build-feature-branch-1
     kapp.k14s.io/change-group.db..create-secret: kontinuous/db..create-secret.test-jobs-build-feature-branch-1
     janitor/ttl: '1800'
+    kontinuous/chartPath: project.fabrique.contrib.jobs-dev
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs-dev/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/change-group.jobs-dev: kontinuous/jobs-dev.test-jobs-build-feature-branch-1
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
@@ -596,8 +602,11 @@ metadata:
     kapp.k14s.io/change-group.build-app.kaniko: kontinuous/build-app.kaniko.test-jobs-build-feature-branch-1
     kapp.k14s.io/change-group.build-app..kaniko: kontinuous/build-app..kaniko.test-jobs-build-feature-branch-1
     janitor/ttl: '1800'
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-jobs-build-feature-branch-1
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
@@ -697,8 +706,11 @@ metadata:
     kapp.k14s.io/change-group.build-hasura.kaniko: kontinuous/build-hasura.kaniko.test-jobs-build-feature-branch-1
     kapp.k14s.io/change-group.build-hasura..kaniko: kontinuous/build-hasura..kaniko.test-jobs-build-feature-branch-1
     janitor/ttl: '1800'
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-jobs-build-feature-branch-1
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600

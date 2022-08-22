@@ -7,7 +7,6 @@ envFrom: []
 ingress:
   enabled: true
   annotations: {}
-needs: []
 
 matomo:
   cronjob:

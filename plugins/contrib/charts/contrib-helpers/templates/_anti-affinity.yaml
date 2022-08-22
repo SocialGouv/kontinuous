@@ -1,4 +1,4 @@
-{{- define "fabrique-helpers.anti-affinity" -}}
+{{- define "contrib-helpers.anti-affinity" -}}
 
 {{ $antiAffinity := false }}
 

@@ -1,9 +1,7 @@
 app:
-  enabled: true
-  needs: [seed]
+  ~needs: [seed]
 
 jobs:
-  enabled: true
   runs:
     seed:
       image: "{{ .Values.global.registry }}/{{ .Values.global.imageRepository }}/app:{{ .Values.global.imageTag }}"

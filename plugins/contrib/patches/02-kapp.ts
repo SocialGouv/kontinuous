@@ -31,6 +31,12 @@ const kindPatches = {
       kappAnnotationsPod
     )
   },
+  Service: (manifest) => {
+    Object.assign(manifest.metadata.annotations, {
+      "kapp.k14s.io/disable-default-ownership-label-rules": "",
+      "kapp.k14s.io/disable-default-label-scoping-rules": "",
+    })
+  },
 }
 
 module.exports = (manifests) => {

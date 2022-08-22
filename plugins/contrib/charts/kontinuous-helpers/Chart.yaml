@@ -1,4 +1,0 @@
-apiVersion: v2
-name: kontinuous-helpers
-version: 1.54.1
-type: library

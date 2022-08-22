@@ -1,5 +1,2 @@
-kontinuous-helpers:
-  enabled: true
-
-fabrique-helpers:
+contrib-helpers:
   enabled: true

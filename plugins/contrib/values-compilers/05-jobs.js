@@ -111,9 +111,12 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
         const newRun = {
           action: run.use,
         }
-        for (const k of Object.keys(r)) {
+        for (let k of Object.keys(r)) {
           if (k === "use") {
             continue
+          }
+          if (k.slice(0, 1) === "~") {
+            k = k.slice(1)
           }
           newRun[k] = r[k]
         }

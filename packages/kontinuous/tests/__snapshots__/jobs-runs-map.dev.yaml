@@ -71,8 +71,11 @@ metadata:
       upsert after upserting
       kontinuous/db..create-secret.test-jobs-runs-map-feature-branch-1
     janitor/ttl: '1800'
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-jobs-runs-map-feature-branch-1
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
@@ -175,8 +178,11 @@ metadata:
     kapp.k14s.io/change-group.db.create-secret: kontinuous/db.create-secret.test-jobs-runs-map-feature-branch-1
     kapp.k14s.io/change-group.db..create-secret: kontinuous/db..create-secret.test-jobs-runs-map-feature-branch-1
     janitor/ttl: '1800'
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-jobs-runs-map-feature-branch-1
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600

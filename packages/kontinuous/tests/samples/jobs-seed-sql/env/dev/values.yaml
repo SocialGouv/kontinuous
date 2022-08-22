@@ -1,5 +1,5 @@
 app:
-  needs: [seed]
+  ~needs: [seed]
 
 jobs:
   runs:
@@ -8,7 +8,7 @@ jobs:
       with:
         pgAdminSecretRefName: azure-pg-admin-user
     seed:
-      needs: [db]
+      ~needs: [db]
       use: SocialGouv/kontinuous/plugins/contrib/jobs/seed-db
       with:
         seedPath: hasura/seeds/carnet_de_bord/seed-data.sql

@@ -73,7 +73,7 @@ module.exports = async (manifests, _options, context) => {
   const removeManifests = new Set()
   for (const manifest of manifests) {
     const annotations = manifest.metadata?.annotations || {}
-    const onChangedPathsStr = annotations["kontinuous/onChangedPaths"]
+    const onChangedPathsStr = annotations["kontinuous/plugin.onChangedPaths"]
     if (!onChangedPathsStr) {
       continue
     }
@@ -88,7 +88,7 @@ module.exports = async (manifests, _options, context) => {
 
     const isFirstPushOnBranch = changedPaths.length === 0
 
-    const onChangedAnnotate = annotations["kontinuous/onChangedAnnotate"]
+    const onChangedAnnotate = annotations["kontinuous/plugin.onChangedAnnotate"]
     if (onChangedAnnotate) {
       annotations["kontinuous/hasChanged"] = changed ? "true" : "false"
       annotations["kontinuous/isFirstPushOnBranch"] = isFirstPushOnBranch
@@ -104,7 +104,7 @@ module.exports = async (manifests, _options, context) => {
       removeManifests.add(manifest)
     }
 
-    const onChangedNeeds = annotations["kontinuous/onChangedNeeds"]
+    const onChangedNeeds = annotations["kontinuous/plugin.onChangedNeeds"]
 
     switch (onChangedNeeds) {
       case "unbind": {

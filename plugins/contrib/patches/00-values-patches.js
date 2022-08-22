@@ -26,9 +26,13 @@ module.exports = (manifests, _options, { values }) => {
       if (!key.startsWith("~")) {
         continue
       }
-      let value
+      let value = scopedValues[key]
       let match
-      if (typeof scopedValues[key] === "object" && scopedValues[key] !== null) {
+      if (
+        typeof scopedValues[key] === "object" &&
+        scopedValues[key] !== null &&
+        !Array.isArray(scopedValues[key])
+      ) {
         value = scopedValues[key].value
         match = scopedValues[key].match
       } else {

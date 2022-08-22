@@ -6,8 +6,7 @@ metadata:
     application: {{ .Values.global.repositoryName }}
   name: {{ or .Values.component .Chart.Name }}
   namespace: {{ or .Values.namespace .Values.global.namespace }}
-  annotations:
-    {{- include "kontinuous-helpers.annotations.kapp-deployment" . | nindent 4 }}
+  annotations: {}
 spec:
   replicas: 1
   selector:

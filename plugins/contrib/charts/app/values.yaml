@@ -47,7 +47,6 @@ ingress:
   annotations: {}
   path: /
   rewriteTarget:
-needs: []
 entrypoint:
 args: []
 antiAffinity:

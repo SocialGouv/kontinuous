@@ -17,4 +17,4 @@ data:
   MB_ENABLE_PUBLIC_SHARING: "true"
   MB_SITE_LOCALE: "fr"
   MB_SITE_NAME: "Fabrique des ministères sociaux"
-  MB_SITE_URL: "https://{{ include "fabrique-helpers.ingress-host" . }}"
+  MB_SITE_URL: "https://{{ include "contrib-helpers.ingress-host" . }}"

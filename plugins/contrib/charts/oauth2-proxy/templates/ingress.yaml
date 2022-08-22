@@ -15,7 +15,7 @@ metadata:
 spec:
   rules:
     - host: >-
-        {{- include "fabrique-helpers.ingress-host" . | nindent 8 }}
+        {{- include "contrib-helpers.ingress-host" . | nindent 8 }}
       http:
         paths:
           - backend:
@@ -28,6 +28,6 @@ spec:
   tls:
     - hosts:
         - >-
-          {{- include "fabrique-helpers.ingress-host" . | nindent 10 }}
-      {{ include "fabrique-helpers.ingress-secret" . | nindent 6 }}
+          {{- include "contrib-helpers.ingress-host" . | nindent 10 }}
+      {{ include "contrib-helpers.ingress-secret" . | nindent 6 }}
 {{ end }}

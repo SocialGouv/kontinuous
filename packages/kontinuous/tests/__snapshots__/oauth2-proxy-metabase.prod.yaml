@@ -89,12 +89,12 @@ metadata:
   name: metabase
   namespace: test-oauth2-proxy-metabase
   annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
     kontinuous/chartPath: project.fabrique.contrib.metabase
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/metabase/templates/service.yaml
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
 spec:
   ports:
     - name: http
@@ -113,12 +113,12 @@ metadata:
   name: oauth2-proxy
   namespace: test-oauth2-proxy-metabase
   annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
     kontinuous/chartPath: project.fabrique.contrib.oauth2-proxy
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/service.yaml
     kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
 spec:
   ports:
     - name: http
@@ -137,8 +137,6 @@ metadata:
   name: metabase
   namespace: test-oauth2-proxy-metabase
   annotations:
-    kapp.k14s.io/change-group: kontinuous/test-oauth2-proxy-metabase
-    kapp.k14s.io/change-group.metabase: kontinuous/metabase.test-oauth2-proxy-metabase
     kontinuous/chartPath: project.fabrique.contrib.metabase
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/metabase/templates/deployment.yaml
@@ -146,6 +144,8 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
+    kapp.k14s.io/change-group: kontinuous/test-oauth2-proxy-metabase
+    kapp.k14s.io/change-group.metabase: kontinuous/metabase.test-oauth2-proxy-metabase
 spec:
   replicas: 1
   selector:
@@ -208,8 +208,6 @@ metadata:
   name: oauth2-proxy
   namespace: test-oauth2-proxy-metabase
   annotations:
-    kapp.k14s.io/change-group: kontinuous/test-oauth2-proxy-metabase
-    kapp.k14s.io/change-group.oauth2-proxy: kontinuous/oauth2-proxy.test-oauth2-proxy-metabase
     kontinuous/chartPath: project.fabrique.contrib.oauth2-proxy
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/deployment.yaml
@@ -217,6 +215,8 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
+    kapp.k14s.io/change-group: kontinuous/test-oauth2-proxy-metabase
+    kapp.k14s.io/change-group.oauth2-proxy: kontinuous/oauth2-proxy.test-oauth2-proxy-metabase
 spec:
   replicas: 1
   selector:
