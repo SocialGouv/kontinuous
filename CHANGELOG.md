@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.55.0](https://github.com/SocialGouv/kontinuous/compare/v1.54.1...v1.55.0) (2022-08-22)
+
+
+### Features
+
+* meta-value big refacto ([df6571b](https://github.com/SocialGouv/kontinuous/commit/df6571bb5619f51baecf3ce671fbea371e0cd213))
+
+
+### Bug Fixes
+
+* _chart to ~chart ([f3d8e13](https://github.com/SocialGouv/kontinuous/commit/f3d8e134b472c7212be93d7005447a6b446f6f36))
+* common source ([bf57645](https://github.com/SocialGouv/kontinuous/commit/bf57645e1e5be20d0c17871c4e5fcf727be0ad65))
+
 ### [1.54.1](https://github.com/SocialGouv/kontinuous/compare/v1.54.0...v1.54.1) (2022-08-22)
 
 
