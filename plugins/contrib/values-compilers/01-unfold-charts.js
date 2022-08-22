@@ -48,10 +48,14 @@ module.exports = async (values, _options, _context) => {
     let search
     let searchByKey
     if (val._chart) {
-      if (val._chart.slice(0, 1) === ".") {
+      // retro-compat
+      val["~chart"] = val._chart
+    }
+    if (val["~chart"]) {
+      if (val["~chart"].slice(0, 1) === ".") {
         continue
       }
-      search = val._chart
+      search = val["~chart"]
       searchByKey = false
     } else {
       search = key
@@ -59,7 +63,7 @@ module.exports = async (values, _options, _context) => {
     }
     const scope = await findAliasOf(search, values.project, searchByKey)
     if (scope) {
-      val._chart = scope.join(".")
+      val["~chart"] = scope.join(".")
     }
   }
   return values

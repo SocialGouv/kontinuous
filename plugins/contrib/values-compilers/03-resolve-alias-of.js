@@ -10,9 +10,13 @@ const resolveAliasOf = (values, context, rootValues = values, scope = []) => {
       continue
     }
     if (val._chart) {
+      // retro-compat
+      val["~chart"] = val._chart
+    }
+    if (val["~chart"]) {
       const parentDotKey = [...scope, key].join(".")
 
-      let aliasOf = val._chart
+      let aliasOf = val["~chart"]
       if (aliasOf.startsWith(".")) {
         aliasOf = `${scope.join(".")}${parentDotKey}`
       }

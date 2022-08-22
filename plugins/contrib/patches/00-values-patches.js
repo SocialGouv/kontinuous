@@ -13,6 +13,8 @@ const isMatching = (manifest, match) => {
   return true
 }
 
+const specialFlags = ["chart"]
+
 module.exports = (manifests, _options, { values }) => {
   for (const manifest of manifests) {
     const chartPath = manifest.metadata?.annotations?.["kontinuous/chartPath"]
@@ -35,13 +37,14 @@ module.exports = (manifests, _options, { values }) => {
       if (!isMatching(manifest, match)) {
         continue
       }
-      const jval = JSON.stringify(value)
+      const jval = typeof value === "string" ? value : JSON.stringify(value)
+      const flag = key.slice(1)
       if (key.startsWith("~.")) {
         set(manifest, key.slice(2), jval)
-      } else {
+      } else if (!specialFlags.includes(flag)) {
         set(
           manifest,
-          `metadata.annotations.["kontinuous/plugin.${key.slice(1)}"]`,
+          `metadata.annotations.["kontinuous/plugin.${flag}"]`,
           jval
         )
       }
