@@ -40,3 +40,4 @@ pipelineImage: ghcr.io/socialgouv/kontinuous:1
 # ACL
 kubeconfigSecrets: []
 tokenSecrets: []
+repositories: []

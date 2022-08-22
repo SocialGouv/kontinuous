@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    component: {{ or .Values.component .Chart.Name }}
+  name: {{ or .Values.component .Chart.Name }}-config
+  {{ if ne .Release.Namespace "default" }}
+  namespace: "{{ .Release.Namespace }}"
+  {{ end }}
+data:
+  config.yaml: |
+    tokens:
+      {{ range $index, $secret := .Values.tokenSecrets }}
+      - project: "{{ $secret.project }}"
+        file: /secrets/{{ or $secret.project $secret.name }}/tokens/{{ or $secret.tokenId $index }}
+      {{ end }}
+
+    kubeconfigs:
+      {{ range $secret := .Values.kubeconfigSecrets }}
+      - project: "{{ $secret.project }}"
+        file: /secrets/{{ or $secret.project $secret.name }}/kubeconfig/{{ $secret.cluster }}
+      {{ end }}
+
+    repositories:
+      {{ range $repository := .Values.repositories }}
+      - project: "{{ $repository.project }}"
+        repository: "{{ $repository.repository }}"
+        private: {{ or $repository.private "false" }}
+      {{ end }}
