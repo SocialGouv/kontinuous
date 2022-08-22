@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.54.1](https://github.com/SocialGouv/kontinuous/compare/v1.54.0...v1.54.1) (2022-08-22)
+
+
+### Bug Fixes
+
+* kapp hpa ([416e716](https://github.com/SocialGouv/kontinuous/commit/416e71624d4923a7a64330d9c76f45d21654930d))
+* move jobs to contrib ([e7450a9](https://github.com/SocialGouv/kontinuous/commit/e7450a903f8b9458904cf5210ebfdd8d412e2d95))
+
 ## [1.54.0](https://github.com/SocialGouv/kontinuous/compare/v1.53.15...v1.54.0) (2022-08-20)
 
 
