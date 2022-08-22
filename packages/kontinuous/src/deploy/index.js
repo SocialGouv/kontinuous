@@ -139,9 +139,9 @@ module.exports = async (options) => {
 
     const charts = config.chart?.join(",")
 
-    const kappApp = charts
-      ? slug(`${repositoryName}-${charts}`)
-      : repositoryName
+    const kappApp = slug(
+      `${repositoryName}-${config.gitBranch}${charts ? `-${charts}` : ""}`
+    )
 
     const kappWaitTimeout =
       options.timeout || process.env.KS_DEPLOY_TIMEOUT || "15m0s"
