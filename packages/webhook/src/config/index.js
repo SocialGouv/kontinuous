@@ -44,7 +44,7 @@ module.exports = async function createConfig() {
   for (const {
     project,
     repository,
-    private,
+    private: isPrivate,
     deployKeyFile,
     deployKeyCiSecretName,
   } of projectRepositories) {
@@ -52,7 +52,7 @@ module.exports = async function createConfig() {
       repository,
       https: normalizeRepositoryUrl(repository, "https"),
       ssh: normalizeRepositoryUrl(repository, "ssh"),
-      private,
+      private: isPrivate,
       deployKeyCiSecretName,
       project,
     }
