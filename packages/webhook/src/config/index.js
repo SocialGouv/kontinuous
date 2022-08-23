@@ -36,8 +36,7 @@ module.exports = async function createConfig() {
     if (!kubeconfigs[project]) {
       kubeconfigs[project] = {}
     }
-    const content = await fs.readFile(file, { encoding: "utf-8" })
-    kubeconfigs[project][cluster] = content
+    kubeconfigs[project][cluster] = file
   }
 
   const repositories = {}
