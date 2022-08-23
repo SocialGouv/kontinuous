@@ -24,7 +24,6 @@ module.exports = (program) =>
     .argument("[key]", "the key, using dotkey format")
     .action(async (key, opts, _command) => {
       let config = ctx.require("config")
-      const logger = ctx.require("logger")
 
       if (opts.remote) {
         const { event } = config
@@ -33,7 +32,7 @@ module.exports = (program) =>
           config.gitRepositoryUrl,
           ref
         )
-        config = await loadConfig(opts, [kontinuousRepoConfig], logger)
+        config = await loadConfig(opts, [kontinuousRepoConfig])
       }
 
       let value
