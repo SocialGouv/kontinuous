@@ -28,12 +28,19 @@ module.exports = ({ services }) => {
     const gitBranch = cleanGitRef(ref)
     const gitCommit = after || "0000000000000000000000000000000000000000"
 
+    const repositories = ctx.require("config.project.repositories")
+    const repositoryKey = normalizeRepositoryKey(repositoryUrl)
+    const repo = repositories[repositoryKey]
+
+    const deployKey = repo?.deployKeyFile
+
     const repositoryConfig = await services.getRepoConfig({
       repository: repositoryUrl,
       gitBranch,
       gitSha: gitCommit,
       event: eventName,
       environment: env,
+      deployKey,
     })
 
     if (!env) {
@@ -88,13 +95,7 @@ module.exports = ({ services }) => {
       )
     }
 
-    const repositories = ctx.require("config.project.repositories")
-    const repositoryKey = normalizeRepositoryKey(repositoryUrl)
-    const repo = repositories[repositoryKey]
-    let deployKeyCiSecretName
-    if (repo && repo.private) {
-      deployKeyCiSecretName = repo.deployKeyCiSecretName
-    }
+    const deployKeyCiSecretName = repo?.private && repo.deployKeyCiSecretName
 
     const manifest = pipelineJob({
       namespace: jobNamespace,

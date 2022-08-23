@@ -3,7 +3,15 @@ const loadConfig = require("~common/config/load-config")
 
 module.exports =
   () =>
-  async ({ remote, repository, gitBranch, gitSha, event, environment }) => {
+  async ({
+    remote,
+    repository,
+    gitBranch,
+    gitSha,
+    event,
+    environment,
+    deployKey,
+  }) => {
     let repositoryConfig
 
     if (remote === undefined) {
@@ -18,6 +26,7 @@ module.exports =
         {
           repository,
           ref: branchConfig,
+          deployKey,
         },
         rootConfig
       )

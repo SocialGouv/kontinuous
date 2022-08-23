@@ -11,6 +11,8 @@ module.exports = (program) =>
     .addOption(options.env)
     .addOption(options.cwd)
     .addOption(options.subpath)
+    .addOption(options.private)
+    .addOption(options.deployKey)
     .option(
       "--remote",
       "select environment using kontinuous config from remote repo"
@@ -29,6 +31,7 @@ module.exports = (program) =>
         const repositoryConfig = await loadRemoteConfig({
           repository: config.gitRepositoryUrl,
           ref,
+          deployKey: config.deployKeyFile,
         })
         environmentPatterns = repositoryConfig.environmentPatterns
       }

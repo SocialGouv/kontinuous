@@ -7,15 +7,20 @@ const fs = require("fs-extra")
 const normalizeRepositoryUrl = require("./normalize-repository-url")
 const defaultLogger = require("./logger")
 const asyncShell = require("./async-shell")
+const gitEnv = require("./git-env")
 
 module.exports = async ({
   ref,
   file,
   repositoryUrl,
   logger = defaultLogger,
-  protocol = "https",
+  deployKey,
 }) => {
+  const protocol = deployKey ? "ssh" : "https"
+
   const repoUrl = normalizeRepositoryUrl(repositoryUrl, protocol)
+
+  const env = gitEnv({ deployKey })
 
   logger.debug({ repoUrl }, `downloading file "${file}" ...`)
 
@@ -33,11 +38,12 @@ module.exports = async ({
           ${repoUrl}
           .
       `,
-      { cwd: tmpdir }
+      { cwd: tmpdir, env }
     )
 
     await asyncShell(`git checkout ${ref} -- ${file}`, {
       cwd: tmpdir,
+      env,
     })
 
     const content = await fs.readFile(`${tmpdir}/${file}`, {

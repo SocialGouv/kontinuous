@@ -7,12 +7,13 @@ const defaultLogger = require("./logger")
 module.exports = async (
   repositoryUrl,
   ref,
-  { logger = defaultLogger } = {}
+  { logger = defaultLogger, deployKey } = {}
 ) => {
   const data = await getRepositoryFile({
     repositoryUrl,
     ref,
     file: ".kontinuous/config.yaml",
+    deployKey,
     logger,
   })
   return data ? yaml.load(data) : {}
