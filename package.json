@@ -1,6 +1,6 @@
 {
   "name": "~dev",
-  "version": "1.56.0",
+  "version": "1.56.1",
   "repository": "git@github.com:SocialGouv/kontinuous.git",
   "license": "MIT",
   "private": true,
