@@ -56,8 +56,7 @@ module.exports = async function createConfig() {
       project,
     }
     if (deployKeyFile) {
-      const content = await fs.readFile(deployKeyFile, { encoding: "utf-8" })
-      repo.deployKey = content
+      repo.deployKey = deployKeyFile
     }
     const key = normalizeRepositoryKey(repository)
     repositories[key] = repo
