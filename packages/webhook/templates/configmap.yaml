@@ -33,6 +33,6 @@ data:
         {{ if $repository.deployKeyCiSecretName }}
         deployKeyCiSecretName: {{ $repository.deployKeyCiSecretName | quote }}
         {{ else if $repository.private }}
-        deployKeyCiSecretName: "git-ssh-deploy-key"
+        deployKeyCiSecretName: "deploy-key"
         {{ end }}
       {{ end }}

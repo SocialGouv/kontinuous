@@ -12,6 +12,6 @@ repositories:
     repository: SocialGouv/template
     private: true
     deployKeyFile: ./tests/sample/awesome/deploy-key
-    deployKeySecretName: "git-ssh-deploy-key"
-    deployKeyCiSecretName: "git-ssh-deploy-key"
+    deployKeySecretName: "deploy-key"
+    deployKeyCiSecretName: "deploy-key"
     
