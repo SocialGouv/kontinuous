@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.56.2](https://github.com/SocialGouv/kontinuous/compare/v1.56.1...v1.56.2) (2022-08-23)
+
+
+### Bug Fixes
+
+* webhook configmap files paths ([d7be107](https://github.com/SocialGouv/kontinuous/commit/d7be1071f122f4e3141b6674831a1e465fa80459))
+
 ### [1.56.1](https://github.com/SocialGouv/kontinuous/compare/v1.56.0...v1.56.1) (2022-08-23)
 
 
