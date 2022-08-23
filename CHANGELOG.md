@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.56.6](https://github.com/SocialGouv/kontinuous/compare/v1.56.5...v1.56.6) (2022-08-23)
+
+
+### Bug Fixes
+
+* deployKeyFile ([1aee77c](https://github.com/SocialGouv/kontinuous/commit/1aee77cbda29e55ee23e973471e55f284b86f131))
+
 ### [1.56.5](https://github.com/SocialGouv/kontinuous/compare/v1.56.4...v1.56.5) (2022-08-23)
 
 
