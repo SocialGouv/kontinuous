@@ -100,7 +100,7 @@ module.exports = (program) =>
           const configFile = `${config.workspaceKsPath}/config.yaml`
           if (await fs.pathExists(configFile)) {
             projectConfig = yaml.load(
-              await fs.readFile(configFile, { encoding: "utf8" })
+              await fs.readFile(configFile, { encoding: "utf-8" })
             )
           }
 

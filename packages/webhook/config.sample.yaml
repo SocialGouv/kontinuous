@@ -1,0 +1,17 @@
+tokens:
+  - project: awesome
+    file: ./tests/sample/awesome/token
+
+kubeconfigs:
+  - project: awesome
+    file: ./tests/sample/awesome/kubeconfig
+    cluster: dev
+
+repositories:
+  - project: awesome
+    repository: SocialGouv/template
+    private: true
+    deployKeyFile: ./tests/sample/awesome/deploy-key
+    deployKeySecretName: "deploy-key"
+    deployKeyCiSecretName: "deploy-key"
+    

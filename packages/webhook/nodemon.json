@@ -2,6 +2,6 @@
   "events": {},
   "ext": ".js, .json, .yaml, .yml",
   "watch": [
-    "src"
+    "src", "common"
   ]
 }

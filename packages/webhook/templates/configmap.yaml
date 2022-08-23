@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    component: {{ or .Values.component .Chart.Name }}
+  name: {{ or .Values.component .Chart.Name }}-config
+  {{ if ne .Release.Namespace "default" }}
+  namespace: "{{ .Release.Namespace }}"
+  {{ end }}
+data:
+  config.yaml: |
+    tokens:
+      {{ range $index, $secret := .Values.tokenSecrets }}
+      - project: {{ $secret.project | quote }}
+        file: /secrets/{{ or $secret.project $secret.name }}/tokens/{{ or $secret.tokenId $index }}
+      {{ end }}
+
+    kubeconfigs:
+      {{ range $secret := .Values.kubeconfigSecrets }}
+      - project: {{ $secret.project | quote }}
+        file: "/secrets/{{ or $secret.project $secret.name }}/kubeconfig/{{ $secret.cluster }}"
+        cluster: {{ $secret.cluster | quote }}
+      {{ end }}
+
+    repositories:
+      {{ range $repository := .Values.repositories }}
+      - project: {{ $repository.project | quote }}
+        repository: {{ $repository.repository | quote }}
+        private: {{ or $repository.private "false" }}
+        {{ if (or $repository.deployKeySecretName $repository.private) }}
+        deployKeyFile: "/secrets/{{ $repository.project }}/repositories/{{ $repository.repository | adler32sum }}/ssh/deploy-key"
+        {{ end }}
+        {{ if $repository.deployKeyCiSecretName }}
+        deployKeyCiSecretName: {{ $repository.deployKeyCiSecretName | quote }}
+        {{ else if $repository.private }}
+        deployKeyCiSecretName: "deploy-key"
+        {{ end }}
+      {{ end }}

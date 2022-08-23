@@ -13,6 +13,8 @@ module.exports = (program) =>
     .command("config")
     .description("Get config value")
     .addOption(options.cwd)
+    .addOption(options.private)
+    .addOption(options.deployKey)
     .option(
       "--remote",
       "select config using kontinuous config from remote repo"
@@ -29,11 +31,13 @@ module.exports = (program) =>
       if (opts.remote) {
         const { event } = config
         const ref = event === "deleted" ? "HEAD" : config.gitBranch
+
         const kontinuousRepoConfig = await getRemoteKontinuousConfigFile(
           config.gitRepositoryUrl,
-          ref
+          ref,
+          { logger, deployKey: config.deployKeyFile }
         )
-        config = await loadConfig(opts, [kontinuousRepoConfig], logger)
+        config = await loadConfig(opts, [kontinuousRepoConfig])
       }
 
       let value

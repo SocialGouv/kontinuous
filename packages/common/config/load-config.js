@@ -22,6 +22,7 @@ const logger = require("../utils/logger")
 const refEnv = require("../utils/ref-env")
 const normalizeRepositoryUrl = require("../utils/normalize-repository-url")
 
+const gitEnv = require("../utils/git-env")
 const loadDependencies = require("./load-dependencies")
 const recurseDependency = require("./recurse-dependencies")
 
@@ -389,6 +390,21 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         return links
       },
     },
+    private: {
+      option: "private",
+      env: "KS_PRIVATE",
+      envParser: (str) => yaml.load(str),
+      default: false,
+    },
+    deployKeyFile: {
+      option: "deployKey",
+      env: "KS_DEPLOY_KEY_FILE",
+      defaultFunction: (config) => {
+        if (config.private) {
+          return "~/.ssh/id_rsa"
+        }
+      },
+    },
     disableDiff: {
       env: "KS_DISABLE_DIFF",
     },
@@ -406,12 +422,18 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         ) {
           localRemoteExists = true
         } else {
+          const { deployKeyFile } = config
+          const procEnv = gitEnv({ deployKey: deployKeyFile })
+
           let remoteExists
           try {
+            const protocol = deployKeyFile ? "ssh" : "https"
             await asyncShell(
               `git ls-remote --exit-code --heads ${normalizeRepositoryUrl(
-                gitRepositoryUrl
-              )} ${gitBranch}`
+                gitRepositoryUrl,
+                protocol
+              )} ${gitBranch}`,
+              { env: procEnv }
             )
             remoteExists = true
           } catch (error) {
@@ -420,7 +442,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
             }
           }
           if (remoteExists) {
-            await asyncShell(`git fetch origin ${gitBranch}`)
+            await asyncShell(`git fetch origin ${gitBranch}`, { env: procEnv })
             localRemoteExists = true
           }
         }
@@ -448,11 +470,13 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
           return commits
         }
         const { gitBranch } = config
+        const procEnv = gitEnv({ deployKey: config.deployKeyFile })
         try {
           const { diffBranch } = config
 
           const diffOutput = await asyncShell(
-            `git diff --name-status remotes/origin/${diffBranch}..${gitBranch}`
+            `git diff --name-status remotes/origin/${diffBranch}..${gitBranch}`,
+            { env: procEnv }
           )
           const diff = diffOutput.split("\n").map((line) => {
             const [status, file] = line.trim().split(/\t|\s+/)

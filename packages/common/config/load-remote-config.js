@@ -1,10 +1,11 @@
 const getRemoteKontinuousConfigFile = require("../utils/get-remote-kontinuous-config-file")
 const loadConfig = require("./load-config")
 
-module.exports = async ({ repository, ref }, rootConfig = {}) => {
+module.exports = async ({ repository, ref, deployKey }, rootConfig = {}) => {
   const kontinuousRepoConfig = await getRemoteKontinuousConfigFile(
     repository,
-    ref
+    ref,
+    { deployKey }
   )
   const options = { repository, branch: ref }
   const repositoryConfig = await loadConfig(

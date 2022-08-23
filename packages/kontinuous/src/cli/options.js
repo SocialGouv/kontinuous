@@ -107,3 +107,13 @@ module.exports.kubeconfigContextNoDetect = new Option(
   "--kubeconfig-context-no-detect",
   "don't infer kubeconfig context"
 )
+
+module.exports.deployKey = new Option(
+  "--deploy-key <path>",
+  "ssh deploy to use for private repo remote config download"
+)
+
+module.exports.private = new Option(
+  "--private",
+  "remote config download on private repo"
+)

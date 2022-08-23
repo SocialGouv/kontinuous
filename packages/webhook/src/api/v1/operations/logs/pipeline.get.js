@@ -1,14 +1,15 @@
 const { spawn } = require("child_process")
+
 const retry = require("async-retry")
 const { ctx } = require("@modjo-plugins/core")
 const { reqCtx } = require("@modjo-plugins/express/ctx")
+
 const cleanGitRef = require("~common/utils/clean-git-ref")
 const parseCommand = require("~common/utils/parse-command")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
+const normalizeRepositoryKey = require("~common/utils/normalize-repository-key")
 const asyncShell = require("~common/utils/async-shell")
-
 const refEnv = require("~common/utils/ref-env")
-
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = function ({ services }) {
@@ -109,12 +110,19 @@ module.exports = function ({ services }) {
     const repositoryName = repository.split("/").pop()
     const gitBranch = cleanGitRef(ref)
 
+    const repositories = ctx.require("config.project.repositories")
+    const repositoryKey = normalizeRepositoryKey(repositoryMixed)
+    const repo = repositories[repositoryKey]
+
+    const deployKey = repo?.deployKey
+
     const repositoryConfig = await services.getRepoConfig({
       repository: repositoryMixed,
       gitBranch,
       gitSha: commit,
       event,
       environment: env,
+      deployKey,
     })
 
     if (!env) {
