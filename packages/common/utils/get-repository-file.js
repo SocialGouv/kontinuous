@@ -1,24 +1,53 @@
-const axios = require("axios")
+const path = require("path")
+const os = require("os")
+const { mkdtemp } = require("fs/promises")
+
+const fs = require("fs-extra")
 
 const normalizeRepositoryUrl = require("./normalize-repository-url")
 const defaultLogger = require("./logger")
-const handleAxiosError = require("./hanlde-axios-error")
+const asyncShell = require("./async-shell")
 
 module.exports = async ({
   ref,
   file,
   repositoryUrl,
   logger = defaultLogger,
+  protocol = "https",
 }) => {
-  const repoUrl = normalizeRepositoryUrl(repositoryUrl)
-  const rawUrlParts = [repoUrl, "raw", ref, file]
-  const rawUrl = rawUrlParts.join("/")
+  const repoUrl = normalizeRepositoryUrl(repositoryUrl, protocol)
 
-  logger.debug({ rawUrl }, `downloading file "${file}" ...`)
+  logger.debug({ repoUrl }, `downloading file "${file}" ...`)
+
   try {
-    const response = await axios.get(rawUrl)
-    return response.data
+    const tmpdir = await mkdtemp(path.join(os.tmpdir(), "gitclone-"))
+
+    await asyncShell(
+      `
+        git clone
+          --depth 1
+          --branch ${ref}
+          --filter=blob:none
+          --no-checkout
+          --sparse
+          ${repoUrl}
+          .
+      `,
+      { cwd: tmpdir }
+    )
+
+    await asyncShell(`git checkout ${ref} -- ${file}`, {
+      cwd: tmpdir,
+    })
+
+    const content = await fs.readFile(`${tmpdir}/${file}`, {
+      encoding: "utf-8",
+    })
+
+    await fs.remove(tmpdir)
+
+    return content
   } catch (error) {
-    handleAxiosError(error, logger)
+    logger.error(error)
   }
 }
