@@ -1,5 +1,7 @@
 const { ctx } = require("@modjo-plugins/core")
 
+const gitSshCommand = require("~common/utils/git-ssh-command")
+
 module.exports = ({
   namespace,
   name,
@@ -57,7 +59,9 @@ module.exports = ({
                     command: [
                       "sh",
                       "-c",
-                      `degit ${repositoryUrl}#${
+                      `degit ${
+                        deployKeyCiSecretName ? "--mode=git " : ""
+                      }${repositoryUrl}#${
                         gitCommit &&
                         gitCommit !== "0000000000000000000000000000000000000000"
                           ? gitCommit
@@ -69,6 +73,26 @@ module.exports = ({
                         name: "workspace",
                         mountPath: "/workspace",
                       },
+                      ...(deployKeyCiSecretName
+                        ? [
+                            {
+                              name: "deployKey",
+                              mountPath: "/secrets/ssh",
+                            },
+                          ]
+                        : []),
+                    ],
+                    env: [
+                      ...(deployKeyCiSecretName
+                        ? [
+                            {
+                              name: "GIT_COMMAND_SSH",
+                              value: gitSshCommand({
+                                deployKey: "/secrets/ssh/deploy-key",
+                              }),
+                            },
+                          ]
+                        : []),
                     ],
                   },
                 ]
@@ -143,6 +167,14 @@ module.exports = ({
                   name: "KUBECONFIG",
                   value: "/secrets/kubeconfig/cluster",
                 },
+                ...(deployKeyCiSecretName
+                  ? [
+                      {
+                        name: "KS_DEPLOY_KEY_FILE",
+                        value: "/secrets/ssh/deploy-key",
+                      },
+                    ]
+                  : []),
               ],
               volumeMounts: [
                 {
@@ -153,6 +185,14 @@ module.exports = ({
                   name: "kubeconfig",
                   mountPath: "/secrets/kubeconfig",
                 },
+                ...(deployKeyCiSecretName
+                  ? [
+                      {
+                        name: "deployKey",
+                        mountPath: "/secrets/ssh",
+                      },
+                    ]
+                  : []),
               ],
             },
           ],
@@ -170,6 +210,20 @@ module.exports = ({
                 ],
               },
             },
+            ...(deployKeyCiSecretName
+              ? [
+                  {
+                    name: "deployKey",
+                    secretName: deployKeyCiSecretName,
+                    items: [
+                      {
+                        key: "DEPLOY_KEY",
+                        path: "deploy-key",
+                      },
+                    ],
+                  },
+                ]
+              : []),
           ],
         },
       },
