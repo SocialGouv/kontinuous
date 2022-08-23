@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.56.4](https://github.com/SocialGouv/kontinuous/compare/v1.56.3...v1.56.4) (2022-08-23)
+
+
+### Bug Fixes
+
+* git sparse upgrading ubuntu version ([dc2b0d0](https://github.com/SocialGouv/kontinuous/commit/dc2b0d05363ac9d920949ff2acd1a9b2fc70d0c3))
+
 ### [1.56.3](https://github.com/SocialGouv/kontinuous/compare/v1.56.2...v1.56.3) (2022-08-23)
 
 
