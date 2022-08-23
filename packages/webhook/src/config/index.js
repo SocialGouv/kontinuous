@@ -17,9 +17,9 @@ module.exports = async function createConfig() {
   }
 
   const {
-    tokens: projectTokens,
-    kubeconfigs: projectKubeconfigs,
-    repositories: projectRepositories,
+    tokens: projectTokens = [],
+    kubeconfigs: projectKubeconfigs = [],
+    repositories: projectRepositories = {},
   } = yamlConfig
 
   const tokens = {}
