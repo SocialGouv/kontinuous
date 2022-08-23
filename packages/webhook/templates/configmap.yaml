@@ -11,19 +11,28 @@ data:
   config.yaml: |
     tokens:
       {{ range $index, $secret := .Values.tokenSecrets }}
-      - project: "{{ $secret.project }}"
+      - project: {{ $secret.project | quote }}
         file: /secrets/{{ or $secret.project $secret.name }}/tokens/{{ or $secret.tokenId $index }}
       {{ end }}
 
     kubeconfigs:
       {{ range $secret := .Values.kubeconfigSecrets }}
-      - project: "{{ $secret.project }}"
-        file: /secrets/{{ or $secret.project $secret.name }}/kubeconfig/{{ $secret.cluster }}
+      - project: {{ $secret.project | quote }}
+        file: "/secrets/{{ or $secret.project $secret.name }}/kubeconfig/{{ $secret.cluster }}"
+        cluster: {{ $secret.cluster | quote }}
       {{ end }}
 
     repositories:
       {{ range $repository := .Values.repositories }}
-      - project: "{{ $repository.project }}"
-        repository: "{{ $repository.repository }}"
+      - project: {{ $repository.project | quote }}
+        repository: {{ $repository.repository | quote }}
         private: {{ or $repository.private "false" }}
+        {{ if (or $repository.deployKeySecretName $repository.private) }}
+        deployKeyFile: "/secrets/{{ $repository.project }}/repositories/{{ $repository.repository | adler32sum }}/ssh/deploy-key"
+        {{ end }}
+        {{ if $repository.deployKeyCiSecretName }}
+        deployKeyCiSecretName: {{ $repository.deployKeyCiSecretName | quote }}
+        {{ else if $repository.private }}
+        deployKeyCiSecretName: "git-ssh-deploy-key"
+        {{ end }}
       {{ end }}

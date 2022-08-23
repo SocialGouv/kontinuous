@@ -4,6 +4,7 @@ const { reqCtx } = require("@modjo-plugins/express/ctx")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const cleanGitRef = require("~common/utils/clean-git-ref")
 
+const normalizeRepositoryKey = require("~common/utils/normalize-repository-key")
 const jobRun = require("~/k8s/command/job-run")
 const pipelineJob = require("~/k8s/resources/pipeline.job")
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
@@ -87,6 +88,14 @@ module.exports = ({ services }) => {
       )
     }
 
+    const repositories = ctx.require("config.project.repositories")
+    const repositoryKey = normalizeRepositoryKey(repositoryUrl)
+    const repo = repositories[repositoryKey]
+    let deployKeyCiSecretName
+    if (repo && repo.private) {
+      deployKeyCiSecretName = repo.deployKeyCiSecretName
+    }
+
     const manifest = pipelineJob({
       namespace: jobNamespace,
       name: jobName,
@@ -101,6 +110,7 @@ module.exports = ({ services }) => {
       webhookUri,
       webhookToken,
       commits,
+      deployKeyCiSecretName,
     })
 
     return async () => {

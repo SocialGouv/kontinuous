@@ -40,6 +40,18 @@ spec:
             - key: {{ or $secret.key "TOKEN" }}
               path: token
         {{ end }}
+        {{ range $repository := .Values.repositories }}
+        - name: repository-deploy-{{ $repository.repository | adler32sum }}
+          secret:
+            {{ if or $repository.deployKeySecretName $repository.deployKeySecretName }}
+            secretName: {{ or $repository.deployKeySecretName $repository.deployKeySecretName }}
+            {{ else if $repository.private }}
+            secretName: "deploy-key-{{ $repository.project }}"
+            {{ end }}
+            items:
+            - key: {{ or $secret.key "DEPLOY_KEY" }}
+              path: deploy-key            
+        {{ end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       containers:
         - name: webhook
@@ -61,6 +73,10 @@ spec:
             {{ range $index, $secret := .Values.tokenSecrets }}
             - name: secret-token-{{ $secret.name }}
               mountPath: /secrets/{{ or $secret.project $secret.name }}/tokens/{{ or $secret.tokenId $index }}
+            {{ end }}
+            {{ range $repository := .Values.repositories }}
+            - name: repository-deploy-{{ $repository.repository | adler32sum }}
+              mountPath: "/secrets/{{ $repository.project }}/repositories/{{ $repository.repository | adler32sum }}/ssh"
             {{ end }}
           env:
             - name: KUBEWEBHOOK_CONFIG_PATH

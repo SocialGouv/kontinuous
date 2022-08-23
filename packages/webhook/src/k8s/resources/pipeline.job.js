@@ -14,6 +14,7 @@ module.exports = ({
   webhookToken,
   initContainers = [],
   commits,
+  deployKeyCiSecretName,
 }) => {
   const config = ctx.require("config.project")
 
@@ -29,9 +30,9 @@ module.exports = ({
         "commit-sha": gitCommit,
       },
       annotations: {
-        "kubeworkflow/gitBranch": gitBranch,
-        "kubeworkflow/gitCommit": gitCommit,
-        "kubeworkflow/repositoryUrl": repositoryUrl,
+        "webhook.kontinuous/gitBranch": gitBranch,
+        "webhook.kontinuous/gitCommit": gitCommit,
+        "webhook.kontinuous/repositoryUrl": repositoryUrl,
       },
     },
     spec: {
