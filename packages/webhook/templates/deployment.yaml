@@ -49,7 +49,7 @@ spec:
             secretName: "deploy-key-{{ $repository.project }}"
             {{ end }}
             items:
-            - key: {{ or $secret.key "DEPLOY_KEY" }}
+            - key: DEPLOY_KEY
               path: deploy-key            
         {{ end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
