@@ -12,13 +12,13 @@ data:
     tokens:
       {{ range $index, $secret := .Values.tokenSecrets }}
       - project: {{ $secret.project | quote }}
-        file: /secrets/{{ or $secret.project $secret.name }}/tokens/{{ or $secret.tokenId $index }}
+        file: /secrets/{{ or $secret.project $secret.name }}/tokens/{{ or $secret.tokenId $index }}/token
       {{ end }}
 
     kubeconfigs:
       {{ range $secret := .Values.kubeconfigSecrets }}
       - project: {{ $secret.project | quote }}
-        file: "/secrets/{{ or $secret.project $secret.name }}/kubeconfig/{{ $secret.cluster }}"
+        file: "/secrets/{{ or $secret.project $secret.name }}/kubeconfig/{{ $secret.cluster }}/kubeconfig"
         cluster: {{ $secret.cluster | quote }}
       {{ end }}
 
