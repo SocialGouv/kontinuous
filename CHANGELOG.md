@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.56.5](https://github.com/SocialGouv/kontinuous/compare/v1.56.4...v1.56.5) (2022-08-23)
+
+
+### Bug Fixes
+
+* config kubeconfig path ([1da3ae3](https://github.com/SocialGouv/kontinuous/commit/1da3ae3345bd2193053bfdd2e6feb2b1a33cfd5a))
+
 ### [1.56.4](https://github.com/SocialGouv/kontinuous/compare/v1.56.3...v1.56.4) (2022-08-23)
 
 
