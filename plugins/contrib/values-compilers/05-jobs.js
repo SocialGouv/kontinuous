@@ -1,3 +1,38 @@
+const path = require("path")
+
+const fs = require("fs-extra")
+
+const recurseLocate = async (
+  jobName,
+  dependencies,
+  config,
+  scope = ["project"]
+) => {
+  for (const [name, dependency] of Object.entries(dependencies)) {
+    const childScope = [...scope, name]
+    const jobPath = path.join(
+      config.buildPath,
+      ...childScope.flatMap((chart) => ["charts", chart]),
+      "jobs",
+      jobName
+    )
+    if (await fs.pathExists(jobPath)) {
+      return jobPath
+    }
+    if (dependency.dependencies) {
+      const found = await recurseLocate(
+        jobName,
+        dependency.dependencies,
+        config,
+        childScope
+      )
+      if (found) {
+        return found
+      }
+    }
+  }
+}
+
 const requireUse = async (
   use,
   { config, logger, downloadingPromises, utils }
@@ -14,6 +49,18 @@ const requireUse = async (
         const src = `${workspacePath}/${use}`
         logger.debug(`import local ${src}`)
         await fs.copy(src, target, {
+          filter: ignoreYarnState,
+        })
+      } else if (use.startsWith("~")) {
+        const found = await recurseLocate(
+          use.slice(1),
+          config.dependencies,
+          config
+        )
+        if (!found) {
+          throw new Error(`job "${use}" not found in repo dependencies`)
+        }
+        await fs.copy(found, target, {
           filter: ignoreYarnState,
         })
       } else if (
