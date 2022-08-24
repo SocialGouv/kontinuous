@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.57.0](https://github.com/SocialGouv/kontinuous/compare/v1.56.6...v1.57.0) (2022-08-24)
+
+
+### Features
+
+* autolocate job ([19fd5dc](https://github.com/SocialGouv/kontinuous/commit/19fd5dc05d4747888ddfbb11f65123de735cadcf))
+* test cli ([0d0c415](https://github.com/SocialGouv/kontinuous/commit/0d0c4154f2d75d17898f2de10ae321adc23fc612))
+
+
+### Bug Fixes
+
+* test cli improve ([4c807bf](https://github.com/SocialGouv/kontinuous/commit/4c807bfbabca9d1bb18b3f241ce2328c7650ee8c))
+* up checkout action version ([22bc46c](https://github.com/SocialGouv/kontinuous/commit/22bc46cc0d3496df55f5127f7052b7f645f043c0))
+* up kapp version ([d5b18ca](https://github.com/SocialGouv/kontinuous/commit/d5b18ca32fbfdf5a65941db53c3ac9126a4c45a4))
+* up kubectl and helm version ([aefefb3](https://github.com/SocialGouv/kontinuous/commit/aefefb39a360024fcc4a296b8823808d3a8c076a))
+
 ### [1.56.6](https://github.com/SocialGouv/kontinuous/compare/v1.56.5...v1.56.6) (2022-08-23)
 
 
