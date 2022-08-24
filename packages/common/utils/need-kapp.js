@@ -5,7 +5,7 @@ const fs = require("fs-extra")
 const needBin = require("./need-bin")
 const downloadFile = require("./download-file")
 
-const kappVersion = process.env.KAPP_VERSION || "v0.49.0"
+const kappVersion = process.env.KAPP_VERSION || "v0.52.0"
 
 const download = async (options) => {
   const { logger } = options
