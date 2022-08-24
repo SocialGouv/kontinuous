@@ -45,9 +45,17 @@ module.exports = async (opts) => {
           const { manifests } = await build(opts)
           const snapshotName = `manifests.${environment}.yaml`
           try {
-            const diff = await snapshotDiff(manifests, snapshotName, snapConfig)
-            if (diff) {
-              throw new DiffError(diff, snapshotName)
+            const diffResult = await snapshotDiff(
+              manifests,
+              snapshotName,
+              snapConfig
+            )
+            if (diffResult.created) {
+              console.log(`snapshot "${snapshotName}" created`)
+            } else if (diffResult.updated) {
+              console.log(`snapshot "${snapshotName}" updated`)
+            } else if (diffResult.diff) {
+              throw new DiffError(diffResult.diff, snapshotName)
             }
             end()
           } catch (err) {
@@ -59,4 +67,7 @@ module.exports = async (opts) => {
   })
   const results = await test.run()
   reporter(results)
+  if (results.errors.length > 0) {
+    process.exit(1)
+  }
 }

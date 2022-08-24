@@ -6,23 +6,32 @@ module.exports = async (stdout, name, snapConfig) => {
   const { snapshotsDir, update } = snapConfig
   const writePath = `${snapshotsDir}/${name}`
 
-  if (!update) {
-    let existingSnap = false
-    if (await fs.pathExists(writePath)) {
-      existingSnap = await fs.readFile(writePath, { encoding: "utf-8" })
-      if (stdout !== existingSnap) {
-        const compare = diffStringsUnified(stdout, existingSnap, {
+  let existingSnap = false
+  if (await fs.pathExists(writePath)) {
+    existingSnap = await fs.readFile(writePath, { encoding: "utf-8" })
+  }
+
+  await fs.ensureDir(snapshotsDir)
+
+  const result = {}
+
+  if (stdout !== existingSnap) {
+    if (existingSnap) {
+      if (!update) {
+        result.diff = diffStringsUnified(stdout, existingSnap, {
           includeChangeCounts: true,
           contextLines: 2,
           expand: false,
         })
-        return compare
+      } else {
+        result.updated = true
+        await fs.writeFile(writePath, stdout)
       }
+    } else {
+      result.created = true
+      await fs.writeFile(writePath, stdout)
     }
   }
 
-  await fs.ensureDir(snapshotsDir)
-  await fs.writeFile(writePath, stdout)
-
-  return false
+  return result
 }

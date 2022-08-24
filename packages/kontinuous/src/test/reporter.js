@@ -1,3 +1,5 @@
+const clc = require("cli-color")
+
 const DiffError = require("./diff-error")
 
 const logTests = (results) => {
@@ -6,7 +8,7 @@ const logTests = (results) => {
       if (!result.skipped) {
         console.log(
           `${"  ".repeat(result.nestLevel)}- ${result.name}: ${
-            result.passed ? "PASSED" : "FAILED"
+            result.passed ? clc.green("PASSED") : clc.red("FAILED")
           } (in ${result.elapsed} ms)`
         )
       }
