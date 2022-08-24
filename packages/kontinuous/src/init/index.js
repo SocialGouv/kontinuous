@@ -1,3 +1,5 @@
+const path = require("path")
+
 const fs = require("fs-extra")
 const { Select, Input } = require("enquirer")
 
@@ -5,6 +7,8 @@ const degit = require("~common/utils/degit-improved")
 const yaml = require("~common/utils/yaml")
 
 const ctx = require("~common/ctx")
+
+const boilerplatesRootPath = "SocialGouv/kontinuous/boilerplates/repositories"
 
 module.exports = async (opts, _command) => {
   const config = ctx.require("config")
@@ -14,10 +18,9 @@ module.exports = async (opts, _command) => {
     let boilerplate = opts.B
 
     const nativePluginsBoilerplate = {
-      "trunk-gitops": "SocialGouv/kontinuous/boilerplates/trunk-gitops",
-      "trunk-manual-prod":
-        "SocialGouv/kontinuous/boilerplates/trunk-manual-prod",
-      "gitflow-gitops": "SocialGouv/kontinuous/boilerplates/gitflow-gitops",
+      "trunk-gitops": `${boilerplatesRootPath}/trunk-gitops`,
+      "trunk-manual-prod": `${boilerplatesRootPath}/trunk-manual-prod`,
+      "gitflow-gitops": `${boilerplatesRootPath}}/gitflow-gitops`,
     }
 
     if (!boilerplate) {
@@ -49,9 +52,12 @@ module.exports = async (opts, _command) => {
     }
     logger.info(`degit boilerplate in current directory from ${boilerplate}`)
     const { overwrite } = opts
-    await degit(boilerplate, config.buildPath, { logger })
+
+    const boilerplateBuildPath = path.join(config.buildPath, "boilerplate")
+
+    await degit(boilerplate, boilerplateBuildPath, { logger })
     try {
-      await fs.copy(config.buildPath, config.workspacePath, {
+      await fs.copy(boilerplateBuildPath, config.workspacePath, {
         overwrite,
         errorOnExist: true,
       })
@@ -83,7 +89,7 @@ module.exports = async (opts, _command) => {
       if (overwriteResponse === "cancel") {
         return
       }
-      await fs.copy(config.buildPath, config.workspacePath, {
+      await fs.copy(boilerplateBuildPath, config.workspacePath, {
         overwrite: overwriteResponse === "overwrite",
       })
 
@@ -96,6 +102,7 @@ module.exports = async (opts, _command) => {
       }
 
       let { name } = opts
+      console.log({ name })
       if (!name) {
         const inputName = new Input({
           message: "Project name",
