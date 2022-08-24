@@ -5,7 +5,7 @@ const fs = require("fs-extra")
 const needBin = require("./need-bin")
 const downloadFile = require("./download-file")
 
-const kubectlVersion = process.env.KUBECTL_VERSION || "v1.23.4"
+const kubectlVersion = process.env.KUBECTL_VERSION || "v1.25.0"
 
 const download = async (options) => {
   const { logger } = options

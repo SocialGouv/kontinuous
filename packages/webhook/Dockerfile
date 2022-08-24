@@ -16,7 +16,7 @@ RUN wget -qO- https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
   && npm install -g yarn \
   && rm -rf /var/lib/apt/lists/*
 
-ARG KUBECTL_VERSION=v1.23.4
+ARG KUBECTL_VERSION=v1.25.0
 ENV KUBECTL_VERSION=$KUBECTL_VERSION
 RUN curl -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl
