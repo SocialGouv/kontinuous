@@ -1,0 +1,7 @@
+dependencies:
+  fabrique:
+    import: SocialGouv/kontinuous/plugins/fabrique
+
+environmentPatterns:
+  prod: main
+  preprod: dev
