@@ -14,6 +14,7 @@ const addCommands = [
   require("./commands/clean"),
   require("./commands/upload"),
   require("./commands/download"),
+  require("./commands/test"),
 ]
 
 module.exports = async (args = process.argv) => {
