@@ -11,6 +11,7 @@
     "link-module-alias": "^1.2.0"
   },
   "devDependencies": {
+    "docsify": "^4.12.2",
     "eslint": "^8.12.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
@@ -53,6 +54,7 @@
     "test:webhook": "yarn workspace ~webhook test",
     "dev:webhook": "docker-compose up --build webhook",
     "dev:webhook:built": "docker-compose -f docker-compose.built.yaml up --build webhook",
+    "dev:docs": "docsify serve docs",
     "upgrade:modjo": "yarn up -R \"@modjo-plugins/*\""
   },
   "lint-staged": {
