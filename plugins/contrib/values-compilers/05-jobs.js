@@ -33,6 +33,13 @@ const recurseLocate = async (
   }
 }
 
+const remapValues = (run) => {
+  if (run["~needs"]) {
+    run.needs = run["~needs"]
+    delete run["~needs"]
+  }
+}
+
 const requireUse = async (
   use,
   { config, logger, downloadingPromises, utils }
@@ -144,6 +151,8 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
       currentScope.join("--"),
     ])
 
+    remapValues(run)
+
     if (!run.use) {
       newRuns[key] = run
     } else {
@@ -155,15 +164,13 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
       await compile(context, runValues, scope, run.parentWith)
 
       for (const [runKey, r] of Object.entries(runValues.runs)) {
+        remapValues(r)
         const newRun = {
           action: run.use,
         }
-        for (let k of Object.keys(r)) {
+        for (const k of Object.keys(r)) {
           if (k === "use") {
             continue
-          }
-          if (k.slice(0, 1) === "~") {
-            k = k.slice(1)
           }
           newRun[k] = r[k]
         }

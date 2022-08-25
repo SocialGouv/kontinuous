@@ -379,6 +379,7 @@ metadata:
     kapp.k14s.io/change-group.seed: kontinuous/seed.test-jobs-seed-sql-feature-branch-1
     kapp.k14s.io/change-group.seed.import-secret: kontinuous/seed.import-secret.test-jobs-seed-sql-feature-branch-1
     kapp.k14s.io/change-group.seed..import-secret: kontinuous/seed..import-secret.test-jobs-seed-sql-feature-branch-1
+    kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db.test-jobs-seed-sql-feature-branch-1
     janitor/ttl: '1800'
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
@@ -471,6 +472,7 @@ metadata:
     kapp.k14s.io/change-rule.seed..import-secret: >-
       upsert after upserting
       kontinuous/seed..import-secret.test-jobs-seed-sql-feature-branch-1
+    kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db.test-jobs-seed-sql-feature-branch-1
     janitor/ttl: '1800'
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml

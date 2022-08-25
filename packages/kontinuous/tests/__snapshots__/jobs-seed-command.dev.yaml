@@ -379,6 +379,9 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/change-group: kontinuous/test-jobs-seed-command-feature-branch-1
     kapp.k14s.io/change-group.seed: kontinuous/seed.test-jobs-seed-command-feature-branch-1
+    kapp.k14s.io/change-rule.db: >-
+      upsert after upserting
+      kontinuous/db.test-jobs-seed-command-feature-branch-1
     janitor/ttl: '1800'
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
