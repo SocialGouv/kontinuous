@@ -1,7 +1,7 @@
 const axios = require("axios")
 
 const ctx = require("~common/ctx")
-const handleAxiosError = require("~common/utils/hanlde-axios-error")
+const handleAxiosError = require("~common/utils/handle-axios-error")
 
 const setStatus = async ({ url, status, ok = null }) => {
   const logger = ctx.require("logger")

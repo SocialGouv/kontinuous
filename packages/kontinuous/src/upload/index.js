@@ -4,7 +4,7 @@ const qs = require("qs")
 const fs = require("fs-extra")
 
 const ctx = require("~common/ctx")
-const handleAxiosError = require("~common/utils/hanlde-axios-error")
+const handleAxiosError = require("~common/utils/handle-axios-error")
 
 module.exports = async ({ name, file }) => {
   const config = ctx.require("config")

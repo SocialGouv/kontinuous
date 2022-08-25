@@ -2,7 +2,7 @@ const axios = require("axios")
 
 const normalizeRepositoryUrl = require("./normalize-repository-url")
 const defaultLogger = require("./logger")
-const handleAxiosError = require("./hanlde-axios-error")
+const handleAxiosError = require("./handle-axios-error")
 
 module.exports = async ({
   ref,

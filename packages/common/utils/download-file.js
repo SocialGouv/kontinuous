@@ -6,7 +6,7 @@ const axios = require("axios")
 
 const finished = promisify(stream.finished)
 
-const handleAxiosError = require("./hanlde-axios-error")
+const handleAxiosError = require("./handle-axios-error")
 
 module.exports = async (fileUrl, outputLocationPath, logger) => {
   const writer = fs.createWriteStream(outputLocationPath)

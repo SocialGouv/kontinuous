@@ -18,7 +18,7 @@ const fileHash = require("~common/utils/file-hash")
 const degitImproved = require("~common/utils/degit-improved")
 const slug = require("~common/utils/slug")
 const normalizeDegitUri = require("~common/utils/normalize-degit-uri")
-const handleAxiosError = require("~common/utils/hanlde-axios-error")
+const handleAxiosError = require("~common/utils/handle-axios-error")
 
 const recurseDependency = require("~common/config/recurse-dependencies")
 const copyFilter = require("~common/config/copy-filter")

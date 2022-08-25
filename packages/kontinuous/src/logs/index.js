@@ -4,7 +4,7 @@ const axios = require("axios")
 const qs = require("qs")
 
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
-const handleAxiosError = require("~common/utils/hanlde-axios-error")
+const handleAxiosError = require("~common/utils/handle-axios-error")
 
 const ctx = require("~common/ctx")
 
