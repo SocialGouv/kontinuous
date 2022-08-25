@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.58.0](https://github.com/SocialGouv/kontinuous/compare/v1.57.2...v1.58.0) (2022-08-25)
+
+
+### Features
+
+* docsify ([06507a0](https://github.com/SocialGouv/kontinuous/commit/06507a0e8a24a8fc6a2a2e0cd73d669f19186810))
+
+
+### Bug Fixes
+
+* clean remove sync gh-pages ([0322a34](https://github.com/SocialGouv/kontinuous/commit/0322a3450bce15faecb6db8e034349022fce4ec1))
+* locate jobs degit ([1b0bc23](https://github.com/SocialGouv/kontinuous/commit/1b0bc23818955f35be70fc9f418c44c8af6973b9))
+* readme ([a46734d](https://github.com/SocialGouv/kontinuous/commit/a46734d7c97007545c83b9eb657e437c497889d6))
+* readme logo ([50c66d8](https://github.com/SocialGouv/kontinuous/commit/50c66d850534da5015bd06f9be254e3aaf80733e))
+
 ### [1.57.2](https://github.com/SocialGouv/kontinuous/compare/v1.57.1...v1.57.2) (2022-08-25)
 
 
