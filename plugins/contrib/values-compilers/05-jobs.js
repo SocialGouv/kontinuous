@@ -17,7 +17,16 @@ const recurseLocate = async (
       jobName
     )
     if (await fs.pathExists(jobPath)) {
-      return jobPath
+      let dependencyUrl = dependency.import
+      dependencyUrl = dependencyUrl.replace("@", "#")
+      let dependencyRef = ""
+      if (dependencyUrl.includes("#")) {
+        const parts = dependencyUrl.split("#")
+        dependencyRef = `#${parts.pop()}`
+        dependencyUrl = parts.join("#")
+      }
+      const use = `${dependencyUrl}/jobs/${jobName}${dependencyRef}`
+      return { use, jobPath }
     }
     if (dependency.dependencies) {
       const found = await recurseLocate(
@@ -41,9 +50,10 @@ const remapValues = (run) => {
 }
 
 const requireUse = async (
-  use,
+  run,
   { config, logger, downloadingPromises, utils }
 ) => {
+  let { use } = run
   const { slug, degitImproved, ignoreYarnState, normalizeDegitUri } = utils
   const { buildPath, workspacePath } = config
   const useSlug = slug(use)
@@ -67,7 +77,9 @@ const requireUse = async (
         if (!found) {
           throw new Error(`job "${use}" not found in repo dependencies`)
         }
-        await fs.copy(found, target, {
+        use = found.use
+        run.use = found.use
+        await fs.copy(found.jobPath, target, {
           filter: ignoreYarnState,
         })
       } else if (
@@ -157,7 +169,7 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
       newRuns[key] = run
     } else {
       newRuns[key] = { enabled: false }
-      const { target } = await requireUse(run.use, context)
+      const { target } = await requireUse(run, context)
       const runValues = yaml.load(
         await fs.readFile(target, { encoding: "utf-8" })
       )
