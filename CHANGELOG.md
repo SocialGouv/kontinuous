@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.57.2](https://github.com/SocialGouv/kontinuous/compare/v1.57.1...v1.57.2) (2022-08-25)
+
+
+### Bug Fixes
+
+* enable sealedSecrets ([385e1b6](https://github.com/SocialGouv/kontinuous/commit/385e1b66a62a72c10ee634a2830992d267a0fbeb))
+* jobs chart ~needs to value ([d1e103c](https://github.com/SocialGouv/kontinuous/commit/d1e103ca504a0ef5b7538e9752e55ae09ac61ad0))
+* lint ([262001e](https://github.com/SocialGouv/kontinuous/commit/262001e374f3ddef8e145e1600c727aff5344e4d))
+* rename typo handle-axios-error ([a9bb248](https://github.com/SocialGouv/kontinuous/commit/a9bb248b4b9c1eeb3d29d4dbea56d28fbac01fb1))
+* sealed-secret env ([0c7ca1e](https://github.com/SocialGouv/kontinuous/commit/0c7ca1ee56973cbce9e2f9026e3d8b590cd4ac95))
+
 ### [1.57.1](https://github.com/SocialGouv/kontinuous/compare/v1.57.0...v1.57.1) (2022-08-24)
 
 
