@@ -37,7 +37,7 @@ const requireUse = async (
   use,
   { config, logger, downloadingPromises, utils }
 ) => {
-  const { slug, degitImproved, fs, ignoreYarnState, normalizeDegitUri } = utils
+  const { slug, degitImproved, ignoreYarnState, normalizeDegitUri } = utils
   const { buildPath, workspacePath } = config
   const useSlug = slug(use)
   use = normalizeDegitUri(use)
@@ -108,7 +108,7 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
 
   const { config, utils } = context
   const { gitBranch, gitRepositoryName: repositoryName } = config
-  const { slug, yaml, fs } = utils
+  const { slug, yaml } = utils
 
   const newRuns = {}
   for (const [key, run] of Object.entries(values.runs)) {
