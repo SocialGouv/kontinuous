@@ -20,7 +20,7 @@ dependencies:
       noPlainSecrets:
         enabled: true
       sealedSecrets:
-        enabled: false
+        enabled: true
 
     preDeploy:
       debugLinks:
