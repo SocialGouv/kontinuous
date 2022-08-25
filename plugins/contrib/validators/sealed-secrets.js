@@ -10,7 +10,7 @@ module.exports = async (manifests, options, context) => {
   if (!kubesealEndpoint) {
     const { clusters } = options
     const { values } = context
-    const cluster = values.isProd ? clusters.prod : clusters.dev
+    const cluster = values.global.isProd ? clusters.prod : clusters.dev
     if (cluster) {
       ;({ kubesealEndpoint } = cluster)
     }
@@ -68,6 +68,7 @@ module.exports = async (manifests, options, context) => {
           { endpoint, namespace },
           `${manifest.metadata.name} is not sealed properly`
         )
+        handleAxiosError(error, logger)
       } else {
         status = null
         handleAxiosError(error, logger)
