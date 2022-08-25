@@ -2,4 +2,4 @@
 
 [Official Documentation](https://socialgouv.github.io/kontinuous/)
 
-![logo](_media/kontinuous-logo.png)
+![logo](./docs/_media/kontinuous-logo.png)
