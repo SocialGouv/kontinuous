@@ -3,7 +3,7 @@ module.exports = async (
   options,
   { config, logger, utils, needBin }
 ) => {
-  const { asyncShell } = utils
+  const { kubectlRetry } = utils
   const { ciNamespace, kubeconfig, kubeconfigContext } = config
 
   const rancherNsMissingProjectId = []
@@ -42,15 +42,13 @@ module.exports = async (
   } else {
     await needBin(utils.needKubectl)
     try {
-      const json = await asyncShell(
-        `kubectl ${
+      const json = await kubectlRetry(
+        `${
           kubeconfigContext ? `--context ${kubeconfigContext}` : ""
         } get ns ${ciNamespace} -o json`,
         {
-          env: {
-            ...process.env,
-            ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
-          },
+          kubeconfig,
+          logInfo: false,
         }
       )
       const data = JSON.parse(json)

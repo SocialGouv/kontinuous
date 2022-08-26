@@ -7,20 +7,17 @@ const matchAnnotation = "kontinuous/plugin.preDeploy.cleaner"
 
 const cleanResource = async (manifest, { config, utils }) => {
   const { buildPath } = config
-  const { asyncShell, yaml } = utils
+  const { kubectlRetry, yaml } = utils
   const { kubeconfig, kubeconfigContext } = config
   const dir = await mkdtemp(path.join(buildPath, "tmp-"))
   const file = `${dir}/clean-resource.yaml`
   await fs.writeFile(file, yaml.dump(manifest))
-  await asyncShell(
-    `kubectl ${
+  await kubectlRetry(
+    `${
       kubeconfigContext ? `--context ${kubeconfigContext}` : ""
     } delete --ignore-not-found=true -f ${file}`,
     {
-      env: {
-        ...process.env,
-        ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
-      },
+      kubeconfig,
     }
   )
 }

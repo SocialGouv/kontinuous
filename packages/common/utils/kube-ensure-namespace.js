@@ -1,6 +1,6 @@
 const { spawn } = require("child_process")
 const retry = require("async-retry")
-const asyncShell = require("./async-shell")
+const kubectlRetry = require("./kubectl-retry")
 
 const defaultLogger = require("./logger")
 
@@ -12,19 +12,14 @@ const checkNamespaceIsAvailable = async ({
 }) => {
   logger.debug("checking if namespace is available")
   try {
-    const json = await asyncShell(
-      `kubectl ${
+    const json = await kubectlRetry(
+      `${
         kubeconfigContext ? `--context ${kubeconfigContext}` : ""
       } get ns ${namespace} -o json`,
       {
-        env: {
-          ...process.env,
-          ...(kubeconfig
-            ? {
-                KUBECONFIG: kubeconfig,
-              }
-            : {}),
-        },
+        kubeconfig,
+        logInfo: false,
+        logger,
       }
     )
     const data = JSON.parse(json)
