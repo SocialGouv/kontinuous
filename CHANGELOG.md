@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.58.1](https://github.com/SocialGouv/kontinuous/compare/v1.58.0...v1.58.1) (2022-08-26)
+
+
+### Bug Fixes
+
+* docs title ([bfa5826](https://github.com/SocialGouv/kontinuous/commit/bfa5826a299d269d8d26a3abf4c72054964f3adb))
+* implement axios-retry ([cab7194](https://github.com/SocialGouv/kontinuous/commit/cab71942ced358fd684146c9247a690c929bbdcb))
+* tests ([f3e90d0](https://github.com/SocialGouv/kontinuous/commit/f3e90d0b43442df5934c06e8e12159283c92b1d1))
+
 ## [1.58.0](https://github.com/SocialGouv/kontinuous/compare/v1.57.2...v1.58.0) (2022-08-25)
 
 
