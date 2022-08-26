@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.59.0](https://github.com/SocialGouv/kontinuous/compare/v1.58.1...v1.59.0) (2022-08-26)
+
+
+### Features
+
+* kubectlRetry ([ad210dd](https://github.com/SocialGouv/kontinuous/commit/ad210ddb5d6f5f5f31a34ce4f9100b72594f1d75))
+
+
+### Bug Fixes
+
+* add user-agent ([07c3015](https://github.com/SocialGouv/kontinuous/commit/07c30157072487d33682273173805f5a0db7224e))
+* axios error ([956c214](https://github.com/SocialGouv/kontinuous/commit/956c21442f5e7138b44ec4e29d52be2a6756a3b6))
+* clean debug ([cc69b71](https://github.com/SocialGouv/kontinuous/commit/cc69b7108b29403449c6563204aca2ee0532ddd1))
+* enable debug on action ([08e5a38](https://github.com/SocialGouv/kontinuous/commit/08e5a38b2ea571b7e53be2e6ffc262c203fd4f1d))
+* failed status ([2877190](https://github.com/SocialGouv/kontinuous/commit/2877190382b641da05d17271f569c76ba669023d))
+* improve webhook server message infos ([3ce7fd1](https://github.com/SocialGouv/kontinuous/commit/3ce7fd1de78b66855770c0784a202cf08d914ad3))
+* kubectlRetry ([0b5d4bd](https://github.com/SocialGouv/kontinuous/commit/0b5d4bdedf9fa254e69fe6dbf1d6d331a387e97e))
+* kubectlRetry ([986eaa9](https://github.com/SocialGouv/kontinuous/commit/986eaa97f005cb25f5f9183596320755110dd1af))
+* kubectlRetry ([9492d1c](https://github.com/SocialGouv/kontinuous/commit/9492d1c13e93abf8b2362bc494a3e469a95ba50e))
+* kubectlRetry ([6f81543](https://github.com/SocialGouv/kontinuous/commit/6f815435dbb7ce443723af1d334aa039c24b31a2))
+* option logs no-catch ([cf21054](https://github.com/SocialGouv/kontinuous/commit/cf210541fecd3e44adc53b9cd3525016ee1698cb))
+* retry stream logs ([d7eab2f](https://github.com/SocialGouv/kontinuous/commit/d7eab2fe2f9ec6208d4556ee7cad224cbe13d169))
+* retry strem ([1361fff](https://github.com/SocialGouv/kontinuous/commit/1361fff526da3e38098161aa99dc282303afdb4d))
+* up cli desc ([a2c0287](https://github.com/SocialGouv/kontinuous/commit/a2c0287b38076dc631aa4aec5ee7bf325f184065))
+* user-agent ([31189cf](https://github.com/SocialGouv/kontinuous/commit/31189cf34ce1e0562a377205687b29aa0fe0701b))
+
 ### [1.58.1](https://github.com/SocialGouv/kontinuous/compare/v1.58.0...v1.58.1) (2022-08-26)
 
 
