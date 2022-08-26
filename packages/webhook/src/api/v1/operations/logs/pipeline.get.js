@@ -73,8 +73,10 @@ module.exports = function ({ services }) {
             KUBECONFIG: kubeconfig,
           },
         })
+
         proc.stdout.pipe(res)
         proc.stderr.pipe(res)
+
         proc.on("close", (code) => {
           if (code === 0) {
             resolve()
@@ -174,6 +176,12 @@ module.exports = function ({ services }) {
       tryIteration++
     }
 
+    const writeStreamEnd = (data) => {
+      res.write("### KONTINUOUS-STREAM-END ###\n")
+      res.write(JSON.stringify(data))
+      res.end()
+    }
+
     if (catchJob) {
       try {
         await waitJobExists({ jobName, commit, kubeconfig }, waitingCallback)
@@ -188,21 +196,29 @@ module.exports = function ({ services }) {
         res.write(
           `\n💀 error: unable to find expected job "${jobName}" #${commit}\n`
         )
-        res.end()
+
+        writeStreamEnd({ ok: false, error: "not-found" })
         return
       }
     }
 
     try {
-      await runLogStream({ res, kubeconfig, follow, since, jobName })
+      await runLogStream({
+        res,
+        kubeconfig,
+        follow,
+        since,
+        jobName,
+      })
       res.write(`\n🏁 end of logging succeeded\n`)
+      writeStreamEnd({ ok: true })
     } catch (err) {
       logger.error(err)
       res.write(
         `\n❌ end of logging with error, consult webhook service pod logs for full details\n`
       )
+      writeStreamEnd({ ok: false, error: "unkown" })
     }
-    res.end()
   }
 
   return [getOneLogsPipeline]

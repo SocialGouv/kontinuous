@@ -1,7 +1,7 @@
 const globalLogger = require("./logger")
 
 module.exports = (error, logger = globalLogger) => {
-  const url = error.request.res?.responseUrl
+  const url = error.request?.res?.responseUrl
   if (error.response) {
     logger.error(
       {
