@@ -23,6 +23,10 @@ const kubectlRun = async (kubectlArgs, options = {}) => {
       },
     })
 
+    if (stdin !== undefined) {
+      proc.stdin.write(stdin)
+    }
+
     const output = []
     proc.stdout.on("data", (data) => {
       output.push(data.toString())
@@ -52,7 +56,6 @@ const kubectlRun = async (kubectlArgs, options = {}) => {
     })
 
     if (stdin !== undefined) {
-      proc.stdin.write(stdin)
       proc.stdin.end()
     }
   })

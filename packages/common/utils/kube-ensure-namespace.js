@@ -42,57 +42,19 @@ module.exports = async ({
   const namespace = manifest.metadata.name
 
   const ensureNamespace = async (verb) => {
-    try {
-      let ignoreError
-      await new Promise((resolve, reject) => {
-        logger.info("creating namespace")
-        const proc = spawn(
-          "kubectl",
-          [
-            ...(kubeconfigContext ? [`--context=${kubeconfigContext}`] : []),
-            ...verb,
-            "-f",
-            "-",
-          ],
-          {
-            encoding: "utf-8",
-            env: {
-              ...process.env,
-              ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
-            },
-          }
-        )
-
-        proc.stdin.write(JSON.stringify(manifest))
-
-        proc.stdout.on("data", (data) => {
-          process.stdout.write(data.toString())
-        })
-        proc.stderr.on("data", (data) => {
-          const message = data.toString()
-          if (message.includes("AlreadyExists")) {
-            ignoreError = true
-            logger.info({ namespace }, "namespace already exists")
-          } else {
-            logger.warn({ namespace }, message)
-          }
-        })
-        proc.on("close", (code) => {
-          if (code === 0 || ignoreError) {
-            resolve()
-          } else {
-            reject(
-              new Error(`creating namespace failed with exit code ${code}`)
-            )
-          }
-        })
-
-        proc.stdin.end()
-      })
-    } catch (err) {
-      logger.error(err)
-      throw err
-    }
+    await kubectlRetry(
+      [
+        ...(kubeconfigContext ? [`--context=${kubeconfigContext}`] : []),
+        ...verb,
+        "-f",
+        "-",
+      ],
+      {
+        kubeconfig,
+        ignoreError: ["AlreadyExists"],
+        stdin: JSON.stringify(manifest),
+      }
+    )
   }
 
   logger.info(`ensure namespace "${namespace}" is active`)
