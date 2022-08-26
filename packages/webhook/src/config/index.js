@@ -1,4 +1,5 @@
 const fs = require("fs-extra")
+const kontinuousVersion = require("~common/utils/kontinuous-version")
 
 const normalizeRepositoryKey = require("~common/utils/normalize-repository-key")
 const normalizeRepositoryUrl = require("~common/utils/normalize-repository-url")
@@ -74,6 +75,7 @@ module.exports = async function createConfig() {
     process.env.KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE ||
     "ghcr.io/socialgouv/kontinuous/degit:1"
 
+  const serviceName = `kontinuous webhook server v${kontinuousVersion}`
   const config = {
     project: {
       oas: {
@@ -88,6 +90,7 @@ module.exports = async function createConfig() {
       pipelineImage,
       pipelineCheckoutImage,
     },
+    microserviceOapi: { serviceName },
     logger: {
       level: "debug",
     },
