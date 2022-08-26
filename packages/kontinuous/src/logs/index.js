@@ -117,8 +117,8 @@ module.exports = async (options) => {
     logger.error("logs streaming was interrupted, retry limit reached")
     process.exit(1)
   }
-
-  if (finalState) {
-    logger.debug(finalState, "stream end")
+  logger.debug(finalState || {}, "stream end")
+  if (!finalState?.ok) {
+    process.exit(1)
   }
 }
