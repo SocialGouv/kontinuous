@@ -1,4 +1,3 @@
-const { spawn } = require("child_process")
 const retry = require("async-retry")
 const kubectlRetry = require("./kubectl-retry")
 
@@ -26,9 +25,9 @@ const checkNamespaceIsAvailable = async ({
     const phase = data?.status.phase
     // logger.debug(`namespace "${namespace}" phase is "${phase}"`)
     return phase === "Active"
-  } catch (_err) {
+  } catch (err) {
     // do nothing
-    // logger.debug(err)
+    logger.debug(err)
   }
   return false
 }
@@ -51,7 +50,7 @@ module.exports = async ({
       ],
       {
         kubeconfig,
-        ignoreError: ["AlreadyExists"],
+        ignoreErrors: ["AlreadyExists"],
         stdin: JSON.stringify(manifest),
       }
     )
@@ -66,8 +65,8 @@ module.exports = async ({
       logger,
     })
   ) {
-    // logger.info({ namespace }, "apply namespace")
-    // await ensureNamespace(["apply"])
+    logger.info({ namespace }, "apply namespace")
+    await ensureNamespace(["apply"])
     return
   }
 
