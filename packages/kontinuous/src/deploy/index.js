@@ -1,22 +1,15 @@
-const { spawn } = require("child_process")
-
 const fs = require("fs-extra")
 
 const ctx = require("~common/ctx")
-const needKapp = require("~common/utils/need-kapp")
 const yaml = require("~common/utils/yaml")
 const timeLogger = require("~common/utils/time-logger")
-const slug = require("~common/utils/slug")
-const parseCommand = require("~common/utils/parse-command")
 
-const needBin = require("~/bin/need-bin")
 const build = require("~/build")
 const { setStatus } = require("~/status")
 
 const deployHooks = require("./deploy-hooks")
 const deployOnWebhook = require("./deploy-on-webhook")
-
-const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
+const kappDeploy = require("./kapp-deploy")
 
 module.exports = async (options) => {
   ctx.provide()
@@ -73,68 +66,6 @@ module.exports = async (options) => {
 
     const allManifests = yaml.loadAll(manifests)
 
-    const charts = config.chart?.join(",")
-
-    const kappApp = slug(
-      `${repositoryName}-${config.gitBranch}${charts ? `-${charts}` : ""}`
-    )
-
-    const kappWaitTimeout =
-      options.timeout || process.env.KS_DEPLOY_TIMEOUT || "15m0s"
-
-    await needBin(needKapp)
-
-    const deployWithKapp = async () => {
-      const [cmd, args] = parseCommand(`
-        kapp deploy
-          ${
-            kubeconfigContext ? `--kubeconfig-context ${kubeconfigContext}` : ""
-          }
-          --app label:kontinuous/kapp=${kappApp}
-          --logs-all
-          --wait-timeout ${kappWaitTimeout}
-          --dangerous-override-ownership-of-existing-resources
-          --yes
-          -f ${manifestsFile}
-      `)
-
-      try {
-        await new Promise((resolve, reject) => {
-          const proc = spawn(cmd, args, {
-            encoding: "utf-8",
-            env: {
-              ...process.env,
-              ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
-            },
-          })
-
-          for (const signal of signals) {
-            process.on(signal, () => {
-              proc.kill(signal)
-              process.exit(0)
-            })
-          }
-
-          proc.stdout.on("data", (data) => {
-            process.stdout.write(data.toString())
-          })
-          proc.stderr.on("data", (data) => {
-            logger.warn(data.toString())
-          })
-          proc.on("close", (code) => {
-            if (code === 0) {
-              resolve()
-            } else {
-              reject(new Error(`kapp deploy failed with exit code ${code}`))
-            }
-          })
-        })
-      } catch (err) {
-        logger.error(err)
-        throw err
-      }
-    }
-
     await deployHooks(allManifests, "pre")
 
     const namespacesManifests = allManifests.filter(
@@ -157,7 +88,13 @@ module.exports = async (options) => {
     })
 
     try {
-      await deployWithKapp()
+      await kappDeploy({
+        options,
+        kubeconfigContext,
+        manifestsFile,
+        kubeconfig,
+        repositoryName,
+      })
     } catch (error) {
       logger.error({ error }, "kapp deploy failed")
       throw error
