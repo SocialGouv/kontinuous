@@ -70,7 +70,8 @@ module.exports = async (kubectlArgs, options = {}) => {
     result = await retry(
       async (bail) => {
         try {
-          await kubectlRun(kubectlArgs, options)
+          const output = await kubectlRun(kubectlArgs, options)
+          return output
         } catch (err) {
           if (
             err.message.includes(
