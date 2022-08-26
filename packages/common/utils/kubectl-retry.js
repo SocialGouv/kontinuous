@@ -8,7 +8,7 @@ const defaultLogger = require("./logger")
 const kubectlRun = async (kubectlArgs, options = {}) => {
   const { kubeconfig, ignoreErrors = [], stdin } = options
 
-  if (kubectlArgs) {
+  if (Array.isArray(kubectlArgs)) {
     kubectlArgs = kubectlArgs.join(" ")
   }
 
