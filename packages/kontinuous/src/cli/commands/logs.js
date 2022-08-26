@@ -15,6 +15,7 @@ module.exports = (program) =>
     .addOption(options.webhookToken)
     .addOption(options.webhookUri)
     .addOption(options.event)
+    .option("--no-catch", "disable waiting for job to appear")
     .action(async (_opts, command) => {
       const opts = command.optsWithGlobals()
       await logs(opts)

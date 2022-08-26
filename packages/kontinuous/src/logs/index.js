@@ -44,7 +44,7 @@ module.exports = async (options) => {
     env,
     ref: branch,
     commit,
-    catch: true,
+    catch: options.catch ? true : undefined,
     follow: true,
     token,
   })
