@@ -73,10 +73,10 @@ module.exports = function ({ services }) {
         },
       })
 
-      proc.on("data", (buffer) => {
+      proc.stdout.on("data", (buffer) => {
         res.write(buffer)
       })
-      proc.on("error", (buffer) => {
+      proc.stderr.on("data", (buffer) => {
         res.write(buffer)
       })
       proc.on("close", (code) => {
