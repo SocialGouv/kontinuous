@@ -27,7 +27,7 @@ const checkNamespaceIsAvailable = async ({
     return phase === "Active"
   } catch (err) {
     // do nothing
-    logger.debug(err)
+    // logger.debug(err)
   }
   return false
 }
