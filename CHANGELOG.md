@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.59.4](https://github.com/SocialGouv/kontinuous/compare/v1.59.3...v1.59.4) (2022-08-26)
+
+
+### Bug Fixes
+
+* pipeline logging in cli ([ae10b9c](https://github.com/SocialGouv/kontinuous/commit/ae10b9c470af92fde39dcce3d660b436cc955797))
+
 ### [1.59.3](https://github.com/SocialGouv/kontinuous/compare/v1.59.2...v1.59.3) (2022-08-26)
 
 
