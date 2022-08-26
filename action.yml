@@ -49,8 +49,8 @@ runs:
         PROJECT_PATH="${{ github.workspace }}/${{ inputs.cwd }}"
         echo "KS_BUILD_PATH=$KS_BUILD_PATH" >> $GITHUB_ENV
         echo "KS_DISABLE_DIFF=$KS_DISABLE_DIFF" >> $GITHUB_ENV
+        echo "KS_DEBUG=true" >> $GITHUB_ENV
         echo "PROJECT_PATH=$PROJECT_PATH" >> $GITHUB_ENV
-
     - name: Install dependencies
       working-directory: "${{ github.action_path }}"
       shell: bash
@@ -68,7 +68,6 @@ runs:
         KS_CHART: ${{ inputs.chart }}
         KS_INLINE_VALUES: ${{ inputs.inlineValues }}
         KS_INLINE_SET: ${{ inputs.inlineSet }}
-        KS_DEBUG: "true"
       run: packages/kontinuous/bin/kontinuous build --cwd ${{ env.PROJECT_PATH }}
 
     - name: Archive manifest

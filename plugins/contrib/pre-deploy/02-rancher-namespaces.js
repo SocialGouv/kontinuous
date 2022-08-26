@@ -20,7 +20,7 @@ module.exports = async (
     (manifest) => manifest.metadata.name
   )
 
-  logger.debug({ namespaces }, "ensure rancher namespaces are available")
+  logger.debug({ namespaces }, "ensure rancher namespaces are availables")
 
   await needBin(utils.needKubectl)
 
