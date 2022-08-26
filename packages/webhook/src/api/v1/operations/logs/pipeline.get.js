@@ -73,9 +73,12 @@ module.exports = function ({ services }) {
         },
       })
 
-      proc.stdout.pipe(res)
-      proc.stderr.pipe(res)
-
+      proc.on("data", (buffer) => {
+        res.write(buffer)
+      })
+      proc.on("error", (buffer) => {
+        res.write(buffer)
+      })
       proc.on("close", (code) => {
         if (code === 0) {
           resolve()
