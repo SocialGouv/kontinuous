@@ -1,6 +1,3 @@
-const stream = require("stream")
-const { promisify } = require("util")
-
 const qs = require("qs")
 const retry = require("async-retry")
 
@@ -50,14 +47,12 @@ module.exports = async (options) => {
   })
   const url = `${webhookUri}/api/v1/oas/logs/pipeline?${query}`
 
-  const finished = promisify(stream.finished)
-
   const writeStream = process.stdout
 
+  let realFinish = false
   try {
     await retry(
       async (bail) => {
-        let realFinish = false
         let currentLine = ""
         const checkEndFlagCurrentLine = () => {
           if (currentLine === "### KONTINUOUS-STREAM-END ###") {
@@ -81,7 +76,11 @@ module.exports = async (options) => {
           })
           response.data.on("data", handleOut)
           response.data.pipe(writeStream)
-          await finished(writeStream)
+          await new Promise((resolve, _reject) => {
+            response.data.on("end", () => {
+              resolve()
+            })
+          })
         } catch (err) {
           bail(err)
         }
@@ -99,5 +98,10 @@ module.exports = async (options) => {
     )
   } catch (error) {
     handleAxiosError(error, logger)
+  }
+
+  if (!realFinish) {
+    logger.error("logs streaming was interrupted, retry limit reached")
+    process.exit(1)
   }
 }
