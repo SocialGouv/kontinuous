@@ -2,7 +2,6 @@ const { spawn } = require("child_process")
 const crypto = require("crypto")
 
 const fs = require("fs-extra")
-const axios = require("axios")
 const qs = require("qs")
 const FormData = require("form-data")
 
@@ -13,6 +12,7 @@ const timeLogger = require("~common/utils/time-logger")
 const slug = require("~common/utils/slug")
 const parseCommand = require("~common/utils/parse-command")
 const validateMd5 = require("~common/utils/validate-md5")
+const axios = require("~common/utils/axios-retry")
 const handleAxiosError = require("~common/utils/handle-axios-error")
 
 const needBin = require("~/bin/need-bin")

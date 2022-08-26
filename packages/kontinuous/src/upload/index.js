@@ -1,9 +1,9 @@
-const axios = require("axios")
 const FormData = require("form-data")
 const qs = require("qs")
 const fs = require("fs-extra")
 
 const ctx = require("~common/ctx")
+const axios = require("~common/utils/axios-retry")
 const handleAxiosError = require("~common/utils/handle-axios-error")
 
 module.exports = async ({ name, file }) => {

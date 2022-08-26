@@ -1,6 +1,5 @@
-const axios = require("axios")
-
 const ctx = require("~common/ctx")
+const axios = require("~common/utils/axios-retry")
 const handleAxiosError = require("~common/utils/handle-axios-error")
 
 const setStatus = async ({ url, status, ok = null }) => {

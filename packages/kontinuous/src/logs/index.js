@@ -1,9 +1,9 @@
 const stream = require("stream")
 const { promisify } = require("util")
-const axios = require("axios")
 const qs = require("qs")
 
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
+const axios = require("~common/utils/axios-retry")
 const handleAxiosError = require("~common/utils/handle-axios-error")
 
 const ctx = require("~common/ctx")

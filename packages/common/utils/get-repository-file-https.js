@@ -1,4 +1,4 @@
-const axios = require("axios")
+const axios = require("./axios-retry")
 
 const normalizeRepositoryUrl = require("./normalize-repository-url")
 const defaultLogger = require("./logger")

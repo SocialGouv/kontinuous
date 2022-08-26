@@ -2,7 +2,7 @@ const fs = require("fs")
 const stream = require("stream")
 const { promisify } = require("util")
 
-const axios = require("axios")
+const axios = require("./axios-retry")
 
 const finished = promisify(stream.finished)
 

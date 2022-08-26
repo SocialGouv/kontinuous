@@ -1,9 +1,8 @@
-const axios = require("axios")
 const retry = require("async-retry")
 
 module.exports = async (manifests, options, context) => {
   const { logger, utils } = context
-  const { handleAxiosError } = utils
+  const { handleAxiosError, axiosRetry: axios } = utils
 
   let { kubesealEndpoint } = options
 
