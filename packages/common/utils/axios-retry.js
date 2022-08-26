@@ -1,7 +1,11 @@
 const axios = require("axios")
 const axiosRetry = require("axios-retry")
 
-const client = axios.create()
+const kontinuousVersion = require("./kontinuous-version")
+
+const client = axios.create({
+  headers: { "User-Agent": `kontinuous cli v${kontinuousVersion}` },
+})
 
 axiosRetry(client, {
   retries: 3,
