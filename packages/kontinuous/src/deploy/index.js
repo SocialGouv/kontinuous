@@ -224,7 +224,7 @@ module.exports = async (options) => {
       await deployWithKapp()
     } catch (error) {
       logger.error({ error }, "kapp deploy failed")
-      process.exit(1)
+      throw error
     }
 
     await deployHooks(allManifests, "post")
@@ -240,6 +240,6 @@ module.exports = async (options) => {
     if (statusUrl) {
       await setStatus({ url: statusUrl, status: "failed", ok: false })
     }
-    throw err
+    process.exit(1)
   }
 }
