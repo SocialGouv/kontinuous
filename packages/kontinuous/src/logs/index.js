@@ -50,21 +50,33 @@ module.exports = async (options) => {
   const writeStream = process.stdout
 
   let realFinish = false
+  let finalState
+
   try {
     await retry(
       async (bail) => {
         let currentLine = ""
-        const checkEndFlagCurrentLine = () => {
-          if (currentLine === "### KONTINUOUS-STREAM-END ###") {
+        const checkEndFlagCurrentLine = (line) => {
+          if (realFinish) {
+            try {
+              finalState = JSON.parse(line)
+            } catch (_err) {
+              // do nothing
+            }
+          }
+          if (line === "### KONTINUOUS-STREAM-END ###") {
             realFinish = true
           }
         }
         const handleOut = (outputBuffer) => {
           const output = outputBuffer.toString()
-          const [current, next] = output.split("\n")
+          const [current, ...nexts] = output.split("\n")
           currentLine += current
           checkEndFlagCurrentLine(currentLine)
-          currentLine = next
+          currentLine = nexts.pop()
+          for (const line of nexts) {
+            checkEndFlagCurrentLine(line)
+          }
           checkEndFlagCurrentLine(currentLine)
         }
 
@@ -78,6 +90,7 @@ module.exports = async (options) => {
           response.data.pipe(writeStream)
           await new Promise((resolve, _reject) => {
             response.data.on("end", () => {
+              writeStream.write("\n")
               resolve()
             })
           })
@@ -103,5 +116,9 @@ module.exports = async (options) => {
   if (!realFinish) {
     logger.error("logs streaming was interrupted, retry limit reached")
     process.exit(1)
+  }
+
+  if (finalState) {
+    logger.debug(finalState, "stream end")
   }
 }
