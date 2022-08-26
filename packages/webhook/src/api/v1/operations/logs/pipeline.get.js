@@ -64,33 +64,26 @@ module.exports = function ({ services }) {
         ${follow && follow !== "false" ? "--follow" : ""}
         job.batch/${jobName}
     `)
-    try {
-      await new Promise((resolve, reject) => {
-        const proc = spawn(cmd, args, {
-          encoding: "utf-8",
-          env: {
-            ...process.env,
-            KUBECONFIG: kubeconfig,
-          },
-        })
-
-        proc.stdout.pipe(res)
-        proc.stderr.pipe(res)
-
-        proc.on("close", (code) => {
-          if (code === 0) {
-            resolve()
-          } else {
-            reject(new Error(`kubectl logs exit with code ${code}`))
-          }
-        })
+    await new Promise((resolve, reject) => {
+      const proc = spawn(cmd, args, {
+        encoding: "utf-8",
+        env: {
+          ...process.env,
+          KUBECONFIG: kubeconfig,
+        },
       })
-    } catch (err) {
-      logger.error(err)
-      throw err
-    } finally {
-      res.end()
-    }
+
+      proc.stdout.pipe(res)
+      proc.stderr.pipe(res)
+
+      proc.on("close", (code) => {
+        if (code === 0) {
+          resolve()
+        } else {
+          reject(new Error(`kubectl logs exit with code ${code}`))
+        }
+      })
+    })
   }
 
   async function getOneLogsPipeline(req, res) {
