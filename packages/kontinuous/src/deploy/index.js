@@ -1,9 +1,6 @@
 const { spawn } = require("child_process")
-const crypto = require("crypto")
 
 const fs = require("fs-extra")
-const qs = require("qs")
-const FormData = require("form-data")
 
 const ctx = require("~common/ctx")
 const needKapp = require("~common/utils/need-kapp")
@@ -11,16 +8,13 @@ const yaml = require("~common/utils/yaml")
 const timeLogger = require("~common/utils/time-logger")
 const slug = require("~common/utils/slug")
 const parseCommand = require("~common/utils/parse-command")
-const validateMd5 = require("~common/utils/validate-md5")
-const axios = require("~common/utils/axios-retry")
-const handleAxiosError = require("~common/utils/handle-axios-error")
 
 const needBin = require("~/bin/need-bin")
 const build = require("~/build")
-const logs = require("~/logs")
-const { getStatus, setStatus } = require("~/status")
+const { setStatus } = require("~/status")
 
 const deployHooks = require("./deploy-hooks")
+const deployOnWebhook = require("./deploy-on-webhook")
 
 const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
 
@@ -55,74 +49,16 @@ module.exports = async (options) => {
     }
 
     if (onWebhook) {
-      const manifestsHash = crypto.createHmac("md5", manifests).digest("hex")
-
-      let jobHash
-      if (options.jobHash) {
-        if (validateMd5(options.jobHash)) {
-          jobHash = options.jobHash
-        } else {
-          jobHash = crypto.createHmac("md5", options.jobHash).digest("hex")
-        }
-      } else {
-        jobHash = manifestsHash
-      }
-
-      logger.info(
-        `deploying via webhook ${repositoryName} job#${jobHash} manifests#md5:${manifestsHash}`
-      )
-
-      logger.info("uploading custom manifests to deploy")
-
-      const form = new FormData()
-      form.append("manifests", manifests, {
-        filename: "manifests.yaml",
-        contentType: "text/x-yaml",
-      })
-
-      const query = qs.stringify({
-        project: config.projectName,
-        env: environment,
+      await deployOnWebhook({
+        options,
+        manifests,
+        repositoryName,
+        environment,
         token,
-        hash: jobHash,
-        repositoryUrl: gitRepositoryUrl,
+        gitRepositoryUrl,
+        webhookUri,
+        statusUrl,
       })
-
-      const url = `${webhookUri}/api/v1/oas/hooks/custom?${query}`
-      try {
-        const response = await axios.request({
-          method: "POST",
-          url,
-          data: form,
-          headers: form.getHeaders(),
-        })
-        logger.debug(response.data)
-        logger.info("uploaded custom manifests to deploy")
-      } catch (error) {
-        handleAxiosError(error, logger)
-      }
-
-      if (options.onWebhookDetach) {
-        return
-      }
-
-      await logs({
-        ...options,
-        env: environment,
-        event: "custom",
-        repository: gitRepositoryUrl,
-        branch: jobHash,
-        commit: "0000000000000000000000000000000000000000",
-      })
-      if (statusUrl) {
-        const { status, ok } = await getStatus({ url: statusUrl })
-        if (ok !== true) {
-          const errorMsg = `status not ok, it returned: ${status}`
-          logger.error(errorMsg)
-          throw new Error(errorMsg)
-        }
-      }
-
       return
     }
 
