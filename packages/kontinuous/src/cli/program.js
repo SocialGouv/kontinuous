@@ -12,9 +12,7 @@ module.exports = () => {
 
   program
     .name("kontinuous")
-    .description(
-      "CI/CD on Kubernetes to Kubernetes (Helm + Kapp + some Kung-Fu) 🚀"
-    )
+    .description("CI/CD for Kubernetes 🚀")
     .version(require(`${__dirname}/../../package.json`).version)
     .addOption(options.debug)
     .addOption(options.inlineConfig)
