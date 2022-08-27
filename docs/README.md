@@ -1,11 +1,8 @@
 # Kontinuous - CI/CD for Kubernetes 🚀
 
-Hey, you work at the marvelous *[Fabrique Numérique des Ministères Sociaux](https://www.fabrique.social.gouv.fr/)* ?
-[Go here for quickstart](#_211-fabrique-quickstart)
+## Why another CI/CD  ?
 
-## Why ?
-
-Was needing a flexible, scalable and independent CI+CD system running on Kubernetes with fine grained control over pipelines.
+Was needing a flexible, scalable and independent CI/CD optimized for Kubernetes with fine grained control over pipelines.
 
 ## The approach
 
@@ -17,12 +14,101 @@ All CI+CD pipeline is reproductible running kapp cli deploy command on the built
 
 Keep as close as possible of battle tested and confident tech paradigms as native kubernetes, helm and kapp, so we can use all theirs powers and abilities.
 
+CLI runnable from anywhere: CI runner (github, gitlab, ...), kubernetes job (creatable from webhook), even your own laptop.
 
-**Tech: (Helm ⛵ + Kapp 🌞) x NodeJS for the customization Kung-Fu 🥷**
+Minimal dependencies:
+- Git repository
+- Kubernetes (provide a kubeconfig)
+- NodeJS
 
-- [helm](https://helm.sh/): build manifests from helm templates, so kontinuous is interoperable with the ecosystem of the most popular package manager for kubernetes, and use the only one templating language in go (also used in kubernetes cli)
-- [carvel/kapp](https://carvel.dev/kapp/): to deploy ordered pipelines with advanced dependencies declarative system and following deployment state and reconciliation
-- the kung-fu: to expose adapted and simplified logic to final dev users, with ready to use values system corresponding to infra, flexible patching system, easy to use plugin charts system etc...
+
+**The stack**:
+- [Helm](https://helm.sh/) ⛵
+    build manifests from helm templates, so kontinuous is interoperable with the ecosystem of the most popular package manager for kubernetes, and use the only one templating language in go (also used in kubernetes cli)
+- [Kapp](https://carvel.dev/kapp/) 🌞
+    deploy ordered pipelines with advanced dependencies declarative system and following deployment state and reconciliation
+
+- [NodeJS](https://nodejs.org) 🥷
+    expose adapted and simplified logic to final dev users, with ready to use values system corresponding to infra, flexible patching system, easy to use plugin charts system etc...
+
+
+## Cycle
+
+### build manifests
+- load dependencies (from .kontinuous/config.yaml)
+- values-compilers plugins
+- helm template
+- patches plugins
+- post-renderer plugin
+- validators plugins
+- debug-manifests plugins
+
+### deploy manifests
+- pre-deploy plugins
+- deploy with kapp
+- post-deploy plugins
+
+## Features
+
+### Core features
+
+- run anywhere
+- dependencies tree between jobs and deployment
+- on file change switcher (exprerimental)
+- patches manifests (using plugins)
+- easy hack of manifest using [jq](https://stedolan.github.io/jq/) (using post-renderer)
+- validate (using plugins)
+- pre-deploy hook (using plugins)
+- post-deploy hook (using plugins)
+- plugins at repository level
+- external plugins from git repo
+- nested charts
+- external helm charts
+    - from helm repository
+    - from git repository
+- private repository (experimental)
+- adaptable to your infra
+- meta values to patches even external charts (eg: using ~needs for dependencies tree)
+
+### Plugin's features
+
+- values-compilers
+    - auto matching on nested charts
+    - multiple instances of chart
+    - implicit enabled
+    - global default values helpers
+- patches
+    - auto set undefined to main namespace
+    - default kapp annotations ensure replace on immutable conflict
+    - auto set rancherProjectId from ci namespace
+    - versioning sealed-secret (coming soon)
+    - auto hash and truncate too long ingress subdomains with global replacement
+- validators
+    - validate ingress subdomains compliance
+    - verify sealed secret
+    - no plain secret
+    - resources uniqness
+- debug-manifests
+    - resources tree infos
+    - dependencies-tree-infos
+- pre-deploy plugins
+    - ensure rancher namespaces are in active state
+    - on demand resource cleaner
+- post-deploy plugins
+    - notify mattermost (coming soon)
+
+### Webhook features
+
+- trigger pipeline
+    - github
+    - user
+    - gitlab (experimental)
+- stream logs
+- ephemeral artifact
+    - manifests.yaml
+    - customs
+- deploy custom manifests
+
 
 ## Documentation
 
