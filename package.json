@@ -54,6 +54,8 @@
     "test:webhook": "yarn workspace ~webhook test",
     "dev:webhook": "docker-compose up --build webhook",
     "dev:webhook:built": "docker-compose -f docker-compose.built.yaml up --build webhook",
+    "docker:kontinuous:build": "docker build -f packages/kontinuous/Dockerfile -t kontinuous .",
+    "docker:kontinuous": "yarn docker:kontinuous:build && docker run kontinuous",
     "dev:docs": "docsify serve docs",
     "logs:remote-webhook": "kubectl --context prod -n kontinuous-webhook logs -f --all-containers -l component=kontinuous-webhook",
     "upgrade:modjo": "yarn up -R \"@modjo-plugins/*\""
