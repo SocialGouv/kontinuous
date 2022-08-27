@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.60.0](https://github.com/SocialGouv/kontinuous/compare/v1.59.7...v1.60.0) (2022-08-27)
+
+
+### Features
+
+* dependencies tree based on graph-easy ([a794b6d](https://github.com/SocialGouv/kontinuous/commit/a794b6dcd43b190d50942b3e5d0b2330d50c23f1))
+
 ### [1.59.7](https://github.com/SocialGouv/kontinuous/compare/v1.59.6...v1.59.7) (2022-08-27)
 
 
