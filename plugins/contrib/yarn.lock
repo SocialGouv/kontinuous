@@ -49,13 +49,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^2.8.1":
-  version: 2.20.3
-  resolution: "commander@npm:2.20.3"
-  checksum: a6cb7ce73cc1db74a2da4bb6b4fc4f9a655ba35beb90f32bf5831d7d3be610dafc01dcc8a17f8204cf4e3f1f434d2115b7db56dfb0b827d42b10d1ba6ae8cbb4
-  languageName: node
-  linkType: hard
-
 "delayed-stream@npm:~1.0.0":
   version: 1.0.0
   resolution: "delayed-stream@npm:1.0.0"
@@ -185,53 +178,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-nailgun-client@npm:^0.1.0":
-  version: 0.1.2
-  resolution: "node-nailgun-client@npm:0.1.2"
-  dependencies:
-    commander: "npm:^2.8.1"
-  bin:
-    node-nailgun-client: index.js
-  checksum: 6bc0af24071cd18855c5ae1c9222457d0fe632e1f1c683ef3483afed48c794f23c27f7f112dcc40947c62ac3d2a429e86670b7de702de1f791a7bb05911b3c96
-  languageName: node
-  linkType: hard
-
-"node-nailgun-server@npm:^0.1.4":
-  version: 0.1.4
-  resolution: "node-nailgun-server@npm:0.1.4"
-  dependencies:
-    commander: "npm:^2.8.1"
-  bin:
-    node-nailgun-server: index.js
-  checksum: 72afa0d712b8452361d44be6cf8ab5991f20b97de65fdaf7f1d1b86b3425d8491b7add89419dfc9ec2c8e3ed4879f8da777b09afed1b34d17b11e2e8e7c8833f
-  languageName: node
-  linkType: hard
-
-"node-plantuml@git+https://github.com/betagouv/node-plantuml.git#master":
-  version: 0.9.0
-  resolution: "node-plantuml@https://github.com/betagouv/node-plantuml.git#commit=3138c77a08eb96b0d7500126d7d23f6235618628"
-  dependencies:
-    commander: "npm:^2.8.1"
-    node-nailgun-client: "npm:^0.1.0"
-    node-nailgun-server: "npm:^0.1.4"
-    plantuml-encoder: "npm:^1.2.5"
-  bin:
-    puml: index.js
-  checksum: ba5b2a30400980ff3fd5d583c98d5fc00243df5c12e72cb65c41f27194666d9f2bdb136ea25d088c71a6edc2dfdeea7d2df463d1a51b69e35b8321768c852d72
-  languageName: node
-  linkType: hard
-
 "picomatch@npm:^2.3.1":
   version: 2.3.1
   resolution: "picomatch@npm:2.3.1"
   checksum: 6ba5938c24af2c5918e94b39aa0ad48d71f2c30634de69d46e0bd32feb666de4e909406db6ffb78f98d39ef450d6a41b6fa3954dc3659d7b2b750766c1261e5e
-  languageName: node
-  linkType: hard
-
-"plantuml-encoder@npm:^1.2.5":
-  version: 1.4.0
-  resolution: "plantuml-encoder@npm:1.4.0"
-  checksum: 1144dff1390ae5d91d2da9ed51469ab11f69cc5c49a55f36bf002acb7611b9fcc4595d926ccc9fe629c2dfbae35e765e43de1c99feb21301235bb508bb360c0d
   languageName: node
   linkType: hard
 
@@ -279,7 +229,6 @@ __metadata:
     lodash.get: "npm:^4.4.2"
     lodash.set: "npm:^4.3.2"
     micromatch: "npm:^4.0.5"
-    node-plantuml: "git+https://github.com/betagouv/node-plantuml.git#master"
     puml: "npm:^1.0.1"
   languageName: unknown
   linkType: soft

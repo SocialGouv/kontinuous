@@ -1,4 +1,21 @@
+/*
+
+need:
+
+  package.json
+    dependencies
+      "node-plantuml": "git+https://github.com/betagouv/node-plantuml.git#master",
+
+  Dockerfile
+    RUN apt-get update && \
+      DEBIAN_FRONTEND=noninteractive apt-get install -yq \
+      openjdk-17-jre-headless
+
+*/
+
+const path = require("path")
 const camelcase = require("lodash.camelcase")
+const fs = require("fs-extra")
 
 const changeGroupPrefix = "kapp.k14s.io/change-group"
 const changeRulePrefix = "kapp.k14s.io/change-rule"
@@ -7,9 +24,9 @@ const changeRuleValuePrefix = "upsert after upserting kontinuous/"
 module.exports = async (manifests, _options, { ctx, utils }) => {
   const logger = ctx.require("logger")
 
-  if (!(await utils.graphEasyExists())) {
+  if (!(await utils.javaExists())) {
     logger.debug(
-      "unable to display dependencies diagram, graph-easy not available, skipping"
+      "unable to display dependencies diagram, java not available, skipping"
     )
     return
   }
@@ -50,7 +67,7 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
   for (const [key, dependenciesSet] of Object.entries(flatDependencies)) {
     for (const dep of dependenciesSet) {
       if (dep !== key) {
-        uml.push(`${dep} -> ${camelcase(key)};`)
+        uml.push(`${dep} -> ${camelcase(key)}`)
       }
     }
   }
@@ -59,14 +76,38 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
     return
   }
 
-  // test here https://dot-to-ascii.ggerganov.com/ https://github.com/ggerganov/dot-to-ascii
-  // lib https://github.com/ironcamel/Graph-Easy
-  const result = await utils.asyncShell("graph-easy", {}, (proc) => {
-    proc.stdin.write(`digraph {
-    ${uml.join("\n")}
-}`)
-    proc.stdin.end()
-  })
+  const rootPluginDir = path.resolve(`${__dirname}/..`)
+
+  const platform = process.platform === "darwin" ? "macosx" : process.platform
+  const binSourceDir = `../../puml/bin/${platform}`
+  const binTargetDir = `${rootPluginDir}/node_modules/node-plantuml/vendor`
+  await fs.ensureDir(binTargetDir)
+
+  const symlinkMap = {
+    [`${binTargetDir}/j2v8_${platform}_x86_64-3.1.6.jar`]: `${binSourceDir}/j2v8_${platform}_x86_64-3.1.6.jar`,
+    [`${binTargetDir}/plantuml.jar`]: `${binSourceDir}/plantuml.jar`,
+    [`${binTargetDir}/vizjs.jar`]: `${binSourceDir}/vizjs.jar`,
+  }
+  await Promise.all(
+    Object.entries(symlinkMap).map(async ([key, value]) => {
+      if (!(await fs.pathExists(key))) {
+        await fs.symlink(value, key)
+      }
+    })
+  )
+
+  const result = await utils.asyncShell(
+    [
+      "node_modules/node-plantuml/index.js",
+      "generate",
+      "--unicode",
+      "--text",
+      uml.join("\n"),
+    ],
+    {
+      cwd: rootPluginDir,
+    }
+  )
 
   logger.debug(`\n${result}`)
 }

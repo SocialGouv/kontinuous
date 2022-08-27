@@ -7,10 +7,8 @@ RUN apt-get update && \
     curl \
     wget \
     git \
-    openjdk-17-jre-headless \
+    libgraph-easy-perl \
   && rm -rf /var/lib/apt/lists/*
-
-ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64/
 
 ARG KUBECTL_VERSION=v1.25.0
 ENV KUBECTL_VERSION=$KUBECTL_VERSION

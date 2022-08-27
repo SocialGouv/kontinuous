@@ -1086,7 +1086,6 @@ yarn push:gitlab
 ```sh
 docker run 
   -t \
-  -u $UID \
   -v $PWD:/workspace \
   -v $HOME/.kube:/home/ubuntu/.kube \
   harbor.fabrique.social.gouv.fr/sre/kontinuous \
