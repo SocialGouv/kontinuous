@@ -23,8 +23,6 @@ dependencies:
         enabled: true
 
     preDeploy:
-      debugLinks:
-        enabled: true
       rancherNamespaces:
         enabled: true
 

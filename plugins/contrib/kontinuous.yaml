@@ -19,7 +19,5 @@ validators:
     enabled: false
 
 preDeploy:
-  debugLinks:
-    enabled: false
   rancherNamespaces:
     enabled: false

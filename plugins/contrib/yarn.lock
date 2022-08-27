@@ -5,18 +5,6 @@ __metadata:
   version: 7
   cacheKey: 9
 
-"@socialgouv/parse-manifests@npm:^1.14.1":
-  version: 1.14.1
-  resolution: "@socialgouv/parse-manifests@npm:1.14.1"
-  dependencies:
-    get-stdin: "npm:^9.0.0"
-    yaml: "npm:^1.10.2"
-  bin:
-    parse-manifests: bin/index.js
-  checksum: 6c13bb36336731cadef084af1e786a07623d9f74344bd8d9381d3648b641b3c2465d54f62e41b6a1279a9211c88b085db1e4363077da3ea1cca683be158ca5bb
-  languageName: node
-  linkType: hard
-
 "async-retry@npm:^1.3.3":
   version: 1.3.3
   resolution: "async-retry@npm:1.3.3"
@@ -113,13 +101,6 @@ __metadata:
     jsonfile: "npm:^6.0.1"
     universalify: "npm:^2.0.0"
   checksum: c397c1bfbb8976afb6758a96b9d5781c179b01ec843caa9f6613b8d95d95e17229d1ba7132dd811e112df5f2537bce1f68a3c0a722decc345947f133921fa3b3
-  languageName: node
-  linkType: hard
-
-"get-stdin@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "get-stdin@npm:9.0.0"
-  checksum: 3adee5758c111b3432b2855cba6af7d342a679330a85867bf076bfc51b03f8747f34a5057f33e4a8909af4589acdc909a28eda82b3a4050b88e1d400696b6efe
   languageName: node
   linkType: hard
 
@@ -286,18 +267,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^1.10.2":
-  version: 1.10.2
-  resolution: "yaml@npm:1.10.2"
-  checksum: d6f04384bdf1105256581aef39991f825e358f3f48f081974b0e0f39ff5240c60ccafb5842cb79d1287517efa2b9ee172c702f2e4855ba6cc46948b40a43aa6e
-  languageName: node
-  linkType: hard
-
 "~fabrique@workspace:.":
   version: 0.0.0-use.local
   resolution: "~fabrique@workspace:."
   dependencies:
-    "@socialgouv/parse-manifests": "npm:^1.14.1"
     async-retry: "npm:^1.3.3"
     axios: "npm:^0.27.2"
     fs-extra: "npm:^10.1.0"
