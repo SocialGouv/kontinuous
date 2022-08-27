@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.59.7](https://github.com/SocialGouv/kontinuous/compare/v1.59.6...v1.59.7) (2022-08-27)
+
+
+### Bug Fixes
+
+* move debug-manifests to fabrique plugin ([e27b395](https://github.com/SocialGouv/kontinuous/commit/e27b39570a6f4b5f4bfb0de17287c9d0c9ee8823))
+
 ### [1.59.6](https://github.com/SocialGouv/kontinuous/compare/v1.59.5...v1.59.6) (2022-08-27)
 
 
