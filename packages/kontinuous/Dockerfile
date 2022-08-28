@@ -65,6 +65,8 @@ RUN node -e " \
 
 FROM base as server
 
+RUN npm install -g clean-modules
+
 RUN mkdir -p /workspace
 RUN chown 1001:1001 /workspace
 
@@ -90,12 +92,18 @@ RUN yarn workspaces focus kontinuous --production && yarn cache clean
 # pre-cache yarn package for official plugins optimization
 ENV KS_INLINE_CONFIG_SET "links.SocialGouv/kontinuous=/opt/kontinuous"
 COPY --chown=1001:1001 plugins/ ./plugins/
-RUN cd plugins/contrib && yarn
-RUN cd plugins/fabrique && yarn
+RUN cd plugins/contrib && yarn && clean-modules
+RUN cd plugins/fabrique && yarn && clean-modules
 
 RUN rm -rf packages/kontinuous/src && rm -rf packages/kontinuous/common
 COPY --chown=1001:1001 packages/kontinuous/ ./packages/kontinuous/
 COPY --chown=1001:1001 packages/common/ ./packages/common/
+
+RUN clean-modules --exclude node_modules/yaml/dist/doc
+
+USER root
+RUN npm un -g clean-modules
+USER 1001
 
 WORKDIR /workspace
 
