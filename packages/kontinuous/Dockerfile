@@ -3,8 +3,9 @@ ARG UBUNTU_VERSION=22.04
 FROM ubuntu:$UBUNTU_VERSION as base
 
 RUN apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -yq \
+  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
     curl \
+    ca-certificates \
     wget \
     git \
     libgraph-easy-perl \
@@ -103,6 +104,11 @@ RUN clean-modules --exclude node_modules/yaml/dist/doc
 
 USER root
 RUN npm un -g clean-modules
+RUN apt-get remove -yq \
+    curl \
+    libcurl4 \
+    wget \
+  && rm -rf /var/lib/apt/lists/*
 USER 1001
 
 WORKDIR /workspace
