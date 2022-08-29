@@ -9,6 +9,7 @@ module.exports = (program) => {
     .command("test")
     .description("test against current repo snapshot")
     .addOption(options.cwd)
+    .addOption(options.chart)
     .option("--update, -u", "update snapshots")
     .action(async (_opts, command) => {
       const opts = command.optsWithGlobals()

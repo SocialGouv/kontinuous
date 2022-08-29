@@ -33,42 +33,58 @@ module.exports = async (opts) => {
     update: opts.U,
   }
 
-  test.group("snapshots", () => {
-    for (const environment of environments) {
-      test(`generate manifests for env: ${environment}`, async (end) => {
-        await nctx.fork(async () => {
-          const ctxConfig = await loadConfig(opts, [], {
-            environment,
-            gitBranch: "master",
-            gitSha: "0000000000000000000000000000000000000000",
-          })
-          ctx.set("config", ctxConfig)
-          const loggerChild = logger.child({})
-          loggerChild.level = pino.levels.values.error
-          ctx.set("logger", loggerChild)
-          const { manifests } = await build(opts)
-          const snapshotName = `manifests.${environment}.yaml`
-          try {
-            const diffResult = await snapshotDiff(
-              manifests,
-              snapshotName,
-              snapConfig
-            )
-            if (diffResult.created) {
-              console.log(`snapshot "${snapshotName}" created`)
-            } else if (diffResult.updated) {
-              console.log(`snapshot "${snapshotName}" updated`)
-            } else if (diffResult.diff) {
-              throw new DiffError(diffResult.diff, snapshotName)
+  const runSnapshotsTests = async ({ title, subdir }) =>
+    test.group(title, () => {
+      for (const environment of environments) {
+        test(`generate manifests for env: ${environment}`, async (end) => {
+          await nctx.fork(async () => {
+            const ctxConfig = await loadConfig(opts, [], {
+              environment,
+              gitBranch: "master",
+              gitSha: "0000000000000000000000000000000000000000",
+            })
+            ctx.set("config", ctxConfig)
+            const loggerChild = logger.child({})
+            loggerChild.level = pino.levels.values.error
+            ctx.set("logger", loggerChild)
+            const { manifests } = await build(opts)
+            const snapshotName = `manifests.${environment}.yaml`
+            try {
+              const diffResult = await snapshotDiff(manifests, snapshotName, {
+                ...snapConfig,
+                ...(subdir
+                  ? {
+                      snapshotsDir: `${snapConfig.snapshotsDir}/${subdir}`,
+                    }
+                  : {}),
+              })
+              if (diffResult.created) {
+                console.log(`snapshot "${snapshotName}" created`)
+              } else if (diffResult.updated) {
+                console.log(`snapshot "${snapshotName}" updated`)
+              } else if (diffResult.diff) {
+                throw new DiffError(diffResult.diff, snapshotName)
+              }
+              end()
+            } catch (err) {
+              end(err)
             }
-            end()
-          } catch (err) {
-            end(err)
-          }
-        }, [ctx])
-      })
-    }
-  })
+          }, [ctx])
+        })
+      }
+    })
+
+  if (config.chart) {
+    await runSnapshotsTests({
+      title: `snapshots for charts: ${config.chart.join(",")}`,
+      subdir: config.chart.join("+"),
+    })
+  } else {
+    await runSnapshotsTests({
+      title: "snapshots",
+    })
+  }
+
   const results = await test.run()
   reporter(results)
   if (results.errors.length > 0) {
