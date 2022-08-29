@@ -427,12 +427,11 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
 
           let remoteExists
           try {
-            const protocol = deployKeyFile ? "ssh" : "https"
+            const repoUrl = deployKeyFile
+              ? normalizeRepositoryUrl(gitRepositoryUrl, "ssh")
+              : gitRepositoryUrl
             await asyncShell(
-              `git ls-remote --exit-code --heads ${normalizeRepositoryUrl(
-                gitRepositoryUrl,
-                protocol
-              )} ${gitBranch}`,
+              `git ls-remote --exit-code --heads ${repoUrl} ${gitBranch}`,
               { env: procEnv }
             )
             remoteExists = true
