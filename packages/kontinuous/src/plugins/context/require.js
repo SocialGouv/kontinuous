@@ -55,7 +55,11 @@ module.exports = (type, context) => {
         }
       } catch (error) {
         context.logger.error(
-          { error: error.toString(), ...(error.data || {}) },
+          {
+            error: error.toString(),
+            ...(error.data || {}),
+            errorStack: error.stack,
+          },
           `plugin error`
         )
         throw error
