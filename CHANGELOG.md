@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.61.0](https://github.com/SocialGouv/kontinuous/compare/v1.60.7...v1.61.0) (2022-08-29)
+
+
+### Features
+
+* test with chart option ([4f3d2a7](https://github.com/SocialGouv/kontinuous/commit/4f3d2a7c0fa5981f1aa0cbf442d1bd1f26042395))
+
 ### [1.60.7](https://github.com/SocialGouv/kontinuous/compare/v1.60.6...v1.60.7) (2022-08-29)
 
 
