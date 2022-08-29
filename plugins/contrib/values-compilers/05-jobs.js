@@ -171,8 +171,8 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
 
     run.jobName = slug([
       "job",
-      repositoryName,
-      [gitBranch, 30],
+      [repositoryName, 24],
+      [gitBranch, 16],
       currentScope.join("--"),
     ])
 
