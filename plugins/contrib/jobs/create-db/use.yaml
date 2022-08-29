@@ -47,5 +47,5 @@ runs:
             key: PGPORT
             name: "{{ tpl (or $.with.pgSecretName $.Values.global.pgSecretName) . }}"
       - name: NEW_DB_EXTENSIONS
-        value: "hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent"
+        value: "{{ if kindIs "invalid" $.with.extensions }}hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent{{ else }}{{ tpl $.with.extensions . }}{{ end }}"
     run: /action/ensure-db.sh
