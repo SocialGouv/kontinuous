@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.60.5](https://github.com/SocialGouv/kontinuous/compare/v1.60.4...v1.60.5) (2022-08-29)
+
+
+### Bug Fixes
+
+* pg extensions as var typo ([324732a](https://github.com/SocialGouv/kontinuous/commit/324732aa46a168f45d6d7496a458359e81e82945))
+
 ### [1.60.4](https://github.com/SocialGouv/kontinuous/compare/v1.60.3...v1.60.4) (2022-08-29)
 
 
