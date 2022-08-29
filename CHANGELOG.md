@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.60.2](https://github.com/SocialGouv/kontinuous/compare/v1.60.1...v1.60.2) (2022-08-29)
+
+
+### Bug Fixes
+
+* kapp optoutable kind ([d581a4e](https://github.com/SocialGouv/kontinuous/commit/d581a4e44fe31903b1ffe0e1874283d6e51e2f70))
+* reduce image size ([1371d68](https://github.com/SocialGouv/kontinuous/commit/1371d68d3dca702cb1d28e31b794ed6090d49136))
+* reduce image size ([3c343a8](https://github.com/SocialGouv/kontinuous/commit/3c343a8f483a7aff86e361414e322a47ee0be417))
+
 ### [1.60.1](https://github.com/SocialGouv/kontinuous/compare/v1.60.0...v1.60.1) (2022-08-27)
 
 
