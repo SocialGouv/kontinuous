@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.60.6](https://github.com/SocialGouv/kontinuous/compare/v1.60.5...v1.60.6) (2022-08-29)
+
+
+### Bug Fixes
+
+* charts location ([61f9953](https://github.com/SocialGouv/kontinuous/commit/61f9953f02a05bef3dac468affeb397f82d62aef))
+* explicit chart sub dependencies ([5e06999](https://github.com/SocialGouv/kontinuous/commit/5e06999e4ec53c884740b4c7ed649577c8db812a))
+* improve debugging ([0314879](https://github.com/SocialGouv/kontinuous/commit/0314879831fc140eb1ebadb264fb6863e8fa9a57))
+* kontinuous-plugin-error class ([5ae9bfe](https://github.com/SocialGouv/kontinuous/commit/5ae9bfee88deadd6f8581bf44cc86d10f0755075))
+* no implicit helm condition ([eb4f2be](https://github.com/SocialGouv/kontinuous/commit/eb4f2be4ee09e9f6b8a431a9a2f8a612f53ebe76))
+
 ### [1.60.5](https://github.com/SocialGouv/kontinuous/compare/v1.60.4...v1.60.5) (2022-08-29)
 
 
