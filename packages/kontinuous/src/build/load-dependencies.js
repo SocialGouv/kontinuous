@@ -70,8 +70,11 @@ const registerSubcharts = async (
     } else {
       chart.dependencies.push(dependency)
     }
-    if (subchart.type !== "library" && !dependency.condition) {
-      dependency.condition = `${dependency.alias || dependency.name}.enabled`
+    if (dependency.condition && dependency.alias !== dependency.name) {
+      dependency.condition = dependency.condition.replaceAll(
+        `${dependency.name}.enabled`,
+        `${dependency.alias}.enabled`
+      )
     }
   }
 }
@@ -83,12 +86,6 @@ const buildChartFile = async (target, name, definition = {}) => {
     const extendChart = yaml.load(await fs.readFile(chartFile))
     Object.assign(chart, extendChart)
     chart.name = name
-    for (const dep of chart.dependencies) {
-      if (dep.condition) {
-        continue
-      }
-      dep.condition = `${dep.alias || dep.name}.enabled`
-    }
   }
 
   await registerSubcharts(chart, "charts", target, definition)
@@ -475,7 +472,14 @@ const writeChartsAlias = async (chartsAliasMap, config) => {
       chart.dependencies.push({
         ...aliasOf,
         alias,
-        condition: `${alias}.enabled`,
+        ...(aliasOf.condition
+          ? {
+              condition: aliasOf.condition.replaceAll(
+                `${aliasOf.name}.enabled`,
+                `${alias}.enabled`
+              ),
+            }
+          : {}),
       })
     }
     await fs.writeFile(chartFile, yaml.dump(chart))
