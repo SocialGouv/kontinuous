@@ -1,5 +1,6 @@
 const MAX_DNS_LENGTH = 63
-module.exports = (manifests) => {
+module.exports = (manifests, _options, { utils }) => {
+  const { KontinuousPluginError } = utils
   for (const manifest of manifests) {
     if (manifest.kind !== "Ingress") {
       continue
@@ -9,7 +10,7 @@ module.exports = (manifests) => {
       const domainParts = host.split(".")
       for (const subdomain of domainParts) {
         if (subdomain.length > MAX_DNS_LENGTH) {
-          throw new Error(
+          throw new KontinuousPluginError(
             `subdomain dns max length reached ${subdomain.length}/${MAX_DNS_LENGTH} for subdomain ${subdomain} in host ${host}`
           )
         }

@@ -67,7 +67,7 @@ const removeDependentsOf = (
 
 module.exports = async (manifests, _options, context) => {
   const { config, utils } = context
-  const { yaml } = utils
+  const { yaml, KontinuousPluginError } = utils
   const { changedPaths } = config
 
   const removeManifests = new Set()
@@ -119,7 +119,7 @@ module.exports = async (manifests, _options, context) => {
         if (!onChangedNeeds) {
           break
         }
-        throw new Error(
+        throw new KontinuousPluginError(
           `unexpected value "${onChangedNeeds}" for "onChangedNeeds", expected one of: "unbind","cascade"`
         )
       }

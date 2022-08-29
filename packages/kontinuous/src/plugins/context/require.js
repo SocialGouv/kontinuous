@@ -2,6 +2,7 @@ require("~/ts-node")
 
 const path = require("path")
 
+const KontinuousPluginError = require("~common/utils/kontinuous-plugin-error.class")
 const configDependencyKey = require("./config-dependency-key")
 
 function requireTs(filePath) {
@@ -58,7 +59,9 @@ module.exports = (type, context) => {
           {
             error: error.toString(),
             ...(error.data || {}),
-            errorStack: error.stack,
+            ...(error instanceof KontinuousPluginError
+              ? {}
+              : { errorStack: error.stack }),
           },
           `plugin error`
         )

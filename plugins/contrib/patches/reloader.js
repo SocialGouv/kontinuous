@@ -1,9 +1,10 @@
 const deploymentModeEnum = [false, "auto", "search"]
 
-module.exports = (manifests, options) => {
+module.exports = (manifests, options, { utils }) => {
+  const { KontinuousPluginError } = utils
   const { deploymentMode = "auto" } = options
   if (!deploymentModeEnum.includes(deploymentMode)) {
-    throw new Error(
+    throw new KontinuousPluginError(
       `unexpected option deployment mode "${deploymentMode}", expected one of ${JSON.stringify(
         deploymentModeEnum
       )}`

@@ -1,4 +1,5 @@
-module.exports = async (manifests, _options, _context) => {
+module.exports = async (manifests, _options, { utils }) => {
+  const { KontinuousPluginError } = utils
   const errors = []
   for (const manifest of manifests) {
     if (manifest.kind === "Secret") {
@@ -9,6 +10,8 @@ module.exports = async (manifests, _options, _context) => {
   }
 
   if (errors.length > 0) {
-    throw new Error(`Following errors occurred: ${errors.join("\n")}`)
+    throw new KontinuousPluginError(
+      `Following errors occurred: ${errors.join("\n")}`
+    )
   }
 }

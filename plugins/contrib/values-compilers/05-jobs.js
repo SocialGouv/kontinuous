@@ -54,12 +54,23 @@ const requireUse = async (
   { config, logger, downloadingPromises, utils }
 ) => {
   let { use } = run
-  const { slug, degitImproved, ignoreYarnState, normalizeDegitUri } = utils
+
+  const {
+    slug,
+    degitImproved,
+    ignoreYarnState,
+    normalizeDegitUri,
+    KontinuousPluginError,
+  } = utils
+
   const { buildPath, workspacePath } = config
+
   const useSlug = slug(use)
   use = normalizeDegitUri(use)
+
   let target = `${buildPath}/uses/${useSlug}`
   const { links = {} } = config
+
   if (!downloadingPromises[useSlug]) {
     downloadingPromises[useSlug] = (async () => {
       if (use.startsWith(".") || use.startsWith("/")) {
@@ -75,7 +86,9 @@ const requireUse = async (
           config
         )
         if (!found) {
-          throw new Error(`job "${use}" not found in repo dependencies`)
+          throw new KontinuousPluginError(
+            `job "${use}" not found in repo dependencies`
+          )
         }
         use = found.use
         run.use = found.use

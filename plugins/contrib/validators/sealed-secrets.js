@@ -2,7 +2,7 @@ const retry = require("async-retry")
 
 module.exports = async (manifests, options, context) => {
   const { logger, utils } = context
-  const { handleAxiosError, axiosRetry: axios } = utils
+  const { handleAxiosError, axiosRetry: axios, KontinuousPluginError } = utils
 
   let { kubesealEndpoint } = options
 
@@ -15,7 +15,9 @@ module.exports = async (manifests, options, context) => {
     }
   }
   if (!kubesealEndpoint) {
-    throw new Error(`missing "kubesealEndpoint" required option`)
+    throw new KontinuousPluginError(
+      `missing "kubesealEndpoint" required option`
+    )
   }
   const endpoint = `${kubesealEndpoint}/v1/verify`
 
@@ -46,7 +48,7 @@ module.exports = async (manifests, options, context) => {
                 { endpoint },
                 `kubeseal verify endpoint rate limit exceeded, trying`
               )
-              throw new Error("rate limit exceeded")
+              throw new KontinuousPluginError("rate limit exceeded")
             }
             bail(err)
           }
@@ -95,6 +97,8 @@ module.exports = async (manifests, options, context) => {
     })
 
   if (errors.length > 0) {
-    throw new Error(`Following errors occurred: ${errors.join("\n")}`)
+    throw new KontinuousPluginError(
+      `Following errors occurred: ${errors.join("\n")}`
+    )
   }
 }
