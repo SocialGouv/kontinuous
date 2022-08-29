@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.60.3](https://github.com/SocialGouv/kontinuous/compare/v1.60.2...v1.60.3) (2022-08-29)
+
+
+### Bug Fixes
+
+* createRancherNamespace option for job ([8c0eb25](https://github.com/SocialGouv/kontinuous/commit/8c0eb25917b4687ad778acb61319395677570362))
+
 ### [1.60.2](https://github.com/SocialGouv/kontinuous/compare/v1.60.1...v1.60.2) (2022-08-29)
 
 
