@@ -151,6 +151,27 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
       run.with = {}
     }
 
+    if (!run.labels) {
+      run.labels = {}
+    }
+    Object.assign(run.labels, {
+      repository: repositoryName,
+      ref: slug(gitBranch),
+      env: config.env,
+      ...(run.use ? {} : {}),
+    })
+    run.labels.runName = run.use
+      ? slug(
+          run.use
+            .replace("@", "#")
+            .split("#")
+            .shift()
+            .split("/")
+            .pop()
+            .replace("~", "")
+        )
+      : "custom"
+
     const scope = [...parentScope, run.name]
     run.scope = scope
     const scopes = []
