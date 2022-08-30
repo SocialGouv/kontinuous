@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.62.1](https://github.com/SocialGouv/kontinuous/compare/v1.62.0...v1.62.1) (2022-08-30)
+
+
+### Bug Fixes
+
+* job label environment ([85a378d](https://github.com/SocialGouv/kontinuous/commit/85a378d631923d8d38dc6a2f509a6884fec4b030))
+
 ## [1.62.0](https://github.com/SocialGouv/kontinuous/compare/v1.61.2...v1.62.0) (2022-08-30)
 
 
