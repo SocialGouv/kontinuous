@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.63.0](https://github.com/SocialGouv/kontinuous/compare/v1.62.1...v1.63.0) (2022-08-30)
+
+
+### Features
+
+* tpl meta values ([b57c2c3](https://github.com/SocialGouv/kontinuous/commit/b57c2c3766b9b9ba5d31c87a423f4e60c1c90a19))
+
+
+### Bug Fixes
+
+* ignore .snapshots on copy ks path ([555a8da](https://github.com/SocialGouv/kontinuous/commit/555a8da2cd5ef2a3a9a0dc15eefa3caa2c8809cc))
+
 ### [1.62.1](https://github.com/SocialGouv/kontinuous/compare/v1.62.0...v1.62.1) (2022-08-30)
 
 
