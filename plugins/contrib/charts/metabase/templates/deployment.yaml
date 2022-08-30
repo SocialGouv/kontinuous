@@ -18,7 +18,7 @@ spec:
         component: {{ or .Values.component .Chart.Name }}
     spec:
       containers:
-        - image: metabase/metabase:v0.43.4
+        - image: metabase/metabase:v0.44.0
           name: metabase
           env:
             {{- if gt (len .Values.env) 0 }}
