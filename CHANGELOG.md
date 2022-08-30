@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.62.0](https://github.com/SocialGouv/kontinuous/compare/v1.61.2...v1.62.0) (2022-08-30)
+
+
+### Features
+
+* add jobs labels ([9391926](https://github.com/SocialGouv/kontinuous/commit/93919269aa8a6277820a139fad9b09b2e843f28c))
+
 ### 1.61.2 (2022-08-30)
 
 
