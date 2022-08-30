@@ -207,7 +207,7 @@ spec:
         component: metabase-app1
     spec:
       containers:
-        - image: metabase/metabase:v0.43.4
+        - image: metabase/metabase:v0.44.0
           name: metabase
           envFrom:
             - configMapRef:
@@ -282,7 +282,7 @@ spec:
         component: metabase-app2
     spec:
       containers:
-        - image: metabase/metabase:v0.43.4
+        - image: metabase/metabase:v0.44.0
           name: metabase
           envFrom:
             - configMapRef:
