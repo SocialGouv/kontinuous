@@ -1,6 +1,6 @@
 apiVersion: v2
 name: deactivate
-version: 1.61.1
+version: 1.61.2
 dependencies:
   - name: jobs
     repository: file://../jobs

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.61.2 (2022-08-30)
+
+
+### Bug Fixes
+
+* **metabase:** upgrade to 0.44 ([#27](https://github.com/SocialGouv/kontinuous/issues/27)) ([c40c993](https://github.com/SocialGouv/kontinuous/commit/c40c993e37bfdf2b0106bcc7ad687a3d6cca013d))
+
 ### [1.61.1](https://github.com/SocialGouv/kontinuous/compare/v1.61.0...v1.61.1) (2022-08-29)
 
 
