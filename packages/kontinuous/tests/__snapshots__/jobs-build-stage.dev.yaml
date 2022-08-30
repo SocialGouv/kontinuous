@@ -302,7 +302,12 @@ spec:
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
-    metadata: {}
+    metadata:
+      labels:
+        environment: dev
+        ref: feature-branch-1
+        repository: test-jobs-build-stage
+        runName: create-db
     spec:
       restartPolicy: Never
       initContainers:
@@ -409,7 +414,12 @@ spec:
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
-    metadata: {}
+    metadata:
+      labels:
+        environment: dev
+        ref: feature-branch-1
+        repository: test-jobs-build-stage
+        runName: create-db
     spec:
       restartPolicy: Never
       initContainers:
@@ -505,7 +515,12 @@ spec:
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
-    metadata: {}
+    metadata:
+      labels:
+        environment: dev
+        ref: feature-branch-1
+        repository: test-jobs-build-stage
+        runName: build
     spec:
       restartPolicy: Never
       initContainers:
@@ -610,7 +625,12 @@ spec:
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
-    metadata: {}
+    metadata:
+      labels:
+        environment: dev
+        ref: feature-branch-1
+        repository: test-jobs-build-stage
+        runName: build
     spec:
       restartPolicy: Never
       initContainers:

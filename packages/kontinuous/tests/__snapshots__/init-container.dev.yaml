@@ -185,7 +185,12 @@ spec:
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
-    metadata: {}
+    metadata:
+      labels:
+        environment: dev
+        ref: feature-branch-1
+        repository: test-init-container
+        runName: custom
     spec:
       restartPolicy: Never
       initContainers:
