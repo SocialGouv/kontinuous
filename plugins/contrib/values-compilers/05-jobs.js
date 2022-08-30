@@ -157,7 +157,7 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
     Object.assign(run.labels, {
       repository: repositoryName,
       ref: slug(gitBranch),
-      env: config.env,
+      environment: config.environment,
       ...(run.use ? {} : {}),
     })
     run.labels.runName = run.use
