@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.63.2](https://github.com/SocialGouv/kontinuous/compare/v1.63.1...v1.63.2) (2022-08-31)
+
+
+### Bug Fixes
+
+* no need of tilde to locate job when no slash ([0c33101](https://github.com/SocialGouv/kontinuous/commit/0c331013ef081c8d8f38128040da97c129ea4298))
+* up snapshots ([dc08567](https://github.com/SocialGouv/kontinuous/commit/dc08567fb60721b93396786db2fde04f11237382))
+
 ### [1.63.1](https://github.com/SocialGouv/kontinuous/compare/v1.63.0...v1.63.1) (2022-08-30)
 
 
