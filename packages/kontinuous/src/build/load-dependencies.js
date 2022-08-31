@@ -312,11 +312,9 @@ const buildJsFile = async (target, type, definition) => {
     processors.push(req)
   }
 
-  const jsSrc = `const processors = [${processors
+  const jsSrc = `module.exports = [${processors
     .map((p) => JSON.stringify(p))
-    .join(",")}]
-module.exports = ${pluginFunction().toString()}
-`
+    .join(",")}]`
   await fs.ensureDir(path.dirname(jsFile))
   await fs.writeFile(jsFile, jsSrc)
 }
@@ -647,10 +645,10 @@ const compileValues = async (config, logger) => {
 
   const valuesJsFile = `${buildProjectPath}/values.js`
   if (await fs.pathExists(valuesJsFile)) {
-    values = await require(valuesJsFile)(values, {}, context)
+    values = await pluginFunction(valuesJsFile)(values, {}, context)
   }
 
-  values = await require(`${buildProjectPath}/values-compilers`)(
+  values = await pluginFunction(`${buildProjectPath}/values-compilers`)(
     values,
     {},
     context
@@ -658,7 +656,7 @@ const compileValues = async (config, logger) => {
 
   const valuesFinalJsFile = `${buildProjectPath}/values.final.js`
   if (await fs.pathExists(valuesFinalJsFile)) {
-    values = await require(valuesFinalJsFile)(values, {}, context)
+    values = await pluginFunction(valuesFinalJsFile)(values, {}, context)
   }
 
   await writeChartsAlias(chartsAliasMap, config)

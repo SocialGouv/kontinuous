@@ -3,6 +3,7 @@ const fs = require("fs-extra")
 const ctx = require("~common/ctx")
 
 const createContext = require("~/plugins/context")
+const pluginFunction = require("~/plugins/context/function")
 
 module.exports = async (manifests, step) => {
   const config = ctx.require("config")
@@ -11,6 +12,6 @@ module.exports = async (manifests, step) => {
   const { buildProjectPath } = config
   const requirePath = `${buildProjectPath}/${type}`
   if (await fs.pathExists(requirePath)) {
-    await require(requirePath)(manifests, {}, context)
+    await pluginFunction(requirePath)(manifests, {}, context)
   }
 }

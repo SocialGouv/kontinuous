@@ -14,12 +14,13 @@ module.exports = ({ scope, inc, type, config }) => {
     inc = inc.slice(0, inc.length - ext.length)
   }
 
+  scope = scope.slice(1)
+  inc = inc.split("/").pop()
+
   if (/^[0-9]*-/.test(inc)) {
     inc = inc.slice(inc.indexOf("-") + 1)
   }
 
-  scope = scope.slice(1)
-  inc = inc.split("/").pop()
   dotInc = [...scope]
   if (inc !== type) {
     dotInc.push(type)

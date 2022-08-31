@@ -23,12 +23,15 @@ module.exports = (type, context) => {
       type,
       config,
     })
-    const rPath = path.join(
-      config.buildPath,
-      ...parentScope.map((s) => `charts/${s}`),
-      type,
-      inc
-    )
+
+    const rPath = inc.startsWith("/")
+      ? inc
+      : path.join(
+          config.buildPath,
+          ...parentScope.map((s) => `charts/${s}`),
+          type,
+          inc
+        )
 
     const ext = path.extname(inc)
 
