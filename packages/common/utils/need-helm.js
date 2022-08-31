@@ -21,10 +21,12 @@ const download = async (options) => {
     default:
   }
   let platform = os.platform()
+  let ext = ""
   switch (platform) {
     case "darwin":
       break
     case "windows":
+      ext = ".exe"
       break
     case "linux":
       break
@@ -46,7 +48,7 @@ const download = async (options) => {
   const { addPath } = options
   await decompress(zfile, cachePath)
   const unzippedDir = `${cachePath}/${platform}-${arch}`
-  const unzippedHelm = `${unzippedDir}/helm`
+  const unzippedHelm = `${unzippedDir}/helm${ext}`
   await fs.move(unzippedHelm, `${addPath}/helm`)
   await fs.remove(unzippedDir)
 }

@@ -18,10 +18,12 @@ const download = async (options) => {
     default:
   }
   let platform = os.platform()
+  let ext = ""
   switch (platform) {
     case "darwin":
       break
     case "windows":
+      ext = ".exe"
       break
     case "linux":
       break
@@ -31,7 +33,7 @@ const download = async (options) => {
 
   const { addPath } = options
 
-  const downloadUrl = `https://github.com/vmware-tanzu/carvel-kapp/releases/download/${kappVersion}/kapp-${platform}-${arch}`
+  const downloadUrl = `https://github.com/vmware-tanzu/carvel-kapp/releases/download/${kappVersion}/kapp-${platform}-${arch}${ext}`
   logger.info(`download ${downloadUrl}`)
   const dest = `${addPath}/kapp`
   await downloadFile(downloadUrl, dest, logger)
