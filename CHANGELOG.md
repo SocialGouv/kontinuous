@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.64.0](https://github.com/SocialGouv/kontinuous/compare/v1.63.2...v1.64.0) (2022-08-31)
+
+
+### Features
+
+* allow array of plugins exported by index ([b3d57e6](https://github.com/SocialGouv/kontinuous/commit/b3d57e68a0375771af300a42b04fb622a6d4fe24))
+
+
+### Bug Fixes
+
+* ordrered with defaults before tpl ([dec4841](https://github.com/SocialGouv/kontinuous/commit/dec4841eddea451a0687446191f39b6c113a56e5))
+* plugin function stringify ([2432a5d](https://github.com/SocialGouv/kontinuous/commit/2432a5d3162a9b77c709b639b5c3d89b00e0c246))
+* silent yarn install ([4ec54bc](https://github.com/SocialGouv/kontinuous/commit/4ec54bcf9af9766089b463eff3d2b14e3b9d1ddd))
+
 ### [1.63.2](https://github.com/SocialGouv/kontinuous/compare/v1.63.1...v1.63.2) (2022-08-31)
 
 
