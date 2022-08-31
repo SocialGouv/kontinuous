@@ -3,7 +3,9 @@ require("~/ts-node")
 const path = require("path")
 
 const KontinuousPluginError = require("~common/utils/kontinuous-plugin-error.class")
+
 const configDependencyKey = require("./config-dependency-key")
+const pluginFunction = require("./function")
 
 function requireTs(filePath) {
   const result = require(filePath)
@@ -47,7 +49,11 @@ module.exports = (type, context) => {
         requireFunc = (r) => require(r)
       }
 
-      const plugin = requireFunc(rPath)
+      let plugin = requireFunc(rPath)
+
+      if (Array.isArray(plugin)) {
+        plugin = pluginFunction(plugin)
+      }
 
       try {
         const result = await plugin(data, pluginOptions, context, scope)
