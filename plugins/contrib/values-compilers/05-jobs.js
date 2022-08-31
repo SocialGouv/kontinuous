@@ -79,9 +79,9 @@ const requireUse = async (
         await fs.copy(src, target, {
           filter: ignoreYarnState,
         })
-      } else if (use.startsWith("~")) {
+      } else if (use.startsWith("~") || !use.includes("/")) {
         const found = await recurseLocate(
-          use.slice(1),
+          use.startsWith("~") ? use.slice(1) : use,
           config.dependencies,
           config
         )
