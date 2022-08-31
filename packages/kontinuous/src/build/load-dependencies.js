@@ -23,6 +23,7 @@ const recurseDependency = require("~common/config/recurse-dependencies")
 const copyFilter = require("~common/config/copy-filter")
 const createContext = require("~/plugins/context")
 const configDependencyKey = require("~/plugins/context/config-dependency-key")
+const pluginFunction = require("~/plugins/context/function")
 
 const registerSubcharts = async (
   chart,
@@ -314,12 +315,7 @@ const buildJsFile = async (target, type, definition) => {
   const jsSrc = `const processors = [${processors
     .map((p) => JSON.stringify(p))
     .join(",")}]
-module.exports = async (data, _options, context, scope)=>{
-  for(const inc of processors){
-    data = await context.require(inc, scope)(data)
-  }
-  return data
-}
+module.exports = ${pluginFunction().toString()}
 `
   await fs.ensureDir(path.dirname(jsFile))
   await fs.writeFile(jsFile, jsSrc)
