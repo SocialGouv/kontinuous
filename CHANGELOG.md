@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.64.1](https://github.com/SocialGouv/kontinuous/compare/v1.64.0...v1.64.1) (2022-08-31)
+
+
+### Bug Fixes
+
+* clean --silent ([5c8c8a5](https://github.com/SocialGouv/kontinuous/commit/5c8c8a5b0ac92576e01a110b43d85f9f6d62b172))
+* refacto plugin generated code ([7c58c3a](https://github.com/SocialGouv/kontinuous/commit/7c58c3ac080f2747f9130fe36e3fb0454664352d))
+
 ## [1.64.0](https://github.com/SocialGouv/kontinuous/compare/v1.63.2...v1.64.0) (2022-08-31)
 
 
