@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.65.0](https://github.com/SocialGouv/kontinuous/compare/v1.64.1...v1.65.0) (2022-09-01)
+
+
+### Features
+
+* add need-rollout-status ([67918a7](https://github.com/SocialGouv/kontinuous/commit/67918a7522ebb6dbf37a0ec30b281d47dcb810e0))
+* clear on pre-deploy ([ecfe3a2](https://github.com/SocialGouv/kontinuous/commit/ecfe3a2e8f4812054625ca144b735e8ee55a693e))
+
+
+### Bug Fixes
+
+* windows ext ([7322d46](https://github.com/SocialGouv/kontinuous/commit/7322d461be2db6fec74dfdd44a440093523d84de))
+
 ### [1.64.1](https://github.com/SocialGouv/kontinuous/compare/v1.64.0...v1.64.1) (2022-08-31)
 
 
