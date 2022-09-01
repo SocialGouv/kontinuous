@@ -21,3 +21,5 @@ validators:
 preDeploy:
   rancherNamespaces:
     enabled: false
+  clear:
+    enabled: false

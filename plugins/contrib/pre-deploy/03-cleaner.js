@@ -1,26 +1,4 @@
-const path = require("path")
-const { mkdtemp } = require("fs/promises")
-
-const fs = require("fs-extra")
-
 const matchAnnotation = "kontinuous/plugin.preDeploy.cleaner"
-
-const cleanResource = async (manifest, { config, utils }) => {
-  const { buildPath } = config
-  const { kubectlRetry, yaml } = utils
-  const { kubeconfig, kubeconfigContext } = config
-  const dir = await mkdtemp(path.join(buildPath, "tmp-"))
-  const file = `${dir}/clean-resource.yaml`
-  await fs.writeFile(file, yaml.dump(manifest))
-  await kubectlRetry(
-    `${
-      kubeconfigContext ? `--context ${kubeconfigContext}` : ""
-    } delete --ignore-not-found=true -f ${file}`,
-    {
-      kubeconfig,
-    }
-  )
-}
 
 module.exports = async (
   manifests,
@@ -28,6 +6,13 @@ module.exports = async (
   { utils, config, logger, needBin }
 ) => {
   await needBin(utils.needKubectl)
+
+  const { kubectlDeleteManifest } = utils
+  const kubectlDeleteManifestOptions = {
+    rootDir: config.buildPath,
+    kubeconfig: config.kubeconfig,
+    kubeconfigContext: config.kubeconfigContext,
+  }
 
   const promises = []
   for (const manifest of manifests) {
@@ -46,7 +31,7 @@ module.exports = async (
     }
     logger.debug({ kind, name, namespace }, "clean resource")
 
-    promises.push(cleanResource(manifest, { config, utils }))
+    promises.push(kubectlDeleteManifest(manifest, kubectlDeleteManifestOptions))
   }
 
   if (promises.length === 0) {
