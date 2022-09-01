@@ -15,6 +15,10 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/change-group: kontinuous/test-standalone-charts-feature-branch-1
     kapp.k14s.io/change-group.job-extra: kontinuous/job-extra.test-standalone-charts-feature-branch-1
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600

@@ -14,6 +14,9 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
   labels:
     application: test-app-simple
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: test-app-simple
 ---
 apiVersion: networking.k8s.io/v1
@@ -26,6 +29,10 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kapp.k14s.io/disable-original: ''
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -52,6 +59,10 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
   namespace: test-app-simple
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -60,6 +71,9 @@ metadata:
   labels:
     component: app
     application: test-app-simple
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app
   namespace: test-app-simple
   annotations:
@@ -83,6 +97,9 @@ metadata:
   labels:
     component: app
     application: test-app-simple
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app
   namespace: test-app-simple
   annotations:
@@ -172,6 +189,9 @@ metadata:
   labels:
     component: app
     application: test-app-simple
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app
   namespace: test-app-simple
 spec:
@@ -211,5 +231,9 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 "
 `;

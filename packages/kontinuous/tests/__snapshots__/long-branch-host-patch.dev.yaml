@@ -16,6 +16,9 @@ metadata:
   labels:
     application: test-long-branch-host-patch
     cert: wildcard
+    kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
 ---
 apiVersion: networking.k8s.io/v1
@@ -28,6 +31,10 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kapp.k14s.io/disable-original: ''
+  labels:
+    kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -54,6 +61,10 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
   namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
+  labels:
+    kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -62,6 +73,9 @@ metadata:
   labels:
     component: app
     application: test-long-branch-host-patch
+    kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app
   namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
   annotations:
@@ -85,6 +99,9 @@ metadata:
   labels:
     component: app
     application: test-long-branch-host-patch
+    kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app
   namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
   annotations:
@@ -174,6 +191,9 @@ metadata:
   labels:
     component: app
     application: test-long-branch-host-patch
+    kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app
   namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
 spec:
@@ -215,5 +235,9 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
+  labels:
+    kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 "
 `;

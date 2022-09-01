@@ -16,6 +16,9 @@ metadata:
   labels:
     application: test-post-renderer
     cert: wildcard
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
     foo: bar
   name: test-post-renderer-feature-branch-1
 ---
@@ -29,6 +32,10 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kapp.k14s.io/disable-original: ''
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -55,6 +62,10 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
   namespace: test-post-renderer-feature-branch-1
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -63,6 +74,9 @@ metadata:
   labels:
     component: app
     application: test-post-renderer
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app
   namespace: test-post-renderer-feature-branch-1
   annotations:
@@ -86,6 +100,9 @@ metadata:
   labels:
     component: app
     application: test-post-renderer
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app
   namespace: test-post-renderer-feature-branch-1
   annotations:
@@ -173,6 +190,9 @@ metadata:
   labels:
     component: app
     application: test-post-renderer
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app
   namespace: test-post-renderer-feature-branch-1
 spec:
@@ -212,5 +232,9 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 "
 `;

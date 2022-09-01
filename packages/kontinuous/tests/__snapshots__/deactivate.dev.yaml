@@ -20,6 +20,10 @@ metadata:
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/change-group.jobs-deactivate: kontinuous/jobs-deactivate.test-deactivate-feature-branch-1
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600

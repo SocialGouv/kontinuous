@@ -15,6 +15,9 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
   labels:
     application: test-charts
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: test-charts-feature-branch-1
 ---
 apiVersion: networking.k8s.io/v1
@@ -27,6 +30,10 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kapp.k14s.io/disable-original: ''
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -53,6 +60,10 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
   namespace: test-charts-feature-branch-1
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -64,6 +75,10 @@ metadata:
     kontinuous/source: project/charts/job-extra/templates/sa.yaml
     kapp.k14s.io/disable-original: ''
   namespace: test-charts-feature-branch-1
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 automountServiceAccountToken: false
 ---
 apiVersion: batch/v1
@@ -80,6 +95,10 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/change-group: kontinuous/test-charts-feature-branch-1
     kapp.k14s.io/change-group.job-extra: kontinuous/job-extra.test-charts-feature-branch-1
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -120,5 +139,9 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 "
 `;

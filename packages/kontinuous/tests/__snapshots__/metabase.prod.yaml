@@ -14,6 +14,9 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
   labels:
     application: test-metabase
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: test-metabase
 ---
 apiVersion: networking.k8s.io/v1
@@ -26,6 +29,10 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kapp.k14s.io/disable-original: ''
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -52,6 +59,10 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
   namespace: test-metabase
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -60,6 +71,9 @@ metadata:
   labels:
     component: metabase-app1
     application: test-metabase
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: metabase-app1
   namespace: test-metabase
   annotations:
@@ -86,6 +100,9 @@ metadata:
   labels:
     component: metabase-app2
     application: test-metabase
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: metabase-app2
   namespace: test-metabase
   annotations:
@@ -115,6 +132,10 @@ metadata:
     kontinuous/source: project/templates/metabase1.configmap.yaml
     kapp.k14s.io/disable-original: ''
   namespace: test-metabase
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 data:
   METABASE_ENV: production
 ---
@@ -127,6 +148,10 @@ metadata:
     kontinuous/source: project/templates/metabase2.configmap.yaml
     kapp.k14s.io/disable-original: ''
   namespace: test-metabase
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 data:
   METABASE_ENV: production
 ---
@@ -136,6 +161,9 @@ metadata:
   labels:
     component: metabase-app1
     application: test-metabase
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: metabase-app1
   namespace: test-metabase
   annotations:
@@ -160,6 +188,9 @@ metadata:
   labels:
     component: metabase-app2
     application: test-metabase
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: metabase-app2
   namespace: test-metabase
   annotations:
@@ -184,6 +215,9 @@ metadata:
   labels:
     component: metabase-app1
     application: test-metabase
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: metabase-app1
   namespace: test-metabase
   annotations:
@@ -259,6 +293,9 @@ metadata:
   labels:
     component: metabase-app2
     application: test-metabase
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: metabase-app2
   namespace: test-metabase
   annotations:
@@ -343,6 +380,9 @@ metadata:
   labels:
     component: metabase-app1
     application: test-metabase
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: metabase-app1
   namespace: test-metabase
 spec:
@@ -377,6 +417,9 @@ metadata:
   labels:
     component: metabase-app2
     application: test-metabase
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: metabase-app2
   namespace: test-metabase
 spec:
@@ -416,6 +459,10 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -426,6 +473,10 @@ metadata:
     kontinuous/source: project/templates/metabase1.sealed-secret.yaml
     kapp.k14s.io/disable-original: ''
   namespace: test-metabase
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 spec:
   encryptedData:
     METABASE_SECRET: >-
@@ -444,6 +495,10 @@ metadata:
     kontinuous/source: project/templates/metabase2.sealed-secret.yaml
     kapp.k14s.io/disable-original: ''
   namespace: test-metabase
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 spec:
   encryptedData:
     METABASE_SECRET: >-

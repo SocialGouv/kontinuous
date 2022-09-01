@@ -15,6 +15,9 @@ metadata:
   labels:
     application: test-sample-1
     cert: wildcard
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: test-sample-1-preprod
 ---
 apiVersion: networking.k8s.io/v1
@@ -27,6 +30,10 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kapp.k14s.io/disable-original: ''
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -53,6 +60,10 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
   namespace: test-sample-1-preprod
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 automountServiceAccountToken: false
 ---
 kind: ConfigMap
@@ -64,6 +75,10 @@ metadata:
     kontinuous/source: project/templates/app.configmap.yaml
     kapp.k14s.io/disable-original: ''
   namespace: test-sample-1-preprod
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 data:
   NODE_ENV: production
   GRAPHQL_ENDPOINT: http://hasura/v1/graphql
@@ -76,6 +91,9 @@ metadata:
   labels:
     component: app-2nd-instance
     application: test-sample-1
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app-2nd-instance
   namespace: test-sample-1-preprod
   annotations:
@@ -100,6 +118,9 @@ metadata:
   labels:
     component: app
     application: test-sample-1
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app
   namespace: test-sample-1-preprod
   annotations:
@@ -123,6 +144,9 @@ metadata:
   labels:
     component: hasura
     application: test-sample-1
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: hasura
   namespace: test-sample-1-preprod
   annotations:
@@ -147,6 +171,9 @@ metadata:
   labels:
     component: pgweb
     application: test-sample-1
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: pgweb
   namespace: test-sample-1-preprod
   annotations:
@@ -170,6 +197,9 @@ metadata:
   labels:
     component: app-2nd-instance
     application: test-sample-1
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app-2nd-instance
   namespace: test-sample-1-preprod
   annotations:
@@ -259,6 +289,9 @@ metadata:
   labels:
     component: app
     application: test-sample-1
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app
   namespace: test-sample-1-preprod
   annotations:
@@ -348,6 +381,9 @@ metadata:
   labels:
     component: hasura
     application: test-sample-1
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: hasura
   namespace: test-sample-1-preprod
   annotations:
@@ -423,6 +459,9 @@ metadata:
   labels:
     component: pgweb
     application: test-sample-1
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: pgweb
   namespace: test-sample-1-preprod
   annotations:
@@ -526,6 +565,9 @@ metadata:
   labels:
     component: app-2nd-instance
     application: test-sample-1
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app-2nd-instance
   namespace: test-sample-1-preprod
 spec:
@@ -567,6 +609,9 @@ metadata:
   labels:
     component: app
     application: test-sample-1
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: app
   namespace: test-sample-1-preprod
 spec:
@@ -598,6 +643,9 @@ metadata:
   labels:
     component: hasura
     application: test-sample-1
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: hasura
   namespace: test-sample-1-preprod
 spec:
@@ -628,6 +676,9 @@ metadata:
   labels:
     component: pgweb
     application: test-sample-1
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
   name: pgweb
   namespace: test-sample-1-preprod
 spec:
@@ -667,6 +718,10 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -678,6 +733,10 @@ metadata:
     kapp.k14s.io/disable-original: ''
   name: hasura-sealed-secret
   namespace: test-sample-1-preprod
+  labels:
+    kontinuous/ref: feature-branch-1
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
 spec:
   encryptedData:
     ACCOUNT_EMAIL_SECRET: >-
