@@ -1,7 +1,7 @@
 ![logo](_media/kontinuous-logo.png)
 
 # Kontinuous
-> Let's deploy to real world  !
+> The Kube to PaaS Framework  !
 
 - GitOPS to Kubernetes 🚀
 - CI/CD as K8S Manifest 🐋
