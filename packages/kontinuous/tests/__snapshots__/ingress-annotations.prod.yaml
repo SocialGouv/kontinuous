@@ -15,6 +15,7 @@ metadata:
   labels:
     application: test-ingress-annotations
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: test-ingress-annotations
@@ -31,6 +32,7 @@ metadata:
     kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 spec:
@@ -61,6 +63,7 @@ metadata:
   namespace: test-ingress-annotations
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: serviceaccount-4nws8p-default
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 automountServiceAccountToken: false
@@ -72,6 +75,7 @@ metadata:
     component: metabase
     application: test-ingress-annotations
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: configmap-e4ces7-metabase
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: metabase
@@ -101,6 +105,7 @@ metadata:
     component: metabase
     application: test-ingress-annotations
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-metabase
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: metabase
@@ -128,6 +133,7 @@ metadata:
     component: metabase
     application: test-ingress-annotations
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: deployment-3d60sq-metabase
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: metabase
@@ -211,6 +217,7 @@ metadata:
     component: metabase
     application: test-ingress-annotations
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: ingress-5dz9oh-metabase
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: metabase
@@ -252,9 +259,5 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
-  labels:
-    kontinuous/ref: feature-branch-1
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
 "
 `;

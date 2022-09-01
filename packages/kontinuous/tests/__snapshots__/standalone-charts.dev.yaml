@@ -17,6 +17,7 @@ metadata:
     kapp.k14s.io/change-group.job-extra: kontinuous/job-extra.test-standalone-charts-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: job-4bkfwz-job-extra
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 spec:

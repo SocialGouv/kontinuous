@@ -15,6 +15,7 @@ metadata:
   labels:
     application: test-metabase
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: test-metabase
@@ -31,6 +32,7 @@ metadata:
     kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 spec:
@@ -61,6 +63,7 @@ metadata:
   namespace: test-metabase
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: serviceaccount-4nws8p-default
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 automountServiceAccountToken: false
@@ -72,6 +75,7 @@ metadata:
     component: metabase-app1
     application: test-metabase
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: configmap-e4ces7-metabase-app1
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: metabase-app1
@@ -101,6 +105,7 @@ metadata:
     component: metabase-app2
     application: test-metabase
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: configmap-e4ces7-metabase-app2
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: metabase-app2
@@ -134,6 +139,7 @@ metadata:
   namespace: test-metabase
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: configmap-e4ces7-metabase1-configmap
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 data:
@@ -150,6 +156,7 @@ metadata:
   namespace: test-metabase
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: configmap-e4ces7-metabase2-configmap
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 data:
@@ -162,6 +169,7 @@ metadata:
     component: metabase-app1
     application: test-metabase
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-metabase-app1
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: metabase-app1
@@ -189,6 +197,7 @@ metadata:
     component: metabase-app2
     application: test-metabase
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-metabase-app2
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: metabase-app2
@@ -216,6 +225,7 @@ metadata:
     component: metabase-app1
     application: test-metabase
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: deployment-3d60sq-metabase-app1
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: metabase-app1
@@ -294,6 +304,7 @@ metadata:
     component: metabase-app2
     application: test-metabase
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: deployment-3d60sq-metabase-app2
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: metabase-app2
@@ -381,6 +392,7 @@ metadata:
     component: metabase-app1
     application: test-metabase
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: ingress-5dz9oh-metabase-app1
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: metabase-app1
@@ -418,6 +430,7 @@ metadata:
     component: metabase-app2
     application: test-metabase
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: ingress-5dz9oh-metabase-app2
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: metabase-app2
@@ -459,10 +472,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
-  labels:
-    kontinuous/ref: feature-branch-1
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -475,6 +484,7 @@ metadata:
   namespace: test-metabase
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: sealedsecret-5ip1a4-metabase1-sealed-secret
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 spec:
@@ -497,6 +507,7 @@ metadata:
   namespace: test-metabase
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: sealedsecret-5ip1a4-metabase2-sealed-secret
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 spec:

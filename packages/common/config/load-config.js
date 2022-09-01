@@ -20,6 +20,7 @@ const asyncShell = require("../utils/async-shell")
 const deepmerge = require("../utils/deepmerge")
 const logger = require("../utils/logger")
 const refEnv = require("../utils/ref-env")
+const slug = require("../utils/slug")
 const normalizeRepositoryUrl = require("../utils/normalize-repository-url")
 
 const gitEnv = require("../utils/git-env")
@@ -156,6 +157,12 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     repositoryName: {
       defaultFunction: (config) => config.gitRepositoryName,
+    },
+    refLabelKey: {
+      default: "kontinuous/ref",
+    },
+    refLabelValue: {
+      defaultFunction: (config) => slug(config.gitBranch),
     },
   }
   const configOverride = {

@@ -16,6 +16,7 @@ metadata:
   labels:
     application: test-include-file
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: test-include-file-feature-branch-1
@@ -32,6 +33,7 @@ metadata:
     kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 spec:
@@ -62,6 +64,7 @@ metadata:
   namespace: test-include-file-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: serviceaccount-4nws8p-default
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 automountServiceAccountToken: false
@@ -84,6 +87,7 @@ metadata:
     kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-include-file-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: job-4bkfwz-job-test-include-file-feature-branch-1-say-hello
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 spec:
@@ -175,9 +179,5 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
-  labels:
-    kontinuous/ref: feature-branch-1
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
 "
 `;

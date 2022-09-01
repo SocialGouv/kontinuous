@@ -22,6 +22,7 @@ metadata:
     kapp.k14s.io/change-group.jobs-deactivate: kontinuous/jobs-deactivate.test-deactivate-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: job-4bkfwz-job-test-deactivate-feature-branch-1-deactiv-56yw37
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 spec:

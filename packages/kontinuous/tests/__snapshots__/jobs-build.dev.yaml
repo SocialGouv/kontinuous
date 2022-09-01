@@ -17,6 +17,7 @@ metadata:
     application: test-jobs-build
     cert: wildcard
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: test-jobs-build-feature-branch-1
@@ -33,6 +34,7 @@ metadata:
     kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 spec:
@@ -63,6 +65,7 @@ metadata:
   namespace: test-jobs-build-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: serviceaccount-4nws8p-default
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 automountServiceAccountToken: false
@@ -74,6 +77,7 @@ metadata:
     component: app
     application: test-jobs-build
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-app
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: app
@@ -100,6 +104,7 @@ metadata:
     component: hasura
     application: test-jobs-build
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-hasura
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: hasura
@@ -127,6 +132,7 @@ metadata:
     component: pgweb
     application: test-jobs-build
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-pgweb
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: pgweb
@@ -153,6 +159,7 @@ metadata:
     component: app
     application: test-jobs-build
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: deployment-3d60sq-app
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: app
@@ -248,6 +255,7 @@ metadata:
     component: hasura
     application: test-jobs-build
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: deployment-3d60sq-hasura
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: hasura
@@ -330,6 +338,7 @@ metadata:
     component: pgweb
     application: test-jobs-build
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: deployment-3d60sq-pgweb
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: pgweb
@@ -436,6 +445,7 @@ metadata:
     kapp.k14s.io/change-group.jobs-dev: kontinuous/jobs-dev.test-jobs-build-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-feature-branch-1-db-crea-4u3jy7
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 spec:
@@ -552,6 +562,7 @@ metadata:
     kapp.k14s.io/change-group.jobs-dev: kontinuous/jobs-dev.test-jobs-build-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-feature-branch-1-db-crea-23ka4q
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 spec:
@@ -656,6 +667,7 @@ metadata:
     kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-jobs-build-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-feature-branch-1-build-a-515bh5
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 spec:
@@ -769,6 +781,7 @@ metadata:
     kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-jobs-build-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-feature-branch-1-build-h-3qyux0
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
 spec:
@@ -874,6 +887,7 @@ metadata:
     component: app
     application: test-jobs-build
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: ingress-5dz9oh-app
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: app
@@ -908,6 +922,7 @@ metadata:
     component: hasura
     application: test-jobs-build
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: ingress-5dz9oh-hasura
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: hasura
@@ -941,6 +956,7 @@ metadata:
     component: pgweb
     application: test-jobs-build
     kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: ingress-5dz9oh-pgweb
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
   name: pgweb
@@ -982,9 +998,5 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
-  labels:
-    kontinuous/ref: feature-branch-1
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
 "
 `;
