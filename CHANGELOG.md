@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.66.0](https://github.com/SocialGouv/kontinuous/compare/v1.65.1...v1.66.0) (2022-09-01)
+
+
+### Features
+
+* labels patch ([b0dfe12](https://github.com/SocialGouv/kontinuous/commit/b0dfe124263b0f529386351c29e1c85b157a6c6d))
+
 ### [1.65.1](https://github.com/SocialGouv/kontinuous/compare/v1.65.0...v1.65.1) (2022-09-01)
 
 

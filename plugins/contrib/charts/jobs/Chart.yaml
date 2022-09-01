@@ -1,6 +1,6 @@
 apiVersion: v2
 name: jobs
-version: 1.65.1
+version: 1.66.0
 dependencies:
   - name: rancher-namespace
     repository: file://../rancher-namespace
