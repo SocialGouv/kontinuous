@@ -48,7 +48,7 @@ for (const dir of packageDirs){
 
 const getChartsRecursive = (dir, list=[])=>{
   const chartList = getDirectoriesSync(dir)
-  list.push(...chartList.map(c => fs.realpathSync(`${dir}/${c}`)))
+  list.push(...chartList.map(c => fs.realpathSync(`${dir}/${c}`).slice(__dirname.length+1)))
   for (const chartName of chartList){
     const childDir = `${dir}/${chartName}/charts`
     if (fs.pathExistsSync(childDir)){
