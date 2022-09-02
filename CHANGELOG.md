@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.67.2](https://github.com/SocialGouv/kontinuous/compare/v1.67.1...v1.67.2) (2022-09-02)
+
+
+### Bug Fixes
+
+* clean ([79bc54f](https://github.com/SocialGouv/kontinuous/commit/79bc54f2c9943db09276473f706f6954c0303157))
+* clean failed label and not-found code ([b31cfe7](https://github.com/SocialGouv/kontinuous/commit/b31cfe70e0a4c157d2b2de1fbd750e3f5d0fff31))
+* clean failed need rolllout-status ([ad4a449](https://github.com/SocialGouv/kontinuous/commit/ad4a449b79b3c11502f8c2fd212d5c010d04b85e))
+* disable warn experimental fetch API in axios ([271251e](https://github.com/SocialGouv/kontinuous/commit/271251e05ec85f57655cf0ec2c2a4be368c6d6aa))
+* versionrc ([32609c2](https://github.com/SocialGouv/kontinuous/commit/32609c2656fed976ccea74a9c8a69dba229d3350))
+
 ### [1.67.1](https://github.com/SocialGouv/kontinuous/compare/v1.67.0...v1.67.1) (2022-09-02)
 
 
