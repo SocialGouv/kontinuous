@@ -22,6 +22,9 @@ module.exports = (manifests, _options, { values }) => {
       continue
     }
     const scopedValues = get(values, chartPath)
+    if (!scopedValues) {
+      continue
+    }
     for (const key of Object.keys(scopedValues)) {
       if (!key.startsWith("~")) {
         continue
