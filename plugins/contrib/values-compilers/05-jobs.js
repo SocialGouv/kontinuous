@@ -252,6 +252,20 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
   values.runs = newRuns
 }
 
+const compileJobsValues = async (values, context) => {
+  const { config } = context
+  if (config.deployKeySecretEnabled) {
+    if (!values.deployKey) {
+      values.deployKey = {}
+    }
+    values.deployKey.enabled = true
+    if (config.deployKeySecretName) {
+      values.deployKey.secretRefName = config.deployKeySecretName
+    }
+  }
+  await compile(context, values)
+}
+
 const compileValues = async (values, context) => {
   await Promise.all(
     Object.values(values).map(async (subValues) => {
@@ -263,7 +277,7 @@ const compileValues = async (values, context) => {
         return
       }
       if (subValues._pluginValuesCompilerRecommendedJobs) {
-        await compile(context, subValues)
+        await compileJobsValues(subValues, context)
       } else {
         await compileValues(subValues, context)
       }

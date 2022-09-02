@@ -412,6 +412,14 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         }
       },
     },
+    deployKeySecretEnabled: {
+      env: "KS_DEPLOY_KEY_SECRET_ENABLED",
+      defaultFunction: (config) => !!config.private,
+    },
+    deployKeySecretName: {
+      env: "KS_DEPLOY_KEY_SECRET_NAME",
+      default: null,
+    },
     disableDiff: {
       env: "KS_DISABLE_DIFF",
     },

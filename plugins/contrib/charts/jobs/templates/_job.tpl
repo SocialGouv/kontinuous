@@ -109,6 +109,11 @@ spec:
           volumeMounts:
             - name: workspace
               mountPath: /workspace
+            {{ if .Values.deployKey.enabled }}
+            - name: deploy-key
+              mountPath: /secrets/ssh
+              readOnly: true
+            {{ end }}
           resources:
             limits:
               cpu: {{ or $run.degitRepositoryCpuLimit .Values.degitRepository.resources.limits.cpu }}
@@ -216,6 +221,14 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
+        {{ if .Values.deployKey.enabled }}
+        - name: deploy-key
+          secret:
+            secretName: {{ .Values.deployKey.secretRefName }}
+            items:
+              - key: {{ .Values.deployKey.secretRefKey }}
+                path: deploy-key
+        {{ end }}
         {{/*
         {{ if and .Values.global.extra.jobs.sharedStorage.enabled }}
         - name: workflow

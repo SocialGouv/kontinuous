@@ -36,4 +36,8 @@ degitAction:
     requests:
       cpu: 10m
       memory: 64Mi
+deployKey:
+  enabled: false
+  secretRefName: deploy-key
+  secretRefKey: DEPLOY_KEY
 _pluginValuesCompilerRecommendedJobs: true
