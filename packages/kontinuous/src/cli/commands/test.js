@@ -10,6 +10,9 @@ module.exports = (program) => {
     .description("test against current repo snapshot")
     .addOption(options.cwd)
     .addOption(options.chart)
+    .addOption(options.ignoreProjectTemplates)
+    .addOption(options.env)
+    .addOption(options.debug)
     .option("--update, -u", "update snapshots")
     .action(async (_opts, command) => {
       const opts = command.optsWithGlobals()

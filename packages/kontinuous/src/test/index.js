@@ -36,6 +36,9 @@ module.exports = async (opts) => {
   const runSnapshotsTests = async ({ title, subdir }) =>
     test.group(title, () => {
       for (const environment of environments) {
+        if (opts.E && opts.E !== environment) {
+          continue
+        }
         test(`generate manifests for env: ${environment}`, async (end) => {
           await nctx.fork(async () => {
             const ctxConfig = await loadConfig(opts, [], {
