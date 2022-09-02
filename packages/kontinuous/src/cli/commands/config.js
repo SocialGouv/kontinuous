@@ -5,6 +5,9 @@ const yaml = require("~common/utils/yaml")
 
 const loadConfig = require("~common/config/load-config")
 const ctx = require("~common/ctx")
+const getGitRemoteDefaultBranch = require("~common/utils/get-git-remote-default-branch")
+const getGitUrl = require("~common/utils/get-git-url")
+const normalizeRepositoryUrl = require("~common/utils/normalize-repository-url")
 
 const options = require("../options")
 
@@ -30,7 +33,15 @@ module.exports = (program) =>
 
       if (opts.remote) {
         const { event } = config
-        const ref = event === "deleted" ? "HEAD" : config.gitBranch
+
+        // const ref = event === "deleted" ? "HEAD" : config.gitBranch
+        let ref = config.gitBranch
+        if (event === "deleted") {
+          let gitUrl = await getGitUrl()
+          const protocol = config.deployKeyFile ? "ssh" : "https"
+          gitUrl = normalizeRepositoryUrl(gitUrl, protocol)
+          ref = await getGitRemoteDefaultBranch(gitUrl)
+        }
 
         const kontinuousRepoConfig = await getRemoteKontinuousConfigFile(
           config.gitRepositoryUrl,
