@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.67.0](https://github.com/SocialGouv/kontinuous/compare/v1.66.0...v1.67.0) (2022-09-02)
+
+
+### Features
+
+* clean failed resources before deploy ([9c3e9e7](https://github.com/SocialGouv/kontinuous/commit/9c3e9e7c5b80a2bcfbd5e5b642bc35d356211df6))
+* job retry option ([5bed7e2](https://github.com/SocialGouv/kontinuous/commit/5bed7e239f6274d675c96e7ded89cfee303c10cf))
+
+
+### Bug Fixes
+
+* up rollout-status version ([c00855e](https://github.com/SocialGouv/kontinuous/commit/c00855ecc01db8df0310c2cc5e8e59aa7d6134dd))
+
 ## [1.66.0](https://github.com/SocialGouv/kontinuous/compare/v1.65.1...v1.66.0) (2022-09-01)
 
 
