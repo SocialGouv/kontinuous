@@ -74,5 +74,5 @@
   "engines": {
     "node": ">=14"
   },
-  "packageManager": "yarn@4.0.0-rc.1"
+  "packageManager": "yarn@4.0.0-rc.15"
 }
