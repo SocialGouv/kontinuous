@@ -8,6 +8,8 @@ module.exports = async (
   const { refLabelKey, kubeconfig, kubeconfigContext: kubecontext } = config
   const { rolloutStatus } = utils
 
+  await needBin(utils.needRolloutStatus)
+
   const promises = []
   for (const manifest of manifests) {
     const { kind } = manifest
