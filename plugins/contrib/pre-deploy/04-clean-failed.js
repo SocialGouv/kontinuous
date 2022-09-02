@@ -9,13 +9,12 @@ module.exports = async (
   const { rolloutStatus } = utils
 
   const promises = []
-
   for (const manifest of manifests) {
     const { kind } = manifest
     if (!handledKinds.includes(kind)) {
       continue
     }
-    const resourceName = manifest.labels?.["kontinuous/resourceName"]
+    const resourceName = manifest.metadata.labels?.["kontinuous/resourceName"]
     const ref = manifest.metadata?.labels?.[refLabelKey]
     const namespace = manifest.metadata?.namespace
     if (!resourceName) {
@@ -36,17 +35,22 @@ module.exports = async (
             namespace,
             selector,
           })
-          const { success } = status
+          const { success, error } = status
           if (!success) {
-            logger.debug(
-              { status },
-              "failed resource identified, will clean it before next deploy"
-            )
-            resolve(manifest)
+            if (error.code === "not-found") {
+              resolve(null)
+            } else {
+              logger.debug(
+                { status },
+                "failed resource identified, will clean it before next deploy"
+              )
+              resolve(manifest)
+            }
           } else {
             resolve(null)
           }
         } catch (err) {
+          console.log({ err })
           reject(err)
         }
       })
