@@ -3,14 +3,15 @@ const { spawn } = require("child_process")
 const globalLogger = require("./logger")
 const parseCommand = require("./parse-command")
 
-const promiseFromChildProcess = (child, callback, logger) => {
+const promiseFromChildProcess = (child, callback, logger, extraOptions) => {
+  const { ignoreErrors = [] } = extraOptions
   const out = []
   child.stdout.on("data", (data) => {
     out.push(data)
   })
   const err = []
   child.stderr.on("data", (data) => {
-    if (data.includes("found symbolic link")) {
+    if (ignoreErrors.some((errCatch) => data.includes(errCatch))) {
       return
     }
     err.push(data)
@@ -39,7 +40,8 @@ module.exports = (
   arg,
   options = {},
   callback = null,
-  logger = globalLogger
+  logger = globalLogger,
+  extraOptions = {}
 ) => {
   const [cmd, args] = parseCommand(arg)
   const defaultOptions = { encoding: "utf-8" }
@@ -47,6 +49,7 @@ module.exports = (
   return promiseFromChildProcess(
     childProcess,
     callback,
-    logger.child({ cmd, args })
+    logger.child({ cmd, args }),
+    extraOptions
   )
 }

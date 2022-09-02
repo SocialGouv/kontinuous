@@ -40,7 +40,10 @@ module.exports = async (_options = {}) => {
   logger.debug("Build base manifest using helm")
   let manifests = await asyncShell(
     `helm template . --values=values.yaml ${config.helmArgs}`,
-    { cwd: buildPath }
+    { cwd: buildPath },
+    null,
+    logger,
+    { ignoreErrors: ["found symbolic link"] }
   )
 
   logger.debug("Load manifests")
