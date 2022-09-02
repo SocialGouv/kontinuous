@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.68.4](https://github.com/SocialGouv/kontinuous/compare/v1.68.3...v1.68.4) (2022-09-02)
+
+
+### Bug Fixes
+
+* add checkout on webhook action ([fcfbd76](https://github.com/SocialGouv/kontinuous/commit/fcfbd769e057d66166402cbd93493c0cd333e35b))
+
 ### [1.68.3](https://github.com/SocialGouv/kontinuous/compare/v1.68.2...v1.68.3) (2022-09-02)
 
 
