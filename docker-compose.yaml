@@ -18,6 +18,4 @@ services:
       KUBEWEBHOOK_EXPOSED_PORT: ${KUBEWEBHOOK_EXPOSED_PORT:-7530}
       KUBEWEBHOOK_PIPELINE_IMAGE: ${KUBEWEBHOOK_PIPELINE_IMAGE:-"ghcr.io/socialgouv/kontinuous:1"}
       KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE: ${KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE:-"ghcr.io/socialgouv/kontinuous/degit:1"}
-      RANCHER_PROJECT_NAME: ${RANCHER_PROJECT_NAME:-sample-next-app}
-      KS_CI_NAMESPACE: ${KS_CI_NAMESPACE:-sample-next-app-ci}
       KS_LOG_LEVEL: "trace"
