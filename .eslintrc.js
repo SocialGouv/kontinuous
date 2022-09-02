@@ -29,7 +29,7 @@ const noExtraneousRule = [
 ]
 
 module.exports = {
-  ignorePatterns: ["packages/webhook/build/*"],
+  ignorePatterns: ["packages/webhook/build/*", "!.versionrc.js"],
   settings: {
     "import/resolver": {
       alias: true,
