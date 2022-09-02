@@ -232,6 +232,10 @@ spec:
         component: app-2nd-instance
         application: test-sample-1
         namespace: test-sample-1-preprod
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-app-2nd-instance
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       affinity:
         podAntiAffinity:
@@ -325,6 +329,10 @@ spec:
         component: app
         application: test-sample-1
         namespace: test-sample-1-preprod
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-app
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       affinity:
         podAntiAffinity:
@@ -417,6 +425,10 @@ spec:
       labels:
         component: hasura
         application: test-sample-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-hasura
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       containers:
         - image: >-
@@ -496,6 +508,10 @@ spec:
       labels:
         component: pgweb
         application: test-sample-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-pgweb
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       envFrom:
         - secretRef:

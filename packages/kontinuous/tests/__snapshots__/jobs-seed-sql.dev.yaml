@@ -131,6 +131,10 @@ spec:
         component: app
         application: test-jobs-seed-sql
         namespace: test-jobs-seed-sql-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-app
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       affinity:
         podAntiAffinity:
@@ -221,6 +225,10 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-seed-sql
         runName: create-db
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-seed-sql-feature-branch-1-db-c-2zhptc
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:
@@ -338,6 +346,10 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-seed-sql
         runName: create-db
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-seed-sql-feature-branch-1-db-c-3j6a6s
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:
@@ -444,6 +456,10 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-seed-sql
         runName: seed-db
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-seed-sql-feature-branch-1-seed-4l2wkl
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:
@@ -547,6 +563,10 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-seed-sql
         runName: seed-db
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-seed-sql-feature-branch-1-seed-5dov66
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:

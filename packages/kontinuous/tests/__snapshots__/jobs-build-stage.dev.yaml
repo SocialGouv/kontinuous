@@ -161,6 +161,10 @@ spec:
         component: app
         application: test-jobs-build-stage
         namespace: test-jobs-build-stage-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-app
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       affinity:
         podAntiAffinity:
@@ -259,6 +263,10 @@ spec:
       labels:
         component: hasura
         application: test-jobs-build-stage
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-hasura
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       containers:
         - image: >-
@@ -343,6 +351,10 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-build-stage
         runName: create-db
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-stage-feature-branch-1-d-1p343v
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:
@@ -460,6 +472,10 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-build-stage
         runName: create-db
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-stage-feature-branch-1-d-65jnt4
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:
@@ -566,6 +582,10 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-build-stage
         runName: build
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-stage-feature-branch-1-b-16pool
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:
@@ -681,6 +701,10 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-build-stage
         runName: build
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-stage-feature-branch-1-b-4e3kti
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:

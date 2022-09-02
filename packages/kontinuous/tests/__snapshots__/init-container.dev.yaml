@@ -133,6 +133,10 @@ spec:
         component: app
         application: test-init-container
         namespace: test-init-container-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-app
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       affinity:
         podAntiAffinity:
@@ -218,6 +222,10 @@ spec:
         ref: feature-branch-1
         repository: test-init-container
         runName: custom
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-init-container-feature-branch-1-seed
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:

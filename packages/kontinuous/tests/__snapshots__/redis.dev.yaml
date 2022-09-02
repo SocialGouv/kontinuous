@@ -127,6 +127,10 @@ spec:
     metadata:
       labels:
         component: redis
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-redis
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       containers:
         - image: redis:6.2.5-alpine3.14

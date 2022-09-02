@@ -185,6 +185,10 @@ spec:
     metadata:
       labels:
         component: metabase
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-metabase
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       containers:
         - image: metabase/metabase:v0.44.0
@@ -261,6 +265,10 @@ spec:
       labels:
         component: oauth2-proxy
         application: test-oauth2-proxy-metabase
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-oauth2-proxy
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       containers:
         - image: quay.io/oauth2-proxy/oauth2-proxy:v7.2.1

@@ -106,6 +106,10 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-runs-map
         runName: create-db
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-runs-map-feature-branch-1-db-c-5op4dt
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:
@@ -223,6 +227,10 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-runs-map
         runName: create-db
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-runs-map-feature-branch-1-db-c-4mj01z
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:

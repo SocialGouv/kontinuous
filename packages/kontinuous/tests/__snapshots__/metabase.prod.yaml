@@ -249,6 +249,10 @@ spec:
     metadata:
       labels:
         component: metabase-app1
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-metabase-app1
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       containers:
         - image: metabase/metabase:v0.44.0
@@ -328,6 +332,10 @@ spec:
     metadata:
       labels:
         component: metabase-app2
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-metabase-app2
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       containers:
         - image: metabase/metabase:v0.44.0

@@ -106,6 +106,10 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-uses-relative
         runName: create-db
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-relative-feature-branch-1-24i8nb
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:
@@ -223,6 +227,10 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-uses-relative
         runName: create-db
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-relative-feature-branch-1-5h1agc
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:

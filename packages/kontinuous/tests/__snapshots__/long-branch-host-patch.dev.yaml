@@ -131,6 +131,10 @@ spec:
         component: app
         application: test-long-branch-host-patch
         namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
+        kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+        kontinuous/resourceName: deployment-3d60sq-app
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       affinity:
         podAntiAffinity:

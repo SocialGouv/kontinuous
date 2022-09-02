@@ -101,6 +101,10 @@ spec:
         ref: feature-branch-1
         repository: test-include-file
         runName: custom
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-include-file-feature-branch-1-say-hello
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:

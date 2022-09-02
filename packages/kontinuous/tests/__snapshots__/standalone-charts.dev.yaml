@@ -25,7 +25,12 @@ spec:
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
-    metadata: {}
+    metadata:
+      labels:
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-extra
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       restartPolicy: Never
       containers:

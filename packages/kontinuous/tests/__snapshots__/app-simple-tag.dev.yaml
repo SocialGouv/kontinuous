@@ -130,6 +130,10 @@ spec:
         component: app
         application: test-app-simple-tag
         namespace: test-app-simple-tag-v1-2-3-3sg4dn
+        kontinuous/ref: v1-2-3-5oe0cj
+        kontinuous/resourceName: deployment-3d60sq-app
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       affinity:
         podAntiAffinity:

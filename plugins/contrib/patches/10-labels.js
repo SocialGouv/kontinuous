@@ -1,3 +1,5 @@
+const templateLabelKinds = ["Job", "Deployment", "StatefulSet", "DaemonSet"]
+
 module.exports = (manifests, _options, { config, utils }) => {
   const { refLabelKey, refLabelValue } = config
 
@@ -17,13 +19,32 @@ module.exports = (manifests, _options, { config, utils }) => {
       manifest.metadata.labels = {}
     }
 
-    manifest.metadata.labels[refLabelKey] = refLabelValue
-
     const name = kind === "Namespace" ? manifest.name : manifest.metadata.name
-    manifest.metadata.labels["kontinuous/resourceName"] = slug([kind, name])
 
-    manifest.metadata.labels["app.kubernetes.io/managed-by"] = "kontinuous"
-    manifest.metadata.labels["app.kubernetes.io/created-by"] = "kontinuous"
+    const labels = {
+      [refLabelKey]: refLabelValue,
+      "kontinuous/resourceName": slug([kind, name]),
+      "app.kubernetes.io/managed-by": "kontinuous",
+      "app.kubernetes.io/created-by": "kontinuous",
+    }
+
+    Object.assign(manifest.metadata.labels, labels)
+
+    if (templateLabelKinds.includes(kind)) {
+      if (!manifest.spec) {
+        manifest.spec = {}
+      }
+      if (!manifest.spec.template) {
+        manifest.spec.template = {}
+      }
+      if (!manifest.spec.template.metadata) {
+        manifest.spec.template.metadata = {}
+      }
+      if (!manifest.spec.template.metadata.labels) {
+        manifest.spec.template.metadata.labels = {}
+      }
+      Object.assign(manifest.spec.template.metadata.labels, labels)
+    }
   }
 
   return manifests

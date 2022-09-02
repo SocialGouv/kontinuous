@@ -132,6 +132,10 @@ spec:
         component: app-api
         application: test-long-branch-host
         namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+        kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+        kontinuous/resourceName: deployment-3d60sq-app-api
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
     spec:
       affinity:
         podAntiAffinity:
