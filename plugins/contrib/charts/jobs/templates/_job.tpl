@@ -63,7 +63,11 @@ metadata:
     kontinuous/onChangedAnnotate: "true"
     {{- end }}
 spec:
-  backoffLimit: {{ or $run.retry "1" }}
+  {{ if kindIs "invalid" $run.retry }}
+  backoffLimit: 1
+  {{ else }}
+  backoffLimit: {{ $run.retry }}
+  {{ end }}
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
