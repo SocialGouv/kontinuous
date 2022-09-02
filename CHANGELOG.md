@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.68.1](https://github.com/SocialGouv/kontinuous/compare/v1.68.0...v1.68.1) (2022-09-02)
+
+
+### Bug Fixes
+
+* add labels on pods ([af85881](https://github.com/SocialGouv/kontinuous/commit/af85881a7cc5bc9b181dbfada26ff747557fc333))
+
 ## [1.68.0](https://github.com/SocialGouv/kontinuous/compare/v1.67.5...v1.68.0) (2022-09-02)
 
 
