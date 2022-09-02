@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.68.3](https://github.com/SocialGouv/kontinuous/compare/v1.68.2...v1.68.3) (2022-09-02)
+
+
+### Bug Fixes
+
+* delete default branch ([6938475](https://github.com/SocialGouv/kontinuous/commit/693847506ed6d8bde23ed177c6529d553c811d94))
+* improve test command ([23c648e](https://github.com/SocialGouv/kontinuous/commit/23c648e8590f0aad3fcbb5a62c84583a8a496448))
+
 ### [1.68.2](https://github.com/SocialGouv/kontinuous/compare/v1.68.1...v1.68.2) (2022-09-02)
 
 
