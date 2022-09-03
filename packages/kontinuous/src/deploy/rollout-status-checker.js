@@ -60,7 +60,7 @@ module.exports = async ({ manifests, kappDeployProcess }) => {
   const stopRolloutStatus = () => {
     for (const p of Object.values(rolloutStatusProcesses)) {
       try {
-        p.kill("SIGKILL")
+        process.kill(p.pid, "SIGKILL")
       } catch (_err) {
         // do nothing
       }
