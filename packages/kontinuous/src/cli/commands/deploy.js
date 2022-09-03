@@ -40,6 +40,7 @@ module.exports = (program) =>
       "select a manifests yaml file, default will build one"
     )
     .option("--timeout <timeout>", "deploy wait timeout, default 15m0s")
+    .option("--dry-run", "run all things except the deployment")
     .description(
       "Deploy manifests using kapp with current directory configuration"
     )
