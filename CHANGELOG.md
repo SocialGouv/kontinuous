@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.69.0](https://github.com/SocialGouv/kontinuous/compare/v1.68.4...v1.69.0) (2022-09-03)
+
+
+### Features
+
+* rollout-status failfast and kube debug msg ([106022b](https://github.com/SocialGouv/kontinuous/commit/106022b24ba4dc39a2c42975d0d55af04f6329dc))
+
+
+### Bug Fixes
+
+* dependencies tree ([09d409c](https://github.com/SocialGouv/kontinuous/commit/09d409cfb68cc0f537ffaa775b6e7539bb1ffb5f))
+* deploy ending ([dee9904](https://github.com/SocialGouv/kontinuous/commit/dee9904e201031b7f8e97372c99dfdc904af9b9f))
+* deploy hook when deploy from file + refacto ([51e3afd](https://github.com/SocialGouv/kontinuous/commit/51e3afdf137756ac10b766de2d170a9fdbd9ca02))
+* increase verbosity ([3175655](https://github.com/SocialGouv/kontinuous/commit/3175655e0c7882c23bc40626cba21a02cb74e5d4))
+* pkill of rollout ([4f6ec1b](https://github.com/SocialGouv/kontinuous/commit/4f6ec1b2592272692bbfe40c63ac86fe3c59fcab))
+
 ### [1.68.4](https://github.com/SocialGouv/kontinuous/compare/v1.68.3...v1.68.4) (2022-09-02)
 
 
