@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.70.0](https://github.com/SocialGouv/kontinuous/compare/v1.69.0...v1.70.0) (2022-09-03)
+
+
+### Features
+
+* init config plugin ([8f63d2c](https://github.com/SocialGouv/kontinuous/commit/8f63d2c0d9b87b8ecbfe5698cf571ca33760244b))
+
 ## [1.69.0](https://github.com/SocialGouv/kontinuous/compare/v1.68.4...v1.69.0) (2022-09-03)
 
 
