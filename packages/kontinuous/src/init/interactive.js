@@ -9,6 +9,8 @@ const yaml = require("~common/utils/yaml")
 const ctx = require("~common/ctx")
 
 const boilerplatesRootPath = "SocialGouv/kontinuous/boilerplates/repositories"
+const nativePluginPrefix = "SocialGouv/kontinuous/plugins"
+const defaultPluginPrefix = nativePluginPrefix
 
 module.exports = async (opts) => {
   const config = ctx.require("config")
@@ -111,8 +113,66 @@ module.exports = async (opts) => {
   }
   if (projectConfig.projectName !== name) {
     projectConfig.projectName = name.toString()
-    await fs.writeFile(configFile, yaml.dump(projectConfig))
   }
+
+  let { plugin } = opts
+
+  const nativePurposedPlugins = [
+    `${nativePluginPrefix}/fabrique`,
+    `${nativePluginPrefix}/contrib`,
+  ]
+  if (!plugin && plugin !== "false") {
+    let autofocus = 1
+    const firstPlugin = Object.values(projectConfig.dependencies || {})[0]
+      ?.import
+    if (firstPlugin && nativePurposedPlugins.includes(firstPlugin)) {
+      autofocus = nativePurposedPlugins.indexOf(firstPlugin)
+    }
+    const selectPlugin = new Select({
+      name: "boilerplate",
+      message: "Choose a kontinuous umbrella plugin",
+      autofocus,
+      choices: [
+        ...nativePurposedPlugins.map((pluginName) => ({
+          name: pluginName,
+          message: pluginName,
+        })),
+        {
+          name: "other",
+          message: "other 🛸 ",
+        },
+        {
+          name: "false",
+          message: "no plugin",
+        },
+      ],
+    })
+    plugin = await selectPlugin.run()
+    if (plugin === "other") {
+      const inputPlugin = new Input({
+        message: "Type a plugin repository url",
+      })
+      plugin = await inputPlugin.run()
+    }
+  }
+
+  projectConfig.dependencies = {}
+  if (plugin !== "false") {
+    if (!Array.isArray(plugin)) {
+      plugin = [plugin]
+    }
+    for (let pluginUri of plugin) {
+      if (!pluginUri.includes("/")) {
+        pluginUri = `${defaultPluginPrefix}/${pluginUri}`
+      }
+      const pluginName = pluginUri.split("/").pop()
+      projectConfig.dependencies[pluginName] = {
+        import: pluginUri,
+      }
+    }
+  }
+
+  await fs.writeFile(configFile, yaml.dump(projectConfig))
 
   logger.info("done")
 }

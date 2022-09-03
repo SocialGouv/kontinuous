@@ -10,6 +10,7 @@ module.exports = (program) =>
     .option("--dev", "init also local dev environment config")
     .option("--boilerplate, -b", "specify boilerplate url, repository or name")
     .option("--overwrite", "overwrite existing file")
+    .option("--plugin <plugins...>", "kontinuous plugin(s) to install")
     .option("--name", "project name")
     .action(async (opts, _command) => {
       await init(opts)
