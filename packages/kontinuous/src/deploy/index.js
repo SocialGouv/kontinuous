@@ -11,9 +11,12 @@ const deployHooks = require("./deploy-hooks")
 const deployOnWebhook = require("./deploy-on-webhook")
 const kappDeploy = require("./kapp-deploy")
 const rolloutStatusChecker = require("./rollout-status-checker")
+const buildDeployHooks = require("./build-deploy-hooks")
 
 module.exports = async (options) => {
   ctx.provide()
+
+  await buildDeployHooks()
 
   const config = ctx.require("config")
   const logger = ctx.require("logger")
@@ -103,8 +106,8 @@ module.exports = async (options) => {
       stopRolloutStatus()
     } catch (error) {
       logger.error({ error }, "kapp deploy failed")
-      const { errors } = await rolloutStatusCheckerPromise
       stopRolloutStatus()
+      const { errors } = await rolloutStatusCheckerPromise
       if (errors.length) {
         for (const errorData of errors) {
           logger.error(

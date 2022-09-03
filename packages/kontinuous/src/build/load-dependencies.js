@@ -1,7 +1,6 @@
 const path = require("path")
 
 const fs = require("fs-extra")
-const camelCase = require("lodash.camelcase")
 const get = require("lodash.get")
 const set = require("lodash.set")
 const decompress = require("decompress")
@@ -13,8 +12,6 @@ const createChart = require("~common/utils/create-chart")
 const loadYamlFile = require("~common/utils/load-yaml-file")
 const downloadFile = require("~common/utils/download-file")
 const getYamlPath = require("~common/utils/get-yaml-path")
-const yarnInstall = require("~common/utils/yarn-install")
-const fileHash = require("~common/utils/file-hash")
 const degitImproved = require("~common/utils/degit-improved")
 const slug = require("~common/utils/slug")
 const normalizeDegitUri = require("~common/utils/normalize-degit-uri")
@@ -24,6 +21,9 @@ const copyFilter = require("~common/config/copy-filter")
 const createContext = require("~/plugins/context")
 const configDependencyKey = require("~/plugins/context/config-dependency-key")
 const pluginFunction = require("~/plugins/context/function")
+
+const buildJsFile = require("~/plugins/build-js-file")
+const installPackages = require("~/plugins/install-packages")
 
 const registerSubcharts = async (
   chart,
@@ -255,70 +255,6 @@ const setRelativeLinkVersions = async (target, definition, config, logger) => {
   }
 }
 
-const buildJsFile = async (target, type, definition) => {
-  const jsFile = `${target}/${type}/index.js`
-  if (await fs.pathExists(jsFile)) {
-    return
-  }
-  const processors = []
-
-  const { dependencies = {} } = definition
-  for (const name of Object.keys(dependencies)) {
-    const indexFile = `../charts/${name}/${type}`
-    processors.push(indexFile)
-  }
-
-  const typeKey = camelCase(type)
-  let loads = definition[typeKey] || {}
-  const typeDir = `${target}/${type}`
-
-  const exts = [".js", ".ts"]
-  if (await fs.pathExists(typeDir)) {
-    const paths = await fs.readdir(typeDir)
-    for (const p of paths) {
-      let key
-      if ((await fs.stat(`${typeDir}/${p}`)).isDirectory()) {
-        if (!(await fs.pathExists(`${typeDir}/${p}/index.js`))) {
-          continue
-        }
-        key = p
-      } else {
-        const ext = path.extname(p)
-        if (!exts.includes(ext)) {
-          continue
-        }
-        key = p.substring(0, p.length - ext.length)
-      }
-      key = configDependencyKey(key)
-      if (!loads[key]) {
-        loads[key] = {}
-      }
-      loads[key].require = `./${p}`
-    }
-  }
-
-  loads = Object.entries(loads)
-    .filter(([_key, value]) => value.enabled !== false)
-    .reduce((acc, [key, value]) => {
-      acc[key] = value
-      return acc
-    }, {})
-
-  for (const [name, load] of Object.entries(loads)) {
-    let { require: req } = load
-    if (!req) {
-      req = `./${name}`
-    }
-    processors.push(req)
-  }
-
-  const jsSrc = `module.exports = [${processors
-    .map((p) => JSON.stringify(p))
-    .join(",")}]`
-  await fs.ensureDir(path.dirname(jsFile))
-  await fs.writeFile(jsFile, jsSrc)
-}
-
 const buildDependencies = async (config, logger) => {
   await recurseDependency({
     config,
@@ -330,33 +266,8 @@ const buildDependencies = async (config, logger) => {
       await buildJsFile(target, "debug-manifests", definition)
       await buildJsFile(target, "patches", definition)
       await buildJsFile(target, "validators", definition)
-      await buildJsFile(target, "pre-deploy", definition)
-      await buildJsFile(target, "post-deploy", definition)
-    },
-  })
-}
-
-const installPackages = async (config) => {
-  await recurseDependency({
-    config,
-    afterChildren: async ({ target }) => {
-      if (!(await fs.pathExists(`${target}/package.json`))) {
-        return
-      }
-
-      let hash
-      if (!(await fs.pathExists(`${target}/yarn.lock`))) {
-        hash = await fileHash(`${target}/yarn.lock`)
-      } else {
-        hash = await fileHash(`${target}/package.json`)
-      }
-
-      const sharedDir = `${config.kontinuousHomeDir}/cache/shared-node_modules/${hash}/node_modules`
-
-      await fs.ensureDir(sharedDir)
-      fs.symlink(sharedDir, `${target}/node_modules`)
-
-      await yarnInstall(target)
+      // await buildJsFile(target, "pre-deploy", definition)
+      // await buildJsFile(target, "post-deploy", definition)
     },
   })
 }
