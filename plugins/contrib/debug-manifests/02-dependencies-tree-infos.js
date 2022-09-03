@@ -48,9 +48,11 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
 
   const uml = []
   for (const [key, dependenciesSet] of Object.entries(flatDependencies)) {
+    const ccKey = camelcase(key)
     for (const dep of dependenciesSet) {
-      if (dep !== key) {
-        uml.push(`${dep} -> ${camelcase(key)};`)
+      const ccDep = camelcase(dep)
+      if (ccDep !== ccKey) {
+        uml.push(`${ccDep} -> ${ccKey};`)
       }
     }
   }
