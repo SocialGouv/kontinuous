@@ -384,6 +384,11 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         }
       },
     },
+    deployTimeout: {
+      option: "timeout",
+      env: "KS_DEPLOY_TIMEOUT",
+      default: "15m0s",
+    },
     links: {
       transform: async (links = {}) => {
         if (!links["SocialGouv/kontinuous"]) {

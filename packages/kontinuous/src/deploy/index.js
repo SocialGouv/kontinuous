@@ -10,6 +10,7 @@ const { setStatus } = require("~/status")
 const deployHooks = require("./deploy-hooks")
 const deployOnWebhook = require("./deploy-on-webhook")
 const kappDeploy = require("./kapp-deploy")
+const rolloutStatusChecker = require("./rollout-status-checker")
 
 module.exports = async (options) => {
   ctx.provide()
@@ -65,7 +66,6 @@ module.exports = async (options) => {
     )
 
     const allManifests = yaml.loadAll(manifests)
-
     await deployHooks(allManifests, "pre")
 
     const namespacesManifests = allManifests.filter(
@@ -87,16 +87,37 @@ module.exports = async (options) => {
       logLevel: "info",
     })
 
-    try {
+    const { promise: kappDeployPromise, process: kappDeployProcess } =
       await kappDeploy({
-        options,
-        kubeconfigContext,
         manifestsFile,
-        kubeconfig,
-        repositoryName,
       })
+
+    const { promise: rolloutStatusCheckerPromise, stopRolloutStatus } =
+      await rolloutStatusChecker({
+        manifests: allManifests,
+        kappDeployProcess,
+      })
+
+    try {
+      await kappDeployPromise
+      stopRolloutStatus()
     } catch (error) {
       logger.error({ error }, "kapp deploy failed")
+      const { errors } = await rolloutStatusCheckerPromise
+      stopRolloutStatus()
+      if (errors.length) {
+        for (const errorData of errors) {
+          logger.error(
+            {
+              code: errorData.code,
+              type: errorData.type,
+              log: errorData.log,
+              message: errorData.message,
+            },
+            `rollout-status ${errorData.code} error: ${errorData.message}`
+          )
+        }
+      }
       throw error
     }
 
