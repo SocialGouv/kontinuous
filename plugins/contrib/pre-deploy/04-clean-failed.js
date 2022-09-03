@@ -10,6 +10,8 @@ module.exports = async (
 
   await needBin(utils.needRolloutStatus)
 
+  logger.debug("check for failed resources to clean")
+
   const promises = []
   for (const manifest of manifests) {
     const { kind } = manifest
@@ -62,6 +64,7 @@ module.exports = async (
   const manifestsToClean = (await Promise.all(promises)).filter((m) => !!m)
 
   if (manifestsToClean.length === 0) {
+    logger.debug("no resources to clean")
     return
   }
 
@@ -76,6 +79,9 @@ module.exports = async (
     kubeconfig: config.kubeconfig,
     kubeconfigContext: config.kubeconfigContext,
   }
+
+  logger.debug("cleaning failed resources")
+
   await kubectlDeleteManifest(manifestsToClean, kubectlDeleteManifestOptions)
 
   logger.debug({ resourceNames }, "failed resources cleaned")
