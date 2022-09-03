@@ -9,7 +9,7 @@ const needBin = require("~/bin/need-bin")
 
 const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
 
-module.exports = async ({ manifestsFile }) => {
+module.exports = async ({ manifestsFile, dryRun }) => {
   const logger = ctx.require("logger")
   const config = ctx.require("config")
 
@@ -24,7 +24,9 @@ module.exports = async ({ manifestsFile }) => {
 
   await needBin(needKapp)
 
-  const [cmd, args] = parseCommand(`
+  const kappDeployCommand = dryRun
+    ? "kapp --version"
+    : `
         kapp deploy
           ${
             kubeconfigContext ? `--kubeconfig-context ${kubeconfigContext}` : ""
@@ -35,7 +37,9 @@ module.exports = async ({ manifestsFile }) => {
           --dangerous-override-ownership-of-existing-resources
           --yes
           -f ${manifestsFile}
-      `)
+      `
+
+  const [cmd, args] = parseCommand(kappDeployCommand)
 
   const proc = spawn(cmd, args, {
     encoding: "utf-8",

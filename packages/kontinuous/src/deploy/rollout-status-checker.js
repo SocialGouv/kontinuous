@@ -134,7 +134,6 @@ module.exports = async ({ manifests, kappDeployProcess }) => {
           }
           resolve(result)
         } catch (err) {
-          console.log({ err })
           reject(err)
         }
       })
@@ -153,7 +152,9 @@ module.exports = async ({ manifests, kappDeployProcess }) => {
       const { status } = result
       if (status === "rejected") {
         const { reason } = result
-        logger.error({ reason }, "rollout-status exec error")
+        if (reason) {
+          logger.error({ reason }, "rollout-status exec error")
+        }
       } else if (status === "fulfilled") {
         const { value } = result
         if (value.success === false) {

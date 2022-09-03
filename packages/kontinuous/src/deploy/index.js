@@ -90,40 +90,41 @@ module.exports = async (options) => {
       logLevel: "info",
     })
 
-    if (!options.dryRun) {
-      const { promise: kappDeployPromise, process: kappDeployProcess } =
-        await kappDeploy({
-          manifestsFile,
-        })
+    const { dryRun } = options
 
-      const { promise: rolloutStatusCheckerPromise, endRolloutStatus } =
-        await rolloutStatusChecker({
-          manifests: allManifests,
-          kappDeployProcess,
-        })
+    const { promise: kappDeployPromise, process: kappDeployProcess } =
+      await kappDeploy({
+        manifestsFile,
+        dryRun,
+      })
 
-      try {
-        await kappDeployPromise
-        endRolloutStatus()
-      } catch (error) {
-        logger.error({ error }, "kapp deploy failed")
-        endRolloutStatus()
-        const { errors } = await rolloutStatusCheckerPromise
-        if (errors.length) {
-          for (const errorData of errors) {
-            logger.error(
-              {
-                code: errorData.code,
-                type: errorData.type,
-                log: errorData.log,
-                message: errorData.message,
-              },
-              `rollout-status ${errorData.code} error: ${errorData.message}`
-            )
-          }
+    const { promise: rolloutStatusCheckerPromise, endRolloutStatus } =
+      await rolloutStatusChecker({
+        manifests: allManifests,
+        kappDeployProcess,
+      })
+
+    try {
+      await kappDeployPromise
+      endRolloutStatus()
+    } catch (error) {
+      logger.error({ error }, "kapp deploy failed")
+      endRolloutStatus()
+      const { errors } = await rolloutStatusCheckerPromise
+      if (errors.length) {
+        for (const errorData of errors) {
+          logger.error(
+            {
+              code: errorData.code,
+              type: errorData.type,
+              log: errorData.log,
+              message: errorData.message,
+            },
+            `rollout-status ${errorData.code} error: ${errorData.message}`
+          )
         }
-        throw error
       }
+      throw error
     }
 
     await deployHooks(allManifests, "post")
