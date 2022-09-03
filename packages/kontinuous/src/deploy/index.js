@@ -95,7 +95,7 @@ module.exports = async (options) => {
         manifestsFile,
       })
 
-    const { promise: rolloutStatusCheckerPromise, stopRolloutStatus } =
+    const { promise: rolloutStatusCheckerPromise, endRolloutStatus } =
       await rolloutStatusChecker({
         manifests: allManifests,
         kappDeployProcess,
@@ -103,10 +103,10 @@ module.exports = async (options) => {
 
     try {
       await kappDeployPromise
-      stopRolloutStatus()
+      endRolloutStatus()
     } catch (error) {
       logger.error({ error }, "kapp deploy failed")
-      stopRolloutStatus()
+      endRolloutStatus()
       const { errors } = await rolloutStatusCheckerPromise
       if (errors.length) {
         for (const errorData of errors) {

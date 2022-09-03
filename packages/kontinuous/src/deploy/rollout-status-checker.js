@@ -45,6 +45,7 @@ const rolloutStatusWatchForNewResource = async ({
       `watching resource: ${resourceName}, waiting to appear...`
     )
   }
+  return { success: null }
 }
 
 module.exports = async ({ manifests, kappDeployProcess }) => {
@@ -52,9 +53,13 @@ module.exports = async ({ manifests, kappDeployProcess }) => {
   const config = ctx.require("config")
 
   const stopKapp = async () => {
-    process.kill(kappDeployProcess.pid, "SIGTERM")
-    await setTimeout(kappTerminationTolerationPeriod)
-    process.kill(kappDeployProcess.pid, "SIGKILL")
+    try {
+      process.kill(kappDeployProcess.pid, "SIGTERM")
+      await setTimeout(kappTerminationTolerationPeriod)
+      process.kill(kappDeployProcess.pid, "SIGKILL")
+    } catch (_err) {
+      // do nothing
+    }
   }
   const rolloutStatusProcesses = {}
   const stopRolloutStatus = () => {
@@ -68,6 +73,12 @@ module.exports = async ({ manifests, kappDeployProcess }) => {
   }
 
   const interceptor = { stop: false }
+
+  const endRolloutStatus = () => {
+    interceptor.stop = true
+    stopRolloutStatus()
+  }
+
   let endAllTrigerred = false
   const endAll = async () => {
     if (endAllTrigerred) {
@@ -145,7 +156,7 @@ module.exports = async ({ manifests, kappDeployProcess }) => {
         logger.error({ reason }, "rollout-status exec error")
       } else if (status === "fulfilled") {
         const { value } = result
-        if (!value.success) {
+        if (value.success === false) {
           errors.push(value.error)
         }
       } else {
@@ -155,5 +166,5 @@ module.exports = async ({ manifests, kappDeployProcess }) => {
     resolve({ errors })
   })
 
-  return { stopRolloutStatus, promise }
+  return { endRolloutStatus, promise }
 }
