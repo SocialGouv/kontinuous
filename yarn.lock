@@ -8404,7 +8404,7 @@ __metadata:
     typescript: "npm:^4.7.4"
     which: "npm:^2.0.2"
     yaml: "npm:^2.0.1"
-    ~common: "npm:*"
+    ~common: "workspace:^"
   bin:
     kontinuous: ./bin/kontinuous
   languageName: unknown
@@ -12918,7 +12918,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"~common@npm:*, ~common@workspace:packages/common":
+"~common@workspace:^, ~common@workspace:packages/common":
   version: 0.0.0-use.local
   resolution: "~common@workspace:packages/common"
   dependencies:
@@ -13005,6 +13005,6 @@ __metadata:
     tiged: "npm:^2.11.2"
     uuid: "npm:^8.3.2"
     yaml: "npm:^2.0.1"
-    ~common: "npm:*"
+    ~common: "workspace:^"
   languageName: unknown
   linkType: soft

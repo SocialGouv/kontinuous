@@ -38,20 +38,19 @@
     "slugify": "^1.6.5",
     "tiged": "^2.11.2",
     "uuid": "^8.3.2",
-    "yaml": "^2.0.1"
+    "yaml": "^2.0.1",
+    "~common": "workspace:^"
   },
   "devDependencies": {
     "jest": "^27.5.1",
     "jest-specific-snapshot": "^5.0.0",
     "nodemon": "^2.0.15",
-    "supertest": "^6.2.2",
-    "~common": "*"
+    "supertest": "^6.2.2"
   },
   "engines": {
     "node": ">=14"
   },
   "_moduleAliases": {
-    "~": "src",
-    "~common": "common"
+    "~": "src"
   }
 }
