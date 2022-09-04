@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.71.2](https://github.com/SocialGouv/kontinuous/compare/v1.71.1...v1.71.2) (2022-09-04)
+
+
+### Bug Fixes
+
+* clean plugins deps ([1f8965e](https://github.com/SocialGouv/kontinuous/commit/1f8965e6d71e13963d0a582ca8731c44352d0366))
+* dependencies ([0b7c37f](https://github.com/SocialGouv/kontinuous/commit/0b7c37ffd62fa4a6d5684697a734cb9c3d341bca))
+* dependencies workspaces ([ca627c8](https://github.com/SocialGouv/kontinuous/commit/ca627c8bb5f41eb9eef703bc7107e00a0e5c6221))
+* linter ([fa9d773](https://github.com/SocialGouv/kontinuous/commit/fa9d773cda81b7639935b4acdea55d7e1a2dfa56))
+* refacto dry deps ([6e065c4](https://github.com/SocialGouv/kontinuous/commit/6e065c4d41598128917c7fb9c972c5bb66d61223))
+* root dependencies ([bc0d584](https://github.com/SocialGouv/kontinuous/commit/bc0d584678eaa3b2fe207e9f27667ef54d307245))
+
 ### [1.71.1](https://github.com/SocialGouv/kontinuous/compare/v1.71.0...v1.71.1) (2022-09-03)
 
 
