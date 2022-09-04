@@ -2,7 +2,7 @@ const path = require("path")
 const fs = require("fs")
 
 // see https://github.com/import-js/eslint-plugin-import/issues/1174
-const packageDirs = ["packages"]
+const packageDirs = ["packages", "plugins"]
 const packageDir = []
 for (const dir of packageDirs) {
   for (const d of fs
