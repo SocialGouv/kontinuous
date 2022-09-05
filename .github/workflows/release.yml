@@ -25,6 +25,11 @@ jobs:
           rm -f README.md && cp -r ../../README.md ./
           node -e " \
             let package = JSON.parse(fs.readFileSync('package.json')); \
+            const commonPackage = JSON.parse(fs.readFileSync('common/package.json')); \
+            package.dependencies = { \
+              ...commonPackage.dependencies, \
+              ...package.dependencies, \
+            }; \
             package._moduleAliases = { \
               ...package._moduleAliases, \
               '~common': 'common' \
