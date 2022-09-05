@@ -27,9 +27,9 @@ jobs:
             let package = JSON.parse(fs.readFileSync('package.json')); \
             package._moduleAliases = { \
               ...package._moduleAliases, \
-              "~common": "common" \
+              '~common': 'common' \
             }; \
-            delete package.dependencies["~common"]; \
+            delete package.dependencies['~common']; \
             fs.writeFileSync('package.json', JSON.stringify(package)); \
           "
 
