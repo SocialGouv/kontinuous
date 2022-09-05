@@ -96,6 +96,7 @@ spec:
       {{- if or (not (hasKey $run "checkout")) $run.checkout }}
         - name: degit-repository
           image: {{ .Values.degitImage }}
+          imagePullPolicy: Always
           command:
             - sh
             - -c
