@@ -102,7 +102,7 @@ spec:
             - -c
             - |
               {{ if .Values.deployKey.enabled }}
-              export GIT_SSH_COMMAND="ssh -i /secrets/ssh/deploy-key"
+              export GIT_SSH_COMMAND="ssh -i /secrets/ssh/deploy-key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
               degit --verbose --mode=git {{ or $val.repository $val.global.repository }}#{{ or $val.gitBranch $val.global.gitBranch }} \
                 /workspace
               {{ else }}
