@@ -45,6 +45,7 @@ module.exports = async (
       cache,
       force,
       subgroup,
+      verbose: true,
       "sub-directory": subDirectory,
     }).clone(target)
   } catch (error) {
