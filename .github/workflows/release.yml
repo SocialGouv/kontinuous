@@ -23,6 +23,15 @@ jobs:
           rm -f common && cp -r ../common ./
           rm -f LICENSE && cp -r ../../LICENSE ./
           rm -f README.md && cp -r ../../README.md ./
+          node -e " \
+            let package = JSON.parse(fs.readFileSync('package.json')); \
+            package._moduleAliases = { \
+              ...package._moduleAliases, \
+              "~common": "common" \
+            }; \
+            delete package.dependencies["~common"]; \
+            fs.writeFileSync('package.json', JSON.stringify(package)); \
+          "
 
       - id: publish-kontinuous
         uses: JS-DevTools/npm-publish@v1
