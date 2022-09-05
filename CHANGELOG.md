@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.71.4](https://github.com/SocialGouv/kontinuous/compare/v1.71.3...v1.71.4) (2022-09-05)
+
+
+### Bug Fixes
+
+* npx deps workspace ([73f730c](https://github.com/SocialGouv/kontinuous/commit/73f730caee160089ab6c4fcf42faeb98d0244f38))
+
 ### [1.71.3](https://github.com/SocialGouv/kontinuous/compare/v1.71.2...v1.71.3) (2022-09-05)
 
 
