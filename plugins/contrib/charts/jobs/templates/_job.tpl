@@ -100,8 +100,14 @@ spec:
             - sh
             - -c
             - |
+              {{ if .Values.deployKey.enabled }}
+              export GIT_SSH_COMMAND="ssh -i /secrets/ssh/deploy-key"
+              degit --verbose --mode=git {{ or $val.repository $val.global.repository }}#{{ or $val.gitBranch $val.global.gitBranch }} \
+                /workspace
+              {{ else }}
               degit {{ or $val.repository $val.global.repository }}#{{ or $val.gitBranch $val.global.gitBranch }} \
                 /workspace
+              {{ end }}
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
