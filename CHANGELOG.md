@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.71.11](https://github.com/SocialGouv/kontinuous/compare/v1.71.10...v1.71.11) (2022-09-05)
+
+
+### Bug Fixes
+
+* degit ssh disable strict ([6e04354](https://github.com/SocialGouv/kontinuous/commit/6e04354ac466658b4187a7c58d3f310bff684144))
+
 ### [1.71.10](https://github.com/SocialGouv/kontinuous/compare/v1.71.9...v1.71.10) (2022-09-05)
 
 
