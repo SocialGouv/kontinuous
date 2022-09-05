@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.71.6](https://github.com/SocialGouv/kontinuous/compare/v1.71.5...v1.71.6) (2022-09-05)
+
+
+### Bug Fixes
+
+* degit verbose increase ([5fb7974](https://github.com/SocialGouv/kontinuous/commit/5fb7974806cb8826fe8d3db72bf5ce51cbf2052b))
+
 ### [1.71.5](https://github.com/SocialGouv/kontinuous/compare/v1.71.4...v1.71.5) (2022-09-05)
 
 
