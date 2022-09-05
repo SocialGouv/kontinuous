@@ -40,7 +40,7 @@ module.exports = async (values, options, { config, utils, ctx }) => {
     imageTag = `sha-${sha}`
   }
 
-  const imageRepository = repositoryName
+  const imageRepository = repositoryName.toLowerCase()
 
   const branchSlug32 = slug(gitBranch, 32)
 
