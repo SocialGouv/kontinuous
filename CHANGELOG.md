@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.71.10](https://github.com/SocialGouv/kontinuous/compare/v1.71.9...v1.71.10) (2022-09-05)
+
+
+### Bug Fixes
+
+* degit imagePullPolicy to Always ([4c40641](https://github.com/SocialGouv/kontinuous/commit/4c4064104c1ce36bce72f46e2b6db25ec0247370))
+
 ### [1.71.9](https://github.com/SocialGouv/kontinuous/compare/v1.71.8...v1.71.9) (2022-09-05)
 
 
