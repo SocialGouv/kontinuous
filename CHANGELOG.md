@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.71.12](https://github.com/SocialGouv/kontinuous/compare/v1.71.11...v1.71.12) (2022-09-05)
+
+
+### Bug Fixes
+
+* imageRepository toLowerCase ([59322f2](https://github.com/SocialGouv/kontinuous/commit/59322f2ebf3c0713d4ceb243bf46929ca5e5aef3))
+
 ### [1.71.11](https://github.com/SocialGouv/kontinuous/compare/v1.71.10...v1.71.11) (2022-09-05)
 
 
