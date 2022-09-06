@@ -591,10 +591,12 @@ spec:
       initContainers:
         - name: degit-repository
           image: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
+          imagePullPolicy: Always
           command:
             - sh
             - '-c'
             - |
+
               degit kontinuous/test-jobs-build-stage#feature-branch-1 \\\\
                 /workspace
           securityContext:
@@ -710,10 +712,12 @@ spec:
       initContainers:
         - name: degit-repository
           image: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
+          imagePullPolicy: Always
           command:
             - sh
             - '-c'
             - |
+
               degit kontinuous/test-jobs-build-stage#feature-branch-1 \\\\
                 /workspace
           securityContext:
