@@ -284,8 +284,6 @@ spec:
                   name: pg-user-feature-branch-1
             - name: NEW_DB_EXTENSIONS
               value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
-            - name: USE_AZURE_FLEX
-              value: 'false'
           command:
             - /bin/bash
             - '-c'
@@ -385,6 +383,8 @@ spec:
             - secretRef:
                 name: kubeconfig
           env:
+            - name: USE_AZURE_FLEX
+              value: 'false'
             - name: DB_SECRET_NAME
               value: pg-user-feature-branch-1
             - name: JOB_NAMESPACE
