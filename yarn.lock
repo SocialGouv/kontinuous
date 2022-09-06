@@ -4736,6 +4736,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dev-tools@workspace:packages/dev-tools":
+  version: 0.0.0-use.local
+  resolution: "dev-tools@workspace:packages/dev-tools"
+  languageName: unknown
+  linkType: soft
+
 "dezalgo@npm:1.0.3":
   version: 1.0.3
   resolution: "dezalgo@npm:1.0.3"
