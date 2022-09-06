@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.72.0](https://github.com/SocialGouv/kontinuous/compare/v1.71.12...v1.72.0) (2022-09-06)
+
+
+### Features
+
+* dev-tools ([ea961f8](https://github.com/SocialGouv/kontinuous/commit/ea961f807400ffd6ef0d277b5a0a27513430b24a))
+
+
+### Bug Fixes
+
+* gh workflows ([f75db5d](https://github.com/SocialGouv/kontinuous/commit/f75db5da452e570f207e15c28fb8b41dfd5e8208))
+* update yarn.lock ([eb95fa3](https://github.com/SocialGouv/kontinuous/commit/eb95fa371777b4379f177d64ed50780ed884d938))
+
 ### [1.71.12](https://github.com/SocialGouv/kontinuous/compare/v1.71.11...v1.71.12) (2022-09-05)
 
 
