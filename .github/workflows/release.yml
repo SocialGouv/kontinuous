@@ -18,25 +18,7 @@ jobs:
       
       - name: prepublish
         shell: bash
-        run: |
-          cd packages/kontinuous
-          rm -f common && cp -r ../common ./
-          rm -f LICENSE && cp -r ../../LICENSE ./
-          rm -f README.md && cp -r ../../README.md ./
-          node -e " \
-            let package = JSON.parse(fs.readFileSync('package.json')); \
-            const commonPackage = JSON.parse(fs.readFileSync('common/package.json')); \
-            package.dependencies = { \
-              ...commonPackage.dependencies, \
-              ...package.dependencies, \
-            }; \
-            package._moduleAliases = { \
-              ...package._moduleAliases, \
-              '~common': 'common' \
-            }; \
-            delete package.dependencies['~common']; \
-            fs.writeFileSync('package.json', JSON.stringify(package)); \
-          "
+        run: packages/dev-tools/bin/release-workspace-to-npx kontinuous
 
       - id: publish-kontinuous
         uses: JS-DevTools/npm-publish@v1
