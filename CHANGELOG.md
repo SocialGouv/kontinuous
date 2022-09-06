@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.73.0](https://github.com/SocialGouv/kontinuous/compare/v1.72.2...v1.73.0) (2022-09-06)
+
+
+### Features
+
+* **rollout-status:** retry network error + Job ([3762ab6](https://github.com/SocialGouv/kontinuous/commit/3762ab6e94484491dfa5d39a8feb423405e7b169))
+
 ### [1.72.2](https://github.com/SocialGouv/kontinuous/compare/v1.72.1...v1.72.2) (2022-09-06)
 
 
