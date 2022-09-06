@@ -11,7 +11,7 @@ if [ -n "$(kubectl -n $NAMESPACE get secret $DB_SECRET_NAME 2>/dev/null)" ]; the
 else
   echo "create secret"
   PGPASSWORD=$(openssl rand -base64 32 | sed "s/[^[:alnum:]-]//g")
-  if [[ $PGHOST == *"azure.com"* ]]; then
+  if [[ $PGHOST == *"azure.com"* ]] && [ "$USE_AZURE_FLEX" != "false" ]; then
     PGUSER="${PGUSER}@${PGHOST}"
   fi
   PGSSLMODE=require
