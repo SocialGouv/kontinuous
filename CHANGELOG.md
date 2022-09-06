@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.74.1 (2022-09-06)
+
+
+### Bug Fixes
+
+* **create-db:** fix useAzureFlex option ([c35620f](https://github.com/SocialGouv/kontinuous/commit/c35620f24e777d2df4b76f9a564212cea57c5806))
+
 ## 1.74.0 (2022-09-06)
 
 
