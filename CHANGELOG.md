@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.72.2](https://github.com/SocialGouv/kontinuous/compare/v1.72.1...v1.72.2) (2022-09-06)
+
+
+### Bug Fixes
+
+* add option mountDeployKey to job ([89b02ef](https://github.com/SocialGouv/kontinuous/commit/89b02ef7bf57d4af52c08399850b5bc0ae374d29))
+
 ### [1.72.1](https://github.com/SocialGouv/kontinuous/compare/v1.72.0...v1.72.1) (2022-09-06)
 
 
