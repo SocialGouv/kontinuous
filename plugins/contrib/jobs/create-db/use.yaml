@@ -14,6 +14,9 @@ runs:
       JOB_NAMESPACE: "{{ $.Values.global.ciNamespace }}"
       PGDATABASE: "{{ tpl (or $.with.database $.Values.global.pgDatabase) . }}"
       PGUSER: "{{ tpl (or $.with.pgUser $.Values.global.pgUser) . }}"
+    env:
+      - name: USE_AZURE_FLEX
+        value: '{{ if kindIs "invalid" $.with.useAzureFlex }}false{{ else }}{{ tpl $.with.useAzureFlex . }}{{ end }}' 
     run: /action/create-secret.sh
 
   - name: create-db
@@ -48,6 +51,4 @@ runs:
             name: "{{ tpl (or $.with.pgSecretName $.Values.global.pgSecretName) . }}"
       - name: NEW_DB_EXTENSIONS
         value: '{{ if kindIs "invalid" $.with.extensions }}hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent{{ else }}{{ tpl $.with.extensions . }}{{ end }}'
-      - name: USE_AZURE_FLEX
-        value: '{{ if kindIs "invalid" $.with.useAzureFlex }}false{{ else }}{{ tpl $.with.useAzureFlex . }}{{ end }}' 
     run: /action/ensure-db.sh
