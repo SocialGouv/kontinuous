@@ -58,7 +58,7 @@
   "bin": "./bin/kontinuous",
   "files": [
     "bin",
-    "common",
+    "~common",
     "src",
     "package.json",
     "README.md",
