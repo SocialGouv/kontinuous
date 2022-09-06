@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.74.0 (2022-09-06)
+
+
+### Features
+
+* **create-db:** add new option for azure flex secret ([#28](https://github.com/SocialGouv/kontinuous/issues/28)) ([9f77c3e](https://github.com/SocialGouv/kontinuous/commit/9f77c3e01d6f112815cd496a423587e40fdab0af))
+
 ## [1.73.0](https://github.com/SocialGouv/kontinuous/compare/v1.72.2...v1.73.0) (2022-09-06)
 
 
