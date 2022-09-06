@@ -6,7 +6,7 @@ const rolloutStatusExec = require("~common/utils/rollout-status-exec")
 
 const needBin = require("~/bin/need-bin")
 
-const handledKinds = ["Deployment", "StatefulSet"]
+const handledKinds = ["Deployment", "StatefulSet", "Job"]
 
 const checkForNewResourceInterval = 3000
 const waitBeforeStopAllRolloutStatus = 5000 // try to collect more errors if there is any
@@ -34,7 +34,19 @@ const rolloutStatusWatchForNewResource = async ({
         selector,
       })
     rolloutStatusProcesses[selector] = rolloutStatusProcess
-    const status = await rolloutStatusPromise
+    let status
+    try {
+      status = await rolloutStatusPromise
+    } catch (err) {
+      if (!err.message?.includes("net/http: TLS handshake timeout")) {
+        throw err
+      }
+      logger.debug(
+        { namespace, selector },
+        `rollout-status network error(net/http: TLS handshake timeout): retrying...`
+      )
+      continue
+    }
     const { success, error } = status
     if (success || error.code !== "not-found") {
       return status

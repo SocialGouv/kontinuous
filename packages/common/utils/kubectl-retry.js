@@ -78,6 +78,9 @@ module.exports = async (kubectlArgs, options = {}) => {
               "Unable to connect to the server: net/http: TLS handshake timeout"
             )
           ) {
+            logger.debug(
+              `kubectl network error(net/http: TLS handshake timeout): retrying...`
+            )
             throw err
           }
           bail(err)
