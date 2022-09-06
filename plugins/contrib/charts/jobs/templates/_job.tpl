@@ -214,6 +214,14 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            {{ if and .Values.deployKey.enabled (or $run.mountDeployKey .Values.mountDeployKey) }}
+            - name: deploy-key
+              secret:
+                secretName: {{ .Values.deployKey.secretRefName }}
+                items:
+                  - key: {{ .Values.deployKey.secretRefKey }}
+                    path: deploy-key
+            {{ end }}
             {{/*
             - name: workflow
               mountPath: /workflow

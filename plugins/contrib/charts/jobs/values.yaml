@@ -40,4 +40,5 @@ deployKey:
   enabled: false
   secretRefName: deploy-key
   secretRefKey: DEPLOY_KEY
+mountDeployKey: false
 _pluginValuesCompilerRecommendedJobs: true
