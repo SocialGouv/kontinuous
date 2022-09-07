@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.74.4](https://github.com/SocialGouv/kontinuous/compare/v1.74.3...v1.74.4) (2022-09-07)
+
+
+### Bug Fixes
+
+* up rollout-status version to handle OOMKilled ([37db0a1](https://github.com/SocialGouv/kontinuous/commit/37db0a104d36a2e30b2128375b81a9c626a3ec52))
+
 ### [1.74.3](https://github.com/SocialGouv/kontinuous/compare/v1.74.2...v1.74.3) (2022-09-06)
 
 
