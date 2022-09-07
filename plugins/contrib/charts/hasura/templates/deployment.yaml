@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    component: {{ or .Values.component .Chart.Name }}
+    component: {{ (or .Values.component .Chart.Name) | lower }}
     application: {{ .Values.global.repositoryName }}
-  name: {{ or .Values.component .Chart.Name }}
+  name: {{ (or .Values.component .Chart.Name) | lower }}
   namespace: {{ or .Values.namespace .Values.global.namespace }}
   annotations: {}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      component: {{ or .Values.component .Chart.Name }}
+      component: {{ (or .Values.component .Chart.Name) | lower }}
   template:
     metadata:
       labels:
-        component: {{ or .Values.component .Chart.Name }}
+        component: {{ (or .Values.component .Chart.Name) | lower }}
         application: {{ .Values.global.repositoryName }}
     spec:
       initContainers:

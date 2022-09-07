@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    component: {{ or .Values.component .Chart.Name }}
+    component: {{ (or .Values.component .Chart.Name) | lower }}
     application: {{ .Values.global.repositoryName }}
-  name: {{ or .Values.component .Chart.Name }}
+  name: {{ (or .Values.component .Chart.Name) | lower }}
   namespace: {{ or .Values.namespace .Values.global.namespace }}
   annotations: {}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: {{ or .Values.component .Chart.Name }}
+      component: {{ (or .Values.component .Chart.Name) | lower }}
   template:
     metadata:
       labels:
-        component: {{ or .Values.component .Chart.Name }}
+        component: {{ (or .Values.component .Chart.Name) | lower }}
     spec:
       containers:
         - image: metabase/metabase:v0.44.0
@@ -26,7 +26,7 @@ spec:
             {{- end }}
           envFrom:
             - configMapRef:
-                name: {{ or .Values.component .Chart.Name }}
+                name: {{ (or .Values.component .Chart.Name) | lower }}
             {{- if gt (len .Values.envFrom) 0 }}
             {{- tpl (.Values.envFrom | toYaml) . | nindent 12 }}
             {{- end }}

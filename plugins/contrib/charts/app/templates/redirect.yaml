@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: "{{ or .Values.component .Chart.Name }}-redirect"
+  name: "{{ (or .Values.component .Chart.Name) | lower }}-redirect"
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/permanent-redirect: https://{{- include "contrib-helpers.ingress-host" . -}}$request_uri
@@ -19,5 +19,5 @@ spec:
       {{ range $host := .Values.redirectFrom }}
         - "{{ tpl $host $ }}"
       {{ end }}
-      secretName: "{{ or .Values.component .Chart.Name }}-redirect"
+      secretName: "{{ (or .Values.component .Chart.Name) | lower }}-redirect"
 {{ end }}

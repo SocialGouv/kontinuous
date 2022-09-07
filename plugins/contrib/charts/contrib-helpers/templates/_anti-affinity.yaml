@@ -20,7 +20,7 @@ podAntiAffinity:
       - key: component
         operator: In
         values:
-        - {{ or .Values.component .Chart.Name }}
+        - {{ (or .Values.component .Chart.Name) | lower }}
     topologyKey: "kubernetes.io/hostname"
 {{ end }}
 

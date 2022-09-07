@@ -3,9 +3,9 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   labels:
-    component: {{ or .Values.component .Chart.Name }}
-    application: {{ or .Values.component .Chart.Name }}
-  name: {{ or .Values.component .Chart.Name }}
+    component: {{ (or .Values.component .Chart.Name) | lower }}
+    application: {{ (or .Values.component .Chart.Name) | lower }}
+  name: {{ (or .Values.component .Chart.Name) | lower }}
   namespace: {{ .Values.namespace }}
 spec:
   schedule: 0 * * * *
@@ -15,14 +15,14 @@ spec:
       template:
         metadata:
           labels:
-            component: {{ or .Values.component .Chart.Name }}
-            application: {{ or .Values.component .Chart.Name }}
-          name: {{ or .Values.component .Chart.Name }}
+            component: {{ (or .Values.component .Chart.Name) | lower }}
+            application: {{ (or .Values.component .Chart.Name) | lower }}
+          name: {{ (or .Values.component .Chart.Name) | lower }}
           namespace: {{ .Values.namespace }}
         spec:
           restartPolicy: OnFailure
           containers:
-            - name: {{ or .Values.component .Chart.Name }}-container
+            - name: {{ (or .Values.component .Chart.Name) | lower }}-container
               image: node:14-alpine
               command:
                 - sh
@@ -30,7 +30,7 @@ spec:
                 - npx @socialgouv/matomo-postgres
               envFrom:
                 - secretRef:
-                    name: {{ or .Values.component .Chart.Name }}-cronjob
+                    name: {{ (or .Values.component .Chart.Name) | lower }}-cronjob
               env:
                 - name: STARTDATE
                   value: "2019-01-01"
