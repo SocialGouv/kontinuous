@@ -53,7 +53,7 @@
     "dev:webhook": "docker-compose up --build webhook",
     "docker:webhook": "docker-compose -f docker-compose.built.yaml up --build webhook",
     "docker:kontinuous:build": "docker build -f packages/kontinuous/Dockerfile -t kontinuous .",
-    "docker:kontinuous:run": "docker run -t -v $PWD:/workspace -e KS_ISLOCAL=true kontinuous",
+    "docker:kontinuous:run": "docker run -it -v $PWD:/workspace -e KS_ISLOCAL=true kontinuous",
     "docker:kontinuous": "yarn docker:kontinuous:build && yarn docker:kontinuous:run",
     "dev:docs": "docsify serve docs",
     "logs:remote-webhook": "kubectl --context prod -n kontinuous-webhook logs -f --all-containers -l component=kontinuous-webhook",
