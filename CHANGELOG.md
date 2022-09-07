@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.74.5](https://github.com/SocialGouv/kontinuous/compare/v1.74.4...v1.74.5) (2022-09-07)
+
+
+### Bug Fixes
+
+* configOverride allow empty ([e93a06f](https://github.com/SocialGouv/kontinuous/commit/e93a06fab3af068c54f8f27045ed44dd42ce8f64))
+* docker shortcut cmd ([4bed34d](https://github.com/SocialGouv/kontinuous/commit/4bed34db82da36cd60670d329ae2806c1664f5b4))
+* lower chart name auto ([95568e3](https://github.com/SocialGouv/kontinuous/commit/95568e3ebf65c213a2cb11582ae43eb9056f4b78))
+
 ### [1.74.4](https://github.com/SocialGouv/kontinuous/compare/v1.74.3...v1.74.4) (2022-09-07)
 
 
