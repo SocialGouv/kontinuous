@@ -20,7 +20,7 @@ module.exports = async ({
   inlineConfigs = [],
   configDirs = [],
   configPreCompilers = [],
-  configOverride,
+  configOverride = {},
   env = process.env,
   options,
   mergeWith = deepmerge,
