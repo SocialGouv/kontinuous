@@ -1,6 +1,5 @@
 const kubectlRetry = require("~common/utils/kubectl-retry")
 const { ctx } = require("@modjo-plugins/core")
-const logger = require("~common/utils/logger")
 
 async function listNamespaces({ kubeconfig }) {
   const logger = ctx.require("logger")
