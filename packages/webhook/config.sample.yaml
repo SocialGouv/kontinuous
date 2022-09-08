@@ -3,7 +3,7 @@ tokens:
     file: ./tests/sample/awesome/token
 
 rootKubeconfigs:
-  - file: ./tests/sample/kubeconfig-dev
+  - file: /home/ubuntu/.kube/config
     cluster: dev
 
 kubeconfigs:

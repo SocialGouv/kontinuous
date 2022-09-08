@@ -10,7 +10,6 @@ services:
     volumes:
       - ./:/app
       - ${KUBECONFIG:-~/.kube/config}:/home/ubuntu/.kube/config:ro
-      - ${KUBECONFIG_DEV:-~/.kube/config}:/app/packages/webhook/tests/sample/kubeconfig-dev:ro
     ports:
       - ${KUBEWEBHOOK_EXPOSED_PORT:-7530}:3000
     environment:
