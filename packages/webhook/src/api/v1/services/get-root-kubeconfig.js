@@ -7,7 +7,7 @@ module.exports = () => (cluster) => {
   if (!kubeconfig) {
     const msg = `root kubeconfig not found for cluster: "${cluster}"`
     logger.error({ cluster }, msg)
-    throw new Error(msg)
+    return false
   }
   return kubeconfig
 }

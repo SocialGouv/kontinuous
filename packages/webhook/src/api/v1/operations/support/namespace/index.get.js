@@ -1,5 +1,6 @@
 const kubectlRetry = require("~common/utils/kubectl-retry")
 const { ctx } = require("@modjo-plugins/core")
+const logger = require("~common/utils/logger")
 
 async function listNamespaces({ kubeconfig }) {
   const logger = ctx.require("logger")
@@ -19,13 +20,14 @@ module.exports = function ({ services: { getRootKubeconfig } }) {
       const { cluster } = req.query
 
       const kubeconfig = getRootKubeconfig(cluster)
-
-      try {
-        const namespaces = await listNamespaces({ kubeconfig })
-        return res.status(200).json({ namespaces })
-      } catch (err) {
-        return res.status(500).json({ error: err.message })
+      if (kubeconfig === false) {
+        return res
+          .status(404)
+          .json({ message: "kubeconfig for cluster not found" })
       }
+
+      const namespaces = await listNamespaces({ kubeconfig })
+      return res.status(200).json({ namespaces })
     },
   ]
 }
