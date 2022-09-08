@@ -20,6 +20,7 @@ module.exports = async function createConfig() {
   const {
     tokens: projectTokens = [],
     kubeconfigs: projectKubeconfigs = [],
+    rootKubeconfigs: fileRootKubeconfigs = [],
     repositories: projectRepositories = [],
   } = yamlConfig
 
@@ -38,6 +39,11 @@ module.exports = async function createConfig() {
       kubeconfigs[project] = {}
     }
     kubeconfigs[project][cluster] = file
+  }
+
+  const rootKubeconfigs = {}
+  for (const { file, cluster } of fileRootKubeconfigs) {
+    rootKubeconfigs[cluster] = file
   }
 
   const repositories = {}
@@ -85,6 +91,7 @@ module.exports = async function createConfig() {
         tokens,
         supertoken,
         kubeconfigs,
+        rootKubeconfigs,
       },
       repositories,
       pipelineImage,

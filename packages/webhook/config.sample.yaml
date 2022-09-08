@@ -2,6 +2,10 @@ tokens:
   - project: awesome
     file: ./tests/sample/awesome/token
 
+rootKubeconfigs:
+  - file: ./tests/sample/kubeconfig-dev
+    cluster: dev
+
 kubeconfigs:
   - project: awesome
     file: ./tests/sample/awesome/kubeconfig
