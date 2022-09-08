@@ -1,4 +1,4 @@
-security: 
+security:
   - token: ["webhook"]
 
 parameters:
@@ -8,10 +8,15 @@ parameters:
       type: string
       format: clusterName
     required: true
-    
+
 responses:
   200:
     content:
-      text/plain:
+      application/json:
         schema:
-          $ref: "#/components/schemas/textStream"
+          type: object
+          properties:
+            namespaces:
+              type: array
+              items:
+                type: string

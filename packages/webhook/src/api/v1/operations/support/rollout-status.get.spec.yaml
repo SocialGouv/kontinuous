@@ -1,4 +1,4 @@
-security: 
+security:
   - token: ["webhook"]
 
 parameters:
@@ -14,10 +14,25 @@ parameters:
       type: string
       format: namespace
     required: true
- 
+
 responses:
   200:
     content:
-      text/plain:
+      application/json:
         schema:
-          $ref: "#/components/schemas/textStream"
+          type: object
+          properties:
+            status:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                error:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                    type:
+                      type: string
