@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.74.9](https://github.com/SocialGouv/kontinuous/compare/v1.74.8...v1.74.9) (2022-09-08)
+
+
+### Bug Fixes
+
+* docker-compose unexpected dirs creation ([1aba073](https://github.com/SocialGouv/kontinuous/commit/1aba07373a8627e30f86cbc221af72d8ccef697d))
+* husky ([21a0b0d](https://github.com/SocialGouv/kontinuous/commit/21a0b0d3ce3332c2e67f704b2a1a25159dc71b00))
+
 ### [1.74.8](https://github.com/SocialGouv/kontinuous/compare/v1.74.7...v1.74.8) (2022-09-08)
 
 
