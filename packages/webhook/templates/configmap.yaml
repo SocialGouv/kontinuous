@@ -15,6 +15,12 @@ data:
         file: /secrets/{{ or $secret.project $secret.name }}/tokens/{{ or $secret.tokenId $index }}/token
       {{ end }}
 
+    rootKubeconfigs:
+      {{ range $secret := .Values.rootKubeconfigSecrets }}
+      - file: "/secrets/{{ or $secret.project $secret.name }}/root-kubeconfig/{{ $secret.cluster }}/kubeconfig"
+        cluster: {{ $secret.cluster | quote }}
+      {{ end }}
+
     kubeconfigs:
       {{ range $secret := .Values.kubeconfigSecrets }}
       - project: {{ $secret.project | quote }}

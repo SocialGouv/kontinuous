@@ -1,0 +1,22 @@
+security:
+  - token: ["webhook"]
+
+parameters:
+  - in: query
+    name: cluster
+    schema:
+      type: string
+      format: clusterName
+    required: true
+
+responses:
+  200:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            namespaces:
+              type: array
+              items:
+                type: string

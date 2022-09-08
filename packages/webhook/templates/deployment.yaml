@@ -24,6 +24,14 @@ spec:
         - name: artifacts
           persistentVolumeClaim:
             claimName: artifacts
+        {{ range $secret := .Values.rootKubeconfigSecrets }}
+        - name: secret-root-kubeconfig-{{ $secret.name }}
+          secret:
+            secretName: {{ $secret.name }}
+            items:
+            - key: {{ or $secret.key "KUBECONFIG" }}
+              path: kubeconfig
+        {{ end }}
         {{ range $secret := .Values.kubeconfigSecrets }}
         - name: secret-kubeconfig-{{ $secret.name }}
           secret:
@@ -66,6 +74,10 @@ spec:
               subPath: config.yaml
             - name: artifacts
               mountPath: /artifacts
+            {{ range $secret := .Values.rootKubeconfigSecrets }}
+            - name: secret-root-kubeconfig-{{ $secret.name }}
+              mountPath: /secrets/{{ or $secret.project $secret.name }}/root-kubeconfig/{{ $secret.cluster }}
+            {{ end }}
             {{ range $secret := .Values.kubeconfigSecrets }}
             - name: secret-kubeconfig-{{ $secret.name }}
               mountPath: /secrets/{{ or $secret.project $secret.name }}/kubeconfig/{{ $secret.cluster }}
