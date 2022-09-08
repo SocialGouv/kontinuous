@@ -105,6 +105,13 @@ spec:
               value: {{ .Values.pipelineCheckoutImage }}
             - name: KUBEWEBHOOK_PIPELINE_IMAGE
               value: {{ .Values.pipelineImage }}
+            {{ if .Values.rootTokenSecret }}
+            - name: KUBEWEBHOOK_SUPERTOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.rootTokenSecretKey }}
+                  name: {{ .Values.rootTokenSecret }}
+            {{ end }}
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}

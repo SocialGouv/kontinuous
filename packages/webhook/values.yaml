@@ -38,6 +38,8 @@ pipelineImage: ghcr.io/socialgouv/kontinuous:1
 # pipelineImage: harbor.fabrique.social.gouv.fr/sre/kontinuous:v1
 
 # ACL
+rootTokenSecret:
+rootTokenSecretKey: TOKEN
 rootKubeconfigSecrets: []
 kubeconfigSecrets: []
 tokenSecrets: []
