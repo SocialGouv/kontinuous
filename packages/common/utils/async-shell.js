@@ -5,6 +5,7 @@ const parseCommand = require("./parse-command")
 
 const promiseFromChildProcess = (child, callback, logger, extraOptions) => {
   const { ignoreErrors = [] } = extraOptions
+  child.on("error", () => {}) // avoid crash on not found executable
   const out = []
   child.stdout.on("data", (data) => {
     out.push(data)
