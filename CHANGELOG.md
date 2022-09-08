@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.74.8](https://github.com/SocialGouv/kontinuous/compare/v1.74.7...v1.74.8) (2022-09-08)
+
+
+### Bug Fixes
+
+* add rollout-status to prod webhook ([68a61df](https://github.com/SocialGouv/kontinuous/commit/68a61dfeabe6c0e1087f22aeda3dfa024967b7d6))
+* docker-compose var subst ([e1658e9](https://github.com/SocialGouv/kontinuous/commit/e1658e9294a41fafdcfb483265f370c76e6d73d1))
+* nodemon webhook ([5c246d5](https://github.com/SocialGouv/kontinuous/commit/5c246d545a72268aa629cd77079f6f228909bf53))
+* up ([72d6c42](https://github.com/SocialGouv/kontinuous/commit/72d6c42e4b4f713ef8c0a80dece34eb3782037e0))
+
 ### [1.74.7](https://github.com/SocialGouv/kontinuous/compare/v1.74.6...v1.74.7) (2022-09-08)
 
 
