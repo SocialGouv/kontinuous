@@ -1,0 +1,17 @@
+security: 
+  - token: ["webhook"]
+
+parameters:
+  - in: query
+    name: cluster
+    schema:
+      type: string
+      format: clusterName
+    required: true
+    
+responses:
+  200:
+    content:
+      text/plain:
+        schema:
+          $ref: "#/components/schemas/textStream"
