@@ -40,7 +40,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "postinstall": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\"",
+    "postinstall": "[ -d '.husky' ] && husky install || true",
     "lint": "eslint .",
     "release": "standard-version",
     "retag-legacy": "TAG=$(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1) && git tag -f $TAG && git push origin :refs/tags/$TAG && git push -f origin master --tags",
