@@ -721,5 +721,79 @@ paths:
       summary: getOneLogsPipeline
     parameters: []
     description: /logs/pipeline
+  /support/namespace/:
+    get:
+      security:
+        - token:
+            - webhook
+      parameters:
+        - in: query
+          name: cluster
+          schema:
+            type: string
+            format: clusterName
+          required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  namespaces:
+                    type: array
+                    items:
+                      type: string
+          description: 'Default description: Success results getManySupportNamespace'
+      operationId: getManySupportNamespace
+      description: 'Default description: Query: getManySupportNamespace'
+      summary: getManySupportNamespace
+    parameters: []
+    description: /support/namespace/
+  /support/rollout-status:
+    get:
+      security:
+        - token:
+            - webhook
+      parameters:
+        - in: query
+          name: cluster
+          schema:
+            type: string
+            format: clusterName
+          required: true
+        - in: query
+          name: namespace
+          schema:
+            type: string
+            format: namespace
+          required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      status:
+                        type: boolean
+                      error:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                          message:
+                            type: string
+                          type:
+                            type: string
+          description: 'Default description: Success results getOneSupportRolloutStatus'
+      operationId: getOneSupportRolloutStatus
+      description: 'Default description: Query: getOneSupportRolloutStatus'
+      summary: getOneSupportRolloutStatus
+    parameters: []
+    description: /support/rollout-status
 "
 `;
