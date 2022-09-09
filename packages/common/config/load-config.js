@@ -6,9 +6,9 @@ const fs = require("fs-extra")
 const set = require("lodash.set")
 const defaultsDeep = require("lodash.defaultsdeep")
 const qs = require("qs")
-const micromatch = require("micromatch")
 
 const ctx = require("../ctx")
+const patternMatch = require("../utils/pattern-match")
 const loadStructuredConfig = require("../utils/load-structured-config")
 const getGitRef = require("../utils/get-git-ref")
 const getGitSha = require("../utils/get-git-sha")
@@ -226,7 +226,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     environmentPatterns: {
       transform: (value) => ({
         ...{
-          prod: "v[0-9]*",
+          prod: "v([0-9])*.([0-9])*.([0-9])*",
           preprod: ["main", "master"],
           dev: "**",
         },
@@ -345,7 +345,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         for (const [cluster, envPatterns] of Object.entries(
           clusterEnvironments
         )) {
-          if (envPatterns && micromatch.isMatch(environment, envPatterns)) {
+          if (envPatterns && patternMatch(environment, envPatterns)) {
             return cluster
           }
         }
@@ -378,7 +378,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         for (const [context, envPatterns] of Object.entries(
           kubeconfigContextEnvironments
         )) {
-          if (envPatterns && micromatch.isMatch(environment, envPatterns)) {
+          if (envPatterns && patternMatch(environment, envPatterns)) {
             return context
           }
         }

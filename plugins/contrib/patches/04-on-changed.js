@@ -1,5 +1,3 @@
-const micromatch = require("micromatch")
-
 const changeRulePrefix = "kapp.k14s.io/change-rule"
 const changeGroupPrefix = "kapp.k14s.io/change-group"
 const changeGroupValuePrefix = "kontinuous/"
@@ -67,7 +65,7 @@ const removeDependentsOf = (
 
 module.exports = async (manifests, _options, context) => {
   const { config, utils } = context
-  const { yaml, KontinuousPluginError } = utils
+  const { yaml, KontinuousPluginError, patternMatch } = utils
   const { changedPaths } = config
 
   const removeManifests = new Set()
@@ -82,9 +80,7 @@ module.exports = async (manifests, _options, context) => {
       onChangedPaths = [onChangedPaths]
     }
 
-    const changed = changedPaths.some((p) =>
-      micromatch.isMatch(p, onChangedPaths)
-    )
+    const changed = changedPaths.some((p) => patternMatch(p, onChangedPaths))
 
     const isFirstPushOnBranch = changedPaths.length === 0
 
