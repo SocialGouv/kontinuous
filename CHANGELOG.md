@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.75.0](https://github.com/SocialGouv/kontinuous/compare/v1.74.12...v1.75.0) (2022-09-13)
+
+
+### Features
+
+* Increase delay before job cleaning to 48h ([d93552d](https://github.com/SocialGouv/kontinuous/commit/d93552da68bef87fa5cf66a203a526f659fde5c1))
+
+
+### Bug Fixes
+
+* options+bare contrib no require defaultCharts ([af210ee](https://github.com/SocialGouv/kontinuous/commit/af210ee51ecf28012afb45ec30f9153962d2cb70))
+
 ### [1.74.12](https://github.com/SocialGouv/kontinuous/compare/v1.74.11...v1.74.12) (2022-09-13)
 
 
