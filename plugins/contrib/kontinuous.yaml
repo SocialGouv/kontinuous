@@ -1,6 +1,6 @@
 valuesCompilers:
   globalDefaults:
-    enabled: false
+    enabled: true
 
 patches:
   certs:
