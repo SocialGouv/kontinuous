@@ -86,6 +86,10 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         }
       },
     },
+    gitRequired: {
+      env: "KS_GIT_REQUIRED",
+      envParser: (str) => yaml.load(str),
+    },
     gitBranch: {
       defaultFunction: async (config, { options, env: environ }) => {
         let ref
@@ -109,9 +113,16 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     gitSha: {
       env: "KS_GIT_SHA",
       option: "commit",
-      defaultFunction: (config) => {
+      defaultFunction: async (config) => {
         if (config.git) {
-          return getGitSha(config.workspacePath)
+          try {
+            const sha1 = await getGitSha(config.workspacePath)
+            return sha1
+          } catch (err) {
+            if (config.gitRequired) {
+              throw err
+            }
+          }
         }
         logger.warn(
           `no git sha defined and can't be inferred, default to "0000000000000000000000000000000000000000"`
@@ -120,7 +131,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
       },
     },
     gitRepositoryUrl: {
-      defaultFunction: (config, { options, env: environ }) => {
+      defaultFunction: async (config, { options, env: environ }) => {
         if (environ.KS_GIT_REPOSITORY_URL) {
           return environ.KS_GIT_REPOSITORY_URL
         }
@@ -132,7 +143,14 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
           return `${defaultRepositoryProvider}/${repository}`
         }
         if (config.git) {
-          return getGitUrl(config.workspacePath)
+          try {
+            const gitUrl = await getGitUrl(config.workspacePath)
+            return gitUrl
+          } catch (err) {
+            if (config.gitRequired) {
+              throw err
+            }
+          }
         }
         logger.warn(
           `no git repository url defined and can't be inferred, default to ""`
@@ -141,9 +159,16 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
       },
     },
     gitRepository: {
-      defaultFunction: (config) => {
+      defaultFunction: async (config) => {
         if (config.gitRepositoryUrl) {
-          return repositoryFromGitUrl(config.gitRepositoryUrl)
+          try {
+            const repo = await repositoryFromGitUrl(config.gitRepositoryUrl)
+            return repo
+          } catch (err) {
+            if (config.gitRequired) {
+              throw err
+            }
+          }
         }
         const dirname = path.basename(config.workspacePath)
         logger.warn(
@@ -430,7 +455,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     diffBranch: {
       defaultFunction: async (config) => {
-        if (!config.git || config.disableDiff) {
+        if (!config.git || config.disableDiff || !config.gitRepositoryUrl) {
           return
         }
         const { gitBranch, gitRepositoryUrl, workspacePath } = config
@@ -485,7 +510,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
           modified: [],
           removed: [],
         }
-        if (!config.git || config.disableDiff) {
+        if (!config.git || config.disableDiff || !config.gitRepositoryUrl) {
           return commits
         }
         const { gitBranch } = config
