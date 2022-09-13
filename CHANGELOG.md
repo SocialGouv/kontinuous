@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.74.12](https://github.com/SocialGouv/kontinuous/compare/v1.74.11...v1.74.12) (2022-09-13)
+
+
+### Bug Fixes
+
+* bare contrib ([cd02f60](https://github.com/SocialGouv/kontinuous/commit/cd02f60d7daaf75998e66441911f26534b1e3177))
+* clean failed add job kind ([e82422d](https://github.com/SocialGouv/kontinuous/commit/e82422d06c38b7bbd97f9c561e281304720206c1))
+* default doesn't require git ([74f87ed](https://github.com/SocialGouv/kontinuous/commit/74f87ed6de21b7d225fc377985cd9d82523af8cf))
+* use kubectlRetry ([ce829b4](https://github.com/SocialGouv/kontinuous/commit/ce829b42056cd104dc8034e11b8a11ce359f13a1))
+
 ### [1.74.11](https://github.com/SocialGouv/kontinuous/compare/v1.74.10...v1.74.11) (2022-09-13)
 
 
