@@ -5,6 +5,8 @@ dependencies:
     valuesCompilers:
       globalDefaults:
         enabled: true
+        options:
+          enableDefaultCharts: true
 
     patches:
       certs:

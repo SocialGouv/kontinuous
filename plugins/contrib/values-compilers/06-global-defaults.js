@@ -15,7 +15,7 @@ module.exports = async (values, options, { config, utils, ctx }) => {
 
   const { repositoryName } = config
 
-  const { registry } = options
+  const { registry, enableDefaultCharts = false } = options
 
   const namespace = isProd
     ? repositoryName
@@ -77,6 +77,10 @@ module.exports = async (values, options, { config, utils, ctx }) => {
       sha,
       shortSha,
       env: environment,
+      rancherNamespaceEnabled:
+        enableDefaultCharts && values.global.kontinuous.hasAll,
+      securityPoliciesEnabled:
+        enableDefaultCharts && values.global.kontinuous.hasAll,
       ingress: {
         annotations: {},
       },
