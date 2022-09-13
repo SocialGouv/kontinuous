@@ -1,7 +1,0 @@
-{
-  "name": "~github-snippets",
-  "packageManager": "yarn@4.0.0-rc.1",
-  "dependencies": {
-    "tweetsodium": "0.0.5"
-  }
-}
