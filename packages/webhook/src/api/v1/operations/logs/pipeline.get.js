@@ -8,8 +8,8 @@ const cleanGitRef = require("~common/utils/clean-git-ref")
 const parseCommand = require("~common/utils/parse-command")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const normalizeRepositoryKey = require("~common/utils/normalize-repository-key")
-const asyncShell = require("~common/utils/async-shell")
 const refEnv = require("~common/utils/ref-env")
+const kubectlRetry = require("~common/utils/kubectl-retry")
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = function ({ services }) {
@@ -18,15 +18,14 @@ module.exports = function ({ services }) {
   const checkJobExists = async ({ jobName, commit, kubeconfig }) => {
     const jobNamespace = reqCtx.require("jobNamespace")
     try {
-      const jsonPodStatus = await asyncShell(
-        `kubectl
-        -n ${jobNamespace}
+      const jsonPodStatus = await kubectlRetry(
+        `-n ${jobNamespace}
         get pods
         --selector=job-name=${jobName},commit-sha=${commit}
         --sort-by=.metadata.creationTimestamp
         --output=jsonpath={.items[-1].status}
       `,
-        { env: { ...process.env, KUBECONFIG: kubeconfig } }
+        { kubeconfig, logger }
       )
       const podStatus = JSON.parse(jsonPodStatus)
       const { phase } = podStatus
