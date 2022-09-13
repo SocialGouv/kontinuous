@@ -40,7 +40,7 @@ module.exports = ({
     spec: {
       backoffLimit: 0,
       activeDeadlineSeconds: 3600,
-      ttlSecondsAfterFinished: 1800,
+      ttlSecondsAfterFinished: 2 * 24 * 60 * 60,
       template: {
         metadata: {
           labels: {
