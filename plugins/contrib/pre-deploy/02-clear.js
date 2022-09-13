@@ -1,5 +1,5 @@
 const defaultOptions = {
-  kind: ["Deployment", "StatefulSet", "DaemonSet"],
+  kind: ["Deployment", "StatefulSet", "DaemonSet", "Job"],
   env: ["dev"],
 }
 
