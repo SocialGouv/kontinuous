@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.75.4](https://github.com/SocialGouv/kontinuous/compare/v1.75.3...v1.75.4) (2022-09-14)
+
+
+### Bug Fixes
+
+* deps graph rankdir=LR ([d8706af](https://github.com/SocialGouv/kontinuous/commit/d8706af61546c77ee9e608ae8fa53c12b38c3c62))
+
 ### [1.75.3](https://github.com/SocialGouv/kontinuous/compare/v1.75.2...v1.75.3) (2022-09-14)
 
 
