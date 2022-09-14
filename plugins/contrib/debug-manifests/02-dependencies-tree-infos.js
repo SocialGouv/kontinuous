@@ -65,6 +65,7 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
   // lib https://github.com/ironcamel/Graph-Easy
   const result = await utils.asyncShell("graph-easy", {}, (proc) => {
     proc.stdin.write(`digraph {
+    rankdir=LR
     ${uml.join("\n")}
 }`)
     proc.stdin.end()
