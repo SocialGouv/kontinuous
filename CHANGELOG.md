@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.75.1](https://github.com/SocialGouv/kontinuous/compare/v1.75.0...v1.75.1) (2022-09-14)
+
+
+### Bug Fixes
+
+* Increase delay before job cleaning to 48h for all jobs ([fdc4824](https://github.com/SocialGouv/kontinuous/commit/fdc482447fa7738809c6d4c09da2eff22f8737a6))
+* Keep janitor/ttl on jobs as a cleaning security but increase it to 7d ([d0ac9a4](https://github.com/SocialGouv/kontinuous/commit/d0ac9a4982a3837b9e3e61ecdc6ddec528aad89c))
+* optimize docker image for cli ([1c19de4](https://github.com/SocialGouv/kontinuous/commit/1c19de4b1ad575e32b85b9eb80c26f69882d86d8))
+* Update tests snapshots with new timing values ([63389aa](https://github.com/SocialGouv/kontinuous/commit/63389aa5a752b7164dafb370948cdcdfce537c63))
+
 ## [1.75.0](https://github.com/SocialGouv/kontinuous/compare/v1.74.12...v1.75.0) (2022-09-13)
 
 
