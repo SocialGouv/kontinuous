@@ -39,7 +39,6 @@ module.exports = async (
             namespace,
             selector,
           })
-          console.log({ kubeconfig, kubecontext, namespace, selector, status })
           const { success, error } = status
           if (!success) {
             if (error.code === "not-found") {
