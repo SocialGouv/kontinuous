@@ -88,8 +88,8 @@ FROM node as cli
 RUN groupadd -g 1001 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1001 ubuntu
 RUN mkdir -p /opt && chown 1001:1001 /opt
 
-RUN mkdir -p /workspace
-RUN chown 1001:1001 /workspace
+RUN mkdir -p /workspace && chown 1001:1001 /workspace
+RUN mkdir -p /opt/kontinuous && chown 1001:1001 /opt/kontinuous
 
 RUN mkdir /yarn
 RUN chown 1001:1001 /yarn
