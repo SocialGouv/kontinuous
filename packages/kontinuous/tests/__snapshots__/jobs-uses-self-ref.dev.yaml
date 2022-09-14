@@ -84,7 +84,7 @@ metadata:
     kapp.k14s.io/change-rule.db..create-secret: >-
       upsert after upserting
       kontinuous/db..create-secret.test-jobs-uses-self-ref-feature-branch-1
-    janitor/ttl: '1800'
+    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
@@ -98,7 +98,7 @@ metadata:
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
-  ttlSecondsAfterFinished: 1800
+  ttlSecondsAfterFinished: 172800
   template:
     metadata:
       labels:
@@ -205,7 +205,7 @@ metadata:
     kapp.k14s.io/change-group.db: kontinuous/db.test-jobs-uses-self-ref-feature-branch-1
     kapp.k14s.io/change-group.db.create-secret: kontinuous/db.create-secret.test-jobs-uses-self-ref-feature-branch-1
     kapp.k14s.io/change-group.db..create-secret: kontinuous/db..create-secret.test-jobs-uses-self-ref-feature-branch-1
-    janitor/ttl: '1800'
+    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
@@ -219,7 +219,7 @@ metadata:
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
-  ttlSecondsAfterFinished: 1800
+  ttlSecondsAfterFinished: 172800
   template:
     metadata:
       labels:

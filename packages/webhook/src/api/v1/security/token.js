@@ -1,7 +1,11 @@
 module.exports =
   ({ services: { getProjectTokens, projectGranted } }) =>
   async (req, _scopes, _schema) => {
-    const { token: queryToken } = req.query
+    let { token: queryToken } = req.query
+    if (!queryToken) {
+      queryToken = req.headers.authorization
+    }
+
     if (!queryToken) {
       return false
     }

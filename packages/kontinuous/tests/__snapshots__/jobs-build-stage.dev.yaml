@@ -329,7 +329,7 @@ metadata:
     kapp.k14s.io/change-rule.db..create-secret: >-
       upsert after upserting
       kontinuous/db..create-secret.test-jobs-build-stage-feature-branch-1
-    janitor/ttl: '1800'
+    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs-dev
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs-dev/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
@@ -343,7 +343,7 @@ metadata:
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
-  ttlSecondsAfterFinished: 1800
+  ttlSecondsAfterFinished: 172800
   template:
     metadata:
       labels:
@@ -450,7 +450,7 @@ metadata:
     kapp.k14s.io/change-group.db: kontinuous/db.test-jobs-build-stage-feature-branch-1
     kapp.k14s.io/change-group.db.create-secret: kontinuous/db.create-secret.test-jobs-build-stage-feature-branch-1
     kapp.k14s.io/change-group.db..create-secret: kontinuous/db..create-secret.test-jobs-build-stage-feature-branch-1
-    janitor/ttl: '1800'
+    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs-dev
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs-dev/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
@@ -464,7 +464,7 @@ metadata:
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
-  ttlSecondsAfterFinished: 1800
+  ttlSecondsAfterFinished: 172800
   template:
     metadata:
       labels:
@@ -562,7 +562,7 @@ metadata:
     kapp.k14s.io/change-group.build-app: kontinuous/build-app.test-jobs-build-stage-feature-branch-1
     kapp.k14s.io/change-group.build-app.kaniko: kontinuous/build-app.kaniko.test-jobs-build-stage-feature-branch-1
     kapp.k14s.io/change-group.build-app..kaniko: kontinuous/build-app..kaniko.test-jobs-build-stage-feature-branch-1
-    janitor/ttl: '1800'
+    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
@@ -576,7 +576,7 @@ metadata:
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
-  ttlSecondsAfterFinished: 1800
+  ttlSecondsAfterFinished: 172800
   template:
     metadata:
       labels:
@@ -683,7 +683,7 @@ metadata:
     kapp.k14s.io/change-group.build-hasura: kontinuous/build-hasura.test-jobs-build-stage-feature-branch-1
     kapp.k14s.io/change-group.build-hasura.kaniko: kontinuous/build-hasura.kaniko.test-jobs-build-stage-feature-branch-1
     kapp.k14s.io/change-group.build-hasura..kaniko: kontinuous/build-hasura..kaniko.test-jobs-build-stage-feature-branch-1
-    janitor/ttl: '1800'
+    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
@@ -697,7 +697,7 @@ metadata:
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
-  ttlSecondsAfterFinished: 1800
+  ttlSecondsAfterFinished: 172800
   template:
     metadata:
       labels:
