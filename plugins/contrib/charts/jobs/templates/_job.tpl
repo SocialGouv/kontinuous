@@ -49,7 +49,7 @@ metadata:
     {{- range $need := $run.needs }}
     kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting kontinuous/{{ $need }}.{{ $val.global.namespace }}"
     {{- end }}
-    janitor/ttl: "1800"
+    janitor/ttl: "7d"
     {{- if $run.onChangedPaths }}
     kontinuous/onChangedPaths: |
       {{- range $val := $run.onChangedPaths }}
