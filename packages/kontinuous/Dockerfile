@@ -1,7 +1,6 @@
 ARG UBUNTU_VERSION=22.04
 
-FROM ubuntu:$UBUNTU_VERSION as base
-
+FROM ubuntu:$UBUNTU_VERSION as downloader
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
     curl \
@@ -11,11 +10,13 @@ RUN apt-get update && \
     libgraph-easy-perl \
   && rm -rf /var/lib/apt/lists/*
 
+FROM downloader as kubectl
 ARG KUBECTL_VERSION=v1.25.0
 ENV KUBECTL_VERSION=$KUBECTL_VERSION
 RUN curl -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl
 
+FROM downloader as helm
 ARG HELM_VERSION=v3.9.3
 ENV HELM_VERSION=$HELM_VERSION
 RUN curl -sL https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar xz -C /tmp/ \
@@ -23,34 +24,38 @@ RUN curl -sL https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar x
   && chmod +x /usr/local/bin/helm \
   && rm -r /tmp/linux-amd64
 
-ARG NODE_VERSION=18
-ENV NODE_VERSION=$NODE_VERSION
-RUN wget -qO- https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
-  && apt-get install nodejs \
-  && npm install -g yarn \
-  && rm -rf /var/lib/apt/lists/*
-
+FROM downloader as kapp
 ARG KAPP_VERSION=v0.52.0
 ENV KAPP_VERSION=$KAPP_VERSION
 RUN curl -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/${KAPP_VERSION}/kapp-linux-amd64 > /tmp/kapp \
   && mv /tmp/kapp /usr/local/bin/kapp \
   && chmod +x /usr/local/bin/kapp
 
+FROM downloader as rollout-status
 ARG ROLLOUT_STATUS_VERSION=v1.9.1
 ENV ROLLOUT_STATUS_VERSION=$ROLLOUT_STATUS_VERSION
 RUN curl -sL https://github.com/SocialGouv/rollout-status/releases/download/${ROLLOUT_STATUS_VERSION}/rollout-status-${ROLLOUT_STATUS_VERSION}-linux-amd64 > /tmp/rollout-status \
   && mv /tmp/rollout-status /usr/local/bin/rollout-status \
   && chmod +x /usr/local/bin/rollout-status
 
-RUN groupadd -g 1001 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1001 ubuntu
-RUN mkdir -p /opt && chown 1001:1001 /opt
+FROM ubuntu:$UBUNTU_VERSION as node
+ARG NODE_VERSION=18
+ENV NODE_VERSION=$NODE_VERSION
+RUN apt-get update && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
+    ca-certificates \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+  apt-get install -yq --no-install-recommends \
+    wget \
+    && wget -qO- https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
+    && apt-get install nodejs \
+    && npm install -g yarn \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
 
-RUN mkdir -p /opt/kontinuous
-WORKDIR /opt/kontinuous
-
-
-FROM base as packages
-
+FROM node as packages
 COPY --chown=1001:1001 package.json yarn.lock .yarnrc.yml ./
 COPY --chown=1001:1001 .yarn .yarn
 COPY --chown=1001:1001 packages/kontinuous/package.json ./packages/kontinuous/package.json
@@ -70,9 +75,18 @@ RUN node -e " \
   const packageZero = { ...package, version: '0.0.0' };  \
   fs.writeFileSync('packages/common/package.json', JSON.stringify(packageZero));"
 
-FROM base as server
+FROM node as plugins
+# pre-cache yarn package for official local plugins optimization
+COPY --chown=1001:1001 plugins/ /app/plugins/
+RUN \
+  cd /app/plugins/contrib && yarn  && \
+  cd /app/plugins/fabrique && yarn && \
+  yarn cache clean
 
-RUN npm install -g clean-modules
+FROM node as cli
+
+RUN groupadd -g 1001 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1001 ubuntu
+RUN mkdir -p /opt && chown 1001:1001 /opt
 
 RUN mkdir -p /workspace
 RUN chown 1001:1001 /workspace
@@ -81,48 +95,39 @@ RUN mkdir /yarn
 RUN chown 1001:1001 /yarn
 ENV YARN_CACHE_FOLDER /yarn
 
-RUN chown -R 1001:1001 .
-
-USER 1001
-
-RUN mkdir -p packages/kontinuous/src && mkdir -p packages/kontinuous/common
-
-COPY --from=packages --chown=1001:1001 /opt/kontinuous/package.json /opt/kontinuous/package.json
-COPY --from=packages --chown=1001:1001 /opt/kontinuous/yarn.lock /opt/kontinuous/yarn.lock
-COPY --from=packages --chown=1001:1001 /opt/kontinuous/.yarnrc.yml /opt/kontinuous/.yarnrc.yml
-COPY --from=packages --chown=1001:1001 /opt/kontinuous/.yarn /opt/kontinuous/.yarn
-COPY --from=packages --chown=1001:1001 /opt/kontinuous/packages/kontinuous/package.json /opt/kontinuous/packages/kontinuous/package.json
-COPY --from=packages --chown=1001:1001 /opt/kontinuous/packages/common/package.json /opt/kontinuous/packages/common/package.json
-
-RUN yarn workspaces focus kontinuous --production && yarn cache clean
-
-# pre-cache yarn package for official plugins optimization
-ENV KS_INLINE_CONFIG_SET "links.SocialGouv/kontinuous=/opt/kontinuous"
-COPY --chown=1001:1001 plugins/ ./plugins/
-RUN cd plugins/contrib && yarn && clean-modules
-RUN cd plugins/fabrique && yarn && clean-modules
-
-RUN rm -rf packages/kontinuous/src && rm -rf packages/kontinuous/common
-COPY --chown=1001:1001 packages/kontinuous/ ./packages/kontinuous/
-COPY --chown=1001:1001 packages/common/ ./packages/common/
-
-RUN clean-modules --exclude node_modules/yaml/dist/doc
-
-USER root
-RUN npm un -g clean-modules
-RUN apt-get remove -yq \
-    curl \
-    libcurl4 \
-    wget \
-  && rm -rf /var/lib/apt/lists/*
-USER 1001
-
-WORKDIR /workspace
-
 ENV HOME=/home/ubuntu
 RUN chmod a+rw $HOME
 RUN git config --global --add safe.directory /workspace
 ENV KUBECONFIG=$HOME/.kube/config
 RUN mkdir $HOME/.kube
+
+ENV KS_INLINE_CONFIG_SET "links.SocialGouv/kontinuous=/opt/kontinuous"
+
 ENTRYPOINT ["/opt/kontinuous/packages/kontinuous/bin/kontinuous"]
 CMD ["help"]
+
+USER 1001
+
+COPY --from=kubectl /usr/local/bin/kubectl /usr/local/bin/kubectl
+COPY --from=helm /usr/local/bin/helm /usr/local/bin/helm
+COPY --from=kapp /usr/local/bin/kapp /usr/local/bin/kapp
+COPY --from=rollout-status /usr/local/bin/rollout-status /usr/local/bin/rollout-status
+
+WORKDIR /opt/kontinuous
+
+RUN mkdir -p packages/kontinuous/src && mkdir -p packages/kontinuous/common
+COPY --from=packages --chown=1001:1001 /app/package.json ./package.json
+COPY --from=packages --chown=1001:1001 /app/yarn.lock ./yarn.lock
+COPY --from=packages --chown=1001:1001 /app/.yarnrc.yml ./.yarnrc.yml
+COPY --from=packages --chown=1001:1001 /app/.yarn ./.yarn
+COPY --from=packages --chown=1001:1001 /app/packages/kontinuous/package.json ./packages/kontinuous/package.json
+COPY --from=packages --chown=1001:1001 /app/packages/common/package.json ./packages/common/package.json
+
+RUN yarn workspaces focus kontinuous --production && yarn cache clean
+
+COPY --from=plugins --chown=1001:1001 /app/plugins/ ./plugins/
+
+COPY --chown=1001:1001 packages/kontinuous/ ./packages/kontinuous/
+COPY --chown=1001:1001 packages/common/ ./packages/common/
+
+WORKDIR /workspace
