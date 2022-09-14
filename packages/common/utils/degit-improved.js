@@ -1,4 +1,4 @@
-const degit = require("tiged2")
+const degit = require("tiged")
 
 const degitTagHasChanged = require("./degit-tag-has-changed")
 

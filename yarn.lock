@@ -11894,9 +11894,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tiged2@npm:^2.11.3":
+"tiged@npm:2.11.3":
   version: 2.11.3
-  resolution: "tiged2@npm:2.11.3"
+  resolution: "tiged@npm:2.11.3"
   dependencies:
     colorette: "npm:1.2.1"
     enquirer: "npm:2.3.6"
@@ -11909,7 +11909,7 @@ __metadata:
     tiny-glob: "npm:0.2.8"
   bin:
     degit: bin.js
-  checksum: f992d4943ce9e0ab5e4bc25761e6f58a8995d79c5dab7bc8303345c465b84b73aeba47d3030c5109793779d1d4e29cf3a99c8b6b3e6a819051fc5c7727332ab1
+  checksum: d2c692208e8865f20515769d64fe1c05750d5b83f4bdc8ef1a3a6a2b6b4eb5c95dc8eb47ae5bd76aa88661eaa5cb1446d818513f7a4d01f1d4c97266906149c2
   languageName: node
   linkType: hard
 
@@ -12922,7 +12922,7 @@ __metadata:
     parse-github-url: "npm:^1.0.2"
     qs: "npm:^6.11.0"
     sonic-boom: "npm:^3.0.0"
-    tiged2: "npm:^2.11.3"
+    tiged: "npm:2.11.3"
     which: "npm:^2.0.2"
     yaml: "npm:^2.0.1"
   peerDependencies:

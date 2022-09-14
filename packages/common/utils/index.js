@@ -4,6 +4,6 @@ module.exports = {
   ...exportDirModules(__dirname, {
     filter: (file) => file !== "index.js",
   }),
-  degit: require("tiged2"),
+  degit: require("tiged"),
   fs: require("fs-extra"),
 }
