@@ -69,7 +69,7 @@ spec:
   backoffLimit: {{ $run.retry }}
   {{ end }}
   activeDeadlineSeconds: 3600
-  ttlSecondsAfterFinished: 1800
+  ttlSecondsAfterFinished: 172800
   template:
     metadata:
       annotations:
