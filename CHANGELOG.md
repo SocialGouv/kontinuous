@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.77.1 (2022-09-20)
+
+
+### Bug Fixes
+
+* **create-db:** fix secret ttl ([9790c63](https://github.com/SocialGouv/kontinuous/commit/9790c63d9adb9e374b9c4b55c019e5cf1bc47fe7))
+
 ## 1.77.0 (2022-09-20)
 
 
