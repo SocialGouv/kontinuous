@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.76.0 (2022-09-20)
+
+
+### Features
+
+* **oauth2-proxy:** add additionalArgs ([#32](https://github.com/SocialGouv/kontinuous/issues/32)) ([778e150](https://github.com/SocialGouv/kontinuous/commit/778e15017ba64ef748cf4597e4c132202733acaf))
+
 ### [1.75.4](https://github.com/SocialGouv/kontinuous/compare/v1.75.3...v1.75.4) (2022-09-14)
 
 
