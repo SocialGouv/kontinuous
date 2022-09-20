@@ -10,3 +10,4 @@ ingress:
   enabled: true
   annotations: {}
 upstream: 
+additionalArgs: []

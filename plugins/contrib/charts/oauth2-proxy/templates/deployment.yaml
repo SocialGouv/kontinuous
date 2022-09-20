@@ -20,7 +20,12 @@ spec:
     spec:
       containers:
         - image: quay.io/oauth2-proxy/oauth2-proxy:v7.2.1
-          args: ["--upstream",  {{ .Values.upstream }}]
+          args:
+            - --upstream
+            - {{ .Values.upstream }}
+            {{- if gt (len .Values.additionalArgs) 0 }}
+            {{- tpl (.Values.additionalArgs | toYaml) . | nindent 12 }}
+            {{- end }}
           name: app
           ports:
             - containerPort: 4180
