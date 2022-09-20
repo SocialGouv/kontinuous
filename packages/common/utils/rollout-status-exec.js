@@ -35,7 +35,7 @@ module.exports = ({ kubeconfig, kubecontext, namespace, selector }) => {
         result = JSON.parse(resultJson)
         resolve(result)
       } catch (_err) {
-        reject(Buffer.concat(err).toString())
+        reject(new Error(Buffer.concat(err).toString()))
       }
     })
   })
