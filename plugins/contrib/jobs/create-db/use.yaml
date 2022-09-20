@@ -14,6 +14,7 @@ runs:
       JOB_NAMESPACE: "{{ $.Values.global.ciNamespace }}"
       PGDATABASE: "{{ tpl (or $.with.database $.Values.global.pgDatabase) . }}"
       PGUSER: "{{ tpl (or $.with.pgUser $.Values.global.pgUser) . }}"
+      SECRET_TTL: '{{ tpl (or $.with.secretTTL "24h") . }}'
     env:
       - name: USE_AZURE_FLEX
         value: '{{ if kindIs "invalid" $.with.useAzureFlex }}false{{ else }}{{ tpl $.with.useAzureFlex . }}{{ end }}' 
