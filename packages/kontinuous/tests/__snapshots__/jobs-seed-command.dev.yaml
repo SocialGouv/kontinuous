@@ -397,6 +397,8 @@ spec:
               value: autodevops_feature-branch-1
             - name: PGUSER
               value: user_feature-branch-1
+            - name: SECRET_TTL
+              value: 24h
           command:
             - /bin/bash
             - '-c'
