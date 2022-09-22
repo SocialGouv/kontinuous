@@ -35,6 +35,8 @@ module.exports = async ({ manifestsFile, dryRun }) => {
           --logs-all
           --wait-timeout ${deployTimeout}
           --dangerous-override-ownership-of-existing-resources
+          --diff-changes=true
+          --diff-context=4
           --yes
           -f ${manifestsFile}
       `
