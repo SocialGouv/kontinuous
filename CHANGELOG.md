@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.77.2](https://github.com/SocialGouv/kontinuous/compare/v1.77.1...v1.77.2) (2022-09-22)
+
+
+### Bug Fixes
+
+* enable kapp deep debugging ([c27e627](https://github.com/SocialGouv/kontinuous/commit/c27e627a1c805b10238ae4706d24d44f6ad28008))
+
 ### 1.77.1 (2022-09-20)
 
 

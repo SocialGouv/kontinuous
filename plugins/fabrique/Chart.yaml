@@ -1,6 +1,6 @@
 apiVersion: v2
 name: fabrique
-version: 1.77.1
+version: 1.77.2
 dependencies:
   - name: keycloakx
     repository: https://codecentric.github.io/helm-charts
@@ -8,5 +8,5 @@ dependencies:
     condition: keycloakx.enabled
   - name: contrib
     repository: file://./charts/contrib
-    version: 1.77.1
+    version: 1.77.2
     condition: contrib.enabled
