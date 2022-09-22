@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.77.3](https://github.com/SocialGouv/kontinuous/compare/v1.77.2...v1.77.3) (2022-09-22)
+
+
+### Bug Fixes
+
+* kapp debugging reduce noise ([edc10cc](https://github.com/SocialGouv/kontinuous/commit/edc10ccd338222ddbca860d277112ff1ec42332f))
+
 ### [1.77.2](https://github.com/SocialGouv/kontinuous/compare/v1.77.1...v1.77.2) (2022-09-22)
 
 
