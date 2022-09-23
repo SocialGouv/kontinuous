@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.77.5 (2022-09-23)
+
+
+### Bug Fixes
+
+* use fast-copy@2.1.3 ([#37](https://github.com/SocialGouv/kontinuous/issues/37)) ([94907aa](https://github.com/SocialGouv/kontinuous/commit/94907aae5abeb327ac1a4a3490c662f5d82111be))
+
 ### 1.77.4 (2022-09-23)
 
 
