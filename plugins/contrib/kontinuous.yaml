@@ -9,6 +9,10 @@ patches:
     enabled: false
   reloader:
     enabled: false
+  needsUsingKapp:
+    enabled: true
+  needsUsingInitcontainers:
+    enabled: false
 
 validators:
   rancherProjectId:
