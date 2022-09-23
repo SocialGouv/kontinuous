@@ -5621,10 +5621,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-copy@npm:^2.1.1":
-  version: 2.1.3
-  resolution: "fast-copy@npm:2.1.3"
-  checksum: 5a009604905a1abe22de0c59708976627e097d30c3687c57cc8eb25534f101785c246607996aa7a97cff1fcf50c642ae64087c5353a2c59b195a8eb1adb8296e
+"fast-copy@npm:2.1.4":
+  version: 2.1.4
+  resolution: "fast-copy@npm:2.1.4"
+  checksum: 82523d348dd542776da1d7a74a8eef68f97b167f0d79ea2a6b7cd1c0d9175bb60c8296e4e85ea6b317f0ce618fe82aee11ac04aef3509ebe27a8a017e2bf3ac0
   languageName: node
   linkType: hard
 
