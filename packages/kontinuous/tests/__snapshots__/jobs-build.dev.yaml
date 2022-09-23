@@ -772,7 +772,7 @@ spec:
           resources:
             limits:
               cpu: 2
-              memory: 4Gi
+              memory: 6Gi
             requests:
               cpu: 500m
               memory: 1Gi
@@ -892,7 +892,7 @@ spec:
           resources:
             limits:
               cpu: 2
-              memory: 4Gi
+              memory: 6Gi
             requests:
               cpu: 500m
               memory: 1Gi
