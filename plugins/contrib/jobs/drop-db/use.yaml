@@ -7,7 +7,7 @@ runs:
           name: "{{ or $.with.pgAdminSecretRefName $.Values.global.pgSecretName }}"
     env:
       - name: DATABASE
-        value: "{{ or $.with.database $.Values.global.pgDatabase }}"
+        value: "{{ tpl (or $.with.database $.Values.global.pgDatabase) .  }}"
       - name: DATABASE_USER
         value: "{{ or $.with.databaseUser $.Values.global.pgUser }}"
     run: /action/drop-db.sh
