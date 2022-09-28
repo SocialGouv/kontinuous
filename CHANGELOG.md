@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.78.0 (2022-09-28)
+
+
+### Features
+
+* **job:** parametrize job timeout ([c4664ac](https://github.com/SocialGouv/kontinuous/commit/c4664ac925aae91093e256aab63dad2052eaf548))
+
 ### 1.77.6 (2022-09-26)
 
 ### 1.77.5 (2022-09-23)
