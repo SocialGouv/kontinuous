@@ -1,3 +1,5 @@
+const { setTimeout } = require("timers/promises")
+
 const fs = require("fs-extra")
 
 const ctx = require("~common/ctx")
@@ -92,25 +94,64 @@ module.exports = async (options) => {
 
     const { dryRun } = options
 
-    const { promise: kappDeployPromise, process: kappDeployProcess } =
-      await kappDeploy({
+    const deployPlugin = kappDeploy
+    const deploySidecarPlugins = [rolloutStatusChecker]
+
+    const { promise: deployPromise, process: deployProcess } =
+      await deployPlugin({
         manifestsFile,
         dryRun,
       })
 
-    const { promise: rolloutStatusCheckerPromise, endRolloutStatus } =
-      await rolloutStatusChecker({
+    const stopDeploy = async () => {
+      const kappTerminationTolerationPeriod = 2000
+      try {
+        process.kill(deployProcess.pid, "SIGTERM")
+        await setTimeout(kappTerminationTolerationPeriod)
+        process.kill(deployProcess.pid, "SIGKILL")
+      } catch (_err) {
+        // do nothing
+      }
+    }
+
+    const sidecarPromises = []
+    const sidecarStoppers = []
+    for (const deploySidecarPlugin of deploySidecarPlugins) {
+      const { promise, stopSidecar } = await deploySidecarPlugin({
         manifests: allManifests,
-        kappDeployProcess,
+        stopDeploy,
       })
+      sidecarPromises.push(promise)
+      sidecarStoppers.push(stopSidecar)
+    }
+    const stopSidecars = () => {
+      sidecarStoppers.forEach((stop) => {
+        stop()
+      })
+    }
+
+    const sidecarsPromise = new Promise(async (resolve, reject) => {
+      try {
+        const results = await Promise.all(sidecarPromises)
+        const errors = []
+        for (const result of results) {
+          if (result.errors) {
+            errors.push(...result.errors)
+          }
+        }
+        resolve({ errors })
+      } catch (err) {
+        reject(err)
+      }
+    })
 
     try {
-      await kappDeployPromise
-      endRolloutStatus()
+      await deployPromise
+      stopSidecars()
     } catch (error) {
-      logger.error({ error }, "kapp deploy failed")
-      endRolloutStatus()
-      const { errors } = await rolloutStatusCheckerPromise
+      logger.error({ error }, "deploy failed")
+      stopSidecars()
+      const { errors } = await sidecarsPromise
       if (errors.length) {
         for (const errorData of errors) {
           logger.error(

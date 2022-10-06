@@ -10,7 +10,6 @@ const handledKinds = ["Deployment", "StatefulSet", "Job"]
 
 const checkForNewResourceInterval = 3000
 const waitBeforeStopAllRolloutStatus = 5000 // try to collect more errors if there is any
-const kappTerminationTolerationPeriod = 2000
 
 const rolloutStatusWatchForNewResource = async ({
   selector,
@@ -60,19 +59,10 @@ const rolloutStatusWatchForNewResource = async ({
   return { success: null }
 }
 
-module.exports = async ({ manifests, kappDeployProcess }) => {
+module.exports = async ({ manifests, stopDeploy }) => {
   const logger = ctx.require("logger")
   const config = ctx.require("config")
 
-  const stopKapp = async () => {
-    try {
-      process.kill(kappDeployProcess.pid, "SIGTERM")
-      await setTimeout(kappTerminationTolerationPeriod)
-      process.kill(kappDeployProcess.pid, "SIGKILL")
-    } catch (_err) {
-      // do nothing
-    }
-  }
   const rolloutStatusProcesses = {}
   const stopRolloutStatus = () => {
     for (const p of Object.values(rolloutStatusProcesses)) {
@@ -86,7 +76,7 @@ module.exports = async ({ manifests, kappDeployProcess }) => {
 
   const interceptor = { stop: false }
 
-  const endRolloutStatus = () => {
+  const stopSidecar = () => {
     interceptor.stop = true
     stopRolloutStatus()
   }
@@ -99,13 +89,13 @@ module.exports = async ({ manifests, kappDeployProcess }) => {
     endAllTrigerred = true
     interceptor.stop = true
 
-    const stopKappPromise = stopKapp()
+    const stopDeployPromise = stopDeploy()
 
     await setTimeout(waitBeforeStopAllRolloutStatus)
 
     stopRolloutStatus()
 
-    await stopKappPromise
+    await stopDeployPromise
   }
 
   const { refLabelKey } = config
@@ -179,5 +169,5 @@ module.exports = async ({ manifests, kappDeployProcess }) => {
     resolve({ errors })
   })
 
-  return { endRolloutStatus, promise }
+  return { stopSidecar, promise }
 }
