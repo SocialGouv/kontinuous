@@ -6,6 +6,10 @@ dependencies:
     repository: file://./charts/rancher-namespace
     version: 1.79.0
     condition: global.rancherNamespaceEnabled,rancher-namespace.enabled
+  - name: namespace
+    repository: file://./charts/namespace
+    version: 1.79.0
+    condition: global.namespaceEnabled,namespace.enabled
   - name: security-policies
     repository: file://./charts/security-policies
     version: 1.79.0

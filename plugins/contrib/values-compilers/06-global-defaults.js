@@ -53,6 +53,8 @@ module.exports = async (values, options, { config, utils, ctx }) => {
 
   const replicas = isProd ? 2 : 1
 
+  const hasRancher = !config.isLocal
+
   const defaultValues = {
     global: {
       projectName,
@@ -77,8 +79,10 @@ module.exports = async (values, options, { config, utils, ctx }) => {
       sha,
       shortSha,
       env: environment,
+      namespaceEnabled:
+        !hasRancher && enableDefaultCharts && values.global.kontinuous.hasAll,
       rancherNamespaceEnabled:
-        enableDefaultCharts && values.global.kontinuous.hasAll,
+        hasRancher && enableDefaultCharts && values.global.kontinuous.hasAll,
       securityPoliciesEnabled:
         enableDefaultCharts && values.global.kontinuous.hasAll,
       ingress: {
