@@ -87,9 +87,9 @@ metadata:
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-jobs-uses-relative-feature-branch-1
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-jobs-uses-relative-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-relative-feature-branch-1-24i8nb
@@ -208,9 +208,9 @@ metadata:
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-jobs-uses-relative-feature-branch-1
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-jobs-uses-relative-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-relative-feature-branch-1-5h1agc

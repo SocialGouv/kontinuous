@@ -114,13 +114,13 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.app-api
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app-api/templates/deployment.yaml
+    kapp.k14s.io/change-group: kontinuous/test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+    kapp.k14s.io/change-group.app-api: >-
+      kontinuous/app-api.test-long-branch-host-a-very-very-very-long-branch-name-47z9um
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    kapp.k14s.io/change-group: kontinuous/test-long-branch-host-a-very-very-very-long-branch-name-47z9um
-    kapp.k14s.io/change-group.app-api: >-
-      kontinuous/app-api.test-long-branch-host-a-very-very-very-long-branch-name-47z9um
 spec:
   replicas: 1
   selector:
@@ -155,6 +155,10 @@ spec:
       containers:
         - image: >-
             harbor.fabrique.social.gouv.fr/test-long-branch-host/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
           livenessProbe:
             failureThreshold: 15
             httpGet:
@@ -163,10 +167,6 @@ spec:
             initialDelaySeconds: 30
             periodSeconds: 5
             timeoutSeconds: 5
-          name: app
-          ports:
-            - containerPort: 3000
-              name: http
           readinessProbe:
             failureThreshold: 15
             httpGet:
@@ -177,10 +177,10 @@ spec:
             successThreshold: 1
             timeoutSeconds: 1
           startupProbe:
+            failureThreshold: 12
             httpGet:
               path: /index.html
               port: http
-            failureThreshold: 12
             periodSeconds: 5
           resources:
             limits:
