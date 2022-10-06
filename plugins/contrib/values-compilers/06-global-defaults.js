@@ -53,7 +53,14 @@ module.exports = async (values, options, { config, utils, ctx }) => {
 
   const replicas = isProd ? 2 : 1
 
-  const hasRancher = !config.isLocal
+  let hasRancher
+  if (options.hasRancher !== undefined) {
+    hasRancher = options.hasRancher
+  } else if (environment === "local") {
+    hasRancher = false
+  } else {
+    hasRancher = true
+  }
 
   const defaultValues = {
     global: {
