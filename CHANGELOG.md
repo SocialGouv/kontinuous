@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.79.0](https://github.com/SocialGouv/kontinuous/compare/v1.77.3...v1.79.0) (2022-10-06)
+
+
+### Features
+
+* **job:** parametrize job timeout ([c4664ac](https://github.com/SocialGouv/kontinuous/commit/c4664ac925aae91093e256aab63dad2052eaf548))
+
+
+### Bug Fixes
+
+* boilerplate gitops deploy ([d02c76c](https://github.com/SocialGouv/kontinuous/commit/d02c76c6da2f2d722c6ff75605f51e6933157a8b))
+* **drop-db:** add missing templating on database field ([f9e83ff](https://github.com/SocialGouv/kontinuous/commit/f9e83ff0ff6ee0a0f50c2bf5a67c5b74c1ebd95f))
+* force fast-copy resolution 2.1.4 ([#36](https://github.com/SocialGouv/kontinuous/issues/36)) ([773887f](https://github.com/SocialGouv/kontinuous/commit/773887faa7db1219e0551a3143acc60b41fcf8b6))
+* probes override ([e6db435](https://github.com/SocialGouv/kontinuous/commit/e6db4353e8f527a58afae81f7d6d4300515c4ed1))
+* use fast-copy@2.1.3 ([#37](https://github.com/SocialGouv/kontinuous/issues/37)) ([94907aa](https://github.com/SocialGouv/kontinuous/commit/94907aae5abeb327ac1a4a3490c662f5d82111be))
+
 ## 1.78.0 (2022-09-28)
 
 
