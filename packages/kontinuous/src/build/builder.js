@@ -47,7 +47,12 @@ module.exports = async (_options = {}) => {
   )
 
   logger.debug("Load manifests")
-  manifests = await loadManifests(manifests, config)
+  try {
+    manifests = await loadManifests(manifests, config)
+  } catch (err) {
+    logger.error("load manifests error", err)
+    throw err
+  }
 
   // logger.trace(`Manifests: \n${yaml.dump(manifests)}`)
 

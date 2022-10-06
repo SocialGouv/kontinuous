@@ -12,13 +12,13 @@ const { setStatus } = require("~/status")
 const deployHooks = require("./deploy-hooks")
 const deployOnWebhook = require("./deploy-on-webhook")
 const kappDeploy = require("./kapp-deploy")
-const rolloutStatusChecker = require("./rollout-status-checker")
-const buildDeployHooks = require("./build-deploy-hooks")
+const buildDeployPlugins = require("./build-deploy-plugins")
+const deploySidecars = require("./deploy-sidecars")
 
 module.exports = async (options) => {
   ctx.provide()
 
-  await buildDeployHooks()
+  await buildDeployPlugins()
 
   const config = ctx.require("config")
   const logger = ctx.require("logger")
@@ -95,7 +95,6 @@ module.exports = async (options) => {
     const { dryRun } = options
 
     const deployPlugin = kappDeploy
-    const deploySidecarPlugins = [rolloutStatusChecker]
 
     const { promise: deployPromise, process: deployProcess } =
       await deployPlugin({
@@ -114,35 +113,10 @@ module.exports = async (options) => {
       }
     }
 
-    const sidecarPromises = []
-    const sidecarStoppers = []
-    for (const deploySidecarPlugin of deploySidecarPlugins) {
-      const { promise, stopSidecar } = await deploySidecarPlugin({
-        manifests: allManifests,
-        stopDeploy,
-      })
-      sidecarPromises.push(promise)
-      sidecarStoppers.push(stopSidecar)
-    }
-    const stopSidecars = () => {
-      sidecarStoppers.forEach((stop) => {
-        stop()
-      })
-    }
-
-    const sidecarsPromise = new Promise(async (resolve, reject) => {
-      try {
-        const results = await Promise.all(sidecarPromises)
-        const errors = []
-        for (const result of results) {
-          if (result.errors) {
-            errors.push(...result.errors)
-          }
-        }
-        resolve({ errors })
-      } catch (err) {
-        reject(err)
-      }
+    const { stopSidecars, sidecarsPromise } = await deploySidecars({
+      manifests: allManifests,
+      stopDeploy,
+      dryRun,
     })
 
     try {
@@ -150,6 +124,7 @@ module.exports = async (options) => {
       stopSidecars()
     } catch (error) {
       logger.error({ error }, "deploy failed")
+
       stopSidecars()
       const { errors } = await sidecarsPromise
       if (errors.length) {

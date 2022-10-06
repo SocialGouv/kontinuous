@@ -11,6 +11,8 @@ module.exports = async () => {
     afterChildren: async ({ target, definition }) => {
       await buildJsFile(target, "pre-deploy", definition)
       await buildJsFile(target, "post-deploy", definition)
+      await buildJsFile(target, "deploy-sidecars", definition)
+      await buildJsFile(target, "deploy", definition)
     },
   })
   await installPackages(config)

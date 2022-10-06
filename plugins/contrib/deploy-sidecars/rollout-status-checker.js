@@ -1,11 +1,5 @@
 const { setTimeout } = require("timers/promises")
 
-const ctx = require("~common/ctx")
-const needRolloutStatus = require("~common/utils/need-rollout-status")
-const rolloutStatusExec = require("~common/utils/rollout-status-exec")
-
-const needBin = require("~/bin/need-bin")
-
 const handledKinds = ["Deployment", "StatefulSet", "Job"]
 
 const checkForNewResourceInterval = 3000
@@ -17,9 +11,11 @@ const rolloutStatusWatchForNewResource = async ({
   namespace,
   interceptor,
   rolloutStatusProcesses,
+  utils,
+  config,
+  logger,
 }) => {
-  const config = ctx.require("config")
-  const logger = ctx.require("logger")
+  const { rolloutStatusExec } = utils
 
   const { kubeconfig, kubeconfigContext: kubecontext } = config
 
@@ -59,9 +55,12 @@ const rolloutStatusWatchForNewResource = async ({
   return { success: null }
 }
 
-module.exports = async ({ manifests, stopDeploy }) => {
-  const logger = ctx.require("logger")
-  const config = ctx.require("config")
+module.exports = async (
+  sidecars,
+  _options,
+  { config, logger, utils, needBin, manifests, stopDeploy }
+) => {
+  const { needRolloutStatus } = utils
 
   const rolloutStatusProcesses = {}
   const stopRolloutStatus = () => {
@@ -130,6 +129,9 @@ module.exports = async ({ manifests, stopDeploy }) => {
             resourceName,
             interceptor,
             rolloutStatusProcesses,
+            utils,
+            config,
+            logger,
           })
           if (!result.success) {
             endAll()
@@ -154,7 +156,7 @@ module.exports = async ({ manifests, stopDeploy }) => {
       const { status } = result
       if (status === "rejected") {
         const { reason } = result
-        if (reason) {
+        if (reason && Object.keys(reason) > 0) {
           logger.error({ reason }, "rollout-status exec error")
         }
       } else if (status === "fulfilled") {
@@ -169,5 +171,5 @@ module.exports = async ({ manifests, stopDeploy }) => {
     resolve({ errors })
   })
 
-  return { stopSidecar, promise }
+  sidecars.push({ stopSidecar, promise })
 }
