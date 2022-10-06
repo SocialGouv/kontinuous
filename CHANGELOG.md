@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.80.1](https://github.com/SocialGouv/kontinuous/compare/v1.80.0...v1.80.1) (2022-10-06)
+
+
+### Bug Fixes
+
+* env local hasRancher ([aa62902](https://github.com/SocialGouv/kontinuous/commit/aa62902cdf21922f54e07bf40c4b11b92bae286d))
+
 ## [1.80.0](https://github.com/SocialGouv/kontinuous/compare/v1.79.0...v1.80.0) (2022-10-06)
 
 
