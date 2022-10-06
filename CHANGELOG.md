@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.80.0](https://github.com/SocialGouv/kontinuous/compare/v1.79.0...v1.80.0) (2022-10-06)
+
+
+### Features
+
+* namespace without rancher ([00997ed](https://github.com/SocialGouv/kontinuous/commit/00997edfb1368ef65636080f333a3ff3e8f05ffd))
+
 ## [1.79.0](https://github.com/SocialGouv/kontinuous/compare/v1.77.3...v1.79.0) (2022-10-06)
 
 
