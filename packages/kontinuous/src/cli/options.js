@@ -54,6 +54,11 @@ module.exports.downloadUrl = new Option(
   "url to download artifacts"
 )
 
+module.exports.editor = new Option(
+  "--editor <editor>",
+  "force editor to use on --open flag, default will guess"
+)
+
 module.exports.statusUrl = new Option(
   "--status-url <url>",
   "post status to url"

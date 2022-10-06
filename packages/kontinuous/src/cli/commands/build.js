@@ -22,6 +22,7 @@ module.exports = (program) =>
     .addOption(options.commit)
     .addOption(options.upload)
     .addOption(options.uploadUrl)
+    .addOption(options.editor)
     .addOption(options.ciNamespace)
     .addOption(options.ignoreProjectTemplates)
     .addOption(options.kubeconfigContext)

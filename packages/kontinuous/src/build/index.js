@@ -38,7 +38,7 @@ module.exports = async (options) => {
   }
 
   if (options.open) {
-    launch(manifestsFile)
+    launch(manifestsFile, config.editor)
   }
 
   return result

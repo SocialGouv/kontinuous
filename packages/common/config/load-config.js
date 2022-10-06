@@ -321,6 +321,10 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         return `${webhookUri}/api/v1/oas/artifacts/download?${query}`
       },
     },
+    editor: {
+      env: "KS_EDITOR",
+      options: "editor",
+    },
     statusUrl: {
       env: "KS_DEPLOY_STATUS_URL",
       option: "status-url",
