@@ -50,27 +50,16 @@ spec:
             - "{{ tpl $arg $ }}"
           {{- end }}
           {{- end }}
-          livenessProbe:
-            failureThreshold: 15
-            {{- include "contrib-helpers.livenessProbe" . | nindent 12 }}
-            initialDelaySeconds: 30
-            periodSeconds: 5
-            timeoutSeconds: 5
           name: app
           ports:
             - containerPort: {{ .Values.containerPort }}
               name: http
+          livenessProbe:
+            {{- include "contrib-helpers.livenessProbe" . | nindent 12 }}
           readinessProbe:
-            failureThreshold: 15
             {{- include "contrib-helpers.readinessProbe" . | nindent 12 }}
-            initialDelaySeconds: 1
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
           startupProbe:
             {{- include "contrib-helpers.startupProbe" . | nindent 12 }}
-            failureThreshold: 12
-            periodSeconds: 5
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu | quote }}

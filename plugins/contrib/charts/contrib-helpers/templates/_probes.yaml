@@ -10,25 +10,28 @@ httpGet:
 {{- end -}}
 
 {{- define "contrib-helpers.livenessProbe" -}}
+{{ $defaultLivenessProbe := dict "failureThreshold" 15 "initialDelaySeconds" 30 "periodSeconds" 5 "timeoutSeconds" 5 }}
 {{ if .Values.livenessProbe }}
-{{ .Values.livenessProbe | toYaml }}
+{{ merge $defaultLivenessProbe .Values.livenessProbe | toYaml }}
 {{ else }}
-{{- include "contrib-helpers.probe" . }}
+{{- merge $defaultLivenessProbe ((include "contrib-helpers.probe" .) | fromYaml) | toYaml }}
 {{- end -}}
 {{- end -}}
 
 {{- define "contrib-helpers.readinessProbe" -}}
+{{ $defaultReadinessProbe := dict "failureThreshold" 15 "initialDelaySeconds" 1 "periodSeconds" 5 "timeoutSeconds" 1 "successThreshold" 1 }}
 {{ if .Values.readinessProbe }}
-{{ .Values.readinessProbe | toYaml }}
+{{ merge $defaultReadinessProbe .Values.readinessProbe | toYaml }}
 {{ else }}
-{{- include "contrib-helpers.probe" . }}
+{{- merge $defaultReadinessProbe ((include "contrib-helpers.probe" .) | fromYaml) | toYaml }}
 {{- end -}}
 {{- end -}}
 
 {{- define "contrib-helpers.startupProbe" -}}
+{{ $defaultStartupProbe := dict "failureThreshold" 12 "periodSeconds" 5 }}
 {{ if .Values.startupProbe }}
-{{ .Values.startupProbe | toYaml }}
+{{ merge $defaultStartupProbe .Values.startupProbe  | toYaml }}
 {{ else }}
-{{- include "contrib-helpers.probe" . }}
+{{- merge $defaultStartupProbe ((include "contrib-helpers.probe" .) | fromYaml) | toYaml }}
 {{- end -}}
 {{- end -}}
