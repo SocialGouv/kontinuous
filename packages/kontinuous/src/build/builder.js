@@ -37,14 +37,21 @@ module.exports = async (_options = {}) => {
 
   await needBin(needHelm)
 
+  let manifests
+
   logger.debug("Build base manifest using helm")
-  let manifests = await asyncShell(
-    `helm template . --values=values.yaml ${config.helmArgs}`,
-    { cwd: buildPath },
-    null,
-    logger,
-    { ignoreErrors: ["found symbolic link"] }
-  )
+  try {
+    manifests = await asyncShell(
+      `helm template . --values=values.yaml ${config.helmArgs}`,
+      { cwd: buildPath },
+      null,
+      logger,
+      { ignoreErrors: ["found symbolic link"] }
+    )
+  } catch (err) {
+    logger.error(`Build helm error : ${err.message}`, err)
+    throw err
+  }
 
   logger.debug("Load manifests")
   try {
