@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.80.2 (2022-10-07)
+
+
+### Bug Fixes
+
+* **builder:** show helm exceptions ([#41](https://github.com/SocialGouv/kontinuous/issues/41)) ([b8f477b](https://github.com/SocialGouv/kontinuous/commit/b8f477bde9b460b3db1747cec85d65e5b995b30a))
+
 ### [1.80.1](https://github.com/SocialGouv/kontinuous/compare/v1.80.0...v1.80.1) (2022-10-06)
 
 
