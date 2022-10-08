@@ -7,6 +7,8 @@ const set = require("lodash.set")
 const defaultsDeep = require("lodash.defaultsdeep")
 const qs = require("qs")
 
+const configDependencyKey = require("~common/utils/config-dependency-key")
+
 const ctx = require("../ctx")
 const patternMatch = require("../utils/pattern-match")
 const loadStructuredConfig = require("../utils/load-structured-config")
@@ -324,6 +326,11 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     editor: {
       env: "KS_EDITOR",
       options: "editor",
+    },
+    deployWithPlugin: {
+      env: "KS_DEPLOY_WITH",
+      option: "deploy-with",
+      default: "kapp",
     },
     statusUrl: {
       env: "KS_DEPLOY_STATUS_URL",
@@ -649,6 +656,38 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         return
       }
       defaultsDeep(config, extendsConfig)
+    },
+  })
+
+  await recurseDependency({
+    config,
+    beforeChildren: async ({ definition, target }) => {
+      const deployWithDir = `${target}/deploy-with`
+      if (!(await fs.pathExists(deployWithDir))) {
+        return
+      }
+      const depoyWithFiles = await fs.readdir(deployWithDir)
+
+      if (!definition.deployWith) {
+        definition.deployWith = {}
+      }
+      const { deployWith } = definition
+      for (let depoyWithFile of depoyWithFiles) {
+        const ext = path.extname(depoyWithFile)
+        if (ext) {
+          depoyWithFile = depoyWithFile.slice(
+            0,
+            depoyWithFile.length - ext.length
+          )
+        }
+        const deployWithKey = configDependencyKey(depoyWithFile)
+        if (!deployWith[deployWithKey]) {
+          deployWith[deployWithKey] = {}
+        }
+        deployWith[deployWithKey].enabled = deployWithKey.includes(
+          config.deployWithPlugin
+        )
+      }
     },
   })
 

@@ -3,7 +3,7 @@ const path = require("path")
 const fs = require("fs-extra")
 const camelCase = require("lodash.camelcase")
 
-const configDependencyKey = require("~/plugins/context/config-dependency-key")
+const configDependencyKey = require("~common/utils/config-dependency-key")
 
 module.exports = async (target, type, definition) => {
   const jsFile = `${target}/${type}/index.js`

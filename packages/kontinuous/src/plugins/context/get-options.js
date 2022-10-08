@@ -4,7 +4,7 @@ const get = require("lodash.get")
 
 const deepmerge = require("~common/utils/deepmerge")
 
-const configDependencyKey = require("./config-dependency-key")
+const configDependencyKey = require("~common/utils/config-dependency-key")
 
 module.exports = ({ scope, inc, type, config }) => {
   let dotInc

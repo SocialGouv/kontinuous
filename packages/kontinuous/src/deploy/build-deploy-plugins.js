@@ -12,7 +12,7 @@ module.exports = async () => {
       await buildJsFile(target, "pre-deploy", definition)
       await buildJsFile(target, "post-deploy", definition)
       await buildJsFile(target, "deploy-sidecars", definition)
-      await buildJsFile(target, "deploy", definition)
+      await buildJsFile(target, "deploy-with", definition)
     },
   })
   await installPackages(config)

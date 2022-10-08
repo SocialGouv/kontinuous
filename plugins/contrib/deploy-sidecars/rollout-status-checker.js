@@ -58,8 +58,12 @@ const rolloutStatusWatchForNewResource = async ({
 module.exports = async (
   sidecars,
   _options,
-  { config, logger, utils, needBin, manifests, stopDeploy }
+  { config, logger, utils, needBin, manifests, runContext, dryRun }
 ) => {
+  if (dryRun) {
+    return
+  }
+
   const { needRolloutStatus } = utils
 
   const rolloutStatusProcesses = {}
@@ -88,7 +92,7 @@ module.exports = async (
     endAllTrigerred = true
     interceptor.stop = true
 
-    const stopDeployPromise = stopDeploy()
+    const stopDeployPromise = runContext.stopDeploys && runContext.stopDeploys()
 
     await setTimeout(waitBeforeStopAllRolloutStatus)
 

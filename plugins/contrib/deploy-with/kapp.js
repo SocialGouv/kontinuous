@@ -1,17 +1,14 @@
+const { setTimeout } = require("timers/promises")
 const { spawn } = require("child_process")
-
-const ctx = require("~common/ctx")
-const parseCommand = require("~common/utils/parse-command")
-const needKapp = require("~common/utils/need-kapp")
-const slug = require("~common/utils/slug")
-
-const needBin = require("~/bin/need-bin")
 
 const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
 
-module.exports = async ({ manifestsFile, dryRun }) => {
-  const logger = ctx.require("logger")
-  const config = ctx.require("config")
+module.exports = async (
+  deploys,
+  _options,
+  { config, logger, needBin, utils, manifestsFile, dryRun }
+) => {
+  const { parseCommand, needKapp, slug } = utils
 
   const { kubeconfigContext, kubeconfig, repositoryName, deployTimeout } =
     config
@@ -74,5 +71,16 @@ module.exports = async ({ manifestsFile, dryRun }) => {
     })
   })
 
-  return { promise, process: proc }
+  const stopDeploy = async () => {
+    const kappTerminationTolerationPeriod = 2000
+    try {
+      process.kill(proc.pid, "SIGTERM")
+      await setTimeout(kappTerminationTolerationPeriod)
+      process.kill(proc.pid, "SIGKILL")
+    } catch (_err) {
+      // do nothing
+    }
+  }
+
+  deploys.push({ promise, stopDeploy })
 }

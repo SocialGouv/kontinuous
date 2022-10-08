@@ -20,6 +20,7 @@ module.exports = (program) =>
     .addOption(options.ciNamespace)
     .addOption(options.webhookToken)
     .addOption(options.webhookUri)
+    .addOption(options.deployWith)
     .addOption(options.ignoreProjectTemplates)
     .addOption(options.kubeconfigContext)
     .addOption(options.kubeconfigContextNoDetect)

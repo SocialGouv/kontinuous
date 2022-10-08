@@ -54,11 +54,6 @@ module.exports.downloadUrl = new Option(
   "url to download artifacts"
 )
 
-module.exports.editor = new Option(
-  "--editor <editor>",
-  "force editor to use on --open flag, default will guess"
-)
-
 module.exports.statusUrl = new Option(
   "--status-url <url>",
   "post status to url"
@@ -70,6 +65,16 @@ module.exports.webhookToken = new Option(
 )
 
 module.exports.webhookUri = new Option("--webhook-uri <uri>", "webhook uri")
+
+module.exports.editor = new Option(
+  "--editor <editor>",
+  "force editor to use on --open flag, default will guess"
+)
+
+module.exports.deployWith = new Option(
+  "--deploy-with <plugin>",
+  "set deploy-with plugin to handle the deployment"
+)
 
 module.exports.ciNamespace = new Option("--ci-namespace <ns>", "ci namespace")
 

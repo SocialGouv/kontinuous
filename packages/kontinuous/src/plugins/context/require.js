@@ -3,8 +3,8 @@ require("~/ts-node")
 const path = require("path")
 
 const KontinuousPluginError = require("~common/utils/kontinuous-plugin-error.class")
+const configDependencyKey = require("~common/utils/config-dependency-key")
 
-const configDependencyKey = require("./config-dependency-key")
 const pluginFunction = require("./function")
 
 function requireTs(filePath) {

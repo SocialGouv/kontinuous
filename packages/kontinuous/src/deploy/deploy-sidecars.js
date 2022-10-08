@@ -5,14 +5,14 @@ const ctx = require("~common/ctx")
 const createContext = require("~/plugins/context")
 const pluginFunction = require("~/plugins/context/function")
 
-module.exports = async ({ manifests, stopDeploy, dryRun }) => {
+module.exports = async ({ manifests, runContext, dryRun }) => {
   const config = ctx.require("config")
   const type = `deploy-sidecars`
-  const context = createContext({ type, stopDeploy, manifests })
+  const context = createContext({ type, runContext, manifests, dryRun })
   const { buildProjectPath } = config
   const requirePath = `${buildProjectPath}/${type}`
   let sidecars = []
-  if ((await fs.pathExists(requirePath)) && !dryRun) {
+  if (await fs.pathExists(requirePath)) {
     sidecars = await pluginFunction(requirePath)(sidecars, {}, context)
   }
 
@@ -34,7 +34,7 @@ module.exports = async ({ manifests, stopDeploy, dryRun }) => {
       const results = await Promise.all(sidecarPromises)
       const errors = []
       for (const result of results) {
-        if (result.errors) {
+        if (result?.errors) {
           errors.push(...result.errors)
         }
       }

@@ -1,5 +1,3 @@
-const { setTimeout } = require("timers/promises")
-
 const fs = require("fs-extra")
 
 const ctx = require("~common/ctx")
@@ -11,9 +9,9 @@ const { setStatus } = require("~/status")
 
 const deployHooks = require("./deploy-hooks")
 const deployOnWebhook = require("./deploy-on-webhook")
-const kappDeploy = require("./kapp-deploy")
 const buildDeployPlugins = require("./build-deploy-plugins")
 const deploySidecars = require("./deploy-sidecars")
+const deployWith = require("./deploy-with")
 
 module.exports = async (options) => {
   ctx.provide()
@@ -65,10 +63,7 @@ module.exports = async (options) => {
       await setStatus({ url: statusUrl, status: "loading", ok: null })
     }
 
-    logger.info(
-      { kubeconfig, kubeconfigContext },
-      "let's deploy on kubernetes with kapp"
-    )
+    logger.info({ kubeconfig, kubeconfigContext }, "let's deploy on kubernetes")
 
     const allManifests = yaml.loadAll(manifests)
     await deployHooks(allManifests, "pre")
@@ -94,33 +89,24 @@ module.exports = async (options) => {
 
     const { dryRun } = options
 
-    const deployPlugin = kappDeploy
+    const runContext = {}
 
-    const { promise: deployPromise, process: deployProcess } =
-      await deployPlugin({
-        manifestsFile,
-        dryRun,
-      })
-
-    const stopDeploy = async () => {
-      const kappTerminationTolerationPeriod = 2000
-      try {
-        process.kill(deployProcess.pid, "SIGTERM")
-        await setTimeout(kappTerminationTolerationPeriod)
-        process.kill(deployProcess.pid, "SIGKILL")
-      } catch (_err) {
-        // do nothing
-      }
-    }
+    const { stopDeploys, deploysPromise } = await deployWith({
+      manifestsFile,
+      runContext,
+      dryRun,
+    })
+    runContext.stopDeploys = stopDeploys
 
     const { stopSidecars, sidecarsPromise } = await deploySidecars({
       manifests: allManifests,
-      stopDeploy,
+      runContext,
       dryRun,
     })
+    runContext.stopSidecars = stopSidecars
 
     try {
-      await deployPromise
+      await deploysPromise
       stopSidecars()
     } catch (error) {
       logger.error({ error }, "deploy failed")
@@ -153,6 +139,7 @@ module.exports = async (options) => {
       await setStatus({ url: statusUrl, status: "success", ok: true })
     }
   } catch (err) {
+    logger.error(err)
     if (statusUrl) {
       await setStatus({ url: statusUrl, status: "failed", ok: false })
     }
