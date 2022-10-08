@@ -49,6 +49,16 @@ const remapValues = (run) => {
   }
 }
 
+const useIsInPlugins = (use) => use.startsWith("~") || !use.includes("/")
+const locateUseInPlugins = async (use, config) => {
+  const found = await recurseLocate(
+    use.startsWith("~") ? use.slice(1) : use,
+    config.dependencies,
+    config
+  )
+  return found
+}
+
 const requireUse = async (
   run,
   { config, logger, downloadingPromises, utils }
@@ -79,22 +89,18 @@ const requireUse = async (
         await fs.copy(src, target, {
           filter: ignoreYarnState,
         })
-      } else if (use.startsWith("~") || !use.includes("/")) {
-        const found = await recurseLocate(
-          use.startsWith("~") ? use.slice(1) : use,
-          config.dependencies,
-          config
-        )
+      } else if (useIsInPlugins(use)) {
+        const found = await locateUseInPlugins(use, config)
         if (!found) {
           throw new KontinuousPluginError(
             `job "${use}" not found in repo dependencies`
           )
         }
-        use = found.use
-        run.use = found.use
         await fs.copy(found.jobPath, target, {
           filter: ignoreYarnState,
         })
+        use = found.use
+        run.use = use
       } else if (
         !use.includes("#") &&
         Object.keys(links).some((key) => use.startsWith(key))
@@ -211,8 +217,15 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
 
       for (const [runKey, r] of Object.entries(runValues.runs)) {
         remapValues(r)
+        let action
+        if (useIsInPlugins(run.use)) {
+          const found = await locateUseInPlugins(run.use, config)
+          action = found.use
+        } else {
+          action = run.use
+        }
         const newRun = {
-          action: run.use,
+          action,
         }
         for (const k of Object.keys(r)) {
           if (k === "use") {
