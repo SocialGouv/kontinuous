@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.81.0](https://github.com/SocialGouv/kontinuous/compare/v1.80.2...v1.81.0) (2022-10-08)
+
+
+### Features
+
+* deploy-with as plugin + helm wip ([46b6c83](https://github.com/SocialGouv/kontinuous/commit/46b6c8376432630c0c08b3b3f8786d1fbd5fd029))
+
+
+### Bug Fixes
+
+* shortcut jobs actions degit ([c29e9d3](https://github.com/SocialGouv/kontinuous/commit/c29e9d37257806576bdcf8dc6891f2eefb77a841))
+
 ### 1.80.2 (2022-10-07)
 
 
