@@ -9,6 +9,8 @@ patches:
     enabled: false
   reloader:
     enabled: false
+  needs:
+    enabled: true
   needsUsingInitcontainers:
     enabled: false
   needsUsingKapp:

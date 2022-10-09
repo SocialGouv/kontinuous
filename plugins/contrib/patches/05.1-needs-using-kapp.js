@@ -7,6 +7,7 @@ const runKinds = ["Deployment", "StatefulSet", "DaemonSet", "Job"]
 
 module.exports = async (manifests, _options, context) => {
   const { values } = context
+
   const namespace = values.global.namespace || "default"
   for (const manifest of manifests) {
     const annotations = manifest.metadata?.annotations
