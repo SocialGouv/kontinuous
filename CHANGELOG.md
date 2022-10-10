@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.81.1 (2022-10-10)
+
+
+### Bug Fixes
+
+* **create-db:** use original PGSSLMODE if any ([#42](https://github.com/SocialGouv/kontinuous/issues/42)) ([d7ab97c](https://github.com/SocialGouv/kontinuous/commit/d7ab97c9f93fe765ef98f60e6b7cc32d3c81f3ba))
+
 ## [1.81.0](https://github.com/SocialGouv/kontinuous/compare/v1.80.2...v1.81.0) (2022-10-08)
 
 
