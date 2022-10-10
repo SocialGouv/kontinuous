@@ -14,7 +14,7 @@ else
   if [[ $PGHOST == *"azure.com"* ]] && [ "$USE_AZURE_FLEX" == "false" ]; then
     PGUSER="${PGUSER}@${PGHOST}"
   fi
-  PGSSLMODE=require
+  PGSSLMODE="${PGSSLMODE:-require}"
   PGUSER_URLENCODED=$(printf %s "$PGUSER" |jq -sRr @uri)
   PGPASSWORD_URLENCODED=$(printf %s "$PGPASSWORD" |jq -sRr @uri)
   PGPORT="${PGPORT:-5432}"
@@ -32,7 +32,7 @@ else
 fi
 
 if [ "$NAMESPACE" != "$JOB_NAMESPACE" ]; then
-  echo "copy secret '$DB_SECRET_NAME' to '$JOB_NAMESPACE'"
+  echo "copy secret '$DB_SECRET_NAME' from '$NAMESPACE' to '$JOB_NAMESPACE' "
   kubectl get secret "$DB_SECRET_NAME" --namespace="$NAMESPACE" -ojson \
     | jq 'del(.metadata.namespace,.metadata.resourceVersion,.metadata.uid) | .metadata.creationTimestamp=null' \
     | jq ".metadata.annotations[\"janitor/ttl\"] = \"$SECRET_TTL\"" \
