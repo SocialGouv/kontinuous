@@ -44,6 +44,7 @@ metadata:
     kapp.k14s.io/change-group.kontinuous-stage: "kontinuous/{{ $run.stage }}.{{ $val.global.namespace }}"
     {{- end }}
     {{- range $scope := $run.scopes }}
+    kontinuous/depname.custom.{{ $scope }}: "{{ $scope }}"
     kapp.k14s.io/change-group.{{ $scope }}: "kontinuous/{{ $scope }}.{{ $val.global.namespace }}"
     {{- end }}
     {{- range $need := $run.needs }}

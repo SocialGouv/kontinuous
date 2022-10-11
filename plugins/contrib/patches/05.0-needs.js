@@ -1,58 +1,25 @@
-const changeRulePrefix = "kapp.k14s.io/change-rule"
-const changeGroupPrefix = "kapp.k14s.io/change-group"
-const changeGroupValuePrefix = "kontinuous/"
-const changeRuleValuePrefix = `upsert after upserting ${changeGroupValuePrefix}`
-
 const runKinds = ["Deployment", "StatefulSet", "DaemonSet", "Job"]
 
-module.exports = async (manifests, _options, context) => {
-  return manifests
-  const { values } = context
-  const namespace = values.global.namespace || "default"
+module.exports = async (manifests, _options, _context) => {
   for (const manifest of manifests) {
-    const annotations = manifest.metadata?.annotations
-    if (!annotations) {
+    const { kind, metadata } = manifest
+    const annotations = metadata?.annotations
+    if (!annotations || !runKinds.includes(kind)) {
       continue
     }
 
-    const jsonNeeds = annotations["kontinuous/plugin.needs"]
-    if (annotations["kontinuous/plugin.needs"]) {
-      delete annotations["kontinuous/plugin.needs"]
-    }
-
-    if (!runKinds.includes(manifest.kind)) {
-      continue
-    }
-
-    // add change-group
     const chartPath = annotations["kontinuous/chartPath"]
-    if (chartPath) {
-      const name = chartPath.split(".").pop()
-      annotations[changeGroupPrefix] = `${changeGroupValuePrefix}${namespace}`
+    const { name } = metadata
+    const chartName = chartPath.split(".").pop()
 
-      annotations[
-        `${changeGroupPrefix}.${name}`
-      ] = `${changeGroupValuePrefix}${name}.${namespace}`
-    }
-
-    // add stage if any
-    const stage = annotations["kontinuous/plugin.stage"]
-    if (stage) {
-      annotations[
-        `${changeGroupPrefix}.kontinuous-stage`
-      ] = `${changeGroupValuePrefix}/${stage}.${namespace}`
-    }
-
-    // add change-rules
-    if (!jsonNeeds) {
-      continue
-    }
-    const needs = JSON.parse(jsonNeeds)
-    for (const need of needs) {
-      annotations[
-        `${changeRulePrefix}.${need}`
-      ] = `${changeRuleValuePrefix}${need}.${namespace}`
-    }
+    annotations["kontinuous/depname.full"] = `${chartPath}.${kind}.${name}`
+    annotations[
+      "kontinuous/depname.chartResource"
+    ] = `${chartName}.${kind}.${name}`
+    annotations["kontinuous/depname.chartName"] = chartName
+    annotations["kontinuous/depname.chartPath"] = chartPath
+    annotations["kontinuous/depname.resourcePath"] = `${kind}.${name}`
+    annotations["kontinuous/depname.resourceName"] = name
   }
 
   return manifests
