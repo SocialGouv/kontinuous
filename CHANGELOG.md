@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.81.2](https://github.com/SocialGouv/kontinuous/compare/v1.81.1...v1.81.2) (2022-10-11)
+
+
+### Bug Fixes
+
+* temp fix plugin naming bug ([5db1043](https://github.com/SocialGouv/kontinuous/commit/5db104302fe7e3504692c1dc9316b96e84597f7e))
+
 ### 1.81.1 (2022-10-10)
 
 
