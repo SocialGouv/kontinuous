@@ -11,10 +11,10 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/chartPath: project.job-extra
     kontinuous/source: project/charts/job-extra/templates/my-job.yaml
-    kapp.k14s.io/change-group: kontinuous/test-standalone-charts-feature-branch-1
-    kapp.k14s.io/change-group.job-extra: kontinuous/job-extra.test-standalone-charts-feature-branch-1
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/change-group: kontinuous/test-standalone-charts-feature-branch-1
+    kapp.k14s.io/change-group.job-extra: kontinuous/job-extra.test-standalone-charts-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-extra

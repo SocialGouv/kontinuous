@@ -114,12 +114,12 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
-    kapp.k14s.io/change-group: kontinuous/test-post-renderer-feature-branch-1
-    kapp.k14s.io/change-group.app: kontinuous/app.test-post-renderer-feature-branch-1
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
+    kapp.k14s.io/change-group: kontinuous/test-post-renderer-feature-branch-1
+    kapp.k14s.io/change-group.app: kontinuous/app.test-post-renderer-feature-branch-1
 spec:
   replicas: 1
   selector:
