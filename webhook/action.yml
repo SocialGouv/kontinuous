@@ -24,20 +24,20 @@ runs:
 
     - uses: actions/setup-node@v2
       with:
-        node-version: '18'
-    
+        node-version: "18"
+
     - name: Cache node modules
       uses: actions/cache@v2
       with:
         path: ~/.npm
         key: ${{ runner.os }}-cache-node-modules
-    
+
     - name: Setup env vars
       shell: bash
       id: environment
       run: |
         npm i --location=global kontinuous
-        
+
         if [ -n "$GITHUB_HEAD_REF" ]; then
           KS_GIT_BRANCH=$GITHUB_HEAD_REF
         else
@@ -46,10 +46,10 @@ runs:
         KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/heads/}
         KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/tags/}
         KS_GIT_BRANCH_URLENCODED=$(echo $KS_GIT_BRANCH | sed 's/\//\%2f/g')
-        
+
         KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
         KS_GIT_REPOSITORY_URLENCODED=$(echo $KS_GIT_REPOSITORY | sed 's/\//\%2f/g')
-        
+
         KS_GIT_SHA=$GITHUB_SHA
         KS_DEBUG=true
 
@@ -69,7 +69,7 @@ runs:
         export KS_DEBUG
         export KS_ENVIRONMENT="${{ inputs.environment }}"
         KONTINUOUS_CONFIG=$(npx kontinuous config --remote --format json)
-        
+
         KS_ENVIRONMENT=$(echo "$KONTINUOUS_CONFIG" | jq -r ".environment")
         KS_WEBHOOK_URI=$(echo "$KONTINUOUS_CONFIG" | jq -r ".webhookUri")
         KS_PROJECT_NAME=$(echo "$KONTINUOUS_CONFIG" | jq -r ".projectName")
@@ -105,9 +105,16 @@ runs:
 
     - name: Stream logs of kube pipeline
       shell: bash
+      id: stream
       run: |
         npx kontinuous logs
-    
+
+    - name: Retry kontinuous logs
+      shell: bash
+      if: steps.stream.outcome=='failure'
+      run: |
+        npx kontinuous logs
+
     - name: Download manifests artifact
       shell: bash
       run: |
@@ -126,7 +133,7 @@ runs:
         DEPLOYMENT_STATUS=$(cat deployment-status.json)
         status=$(echo "$DEPLOYMENT_STATUS" | jq .status)
         echo "status:  $status"
-        
+
         if [ "$status" = "loading" ]; then
           sleep 5
           wget --content-on-error -q -O deployment-status.json "${KS_WEBHOOK_URI}/api/v1/oas/artifacts/status?project=${KS_PROJECT_NAME}&repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
@@ -154,7 +161,7 @@ runs:
         token: ${{ inputs.token }}
         desc: "Deploying environment: ${{ env.NAMESPACE }}"
         env: ${{ steps.environment.outputs.env == 'dev' && env.NAMESPACE || steps.environment.outputs.env == 'preprod' && 'preproduction' || 'production' }}
-    
+
     - name: Define environment URL
       id: environment-url
       shell: bash
