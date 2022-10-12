@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.81.4](https://github.com/SocialGouv/kontinuous/compare/v1.81.2...v1.81.4) (2022-10-12)
+
+
+### Bug Fixes
+
+* **create-db:** owner ([fb225eb](https://github.com/SocialGouv/kontinuous/commit/fb225eb006fcb852708c7ca6823ef468e6cab585))
+* try to reduce charge ([ce4332b](https://github.com/SocialGouv/kontinuous/commit/ce4332b0141117fbc3c2495d467c1ea987532c40))
+
 ### 1.81.3 (2022-10-12)
 
 ### [1.81.2](https://github.com/SocialGouv/kontinuous/compare/v1.81.1...v1.81.2) (2022-10-11)
