@@ -5,9 +5,9 @@ runs:
     image: gcr.io/kaniko-project/executor:debug
     # serviceAccountName: kaniko
     cpuLimit: "2"
-    cpuRequest: 500m
+    cpuRequest: 100m
     memoryLimit: 4Gi
-    memoryRequest: 1Gi
+    memoryRequest: 500Mi
     user: 0
     entrypoint: ["/busybox/sh","-c"]
     envFrom:

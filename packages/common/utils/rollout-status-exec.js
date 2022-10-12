@@ -14,6 +14,7 @@ module.exports = ({ kubeconfig, kubecontext, namespace, selector }) => {
   if (selector) {
     args.push(...["-selector", selector])
   }
+  args.push(...["-interval", "10s"])
   const proc = spawn("rollout-status", args, { encoding: "utf-8" })
   proc.on("error", () => {}) // avoid crash on not found executable
 
