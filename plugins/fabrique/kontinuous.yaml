@@ -32,6 +32,12 @@ dependencies:
       rolloutStatusChecker:
         enabled: false
 
+    deployWith:
+      kapp:
+        options:
+          kubeApiQps: 1000
+          kubeApiBurst: 1000
+
 
 config:
   webhookUri: https://kontinuous.fabrique.social.gouv.fr

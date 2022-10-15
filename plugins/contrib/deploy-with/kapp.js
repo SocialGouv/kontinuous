@@ -5,13 +5,15 @@ const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
 
 module.exports = async (
   deploys,
-  _options,
+  options,
   { config, logger, needBin, utils, manifestsFile, dryRun }
 ) => {
   const { parseCommand, needKapp, slug } = utils
 
   const { kubeconfigContext, kubeconfig, repositoryName, deployTimeout } =
     config
+
+  const { kubeApiQps = 1000, kubeApiBurst = 1000 } = options
 
   const charts = config.chart?.join(",")
 
@@ -33,6 +35,8 @@ module.exports = async (
           --wait-timeout ${deployTimeout}
           --dangerous-override-ownership-of-existing-resources
           --diff-changes=true
+          --kube-api-qps ${kubeApiQps}
+          --kube-api-burst ${kubeApiBurst}
           --yes
           -f ${manifestsFile}
       `
