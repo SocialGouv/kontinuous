@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.82.0](https://github.com/SocialGouv/kontinuous/compare/v1.81.6...v1.82.0) (2022-10-15)
+
+
+### Features
+
+* add option kapp kubeApi options +default 100 ([ccdfb4e](https://github.com/SocialGouv/kontinuous/commit/ccdfb4e485d0a454818def102406ab5f36588266))
+
 ### [1.81.6](https://github.com/SocialGouv/kontinuous/compare/v1.81.5...v1.81.6) (2022-10-15)
 
 
