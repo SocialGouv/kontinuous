@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.81.5](https://github.com/SocialGouv/kontinuous/compare/v1.81.4...v1.81.5) (2022-10-15)
+
+
+### Bug Fixes
+
+* plugin build js sort order ([0b11bed](https://github.com/SocialGouv/kontinuous/commit/0b11bed4a3d8ffe017c184d7a3cc25701fecb6d4))
+* Revert keeping completed pods for too long ([f9250ba](https://github.com/SocialGouv/kontinuous/commit/f9250ba67bcf856b8e1deb6b9a21fdc26e29f384))
+
 ### [1.81.4](https://github.com/SocialGouv/kontinuous/compare/v1.81.2...v1.81.4) (2022-10-12)
 
 
