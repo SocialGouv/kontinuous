@@ -9,10 +9,10 @@ patches:
     enabled: false
   reloader:
     enabled: false
-  # needsUsingInitContainers:
-  #   enabled: true
-  # needsUsingKapp:
-  #   enabled: true
+  needsUsingInitcontainers:
+    enabled: false
+  needsUsingKapp:
+    enabled: true
 
 
 validators:

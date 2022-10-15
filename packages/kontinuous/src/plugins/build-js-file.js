@@ -62,6 +62,8 @@ module.exports = async (target, type, definition) => {
     processors.push(req)
   }
 
+  processors.sort()
+
   const jsSrc = `module.exports = [${processors
     .map((p) => JSON.stringify(p))
     .join(",")}]`
