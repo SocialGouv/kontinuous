@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.81.6](https://github.com/SocialGouv/kontinuous/compare/v1.81.5...v1.81.6) (2022-10-15)
+
+
+### Bug Fixes
+
+* temp disable sidecar rollout-status-checker ([abf4e32](https://github.com/SocialGouv/kontinuous/commit/abf4e32f2631d5a8c20c6e62f4061f09ead4f897))
+
 ### [1.81.5](https://github.com/SocialGouv/kontinuous/compare/v1.81.4...v1.81.5) (2022-10-15)
 
 
