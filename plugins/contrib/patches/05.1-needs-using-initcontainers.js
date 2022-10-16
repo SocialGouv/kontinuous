@@ -1,12 +1,6 @@
 const runKinds = ["Deployment", "StatefulSet", "DaemonSet", "Job"]
 
-module.exports = async (manifests, _options, context) => {
-  const { values } = context
-
-  return manifests
-
-  const namespace = values.global.namespace || "default"
-
+module.exports = async (manifests, _options, _context) => {
   const waitForGroups = {}
 
   for (const manifest of manifests) {
@@ -39,12 +33,12 @@ module.exports = async (manifests, _options, context) => {
     if (!jsonNeeds) {
       continue
     }
-    const needs = JSON.parse(jsonNeeds)
-    for (const need of needs) {
-      annotations[
-        `${changeRulePrefix}.${need}`
-      ] = `${changeRuleValuePrefix}${need}.${namespace}`
-    }
+    // const needs = JSON.parse(jsonNeeds)
+    // for (const need of needs) {
+    //   annotations[
+    //     `${changeRulePrefix}.${need}`
+    //   ] = `${changeRuleValuePrefix}${need}.${namespace}`
+    // }
   }
 
   return manifests
