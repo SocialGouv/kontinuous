@@ -10,16 +10,28 @@ module.exports = (manifests) => {
     }
     const lowerKind = kind.toLowerCase()
     const chartPath = annotations["kontinuous/chartPath"]
-    const { name } = metadata
+    let { name } = metadata
+    if (annotations["kontinuous/needsName"]) {
+      name = annotations["kontinuous/needsName"]
+    }
     const chartName = chartPath.split(".").pop()
-    const keys = [
-      `${chartPath}.${lowerKind}.${name}`,
-      `${chartName}.${lowerKind}.${name}`,
-      chartName,
-      chartPath,
-      `${lowerKind}.${name}`,
-      name,
-    ]
+    const keys = [chartName, chartPath]
+    const nameParts = name.split(".")
+    while (nameParts.length > 0) {
+      const lastPart = nameParts.pop()
+      const n = [...nameParts, lastPart].join(".")
+      keys.push(
+        ...[
+          `${chartPath}.${lowerKind}.${n}`,
+          `${chartPath}.${n}`,
+          `${chartName}.${lowerKind}.${n}`,
+          `${chartName}.${n}`,
+          `${lowerKind}.${n}`,
+          n,
+        ]
+      )
+    }
+
     const stage = annotations["kontinuous/plugin.stage"]
     if (stage) {
       keys.push(stage)

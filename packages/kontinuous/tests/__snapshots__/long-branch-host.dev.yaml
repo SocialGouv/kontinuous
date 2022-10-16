@@ -124,10 +124,12 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app-api
     kontinuous/depname.resourcePath: deployment.app-api
     kontinuous/depname.resourceName: app-api
-    kapp.k14s.io/change-group.project.fabrique.contrib.app-api.deployment.app-api: kontinuous/project.fabrique.contrib.app-api.deployment.app-api
-    kapp.k14s.io/change-group.app-api.deployment.app-api: kontinuous/app-api.deployment.app-api
     kapp.k14s.io/change-group.app-api: kontinuous/app-api
     kapp.k14s.io/change-group.project.fabrique.contrib.app-api: kontinuous/project.fabrique.contrib.app-api
+    kapp.k14s.io/change-group.project.fabrique.contrib.app-api.deployment.app-api: kontinuous/project.fabrique.contrib.app-api.deployment.app-api
+    kapp.k14s.io/change-group.project.fabrique.contrib.app-api.app-api: kontinuous/project.fabrique.contrib.app-api.app-api
+    kapp.k14s.io/change-group.app-api.deployment.app-api: kontinuous/app-api.deployment.app-api
+    kapp.k14s.io/change-group.app-api.app-api: kontinuous/app-api.app-api
     kapp.k14s.io/change-group.deployment.app-api: kontinuous/deployment.app-api
 spec:
   replicas: 1

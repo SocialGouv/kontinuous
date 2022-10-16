@@ -19,10 +19,12 @@ metadata:
     kontinuous/depname.chartPath: project.job-extra
     kontinuous/depname.resourcePath: job.job-extra
     kontinuous/depname.resourceName: job-extra
-    kapp.k14s.io/change-group.project.job-extra.job.job-extra: kontinuous/project.job-extra.job.job-extra
-    kapp.k14s.io/change-group.job-extra.job.job-extra: kontinuous/job-extra.job.job-extra
     kapp.k14s.io/change-group.job-extra: kontinuous/job-extra
     kapp.k14s.io/change-group.project.job-extra: kontinuous/project.job-extra
+    kapp.k14s.io/change-group.project.job-extra.job.job-extra: kontinuous/project.job-extra.job.job-extra
+    kapp.k14s.io/change-group.project.job-extra.job-extra: kontinuous/project.job-extra.job-extra
+    kapp.k14s.io/change-group.job-extra.job.job-extra: kontinuous/job-extra.job.job-extra
+    kapp.k14s.io/change-group.job-extra.job-extra: kontinuous/job-extra.job-extra
     kapp.k14s.io/change-group.job.job-extra: kontinuous/job.job-extra
   labels:
     kontinuous/ref: feature-branch-1

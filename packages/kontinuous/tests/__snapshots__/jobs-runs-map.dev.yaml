@@ -77,6 +77,7 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
+    kontinuous/needsName: db.create-db
     kapp.k14s.io/change-group.db: kontinuous/db
     kapp.k14s.io/change-group.db.create-db: kontinuous/db.create-db
     kapp.k14s.io/change-group.db..create-db: kontinuous/db..create-db
@@ -93,14 +94,18 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a
     kontinuous/depname.resourceName: job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a: >-
-      kontinuous/project.fabrique.contrib.jobs.job.job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a
-    kapp.k14s.io/change-group.jobs.job.job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a: >-
-      kontinuous/jobs.job.job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a
     kapp.k14s.io/change-group.jobs: kontinuous/jobs
     kapp.k14s.io/change-group.project.fabrique.contrib.jobs: kontinuous/project.fabrique.contrib.jobs
-    kapp.k14s.io/change-group.job.job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a: kontinuous/job.job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a
-    kapp.k14s.io/change-group.job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a: kontinuous/job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.db.create-db: kontinuous/project.fabrique.contrib.jobs.job.db.create-db
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.db.create-db: kontinuous/project.fabrique.contrib.jobs.db.create-db
+    kapp.k14s.io/change-group.jobs.job.db.create-db: kontinuous/jobs.job.db.create-db
+    kapp.k14s.io/change-group.jobs.db.create-db: kontinuous/jobs.db.create-db
+    kapp.k14s.io/change-group.job.db.create-db: kontinuous/job.db.create-db
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.db: kontinuous/project.fabrique.contrib.jobs.job.db
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.db: kontinuous/project.fabrique.contrib.jobs.db
+    kapp.k14s.io/change-group.jobs.job.db: kontinuous/jobs.job.db
+    kapp.k14s.io/change-group.jobs.db: kontinuous/jobs.db
+    kapp.k14s.io/change-group.job.db: kontinuous/job.db
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-runs-map-feature-branch-1-db-c-5op4dt
@@ -217,6 +222,7 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
+    kontinuous/needsName: db.create-secret
     kapp.k14s.io/change-group.db: kontinuous/db
     kapp.k14s.io/change-group.db.create-secret: kontinuous/db.create-secret
     kapp.k14s.io/change-group.db..create-secret: kontinuous/db..create-secret
@@ -234,13 +240,16 @@ metadata:
     kontinuous/depname.resourceName: job-test-jobs-runs-map-feature-branch-1-db-create-secret-3ea5t8
     kapp.k14s.io/change-group.jobs: kontinuous/jobs
     kapp.k14s.io/change-group.project.fabrique.contrib.jobs: kontinuous/project.fabrique.contrib.jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.job-test-jobs-runs-map-feature-branch-1-db-create-secret-3ea5t8: >-
-      kontinuous/project.fabrique.contrib.jobs.job.job-test-jobs-runs-map-feature-branch-1-db-create-secret-3ea5t8
-    kapp.k14s.io/change-group.jobs.job.job-test-jobs-runs-map-feature-branch-1-db-create-secret-3ea5t8: >-
-      kontinuous/jobs.job.job-test-jobs-runs-map-feature-branch-1-db-create-secret-3ea5t8
-    kapp.k14s.io/change-group.job.job-test-jobs-runs-map-feature-branch-1-db-create-secret-3ea5t8: >-
-      kontinuous/job.job-test-jobs-runs-map-feature-branch-1-db-create-secret-3ea5t8
-    kapp.k14s.io/change-group.job-test-jobs-runs-map-feature-branch-1-db-create-secret-3ea5t8: kontinuous/job-test-jobs-runs-map-feature-branch-1-db-create-secret-3ea5t8
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.db: kontinuous/project.fabrique.contrib.jobs.job.db
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.db: kontinuous/project.fabrique.contrib.jobs.db
+    kapp.k14s.io/change-group.jobs.job.db: kontinuous/jobs.job.db
+    kapp.k14s.io/change-group.jobs.db: kontinuous/jobs.db
+    kapp.k14s.io/change-group.job.db: kontinuous/job.db
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.db.create-secret: kontinuous/project.fabrique.contrib.jobs.job.db.create-secret
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.db.create-secret: kontinuous/project.fabrique.contrib.jobs.db.create-secret
+    kapp.k14s.io/change-group.jobs.job.db.create-secret: kontinuous/jobs.job.db.create-secret
+    kapp.k14s.io/change-group.jobs.db.create-secret: kontinuous/jobs.db.create-secret
+    kapp.k14s.io/change-group.job.db.create-secret: kontinuous/job.db.create-secret
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-runs-map-feature-branch-1-db-c-4mj01z
