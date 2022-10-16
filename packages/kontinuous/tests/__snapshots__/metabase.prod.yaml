@@ -238,6 +238,12 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
+    kontinuous/depname.full: project.fabrique.contrib.metabase-app1.Deployment.metabase-app1
+    kontinuous/depname.chartResource: metabase-app1.Deployment.metabase-app1
+    kontinuous/depname.chartName: metabase-app1
+    kontinuous/depname.chartPath: project.fabrique.contrib.metabase-app1
+    kontinuous/depname.resourcePath: Deployment.metabase-app1
+    kontinuous/depname.resourceName: metabase-app1
     kapp.k14s.io/change-group: kontinuous/test-metabase
     kapp.k14s.io/change-group.metabase-app1: kontinuous/metabase-app1.test-metabase
 spec:
@@ -321,6 +327,12 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
+    kontinuous/depname.full: project.fabrique.contrib.metabase-app2.Deployment.metabase-app2
+    kontinuous/depname.chartResource: metabase-app2.Deployment.metabase-app2
+    kontinuous/depname.chartName: metabase-app2
+    kontinuous/depname.chartPath: project.fabrique.contrib.metabase-app2
+    kontinuous/depname.resourcePath: Deployment.metabase-app2
+    kontinuous/depname.resourceName: metabase-app2
     kapp.k14s.io/change-group: kontinuous/test-metabase
     kapp.k14s.io/change-group.metabase-app2: kontinuous/metabase-app2.test-metabase
 spec:

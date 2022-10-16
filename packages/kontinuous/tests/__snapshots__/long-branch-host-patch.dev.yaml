@@ -117,6 +117,12 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
+    kontinuous/depname.full: project.fabrique.contrib.app.Deployment.app
+    kontinuous/depname.chartResource: app.Deployment.app
+    kontinuous/depname.chartName: app
+    kontinuous/depname.chartPath: project.fabrique.contrib.app
+    kontinuous/depname.resourcePath: Deployment.app
+    kontinuous/depname.resourceName: app
     kapp.k14s.io/change-group: kontinuous/test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
     kapp.k14s.io/change-group.app: >-
       kontinuous/app.test-long-branch-host-patch-a-very-very-very-long-branc-2h9265

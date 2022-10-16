@@ -97,6 +97,12 @@ metadata:
     kontinuous/source: project/charts/job-extra/templates/my-job.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
+    kontinuous/depname.full: project.job-extra.Job.job-extra
+    kontinuous/depname.chartResource: job-extra.Job.job-extra
+    kontinuous/depname.chartName: job-extra
+    kontinuous/depname.chartPath: project.job-extra
+    kontinuous/depname.resourcePath: Job.job-extra
+    kontinuous/depname.resourceName: job-extra
     kapp.k14s.io/change-group: kontinuous/test-charts-feature-branch-1
     kapp.k14s.io/change-group.job-extra: kontinuous/job-extra.test-charts-feature-branch-1
   labels:
