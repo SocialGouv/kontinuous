@@ -39,16 +39,14 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ""
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: "kontinuous/{{ $val.global.namespace }}"
     {{- if $run.stage }}
-    kapp.k14s.io/change-group.kontinuous-stage: "kontinuous/{{ $run.stage }}.{{ $val.global.namespace }}"
+    kapp.k14s.io/change-group.stage: "kontinuous/{{ $run.stage }}"
     {{- end }}
     {{- range $scope := $run.scopes }}
-    kontinuous/depname.custom.{{ $scope }}: "{{ $scope }}"
-    kapp.k14s.io/change-group.{{ $scope }}: "kontinuous/{{ $scope }}.{{ $val.global.namespace }}"
+    kapp.k14s.io/change-group.{{ $scope }}: "kontinuous/{{ $scope }}"
     {{- end }}
     {{- range $need := $run.needs }}
-    kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting kontinuous/{{ $need }}.{{ $val.global.namespace }}"
+    kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting kontinuous/{{ $need }}"
     {{- end }}
     janitor/ttl: "7d"
     {{- if $run.onChangedPaths }}

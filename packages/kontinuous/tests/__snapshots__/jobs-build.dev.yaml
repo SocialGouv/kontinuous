@@ -172,17 +172,18 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    kontinuous/depname.full: project.fabrique.contrib.app.Deployment.app
-    kontinuous/depname.chartResource: app.Deployment.app
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
     kontinuous/depname.chartName: app
     kontinuous/depname.chartPath: project.fabrique.contrib.app
-    kontinuous/depname.resourcePath: Deployment.app
+    kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.app: kontinuous/app.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-rule.build-app: >-
-      upsert after upserting
-      kontinuous/build-app.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.project.fabrique.contrib.app.deployment.app: kontinuous/project.fabrique.contrib.app.deployment.app
+    kapp.k14s.io/change-group.app.deployment.app: kontinuous/app.deployment.app
+    kapp.k14s.io/change-group.app: kontinuous/app
+    kapp.k14s.io/change-group.project.fabrique.contrib.app: kontinuous/project.fabrique.contrib.app
+    kapp.k14s.io/change-group.deployment.app: kontinuous/deployment.app
+    kapp.k14s.io/change-rule.build-app: upsert after upserting kontinuous/build-app
 spec:
   replicas: 1
   selector:
@@ -280,18 +281,19 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    kontinuous/depname.full: project.fabrique.contrib.hasura.Deployment.hasura
-    kontinuous/depname.chartResource: hasura.Deployment.hasura
+    kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
+    kontinuous/depname.chartResource: hasura.deployment.hasura
     kontinuous/depname.chartName: hasura
     kontinuous/depname.chartPath: project.fabrique.contrib.hasura
-    kontinuous/depname.resourcePath: Deployment.hasura
+    kontinuous/depname.resourcePath: deployment.hasura
     kontinuous/depname.resourceName: hasura
-    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.hasura: kontinuous/hasura.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-rule.build-hasura: >-
-      upsert after upserting
-      kontinuous/build-hasura.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.project.fabrique.contrib.hasura.deployment.hasura: kontinuous/project.fabrique.contrib.hasura.deployment.hasura
+    kapp.k14s.io/change-group.hasura.deployment.hasura: kontinuous/hasura.deployment.hasura
+    kapp.k14s.io/change-group.hasura: kontinuous/hasura
+    kapp.k14s.io/change-group.project.fabrique.contrib.hasura: kontinuous/project.fabrique.contrib.hasura
+    kapp.k14s.io/change-group.deployment.hasura: kontinuous/deployment.hasura
+    kapp.k14s.io/change-rule.build-hasura: upsert after upserting kontinuous/build-hasura
+    kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db
 spec:
   replicas: 1
   selector:
@@ -373,15 +375,18 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    kontinuous/depname.full: project.fabrique.contrib.pgweb.Deployment.pgweb
-    kontinuous/depname.chartResource: pgweb.Deployment.pgweb
+    kontinuous/depname.full: project.fabrique.contrib.pgweb.deployment.pgweb
+    kontinuous/depname.chartResource: pgweb.deployment.pgweb
     kontinuous/depname.chartName: pgweb
     kontinuous/depname.chartPath: project.fabrique.contrib.pgweb
-    kontinuous/depname.resourcePath: Deployment.pgweb
+    kontinuous/depname.resourcePath: deployment.pgweb
     kontinuous/depname.resourceName: pgweb
-    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-group.pgweb: kontinuous/pgweb.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.project.fabrique.contrib.pgweb.deployment.pgweb: kontinuous/project.fabrique.contrib.pgweb.deployment.pgweb
+    kapp.k14s.io/change-group.pgweb.deployment.pgweb: kontinuous/pgweb.deployment.pgweb
+    kapp.k14s.io/change-group.pgweb: kontinuous/pgweb
+    kapp.k14s.io/change-group.project.fabrique.contrib.pgweb: kontinuous/project.fabrique.contrib.pgweb
+    kapp.k14s.io/change-group.deployment.pgweb: kontinuous/deployment.pgweb
+    kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db
 spec:
   replicas: 1
   selector:
@@ -462,29 +467,30 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
-    kontinuous/depname.custom.db: db
-    kapp.k14s.io/change-group.db: kontinuous/db.test-jobs-build-feature-branch-1
-    kontinuous/depname.custom.db.create-db: db.create-db
-    kapp.k14s.io/change-group.db.create-db: kontinuous/db.create-db.test-jobs-build-feature-branch-1
-    kontinuous/depname.custom.db..create-db: db..create-db
-    kapp.k14s.io/change-group.db..create-db: kontinuous/db..create-db.test-jobs-build-feature-branch-1
-    kapp.k14s.io/change-rule.db..create-secret: >-
-      upsert after upserting
-      kontinuous/db..create-secret.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.db: kontinuous/db
+    kapp.k14s.io/change-group.db.create-db: kontinuous/db.create-db
+    kapp.k14s.io/change-group.db..create-db: kontinuous/db..create-db
+    kapp.k14s.io/change-rule.db..create-secret: upsert after upserting kontinuous/db..create-secret
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs-dev
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs-dev/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs-dev.Job.job-test-jobs-build-feature-branch-1-db-create-db-13oc8a
-    kontinuous/depname.chartResource: jobs-dev.Job.job-test-jobs-build-feature-branch-1-db-create-db-13oc8a
+      project.fabrique.contrib.jobs-dev.job.job-test-jobs-build-feature-branch-1-db-create-db-13oc8a
+    kontinuous/depname.chartResource: jobs-dev.job.job-test-jobs-build-feature-branch-1-db-create-db-13oc8a
     kontinuous/depname.chartName: jobs-dev
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs-dev
-    kontinuous/depname.resourcePath: Job.job-test-jobs-build-feature-branch-1-db-create-db-13oc8a
+    kontinuous/depname.resourcePath: job.job-test-jobs-build-feature-branch-1-db-create-db-13oc8a
     kontinuous/depname.resourceName: job-test-jobs-build-feature-branch-1-db-create-db-13oc8a
-    kapp.k14s.io/change-group.jobs-dev: kontinuous/jobs-dev.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs-dev.job.job-test-jobs-build-feature-branch-1-db-create-db-13oc8a: >-
+      kontinuous/project.fabrique.contrib.jobs-dev.job.job-test-jobs-build-feature-branch-1-db-create-db-13oc8a
+    kapp.k14s.io/change-group.jobs-dev.job.job-test-jobs-build-feature-branch-1-db-create-db-13oc8a: >-
+      kontinuous/jobs-dev.job.job-test-jobs-build-feature-branch-1-db-create-db-13oc8a
+    kapp.k14s.io/change-group.jobs-dev: kontinuous/jobs-dev
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs-dev: kontinuous/project.fabrique.contrib.jobs-dev
+    kapp.k14s.io/change-group.job.job-test-jobs-build-feature-branch-1-db-create-db-13oc8a: kontinuous/job.job-test-jobs-build-feature-branch-1-db-create-db-13oc8a
+    kapp.k14s.io/change-group.job-test-jobs-build-feature-branch-1-db-create-db-13oc8a: kontinuous/job-test-jobs-build-feature-branch-1-db-create-db-13oc8a
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-feature-branch-1-db-crea-4u3jy7
@@ -601,26 +607,30 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
-    kontinuous/depname.custom.db: db
-    kapp.k14s.io/change-group.db: kontinuous/db.test-jobs-build-feature-branch-1
-    kontinuous/depname.custom.db.create-secret: db.create-secret
-    kapp.k14s.io/change-group.db.create-secret: kontinuous/db.create-secret.test-jobs-build-feature-branch-1
-    kontinuous/depname.custom.db..create-secret: db..create-secret
-    kapp.k14s.io/change-group.db..create-secret: kontinuous/db..create-secret.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.db: kontinuous/db
+    kapp.k14s.io/change-group.db.create-secret: kontinuous/db.create-secret
+    kapp.k14s.io/change-group.db..create-secret: kontinuous/db..create-secret
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs-dev
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs-dev/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs-dev.Job.job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8
-    kontinuous/depname.chartResource: jobs-dev.Job.job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8
+      project.fabrique.contrib.jobs-dev.job.job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8
+    kontinuous/depname.chartResource: jobs-dev.job.job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8
     kontinuous/depname.chartName: jobs-dev
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs-dev
-    kontinuous/depname.resourcePath: Job.job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8
+    kontinuous/depname.resourcePath: job.job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8
     kontinuous/depname.resourceName: job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8
-    kapp.k14s.io/change-group.jobs-dev: kontinuous/jobs-dev.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.jobs-dev: kontinuous/jobs-dev
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs-dev: kontinuous/project.fabrique.contrib.jobs-dev
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs-dev.job.job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8: >-
+      kontinuous/project.fabrique.contrib.jobs-dev.job.job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8
+    kapp.k14s.io/change-group.jobs-dev.job.job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8: >-
+      kontinuous/jobs-dev.job.job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8
+    kapp.k14s.io/change-group.job.job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8: >-
+      kontinuous/job.job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8
+    kapp.k14s.io/change-group.job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8: kontinuous/job-test-jobs-build-feature-branch-1-db-create-secret-3ea5t8
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-feature-branch-1-db-crea-23ka4q
@@ -724,26 +734,30 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
-    kontinuous/depname.custom.build-app: build-app
-    kapp.k14s.io/change-group.build-app: kontinuous/build-app.test-jobs-build-feature-branch-1
-    kontinuous/depname.custom.build-app.kaniko: build-app.kaniko
-    kapp.k14s.io/change-group.build-app.kaniko: kontinuous/build-app.kaniko.test-jobs-build-feature-branch-1
-    kontinuous/depname.custom.build-app..kaniko: build-app..kaniko
-    kapp.k14s.io/change-group.build-app..kaniko: kontinuous/build-app..kaniko.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.build-app: kontinuous/build-app
+    kapp.k14s.io/change-group.build-app.kaniko: kontinuous/build-app.kaniko
+    kapp.k14s.io/change-group.build-app..kaniko: kontinuous/build-app..kaniko
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.Job.job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9
-    kontinuous/depname.chartResource: jobs.Job.job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9
+      project.fabrique.contrib.jobs.job.job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9
+    kontinuous/depname.chartResource: jobs.job.job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: Job.job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9
+    kontinuous/depname.resourcePath: job.job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9
     kontinuous/depname.resourceName: job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9
-    kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9: >-
+      kontinuous/project.fabrique.contrib.jobs.job.job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9
+    kapp.k14s.io/change-group.jobs.job.job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9: >-
+      kontinuous/jobs.job.job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9
+    kapp.k14s.io/change-group.jobs: kontinuous/jobs
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs: kontinuous/project.fabrique.contrib.jobs
+    kapp.k14s.io/change-group.job.job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9: >-
+      kontinuous/job.job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9
+    kapp.k14s.io/change-group.job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9: kontinuous/job-test-jobs-build-feature-branch-1-build-app-kaniko-3zekn9
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-feature-branch-1-build-a-515bh5
@@ -874,26 +888,30 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kontinuous/test-jobs-build-feature-branch-1
-    kontinuous/depname.custom.build-hasura: build-hasura
-    kapp.k14s.io/change-group.build-hasura: kontinuous/build-hasura.test-jobs-build-feature-branch-1
-    kontinuous/depname.custom.build-hasura.kaniko: build-hasura.kaniko
-    kapp.k14s.io/change-group.build-hasura.kaniko: kontinuous/build-hasura.kaniko.test-jobs-build-feature-branch-1
-    kontinuous/depname.custom.build-hasura..kaniko: build-hasura..kaniko
-    kapp.k14s.io/change-group.build-hasura..kaniko: kontinuous/build-hasura..kaniko.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.build-hasura: kontinuous/build-hasura
+    kapp.k14s.io/change-group.build-hasura.kaniko: kontinuous/build-hasura.kaniko
+    kapp.k14s.io/change-group.build-hasura..kaniko: kontinuous/build-hasura..kaniko
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.Job.job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853
-    kontinuous/depname.chartResource: jobs.Job.job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853
+      project.fabrique.contrib.jobs.job.job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853
+    kontinuous/depname.chartResource: jobs.job.job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: Job.job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853
+    kontinuous/depname.resourcePath: job.job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853
     kontinuous/depname.resourceName: job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853
-    kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-jobs-build-feature-branch-1
+    kapp.k14s.io/change-group.jobs: kontinuous/jobs
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs: kontinuous/project.fabrique.contrib.jobs
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853: >-
+      kontinuous/project.fabrique.contrib.jobs.job.job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853
+    kapp.k14s.io/change-group.jobs.job.job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853: >-
+      kontinuous/jobs.job.job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853
+    kapp.k14s.io/change-group.job.job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853: >-
+      kontinuous/job.job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853
+    kapp.k14s.io/change-group.job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853: kontinuous/job-test-jobs-build-feature-branch-1-build-hasura-kaniko-3d6853
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-feature-branch-1-build-h-3qyux0

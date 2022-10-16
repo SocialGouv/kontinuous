@@ -218,14 +218,18 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    kontinuous/depname.full: project.fabrique.contrib.app-2nd-instance.Deployment.app-2nd-instance
-    kontinuous/depname.chartResource: app-2nd-instance.Deployment.app-2nd-instance
+    kontinuous/depname.full: project.fabrique.contrib.app-2nd-instance.deployment.app-2nd-instance
+    kontinuous/depname.chartResource: app-2nd-instance.deployment.app-2nd-instance
     kontinuous/depname.chartName: app-2nd-instance
     kontinuous/depname.chartPath: project.fabrique.contrib.app-2nd-instance
-    kontinuous/depname.resourcePath: Deployment.app-2nd-instance
+    kontinuous/depname.resourcePath: deployment.app-2nd-instance
     kontinuous/depname.resourceName: app-2nd-instance
-    kapp.k14s.io/change-group: kontinuous/test-sample-1
-    kapp.k14s.io/change-group.app-2nd-instance: kontinuous/app-2nd-instance.test-sample-1
+    kapp.k14s.io/change-group.project.fabrique.contrib.app-2nd-instance.deployment.app-2nd-instance: >-
+      kontinuous/project.fabrique.contrib.app-2nd-instance.deployment.app-2nd-instance
+    kapp.k14s.io/change-group.app-2nd-instance.deployment.app-2nd-instance: kontinuous/app-2nd-instance.deployment.app-2nd-instance
+    kapp.k14s.io/change-group.app-2nd-instance: kontinuous/app-2nd-instance
+    kapp.k14s.io/change-group.project.fabrique.contrib.app-2nd-instance: kontinuous/project.fabrique.contrib.app-2nd-instance
+    kapp.k14s.io/change-group.deployment.app-2nd-instance: kontinuous/deployment.app-2nd-instance
 spec:
   replicas: 2
   selector:
@@ -322,14 +326,17 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    kontinuous/depname.full: project.fabrique.contrib.app.Deployment.app
-    kontinuous/depname.chartResource: app.Deployment.app
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
     kontinuous/depname.chartName: app
     kontinuous/depname.chartPath: project.fabrique.contrib.app
-    kontinuous/depname.resourcePath: Deployment.app
+    kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    kapp.k14s.io/change-group: kontinuous/test-sample-1
-    kapp.k14s.io/change-group.app: kontinuous/app.test-sample-1
+    kapp.k14s.io/change-group.project.fabrique.contrib.app.deployment.app: kontinuous/project.fabrique.contrib.app.deployment.app
+    kapp.k14s.io/change-group.app.deployment.app: kontinuous/app.deployment.app
+    kapp.k14s.io/change-group.app: kontinuous/app
+    kapp.k14s.io/change-group.project.fabrique.contrib.app: kontinuous/project.fabrique.contrib.app
+    kapp.k14s.io/change-group.deployment.app: kontinuous/deployment.app
 spec:
   replicas: 2
   selector:
@@ -426,14 +433,17 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    kontinuous/depname.full: project.fabrique.contrib.hasura.Deployment.hasura
-    kontinuous/depname.chartResource: hasura.Deployment.hasura
+    kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
+    kontinuous/depname.chartResource: hasura.deployment.hasura
     kontinuous/depname.chartName: hasura
     kontinuous/depname.chartPath: project.fabrique.contrib.hasura
-    kontinuous/depname.resourcePath: Deployment.hasura
+    kontinuous/depname.resourcePath: deployment.hasura
     kontinuous/depname.resourceName: hasura
-    kapp.k14s.io/change-group: kontinuous/test-sample-1
-    kapp.k14s.io/change-group.hasura: kontinuous/hasura.test-sample-1
+    kapp.k14s.io/change-group.project.fabrique.contrib.hasura.deployment.hasura: kontinuous/project.fabrique.contrib.hasura.deployment.hasura
+    kapp.k14s.io/change-group.hasura.deployment.hasura: kontinuous/hasura.deployment.hasura
+    kapp.k14s.io/change-group.hasura: kontinuous/hasura
+    kapp.k14s.io/change-group.project.fabrique.contrib.hasura: kontinuous/project.fabrique.contrib.hasura
+    kapp.k14s.io/change-group.deployment.hasura: kontinuous/deployment.hasura
 spec:
   replicas: 1
   selector:
@@ -514,14 +524,17 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    kontinuous/depname.full: project.fabrique.contrib.pgweb.Deployment.pgweb
-    kontinuous/depname.chartResource: pgweb.Deployment.pgweb
+    kontinuous/depname.full: project.fabrique.contrib.pgweb.deployment.pgweb
+    kontinuous/depname.chartResource: pgweb.deployment.pgweb
     kontinuous/depname.chartName: pgweb
     kontinuous/depname.chartPath: project.fabrique.contrib.pgweb
-    kontinuous/depname.resourcePath: Deployment.pgweb
+    kontinuous/depname.resourcePath: deployment.pgweb
     kontinuous/depname.resourceName: pgweb
-    kapp.k14s.io/change-group: kontinuous/test-sample-1
-    kapp.k14s.io/change-group.pgweb: kontinuous/pgweb.test-sample-1
+    kapp.k14s.io/change-group.project.fabrique.contrib.pgweb.deployment.pgweb: kontinuous/project.fabrique.contrib.pgweb.deployment.pgweb
+    kapp.k14s.io/change-group.pgweb.deployment.pgweb: kontinuous/pgweb.deployment.pgweb
+    kapp.k14s.io/change-group.pgweb: kontinuous/pgweb
+    kapp.k14s.io/change-group.project.fabrique.contrib.pgweb: kontinuous/project.fabrique.contrib.pgweb
+    kapp.k14s.io/change-group.deployment.pgweb: kontinuous/deployment.pgweb
 spec:
   replicas: 1
   selector:

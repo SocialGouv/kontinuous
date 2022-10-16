@@ -9,13 +9,9 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kontinuous/test-deactivate-feature-branch-1
-    kontinuous/depname.custom.deactivate: deactivate
-    kapp.k14s.io/change-group.deactivate: kontinuous/deactivate.test-deactivate-feature-branch-1
-    kontinuous/depname.custom.deactivate.delete-namespace: deactivate.delete-namespace
-    kapp.k14s.io/change-group.deactivate.delete-namespace: kontinuous/deactivate.delete-namespace.test-deactivate-feature-branch-1
-    kontinuous/depname.custom.deactivate..delete-namespace: deactivate..delete-namespace
-    kapp.k14s.io/change-group.deactivate..delete-namespace: kontinuous/deactivate..delete-namespace.test-deactivate-feature-branch-1
+    kapp.k14s.io/change-group.deactivate: kontinuous/deactivate
+    kapp.k14s.io/change-group.deactivate.delete-namespace: kontinuous/deactivate.delete-namespace
+    kapp.k14s.io/change-group.deactivate..delete-namespace: kontinuous/deactivate..delete-namespace
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.deactivate.jobs-deactivate
     kontinuous/source: >-
@@ -23,14 +19,22 @@ metadata:
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
-      project.fabrique.contrib.deactivate.jobs-deactivate.Job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
+      project.fabrique.contrib.deactivate.jobs-deactivate.job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
     kontinuous/depname.chartResource: >-
-      jobs-deactivate.Job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
+      jobs-deactivate.job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
     kontinuous/depname.chartName: jobs-deactivate
     kontinuous/depname.chartPath: project.fabrique.contrib.deactivate.jobs-deactivate
-    kontinuous/depname.resourcePath: Job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
+    kontinuous/depname.resourcePath: job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
     kontinuous/depname.resourceName: job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
-    kapp.k14s.io/change-group.jobs-deactivate: kontinuous/jobs-deactivate.test-deactivate-feature-branch-1
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t: >-
+      kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
+    kapp.k14s.io/change-group.jobs-deactivate.job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t: >-
+      kontinuous/jobs-deactivate.job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
+    kapp.k14s.io/change-group.jobs-deactivate: kontinuous/jobs-deactivate
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate: kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate
+    kapp.k14s.io/change-group.job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t: >-
+      kontinuous/job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
+    kapp.k14s.io/change-group.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t: kontinuous/job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-deactivate-feature-branch-1-deactiv-56yw37

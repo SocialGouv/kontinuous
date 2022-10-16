@@ -18,7 +18,7 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
 
   for (const manifest of manifests) {
     const annotations = manifest.metadata?.annotations
-    if (!annotations || !annotations[changeGroupPrefix]) {
+    if (!annotations) {
       continue
     }
 
@@ -47,6 +47,7 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
   }
 
   const uml = []
+
   for (const [key, dependenciesSet] of Object.entries(flatDependencies)) {
     const ccKey = camelcase(key)
     for (const dep of dependenciesSet) {
@@ -70,6 +71,5 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
 }`)
     proc.stdin.end()
   })
-
   logger.debug(`\n${result}`)
 }

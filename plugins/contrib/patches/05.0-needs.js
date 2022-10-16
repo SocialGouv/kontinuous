@@ -12,13 +12,14 @@ module.exports = async (manifests, _options, _context) => {
     const { name } = metadata
     const chartName = chartPath.split(".").pop()
 
-    annotations["kontinuous/depname.full"] = `${chartPath}.${kind}.${name}`
+    const lowerKind = kind.toLowerCase()
+    annotations["kontinuous/depname.full"] = `${chartPath}.${lowerKind}.${name}`
     annotations[
       "kontinuous/depname.chartResource"
-    ] = `${chartName}.${kind}.${name}`
+    ] = `${chartName}.${lowerKind}.${name}`
     annotations["kontinuous/depname.chartName"] = chartName
     annotations["kontinuous/depname.chartPath"] = chartPath
-    annotations["kontinuous/depname.resourcePath"] = `${kind}.${name}`
+    annotations["kontinuous/depname.resourcePath"] = `${lowerKind}.${name}`
     annotations["kontinuous/depname.resourceName"] = name
   }
 

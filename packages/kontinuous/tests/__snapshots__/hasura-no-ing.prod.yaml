@@ -116,14 +116,17 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    kontinuous/depname.full: project.fabrique.contrib.hasura.Deployment.hasura
-    kontinuous/depname.chartResource: hasura.Deployment.hasura
+    kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
+    kontinuous/depname.chartResource: hasura.deployment.hasura
     kontinuous/depname.chartName: hasura
     kontinuous/depname.chartPath: project.fabrique.contrib.hasura
-    kontinuous/depname.resourcePath: Deployment.hasura
+    kontinuous/depname.resourcePath: deployment.hasura
     kontinuous/depname.resourceName: hasura
-    kapp.k14s.io/change-group: kontinuous/test-hasura-no-ing
-    kapp.k14s.io/change-group.hasura: kontinuous/hasura.test-hasura-no-ing
+    kapp.k14s.io/change-group.project.fabrique.contrib.hasura.deployment.hasura: kontinuous/project.fabrique.contrib.hasura.deployment.hasura
+    kapp.k14s.io/change-group.hasura.deployment.hasura: kontinuous/hasura.deployment.hasura
+    kapp.k14s.io/change-group.hasura: kontinuous/hasura
+    kapp.k14s.io/change-group.project.fabrique.contrib.hasura: kontinuous/project.fabrique.contrib.hasura
+    kapp.k14s.io/change-group.deployment.hasura: kontinuous/deployment.hasura
 spec:
   replicas: 1
   selector:

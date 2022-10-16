@@ -115,14 +115,17 @@ metadata:
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    kontinuous/depname.full: project.fabrique.contrib.app.Deployment.app
-    kontinuous/depname.chartResource: app.Deployment.app
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
     kontinuous/depname.chartName: app
     kontinuous/depname.chartPath: project.fabrique.contrib.app
-    kontinuous/depname.resourcePath: Deployment.app
+    kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    kapp.k14s.io/change-group: kontinuous/test-app-simple-tag
-    kapp.k14s.io/change-group.app: kontinuous/app.test-app-simple-tag
+    kapp.k14s.io/change-group.project.fabrique.contrib.app.deployment.app: kontinuous/project.fabrique.contrib.app.deployment.app
+    kapp.k14s.io/change-group.app.deployment.app: kontinuous/app.deployment.app
+    kapp.k14s.io/change-group.app: kontinuous/app
+    kapp.k14s.io/change-group.project.fabrique.contrib.app: kontinuous/project.fabrique.contrib.app
+    kapp.k14s.io/change-group.deployment.app: kontinuous/deployment.app
 spec:
   replicas: 2
   selector:
