@@ -28,5 +28,3 @@ preDeploy:
     enabled: false
   clear:
     enabled: false
-  cleanFailed:
-    enabled: false
