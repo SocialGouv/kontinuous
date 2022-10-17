@@ -8,26 +8,17 @@ module.exports = async (
   options,
   { config, logger, needBin, utils, manifestsFile, dryRun }
 ) => {
-  const {
-    parseCommand,
-    needKapp,
-    // slug
-    fs,
-  } = utils
+  const { parseCommand, needKapp, slug, fs } = utils
 
-  const {
-    kubeconfigContext,
-    kubeconfig,
-    // repositoryName,
-    deployTimeout,
-  } = config
+  const { kubeconfigContext, kubeconfig, repositoryName, deployTimeout } =
+    config
 
   const { kubeApiQps = 1000, kubeApiBurst = 1000, logsAll = true } = options
 
-  // const charts = config.chart?.join(",")
-  // const kappApp = slug(
-  //   `${repositoryName}-${config.gitBranch}${charts ? `-${charts}` : ""}`
-  // )
+  const charts = config.chart?.join(",")
+  const kappApp = slug(
+    `${repositoryName}-${config.gitBranch}${charts ? `-${charts}` : ""}`
+  )
 
   const manifests = utils.yaml.loadAll(
     await fs.readFile(manifestsFile, { encoding: "utf-8" })
@@ -45,9 +36,8 @@ module.exports = async (
     ? "kapp --version"
     : `
         kapp deploy
-          ${
-            kubeconfigContext ? `--kubeconfig-context ${kubeconfigContext}` : ""
-          }
+        ${kubeconfigContext ? `--kubeconfig-context ${kubeconfigContext}` : ""}
+          --app ${kappApp}
           --namespace ${ns}
           ${logsAll ? "--logs-all" : ""}
           --wait-timeout ${deployTimeout}
