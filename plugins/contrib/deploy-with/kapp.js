@@ -28,7 +28,7 @@ module.exports = async (
       manifest.kind === "Namespace" &&
       manifest.metadata?.annotations?.["kontinuous/mainNamespace"]
   )
-  const ns = mainNamespace.metadata?.annotations?.["kontinuous/mainNamespace"]
+  const ns = mainNamespace[0].metadata.name
 
   await needBin(needKapp)
 
@@ -37,7 +37,7 @@ module.exports = async (
     : `
         kapp deploy
         ${kubeconfigContext ? `--kubeconfig-context ${kubeconfigContext}` : ""}
-          --app ${kappApp}
+          --app label:kontinuous/kapp=${kappApp}
           --namespace ${ns}
           ${logsAll ? "--logs-all" : ""}
           --wait-timeout ${deployTimeout}
