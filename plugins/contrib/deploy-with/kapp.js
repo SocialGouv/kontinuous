@@ -1,6 +1,5 @@
 const { setTimeout } = require("timers/promises")
 const { spawn } = require("child_process")
-const fs = require("fs-extra")
 
 const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
 
@@ -13,6 +12,7 @@ module.exports = async (
     parseCommand,
     needKapp,
     // slug
+    fs,
   } = utils
 
   const {
