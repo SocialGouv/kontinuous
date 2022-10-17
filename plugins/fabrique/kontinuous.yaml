@@ -35,8 +35,8 @@ dependencies:
     deployWith:
       kapp:
         options:
-          kubeApiQps: 100
-          kubeApiBurst: 100
+          kubeApiQps: 1000
+          kubeApiBurst: 1000
           logsAll: false
 
 
