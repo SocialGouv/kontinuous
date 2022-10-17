@@ -37,7 +37,7 @@ dependencies:
         options:
           kubeApiQps: 1000
           kubeApiBurst: 1000
-          logsAll: false
+          logsAll: true
 
 
 config:
