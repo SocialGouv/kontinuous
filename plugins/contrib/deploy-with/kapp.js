@@ -1,5 +1,6 @@
 const { setTimeout } = require("timers/promises")
 const { spawn } = require("child_process")
+const fs = require("fs-extra")
 
 const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
 
@@ -8,18 +9,33 @@ module.exports = async (
   options,
   { config, logger, needBin, utils, manifestsFile, dryRun }
 ) => {
-  const { parseCommand, needKapp, slug } = utils
+  const {
+    parseCommand,
+    needKapp,
+    // slug
+  } = utils
 
-  const { kubeconfigContext, kubeconfig, repositoryName, deployTimeout } =
-    config
+  const {
+    kubeconfigContext,
+    kubeconfig,
+    // repositoryName,
+    deployTimeout,
+  } = config
 
   const { kubeApiQps = 1000, kubeApiBurst = 1000, logsAll = true } = options
 
-  const charts = config.chart?.join(",")
+  // const charts = config.chart?.join(",")
+  // const kappApp = slug(
+  //   `${repositoryName}-${config.gitBranch}${charts ? `-${charts}` : ""}`
+  // )
 
-  const kappApp = slug(
-    `${repositoryName}-${config.gitBranch}${charts ? `-${charts}` : ""}`
+  const manifests = utils.yaml.loadAll(await fs.readFile(manifestsFile))
+  const mainNamespace = manifests.filter(
+    (manifest) =>
+      manifest.kind === "Namespace" &&
+      manifest.metadata?.annotations?.["kontinuous/mainNamespace"]
   )
+  const ns = mainNamespace.metadata?.annotations?.["kontinuous/mainNamespace"]
 
   await needBin(needKapp)
 
@@ -30,7 +46,7 @@ module.exports = async (
           ${
             kubeconfigContext ? `--kubeconfig-context ${kubeconfigContext}` : ""
           }
-          --app label:kontinuous/kapp=${kappApp}
+          --namespace ${ns}
           ${logsAll ? "--logs-all" : ""}
           --wait-timeout ${deployTimeout}
           --dangerous-override-ownership-of-existing-resources
