@@ -37,7 +37,7 @@ module.exports = async (
     : `
         kapp deploy
         ${kubeconfigContext ? `--kubeconfig-context ${kubeconfigContext}` : ""}
-          --app label:kontinuous/kapp=${kappApp}
+          --app ${kappApp}
           --namespace ${ns}
           ${logsAll ? "--logs-all" : ""}
           --wait-timeout ${deployTimeout}
