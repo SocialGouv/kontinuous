@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.82.7](https://github.com/SocialGouv/kontinuous/compare/v1.82.6...v1.82.7) (2022-10-17)
+
+
+### Bug Fixes
+
+* test kapp with ns target ([a4dc6bc](https://github.com/SocialGouv/kontinuous/commit/a4dc6bca619864c8a2dcd3969d52671f4c5a6bfb))
+
 ### [1.82.6](https://github.com/SocialGouv/kontinuous/compare/v1.82.5...v1.82.6) (2022-10-17)
 
 
