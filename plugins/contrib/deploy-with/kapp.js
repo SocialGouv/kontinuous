@@ -29,7 +29,9 @@ module.exports = async (
   //   `${repositoryName}-${config.gitBranch}${charts ? `-${charts}` : ""}`
   // )
 
-  const manifests = utils.yaml.loadAll(await fs.readFile(manifestsFile))
+  const manifests = utils.yaml.loadAll(
+    await fs.readFile(manifestsFile, { encoding: "utf-8" })
+  )
   const mainNamespace = manifests.filter(
     (manifest) =>
       manifest.kind === "Namespace" &&
