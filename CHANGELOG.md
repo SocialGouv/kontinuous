@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.82.4](https://github.com/SocialGouv/kontinuous/compare/v1.82.3...v1.82.4) (2022-10-17)
+
+
+### Bug Fixes
+
+* lower kapp qps ([a5e7644](https://github.com/SocialGouv/kontinuous/commit/a5e76445c81bd2893687e0258e45d9e8eefcb3c2))
+
 ### [1.82.3](https://github.com/SocialGouv/kontinuous/compare/v1.82.2...v1.82.3) (2022-10-16)
 
 
