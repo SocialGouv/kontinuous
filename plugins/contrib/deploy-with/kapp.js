@@ -8,7 +8,7 @@ module.exports = async (
   options,
   { config, logger, needBin, utils, manifestsFile, dryRun }
 ) => {
-  const { parseCommand, needKapp, slug, fs } = utils
+  const { parseCommand, needKapp, slug } = utils
 
   const { kubeconfigContext, kubeconfig, repositoryName, deployTimeout } =
     config
@@ -20,16 +20,6 @@ module.exports = async (
     `${repositoryName}-${config.gitBranch}${charts ? `-${charts}` : ""}`
   )
 
-  const manifests = utils.yaml.loadAll(
-    await fs.readFile(manifestsFile, { encoding: "utf-8" })
-  )
-  const mainNamespace = manifests.filter(
-    (manifest) =>
-      manifest.kind === "Namespace" &&
-      manifest.metadata?.annotations?.["kontinuous/mainNamespace"]
-  )
-  const ns = mainNamespace[0].metadata.name
-
   await needBin(needKapp)
 
   const kappDeployCommand = dryRun
@@ -37,8 +27,7 @@ module.exports = async (
     : `
         kapp deploy
         ${kubeconfigContext ? `--kubeconfig-context ${kubeconfigContext}` : ""}
-          --app ${kappApp}
-          --namespace ${ns}
+          --app label:kontinuous/kapp=${kappApp}
           ${logsAll ? "--logs-all" : ""}
           --wait-timeout ${deployTimeout}
           --dangerous-override-ownership-of-existing-resources
