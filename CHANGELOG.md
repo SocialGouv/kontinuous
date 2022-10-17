@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.82.11](https://github.com/SocialGouv/kontinuous/compare/v1.82.10...v1.82.11) (2022-10-17)
+
+
+### Bug Fixes
+
+* rollback test ([1ed8499](https://github.com/SocialGouv/kontinuous/commit/1ed84996ec9a38e16c46ef6ecfff37f584f0a3e6))
+* test rollback kapp qps to 1000 ([125d1b2](https://github.com/SocialGouv/kontinuous/commit/125d1b2daf9d79778eb15a9dd6b5a563affad74b))
+
 ### [1.82.10](https://github.com/SocialGouv/kontinuous/compare/v1.82.9...v1.82.10) (2022-10-17)
 
 
