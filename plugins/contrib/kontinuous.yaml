@@ -12,10 +12,9 @@ patches:
   needs:
     enabled: true
   needsUsingInitcontainers:
-    # enabled: true
-    enabled: false
-  needsUsingKapp:
     enabled: true
+  needsUsingKapp:
+    enabled: false
 
 
 validators:

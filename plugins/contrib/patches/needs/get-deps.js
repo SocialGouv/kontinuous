@@ -1,4 +1,4 @@
-const runKinds = ["Deployment", "StatefulSet", "DaemonSet", "Job"]
+const runKinds = require("./run-kinds")
 
 module.exports = (manifests) => {
   const deps = {}

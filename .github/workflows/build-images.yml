@@ -25,8 +25,8 @@ jobs:
             destination: "/webhook"
           - dockerfile: packages/degit/Dockerfile
             destination: "/degit"
-          # - dockerfile: packages/wait-needs/Dockerfile
-          #   destination: "/wait-needs"
+          - dockerfile: packages/wait-needs/Dockerfile
+            destination: "/wait-needs"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2

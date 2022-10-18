@@ -1,11 +1,10 @@
+const runKinds = require("./needs/run-kinds")
+const getDeps = require("./needs/get-deps")
+
 const changeRulePrefix = "kapp.k14s.io/change-rule"
 const changeGroupPrefix = "kapp.k14s.io/change-group"
 const changeGroupValuePrefix = "kontinuous/"
 const changeRuleValuePrefix = `upsert after upserting ${changeGroupValuePrefix}`
-
-const runKinds = ["Deployment", "StatefulSet", "DaemonSet", "Job"]
-
-const getDeps = require("./needs/get-deps")
 
 module.exports = async (manifests, _options, _context) => {
   const deps = getDeps(manifests)

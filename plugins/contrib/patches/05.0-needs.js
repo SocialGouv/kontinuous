@@ -1,4 +1,4 @@
-const runKinds = ["Deployment", "StatefulSet", "DaemonSet", "Job"]
+const runKinds = require("./needs/run-kinds")
 
 module.exports = async (manifests, _options, _context) => {
   for (const manifest of manifests) {

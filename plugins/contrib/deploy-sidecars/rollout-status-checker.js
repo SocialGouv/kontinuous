@@ -2,58 +2,7 @@ const { setTimeout } = require("timers/promises")
 
 const handledKinds = ["Deployment", "StatefulSet", "Job"]
 
-const checkForNewResourceInterval = 3000
 const waitBeforeStopAllRolloutStatus = 5000 // try to collect more errors if there is any
-
-const rolloutStatusWatchForNewResource = async ({
-  selector,
-  resourceName,
-  namespace,
-  interceptor,
-  rolloutStatusProcesses,
-  utils,
-  config,
-  logger,
-}) => {
-  const { rolloutStatusExec } = utils
-
-  const { kubeconfig, kubeconfigContext: kubecontext } = config
-
-  logger.debug({ namespace, selector }, `watching resource: ${resourceName}`)
-  while (!interceptor.stop) {
-    const { promise: rolloutStatusPromise, process: rolloutStatusProcess } =
-      rolloutStatusExec({
-        kubeconfig,
-        kubecontext,
-        namespace,
-        selector,
-      })
-    rolloutStatusProcesses[selector] = rolloutStatusProcess
-    let status
-    try {
-      status = await rolloutStatusPromise
-    } catch (err) {
-      if (!err.message?.includes("net/http: TLS handshake timeout")) {
-        throw err
-      }
-      logger.debug(
-        { namespace, selector },
-        `rollout-status network error(net/http: TLS handshake timeout): retrying...`
-      )
-      continue
-    }
-    const { success, error } = status
-    if (success || error.code !== "not-found") {
-      return status
-    }
-    await setTimeout(checkForNewResourceInterval)
-    logger.trace(
-      { namespace, selector },
-      `watching resource: ${resourceName}, waiting to appear...`
-    )
-  }
-  return { success: null }
-}
 
 module.exports = async (
   sidecars,
@@ -64,7 +13,7 @@ module.exports = async (
     return
   }
 
-  const { needRolloutStatus } = utils
+  const { needRolloutStatus, rolloutStatusWatch } = utils
 
   const rolloutStatusProcesses = {}
   const stopRolloutStatus = () => {
@@ -105,6 +54,8 @@ module.exports = async (
 
   await needBin(needRolloutStatus)
 
+  const { kubeconfig, kubeconfigContext: kubecontext } = config
+
   const promises = []
   for (const manifest of manifests) {
     const { kind } = manifest
@@ -127,14 +78,17 @@ module.exports = async (
     promises.push(
       new Promise(async (resolve, reject) => {
         try {
-          const result = await rolloutStatusWatchForNewResource({
+          logger.debug(
+            { namespace, selector },
+            `watching resource: ${resourceName}`
+          )
+          const result = await rolloutStatusWatch({
             namespace,
             selector,
-            resourceName,
             interceptor,
             rolloutStatusProcesses,
-            utils,
-            config,
+            kubeconfig,
+            kubecontext,
             logger,
           })
           if (!result.success) {

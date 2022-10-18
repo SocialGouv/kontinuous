@@ -8,8 +8,8 @@ docker-build-images:
         DESTINATION: "/webhook"
       - DOCKERFILE: packages/degit/Dockerfile
         DESTINATION: "/degit"
-      # - DOCKERFILE: packages/wait-needs/Dockerfile
-      #   DESTINATION: "/wait-needs"
+      - DOCKERFILE: packages/wait-needs/Dockerfile
+        DESTINATION: "/wait-needs"
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: ["/busybox/sh","-c"]
