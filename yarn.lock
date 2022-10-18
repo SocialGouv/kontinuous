@@ -12553,6 +12553,7 @@ __metadata:
     pino: "npm:^8.6.1"
     pino-bfuscate: "npm:^1.0.0"
     pino-pretty: "npm:^9.1.1"
+    ~common: "workspace:^"
   languageName: unknown
   linkType: soft
 
