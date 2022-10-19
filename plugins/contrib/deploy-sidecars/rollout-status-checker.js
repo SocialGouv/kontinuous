@@ -114,7 +114,12 @@ module.exports = async (
       const { status } = result
       if (status === "rejected") {
         const { reason } = result
-        if (reason && Object.keys(reason) > 0) {
+        if (
+          reason &&
+          (typeof reason !== "object" ||
+            Object.keys(reason) > 0 ||
+            (reason instanceof Error && reason.message))
+        ) {
           logger.error({ reason }, "rollout-status exec error")
         }
       } else if (status === "fulfilled") {

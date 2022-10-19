@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const rolloutStatusWatch = require("~common/utils/rollout-status-watch")
 const logger = require("~common/utils/logger")
 
@@ -13,7 +15,7 @@ const runWaitNeeds = async ({ waitNeeds, timeout = 900 }) => {
 
   const promises = []
   for (const { namespace, selectors } of waitNeeds) {
-    const selector = Object.entries(selectors)
+    const selector = selectors
       .map(([label, value]) => `${label}=${value}`)
       .join(",")
 
@@ -44,8 +46,18 @@ const runWaitNeeds = async ({ waitNeeds, timeout = 900 }) => {
     const { status } = result
     if (status === "rejected") {
       const { reason } = result
-      if (reason && Object.keys(reason) > 0) {
+      if (
+        reason &&
+        (typeof reason !== "object" ||
+          Object.keys(reason) > 0 ||
+          (reason instanceof Error && reason.message))
+      ) {
         logger.error({ reason }, "rollout-status exec error")
+        if (reason instanceof Error) {
+          errors.push(reason.message)
+        } else {
+          errors.push(reason)
+        }
       }
     } else if (status === "fulfilled") {
       const { value } = result
@@ -57,9 +69,11 @@ const runWaitNeeds = async ({ waitNeeds, timeout = 900 }) => {
     }
   }
   if (errors.length > 0) {
+    logger.error({ errors }, "required dependencies can be satistfied")
     process.exit(1)
   } else {
     logger.info("all dependencies are ready")
+    process.exit(0)
   }
 }
 
@@ -72,7 +86,7 @@ const main = async () => {
   } else {
     timeout = undefined
   }
-  runWaitNeeds({ waitNeeds, timeout })
+  await runWaitNeeds({ waitNeeds, timeout })
 }
 
 main()
