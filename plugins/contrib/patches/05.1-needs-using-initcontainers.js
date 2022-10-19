@@ -1,6 +1,8 @@
 const runKinds = require("./needs/run-kinds")
 
-const kontinuousNeedsImage = "ghcr.io/socialgouv/kontinuous/wait-needs:1"
+const kontinuousNeedsImage =
+  "ghcr.io/socialgouv/kontinuous/wait-needs:sha-3ffe6fa"
+// const kontinuousNeedsImage = "ghcr.io/socialgouv/kontinuous/wait-needs:1"
 // const kontinuousNeedsImage = "harbor.fabrique.social.gouv.fr/sre/kontinuous/wait-needs:v1"
 
 module.exports = async (manifests, _options, _context) => {

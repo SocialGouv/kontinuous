@@ -21,14 +21,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - dockerfile: packages/kontinuous/Dockerfile
-            destination: ""
-          - dockerfile: packages/webhook/Dockerfile
-            destination: "/webhook"
-          - dockerfile: packages/degit/Dockerfile
-            destination: "/degit"
-          - dockerfile: packages/wait-needs/Dockerfile
-            destination: "/wait-needs"
+          - destination: ""
+            dockerfile: packages/kontinuous/Dockerfile
+          - destination: "/webhook"
+            dockerfile: packages/webhook/Dockerfile
+          - destination: "/degit"
+            dockerfile: packages/degit/Dockerfile
+          - destination: "/wait-needs"
+            dockerfile: packages/wait-needs/Dockerfile
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
