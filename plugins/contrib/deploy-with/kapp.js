@@ -13,7 +13,12 @@ module.exports = async (
   const { kubeconfigContext, kubeconfig, repositoryName, deployTimeout } =
     config
 
-  const { kubeApiQps = 1000, kubeApiBurst = 1000, logsAll = true } = options
+  const {
+    kubeApiQps = 1000,
+    kubeApiBurst = 1000,
+    waitCheckInterval = "1s",
+    logsAll = true,
+  } = options
 
   const charts = config.chart?.join(",")
   const kappApp = slug(
@@ -29,6 +34,7 @@ module.exports = async (
         ${kubeconfigContext ? `--kubeconfig-context ${kubeconfigContext}` : ""}
           --app label:kontinuous/kapp=${kappApp}
           ${logsAll ? "--logs-all" : ""}
+          --wait-check-interval ${waitCheckInterval}
           --wait-timeout ${deployTimeout}
           --dangerous-override-ownership-of-existing-resources
           --diff-changes=true
