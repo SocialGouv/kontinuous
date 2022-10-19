@@ -15,11 +15,11 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
   labels:
     application: test-app-simple-tag
-    cert: wildcard
     kontinuous/ref: v1-2-3-5oe0cj
     kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
+    cert: wildcard
   name: test-app-simple-tag-v1-2-3-3sg4dn
 ---
 apiVersion: networking.k8s.io/v1

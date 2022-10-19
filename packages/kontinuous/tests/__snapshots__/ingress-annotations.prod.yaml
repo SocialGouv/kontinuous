@@ -213,10 +213,10 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.metabase
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/metabase/templates/ingress.yaml
+    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
-    kapp.k14s.io/disable-original: ''
   labels:
     component: metabase
     application: test-ingress-annotations

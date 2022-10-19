@@ -15,11 +15,11 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
   labels:
     application: test-long-branch-host
-    cert: wildcard
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
+    cert: wildcard
   name: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
 ---
 apiVersion: networking.k8s.io/v1

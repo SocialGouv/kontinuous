@@ -190,10 +190,10 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.oauth2-proxy
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/ingress.yaml
+    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
-    kapp.k14s.io/disable-original: ''
   labels:
     component: oauth2-proxy
     application: test-oauth2-proxy

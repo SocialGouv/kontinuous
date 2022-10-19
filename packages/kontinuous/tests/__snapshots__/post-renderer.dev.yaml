@@ -15,11 +15,11 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
   labels:
     application: test-post-renderer
-    cert: wildcard
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/managed-by: kontinuous
     app.kubernetes.io/created-by: kontinuous
+    cert: wildcard
     foo: bar
   name: test-post-renderer-feature-branch-1
 ---
