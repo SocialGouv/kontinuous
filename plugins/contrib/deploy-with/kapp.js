@@ -16,6 +16,7 @@ module.exports = async (
   const {
     kubeApiQps = 1000,
     kubeApiBurst = 1000,
+    waitConcurrency = 5,
     waitCheckInterval = "1s",
     logsAll = true,
   } = options
@@ -34,8 +35,9 @@ module.exports = async (
         ${kubeconfigContext ? `--kubeconfig-context ${kubeconfigContext}` : ""}
           --app label:kontinuous/kapp=${kappApp}
           ${logsAll ? "--logs-all" : ""}
-          --wait-check-interval ${waitCheckInterval}
           --wait-timeout ${deployTimeout}
+          --wait-check-interval ${waitCheckInterval}
+          --wait-concurrency ${waitConcurrency}
           --dangerous-override-ownership-of-existing-resources
           --diff-changes=true
           --kube-api-qps ${kubeApiQps}

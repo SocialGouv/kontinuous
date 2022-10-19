@@ -392,10 +392,10 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.metabase-app1
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/ingress.yaml
+    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
-    kapp.k14s.io/disable-original: ''
   labels:
     component: metabase-app1
     application: test-metabase
@@ -430,10 +430,10 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.metabase-app2
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/ingress.yaml
+    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
-    kapp.k14s.io/disable-original: ''
   labels:
     component: metabase-app2
     application: test-metabase

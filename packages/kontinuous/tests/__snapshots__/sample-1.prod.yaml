@@ -585,10 +585,10 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.app-2nd-instance
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/ingress.yaml
+    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
-    kapp.k14s.io/disable-original: ''
   labels:
     component: app-2nd-instance
     application: test-sample-1
@@ -633,10 +633,10 @@ metadata:
       more_set_headers \\"X-Content-Type-Options: nosniff\\";
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
-    kapp.k14s.io/disable-original: ''
   labels:
     component: app
     application: test-sample-1
@@ -671,10 +671,10 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.hasura
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
+    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
-    kapp.k14s.io/disable-original: ''
   labels:
     component: hasura
     application: test-sample-1
@@ -708,10 +708,10 @@ metadata:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.pgweb
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/pgweb/templates/ingress.yaml
+    kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
-    kapp.k14s.io/disable-original: ''
   labels:
     component: pgweb
     application: test-sample-1
