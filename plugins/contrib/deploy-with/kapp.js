@@ -16,9 +16,9 @@ module.exports = async (
   const {
     kubeApiQps = 1000,
     kubeApiBurst = 1000,
-    logsAll = true,
-    waitCheckInterval = 1,
     waitConcurrency = 5,
+    waitCheckInterval = "1s",
+    logsAll = true,
   } = options
 
   const charts = config.chart?.join(",")

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.82.13](https://github.com/SocialGouv/kontinuous/compare/v1.82.12...v1.82.13) (2022-10-19)
+
+
+### Bug Fixes
+
+* kapp waitCheckInterval option ([a2b0fca](https://github.com/SocialGouv/kontinuous/commit/a2b0fca4da017e1450b482fa64fd70a2c7ffe6db))
+
 ### [1.82.12](https://github.com/SocialGouv/kontinuous/compare/v1.82.11...v1.82.12) (2022-10-17)
 
 
