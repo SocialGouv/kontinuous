@@ -19,6 +19,7 @@ module.exports = async (
     waitConcurrency = 5,
     waitCheckInterval = "1s",
     existingNonLabeledResourcesCheckConcurrency = 100,
+    existingNonLabeledResourcesCheck = true,
     logsAll = true,
   } = options
 
@@ -39,6 +40,7 @@ module.exports = async (
           --wait-timeout ${deployTimeout}
           --wait-check-interval ${waitCheckInterval}
           --wait-concurrency ${waitConcurrency}
+          --existing-non-labeled-resources-check ${existingNonLabeledResourcesCheck}
           --existing-non-labeled-resources-check-concurrency ${existingNonLabeledResourcesCheckConcurrency}
           --dangerous-override-ownership-of-existing-resources
           --diff-changes=true
