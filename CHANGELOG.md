@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.82.16 (2022-10-19)
+
+
+### Bug Fixes
+
+* **kapp:** add options.existingNonLabeledResourcesCheck ([#49](https://github.com/SocialGouv/kontinuous/issues/49)) ([fe23183](https://github.com/SocialGouv/kontinuous/commit/fe231832d85222a04edb088fc716cf22edd418fa))
+
 ### 1.82.15 (2022-10-19)
 
 
