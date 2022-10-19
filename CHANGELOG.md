@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.82.15 (2022-10-19)
+
+
+### Bug Fixes
+
+* **kapp:** add options.existingNonLabeledResourcesCheckConcurrency ([#48](https://github.com/SocialGouv/kontinuous/issues/48)) ([b6a597b](https://github.com/SocialGouv/kontinuous/commit/b6a597bba0b2bc0d976d8780af0d9eb71a1881df))
+
 ### 1.82.14 (2022-10-19)
 
 ### [1.82.13](https://github.com/SocialGouv/kontinuous/compare/v1.82.12...v1.82.13) (2022-10-19)
