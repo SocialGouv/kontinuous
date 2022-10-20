@@ -10,9 +10,8 @@ metadata:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: deactivate.delete-namespace
-    kapp.k14s.io/change-group.deactivate: kontinuous/deactivate
-    kapp.k14s.io/change-group.deactivate.delete-namespace: kontinuous/deactivate.delete-namespace
-    kapp.k14s.io/change-group.deactivate..delete-namespace: kontinuous/deactivate..delete-namespace
+    kontinuous/needsNames: >-
+      [\\"deactivate\\",\\"deactivate.delete-namespace\\",\\"deactivate..delete-namespace\\"]
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.deactivate.jobs-deactivate
     kontinuous/source: >-
@@ -36,12 +35,29 @@ metadata:
     kapp.k14s.io/change-group.jobs-deactivate.job.deactivate.delete-namespace: kontinuous/jobs-deactivate.job.deactivate.delete-namespace
     kapp.k14s.io/change-group.jobs-deactivate.deactivate.delete-namespace: kontinuous/jobs-deactivate.deactivate.delete-namespace
     kapp.k14s.io/change-group.job.deactivate.delete-namespace: kontinuous/job.deactivate.delete-namespace
+    kapp.k14s.io/change-group.deactivate.delete-namespace: kontinuous/deactivate.delete-namespace
     kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.job.deactivate: >-
       kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.job.deactivate
     kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.deactivate: kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.deactivate
     kapp.k14s.io/change-group.jobs-deactivate.job.deactivate: kontinuous/jobs-deactivate.job.deactivate
     kapp.k14s.io/change-group.jobs-deactivate.deactivate: kontinuous/jobs-deactivate.deactivate
     kapp.k14s.io/change-group.job.deactivate: kontinuous/job.deactivate
+    kapp.k14s.io/change-group.deactivate: kontinuous/deactivate
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.job.deactivate..delete-namespace: >-
+      kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.job.deactivate..delete-namespace
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.deactivate..delete-namespace: >-
+      kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.deactivate..delete-namespace
+    kapp.k14s.io/change-group.jobs-deactivate.job.deactivate..delete-namespace: kontinuous/jobs-deactivate.job.deactivate..delete-namespace
+    kapp.k14s.io/change-group.jobs-deactivate.deactivate..delete-namespace: kontinuous/jobs-deactivate.deactivate..delete-namespace
+    kapp.k14s.io/change-group.job.deactivate..delete-namespace: kontinuous/job.deactivate..delete-namespace
+    kapp.k14s.io/change-group.deactivate..delete-namespace: kontinuous/deactivate..delete-namespace
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.job.deactivate.: >-
+      kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.job.deactivate.
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.deactivate.: kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.deactivate.
+    kapp.k14s.io/change-group.jobs-deactivate.job.deactivate.: kontinuous/jobs-deactivate.job.deactivate.
+    kapp.k14s.io/change-group.jobs-deactivate.deactivate.: kontinuous/jobs-deactivate.deactivate.
+    kapp.k14s.io/change-group.job.deactivate.: kontinuous/job.deactivate.
+    kapp.k14s.io/change-group.deactivate.: kontinuous/deactivate.
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-deactivate-feature-branch-1-deactiv-56yw37

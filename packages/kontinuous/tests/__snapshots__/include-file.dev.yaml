@@ -78,7 +78,7 @@ metadata:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: say-hello
-    kapp.k14s.io/change-group.say-hello: kontinuous/say-hello
+    kontinuous/needsNames: '[\\"say-hello\\"]'
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
@@ -98,6 +98,7 @@ metadata:
     kapp.k14s.io/change-group.jobs.job.say-hello: kontinuous/jobs.job.say-hello
     kapp.k14s.io/change-group.jobs.say-hello: kontinuous/jobs.say-hello
     kapp.k14s.io/change-group.job.say-hello: kontinuous/job.say-hello
+    kapp.k14s.io/change-group.say-hello: kontinuous/say-hello
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-include-file-feature-branch-1-say-hello
