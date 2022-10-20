@@ -12,9 +12,9 @@ patches:
   needs:
     enabled: true
   needsUsingInitcontainers:
-    enabled: true
-  needsUsingKapp:
     enabled: false
+  needsUsingKapp:
+    enabled: true
 
 
 validators:
@@ -28,5 +28,7 @@ validators:
 preDeploy:
   rancherNamespaces:
     enabled: false
+  needsKubeconfig:
+    enabled: true
   clear:
     enabled: false

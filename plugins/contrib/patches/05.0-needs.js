@@ -1,10 +1,10 @@
-const runKinds = require("./needs/run-kinds")
-
-module.exports = async (manifests, _options, _context) => {
+module.exports = async (manifests, _options, context) => {
+  const { utils } = context
+  const { kindIsRunnable } = utils
   for (const manifest of manifests) {
     const { kind, metadata } = manifest
     const annotations = metadata?.annotations
-    if (!annotations || !runKinds.includes(kind)) {
+    if (!annotations || !kindIsRunnable(kind)) {
       continue
     }
 

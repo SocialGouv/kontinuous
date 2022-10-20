@@ -1,11 +1,12 @@
-const runKinds = require("./needs/run-kinds")
-
 const kontinuousNeedsImage =
   "ghcr.io/socialgouv/kontinuous/wait-needs:sha-3ffe6fa"
 // const kontinuousNeedsImage = "ghcr.io/socialgouv/kontinuous/wait-needs:1"
 // const kontinuousNeedsImage = "harbor.fabrique.social.gouv.fr/sre/kontinuous/wait-needs:v1"
 
-module.exports = async (manifests, _options, _context) => {
+module.exports = async (manifests, _options, context) => {
+  const { utils } = context
+  const { kindIsRunnable } = utils
+
   for (const manifest of manifests) {
     const annotations = manifest.metadata?.annotations
     if (!annotations) {
@@ -17,7 +18,7 @@ module.exports = async (manifests, _options, _context) => {
       delete annotations["kontinuous/plugin.needs"]
     }
 
-    if (!runKinds.includes(manifest.kind)) {
+    if (!kindIsRunnable(manifest.kind)) {
       continue
     }
 

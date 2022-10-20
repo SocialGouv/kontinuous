@@ -1,4 +1,3 @@
-const runKinds = require("./needs/run-kinds")
 const getDeps = require("./needs/get-deps")
 
 const changeRulePrefix = "kapp.k14s.io/change-rule"
@@ -6,8 +5,10 @@ const changeGroupPrefix = "kapp.k14s.io/change-group"
 const changeGroupValuePrefix = "kontinuous/"
 const changeRuleValuePrefix = `upsert after upserting ${changeGroupValuePrefix}`
 
-module.exports = async (manifests, _options, _context) => {
-  const deps = getDeps(manifests)
+module.exports = async (manifests, _options, context) => {
+  const { utils } = context
+  const { kindIsRunnable } = utils
+  const deps = getDeps(manifests, context)
 
   for (const [key, dep] of Object.entries(deps)) {
     for (const manifest of dep) {
@@ -32,7 +33,7 @@ module.exports = async (manifests, _options, _context) => {
       delete annotations["kontinuous/plugin.needs"]
     }
 
-    if (!runKinds.includes(manifest.kind)) {
+    if (!kindIsRunnable(manifest.kind)) {
       continue
     }
 

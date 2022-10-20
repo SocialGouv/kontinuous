@@ -41,13 +41,18 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: "{{ $run.name }}"
     {{- if $run.stage }}
-    kapp.k14s.io/change-group.stage: "kontinuous/{{ $run.stage }}"
+    # kapp.k14s.io/change-group.stage: "kontinuous/{{ $run.stage }}"
+    kontinuous/plugin.stage: {{ $run.stage | quote }}
     {{- end }}
-    {{- range $scope := $run.scopes }}
-    kapp.k14s.io/change-group.{{ $scope }}: "kontinuous/{{ $scope }}"
-    {{- end }}
-    {{- range $need := $run.needs }}
-    kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting kontinuous/{{ $need }}"
+    # {{- range $scope := $run.scopes }}
+    # kapp.k14s.io/change-group.{{ $scope }}: "kontinuous/{{ $scope }}"
+    # {{- end }}
+    kontinuous/needsNames: {{ $run.scopes | toJson | quote }}
+    # {{- range $need := $run.needs }}
+    # kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting kontinuous/{{ $need }}"
+    # {{- end }}
+    {{- if $run.needs }}
+    kontinuous/plugin.needs: {{ $run.needs | toJson | quote }}
     {{- end }}
     janitor/ttl: "7d"
     {{- if $run.onChangedPaths }}
