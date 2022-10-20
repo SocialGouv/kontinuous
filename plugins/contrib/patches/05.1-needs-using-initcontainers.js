@@ -69,7 +69,6 @@ module.exports = async (manifests, _options, context) => {
       env: [
         { name: "WAIT_NEEDS", value: jsonDependencies },
         { name: "KUBECONFIG", value: "/secrets/kubeconfig" },
-        {},
       ],
       volumeMounts: [
         {
@@ -81,7 +80,7 @@ module.exports = async (manifests, _options, context) => {
     }
 
     const volume = {
-      name: "kubeconfig",
+      name: "kontinuous-wait-needs-kubeconfig",
       secret: {
         secretName: "kubeconfig",
         items: [

@@ -24,8 +24,10 @@ module.exports = (manifests, _options, { config, utils }) => {
     const labels = {
       [refLabelKey]: refLabelValue,
       "kontinuous/resourceName": slug([kind, name]),
-      "app.kubernetes.io/managed-by": "kontinuous",
-      "app.kubernetes.io/created-by": "kontinuous",
+      // "app.kubernetes.io/managed-by": "kontinuous", // incompatible with helm deployment
+      // "app.kubernetes.io/created-by": "kontinuous", // incompatible with helm deployment
+      "app.kubernetes.io/manifest-managed-by": "kontinuous",
+      "app.kubernetes.io/manifest-created-by": "kontinuous",
     }
 
     Object.assign(manifest.metadata.labels, labels)

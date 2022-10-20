@@ -93,6 +93,7 @@ module.exports = async (options) => {
 
     const { stopDeploys, deploysPromise } = await deployWith({
       manifestsFile,
+      manifests,
       runContext,
       dryRun,
     })
