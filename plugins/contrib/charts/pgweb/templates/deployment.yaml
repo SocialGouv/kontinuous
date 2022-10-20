@@ -18,9 +18,6 @@ spec:
         component: {{ (or .Values.component .Chart.Name) | lower }}
         application: {{ .Values.global.repositoryName }}
     spec:
-      envFrom:
-        - secretRef:
-            name: {{ or .Values.pgSecretName .Values.global.pgSecretName }}
       initContainers:
       {{- if .Values.waitForPostgres }}
         {{- include "contrib-helpers.init-containers.wait-for-postgres" . | nindent 8 }}
@@ -28,6 +25,9 @@ spec:
       containers:
         - image: sosedoff/pgweb:0.11.8
           name: pgweb
+          envFrom:
+            - secretRef:
+                name: {{ or .Values.pgSecretName .Values.global.pgSecretName }}
           ports:
             - containerPort: 8081
               name: http
