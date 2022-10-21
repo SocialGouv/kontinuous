@@ -1,0 +1,378 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test build manifests with snapshots jobs-build-options.dev 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    janitor/ttl: 7d
+    field.cattle.io/projectId: '1234'
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: 'true'
+    kapp.k14s.io/exists: ''
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+  labels:
+    application: test-jobs-build-options
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: namespace-4wnyh3
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
+    cert: wildcard
+  name: test-jobs-build-options-feature-branch-1
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-jobs-build-options-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kapp.k14s.io/disable-original: ''
+  labels:
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kapp.k14s.io/disable-original: ''
+  namespace: test-jobs-build-options-feature-branch-1
+  labels:
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: serviceaccount-4nws8p-default
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
+automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: test-jobs-build-options
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-app
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
+  name: app
+  namespace: test-jobs-build-options-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app
+    application: test-jobs-build-options
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: deployment-3d60sq-app
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
+  name: app
+  namespace: test-jobs-build-options-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/nonce: ''
+    kapp.k14s.io/change-group: kontinuous/test-jobs-build-options-feature-branch-1
+    kapp.k14s.io/change-group.app: kontinuous/app.test-jobs-build-options-feature-branch-1
+    kapp.k14s.io/change-rule.build-app: >-
+      upsert after upserting
+      kontinuous/build-app.test-jobs-build-options-feature-branch-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  template:
+    metadata:
+      labels:
+        component: app
+        application: test-jobs-build-options
+        namespace: test-jobs-build-options-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-app
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: namespace
+                    operator: In
+                    values:
+                      - test-jobs-build-options-feature-branch-1
+                  - key: component
+                    operator: In
+                    values:
+                      - app
+              topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            harbor.fabrique.social.gouv.fr/test-jobs-build-options/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          envFrom:
+            - secretRef:
+                name: pg-user-feature-branch-1
+            - secretRef:
+                name: app-sealed-secret
+            - configMapRef:
+                name: app-configmap
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-test-jobs-build-options-feature-branch-1-build-app-gre3q1
+  namespace: awesome-ci
+  annotations:
+    kapp.k14s.io/nonce: ''
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/change-group: kontinuous/test-jobs-build-options-feature-branch-1
+    kapp.k14s.io/change-group.build-app: kontinuous/build-app.test-jobs-build-options-feature-branch-1
+    kapp.k14s.io/change-group.build-app.kaniko: kontinuous/build-app.kaniko.test-jobs-build-options-feature-branch-1
+    kapp.k14s.io/change-group.build-app..kaniko: kontinuous/build-app..kaniko.test-jobs-build-options-feature-branch-1
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-jobs-build-options-feature-branch-1
+  labels:
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-options-feature-branch-1-2auuh2
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      labels:
+        environment: dev
+        ref: feature-branch-1
+        repository: test-jobs-build-options
+        runName: build
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-options-feature-branch-1-2auuh2
+        app.kubernetes.io/managed-by: kontinuous
+        app.kubernetes.io/created-by: kontinuous
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-repository
+          image: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
+          imagePullPolicy: Always
+          command:
+            - sh
+            - '-c'
+            - |
+
+              degit kontinuous/test-jobs-build-options#feature-branch-1 \\\\
+                /workspace
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
+      containers:
+        - name: job
+          image: gcr.io/kaniko-project/executor:debug
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: harbor
+          command:
+            - /busybox/sh
+            - '-c'
+            - >
+              set -e
+
+              mkdir -p /kaniko/.docker
+
+              echo
+              \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\"
+              > /kaniko/.docker/config.json
+
+              export IMAGE_PATH=$CI_REGISTRY/test-jobs-build-options/app
+
+              /kaniko/executor \\\\
+                --context=dir:///workspace \\\\
+                --dockerfile=/workspace/Dockerfile \\\\
+                --destination=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53 \\\\
+                --destination=$IMAGE_PATH:feature-branch-1 \\\\
+                --cache=true \\\\
+                --cache-repo=$IMAGE_PATH \\\\
+                --snapshotMode=redo \\\\
+                --skip-unused-stages \\\\
+                --use-new-run \\\\
+                --cache-ttl=336h \\\\
+                --insecure --single-snapshot --ignore-path=/product_uuid --compressed-caching=false \\\\
+                --build-arg=\\"arg1=value1\\" \\\\
+                --build-arg=\\"arg2=value2\\" \\\\
+                
+          resources:
+            limits:
+              cpu: 2
+              memory: 4Gi
+            requests:
+              cpu: 100m
+              memory: 500Mi
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            fsGroup: 0
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kapp.k14s.io/disable-original: ''
+  labels:
+    component: app
+    application: test-jobs-build-options
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: ingress-5dz9oh-app
+    app.kubernetes.io/managed-by: kontinuous
+    app.kubernetes.io/created-by: kontinuous
+  name: app
+  namespace: test-jobs-build-options-feature-branch-1
+spec:
+  rules:
+    - host: test-jobs-build-options-feature-branch-1.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - test-jobs-build-options-feature-branch-1.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+rebaseRules:
+  - path:
+      - metadata
+      - annotations
+      - field.cattle.io/publicEndpoints
+    type: copy
+    sources:
+      - existing
+      - new
+    resourceMatchers:
+      - apiVersionKindMatcher:
+          apiVersion: apps/v1
+          kind: Deployment
+metadata:
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
+"
+`;

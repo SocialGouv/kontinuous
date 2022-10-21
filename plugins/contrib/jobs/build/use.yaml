@@ -44,6 +44,9 @@ runs:
         --skip-unused-stages \
         --use-new-run \
         --cache-ttl=336h \
+        {{ if $.with.buildOptions -}}
+        {{ $.with.buildOptions }} \
+        {{ end -}}
         {{ if $.with.buildArgs -}}
         {{- range $key, $val := $.with.buildArgs -}}
         --build-arg="{{ tpl $key $ }}={{ tpl $val $ }}" \
