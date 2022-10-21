@@ -9,14 +9,27 @@ runs:
     memoryLimit: 4Gi
     memoryRequest: 500Mi
     user: 0
-    entrypoint: ["/busybox/sh","-c"]
+    entrypoint: ["/busybox/sh", "-c"]
     envFrom:
       - secretRef:
           name: "{{ or $.with.registrySecretRefName $.Values.global.registrySecretRefName }}"
     run: |
       mkdir -p /kaniko/.docker
       echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-      export IMAGE_PATH=$CI_REGISTRY{{ if (or $.with.imageProject $.Values.global.imageProject) }}{{ (print "/" (or $.with.imageProject $.Values.global.imageProject)) }}{{ end }}/{{ or $.with.imageRepository $.Values.global.imageRepository }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}{{ if $.with.target }}{{ (print "-" $.with.target) }}{{ end }}
+      export RELATIVE_IMAGE_PATH={{ if (or $.with.imageProject $.Values.global.imageProject) }}{{ (print "/" (or $.with.imageProject $.Values.global.imageProject)) }}{{ end }}/{{ or $.with.imageRepository $.Values.global.imageRepository }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}{{ if $.with.target }}{{ (print "-" $.with.target) }}{{ end }}
+      export IMAGE_PATH=$CI_REGISTRY$RELATIVE_IMAGE_PATH
+
+      # skip image build if already exist on registry
+      if [ -n "{{ $.with.skipExisting }}" ]; then
+        URL="http://${CI_REGISTRY}/v2/${RELATIVE_IMAGE_PATH}/manifests/{{ or $.with.imageTag $.Values.global.imageTag }}"
+        IMAGE_EXISTS=$(wget -q "${URL}")
+        if [ -z $IMAGE_EXISTS ]; then
+            # error handling
+            echo "docker build: skip, image ${RELATIVE_IMAGE_PATH}:{{ or $.with.imageTag $.Values.global.imageTag }} alreay exist on registry"
+            exit 0
+        fi
+      fi
+
       /kaniko/executor \
         --context=dir:///workspace{{ if $.with.context }}/{{ $.with.context }}{{ end }} \
         --dockerfile=/workspace{{ if $.with.context }}/{{ $.with.context }}{{ end }}/{{ or $.with.dockerfile "Dockerfile" }} \
