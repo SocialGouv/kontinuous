@@ -90,7 +90,7 @@ module.exports = async (manifests, _options, context) => {
     }
 
     volumes.push(volume)
-    initContainers.push(initContainer)
+    initContainers.unshift(initContainer)
   }
 
   return manifests

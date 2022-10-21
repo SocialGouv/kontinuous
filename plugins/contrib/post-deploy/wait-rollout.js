@@ -116,8 +116,7 @@ module.exports = async (
       logger.fatal({ result }, `Unexpected promise result`)
     }
   }
-  console.log(errors)
-  if (errors.lenth > 0) {
+  if (errors.length > 0) {
     throw new KontinuousPluginError(JSON.stringify(errors))
   }
 }
