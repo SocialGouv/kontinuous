@@ -26,7 +26,7 @@ PG_URL_NEWDB="postgresql://${ORIGINAL_PGUSER_URLENCODED}:${PGPASSWORD_URLENCODED
 # strip after @ part to handle azure pg users
 PGUSER=${PGUSER%%@*}
 
-PGSSLMODE=require
+PGSSLMODE="${PGSSLMODE:-require}"
 
 # /o\ get base user name (without server) for SQL commands
 # strip after @ part to handle azure pg users
