@@ -17,8 +17,8 @@ metadata:
     application: test-redis
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: test-redis-feature-branch-1
 ---
 apiVersion: networking.k8s.io/v1
@@ -34,8 +34,8 @@ metadata:
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -61,12 +61,12 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
-  namespace: test-redis-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-default
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-redis-feature-branch-1
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -77,8 +77,8 @@ metadata:
     application: test-redis
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: service-5cfizy-redis
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: redis
   namespace: test-redis-feature-branch-1
   annotations:
@@ -104,8 +104,8 @@ metadata:
     application: test-redis
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: deployment-3d60sq-redis
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: redis
   namespace: test-redis-feature-branch-1
   annotations:
@@ -140,8 +140,8 @@ spec:
         component: redis
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: deployment-3d60sq-redis
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
     spec:
       containers:
         - image: redis:6.2.5-alpine3.14

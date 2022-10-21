@@ -29,8 +29,8 @@ metadata:
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-extra
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -40,8 +40,8 @@ spec:
       labels:
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-extra
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
     spec:
       restartPolicy: Never
       containers:

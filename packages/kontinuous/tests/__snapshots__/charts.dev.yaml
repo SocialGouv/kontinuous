@@ -17,8 +17,8 @@ metadata:
     application: test-charts
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: test-charts-feature-branch-1
 ---
 apiVersion: networking.k8s.io/v1
@@ -34,8 +34,8 @@ metadata:
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -61,12 +61,12 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
-  namespace: test-charts-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-default
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-charts-feature-branch-1
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -77,12 +77,12 @@ metadata:
     kontinuous/chartPath: project.job-extra
     kontinuous/source: project/charts/job-extra/templates/sa.yaml
     kapp.k14s.io/disable-original: ''
-  namespace: test-charts-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-kaniko
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-charts-feature-branch-1
 automountServiceAccountToken: false
 ---
 apiVersion: batch/v1
@@ -113,8 +113,8 @@ metadata:
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-extra
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -124,8 +124,8 @@ spec:
       labels:
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-extra
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
     spec:
       restartPolicy: Never
       containers:

@@ -16,8 +16,8 @@ metadata:
     application: test-sample-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
     cert: wildcard
   name: test-sample-1-preprod
 ---
@@ -34,8 +34,8 @@ metadata:
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -61,12 +61,12 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
-  namespace: test-sample-1-preprod
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-default
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-sample-1-preprod
 automountServiceAccountToken: false
 ---
 kind: ConfigMap
@@ -77,12 +77,12 @@ metadata:
     kontinuous/chartPath: project
     kontinuous/source: project/templates/app.configmap.yaml
     kapp.k14s.io/disable-original: ''
-  namespace: test-sample-1-preprod
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: configmap-e4ces7-app-configmap
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-sample-1-preprod
 data:
   NODE_ENV: production
   GRAPHQL_ENDPOINT: http://hasura/v1/graphql
@@ -97,8 +97,8 @@ metadata:
     application: test-sample-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: service-5cfizy-app-2nd-instance
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app-2nd-instance
   namespace: test-sample-1-preprod
   annotations:
@@ -125,8 +125,8 @@ metadata:
     application: test-sample-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: service-5cfizy-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-sample-1-preprod
   annotations:
@@ -152,8 +152,8 @@ metadata:
     application: test-sample-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: service-5cfizy-hasura
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: hasura
   namespace: test-sample-1-preprod
   annotations:
@@ -180,8 +180,8 @@ metadata:
     application: test-sample-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: service-5cfizy-pgweb
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: pgweb
   namespace: test-sample-1-preprod
   annotations:
@@ -207,8 +207,8 @@ metadata:
     application: test-sample-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: deployment-3d60sq-app-2nd-instance
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app-2nd-instance
   namespace: test-sample-1-preprod
   annotations:
@@ -246,8 +246,8 @@ spec:
         namespace: test-sample-1-preprod
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: deployment-3d60sq-app-2nd-instance
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
     spec:
       affinity:
         podAntiAffinity:
@@ -318,8 +318,8 @@ metadata:
     application: test-sample-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: deployment-3d60sq-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-sample-1-preprod
   annotations:
@@ -356,8 +356,8 @@ spec:
         namespace: test-sample-1-preprod
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: deployment-3d60sq-app
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
     spec:
       affinity:
         podAntiAffinity:
@@ -428,8 +428,8 @@ metadata:
     application: test-sample-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: deployment-3d60sq-hasura
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: hasura
   namespace: test-sample-1-preprod
   annotations:
@@ -465,8 +465,8 @@ spec:
         application: test-sample-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: deployment-3d60sq-hasura
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
     spec:
       containers:
         - image: >-
@@ -522,8 +522,8 @@ metadata:
     application: test-sample-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: deployment-3d60sq-pgweb
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: pgweb
   namespace: test-sample-1-preprod
   annotations:
@@ -559,12 +559,9 @@ spec:
         application: test-sample-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: deployment-3d60sq-pgweb
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
     spec:
-      envFrom:
-        - secretRef:
-            name: pg-user
       initContainers:
         - name: wait-for-postgres
           image: ghcr.io/socialgouv/docker/wait-for-postgres:6.56.1
@@ -585,6 +582,9 @@ spec:
       containers:
         - image: sosedoff/pgweb:0.11.8
           name: pgweb
+          envFrom:
+            - secretRef:
+                name: pg-user
           ports:
             - containerPort: 8081
               name: http
@@ -644,8 +644,8 @@ metadata:
     application: test-sample-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: ingress-5dz9oh-app-2nd-instance
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app-2nd-instance
   namespace: test-sample-1-preprod
 spec:
@@ -689,8 +689,8 @@ metadata:
     application: test-sample-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: ingress-5dz9oh-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-sample-1-preprod
 spec:
@@ -724,8 +724,8 @@ metadata:
     application: test-sample-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: ingress-5dz9oh-hasura
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: hasura
   namespace: test-sample-1-preprod
 spec:
@@ -758,8 +758,8 @@ metadata:
     application: test-sample-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: ingress-5dz9oh-pgweb
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: pgweb
   namespace: test-sample-1-preprod
 spec:
@@ -809,12 +809,12 @@ metadata:
     kontinuous/source: project/templates/hasura.sealed-secret.yaml
     kapp.k14s.io/disable-original: ''
   name: hasura-sealed-secret
-  namespace: test-sample-1-preprod
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: sealedsecret-5ip1a4-hasura-sealed-secret
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-sample-1-preprod
 spec:
   encryptedData:
     ACCOUNT_EMAIL_SECRET: >-

@@ -17,8 +17,8 @@ metadata:
     application: test-long-branch-host-patch
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/resourceName: namespace-4wnyh3
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
     cert: wildcard
   name: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
 ---
@@ -35,8 +35,8 @@ metadata:
   labels:
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -62,12 +62,12 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
-  namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
   labels:
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/resourceName: serviceaccount-4nws8p-default
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -78,8 +78,8 @@ metadata:
     application: test-long-branch-host-patch
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/resourceName: service-5cfizy-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
   annotations:
@@ -105,8 +105,8 @@ metadata:
     application: test-long-branch-host-patch
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/resourceName: deployment-3d60sq-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
   annotations:
@@ -143,8 +143,8 @@ spec:
         namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
         kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
         kontinuous/resourceName: deployment-3d60sq-app
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
     spec:
       affinity:
         podAntiAffinity:
@@ -214,8 +214,8 @@ metadata:
     application: test-long-branch-host-patch
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/resourceName: ingress-5dz9oh-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
 spec:

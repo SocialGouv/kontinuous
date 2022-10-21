@@ -17,8 +17,8 @@ metadata:
     application: test-values-js
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: test-namespace
 ---
 apiVersion: networking.k8s.io/v1
@@ -34,8 +34,8 @@ metadata:
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -61,12 +61,12 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
-  namespace: test-namespace
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-default
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-namespace
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -77,8 +77,8 @@ metadata:
     application: test-values-js
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: service-5cfizy-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-namespace
   annotations:
@@ -104,8 +104,8 @@ metadata:
     application: test-values-js
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: deployment-3d60sq-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-namespace
   annotations:
@@ -142,8 +142,8 @@ spec:
         namespace: test-namespace
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: deployment-3d60sq-app
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
     spec:
       affinity:
         podAntiAffinity:
@@ -214,8 +214,8 @@ metadata:
     application: test-values-js
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: ingress-5dz9oh-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-namespace
 spec:

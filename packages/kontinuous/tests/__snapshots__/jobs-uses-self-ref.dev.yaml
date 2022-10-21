@@ -17,8 +17,8 @@ metadata:
     application: test-jobs-uses-self-ref
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: test-jobs-uses-self-ref-feature-branch-1
 ---
 apiVersion: networking.k8s.io/v1
@@ -34,8 +34,8 @@ metadata:
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -61,12 +61,12 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kapp.k14s.io/disable-original: ''
-  namespace: test-jobs-uses-self-ref-feature-branch-1
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-default
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-jobs-uses-self-ref-feature-branch-1
 automountServiceAccountToken: false
 ---
 apiVersion: batch/v1
@@ -121,8 +121,8 @@ metadata:
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-self-ref-feature-branch-1-63tyl5
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
@@ -136,8 +136,8 @@ spec:
         runName: create-db
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-self-ref-feature-branch-1-63tyl5
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:
@@ -150,7 +150,6 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            fsGroup: 1000
           volumeMounts:
             - name: action
               mountPath: /action
@@ -214,12 +213,13 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            fsGroup: 1000
           volumeMounts:
             - name: workspace
               mountPath: /workspace
             - name: action
               mountPath: /action
+      securityContext:
+        fsGroup: 1000
       volumes:
         - name: workspace
           emptyDir: {}
@@ -277,8 +277,8 @@ metadata:
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-self-ref-feature-branch-1-1jp7w3
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
@@ -292,8 +292,8 @@ spec:
         runName: create-db
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-self-ref-feature-branch-1-1jp7w3
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:
@@ -306,7 +306,6 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            fsGroup: 1001
           volumeMounts:
             - name: action
               mountPath: /action
@@ -357,12 +356,13 @@ spec:
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
-            fsGroup: 1001
           volumeMounts:
             - name: workspace
               mountPath: /workspace
             - name: action
               mountPath: /action
+      securityContext:
+        fsGroup: 1001
       volumes:
         - name: workspace
           emptyDir: {}

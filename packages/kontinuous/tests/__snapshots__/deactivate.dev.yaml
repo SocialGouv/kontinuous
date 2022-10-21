@@ -61,8 +61,8 @@ metadata:
   labels:
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-deactivate-feature-branch-1-deactiv-56yw37
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
@@ -76,8 +76,8 @@ spec:
         runName: deactivate
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-test-deactivate-feature-branch-1-deactiv-56yw37
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
     spec:
       restartPolicy: Never
       initContainers:
@@ -92,7 +92,6 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            fsGroup: 1001
           volumeMounts:
             - name: action
               mountPath: /action
@@ -133,12 +132,13 @@ spec:
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
-            fsGroup: 1001
           volumeMounts:
             - name: workspace
               mountPath: /workspace
             - name: action
               mountPath: /action
+      securityContext:
+        fsGroup: 1001
       volumes:
         - name: workspace
           emptyDir: {}
