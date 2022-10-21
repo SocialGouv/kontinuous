@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.83.0 (2022-10-21)
+
+
+### Features
+
+* **build:** add with.skipExisting ([#51](https://github.com/SocialGouv/kontinuous/issues/51)) ([5ca0ae3](https://github.com/SocialGouv/kontinuous/commit/5ca0ae30cd64435232e88cfb71a7539a26b8ca58))
+
 ### 1.82.17 (2022-10-21)
 
 
