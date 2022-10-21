@@ -31,7 +31,7 @@ module.exports = (manifests, context) => {
       const nameParts = nameItem.split(".")
       while (nameParts.length > 0) {
         const lastPart = nameParts.pop()
-        const n = [...nameParts, lastPart].join(".")
+        const n = [...nameParts, lastPart].join(".").trimEnd(".")
         keys.push(
           ...[
             `${chartPath}.${lowerKind}.${n}`,

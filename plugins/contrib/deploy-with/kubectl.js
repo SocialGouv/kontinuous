@@ -9,16 +9,19 @@ module.exports = async (
 ) => {
   const { parseCommand } = utils
 
-  const { kubeconfigContext, kubeconfig } = config
+  const { kubeconfigContext, kubeconfig, deployTimeout } = config
 
-  const helmDeployCommand = dryRun
-    ? "kubectl version"
-    : `
-        kubectl apply
-          ${kubeconfigContext ? `--kube-context ${kubeconfigContext}` : ""}
-          -f ${manifestsFile}
-          --force
-      `
+  const helmDeployCommand = `
+    kubectl apply
+      ${kubeconfigContext ? `--context ${kubeconfigContext}` : ""}
+      -f ${manifestsFile}
+      --server-side
+      --force-conflicts
+      ${dryRun ? "--dry-run=server" : ""}
+      --overwrite
+      --wait
+      --timeout=${deployTimeout}
+  `
 
   const [cmd, args] = parseCommand(helmDeployCommand)
 

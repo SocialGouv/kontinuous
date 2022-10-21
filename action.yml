@@ -18,7 +18,7 @@ inputs:
   actionName:
     description: "override manifests name as manifest-$name.yaml, default to manifest-$environment.yaml"
   timeout:
-    description: "override default kapp --wait-timeout, default to 15m0s"
+    description: "override default kapp --wait-timeout, default to 15m"
   cwd:
     description: "working directory where is located .kontinuous"
   kubeconfigContext:

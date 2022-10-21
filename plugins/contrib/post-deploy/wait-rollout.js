@@ -5,15 +5,15 @@ const handledKinds = ["Deployment", "StatefulSet", "Job"]
 const waitBeforeStopAllRolloutStatus = 5000 // try to collect more errors if there is any
 
 module.exports = async (
-  sidecars,
+  manifests,
   _options,
-  { config, logger, utils, needBin, manifests, runContext, dryRun }
+  { config, logger, utils, needBin, dryRun }
 ) => {
   if (dryRun) {
     return
   }
 
-  const { needRolloutStatus, rolloutStatusWatch } = utils
+  const { needRolloutStatus, rolloutStatusWatch, KontinuousPluginError } = utils
 
   const rolloutStatusProcesses = {}
   const stopRolloutStatus = () => {
@@ -28,11 +28,6 @@ module.exports = async (
 
   const interceptor = { stop: false }
 
-  const stopSidecar = () => {
-    interceptor.stop = true
-    stopRolloutStatus()
-  }
-
   let endAllTrigerred = false
   const endAll = async () => {
     if (endAllTrigerred) {
@@ -41,13 +36,9 @@ module.exports = async (
     endAllTrigerred = true
     interceptor.stop = true
 
-    const stopDeployPromise = runContext.stopDeploys && runContext.stopDeploys()
-
     await setTimeout(waitBeforeStopAllRolloutStatus)
 
     stopRolloutStatus()
-
-    await stopDeployPromise
   }
 
   const { refLabelKey } = config
@@ -102,34 +93,31 @@ module.exports = async (
     )
   }
 
-  const promise = new Promise(async (resolve, reject) => {
-    let results
-    try {
-      results = await Promise.allSettled(promises)
-    } catch (err) {
-      reject(err)
-    }
-    const errors = []
-    for (const result of results) {
-      const { status } = result
-      if (status === "rejected") {
-        const { reason } = result
-        if (reason instanceof Error) {
-          errors.push(reason.message)
-        } else {
-          errors.push(reason)
-        }
-      } else if (status === "fulfilled") {
-        const { value } = result
-        if (value.success !== true) {
-          errors.push(value.error)
-        }
+  const results = await Promise.allSettled(promises)
+  const errors = []
+  for (const result of results) {
+    const { status } = result
+    if (status === "rejected") {
+      const { reason } = result
+      if (reason instanceof Error) {
+        errors.push(reason.message)
       } else {
-        logger.fatal({ result }, `Unexpected promise result`)
+        errors.push(reason)
       }
+    } else if (status === "fulfilled") {
+      const { value } = result
+      if (value.success !== true) {
+        const { error } = value
+        if (error.code !== null) {
+          errors.push(error)
+        }
+      }
+    } else {
+      logger.fatal({ result }, `Unexpected promise result`)
     }
-    resolve({ errors })
-  })
-
-  sidecars.push({ stopSidecar, promise })
+  }
+  console.log(errors)
+  if (errors.lenth > 0) {
+    throw new KontinuousPluginError(JSON.stringify(errors))
+  }
 }

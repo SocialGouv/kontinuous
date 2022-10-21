@@ -423,7 +423,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     deployTimeout: {
       option: "timeout",
       env: "KS_DEPLOY_TIMEOUT",
-      default: "15m0s",
+      default: "15m",
     },
     links: {
       transform: async (links = {}) => {

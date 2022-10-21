@@ -38,3 +38,7 @@ preDeploy:
     enabled: true
   clear:
     enabled: false
+
+postDeploy:
+  waitRollout:
+    enabled: false
