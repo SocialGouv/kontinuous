@@ -282,6 +282,11 @@ spec:
                 secretKeyRef:
                   key: PGPORT
                   name: pg-user-feature-branch-1
+            - name: PGSSLMODE
+              valueFrom:
+                secretKeyRef:
+                  key: PGSSLMODE
+                  name: pg-user-feature-branch-1
             - name: NEW_DB_EXTENSIONS
               value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
           command:
