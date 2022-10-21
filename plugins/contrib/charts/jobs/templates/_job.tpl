@@ -97,10 +97,6 @@ spec:
       serviceAccountName: "{{ or $run.serviceAccountName .Values.serviceAccountName .Values.global.jobsConfig.serviceAccountName }}"
       {{- end }}
       restartPolicy: Never
-      securityContext:
-        runAsUser: {{ $user }}
-        runAsGroup: {{ $group }}
-        fsGroup: {{ $fsGroup }}
       initContainers:
       {{- if or (not (hasKey $run "checkout")) $run.checkout }}
         - name: degit-repository
@@ -118,6 +114,9 @@ spec:
               degit {{ or $val.repository $val.global.repository }}#{{ or $val.gitBranch $val.global.gitBranch }} \
                 /workspace
               {{ end }}
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
           volumeMounts:
             - name: workspace
               mountPath: /workspace
@@ -141,6 +140,9 @@ spec:
             - sh
             - -c
             - degit {{ $run.action | replace "@" "#" }} /action
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
           volumeMounts:
             - name: action
               mountPath: /action
@@ -206,6 +208,9 @@ spec:
             requests:
               cpu: {{ or $run.cpuRequest .Values.resources.requests.cpu }}
               memory: {{ or $run.memoryRequest .Values.resources.requests.memory }}
+          securityContext:
+            runAsUser: {{ $user }}
+            runAsGroup: {{ $group }}
           volumeMounts:
             - name: workspace
               mountPath: /workspace
@@ -227,7 +232,8 @@ spec:
             {{- if $run.volumeMounts }}
             {{- tpl ($run.volumeMounts | toYaml) . | nindent 12 }}
             {{- end }}
-
+      securityContext:
+        fsGroup: {{ $fsGroup }}
       volumes:
         - name: workspace
           emptyDir: {}

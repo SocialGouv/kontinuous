@@ -15,8 +15,7 @@ module.exports = async (
     kubectl apply
       ${kubeconfigContext ? `--context ${kubeconfigContext}` : ""}
       -f ${manifestsFile}
-      --server-side
-      --force-conflicts
+      --force
       ${dryRun ? "--dry-run=server" : ""}
       --overwrite
       --wait
