@@ -10,7 +10,7 @@
 
 {{- if $antiAffinity }}
 podAntiAffinity:
-  requiredDuringSchedulingIgnoredDuringExecution:
+  preferredDuringSchedulingIgnoredDuringExecution:
   - labelSelector:
       matchExpressions:
       - key: namespace
