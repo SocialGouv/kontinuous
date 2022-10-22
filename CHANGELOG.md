@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.84.2 (2022-10-22)
+
+
+### Bug Fixes
+
+* **job-build:** fix skipExisting docker image ([#53](https://github.com/SocialGouv/kontinuous/issues/53)) ([bc41f6c](https://github.com/SocialGouv/kontinuous/commit/bc41f6ca6628310a086ee6102da3a9ac4763c030))
+
 ### 1.84.1 (2022-10-22)
 
 
