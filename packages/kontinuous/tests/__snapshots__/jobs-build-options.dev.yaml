@@ -290,6 +290,7 @@ spec:
 
               if [ -n \\"true\\" ]; then
                 URL=\\"http://\${CI_REGISTRY}/v2/\${RELATIVE_IMAGE_PATH}/manifests/sha-ffac537e6cbbf934b08745a378932722df287a53\\"
+                echo \\"docker build: check image at \${URL}\\"
                 IMAGE_EXISTS=$(wget -q \\"\${URL}\\" || echo \\"1\\")
                 if [ -z $IMAGE_EXISTS ]; then
                     echo \\"docker build: skip, image \${RELATIVE_IMAGE_PATH}:sha-ffac537e6cbbf934b08745a378932722df287a53 alreay exist on registry\\"
@@ -305,7 +306,7 @@ spec:
                 --destination=$IMAGE_PATH:feature-branch-1 \\\\
                 --cache=true \\\\
                 --cache-repo=$IMAGE_PATH \\\\
-                --snapshotMode=redo \\\\
+                --snapshot-mode=redo \\\\
                 --skip-unused-stages \\\\
                 --use-new-run \\\\
                 --cache-ttl=336h \\\\

@@ -15,7 +15,7 @@ module.exports = async (opts) => {
   const config = ctx.require("config")
   const logger = ctx.require("logger")
 
-  const allEnvs = ["dev", "preprod", "prod"]
+  const allEnvs = ["local", "dev", "preprod", "prod"]
   const envDir = `${config.workspaceKsPath}/env`
   let environments = []
   if (await fs.pathExists(envDir)) {
