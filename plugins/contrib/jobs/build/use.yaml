@@ -40,7 +40,7 @@ runs:
         --cache=true \
         --cache-repo=$IMAGE_PATH \
         {{ end -}}
-        --snapshotMode=redo \
+        --snapshot-mode=redo \
         --skip-unused-stages \
         --use-new-run \
         --cache-ttl=336h \

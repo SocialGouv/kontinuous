@@ -3,7 +3,7 @@ const { Option } = require("commander")
 module.exports.env = new Option(
   "--env, -e <env>",
   "select environment, default autodetect from current git branch"
-).choices(["dev", "preprod", "prod"])
+).choices(["local", "dev", "preprod", "prod"])
 
 module.exports.chart = new Option(
   "--chart <chart...>",

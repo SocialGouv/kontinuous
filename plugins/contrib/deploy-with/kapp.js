@@ -52,6 +52,7 @@ module.exports = async (
 
   const [cmd, args] = parseCommand(kappDeployCommand)
 
+  logger.debug(`Launch kapp:${kappDeployCommand}`)
   const proc = spawn(cmd, args, {
     encoding: "utf-8",
     env: {
