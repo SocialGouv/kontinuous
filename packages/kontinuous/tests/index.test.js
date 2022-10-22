@@ -32,6 +32,7 @@ const defaultEnv = {
   KS_ENVIRONMENT: "dev",
   KS_CI_NAMESPACE: "awesome-ci",
   RANCHER_PROJECT_ID: "1234",
+  KS_FORCE_NEW_DEPLOY: "false",
 }
 
 const allEnvs = ["dev", "preprod", "prod"]

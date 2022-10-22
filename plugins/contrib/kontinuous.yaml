@@ -42,3 +42,7 @@ preDeploy:
 postDeploy:
   waitRollout:
     enabled: false
+
+deploySidecars:
+  stern:
+    enabled: false

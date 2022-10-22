@@ -83,7 +83,16 @@ module.exports = async (
             logger,
           })
           if (!result.success) {
+            logger.error(
+              { namespace, selector },
+              `resource "${resourceName}" failed`
+            )
             endAll()
+          } else {
+            logger.info(
+              { namespace, selector },
+              `resource "${resourceName}" ready`
+            )
           }
           resolve(result)
         } catch (err) {

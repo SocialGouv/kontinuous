@@ -191,6 +191,47 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     refLabelValue: {
       defaultFunction: (config) => slug(config.gitBranch),
     },
+    deploymentEnvLabelKey: {
+      default: "kontinuous/deployment.env",
+    },
+    deploymentEnvLabelValue: {
+      defaultFunction: (config) => {
+        const { repositoryName, chart, gitBranch } = config
+        const charts = chart?.join(",")
+        return slug(
+          `${repositoryName}-${gitBranch}${charts ? `-${charts}` : ""}`
+        )
+      },
+    },
+    deploymentLabelKey: {
+      default: "kontinuous/deployment",
+    },
+    deploymentLabelForceNewDeploy: {
+      default: true,
+      env: "KS_FORCE_NEW_DEPLOY",
+      envParser: (str) => yaml.load(str),
+    },
+    deploymentLabelValue: {
+      defaultFunction: (config) => {
+        const {
+          repositoryName,
+          chart,
+          gitBranch,
+          gitSha,
+          deploymentLabelForceNewDeploy,
+        } = config
+        const deploymentId = !deploymentLabelForceNewDeploy
+          ? gitSha
+          : Math.floor(Date.now() / 1000)
+
+        const slugParts = [repositoryName, gitBranch, deploymentId]
+        const charts = chart?.join(",")
+        if (charts) {
+          slugParts.push(charts)
+        }
+        return slug(slugParts.join("-"))
+      },
+    },
   }
   const configOverride = {
     kontinuousPath: {

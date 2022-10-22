@@ -38,6 +38,13 @@ RUN curl -sL https://github.com/SocialGouv/rollout-status/releases/download/${RO
   && mv /tmp/rollout-status /usr/local/bin/rollout-status \
   && chmod +x /usr/local/bin/rollout-status
 
+FROM downloader as stern
+ARG STERN_VERSION=v1.11.1
+ENV STERN_VERSION=$STERN_VERSION
+RUN curl -sL https://github.com/wercker/stern/releases/download/${STERN_VERSION}/stern_linux_amd64 > /tmp/stern \
+  && mv /tmp/stern /usr/local/bin/stern \
+  && chmod +x /usr/local/bin/stern
+
 FROM ubuntu:$UBUNTU_VERSION as node
 ARG NODE_VERSION=18
 ENV NODE_VERSION=$NODE_VERSION
@@ -112,6 +119,7 @@ COPY --from=kubectl /usr/local/bin/kubectl /usr/local/bin/kubectl
 COPY --from=helm /usr/local/bin/helm /usr/local/bin/helm
 COPY --from=kapp /usr/local/bin/kapp /usr/local/bin/kapp
 COPY --from=rollout-status /usr/local/bin/rollout-status /usr/local/bin/rollout-status
+COPY --from=stern /usr/local/bin/stern /usr/local/bin/stern
 
 WORKDIR /opt/kontinuous
 

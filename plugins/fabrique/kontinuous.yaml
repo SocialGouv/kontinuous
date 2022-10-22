@@ -29,7 +29,7 @@ dependencies:
         enabled: true
     
     deploySidecars:
-      rolloutStatusChecker:
+      failfast:
         enabled: false
 
     deployWith:
