@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.84.0 (2022-10-22)
+
+
+### Features
+
+* **build:** add build.buildOptions ([#52](https://github.com/SocialGouv/kontinuous/issues/52)) ([ac68f06](https://github.com/SocialGouv/kontinuous/commit/ac68f068aeca1897021a26cfc75fe8c2d0f4a323))
+
 ## 1.83.0 (2022-10-21)
 
 
