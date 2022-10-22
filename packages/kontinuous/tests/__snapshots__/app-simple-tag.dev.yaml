@@ -137,18 +137,20 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: namespace
-                    operator: In
-                    values:
-                      - test-app-simple-tag-v1-2-3-3sg4dn
-                  - key: component
-                    operator: In
-                    values:
-                      - app
-              topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-app-simple-tag-v1-2-3-3sg4dn
+                    - key: component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
       containers:
         - image: >-
             harbor.fabrique.social.gouv.fr/test-app-simple-tag/app:sha-ffac537e6cbbf934b08745a378932722df287a53

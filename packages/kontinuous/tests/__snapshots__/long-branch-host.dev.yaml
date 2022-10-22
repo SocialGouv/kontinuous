@@ -139,19 +139,21 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: namespace
-                    operator: In
-                    values:
-                      - >-
-                        test-long-branch-host-a-very-very-very-long-branch-name-47z9um
-                  - key: component
-                    operator: In
-                    values:
-                      - app-api
-              topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - >-
+                          test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+                    - key: component
+                      operator: In
+                      values:
+                        - app-api
+                topologyKey: kubernetes.io/hostname
       containers:
         - image: >-
             harbor.fabrique.social.gouv.fr/test-long-branch-host/app:sha-ffac537e6cbbf934b08745a378932722df287a53
