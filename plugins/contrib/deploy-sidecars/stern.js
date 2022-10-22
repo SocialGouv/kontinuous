@@ -43,6 +43,7 @@ module.exports = async (
         ${kubecontext ? `--context ${kubecontext}` : ""}
         --namespace ${ns}
         --selector ${deploymentLabelKey}=${deploymentLabelValue}
+         --color always
     `
     const [cmd, args] = parseCommand(kubectlDeployCommand)
 
@@ -58,7 +59,7 @@ module.exports = async (
       process.stdout.write(data.toString())
     })
     proc.stderr.on("data", (data) => {
-      logger.warn(data.toString())
+      process.stdout.write(data.toString())
     })
 
     sternProcesses.push(proc)
