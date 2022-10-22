@@ -784,7 +784,7 @@ spec:
                 --destination=$IMAGE_PATH:feature-branch-1 \\\\
                 --cache=true \\\\
                 --cache-repo=$IMAGE_PATH \\\\
-                --snapshotMode=redo \\\\
+                --snapshot-mode=redo \\\\
                 --skip-unused-stages \\\\
                 --use-new-run \\\\
                 --cache-ttl=336h \\\\
@@ -919,7 +919,7 @@ spec:
                 --destination=$IMAGE_PATH:feature-branch-1 \\\\
                 --cache=true \\\\
                 --cache-repo=$IMAGE_PATH \\\\
-                --snapshotMode=redo \\\\
+                --snapshot-mode=redo \\\\
                 --skip-unused-stages \\\\
                 --use-new-run \\\\
                 --cache-ttl=336h \\\\
