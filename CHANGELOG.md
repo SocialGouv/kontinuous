@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.85.0 (2022-10-22)
+
+
+### Features
+
+* local environment ([#40](https://github.com/SocialGouv/kontinuous/issues/40)) ([94d7809](https://github.com/SocialGouv/kontinuous/commit/94d78098173357f35a9ce573acd9d1bbf6ec082e))
+
 ### 1.84.3 (2022-10-22)
 
 ### 1.84.2 (2022-10-22)
