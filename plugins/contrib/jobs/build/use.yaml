@@ -22,7 +22,7 @@ runs:
       # skip image build if already exist on registry
       if [ -n "{{ $.with.skipExisting }}" ]; then
         URL="http://${CI_REGISTRY}/v2/${RELATIVE_IMAGE_PATH}/manifests/{{ or $.with.imageTag $.Values.global.imageTag }}"
-        IMAGE_EXISTS=$(wget -q "${URL}" && echo "0" || echo "1")
+        IMAGE_EXISTS=$(wget -q "${URL}" || echo "1")
         if [ -z $IMAGE_EXISTS ]; then
             echo "docker build: skip, image ${RELATIVE_IMAGE_PATH}:{{ or $.with.imageTag $.Values.global.imageTag }} alreay exist on registry"
             exit 0
