@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.84.1 (2022-10-22)
+
+
+### Bug Fixes
+
+* **podAntiAffinity:** use preferred affinity ([#54](https://github.com/SocialGouv/kontinuous/issues/54)) ([4622d8a](https://github.com/SocialGouv/kontinuous/commit/4622d8aefd27ebc582195ed51a6319d8cf1e191c))
+
 ## 1.84.0 (2022-10-22)
 
 
