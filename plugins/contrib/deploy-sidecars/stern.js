@@ -1,4 +1,4 @@
-// const { setTimeout } = require("timers/promises")
+const { spawn } = require("child_process")
 
 module.exports = async (
   sidecars,
@@ -9,7 +9,7 @@ module.exports = async (
     return
   }
 
-  const { needStern, asyncShell } = utils
+  const { needStern, parseCommand } = utils
 
   await needBin(needStern)
 
@@ -35,31 +35,49 @@ module.exports = async (
     }
   }
 
-  const promises = [...namespaces].map((ns) =>
-    asyncShell(
-      `
+  const promises = []
+  for (const ns of namespaces) {
+    const kubectlDeployCommand = `
       stern
-        --kubeconfig ${kubeconfig}
-        --context ${kubecontext}
+        ${kubeconfig ? `--kubeconfig ${kubeconfig}` : ""}
+        ${kubecontext ? `--context ${kubecontext}` : ""}
         --namespace ${ns}
         --selector ${deploymentLabelKey}=${deploymentLabelValue}
-    `,
-      {
-        callback: (proc) => {
-          sternProcesses.push(proc)
-          proc.stdout.on("data", (data) => {
-            // logger.debug(data.toString())
-            process.stdout.write(data.toString())
-          })
-          proc.stderr.on("data", (data) => {
-            logger.warn(data.toString())
-          })
-        },
-      }
-    )
-  )
+    `
+    const [cmd, args] = parseCommand(kubectlDeployCommand)
 
-  const promise = Promise.all(promises)
+    const proc = spawn(cmd, args, {
+      encoding: "utf-8",
+      env: {
+        ...process.env,
+        ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
+      },
+    })
+
+    proc.stdout.on("data", (data) => {
+      process.stdout.write(data.toString())
+    })
+    proc.stderr.on("data", (data) => {
+      logger.warn(data.toString())
+    })
+
+    sternProcesses.push(proc)
+    const promise = new Promise(async (resolve, reject) => {
+      proc.on("close", (code) => {
+        if (code === 0) {
+          resolve(true)
+        } else {
+          const error = new Error(`stern exit code ${code}`)
+          error.code = code
+          logger.trace("error running command")
+          reject(error)
+        }
+      })
+    })
+    promises.push(promise)
+  }
+
+  const promise = Promise.allSettled(promises)
 
   sidecars.push({ stopSidecar, promise })
 }
