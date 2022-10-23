@@ -8,11 +8,17 @@ RUN apt-get update && \
   && rm -rf /var/lib/apt/lists/*
 
 FROM downloader as rollout-status
-ARG ROLLOUT_STATUS_VERSION=v1.9.2
+ARG ROLLOUT_STATUS_VERSION=v1.9.3
 ENV ROLLOUT_STATUS_VERSION=$ROLLOUT_STATUS_VERSION
 RUN curl -sL https://github.com/SocialGouv/rollout-status/releases/download/${ROLLOUT_STATUS_VERSION}/rollout-status-${ROLLOUT_STATUS_VERSION}-linux-amd64 > /tmp/rollout-status \
   && mv /tmp/rollout-status /usr/local/bin/rollout-status \
   && chmod +x /usr/local/bin/rollout-status
+
+FROM downloader as kubectl
+ARG KUBECTL_VERSION=v1.25.0
+ENV KUBECTL_VERSION=$KUBECTL_VERSION
+RUN curl -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
+  && chmod +x /usr/local/bin/kubectl
 
 FROM node:$NODE_VERSION
 
@@ -22,6 +28,7 @@ RUN mkdir -p /opt/wait-needs && chown -R 1001:1001 /opt
 USER 1001
 
 COPY --from=rollout-status /usr/local/bin/rollout-status /usr/local/bin/rollout-status
+COPY --from=kubectl /usr/local/bin/kubectl /usr/local/bin/kubectl
 
 WORKDIR /opt/wait-needs
 
