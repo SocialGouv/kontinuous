@@ -622,6 +622,11 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
       option: "ignoreProjectTemplates",
       default: false,
     },
+    externalBinForceDownload: {
+      env: "KS_EXTERNAL_BIN_FORCE_DOWNLOAD",
+      envParser: (str) => yaml.load(str),
+      default: true,
+    },
   }
 
   rootConfig = await loadStructuredConfig({

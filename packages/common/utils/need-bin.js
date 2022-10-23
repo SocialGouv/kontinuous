@@ -38,9 +38,28 @@ module.exports = async (bin, downloadFunc, options = {}) => {
     }
     options.envPath = envPath
   }
-  if (!(await findableBin(bin, envPath))) {
-    await downloadFunc(options)
+
+  if (!options.forceDownload && (await findableBin(bin, envPath))) {
+    return
   }
+
+  const binFile = `${addPath}/${bin}`
+  const versionFile = `${binFile}.version`
+  const { version } = options
+  let hasToDownload
+  if ((await fs.pathExists(versionFile)) && (await fs.pathExists(binFile))) {
+    const currentVersion = await fs.readFile(versionFile)
+    hasToDownload = currentVersion !== version
+  } else {
+    hasToDownload = true
+  }
+
+  if (hasToDownload) {
+    await fs.remove(binFile)
+    await downloadFunc(options)
+    await fs.writeFile(versionFile, version)
+  }
+
   if (!(await findableBin(bin, envPath))) {
     throw Error(`unable to locate required executable: ${bin}`)
   }

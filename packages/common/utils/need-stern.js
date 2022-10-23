@@ -40,4 +40,5 @@ const download = async (options) => {
   await fs.chmod(dest, 0o755)
 }
 
-module.exports = (options = {}) => needBin("stern", download, options)
+module.exports = (options = {}) =>
+  needBin("stern", download, { ...options, version: sternVersion })

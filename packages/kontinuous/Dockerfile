@@ -109,6 +109,7 @@ ENV KUBECONFIG=$HOME/.kube/config
 RUN mkdir $HOME/.kube
 
 ENV KS_INLINE_CONFIG_SET "links.SocialGouv/kontinuous=/opt/kontinuous"
+ENV KS_EXTERNAL_BIN_FORCE_DOWNLOAD "false"
 
 ENTRYPOINT ["/opt/kontinuous/packages/kontinuous/bin/kontinuous"]
 CMD ["help"]

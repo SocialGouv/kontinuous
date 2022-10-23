@@ -40,4 +40,8 @@ const download = async (options) => {
   await fs.chmod(dest, 0o755)
 }
 
-module.exports = (options = {}) => needBin("rollout-status", download, options)
+module.exports = (options = {}) =>
+  needBin("rollout-status", download, {
+    ...options,
+    version: rolloutStatusVersion,
+  })
