@@ -39,7 +39,7 @@ RUN curl -sL https://github.com/SocialGouv/rollout-status/releases/download/${RO
   && chmod +x /usr/local/bin/rollout-status
 
 FROM downloader as stern
-ARG STERN_VERSION=v1.11.1
+ARG STERN_VERSION=1.11.0
 ENV STERN_VERSION=$STERN_VERSION
 RUN curl -sL https://github.com/wercker/stern/releases/download/${STERN_VERSION}/stern_linux_amd64 > /tmp/stern \
   && mv /tmp/stern /usr/local/bin/stern \

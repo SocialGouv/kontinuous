@@ -47,8 +47,9 @@ module.exports = async (bin, downloadFunc, options = {}) => {
   const versionFile = `${binFile}.version`
   const { version } = options
   let hasToDownload
+
   if ((await fs.pathExists(versionFile)) && (await fs.pathExists(binFile))) {
-    const currentVersion = await fs.readFile(versionFile)
+    const currentVersion = await fs.readFile(versionFile, { encoding: "utf-8" })
     hasToDownload = currentVersion !== version
   } else {
     hasToDownload = true

@@ -5,7 +5,7 @@ const fs = require("fs-extra")
 const needBin = require("./need-bin")
 const downloadFile = require("./download-file")
 
-const sternVersion = process.env.STERN_VERSION || "v1.11.0"
+const sternVersion = process.env.STERN_VERSION || "1.11.0"
 
 const download = async (options) => {
   const { logger } = options
