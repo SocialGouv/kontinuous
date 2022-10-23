@@ -1,5 +1,5 @@
 const kontinuousNeedsImage =
-  "ghcr.io/socialgouv/kontinuous/wait-needs:sha-be4f72a"
+  "ghcr.io/socialgouv/kontinuous/wait-needs:sha-1c9866a"
 // const kontinuousNeedsImage = "ghcr.io/socialgouv/kontinuous/wait-needs:1"
 // const kontinuousNeedsImage = "harbor.fabrique.social.gouv.fr/sre/kontinuous/wait-needs:v1"
 
