@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.85.2](https://github.com/SocialGouv/kontinuous/compare/v1.85.1...v1.85.2) (2022-10-25)
+
+
+### Bug Fixes
+
+* disablePlugin tmp init ([7e65508](https://github.com/SocialGouv/kontinuous/commit/7e65508c7f94e8187e641888cbcd3a90d8863426))
+
 ### [1.85.1](https://github.com/SocialGouv/kontinuous/compare/v1.85.0...v1.85.1) (2022-10-25)
 
 
