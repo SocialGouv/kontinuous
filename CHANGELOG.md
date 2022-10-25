@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.85.1](https://github.com/SocialGouv/kontinuous/compare/v1.85.0...v1.85.1) (2022-10-25)
+
+
+### Bug Fixes
+
+* snapshotMode ([bdf5313](https://github.com/SocialGouv/kontinuous/commit/bdf531338a1038e4b319bc31dde8f8a284f641a0))
+
 ## 1.85.0 (2022-10-22)
 
 
