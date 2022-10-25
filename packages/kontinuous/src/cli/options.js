@@ -127,3 +127,8 @@ module.exports.private = new Option(
   "--private",
   "remote config download on private repo"
 )
+
+module.exports.disablePlugin = new Option(
+  "--disable-plugin",
+  "disable plugin(s) using regex"
+)
