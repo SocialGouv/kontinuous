@@ -7,7 +7,7 @@ module.exports = (opts = {}) => {
     pretty: true,
     prettyOptions: {
       translateTime: "yyyy-mm-dd HH:MM:ss",
-      ignore: "pid,hostname",
+      ignore: "pid,hostname,time",
       ...prettyOptions,
     },
     destination: 2,
