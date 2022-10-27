@@ -36,7 +36,11 @@ module.exports = async (
 
   const stopSidecar = async () => {
     for (const p of Object.values(sternProcesses)) {
-      process.kill(p.pid, "SIGKILL")
+      try {
+        process.kill(p.pid, "SIGKILL")
+      } catch (_err) {
+        // do nothing
+      }
     }
   }
 
