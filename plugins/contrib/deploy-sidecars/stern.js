@@ -1,13 +1,26 @@
 const { spawn } = require("child_process")
 
+const handledKinds = ["Deployment", "StatefulSet", "Job", "DaemonSet"]
+
 module.exports = async (
   sidecars,
   _options,
-  { config, logger, utils, needBin, manifests, dryRun, deploysPromise }
+  {
+    config,
+    logger,
+    utils,
+    needBin,
+    manifests,
+    dryRun,
+    deploysPromise,
+    runContext,
+  }
 ) => {
   if (dryRun) {
     return
   }
+
+  const { eventsBucket } = runContext
 
   const { needStern, parseCommand } = utils
 
@@ -17,35 +30,45 @@ module.exports = async (
     kubeconfig,
     kubeconfigContext: kubecontext,
     deploymentLabelKey,
-    deploymentLabelValue,
   } = config
 
-  const sternProcesses = []
+  const sternProcesses = {}
+
   const stopSidecar = async () => {
-    for (const p of sternProcesses) {
+    for (const p of Object.values(sternProcesses)) {
       process.kill(p.pid, "SIGKILL")
     }
   }
 
-  const namespaces = new Set()
-  for (const m of manifests) {
-    const ns = m.metadata?.namespace
-    if (ns) {
-      namespaces.add(ns)
-    }
-  }
-
   const promises = []
-  for (const ns of namespaces) {
-    const kubectlDeployCommand = `
+
+  for (const manifest of manifests) {
+    const { kind } = manifest
+    if (!handledKinds.includes(kind)) {
+      continue
+    }
+    const resourceName = manifest.metadata.labels?.["kontinuous/resourceName"]
+    const deploymentLabelValue = manifest.metadata?.labels?.[deploymentLabelKey]
+    const namespace = manifest.metadata?.namespace
+    if (!resourceName) {
+      continue
+    }
+    const labelSelectors = []
+    labelSelectors.push(`kontinuous/resourceName=${resourceName}`)
+    if (deploymentLabelValue) {
+      labelSelectors.push(`${deploymentLabelKey}=${deploymentLabelValue}`)
+    }
+    const selector = labelSelectors.join(",")
+
+    const sternCmd = `
       stern
         ${kubeconfig ? `--kubeconfig ${kubeconfig}` : ""}
         ${kubecontext ? `--context ${kubecontext}` : ""}
-        --namespace ${ns}
-        --selector ${deploymentLabelKey}=${deploymentLabelValue}
+        --namespace ${namespace}
+        --selector ${selector}
          --color always
     `
-    const [cmd, args] = parseCommand(kubectlDeployCommand)
+    const [cmd, args] = parseCommand(sternCmd)
 
     const proc = spawn(cmd, args, {
       encoding: "utf-8",
@@ -62,7 +85,8 @@ module.exports = async (
       process.stderr.write(data.toString())
     })
 
-    sternProcesses.push(proc)
+    sternProcesses[`${namespace}/${resourceName}`] = proc
+
     const promise = new Promise(async (resolve, reject) => {
       proc.on("close", (code) => {
         if (code === 0) {
@@ -77,6 +101,17 @@ module.exports = async (
     })
     promises.push(promise)
   }
+
+  eventsBucket.on("ready", ({ namespace, resourceName }) => {
+    const key = `${namespace}/${resourceName}`
+    if (sternProcesses[key]) {
+      try {
+        process.kill(sternProcesses[key].pid, "SIGKILL")
+      } catch (_err) {
+        // do nothing
+      }
+    }
+  })
 
   const promise = Promise.allSettled(promises)
 

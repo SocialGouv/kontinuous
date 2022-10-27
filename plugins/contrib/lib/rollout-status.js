@@ -7,6 +7,8 @@ const waitBeforeStopAllRolloutStatus = 5000 // try to collect more errors if the
 module.exports = async (context) => {
   const { config, logger, utils, needBin, manifests, runContext } = context
 
+  const { eventsBucket } = runContext
+
   const { needRolloutStatus, rolloutStatusWatch } = utils
 
   const rolloutStatusProcesses = {}
@@ -44,7 +46,7 @@ module.exports = async (context) => {
     await stopDeployPromise
   }
 
-  const { refLabelKey } = config
+  const { deploymentLabelKey } = config
 
   await needBin(needRolloutStatus)
 
@@ -57,15 +59,15 @@ module.exports = async (context) => {
       continue
     }
     const resourceName = manifest.metadata.labels?.["kontinuous/resourceName"]
-    const ref = manifest.metadata?.labels?.[refLabelKey]
+    const deploymentLabelValue = manifest.metadata?.labels?.[deploymentLabelKey]
     const namespace = manifest.metadata?.namespace
     if (!resourceName) {
       continue
     }
     const labelSelectors = []
     labelSelectors.push(`kontinuous/resourceName=${resourceName}`)
-    if (ref) {
-      labelSelectors.push(`${refLabelKey}=${ref}`)
+    if (deploymentLabelValue) {
+      labelSelectors.push(`${deploymentLabelKey}=${deploymentLabelValue}`)
     }
     const selector = labelSelectors.join(",")
 
@@ -97,6 +99,7 @@ module.exports = async (context) => {
               { namespace, selector },
               `resource "${resourceName}" ready`
             )
+            eventsBucket.trigger("ready", { namespace, resourceName, selector })
           }
 
           resolve(result)

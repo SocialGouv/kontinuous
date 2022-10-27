@@ -3,6 +3,7 @@ const fs = require("fs-extra")
 const ctx = require("~common/ctx")
 const yaml = require("~common/utils/yaml")
 const timeLogger = require("~common/utils/time-logger")
+const eventsBucket = require("~common/utils/events-bucket")
 
 const build = require("~/build")
 const { setStatus } = require("~/status")
@@ -89,7 +90,9 @@ module.exports = async (options) => {
 
     const { dryRun } = options
 
-    const runContext = {}
+    const runContext = {
+      eventsBucket: eventsBucket(),
+    }
 
     const commonDeployContext = {
       manifestsFile,
