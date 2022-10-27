@@ -67,6 +67,8 @@ module.exports = async (options) => {
     logger.info({ kubeconfig, kubeconfigContext }, "let's deploy on kubernetes")
 
     const allManifests = yaml.loadAll(manifests)
+
+    logger.info("🌀 [LIFECYCLE]: pre-deploy")
     await deployHooks(allManifests, "pre")
 
     const namespacesManifests = allManifests.filter(
@@ -102,11 +104,13 @@ module.exports = async (options) => {
       dryRun,
     }
 
+    logger.info("🌀 [LIFECYCLE]: deploy-with")
     const { stopDeploys, deploysPromise } = await deployWith({
       ...commonDeployContext,
     })
     runContext.stopDeploys = stopDeploys
 
+    logger.info("🌀 [LIFECYCLE]: deploy-sidecars")
     const { stopSidecars, sidecarsPromise } = await deploySidecars({
       ...commonDeployContext,
       deploysPromise,
@@ -122,6 +126,7 @@ module.exports = async (options) => {
       throw error
     }
 
+    logger.info("🌀 [LIFECYCLE]: post-deploy")
     await deployHooks(allManifests, "post")
 
     elapsed.end({

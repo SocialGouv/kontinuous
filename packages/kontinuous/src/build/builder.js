@@ -30,7 +30,7 @@ module.exports = async (_options = {}) => {
     })
   }
 
-  logger.debug("Compile dependencies")
+  logger.info("🌀 [LIFECYCLE]: dependencies")
   const { values, valuesDump } = await loadDependencies(config, logger)
 
   logger.trace(`Values: \n${valuesDump}`)
@@ -39,7 +39,7 @@ module.exports = async (_options = {}) => {
 
   let manifests
 
-  logger.debug("Build base manifest using helm")
+  logger.info("🌀 [LIFECYCLE]: helm template")
   try {
     manifests = await asyncShell(
       `helm template . --values=values.yaml ${config.helmArgs}`,
@@ -63,10 +63,10 @@ module.exports = async (_options = {}) => {
 
   // logger.trace(`Manifests: \n${yaml.dump(manifests)}`)
 
-  logger.debug("Apply patches")
+  logger.info("🌀 [LIFECYCLE]: patches")
   manifests = await applyPatches(manifests, values)
 
-  logger.debug("Run postRenderer")
+  logger.info("🌀 [LIFECYCLE]: post-renderer")
   manifests = await postRenderer(manifests, config)
 
   logger.debug("Build final output")
@@ -78,10 +78,10 @@ module.exports = async (_options = {}) => {
 
   logger.debug(`Built manifests: file://${manifestsFile}`)
 
-  logger.debug("Validate manifests")
+  logger.info("🌀 [LIFECYCLE]: validators")
   await validateManifests(manifests, values)
 
-  logger.debug("Debug manifests")
+  logger.info("🌀 [LIFECYCLE]: debug-manifests")
   await debugManifests(manifests, values)
 
   return {
