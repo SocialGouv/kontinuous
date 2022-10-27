@@ -1,6 +1,12 @@
 const { spawn } = require("child_process")
 
-module.exports = ({ kubeconfig, kubecontext, namespace, selector }) => {
+module.exports = ({
+  kubeconfig,
+  kubecontext,
+  namespace,
+  selector,
+  ignoreSecretNotFound,
+}) => {
   const args = []
   if (kubeconfig) {
     args.push(...["-kubeconfig", kubeconfig])
@@ -13,6 +19,9 @@ module.exports = ({ kubeconfig, kubecontext, namespace, selector }) => {
   }
   if (selector) {
     args.push(...["-selector", selector])
+  }
+  if (ignoreSecretNotFound) {
+    args.push("-ignore-secret-not-found")
   }
   args.push(...["-interval", "10s"])
   const proc = spawn("rollout-status", args, { encoding: "utf-8" })
