@@ -25,7 +25,8 @@ const runWaitNeeds = async ({ waitNeeds, annotationsRef, timeout = 900 }) => {
   }
   const getCompletedOnce = async () => {
     const annotationsJSON = await kubectlRetry(
-      `-n ${selfRefNamespace} get ${lowerkind}/${selfRefName} -o json`
+      `-n ${selfRefNamespace} get ${lowerkind}/${selfRefName} -o json`,
+      { logInfo: false }
     )
     const manifest = JSON.parse(annotationsJSON)
     const { annotations = {} } = manifest.metadata
@@ -92,7 +93,6 @@ const runWaitNeeds = async ({ waitNeeds, annotationsRef, timeout = 900 }) => {
   }
   logger.info("all dependencies are ready")
   await annotateCompletedOnce()
-  logger.info("completed-once annotated")
   return true
 }
 

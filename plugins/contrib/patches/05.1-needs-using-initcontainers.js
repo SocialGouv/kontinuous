@@ -54,7 +54,7 @@ module.exports = async (manifests, _options, context) => {
     const dependencies = [...needsManifests].map((m) => {
       const { namespace, labels, name } = m.metadata
       const resourceName = labels["kontinuous/resourceName"]
-      const selectors = [{ "kontinuous/resourceName": resourceName }]
+      const selectors = { "kontinuous/resourceName": resourceName }
       return {
         namespace,
         kind: m.kind,
