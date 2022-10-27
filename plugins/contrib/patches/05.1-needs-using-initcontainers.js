@@ -52,10 +52,16 @@ module.exports = async (manifests, _options, context) => {
     const { initContainers, volumes } = spec
 
     const dependencies = [...needsManifests].map((m) => {
-      const { namespace, labels } = m.metadata
+      const { namespace, labels, name } = m.metadata
       const resourceName = labels["kontinuous/resourceName"]
-      const selectors = [["kontinuous/resourceName", resourceName]]
-      return { namespace, selectors }
+      const selectors = [{ "kontinuous/resourceName": resourceName }]
+      return {
+        namespace,
+        kind: m.kind,
+        name,
+        selectors,
+        needOnce: m.kind === "Job",
+      }
     })
 
     const jsonDependencies = JSON.stringify(dependencies)
@@ -64,6 +70,14 @@ module.exports = async (manifests, _options, context) => {
       name: "kontinuous-wait-needs",
       image: kontinuousNeedsImage,
       env: [
+        {
+          name: "WAIT_NEEDS_ANNOTATIONS_REF",
+          value: [
+            manifest.metadata.namespace,
+            kind,
+            manifest.metadata.name,
+          ].join("/"),
+        },
         { name: "WAIT_NEEDS", value: jsonDependencies },
         { name: "KUBECONFIG", value: "/secrets/kubeconfig" },
       ],

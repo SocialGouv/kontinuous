@@ -2,8 +2,9 @@
 
 const rolloutStatusWatch = require("~common/utils/rollout-status-watch")
 const logger = require("~common/utils/logger")
+const kubectlRetry = require("~common/utils/kubectl-retry")
 
-const runWaitNeeds = async ({ waitNeeds, timeout = 900 }) => {
+const runWaitNeeds = async ({ waitNeeds, annotationsRef, timeout = 900 }) => {
   const interceptor = {}
 
   setTimeout(() => {
@@ -13,11 +14,35 @@ const runWaitNeeds = async ({ waitNeeds, timeout = 900 }) => {
     }, 1000)
   }, timeout * 1000)
 
+  const completedOnceAnnotationKey = "kontinuous/completedOnce"
+
+  const [selfRefNamespace, selfRefKind, selfRefName] = annotationsRef.split("/")
+  const lowerkind = selfRefKind.toLowerCase()
+  const annotateCompletedOnce = async () => {
+    await kubectlRetry(
+      `-n ${selfRefNamespace} annotate ${lowerkind}/${selfRefName} ${completedOnceAnnotationKey}=true --overwrite`
+    )
+  }
+  const getCompletedOnce = async () => {
+    const annotationsJSON = await kubectlRetry(
+      `-n ${selfRefNamespace} get ${lowerkind}/${selfRefName} -o go-template='{{.metadata.annotations}}`
+    )
+    const annotations = JSON.parse(annotationsJSON)
+    return annotations[completedOnceAnnotationKey] === "true"
+  }
+
+  const completedOnce = await getCompletedOnce()
+  logger.info(`completedOnce: ${completedOnce}`)
+
   const promises = []
-  for (const { namespace, selectors } of waitNeeds) {
-    const selector = selectors
+  for (const { namespace, selectors, needOnce } of waitNeeds) {
+    const selector = Object.entries(selectors)
       .map(([label, value]) => `${label}=${value}`)
       .join(",")
+
+    if (needOnce && completedOnce) {
+      continue
+    }
 
     promises.push(
       new Promise(async (resolve, reject) => {
@@ -62,15 +87,17 @@ const runWaitNeeds = async ({ waitNeeds, timeout = 900 }) => {
   }
   if (errors.length > 0) {
     logger.error({ errors }, "required dependencies could not be satistfied")
-    process.exit(1)
-  } else {
-    logger.info("all dependencies are ready")
-    process.exit(0)
+    return false
   }
+  logger.info("all dependencies are ready")
+  await annotateCompletedOnce()
+  logger.info("completed-once annotated")
+  return true
 }
 
 const main = async () => {
   const jsonWaitNeeds = process.env.WAIT_NEEDS
+  const annotationsRef = process.env.WAIT_NEEDS_ANNOTATIONS_REF
   const waitNeeds = JSON.parse(jsonWaitNeeds)
   let timeout = process.env.TIMEOUT
   if (timeout) {
@@ -78,7 +105,12 @@ const main = async () => {
   } else {
     timeout = undefined
   }
-  await runWaitNeeds({ waitNeeds, timeout })
+  const ok = await runWaitNeeds({ waitNeeds, annotationsRef, timeout })
+  if (ok) {
+    process.exit(0)
+  } else {
+    process.exit(1)
+  }
 }
 
 main()
