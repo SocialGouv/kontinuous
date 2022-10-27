@@ -18,22 +18,28 @@ const runWaitNeeds = async ({ waitNeeds, annotationsRef, timeout = 900 }) => {
 
   const [selfRefNamespace, selfRefKind, selfRefName] = annotationsRef.split("/")
   const lowerkind = selfRefKind.toLowerCase()
-  const annotateCompletedOnce = async () => {
-    await kubectlRetry(
-      `-n ${selfRefNamespace} annotate ${lowerkind}/${selfRefName} ${completedOnceAnnotationKey}=true --overwrite`
-    )
-  }
-  const getCompletedOnce = async () => {
+  const getSelfRefAnnotations = async () => {
     const annotationsJSON = await kubectlRetry(
       `-n ${selfRefNamespace} get ${lowerkind}/${selfRefName} -o json`,
       { logInfo: false }
     )
     const manifest = JSON.parse(annotationsJSON)
     const { annotations = {} } = manifest.metadata
-    return annotations[completedOnceAnnotationKey] === "true"
+    return annotations
   }
 
-  const completedOnce = await getCompletedOnce()
+  const annotations = await getSelfRefAnnotations()
+
+  const deploymentSelector = annotations["kontinuous/deployment"]
+
+  const annotateCompletedOnce = async () => {
+    await kubectlRetry(
+      `-n ${selfRefNamespace} annotate ${lowerkind}/${selfRefName} ${completedOnceAnnotationKey}=${deploymentSelector} --overwrite`
+    )
+  }
+
+  const completedOnce =
+    annotations[completedOnceAnnotationKey] === deploymentSelector
   logger.info(`completedOnce: ${completedOnce}`)
 
   const promises = []
