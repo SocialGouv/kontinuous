@@ -39,10 +39,8 @@ preDeploy:
   clear:
     enabled: false
 
-postDeploy:
-  waitRollout:
-    enabled: false
-
 deploySidecars:
+  failfast:
+    enabled: false
   stern:
     enabled: false

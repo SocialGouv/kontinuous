@@ -4,16 +4,10 @@ const handledKinds = ["Deployment", "StatefulSet", "Job"]
 
 const waitBeforeStopAllRolloutStatus = 5000 // try to collect more errors if there is any
 
-module.exports = async (
-  manifests,
-  _options,
-  { config, logger, utils, needBin, dryRun }
-) => {
-  if (dryRun) {
-    return
-  }
+module.exports = async (context) => {
+  const { config, logger, utils, needBin, manifests, runContext } = context
 
-  const { needRolloutStatus, rolloutStatusWatch, KontinuousPluginError } = utils
+  const { needRolloutStatus, rolloutStatusWatch } = utils
 
   const rolloutStatusProcesses = {}
   const stopRolloutStatus = () => {
@@ -28,6 +22,11 @@ module.exports = async (
 
   const interceptor = { stop: false }
 
+  const stop = () => {
+    interceptor.stop = true
+    stopRolloutStatus()
+  }
+
   let endAllTrigerred = false
   const endAll = async () => {
     if (endAllTrigerred) {
@@ -36,9 +35,13 @@ module.exports = async (
     endAllTrigerred = true
     interceptor.stop = true
 
+    const stopDeployPromise = runContext.stopDeploys && runContext.stopDeploys()
+
     await setTimeout(waitBeforeStopAllRolloutStatus)
 
     stopRolloutStatus()
+
+    await stopDeployPromise
   }
 
   const { refLabelKey } = config
@@ -82,6 +85,7 @@ module.exports = async (
             kubecontext,
             logger,
           })
+
           if (!result.success) {
             logger.error(
               { namespace, selector },
@@ -94,6 +98,7 @@ module.exports = async (
               `resource "${resourceName}" ready`
             )
           }
+
           resolve(result)
         } catch (err) {
           reject(err)
@@ -102,30 +107,47 @@ module.exports = async (
     )
   }
 
-  const results = await Promise.allSettled(promises)
-  const errors = []
-  for (const result of results) {
-    const { status } = result
-    if (status === "rejected") {
-      const { reason } = result
-      if (reason instanceof Error) {
-        errors.push(reason.message)
-      } else {
-        errors.push(reason)
-      }
-    } else if (status === "fulfilled") {
-      const { value } = result
-      if (value.success !== true) {
-        const { error } = value
-        if (error.code !== null) {
-          errors.push(error)
-        }
-      }
-    } else {
-      logger.fatal({ result }, `Unexpected promise result`)
+  const promise = new Promise(async (resolve, reject) => {
+    let results
+    try {
+      results = await Promise.allSettled(promises)
+    } catch (err) {
+      reject(err)
     }
-  }
-  if (errors.length > 0) {
-    throw new KontinuousPluginError(JSON.stringify(errors))
-  }
+    const errors = []
+    for (const result of results) {
+      const { status } = result
+      if (status === "rejected") {
+        const { reason } = result
+        if (reason instanceof Error) {
+          errors.push(reason.message)
+        } else {
+          errors.push(reason)
+        }
+      } else if (status === "fulfilled") {
+        const { value } = result
+        if (value.success !== true) {
+          errors.push(value.error)
+        }
+      } else {
+        logger.fatal({ result }, `Unexpected promise result`)
+      }
+    }
+    if (errors.length) {
+      for (const errorData of errors) {
+        logger.error(
+          {
+            code: errorData.code,
+            type: errorData.type,
+            log: errorData.log,
+            message: errorData.message,
+          },
+          `rollout-status ${errorData.code} error: ${errorData.message}`
+        )
+      }
+    }
+    resolve({ errors })
+  })
+
+  return { stop, promise }
 }

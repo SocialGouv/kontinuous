@@ -31,6 +31,8 @@ dependencies:
     deploySidecars:
       failfast:
         enabled: false
+      stern:
+        enabled: false
 
     deployWith:
       kapp:

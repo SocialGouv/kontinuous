@@ -14,7 +14,7 @@ const escapeCurlyGo = {
 module.exports = async (
   deploys,
   _options,
-  { config, logger, needBin, utils, manifests, dryRun }
+  { config, logger, needBin, utils, manifestsYaml, dryRun }
 ) => {
   const { parseCommand, needHelm, slug, createChart, yaml } = utils
 
@@ -32,7 +32,7 @@ module.exports = async (
   const manifestsDir = `${config.buildPath}/deploy-with/helm`
   await fs.ensureDir(`${manifestsDir}/templates`)
 
-  const yamlManifests = manifests.replace(
+  const yamlManifests = manifestsYaml.replace(
     /\{\{|\}\}/g,
     (matched) => escapeCurlyGo[matched]
   )

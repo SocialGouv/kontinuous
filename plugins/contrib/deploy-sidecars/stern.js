@@ -3,7 +3,7 @@ const { spawn } = require("child_process")
 module.exports = async (
   sidecars,
   _options,
-  { config, logger, utils, needBin, manifests, dryRun }
+  { config, logger, utils, needBin, manifests, dryRun, deploysPromise }
 ) => {
   if (dryRun) {
     return
@@ -56,10 +56,10 @@ module.exports = async (
     })
 
     proc.stdout.on("data", (data) => {
-      process.stdout.write(data.toString())
+      process.stderr.write(data.toString())
     })
     proc.stderr.on("data", (data) => {
-      process.stdout.write(data.toString())
+      process.stderr.write(data.toString())
     })
 
     sternProcesses.push(proc)
@@ -81,4 +81,7 @@ module.exports = async (
   const promise = Promise.allSettled(promises)
 
   sidecars.push({ stopSidecar, promise })
+
+  await deploysPromise
+  stopSidecar()
 }

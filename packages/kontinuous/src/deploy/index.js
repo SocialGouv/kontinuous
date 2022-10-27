@@ -91,42 +91,31 @@ module.exports = async (options) => {
 
     const runContext = {}
 
-    const { stopDeploys, deploysPromise } = await deployWith({
+    const commonDeployContext = {
       manifestsFile,
-      manifests,
+      manifestsYaml: manifests,
+      manifests: allManifests,
       runContext,
       dryRun,
+    }
+
+    const { stopDeploys, deploysPromise } = await deployWith({
+      ...commonDeployContext,
     })
     runContext.stopDeploys = stopDeploys
 
     const { stopSidecars, sidecarsPromise } = await deploySidecars({
-      manifests: allManifests,
-      runContext,
-      dryRun,
+      ...commonDeployContext,
+      deploysPromise,
     })
     runContext.stopSidecars = stopSidecars
 
     try {
-      await deploysPromise
-      stopSidecars()
+      await Promise.allSettled([deploysPromise, sidecarsPromise])
     } catch (error) {
       logger.error({ error }, "deploy failed")
-
       stopSidecars()
-      const { errors } = await sidecarsPromise
-      if (errors.length) {
-        for (const errorData of errors) {
-          logger.error(
-            {
-              code: errorData.code,
-              type: errorData.type,
-              log: errorData.log,
-              message: errorData.message,
-            },
-            `rollout-status ${errorData.code} error: ${errorData.message}`
-          )
-        }
-      }
+      stopDeploys()
       throw error
     }
 

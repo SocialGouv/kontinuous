@@ -5,10 +5,16 @@ const ctx = require("~common/ctx")
 const createContext = require("~/plugins/context")
 const pluginFunction = require("~/plugins/context/function")
 
-module.exports = async ({ manifests, runContext, dryRun }) => {
+module.exports = async ({ manifests, runContext, dryRun, deploysPromise }) => {
   const config = ctx.require("config")
   const type = `deploy-sidecars`
-  const context = createContext({ type, runContext, manifests, dryRun })
+  const context = createContext({
+    type,
+    runContext,
+    manifests,
+    dryRun,
+    deploysPromise,
+  })
   const { buildProjectPath } = config
   const requirePath = `${buildProjectPath}/${type}`
   let sidecars = []

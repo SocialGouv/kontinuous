@@ -2,11 +2,11 @@ const { spawn } = require("child_process")
 
 const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
 
-module.exports = async (
-  deploys,
-  _options,
-  { config, logger, utils, manifestsFile, dryRun }
-) => {
+const rolloutStatus = require("../lib/rollout-status")
+
+module.exports = async (deploys, _options, context) => {
+  const { config, logger, utils, manifestsFile, dryRun } = context
+
   const { parseCommand } = utils
 
   const { kubeconfigContext, kubeconfig, deployTimeout } = config
@@ -28,7 +28,7 @@ module.exports = async (
 
   const [cmd, args] = parseCommand(helmDeployCommand)
 
-  const proc = spawn(cmd, args, {
+  const kubectlProc = spawn(cmd, args, {
     encoding: "utf-8",
     env: {
       ...process.env,
@@ -36,22 +36,27 @@ module.exports = async (
     },
   })
 
+  let stopRolloutStatus
+
   for (const signal of signals) {
     process.on(signal, () => {
-      proc.kill(signal)
+      kubectlProc.kill(signal)
+      if (stopRolloutStatus) {
+        stopRolloutStatus()
+      }
       process.exit(0)
     })
   }
 
-  proc.stdout.on("data", (data) => {
+  kubectlProc.stdout.on("data", (data) => {
     process.stdout.write(data.toString())
   })
-  proc.stderr.on("data", (data) => {
+  kubectlProc.stderr.on("data", (data) => {
     logger.warn(data.toString())
   })
 
-  const promise = new Promise((resolve, reject) => {
-    proc.on("close", (code) => {
+  const kubectlPromise = new Promise((resolve, reject) => {
+    kubectlProc.on("close", (code) => {
       if (code === 0) {
         resolve()
       } else {
@@ -60,5 +65,32 @@ module.exports = async (
     })
   })
 
-  deploys.push({ promise, process: proc })
+  const promise = new Promise(async (resolve, reject) => {
+    try {
+      await kubectlPromise
+      if (!dryRun) {
+        const { stop, promise: rolloutStatusPromise } = await rolloutStatus(
+          context
+        )
+        stopRolloutStatus = stop
+        await rolloutStatusPromise
+      }
+      resolve(true)
+    } catch (err) {
+      reject(err)
+    }
+  })
+
+  const stopDeploy = async () => {
+    try {
+      process.kill(kubectlProc.pid, "SIGKILL")
+    } catch (_err) {
+      // do nothing
+    }
+    if (stopRolloutStatus) {
+      stopRolloutStatus()
+    }
+  }
+
+  deploys.push({ promise, stopDeploy })
 }
