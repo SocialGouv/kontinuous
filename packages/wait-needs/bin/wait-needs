@@ -25,9 +25,10 @@ const runWaitNeeds = async ({ waitNeeds, annotationsRef, timeout = 900 }) => {
   }
   const getCompletedOnce = async () => {
     const annotationsJSON = await kubectlRetry(
-      `-n ${selfRefNamespace} get ${lowerkind}/${selfRefName} -o go-template='{{.metadata.annotations}}`
+      `-n ${selfRefNamespace} get ${lowerkind}/${selfRefName} -o json`
     )
-    const annotations = JSON.parse(annotationsJSON)
+    const manifest = JSON.parse(annotationsJSON)
+    const { annotations = {} } = manifest.metadata
     return annotations[completedOnceAnnotationKey] === "true"
   }
 
