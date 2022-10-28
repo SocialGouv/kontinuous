@@ -624,7 +624,7 @@ spec:
               memory: 64Mi
       containers:
         - name: job
-          image: gcr.io/kaniko-project/executor:v1.9.1
+          image: gcr.io/kaniko-project/executor:v1.9.1-debug
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -765,7 +765,7 @@ spec:
               memory: 64Mi
       containers:
         - name: job
-          image: gcr.io/kaniko-project/executor:v1.9.1
+          image: gcr.io/kaniko-project/executor:v1.9.1-debug
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
