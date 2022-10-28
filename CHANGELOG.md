@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.85.3 (2022-10-28)
+
+
+### Bug Fixes
+
+* use preferredDuringSchedulingIgnoredDuringExecution ([#56](https://github.com/SocialGouv/kontinuous/issues/56)) ([04cd06f](https://github.com/SocialGouv/kontinuous/commit/04cd06fd5ad703bf4e85cb2d7c94e2b025b5afcd))
+
 ### [1.85.2](https://github.com/SocialGouv/kontinuous/compare/v1.85.1...v1.85.2) (2022-10-25)
 
 
