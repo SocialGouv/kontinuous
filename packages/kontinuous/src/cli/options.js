@@ -129,6 +129,16 @@ module.exports.private = new Option(
 )
 
 module.exports.disablePlugin = new Option(
-  "--disable-plugin",
-  "disable plugin(s) using regex"
+  "--disable-plugin <regex...>",
+  "disable plugin(s) using regex, can be called multiple times"
+)
+
+module.exports.disableStep = new Option(
+  "--disable-step <step...>",
+  "disable step, can be called multiple times"
+)
+
+module.exports.noValidate = new Option(
+  "--no-validate",
+  "disable validation of manifests"
 )

@@ -93,6 +93,14 @@ describe("test build manifests with snapshots", () => {
     }
     ctx.provide()
     ctx.set("env", env)
+
+    ctx.set("loggerOverride", (logger, config) =>
+      logger.child({
+        workspacePath: config.workspacePath,
+        buildPath: config.buildPath,
+      })
+    )
+
     await cli([...process.argv.slice(0, 2), "build"])
     const result = ctx.require("result")
     const { manifests } = result

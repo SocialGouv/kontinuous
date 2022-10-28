@@ -5,9 +5,14 @@ const pluginFunction = require("~/plugins/context/function")
 
 const ValidationError = require("./validation-error")
 
-module.exports = async (manifests, values) => {
+module.exports = async (manifests) => {
   const config = ctx.require("config")
-  const context = createContext({ type: "validators", values, ValidationError })
+  if (config.noValidate) {
+    return
+  }
+  const logger = ctx.require("logger")
+  logger.info("🌀 [LIFECYCLE]: validators")
+  const context = createContext({ type: "validators", ValidationError })
   const { buildProjectPath } = config
   await pluginFunction(`${buildProjectPath}/validators`)(manifests, {}, context)
 }

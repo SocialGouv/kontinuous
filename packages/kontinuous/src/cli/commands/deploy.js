@@ -24,7 +24,9 @@ module.exports = (program) =>
     .addOption(options.ignoreProjectTemplates)
     .addOption(options.kubeconfigContext)
     .addOption(options.kubeconfigContextNoDetect)
+    .addOption(options.disableStep)
     .addOption(options.disablePlugin)
+    .addOption(options.noValidate)
     .option(
       "--on-webhook, -w",
       "trigger built manifests deploying via webhook endpoint"

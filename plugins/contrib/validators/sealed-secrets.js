@@ -1,15 +1,14 @@
 const retry = require("async-retry")
 
 module.exports = async (manifests, options, context) => {
-  const { logger, utils } = context
+  const { config, logger, utils } = context
   const { handleAxiosError, axiosRetry: axios, KontinuousPluginError } = utils
 
   let { kubesealEndpoint } = options
 
   if (!kubesealEndpoint) {
     const { clusters } = options
-    const { values } = context
-    const cluster = values.global.isProd ? clusters.prod : clusters.dev
+    const cluster = config.environment === "prod" ? clusters.prod : clusters.dev
     if (cluster) {
       ;({ kubesealEndpoint } = cluster)
     }

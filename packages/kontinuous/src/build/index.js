@@ -29,7 +29,6 @@ module.exports = async (options) => {
     }
     process.stdout.write(m)
   } else {
-    logger.info(`📂 buildPath: file://${config.buildPath}`)
     logger.info(`📦 manifests: file://${manifestsFile}`)
   }
 

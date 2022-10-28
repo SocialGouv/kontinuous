@@ -4,14 +4,23 @@ const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
 
 const rolloutStatus = require("../lib/rollout-status")
 
-module.exports = async (deploys, _options, context) => {
+module.exports = async (deploys, options, context) => {
   const { config, logger, utils, manifestsFile, dryRun } = context
 
   const { parseCommand } = utils
 
   const { kubeconfigContext, kubeconfig, deployTimeout } = config
 
-  const helmDeployCommand = `
+  let validate
+  if (validate === undefined || validate === null || validate === "") {
+    if (config.noValidate) {
+      validate = false
+    } else {
+      validate = true
+    }
+  }
+
+  const kubectlDeployCommand = `
     kubectl apply
       ${kubeconfigContext ? `--context ${kubeconfigContext}` : ""}
       -f ${manifestsFile}
@@ -21,12 +30,13 @@ module.exports = async (deploys, _options, context) => {
           : `
       --force`
       }
+      --validate=${validate ? "true" : "false"}
       --overwrite
       --wait
       --timeout=${deployTimeout}
   `
 
-  const [cmd, args] = parseCommand(helmDeployCommand)
+  const [cmd, args] = parseCommand(kubectlDeployCommand)
 
   const kubectlProc = spawn(cmd, args, {
     encoding: "utf-8",

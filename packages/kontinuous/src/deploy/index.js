@@ -8,6 +8,7 @@ const eventsBucket = require("~common/utils/events-bucket")
 const build = require("~/build")
 const { setStatus } = require("~/status")
 
+const validateManifests = require("../build/validate-manifests")
 const deployHooks = require("./deploy-hooks")
 const deployOnWebhook = require("./deploy-on-webhook")
 const buildDeployPlugins = require("./build-deploy-plugins")
@@ -44,6 +45,7 @@ module.exports = async (options) => {
       manifests = result.manifests
     } else {
       manifests = await fs.readFile(manifestsFile, { encoding: "utf-8" })
+      await validateManifests(manifests)
     }
 
     if (onWebhook) {

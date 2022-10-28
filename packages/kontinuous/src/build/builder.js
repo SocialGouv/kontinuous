@@ -18,10 +18,11 @@ const loadDependencies = require("./load-dependencies")
 module.exports = async (_options = {}) => {
   const config = ctx.require("config")
 
-  const { buildPath, buildProjectPath, workspacePath, workspaceKsPath } = config
+  const { buildPath, buildProjectPath, workspaceKsPath } = config
 
-  const logger = ctx.require("logger").child({ buildPath, workspacePath })
-  ctx.set("logger", logger)
+  const logger = ctx.require("logger")
+
+  logger.info(`📂 buildPath: file://${config.buildPath}`)
 
   if (await fs.pathExists(workspaceKsPath)) {
     await fs.copy(workspaceKsPath, buildProjectPath, {
@@ -69,17 +70,13 @@ module.exports = async (_options = {}) => {
   logger.info("🌀 [LIFECYCLE]: post-renderer")
   manifests = await postRenderer(manifests, config)
 
-  logger.debug("Build final output")
   const manifestsDump = yaml.dumpAll(manifests)
-
-  logger.debug("Write manifests file")
   const manifestsFile = `${buildPath}/manifests.yaml`
   await fs.writeFile(manifestsFile, manifestsDump)
 
   logger.debug(`Built manifests: file://${manifestsFile}`)
 
-  logger.info("🌀 [LIFECYCLE]: validators")
-  await validateManifests(manifests, values)
+  await validateManifests(manifests)
 
   logger.info("🌀 [LIFECYCLE]: debug-manifests")
   await debugManifests(manifests, values)

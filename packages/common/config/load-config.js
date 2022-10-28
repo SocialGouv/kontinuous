@@ -627,6 +627,16 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
       envParser: (str) => yaml.load(str),
       default: true,
     },
+    disablePlugin: {
+      env: "KS_DISABLE_PLUGIN",
+      envParser: (str) => yaml.load(str),
+      option: "disable-plugin",
+    },
+    noValidate: {
+      env: "KS_NO_VALIDATE",
+      envParser: (str) => yaml.load(str),
+      option: "no-validate",
+    },
   }
 
   rootConfig = await loadStructuredConfig({
