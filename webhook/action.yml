@@ -74,7 +74,7 @@ runs:
         KS_WEBHOOK_URI=$(echo "$KONTINUOUS_CONFIG" | jq -r ".webhookUri")
         KS_PROJECT_NAME=$(echo "$KONTINUOUS_CONFIG" | jq -r ".projectName")
 
-        echo "::set-output name=env::$KS_ENVIRONMENT"
+        echo "env=$KS_ENVIRONMENT">>$GITHUB_OUTPUT
 
         echo "KS_ENVIRONMENT=$KS_ENVIRONMENT">>$GITHUB_ENV
         echo "KS_PROJECT_NAME=$KS_PROJECT_NAME">>$GITHUB_ENV
@@ -162,7 +162,7 @@ runs:
         HOSTS=$(cat manifests.yaml | yq eval-all '.spec.rules[] .host')
         HOST=$(echo "$HOSTS" | head -n 1)
         echo $HOST
-        echo "::set-output name=url::https://$HOST"
+        echo "url=https://$HOST">>$GITHUB_OUTPUT
 
     - name: Notify deployment end
       uses: bobheadxi/deployments@v1
