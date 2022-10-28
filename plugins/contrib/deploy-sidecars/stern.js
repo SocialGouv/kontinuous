@@ -70,6 +70,7 @@ module.exports = async (
         ${kubecontext ? `--context ${kubecontext}` : ""}
         --namespace ${namespace}
         --selector ${selector}
+        --since 0s
          --color always
     `
     const [cmd, args] = parseCommand(sternCmd)
