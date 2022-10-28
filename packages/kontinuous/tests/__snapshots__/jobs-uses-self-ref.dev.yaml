@@ -13,8 +13,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-jobs-uses-self-ref-feature-branch-1-ffac537e6cbbf9-2y8ey2
   labels:
     application: test-jobs-uses-self-ref
+    kontinuous/deployment: test-jobs-uses-self-ref-feature-branch-1-ffac537e6cbbf9-2y8ey2
+    kontinuous/deployment.env: test-jobs-uses-self-ref-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -30,8 +33,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-jobs-uses-self-ref-feature-branch-1-ffac537e6cbbf9-2y8ey2
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-jobs-uses-self-ref-feature-branch-1-ffac537e6cbbf9-2y8ey2
+    kontinuous/deployment.env: test-jobs-uses-self-ref-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -60,8 +66,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-jobs-uses-self-ref-feature-branch-1-ffac537e6cbbf9-2y8ey2
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-jobs-uses-self-ref-feature-branch-1-ffac537e6cbbf9-2y8ey2
+    kontinuous/deployment.env: test-jobs-uses-self-ref-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-default
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -79,9 +88,11 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: db.create-db
     kontinuous/needsNames: '[\\"db\\",\\"db.create-db\\",\\"db..create-db\\"]'
+    kontinuous/plugin.needs: '[\\"db..create-secret\\"]'
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: test-jobs-uses-self-ref-feature-branch-1-ffac537e6cbbf9-2y8ey2
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
@@ -119,6 +130,8 @@ metadata:
     kapp.k14s.io/change-group.db.: kontinuous/db.
     kapp.k14s.io/change-rule.db..create-secret: upsert after upserting kontinuous/db..create-secret
   labels:
+    kontinuous/deployment: test-jobs-uses-self-ref-feature-branch-1-ffac537e6cbbf9-2y8ey2
+    kontinuous/deployment.env: test-jobs-uses-self-ref-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-self-ref-feature-branch-1-63tyl5
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -134,10 +147,14 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-uses-self-ref
         runName: create-db
+        kontinuous/deployment: test-jobs-uses-self-ref-feature-branch-1-ffac537e6cbbf9-2y8ey2
+        kontinuous/deployment.env: test-jobs-uses-self-ref-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-self-ref-feature-branch-1-63tyl5
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-jobs-uses-self-ref-feature-branch-1-ffac537e6cbbf9-2y8ey2
     spec:
       restartPolicy: Never
       initContainers:
@@ -239,6 +256,7 @@ metadata:
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: test-jobs-uses-self-ref-feature-branch-1-ffac537e6cbbf9-2y8ey2
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
@@ -275,6 +293,8 @@ metadata:
     kapp.k14s.io/change-group.job.db..create-secret: kontinuous/job.db..create-secret
     kapp.k14s.io/change-group.db..create-secret: kontinuous/db..create-secret
   labels:
+    kontinuous/deployment: test-jobs-uses-self-ref-feature-branch-1-ffac537e6cbbf9-2y8ey2
+    kontinuous/deployment.env: test-jobs-uses-self-ref-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-self-ref-feature-branch-1-1jp7w3
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -290,10 +310,14 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-uses-self-ref
         runName: create-db
+        kontinuous/deployment: test-jobs-uses-self-ref-feature-branch-1-ffac537e6cbbf9-2y8ey2
+        kontinuous/deployment.env: test-jobs-uses-self-ref-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-self-ref-feature-branch-1-1jp7w3
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-jobs-uses-self-ref-feature-branch-1-ffac537e6cbbf9-2y8ey2
     spec:
       restartPolicy: Never
       initContainers:

@@ -13,8 +13,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
   labels:
     application: test-include-file
+    kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
+    kontinuous/deployment.env: test-include-file-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -30,8 +33,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
+    kontinuous/deployment.env: test-include-file-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -60,8 +66,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
+    kontinuous/deployment.env: test-include-file-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-default
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -82,6 +91,7 @@ metadata:
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
@@ -100,6 +110,8 @@ metadata:
     kapp.k14s.io/change-group.job.say-hello: kontinuous/job.say-hello
     kapp.k14s.io/change-group.say-hello: kontinuous/say-hello
   labels:
+    kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
+    kontinuous/deployment.env: test-include-file-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-include-file-feature-branch-1-say-hello
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -115,10 +127,14 @@ spec:
         ref: feature-branch-1
         repository: test-include-file
         runName: custom
+        kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
+        kontinuous/deployment.env: test-include-file-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-test-include-file-feature-branch-1-say-hello
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
     spec:
       restartPolicy: Never
       initContainers:

@@ -13,8 +13,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
   labels:
     application: test-jobs-seed-command
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+    kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -31,8 +34,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+    kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -61,145 +67,17 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+    kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-default
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   namespace: test-jobs-seed-command-feature-branch-1
 automountServiceAccountToken: false
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    component: app
-    application: test-jobs-seed-command
-    kontinuous/ref: feature-branch-1
-    kontinuous/resourceName: service-5cfizy-app
-    app.kubernetes.io/manifest-managed-by: kontinuous
-    app.kubernetes.io/manifest-created-by: kontinuous
-  name: app
-  namespace: test-jobs-seed-command-feature-branch-1
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 3000
-  selector:
-    component: app
-  type: ClusterIP
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    component: app
-    application: test-jobs-seed-command
-    kontinuous/ref: feature-branch-1
-    kontinuous/resourceName: deployment-3d60sq-app
-    app.kubernetes.io/manifest-managed-by: kontinuous
-    app.kubernetes.io/manifest-created-by: kontinuous
-  name: app
-  namespace: test-jobs-seed-command-feature-branch-1
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/nonce: ''
-    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
-    kontinuous/depname.chartResource: app.deployment.app
-    kontinuous/depname.chartName: app
-    kontinuous/depname.chartPath: project.fabrique.contrib.app
-    kontinuous/depname.resourcePath: deployment.app
-    kontinuous/depname.resourceName: app
-    kapp.k14s.io/change-group.app: kontinuous/app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app: kontinuous/project.fabrique.contrib.app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app.deployment.app: kontinuous/project.fabrique.contrib.app.deployment.app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app.app: kontinuous/project.fabrique.contrib.app.app
-    kapp.k14s.io/change-group.app.deployment.app: kontinuous/app.deployment.app
-    kapp.k14s.io/change-group.app.app: kontinuous/app.app
-    kapp.k14s.io/change-group.deployment.app: kontinuous/deployment.app
-    kapp.k14s.io/change-rule.seed: upsert after upserting kontinuous/seed
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      component: app
-  template:
-    metadata:
-      labels:
-        component: app
-        application: test-jobs-seed-command
-        namespace: test-jobs-seed-command-feature-branch-1
-        kontinuous/ref: feature-branch-1
-        kontinuous/resourceName: deployment-3d60sq-app
-        app.kubernetes.io/manifest-managed-by: kontinuous
-        app.kubernetes.io/manifest-created-by: kontinuous
-    spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: namespace
-                      operator: In
-                      values:
-                        - test-jobs-seed-command-feature-branch-1
-                    - key: component
-                      operator: In
-                      values:
-                        - app
-                topologyKey: kubernetes.io/hostname
-      containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/test-jobs-seed-command/app:sha-ffac537e6cbbf934b08745a378932722df287a53
-          name: app
-          ports:
-            - containerPort: 3000
-              name: http
-          livenessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /index.html
-              port: http
-            initialDelaySeconds: 30
-            periodSeconds: 5
-            timeoutSeconds: 5
-          readinessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /index.html
-              port: http
-            initialDelaySeconds: 1
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
-          startupProbe:
-            failureThreshold: 12
-            httpGet:
-              path: /index.html
-              port: http
-            periodSeconds: 5
-          resources:
-            limits:
-              cpu: 500m
-              memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
 ---
 apiVersion: batch/v1
 kind: Job
@@ -211,9 +89,11 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: db.create-db
     kontinuous/needsNames: '[\\"db\\",\\"db.create-db\\",\\"db..create-db\\"]'
+    kontinuous/plugin.needs: '[\\"db..create-secret\\"]'
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
@@ -251,6 +131,8 @@ metadata:
     kapp.k14s.io/change-group.db.: kontinuous/db.
     kapp.k14s.io/change-rule.db..create-secret: upsert after upserting kontinuous/db..create-secret
   labels:
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+    kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-seed-command-feature-branch-1-5a4gq8
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -266,10 +148,14 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-seed-command
         runName: create-db
+        kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+        kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-test-jobs-seed-command-feature-branch-1-5a4gq8
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
     spec:
       restartPolicy: Never
       initContainers:
@@ -371,6 +257,7 @@ metadata:
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
@@ -407,6 +294,8 @@ metadata:
     kapp.k14s.io/change-group.job.db..create-secret: kontinuous/job.db..create-secret
     kapp.k14s.io/change-group.db..create-secret: kontinuous/db..create-secret
   labels:
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+    kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-seed-command-feature-branch-1-61qgw4
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -422,10 +311,14 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-seed-command
         runName: create-db
+        kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+        kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-test-jobs-seed-command-feature-branch-1-61qgw4
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
     spec:
       restartPolicy: Never
       initContainers:
@@ -511,9 +404,11 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: seed
     kontinuous/needsNames: '[\\"seed\\"]'
+    kontinuous/plugin.needs: '[\\"db\\"]'
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
@@ -533,6 +428,8 @@ metadata:
     kapp.k14s.io/change-group.seed: kontinuous/seed
     kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db
   labels:
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+    kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-seed-command-feature-branch-1-seed
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -548,10 +445,14 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-seed-command
         runName: custom
+        kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+        kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-test-jobs-seed-command-feature-branch-1-seed
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
     spec:
       restartPolicy: Never
       containers:
@@ -591,6 +492,149 @@ spec:
         - name: action
           emptyDir: {}
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app
+    application: test-jobs-seed-command
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+    kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: deployment-3d60sq-app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-jobs-seed-command-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/plugin.needs: '[\\"seed\\"]'
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/nonce: ''
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
+    kontinuous/depname.chartName: app
+    kontinuous/depname.chartPath: project.fabrique.contrib.app
+    kontinuous/depname.resourcePath: deployment.app
+    kontinuous/depname.resourceName: app
+    kapp.k14s.io/change-group.app: kontinuous/app
+    kapp.k14s.io/change-group.project.fabrique.contrib.app: kontinuous/project.fabrique.contrib.app
+    kapp.k14s.io/change-group.project.fabrique.contrib.app.deployment.app: kontinuous/project.fabrique.contrib.app.deployment.app
+    kapp.k14s.io/change-group.project.fabrique.contrib.app.app: kontinuous/project.fabrique.contrib.app.app
+    kapp.k14s.io/change-group.app.deployment.app: kontinuous/app.deployment.app
+    kapp.k14s.io/change-group.app.app: kontinuous/app.app
+    kapp.k14s.io/change-group.deployment.app: kontinuous/deployment.app
+    kapp.k14s.io/change-rule.seed: upsert after upserting kontinuous/seed
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  template:
+    metadata:
+      labels:
+        component: app
+        application: test-jobs-seed-command
+        namespace: test-jobs-seed-command-feature-branch-1
+        kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+        kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-app
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-jobs-seed-command-feature-branch-1
+                    - key: component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            harbor.fabrique.social.gouv.fr/test-jobs-seed-command/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: test-jobs-seed-command
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+    kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-jobs-seed-command-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
+    kontinuous/plugin.needs: '[\\"seed\\"]'
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -598,10 +642,14 @@ metadata:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"seed\\"]'
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
     kapp.k14s.io/disable-original: ''
   labels:
     component: app
     application: test-jobs-seed-command
+    kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf93-64g1rb
+    kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: ingress-5dz9oh-app
     app.kubernetes.io/manifest-managed-by: kontinuous

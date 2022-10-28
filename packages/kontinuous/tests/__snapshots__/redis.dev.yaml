@@ -13,8 +13,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
   labels:
     application: test-redis
+    kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
+    kontinuous/deployment.env: test-redis-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -30,8 +33,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
+    kontinuous/deployment.env: test-redis-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -60,8 +66,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
+    kontinuous/deployment.env: test-redis-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-default
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -69,39 +78,14 @@ metadata:
   namespace: test-redis-feature-branch-1
 automountServiceAccountToken: false
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    component: redis
-    application: test-redis
-    kontinuous/ref: feature-branch-1
-    kontinuous/resourceName: service-5cfizy-redis
-    app.kubernetes.io/manifest-managed-by: kontinuous
-    app.kubernetes.io/manifest-created-by: kontinuous
-  name: redis
-  namespace: test-redis-feature-branch-1
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.redis
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/redis/templates/service.yaml
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 6379
-  selector:
-    component: redis
-  type: ClusterIP
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     component: redis
     application: test-redis
+    kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
+    kontinuous/deployment.env: test-redis-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: deployment-3d60sq-redis
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -112,6 +96,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.redis
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/redis/templates/deployment.yaml
+    kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -138,10 +123,14 @@ spec:
     metadata:
       labels:
         component: redis
+        kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
+        kontinuous/deployment.env: test-redis-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: deployment-3d60sq-redis
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
     spec:
       containers:
         - image: redis:6.2.5-alpine3.14
@@ -185,6 +174,36 @@ spec:
             requests:
               cpu: 300m
               memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: redis
+    application: test-redis
+    kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
+    kontinuous/deployment.env: test-redis-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-redis
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: redis
+  namespace: test-redis-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.redis
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/redis/templates/service.yaml
+    kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 6379
+  selector:
+    component: redis
+  type: ClusterIP
 ---
 apiVersion: kapp.k14s.io/v1alpha1
 kind: Config

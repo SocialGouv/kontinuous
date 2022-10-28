@@ -12,8 +12,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
   labels:
     application: test-ingress-annotations
+    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
+    kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -29,8 +32,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
+    kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -59,8 +65,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
+    kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-default
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -74,6 +83,8 @@ metadata:
   labels:
     component: metabase
     application: test-ingress-annotations
+    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
+    kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: configmap-e4ces7-metabase
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -84,6 +95,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.metabase
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/metabase/templates/configmap.yaml
+    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
     kapp.k14s.io/disable-original: ''
 data:
   MB_APPLICATION_NAME: metabase
@@ -98,40 +110,14 @@ data:
   MB_SITE_NAME: Fabrique des ministères sociaux
   MB_SITE_URL: https://metabase-test-ingress-annotations.fabrique.social.gouv.fr
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    component: metabase
-    application: test-ingress-annotations
-    kontinuous/ref: feature-branch-1
-    kontinuous/resourceName: service-5cfizy-metabase
-    app.kubernetes.io/manifest-managed-by: kontinuous
-    app.kubernetes.io/manifest-created-by: kontinuous
-  name: metabase
-  namespace: test-ingress-annotations
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.metabase
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase/templates/service.yaml
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 3000
-  selector:
-    component: metabase
-  type: ClusterIP
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     component: metabase
     application: test-ingress-annotations
+    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
+    kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: deployment-3d60sq-metabase
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -142,6 +128,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.metabase
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/metabase/templates/deployment.yaml
+    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -168,10 +155,14 @@ spec:
     metadata:
       labels:
         component: metabase
+        kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
+        kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: deployment-3d60sq-metabase
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
     spec:
       containers:
         - image: metabase/metabase:v0.44.0
@@ -216,6 +207,37 @@ spec:
               cpu: 500m
               memory: 512Mi
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: metabase
+    application: test-ingress-annotations
+    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
+    kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-metabase
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: metabase
+  namespace: test-ingress-annotations
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.metabase
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase/templates/service.yaml
+    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: metabase
+  type: ClusterIP
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -224,6 +246,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.metabase
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/metabase/templates/ingress.yaml
+    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
     kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -231,6 +254,8 @@ metadata:
   labels:
     component: metabase
     application: test-ingress-annotations
+    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
+    kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: ingress-5dz9oh-metabase
     app.kubernetes.io/manifest-managed-by: kontinuous

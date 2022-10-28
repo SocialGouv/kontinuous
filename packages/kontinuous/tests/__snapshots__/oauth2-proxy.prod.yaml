@@ -12,8 +12,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
   labels:
     application: test-oauth2-proxy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -29,8 +32,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -59,8 +65,11 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-default
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -68,40 +77,14 @@ metadata:
   namespace: test-oauth2-proxy
 automountServiceAccountToken: false
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    component: oauth2-proxy
-    application: test-oauth2-proxy
-    kontinuous/ref: feature-branch-1
-    kontinuous/resourceName: service-5cfizy-oauth2-proxy
-    app.kubernetes.io/manifest-managed-by: kontinuous
-    app.kubernetes.io/manifest-created-by: kontinuous
-  name: oauth2-proxy
-  namespace: test-oauth2-proxy
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.oauth2-proxy
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/service.yaml
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 4180
-  selector:
-    component: oauth2-proxy
-  type: ClusterIP
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     component: oauth2-proxy
     application: test-oauth2-proxy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: deployment-3d60sq-oauth2-proxy
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -112,6 +95,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.oauth2-proxy
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/deployment.yaml
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
@@ -139,10 +123,14 @@ spec:
       labels:
         component: oauth2-proxy
         application: test-oauth2-proxy
+        kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+        kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: deployment-3d60sq-oauth2-proxy
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
     spec:
       containers:
         - image: quay.io/oauth2-proxy/oauth2-proxy:v7.2.1
@@ -193,6 +181,37 @@ spec:
             - secretRef:
                 name: some-secret
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: oauth2-proxy
+    application: test-oauth2-proxy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-oauth2-proxy
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: oauth2-proxy
+  namespace: test-oauth2-proxy
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.oauth2-proxy
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/service.yaml
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 4180
+  selector:
+    component: oauth2-proxy
+  type: ClusterIP
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -201,6 +220,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.oauth2-proxy
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/ingress.yaml
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
     kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -208,6 +228,8 @@ metadata:
   labels:
     component: oauth2-proxy
     application: test-oauth2-proxy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: ingress-5dz9oh-oauth2-proxy
     app.kubernetes.io/manifest-managed-by: kontinuous

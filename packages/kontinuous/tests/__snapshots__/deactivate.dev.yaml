@@ -16,6 +16,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.deactivate.jobs-deactivate
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/deactivate/charts/jobs-deactivate/templates/jobs.yaml
+    kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b08745-2ugc7f
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
@@ -59,6 +60,8 @@ metadata:
     kapp.k14s.io/change-group.job.deactivate.: kontinuous/job.deactivate.
     kapp.k14s.io/change-group.deactivate.: kontinuous/deactivate.
   labels:
+    kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b08745-2ugc7f
+    kontinuous/deployment.env: test-deactivate-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-deactivate-feature-branch-1-deactiv-56yw37
     app.kubernetes.io/manifest-managed-by: kontinuous
@@ -74,10 +77,14 @@ spec:
         ref: feature-branch-1
         repository: test-deactivate
         runName: deactivate
+        kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b08745-2ugc7f
+        kontinuous/deployment.env: test-deactivate-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-test-deactivate-feature-branch-1-deactiv-56yw37
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b08745-2ugc7f
     spec:
       restartPolicy: Never
       initContainers:
