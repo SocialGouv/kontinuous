@@ -37,6 +37,11 @@ module.exports = async (options) => {
   const onWebhook = options.W
 
   try {
+    const elapsed = timeLogger({
+      logger,
+      logLevel: "debug",
+    })
+
     let manifestsFile = options.F
     let manifests
     if (!manifestsFile) {
@@ -87,12 +92,6 @@ module.exports = async (options) => {
         namespaces.length > 1 ? "s" : ""
       } "${namespaces.join('","')}"`
     }
-    logger.info(`deploying ${repositoryName} ${namespacesLabel}`)
-
-    const elapsed = timeLogger({
-      logger,
-      logLevel: "info",
-    })
 
     const { dryRun } = options
 
@@ -109,6 +108,8 @@ module.exports = async (options) => {
     }
 
     if (!config.disableStep.includes("deploy")) {
+      logger.info("🌀 [LIFECYCLE]: deploy")
+      logger.info(`🚀 deploying ${repositoryName} ${namespacesLabel}`)
       if (!config.disableStep.includes("deploy-with")) {
         logger.info("🌀 [LIFECYCLE]: deploy-with")
         const { stopDeploys, deploysPromise } = await deployWith(deployContext)
@@ -143,8 +144,11 @@ module.exports = async (options) => {
       await deployHooks(allManifests, "post")
     }
 
+    logger.info(
+      `✅ kontinuous pipeline ${repositoryName} ${environment} ${namespacesLabel}: ok`
+    )
     elapsed.end({
-      label: `🚀 kontinuous pipeline ${repositoryName} ${environment} ${namespacesLabel}`,
+      label: "🏁 pipeline runned in",
     })
 
     if (statusUrl) {
