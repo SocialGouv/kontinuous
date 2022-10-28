@@ -2,8 +2,11 @@ require("~/ts-node")
 
 const path = require("path")
 
+const camelCase = require("lodash.camelcase")
+
 const KontinuousPluginError = require("~common/utils/kontinuous-plugin-error.class")
 const configDependencyKey = require("~common/utils/config-dependency-key")
+const patternMatch = require("~common/utils/pattern-match")
 
 const pluginFunction = require("./function")
 
@@ -14,6 +17,7 @@ function requireTs(filePath) {
 
 module.exports = (type, context) => {
   const { config, getOptions, getScope } = context
+  const { disablePlugin } = config
 
   return (inc, parentScope = ["project"]) => {
     const scope = getScope({ scope: parentScope, inc, type })
@@ -43,6 +47,11 @@ module.exports = (type, context) => {
       .flatMap((v) => v)
       .join("/")
     context.logger = context.logger.child({ plugin: pluginName })
+
+    const pluginFullName = pluginName.split("/").map(camelCase).join("/")
+    if (patternMatch(pluginFullName, disablePlugin)) {
+      return () => {}
+    }
 
     return async (data) => {
       let requireFunc
