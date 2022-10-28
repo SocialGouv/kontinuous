@@ -50,7 +50,8 @@ module.exports = async (options) => {
       manifests = result.manifests
     } else {
       manifests = await fs.readFile(manifestsFile, { encoding: "utf-8" })
-      await validateManifests(manifests)
+      const manifestsObjects = yaml.loadAll(manifests)
+      await validateManifests(manifestsObjects)
     }
 
     if (onWebhook) {
