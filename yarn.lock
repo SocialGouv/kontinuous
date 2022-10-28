@@ -12554,6 +12554,8 @@ __metadata:
     pino-bfuscate: "npm:^1.0.0"
     pino-pretty: "npm:^9.1.1"
     ~common: "workspace:^"
+  bin:
+    wait-needs: ./bin/wait-needs
   languageName: unknown
   linkType: soft
 
