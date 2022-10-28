@@ -4,7 +4,7 @@ const handledKinds = ["Deployment", "StatefulSet", "Job", "DaemonSet"]
 
 module.exports = async (
   sidecars,
-  _options,
+  options,
   {
     config,
     logger,
@@ -19,6 +19,22 @@ module.exports = async (
   if (dryRun) {
     return
   }
+
+  let {
+    defaultExcludeContainer = ["kontinuous-wait-needs"],
+    excludeContainer = [],
+  } = options
+  if (!Array.isArray(defaultExcludeContainer)) {
+    defaultExcludeContainer = defaultExcludeContainer.split(",")
+  }
+  if (!Array.isArray(excludeContainer)) {
+    excludeContainer = excludeContainer.split(",")
+  }
+
+  const allExcludeContainers = [...defaultExcludeContainer, ...excludeContainer]
+  const excludeContainerFlag = allExcludeContainers
+    .map((containerName) => `--exclude-container=${containerName}`)
+    .join(" ")
 
   const { eventsBucket } = runContext
 
@@ -71,7 +87,8 @@ module.exports = async (
         --namespace ${namespace}
         --selector ${selector}
         --since 0s
-         --color always
+        --color always
+        ${excludeContainerFlag}
     `
     const [cmd, args] = parseCommand(sternCmd)
 
