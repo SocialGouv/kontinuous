@@ -2,7 +2,7 @@ runs:
   - name: kaniko
     checkout: true
     action: false
-    image: gcr.io/kaniko-project/executor:v1.9.1
+    image: gcr.io/kaniko-project/executor:v1.9.1-debug
     # serviceAccountName: kaniko
     cpuLimit: "2"
     cpuRequest: 100m
