@@ -238,18 +238,20 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: namespace
-                    operator: In
-                    values:
-                      - test-sample-1
-                  - key: component
-                    operator: In
-                    values:
-                      - app-2nd-instance
-              topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-sample-1
+                    - key: component
+                      operator: In
+                      values:
+                        - app-2nd-instance
+                topologyKey: kubernetes.io/hostname
       containers:
         - image: harbor.fabrique.social.gouv.fr/test-sample-1/app:prod
           name: app
@@ -334,18 +336,20 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: namespace
-                    operator: In
-                    values:
-                      - test-sample-1
-                  - key: component
-                    operator: In
-                    values:
-                      - app
-              topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-sample-1
+                    - key: component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
       containers:
         - image: harbor.fabrique.social.gouv.fr/test-sample-1/app:prod
           name: app

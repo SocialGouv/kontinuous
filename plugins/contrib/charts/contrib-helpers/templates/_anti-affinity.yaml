@@ -10,18 +10,20 @@
 
 {{- if $antiAffinity }}
 podAntiAffinity:
-  requiredDuringSchedulingIgnoredDuringExecution:
-  - labelSelector:
-      matchExpressions:
-      - key: namespace
-        operator: In
-        values: 
-        - {{ or .Values.namespace .Values.global.namespace }}
-      - key: component
-        operator: In
-        values:
-        - {{ (or .Values.component .Chart.Name) | lower }}
-    topologyKey: "kubernetes.io/hostname"
+  preferredDuringSchedulingIgnoredDuringExecution:
+  - weight: 1
+    podAffinityTerm:
+      labelSelector:
+        matchExpressions:
+        - key: namespace
+          operator: In
+          values:
+          - {{ or .Values.namespace .Values.global.namespace }}
+        - key: component
+          operator: In
+          values:
+          - {{ (or .Values.component .Chart.Name) | lower }}
+      topologyKey: "kubernetes.io/hostname"
 {{ end }}
 
 {{- end -}}
