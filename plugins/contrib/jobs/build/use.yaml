@@ -2,7 +2,7 @@ runs:
   - name: kaniko
     checkout: true
     action: false
-    image: gcr.io/kaniko-project/executor:debug
+    image: gcr.io/kaniko-project/executor:v1.9.1
     # serviceAccountName: kaniko
     cpuLimit: "2"
     cpuRequest: 100m
@@ -21,12 +21,12 @@ runs:
 
       # skip image build if already exist on registry
       if [ -n "{{ $.with.skipExisting }}" ]; then
-        URL="http://${CI_REGISTRY}/v2/${RELATIVE_IMAGE_PATH}/manifests/{{ or $.with.imageTag $.Values.global.imageTag }}"
+        URL="${CI_REGISTRY}/v2/${RELATIVE_IMAGE_PATH}/manifests/{{ or $.with.imageTag $.Values.global.imageTag }}"
         echo "docker build: check image at ${URL}"
         if [ -n "$CI_REGISTRY_USER" ]; then
-          IMAGE_EXISTS=$(wget -q --user="${CI_REGISTRY_USER}" --password="${CI_REGISTRY_PASSWORD}" "${URL}" || echo "1")
+          IMAGE_EXISTS=$(wget -q --no-check-certificate "http://${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD}@${URL}" || echo "1")
         else
-          IMAGE_EXISTS=$(wget -q "${URL}" || echo "1")
+          IMAGE_EXISTS=$(wget -q --no-check-certificate "http://${URL}" || echo "1")
         fi
         if [ -z $IMAGE_EXISTS ]; then
             echo "docker build: skip, image ${RELATIVE_IMAGE_PATH}:{{ or $.with.imageTag $.Values.global.imageTag }} alreay exist on registry"
