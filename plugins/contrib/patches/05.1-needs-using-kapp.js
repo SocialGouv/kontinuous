@@ -1,4 +1,4 @@
-const getDeps = require("./needs/get-deps")
+const getDeps = require("../lib/get-needs-deps")
 
 const changeRulePrefix = "kapp.k14s.io/change-rule"
 const changeGroupPrefix = "kapp.k14s.io/change-group"
@@ -29,9 +29,9 @@ module.exports = async (manifests, _options, context) => {
     }
 
     const jsonNeeds = annotations["kontinuous/plugin.needs"]
-    if (annotations["kontinuous/plugin.needs"]) {
-      delete annotations["kontinuous/plugin.needs"]
-    }
+    // if (annotations["kontinuous/plugin.needs"]) {
+    //   delete annotations["kontinuous/plugin.needs"]
+    // }
 
     if (!kindIsRunnable(manifest.kind)) {
       continue

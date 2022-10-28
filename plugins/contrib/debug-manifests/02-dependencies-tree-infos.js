@@ -1,10 +1,10 @@
 const camelcase = require("lodash.camelcase")
 
-const changeGroupPrefix = "kapp.k14s.io/change-group"
-const changeRulePrefix = "kapp.k14s.io/change-rule"
-const changeRuleValuePrefix = "upsert after upserting kontinuous/"
+const getDeps = require("../lib/get-needs-deps")
 
-module.exports = async (manifests, _options, { ctx, utils }) => {
+module.exports = async (manifests, _options, context) => {
+  const { ctx, utils } = context
+
   const logger = ctx.require("logger")
 
   if (!(await utils.graphEasyExists())) {
@@ -14,49 +14,55 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
     return
   }
 
-  const flatDependencies = {}
+  const { kindIsRunnable } = utils
+
+  const deps = getDeps(manifests, context)
+
+  const umlSet = new Set()
+
+  const getDepName = (manifest) => {
+    const { metadata } = manifest
+    const annotations = metadata?.annotations
+
+    const name =
+      annotations["kontinuous/needsName"] ||
+      annotations["kontinuous/depname.chartName"]
+
+    return camelcase(name)
+  }
 
   for (const manifest of manifests) {
-    const annotations = manifest.metadata?.annotations
+    const { metadata, kind } = manifest
+    const annotations = metadata?.annotations
     if (!annotations) {
       continue
     }
 
-    let depKey = Object.keys(annotations).find((key) =>
-      key.startsWith(`${changeGroupPrefix}.`)
-    )
-    if (!depKey) {
+    const jsonNeeds = annotations["kontinuous/plugin.needs"]
+
+    if (!kindIsRunnable(kind)) {
       continue
     }
-    depKey = depKey.split(".").pop()
 
-    for (const [key, value] of Object.entries(annotations)) {
-      if (
-        (key === changeRulePrefix || key.startsWith(`${changeRulePrefix}.`)) &&
-        value.startsWith(changeRuleValuePrefix)
-      ) {
-        if (!flatDependencies[depKey]) {
-          flatDependencies[depKey] = new Set()
+    if (!jsonNeeds) {
+      continue
+    }
+    const needs = JSON.parse(jsonNeeds)
+
+    const dependantName = getDepName(manifest)
+
+    for (const need of needs) {
+      const matchingDeps = deps[need]
+      for (const m of matchingDeps) {
+        const dependencyName = getDepName(m)
+        if (dependantName !== dependencyName) {
+          umlSet.add(`${dependencyName} -> ${dependantName};`)
         }
-        let dep = value.slice(changeRuleValuePrefix.length)
-        dep = dep.split(".").shift()
-        dep = camelcase(dep)
-        flatDependencies[depKey].add(dep)
       }
     }
   }
 
-  const uml = []
-
-  for (const [key, dependenciesSet] of Object.entries(flatDependencies)) {
-    const ccKey = camelcase(key)
-    for (const dep of dependenciesSet) {
-      const ccDep = camelcase(dep)
-      if (ccDep !== ccKey) {
-        uml.push(`${ccDep} -> ${ccKey};`)
-      }
-    }
-  }
+  const uml = [...umlSet]
 
   if (uml.length === 0) {
     return

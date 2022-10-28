@@ -109,12 +109,12 @@ const requireUse = async (
           use.startsWith(key)
         )
         const from = linkPath + use.substr(linkKey.length)
-        logger.debug(`use linked job: ${use} -> ${linkPath}`)
+        logger.debug(`🗂️  use linked job: ${use} -> ${linkPath}`)
         await fs.copy(from, target, {
           filter: ignoreYarnState,
         })
       } else {
-        logger.debug(`degit ${use}`)
+        logger.debug(`🗂️  degit ${use}`)
         await degitImproved(use, target, { logger, force: true })
       }
     })()

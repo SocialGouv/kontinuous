@@ -40,7 +40,7 @@ module.exports = async (manifests, options, context) => {
             await axios.post(endpoint, content)
             logger.debug(
               { endpoint, namespace },
-              `${manifest.metadata.name} is sealed properly`
+              `🔐 ${manifest.metadata.name} is sealed properly`
             )
           } catch (err) {
             if (err.response?.status === 429) {

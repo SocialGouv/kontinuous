@@ -3,7 +3,7 @@ const kontinuousNeedsImage =
 // const kontinuousNeedsImage = "ghcr.io/socialgouv/kontinuous/wait-needs:1"
 // const kontinuousNeedsImage = "harbor.fabrique.social.gouv.fr/sre/kontinuous/wait-needs:v1"
 
-const getDeps = require("./needs/get-deps")
+const getDeps = require("../lib/get-needs-deps")
 
 module.exports = async (manifests, _options, context) => {
   const { utils, logger } = context
@@ -19,9 +19,9 @@ module.exports = async (manifests, _options, context) => {
     }
 
     const jsonNeeds = annotations["kontinuous/plugin.needs"]
-    if (annotations["kontinuous/plugin.needs"]) {
-      delete annotations["kontinuous/plugin.needs"]
-    }
+    // if (annotations["kontinuous/plugin.needs"]) {
+    //   delete annotations["kontinuous/plugin.needs"]
+    // }
 
     if (!kindIsRunnable(kind)) {
       continue
