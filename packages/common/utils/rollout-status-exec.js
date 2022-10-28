@@ -9,16 +9,16 @@ module.exports = ({
 }) => {
   const args = []
   if (kubeconfig) {
-    args.push(...["-kubeconfig", kubeconfig])
+    args.push("-kubeconfig", kubeconfig)
   }
   if (kubecontext) {
-    args.push(...["-kubecontext", kubecontext])
+    args.push("-kubecontext", kubecontext)
   }
   if (namespace) {
-    args.push(...["-namespace", namespace])
+    args.push("-namespace", namespace)
   }
   if (selector) {
-    args.push(...["-selector", selector])
+    args.push("-selector", selector)
   }
   if (ignoreSecretNotFound) {
     args.push("-ignore-secret-not-found")

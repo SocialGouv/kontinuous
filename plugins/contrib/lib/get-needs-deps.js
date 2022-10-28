@@ -33,14 +33,12 @@ module.exports = (manifests, context) => {
         const lastPart = nameParts.pop()
         const n = [...nameParts, lastPart].join(".").trimEnd(".")
         keys.push(
-          ...[
-            `${chartPath}.${lowerKind}.${n}`,
-            `${chartPath}.${n}`,
-            `${chartName}.${lowerKind}.${n}`,
-            `${chartName}.${n}`,
-            `${lowerKind}.${n}`,
-            n,
-          ]
+          `${chartPath}.${lowerKind}.${n}`,
+          `${chartPath}.${n}`,
+          `${chartName}.${lowerKind}.${n}`,
+          `${chartName}.${n}`,
+          `${lowerKind}.${n}`,
+          n
         )
       }
     }
