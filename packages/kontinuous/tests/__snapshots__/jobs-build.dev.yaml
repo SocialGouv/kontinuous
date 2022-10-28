@@ -770,7 +770,11 @@ spec:
               if [ -n \\"\\" ]; then
                 URL=\\"http://\${CI_REGISTRY}/v2/\${RELATIVE_IMAGE_PATH}/manifests/sha-ffac537e6cbbf934b08745a378932722df287a53\\"
                 echo \\"docker build: check image at \${URL}\\"
-                IMAGE_EXISTS=$(wget -q \\"\${URL}\\" || echo \\"1\\")
+                if [ -n \\"$CI_REGISTRY_USER\\" ]; then
+                  IMAGE_EXISTS=$(wget -q --auth-no-challenge --user=\\"\${CI_REGISTRY_USER}\\" --password=\\"\${CI_REGISTRY_PASSWORD}\\" \\"\${URL}\\" || echo \\"1\\")
+                else
+                  IMAGE_EXISTS=$(wget -q \\"\${URL}\\" || echo \\"1\\")
+                fi
                 if [ -z $IMAGE_EXISTS ]; then
                     echo \\"docker build: skip, image \${RELATIVE_IMAGE_PATH}:sha-ffac537e6cbbf934b08745a378932722df287a53 alreay exist on registry\\"
                     exit 0
@@ -785,7 +789,7 @@ spec:
                 --destination=$IMAGE_PATH:feature-branch-1 \\\\
                 --cache=true \\\\
                 --cache-repo=$IMAGE_PATH \\\\
-                --snapshot-mode=redo \\\\
+                --snapshotMode=redo \\\\
                 --skip-unused-stages \\\\
                 --use-new-run \\\\
                 --cache-ttl=336h \\\\
@@ -906,7 +910,11 @@ spec:
               if [ -n \\"\\" ]; then
                 URL=\\"http://\${CI_REGISTRY}/v2/\${RELATIVE_IMAGE_PATH}/manifests/sha-ffac537e6cbbf934b08745a378932722df287a53\\"
                 echo \\"docker build: check image at \${URL}\\"
-                IMAGE_EXISTS=$(wget -q \\"\${URL}\\" || echo \\"1\\")
+                if [ -n \\"$CI_REGISTRY_USER\\" ]; then
+                  IMAGE_EXISTS=$(wget -q --auth-no-challenge --user=\\"\${CI_REGISTRY_USER}\\" --password=\\"\${CI_REGISTRY_PASSWORD}\\" \\"\${URL}\\" || echo \\"1\\")
+                else
+                  IMAGE_EXISTS=$(wget -q \\"\${URL}\\" || echo \\"1\\")
+                fi
                 if [ -z $IMAGE_EXISTS ]; then
                     echo \\"docker build: skip, image \${RELATIVE_IMAGE_PATH}:sha-ffac537e6cbbf934b08745a378932722df287a53 alreay exist on registry\\"
                     exit 0
@@ -921,7 +929,7 @@ spec:
                 --destination=$IMAGE_PATH:feature-branch-1 \\\\
                 --cache=true \\\\
                 --cache-repo=$IMAGE_PATH \\\\
-                --snapshot-mode=redo \\\\
+                --snapshotMode=redo \\\\
                 --skip-unused-stages \\\\
                 --use-new-run \\\\
                 --cache-ttl=336h \\\\
