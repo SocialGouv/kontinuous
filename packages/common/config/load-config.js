@@ -631,6 +631,13 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
       env: "KS_DISABLE_PLUGIN",
       envParser: (str) => yaml.load(str),
       option: "disable-plugin",
+      default: [],
+    },
+    disableStep: {
+      env: "KS_DISABLE_STEP",
+      envParser: (str) => yaml.load(str),
+      option: "disable-step",
+      default: [],
     },
     noValidate: {
       env: "KS_NO_VALIDATE",

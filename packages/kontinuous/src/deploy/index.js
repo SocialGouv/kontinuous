@@ -70,8 +70,10 @@ module.exports = async (options) => {
 
     const allManifests = yaml.loadAll(manifests)
 
-    logger.info("🌀 [LIFECYCLE]: pre-deploy")
-    await deployHooks(allManifests, "pre")
+    if (!config.disableStep.includes("pre-deploy")) {
+      logger.info("🌀 [LIFECYCLE]: pre-deploy")
+      await deployHooks(allManifests, "pre")
+    }
 
     const namespacesManifests = allManifests.filter(
       (manifest) => manifest.kind === "Namespace"
@@ -98,7 +100,7 @@ module.exports = async (options) => {
       eventsBucket: eventsBucket(),
     }
 
-    const commonDeployContext = {
+    const deployContext = {
       manifestsFile,
       manifestsYaml: manifests,
       manifests: allManifests,
@@ -106,30 +108,40 @@ module.exports = async (options) => {
       dryRun,
     }
 
-    logger.info("🌀 [LIFECYCLE]: deploy-with")
-    const { stopDeploys, deploysPromise } = await deployWith({
-      ...commonDeployContext,
-    })
-    runContext.stopDeploys = stopDeploys
+    if (!config.disableStep.includes("deploy")) {
+      if (!config.disableStep.includes("deploy-with")) {
+        logger.info("🌀 [LIFECYCLE]: deploy-with")
+        const { stopDeploys, deploysPromise } = await deployWith(deployContext)
+        runContext.stopDeploys = stopDeploys
+        runContext.deploysPromise = deploysPromise
+      }
 
-    logger.info("🌀 [LIFECYCLE]: deploy-sidecars")
-    const { stopSidecars, sidecarsPromise } = await deploySidecars({
-      ...commonDeployContext,
-      deploysPromise,
-    })
-    runContext.stopSidecars = stopSidecars
+      if (!config.disableStep.includes("deploy-sidecars")) {
+        logger.info("🌀 [LIFECYCLE]: deploy-sidecars")
+        const { stopSidecars, sidecarsPromise } = await deploySidecars(
+          deployContext
+        )
+        runContext.stopSidecars = stopSidecars
+        runContext.sidecarsPromise = sidecarsPromise
+      }
+    }
 
     try {
-      await Promise.allSettled([deploysPromise, sidecarsPromise])
+      await Promise.allSettled([
+        runContext.deploysPromise,
+        runContext.sidecarsPromise,
+      ])
     } catch (error) {
       logger.error({ error }, "deploy failed")
-      stopSidecars()
-      stopDeploys()
+      runContext.stopSidecars()
+      runContext.stopDeploys()
       throw error
     }
 
-    logger.info("🌀 [LIFECYCLE]: post-deploy")
-    await deployHooks(allManifests, "post")
+    if (!config.disableStep.includes("post-deploy")) {
+      logger.info("🌀 [LIFECYCLE]: post-deploy")
+      await deployHooks(allManifests, "post")
+    }
 
     elapsed.end({
       label: `🚀 kontinuous pipeline ${repositoryName} ${environment} ${namespacesLabel}`,

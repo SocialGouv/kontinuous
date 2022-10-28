@@ -5,9 +5,10 @@ const ctx = require("~common/ctx")
 const createContext = require("~/plugins/context")
 const pluginFunction = require("~/plugins/context/function")
 
-module.exports = async ({ manifests, runContext, dryRun, deploysPromise }) => {
+module.exports = async ({ manifests, runContext, dryRun }) => {
   const config = ctx.require("config")
   const type = `deploy-sidecars`
+  const { deploysPromise } = runContext
   const context = createContext({
     type,
     runContext,

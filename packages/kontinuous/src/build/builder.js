@@ -63,12 +63,9 @@ module.exports = async (_options = {}) => {
   }
 
   // logger.trace(`Manifests: \n${yaml.dump(manifests)}`)
-
-  logger.info("🌀 [LIFECYCLE]: patches")
   manifests = await applyPatches(manifests, values)
 
-  logger.info("🌀 [LIFECYCLE]: post-renderer")
-  manifests = await postRenderer(manifests, config)
+  manifests = await postRenderer(manifests)
 
   const manifestsDump = yaml.dumpAll(manifests)
   const manifestsFile = `${buildPath}/manifests.yaml`
@@ -78,7 +75,6 @@ module.exports = async (_options = {}) => {
 
   await validateManifests(manifests)
 
-  logger.info("🌀 [LIFECYCLE]: debug-manifests")
   await debugManifests(manifests, values)
 
   return {

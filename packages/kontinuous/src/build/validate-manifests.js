@@ -7,7 +7,7 @@ const ValidationError = require("./validation-error")
 
 module.exports = async (manifests) => {
   const config = ctx.require("config")
-  if (config.noValidate) {
+  if (config.noValidate || config.disableStep.includes("validators")) {
     return
   }
   const logger = ctx.require("logger")
