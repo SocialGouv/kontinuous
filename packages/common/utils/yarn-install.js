@@ -10,11 +10,11 @@ module.exports = async (target) => {
   ) {
     return
   }
-  logger.debug(`yarn install in "${target}"\n`)
+  logger.debug(`🧶 yarn install in "${target}"\n`)
   try {
     await asyncShell("yarn install", { cwd: target }, (proc) => {
       proc.stdout.on("data", (data) => {
-        logger.debug(data.toString())
+        logger.trace(data.toString())
       })
       proc.stderr.on("data", (data) => {
         logger.warn(data.toString())
