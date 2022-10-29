@@ -98,7 +98,7 @@ module.exports = async (context) => {
             eventsBucket.trigger("failed", eventParam)
             endAll()
           } else {
-            logger.info(
+            logger.debug(
               { namespace, selector },
               `resource "${resourceName}" ready`
             )

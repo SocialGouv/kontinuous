@@ -1,4 +1,4 @@
-const prettyMilliseconds = require("pretty-ms")
+const prettyTime = require("./pretty-time")
 
 function TimeLogger({
   startTime = new Date(),
@@ -23,9 +23,7 @@ Object.assign(TimeLogger.prototype, {
       this.logLevel = options.logLevel
     }
     this.logger[this.logLevel](
-      `${this.label}: ${prettyMilliseconds(new Date() - this.startTime, {
-        secondsDecimalDigits: 0,
-      })}`
+      `${this.label}: ${prettyTime(new Date() - this.startTime)}`
     )
   },
 })

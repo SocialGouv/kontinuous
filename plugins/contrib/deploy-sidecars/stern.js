@@ -138,7 +138,8 @@ module.exports = async (
   const promise = Promise.allSettled(promises)
 
   sidecars.push({ stopSidecar, promise })
-
-  await deploysPromise
-  stopSidecar()
+  ;(async () => {
+    await deploysPromise
+    stopSidecar()
+  })()
 }

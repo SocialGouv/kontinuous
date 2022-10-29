@@ -22,8 +22,6 @@ module.exports = async (_options = {}) => {
 
   const logger = ctx.require("logger")
 
-  logger.info(`📂 buildPath: file://${config.buildPath}`)
-
   if (await fs.pathExists(workspaceKsPath)) {
     await fs.copy(workspaceKsPath, buildProjectPath, {
       dereference: true,

@@ -709,6 +709,8 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
       return acc
     }, {})
 
+  logger.info(`📂 buildPath: file://${config.buildPath}`)
+
   await loadDependencies(config)
 
   await recurseDependency({

@@ -28,13 +28,14 @@ module.exports = async (manifests, options, context) => {
 
     const { namespace } = manifest.metadata
 
+    const secretName = manifest.metadata.name
     try {
       await retry(
         async (bail) => {
           try {
             logger.debug(
-              { endpoint, namespace, name: manifest.metadata.name },
-              `kubeseal verifying`
+              { endpoint, namespace, secretName },
+              `kubeseal verifying "${secretName}"`
             )
             await axios.post(endpoint, content)
             logger.debug(
