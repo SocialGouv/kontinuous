@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.85.4 (2022-10-29)
+
+
+### Bug Fixes
+
+* build.skipExisting with harbor ([#68](https://github.com/SocialGouv/kontinuous/issues/68)) ([3f2fd23](https://github.com/SocialGouv/kontinuous/commit/3f2fd2344c0376324c95cbc74a8482c5728f0956))
+
 ### 1.85.3 (2022-10-28)
 
 
