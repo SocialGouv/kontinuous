@@ -182,7 +182,7 @@ spec:
               memory: 64Mi
       containers:
         - name: job
-          image: gcr.io/kaniko-project/executor:debug
+          image: gcr.io/kaniko-project/executor:v1.9.1-debug
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -207,9 +207,13 @@ spec:
               # skip image build if already exist on registry
 
               if [ -n \\"true\\" ]; then
-                URL=\\"http://\${CI_REGISTRY}/v2/\${RELATIVE_IMAGE_PATH}/manifests/sha-ffac537e6cbbf934b08745a378932722df287a53\\"
+                URL=\\"\${CI_REGISTRY}/v2/\${RELATIVE_IMAGE_PATH}/manifests/sha-ffac537e6cbbf934b08745a378932722df287a53\\"
                 echo \\"docker build: check image at \${URL}\\"
-                IMAGE_EXISTS=$(wget -q \\"\${URL}\\" || echo \\"1\\")
+                if [ -n \\"$CI_REGISTRY_USER\\" ]; then
+                  IMAGE_EXISTS=$(wget -q --no-check-certificate \\"http://\${CI_REGISTRY_USER}:\${CI_REGISTRY_PASSWORD}@\${URL}\\" || echo \\"1\\")
+                else
+                  IMAGE_EXISTS=$(wget -q --no-check-certificate \\"http://\${URL}\\" || echo \\"1\\")
+                fi
                 if [ -z $IMAGE_EXISTS ]; then
                     echo \\"docker build: skip, image \${RELATIVE_IMAGE_PATH}:sha-ffac537e6cbbf934b08745a378932722df287a53 alreay exist on registry\\"
                     exit 0
@@ -397,124 +401,13 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
 spec:
-  backoffLimit: 1
-  activeDeadlineSeconds: 3600
-  ttlSecondsAfterFinished: 1800
-  template:
-    metadata:
-      labels:
-        environment: dev
-        ref: feature-branch-1
-        repository: test-jobs-build-options
-        runName: build
-        kontinuous/ref: feature-branch-1
-        kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-options-feature-branch-1-2auuh2
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
-    spec:
-      restartPolicy: Never
-      initContainers:
-        - name: degit-repository
-          image: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
-          imagePullPolicy: Always
-          command:
-            - sh
-            - '-c'
-            - |
-
-              degit kontinuous/test-jobs-build-options#feature-branch-1 \\\\
-                /workspace
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-          volumeMounts:
-            - name: workspace
-              mountPath: /workspace
-          resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
-            requests:
-              cpu: 10m
-              memory: 64Mi
-      containers:
-        - name: job
-          image: gcr.io/kaniko-project/executor:v1.9.1-debug
-          imagePullPolicy: IfNotPresent
-          envFrom:
-            - secretRef:
-                name: harbor
-          command:
-            - /busybox/sh
-            - '-c'
-            - >
-              set -e
-
-              mkdir -p /kaniko/.docker
-
-              echo
-              \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\"
-              > /kaniko/.docker/config.json
-
-              export RELATIVE_IMAGE_PATH=/test-jobs-build-options/app
-
-              export IMAGE_PATH=$CI_REGISTRY$RELATIVE_IMAGE_PATH
-
-
-              # skip image build if already exist on registry
-
-              if [ -n \\"true\\" ]; then
-                URL=\\"\${CI_REGISTRY}/v2/\${RELATIVE_IMAGE_PATH}/manifests/sha-ffac537e6cbbf934b08745a378932722df287a53\\"
-                echo \\"docker build: check image at \${URL}\\"
-                if [ -n \\"$CI_REGISTRY_USER\\" ]; then
-                  IMAGE_EXISTS=$(wget -q --no-check-certificate \\"http://\${CI_REGISTRY_USER}:\${CI_REGISTRY_PASSWORD}@\${URL}\\" || echo \\"1\\")
-                else
-                  IMAGE_EXISTS=$(wget -q --no-check-certificate \\"http://\${URL}\\" || echo \\"1\\")
-                fi
-                if [ -z $IMAGE_EXISTS ]; then
-                    echo \\"docker build: skip, image \${RELATIVE_IMAGE_PATH}:sha-ffac537e6cbbf934b08745a378932722df287a53 alreay exist on registry\\"
-                    exit 0
-                fi
-              fi
-
-
-              /kaniko/executor \\\\
-                --context=dir:///workspace \\\\
-                --dockerfile=/workspace/Dockerfile \\\\
-                --destination=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53 \\\\
-                --destination=$IMAGE_PATH:feature-branch-1 \\\\
-                --cache=true \\\\
-                --cache-repo=$IMAGE_PATH \\\\
-                --snapshotMode=redo \\\\
-                --skip-unused-stages \\\\
-                --use-new-run \\\\
-                --cache-ttl=336h \\\\
-                --insecure --single-snapshot --ignore-path=/product_uuid --compressed-caching=false \\\\
-                --build-arg=\\"arg1=value1\\" \\\\
-                --build-arg=\\"arg2=value2\\" \\\\
-                
-          resources:
-            limits:
-              cpu: 2
-              memory: 4Gi
-            requests:
-              cpu: 100m
-              memory: 500Mi
-          securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            fsGroup: 0
-          volumeMounts:
-            - name: workspace
-              mountPath: /workspace
-            - name: action
-              mountPath: /action
-      volumes:
-        - name: workspace
-          emptyDir: {}
-        - name: action
-          emptyDir: {}
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
