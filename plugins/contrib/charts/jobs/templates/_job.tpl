@@ -98,7 +98,7 @@ spec:
       {{- end }}
       restartPolicy: Never
       initContainers:
-      {{- if or (not (hasKey $run "checkout")) $run.checkout }}
+      {{- if and (or (not (hasKey $run "checkout")) $run.checkout) (ne .Values.global.env "local") }}
         - name: degit-repository
           image: {{ .Values.degitImage }}
           imagePullPolicy: Always
@@ -133,7 +133,7 @@ spec:
               cpu: {{ or $run.degitRepositoryCpuRequest .Values.degitRepository.resources.requests.cpu }}
               memory: {{ or $run.degitRepositoryMemoryRequest .Values.degitRepository.resources.requests.memory }}
       {{- end }}
-      {{- if $run.action }}
+      {{- if and $run.action (ne .Values.global.env "local") }}
         - name: degit-action
           image: {{ .Values.degitImage }}
           command:
@@ -236,9 +236,21 @@ spec:
         fsGroup: {{ $fsGroup }}
       volumes:
         - name: workspace
+          {{- if and (eq .Values.global.env "local") (or (not (hasKey $run "checkout")) $run.checkout) }}
+          hostPath:
+            path: {{ .Values.global.workspacePath }}
+            type: Directory
+          {{- else }}
           emptyDir: {}
+          {{- end }}
         - name: action
+          {{- if and (eq .Values.global.env "local") $run.localActionPath }}
+          hostPath:
+            path: {{ $run.localActionPath }}
+            type: Directory
+          {{- else }}
           emptyDir: {}
+          {{- end }}
         {{ if .Values.deployKey.enabled }}
         - name: deploy-key
           secret:

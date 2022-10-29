@@ -85,7 +85,7 @@ const requireUse = async (
     downloadingPromises[useSlug] = (async () => {
       if (use.startsWith(".") || use.startsWith("/")) {
         const src = `${workspacePath}/${use}`
-        logger.debug(`import local ${src}`)
+        logger.debug(`🗂️  use project job: ${src}`)
         await fs.copy(src, target, {
           filter: ignoreYarnState,
         })
@@ -96,6 +96,7 @@ const requireUse = async (
             `job "${use}" not found in repo dependencies`
           )
         }
+        logger.debug(`🗂️  use plugin job: ${found.jobPath}`)
         await fs.copy(found.jobPath, target, {
           filter: ignoreYarnState,
         })
@@ -109,12 +110,12 @@ const requireUse = async (
           use.startsWith(key)
         )
         const from = linkPath + use.substr(linkKey.length)
-        logger.debug(`🗂️  use linked job: ${use} -> ${linkPath}`)
+        logger.debug(`🗂️  use linked job: ${use}`)
         await fs.copy(from, target, {
           filter: ignoreYarnState,
         })
       } else {
-        logger.debug(`🗂️  degit ${use}`)
+        logger.debug(`🗂️  degit job: ${use}`)
         await degitImproved(use, target, { logger, force: true })
       }
     })()
@@ -144,8 +145,8 @@ const runsArrayToMap = (runs) => {
 async function compile(context, values, parentScope = [], parentWith = {}) {
   values.runs = runsArrayToMap(values.runs)
 
-  const { config, utils } = context
-  const { gitBranch, gitRepositoryName: repositoryName } = config
+  const { config, logger, utils } = context
+  const { gitBranch, gitRepositoryName: repositoryName, links } = config
   const { slug, yaml } = utils
 
   const newRuns = {}
@@ -220,9 +221,23 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
         let action
         if (useIsInPlugins(run.use)) {
           const found = await locateUseInPlugins(run.use, config)
+          logger.debug(`🗂️  use plugin action: ${found.jobPath}`)
           action = found.use
+          run.localActionPath = found.jobPath
         } else {
           action = run.use
+
+          if (
+            !action.includes("#") &&
+            Object.keys(links).some((lk) => action.startsWith(lk))
+          ) {
+            const [linkKey, linkPath] = Object.entries(links).find(([lk]) =>
+              action.startsWith(lk)
+            )
+            const from = linkPath + action.substr(linkKey.length)
+            logger.debug(`🗂️  use linked action: ${from}`)
+            run.localActionPath = from
+          }
         }
         const newRun = {
           action,
