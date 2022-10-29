@@ -50,7 +50,7 @@ module.exports = (type, context) => {
 
     const pluginFullName = pluginName.split("/").map(camelCase).join("/")
     if (patternMatch(pluginFullName, disablePlugin)) {
-      return () => {}
+      return (data) => data
     }
 
     return async (data) => {
