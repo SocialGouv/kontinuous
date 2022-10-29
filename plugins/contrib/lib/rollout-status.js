@@ -78,6 +78,8 @@ module.exports = async (context) => {
             { namespace, selector },
             `watching resource: ${resourceName}`
           )
+          const eventParam = { namespace, resourceName, selector }
+          eventsBucket.trigger("waiting", eventParam)
           const result = await rolloutStatusWatch({
             namespace,
             selector,
@@ -93,13 +95,14 @@ module.exports = async (context) => {
               { namespace, selector },
               `resource "${resourceName}" failed`
             )
+            eventsBucket.trigger("failed", eventParam)
             endAll()
           } else {
             logger.info(
               { namespace, selector },
               `resource "${resourceName}" ready`
             )
-            eventsBucket.trigger("ready", { namespace, resourceName, selector })
+            eventsBucket.trigger("ready", eventParam)
           }
 
           resolve(result)

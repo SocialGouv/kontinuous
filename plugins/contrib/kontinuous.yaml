@@ -44,3 +44,5 @@ deploySidecars:
     enabled: false
   stern:
     enabled: false
+  progressing:
+    enabled: false

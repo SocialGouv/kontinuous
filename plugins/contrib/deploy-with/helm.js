@@ -54,7 +54,6 @@ module.exports = async (
           --install
           ${kubeconfigContext ? `--kube-context ${kubeconfigContext}` : ""}
           --force
-          --wait
           --timeout ${deployTimeout}
       `
 
