@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.86.0 (2022-10-30)
+
+
+### Features
+
+* Add bearer auth to webhook support/namespace endpoint ([#31](https://github.com/SocialGouv/kontinuous/issues/31)) ([edfe16b](https://github.com/SocialGouv/kontinuous/commit/edfe16bae70cdbac770fa320aeed971920ddf960))
+
 ### 1.85.4 (2022-10-29)
 
 
