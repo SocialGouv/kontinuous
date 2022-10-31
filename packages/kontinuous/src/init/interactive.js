@@ -106,7 +106,8 @@ module.exports = async (opts) => {
   let { name } = opts
   if (!name) {
     const inputName = new Input({
-      message: "Project name",
+      message:
+        "Project name (see documentation https://socialgouv.github.io/kontinuous/#/?id=_211-projectname)",
       initial: projectConfig.projectName || "",
     })
     name = await inputName.run()
