@@ -26,6 +26,9 @@ exports[`kontinuous webhook service expose open-api spec 1`] = `
       type: string
       description: A stream of text
   securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
     commitToken:
       type: apiKey
       in: query
@@ -726,6 +729,7 @@ paths:
       security:
         - token:
             - webhook
+        - bearerAuth: []
       parameters:
         - in: query
           name: cluster
