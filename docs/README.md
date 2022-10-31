@@ -32,6 +32,7 @@ Everything are plugins. Especially opinions. So we keep modularity and we can sw
 ### 📝 build manifests
 - load dependencies (from .kontinuous/config.yaml)
 - values-compilers plugins
+- values.final.js plugins
 - helm template
 - patches plugins
 - post-renderer plugin
@@ -435,7 +436,7 @@ Values are merged from project paths:
 - `.kontinuous/${env}/values.yaml` (optional)
 - `.kontinuous/values.js`  (optional)
 
-Then `values-compilers` will modify values. See also [official plugins](#_47-official-plugins).
+Then `values-compilers`, and optionaly `values.final.js`, will modify the values. See also [official plugins](#_47-official-plugins).
 
 Some values can contain templating and use others values variables, but only if `tpl` Helm function is used to load value in Helm templates.
 
@@ -887,12 +888,23 @@ kapp deploy /tmp/manifests.yaml
     ```yaml
     jobs:
       follow-deployment:
-        uses: SocialGouv/kontinuous/.github/workflows/workflow-logs.yaml@v1
+        uses: SocialGouv/kontinuous/.github/workflows/workflow-webhook.yaml@v1
         secrets: inherit
     ```
+    
+    It require to configure the webhook on `push`+`create` and `delete` events at repository level on the git platform. On rerun, the action will trigger the webhook itself.
 
-    see also [plugins/fabrique/boilerplates/workspace/.github/workflows](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/boilerplates/workspace/.github/workflows) for [generic setup of ***La Fabrique***](#_211-fabrique-quickstart).
 
+    reusable workflow without using webhook feature of git platform:
+    ```yaml
+    jobs:
+      follow-deployment:
+        uses: SocialGouv/kontinuous/.github/workflows/workflow-webhook.yaml@v1
+        secrets: inherit
+        triggerWebhook: true
+    ```
+    
+    With the option `triggerWebhook`, the action will trigger webhook pipeline on first run, if not provided, it will expect that webhook feature has allready triggered webhook pipeline and try to catch it on the fly.
 
     composite action:
     ```yaml
@@ -1100,18 +1112,7 @@ New values-compilers are welcome in folder [plugins/fabrique/values-compilers/](
 
 To be independent from github, the images used by default by the webhook Chart is retrieved from our GitLab instance at https://gitlab.fabrique.social.gouv.fr
 
-To push on GitLab and be able to deploy new version of webhook you have to add GitLab remote to your local git. <br>
-You can do it running this command:
-
-```sh
-git remote add gitlab git@gitlab.fabrique.social.gouv.fr:sre/kontinuous.git
-```
-
-then to push
-
-```sh
-yarn push:gitlab
-```
+When pushing to github there is a github action that make mirror sync to gitlab repository and wait for gitlab CI to complete, retrieving logging.
 
 ##### Docker image kontinuous cli
 
