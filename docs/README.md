@@ -1,4 +1,4 @@
-# 🐉 Kontinuous - CI/CD for Kubernetes 🥷
+# 🐉 Kontinuous - The CI/CD ninja for Kubernetes 🥷
 
 ## 💡 The paradigm
 ***Why another CI/CD ?***
@@ -30,14 +30,12 @@ Everything are plugins. Especially opinions. So we keep modularity and we can sw
 ## 🌀 Life Cycle
 
 ### 📝 build manifests
-- load dependencies (from .kontinuous/config.yaml)
-- values-compilers plugins
-- values.final.js plugins
-- helm template
-- patches plugins
-- post-renderer plugin
-- validators plugins
-- debug-manifests plugins
+- load dependencies (from .kontinuous/config.yaml) ♾️ Git based extensible plugins ecosystem
+- values-compilers (and values.final.js) plugins 🐒 Expose easy to use options you choose for your final developers
+- helm template 🌟 Full access to rich helm ecosystem and fractal service definitions (subcharts)
+- patches (and post-renderer) plugins 🎯 Highly Customizable (better than kustomize)
+- validators plugins ✅ Verify compliance (opinionable)
+- debug-manifests plugins 🐞 Tailor makable debugging
 
 ### 🚀 deploy manifests
 - pre-deploy plugins
@@ -396,6 +394,11 @@ npx kontinuous build -so
 If you want to open it automatically in your favorite code editor:
 ```sh
 npx kontinuous build --open
+```
+
+If you want to generate snapshots, so you can compare generated manifests for differents envs when making changes to values and charts.
+```sh
+npx kontinuous test
 ```
 
 
