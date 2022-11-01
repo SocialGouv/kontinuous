@@ -1,16 +1,25 @@
 ![logo](_media/kontinuous-logo.png)
 
 # Kontinuous
-> 🥷 The CI/CD ninja for Kubernetes
+<div style="margin:0 auto;width:360px;height:40px;margin-bottom:60px;">
+  <div style="font-size:24px;height:40px;">
+    🥷 The CI/CD ninja for Kubernetes
+  </div>
+  <div style="float:right;">
+    <a style="font-size:15px;" href="https://socialgouv.github.io/" target="_blank">
+        <div style="float:left;">
+          coded with 💚
+          by SocialGouv
+        </div>
+        <div style="float:left;">
+          <img src="_media/socialgroove-100.jpg" width="24px" height="24px">
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+<br>
 
-<a style="font-size: 16px" href="https://socialgouv.github.io/" target="_blank">developed with 💚<br> by SocialGouv <br><img src="_media/socialgroove-100.jpg" width="32px" height="32px"></a>
-
-
-- Kube to PaaS Framework 🐉 
-- GitOPS to Kubernetes 🚀
-- CI/CD as K8S Manifest 🐋
-- Powerfull Plugins Ecosystem ♾️
-- 100% OpenSource - No vendor lock-in 🔓
 
 [🏁 Getting Started](#_1-getting-started)
 [👨‍💻 Ask for help](https://github.com/socialgouv/kontinuous/issues/new/choose)

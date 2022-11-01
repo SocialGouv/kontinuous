@@ -1,6 +1,6 @@
-# 🐉 Kontinuous - The CI/CD ninja for Kubernetes 🥷
+# Kontinuous - The CI/CD ninja for Kubernetes 🥷
 
-## 💡 The paradigm
+## 🐉 The paradigm
 ***Why another CI/CD ?***
 
 Was needing a flexible, scalable and independent CI+CD framework optimized for running on Kubernetes and to Kubernetes with fine grained control over pipelines.<br>
@@ -19,8 +19,16 @@ Keep as close as possible of battle tested and confident tech paradigms as nativ
 CLI runnable from anywhere: CI runner (github, gitlab, ...), kubernetes job (creatable from webhook, itself trigerrable from git platform webhook feature, from another ci/cd pipeline or manually), even your own laptop.<br>
 Everything are plugins. Especially opinions. So we keep modularity and we can switch between approach and tooling when needed. <br>
 
+***Main goals***
 
-***The main stack***
+- GitOPS to Kubernetes 🚀
+- Kubernetes to PaaS Framework 🐉 
+- CI/CD as K8S Manifest 🐋
+- Powerfull Plugins Ecosystem ♾️
+- 100% OpenSource - No vendor lock-in 🔓
+
+
+***Main stack***
 
 [Helm](https://helm.sh/):
     build manifests from helm templates, so kontinuous is interoperable the most popular package manager for kubernetes and can use the go templating language that is widely adopted in the kubernetes ecosystem <br>
@@ -494,7 +502,7 @@ Both extensions yaml and yml are accepted.
 Usually, that's where you put your CronJob, ConfigMap and SealedSecret ressources.
 
 
-#### 3 Plugins
+#### 4 Plugins
 
 
 **Core**
@@ -518,16 +526,16 @@ There are differents type of plugins:
 - deploy-with: plugin as a deployment handler (kapp, kubectl, helm)
 - deploy-sidecar: plugin that is running in parallel of deployment handler, used to retrieve logs, fail fast, monitoring some things etc...
 - post-deploy: used, for example, to make a report of deployment by sending a message to a third party service
-- import (the umbrella plugin): you can combine multiples plugins in one repository using import plugin
+- import (the umbrella plugin): you can combine multiples plugins in one repository using import
 All plugins follow a recursive design pattern, imported `import` plugin can import another repo (example project import fabrique, fabrique import contrib etc...), all charts can have subcharts, that can have subchart etc..., it the same for values-compilers, patches, validators, debug-manifests, pre-deploy, post-deploy and deploy-sidecar.
 When you import recursively there is an arborescence autobuild.
 An import plugin conatain generally a `kontinuous.yaml` that will contain specific options on sub plugins and sub importeds import, you can ovveride theses in `.kontinuous/config.yaml` at the root of the repository.
 
-#### 4.2 repository
+#### 4.2 import
 
-A repository plugin is the container for all other plugins types. It's basically a git repository, or subdirectory of a git repository. It can be versioned as a git repo. <br>
-A repository plugin can import other repository plugin, dependencies are recursives. <br>
-You can import repository plugins from `.kontinuous/config.yaml` in your project and in `kontinous.yaml` in the plugin directory. <br>
+A, import plugin is the container for all other plugins types. It's basically a git repository, or subdirectory of a git repository. It can be versioned as a git repo. <br>
+A import plugin can import other import plugin, dependencies are recursives. <br>
+You can import import plugins from `.kontinuous/config.yaml` in your project and in `kontinous.yaml` in the plugin directory. <br>
 You have to name the import from the plugin caller using key. This name will be used for subchart values autolinking. <br>
 
 example:
