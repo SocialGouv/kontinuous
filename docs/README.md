@@ -197,6 +197,33 @@ projectName: my-project
 dependencies:
   fabrique:
     import: SocialGouv/kontinuous/plugins/fabrique
+    
+    valuesCompilers: {}
+    patches: {}
+    validators: {}
+    preDeploy: {}
+    postDeploy: {}
+    deploySidecars: {}
+
+    dependencies:
+      contrib:
+        patches:
+          reloader:
+            enabled: false
+```
+
+All plugin types, matching to folders naming, are camel-cased. All plugin names, matching to files naming, are camel-cased to and, if prefixed with numbers for simple auto-ordering, the number prefix will be removed. For example, to target the config of `plugins/contrib/values-compilers/06-global-defaults.js`, in case of `contrib` imported via `fabrique` plugin:
+
+```yaml
+dependencies:
+  fabrique:
+    dependencies:
+      contrib:
+        valuesCompilers:
+          globalDefaults:
+            enabled: true
+            options:
+              foo: bar
 ```
 
 ##### 2.1.1 projectName
@@ -248,7 +275,7 @@ Here are some (titles are config keys):
     sample for `~/.kontinuous/config.yaml` :
     ```yaml
     links:
-        SocialGouv/kontinuous: /lab/fabrique/sre/kontinuous
+      SocialGouv/kontinuous: /lab/fabrique/sre/kontinuous
     ```
 
     In this case, all plugins call starting with `SocialGouv/kontinuous` will be loaded from local `/lab/fabrique/sre/kontinuous`. Usefull for development.
@@ -483,6 +510,23 @@ metadata:
     kontinuous/plugin.needs: [test]
 ```
 
+meta-value `~chart` used to create an instance of specific chart
+shortcut target autolocate
+
+```yaml
+arbitrary-chart-instance-name:
+  ~chart: app
+```
+
+example with fully qualified target
+
+```yaml
+arbitrary-chart-instance-name:
+  ~chart: project.fabrique.contrib.app
+```
+
+`project` is a always the root chart name, matching repository level, `fabrique` is a kontinuous umbrella plugin that you can import, and `contrib` is a plugin that is imported by `fabrique`, `app` is the chart name.
+
 **meta-values set**
 
 ```
@@ -513,7 +557,7 @@ The core is responsible to merge config, values, templates and process plugins, 
 
 All custom logic can be implemented in plugins. By creating plugins you can covers all uses cases. 
 
-#### 4.1 types
+##### 4.1 types
 
 There are differents type of plugins:
 - values-compilers: transform user defined values to be consummed by charts
@@ -526,17 +570,72 @@ There are differents type of plugins:
 - deploy-with: plugin as a deployment handler (kapp, kubectl, helm)
 - deploy-sidecar: plugin that is running in parallel of deployment handler, used to retrieve logs, fail fast, monitoring some things etc...
 - post-deploy: used, for example, to make a report of deployment by sending a message to a third party service
-- import (the umbrella plugin): you can combine multiples plugins in one repository using import
-All plugins follow a recursive design pattern, imported `import` plugin can import another repo (example project import fabrique, fabrique import contrib etc...), all charts can have subcharts, that can have subchart etc..., it the same for values-compilers, patches, validators, debug-manifests, pre-deploy, post-deploy and deploy-sidecar.
+- kontinuous umbrella plugin: you can combine multiples plugins in one repository, or directory inside a repository, using kontinuous umbrella plugins. You can call theses plugins by defining `dependencies` in `.kontinuous/config.yaml` file, calling them with the `import` keyword.
+
+**auto import behavior**
+
+All plugins follow a recursive design pattern, imported umbrella plugins can import another repo (example project import fabrique, fabrique import contrib etc...), all charts can have subcharts, that can have subchart etc..., it the same for values-compilers, patches, validators, debug-manifests, pre-deploy, post-deploy and deploy-sidecar.
 When you import recursively there is an arborescence autobuild.
-An import plugin conatain generally a `kontinuous.yaml` that will contain specific options on sub plugins and sub importeds import, you can ovveride theses in `.kontinuous/config.yaml` at the root of the repository.
+An umbrella plugin contain generally a `kontinuous.yaml` that will contain specific options on sub plugins and sub importeds umbrella plugins, you can ovveride theses in `.kontinuous/config.yaml` at the root of the repository.
 
-#### 4.2 import
+**degit**
 
-A, import plugin is the container for all other plugins types. It's basically a git repository, or subdirectory of a git repository. It can be versioned as a git repo. <br>
-A import plugin can import other import plugin, dependencies are recursives. <br>
-You can import import plugins from `.kontinuous/config.yaml` in your project and in `kontinous.yaml` in the plugin directory. <br>
-You have to name the import from the plugin caller using key. This name will be used for subchart values autolinking. <br>
+Remote plugin can be integrated using [`degit`](https://github.com/tiged/tiged) mechanism. You can target full git url on any git plateform, shortcut syntax will default to github. If you use gitlab, there is an addon on `degit` syntax in kontinuous that you can use to target subgroup, putting curly braces arround group name: `https://gitlab.my-orga.com/group/{subgroup-name}/repo/folder/subfolder@ref-branch-or-tag`
+
+**config plugins**
+
+A plugin can be parametred using `enabled` and `options` keys.
+
+The `enabled` key as it's name indicating, allow you to enable or disable a plugins. All plugins are enabled by default, but can be disabled by default at same level as `import` keyword in `kontinuous.yaml` config file.
+
+The `options` key allow you to pass any options that you want to the plugin, and will be consumed by it.
+
+```yaml
+projectName: my-project
+dependencies:
+  fabrique:
+    import: SocialGouv/kontinuous/plugins/fabrique
+    valuesCompilers:
+      globalDefaults:
+        enabled: true
+        options:
+          foo: bar
+```
+
+You can also add global options, common to your umbrella plugin.
+
+`plugins/fabrique/kontinuous.yaml`
+
+```yaml
+dependencies:
+  contrib:
+    import: SocialGouv/kontinuous/plugins/contrib
+options:
+  domain: "fabrique.social.gouv.fr"
+```
+
+The `domain` option will be provided to all plugin as default merge, but you can override at each plugin level:
+
+```yaml
+dependencies:
+  contrib:
+    import: SocialGouv/kontinuous/plugins/contrib
+    valuesCompilers:
+      globalDefaults:
+        enabled: true
+        options:
+          foo: bar
+          domain: "override.social.gouv.fr"
+options:
+  domain: "fabrique.social.gouv.fr"
+```
+
+##### 4.2 umbrella
+
+An umbrella plugin is the container for all other plugins types. It's basically a git repository, or subdirectory of a git repository. It can be versioned as a git repo. <br>
+A umbrella plugin can import other umbrella plugins, dependencies are recursives. <br>
+You can import umbrella plugins from `.kontinuous/config.yaml` in your project and in `kontinous.yaml` in the plugin directory. <br>
+You have to name the umbrella from the plugin caller using key. This name will be used for subchart values autolinking. <br>
 
 example:
 
@@ -545,6 +644,31 @@ example:
 dependencies:
   fabrique:
     import: SocialGouv/kontinuous/plugins/fabrique
+    
+    valuesCompilers:
+      globalDefaults:
+        options:
+          foo: bar
+    patches: {}
+    validators: {}
+    preDeploy: {}
+    postDeploy: {}
+    deploySidecars: {}
+
+    dependencies:
+      contrib:
+        patches:
+          reloader:
+            enabled: false
+        deployWith:
+          kapp:
+            options:
+              kubeApiQps: 1000
+              kubeApiBurst: 1000
+              waitCheckInterval: 1s
+              logsAll: true
+          
+
 ```
 
 `SocialGouv/plugins/fabrique/kontinuous.yaml`
@@ -563,21 +687,21 @@ fabrique:
 ```
 
 
-All plugins `charts`, `values-compilers`, `patches`, `validators`, `debug-manifests`, `pre-deploy`, `post-deploy` and `deploy-sidecar` will be autolinked and implicitely applied recursively. You can control order, or optout by creating index.js in each `values-compilers`, `patches`, `validators`, `debug-manifests`, `pre-deploy`, `post-deploy` and `deploy-sidecar` directories, then you can include from dependencies plugins yourself. <br>
+All plugins `charts`, `values-compilers`, `patches`, `validators`, `debug-manifests`, `pre-deploy`, `post-deploy` and `deploy-sidecar` will be autolinked and implicitely applied recursively. You can control order, or optout by creating index.js in each `values-compilers`, `patches`, `validators`, `debug-manifests`, `pre-deploy`, `post-deploy`, `deploy-sidecar` and `deploy-with` directories, then you can include from dependencies plugins yourself. <br>
 See [plugins/fabrique/values-compilers/index.js](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/values-compilers/index.js) for example.
 
 You can create and use `charts`, `values-compilers`, `patches`, `validators`, `debug-manifests`, `pre-deploy`, `post-deploy` and `deploy-sidecar` directories in `.kontinuous` at project level in your project path, or in plugin root path. Project level plugins can consume plugins in the same way the plugins can consume other plugins.
 
-You can add a `package.json` and a `yarn.lock` file at root of your kontinuous plugin directory, kontinuous will install it using `yarn`, so you can use node dependencies in your `values-compilers`, `patches` and `validators`.
+You can add a `package.json` and a `yarn.lock` file at root of your kontinuous plugin directory, kontinuous will install it using `yarn` (yes, it's opinionated), so you can use node dependencies in your `values-compilers`, `patches`, `validators`, `debug-manifests`, `pre-deploy`, `post-deploy`, `deploy-sidecar` and `deploy-with` plugins.
 
-#### 4.3 charts
+##### 4.3 charts
 
 Charts plugin are basically helm charts, that can be autolinked from the umbrella (name for the main chart in helm jargon). <br>
 If you doesn't create a `Chart.yaml` in a chart repository, a default on will be created for you by kontinuous. <br>
 A parent chart will be automatically created from project/plugin path, charts that are present in the `charts` directory will be automatically added to this chart as subcharts (`dependencies` key in `Chart.yaml`). <br>
 
 
-#### 4.4 values-compilers
+##### 4.4 values-compilers
 
 As it's name suggest it, it's values compilers, that will transform values declared in `values.yaml` files in final values that will be consumed by `helm`. <br>
 Most often values-compilers are here to make values leaner to declare for final dev user. <br>
@@ -599,12 +723,12 @@ Here are the args that the function will receive: `module.exports = (values, opt
 - `utils` is a toolset of helpers function used in kontinuous itself and exposed, all are defined here: [packages/common/utils](https://github.com/SocialGouv/kontinuous/blob/master/packages/common/utils)
 - `ctx` is the async context dependency injection container of kontinous, it can be used to retrieve config or logger, eg: `logger = ctx.get("logger")`
 
-#### 4.4-bis values.js
+##### 4.4-bis values.js
 
 Instead or additionaly to using a `values.yaml`, you can use a project level only values compiler, that will be runned before all others (bu after retrieving and merging values from `values.yaml` files), creating a values.js file.
 
 
-#### 4.5 patches
+##### 4.5 patches
 
 Patches are pure nodeJS file used to modify final `manifests` after compiled by `helm template`. <br>
 Same as `values-compilers` and `validators`, patches has to expose a function using commonJS. This function will receive the kubernetes manifests as an array of object that you can mutate directly or use to produce a new one that you will return. <br>
@@ -619,7 +743,7 @@ NodeJS patches are more flexible than `kustomize` patches that had be abandonned
 If you want to use `kustomize` anyway, the easiest way is to use [`post-renderer`](#_45-bis-post-renderer)
 
 
-#### 4.5-bis post-renderer
+##### 4.5-bis post-renderer
 
 Aka *Hack the manifests*
 
@@ -649,7 +773,7 @@ kustomize build .
 ```
 
 
-#### 4.6 validators
+##### 4.6 validators
 Validators are pure nodeJS file used to validate final `manifests` after compiled by `helm template`. <br>
 Same as `values-compilers` and `patches`, validators has to expose a function using commonJS. This function will receive the kubernetes manifests as an array of object. <br>
 When a manifest contain an invalid definition you have to throw an error this way `throw new Error("error message")`.
@@ -659,7 +783,7 @@ See [values-compilers doc for details on arguments](#_44-values-compilers)
 
 
 
-#### 4.7 official plugins
+##### 4.7 official plugins
 
 Official plugins are here [plugins/contrib/](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/). They could be put in another git repository, but was kept in main repository for testing purpose.
 
@@ -706,7 +830,7 @@ Official plugins are here [plugins/contrib/](https://github.com/SocialGouv/konti
         common helm [library chart](https://helm.sh/docs/topics/library_charts/), contains helpers helm templating snippets that can be reused in any subchart, helping you to keep your charts DRY
 
     - [patches/namespace](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/namespace.js) <br>
-        Add the current kubernetes namespace from [kontinuous config](#_25-variables) to all manifests that doesn't declare explicitly a namespace
+        Add the current kubernetes namespace from [kontinuous config](#_24-variables) to all manifests that doesn't declare explicitly a namespace
 
     - [patches/dns-truncate](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/dns-truncate.js) <br>
         Truncate and hash all manifests name and ingress domains that is over the max allowed 63 characters.
@@ -746,8 +870,20 @@ Official plugins are here [plugins/contrib/](https://github.com/SocialGouv/konti
                 name: app-configmap
         ```
 
+        This is an equivalent to adding `~chart` meta-value:
+        
+        ```yaml
+        app-2nd-instance:
+          # ~chart: app # implicit because name starts with app-
+        ```
+
+        ```yaml
+        arbitrary-chart-instance-name:
+          ~chart: app
+        ```
+
     - [values-compilers/unfold-charts](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/unfold-charts.js) <br>
-        Refacto the value tree on the fly matching the root level key name with dependencies subcharts names. Example, if you import `fabrique` kontinous plugin in your project: <br>
+        Refacto the value tree on the fly matching the root level key name with dependencies subcharts names. Example, if you import `fabrique` umbrella plugin in your project: <br>
         `.kontinous/values.yaml`
         ```yaml
         app: {}
