@@ -27,6 +27,11 @@ Everything are plugins. Especially opinions. So we keep modularity and we can sw
 - Powerfull Plugins Ecosystem ♾️
 - 100% OpenSource - No vendor lock-in 🔓
 
+🚀 Project repository as source of truth from review environments to production deployment. <br>
+🐉 Simplicity for final dev users is crucial, so we must be able to express opinion abstractions as plugins to reflect the most our cases and currents usages without falling in the trap of implementing them into the core of the framework, that must stay universal and able to handle any new and unknowns cases in future. <br>
+♾️ DevOPS problems are complexes and cases are plethora. We must be able to split big problematics into smaller, to adress each one separately. <br>
+🐋 Deployment must be reproductible relying only on kubernetes, so the pipelines that produce deployments possible, must be abstracted as kubernetes manifests. <br>
+🔓 We don't want to be held hostage by proprietary code and let multinationals rule the game for us. The full chain from repositories to deployment must be self-hostable. <br>
 
 ***Main stack***
 
@@ -1339,7 +1344,7 @@ to enable correct syntax recognition and coloration of yaml helm templates in vs
 - [JSON to YAML](https://www.json2yaml.com/)
 - [Kubernetes doc](https://kubernetes.io/docs/concepts/)
 - [Helm doc](https://helm.sh/docs/)
-- [Kapp doc](https://carvel.dev/kapp/)
+- [Container training](https://container.training/)
 
 #### Others CI/CD software
 
