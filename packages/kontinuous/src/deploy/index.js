@@ -129,10 +129,7 @@ module.exports = async (options) => {
     }
 
     try {
-      await Promise.allSettled([
-        runContext.deploysPromise,
-        runContext.sidecarsPromise,
-      ])
+      await Promise.all([runContext.deploysPromise, runContext.sidecarsPromise])
     } catch (error) {
       logger.error({ error }, "deploy failed")
       runContext.stopSidecars()
