@@ -10,7 +10,7 @@ on:
 
 jobs:
   production:
-    name: production
+    name: Kontinuous Production Pipeline 🚀
     runs-on: ubuntu-latest
     environment: production
     steps:

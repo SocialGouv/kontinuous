@@ -15,8 +15,8 @@ on:
         required: true
 
 jobs:
-  apply:
-    name: apply
+  webhook:
+    name: Kontinuous Pipeline (via webhook)
     runs-on: ubuntu-latest
     steps:
       - name: kontinuous pipeline

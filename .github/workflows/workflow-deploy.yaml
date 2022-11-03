@@ -10,7 +10,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy
+    name: Kontinuous Deployment Pipeline 🚀
     runs-on: ubuntu-latest
     steps:
       - name: kontinuous pipeline
