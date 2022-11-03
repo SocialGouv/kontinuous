@@ -7,5 +7,6 @@
     "pino-pretty": "^9.1.1",
     "~common": "workspace:^"
   },
-  "bin": "./bin/wait-needs"
+  "bin": "./bin/wait-needs",
+  "version": "1.86.1"
 }
