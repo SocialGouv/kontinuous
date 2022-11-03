@@ -9,12 +9,11 @@ runs:
     cpuRequest: 500m
     memoryLimit: 4Gi
     memoryRequest: 1Gi
-    entrypoint: ["/busybox/sh","-c"]
+    entrypoint: ["/bin/sh","-c"]
     user: 1000
     group: 1000
     annotations:
-      container.apparmor.security.beta.kubernetes.io/buildkit: unconfined
-      container.seccomp.security.alpha.kubernetes.io/buildkit: unconfined
+      container.apparmor.security.beta.kubernetes.io/job: unconfined
     envFrom:
       - secretRef:
           name: "{{ or $.with.registrySecretRefName $.Values.global.registrySecretRefName }}"
