@@ -1,4 +1,4 @@
-# Kontinuous - CI/CD for Kubernetes
+# Kontinuous - The CI/CD ninja for Kubernetes ninja
 
 <p align="center">
   <a href="https://socialgouv.github.io/kontinuous/" rel="nofollow">
