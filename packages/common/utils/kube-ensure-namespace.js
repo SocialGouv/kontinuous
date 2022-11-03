@@ -15,6 +15,7 @@ const checkNamespaceIsAvailable = async ({
       kubeconfig,
       kubeconfigContext,
       logInfo: false,
+      logError: false,
       logger,
     })
     const data = JSON.parse(json)
