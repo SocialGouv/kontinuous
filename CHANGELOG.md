@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.86.5](https://github.com/SocialGouv/kontinuous/compare/v1.86.4...v1.86.5) (2022-11-03)
+
+
+### Bug Fixes
+
+* cleaner logs ([7a90f2f](https://github.com/SocialGouv/kontinuous/commit/7a90f2fdc8c3dd587c22e8480742d9e8db129a0e))
+* deploy and sidecars async flow ([5b08ec0](https://github.com/SocialGouv/kontinuous/commit/5b08ec0a4d152a33205e6d8281921626ccbe0599))
+* improve lint ([db67be4](https://github.com/SocialGouv/kontinuous/commit/db67be486a1abe067ef2ddefafb500b75a3cd4cc))
+
 ### [1.86.4](https://github.com/SocialGouv/kontinuous/compare/v1.86.3...v1.86.4) (2022-11-03)
 
 
