@@ -7,7 +7,6 @@ RUN apt-get update && \
     ca-certificates \
     wget \
     git \
-    libgraph-easy-perl \
   && rm -rf /var/lib/apt/lists/*
 
 FROM downloader as kubectl
@@ -52,6 +51,7 @@ RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
     ca-certificates \
     git \
+    libgraph-easy-perl \
     && rm -rf /var/lib/apt/lists/*
 RUN apt-get update && \
   apt-get install -yq --no-install-recommends \
