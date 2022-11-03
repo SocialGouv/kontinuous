@@ -139,6 +139,7 @@ Minimal dependencies:
 ### 🕮 Summary
 
 1. [Getting Started](#_1-getting-started)
+    1. [Directory structure](#_12-directory-structure)
 
 2. [Configuration](#_2-configuration)
     1. [Repository config](#_21-repository-config)
@@ -152,6 +153,7 @@ Minimal dependencies:
     2. [Environment](#_32-environment)
     3. [Values](#_33-values)
     4. [Templates](#_34-templates)
+    5. [A note on YAML](#_35-a-note-on-yaml)
     
   
 4. [Plugins](#_4-plugins)
@@ -188,6 +190,34 @@ If you're using git platform webhook don't forget to enable webhooks on `push` a
 If you want to use github action don't forget to provide kubeconfig secret to the action.
 ```sh
 npx kontinuous init
+```
+
+#### 1.1 Directory structure
+  
+```
+.kontinuous
+├─ config.yaml # kontinuous config, install and configure plugins
+├─ values.yaml # common values passed to charts
+├─ templates # common kubernetes resources defined as helm templates, can consume veriables defined in values
+│   └─ * # any yaml file that you put here will be included in manifests
+├─ env
+│   ├─ dev
+│   │   ├─ values.yaml # values override for dev environment
+│   │   └─ templates # kubernetes resources specific for dev environment
+│   │       └─ * # any yaml file that you put here will be included in manifests
+│   ├─ preprod
+│   │   ├─ # same as dev, but for preprod :)
+│   │   └─ # if you have common templates with dev you can make relative symlink targeting dev resources to avoid repetition
+│   ├─ prod
+│   │   └─ # same as dev and preprod, but for prod :)
+│   └─ local
+│       └─ # same as dev and preprod and prod, but for local cluster, if you have a kubernetes cluster on your laptop :)
+└─ charts
+    └─ name-of-chart # you can override values for this chart in root values.yaml at key `name-of-chart`
+        ├─ values.yaml # default values for the chart
+        ├─ templates # same as before
+        ├─ env # same as before
+        └─ charts # if you have subcharts, you can nest infinitely
 ```
 
 ### 2. Configuration
@@ -550,8 +580,11 @@ Both extensions yaml and yml are accepted.
 
 Usually, that's where you put your CronJob, ConfigMap and SealedSecret ressources.
 
+##### 3.5 A note on YAML
 
-#### 4 Plugins
+Kontinuous support retro-compatibility YAML syntax version 1.1, some chart, including the keycloak one need this. In old YAML syntax (1.1), octal can be converted to integer, for example octal `0555` is equal to integer `365`, in new YAML syntax (1.2) octal are considered as padded number, and it's not that do we want, because in this case octal `0555` is converted to integer `555` which is wrong. I don't know exact implementation of YAML in Helm, but current version of Helm v3 treat octal correctly, according to YAML 1.1 spec, and so, we can found charts that is compatible with Helm, but not compatible with new YAML syntax spec 1.2. In Kontinuous we need to parse `values.yaml` file including defaults one of charts that we merge in one global, so we need to support YAML 1.1 to be fully compliant with state of art.
+
+### 4. Plugins
 
 
 **Core**
@@ -562,7 +595,7 @@ The core is responsible to merge config, values, templates and process plugins, 
 
 All custom logic can be implemented in plugins. By creating plugins you can covers all uses cases. 
 
-##### 4.1 types
+#### 4.1 types
 
 There are differents type of plugins:
 - values-compilers: transform user defined values to be consummed by charts
@@ -635,7 +668,7 @@ options:
   domain: "fabrique.social.gouv.fr"
 ```
 
-##### 4.2 umbrella
+#### 4.2 umbrella
 
 An umbrella plugin is the container for all other plugins types. It's basically a git repository, or subdirectory of a git repository. It can be versioned as a git repo. <br>
 A umbrella plugin can import other umbrella plugins, dependencies are recursives. <br>
@@ -699,14 +732,14 @@ You can create and use `charts`, `values-compilers`, `patches`, `validators`, `d
 
 You can add a `package.json` and a `yarn.lock` file at root of your kontinuous plugin directory, kontinuous will install it using `yarn` (yes, it's opinionated), so you can use node dependencies in your `values-compilers`, `patches`, `validators`, `debug-manifests`, `pre-deploy`, `post-deploy`, `deploy-sidecar` and `deploy-with` plugins.
 
-##### 4.3 charts
+#### 4.3 charts
 
 Charts plugin are basically helm charts, that can be autolinked from the umbrella (name for the main chart in helm jargon). <br>
 If you doesn't create a `Chart.yaml` in a chart repository, a default on will be created for you by kontinuous. <br>
 A parent chart will be automatically created from project/plugin path, charts that are present in the `charts` directory will be automatically added to this chart as subcharts (`dependencies` key in `Chart.yaml`). <br>
 
 
-##### 4.4 values-compilers
+#### 4.4 values-compilers
 
 As it's name suggest it, it's values compilers, that will transform values declared in `values.yaml` files in final values that will be consumed by `helm`. <br>
 Most often values-compilers are here to make values leaner to declare for final dev user. <br>
@@ -728,12 +761,12 @@ Here are the args that the function will receive: `module.exports = (values, opt
 - `utils` is a toolset of helpers function used in kontinuous itself and exposed, all are defined here: [packages/common/utils](https://github.com/SocialGouv/kontinuous/blob/master/packages/common/utils)
 - `ctx` is the async context dependency injection container of kontinous, it can be used to retrieve config or logger, eg: `logger = ctx.get("logger")`
 
-##### 4.4-bis values.js
+#### 4.4-bis values.js
 
 Instead or additionaly to using a `values.yaml`, you can use a project level only values compiler, that will be runned before all others (bu after retrieving and merging values from `values.yaml` files), creating a values.js file.
 
 
-##### 4.5 patches
+#### 4.5 patches
 
 Patches are pure nodeJS file used to modify final `manifests` after compiled by `helm template`. <br>
 Same as `values-compilers` and `validators`, patches has to expose a function using commonJS. This function will receive the kubernetes manifests as an array of object that you can mutate directly or use to produce a new one that you will return. <br>
@@ -748,7 +781,7 @@ NodeJS patches are more flexible than `kustomize` patches that had be abandonned
 If you want to use `kustomize` anyway, the easiest way is to use [`post-renderer`](#_45-bis-post-renderer)
 
 
-##### 4.5-bis post-renderer
+#### 4.5-bis post-renderer
 
 Aka *Hack the manifests*
 
@@ -778,7 +811,7 @@ kustomize build .
 ```
 
 
-##### 4.6 validators
+#### 4.6 validators
 Validators are pure nodeJS file used to validate final `manifests` after compiled by `helm template`. <br>
 Same as `values-compilers` and `patches`, validators has to expose a function using commonJS. This function will receive the kubernetes manifests as an array of object. <br>
 When a manifest contain an invalid definition you have to throw an error this way `throw new Error("error message")`.
@@ -788,7 +821,7 @@ See [values-compilers doc for details on arguments](#_44-values-compilers)
 
 
 
-##### 4.7 official plugins
+#### 4.7 official plugins
 
 Official plugins are here [plugins/contrib/](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/). They could be put in another git repository, but was kept in main repository for testing purpose.
 
@@ -1341,6 +1374,7 @@ to enable correct syntax recognition and coloration of yaml helm templates in vs
 **learning**:
 
 - [Learn YAML in Y minutes](https://learnxinyminutes.com/docs/yaml/)
+- [Yaml is a superset of json](https://helm.sh/docs/chart_template_guide/yaml_techniques/#yaml-is-a-superset-of-json)
 - [JSON to YAML](https://www.json2yaml.com/)
 - [Kubernetes doc](https://kubernetes.io/docs/concepts/)
 - [Helm doc](https://helm.sh/docs/)
