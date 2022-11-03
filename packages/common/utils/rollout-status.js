@@ -10,6 +10,7 @@ module.exports = async ({
   namespace,
   selector,
   logger = globalLogger,
+  ignoreSecretNotFound = true,
 }) =>
   retry(
     async (bail) => {
@@ -19,6 +20,7 @@ module.exports = async ({
           kubecontext,
           namespace,
           selector,
+          ignoreSecretNotFound,
         })
         const output = await promise
         return output

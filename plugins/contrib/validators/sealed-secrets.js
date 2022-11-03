@@ -1,15 +1,14 @@
 const retry = require("async-retry")
 
 module.exports = async (manifests, options, context) => {
-  const { logger, utils } = context
+  const { config, logger, utils } = context
   const { handleAxiosError, axiosRetry: axios, KontinuousPluginError } = utils
 
   let { kubesealEndpoint } = options
 
   if (!kubesealEndpoint) {
     const { clusters } = options
-    const { values } = context
-    const cluster = values.global.isProd ? clusters.prod : clusters.dev
+    const cluster = config.environment === "prod" ? clusters.prod : clusters.dev
     if (cluster) {
       ;({ kubesealEndpoint } = cluster)
     }
@@ -29,18 +28,19 @@ module.exports = async (manifests, options, context) => {
 
     const { namespace } = manifest.metadata
 
+    const secretName = manifest.metadata.name
     try {
       await retry(
         async (bail) => {
           try {
             logger.debug(
-              { endpoint, namespace, name: manifest.metadata.name },
-              `kubeseal verifying`
+              { endpoint, namespace, secretName },
+              `kubeseal verifying "${secretName}"`
             )
             await axios.post(endpoint, content)
             logger.debug(
               { endpoint, namespace },
-              `${manifest.metadata.name} is sealed properly`
+              `🔐 ${manifest.metadata.name} is sealed properly`
             )
           } catch (err) {
             if (err.response?.status === 429) {

@@ -9,22 +9,63 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kontinuous/test-deactivate-feature-branch-1
-    kapp.k14s.io/change-group.deactivate: kontinuous/deactivate.test-deactivate-feature-branch-1
-    kapp.k14s.io/change-group.deactivate.delete-namespace: kontinuous/deactivate.delete-namespace.test-deactivate-feature-branch-1
-    kapp.k14s.io/change-group.deactivate..delete-namespace: kontinuous/deactivate..delete-namespace.test-deactivate-feature-branch-1
+    kontinuous/needsName: deactivate.delete-namespace
+    kontinuous/needsNames: >-
+      [\\"deactivate\\",\\"deactivate.delete-namespace\\",\\"deactivate..delete-namespace\\"]
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.deactivate.jobs-deactivate
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/deactivate/charts/jobs-deactivate/templates/jobs.yaml
+    kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b08745-2ugc7f
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/change-group.jobs-deactivate: kontinuous/jobs-deactivate.test-deactivate-feature-branch-1
+    kontinuous/depname.full: >-
+      project.fabrique.contrib.deactivate.jobs-deactivate.job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
+    kontinuous/depname.chartResource: >-
+      jobs-deactivate.job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
+    kontinuous/depname.chartName: jobs-deactivate
+    kontinuous/depname.chartPath: project.fabrique.contrib.deactivate.jobs-deactivate
+    kontinuous/depname.resourcePath: job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
+    kontinuous/depname.resourceName: job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
+    kapp.k14s.io/change-group.jobs-deactivate: kontinuous/jobs-deactivate
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate: kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.job.deactivate.delete-namespace: >-
+      kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.job.deactivate.delete-namespace
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.deactivate.delete-namespace: >-
+      kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.deactivate.delete-namespace
+    kapp.k14s.io/change-group.jobs-deactivate.job.deactivate.delete-namespace: kontinuous/jobs-deactivate.job.deactivate.delete-namespace
+    kapp.k14s.io/change-group.jobs-deactivate.deactivate.delete-namespace: kontinuous/jobs-deactivate.deactivate.delete-namespace
+    kapp.k14s.io/change-group.job.deactivate.delete-namespace: kontinuous/job.deactivate.delete-namespace
+    kapp.k14s.io/change-group.deactivate.delete-namespace: kontinuous/deactivate.delete-namespace
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.job.deactivate: >-
+      kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.job.deactivate
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.deactivate: kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.deactivate
+    kapp.k14s.io/change-group.jobs-deactivate.job.deactivate: kontinuous/jobs-deactivate.job.deactivate
+    kapp.k14s.io/change-group.jobs-deactivate.deactivate: kontinuous/jobs-deactivate.deactivate
+    kapp.k14s.io/change-group.job.deactivate: kontinuous/job.deactivate
+    kapp.k14s.io/change-group.deactivate: kontinuous/deactivate
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.job.deactivate..delete-namespace: >-
+      kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.job.deactivate..delete-namespace
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.deactivate..delete-namespace: >-
+      kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.deactivate..delete-namespace
+    kapp.k14s.io/change-group.jobs-deactivate.job.deactivate..delete-namespace: kontinuous/jobs-deactivate.job.deactivate..delete-namespace
+    kapp.k14s.io/change-group.jobs-deactivate.deactivate..delete-namespace: kontinuous/jobs-deactivate.deactivate..delete-namespace
+    kapp.k14s.io/change-group.job.deactivate..delete-namespace: kontinuous/job.deactivate..delete-namespace
+    kapp.k14s.io/change-group.deactivate..delete-namespace: kontinuous/deactivate..delete-namespace
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.job.deactivate.: >-
+      kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.job.deactivate.
+    kapp.k14s.io/change-group.project.fabrique.contrib.deactivate.jobs-deactivate.deactivate.: kontinuous/project.fabrique.contrib.deactivate.jobs-deactivate.deactivate.
+    kapp.k14s.io/change-group.jobs-deactivate.job.deactivate.: kontinuous/jobs-deactivate.job.deactivate.
+    kapp.k14s.io/change-group.jobs-deactivate.deactivate.: kontinuous/jobs-deactivate.deactivate.
+    kapp.k14s.io/change-group.job.deactivate.: kontinuous/job.deactivate.
+    kapp.k14s.io/change-group.deactivate.: kontinuous/deactivate.
   labels:
+    kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b08745-2ugc7f
+    kontinuous/deployment.env: test-deactivate-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-deactivate-feature-branch-1-deactiv-56yw37
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
@@ -36,10 +77,14 @@ spec:
         ref: feature-branch-1
         repository: test-deactivate
         runName: deactivate
+        kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b08745-2ugc7f
+        kontinuous/deployment.env: test-deactivate-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-test-deactivate-feature-branch-1-deactiv-56yw37
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b08745-2ugc7f
     spec:
       restartPolicy: Never
       initContainers:
@@ -54,7 +99,6 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            fsGroup: 1001
           volumeMounts:
             - name: action
               mountPath: /action
@@ -95,12 +139,13 @@ spec:
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
-            fsGroup: 1001
           volumeMounts:
             - name: workspace
               mountPath: /workspace
             - name: action
               mountPath: /action
+      securityContext:
+        fsGroup: 1001
       volumes:
         - name: workspace
           emptyDir: {}

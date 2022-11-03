@@ -5,7 +5,7 @@ const fs = require("fs-extra")
 const needBin = require("./need-bin")
 const downloadFile = require("./download-file")
 
-const rolloutStatusVersion = process.env.ROLLOUT_STATUS_VERSION || "v1.9.1"
+const rolloutStatusVersion = process.env.ROLLOUT_STATUS_VERSION || "v1.10.0"
 
 const download = async (options) => {
   const { logger } = options
@@ -40,4 +40,8 @@ const download = async (options) => {
   await fs.chmod(dest, 0o755)
 }
 
-module.exports = (options = {}) => needBin("rollout-status", download, options)
+module.exports = (options = {}) =>
+  needBin("rollout-status", download, {
+    ...options,
+    version: rolloutStatusVersion,
+  })

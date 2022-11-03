@@ -39,15 +39,20 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ""
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: "kontinuous/{{ $val.global.namespace }}"
+    kontinuous/needsName: "{{ $run.name }}"
     {{- if $run.stage }}
-    kapp.k14s.io/change-group.kontinuous-stage: "kontinuous/{{ $run.stage }}.{{ $val.global.namespace }}"
+    # kapp.k14s.io/change-group.stage: "kontinuous/{{ $run.stage }}"
+    kontinuous/plugin.stage: {{ $run.stage | quote }}
     {{- end }}
-    {{- range $scope := $run.scopes }}
-    kapp.k14s.io/change-group.{{ $scope }}: "kontinuous/{{ $scope }}.{{ $val.global.namespace }}"
-    {{- end }}
-    {{- range $need := $run.needs }}
-    kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting kontinuous/{{ $need }}.{{ $val.global.namespace }}"
+    # {{- range $scope := $run.scopes }}
+    # kapp.k14s.io/change-group.{{ $scope }}: "kontinuous/{{ $scope }}"
+    # {{- end }}
+    kontinuous/needsNames: {{ $run.scopes | toJson | quote }}
+    # {{- range $need := $run.needs }}
+    # kapp.k14s.io/change-rule.{{ $need }}: "upsert after upserting kontinuous/{{ $need }}"
+    # {{- end }}
+    {{- if $run.needs }}
+    kontinuous/plugin.needs: {{ $run.needs | toJson | quote }}
     {{- end }}
     janitor/ttl: "7d"
     {{- if $run.onChangedPaths }}
@@ -93,7 +98,7 @@ spec:
       {{- end }}
       restartPolicy: Never
       initContainers:
-      {{- if or (not (hasKey $run "checkout")) $run.checkout }}
+      {{- if and (or (not (hasKey $run "checkout")) $run.checkout) (ne .Values.global.env "local") }}
         - name: degit-repository
           image: {{ .Values.degitImage }}
           imagePullPolicy: Always
@@ -112,7 +117,6 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            fsGroup: {{ or $run.fsGroup (or $run.user "1000") }}
           volumeMounts:
             - name: workspace
               mountPath: /workspace
@@ -129,7 +133,7 @@ spec:
               cpu: {{ or $run.degitRepositoryCpuRequest .Values.degitRepository.resources.requests.cpu }}
               memory: {{ or $run.degitRepositoryMemoryRequest .Values.degitRepository.resources.requests.memory }}
       {{- end }}
-      {{- if $run.action }}
+      {{- if and $run.action (ne .Values.global.env "local") }}
         - name: degit-action
           image: {{ .Values.degitImage }}
           command:
@@ -139,7 +143,6 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            fsGroup: {{ or $run.fsGroup (or $run.user "1000") }}
           volumeMounts:
             - name: action
               mountPath: /action
@@ -208,7 +211,6 @@ spec:
           securityContext:
             runAsUser: {{ $user }}
             runAsGroup: {{ $group }}
-            fsGroup: {{ $fsGroup }}
           volumeMounts:
             - name: workspace
               mountPath: /workspace
@@ -230,12 +232,25 @@ spec:
             {{- if $run.volumeMounts }}
             {{- tpl ($run.volumeMounts | toYaml) . | nindent 12 }}
             {{- end }}
-
+      securityContext:
+        fsGroup: {{ $fsGroup }}
       volumes:
         - name: workspace
+          {{- if and (eq .Values.global.env "local") (or (not (hasKey $run "checkout")) $run.checkout) }}
+          hostPath:
+            path: {{ .Values.global.workspacePath }}
+            type: Directory
+          {{- else }}
           emptyDir: {}
+          {{- end }}
         - name: action
+          {{- if and (eq .Values.global.env "local") $run.localActionPath }}
+          hostPath:
+            path: {{ $run.localActionPath }}
+            type: Directory
+          {{- else }}
           emptyDir: {}
+          {{- end }}
         {{ if .Values.deployKey.enabled }}
         - name: deploy-key
           secret:

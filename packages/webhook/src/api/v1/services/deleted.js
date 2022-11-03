@@ -5,14 +5,7 @@ module.exports = function ({ services }) {
       ref,
       after,
       repositoryUrl,
-      args: [
-        "deploy",
-        "--chart",
-        "deactivate",
-        "--ignore-project-templates",
-        "--disable-plugin",
-        "*.deploySidecar.rolloutStatus",
-      ],
+      args: ["deploy", "--chart", "deactivate", "--ignore-project-templates"],
       checkout: true,
     })
 }

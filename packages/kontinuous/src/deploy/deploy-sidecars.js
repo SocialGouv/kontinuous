@@ -8,7 +8,14 @@ const pluginFunction = require("~/plugins/context/function")
 module.exports = async ({ manifests, runContext, dryRun }) => {
   const config = ctx.require("config")
   const type = `deploy-sidecars`
-  const context = createContext({ type, runContext, manifests, dryRun })
+  const { deploysPromise } = runContext
+  const context = createContext({
+    type,
+    runContext,
+    manifests,
+    dryRun,
+    deploysPromise,
+  })
   const { buildProjectPath } = config
   const requirePath = `${buildProjectPath}/${type}`
   let sidecars = []

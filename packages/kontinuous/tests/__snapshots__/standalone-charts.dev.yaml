@@ -11,15 +11,29 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/chartPath: project.job-extra
     kontinuous/source: project/charts/job-extra/templates/my-job.yaml
+    kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf93-5g1zo1
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/change-group: kontinuous/test-standalone-charts-feature-branch-1
-    kapp.k14s.io/change-group.job-extra: kontinuous/job-extra.test-standalone-charts-feature-branch-1
+    kontinuous/depname.full: project.job-extra.job.job-extra
+    kontinuous/depname.chartResource: job-extra.job.job-extra
+    kontinuous/depname.chartName: job-extra
+    kontinuous/depname.chartPath: project.job-extra
+    kontinuous/depname.resourcePath: job.job-extra
+    kontinuous/depname.resourceName: job-extra
+    kapp.k14s.io/change-group.job-extra: kontinuous/job-extra
+    kapp.k14s.io/change-group.project.job-extra: kontinuous/project.job-extra
+    kapp.k14s.io/change-group.project.job-extra.job.job-extra: kontinuous/project.job-extra.job.job-extra
+    kapp.k14s.io/change-group.project.job-extra.job-extra: kontinuous/project.job-extra.job-extra
+    kapp.k14s.io/change-group.job-extra.job.job-extra: kontinuous/job-extra.job.job-extra
+    kapp.k14s.io/change-group.job-extra.job-extra: kontinuous/job-extra.job-extra
+    kapp.k14s.io/change-group.job.job-extra: kontinuous/job.job-extra
   labels:
+    kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf93-5g1zo1
+    kontinuous/deployment.env: test-standalone-charts-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-extra
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   backoffLimit: 2
   activeDeadlineSeconds: 3600
@@ -27,10 +41,14 @@ spec:
   template:
     metadata:
       labels:
+        kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf93-5g1zo1
+        kontinuous/deployment.env: test-standalone-charts-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-extra
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf93-5g1zo1
     spec:
       restartPolicy: Never
       containers:

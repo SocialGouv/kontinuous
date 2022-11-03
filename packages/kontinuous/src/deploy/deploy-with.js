@@ -5,10 +5,16 @@ const ctx = require("~common/ctx")
 const createContext = require("~/plugins/context")
 const pluginFunction = require("~/plugins/context/function")
 
-module.exports = async ({ manifestsFile, runContext, dryRun }) => {
+module.exports = async ({ manifestsFile, manifests, runContext, dryRun }) => {
   const config = ctx.require("config")
   const type = `deploy-with`
-  const context = createContext({ type, runContext, manifestsFile, dryRun })
+  const context = createContext({
+    type,
+    runContext,
+    manifestsFile,
+    manifests,
+    dryRun,
+  })
   const { buildProjectPath } = config
   const requirePath = `${buildProjectPath}/${type}`
   let deploys = []

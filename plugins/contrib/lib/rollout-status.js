@@ -2,69 +2,14 @@ const { setTimeout } = require("timers/promises")
 
 const handledKinds = ["Deployment", "StatefulSet", "Job"]
 
-const checkForNewResourceInterval = 3000
 const waitBeforeStopAllRolloutStatus = 5000 // try to collect more errors if there is any
 
-const rolloutStatusWatchForNewResource = async ({
-  selector,
-  resourceName,
-  namespace,
-  interceptor,
-  rolloutStatusProcesses,
-  utils,
-  config,
-  logger,
-}) => {
-  const { rolloutStatusExec } = utils
+module.exports = async (context) => {
+  const { config, logger, utils, needBin, manifests, runContext } = context
 
-  const { kubeconfig, kubeconfigContext: kubecontext } = config
+  const { eventsBucket } = runContext
 
-  logger.debug({ namespace, selector }, `watching resource: ${resourceName}`)
-  while (!interceptor.stop) {
-    const { promise: rolloutStatusPromise, process: rolloutStatusProcess } =
-      rolloutStatusExec({
-        kubeconfig,
-        kubecontext,
-        namespace,
-        selector,
-      })
-    rolloutStatusProcesses[selector] = rolloutStatusProcess
-    let status
-    try {
-      status = await rolloutStatusPromise
-    } catch (err) {
-      if (!err.message?.includes("net/http: TLS handshake timeout")) {
-        throw err
-      }
-      logger.debug(
-        { namespace, selector },
-        `rollout-status network error(net/http: TLS handshake timeout): retrying...`
-      )
-      continue
-    }
-    const { success, error } = status
-    if (success || error.code !== "not-found") {
-      return status
-    }
-    await setTimeout(checkForNewResourceInterval)
-    logger.trace(
-      { namespace, selector },
-      `watching resource: ${resourceName}, waiting to appear...`
-    )
-  }
-  return { success: null }
-}
-
-module.exports = async (
-  sidecars,
-  _options,
-  { config, logger, utils, needBin, manifests, runContext, dryRun }
-) => {
-  if (dryRun) {
-    return
-  }
-
-  const { needRolloutStatus } = utils
+  const { needRolloutStatus, rolloutStatusWatch } = utils
 
   const rolloutStatusProcesses = {}
   const stopRolloutStatus = () => {
@@ -79,7 +24,7 @@ module.exports = async (
 
   const interceptor = { stop: false }
 
-  const stopSidecar = () => {
+  const stop = () => {
     interceptor.stop = true
     stopRolloutStatus()
   }
@@ -101,9 +46,11 @@ module.exports = async (
     await stopDeployPromise
   }
 
-  const { refLabelKey } = config
+  const { deploymentLabelKey } = config
 
   await needBin(needRolloutStatus)
+
+  const { kubeconfig, kubeconfigContext: kubecontext } = config
 
   const promises = []
   for (const manifest of manifests) {
@@ -112,34 +59,52 @@ module.exports = async (
       continue
     }
     const resourceName = manifest.metadata.labels?.["kontinuous/resourceName"]
-    const ref = manifest.metadata?.labels?.[refLabelKey]
+    const deploymentLabelValue = manifest.metadata?.labels?.[deploymentLabelKey]
     const namespace = manifest.metadata?.namespace
     if (!resourceName) {
       continue
     }
     const labelSelectors = []
     labelSelectors.push(`kontinuous/resourceName=${resourceName}`)
-    if (ref) {
-      labelSelectors.push(`${refLabelKey}=${ref}`)
+    if (deploymentLabelValue) {
+      labelSelectors.push(`${deploymentLabelKey}=${deploymentLabelValue}`)
     }
     const selector = labelSelectors.join(",")
 
     promises.push(
       new Promise(async (resolve, reject) => {
         try {
-          const result = await rolloutStatusWatchForNewResource({
+          logger.debug(
+            { namespace, selector },
+            `watching resource: ${resourceName}`
+          )
+          const eventParam = { namespace, resourceName, selector }
+          eventsBucket.trigger("waiting", eventParam)
+          const result = await rolloutStatusWatch({
             namespace,
             selector,
-            resourceName,
             interceptor,
             rolloutStatusProcesses,
-            utils,
-            config,
+            kubeconfig,
+            kubecontext,
             logger,
           })
+
           if (!result.success) {
+            logger.error(
+              { namespace, selector },
+              `resource "${resourceName}" failed`
+            )
+            eventsBucket.trigger("failed", eventParam)
             endAll()
+          } else {
+            logger.debug(
+              { namespace, selector },
+              `resource "${resourceName}" ready`
+            )
+            eventsBucket.trigger("ready", eventParam)
           }
+
           resolve(result)
         } catch (err) {
           reject(err)
@@ -160,20 +125,35 @@ module.exports = async (
       const { status } = result
       if (status === "rejected") {
         const { reason } = result
-        if (reason && Object.keys(reason) > 0) {
-          logger.error({ reason }, "rollout-status exec error")
+        if (reason instanceof Error) {
+          errors.push(reason.message)
+        } else {
+          errors.push(reason)
         }
       } else if (status === "fulfilled") {
         const { value } = result
-        if (value.success === false) {
+        if (value.success !== true) {
           errors.push(value.error)
         }
       } else {
         logger.fatal({ result }, `Unexpected promise result`)
       }
     }
+    if (errors.length) {
+      for (const errorData of errors) {
+        logger.error(
+          {
+            code: errorData.code,
+            type: errorData.type,
+            log: errorData.log,
+            message: errorData.message,
+          },
+          `rollout-status ${errorData.code} error: ${errorData.message}`
+        )
+      }
+    }
     resolve({ errors })
   })
 
-  sidecars.push({ stopSidecar, promise })
+  return { stop, promise }
 }

@@ -13,12 +13,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
   labels:
     application: test-jobs-build-options
+    kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
+    kontinuous/deployment.env: test-jobs-build-options-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
     cert: wildcard
   name: test-jobs-build-options-feature-branch-1
 ---
@@ -31,12 +34,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
+    kontinuous/deployment.env: test-jobs-build-options-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -61,143 +67,17 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
     kapp.k14s.io/disable-original: ''
-  namespace: test-jobs-build-options-feature-branch-1
   labels:
+    kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
+    kontinuous/deployment.env: test-jobs-build-options-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-default
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-jobs-build-options-feature-branch-1
 automountServiceAccountToken: false
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    component: app
-    application: test-jobs-build-options
-    kontinuous/ref: feature-branch-1
-    kontinuous/resourceName: service-5cfizy-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
-  name: app
-  namespace: test-jobs-build-options-feature-branch-1
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 3000
-  selector:
-    component: app
-  type: ClusterIP
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    component: app
-    application: test-jobs-build-options
-    kontinuous/ref: feature-branch-1
-    kontinuous/resourceName: deployment-3d60sq-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
-  name: app
-  namespace: test-jobs-build-options-feature-branch-1
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/change-group: kontinuous/test-jobs-build-options-feature-branch-1
-    kapp.k14s.io/change-group.app: kontinuous/app.test-jobs-build-options-feature-branch-1
-    kapp.k14s.io/change-rule.build-app: >-
-      upsert after upserting
-      kontinuous/build-app.test-jobs-build-options-feature-branch-1
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      component: app
-  template:
-    metadata:
-      labels:
-        component: app
-        application: test-jobs-build-options
-        namespace: test-jobs-build-options-feature-branch-1
-        kontinuous/ref: feature-branch-1
-        kontinuous/resourceName: deployment-3d60sq-app
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
-    spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: namespace
-                      operator: In
-                      values:
-                        - test-jobs-build-options-feature-branch-1
-                    - key: component
-                      operator: In
-                      values:
-                        - app
-                topologyKey: kubernetes.io/hostname
-      containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/test-jobs-build-options/app:sha-ffac537e6cbbf934b08745a378932722df287a53
-          name: app
-          ports:
-            - containerPort: 3000
-              name: http
-          livenessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /healthz
-              port: http
-            initialDelaySeconds: 30
-            periodSeconds: 5
-            timeoutSeconds: 5
-          readinessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /healthz
-              port: http
-            initialDelaySeconds: 1
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
-          startupProbe:
-            failureThreshold: 12
-            httpGet:
-              path: /healthz
-              port: http
-            periodSeconds: 5
-          resources:
-            limits:
-              cpu: 500m
-              memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
-          envFrom:
-            - secretRef:
-                name: pg-user-feature-branch-1
-            - secretRef:
-                name: app-sealed-secret
-            - configMapRef:
-                name: app-configmap
 ---
 apiVersion: batch/v1
 kind: Job
@@ -207,21 +87,54 @@ metadata:
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/change-group: kontinuous/test-jobs-build-options-feature-branch-1
-    kapp.k14s.io/change-group.build-app: kontinuous/build-app.test-jobs-build-options-feature-branch-1
-    kapp.k14s.io/change-group.build-app.kaniko: kontinuous/build-app.kaniko.test-jobs-build-options-feature-branch-1
-    kapp.k14s.io/change-group.build-app..kaniko: kontinuous/build-app..kaniko.test-jobs-build-options-feature-branch-1
+    kontinuous/needsName: build-app.kaniko
+    kontinuous/needsNames: '[\\"build-app\\",\\"build-app.kaniko\\",\\"build-app..kaniko\\"]'
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/change-group.jobs: kontinuous/jobs.test-jobs-build-options-feature-branch-1
+    kontinuous/depname.full: >-
+      project.fabrique.contrib.jobs.job.job-test-jobs-build-options-feature-branch-1-build-app-gre3q1
+    kontinuous/depname.chartResource: jobs.job.job-test-jobs-build-options-feature-branch-1-build-app-gre3q1
+    kontinuous/depname.chartName: jobs
+    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
+    kontinuous/depname.resourcePath: job.job-test-jobs-build-options-feature-branch-1-build-app-gre3q1
+    kontinuous/depname.resourceName: job-test-jobs-build-options-feature-branch-1-build-app-gre3q1
+    kapp.k14s.io/change-group.jobs: kontinuous/jobs
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs: kontinuous/project.fabrique.contrib.jobs
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.build-app.kaniko: kontinuous/project.fabrique.contrib.jobs.job.build-app.kaniko
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.build-app.kaniko: kontinuous/project.fabrique.contrib.jobs.build-app.kaniko
+    kapp.k14s.io/change-group.jobs.job.build-app.kaniko: kontinuous/jobs.job.build-app.kaniko
+    kapp.k14s.io/change-group.jobs.build-app.kaniko: kontinuous/jobs.build-app.kaniko
+    kapp.k14s.io/change-group.job.build-app.kaniko: kontinuous/job.build-app.kaniko
+    kapp.k14s.io/change-group.build-app.kaniko: kontinuous/build-app.kaniko
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.build-app: kontinuous/project.fabrique.contrib.jobs.job.build-app
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.build-app: kontinuous/project.fabrique.contrib.jobs.build-app
+    kapp.k14s.io/change-group.jobs.job.build-app: kontinuous/jobs.job.build-app
+    kapp.k14s.io/change-group.jobs.build-app: kontinuous/jobs.build-app
+    kapp.k14s.io/change-group.job.build-app: kontinuous/job.build-app
+    kapp.k14s.io/change-group.build-app: kontinuous/build-app
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.build-app..kaniko: kontinuous/project.fabrique.contrib.jobs.job.build-app..kaniko
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.build-app..kaniko: kontinuous/project.fabrique.contrib.jobs.build-app..kaniko
+    kapp.k14s.io/change-group.jobs.job.build-app..kaniko: kontinuous/jobs.job.build-app..kaniko
+    kapp.k14s.io/change-group.jobs.build-app..kaniko: kontinuous/jobs.build-app..kaniko
+    kapp.k14s.io/change-group.job.build-app..kaniko: kontinuous/job.build-app..kaniko
+    kapp.k14s.io/change-group.build-app..kaniko: kontinuous/build-app..kaniko
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.build-app.: kontinuous/project.fabrique.contrib.jobs.job.build-app.
+    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.build-app.: kontinuous/project.fabrique.contrib.jobs.build-app.
+    kapp.k14s.io/change-group.jobs.job.build-app.: kontinuous/jobs.job.build-app.
+    kapp.k14s.io/change-group.jobs.build-app.: kontinuous/jobs.build-app.
+    kapp.k14s.io/change-group.job.build-app.: kontinuous/job.build-app.
+    kapp.k14s.io/change-group.build-app.: kontinuous/build-app.
   labels:
+    kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
+    kontinuous/deployment.env: test-jobs-build-options-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-options-feature-branch-1-2auuh2
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   backoffLimit: 1
   activeDeadlineSeconds: 3600
@@ -233,10 +146,14 @@ spec:
         ref: feature-branch-1
         repository: test-jobs-build-options
         runName: build
+        kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
+        kontinuous/deployment.env: test-jobs-build-options-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-options-feature-branch-1-2auuh2
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
     spec:
       restartPolicy: Never
       initContainers:
@@ -253,7 +170,6 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            fsGroup: 1000
           volumeMounts:
             - name: workspace
               mountPath: /workspace
@@ -330,17 +246,168 @@ spec:
           securityContext:
             runAsUser: 0
             runAsGroup: 0
-            fsGroup: 0
           volumeMounts:
             - name: workspace
               mountPath: /workspace
             - name: action
               mountPath: /action
+      securityContext:
+        fsGroup: 0
       volumes:
         - name: workspace
           emptyDir: {}
         - name: action
           emptyDir: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app
+    application: test-jobs-build-options
+    kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
+    kontinuous/deployment.env: test-jobs-build-options-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: deployment-3d60sq-app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-jobs-build-options-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/plugin.needs: '[\\"build-app\\"]'
+    kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/create-strategy: fallback-on-update
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    kapp.k14s.io/nonce: ''
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
+    kontinuous/depname.chartName: app
+    kontinuous/depname.chartPath: project.fabrique.contrib.app
+    kontinuous/depname.resourcePath: deployment.app
+    kontinuous/depname.resourceName: app
+    kapp.k14s.io/change-group.app: kontinuous/app
+    kapp.k14s.io/change-group.project.fabrique.contrib.app: kontinuous/project.fabrique.contrib.app
+    kapp.k14s.io/change-group.project.fabrique.contrib.app.deployment.app: kontinuous/project.fabrique.contrib.app.deployment.app
+    kapp.k14s.io/change-group.project.fabrique.contrib.app.app: kontinuous/project.fabrique.contrib.app.app
+    kapp.k14s.io/change-group.app.deployment.app: kontinuous/app.deployment.app
+    kapp.k14s.io/change-group.app.app: kontinuous/app.app
+    kapp.k14s.io/change-group.deployment.app: kontinuous/deployment.app
+    kapp.k14s.io/change-rule.build-app: upsert after upserting kontinuous/build-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  template:
+    metadata:
+      labels:
+        component: app
+        application: test-jobs-build-options
+        namespace: test-jobs-build-options-feature-branch-1
+        kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
+        kontinuous/deployment.env: test-jobs-build-options-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/resourceName: deployment-3d60sq-app
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-jobs-build-options-feature-branch-1
+                    - key: component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            harbor.fabrique.social.gouv.fr/test-jobs-build-options/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          envFrom:
+            - secretRef:
+                name: pg-user-feature-branch-1
+            - secretRef:
+                name: app-sealed-secret
+            - configMapRef:
+                name: app-configmap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: test-jobs-build-options
+    kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
+    kontinuous/deployment.env: test-jobs-build-options-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-jobs-build-options-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
+    kontinuous/plugin.needs: '[\\"build-app\\"]'
+    kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -349,14 +416,18 @@ metadata:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"build-app\\"]'
+    kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
     kapp.k14s.io/disable-original: ''
   labels:
     component: app
     application: test-jobs-build-options
+    kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
+    kontinuous/deployment.env: test-jobs-build-options-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: ingress-5dz9oh-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-jobs-build-options-feature-branch-1
 spec:

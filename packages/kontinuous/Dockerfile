@@ -13,13 +13,13 @@ RUN apt-get update && \
 FROM downloader as kubectl
 ARG KUBECTL_VERSION=v1.25.0
 ENV KUBECTL_VERSION=$KUBECTL_VERSION
-RUN curl -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
+RUN curl --fail -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl
 
 FROM downloader as helm
 ARG HELM_VERSION=v3.9.3
 ENV HELM_VERSION=$HELM_VERSION
-RUN curl -sL https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar xz -C /tmp/ \
+RUN curl --fail -sL https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar xz -C /tmp/ \
   && mv /tmp/linux-amd64/helm /usr/local/bin/helm \
   && chmod +x /usr/local/bin/helm \
   && rm -r /tmp/linux-amd64
@@ -27,16 +27,23 @@ RUN curl -sL https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar x
 FROM downloader as kapp
 ARG KAPP_VERSION=v0.52.0
 ENV KAPP_VERSION=$KAPP_VERSION
-RUN curl -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/${KAPP_VERSION}/kapp-linux-amd64 > /tmp/kapp \
+RUN curl --fail -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/${KAPP_VERSION}/kapp-linux-amd64 > /tmp/kapp \
   && mv /tmp/kapp /usr/local/bin/kapp \
   && chmod +x /usr/local/bin/kapp
 
 FROM downloader as rollout-status
-ARG ROLLOUT_STATUS_VERSION=v1.9.1
+ARG ROLLOUT_STATUS_VERSION=v1.10.0
 ENV ROLLOUT_STATUS_VERSION=$ROLLOUT_STATUS_VERSION
-RUN curl -sL https://github.com/SocialGouv/rollout-status/releases/download/${ROLLOUT_STATUS_VERSION}/rollout-status-${ROLLOUT_STATUS_VERSION}-linux-amd64 > /tmp/rollout-status \
+RUN curl --fail -sL https://github.com/SocialGouv/rollout-status/releases/download/${ROLLOUT_STATUS_VERSION}/rollout-status-${ROLLOUT_STATUS_VERSION}-linux-amd64 > /tmp/rollout-status \
   && mv /tmp/rollout-status /usr/local/bin/rollout-status \
   && chmod +x /usr/local/bin/rollout-status
+
+FROM downloader as stern
+ARG STERN_VERSION=1.11.0
+ENV STERN_VERSION=$STERN_VERSION
+RUN curl --fail -sL https://github.com/wercker/stern/releases/download/${STERN_VERSION}/stern_linux_amd64 > /tmp/stern \
+  && mv /tmp/stern /usr/local/bin/stern \
+  && chmod +x /usr/local/bin/stern
 
 FROM ubuntu:$UBUNTU_VERSION as node
 ARG NODE_VERSION=18
@@ -102,6 +109,7 @@ ENV KUBECONFIG=$HOME/.kube/config
 RUN mkdir $HOME/.kube
 
 ENV KS_INLINE_CONFIG_SET "links.SocialGouv/kontinuous=/opt/kontinuous"
+ENV KS_EXTERNAL_BIN_FORCE_DOWNLOAD "false"
 
 ENTRYPOINT ["/opt/kontinuous/packages/kontinuous/bin/kontinuous"]
 CMD ["help"]
@@ -112,6 +120,7 @@ COPY --from=kubectl /usr/local/bin/kubectl /usr/local/bin/kubectl
 COPY --from=helm /usr/local/bin/helm /usr/local/bin/helm
 COPY --from=kapp /usr/local/bin/kapp /usr/local/bin/kapp
 COPY --from=rollout-status /usr/local/bin/rollout-status /usr/local/bin/rollout-status
+COPY --from=stern /usr/local/bin/stern /usr/local/bin/stern
 
 WORKDIR /opt/kontinuous
 

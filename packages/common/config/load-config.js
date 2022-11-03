@@ -191,6 +191,47 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     refLabelValue: {
       defaultFunction: (config) => slug(config.gitBranch),
     },
+    deploymentEnvLabelKey: {
+      default: "kontinuous/deployment.env",
+    },
+    deploymentEnvLabelValue: {
+      defaultFunction: (config) => {
+        const { repositoryName, chart, gitBranch } = config
+        const charts = chart?.join(",")
+        return slug(
+          `${repositoryName}-${gitBranch}${charts ? `-${charts}` : ""}`
+        )
+      },
+    },
+    deploymentLabelKey: {
+      default: "kontinuous/deployment",
+    },
+    deploymentLabelForceNewDeploy: {
+      default: true,
+      env: "KS_FORCE_NEW_DEPLOY",
+      envParser: (str) => yaml.load(str),
+    },
+    deploymentLabelValue: {
+      defaultFunction: (config) => {
+        const {
+          repositoryName,
+          chart,
+          gitBranch,
+          gitSha,
+          deploymentLabelForceNewDeploy,
+        } = config
+        const deploymentId = !deploymentLabelForceNewDeploy
+          ? gitSha
+          : Math.floor(Date.now() / 1000)
+
+        const slugParts = [repositoryName, gitBranch, deploymentId]
+        const charts = chart?.join(",")
+        if (charts) {
+          slugParts.push(charts)
+        }
+        return slug(slugParts.join("-"))
+      },
+    },
   }
   const configOverride = {
     kontinuousPath: {
@@ -423,7 +464,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     deployTimeout: {
       option: "timeout",
       env: "KS_DEPLOY_TIMEOUT",
-      default: "15m0s",
+      default: "15m",
     },
     links: {
       transform: async (links = {}) => {
@@ -581,6 +622,28 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
       option: "ignoreProjectTemplates",
       default: false,
     },
+    externalBinForceDownload: {
+      env: "KS_EXTERNAL_BIN_FORCE_DOWNLOAD",
+      envParser: (str) => yaml.load(str),
+      default: true,
+    },
+    disablePlugin: {
+      env: "KS_DISABLE_PLUGIN",
+      envParser: (str) => yaml.load(str),
+      option: "disable-plugin",
+      default: [],
+    },
+    disableStep: {
+      env: "KS_DISABLE_STEP",
+      envParser: (str) => yaml.load(str),
+      option: "disable-step",
+      default: [],
+    },
+    noValidate: {
+      env: "KS_NO_VALIDATE",
+      envParser: (str) => yaml.load(str),
+      option: "no-validate",
+    },
   }
 
   rootConfig = await loadStructuredConfig({
@@ -645,6 +708,8 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
       acc[key] = value
       return acc
     }, {})
+
+  logger.info(`📂 buildPath: file://${config.buildPath}`)
 
   await loadDependencies(config)
 

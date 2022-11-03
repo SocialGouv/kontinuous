@@ -1,13 +1,22 @@
 const { spawn } = require("child_process")
+const fs = require("fs-extra")
 
 const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
+
+const openCurly = "{{"
+const closeCurly = "}}"
+const escapeCurlyGoTemplate = (str) => `{{ "${str}" }}`
+const escapeCurlyGo = {
+  [openCurly]: escapeCurlyGoTemplate(openCurly),
+  [closeCurly]: escapeCurlyGoTemplate(closeCurly),
+}
 
 module.exports = async (
   deploys,
   _options,
-  { config, logger, needBin, utils, manifestsFile, dryRun }
+  { config, logger, needBin, utils, manifestsYaml, dryRun }
 ) => {
-  const { parseCommand, needHelm, slug } = utils
+  const { parseCommand, needHelm, slug, createChart, yaml } = utils
 
   const { kubeconfigContext, kubeconfig, repositoryName, deployTimeout } =
     config
@@ -20,16 +29,31 @@ module.exports = async (
 
   await needBin(needHelm)
 
+  const manifestsDir = `${config.buildPath}/deploy-with/helm`
+  await fs.ensureDir(`${manifestsDir}/templates`)
+
+  const yamlManifests = manifestsYaml.replace(
+    /\{\{|\}\}/g,
+    (matched) => escapeCurlyGo[matched]
+  )
+
+  await Promise.all([
+    fs.writeFile(`${manifestsDir}/templates/manifests.yaml`, yamlManifests),
+    fs.writeFile(
+      `${manifestsDir}/Chart.yaml`,
+      yaml.dump(createChart(slug(repositoryName), {}))
+    ),
+  ])
+
   const helmDeployCommand = dryRun
     ? "helm version"
     : `
         helm upgrade
           ${helmRelease}
-          ${manifestsFile}
+          ${manifestsDir}
           --install
           ${kubeconfigContext ? `--kube-context ${kubeconfigContext}` : ""}
           --force
-          --wait
           --timeout ${deployTimeout}
       `
 
@@ -69,8 +93,3 @@ module.exports = async (
 
   deploys.push({ promise, process: proc })
 }
-
-/*
-   .replaceAll("{{",'{{ "{{" }}')
-   .replaceAll("}}",'{{ "}}" }}')
-*/

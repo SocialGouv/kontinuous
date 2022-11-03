@@ -1,0 +1,123 @@
+#!/usr/bin/env node
+
+const rolloutStatusWatch = require("~common/utils/rollout-status-watch")
+const logger = require("~common/utils/logger")
+const kubectlRetry = require("~common/utils/kubectl-retry")
+
+const runWaitNeeds = async ({ waitNeeds, annotationsRef, timeout = 900 }) => {
+  const interceptor = {}
+
+  setTimeout(() => {
+    interceptor.stop = true
+    setTimeout(() => {
+      process.exit(1)
+    }, 1000)
+  }, timeout * 1000)
+
+  const completedOnceAnnotationKey = "kontinuous/completedOnce"
+
+  const [selfRefNamespace, selfRefKind, selfRefName] = annotationsRef.split("/")
+  const lowerkind = selfRefKind.toLowerCase()
+  const getSelfRefAnnotations = async () => {
+    const annotationsJSON = await kubectlRetry(
+      `-n ${selfRefNamespace} get ${lowerkind}/${selfRefName} -o json`,
+      { logInfo: false }
+    )
+    const manifest = JSON.parse(annotationsJSON)
+    const { annotations = {} } = manifest.metadata
+    return annotations
+  }
+
+  const annotations = await getSelfRefAnnotations()
+
+  const deploymentSelector = annotations["kontinuous/deployment"]
+
+  const annotateCompletedOnce = async () => {
+    await kubectlRetry(
+      `-n ${selfRefNamespace} annotate ${lowerkind}/${selfRefName} ${completedOnceAnnotationKey}=${deploymentSelector} --overwrite`
+    )
+  }
+
+  const completedOnce =
+    annotations[completedOnceAnnotationKey] === deploymentSelector
+  logger.info(`completedOnce: ${completedOnce}`)
+
+  const promises = []
+  for (const { namespace, selectors, needOnce } of waitNeeds) {
+    const selector = Object.entries(selectors)
+      .map(([label, value]) => `${label}=${value}`)
+      .join(",")
+
+    if (needOnce && completedOnce) {
+      continue
+    }
+
+    promises.push(
+      new Promise(async (resolve, reject) => {
+        try {
+          logger.info({ namespace, selector }, `watching`)
+          const result = await rolloutStatusWatch({
+            namespace,
+            selector,
+            interceptor,
+            // rolloutStatusProcesses,
+            // kubeconfig,
+            // kubecontext,
+            logger,
+          })
+          resolve(result)
+        } catch (err) {
+          reject(err)
+        }
+      })
+    )
+  }
+
+  const results = await Promise.allSettled(promises)
+  const errors = []
+  for (const result of results) {
+    const { status } = result
+    if (status === "rejected") {
+      const { reason } = result
+      if (reason instanceof Error) {
+        errors.push(reason.message)
+      } else {
+        errors.push(reason)
+      }
+    } else if (status === "fulfilled") {
+      const { value } = result
+      if (value.success !== true) {
+        errors.push(value.error)
+      }
+    } else {
+      logger.fatal({ result }, `unexpected promise result`)
+    }
+  }
+  if (errors.length > 0) {
+    logger.error({ errors }, "required dependencies could not be satistfied")
+    return false
+  }
+  logger.info("all dependencies are ready")
+  await annotateCompletedOnce()
+  return true
+}
+
+const main = async () => {
+  const jsonWaitNeeds = process.env.WAIT_NEEDS
+  const annotationsRef = process.env.WAIT_NEEDS_ANNOTATIONS_REF
+  const waitNeeds = JSON.parse(jsonWaitNeeds)
+  let timeout = process.env.TIMEOUT
+  if (timeout) {
+    timeout = parseInt(timeout, 10)
+  } else {
+    timeout = undefined
+  }
+  const ok = await runWaitNeeds({ waitNeeds, annotationsRef, timeout })
+  if (ok) {
+    process.exit(0)
+  } else {
+    process.exit(1)
+  }
+}
+
+main()

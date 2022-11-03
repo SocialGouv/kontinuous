@@ -6,8 +6,11 @@ module.exports = (opts = {}) => {
   const options = {
     pretty: true,
     prettyOptions: {
-      translateTime: "yyyy-mm-dd HH:MM:ss",
-      ignore: "pid,hostname",
+      // translateTime: "yyyy-mm-dd HH:MM:ss",
+      ignore: "pid,hostname,time,level",
+      customColors: "message:blueBright,greyMessage:gray",
+      singleLine: true, // Print each log message on a single line (errors will still be multi-line)
+      // hideObject: true, // Hide objects from output (but not error object)
       ...prettyOptions,
     },
     destination: 2,

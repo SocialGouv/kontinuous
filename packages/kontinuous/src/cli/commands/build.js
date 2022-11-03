@@ -27,6 +27,9 @@ module.exports = (program) =>
     .addOption(options.ignoreProjectTemplates)
     .addOption(options.kubeconfigContext)
     .addOption(options.kubeconfigContextNoDetect)
+    .addOption(options.noValidate)
+    .addOption(options.disablePlugin)
+    .addOption(options.disableStep)
     .option("--output, -o", "enable direct output of manifests")
     .option("--open", "open manifests file with default application")
     .option(

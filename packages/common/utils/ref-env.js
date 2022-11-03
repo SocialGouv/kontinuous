@@ -1,4 +1,4 @@
-const patternMatch = require("~common/utils/pattern-match")
+const patternMatch = require("./pattern-match")
 
 module.exports = (ref, patterns) => {
   if (!ref) {

@@ -1,13 +1,15 @@
-name: Build Docker Degit
+name: Build Docker Images
 
 on:
   push:
+    branches:
+      - "**"
     tags:
       - 'v*.*.*'
 
 concurrency:
   cancel-in-progress: true
-  group: build-docker-degit-${{ github.ref_name }}
+  group: build-docker-images-${{ github.ref_name }}
 
 jobs:
   build-and-push-image:
@@ -15,7 +17,18 @@ jobs:
     permissions:
       contents: read
       packages: write
-
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - destination: ""
+            dockerfile: packages/kontinuous/Dockerfile
+          - destination: "/webhook"
+            dockerfile: packages/webhook/Dockerfile
+          - destination: "/degit"
+            dockerfile: packages/degit/Dockerfile
+          - destination: "/wait-needs"
+            dockerfile: packages/wait-needs/Dockerfile
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -31,7 +44,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/${{ github.repository }}/degit
+          images: ghcr.io/${{ github.repository }}${{ matrix.destination }}
           tags: |
             type=schedule
             type=ref,event=branch
@@ -46,7 +59,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: packages/degit/Dockerfile
+          file: ${{ matrix.dockerfile }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

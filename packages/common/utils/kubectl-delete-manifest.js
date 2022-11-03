@@ -20,12 +20,8 @@ module.exports = async (
 
   await fs.writeFile(file, dump)
 
-  await kubectlRetry(
-    `${
-      kubeconfigContext ? `--context ${kubeconfigContext}` : ""
-    } delete --ignore-not-found=true -f ${file}`,
-    {
-      kubeconfig,
-    }
-  )
+  await kubectlRetry(`delete --ignore-not-found=true -f ${file}`, {
+    kubeconfig,
+    kubeconfigContext,
+  })
 }

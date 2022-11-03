@@ -13,12 +13,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
   labels:
     application: test-long-branch-host-patch
+    kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
+    kontinuous/deployment.env: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/resourceName: namespace-4wnyh3
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
     cert: wildcard
   name: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
 ---
@@ -31,12 +34,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
+    kontinuous/deployment.env: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -61,41 +67,17 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
     kapp.k14s.io/disable-original: ''
-  namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
   labels:
+    kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
+    kontinuous/deployment.env: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/resourceName: serviceaccount-4nws8p-default
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
-automountServiceAccountToken: false
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    component: app
-    application: test-long-branch-host-patch
-    kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
-    kontinuous/resourceName: service-5cfizy-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
-  name: app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 3000
-  selector:
-    component: app
-  type: ClusterIP
+automountServiceAccountToken: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -103,23 +85,36 @@ metadata:
   labels:
     component: app
     application: test-long-branch-host-patch
+    kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
+    kontinuous/deployment.env: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/resourceName: deployment-3d60sq-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    kapp.k14s.io/change-group: kontinuous/test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
-    kapp.k14s.io/change-group.app: >-
-      kontinuous/app.test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
+    kontinuous/depname.chartName: app
+    kontinuous/depname.chartPath: project.fabrique.contrib.app
+    kontinuous/depname.resourcePath: deployment.app
+    kontinuous/depname.resourceName: app
+    kapp.k14s.io/change-group.app: kontinuous/app
+    kapp.k14s.io/change-group.project.fabrique.contrib.app: kontinuous/project.fabrique.contrib.app
+    kapp.k14s.io/change-group.project.fabrique.contrib.app.deployment.app: kontinuous/project.fabrique.contrib.app.deployment.app
+    kapp.k14s.io/change-group.project.fabrique.contrib.app.app: kontinuous/project.fabrique.contrib.app.app
+    kapp.k14s.io/change-group.app.deployment.app: kontinuous/app.deployment.app
+    kapp.k14s.io/change-group.app.app: kontinuous/app.app
+    kapp.k14s.io/change-group.deployment.app: kontinuous/deployment.app
 spec:
   replicas: 1
   selector:
@@ -131,10 +126,14 @@ spec:
         component: app
         application: test-long-branch-host-patch
         namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
+        kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
+        kontinuous/deployment.env: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
         kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
         kontinuous/resourceName: deployment-3d60sq-app
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
     spec:
       affinity:
         podAntiAffinity:
@@ -191,6 +190,36 @@ spec:
               cpu: 100m
               memory: 128Mi
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: test-long-branch-host-patch
+    kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
+    kontinuous/deployment.env: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
+    kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+    kontinuous/resourceName: service-5cfizy-app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
+    kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -198,14 +227,17 @@ metadata:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
     kapp.k14s.io/disable-original: ''
   labels:
     component: app
     application: test-long-branch-host-patch
+    kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
+    kontinuous/deployment.env: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/resourceName: ingress-5dz9oh-app
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-long-branch-host-patch-a-very-very-very-long-branc-2h9265
 spec:

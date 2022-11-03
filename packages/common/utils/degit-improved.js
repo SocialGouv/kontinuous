@@ -13,12 +13,12 @@ module.exports = async (
 ) => {
   try {
     let cache
-    logger.debug(`degit "${uri}"`)
+    logger.debug(`🗂️  degit "${uri}"`)
     if (cacheCheck) {
       const tagHasChanged = await degitTagHasChanged(uri)
       cache = !tagHasChanged
       if (tagHasChanged) {
-        logger.debug({ degit: uri }, `tag has changed, renew cache`)
+        logger.debug({ degit: uri }, `♻️ tag has changed, renew cache`)
       }
     }
     let subgroup
@@ -37,7 +37,7 @@ module.exports = async (
       uri = `${uri.slice(0, subgroupIndex)}${subgroup}/${repoName}`
       logger.debug(
         { degit: uri },
-        `degit using subgroup "${subgroup}" and sub-directory "${subDirectory}"`
+        `🗂️  degit using subgroup "${subgroup}" and sub-directory "${subDirectory}"`
       )
     }
 

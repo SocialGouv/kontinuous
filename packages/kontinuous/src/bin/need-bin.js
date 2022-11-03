@@ -7,5 +7,6 @@ module.exports = async (needFunc) => {
     addPath: `${config.kontinuousHomeDir}/bin`,
     cacheDir: `${config.kontinuousHomeDir}/cache`,
     logger,
+    forceDownload: config.externalBinForceDownload,
   })
 }

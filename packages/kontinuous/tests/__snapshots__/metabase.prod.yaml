@@ -12,12 +12,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
   labels:
     application: test-metabase
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: test-metabase
 ---
 apiVersion: networking.k8s.io/v1
@@ -29,12 +32,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -59,13 +65,16 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     kapp.k14s.io/disable-original: ''
-  namespace: test-metabase
   labels:
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-default
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-metabase
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -74,16 +83,19 @@ metadata:
   labels:
     component: metabase-app1
     application: test-metabase
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: configmap-e4ces7-metabase-app1
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: metabase-app1
   namespace: test-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase-app1
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/configmap.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     kapp.k14s.io/disable-original: ''
 data:
   MB_APPLICATION_NAME: metabase-app1
@@ -104,16 +116,19 @@ metadata:
   labels:
     component: metabase-app2
     application: test-metabase
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: configmap-e4ces7-metabase-app2
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: metabase-app2
   namespace: test-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase-app2
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/configmap.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     kapp.k14s.io/disable-original: ''
 data:
   MB_APPLICATION_NAME: metabase-app2
@@ -135,13 +150,16 @@ metadata:
   annotations:
     kontinuous/chartPath: project
     kontinuous/source: project/templates/metabase1.configmap.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     kapp.k14s.io/disable-original: ''
-  namespace: test-metabase
   labels:
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: configmap-e4ces7-metabase1-configmap
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-metabase
 data:
   METABASE_ENV: production
 ---
@@ -152,71 +170,70 @@ metadata:
   annotations:
     kontinuous/chartPath: project
     kontinuous/source: project/templates/metabase2.configmap.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     kapp.k14s.io/disable-original: ''
-  namespace: test-metabase
   labels:
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: configmap-e4ces7-metabase2-configmap
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-metabase
 data:
   METABASE_ENV: production
 ---
-apiVersion: v1
-kind: Service
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
 metadata:
-  labels:
-    component: metabase-app1
-    application: test-metabase
-    kontinuous/ref: feature-branch-1
-    kontinuous/resourceName: service-5cfizy-metabase-app1
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
-  name: metabase-app1
-  namespace: test-metabase
+  name: metabase1-sealed-secret
   annotations:
-    kontinuous/chartPath: project.fabrique.contrib.metabase-app1
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/service.yaml
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/metabase1.sealed-secret.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
+  labels:
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: sealedsecret-5ip1a4-metabase1-sealed-secret
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-metabase
 spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 3000
-  selector:
-    component: metabase-app1
-  type: ClusterIP
+  encryptedData:
+    METABASE_SECRET: >-
+      AgBc+UqJhU2ZBfuplyiI3pPekRjm36i62WYR1lVpM9PIwK636R78mpfckIeGU09qKAxWGYBqtYtvNP3lTG8OwEUqKLnUxZPZKbtwc78GwzEzaPpnWmM+j78uBDxqHDiW+jKwnD/6XiWxsfyd1ZU/qS0LDEJBnVRoDyUI0NxzFWLxG8ylr6oK3q+oD3338D588TimklZGOvRm/hI95d5uwKsYPz0zYOj28pgHzNMVycreOXi9l562agyg2hdb8AkFD41utLEURxJOomJUl2xZIjv6FX++R9OJQzRsX6WsCAkLZPO7VEi1cvG6QzPf/uchwystfQfW5c+5ofVJer5mLJJjFcO8OfNbsg/JYlndv4F90cjH2dojSHv/qH/ddpObPgkDpVzCljdTvrir5bl3z3KeqLb20ja1hLJlwOue4zHDCQ6Fwza8VN6BjbHZLYhOO5qlYfWezjwt+B6RdFVzD8wu2JbuWsJo5w2HhMl2Nckar1B8CPxzgRXnFwc/QsFTDXOXX+rtxnC4FJfffZ/2frV745c642AhOArDxk8OGDFkrexr5OMv0iJcY15cl6K9dfZWOKfFd5mxfWFhDWUSAoUZJsz4uVxpTCCoSJBe8Nf1aKk7PkZ+bXtV5bpuktySoPh0hG1M1dUg0WsSC2i6zp75AUxVW6c4GG7d9FMsTHIwyD7fEbV3TMRanSRFYNPOmft/oI7Q3oNGOGg26KCtX414FG02EnpmrttHQguY7cnHGG7i7s8mnyGv
+  template:
+    metadata:
+      name: metabase1-sealed-secret
+    type: Opaque
 ---
-apiVersion: v1
-kind: Service
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
 metadata:
-  labels:
-    component: metabase-app2
-    application: test-metabase
-    kontinuous/ref: feature-branch-1
-    kontinuous/resourceName: service-5cfizy-metabase-app2
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
-  name: metabase-app2
-  namespace: test-metabase
+  name: metabase2-sealed-secret
   annotations:
-    kontinuous/chartPath: project.fabrique.contrib.metabase-app2
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/service.yaml
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/metabase2.sealed-secret.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
+  labels:
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: sealedsecret-5ip1a4-metabase2-sealed-secret
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-metabase
 spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 3000
-  selector:
-    component: metabase-app2
-  type: ClusterIP
+  encryptedData:
+    METABASE_SECRET: >-
+      AgBc+UqJhU2ZBfuplyiI3pPekRjm36i62WYR1lVpM9PIwK636R78mpfckIeGU09qKAxWGYBqtYtvNP3lTG8OwEUqKLnUxZPZKbtwc78GwzEzaPpnWmM+j78uBDxqHDiW+jKwnD/6XiWxsfyd1ZU/qS0LDEJBnVRoDyUI0NxzFWLxG8ylr6oK3q+oD3338D588TimklZGOvRm/hI95d5uwKsYPz0zYOj28pgHzNMVycreOXi9l562agyg2hdb8AkFD41utLEURxJOomJUl2xZIjv6FX++R9OJQzRsX6WsCAkLZPO7VEi1cvG6QzPf/uchwystfQfW5c+5ofVJer5mLJJjFcO8OfNbsg/JYlndv4F90cjH2dojSHv/qH/ddpObPgkDpVzCljdTvrir5bl3z3KeqLb20ja1hLJlwOue4zHDCQ6Fwza8VN6BjbHZLYhOO5qlYfWezjwt+B6RdFVzD8wu2JbuWsJo5w2HhMl2Nckar1B8CPxzgRXnFwc/QsFTDXOXX+rtxnC4FJfffZ/2frV745c642AhOArDxk8OGDFkrexr5OMv0iJcY15cl6K9dfZWOKfFd5mxfWFhDWUSAoUZJsz4uVxpTCCoSJBe8Nf1aKk7PkZ+bXtV5bpuktySoPh0hG1M1dUg0WsSC2i6zp75AUxVW6c4GG7d9FMsTHIwyD7fEbV3TMRanSRFYNPOmft/oI7Q3oNGOGg26KCtX414FG02EnpmrttHQguY7cnHGG7i7s8mnyGv
+  template:
+    metadata:
+      name: metabase2-sealed-secret
+    type: Opaque
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -224,22 +241,36 @@ metadata:
   labels:
     component: metabase-app1
     application: test-metabase
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: deployment-3d60sq-metabase-app1
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: metabase-app1
   namespace: test-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase-app1
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/deployment.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    kapp.k14s.io/change-group: kontinuous/test-metabase
-    kapp.k14s.io/change-group.metabase-app1: kontinuous/metabase-app1.test-metabase
+    kontinuous/depname.full: project.fabrique.contrib.metabase-app1.deployment.metabase-app1
+    kontinuous/depname.chartResource: metabase-app1.deployment.metabase-app1
+    kontinuous/depname.chartName: metabase-app1
+    kontinuous/depname.chartPath: project.fabrique.contrib.metabase-app1
+    kontinuous/depname.resourcePath: deployment.metabase-app1
+    kontinuous/depname.resourceName: metabase-app1
+    kapp.k14s.io/change-group.metabase-app1: kontinuous/metabase-app1
+    kapp.k14s.io/change-group.project.fabrique.contrib.metabase-app1: kontinuous/project.fabrique.contrib.metabase-app1
+    kapp.k14s.io/change-group.project.fabrique.contrib.metabase-app1.deployment.metabase-app1: kontinuous/project.fabrique.contrib.metabase-app1.deployment.metabase-app1
+    kapp.k14s.io/change-group.project.fabrique.contrib.metabase-app1.metabase-app1: kontinuous/project.fabrique.contrib.metabase-app1.metabase-app1
+    kapp.k14s.io/change-group.metabase-app1.deployment.metabase-app1: kontinuous/metabase-app1.deployment.metabase-app1
+    kapp.k14s.io/change-group.metabase-app1.metabase-app1: kontinuous/metabase-app1.metabase-app1
+    kapp.k14s.io/change-group.deployment.metabase-app1: kontinuous/deployment.metabase-app1
 spec:
   replicas: 1
   selector:
@@ -249,10 +280,14 @@ spec:
     metadata:
       labels:
         component: metabase-app1
+        kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+        kontinuous/deployment.env: test-metabase-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: deployment-3d60sq-metabase-app1
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     spec:
       containers:
         - image: metabase/metabase:v0.44.0
@@ -307,22 +342,36 @@ metadata:
   labels:
     component: metabase-app2
     application: test-metabase
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: deployment-3d60sq-metabase-app2
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: metabase-app2
   namespace: test-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase-app2
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/deployment.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    kapp.k14s.io/change-group: kontinuous/test-metabase
-    kapp.k14s.io/change-group.metabase-app2: kontinuous/metabase-app2.test-metabase
+    kontinuous/depname.full: project.fabrique.contrib.metabase-app2.deployment.metabase-app2
+    kontinuous/depname.chartResource: metabase-app2.deployment.metabase-app2
+    kontinuous/depname.chartName: metabase-app2
+    kontinuous/depname.chartPath: project.fabrique.contrib.metabase-app2
+    kontinuous/depname.resourcePath: deployment.metabase-app2
+    kontinuous/depname.resourceName: metabase-app2
+    kapp.k14s.io/change-group.metabase-app2: kontinuous/metabase-app2
+    kapp.k14s.io/change-group.project.fabrique.contrib.metabase-app2: kontinuous/project.fabrique.contrib.metabase-app2
+    kapp.k14s.io/change-group.project.fabrique.contrib.metabase-app2.deployment.metabase-app2: kontinuous/project.fabrique.contrib.metabase-app2.deployment.metabase-app2
+    kapp.k14s.io/change-group.project.fabrique.contrib.metabase-app2.metabase-app2: kontinuous/project.fabrique.contrib.metabase-app2.metabase-app2
+    kapp.k14s.io/change-group.metabase-app2.deployment.metabase-app2: kontinuous/metabase-app2.deployment.metabase-app2
+    kapp.k14s.io/change-group.metabase-app2.metabase-app2: kontinuous/metabase-app2.metabase-app2
+    kapp.k14s.io/change-group.deployment.metabase-app2: kontinuous/deployment.metabase-app2
 spec:
   replicas: 1
   selector:
@@ -332,10 +381,14 @@ spec:
     metadata:
       labels:
         component: metabase-app2
+        kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+        kontinuous/deployment.env: test-metabase-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: deployment-3d60sq-metabase-app2
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     spec:
       containers:
         - image: metabase/metabase:v0.44.0
@@ -384,6 +437,68 @@ spec:
               cpu: 500m
               memory: 512Mi
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: metabase-app1
+    application: test-metabase
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-metabase-app1
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: metabase-app1
+  namespace: test-metabase
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.metabase-app1
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/service.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: metabase-app1
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: metabase-app2
+    application: test-metabase
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-metabase-app2
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: metabase-app2
+  namespace: test-metabase
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.metabase-app2
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/service.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: metabase-app2
+  type: ClusterIP
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -392,6 +507,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.metabase-app1
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/ingress.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -399,10 +515,12 @@ metadata:
   labels:
     component: metabase-app1
     application: test-metabase
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: ingress-5dz9oh-metabase-app1
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: metabase-app1
   namespace: test-metabase
 spec:
@@ -430,6 +548,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.metabase-app2
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/ingress.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     kapp.k14s.io/disable-original: ''
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -437,10 +556,12 @@ metadata:
   labels:
     component: metabase-app2
     application: test-metabase
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
+    kontinuous/deployment.env: test-metabase-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: ingress-5dz9oh-metabase-app2
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: metabase-app2
   namespace: test-metabase
 spec:
@@ -480,51 +601,5 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
----
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  name: metabase1-sealed-secret
-  annotations:
-    kontinuous/chartPath: project
-    kontinuous/source: project/templates/metabase1.sealed-secret.yaml
-    kapp.k14s.io/disable-original: ''
-  namespace: test-metabase
-  labels:
-    kontinuous/ref: feature-branch-1
-    kontinuous/resourceName: sealedsecret-5ip1a4-metabase1-sealed-secret
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
-spec:
-  encryptedData:
-    METABASE_SECRET: >-
-      AgBc+UqJhU2ZBfuplyiI3pPekRjm36i62WYR1lVpM9PIwK636R78mpfckIeGU09qKAxWGYBqtYtvNP3lTG8OwEUqKLnUxZPZKbtwc78GwzEzaPpnWmM+j78uBDxqHDiW+jKwnD/6XiWxsfyd1ZU/qS0LDEJBnVRoDyUI0NxzFWLxG8ylr6oK3q+oD3338D588TimklZGOvRm/hI95d5uwKsYPz0zYOj28pgHzNMVycreOXi9l562agyg2hdb8AkFD41utLEURxJOomJUl2xZIjv6FX++R9OJQzRsX6WsCAkLZPO7VEi1cvG6QzPf/uchwystfQfW5c+5ofVJer5mLJJjFcO8OfNbsg/JYlndv4F90cjH2dojSHv/qH/ddpObPgkDpVzCljdTvrir5bl3z3KeqLb20ja1hLJlwOue4zHDCQ6Fwza8VN6BjbHZLYhOO5qlYfWezjwt+B6RdFVzD8wu2JbuWsJo5w2HhMl2Nckar1B8CPxzgRXnFwc/QsFTDXOXX+rtxnC4FJfffZ/2frV745c642AhOArDxk8OGDFkrexr5OMv0iJcY15cl6K9dfZWOKfFd5mxfWFhDWUSAoUZJsz4uVxpTCCoSJBe8Nf1aKk7PkZ+bXtV5bpuktySoPh0hG1M1dUg0WsSC2i6zp75AUxVW6c4GG7d9FMsTHIwyD7fEbV3TMRanSRFYNPOmft/oI7Q3oNGOGg26KCtX414FG02EnpmrttHQguY7cnHGG7i7s8mnyGv
-  template:
-    metadata:
-      name: metabase1-sealed-secret
-    type: Opaque
----
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  name: metabase2-sealed-secret
-  annotations:
-    kontinuous/chartPath: project
-    kontinuous/source: project/templates/metabase2.sealed-secret.yaml
-    kapp.k14s.io/disable-original: ''
-  namespace: test-metabase
-  labels:
-    kontinuous/ref: feature-branch-1
-    kontinuous/resourceName: sealedsecret-5ip1a4-metabase2-sealed-secret
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
-spec:
-  encryptedData:
-    METABASE_SECRET: >-
-      AgBc+UqJhU2ZBfuplyiI3pPekRjm36i62WYR1lVpM9PIwK636R78mpfckIeGU09qKAxWGYBqtYtvNP3lTG8OwEUqKLnUxZPZKbtwc78GwzEzaPpnWmM+j78uBDxqHDiW+jKwnD/6XiWxsfyd1ZU/qS0LDEJBnVRoDyUI0NxzFWLxG8ylr6oK3q+oD3338D588TimklZGOvRm/hI95d5uwKsYPz0zYOj28pgHzNMVycreOXi9l562agyg2hdb8AkFD41utLEURxJOomJUl2xZIjv6FX++R9OJQzRsX6WsCAkLZPO7VEi1cvG6QzPf/uchwystfQfW5c+5ofVJer5mLJJjFcO8OfNbsg/JYlndv4F90cjH2dojSHv/qH/ddpObPgkDpVzCljdTvrir5bl3z3KeqLb20ja1hLJlwOue4zHDCQ6Fwza8VN6BjbHZLYhOO5qlYfWezjwt+B6RdFVzD8wu2JbuWsJo5w2HhMl2Nckar1B8CPxzgRXnFwc/QsFTDXOXX+rtxnC4FJfffZ/2frV745c642AhOArDxk8OGDFkrexr5OMv0iJcY15cl6K9dfZWOKfFd5mxfWFhDWUSAoUZJsz4uVxpTCCoSJBe8Nf1aKk7PkZ+bXtV5bpuktySoPh0hG1M1dUg0WsSC2i6zp75AUxVW6c4GG7d9FMsTHIwyD7fEbV3TMRanSRFYNPOmft/oI7Q3oNGOGg26KCtX414FG02EnpmrttHQguY7cnHGG7i7s8mnyGv
-  template:
-    metadata:
-      name: metabase2-sealed-secret
-    type: Opaque
 "
 `;

@@ -3,10 +3,12 @@ const fs = require("fs-extra")
 const ctx = require("~common/ctx")
 const yaml = require("~common/utils/yaml")
 const timeLogger = require("~common/utils/time-logger")
+const eventsBucket = require("~common/utils/events-bucket")
 
 const build = require("~/build")
 const { setStatus } = require("~/status")
 
+const validateManifests = require("../build/validate-manifests")
 const deployHooks = require("./deploy-hooks")
 const deployOnWebhook = require("./deploy-on-webhook")
 const buildDeployPlugins = require("./build-deploy-plugins")
@@ -35,6 +37,11 @@ module.exports = async (options) => {
   const onWebhook = options.W
 
   try {
+    const elapsed = timeLogger({
+      logger,
+      logLevel: "debug",
+    })
+
     let manifestsFile = options.F
     let manifests
     if (!manifestsFile) {
@@ -43,6 +50,8 @@ module.exports = async (options) => {
       manifests = result.manifests
     } else {
       manifests = await fs.readFile(manifestsFile, { encoding: "utf-8" })
+      const manifestsObjects = yaml.loadAll(manifests)
+      await validateManifests(manifestsObjects)
     }
 
     if (onWebhook) {
@@ -66,7 +75,11 @@ module.exports = async (options) => {
     logger.info({ kubeconfig, kubeconfigContext }, "let's deploy on kubernetes")
 
     const allManifests = yaml.loadAll(manifests)
-    await deployHooks(allManifests, "pre")
+
+    if (!config.disableStep.includes("pre-deploy")) {
+      logger.info("🌀 [LIFECYCLE]: pre-deploy")
+      await deployHooks(allManifests, "pre")
+    }
 
     const namespacesManifests = allManifests.filter(
       (manifest) => manifest.kind === "Namespace"
@@ -80,59 +93,63 @@ module.exports = async (options) => {
         namespaces.length > 1 ? "s" : ""
       } "${namespaces.join('","')}"`
     }
-    logger.info(`deploying ${repositoryName} ${namespacesLabel}`)
-
-    const elapsed = timeLogger({
-      logger,
-      logLevel: "info",
-    })
 
     const { dryRun } = options
 
-    const runContext = {}
+    const runContext = {
+      eventsBucket: eventsBucket(),
+    }
 
-    const { stopDeploys, deploysPromise } = await deployWith({
+    const deployContext = {
       manifestsFile,
-      runContext,
-      dryRun,
-    })
-    runContext.stopDeploys = stopDeploys
-
-    const { stopSidecars, sidecarsPromise } = await deploySidecars({
+      manifestsYaml: manifests,
       manifests: allManifests,
       runContext,
       dryRun,
-    })
-    runContext.stopSidecars = stopSidecars
+    }
+
+    if (!config.disableStep.includes("deploy")) {
+      logger.info("🌀 [LIFECYCLE]: deploy")
+      logger.info(`🚀 deploying ${repositoryName} ${namespacesLabel}`)
+      if (!config.disableStep.includes("deploy-with")) {
+        logger.info("🌀 [LIFECYCLE]: deploy-with")
+        const { stopDeploys, deploysPromise } = await deployWith(deployContext)
+        runContext.stopDeploys = stopDeploys
+        runContext.deploysPromise = deploysPromise
+      }
+
+      if (!config.disableStep.includes("deploy-sidecars")) {
+        logger.info("🌀 [LIFECYCLE]: deploy-sidecars")
+        const { stopSidecars, sidecarsPromise } = await deploySidecars(
+          deployContext
+        )
+        runContext.stopSidecars = stopSidecars
+        runContext.sidecarsPromise = sidecarsPromise
+      }
+    }
 
     try {
-      await deploysPromise
-      stopSidecars()
+      await Promise.allSettled([
+        runContext.deploysPromise,
+        runContext.sidecarsPromise,
+      ])
     } catch (error) {
       logger.error({ error }, "deploy failed")
-
-      stopSidecars()
-      const { errors } = await sidecarsPromise
-      if (errors.length) {
-        for (const errorData of errors) {
-          logger.error(
-            {
-              code: errorData.code,
-              type: errorData.type,
-              log: errorData.log,
-              message: errorData.message,
-            },
-            `rollout-status ${errorData.code} error: ${errorData.message}`
-          )
-        }
-      }
+      runContext.stopSidecars()
+      runContext.stopDeploys()
       throw error
     }
 
-    await deployHooks(allManifests, "post")
+    if (!config.disableStep.includes("post-deploy")) {
+      logger.info("🌀 [LIFECYCLE]: post-deploy")
+      await deployHooks(allManifests, "post")
+    }
 
+    logger.info(
+      `✅ kontinuous pipeline ${repositoryName} ${environment} ${namespacesLabel}: ok`
+    )
     elapsed.end({
-      label: `🚀 kontinuous pipeline ${repositoryName} ${environment} ${namespacesLabel}`,
+      label: "🏁 pipeline runned in",
     })
 
     if (statusUrl) {

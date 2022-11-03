@@ -1,0 +1,145 @@
+const { spawn } = require("child_process")
+
+const handledKinds = ["Deployment", "StatefulSet", "Job", "DaemonSet"]
+
+module.exports = async (
+  sidecars,
+  options,
+  {
+    config,
+    logger,
+    utils,
+    needBin,
+    manifests,
+    dryRun,
+    deploysPromise,
+    runContext,
+  }
+) => {
+  if (dryRun) {
+    return
+  }
+
+  let {
+    defaultExcludeContainer = ["kontinuous-wait-needs"],
+    excludeContainer = [],
+  } = options
+  if (!Array.isArray(defaultExcludeContainer)) {
+    defaultExcludeContainer = defaultExcludeContainer.split(",")
+  }
+  if (!Array.isArray(excludeContainer)) {
+    excludeContainer = excludeContainer.split(",")
+  }
+
+  const allExcludeContainers = [...defaultExcludeContainer, ...excludeContainer]
+  const excludeContainerFlag = allExcludeContainers
+    .map((containerName) => `--exclude-container=${containerName}`)
+    .join(" ")
+
+  const { eventsBucket } = runContext
+
+  const { needStern, parseCommand } = utils
+
+  await needBin(needStern)
+
+  const {
+    kubeconfig,
+    kubeconfigContext: kubecontext,
+    deploymentLabelKey,
+  } = config
+
+  const sternProcesses = {}
+
+  const stopSidecar = async () => {
+    for (const p of Object.values(sternProcesses)) {
+      try {
+        process.kill(p.pid, "SIGKILL")
+      } catch (_err) {
+        // do nothing
+      }
+    }
+  }
+
+  const promises = []
+
+  for (const manifest of manifests) {
+    const { kind } = manifest
+    if (!handledKinds.includes(kind)) {
+      continue
+    }
+    const resourceName = manifest.metadata.labels?.["kontinuous/resourceName"]
+    const deploymentLabelValue = manifest.metadata?.labels?.[deploymentLabelKey]
+    const namespace = manifest.metadata?.namespace
+    if (!resourceName) {
+      continue
+    }
+    const labelSelectors = []
+    labelSelectors.push(`kontinuous/resourceName=${resourceName}`)
+    if (deploymentLabelValue) {
+      labelSelectors.push(`${deploymentLabelKey}=${deploymentLabelValue}`)
+    }
+    const selector = labelSelectors.join(",")
+
+    const sternCmd = `
+      stern
+        ${kubeconfig ? `--kubeconfig ${kubeconfig}` : ""}
+        ${kubecontext ? `--context ${kubecontext}` : ""}
+        --namespace ${namespace}
+        --selector ${selector}
+        --since 0s
+        --color always
+        ${excludeContainerFlag}
+    `
+    const [cmd, args] = parseCommand(sternCmd)
+
+    const proc = spawn(cmd, args, {
+      encoding: "utf-8",
+      env: {
+        ...process.env,
+        ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
+      },
+    })
+
+    proc.stdout.on("data", (data) => {
+      process.stderr.write(data.toString())
+    })
+    proc.stderr.on("data", (data) => {
+      process.stderr.write(data.toString())
+    })
+
+    sternProcesses[`${namespace}/${resourceName}`] = proc
+
+    const promise = new Promise(async (resolve, reject) => {
+      proc.on("close", (code) => {
+        if (code === 0) {
+          resolve(true)
+        } else {
+          const error = new Error(`stern exit code ${code}`)
+          error.code = code
+          logger.trace("error running command")
+          reject(error)
+        }
+      })
+    })
+    promises.push(promise)
+  }
+
+  eventsBucket.on("ready", ({ namespace, resourceName }) => {
+    const key = `${namespace}/${resourceName}`
+    if (sternProcesses[key]) {
+      try {
+        process.kill(sternProcesses[key].pid, "SIGKILL")
+      } catch (_err) {
+        // do nothing
+      }
+    }
+  })
+
+  const promise = Promise.allSettled(promises)
+
+  sidecars.push({ stopSidecar, promise })
+  ;(async () => {
+    await deploysPromise
+    stopSidecar()
+  })()
+}

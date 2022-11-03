@@ -12,12 +12,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
   labels:
     application: test-hasura-no-ing
+    kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
+    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: namespace-4wnyh3
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: test-hasura-no-ing
 ---
 apiVersion: networking.k8s.io/v1
@@ -29,12 +32,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
     kapp.k14s.io/disable-original: ''
   labels:
+    kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
+    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
 spec:
   ingress:
     - from:
@@ -59,42 +65,17 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
     kapp.k14s.io/disable-original: ''
-  namespace: test-hasura-no-ing
   labels:
+    kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
+    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: serviceaccount-4nws8p-default
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
-automountServiceAccountToken: false
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    component: hasura
-    application: test-hasura-no-ing
-    kontinuous/ref: feature-branch-1
-    kontinuous/resourceName: service-5cfizy-hasura
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
-  name: hasura
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   namespace: test-hasura-no-ing
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 8080
-  selector:
-    component: hasura
-  type: ClusterIP
+automountServiceAccountToken: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -102,22 +83,36 @@ metadata:
   labels:
     component: hasura
     application: test-hasura-no-ing
+    kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
+    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/resourceName: deployment-3d60sq-hasura
-    app.kubernetes.io/managed-by: kontinuous
-    app.kubernetes.io/created-by: kontinuous
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
   name: hasura
   namespace: test-hasura-no-ing
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.hasura
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
+    kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kapp.k14s.io/update-strategy: fallback-on-replace
     kapp.k14s.io/nonce: ''
-    kapp.k14s.io/change-group: kontinuous/test-hasura-no-ing
-    kapp.k14s.io/change-group.hasura: kontinuous/hasura.test-hasura-no-ing
+    kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
+    kontinuous/depname.chartResource: hasura.deployment.hasura
+    kontinuous/depname.chartName: hasura
+    kontinuous/depname.chartPath: project.fabrique.contrib.hasura
+    kontinuous/depname.resourcePath: deployment.hasura
+    kontinuous/depname.resourceName: hasura
+    kapp.k14s.io/change-group.hasura: kontinuous/hasura
+    kapp.k14s.io/change-group.project.fabrique.contrib.hasura: kontinuous/project.fabrique.contrib.hasura
+    kapp.k14s.io/change-group.project.fabrique.contrib.hasura.deployment.hasura: kontinuous/project.fabrique.contrib.hasura.deployment.hasura
+    kapp.k14s.io/change-group.project.fabrique.contrib.hasura.hasura: kontinuous/project.fabrique.contrib.hasura.hasura
+    kapp.k14s.io/change-group.hasura.deployment.hasura: kontinuous/hasura.deployment.hasura
+    kapp.k14s.io/change-group.hasura.hasura: kontinuous/hasura.hasura
+    kapp.k14s.io/change-group.deployment.hasura: kontinuous/deployment.hasura
 spec:
   replicas: 1
   selector:
@@ -128,10 +123,14 @@ spec:
       labels:
         component: hasura
         application: test-hasura-no-ing
+        kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
+        kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/resourceName: deployment-3d60sq-hasura
-        app.kubernetes.io/managed-by: kontinuous
-        app.kubernetes.io/created-by: kontinuous
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
     spec:
       containers:
         - image: harbor.fabrique.social.gouv.fr/test-hasura-no-ing/hasura:prod
@@ -171,6 +170,37 @@ spec:
             periodSeconds: 5
           env: []
           envFrom: []
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: hasura
+    application: test-hasura-no-ing
+    kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
+    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/resourceName: service-5cfizy-hasura
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: hasura
+  namespace: test-hasura-no-ing
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
+    kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
+    kapp.k14s.io/disable-original: ''
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    component: hasura
+  type: ClusterIP
 ---
 apiVersion: kapp.k14s.io/v1alpha1
 kind: Config

@@ -9,10 +9,16 @@ patches:
     enabled: false
   reloader:
     enabled: false
+  needs:
+    enabled: true
   needsUsingInitcontainers:
     enabled: false
   needsUsingKapp:
     enabled: true
+  filterDisableKapp:
+    enabled: false
+  helm:
+    enabled: false
 
 
 validators:
@@ -24,7 +30,19 @@ validators:
     enabled: false
 
 preDeploy:
+  namespaces:
+    enabled: false
   rancherNamespaces:
     enabled: false
+  needsKubeconfig:
+    enabled: true
   clear:
+    enabled: false
+
+deploySidecars:
+  failfast:
+    enabled: false
+  stern:
+    enabled: false
+  progressing:
     enabled: false

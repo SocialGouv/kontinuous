@@ -6,13 +6,17 @@ const parseCommand = require("./parse-command")
 const defaultLogger = require("./logger")
 
 const kubectlRun = async (kubectlArgs, options = {}) => {
-  const { kubeconfig, ignoreErrors = [], stdin } = options
+  const { kubeconfig, kubeconfigContext, ignoreErrors = [], stdin } = options
 
   if (Array.isArray(kubectlArgs)) {
     kubectlArgs = kubectlArgs.join(" ")
   }
 
-  const [cmd, args] = parseCommand(`kubectl ${kubectlArgs}`)
+  const [cmd, args] = parseCommand(
+    `kubectl ${
+      kubeconfigContext ? `--context ${kubeconfigContext}` : ""
+    } ${kubectlArgs}`
+  )
 
   return new Promise((resolve, reject) => {
     const proc = spawn(cmd, args, {

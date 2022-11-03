@@ -1,18 +1,27 @@
 const { spawn } = require("child_process")
 
-module.exports = ({ kubeconfig, kubecontext, namespace, selector }) => {
+module.exports = ({
+  kubeconfig,
+  kubecontext,
+  namespace,
+  selector,
+  ignoreSecretNotFound,
+}) => {
   const args = []
   if (kubeconfig) {
-    args.push(...["-kubeconfig", kubeconfig])
+    args.push("-kubeconfig", kubeconfig)
   }
   if (kubecontext) {
-    args.push(...["-kubecontext", kubecontext])
+    args.push("-kubecontext", kubecontext)
   }
   if (namespace) {
-    args.push(...["-namespace", namespace])
+    args.push("-namespace", namespace)
   }
   if (selector) {
-    args.push(...["-selector", selector])
+    args.push("-selector", selector)
+  }
+  if (ignoreSecretNotFound) {
+    args.push("-ignore-secret-not-found")
   }
   args.push(...["-interval", "10s"])
   const proc = spawn("rollout-status", args, { encoding: "utf-8" })
@@ -28,15 +37,16 @@ module.exports = ({ kubeconfig, kubecontext, namespace, selector }) => {
     err.push(data)
   })
 
-  const promise = new Promise(async (resolve, reject) => {
-    proc.on("close", (_code) => {
-      const resultJson = Buffer.concat(out).toString()
+  const promise = new Promise(async (resolve, _reject) => {
+    proc.on("close", (code) => {
+      const resultStr = Buffer.concat(out).toString()
       let result
       try {
-        result = JSON.parse(resultJson)
+        result = JSON.parse(resultStr)
         resolve(result)
       } catch (_err) {
-        reject(new Error(Buffer.concat(err).toString()))
+        const errStr = Buffer.concat(err).toString()
+        resolve({ error: { reason: errStr || resultStr, code } })
       }
     })
   })

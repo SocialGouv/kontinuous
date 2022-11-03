@@ -24,7 +24,9 @@ module.exports = (program) =>
     .addOption(options.ignoreProjectTemplates)
     .addOption(options.kubeconfigContext)
     .addOption(options.kubeconfigContextNoDetect)
+    .addOption(options.disableStep)
     .addOption(options.disablePlugin)
+    .addOption(options.noValidate)
     .option(
       "--on-webhook, -w",
       "trigger built manifests deploying via webhook endpoint"
@@ -41,7 +43,7 @@ module.exports = (program) =>
       "--file, -f <file>",
       "select a manifests yaml file, default will build one"
     )
-    .option("--timeout <timeout>", "deploy wait timeout, default 15m0s")
+    .option("--timeout <timeout>", "deploy wait timeout, default 15m")
     .option("--dry-run", "run all things except the deployment")
     .description(
       "Deploy manifests using kapp with current directory configuration"

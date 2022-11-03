@@ -14,7 +14,7 @@ app:
         name: app-configmap
 
 hasura:
-  ~needs: [build-hasura,db]
+  ~needs: [jobs.build-hasura,jobs-dev.db]
   # waitForPostgres: true
   envFrom:
     - secretRef:

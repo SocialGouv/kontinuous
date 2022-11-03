@@ -3,8 +3,10 @@ const fs = require("fs-extra")
 const recurseDependency = require("~common/config/recurse-dependencies")
 const yarnInstall = require("~common/utils/yarn-install")
 const fileHash = require("~common/utils/file-hash")
+const ctx = require("~common/ctx")
 
 module.exports = async (config) => {
+  const logger = ctx.require("logger")
   await recurseDependency({
     config,
     afterChildren: async ({ target }) => {
@@ -28,6 +30,12 @@ module.exports = async (config) => {
       await fs.ensureDir(sharedDir)
       fs.symlink(sharedDir, `${target}/node_modules`)
 
+      const { buildPath } = config
+      const relativeTarget = target.startsWith(buildPath)
+        ? target.slice(buildPath.length + 1)
+        : target
+
+      logger.debug({ path: relativeTarget }, `🧶 yarn install plugins`)
       await yarnInstall(target)
     },
   })

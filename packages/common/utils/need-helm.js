@@ -53,4 +53,5 @@ const download = async (options) => {
   await fs.remove(unzippedDir)
 }
 
-module.exports = (options = {}) => needBin("helm", download, options)
+module.exports = (options = {}) =>
+  needBin("helm", download, { ...options, version: helmVersion })

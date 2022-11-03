@@ -515,6 +515,8 @@ const mergeValuesFromDir = async ({
 }
 
 const compileValues = async (config, logger) => {
+  logger.info("🌀 [LIFECYCLE]: values-compilers")
+
   let values = {}
   const { buildPath, environment } = config
 
@@ -522,6 +524,7 @@ const compileValues = async (config, logger) => {
 
   const scope = ["project"]
 
+  logger.debug("🪡  [STEP]: merge env values")
   await mergeValuesFromDir({
     values,
     target: buildProjectPath,
@@ -555,16 +558,19 @@ const compileValues = async (config, logger) => {
   const context = createContext({ type: "values-compilers", chartsAliasMap })
 
   const valuesJsFile = `${buildProjectPath}/values.js`
+  logger.debug("🪡  [STEP]: values.js")
   if (await fs.pathExists(valuesJsFile)) {
     values = await pluginFunction(valuesJsFile)(values, {}, context)
   }
 
+  logger.debug("🪡  [STEP]: values-compilers/*")
   values = await pluginFunction(`${buildProjectPath}/values-compilers`)(
     values,
     {},
     context
   )
 
+  logger.debug("🪡  [STEP]: values.final.js")
   const valuesFinalJsFile = `${buildProjectPath}/values.final.js`
   if (await fs.pathExists(valuesFinalJsFile)) {
     values = await pluginFunction(valuesFinalJsFile)(values, {}, context)

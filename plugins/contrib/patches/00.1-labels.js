@@ -1,7 +1,14 @@
 const templateLabelKinds = ["Job", "Deployment", "StatefulSet", "DaemonSet"]
 
 module.exports = (manifests, _options, { config, utils }) => {
-  const { refLabelKey, refLabelValue } = config
+  const {
+    refLabelKey,
+    refLabelValue,
+    deploymentLabelKey,
+    deploymentLabelValue,
+    deploymentEnvLabelKey,
+    deploymentEnvLabelValue,
+  } = config
 
   const { slug } = utils
 
@@ -18,17 +25,29 @@ module.exports = (manifests, _options, { config, utils }) => {
     if (!manifest.metadata.labels) {
       manifest.metadata.labels = {}
     }
+    if (!manifest.metadata.annotations) {
+      manifest.metadata.annotations = {}
+    }
 
     const name = kind === "Namespace" ? manifest.name : manifest.metadata.name
 
     const labels = {
+      [deploymentLabelKey]: deploymentLabelValue,
+      [deploymentEnvLabelKey]: deploymentEnvLabelValue,
       [refLabelKey]: refLabelValue,
       "kontinuous/resourceName": slug([kind, name]),
-      "app.kubernetes.io/managed-by": "kontinuous",
-      "app.kubernetes.io/created-by": "kontinuous",
+      // "app.kubernetes.io/managed-by": "kontinuous", // incompatible with helm deployment
+      // "app.kubernetes.io/created-by": "kontinuous", // incompatible with helm deployment
+      "app.kubernetes.io/manifest-managed-by": "kontinuous",
+      "app.kubernetes.io/manifest-created-by": "kontinuous",
+    }
+
+    const annotations = {
+      [deploymentLabelKey]: deploymentLabelValue,
     }
 
     Object.assign(manifest.metadata.labels, labels)
+    Object.assign(manifest.metadata.annotations, annotations)
 
     if (templateLabelKinds.includes(kind)) {
       if (!manifest.spec) {
@@ -43,7 +62,11 @@ module.exports = (manifests, _options, { config, utils }) => {
       if (!manifest.spec.template.metadata.labels) {
         manifest.spec.template.metadata.labels = {}
       }
+      if (!manifest.spec.template.metadata.annotations) {
+        manifest.spec.template.metadata.annotations = {}
+      }
       Object.assign(manifest.spec.template.metadata.labels, labels)
+      Object.assign(manifest.spec.template.metadata.annotations, annotations)
     }
   }
 

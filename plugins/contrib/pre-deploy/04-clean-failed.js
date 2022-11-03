@@ -38,6 +38,7 @@ module.exports = async (
             kubecontext,
             namespace,
             selector,
+            ignoreSecretNotFound: false,
           })
           const { success, error } = status
           if (!success) {

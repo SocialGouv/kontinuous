@@ -11,16 +11,12 @@ const checkNamespaceIsAvailable = async ({
 }) => {
   logger.debug("checking if namespace is available")
   try {
-    const json = await kubectlRetry(
-      `${
-        kubeconfigContext ? `--context ${kubeconfigContext}` : ""
-      } get ns ${namespace} -o json`,
-      {
-        kubeconfig,
-        logInfo: false,
-        logger,
-      }
-    )
+    const json = await kubectlRetry(`get ns ${namespace} -o json`, {
+      kubeconfig,
+      kubeconfigContext,
+      logInfo: false,
+      logger,
+    })
     const data = JSON.parse(json)
     const phase = data?.status.phase
     // logger.debug(`namespace "${namespace}" phase is "${phase}"`)

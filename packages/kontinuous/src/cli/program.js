@@ -23,11 +23,16 @@ module.exports = () => {
       const config = await loadConfig(opts)
       ctx.set("config", config)
 
-      const logger = createLogger({
+      const loggerOverride = ctx.get("loggerOverride")
+      let logger = createLogger({
         sync: false,
         secrets: [...(config.webhookToken ? [config.webhookToken] : [])],
       })
+      if (loggerOverride) {
+        logger = loggerOverride(logger, config)
+      }
       ctx.set("logger", logger)
+
       logger.configureDebug(opts.D)
       globalLogger.configureDebug(opts.D)
     })

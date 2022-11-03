@@ -18,7 +18,7 @@ inputs:
   actionName:
     description: "override manifests name as manifest-$name.yaml, default to manifest-$environment.yaml"
   timeout:
-    description: "override default kapp --wait-timeout, default to 15m0s"
+    description: "override default kapp --wait-timeout, default to 15m"
   cwd:
     description: "working directory where is located .kontinuous"
   kubeconfigContext:
@@ -128,7 +128,7 @@ runs:
         HOSTS=$(cat manifests.yaml | yq eval-all '.spec.rules[] .host')
         HOST=$(echo "$HOSTS" | head -n 1)
         echo $HOST
-        echo "::set-output name=url::https://$HOST"
+        echo "url=https://$HOST">>$GITHUB_OUTPUT
 
     - name: Notify deployment end
       uses: bobheadxi/deployments@v0.4.3
