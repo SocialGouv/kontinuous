@@ -9,8 +9,8 @@ on:
         required: true
 
 jobs:
-  logs:
-    name: logs
+  production:
+    name: production
     runs-on: ubuntu-latest
     environment: production
     steps:
