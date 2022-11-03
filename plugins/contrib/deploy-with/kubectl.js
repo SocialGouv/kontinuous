@@ -78,13 +78,15 @@ module.exports = async (deploys, options, context) => {
   const promise = new Promise(async (resolve, reject) => {
     try {
       await kubectlPromise
-      if (!dryRun) {
-        const { stop, promise: rolloutStatusPromise } = await rolloutStatus(
-          context
-        )
-        stopRolloutStatus = stop
-        await rolloutStatusPromise
+      if (dryRun) {
+        resolve(true)
+        return
       }
+      const { stop, promise: rolloutStatusPromise } = await rolloutStatus(
+        context
+      )
+      stopRolloutStatus = stop
+      await rolloutStatusPromise
       resolve(true)
     } catch (err) {
       reject(err)

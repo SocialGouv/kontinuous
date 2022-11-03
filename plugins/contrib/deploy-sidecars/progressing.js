@@ -12,7 +12,7 @@ module.exports = async (
     return
   }
 
-  const { prettyTime } = utils
+  const { prettyTime, promiseAll } = utils
 
   const { interval = 15, globalProgressingInitialDelay = 5 } = options
 
@@ -23,11 +23,15 @@ module.exports = async (
     return elapsed
   }
 
-  const logState = (msg, param) => {
+  const getStateMsg = (msg, param) => {
     const key = getEventUniqKey(param)
-    const { namespace, resourceName } = param
+    const { resourceName } = param
     const elapsed = getElapsed(key)
-    logger.info({ namespace }, `${msg}: ${resourceName} [${elapsed}]`)
+    return `${msg}: ${resourceName} [${elapsed}]`
+  }
+  const logState = (msg, param) => {
+    const { namespace } = param
+    logger.info({ namespace }, getStateMsg(msg, param))
   }
 
   const { publicPromise } = utils
@@ -41,7 +45,7 @@ module.exports = async (
     }
     for (const p of Object.values(promisesMap)) {
       if (!p.ended) {
-        p.reject()
+        p.resolve(null)
       }
     }
   }
@@ -53,6 +57,9 @@ module.exports = async (
     intervalsMap[".global"] = setInterval(() => {
       const promiseValues = Object.values(promisesMap)
       const countTotal = promiseValues.length
+      if (countTotal === 0) {
+        return
+      }
       const countResolved = promiseValues.reduce(
         (n, { resolved }) => (resolved ? n + 1 : n),
         0
@@ -82,22 +89,30 @@ module.exports = async (
   })
   eventsBucket.on("ready", (param) => {
     const key = getEventUniqKey(param)
-    promisesMap[key].resolve()
+    promisesMap[key].resolve(true)
     clearInterval(intervalsMap[key])
     logState("🗸 ready", param)
   })
   eventsBucket.on("failed", (param) => {
     const key = getEventUniqKey(param)
-    promisesMap[key].reject()
+    const msg = "❌ failed"
+    const err = new Error(getStateMsg(msg, param))
+    promisesMap[key].resolve(err)
     clearInterval(intervalsMap[key])
-    logState("❌ failed", param)
+    logState(msg, param)
   })
 
-  const promise = Promise.allSettled(Object.values(promisesMap))
+  const promise = new Promise(async (resolve, reject) => {
+    await Promise.allSettled([deploysPromise])
+    stopSidecar()
+    try {
+      const results = await promiseAll(Object.values(promisesMap))
+      const errors = results.filter((result) => result instanceof Error)
+      resolve({ errors })
+    } catch (err) {
+      reject(err)
+    }
+  })
 
   sidecars.push({ stopSidecar, promise })
-  ;(async () => {
-    await deploysPromise
-    stopSidecar()
-  })()
 }

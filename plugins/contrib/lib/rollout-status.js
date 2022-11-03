@@ -9,7 +9,7 @@ module.exports = async (context) => {
 
   const { eventsBucket } = runContext
 
-  const { needRolloutStatus, rolloutStatusWatch } = utils
+  const { needRolloutStatus, rolloutStatusWatch, promiseAll } = utils
 
   const rolloutStatusProcesses = {}
   const stopRolloutStatus = () => {
@@ -113,46 +113,45 @@ module.exports = async (context) => {
     )
   }
 
+  const optionalField = (err, field) =>
+    err[field] ? `${field}: ${err[field]}` : ""
+  const errorFields = ["code", "type", "message", "log"]
+
   const promise = new Promise(async (resolve, reject) => {
-    let results
     try {
-      results = await Promise.allSettled(promises)
+      const results = await promiseAll(promises)
+      const errors = []
+      for (const result of results) {
+        if (result.success !== true && result.error?.code) {
+          errors.push(result.error)
+        }
+      }
+      if (errors.length) {
+        // for (const errorData of errors) {
+        //   logger.error(
+        //     {
+        //       code: errorData.code,
+        //       type: errorData.type,
+        //       log: errorData.log,
+        //       message: errorData.message,
+        //     },
+        //     `rollout-status ${errorData.code} error: ${errorData.message}`
+        //   )
+        // }
+        throw new AggregateError(
+          errors.map(
+            (err) =>
+              new Error(
+                errorFields.map((field) => optionalField(err, field)).join(", ")
+              )
+          ),
+          "rollout-status error"
+        )
+      }
+      resolve(true)
     } catch (err) {
       reject(err)
     }
-    const errors = []
-    for (const result of results) {
-      const { status } = result
-      if (status === "rejected") {
-        const { reason } = result
-        if (reason instanceof Error) {
-          errors.push(reason.message)
-        } else {
-          errors.push(reason)
-        }
-      } else if (status === "fulfilled") {
-        const { value } = result
-        if (value.success !== true) {
-          errors.push(value.error)
-        }
-      } else {
-        logger.fatal({ result }, `Unexpected promise result`)
-      }
-    }
-    if (errors.length) {
-      for (const errorData of errors) {
-        logger.error(
-          {
-            code: errorData.code,
-            type: errorData.type,
-            log: errorData.log,
-            message: errorData.message,
-          },
-          `rollout-status ${errorData.code} error: ${errorData.message}`
-        )
-      }
-    }
-    resolve({ errors })
   })
 
   return { stop, promise }

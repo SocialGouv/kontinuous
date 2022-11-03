@@ -38,7 +38,7 @@ module.exports = async (
 
   const { eventsBucket } = runContext
 
-  const { needStern, parseCommand } = utils
+  const { needStern, parseCommand, promiseAll } = utils
 
   await needBin(needStern)
 
@@ -111,7 +111,7 @@ module.exports = async (
 
     const promise = new Promise(async (resolve, reject) => {
       proc.on("close", (code) => {
-        if (code === 0) {
+        if (code === 0 || code === null) {
           resolve(true)
         } else {
           const error = new Error(`stern exit code ${code}`)
@@ -135,11 +135,11 @@ module.exports = async (
     }
   })
 
-  const promise = Promise.allSettled(promises)
+  const promise = promiseAll(promises)
 
   sidecars.push({ stopSidecar, promise })
   ;(async () => {
-    await deploysPromise
+    await Promise.allSettled([deploysPromise])
     stopSidecar()
   })()
 }

@@ -4,6 +4,7 @@ const ctx = require("~common/ctx")
 const yaml = require("~common/utils/yaml")
 const timeLogger = require("~common/utils/time-logger")
 const eventsBucket = require("~common/utils/events-bucket")
+const promiseAll = require("~common/utils/promise-all")
 
 const build = require("~/build")
 const { setStatus } = require("~/status")
@@ -128,13 +129,17 @@ module.exports = async (options) => {
       }
     }
 
-    try {
-      await Promise.all([runContext.deploysPromise, runContext.sidecarsPromise])
-    } catch (error) {
-      logger.error({ error }, "deploy failed")
-      runContext.stopSidecars()
-      runContext.stopDeploys()
-      throw error
+    const results = await promiseAll([
+      runContext.deploysPromise,
+      runContext.sidecarsPromise,
+    ])
+    runContext.stopSidecars()
+    runContext.stopDeploys()
+    const errors = results
+      .filter((result) => result?.errors)
+      .flatMap((result) => result.errors)
+    if (errors.length) {
+      throw new AggregateError(errors, "errors encountered during deployment")
     }
 
     if (!config.disableStep.includes("post-deploy")) {
