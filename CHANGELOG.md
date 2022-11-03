@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.86.2](https://github.com/SocialGouv/kontinuous/compare/v1.86.1...v1.86.2) (2022-11-03)
+
+
+### Bug Fixes
+
+* dep trim final dot ([01e5255](https://github.com/SocialGouv/kontinuous/commit/01e5255bd7153e85a43c0a465145681d01c1ba35))
+* disable build images on all branches ([c4e55ec](https://github.com/SocialGouv/kontinuous/commit/c4e55ec1bcc03b77ab3b4bca64538115bb691a5b))
+* sha wait-needs image ([a9d9f6e](https://github.com/SocialGouv/kontinuous/commit/a9d9f6ef78104bfa2b9562c45d6ce227ca8e8662))
+
 ### 1.86.1 (2022-11-03)
 
 ## 1.86.0 (2022-10-30)
