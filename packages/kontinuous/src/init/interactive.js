@@ -2,6 +2,7 @@ const path = require("path")
 
 const fs = require("fs-extra")
 const { Select, Input } = require("enquirer")
+const dree = require("dree")
 
 const degit = require("~common/utils/degit-improved")
 const yaml = require("~common/utils/yaml")
@@ -57,6 +58,15 @@ module.exports = async (opts) => {
   const boilerplateBuildPath = path.join(config.buildPath, "boilerplate")
 
   await degit(boilerplate, boilerplateBuildPath, { logger })
+
+  const dreeOptions = {}
+  const tree = await dree.scanAsync(boilerplateBuildPath, dreeOptions)
+  const treeStr = dree.parseTree(tree, dreeOptions)
+
+  process.stderr.write(
+    `\n📂 files that will be added to project:\n ${treeStr}\n\n`
+  ) // don't use logger to avoid enquirer and asnyc log output collision
+
   try {
     await fs.copy(boilerplateBuildPath, config.workspacePath, {
       overwrite,
@@ -106,7 +116,8 @@ module.exports = async (opts) => {
   let { name } = opts
   if (!name) {
     const inputName = new Input({
-      message: "Project name",
+      message:
+        "Project name (see documentation https://socialgouv.github.io/kontinuous/#/?id=_211-projectname)",
       initial: projectConfig.projectName || "",
     })
     name = await inputName.run()

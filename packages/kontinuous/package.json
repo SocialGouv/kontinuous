@@ -15,6 +15,7 @@
     "commander": "^9.1.0",
     "decompress": "^4.2.1",
     "dotenv": "^16.0.0",
+    "dree": "^3.4.2",
     "enquirer": "^2.3.6",
     "form-data": "^4.0.0",
     "fs-extra": "^10.0.1",
