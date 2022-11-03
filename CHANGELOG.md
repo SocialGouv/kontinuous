@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.86.4](https://github.com/SocialGouv/kontinuous/compare/v1.86.3...v1.86.4) (2022-11-03)
+
+
+### Bug Fixes
+
+* detect error on deploy fail ([fe70a74](https://github.com/SocialGouv/kontinuous/commit/fe70a74c57a5062a165151ce3c47a29fd64023f1))
+* production workflow name ([e8f31d2](https://github.com/SocialGouv/kontinuous/commit/e8f31d2cfe41673ef1863ca35c8d855a4bd9042f))
+* workflow naming try ([a71d205](https://github.com/SocialGouv/kontinuous/commit/a71d2054ba48ae8c10b9c55a14089f7a076bf50c))
+
 ### [1.86.3](https://github.com/SocialGouv/kontinuous/compare/v1.86.2...v1.86.3) (2022-11-03)
 
 
