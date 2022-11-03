@@ -7,8 +7,12 @@ const changeRuleValuePrefix = `upsert after upserting ${changeGroupValuePrefix}`
 
 module.exports = async (manifests, _options, context) => {
   const { utils } = context
-  const { kindIsRunnable } = utils
+  const { kindIsRunnable, slug } = utils
   const deps = getDeps(manifests, context)
+
+  const annotationChangeGroupPrefixLength = changeGroupPrefix.length + 1
+  const slugDepAnnotationKey = (key) =>
+    slug(key, { maxLength: annotationChangeGroupPrefixLength })
 
   for (const [key, dep] of Object.entries(deps)) {
     for (const manifest of dep) {
@@ -17,7 +21,7 @@ module.exports = async (manifests, _options, context) => {
         continue
       }
       annotations[
-        `${changeGroupPrefix}.${key}`
+        `${changeGroupPrefix}.${slugDepAnnotationKey(key)}`
       ] = `${changeGroupValuePrefix}${key}`
     }
   }
@@ -43,7 +47,7 @@ module.exports = async (manifests, _options, context) => {
     const needs = JSON.parse(jsonNeeds)
     for (const need of needs) {
       annotations[
-        `${changeRulePrefix}.${need}`
+        `${changeRulePrefix}.${slugDepAnnotationKey(need)}`
       ] = `${changeRuleValuePrefix}${need}`
     }
   }
