@@ -45,27 +45,32 @@ module.exports = async (config, logger = globalLogger) => {
       // load config file
       let mergeDefinition = definition
 
-      const { extends: extendsPlugin } = definition
-      if (extendsPlugin) {
-        const extendsFileBasename = kebabCase(extendsPlugin)
-        const extendsFile = `${target}/extends/${extendsFileBasename}.yaml`
-        if (!(await fs.pathExists(extendsFile))) {
-          throw new Error(
-            `extends ̂file ${extendsFile} not found as expected for specified extends ${extendsPlugin}`
-          )
+      let { extends: extendsPlugins } = definition
+      if (extendsPlugins) {
+        if (!Array.isArray(extendsPlugins)) {
+          extendsPlugins = [extendsPlugins]
         }
-        const yamlExtends = await fs.readFile(extendsFile, {
-          encoding: "utf-8",
-        })
-        const extendsObj = yaml.load(yamlExtends)
-        mergeDefinition = deepmerge({}, extendsObj, mergeDefinition)
+        for (const extendsPlugin of extendsPlugins) {
+          const extendsFileBasename = kebabCase(extendsPlugin)
+          const extendsFile = `${target}/extends/${extendsFileBasename}.yaml`
+          if (!(await fs.pathExists(extendsFile))) {
+            throw new Error(
+              `extends ̂file ${extendsFile} not found as expected for specified extends ${extendsPlugin}`
+            )
+          }
+          const yamlExtends = await fs.readFile(extendsFile, {
+            encoding: "utf-8",
+          })
+          const extendsObj = yaml.load(yamlExtends)
+          mergeDefinition = deepmerge({}, extendsObj, mergeDefinition)
 
-        if (
-          extendsObj.config?.deployWithPlugin &&
-          config.deployWithPluginIsDefault
-        ) {
-          config.deployWithPlugin = extendsObj.config?.deployWithPlugin
-          config.deployWithPluginIsDefault = false
+          if (
+            extendsObj.config?.deployWithPlugin &&
+            config.deployWithPluginIsDefault
+          ) {
+            config.deployWithPlugin = extendsObj.config?.deployWithPlugin
+            config.deployWithPluginIsDefault = false
+          }
         }
       }
 
