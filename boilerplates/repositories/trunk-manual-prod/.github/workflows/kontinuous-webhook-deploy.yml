@@ -1,4 +1,4 @@
-name: Staging
+name: Review
 on:
   push:
     branches:
