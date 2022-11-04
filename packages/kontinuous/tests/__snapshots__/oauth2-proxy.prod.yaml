@@ -107,12 +107,12 @@ metadata:
     kontinuous/depname.resourcePath: deployment.oauth2-proxy
     kontinuous/depname.resourceName: oauth2-proxy
     kapp.k14s.io/change-group.oauth2-proxy: kontinuous/oauth2-proxy
-    kapp.k14s.io/change-group.project.fabrique.contrib.oauth2-proxy: kontinuous/project.fabrique.contrib.oauth2-proxy
-    kapp.k14s.io/change-group.project.fabrique.contrib.oauth2-proxy.deployment.oauth2-proxy: kontinuous/project.fabrique.contrib.oauth2-proxy.deployment.oauth2-proxy
-    kapp.k14s.io/change-group.project.fabrique.contrib.oauth2-proxy.oauth2-proxy: kontinuous/project.fabrique.contrib.oauth2-proxy.oauth2-proxy
-    kapp.k14s.io/change-group.oauth2-proxy.deployment.oauth2-proxy: kontinuous/oauth2-proxy.deployment.oauth2-proxy
-    kapp.k14s.io/change-group.oauth2-proxy.oauth2-proxy: kontinuous/oauth2-proxy.oauth2-proxy
-    kapp.k14s.io/change-group.deployment.oauth2-proxy: kontinuous/deployment.oauth2-proxy
+    kapp.k14s.io/change-group.project-fabrique-c-2mv7e0: kontinuous/project.fabrique.contrib.oauth2-proxy
+    kapp.k14s.io/change-group.project-fabrique-c-1jwx5m: kontinuous/project.fabrique.contrib.oauth2-proxy.deployment.oauth2-proxy
+    kapp.k14s.io/change-group.project-fabrique-c-51acjs: kontinuous/project.fabrique.contrib.oauth2-proxy.oauth2-proxy
+    kapp.k14s.io/change-group.oauth2-proxy-deplo-31lhs3: kontinuous/oauth2-proxy.deployment.oauth2-proxy
+    kapp.k14s.io/change-group.oauth2-proxy-oauth-2gxof1: kontinuous/oauth2-proxy.oauth2-proxy
+    kapp.k14s.io/change-group.deployment-oauth2-154fgr: kontinuous/deployment.oauth2-proxy
 spec:
   replicas: 1
   selector:

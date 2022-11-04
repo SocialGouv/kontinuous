@@ -103,12 +103,12 @@ metadata:
     kontinuous/depname.resourcePath: job.job-test-init-container-feature-branch-1-seed
     kontinuous/depname.resourceName: job-test-init-container-feature-branch-1-seed
     kapp.k14s.io/change-group.jobs: kontinuous/jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs: kontinuous/project.fabrique.contrib.jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.seed: kontinuous/project.fabrique.contrib.jobs.job.seed
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.seed: kontinuous/project.fabrique.contrib.jobs.seed
-    kapp.k14s.io/change-group.jobs.job.seed: kontinuous/jobs.job.seed
-    kapp.k14s.io/change-group.jobs.seed: kontinuous/jobs.seed
-    kapp.k14s.io/change-group.job.seed: kontinuous/job.seed
+    kapp.k14s.io/change-group.project-fabrique-c-1g5tpj: kontinuous/project.fabrique.contrib.jobs
+    kapp.k14s.io/change-group.project-fabrique-c-619e9n: kontinuous/project.fabrique.contrib.jobs.job.seed
+    kapp.k14s.io/change-group.project-fabrique-c-1bekan: kontinuous/project.fabrique.contrib.jobs.seed
+    kapp.k14s.io/change-group.jobs-job-seed-gtz5x9: kontinuous/jobs.job.seed
+    kapp.k14s.io/change-group.jobs-seed-3cd540: kontinuous/jobs.seed
+    kapp.k14s.io/change-group.job-seed-32qb3l: kontinuous/job.seed
     kapp.k14s.io/change-group.seed: kontinuous/seed
   labels:
     kontinuous/deployment: test-init-container-feature-branch-1-ffac537e6cbbf934b0-32fk0x
@@ -227,12 +227,12 @@ metadata:
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
     kapp.k14s.io/change-group.app: kontinuous/app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app: kontinuous/project.fabrique.contrib.app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app.deployment.app: kontinuous/project.fabrique.contrib.app.deployment.app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app.app: kontinuous/project.fabrique.contrib.app.app
-    kapp.k14s.io/change-group.app.deployment.app: kontinuous/app.deployment.app
-    kapp.k14s.io/change-group.app.app: kontinuous/app.app
-    kapp.k14s.io/change-group.deployment.app: kontinuous/deployment.app
+    kapp.k14s.io/change-group.project-fabrique-c-7gj1ui: kontinuous/project.fabrique.contrib.app
+    kapp.k14s.io/change-group.project-fabrique-c-i3djtl: kontinuous/project.fabrique.contrib.app.deployment.app
+    kapp.k14s.io/change-group.project-fabrique-c-5nawz7: kontinuous/project.fabrique.contrib.app.app
+    kapp.k14s.io/change-group.app-deployment-app-3m2vpu: kontinuous/app.deployment.app
+    kapp.k14s.io/change-group.app-app-2laxj3: kontinuous/app.app
+    kapp.k14s.io/change-group.deployment-app-2yfbx7: kontinuous/deployment.app
     kapp.k14s.io/change-rule.seed: upsert after upserting kontinuous/seed
 spec:
   replicas: 1

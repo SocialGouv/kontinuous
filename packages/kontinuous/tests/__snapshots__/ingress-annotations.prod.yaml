@@ -140,12 +140,12 @@ metadata:
     kontinuous/depname.resourcePath: deployment.metabase
     kontinuous/depname.resourceName: metabase
     kapp.k14s.io/change-group.metabase: kontinuous/metabase
-    kapp.k14s.io/change-group.project.fabrique.contrib.metabase: kontinuous/project.fabrique.contrib.metabase
-    kapp.k14s.io/change-group.project.fabrique.contrib.metabase.deployment.metabase: kontinuous/project.fabrique.contrib.metabase.deployment.metabase
-    kapp.k14s.io/change-group.project.fabrique.contrib.metabase.metabase: kontinuous/project.fabrique.contrib.metabase.metabase
-    kapp.k14s.io/change-group.metabase.deployment.metabase: kontinuous/metabase.deployment.metabase
-    kapp.k14s.io/change-group.metabase.metabase: kontinuous/metabase.metabase
-    kapp.k14s.io/change-group.deployment.metabase: kontinuous/deployment.metabase
+    kapp.k14s.io/change-group.project-fabrique-c-t0r3xb: kontinuous/project.fabrique.contrib.metabase
+    kapp.k14s.io/change-group.project-fabrique-c-16wd5v: kontinuous/project.fabrique.contrib.metabase.deployment.metabase
+    kapp.k14s.io/change-group.project-fabrique-c-4xxwku: kontinuous/project.fabrique.contrib.metabase.metabase
+    kapp.k14s.io/change-group.metabase-deploymen-2wgolc: kontinuous/metabase.deployment.metabase
+    kapp.k14s.io/change-group.metabase-metabase-1qgrhp: kontinuous/metabase.metabase
+    kapp.k14s.io/change-group.deployment-metabase-pznz69: kontinuous/deployment.metabase
 spec:
   replicas: 1
   selector:

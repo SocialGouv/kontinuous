@@ -102,12 +102,12 @@ metadata:
     kontinuous/depname.resourcePath: job.job-test-include-file-feature-branch-1-say-hello
     kontinuous/depname.resourceName: job-test-include-file-feature-branch-1-say-hello
     kapp.k14s.io/change-group.jobs: kontinuous/jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs: kontinuous/project.fabrique.contrib.jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.say-hello: kontinuous/project.fabrique.contrib.jobs.job.say-hello
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.say-hello: kontinuous/project.fabrique.contrib.jobs.say-hello
-    kapp.k14s.io/change-group.jobs.job.say-hello: kontinuous/jobs.job.say-hello
-    kapp.k14s.io/change-group.jobs.say-hello: kontinuous/jobs.say-hello
-    kapp.k14s.io/change-group.job.say-hello: kontinuous/job.say-hello
+    kapp.k14s.io/change-group.project-fabrique-c-1g5tpj: kontinuous/project.fabrique.contrib.jobs
+    kapp.k14s.io/change-group.project-fabrique-c-5y20bl: kontinuous/project.fabrique.contrib.jobs.job.say-hello
+    kapp.k14s.io/change-group.project-fabrique-c-42ng2v: kontinuous/project.fabrique.contrib.jobs.say-hello
+    kapp.k14s.io/change-group.jobs-job-say-hello-59o0xt: kontinuous/jobs.job.say-hello
+    kapp.k14s.io/change-group.jobs-say-hello-4o8gcl: kontinuous/jobs.say-hello
+    kapp.k14s.io/change-group.job-say-hello-s5sh2i: kontinuous/job.say-hello
     kapp.k14s.io/change-group.say-hello: kontinuous/say-hello
   labels:
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4

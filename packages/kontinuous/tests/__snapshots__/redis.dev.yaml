@@ -108,12 +108,12 @@ metadata:
     kontinuous/depname.resourcePath: deployment.redis
     kontinuous/depname.resourceName: redis
     kapp.k14s.io/change-group.redis: kontinuous/redis
-    kapp.k14s.io/change-group.project.fabrique.contrib.redis: kontinuous/project.fabrique.contrib.redis
-    kapp.k14s.io/change-group.project.fabrique.contrib.redis.deployment.redis: kontinuous/project.fabrique.contrib.redis.deployment.redis
-    kapp.k14s.io/change-group.project.fabrique.contrib.redis.redis: kontinuous/project.fabrique.contrib.redis.redis
-    kapp.k14s.io/change-group.redis.deployment.redis: kontinuous/redis.deployment.redis
-    kapp.k14s.io/change-group.redis.redis: kontinuous/redis.redis
-    kapp.k14s.io/change-group.deployment.redis: kontinuous/deployment.redis
+    kapp.k14s.io/change-group.project-fabrique-c-4d8u2l: kontinuous/project.fabrique.contrib.redis
+    kapp.k14s.io/change-group.project-fabrique-c-14iux0: kontinuous/project.fabrique.contrib.redis.deployment.redis
+    kapp.k14s.io/change-group.project-fabrique-c-lvjzbw: kontinuous/project.fabrique.contrib.redis.redis
+    kapp.k14s.io/change-group.redis-deployment-r-41ntk5: kontinuous/redis.deployment.redis
+    kapp.k14s.io/change-group.redis-redis-5kg0nk: kontinuous/redis.redis
+    kapp.k14s.io/change-group.deployment-redis-2p1d4t: kontinuous/deployment.redis
 spec:
   replicas: 1
   selector:

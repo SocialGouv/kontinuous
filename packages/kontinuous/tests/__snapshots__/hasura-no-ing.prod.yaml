@@ -107,12 +107,12 @@ metadata:
     kontinuous/depname.resourcePath: deployment.hasura
     kontinuous/depname.resourceName: hasura
     kapp.k14s.io/change-group.hasura: kontinuous/hasura
-    kapp.k14s.io/change-group.project.fabrique.contrib.hasura: kontinuous/project.fabrique.contrib.hasura
-    kapp.k14s.io/change-group.project.fabrique.contrib.hasura.deployment.hasura: kontinuous/project.fabrique.contrib.hasura.deployment.hasura
-    kapp.k14s.io/change-group.project.fabrique.contrib.hasura.hasura: kontinuous/project.fabrique.contrib.hasura.hasura
-    kapp.k14s.io/change-group.hasura.deployment.hasura: kontinuous/hasura.deployment.hasura
-    kapp.k14s.io/change-group.hasura.hasura: kontinuous/hasura.hasura
-    kapp.k14s.io/change-group.deployment.hasura: kontinuous/deployment.hasura
+    kapp.k14s.io/change-group.project-fabrique-c-6bncjy: kontinuous/project.fabrique.contrib.hasura
+    kapp.k14s.io/change-group.project-fabrique-c-55rnho: kontinuous/project.fabrique.contrib.hasura.deployment.hasura
+    kapp.k14s.io/change-group.project-fabrique-c-42m6xl: kontinuous/project.fabrique.contrib.hasura.hasura
+    kapp.k14s.io/change-group.hasura-deployment-3ts8bo: kontinuous/hasura.deployment.hasura
+    kapp.k14s.io/change-group.hasura-hasura-5ba5zs: kontinuous/hasura.hasura
+    kapp.k14s.io/change-group.deployment-hasura-1jc1mt: kontinuous/deployment.hasura
 spec:
   replicas: 1
   selector:

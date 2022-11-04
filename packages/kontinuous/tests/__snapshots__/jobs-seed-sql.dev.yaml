@@ -104,32 +104,26 @@ metadata:
     kontinuous/depname.resourcePath: job.job-test-jobs-seed-sql-feature-branch-1-db-create-db-13oc8a
     kontinuous/depname.resourceName: job-test-jobs-seed-sql-feature-branch-1-db-create-db-13oc8a
     kapp.k14s.io/change-group.jobs: kontinuous/jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs: kontinuous/project.fabrique.contrib.jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.db.create-db: kontinuous/project.fabrique.contrib.jobs.job.db.create-db
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.db.create-db: kontinuous/project.fabrique.contrib.jobs.db.create-db
-    kapp.k14s.io/change-group.jobs.job.db.create-db: kontinuous/jobs.job.db.create-db
-    kapp.k14s.io/change-group.jobs.db.create-db: kontinuous/jobs.db.create-db
-    kapp.k14s.io/change-group.job.db.create-db: kontinuous/job.db.create-db
-    kapp.k14s.io/change-group.db.create-db: kontinuous/db.create-db
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.db: kontinuous/project.fabrique.contrib.jobs.job.db
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.db: kontinuous/project.fabrique.contrib.jobs.db
-    kapp.k14s.io/change-group.jobs.job.db: kontinuous/jobs.job.db
-    kapp.k14s.io/change-group.jobs.db: kontinuous/jobs.db
-    kapp.k14s.io/change-group.job.db: kontinuous/job.db
+    kapp.k14s.io/change-group.project-fabrique-c-1g5tpj: kontinuous/project.fabrique.contrib.jobs
+    kapp.k14s.io/change-group.project-fabrique-c-4rzxtq: kontinuous/project.fabrique.contrib.jobs.job.db.create-db
+    kapp.k14s.io/change-group.project-fabrique-c-48reig: kontinuous/project.fabrique.contrib.jobs.db.create-db
+    kapp.k14s.io/change-group.jobs-job-db-create-491qs8: kontinuous/jobs.job.db.create-db
+    kapp.k14s.io/change-group.jobs-db-create-db-1u32xg: kontinuous/jobs.db.create-db
+    kapp.k14s.io/change-group.job-db-create-db-4fqeeh: kontinuous/job.db.create-db
+    kapp.k14s.io/change-group.db-create-db-1vqedp: kontinuous/db.create-db
+    kapp.k14s.io/change-group.project-fabrique-c-4zmbb4: kontinuous/project.fabrique.contrib.jobs.job.db
+    kapp.k14s.io/change-group.project-fabrique-c-4g7lb7: kontinuous/project.fabrique.contrib.jobs.db
+    kapp.k14s.io/change-group.jobs-job-db-4pmoj8: kontinuous/jobs.job.db
+    kapp.k14s.io/change-group.jobs-db-4g5hgy: kontinuous/jobs.db
+    kapp.k14s.io/change-group.job-db-3np5js: kontinuous/job.db
     kapp.k14s.io/change-group.db: kontinuous/db
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.db..create-db: kontinuous/project.fabrique.contrib.jobs.job.db..create-db
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.db..create-db: kontinuous/project.fabrique.contrib.jobs.db..create-db
-    kapp.k14s.io/change-group.jobs.job.db..create-db: kontinuous/jobs.job.db..create-db
-    kapp.k14s.io/change-group.jobs.db..create-db: kontinuous/jobs.db..create-db
-    kapp.k14s.io/change-group.job.db..create-db: kontinuous/job.db..create-db
-    kapp.k14s.io/change-group.db..create-db: kontinuous/db..create-db
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.db.: kontinuous/project.fabrique.contrib.jobs.job.db.
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.db.: kontinuous/project.fabrique.contrib.jobs.db.
-    kapp.k14s.io/change-group.jobs.job.db.: kontinuous/jobs.job.db.
-    kapp.k14s.io/change-group.jobs.db.: kontinuous/jobs.db.
-    kapp.k14s.io/change-group.job.db.: kontinuous/job.db.
-    kapp.k14s.io/change-group.db.: kontinuous/db.
-    kapp.k14s.io/change-rule.db..create-secret: upsert after upserting kontinuous/db..create-secret
+    kapp.k14s.io/change-group.project-fabrique-c-504l2h: kontinuous/project.fabrique.contrib.jobs.job.db..create-db
+    kapp.k14s.io/change-group.project-fabrique-c-xjvvl1: kontinuous/project.fabrique.contrib.jobs.db..create-db
+    kapp.k14s.io/change-group.jobs-job-db-create-4kcfqh: kontinuous/jobs.job.db..create-db
+    kapp.k14s.io/change-group.jobs-db-create-db-693mcw: kontinuous/jobs.db..create-db
+    kapp.k14s.io/change-group.job-db-create-db-11odv2: kontinuous/job.db..create-db
+    kapp.k14s.io/change-group.db-create-db-27la6y: kontinuous/db..create-db
+    kapp.k14s.io/change-rule.db-create-secret-1sm3f3: upsert after upserting kontinuous/db..create-secret
   labels:
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
     kontinuous/deployment.env: test-jobs-seed-sql-feature-branch-1
@@ -268,31 +262,25 @@ metadata:
     kontinuous/depname.resourcePath: job.job-test-jobs-seed-sql-feature-branch-1-db-create-secret-3ea5t8
     kontinuous/depname.resourceName: job-test-jobs-seed-sql-feature-branch-1-db-create-secret-3ea5t8
     kapp.k14s.io/change-group.jobs: kontinuous/jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs: kontinuous/project.fabrique.contrib.jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.db: kontinuous/project.fabrique.contrib.jobs.job.db
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.db: kontinuous/project.fabrique.contrib.jobs.db
-    kapp.k14s.io/change-group.jobs.job.db: kontinuous/jobs.job.db
-    kapp.k14s.io/change-group.jobs.db: kontinuous/jobs.db
-    kapp.k14s.io/change-group.job.db: kontinuous/job.db
+    kapp.k14s.io/change-group.project-fabrique-c-1g5tpj: kontinuous/project.fabrique.contrib.jobs
+    kapp.k14s.io/change-group.project-fabrique-c-4zmbb4: kontinuous/project.fabrique.contrib.jobs.job.db
+    kapp.k14s.io/change-group.project-fabrique-c-4g7lb7: kontinuous/project.fabrique.contrib.jobs.db
+    kapp.k14s.io/change-group.jobs-job-db-4pmoj8: kontinuous/jobs.job.db
+    kapp.k14s.io/change-group.jobs-db-4g5hgy: kontinuous/jobs.db
+    kapp.k14s.io/change-group.job-db-3np5js: kontinuous/job.db
     kapp.k14s.io/change-group.db: kontinuous/db
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.db.: kontinuous/project.fabrique.contrib.jobs.job.db.
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.db.: kontinuous/project.fabrique.contrib.jobs.db.
-    kapp.k14s.io/change-group.jobs.job.db.: kontinuous/jobs.job.db.
-    kapp.k14s.io/change-group.jobs.db.: kontinuous/jobs.db.
-    kapp.k14s.io/change-group.job.db.: kontinuous/job.db.
-    kapp.k14s.io/change-group.db.: kontinuous/db.
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.db.create-secret: kontinuous/project.fabrique.contrib.jobs.job.db.create-secret
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.db.create-secret: kontinuous/project.fabrique.contrib.jobs.db.create-secret
-    kapp.k14s.io/change-group.jobs.job.db.create-secret: kontinuous/jobs.job.db.create-secret
-    kapp.k14s.io/change-group.jobs.db.create-secret: kontinuous/jobs.db.create-secret
-    kapp.k14s.io/change-group.job.db.create-secret: kontinuous/job.db.create-secret
-    kapp.k14s.io/change-group.db.create-secret: kontinuous/db.create-secret
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.db..create-secret: kontinuous/project.fabrique.contrib.jobs.job.db..create-secret
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.db..create-secret: kontinuous/project.fabrique.contrib.jobs.db..create-secret
-    kapp.k14s.io/change-group.jobs.job.db..create-secret: kontinuous/jobs.job.db..create-secret
-    kapp.k14s.io/change-group.jobs.db..create-secret: kontinuous/jobs.db..create-secret
-    kapp.k14s.io/change-group.job.db..create-secret: kontinuous/job.db..create-secret
-    kapp.k14s.io/change-group.db..create-secret: kontinuous/db..create-secret
+    kapp.k14s.io/change-group.project-fabrique-c-2nbhfr: kontinuous/project.fabrique.contrib.jobs.job.db.create-secret
+    kapp.k14s.io/change-group.project-fabrique-c-5n582s: kontinuous/project.fabrique.contrib.jobs.db.create-secret
+    kapp.k14s.io/change-group.jobs-job-db-create-5vxbl6: kontinuous/jobs.job.db.create-secret
+    kapp.k14s.io/change-group.jobs-db-create-sec-155nuu: kontinuous/jobs.db.create-secret
+    kapp.k14s.io/change-group.job-db-create-secr-36xbgm: kontinuous/job.db.create-secret
+    kapp.k14s.io/change-group.db-create-secret-6a711z: kontinuous/db.create-secret
+    kapp.k14s.io/change-group.project-fabrique-c-6bhrzw: kontinuous/project.fabrique.contrib.jobs.job.db..create-secret
+    kapp.k14s.io/change-group.project-fabrique-c-3lt4hb: kontinuous/project.fabrique.contrib.jobs.db..create-secret
+    kapp.k14s.io/change-group.jobs-job-db-create-3c6mqu: kontinuous/jobs.job.db..create-secret
+    kapp.k14s.io/change-group.jobs-db-create-sec-4e7e29: kontinuous/jobs.db..create-secret
+    kapp.k14s.io/change-group.job-db-create-secr-yqquct: kontinuous/job.db..create-secret
+    kapp.k14s.io/change-group.db-create-secret-1sm3f3: kontinuous/db..create-secret
   labels:
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
     kontinuous/deployment.env: test-jobs-seed-sql-feature-branch-1
@@ -419,31 +407,25 @@ metadata:
     kontinuous/depname.resourcePath: job.job-test-jobs-seed-sql-feature-branch-1-seed-import-sec-shgdmm
     kontinuous/depname.resourceName: job-test-jobs-seed-sql-feature-branch-1-seed-import-sec-shgdmm
     kapp.k14s.io/change-group.jobs: kontinuous/jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs: kontinuous/project.fabrique.contrib.jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.seed.import-secret: kontinuous/project.fabrique.contrib.jobs.job.seed.import-secret
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.seed.import-secret: kontinuous/project.fabrique.contrib.jobs.seed.import-secret
-    kapp.k14s.io/change-group.jobs.job.seed.import-secret: kontinuous/jobs.job.seed.import-secret
-    kapp.k14s.io/change-group.jobs.seed.import-secret: kontinuous/jobs.seed.import-secret
-    kapp.k14s.io/change-group.job.seed.import-secret: kontinuous/job.seed.import-secret
-    kapp.k14s.io/change-group.seed.import-secret: kontinuous/seed.import-secret
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.seed: kontinuous/project.fabrique.contrib.jobs.job.seed
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.seed: kontinuous/project.fabrique.contrib.jobs.seed
-    kapp.k14s.io/change-group.jobs.job.seed: kontinuous/jobs.job.seed
-    kapp.k14s.io/change-group.jobs.seed: kontinuous/jobs.seed
-    kapp.k14s.io/change-group.job.seed: kontinuous/job.seed
+    kapp.k14s.io/change-group.project-fabrique-c-1g5tpj: kontinuous/project.fabrique.contrib.jobs
+    kapp.k14s.io/change-group.project-fabrique-c-3kysgg: kontinuous/project.fabrique.contrib.jobs.job.seed.import-secret
+    kapp.k14s.io/change-group.project-fabrique-c-am2avk: kontinuous/project.fabrique.contrib.jobs.seed.import-secret
+    kapp.k14s.io/change-group.jobs-job-seed-impo-1qm0o5: kontinuous/jobs.job.seed.import-secret
+    kapp.k14s.io/change-group.jobs-seed-import-s-5lmpx5: kontinuous/jobs.seed.import-secret
+    kapp.k14s.io/change-group.job-seed-import-se-4of1j6: kontinuous/job.seed.import-secret
+    kapp.k14s.io/change-group.seed-import-secret-9ul3tp: kontinuous/seed.import-secret
+    kapp.k14s.io/change-group.project-fabrique-c-619e9n: kontinuous/project.fabrique.contrib.jobs.job.seed
+    kapp.k14s.io/change-group.project-fabrique-c-1bekan: kontinuous/project.fabrique.contrib.jobs.seed
+    kapp.k14s.io/change-group.jobs-job-seed-gtz5x9: kontinuous/jobs.job.seed
+    kapp.k14s.io/change-group.jobs-seed-3cd540: kontinuous/jobs.seed
+    kapp.k14s.io/change-group.job-seed-32qb3l: kontinuous/job.seed
     kapp.k14s.io/change-group.seed: kontinuous/seed
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.seed..import-secret: kontinuous/project.fabrique.contrib.jobs.job.seed..import-secret
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.seed..import-secret: kontinuous/project.fabrique.contrib.jobs.seed..import-secret
-    kapp.k14s.io/change-group.jobs.job.seed..import-secret: kontinuous/jobs.job.seed..import-secret
-    kapp.k14s.io/change-group.jobs.seed..import-secret: kontinuous/jobs.seed..import-secret
-    kapp.k14s.io/change-group.job.seed..import-secret: kontinuous/job.seed..import-secret
-    kapp.k14s.io/change-group.seed..import-secret: kontinuous/seed..import-secret
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.seed.: kontinuous/project.fabrique.contrib.jobs.job.seed.
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.seed.: kontinuous/project.fabrique.contrib.jobs.seed.
-    kapp.k14s.io/change-group.jobs.job.seed.: kontinuous/jobs.job.seed.
-    kapp.k14s.io/change-group.jobs.seed.: kontinuous/jobs.seed.
-    kapp.k14s.io/change-group.job.seed.: kontinuous/job.seed.
-    kapp.k14s.io/change-group.seed.: kontinuous/seed.
+    kapp.k14s.io/change-group.project-fabrique-c-4p4tj6: kontinuous/project.fabrique.contrib.jobs.job.seed..import-secret
+    kapp.k14s.io/change-group.project-fabrique-c-1ntmzq: kontinuous/project.fabrique.contrib.jobs.seed..import-secret
+    kapp.k14s.io/change-group.jobs-job-seed-impo-2tjnhq: kontinuous/jobs.job.seed..import-secret
+    kapp.k14s.io/change-group.jobs-seed-import-s-5fbxf9: kontinuous/jobs.seed..import-secret
+    kapp.k14s.io/change-group.job-seed-import-se-4z98ah: kontinuous/job.seed..import-secret
+    kapp.k14s.io/change-group.seed-import-secret-1r7ph6: kontinuous/seed..import-secret
     kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db
   labels:
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
@@ -561,32 +543,26 @@ metadata:
     kontinuous/depname.resourcePath: job.job-test-jobs-seed-sql-feature-branch-1-seed-seed-db-5pgwgr
     kontinuous/depname.resourceName: job-test-jobs-seed-sql-feature-branch-1-seed-seed-db-5pgwgr
     kapp.k14s.io/change-group.jobs: kontinuous/jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs: kontinuous/project.fabrique.contrib.jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.seed: kontinuous/project.fabrique.contrib.jobs.job.seed
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.seed: kontinuous/project.fabrique.contrib.jobs.seed
-    kapp.k14s.io/change-group.jobs.job.seed: kontinuous/jobs.job.seed
-    kapp.k14s.io/change-group.jobs.seed: kontinuous/jobs.seed
-    kapp.k14s.io/change-group.job.seed: kontinuous/job.seed
+    kapp.k14s.io/change-group.project-fabrique-c-1g5tpj: kontinuous/project.fabrique.contrib.jobs
+    kapp.k14s.io/change-group.project-fabrique-c-619e9n: kontinuous/project.fabrique.contrib.jobs.job.seed
+    kapp.k14s.io/change-group.project-fabrique-c-1bekan: kontinuous/project.fabrique.contrib.jobs.seed
+    kapp.k14s.io/change-group.jobs-job-seed-gtz5x9: kontinuous/jobs.job.seed
+    kapp.k14s.io/change-group.jobs-seed-3cd540: kontinuous/jobs.seed
+    kapp.k14s.io/change-group.job-seed-32qb3l: kontinuous/job.seed
     kapp.k14s.io/change-group.seed: kontinuous/seed
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.seed.: kontinuous/project.fabrique.contrib.jobs.job.seed.
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.seed.: kontinuous/project.fabrique.contrib.jobs.seed.
-    kapp.k14s.io/change-group.jobs.job.seed.: kontinuous/jobs.job.seed.
-    kapp.k14s.io/change-group.jobs.seed.: kontinuous/jobs.seed.
-    kapp.k14s.io/change-group.job.seed.: kontinuous/job.seed.
-    kapp.k14s.io/change-group.seed.: kontinuous/seed.
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.seed.seed-db: kontinuous/project.fabrique.contrib.jobs.job.seed.seed-db
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.seed.seed-db: kontinuous/project.fabrique.contrib.jobs.seed.seed-db
-    kapp.k14s.io/change-group.jobs.job.seed.seed-db: kontinuous/jobs.job.seed.seed-db
-    kapp.k14s.io/change-group.jobs.seed.seed-db: kontinuous/jobs.seed.seed-db
-    kapp.k14s.io/change-group.job.seed.seed-db: kontinuous/job.seed.seed-db
-    kapp.k14s.io/change-group.seed.seed-db: kontinuous/seed.seed-db
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.seed..seed-db: kontinuous/project.fabrique.contrib.jobs.job.seed..seed-db
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.seed..seed-db: kontinuous/project.fabrique.contrib.jobs.seed..seed-db
-    kapp.k14s.io/change-group.jobs.job.seed..seed-db: kontinuous/jobs.job.seed..seed-db
-    kapp.k14s.io/change-group.jobs.seed..seed-db: kontinuous/jobs.seed..seed-db
-    kapp.k14s.io/change-group.job.seed..seed-db: kontinuous/job.seed..seed-db
-    kapp.k14s.io/change-group.seed..seed-db: kontinuous/seed..seed-db
-    kapp.k14s.io/change-rule.seed..import-secret: upsert after upserting kontinuous/seed..import-secret
+    kapp.k14s.io/change-group.project-fabrique-c-hduth2: kontinuous/project.fabrique.contrib.jobs.job.seed.seed-db
+    kapp.k14s.io/change-group.project-fabrique-c-3zmrsd: kontinuous/project.fabrique.contrib.jobs.seed.seed-db
+    kapp.k14s.io/change-group.jobs-job-seed-seed-4k8iwm: kontinuous/jobs.job.seed.seed-db
+    kapp.k14s.io/change-group.jobs-seed-seed-db-4oxa5g: kontinuous/jobs.seed.seed-db
+    kapp.k14s.io/change-group.job-seed-seed-db-kmcw41: kontinuous/job.seed.seed-db
+    kapp.k14s.io/change-group.seed-seed-db-klctb0: kontinuous/seed.seed-db
+    kapp.k14s.io/change-group.project-fabrique-c-1zl0r2: kontinuous/project.fabrique.contrib.jobs.job.seed..seed-db
+    kapp.k14s.io/change-group.project-fabrique-c-1p93hd: kontinuous/project.fabrique.contrib.jobs.seed..seed-db
+    kapp.k14s.io/change-group.jobs-job-seed-seed-5p3gcs: kontinuous/jobs.job.seed..seed-db
+    kapp.k14s.io/change-group.jobs-seed-seed-db-51eco1: kontinuous/jobs.seed..seed-db
+    kapp.k14s.io/change-group.job-seed-seed-db-2fyf3b: kontinuous/job.seed..seed-db
+    kapp.k14s.io/change-group.seed-seed-db-175jai: kontinuous/seed..seed-db
+    kapp.k14s.io/change-rule.seed-import-secret-1r7ph6: upsert after upserting kontinuous/seed..import-secret
     kapp.k14s.io/change-rule.db: upsert after upserting kontinuous/db
   labels:
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
@@ -729,12 +705,12 @@ metadata:
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
     kapp.k14s.io/change-group.app: kontinuous/app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app: kontinuous/project.fabrique.contrib.app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app.deployment.app: kontinuous/project.fabrique.contrib.app.deployment.app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app.app: kontinuous/project.fabrique.contrib.app.app
-    kapp.k14s.io/change-group.app.deployment.app: kontinuous/app.deployment.app
-    kapp.k14s.io/change-group.app.app: kontinuous/app.app
-    kapp.k14s.io/change-group.deployment.app: kontinuous/deployment.app
+    kapp.k14s.io/change-group.project-fabrique-c-7gj1ui: kontinuous/project.fabrique.contrib.app
+    kapp.k14s.io/change-group.project-fabrique-c-i3djtl: kontinuous/project.fabrique.contrib.app.deployment.app
+    kapp.k14s.io/change-group.project-fabrique-c-5nawz7: kontinuous/project.fabrique.contrib.app.app
+    kapp.k14s.io/change-group.app-deployment-app-3m2vpu: kontinuous/app.deployment.app
+    kapp.k14s.io/change-group.app-app-2laxj3: kontinuous/app.app
+    kapp.k14s.io/change-group.deployment-app-2yfbx7: kontinuous/deployment.app
     kapp.k14s.io/change-rule.seed: upsert after upserting kontinuous/seed
 spec:
   replicas: 1

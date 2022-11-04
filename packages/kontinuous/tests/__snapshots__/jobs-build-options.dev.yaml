@@ -103,31 +103,25 @@ metadata:
     kontinuous/depname.resourcePath: job.job-test-jobs-build-options-feature-branch-1-build-app-gre3q1
     kontinuous/depname.resourceName: job-test-jobs-build-options-feature-branch-1-build-app-gre3q1
     kapp.k14s.io/change-group.jobs: kontinuous/jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs: kontinuous/project.fabrique.contrib.jobs
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.build-app.kaniko: kontinuous/project.fabrique.contrib.jobs.job.build-app.kaniko
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.build-app.kaniko: kontinuous/project.fabrique.contrib.jobs.build-app.kaniko
-    kapp.k14s.io/change-group.jobs.job.build-app.kaniko: kontinuous/jobs.job.build-app.kaniko
-    kapp.k14s.io/change-group.jobs.build-app.kaniko: kontinuous/jobs.build-app.kaniko
-    kapp.k14s.io/change-group.job.build-app.kaniko: kontinuous/job.build-app.kaniko
-    kapp.k14s.io/change-group.build-app.kaniko: kontinuous/build-app.kaniko
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.build-app: kontinuous/project.fabrique.contrib.jobs.job.build-app
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.build-app: kontinuous/project.fabrique.contrib.jobs.build-app
-    kapp.k14s.io/change-group.jobs.job.build-app: kontinuous/jobs.job.build-app
-    kapp.k14s.io/change-group.jobs.build-app: kontinuous/jobs.build-app
-    kapp.k14s.io/change-group.job.build-app: kontinuous/job.build-app
+    kapp.k14s.io/change-group.project-fabrique-c-1g5tpj: kontinuous/project.fabrique.contrib.jobs
+    kapp.k14s.io/change-group.project-fabrique-c-lwj39z: kontinuous/project.fabrique.contrib.jobs.job.build-app.kaniko
+    kapp.k14s.io/change-group.project-fabrique-c-59qpjf: kontinuous/project.fabrique.contrib.jobs.build-app.kaniko
+    kapp.k14s.io/change-group.jobs-job-build-app-dro60v: kontinuous/jobs.job.build-app.kaniko
+    kapp.k14s.io/change-group.jobs-build-app-kan-22iut9: kontinuous/jobs.build-app.kaniko
+    kapp.k14s.io/change-group.job-build-app-kani-4oz5p3: kontinuous/job.build-app.kaniko
+    kapp.k14s.io/change-group.build-app-kaniko-2iupr5: kontinuous/build-app.kaniko
+    kapp.k14s.io/change-group.project-fabrique-c-25vb4e: kontinuous/project.fabrique.contrib.jobs.job.build-app
+    kapp.k14s.io/change-group.project-fabrique-c-2x1zpy: kontinuous/project.fabrique.contrib.jobs.build-app
+    kapp.k14s.io/change-group.jobs-job-build-app-3zd5kn: kontinuous/jobs.job.build-app
+    kapp.k14s.io/change-group.jobs-build-app-605yp1: kontinuous/jobs.build-app
+    kapp.k14s.io/change-group.job-build-app-11ytjs: kontinuous/job.build-app
     kapp.k14s.io/change-group.build-app: kontinuous/build-app
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.build-app..kaniko: kontinuous/project.fabrique.contrib.jobs.job.build-app..kaniko
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.build-app..kaniko: kontinuous/project.fabrique.contrib.jobs.build-app..kaniko
-    kapp.k14s.io/change-group.jobs.job.build-app..kaniko: kontinuous/jobs.job.build-app..kaniko
-    kapp.k14s.io/change-group.jobs.build-app..kaniko: kontinuous/jobs.build-app..kaniko
-    kapp.k14s.io/change-group.job.build-app..kaniko: kontinuous/job.build-app..kaniko
-    kapp.k14s.io/change-group.build-app..kaniko: kontinuous/build-app..kaniko
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.job.build-app.: kontinuous/project.fabrique.contrib.jobs.job.build-app.
-    kapp.k14s.io/change-group.project.fabrique.contrib.jobs.build-app.: kontinuous/project.fabrique.contrib.jobs.build-app.
-    kapp.k14s.io/change-group.jobs.job.build-app.: kontinuous/jobs.job.build-app.
-    kapp.k14s.io/change-group.jobs.build-app.: kontinuous/jobs.build-app.
-    kapp.k14s.io/change-group.job.build-app.: kontinuous/job.build-app.
-    kapp.k14s.io/change-group.build-app.: kontinuous/build-app.
+    kapp.k14s.io/change-group.project-fabrique-c-5vt2wq: kontinuous/project.fabrique.contrib.jobs.job.build-app..kaniko
+    kapp.k14s.io/change-group.project-fabrique-c-4wdn94: kontinuous/project.fabrique.contrib.jobs.build-app..kaniko
+    kapp.k14s.io/change-group.jobs-job-build-app-61ujcy: kontinuous/jobs.job.build-app..kaniko
+    kapp.k14s.io/change-group.jobs-build-app-kan-5rjrfo: kontinuous/jobs.build-app..kaniko
+    kapp.k14s.io/change-group.job-build-app-kani-5a51zx: kontinuous/job.build-app..kaniko
+    kapp.k14s.io/change-group.build-app-kaniko-1rr3r2: kontinuous/build-app..kaniko
   labels:
     kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
     kontinuous/deployment.env: test-jobs-build-options-feature-branch-1
@@ -290,12 +284,12 @@ metadata:
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
     kapp.k14s.io/change-group.app: kontinuous/app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app: kontinuous/project.fabrique.contrib.app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app.deployment.app: kontinuous/project.fabrique.contrib.app.deployment.app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app.app: kontinuous/project.fabrique.contrib.app.app
-    kapp.k14s.io/change-group.app.deployment.app: kontinuous/app.deployment.app
-    kapp.k14s.io/change-group.app.app: kontinuous/app.app
-    kapp.k14s.io/change-group.deployment.app: kontinuous/deployment.app
+    kapp.k14s.io/change-group.project-fabrique-c-7gj1ui: kontinuous/project.fabrique.contrib.app
+    kapp.k14s.io/change-group.project-fabrique-c-i3djtl: kontinuous/project.fabrique.contrib.app.deployment.app
+    kapp.k14s.io/change-group.project-fabrique-c-5nawz7: kontinuous/project.fabrique.contrib.app.app
+    kapp.k14s.io/change-group.app-deployment-app-3m2vpu: kontinuous/app.deployment.app
+    kapp.k14s.io/change-group.app-app-2laxj3: kontinuous/app.app
+    kapp.k14s.io/change-group.deployment-app-2yfbx7: kontinuous/deployment.app
     kapp.k14s.io/change-rule.build-app: upsert after upserting kontinuous/build-app
 spec:
   replicas: 1

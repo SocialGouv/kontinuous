@@ -265,12 +265,12 @@ metadata:
     kontinuous/depname.resourcePath: deployment.metabase-app1
     kontinuous/depname.resourceName: metabase-app1
     kapp.k14s.io/change-group.metabase-app1: kontinuous/metabase-app1
-    kapp.k14s.io/change-group.project.fabrique.contrib.metabase-app1: kontinuous/project.fabrique.contrib.metabase-app1
-    kapp.k14s.io/change-group.project.fabrique.contrib.metabase-app1.deployment.metabase-app1: kontinuous/project.fabrique.contrib.metabase-app1.deployment.metabase-app1
-    kapp.k14s.io/change-group.project.fabrique.contrib.metabase-app1.metabase-app1: kontinuous/project.fabrique.contrib.metabase-app1.metabase-app1
-    kapp.k14s.io/change-group.metabase-app1.deployment.metabase-app1: kontinuous/metabase-app1.deployment.metabase-app1
-    kapp.k14s.io/change-group.metabase-app1.metabase-app1: kontinuous/metabase-app1.metabase-app1
-    kapp.k14s.io/change-group.deployment.metabase-app1: kontinuous/deployment.metabase-app1
+    kapp.k14s.io/change-group.project-fabrique-c-6dcasm: kontinuous/project.fabrique.contrib.metabase-app1
+    kapp.k14s.io/change-group.project-fabrique-c-48cn2p: kontinuous/project.fabrique.contrib.metabase-app1.deployment.metabase-app1
+    kapp.k14s.io/change-group.project-fabrique-c-3jy3fs: kontinuous/project.fabrique.contrib.metabase-app1.metabase-app1
+    kapp.k14s.io/change-group.metabase-app1-depl-2la2u9: kontinuous/metabase-app1.deployment.metabase-app1
+    kapp.k14s.io/change-group.metabase-app1-meta-fvlr11: kontinuous/metabase-app1.metabase-app1
+    kapp.k14s.io/change-group.deployment-metabas-qbruia: kontinuous/deployment.metabase-app1
 spec:
   replicas: 1
   selector:
@@ -366,12 +366,12 @@ metadata:
     kontinuous/depname.resourcePath: deployment.metabase-app2
     kontinuous/depname.resourceName: metabase-app2
     kapp.k14s.io/change-group.metabase-app2: kontinuous/metabase-app2
-    kapp.k14s.io/change-group.project.fabrique.contrib.metabase-app2: kontinuous/project.fabrique.contrib.metabase-app2
-    kapp.k14s.io/change-group.project.fabrique.contrib.metabase-app2.deployment.metabase-app2: kontinuous/project.fabrique.contrib.metabase-app2.deployment.metabase-app2
-    kapp.k14s.io/change-group.project.fabrique.contrib.metabase-app2.metabase-app2: kontinuous/project.fabrique.contrib.metabase-app2.metabase-app2
-    kapp.k14s.io/change-group.metabase-app2.deployment.metabase-app2: kontinuous/metabase-app2.deployment.metabase-app2
-    kapp.k14s.io/change-group.metabase-app2.metabase-app2: kontinuous/metabase-app2.metabase-app2
-    kapp.k14s.io/change-group.deployment.metabase-app2: kontinuous/deployment.metabase-app2
+    kapp.k14s.io/change-group.project-fabrique-c-15vk9u: kontinuous/project.fabrique.contrib.metabase-app2
+    kapp.k14s.io/change-group.project-fabrique-c-3txu15: kontinuous/project.fabrique.contrib.metabase-app2.deployment.metabase-app2
+    kapp.k14s.io/change-group.project-fabrique-c-lfpsp3: kontinuous/project.fabrique.contrib.metabase-app2.metabase-app2
+    kapp.k14s.io/change-group.metabase-app2-depl-5hoc48: kontinuous/metabase-app2.deployment.metabase-app2
+    kapp.k14s.io/change-group.metabase-app2-meta-2vlf8t: kontinuous/metabase-app2.metabase-app2
+    kapp.k14s.io/change-group.deployment-metabas-5p8yvf: kontinuous/deployment.metabase-app2
 spec:
   replicas: 1
   selector:

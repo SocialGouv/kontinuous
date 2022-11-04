@@ -109,12 +109,12 @@ metadata:
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
     kapp.k14s.io/change-group.app: kontinuous/app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app: kontinuous/project.fabrique.contrib.app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app.deployment.app: kontinuous/project.fabrique.contrib.app.deployment.app
-    kapp.k14s.io/change-group.project.fabrique.contrib.app.app: kontinuous/project.fabrique.contrib.app.app
-    kapp.k14s.io/change-group.app.deployment.app: kontinuous/app.deployment.app
-    kapp.k14s.io/change-group.app.app: kontinuous/app.app
-    kapp.k14s.io/change-group.deployment.app: kontinuous/deployment.app
+    kapp.k14s.io/change-group.project-fabrique-c-7gj1ui: kontinuous/project.fabrique.contrib.app
+    kapp.k14s.io/change-group.project-fabrique-c-i3djtl: kontinuous/project.fabrique.contrib.app.deployment.app
+    kapp.k14s.io/change-group.project-fabrique-c-5nawz7: kontinuous/project.fabrique.contrib.app.app
+    kapp.k14s.io/change-group.app-deployment-app-3m2vpu: kontinuous/app.deployment.app
+    kapp.k14s.io/change-group.app-app-2laxj3: kontinuous/app.app
+    kapp.k14s.io/change-group.deployment-app-2yfbx7: kontinuous/deployment.app
 spec:
   replicas: 1
   selector:
