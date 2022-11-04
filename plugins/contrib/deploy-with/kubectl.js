@@ -8,15 +8,25 @@ const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
 module.exports = async (deploys, options, context) => {
   const { config, utils, manifests, dryRun } = context
 
-  const { yaml, kubectlRetry, logger } = utils
+  const { yaml, kubectlRetry, logger, kubectlDeleteManifest } = utils
 
   const { kubeconfigContext, kubeconfig, deployTimeout } = config
 
   const { serverSide = true } = options
 
-  const force = defaultTo(options.force, !dryRun)
+  const defaultOptions = {
+    validate: true,
+    force: true,
+    recreate: false,
+  }
+
+  const force = defaultTo(options.force, !dryRun && defaultOptions.force)
+  const recreate = defaultTo(options.recreate, defaultOptions.recreate)
   const forceConflicts = defaultTo(options.forceConflicts, !dryRun)
-  const validate = defaultTo(options.validate, !config.noValidate)
+  const validate = defaultTo(
+    options.validate,
+    !config.noValidate && defaultOptions.validate
+  )
 
   const kubectlProcesses = []
   const kubectlDeleteManifestOptions = {
@@ -32,11 +42,18 @@ module.exports = async (deploys, options, context) => {
     return defaultTo(manifestsForceResourceOption, force)
   }
 
+  const recreateAnnotationKey = "kontinuous/kubectl-recreate"
+  const getRecreateThisResource = (manifest) => {
+    const manifestsRecreateResourceOption =
+      manifest.metadata?.annotations?.[recreateAnnotationKey]
+    return defaultTo(manifestsRecreateResourceOption, recreate)
+  }
+
   const kubectlApplyManifest = async (manifest) => {
     const yamlManifest = yaml.dump(manifest)
     const forceThisResource = getForceThisResource(manifest)
     const kubectlDeployCommand = `
-    apply
+      apply
       -f -
       ${dryRun ? "--dry-run=none" : ""}
       --force=${forceThisResource && !serverSide ? "true" : "false"}
@@ -56,11 +73,9 @@ module.exports = async (deploys, options, context) => {
       logError: false,
     })
   }
+
   const forceApply = async (manifest) => {
-    const { kubectlDeleteManifest } = utils
-
     await kubectlDeleteManifest(manifest, kubectlDeleteManifestOptions)
-
     await kubectlApplyManifest(manifest)
   }
 
@@ -82,7 +97,11 @@ module.exports = async (deploys, options, context) => {
 
   const applyManifest = async (manifest) => {
     let result
+    const recreateThisResource = getRecreateThisResource(manifest)
     try {
+      if (recreateThisResource) {
+        await kubectlDeleteManifest(manifest)
+      }
       result = await kubectlApplyManifest(manifest)
     } catch (err) {
       if (err.message.includes("field is immutable")) {
