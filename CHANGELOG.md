@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.88.0](https://github.com/SocialGouv/kontinuous/compare/v1.87.0...v1.88.0) (2022-11-04)
+
+
+### Features
+
+* extends plugin type ([f43b09b](https://github.com/SocialGouv/kontinuous/commit/f43b09bacb9ba6422b0cdc03364f38f5e6c14f50))
+
+
+### Bug Fixes
+
+* default triggerWebhook ([4f3080a](https://github.com/SocialGouv/kontinuous/commit/4f3080a185e4c6059fe8d3abb46d57742dd84c44))
+* extends plugin array support ([c7b992c](https://github.com/SocialGouv/kontinuous/commit/c7b992c205d96788f394c504855d8f0aa528df49))
+* up snapshots ([6dc7df0](https://github.com/SocialGouv/kontinuous/commit/6dc7df085e0924a84a42d0c7b814d1f671929a9f))
+
 ## [1.87.0](https://github.com/SocialGouv/kontinuous/compare/v1.86.5...v1.87.0) (2022-11-04)
 
 
