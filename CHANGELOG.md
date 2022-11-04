@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.91.1](https://github.com/SocialGouv/kontinuous/compare/v1.91.0...v1.91.1) (2022-11-04)
+
+
+### Bug Fixes
+
+* lint ([7cfcfbf](https://github.com/SocialGouv/kontinuous/commit/7cfcfbf2aa4294df9e8983c806634976c4adbcb0))
+* lint ([4497007](https://github.com/SocialGouv/kontinuous/commit/4497007e24867b16dc537373ed04988c309c45f0))
+* up gh action versions ([9d48ec1](https://github.com/SocialGouv/kontinuous/commit/9d48ec169d42e2b6defb9aa65fb2c62e3aac0069))
+
 ## [1.91.0](https://github.com/SocialGouv/kontinuous/compare/v1.90.0...v1.91.0) (2022-11-04)
 
 
