@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.91.2](https://github.com/SocialGouv/kontinuous/compare/v1.91.1...v1.91.2) (2022-11-04)
+
+
+### Bug Fixes
+
+* add rollout timeout and retry on ErrImagePull ([34f3665](https://github.com/SocialGouv/kontinuous/commit/34f36653494ce867f6ea0240bfd74bfc2addaf2a))
+
 ### [1.91.1](https://github.com/SocialGouv/kontinuous/compare/v1.91.0...v1.91.1) (2022-11-04)
 
 
