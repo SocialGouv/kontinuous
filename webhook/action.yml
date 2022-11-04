@@ -22,12 +22,12 @@ runs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - uses: actions/setup-node@v2
+    - uses: actions/setup-node@v3
       with:
         node-version: '18'
     
     - name: Cache node modules
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ~/.npm
         key: ${{ runner.os }}-cache-node-modules
@@ -114,7 +114,7 @@ runs:
         npx kontinuous download manifests manifests.yaml
 
     - name: Archive manifest
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: manifests.yaml
         path: manifests.yaml
