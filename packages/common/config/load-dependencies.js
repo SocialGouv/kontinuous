@@ -63,14 +63,6 @@ module.exports = async (config, logger = globalLogger) => {
           })
           const extendsObj = yaml.load(yamlExtends)
           mergeDefinition = deepmerge({}, extendsObj, mergeDefinition)
-
-          if (
-            extendsObj.config?.deployWithPlugin &&
-            config.deployWithPluginIsDefault
-          ) {
-            config.deployWithPlugin = extendsObj.config?.deployWithPlugin
-            config.deployWithPluginIsDefault = false
-          }
         }
       }
 

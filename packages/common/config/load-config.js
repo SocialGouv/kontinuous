@@ -724,6 +724,10 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         return
       }
       defaultsDeep(config, extendsConfig)
+      if (extendsConfig.deployWithPlugin && config.deployWithPluginIsDefault) {
+        config.deployWithPlugin = extendsConfig.deployWithPlugin
+        config.deployWithPluginIsDefault = false
+      }
     },
   })
 
