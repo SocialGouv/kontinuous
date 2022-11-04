@@ -1,5 +1,5 @@
 const retry = require("async-retry")
-const mapLimit = require("async/mapLimit")
+const async = require("async")
 
 const rolloutStatus = require("../lib/rollout-status")
 
@@ -148,7 +148,7 @@ module.exports = async (deploys, options, context) => {
       }
     )
 
-  const applyPromise = mapLimit(
+  const applyPromise = async.mapLimit(
     manifests,
     applyConcurrencyLimit,
     applyManifestWithRetry
