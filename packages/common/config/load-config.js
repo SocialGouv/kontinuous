@@ -371,7 +371,10 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     deployWithPlugin: {
       env: "KS_DEPLOY_WITH",
       option: "deploy-with",
-      default: "kapp",
+      defaultFunction: (config) => {
+        config.deployWithPluginIsDefault = true
+        return "kapp"
+      },
     },
     statusUrl: {
       env: "KS_DEPLOY_STATUS_URL",

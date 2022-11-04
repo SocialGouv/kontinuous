@@ -1,4 +1,5 @@
 const fs = require("fs-extra")
+const kebabCase = require("lodash.kebabcase")
 
 const yaml = require("../utils/yaml")
 const deepmerge = require("../utils/deepmerge")
@@ -42,11 +43,39 @@ module.exports = async (config, logger = globalLogger) => {
       }
 
       // load config file
+      let mergeDefinition = definition
+
+      const { extends: extendsPlugin } = definition
+      if (extendsPlugin) {
+        const extendsFileBasename = kebabCase(extendsPlugin)
+        const extendsFile = `${target}/extends/${extendsFileBasename}.yaml`
+        if (!(await fs.pathExists(extendsFile))) {
+          throw new Error(
+            `extends ̂file ${extendsFile} not found as expected for specified extends ${extendsPlugin}`
+          )
+        }
+        const yamlExtends = await fs.readFile(extendsFile, {
+          encoding: "utf-8",
+        })
+        const extendsObj = yaml.load(yamlExtends)
+        mergeDefinition = deepmerge({}, extendsObj, mergeDefinition)
+
+        if (
+          extendsObj.config?.deployWithPlugin &&
+          config.deployWithPluginIsDefault
+        ) {
+          config.deployWithPlugin = extendsObj.config?.deployWithPlugin
+          config.deployWithPluginIsDefault = false
+        }
+      }
+
       const pluginConfigFile = `${target}/kontinuous.yaml`
       if (await fs.pathExists(pluginConfigFile)) {
         const pluginConfig = yaml.load(await fs.readFile(pluginConfigFile))
-        Object.assign(definition, deepmerge({}, pluginConfig, definition))
+        mergeDefinition = deepmerge({}, pluginConfig, mergeDefinition)
       }
+
+      Object.assign(definition, mergeDefinition)
     },
   })
 }

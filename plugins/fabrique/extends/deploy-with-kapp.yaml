@@ -1,0 +1,24 @@
+config:
+  deployWithPlugin: kapp
+  
+dependencies:
+  contrib:
+    preDeploy:
+      cleanFailed:
+        enabled: true
+    deploySidecars:
+      failfast:
+        enabled: true
+      stern:
+        enabled: false
+      progressing:
+        enabled: false
+    patches:
+      needsUsingInitcontainers:
+        enabled: false
+      needsUsingKapp:
+        enabled: true
+      filterDisableKapp:
+        enabled: false
+      reloader:
+        enabled: false
