@@ -51,7 +51,6 @@ module.exports = async ({
   const query = qs.stringify({
     project: config.projectName,
     env: environment,
-    token,
     hash: jobHash,
     repositoryUrl: gitRepositoryUrl,
   })
@@ -62,7 +61,10 @@ module.exports = async ({
       method: "POST",
       url,
       data: form,
-      headers: form.getHeaders(),
+      headers: {
+        ...form.getHeaders(),
+        Authorization: `Bearer ${token}`,
+      },
     })
     logger.debug(response.data)
     logger.info("uploaded custom manifests to deploy")
@@ -83,7 +85,7 @@ module.exports = async ({
     commit: "0000000000000000000000000000000000000000",
   })
   if (statusUrl) {
-    const { status, ok } = await getStatus({ url: statusUrl })
+    const { status, ok } = await getStatus({ url: statusUrl, token })
     if (ok !== true) {
       const errorMsg = `status not ok, it returned: ${status}`
       logger.error(errorMsg)

@@ -70,7 +70,7 @@ module.exports = async (options) => {
     }
 
     if (statusUrl) {
-      await setStatus({ url: statusUrl, status: "loading", ok: null })
+      await setStatus({ url: statusUrl, token, status: "loading", ok: null })
     }
 
     logger.info({ kubeconfig, kubeconfigContext }, "let's deploy on kubernetes")
@@ -157,12 +157,12 @@ module.exports = async (options) => {
     })
 
     if (statusUrl) {
-      await setStatus({ url: statusUrl, status: "success", ok: true })
+      await setStatus({ url: statusUrl, token, status: "success", ok: true })
     }
   } catch (err) {
     logger.error(err)
     if (statusUrl) {
-      await setStatus({ url: statusUrl, status: "failed", ok: false })
+      await setStatus({ url: statusUrl, token, status: "failed", ok: false })
     }
     process.exit(1)
   }
