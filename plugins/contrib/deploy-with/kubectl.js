@@ -1,6 +1,8 @@
-const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
+const retry = require("async-retry")
 
 const rolloutStatus = require("../lib/rollout-status")
+
+const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
 
 const isNotDefined = (val) => val === undefined || val === null || val === ""
 const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
@@ -112,7 +114,35 @@ module.exports = async (deploys, options, context) => {
     return result
   }
 
-  const kubectlPromises = manifests.map(applyManifest)
+  const applyManifestWithRetry = async (manifest) =>
+    retry(
+      async (bail) => {
+        try {
+          const r = await applyManifest(manifest)
+          return r
+        } catch (err) {
+          if (
+            // err.message.includes(
+            //   "error trying to reach service: dial tcp 10.0.0.1:443: connect: connection refused"
+            // ) ||
+            err.message.includes("InternalError")
+          ) {
+            logger.debug(`kubectl server error(InternalError): retrying...`)
+            throw err
+          }
+          bail(err)
+        }
+      },
+      {
+        retries: 2,
+        factor: 2,
+        minTimeout: 1000,
+        maxTimeout: 15000,
+        randomize: true,
+      }
+    )
+
+  const kubectlPromises = manifests.map(applyManifestWithRetry)
 
   let stopRolloutStatus
 
