@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.87.0](https://github.com/SocialGouv/kontinuous/compare/v1.86.5...v1.87.0) (2022-11-04)
+
+
+### Features
+
+* buildkit job ([eb36280](https://github.com/SocialGouv/kontinuous/commit/eb36280442d7cbcaf245300a38826d754f87c3ce))
+
+
+### Bug Fixes
+
+* buildkit job cache ([09b5466](https://github.com/SocialGouv/kontinuous/commit/09b546676fe8003575db6268518a1d7eadc1736e))
+* buildkit job wip ([8024f97](https://github.com/SocialGouv/kontinuous/commit/8024f975f5f020616ee5858ad1d635c25a522dd4))
+* docker image libgraph-easy-perl ([c1508f6](https://github.com/SocialGouv/kontinuous/commit/c1508f6a8b0cc1cd104a59c793ada4eaa0864361))
+
 ### [1.86.5](https://github.com/SocialGouv/kontinuous/compare/v1.86.4...v1.86.5) (2022-11-03)
 
 
