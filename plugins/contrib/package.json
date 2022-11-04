@@ -1,6 +1,7 @@
 {
   "name": "~fabrique",
   "dependencies": {
+    "async": "^3.2.4",
     "async-retry": "^1.3.3",
     "fs-extra": "^10.1.0",
     "lodash.camelcase": "^4.3.0",

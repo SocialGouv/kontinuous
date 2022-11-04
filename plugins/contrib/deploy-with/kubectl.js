@@ -1,4 +1,5 @@
 const retry = require("async-retry")
+const mapLimit = require("async/mapLimit")
 
 const rolloutStatus = require("../lib/rollout-status")
 
@@ -20,11 +21,16 @@ module.exports = async (deploys, options, context) => {
     validate: true,
     force: true,
     recreate: false,
+    applyConcurrencyLimit: 3,
   }
 
   const force = defaultTo(options.force, !dryRun && defaultOptions.force)
   const recreate = defaultTo(options.recreate, defaultOptions.recreate)
   const forceConflicts = defaultTo(options.forceConflicts, !dryRun)
+  const applyConcurrencyLimit = defaultTo(
+    options.applyConcurrencyLimit,
+    defaultOptions.applyConcurrencyLimit
+  )
   const validate = defaultTo(
     options.validate,
     !config.noValidate && defaultOptions.validate
@@ -142,7 +148,11 @@ module.exports = async (deploys, options, context) => {
       }
     )
 
-  const kubectlPromises = manifests.map(applyManifestWithRetry)
+  const applyPromise = mapLimit(
+    manifests,
+    applyConcurrencyLimit,
+    applyManifestWithRetry
+  )
 
   let stopRolloutStatus
 
@@ -160,7 +170,7 @@ module.exports = async (deploys, options, context) => {
 
   const promise = new Promise(async (resolve, reject) => {
     try {
-      await Promise.all(kubectlPromises)
+      await applyPromise
       if (dryRun) {
         resolve(true)
         return

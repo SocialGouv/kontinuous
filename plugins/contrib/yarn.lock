@@ -14,6 +14,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"async@npm:^3.2.4":
+  version: 3.2.4
+  resolution: "async@npm:3.2.4"
+  checksum: 9719e38d24e9922c255ee9ae925fb668ef52243f9866a1b59e423a3bb6150a886b3c37287348ceefa09cd3f6fa1a29dcc770eeb70642acb13674363b2d5b2b21
+  languageName: node
+  linkType: hard
+
 "fs-extra@npm:^10.1.0":
   version: 10.1.0
   resolution: "fs-extra@npm:10.1.0"
@@ -91,6 +98,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "~fabrique@workspace:."
   dependencies:
+    async: "npm:^3.2.4"
     async-retry: "npm:^1.3.3"
     fs-extra: "npm:^10.1.0"
     lodash.camelcase: "npm:^4.3.0"
