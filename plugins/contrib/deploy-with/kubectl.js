@@ -4,6 +4,9 @@ const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
 
 const rolloutStatus = require("../lib/rollout-status")
 
+const isNotDefined = (val) => val === undefined || val === null || val === ""
+const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
+
 module.exports = async (deploys, options, context) => {
   const { config, logger, utils, manifestsFile, dryRun } = context
 
@@ -11,26 +14,25 @@ module.exports = async (deploys, options, context) => {
 
   const { kubeconfigContext, kubeconfig, deployTimeout } = config
 
-  let validate
-  if (validate === undefined || validate === null || validate === "") {
-    if (config.noValidate) {
-      validate = false
-    } else {
-      validate = true
-    }
-  }
+  const { serverSide = false } = options
+
+  const force = defaultTo(options.force, !serverSide && !dryRun)
+  const forceConflicts = defaultTo(
+    options.forceConflicts,
+    serverSide && !dryRun
+  )
+
+  const validate = defaultTo(options.validate, !config.noValidate)
 
   const kubectlDeployCommand = `
     kubectl apply
       ${kubeconfigContext ? `--context ${kubeconfigContext}` : ""}
       -f ${manifestsFile}
-      ${
-        dryRun
-          ? "--dry-run=none"
-          : `
-      --force`
-      }
+      ${dryRun ? "--dry-run=none" : ""}
+      --force=${force ? "true" : "false"}
       --validate=${validate ? "true" : "false"}
+      --server-side=${serverSide ? "true" : "false"}
+      --force-conflicts=${forceConflicts ? "true" : "false"}
       --overwrite
       --wait
       --timeout=${deployTimeout}
