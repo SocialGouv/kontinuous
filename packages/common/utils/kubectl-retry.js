@@ -87,6 +87,10 @@ module.exports = async (kubectlArgs, options = {}) => {
             )
             throw err
           }
+          if (err.message.includes("timeout")) {
+            logger.debug(`kubectl network error(timeout stuff): retrying...`)
+            throw err
+          }
           bail(err)
         }
       },
