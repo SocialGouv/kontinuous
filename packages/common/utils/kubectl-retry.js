@@ -6,7 +6,13 @@ const parseCommand = require("./parse-command")
 const defaultLogger = require("./logger")
 
 const kubectlRun = async (kubectlArgs, options = {}) => {
-  const { kubeconfig, kubeconfigContext, ignoreErrors = [], stdin } = options
+  const {
+    kubeconfig,
+    kubeconfigContext,
+    ignoreErrors = [],
+    stdin,
+    collectProcesses,
+  } = options
 
   if (Array.isArray(kubectlArgs)) {
     kubectlArgs = kubectlArgs.join(" ")
@@ -26,6 +32,8 @@ const kubectlRun = async (kubectlArgs, options = {}) => {
         ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
       },
     })
+
+    collectProcesses.push(proc)
 
     if (stdin !== undefined) {
       proc.stdin.write(stdin)
@@ -66,7 +74,12 @@ const kubectlRun = async (kubectlArgs, options = {}) => {
 }
 
 module.exports = async (kubectlArgs, options = {}) => {
-  const { logger = defaultLogger, logError = true, logInfo = true } = options
+  const {
+    logger = defaultLogger,
+    logError = true,
+    logInfo = true,
+    collectProcesses = [],
+  } = options
 
   let result
 
@@ -74,7 +87,10 @@ module.exports = async (kubectlArgs, options = {}) => {
     result = await retry(
       async (bail) => {
         try {
-          const output = await kubectlRun(kubectlArgs, options)
+          const output = await kubectlRun(kubectlArgs, {
+            ...options,
+            collectProcesses,
+          })
           return output
         } catch (err) {
           if (
