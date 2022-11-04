@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.91.0](https://github.com/SocialGouv/kontinuous/compare/v1.90.0...v1.91.0) (2022-11-04)
+
+
+### Features
+
+* applyConcurrencyLimit ([1bf79f7](https://github.com/SocialGouv/kontinuous/commit/1bf79f7e3279da26616e9e9e24297e689d77be40))
+
+
+### Bug Fixes
+
+* clean log false positive errors ([7f9a2d7](https://github.com/SocialGouv/kontinuous/commit/7f9a2d79c4bce35627b11ed5942fa6694683df24))
+* internalServerError retry on kubectl ([c0179b0](https://github.com/SocialGouv/kontinuous/commit/c0179b00d3a277811f4e42e2af0525d9623b7d7b))
+* upgrade snapshots ([9e132bb](https://github.com/SocialGouv/kontinuous/commit/9e132bbd9dc0d57d14a7c8f2cb31f24d4f8640e4))
+
 ## [1.90.0](https://github.com/SocialGouv/kontinuous/compare/v1.89.0...v1.90.0) (2022-11-04)
 
 
