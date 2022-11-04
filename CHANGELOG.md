@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.89.0](https://github.com/SocialGouv/kontinuous/compare/v1.88.0...v1.89.0) (2022-11-04)
+
+
+### Features
+
+* kubectl server-side apply option ([1c7d4e6](https://github.com/SocialGouv/kontinuous/commit/1c7d4e6625a16fe4cd2048fd0a5453898aa2cf13))
+* server-side apply and advanced force !!! ([8431695](https://github.com/SocialGouv/kontinuous/commit/843169530e61a0dbe4eef062927c053a478f6de2))
+
+
+### Bug Fixes
+
+* improve config extends ([1ba305f](https://github.com/SocialGouv/kontinuous/commit/1ba305f42cc12a9bab8140ceb6d44407b542fed3))
+* kubectl retry on other timeout errors ([0d61acd](https://github.com/SocialGouv/kontinuous/commit/0d61acd40c3d44bd3ce2a038d42cdfe61908972c))
+
 ## [1.88.0](https://github.com/SocialGouv/kontinuous/compare/v1.87.0...v1.88.0) (2022-11-04)
 
 
