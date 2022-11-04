@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.90.0](https://github.com/SocialGouv/kontinuous/compare/v1.89.0...v1.90.0) (2022-11-04)
+
+
+### Features
+
+* kubectl recreate resource ([f34d0d7](https://github.com/SocialGouv/kontinuous/commit/f34d0d741142c160a9d496df1c44436fd92f47b0))
+
+
+### Bug Fixes
+
+* add resourceName log infos ([e1c7fa5](https://github.com/SocialGouv/kontinuous/commit/e1c7fa51e5c1fa4be3d7c3bc711c7265de1bda70))
+* boilerplate gh workflows naming ([8691371](https://github.com/SocialGouv/kontinuous/commit/8691371009ebcca5ad357838058e3e68e1da3327))
+* up stern source repo ([cc0a7f2](https://github.com/SocialGouv/kontinuous/commit/cc0a7f272e40e2e18173554904ca6c526b4279a9))
+* use ghcr image for jobs ([02d6d5f](https://github.com/SocialGouv/kontinuous/commit/02d6d5f8742d2f43e2e119f58b2aca7365f683aa))
+
 ## [1.89.0](https://github.com/SocialGouv/kontinuous/compare/v1.88.0...v1.89.0) (2022-11-04)
 
 
