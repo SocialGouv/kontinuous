@@ -1,11 +1,12 @@
 const os = require("os")
 
 const fs = require("fs-extra")
+const decompress = require("decompress")
 
 const needBin = require("./need-bin")
 const downloadFile = require("./download-file")
 
-const sternVersion = process.env.STERN_VERSION || "1.11.0"
+const sternVersion = process.env.STERN_VERSION || "1.22.0"
 
 const download = async (options) => {
   const { logger } = options
@@ -31,13 +32,27 @@ const download = async (options) => {
       platform = "linux"
   }
 
-  const { addPath } = options
+  const { addPath, cacheDir } = options
 
-  const downloadUrl = `https://github.com/wercker/stern/releases/download/${sternVersion}/stern_${platform}_${arch}${ext}`
-  logger.info(`download ${downloadUrl}`)
+  const fileName = `stern_${sternVersion}_${platform}_${arch}.tar.gz`
+
+  const cachePath = `${cacheDir}/bin`
+  const unzipTarget = `${cachePath}/stern`
+  await fs.ensureDir(unzipTarget)
+  const zfile = `${cachePath}/${fileName}`
+
+  if (!(await fs.pathExists(zfile))) {
+    const downloadUrl = `https://github.com/stern/stern/releases/download/v${sternVersion}/${fileName}`
+    logger.info(`download ${downloadUrl}`)
+    await downloadFile(downloadUrl, zfile, logger)
+  }
+
+  await decompress(zfile, unzipTarget)
+  const unzippedStern = `${unzipTarget}/stern${ext}`
   const dest = `${addPath}/stern`
-  await downloadFile(downloadUrl, dest, logger)
+  await fs.move(unzippedStern, dest)
   await fs.chmod(dest, 0o755)
+  await fs.remove(unzipTarget)
 }
 
 module.exports = (options = {}) =>

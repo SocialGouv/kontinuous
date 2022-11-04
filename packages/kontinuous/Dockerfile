@@ -38,11 +38,12 @@ RUN curl --fail -sL https://github.com/SocialGouv/rollout-status/releases/downlo
   && chmod +x /usr/local/bin/rollout-status
 
 FROM downloader as stern
-ARG STERN_VERSION=1.11.0
+ARG STERN_VERSION=1.22.0
 ENV STERN_VERSION=$STERN_VERSION
-RUN curl --fail -sL https://github.com/wercker/stern/releases/download/${STERN_VERSION}/stern_linux_amd64 > /tmp/stern \
+RUN curl --fail -sL https://github.com/stern/stern/releases/download/v${STERN_VERSION}/stern_${STERN_VERSION}_linux_amd64.tar.gz | tar xz -C /tmp/ \
   && mv /tmp/stern /usr/local/bin/stern \
-  && chmod +x /usr/local/bin/stern
+  && chmod +x /usr/local/bin/stern \
+  && rm -r /tmp/*
 
 FROM ubuntu:$UBUNTU_VERSION as node
 ARG NODE_VERSION=18
