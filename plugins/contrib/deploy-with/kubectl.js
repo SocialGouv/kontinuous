@@ -66,15 +66,16 @@ module.exports = async (deploys, options, context) => {
 
   const handleFieldIsImmutableError = async (manifest, err) => {
     const forceThisResource = getForceThisResource(manifest)
+    const resourceName = `${manifest.kind} ${manifest.metadata.namespace}/${manifest.metadata.name}`
     if (!forceThisResource) {
       logger.error(
         { err },
-        `💥 immutable field conflict error, to bypass this, enable force option on manifest using ${forceAnnotationKey} annotation or enable force globally on kubectl deploy-with plugin, caution, this will destroy and recreate resource`
+        `💥 immutable field conflict error on "${resourceName}", to bypass this, enable force option on manifest using ${forceAnnotationKey} annotation or enable force globally on kubectl deploy-with plugin, caution, this will destroy and recreate resource`
       )
       throw err
     }
     logger.warn(
-      "💥 delete resource before recreate to force immutable field conflict"
+      `💥 delete resource "${resourceName}" before recreate to force immutable field conflict`
     )
     return forceApply(manifest, err)
   }
