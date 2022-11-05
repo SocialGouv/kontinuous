@@ -30,4 +30,5 @@ jobs:
       
       - name: ending
         uses: SocialGouv/kontinuous/gh-webhook-action-ending@ci/gh-docker-actions
-        
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
