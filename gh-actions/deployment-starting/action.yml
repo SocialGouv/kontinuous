@@ -7,7 +7,6 @@ runs:
   using: "composite"
   steps:
     - name: Load kontinuous config
-      shell: bash
       id: kontinuous-config
       uses: SocialGouv/kontinuous/gh-actions/load-remote-config@v1
     
