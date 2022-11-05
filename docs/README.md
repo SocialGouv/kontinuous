@@ -1117,7 +1117,7 @@ kapp deploy /tmp/manifests.yaml
         runs-on: ubuntu-latest
         steps:
         - name: kontinuous pipeline
-            uses: SocialGouv/kontinuous@master
+            uses: SocialGouv/kontinuous/gh-actions/deploy-via-github@v1
             with:
               token: ${{ secrets.GITHUB_TOKEN }}
               kubeconfig: ${{ secrets.KUBECONFIG }}
