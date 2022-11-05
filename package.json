@@ -41,7 +41,10 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "postinstall": "[ -d '.husky' ] && husky install || true",
+    "postinstall": "[ -d '.husky' ] && husky install || true && yarn install:plugins",
+    "install:plugins": "yarn install:plugin:contrib && yarn install:plugin:fabrique",
+    "install:plugin:contrib": "cd plugins/contrib && yarn",
+    "install:plugin:fabrique": "cd plugins/fabrique && yarn",
     "lint": "eslint .",
     "release": "standard-version",
     "retag-legacy": "TAG=$(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1) && git tag -f $TAG && git push origin :refs/tags/$TAG && git push -f origin master --tags",

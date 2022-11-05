@@ -27,14 +27,6 @@ jobs:
       - name: Install dependencies
         run: yarn --immutable
 
-      - name: Install dependencies for plugin contrib
-        run: yarn --immutable
-        working-directory: plugins/contrib
-      
-      - name: Install dependencies for plugin fabrique
-        run: yarn --immutable
-        working-directory: plugins/fabrique
-
       - name: Run lint
         run: yarn lint
 
