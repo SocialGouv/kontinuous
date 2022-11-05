@@ -1,0 +1,77 @@
+name: "Ending of Kontinuous Webhook Pipeline for Github"
+inputs:
+  token:
+    description: "The Github authentication token"
+outputs:
+  url:
+    description: "Main deployment URL"
+    value: ${{ steps.environment-url.outputs.url }}
+runs:
+  using: "composite"
+  steps:
+    - name: Archive manifest
+      uses: actions/upload-artifact@v3
+      with:
+        name: manifests.yaml
+        path: manifests.yaml
+
+    - name: Get status of pipeline
+      shell: bash
+      run: |
+        wget --content-on-error -q -O deployment-status.json "${KS_WEBHOOK_URI}/api/v1/oas/artifacts/status?project=${KS_PROJECT_NAME}&repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
+        DEPLOYMENT_STATUS=$(cat deployment-status.json)
+        status=$(echo "$DEPLOYMENT_STATUS" | jq .status)
+        echo "status:  $status"
+        
+        if [ "$status" = "loading" ]; then
+          sleep 5
+          wget --content-on-error -q -O deployment-status.json "${KS_WEBHOOK_URI}/api/v1/oas/artifacts/status?project=${KS_PROJECT_NAME}&repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
+          DEPLOYMENT_STATUS=$(cat deployment-status.json)
+          status=$(echo "$DEPLOYMENT_STATUS" | jq .status)
+          echo "status:  $status"
+        fi
+
+        OK=$(echo "$DEPLOYMENT_STATUS" | jq .ok)
+        if [ "$OK" != "true" ]; then
+          exit 1
+        fi
+
+    - name: Setup namespace env var
+      shell: bash
+      run: |
+        NAMESPACE=$(cat manifests.yaml | yq eval-all 'select(.kind=="Namespace").metadata.name')
+        echo "NAMESPACE=$NAMESPACE" >> $GITHUB_ENV
+
+    - name: Notify deployment start
+      uses: bobheadxi/deployments@v1
+      id: deployment
+      with:
+        step: start
+        token: ${{ inputs.token }}
+        desc: "Deploying environment: ${{ env.NAMESPACE }}"
+        env: ${{ steps.environment.outputs.env == 'dev' && env.NAMESPACE || steps.environment.outputs.env == 'preprod' && 'preproduction' || 'production' }}
+    
+    - name: Define environment URL
+      id: environment-url
+      shell: bash
+      run: |
+        HOSTS=$(cat manifests.yaml | yq eval-all '.spec.rules[] .host')
+        HOST=$(echo "$HOSTS" | head -n 1)
+        echo $HOST
+        echo "url=https://$HOST">>$GITHUB_OUTPUT
+
+    - name: Notify deployment end
+      uses: bobheadxi/deployments@v1
+      with:
+        step: finish
+        status: ${{ job.status }}
+        token: ${{ inputs.token }}
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+        env_url: ${{ steps.environment-url.outputs.url }}
+        env: ${{ steps.deployment.outputs.env }}
+
+    - name: Debug manifests
+      uses: SocialGouv/actions/k8s-manifests-debug@v1
+      with:
+        token: ${{ inputs.token }}
+        path: manifests.yaml

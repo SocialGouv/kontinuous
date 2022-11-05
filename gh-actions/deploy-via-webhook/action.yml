@@ -1,0 +1,20 @@
+name: "Kontinuous Webhook"
+description: "Run a kontinuous pipeline on kubernetes via webhook"
+inputs:
+  token:
+    description: "The github authentication token"
+  webhookToken:
+    description: "The webhook authentication token, usually secrets.KUBEWEBHOOK_TOKEN"
+  webhookUri:
+    description: "The webhook uri"
+  triggerWebhook:
+    description: "Trigger webhook on first call, useful when webhooks are not configured on the repo"
+  environment:
+    description: "The deployment environment (dev | preprod | prod), default to prod on version tag, preprod on master or main, else dev"
+runs:
+  using: docker
+  image: Dockerfile
+  args:  
+    - '${{ inputs.environment }}'
+    - '${{ inputs.webhookToken }}'
+    - '${{ inputs.triggerWebhook }}'
