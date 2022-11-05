@@ -20,7 +20,7 @@ runs:
   using: docker
   image: Dockerfile
   args:  
-    - ${{ inputs.environment }}
-    - ${{ inputs.webhookToken }}
-    - ${{ github.event.ref }}
-    - ${{ inputs.triggerWebhook }}
+    - "${{ inputs.environment }}"
+    - "${{ inputs.webhookToken }}"
+    - "${{ github.event.ref }}"
+    - "${{ inputs.triggerWebhook }}"
