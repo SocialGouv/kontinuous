@@ -27,7 +27,7 @@ KS_DEBUG=true
 if [ "$GITHUB_EVENT_NAME" = "delete"  ]; then
   KS_EVENT=deleted
   
-  export EVENT_REF=$(cat $GITHUB_EVENT_PATH | jq --raw-output '.ref')
+  export EVENT_REF=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('$GITHUB_EVENT_PATH')).ref)")
 
   KS_GIT_BRANCH="$EVENT_REF"
   KS_GIT_BRANCH_URLENCODED=$(echo $KS_GIT_BRANCH | sed 's/\//\%2f/g')
