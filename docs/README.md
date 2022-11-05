@@ -1149,7 +1149,7 @@ The service can be deployed using an [official Helm chart](https://github.com/So
 
 ##### 6.3.1. deploy service
 
-###### 6.3.1.1. using [Helm](https://helm.sh/)
+###### 6.3.1.1. using Helm
 
 It require you have predefined these secrets (in the namespace `myproject-ci` in example): <br>
 - kubeconfig-dev
@@ -1179,7 +1179,7 @@ helm template .  \
 kubectl --namespace myproject-ci apply manifests.yaml
 ```
 
-###### 6.3.1.2. using [ArgoCD](https://github.com/argoproj/argo-cd/)
+###### 6.3.1.2. using ArgoCD
 
 Here is a sample of an [ArgoCD ApplicationSet](https://argo-cd.readthedocs.io/en/stable/roadmap/#applicationset): [plugins/fabrique/samples/argocd/kontinuous-webhooks.yaml](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/samples/argocd/kontinuous-webhooks.yaml)
 
