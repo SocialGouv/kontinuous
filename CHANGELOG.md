@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.93.0](https://github.com/SocialGouv/kontinuous/compare/v1.91.2...v1.93.0) (2022-11-05)
+
+
+### Features
+
+* webhook gh docker action ([#73](https://github.com/SocialGouv/kontinuous/issues/73)) ([be7ba6a](https://github.com/SocialGouv/kontinuous/commit/be7ba6a5c9eba17f41cae69e630ca1b3a232a0ed))
+
+
+### Bug Fixes
+
+* postinstall yarn plugins ([1a462ab](https://github.com/SocialGouv/kontinuous/commit/1a462ab66bee5ab8c21db373e3686e56ba43c0dd))
+* stern since time ([eb91e69](https://github.com/SocialGouv/kontinuous/commit/eb91e69fbd0a5e6bb98f37540959ee11d3de3e78))
+
 ## 1.92.0 (2022-11-05)
 
 
