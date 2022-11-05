@@ -1,6 +1,6 @@
 #!/bin/bash
 
-alias kontinuous=/opt/kontinuous/packages/kontinuous/bin/kontinuous
+export PATH=$PATH:/opt/kontinuous/packages/kontinuous/bin
 
 export KS_ENVIRONMENT="$1"
 export KS_WEBHOOK_TOKEN="$2"
@@ -45,11 +45,12 @@ export KS_DEBUG
 
 mkdir -p .kontinuous
 kontinuous config --remote --format json>.kontinuous/config.yaml
+
 KONTINUOUS_CONFIG=$(cat .kontinuous/config.yaml)
 
-export KS_ENVIRONMENT=$(echo "$KONTINUOUS_CONFIG" | jq -r ".environment")
-KS_WEBHOOK_URI=$(echo "$KONTINUOUS_CONFIG" | jq -r ".webhookUri")
-KS_PROJECT_NAME=$(echo "$KONTINUOUS_CONFIG" | jq -r ".projectName")
+export KS_ENVIRONMENT=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('.kontinuous/config.yaml')).environment)")
+KS_WEBHOOK_URI=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('.kontinuous/config.yaml')).webhookUri)")
+KS_PROJECT_NAME=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('.kontinuous/config.yaml')).projectName)")
 
 echo "env=$KS_ENVIRONMENT">>$GITHUB_OUTPUT
 
