@@ -15,10 +15,13 @@ jobs:
     environment: production
     steps:
       - name: kontinuous pipeline
-        uses: SocialGouv/kontinuous/webhook@v1
+        uses: SocialGouv/kontinuous/gh-webhook-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           webhookToken: ${{ secrets.KUBEWEBHOOK_TOKEN }}
           webhookUri: ${{ inputs.webhookUri }}
           triggerWebhook: "true"
           environment: "prod"
+      
+      - name: ending
+        uses: SocialGouv/kontinuous/.github/workflows/workflow-webhook-ending.yaml
