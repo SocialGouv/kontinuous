@@ -1,0 +1,37 @@
+name: "⛑ Debug manifests ⛑"
+description: "Debug some kubernetes manifests"
+inputs:
+  token:
+    description: "Github token for PR comment"
+outputs:
+  json:
+    description: "Json debug"
+    value: ${{ steps.debug-manifests.outputs.json }}
+  markdown:
+    description: "Markdown debug"
+    value: ${{ steps.debug-manifests.outputs.markdown }}
+  text:
+    description: "Text debug"
+    value: ${{ steps.debug-manifests.outputs.text }}
+runs:
+  using: "composite"
+  steps:
+    - name: Debug manifests
+      shell: bash
+      id: debug-manifests
+      uses: SocialGouv/kontinuous/gh-actions/debug-manifests-output@v1
+      with:
+        path: manifests.yaml
+
+    - uses: jwalton/gh-find-current-pr@v1
+      id: finder
+
+    - name: ⛑ Comment PR
+      uses: marocchino/sticky-pull-request-comment@v2
+      with:
+        number: ${{ steps.finder.outputs.pr }}
+        recreate: true
+        message: |
+          🎉 Deployment for commit ${{ github.sha }} :
+          ${{ steps.debug-manifests.outputs.markdown }}
+        GITHUB_TOKEN: ${{ inputs.token }}

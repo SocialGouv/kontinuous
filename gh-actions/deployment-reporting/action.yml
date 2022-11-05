@@ -1,0 +1,35 @@
+name: "Reporting of Kontinuous Webhook Pipeline for Github"
+inputs:
+  token:
+    description: "The Github authentication token"
+outputs:
+  url:
+    description: "Main deployment URL"
+    value: ${{ steps.environment-url.outputs.url }}
+runs:
+  using: "composite"
+  steps:
+    - name: Archive manifest
+      uses: actions/upload-artifact@v3
+      with:
+        name: manifests.yaml
+        path: manifests.yaml
+
+    - name: Get status of pipeline
+      shell: bash
+      run: '[ "$DEPLOYMENT_OK" != "true" ] && exit 1'
+
+    - name: Notify deployment end
+      uses: bobheadxi/deployments@v1
+      with:
+        step: finish
+        status: ${{ job.status }}
+        token: ${{ inputs.token }}
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+        env_url: ${{ env.DEPLOYMENT_URL }}
+
+    - name: Debug manifests
+      uses: SocialGouv/kontinuous/gh-actions/debug-manifests@v1
+      with:
+        token: ${{ inputs.token }}
+        path: manifests.yaml

@@ -1,0 +1,17 @@
+name: "Debug manifests generate output"
+description: "Run a kontinuous pipeline on kubernetes via webhook"
+inputs:
+  path:
+    description: "Your manifests YAML file path"
+outputs:
+  json:
+    description: "Json debug"
+  markdown:
+    description: "Markdown debug"
+  text:
+    description: "Text debug"
+runs:
+  using: docker
+  image: Dockerfile
+  args:  
+    - '${{ inputs.path }}'

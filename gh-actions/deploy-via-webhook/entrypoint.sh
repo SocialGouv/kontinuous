@@ -82,3 +82,16 @@ fi
 kontinuous logs
 
 kontinuous download manifests manifests.yaml
+
+wget --content-on-error -q -O deployment-status.json "${KS_WEBHOOK_URI}/api/v1/oas/artifacts/status?project=${KS_PROJECT_NAME}&repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
+DEPLOYMENT_STATUS=$(cat deployment-status.json)
+status=$(echo "$DEPLOYMENT_STATUS" | jq .status)
+echo "status:  $status"
+
+DEPLOYMENT_OK=$(echo "$DEPLOYMENT_STATUS" | jq .ok)
+echo "DEPLOYMENT_OK=$DEPLOYMENT_OK">>$GITHUB_ENV
+
+HOSTS=$(cat manifests.yaml | yq eval-all '.spec.rules[] .host')
+HOST=$(echo "$HOSTS" | head -n 1)
+DEPLOYMENT_URL="https://$HOST"
+echo "DEPLOYMENT_URL=$DEPLOYMENT_URL">>$GITHUB_ENV

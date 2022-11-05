@@ -1,0 +1,10 @@
+name: "Load config"
+description: "Load remote kontinuous config from repo"
+outputs:
+  kontinuous_config:
+    description: file path containing output of kontinuous remote config
+  deployment_id:
+    description: deployment id
+runs:
+  using: docker
+  image: Dockerfile

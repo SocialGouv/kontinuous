@@ -1,0 +1,22 @@
+name: "Starting deployment"
+inputs:
+  token:
+    description: "The Github authentication token"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Load kontinuous config
+      shell: bash
+      id: kontinuous-config
+      uses: SocialGouv/kontinuous/gh-actions/load-remote-config@v1
+    
+    - name: Notify deployment start
+      uses: bobheadxi/deployments@v1
+      id: deployment
+      with:
+        step: start
+        token: ${{ inputs.token }}
+        override: true
+        desc: "Deploying environment: ${{ steps.kontinuous-config.outputs.deployment_id }}"
+        env: ${{ steps.kontinuous-config.outputs.deployment_id }}

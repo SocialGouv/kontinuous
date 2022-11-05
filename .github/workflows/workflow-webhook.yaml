@@ -19,7 +19,13 @@ jobs:
     name: Kontinuous Pipeline (via webhook)
     runs-on: ubuntu-latest
     steps:
-      - name: kontinuous pipeline
+
+      - name: Starting Deployment 🎬
+        uses: SocialGouv/kontinuous/gh-actions/deployment-starting@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Kontinuous Pipeline 🥷
         uses: SocialGouv/kontinuous/gh-actions/deploy-via-webhook@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -28,7 +34,7 @@ jobs:
           triggerWebhook: ${{ inputs.triggerWebhook }}
           environment: ${{ inputs.environment }}
       
-      - name: ending
-        uses: SocialGouv/kontinuous/gh-actions/deploy-via-webhook-ending@v1
+      - name: Reporting 📜
+        uses: SocialGouv/kontinuous/gh-actions/deployment-reporting@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
