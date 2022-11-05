@@ -66,7 +66,7 @@ jobs:
         id: deployment
         with:
           step: start
-          token: ${{ inputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           desc: "Deploying environment: ${{ env.NAMESPACE }}"
           env: ${{ steps.environment.outputs.env == 'dev' && env.NAMESPACE || steps.environment.outputs.env == 'preprod' && 'preproduction' || 'production' }}
       
@@ -84,7 +84,7 @@ jobs:
         with:
           step: finish
           status: ${{ job.status }}
-          token: ${{ inputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: ${{ steps.environment-url.outputs.url }}
           env: ${{ steps.deployment.outputs.env }}
@@ -92,5 +92,5 @@ jobs:
       - name: Debug manifests
         uses: SocialGouv/actions/k8s-manifests-debug@v1
         with:
-          token: ${{ inputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           path: manifests.yaml
