@@ -4,8 +4,7 @@ alias kontinuous=/opt/kontinuous/packages/kontinuous/bin/kontinuous
 
 export KS_ENVIRONMENT="$1"
 export KS_WEBHOOK_TOKEN="$2"
-export EVENT_REF="$3"
-export TRIGGER_WEBHOOK="$4"
+export TRIGGER_WEBHOOK="$3"
 
 KS_GIT=false
 
@@ -27,6 +26,9 @@ KS_DEBUG=true
 
 if [ "$GITHUB_EVENT_NAME" = "delete"  ]; then
   KS_EVENT=deleted
+  
+  export EVENT_REF=$(cat $GITHUB_EVENT_PATH | jq --raw-output '.ref')
+
   KS_GIT_BRANCH="$EVENT_REF"
   KS_GIT_BRANCH_URLENCODED=$(echo $KS_GIT_BRANCH | sed 's/\//\%2f/g')
   KS_GIT_SHA="0000000000000000000000000000000000000000"
