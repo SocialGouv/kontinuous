@@ -11,11 +11,11 @@ image: harbor.fabrique.social.gouv.fr/sre/kontinuous/webhook:latest
 # image: ghcr.io/socialgouv/kontinuous/webhook:latest
 resources:
   limits:
-    cpu: 500m
-    memory: 1Gi
+    cpu: 2
+    memory: 2Gi
   requests:
-    cpu: 100m
-    memory: 256Mi
+    cpu: 500m
+    memory: 512Mi
 terminationGracePeriodSeconds: 900
 
 ## optional
