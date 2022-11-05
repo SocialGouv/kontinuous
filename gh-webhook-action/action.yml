@@ -17,5 +17,5 @@ runs:
   args:  
     - '${{ inputs.environment }}'
     - '${{ inputs.webhookToken }}'
-    - '${{ github.event.ref }}'
+    - '${{ github.event.ref || "0000000000000000000000000000000000000000" }}'
     - '${{ inputs.triggerWebhook }}'
