@@ -86,7 +86,7 @@ module.exports = async (
         ${kubecontext ? `--context ${kubecontext}` : ""}
         --namespace ${namespace}
         --selector ${selector}
-        --since 0s
+        --since 1s
         --color always
         ${excludeContainerFlag}
     `
