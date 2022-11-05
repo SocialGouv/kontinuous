@@ -11,11 +11,6 @@ inputs:
     description: "Trigger webhook on first call, useful when webhooks are not configured on the repo"
   environment:
     description: "The deployment environment (dev | preprod | prod), default to prod on version tag, preprod on master or main, else dev"
-outputs:
-  url:
-    description: "Main deployment URL"
-    value: ${{ steps.environment-url.outputs.url }}
-
 runs:
   using: docker
   image: Dockerfile

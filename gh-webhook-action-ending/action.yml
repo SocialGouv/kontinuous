@@ -1,4 +1,8 @@
 name: "Ending of Kontinuous Webhook Pipeline for Github"
+outputs:
+  url:
+    description: "Main deployment URL"
+    value: ${{ steps.environment-url.outputs.url }}
 runs:
   using: "composite"
   steps:

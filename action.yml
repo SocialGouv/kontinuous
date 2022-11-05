@@ -29,10 +29,6 @@ inputs:
     description: "override final values using in yaml format, supporting subkeys"
   disableDiff:
     description: "disable diff branch"
-outputs:
-  url:
-    description: "Main deployment URL"
-    value: ${{ steps.environment-url.outputs.url }}
 runs:
   using: "composite"
   steps:
