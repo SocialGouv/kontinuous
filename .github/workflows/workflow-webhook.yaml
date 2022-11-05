@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: kontinuous pipeline
-        uses: SocialGouv/kontinuous/gh-webhook-action@v1
+        uses: SocialGouv/kontinuous/gh-webhook-action@ci/gh-docker-actions
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           webhookToken: ${{ secrets.KUBEWEBHOOK_TOKEN }}
