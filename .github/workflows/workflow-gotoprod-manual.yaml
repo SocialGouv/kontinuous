@@ -15,7 +15,7 @@ jobs:
     environment: production
     steps:
       - name: kontinuous pipeline
-        uses: SocialGouv/kontinuous/gh-actions/webhook@ci/gh-docker-actions
+        uses: SocialGouv/kontinuous/gh-actions/deploy-via-webhook@ci/gh-docker-actions
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           webhookToken: ${{ secrets.KUBEWEBHOOK_TOKEN }}
@@ -24,6 +24,6 @@ jobs:
           environment: "prod"
       
       - name: ending
-        uses: SocialGouv/kontinuous/gh-actions/ending@ci/gh-docker-actions
+        uses: SocialGouv/kontinuous/gh-actions/deploy-via-webhook-ending@ci/gh-docker-actions
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
