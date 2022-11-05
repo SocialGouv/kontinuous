@@ -29,5 +29,5 @@ jobs:
           environment: ${{ inputs.environment }}
       
       - name: ending
-        uses: SocialGouv/kontinuous/gh-webhook-action/ending@ci/gh-docker-actions
+        uses: SocialGouv/kontinuous/gh-webhook-action-ending@ci/gh-docker-actions
         
