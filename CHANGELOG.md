@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.92.0 (2022-11-05)
+
+
+### Features
+
+* webhook gh docker action ([#73](https://github.com/SocialGouv/kontinuous/issues/73)) ([be7ba6a](https://github.com/SocialGouv/kontinuous/commit/be7ba6a5c9eba17f41cae69e630ca1b3a232a0ed))
+
 ### [1.91.2](https://github.com/SocialGouv/kontinuous/compare/v1.91.1...v1.91.2) (2022-11-04)
 
 
