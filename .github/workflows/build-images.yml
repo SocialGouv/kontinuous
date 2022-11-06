@@ -57,7 +57,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Build image
-        uses: ./.github/actions/build-images.yaml
+        uses: ./.github/actions/build-images
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           context: ${{ matrix.context }}
