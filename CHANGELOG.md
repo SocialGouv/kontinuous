@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.93.14](https://github.com/SocialGouv/kontinuous/compare/v1.93.13...v1.93.14) (2022-11-06)
+
+
+### Bug Fixes
+
+* up docker image ([538b261](https://github.com/SocialGouv/kontinuous/commit/538b261d3a50dc01d44bd90e3126062985d28bd1))
+
 ### [1.93.13](https://github.com/SocialGouv/kontinuous/compare/v1.93.12...v1.93.13) (2022-11-06)
 
 
