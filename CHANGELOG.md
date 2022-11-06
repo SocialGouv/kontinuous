@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.94.0](https://github.com/SocialGouv/kontinuous/compare/v1.93.25...v1.94.0) (2022-11-06)
+
+
+### Features
+
+* magic e2e version ([8468339](https://github.com/SocialGouv/kontinuous/commit/8468339d40e2e56ee072ddcfa057bee90689c699))
+* magic e2e version wip ([c5ade7f](https://github.com/SocialGouv/kontinuous/commit/c5ade7f9ae4fe2495a1e896f513f21588a78825b))
+
+
+### Bug Fixes
+
+* build-images action ([2c02104](https://github.com/SocialGouv/kontinuous/commit/2c02104242dd594d31d66d2070735106c7016fbb))
+* build-images action ([c7d8f69](https://github.com/SocialGouv/kontinuous/commit/c7d8f69e6990421c1eabce4a3397e0ef7f677dd2))
+* build-images action ([7a60f27](https://github.com/SocialGouv/kontinuous/commit/7a60f27314ba9b87b85c76dec8097f029ca77d9f))
+* build-images action ([a690bbd](https://github.com/SocialGouv/kontinuous/commit/a690bbd4cf5442c5745584ba3787d1e878a33a11))
+* build-images action ([c4ed488](https://github.com/SocialGouv/kontinuous/commit/c4ed488978b6128cb96fa8ddeb974528c635d11d))
+* improve versioning ([d792767](https://github.com/SocialGouv/kontinuous/commit/d7927671a6badea30beff0803e8d81248b604826))
+* optim gh actions ([9bde3a6](https://github.com/SocialGouv/kontinuous/commit/9bde3a6b115fa805b6781ba2924bc92edafcffc8))
+* rename to action.yaml ([865c565](https://github.com/SocialGouv/kontinuous/commit/865c565f96d43cd130945b6e6c19199f0108a08e))
+
 ### [1.93.25](https://github.com/SocialGouv/kontinuous/compare/v1.93.24...v1.93.25) (2022-11-06)
 
 
