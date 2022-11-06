@@ -15,7 +15,7 @@ runs:
         name: manifests.yaml
         path: manifests.yaml
 
-    - name: Get status of pipeline
+    - name: Check deployment status
       shell: bash
       run: |
         if [ "$DEPLOYMENT_OK" != "true" ]; then
@@ -28,8 +28,8 @@ runs:
         step: finish
         status: ${{ job.status }}
         token: ${{ inputs.token }}
-        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
         env_url: ${{ env.DEPLOYMENT_URL }}
+        deployment_id: ${{ env.DEPLOYMENT_ID }}
 
     - name: Debug manifests
       uses: SocialGouv/kontinuous/gh-actions/debug-manifests@v1
