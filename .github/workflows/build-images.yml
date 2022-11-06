@@ -30,8 +30,8 @@ jobs:
           - destination: "/wait-needs"
             dockerfile: packages/wait-needs/Dockerfile
           - destination: "/gh-actions-common"
-            dockerfile: packages/gh-actions/Dockerfile
-            context: packages/gh-actions
+            dockerfile: gh-actions/Dockerfile
+            context: gh-actions
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
