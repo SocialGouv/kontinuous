@@ -30,6 +30,8 @@ jobs:
           - destination: "/wait-needs"
             dockerfile: packages/wait-needs/Dockerfile
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: Build image
         uses: ./.github/actions/build-images
         with:
@@ -51,6 +53,8 @@ jobs:
             dockerfile: gh-actions/Dockerfile
             context: gh-actions
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: Build image
         uses: ./.github/actions/build-images.yaml
         with:
