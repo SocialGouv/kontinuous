@@ -5,6 +5,7 @@ set -e
 export PATH=$PATH:/opt/kontinuous/packages/kontinuous/bin
 
 export KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
+export KS_GIT_BRANCH=HEAD
 
 export KONTINUOUS_CONFIG=$GITHUB_WORKSPACE/kontinuous-config.json
 
