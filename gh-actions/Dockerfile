@@ -1,5 +1,7 @@
 ARG KONTINUOUS_VERSION=1
 FROM ghcr.io/socialgouv/kontinuous:$KONTINUOUS_VERSION as base
+
+USER 0
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
     curl \
@@ -26,6 +28,8 @@ FROM base as final
 
 COPY --from=jq /usr/local/bin/jq /usr/local/bin/jq
 COPY --from=yq /usr/local/bin/yq /usr/local/bin/yq
+
+USER 1001
 
 ENV NPM_CONFIG_PREFIX=/home/ubuntu/.npm-global
 RUN npm i -g @socialgouv/parse-manifests
