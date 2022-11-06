@@ -4,8 +4,16 @@ set -e
 
 export PATH=$PATH:/opt/kontinuous/packages/kontinuous/bin
 
-export KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
 export KS_GIT=false
+export KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
+if [ -n "$GITHUB_HEAD_REF" ]; then
+  KS_GIT_BRANCH=$GITHUB_HEAD_REF
+else
+  KS_GIT_BRANCH=$GITHUB_REF
+fi
+KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/heads/}
+KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/tags/}
+export KS_GIT_BRANCH
 
 export KONTINUOUS_CONFIG=$GITHUB_WORKSPACE/kontinuous-config.json
 
