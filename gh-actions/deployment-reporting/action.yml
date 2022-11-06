@@ -29,7 +29,7 @@ runs:
         status: ${{ job.status }}
         token: ${{ inputs.token }}
         env_url: ${{ env.DEPLOYMENT_URL }}
-        deployment_id: ${{ env.DEPLOYMENT_ID }}
+        env: ${{ env.DEPLOYMENT_ID }}
 
     - name: Debug manifests
       uses: SocialGouv/kontinuous/gh-actions/debug-manifests@v1
