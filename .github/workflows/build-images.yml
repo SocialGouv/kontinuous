@@ -35,6 +35,7 @@ jobs:
       - name: Build image
         uses: ./.github/actions/build-images
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           context: ${{ matrix.context }}
           dockerfile: ${{ matrix.dockerfile }}
           destination: ${{ matrix.destination }}
@@ -58,6 +59,7 @@ jobs:
       - name: Build image
         uses: ./.github/actions/build-images.yaml
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           context: ${{ matrix.context }}
           dockerfile: ${{ matrix.dockerfile }}
           destination: ${{ matrix.destination }}

@@ -1,6 +1,8 @@
 name: Build Docker Images
 description: "Build kontinuous docker images"
 inputs:
+  token:
+    description: "The Github authentication token"
   context:
     description: "Docker image build context"
   dockerfile:
@@ -16,7 +18,7 @@ runs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ intpus.token }}
 
     - name: Load tag metadata variables
       id: tag-vars
