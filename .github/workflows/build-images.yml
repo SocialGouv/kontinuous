@@ -31,7 +31,7 @@ jobs:
             dockerfile: packages/wait-needs/Dockerfile
     steps:
       - name: Build image
-        uses: ./.github/actions/build-images.yaml
+        uses: ./.github/actions/build-images
         with:
           context: ${{ matrix.context }}
           dockerfile: ${{ matrix.dockerfile }}
