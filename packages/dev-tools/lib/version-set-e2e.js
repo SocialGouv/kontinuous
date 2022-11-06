@@ -17,13 +17,21 @@ module.exports = async (version) => {
   }
   version = sanitizeTag(version)
 
-  replace({
-    regex: "SocialGouv/kontinuous(.*)(:|@)([a-zA-Z0-9-]+)",
-    replacement: `SocialGouv/kontinuous$1$2${version}`,
+  const replaceConfig = {
     paths: ["./"],
     recursive: true,
     silent: false,
     exclude: "*.md,node_modules",
+  }
+  replace({
+    ...replaceConfig,
+    regex: "SocialGouv/kontinuous(.*)(:|@)([a-zA-Z0-9-]+)",
+    replacement: `SocialGouv/kontinuous$1$2${version}`,
+  })
+  replace({
+    ...replaceConfig,
+    regex: "socialgouv/kontinuous(.*)(:|@)([a-zA-Z0-9-]+)",
+    replacement: `socialgouv/kontinuous$1$2${version}`,
   })
 
   console.log(`✨ all source files were linked to version "${version}"`)
