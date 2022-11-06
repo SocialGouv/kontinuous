@@ -5,6 +5,8 @@ on:
     branches:
       - '**'
       - '!v1'
+    tags:
+      - 'v*.*.*'
 
 concurrency:
   cancel-in-progress: true
