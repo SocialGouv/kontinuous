@@ -75,7 +75,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - dockerfile: gh-actions/Dockerfile
+          - destination: "/gh-actions-common"
+            dockerfile: gh-actions/Dockerfile
             context: gh-actions
     steps:
 
