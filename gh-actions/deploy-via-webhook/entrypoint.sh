@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 export PATH=$PATH:/opt/kontinuous/packages/kontinuous/bin
 
 export KS_ENVIRONMENT="$1"

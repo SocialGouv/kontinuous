@@ -29,6 +29,9 @@ jobs:
             dockerfile: packages/degit/Dockerfile
           - destination: "/wait-needs"
             dockerfile: packages/wait-needs/Dockerfile
+          - destination: "/gh-actions-common"
+            dockerfile: Dockerfile
+            context: packages/gh-actions
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2

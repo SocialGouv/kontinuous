@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 export MANIFESTS="$1"
 
 JSON=$(cat "${MANIFESTS}" | npx @socialgouv/parse-manifests --json)
