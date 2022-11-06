@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.93.20](https://github.com/SocialGouv/kontinuous/compare/v1.93.19...v1.93.20) (2022-11-06)
+
+
+### Bug Fixes
+
+* optim gh actions ([1304ce8](https://github.com/SocialGouv/kontinuous/commit/1304ce8e3f7418483b06aa18110a62b5bb6f043d))
+
 ### [1.93.19](https://github.com/SocialGouv/kontinuous/compare/v1.93.18...v1.93.19) (2022-11-06)
 
 
