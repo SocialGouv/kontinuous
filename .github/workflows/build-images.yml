@@ -4,10 +4,7 @@ on:
   push:
     branches:
       - '**'
-      - '!master'
       - '!v1'
-    tags:
-      - 'v*.*.*'
 
 concurrency:
   cancel-in-progress: true
