@@ -53,8 +53,8 @@ jobs:
       matrix:
         include:
           - destination: "/gh-actions-common"
-            dockerfile: gh-actions/Dockerfile
-            context: gh-actions
+            dockerfile: .github/actions/Dockerfile
+            context: .github/actions
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
