@@ -15,6 +15,7 @@ const loadStructuredConfig = require("../utils/load-structured-config")
 const getGitRef = require("../utils/get-git-ref")
 const getGitSha = require("../utils/get-git-sha")
 const getGitUrl = require("../utils/get-git-url")
+const getGitRemoteDefaultBranch = require("../utils/get-git-remote-default-branch")
 const repositoryFromGitUrl = require("../utils/repository-from-git-url")
 const cleanGitRef = require("../utils/clean-git-ref")
 const yaml = require("../utils/yaml")
@@ -92,46 +93,6 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
       env: "KS_GIT_REQUIRED",
       envParser: (str) => yaml.load(str),
     },
-    gitBranch: {
-      defaultFunction: async (config, { options, env: environ }) => {
-        let ref
-        if (options.branch) {
-          ref = options.branch
-        } else if (environ.KS_GIT_BRANCH) {
-          ref = environ.KS_GIT_BRANCH
-        } else if (environ.KS_GIT_REF) {
-          ref = environ.KS_GIT_REF
-        } else if (config.git) {
-          ref = await getGitRef(config.workspacePath)
-        } else {
-          logger.warn(
-            `no git branch defined and can't be inferred, default to "imaginary"`
-          )
-          ref = "imaginary"
-        }
-        return cleanGitRef(ref)
-      },
-    },
-    gitSha: {
-      env: "KS_GIT_SHA",
-      option: "commit",
-      defaultFunction: async (config) => {
-        if (config.git) {
-          try {
-            const sha1 = await getGitSha(config.workspacePath)
-            return sha1
-          } catch (err) {
-            if (config.gitRequired) {
-              throw err
-            }
-          }
-        }
-        logger.warn(
-          `no git sha defined and can't be inferred, default to "0000000000000000000000000000000000000000"`
-        )
-        return "0000000000000000000000000000000000000000"
-      },
-    },
     gitRepositoryUrl: {
       defaultFunction: async (config, { options, env: environ }) => {
         if (environ.KS_GIT_REPOSITORY_URL) {
@@ -177,6 +138,53 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
           `no git repository url defined, repository will default to dirname "${dirname}"`
         )
         return dirname
+      },
+    },
+    gitBranchRetrieveDefaultFromRemote: {
+      env: "KS_GIT_BRANCH_RETRIEVE_DEFAULT_FROM_REMOTE",
+      option: "remote",
+      defaultFunction: false,
+    },
+    gitBranch: {
+      defaultFunction: async (config, { options, env: environ }) => {
+        let ref
+        if (options.branch) {
+          ref = options.branch
+        } else if (environ.KS_GIT_BRANCH) {
+          ref = environ.KS_GIT_BRANCH
+        } else if (environ.KS_GIT_REF) {
+          ref = environ.KS_GIT_REF
+        } else if (config.git) {
+          ref = await getGitRef(config.workspacePath)
+        } else if (config.gitBranchRetrieveDefaultFromRemote) {
+          ref = await getGitRemoteDefaultBranch(config.gitRepositoryUrl)
+        } else {
+          logger.warn(
+            `no git branch defined and can't be inferred, default to "imaginary"`
+          )
+          ref = "imaginary"
+        }
+        return cleanGitRef(ref)
+      },
+    },
+    gitSha: {
+      env: "KS_GIT_SHA",
+      option: "commit",
+      defaultFunction: async (config) => {
+        if (config.git) {
+          try {
+            const sha1 = await getGitSha(config.workspacePath)
+            return sha1
+          } catch (err) {
+            if (config.gitRequired) {
+              throw err
+            }
+          }
+        }
+        logger.warn(
+          `no git sha defined and can't be inferred, default to "0000000000000000000000000000000000000000"`
+        )
+        return "0000000000000000000000000000000000000000"
       },
     },
     gitRepositoryName: {
