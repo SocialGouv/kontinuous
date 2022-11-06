@@ -1,6 +1,6 @@
 module.exports =
   ({ services }) =>
-  async ({ ref, after, repositoryUrl, commits, env }) =>
+  async ({ ref, after, repositoryUrl, commits, env, kontinuousVersion }) =>
     services.pipeline({
       eventName: "pushed",
       ref,
@@ -10,4 +10,5 @@ module.exports =
       checkout: true,
       commits,
       env,
+      kontinuousVersion,
     })

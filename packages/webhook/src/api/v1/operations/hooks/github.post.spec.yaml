@@ -15,6 +15,11 @@ parameters:
       enum: [pushed, deleted, custom, created] # deprecated
       # enum: [pushed, deleted, custom]
     required: true
+  - in: query
+    name: kontinuousVersion
+    schema:
+      type: string
+    required: false
 
 requestBody:
   required: true

@@ -17,10 +17,18 @@ module.exports = ({
   initContainers = [],
   commits,
   deployKeyCiSecretName,
+  kontinuousVersion,
 }) => {
   const config = ctx.require("config.project")
 
-  const { pipelineImage, pipelineCheckoutImage } = config
+  let { pipelineImage, pipelineCheckoutImage } = config
+
+  if (kontinuousVersion) {
+    const pipelineImagePath = pipelineImage.split(":")[0]
+    const pipelineCheckoutImagePath = pipelineCheckoutImage.split(":")[0]
+    pipelineImage = `${pipelineImagePath}:${kontinuousVersion}`
+    pipelineCheckoutImage = `${pipelineCheckoutImagePath}:${kontinuousVersion}`
+  }
 
   return {
     apiVersion: "batch/v1",

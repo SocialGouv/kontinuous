@@ -2,7 +2,14 @@ const yaml = require("~common/utils/yaml")
 
 module.exports =
   ({ services }) =>
-  async ({ cluster, env, hash, manifests, repositoryUrl }) => {
+  async ({
+    cluster,
+    env,
+    hash,
+    manifests,
+    repositoryUrl,
+    kontinuousVersion,
+  }) => {
     const sanitizedManifests = yaml.dumpAll(yaml.loadAll(manifests)) // protect against injections
     const initContainers = [
       {
@@ -36,5 +43,6 @@ EOF
       args: ["deploy", "-f", "/workspace/manifests.yaml"],
       checkout: false,
       initContainers,
+      kontinuousVersion,
     })
   }

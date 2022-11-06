@@ -30,7 +30,12 @@ parameters:
     name: repositoryUrl
     schema:
       type: string
-      example: https://github.com/SocialGouv/sample-next-app.git
+      example: https://github.com/SocialGouv/template.git
+    required: false
+  - in: query
+    name: kontinuousVersion
+    schema:
+      type: string
     required: false
 
 requestBody:

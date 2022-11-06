@@ -1,5 +1,5 @@
 module.exports = function ({ services }) {
-  return ({ ref, after, repositoryUrl }) =>
+  return ({ ref, after, repositoryUrl, kontinuousVersion }) =>
     services.pipeline({
       eventName: "deleted",
       ref,
@@ -7,5 +7,6 @@ module.exports = function ({ services }) {
       repositoryUrl,
       args: ["deploy", "--chart", "deactivate", "--ignore-project-templates"],
       checkout: true,
+      kontinuousVersion,
     })
 }

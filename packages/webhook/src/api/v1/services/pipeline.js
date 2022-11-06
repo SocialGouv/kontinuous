@@ -22,6 +22,7 @@ module.exports = ({ services }) => {
     initContainers,
     commits,
     cluster,
+    kontinuousVersion,
   }) => {
     const repositoryPath = repositoryFromGitUrl(repositoryUrl)
     const repositoryName = repositoryPath.split("/").pop()
@@ -112,6 +113,7 @@ module.exports = ({ services }) => {
       webhookToken,
       commits,
       deployKeyCiSecretName,
+      kontinuousVersion,
     })
 
     return async () => {

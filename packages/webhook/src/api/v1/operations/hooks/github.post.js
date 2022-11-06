@@ -3,9 +3,9 @@ module.exports = function ({ services: { pushed, deleted } }) {
 
   return [
     async (req, res) => {
-      const { body } = req
+      const { body, query } = req
 
-      let eventName = req.query.event
+      let eventName = query.event
 
       // deprecated
       if (eventName === "created") {
@@ -27,11 +27,14 @@ module.exports = function ({ services: { pushed, deleted } }) {
 
       const { clone_url: repositoryUrl, commits } = body.repository
 
+      const { kontinuousVersion } = query
+
       const runJob = await eventHandlers[eventName]({
         ref,
         after,
         repositoryUrl,
         commits,
+        kontinuousVersion,
       })
       if (!runJob) {
         return res.status(204).json({ message: "no-op" })
