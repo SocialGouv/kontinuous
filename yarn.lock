@@ -4767,6 +4767,8 @@ __metadata:
 "dev-tools@workspace:packages/dev-tools":
   version: 0.0.0-use.local
   resolution: "dev-tools@workspace:packages/dev-tools"
+  dependencies:
+    replace: "npm:^1.2.2"
   languageName: unknown
   linkType: soft
 
@@ -9084,6 +9086,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"minimatch@npm:3.0.5":
+  version: 3.0.5
+  resolution: "minimatch@npm:3.0.5"
+  dependencies:
+    brace-expansion: "npm:^1.1.7"
+  checksum: 981826b6bc3c09d9e1c2d9b906ea31b3151b6b8943325194b6d4fd610e0f9bdef52d579fd4256ebdd8a4fd22f5adf2f5d702461ec618fb42a33da8a41f42a6cf
+  languageName: node
+  linkType: hard
+
 "minimatch@npm:^3.0.4, minimatch@npm:^3.0.5, minimatch@npm:^3.1.1, minimatch@npm:^3.1.2":
   version: 3.1.2
   resolution: "minimatch@npm:3.1.2"
@@ -10806,6 +10817,20 @@ __metadata:
   bin:
     regjsparser: bin/parser
   checksum: 8d370d309ad77094d5b2fa57d5ccf9e37929f5d1ef7e5374eb233d8e470b5e41bbe150fad9629959393f57855ca0a54ea5472fc91e933f695adb17198382424f
+  languageName: node
+  linkType: hard
+
+"replace@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "replace@npm:1.2.2"
+  dependencies:
+    chalk: "npm:2.4.2"
+    minimatch: "npm:3.0.5"
+    yargs: "npm:^15.3.1"
+  bin:
+    replace: bin/replace.js
+    search: bin/search.js
+  checksum: 1094669dc2a682e2e840a6b8ee75f95c4e656413e826f8d7bcc28b4ea6bd409689f58b993bd7b9ff59f087c3dcec63f61399e84c14ad6b07b013433c5710f84f
   languageName: node
   linkType: hard
 
@@ -12918,7 +12943,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:^15.3.0":
+"yargs@npm:^15.3.0, yargs@npm:^15.3.1":
   version: 15.4.1
   resolution: "yargs@npm:15.4.1"
   dependencies:
