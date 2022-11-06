@@ -9,19 +9,22 @@ const getVersionFromBranch = async () => {
   if (ref === "master") {
     ref = await getGitMajorVersion()
   }
-  return sanitizeTag(ref)
+  return ref
 }
 module.exports = async (version) => {
   if (!version) {
     version = await getVersionFromBranch()
   }
+  version = sanitizeTag(version)
 
   replace({
     regex: "SocialGouv/kontinuous(.*)(:|@)([a-zA-Z0-9-]+)",
     replacement: `SocialGouv/kontinuous$1$2${version}`,
-    paths: [process.cwd()],
+    paths: ["./"],
     recursive: true,
     silent: false,
-    exclude: "__snpahost__, *.md",
+    exclude: "*.md,node_modules",
   })
+
+  console.log(`✨ all source files were linked to version "${version}"`)
 }
