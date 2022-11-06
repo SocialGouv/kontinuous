@@ -78,7 +78,7 @@ jobs:
           - dockerfile: gh-actions/Dockerfile
             context: gh-actions
     steps:
-    
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -91,7 +91,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v4
         with:
           images: ghcr.io/${{ github.repository }}${{ matrix.destination }}
           tags: |
