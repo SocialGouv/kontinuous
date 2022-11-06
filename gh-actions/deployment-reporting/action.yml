@@ -17,7 +17,9 @@ runs:
 
     - name: Get status of pipeline
       shell: bash
-      run: '[ "$DEPLOYMENT_OK" != "true" ] && exit 1'
+      run: |
+        set -x
+        [ "$DEPLOYMENT_OK" != "true" ] && exit 1
 
     - name: Notify deployment end
       uses: bobheadxi/deployments@v1

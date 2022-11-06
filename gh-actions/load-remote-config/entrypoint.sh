@@ -11,7 +11,7 @@ export KONTINUOUS_CONFIG=$GITHUB_WORKSPACE/kontinuous-config.json
 
 kontinuous config --remote --format json>$KONTINUOUS_CONFIG
 
-DEPLOYMENT_ID=get-deployment-id
+DEPLOYMENT_ID=$(get-deployment-id)
 
 echo "KONTINUOUS_CONFIG=$KONTINUOUS_CONFIG">>$GITHUB_ENV
 echo "DEPLOYMENT_ID=$DEPLOYMENT_ID">>$GITHUB_ENV
