@@ -5,7 +5,7 @@ repository:
 gitBranch: 
 runs: {}
 image: "debian:stable"
-degitImage: ghcr.io/socialgouv/kontinuous/degit:1
+degitImage: ghcr.io/socialgouv/kontinuous/degit:v1
 # degitImage: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
 # extra:
 #   jobs:

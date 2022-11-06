@@ -55,11 +55,12 @@
     "test:kontinuous": "yarn workspace kontinuous test",
     "test:webhook": "yarn workspace ~webhook test",
     "dev:webhook": "docker-compose up --build webhook",
+    "dev:docs": "docsify serve docs",
+    "dev:version-set-e2e": "node packages/dev-tools/bin/version-set-e2e",
     "docker:webhook": "DOCKER_BUILDKIT=1 docker-compose -f docker-compose.built.yaml up --build webhook",
     "docker:kontinuous:build": "DOCKER_BUILDKIT=1 docker build -f packages/kontinuous/Dockerfile -t kontinuous .",
     "docker:kontinuous:run": "docker run -it -v $PWD:/workspace -e KS_ISLOCAL=true kontinuous",
     "docker:kontinuous": "yarn docker:kontinuous:build && yarn docker:kontinuous:run",
-    "dev:docs": "docsify serve docs",
     "logs:remote-webhook": "kubectl --context prod -n kontinuous-webhook logs -f --all-containers -l component=kontinuous-webhook",
     "upgrade:modjo": "yarn up -R \"@modjo-plugins/*\""
   },
