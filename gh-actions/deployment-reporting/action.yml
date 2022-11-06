@@ -2,6 +2,10 @@ name: "Reporting of Kontinuous Webhook Pipeline for Github"
 inputs:
   token:
     description: "The Github authentication token"
+    required: true
+  deployment_id:
+    description: "Deployment id"
+    required: true
 outputs:
   url:
     description: "Main deployment URL"
@@ -29,7 +33,8 @@ runs:
         status: ${{ job.status }}
         token: ${{ inputs.token }}
         env_url: ${{ env.DEPLOYMENT_URL }}
-        env: ${{ env.DEPLOYMENT_ID }}
+        env: ${{ env.DEPLOYMENT_NAME }}
+        deployment_id: ${{ inputs.deployment_id }}
 
     - name: Debug manifests
       uses: SocialGouv/kontinuous/gh-actions/debug-manifests@v1

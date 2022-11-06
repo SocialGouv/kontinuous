@@ -3,6 +3,10 @@ inputs:
   token:
     description: "The Github authentication token"
     required: true
+outputs:
+  deployment_id:
+    description: "Deployment id"
+    value: ${{ steps.deployment.outputs.deployment_id }}
 runs:
   using: "composite"
   steps:
@@ -17,5 +21,5 @@ runs:
         step: start
         token: ${{ inputs.token }}
         override: true
-        desc: "Deploying environment: ${{ steps.kontinuous-config.outputs.deployment_id }}"
-        env: ${{ steps.kontinuous-config.outputs.deployment_id }}
+        desc: "Deploying environment: ${{ steps.kontinuous-config.outputs.deployment_name }}"
+        env: ${{ steps.kontinuous-config.outputs.deployment_name }}

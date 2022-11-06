@@ -17,6 +17,7 @@ jobs:
       
       - name: Starting Deployment 🎬
         uses: SocialGouv/kontinuous/gh-actions/deployment-starting@v1
+        id: deployment-starting
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -33,3 +34,4 @@ jobs:
         uses: SocialGouv/kontinuous/gh-actions/deployment-reporting@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          deployment_id: ${{ steps.deployment-starting.outputs.deployment_id }}
