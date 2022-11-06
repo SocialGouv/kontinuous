@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.95.0](https://github.com/SocialGouv/kontinuous/compare/v1.94.2...v1.95.0) (2022-11-06)
+
+
+### Features
+
+* webhook kontinuousVersion param ([b110769](https://github.com/SocialGouv/kontinuous/commit/b110769a8e9b0a35e0997fe697a8c47a59d62026))
+
+
+### Bug Fixes
+
+* magic e2e version lowercased ([5eea53b](https://github.com/SocialGouv/kontinuous/commit/5eea53bc8a0ebf7cebd633a47ed2f50c2ab00a32))
+
 ### [1.94.2](https://github.com/SocialGouv/kontinuous/compare/v1.94.1...v1.94.2) (2022-11-06)
 
 
