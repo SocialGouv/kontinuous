@@ -1,5 +1,12 @@
 ARG KONTINUOUS_VERSION=1
 FROM ghcr.io/socialgouv/kontinuous:$KONTINUOUS_VERSION as base
+RUN apt-get update && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
+    curl \
+    ca-certificates \
+    wget \
+    git \
+  && rm -rf /var/lib/apt/lists/*
 
 FROM base as jq
 ARG JQ_VERSION=1.6
