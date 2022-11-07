@@ -58,7 +58,7 @@ module.exports = async (
         ) {
           throw error
         }
-        logger.error({ error, uri, target }, `Unable to degit job ${uri}`)
+        logger.error({ error, uri, target }, `unable to degit`)
         bail(error)
       }
     },
