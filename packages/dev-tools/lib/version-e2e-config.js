@@ -7,7 +7,7 @@ module.exports = {
   },
   replacers: [
     {
-      regex: "socialgouv/kontinuous(.*)(:|@)([a-zA-Z0-9-]+)",
+      regex: "socialgouv/kontinuous(.*)(:|@)([a-zA-Z0-9-]*)",
       replacementFactory: (version) => `socialgouv/kontinuous$1$2${version}`,
     },
   ],

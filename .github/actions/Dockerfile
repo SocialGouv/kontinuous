@@ -1,5 +1,4 @@
-ARG KONTINUOUS_VERSION=1
-FROM ghcr.io/socialgouv/kontinuous:$KONTINUOUS_VERSION as base
+FROM ghcr.io/socialgouv/kontinuous:v1 as base
 
 USER 0
 RUN apt-get update && \
