@@ -51,17 +51,17 @@ bumpFiles.push({
 })
 
 // e2e version (docker images, github actions, workflows etc...)
-// const versionE2eGetFiles = require("./packages/dev-tools/lib/version-e2e-get-files")
+const versionE2eGetFiles = require("./packages/dev-tools/lib/version-e2e-get-files")
 
-// const e2eFiles = versionE2eGetFiles()
-// const e2eUpdater = "packages/dev-tools/lib/standard-version-e2e-updater.js"
+const e2eFiles = versionE2eGetFiles()
+const e2eUpdater = "packages/dev-tools/lib/standard-version-e2e-updater.js"
 
-// bumpFiles.push(
-//   ...e2eFiles.map((file) => ({
-//     filename: file,
-//     updater: e2eUpdater,
-//   }))
-// )
+bumpFiles.push(
+  ...e2eFiles.map((file) => ({
+    filename: file,
+    updater: e2eUpdater,
+  }))
+)
 
 module.exports = {
   bumpFiles,

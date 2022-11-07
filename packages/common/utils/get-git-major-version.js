@@ -1,7 +1,6 @@
-const asyncShell = require("./async-shell")
+const getGitVersion = require("./get-git-version")
 
 module.exports = async (cwd = process.cwd()) => {
-  const tags = await asyncShell("git rev-list --tags --max-count=1", { cwd })
-  const tag = await asyncShell(`git describe --tags ${tags}`, { cwd })
+  const tag = await getGitVersion(cwd)
   return tag.split(".").shift()
 }

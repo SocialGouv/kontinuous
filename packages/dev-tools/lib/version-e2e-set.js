@@ -2,20 +2,26 @@ const replace = require("replace")
 
 const getGitAbbrevRef = require("~common/utils/get-git-abbrev-ref")
 const getGitMajorVersion = require("~common/utils/get-git-major-version")
+const getGitVersion = require("~common/utils/get-git-version")
 const sanitizeTag = require("~common/utils/sanitize-tag")
 
 const versionE2eConfig = require("./version-e2e-config")
 
-const getVersionFromBranch = async () => {
+const getVersionFromBranch = async ({ major }) => {
   let ref = await getGitAbbrevRef()
   if (ref === "master") {
-    ref = await getGitMajorVersion()
+    if (major) {
+      ref = await getGitMajorVersion()
+    } else {
+      ref = await getGitVersion()
+    }
   }
   return ref
 }
-module.exports = async (version) => {
+module.exports = async (version, options = {}) => {
+  const { major = false } = options
   if (!version) {
-    version = await getVersionFromBranch()
+    version = await getVersionFromBranch({ major })
   }
   version = sanitizeTag(version)
 
