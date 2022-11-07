@@ -1,5 +1,6 @@
 const fs = require("fs-extra")
 
+// package.json
 const getDirectoriesSync = (source) =>
   fs
     .readdirSync(source, { withFileTypes: true })
@@ -17,6 +18,7 @@ for (const dir of packageDirs) {
   }
 }
 
+// charts
 const getChartsRecursive = (dir, list = []) => {
   const chartList = getDirectoriesSync(dir)
   list.push(
@@ -47,6 +49,19 @@ bumpFiles.push({
   filename: `packages/webhook/Chart.yaml`,
   updater: chartsUpdater,
 })
+
+// e2e version (docker images, github actions, workflows etc...)
+const versionE2eGetFiles = require("./packages/dev-tools/lib/version-e2e-get-files")
+
+const e2eFiles = versionE2eGetFiles()
+const e2eUpdater = "packages/dev-tools/lib/standard-version-e2e-updater.js"
+
+bumpFiles.push(
+  ...e2eFiles.map((file) => ({
+    filename: file,
+    updater: e2eUpdater,
+  }))
+)
 
 module.exports = {
   bumpFiles,

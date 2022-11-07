@@ -51,6 +51,7 @@
     "retag": "TAG=$(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1) && git branch -f v1 master && git push -f origin v1",
     "push": "git push -f --follow-tags origin master",
     "delivery": "git push && yarn release && yarn push",
+    "version-e2e": "yarn version-e2e-set && yarn lint --fix",
     "version-e2e-set": "node packages/dev-tools/bin/version-e2e-set",
     "test": "yarn workspaces foreach --no-private --parallel run test",
     "test:kontinuous": "yarn workspace kontinuous test",
@@ -71,7 +72,8 @@
   },
   "standard-version": {
     "scripts": {
-      "posttag": "yarn retag"
+      "posttag": "yarn retag",
+      "precommit": "yarn lint --fix"
     }
   },
   "engines": {

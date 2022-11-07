@@ -4,7 +4,7 @@ const getGitAbbrevRef = require("~common/utils/get-git-abbrev-ref")
 const getGitMajorVersion = require("~common/utils/get-git-major-version")
 const sanitizeTag = require("~common/utils/sanitize-tag")
 
-const versionE2eConfig = require("./version-e2e")
+const versionE2eConfig = require("./version-e2e-config")
 
 const getVersionFromBranch = async () => {
   let ref = await getGitAbbrevRef()

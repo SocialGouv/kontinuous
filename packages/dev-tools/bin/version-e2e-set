@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+const versionSetE2e = require("../lib/version-e2e-set")
+
+versionSetE2e(process.argv[2])
