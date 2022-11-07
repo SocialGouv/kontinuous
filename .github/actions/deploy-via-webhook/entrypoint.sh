@@ -95,3 +95,7 @@ HOSTS=$(cat manifests.yaml | yq eval-all '.spec.rules[] .host')
 HOST=$(echo "$HOSTS" | head -n 1)
 DEPLOYMENT_URL="https://$HOST"
 echo "DEPLOYMENT_URL=$DEPLOYMENT_URL">>$GITHUB_ENV
+
+if [ "$DEPLOYMENT_OK" != "true" ]; then
+  exit 1
+fi

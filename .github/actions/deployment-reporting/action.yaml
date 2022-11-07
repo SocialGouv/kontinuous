@@ -19,15 +19,9 @@ runs:
         name: manifests.yaml
         path: manifests.yaml
 
-    - name: Check deployment status
-      shell: bash
-      run: |
-        if [ "$DEPLOYMENT_OK" != "true" ]; then
-          exit 1
-        fi
-
     - name: Notify deployment end
       uses: bobheadxi/deployments@v1
+      if: ${{ .env.DEPLOYMENT_OK == 'true' }}
       with:
         step: finish
         status: ${{ job.status }}
