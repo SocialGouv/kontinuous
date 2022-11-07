@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.95.33](https://github.com/socialgouv/kontinuous/compare/v1.95.32...v1.95.33) (2022-11-07)
+
+
+### Bug Fixes
+
+* retry on doesn't know ns ([5f202ff](https://github.com/socialgouv/kontinuous/commit/5f202ff5bfba769096ccfe00309b808ccb48d600))
+
 ### [1.95.32](https://github.com/socialgouv/kontinuous/compare/v1.95.31...v1.95.32) (2022-11-07)
 
 
