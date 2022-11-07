@@ -4,9 +4,6 @@ inputs:
   token:
     description: "Github token for PR comment"
 outputs:
-  json:
-    description: "Json debug"
-    value: ${{ steps.debug-manifests.outputs.json }}
   markdown:
     description: "Markdown debug"
     value: ${{ steps.debug-manifests.outputs.markdown }}

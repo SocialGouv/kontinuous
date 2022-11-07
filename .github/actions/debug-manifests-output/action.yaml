@@ -4,8 +4,6 @@ inputs:
   path:
     description: "Your manifests YAML file path"
 outputs:
-  json:
-    description: "Json debug"
   markdown:
     description: "Markdown debug"
   text:
