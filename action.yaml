@@ -1,3 +1,4 @@
+# this action is deprecated, please use socialgouv/kontinuous/.github/actions/deploy-via-github instead
 name: "Autodevops deploy"
 description: "Autodevops deploy using Helm template and kapp"
 inputs:

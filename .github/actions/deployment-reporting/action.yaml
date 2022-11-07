@@ -40,4 +40,3 @@ runs:
       uses: socialgouv/kontinuous/.github/actions/debug-manifests@v1
       with:
         token: ${{ inputs.token }}
-        path: manifests.yaml
