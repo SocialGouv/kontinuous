@@ -73,8 +73,7 @@
   },
   "standard-version": {
     "scripts": {
-      "precommit": "yarn version-e2e:commit",
-      "posttag": "yarn version-major-branch:up && yarn version-major-branch:push"
+      "posttag": "yarn version-e2e:commit && yarn version-major-branch:up && yarn version-major-branch:push"
     }
   },
   "engines": {

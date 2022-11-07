@@ -21,7 +21,6 @@ set -e
 yarn version-e2e:set
 yarn lint --fix
 git add --all
-git commit -m "chore: link e2e version"
 set +e
 
 unstash
