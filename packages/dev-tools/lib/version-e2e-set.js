@@ -19,11 +19,11 @@ module.exports = async (version) => {
   }
   version = sanitizeTag(version)
 
-  for (const target of versionE2eConfig.targets) {
+  for (const replacer of versionE2eConfig.replacers) {
     replace({
       ...versionE2eConfig.common,
-      regex: target.regex,
-      replacement: target.replacementFactory(version),
+      regex: replacer.regex,
+      replacement: replacer.replacementFactory(version),
     })
   }
 

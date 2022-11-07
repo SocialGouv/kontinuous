@@ -1,30 +1,24 @@
-const yaml = require("js-yaml")
+const asyncShell = require("~common/utils/async-shell")
+
+const package = require("../package.json")
+
+const versionE2eConfig = require("./version-e2e-config")
 
 module.exports = {
-  readVersion: (contents) => {
-    let chart
-    try {
-      chart = yaml.load(contents)
-    } catch (e) {
-      console.error(e)
-      throw e
+  readVersion: (_contents) => package.version,
+  writeVersion: async (contents, version) => {
+    for (const replacer of versionE2eConfig.replacers) {
+      contents = await asyncShell([
+        "yarn",
+        "workspace",
+        package.name,
+        "run",
+        "replace",
+        replacer.regex,
+        replacer.replacementFactory(version),
+        "-z",
+      ])
     }
-    return chart.version
-  },
-  writeVersion: (contents, version) => {
-    const chart = yaml.load(contents)
-    chart.version = version
-    const { dependencies } = chart
-    if (dependencies) {
-      for (const dependency of dependencies) {
-        if (
-          dependency.repository.startsWith("file://./charts/") ||
-          dependency.repository.startsWith("file://../")
-        ) {
-          dependency.version = version
-        }
-      }
-    }
-    return yaml.dump(chart, { indent: 2 })
+    return contents
   },
 }
