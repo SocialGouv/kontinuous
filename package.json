@@ -51,8 +51,8 @@
     "delivery": "git push && yarn release && yarn push",
     "version-major-branch": "packages/dev-tools/bin/version-major-branch",
     "version-major-branch:push": "packages/dev-tools/bin/version-major-branch-push",
-    "version-e2e": "yarn version-e2e-set && yarn lint --fix",
-    "version-e2e-set": "node packages/dev-tools/bin/version-e2e-set",
+    "version-e2e:commit": "packages/dev-tools/bin/version-e2e-commit",
+    "version-e2e:set": "node packages/dev-tools/bin/version-e2e-set",
     "test": "yarn workspaces foreach --no-private --parallel run test",
     "test:kontinuous": "yarn workspace kontinuous test",
     "test:webhook": "yarn workspace ~webhook test",
@@ -72,8 +72,7 @@
   },
   "standard-version": {
     "scripts": {
-      "posttag": "yarn version-major-branch && yarn version-major-branch:push",
-      "precommit": "yarn lint --fix"
+      "posttag": "yarn version-e2e:commit && yarn version-major-branch && yarn version-major-branch:push"
     }
   },
   "engines": {

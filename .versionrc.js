@@ -51,6 +51,8 @@ bumpFiles.push({
 })
 
 // e2e version (docker images, github actions, workflows etc...)
+// it works but it's too slow, I prefer external bumper in this case
+/*
 const versionE2eGetFiles = require("./packages/dev-tools/lib/version-e2e-get-files")
 
 const e2eFiles = versionE2eGetFiles()
@@ -62,6 +64,7 @@ bumpFiles.push(
     updater: e2eUpdater,
   }))
 )
+*/
 
 module.exports = {
   bumpFiles,
