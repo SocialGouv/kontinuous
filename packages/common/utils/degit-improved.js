@@ -58,6 +58,9 @@ module.exports = async (
         ) {
           throw error
         }
+        if (error.code === "DEST_NOT_EMPTY") {
+          return
+        }
         logger.error({ error, uri, target }, `unable to degit`)
         bail(error)
       }
