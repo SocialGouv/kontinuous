@@ -15,7 +15,7 @@ module.exports = {
             run \
             replace \
             "${replacer.regex}" \
-            "${replacer.replacementFactory(version)}" \
+            "${replacer.replacementFactory(`v${version}`)}" \
             -z
       `,
         { encoding: "utf-8", input: contents }
