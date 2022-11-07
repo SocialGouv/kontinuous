@@ -10,7 +10,7 @@ const subgroupRe = /[^{}]+(?=})/g
 module.exports = async (
   uri,
   target,
-  { logger = defaultLogger, cacheCheck = true, force }
+  { logger = defaultLogger, cacheCheck = true, force, ignoreNotEmpty = true }
 ) => {
   await retry(
     async (bail) => {
@@ -58,7 +58,7 @@ module.exports = async (
         ) {
           throw error
         }
-        if (error.code === "DEST_NOT_EMPTY") {
+        if (ignoreNotEmpty && error.code === "DEST_NOT_EMPTY") {
           return
         }
         logger.error({ error, uri, target }, `unable to degit`)
