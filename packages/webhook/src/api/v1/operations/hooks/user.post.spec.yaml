@@ -34,7 +34,7 @@ requestBody:
             example: test-ci
           repositoryUrl:
             type: string
-            example: https://github.com/SocialGouv/sample-next-app.git
+            example: https://github.com/socialgouv/sample-next-app.git
           commit:
             type: string
             example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed

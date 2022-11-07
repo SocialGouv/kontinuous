@@ -136,7 +136,7 @@ runs:
         env_url: ${{ steps.environment-url.outputs.url }}
 
     - name: Debug manifests
-      uses: SocialGouv/actions/k8s-manifests-debug@v1
+      uses: socialgouv/actions/k8s-manifests-debug@v1
       with:
         token: ${{ inputs.token }}
         path: ${{ env.KS_BUILD_PATH }}/manifests.yaml

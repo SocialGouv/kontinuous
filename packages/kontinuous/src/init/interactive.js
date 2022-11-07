@@ -9,8 +9,8 @@ const yaml = require("~common/utils/yaml")
 
 const ctx = require("~common/ctx")
 
-const boilerplatesRootPath = "SocialGouv/kontinuous/boilerplates/repositories"
-const nativePluginPrefix = "SocialGouv/kontinuous/plugins"
+const boilerplatesRootPath = "socialgouv/kontinuous/boilerplates/repositories"
+const nativePluginPrefix = "socialgouv/kontinuous/plugins"
 const defaultPluginPrefix = nativePluginPrefix
 
 module.exports = async (opts) => {

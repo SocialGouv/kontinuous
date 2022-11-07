@@ -71,7 +71,7 @@ requestBody:
             properties:
               clone_url:
                 type: string
-                example: https://github.com/SocialGouv/sample-next-app.git
+                example: https://github.com/socialgouv/sample-next-app.git
 
 
 responses:

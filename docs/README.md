@@ -231,7 +231,7 @@ sample for `.kontinuous/config.yaml` :
 projectName: my-project
 dependencies:
   fabrique:
-    import: SocialGouv/kontinuous/plugins/fabrique
+    import: socialgouv/kontinuous/plugins/fabrique
     
     valuesCompilers: {}
     patches: {}
@@ -278,7 +278,7 @@ All keys are same except `projects` and `organizations`:
 sample for `~/.kontinuous/config.yaml` :
 ```yaml
 links:
-  # SocialGouv/kontinuous: /home/jo/repositories/kontinuous # this will be configured by default on correct path when using kontinuous from cloned repo or inside docker image instead of npx's cli
+  # socialgouv/kontinuous: /home/jo/repositories/kontinuous # this will be configured by default on correct path when using kontinuous from cloned repo or inside docker image instead of npx's cli
   my-orga/my-repo-with-jobs-and-other-kontinuous-plugins: /home/jo/repositories/my-orga/my-repo-with-jobs-and-other-kontinuous-plugins
 
 # organizations:
@@ -302,7 +302,7 @@ Most of the configuration can be defined in 3 ways:
 - environment variables (override config file)
 - command line options (override environment variables)
 
-For exhaustive description of behavior you can [check the source code](https://github.com/SocialGouv/kontinuous/blob/master/packages/common/config/load-config.js). <br>
+For exhaustive description of behavior you can [check the source code](https://github.com/socialgouv/kontinuous/blob/master/packages/common/config/load-config.js). <br>
 Here are some (titles are config keys):
 
 - **links** <br>
@@ -310,10 +310,10 @@ Here are some (titles are config keys):
     sample for `~/.kontinuous/config.yaml` :
     ```yaml
     links:
-      SocialGouv/kontinuous: /lab/fabrique/sre/kontinuous
+      socialgouv/kontinuous: /lab/fabrique/sre/kontinuous
     ```
 
-    In this case, all plugins call starting with `SocialGouv/kontinuous` will be loaded from local `/lab/fabrique/sre/kontinuous`. Usefull for development.
+    In this case, all plugins call starting with `socialgouv/kontinuous` will be loaded from local `/lab/fabrique/sre/kontinuous`. Usefull for development.
 
 - **workspacePath** <br>
     env: `KS_WORKSPACE_PATH` <br>
@@ -427,21 +427,21 @@ Here are some (titles are config keys):
     option: `--webhook-uri` <br>
     commands: `deploy`,`logs` <br>
     default: if `webhookUriPattern` is defined, will use it to generate it replacing `${repositoryName}` and `${baseDomain}` variables.
-    The URI to communicate with kontinuous webhook deployed service (it's expected to be a [kontinuous webhook service](https://github.com/SocialGouv/kontinuous/blob/master/packages/webhook/)).
+    The URI to communicate with kontinuous webhook deployed service (it's expected to be a [kontinuous webhook service](https://github.com/socialgouv/kontinuous/blob/master/packages/webhook/)).
 
 - **ciNamespace** <br>
     env: `KS_CI_NAMESPACE` <br>
     option: `--ci-namespace` <br>
     commands: `build`,`deploy` <br>
     default: `${config.repositoryName}-ci`
-    Used to run main pipelines and ci jobs from [`contrib/charts/jobs`](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/jobs/) plugin. Used to retrieve `rancherProjectId` from namespace when not provided when running `deploy` command.
+    Used to run main pipelines and ci jobs from [`contrib/charts/jobs`](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/charts/jobs/) plugin. Used to retrieve `rancherProjectId` from namespace when not provided when running `deploy` command.
 
 - **rancherProjectId** <br>
     env: `RANCHER_PROJECT_ID` <br>
     option: `--rancher-project-id` <br>
     commands: `build`,`deploy`,`env`,`logs` <br>
     default: retrieved from `ciNamespace` when running `deploy` command.<br>
-    Used to create namespace when running `deploy` command and provided as global chart value from plugin [`fabrique/values-compilers/global-defaults`](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/values-compilers/global-defaults.js) on `build` command.
+    Used to create namespace when running `deploy` command and provided as global chart value from plugin [`fabrique/values-compilers/global-defaults`](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/values-compilers/global-defaults.js) on `build` command.
 
 
 ### 3. Build manifests
@@ -484,7 +484,7 @@ npx kontinuous build --help
 
 For development (require helm):
 ```sh
-git clone https://github.com/SocialGouv/kontinuous.git ~/repos/kontinuous
+git clone https://github.com/socialgouv/kontinuous.git ~/repos/kontinuous
 cd ~/repos/kontinuous
 yarn install
 
@@ -632,7 +632,7 @@ The `options` key allow you to pass any options that you want to the plugin, and
 projectName: my-project
 dependencies:
   fabrique:
-    import: SocialGouv/kontinuous/plugins/fabrique
+    import: socialgouv/kontinuous/plugins/fabrique
     valuesCompilers:
       globalDefaults:
         enabled: true
@@ -647,7 +647,7 @@ You can also add global options, common to your umbrella plugin.
 ```yaml
 dependencies:
   contrib:
-    import: SocialGouv/kontinuous/plugins/contrib
+    import: socialgouv/kontinuous/plugins/contrib
 options:
   domain: "fabrique.social.gouv.fr"
 ```
@@ -657,7 +657,7 @@ The `domain` option will be provided to all plugin as default merge, but you can
 ```yaml
 dependencies:
   contrib:
-    import: SocialGouv/kontinuous/plugins/contrib
+    import: socialgouv/kontinuous/plugins/contrib
     valuesCompilers:
       globalDefaults:
         enabled: true
@@ -681,7 +681,7 @@ example:
 ```yaml
 dependencies:
   fabrique:
-    import: SocialGouv/kontinuous/plugins/fabrique
+    import: socialgouv/kontinuous/plugins/fabrique
     
     valuesCompilers:
       globalDefaults:
@@ -709,11 +709,11 @@ dependencies:
 
 ```
 
-`SocialGouv/plugins/fabrique/kontinuous.yaml`
+`socialgouv/plugins/fabrique/kontinuous.yaml`
 ```yaml
 dependencies:
   contrib:
-    import: SocialGouv/kontinuous/plugins/contrib
+    import: socialgouv/kontinuous/plugins/contrib
 ```
 
 `$PROJECT_WORKSPACE/.kontinuous/values.yaml`
@@ -726,7 +726,7 @@ fabrique:
 
 
 All plugins `charts`, `values-compilers`, `patches`, `validators`, `debug-manifests`, `pre-deploy`, `post-deploy` and `deploy-sidecar` will be autolinked and implicitely applied recursively. You can control order, or optout by creating index.js in each `values-compilers`, `patches`, `validators`, `debug-manifests`, `pre-deploy`, `post-deploy`, `deploy-sidecar` and `deploy-with` directories, then you can include from dependencies plugins yourself. <br>
-See [plugins/fabrique/values-compilers/index.js](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/values-compilers/index.js) for example.
+See [plugins/fabrique/values-compilers/index.js](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/values-compilers/index.js) for example.
 
 You can create and use `charts`, `values-compilers`, `patches`, `validators`, `debug-manifests`, `pre-deploy`, `post-deploy` and `deploy-sidecar` directories in `.kontinuous` at project level in your project path, or in plugin root path. Project level plugins can consume plugins in the same way the plugins can consume other plugins.
 
@@ -751,14 +751,14 @@ Here are the args that the function will receive: `module.exports = (values, opt
     ```yaml
     dependencies:
       fabrique:
-        import: SocialGouv/kontinuous/plugins/fabrique
+        import: socialgouv/kontinuous/plugins/fabrique
         valuesCompilers:
           globalDefaults:
             options:
               foo: bar
     ```
 - `config` is the current [kontinuous config](#_25-variables)
-- `utils` is a toolset of helpers function used in kontinuous itself and exposed, all are defined here: [packages/common/utils](https://github.com/SocialGouv/kontinuous/blob/master/packages/common/utils)
+- `utils` is a toolset of helpers function used in kontinuous itself and exposed, all are defined here: [packages/common/utils](https://github.com/socialgouv/kontinuous/blob/master/packages/common/utils)
 - `ctx` is the async context dependency injection container of kontinous, it can be used to retrieve config or logger, eg: `logger = ctx.get("logger")`
 
 #### 4.4-bis values.js
@@ -823,12 +823,12 @@ See [values-compilers doc for details on arguments](#_44-values-compilers)
 
 #### 4.7 official plugins
 
-Official plugins are here [plugins/contrib/](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/). They could be put in another git repository, but was kept in main repository for testing purpose.
+Official plugins are here [plugins/contrib/](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/). They could be put in another git repository, but was kept in main repository for testing purpose.
 
-- **[contrib](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/)**
-    - [charts/jobs](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/jobs) <br>
+- **[contrib](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/)**
+    - [charts/jobs](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/charts/jobs) <br>
         generic kubernetes jobs chart, used for easily declare CI pipelines from values <br>
-        *it require [values-compilers/jobs](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/jobs.js)*
+        *it require [values-compilers/jobs](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/values-compilers/jobs.js)*
 
         example `.kontinuous/values.yaml`:
         ```yaml
@@ -839,18 +839,18 @@ Official plugins are here [plugins/contrib/](https://github.com/SocialGouv/konti
           runs:
             db:
               # use: ./.kontinous/jobs/create-db # local job, defined in project repository
-              # use: https://github.com/SocialGouv/kontinuous/plugins/contrib/jobs/create-db # degit full url
-              use: SocialGouv/kontinuous/plugins/contrib/jobs/create-db # degit implicit github
+              # use: https://github.com/socialgouv/kontinuous/plugins/contrib/jobs/create-db # degit full url
+              use: socialgouv/kontinuous/plugins/contrib/jobs/create-db # degit implicit github
               with:
                 pgAdminSecretRefName: pg-scaleway
             seed:
               needs: [hasura]
-              use: SocialGouv/kontinuous/plugins/contrib/jobs/seed-db
+              use: socialgouv/kontinuous/plugins/contrib/jobs/seed-db
               with:
                 seedPath: path/in/repo.sql
         ```
 
-        see [plugins/contrib/jobs/create-db/use.yaml](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/jobs/create-db/use.yaml) for full example.
+        see [plugins/contrib/jobs/create-db/use.yaml](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/jobs/create-db/use.yaml) for full example.
         All vues from `runs` keys will be interpolated in the job, but you can also uses all parameters directly, except the `with` parameter that is reserved to be used with `use` and inject variable to the called job.
 
         All others components can declare dependencies on jobs using the `needs` key, and all jobs can declare depencencies on other jobs and other components too, using instances names.
@@ -864,28 +864,28 @@ Official plugins are here [plugins/contrib/](https://github.com/SocialGouv/konti
         - `checkout` (default `true`), this enable the degit of the repository at current commit in mountpoint `/workspace/` in the job
         - `if` condition to include the job, can contain variables from values
 
-    - [charts/kontinuous-helpers](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/kontinuous-helpers) <br>
+    - [charts/kontinuous-helpers](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/charts/kontinuous-helpers) <br>
         common helm [library chart](https://helm.sh/docs/topics/library_charts/), contains helpers helm templating snippets that can be reused in any subchart, helping you to keep your charts DRY
 
-    - [patches/namespace](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/namespace.js) <br>
+    - [patches/namespace](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/patches/namespace.js) <br>
         Add the current kubernetes namespace from [kontinuous config](#_24-variables) to all manifests that doesn't declare explicitly a namespace
 
-    - [patches/dns-truncate](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/dns-truncate.js) <br>
+    - [patches/dns-truncate](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/patches/dns-truncate.js) <br>
         Truncate and hash all manifests name and ingress domains that is over the max allowed 63 characters.
 
-    - [patches/kapp](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/kapp.js) <br>
+    - [patches/kapp](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/patches/kapp.js) <br>
         Add `fallback-on-update` and `fallback-on-replace` update and create strategies, and `disable-original` to fix kapp issue [#472](https://github.com/vmware-tanzu/carvel-kapp/issues/472)
 
-    - [validators/dns-limit](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/dns-limit.js) <br>
-        Check that all manifests name and ingress domains is not over the max allowed 63 characters. This should never fail if you use [patches/dns-truncate](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/dns-truncate.js).
+    - [validators/dns-limit](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/validators/dns-limit.js) <br>
+        Check that all manifests name and ingress domains is not over the max allowed 63 characters. This should never fail if you use [patches/dns-truncate](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/patches/dns-truncate.js).
 
-    - [validators/needs](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/needs.js) <br>
+    - [validators/needs](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/validators/needs.js) <br>
         Check that there is no delcared as required resource that doesn't exists in the manifests.
 
-    - [validators/resources-uniqness](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/resources-uniqness.js) <br>
+    - [validators/resources-uniqness](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/validators/resources-uniqness.js) <br>
         Check that there is no duplicate resource name for the same kind.
 
-    - [values-compilers/dash-instances](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/dash-instances.js) <br>
+    - [values-compilers/dash-instances](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/values-compilers/dash-instances.js) <br>
         Compile values key at root level that start with existing chart name, including dependencies chart name, as `${chartName}-arbitrary-instance-name`, to make a chart alias and implement an instance the chart.
 
         You can declare as many instances as you want of a chart, the name must start with the chart's name suffixed by `-`, eg:
@@ -920,7 +920,7 @@ Official plugins are here [plugins/contrib/](https://github.com/SocialGouv/konti
           ~chart: app
         ```
 
-    - [values-compilers/unfold-charts](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/unfold-charts.js) <br>
+    - [values-compilers/unfold-charts](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/values-compilers/unfold-charts.js) <br>
         Refacto the value tree on the fly matching the root level key name with dependencies subcharts names. Example, if you import `fabrique` umbrella plugin in your project: <br>
         `.kontinous/values.yaml`
         ```yaml
@@ -944,50 +944,50 @@ Official plugins are here [plugins/contrib/](https://github.com/SocialGouv/konti
         ```
         And so, on helm template compilation run, the values of jobs can be consumed by `jobs` chart, that is a subchart of `contrib`, that is itself a subchart of `fabrique`. FYI helm subcharts are natively recursive.
 
-    - [values-compilers/implicit-enabled](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/implicit-enabled.js) <br>
+    - [values-compilers/implicit-enabled](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/values-compilers/implicit-enabled.js) <br>
         Compile declared charts's values to implicit set `enabled` to `true`.
 
-    - [values-compilers/jobs](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/jobs.js) <br>
+    - [values-compilers/jobs](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/values-compilers/jobs.js) <br>
         Compile jobs simple values to be used by final chart, it includes the downloading of reusable `jobs` (using the `use` keyword) and merging of values from the imported job.
         
-- **[fabrique](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/)**
-    - [charts/rancher-namespace](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/rancher-namespace) <br>
+- **[fabrique](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/)**
+    - [charts/rancher-namespace](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/charts/rancher-namespace) <br>
         add a namespace configured with provided with rancherProjectId for [rancher](https://rancher.com/) right management. Enabled by default when `chart` kontinuous config is not provided.
 
-    - [charts/security-policies](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/security-policies) <br>
+    - [charts/security-policies](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/charts/security-policies) <br>
         add some default kube security policies. Enabled by default when `chart` kontinuous config is not provided.
 
-    - [charts/app](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/app) <br>
+    - [charts/app](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/charts/app) <br>
         Generic chart that can be used to deploy differents apps targeting a docker image, as frontend, backend etc...
         
-    - [charts/hasura](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/hasura) <br>
+    - [charts/hasura](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/charts/hasura) <br>
         deploy an instance of [hasura](https://hasura.io/)
     
-    - [charts/pgweb](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/pgweb) <br>
+    - [charts/pgweb](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/charts/pgweb) <br>
         deploy an instance of [pgweb](https://github.com/sosedoff/pgweb)
     
-    - [charts/maildev](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/maildev) <br>
+    - [charts/maildev](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/charts/maildev) <br>
         deploy an instance of [maildev](https://github.com/maildev/maildev)
     
-    - [charts/metabase](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/metabase) <br>
+    - [charts/metabase](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/charts/metabase) <br>
         deploy an instance of [metabase](https://www.metabase.com/)
 
-    - [charts/oauth2-proxy](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/oauth2-proxy) <br>
+    - [charts/oauth2-proxy](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/charts/oauth2-proxy) <br>
         deploy an instance of [oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy)
 
-    - [charts/redis](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/redis) <br>
+    - [charts/redis](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/charts/redis) <br>
         deploy an instance of [redis](https://redis.io/)
         
-    - [patches/cert-letsencrypt-issuer](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/patches/cert-letsencrypt-issuer.js) <br>
+    - [patches/cert-letsencrypt-issuer](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/patches/cert-letsencrypt-issuer.js) <br>
         add annotation to use `letsencrypt-prod` cluster-issuer using `cert-manager` on `ingress` to prod manifests.
     
-    - [patches/cert-wildcard](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/patches/cert-wildcard.js) <br>
+    - [patches/cert-wildcard](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/patches/cert-wildcard.js) <br>
         add label `cert: "wildcard"` on main namespace so `kubed` will copy wildcard cert on dev environment namespaces.
     
-    - [patches/rancher-project-id](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/patches/rancher-project-id.js) <br>
+    - [patches/rancher-project-id](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/patches/rancher-project-id.js) <br>
         if namespace containing an empty `field.cattle.io/projectId` annotation, and `ciNamespace` config is defined (usually when `deploy` command is used), it will try to retrieve rancher project id from the `ciNamespace` to fill it.
         
-    - [values-compilers/global-defaults](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/values-compilers/global-defaults.js) <br>
+    - [values-compilers/global-defaults](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/values-compilers/global-defaults.js) <br>
         All defaults values for ***La Fabrique*** are defined here.
         Here is available global values that you can consume in every charts's templates:
         - certSecretName
@@ -1016,27 +1016,27 @@ Official plugins are here [plugins/contrib/](https://github.com/SocialGouv/konti
         - shortSha
         - env
     
-    - [jobs/build](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/jobs/build) <br>
+    - [jobs/build](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/jobs/build) <br>
         Build `docker` image from project Dockerfile and directory using `kaniko`.
     
-    - [jobs/create-db](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/jobs/create-db) <br>
+    - [jobs/create-db](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/jobs/create-db) <br>
         Create DB and associated new user for review branches using pg admin user.
     
-    - [jobs/drop-db](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/jobs/drop-db) <br>
+    - [jobs/drop-db](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/jobs/drop-db) <br>
         Drop a DB using pg admin user. Can be used before create-db to keep a pristine db on review branch.
 
-    - [jobs/pg-restore](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/jobs/pg-restore) <br>
+    - [jobs/pg-restore](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/jobs/pg-restore) <br>
         Restore a DB from backup using pg_restore.
     
-    - [jobs/psql](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/jobs/psql) <br>
+    - [jobs/psql](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/jobs/psql) <br>
         Run a sql file on DB from project repository.
 
-    - [jobs/seed-db](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/jobs/seed-db) <br>
+    - [jobs/seed-db](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/jobs/seed-db) <br>
         Run a sql file on DB from project repository using pg secret from target namespace.
 
 ### 5. Samples
 
-There are many sample here [packages/kontinuous/tests/samples](https://github.com/SocialGouv/kontinuous/blob/master/packages/kontinuous/tests/samples). <br>
+There are many sample here [packages/kontinuous/tests/samples](https://github.com/socialgouv/kontinuous/blob/master/packages/kontinuous/tests/samples). <br>
 Except in case there is a `.kontinuous` file here, the directories are assumed to be the `.kontinuous` dir of projects. The `.env` files are only consumed in tests and will be ignored by kontinuous in real build and deployments.
 
 More samples will be added on demand when feedback for this current documentation will reveal that it's not easy to find and understand how to do a thing. Don't hesitate to ask for enrichment of this section 😉.
@@ -1073,7 +1073,7 @@ kapp deploy /tmp/manifests.yaml
     ```yaml
     jobs:
       follow-deployment:
-        uses: SocialGouv/kontinuous/.github/workflows/workflow-webhook.yaml@v1
+        uses: socialgouv/kontinuous/.github/workflows/workflow-webhook.yaml@v1
         secrets: inherit
     ```
     
@@ -1084,7 +1084,7 @@ kapp deploy /tmp/manifests.yaml
     ```yaml
     jobs:
       follow-deployment:
-        uses: SocialGouv/kontinuous/.github/workflows/workflow-webhook.yaml@v1
+        uses: socialgouv/kontinuous/.github/workflows/workflow-webhook.yaml@v1
         secrets: inherit
         triggerWebhook: true
     ```
@@ -1099,7 +1099,7 @@ kapp deploy /tmp/manifests.yaml
         runs-on: ubuntu-latest
         steps:
         - name: kontinuous pipeline
-            uses: SocialGouv/kontinuous/webhook@v1
+            uses: socialgouv/kontinuous/webhook@v1
             with:
               token: ${{ secrets.GITHUB_TOKEN }}
               webhookToken: ${{ secrets.KUBEWEBHOOK_TOKEN }}
@@ -1117,7 +1117,7 @@ kapp deploy /tmp/manifests.yaml
         runs-on: ubuntu-latest
         steps:
         - name: kontinuous pipeline
-            uses: SocialGouv/kontinuous/gh-actions/deploy-via-github@v1
+            uses: socialgouv/kontinuous/gh-actions/deploy-via-github@v1
             with:
               token: ${{ secrets.GITHUB_TOKEN }}
               kubeconfig: ${{ secrets.KUBECONFIG }}
@@ -1143,7 +1143,7 @@ kapp deploy /tmp/manifests.yaml
 #### 6.3. using webhook service
 
 Using the webhook service you can be totally independent and self-hosted for running you CI/CD workflow.
-The service can be deployed using an [official Helm chart](https://github.com/SocialGouv/kontinuous/blob/master/packages/webhook/Chart.yaml).
+The service can be deployed using an [official Helm chart](https://github.com/socialgouv/kontinuous/blob/master/packages/webhook/Chart.yaml).
 
 [![schema](./images/webhook-schema.png)](https://excalidraw.com/#json=OoAm9RLHobXlWw9DmzC6x,R0CXD2-2gYj8D-9OvJS3GA)
 
@@ -1163,11 +1163,11 @@ Secrets should contains following environment variables:
 - `KUBECONFIG` and/or `KUBECONFIG_DEV`+`KUBECONFIG_PROD`,
 
 
-To see all avaiables values and defaults see [packages/webhook/values.yaml](https://github.com/SocialGouv/kontinuous/blob/master/packages/webhook/values.yaml).
+To see all avaiables values and defaults see [packages/webhook/values.yaml](https://github.com/socialgouv/kontinuous/blob/master/packages/webhook/values.yaml).
 
 
 ```sh
-npx -y tiged SocialGouv/kontinuous/packages/webhook@master kontinuous-webhook
+npx -y tiged socialgouv/kontinuous/packages/webhook@master kontinuous-webhook
 
 cd ./kontinuous-webhook
 
@@ -1181,7 +1181,7 @@ kubectl --namespace myproject-ci apply manifests.yaml
 
 ###### 6.3.1.2. using ArgoCD
 
-Here is a sample of an [ArgoCD ApplicationSet](https://argo-cd.readthedocs.io/en/stable/roadmap/#applicationset): [plugins/fabrique/samples/argocd/kontinuous-webhooks.yaml](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/samples/argocd/kontinuous-webhooks.yaml)
+Here is a sample of an [ArgoCD ApplicationSet](https://argo-cd.readthedocs.io/en/stable/roadmap/#applicationset): [plugins/fabrique/samples/argocd/kontinuous-webhooks.yaml](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/samples/argocd/kontinuous-webhooks.yaml)
 
 ##### 6.3.2. configure webhook on repository
 
@@ -1203,12 +1203,12 @@ Then click to *Add webhook* and you're good for **dev** env.
 For **prod**, do the same but replace endpoint by: https://webhook-myproject.fabrique.social.gouv.fr/api/v1/oas/hooks/github?event=created <br>
 and after selecting *Let me select individual events*, ensure you have all unchecked (uncheck *push* event that is generally checked by default) and check *Branch or tag creation*
 
-If you have to configure for many repo and you want to make it automatically and *infra as code*, here is a terraform snippet sample: [plugins/fabrique/samples/terraform/rancher-config-setup/github.tf](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/samples/terraform/rancher-config-setup/github.tf)
+If you have to configure for many repo and you want to make it automatically and *infra as code*, here is a terraform snippet sample: [plugins/fabrique/samples/terraform/rancher-config-setup/github.tf](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/samples/terraform/rancher-config-setup/github.tf)
 
 ### 7. Development
 
 ```sh
-git clone git@github.com:SocialGouv/kontinuous.git
+git clone git@github.com:socialgouv/kontinuous.git
 cd kontinuous
 yarn
 ```
@@ -1241,7 +1241,7 @@ You can start to create new plugins or modify kontinous core (no, seriously, don
 
 ##### Automatic
 
-Execute the [Trigger Release](https://github.com/SocialGouv/kontinuous/actions/workflows/trigger-release.yml) workflow to trigger a new release of actions and helm charts.
+Execute the [Trigger Release](https://github.com/socialgouv/kontinuous/actions/workflows/trigger-release.yml) workflow to trigger a new release of actions and helm charts.
 
 ##### Manual
 
@@ -1254,7 +1254,7 @@ Releasing follow semantic versioning using [standard-version tool](https://githu
 ###### prepare kontinuous
 
 ```sh
-git clone https://github.com/SocialGouv/kontinuous.git
+git clone https://github.com/socialgouv/kontinuous.git
 cd kontinuous
 yarn install
 ```
@@ -1277,21 +1277,21 @@ open your navigator on [http://localhost:7530/api/v1/swagger/](http://localhost:
 
 ##### Test
 
-all directories added to [packages/kontinuous/tests/samples](https://github.com/SocialGouv/kontinuous/blob/master/packages/kontinuous/tests/samples) are like a `.kontinuous` directory in a project, it will be automatically tested when you will run `yarn test:kontinuous`. <br>
+all directories added to [packages/kontinuous/tests/samples](https://github.com/socialgouv/kontinuous/blob/master/packages/kontinuous/tests/samples) are like a `.kontinuous` directory in a project, it will be automatically tested when you will run `yarn test:kontinuous`. <br>
 To run only one test at once you can run `yarn test:kontinuous -t name-of-my-test`. <br>
 To upgrade snapshots run `yarn test:kontinuous -u`. <br>
 
 ##### Contribute adding more Helm charts
 
-New charts are welcome in folders [plugins/contrib/charts/](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/) (when universal) and [plugins/fabrique/charts/](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/) (when more *La Fabrique* opinionated, in doubt, purpose it here).
+New charts are welcome in folders [plugins/contrib/charts/](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/charts/) (when universal) and [plugins/fabrique/charts/](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/charts/) (when more *La Fabrique* opinionated, in doubt, purpose it here).
 More options on existing charts will be carefully design, in case of doubt, or if you don't want to wait, you can hack everything using [post-renderer](#_45-bis-post-renderer) or [patches](#_45-patches) from your repository. Feel free, then give us feedback to ensure we follow best practices and are preserving project maintainability.
 
 ##### Contribute adding more plugins
 
-New patches are welcome in folder [plugins/fabrique/patches/](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/patches/). <br>
-New validators are welcome in folder [plugins/fabrique/validators/](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/validators/). <br>
-New jobs are welcome in folder [plugins/contrib/jobs/](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/jobs/). <br>
-New values-compilers are welcome in folder [plugins/fabrique/values-compilers/](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/values-compilers/). <br>
+New patches are welcome in folder [plugins/fabrique/patches/](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/patches/). <br>
+New validators are welcome in folder [plugins/fabrique/validators/](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/validators/). <br>
+New jobs are welcome in folder [plugins/contrib/jobs/](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/jobs/). <br>
+New values-compilers are welcome in folder [plugins/fabrique/values-compilers/](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/values-compilers/). <br>
 
 ##### *La Fabrique* images CI build
 

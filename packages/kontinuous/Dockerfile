@@ -33,7 +33,7 @@ RUN curl --fail -sL https://github.com/vmware-tanzu/carvel-kapp/releases/downloa
 FROM downloader as rollout-status
 ARG ROLLOUT_STATUS_VERSION=v1.10.0
 ENV ROLLOUT_STATUS_VERSION=$ROLLOUT_STATUS_VERSION
-RUN curl --fail -sL https://github.com/SocialGouv/rollout-status/releases/download/${ROLLOUT_STATUS_VERSION}/rollout-status-${ROLLOUT_STATUS_VERSION}-linux-amd64 > /tmp/rollout-status \
+RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/download/${ROLLOUT_STATUS_VERSION}/rollout-status-${ROLLOUT_STATUS_VERSION}-linux-amd64 > /tmp/rollout-status \
   && mv /tmp/rollout-status /usr/local/bin/rollout-status \
   && chmod +x /usr/local/bin/rollout-status
 
@@ -109,7 +109,7 @@ RUN git config --global --add safe.directory /workspace
 ENV KUBECONFIG=$HOME/.kube/config
 RUN mkdir $HOME/.kube
 
-ENV KS_INLINE_CONFIG_SET "links.SocialGouv/kontinuous=/opt/kontinuous"
+ENV KS_INLINE_CONFIG_SET "links.socialgouv/kontinuous=/opt/kontinuous"
 ENV KS_EXTERNAL_BIN_FORCE_DOWNLOAD "false"
 
 ENTRYPOINT ["/opt/kontinuous/packages/kontinuous/bin/kontinuous"]

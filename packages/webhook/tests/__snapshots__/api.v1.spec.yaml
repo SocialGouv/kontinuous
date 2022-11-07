@@ -340,7 +340,7 @@ paths:
           name: repositoryUrl
           schema:
             type: string
-            example: https://github.com/SocialGouv/template.git
+            example: https://github.com/socialgouv/template.git
           required: false
         - in: query
           name: kontinuousVersion
@@ -462,7 +462,7 @@ paths:
                   properties:
                     clone_url:
                       type: string
-                      example: https://github.com/SocialGouv/sample-next-app.git
+                      example: https://github.com/socialgouv/sample-next-app.git
       responses:
         '202':
           content:
@@ -604,7 +604,7 @@ paths:
                   example: test-ci
                 repositoryUrl:
                   type: string
-                  example: https://github.com/SocialGouv/sample-next-app.git
+                  example: https://github.com/socialgouv/sample-next-app.git
                 commit:
                   type: string
                   example: 49ed5a2aeea3dc3438acf53f795fb34805d3c8ed

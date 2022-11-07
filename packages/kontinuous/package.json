@@ -1,7 +1,7 @@
 {
   "name": "kontinuous",
   "version": "1.95.1",
-  "repository": "https://github.com/SocialGouv/kontinuous.git",
+  "repository": "https://github.com/socialgouv/kontinuous.git",
   "homepage": "https://socialgouv.github.io/kontinuous/",
   "license": "MIT",
   "main": "src/index",

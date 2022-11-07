@@ -78,7 +78,7 @@ describe("test build manifests with snapshots", () => {
         : "",
       KS_GIT: "false",
       KS_GIT_REPOSITORY: `kontinuous/test-${testdir}`,
-      KS_INLINE_CONFIG_SET: `links.SocialGouv/kontinuous: "${path.resolve(
+      KS_INLINE_CONFIG_SET: `links.socialgouv/kontinuous: "${path.resolve(
         `${__dirname}/../../..`
       )}"`,
       KS_HOMEDIR: `${tmpdir}/kontinuous/test-homedir`,

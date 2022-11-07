@@ -5,7 +5,7 @@ home: https://socialgouv.github.io/kontinuous/
 description: Webhook CI for Kubernetes
 icon: https://avatars.githubusercontent.com/u/45039513?v=4
 sources:
-  - https://github.com/SocialGouv/kontinuous
+  - https://github.com/socialgouv/kontinuous
 maintainers:
   - name: Fabrique numérique des Ministères Sociaux
     email: dsi-incubateur@sg.social.gouv.fr

@@ -4,11 +4,11 @@ app:
 jobs:
   runs:
     db:
-      use: SocialGouv/kontinuous/plugins/contrib/jobs/create-db
+      use: socialgouv/kontinuous/plugins/contrib/jobs/create-db
       with:
         pgAdminSecretRefName: azure-pg-admin-user
     seed:
       ~needs: [db]
-      use: SocialGouv/kontinuous/plugins/contrib/jobs/seed-db
+      use: socialgouv/kontinuous/plugins/contrib/jobs/seed-db
       with:
         seedPath: hasura/seeds/carnet_de_bord/seed-data.sql

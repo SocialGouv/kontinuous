@@ -154,11 +154,11 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/SocialGouv/kontinuous/degit:v1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1
           command:
             - sh
             - '-c'
-            - degit SocialGouv/kontinuous/plugins/contrib/jobs/create-db /action
+            - degit socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -311,11 +311,11 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/SocialGouv/kontinuous/degit:v1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1
           command:
             - sh
             - '-c'
-            - degit SocialGouv/kontinuous/plugins/contrib/jobs/create-db /action
+            - degit socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

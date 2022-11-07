@@ -13,7 +13,7 @@ kubeconfigs:
 
 repositories:
   - project: awesome
-    repository: SocialGouv/template
+    repository: socialgouv/template
     private: true
     deployKeyFile: ./tests/sample/awesome/deploy-key
     deployKeySecretName: "deploy-key"

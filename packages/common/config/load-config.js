@@ -479,10 +479,10 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     links: {
       transform: async (links = {}) => {
-        if (!links["SocialGouv/kontinuous"]) {
+        if (!links["socialgouv/kontinuous"]) {
           const real = await fs.realpath(process.argv[1])
           if (real.endsWith("packages/kontinuous/bin/kontinuous")) {
-            links["SocialGouv/kontinuous"] = path.resolve(
+            links["socialgouv/kontinuous"] = path.resolve(
               `${path.dirname(real)}/../../..`
             )
           }

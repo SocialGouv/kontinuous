@@ -1,6 +1,6 @@
 dependencies:
   fabrique:
-    import: SocialGouv/kontinuous/plugins/fabrique
+    import: socialgouv/kontinuous/plugins/fabrique
     dependencies:
       contrib:
         validators:

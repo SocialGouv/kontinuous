@@ -82,12 +82,12 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/SocialGouv/kontinuous/degit:v1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1
           command:
             - sh
             - '-c'
             - >-
-              degit SocialGouv/kontinuous/plugins/contrib/jobs/deactivate
+              degit socialgouv/kontinuous/plugins/contrib/jobs/deactivate
               /action
           securityContext:
             runAsUser: 1000

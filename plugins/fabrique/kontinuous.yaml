@@ -1,6 +1,6 @@
 dependencies:
   contrib:
-    import: SocialGouv/kontinuous/plugins/contrib
+    import: socialgouv/kontinuous/plugins/contrib
     
     valuesCompilers:
       globalDefaults:
