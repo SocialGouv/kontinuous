@@ -18,7 +18,7 @@ runs:
   steps:
     - name: Debug manifests
       id: debug-manifests
-      uses: socialgouv/kontinuous/.github/actions/debug-manifests-output@v1.95.20
+      uses: socialgouv/kontinuous/.github/actions/debug-manifests-output@v1.95.21
       with:
         path: manifests.yaml
 
