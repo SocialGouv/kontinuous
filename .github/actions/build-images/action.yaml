@@ -41,7 +41,6 @@ runs:
           type=ref,event=pr
           type=semver,pattern=v{{version}}
           type=semver,pattern=v{{major}}.{{minor}}
-          type=semver,pattern=v{{major}}
           type=sha
           type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
           type=raw,value=${{ steps.tag-vars.outputs.branch-tag }},enable=${{ github.ref != format('refs/heads/{0}', github.event.repository.default_branch) }}

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 stash() {
   # check if we have uncommited changes to stash
@@ -23,7 +24,8 @@ MAJOR_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1) | cut -
 git branch -f $MAJOR_VERSION master # reset major version to current
 git checkout $MAJOR_VERSION || git checkout -b $MAJOR_VERSION
 yarn version-e2e
-# git push -f origin $MAJOR_VERSION
+git add --all
+git commit -m "chore: link major version branch to $MAJOR_VERSION"
 
-git checout $branch
+git checkout $branch
 unstash
