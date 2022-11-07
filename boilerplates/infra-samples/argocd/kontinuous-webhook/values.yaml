@@ -1,5 +1,5 @@
 kontinuous-webhook:
-  image: ghcr.io/socialgouv/kontinuous/webhook:1
+  image: ghcr.io/socialgouv/kontinuous.95.4
   # image: harbor.fabrique.social.gouv.fr/sre/kontinuous/webhook:1
   host: "kontinuous.fabrique.social.gouv.fr"
   kubeconfigSecrets:

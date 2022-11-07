@@ -8,5 +8,5 @@ concurrency:
 
 jobs:
   cleaning:
-    uses: socialgouv/kontinuous/.github/workflows/workflow-webhook.yaml@v1
+    uses: socialgouv/kontinuous.95.4
     secrets: inherit
