@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.95.22](https://github.com/socialgouv/kontinuous/compare/v1.95.21...v1.95.22) (2022-11-07)
+
+
+### Bug Fixes
+
+* madness bug ([b6106e3](https://github.com/socialgouv/kontinuous/commit/b6106e361f75a0e0c1419e26e2ecd1692a2321c7))
+
 ### [1.95.21](https://github.com/socialgouv/kontinuous/compare/v1.95.20...v1.95.21) (2022-11-07)
 
 
