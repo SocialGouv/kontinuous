@@ -18,7 +18,7 @@ module.exports = {
             "${replacer.replacementFactory(version)}" \
             -z
       `,
-        { encoding: "utf-8" }
+        { encoding: "utf-8", input: { stdin: contents } }
       )
     }
     return contents
