@@ -103,6 +103,8 @@ module.exports = async (manifests, _options, context) => {
 
     volumes.push(volume)
     initContainers.unshift(initContainer)
+
+    spec.progressDeadlineSeconds = 1200000 // 20 minutes
   }
 
   return manifests
