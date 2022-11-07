@@ -2,7 +2,7 @@ const replace = require("replace")
 
 const versionE2eConfig = require("./version-e2e-config")
 
-module.exports = async () => {
+module.exports = () => {
   const files = new Set()
   for (const target of versionE2eConfig.targets) {
     const results = replace({
