@@ -48,8 +48,6 @@ export KS_DEBUG
 mkdir -p .kontinuous
 kontinuous config --remote --format json>.kontinuous/config.yaml
 
-KONTINUOUS_CONFIG=$(cat .kontinuous/config.yaml)
-
 export KS_ENVIRONMENT=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('.kontinuous/config.yaml')).environment)")
 KS_WEBHOOK_URI=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('.kontinuous/config.yaml')).webhookUri)")
 KS_PROJECT_NAME=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('.kontinuous/config.yaml')).projectName)")
