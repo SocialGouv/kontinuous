@@ -140,7 +140,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.95.27
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.95.28
           imagePullPolicy: IfNotPresent
           command:
             - sh
