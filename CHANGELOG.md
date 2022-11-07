@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.95.36](https://github.com/socialgouv/kontinuous/compare/v1.95.35...v1.95.36) (2022-11-07)
+
+
+### Bug Fixes
+
+* debug pr + fail pipeline on error ([ce300fc](https://github.com/socialgouv/kontinuous/commit/ce300fcde8d3c3274b8003b582939f3f75b179de))
+
 ### [1.95.35](https://github.com/socialgouv/kontinuous/compare/v1.95.34...v1.95.35) (2022-11-07)
 
 
