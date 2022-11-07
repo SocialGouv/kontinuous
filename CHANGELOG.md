@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.95.26](https://github.com/socialgouv/kontinuous/compare/v1.95.25...v1.95.26) (2022-11-07)
+
+
+### Bug Fixes
+
+* ignoreNotEmpty option in degit ([e86bcaa](https://github.com/socialgouv/kontinuous/commit/e86bcaaca81b1f5f4e8f05e5d2f6f867c917fcf9))
+* templates ([c86b7f5](https://github.com/socialgouv/kontinuous/commit/c86b7f5a3dc181b113abb46316e3c7f4b8e21752))
+
 ### [1.95.25](https://github.com/socialgouv/kontinuous/compare/v1.95.24...v1.95.25) (2022-11-07)
 
 
