@@ -107,6 +107,10 @@ module.exports = async (kubectlArgs, options = {}) => {
             logger.debug(`kubectl network error(timeout stuff): retrying...`)
             throw err
           }
+          if (err.message.includes("the server doesn't have a resource type")) {
+            logger.debug(`kubectl api resource type error: retrying...`)
+            throw err
+          }
           bail(err)
         }
       },
