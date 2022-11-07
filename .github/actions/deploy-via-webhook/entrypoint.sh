@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 export PATH=$PATH:/opt/kontinuous/packages/kontinuous/bin
 
