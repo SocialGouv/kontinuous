@@ -42,8 +42,10 @@ module.exports = async (manifests, options, context) => {
 
     const { spec } = manifest.spec.template
 
-    manifest.spec.progressDeadlineSeconds =
-      options.progressDeadlineSeconds || 1200000 // 20 minutes
+    if (kind === "Deployment") {
+      manifest.spec.progressDeadlineSeconds =
+        options.progressDeadlineSeconds || 1200000 // 20 minutes
+    }
 
     if (!spec.initContainers) {
       spec.initContainers = []
