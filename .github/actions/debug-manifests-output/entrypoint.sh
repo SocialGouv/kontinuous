@@ -14,10 +14,6 @@ MARKDOWN="${MARKDOWN//$'\r'/'%0D'}"
 TEXT="${TEXT//$'\n'/'%0A'}"
 TEXT="${TEXT//$'\r'/'%0D'}"
 
-echo "markdown=<<EOF" >> $GITHUB_OUTPUT
-echo "$MARKDOWN" >> $GITHUB_OUTPUT
-echo "EOF" >> $GITHUB_OUTPUT
-
-echo "text=<<EOF" >> $GITHUB_OUTPUT
-echo "$TEXT" >> $GITHUB_OUTPUT
-echo "EOF" >> $GITHUB_OUTPUT
+echo "DEBUG_MANIFESTS_MARKDOWN=<<EOF" >> $GITHUB_ENV
+echo "$MARKDOWN" >> $GITHUB_ENV
+echo "EOF" >> $GITHUB_ENV

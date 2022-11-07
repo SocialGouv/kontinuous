@@ -3,13 +3,6 @@ description: "Debug some kubernetes manifests"
 inputs:
   token:
     description: "Github token for PR comment"
-outputs:
-  markdown:
-    description: "Markdown debug"
-    value: ${{ steps.debug-manifests.outputs.markdown }}
-  text:
-    description: "Text debug"
-    value: ${{ steps.debug-manifests.outputs.text }}
 runs:
   using: "composite"
   steps:
@@ -29,5 +22,5 @@ runs:
         recreate: true
         message: |
           🎉 Deployment for commit ${{ github.sha }} :
-          ${{ steps.debug-manifests.outputs.markdown }}
+          ${{ env.DEBUG_MANIFESTS_MARKDOWN }}
         GITHUB_TOKEN: ${{ inputs.token }}

@@ -21,7 +21,7 @@ runs:
 
     - name: Notify deployment end
       uses: bobheadxi/deployments@v1
-      if: ${{ .env.DEPLOYMENT_OK == 'true' }}
+      if: ${{ env.DEPLOYMENT_OK == 'true' }}
       with:
         step: finish
         status: ${{ job.status }}

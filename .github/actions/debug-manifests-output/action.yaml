@@ -3,11 +3,6 @@ description: "Run a kontinuous pipeline on kubernetes via webhook"
 inputs:
   path:
     description: "Your manifests YAML file path"
-outputs:
-  markdown:
-    description: "Markdown debug"
-  text:
-    description: "Text debug"
 runs:
   using: docker
   image: Dockerfile
