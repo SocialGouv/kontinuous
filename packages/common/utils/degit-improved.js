@@ -12,7 +12,7 @@ module.exports = async (
   target,
   { logger = defaultLogger, cacheCheck = true, force }
 ) => {
-  retry(
+  await retry(
     async (bail) => {
       try {
         let cache

@@ -143,7 +143,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     gitBranchRetrieveDefaultFromRemote: {
       env: "KS_GIT_BRANCH_RETRIEVE_DEFAULT_FROM_REMOTE",
       option: "remote",
-      defaultFunction: false,
+      default: false,
     },
     gitBranch: {
       defaultFunction: async (config, { options, env: environ }) => {
