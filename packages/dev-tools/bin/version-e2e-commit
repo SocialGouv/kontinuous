@@ -18,10 +18,11 @@ stash=0
 stash
 
 set -e
+VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
 yarn version-e2e:set
 yarn lint --fix
 git add --all
-git commit -m "chore: link e2e version"
+git commit -m "chore: version ${VERSION} e2e linking"
 set +e
 
 unstash
