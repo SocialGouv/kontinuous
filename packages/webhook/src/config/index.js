@@ -77,10 +77,10 @@ module.exports = async function createConfig() {
 
   const pipelineImage =
     process.env.KUBEWEBHOOK_PIPELINE_IMAGE ||
-    "ghcr.io/socialgouv/kontinuous:v1.95.12"
+    "ghcr.io/socialgouv/kontinuous:v1.95.15"
   const pipelineCheckoutImage =
     process.env.KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE ||
-    "ghcr.io/socialgouv/kontinuous/degit:v1.95.12"
+    "ghcr.io/socialgouv/kontinuous/degit:v1.95.15"
 
   const serviceName = `kontinuous webhook server v${kontinuousVersion}`
   const config = {
