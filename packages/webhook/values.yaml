@@ -8,7 +8,7 @@ replicas: 2
 isProdCluster: true
 containerPort: 3000
 image: harbor.fabrique.social.gouv.fr/sre/kontinuous/webhook:latest
-# image: ghcr.io/socialgouv/kontinuous/webhook:v1.95.11
+# image: ghcr.io/socialgouv/kontinuous/webhook:v1.95.12
 resources:
   limits:
     cpu: 2
@@ -32,8 +32,8 @@ httpLogger:
   ignoreUserAgents:
     - blackbox-monitoring-fabnum
 
-pipelineCheckoutImage: ghcr.io/socialgouv/kontinuous/degit:v1.95.11
-pipelineImage: ghcr.io/socialgouv/kontinuous:v1.95.11
+pipelineCheckoutImage: ghcr.io/socialgouv/kontinuous/degit:v1.95.12
+pipelineImage: ghcr.io/socialgouv/kontinuous:v1.95.12
 # pipelineCheckoutImage: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
 # pipelineImage: harbor.fabrique.social.gouv.fr/sre/kontinuous:v1
 
