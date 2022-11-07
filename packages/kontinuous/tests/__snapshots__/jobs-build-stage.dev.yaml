@@ -460,7 +460,7 @@ spec:
       initContainers:
         - name: degit-repository
           image: ghcr.io/socialgouv/kontinuous/degit:v1
-          imagePullPolicy: Always
+          imagePullPolicy: .Values.degitImagePullPolicy
           command:
             - sh
             - '-c'
@@ -633,7 +633,7 @@ spec:
       initContainers:
         - name: degit-repository
           image: ghcr.io/socialgouv/kontinuous/degit:v1
-          imagePullPolicy: Always
+          imagePullPolicy: .Values.degitImagePullPolicy
           command:
             - sh
             - '-c'
