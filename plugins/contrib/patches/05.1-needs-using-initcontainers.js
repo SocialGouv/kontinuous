@@ -3,7 +3,7 @@ const kontinuousNeedsImage = "ghcr.io/socialgouv/kontinuous/wait-needs:v1.95.26"
 
 const getDeps = require("../lib/get-needs-deps")
 
-module.exports = async (manifests, _options, context) => {
+module.exports = async (manifests, options, context) => {
   const { utils, logger } = context
   const { kindIsRunnable, KontinuousPluginError } = utils
 
@@ -41,6 +41,10 @@ module.exports = async (manifests, _options, context) => {
     }
 
     const { spec } = manifest.spec.template
+
+    manifest.spec.progressDeadlineSeconds =
+      options.progressDeadlineSeconds || 1200000 // 20 minutes
+
     if (!spec.initContainers) {
       spec.initContainers = []
     }
@@ -103,8 +107,6 @@ module.exports = async (manifests, _options, context) => {
 
     volumes.push(volume)
     initContainers.unshift(initContainer)
-
-    spec.progressDeadlineSeconds = 1200000 // 20 minutes
   }
 
   return manifests
