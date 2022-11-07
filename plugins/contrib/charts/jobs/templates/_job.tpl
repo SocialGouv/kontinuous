@@ -101,7 +101,7 @@ spec:
       {{- if and (or (not (hasKey $run "checkout")) $run.checkout) (ne .Values.global.env "local") }}
         - name: degit-repository
           image: {{ .Values.degitImage }}
-          imagePullPolicy: .Values.degitImagePullPolicy
+          imagePullPolicy: {{ .Values.degitImagePullPolicy }}
           command:
             - sh
             - -c
