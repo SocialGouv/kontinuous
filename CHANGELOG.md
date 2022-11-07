@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.95.17](https://github.com/socialgouv/kontinuous/compare/v1.95.16...v1.95.17) (2022-11-07)
+
+
+### Bug Fixes
+
+* build images workflows ([785979c](https://github.com/socialgouv/kontinuous/commit/785979c531faf11077047093ec5a8212b8ca2fe0))
+
 ### [1.95.16](https://github.com/socialgouv/kontinuous/compare/v1.95.15...v1.95.16) (2022-11-07)
 
 
