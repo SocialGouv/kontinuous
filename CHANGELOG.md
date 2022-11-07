@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.95.2](https://github.com/socialgouv/kontinuous/compare/v1.95.1...v1.95.2) (2022-11-07)
+
+
+### Bug Fixes
+
+* build images ([e798083](https://github.com/socialgouv/kontinuous/commit/e7980833afddd23cd6638a1c6af217a84c6d4d51))
+* degitImagePullPolicy ([2f0c45d](https://github.com/socialgouv/kontinuous/commit/2f0c45d5f85713891634377a2f078cd0484a85b4))
+* lowercase socialgouv ([499fa6d](https://github.com/socialgouv/kontinuous/commit/499fa6dc00797db4cb67bc78d3b72509a4afc67a))
+* version-e2e wip ([d532ffd](https://github.com/socialgouv/kontinuous/commit/d532ffdbbb6e9a47f6c0d996f5197cc01f0ef687))
+* version-e2e wip ([1947084](https://github.com/socialgouv/kontinuous/commit/194708436d98b2cff8504cffb027ad7c02f8f6b3))
+
 ### [1.95.1](https://github.com/SocialGouv/kontinuous/compare/v1.95.0...v1.95.1) (2022-11-06)
 
 
