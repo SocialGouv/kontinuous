@@ -19,7 +19,7 @@ module.exports = async (config, logger = globalLogger) => {
       const { links = {} } = config
 
       let { import: importTarget } = definition
-      if (importTarget && !(await fs.pathExists(target))) {
+      if (importTarget) {
         importTarget = normalizeDegitUri(importTarget)
 
         const matchLink =
