@@ -7,6 +7,7 @@ RUN apt-get update && \
     ca-certificates \
     wget \
     git \
+    jo \
   && rm -rf /var/lib/apt/lists/*
 
 FROM base as jq

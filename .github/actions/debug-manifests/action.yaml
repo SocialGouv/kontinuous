@@ -22,5 +22,5 @@ runs:
         recreate: true
         message: |
           🎉 Deployment for commit ${{ github.sha }} :
-          ${{ env.DEBUG_MANIFESTS_MARKDOWN }}
+          ${{ fromJSON(env.DEBUG_MANIFESTS_MARKDOWN_JSON).result }}
         GITHUB_TOKEN: ${{ inputs.token }}

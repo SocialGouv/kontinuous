@@ -9,7 +9,6 @@ TEXT=$(cat "${MANIFESTS}" | npx @socialgouv/parse-manifests --text)
 
 echo "${TEXT}"
 
-MARKDOWN="${MARKDOWN//$'\n'/'%0A'}"
-MARKDOWN="${MARKDOWN//$'\r'/'%0D'}"
+MARKDOWN_JSON=$(jo result="$MARKDOWN")
 
-echo "DEBUG_MANIFESTS_MARKDOWN=$MARKDOWN" >> $GITHUB_ENV
+echo "DEBUG_MANIFESTS_MARKDOWN_JSON=$MARKDOWN_JSON" >> $GITHUB_ENV
