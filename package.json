@@ -47,10 +47,9 @@
     "install:plugin:fabrique": "cd plugins/fabrique && yarn",
     "lint": "eslint .",
     "release": "standard-version",
-    "retag-legacy": "TAG=$(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1) && git tag -f $TAG && git push origin :refs/tags/$TAG && git push -f origin master --tags",
-    "retag": "TAG=$(git describe --tags $(git rev-list --tags --max-count=1) | cut -d '.' -f 1) && git branch -f v1 master && git push -f origin v1",
     "push": "git push -f --follow-tags origin master",
     "delivery": "git push && yarn release && yarn push",
+    "version-major-branch": "packages/dev-tools/bin/version-major-branch",
     "version-e2e": "yarn version-e2e-set && yarn lint --fix",
     "version-e2e-set": "node packages/dev-tools/bin/version-e2e-set",
     "test": "yarn workspaces foreach --no-private --parallel run test",
@@ -72,7 +71,7 @@
   },
   "standard-version": {
     "scripts": {
-      "posttag": "yarn retag",
+      "posttag": "yarn version-major-branch",
       "precommit": "yarn lint --fix"
     }
   },
