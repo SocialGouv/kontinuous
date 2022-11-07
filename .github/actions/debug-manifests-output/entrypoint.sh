@@ -10,6 +10,6 @@ TEXT=$(cat "${MANIFESTS}" | npx @socialgouv/parse-manifests --text)
 
 echo "${TEXT}"
 
-echo "json=$JSON" >> $GITHUB_OUTPUT
-echo "markdown=$MARKDOWN" >> $GITHUB_OUTPUT
-echo "text=$TEXT" >> $GITHUB_OUTPUT
+echo "json=\"$JSON\"" >> $GITHUB_OUTPUT
+echo "markdown=\"$MARKDOWN\"" >> $GITHUB_OUTPUT
+echo "text=\"$TEXT\"" >> $GITHUB_OUTPUT
