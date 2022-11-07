@@ -21,13 +21,12 @@ module.exports = ({
 }) => {
   const config = ctx.require("config.project")
 
-  let { pipelineImage, pipelineCheckoutImage } = config
+  const { pipelineImage, pipelineCheckoutImage } = config
+  let { pipelineImageTag, pipelineCheckoutImageTag } = config
 
   if (kontinuousVersion) {
-    const pipelineImagePath = pipelineImage.split(":")[0]
-    const pipelineCheckoutImagePath = pipelineCheckoutImage.split(":")[0]
-    pipelineImage = `${pipelineImagePath}:${kontinuousVersion}`
-    pipelineCheckoutImage = `${pipelineCheckoutImagePath}:${kontinuousVersion}`
+    pipelineImageTag = kontinuousVersion
+    pipelineCheckoutImageTag = kontinuousVersion
   }
 
   return {
@@ -63,7 +62,7 @@ module.exports = ({
               ? [
                   {
                     name: "checkout",
-                    image: pipelineCheckoutImage,
+                    image: `${pipelineCheckoutImage}:${pipelineCheckoutImageTag}`,
                     command: [
                       "sh",
                       "-c",
@@ -110,7 +109,7 @@ module.exports = ({
           containers: [
             {
               name: "pipeline",
-              image: pipelineImage,
+              image: `${pipelineImage}:${pipelineImageTag}`,
               imagePullPolicy: "Always",
               args,
               env: [

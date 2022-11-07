@@ -32,8 +32,10 @@ httpLogger:
   ignoreUserAgents:
     - blackbox-monitoring-fabnum
 
-pipelineCheckoutImage: ghcr.io/socialgouv/kontinuous/degit:v1.95.18
-pipelineImage: ghcr.io/socialgouv/kontinuous:v1.95.18
+pipelineCheckoutImage: ghcr.io/socialgouv/kontinuous/degit
+pipelineCheckoutImageTag: v1
+pipelineImage: ghcr.io/socialgouv/kontinuous
+pipelineImageTag: v1
 # pipelineCheckoutImage: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
 # pipelineImage: harbor.fabrique.social.gouv.fr/sre/kontinuous:v1
 

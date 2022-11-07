@@ -103,8 +103,12 @@ spec:
               value: "{{ .Values.httpLogger.ignoreUserAgents | join "," }}"
             - name: KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE
               value: {{ .Values.pipelineCheckoutImage }}
+            - name: KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE_TAG
+              value: {{ .Values.pipelineCheckoutImageTag }}
             - name: KUBEWEBHOOK_PIPELINE_IMAGE
               value: {{ .Values.pipelineImage }}
+            - name: KUBEWEBHOOK_PIPELINE_IMAGE_TAG
+              value: {{ .Values.pipelineImageTag }}
             {{ if .Values.rootTokenSecret }}
             - name: KUBEWEBHOOK_SUPERTOKEN
               valueFrom:

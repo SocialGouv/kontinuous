@@ -75,12 +75,14 @@ module.exports = async function createConfig() {
     process.env.KUBEWEBHOOK_HTTPLOGGER_IGNOREUSERAGENTS || ""
   ).split(",")
 
+  const pipelineImageTag = process.env.KUBEWEBHOOK_PIPELINE_IMAGE_TAG || "v1"
   const pipelineImage =
-    process.env.KUBEWEBHOOK_PIPELINE_IMAGE ||
-    "ghcr.io/socialgouv/kontinuous:v1.95.18"
+    process.env.KUBEWEBHOOK_PIPELINE_IMAGE || "ghcr.io/socialgouv/kontinuous"
   const pipelineCheckoutImage =
     process.env.KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE ||
-    "ghcr.io/socialgouv/kontinuous/degit:v1.95.18"
+    "ghcr.io/socialgouv/kontinuous/degit"
+  const pipelineCheckoutImageTag =
+    process.env.KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE_TAG || "v1"
 
   const serviceName = `kontinuous webhook server v${kontinuousVersion}`
   const config = {
@@ -96,7 +98,9 @@ module.exports = async function createConfig() {
       },
       repositories,
       pipelineImage,
+      pipelineImageTag,
       pipelineCheckoutImage,
+      pipelineCheckoutImageTag,
     },
     microserviceOapi: { serviceName },
     logger: {
