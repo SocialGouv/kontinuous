@@ -24,9 +24,9 @@ module.exports = async (deploys, options, context) => {
     applyConcurrencyLimit: 3,
   }
 
-  const force = defaultTo(options.force, !dryRun && defaultOptions.force)
+  const force = defaultTo(options.force, defaultOptions.force)
   const recreate = defaultTo(options.recreate, defaultOptions.recreate)
-  const forceConflicts = defaultTo(options.forceConflicts, !dryRun)
+  const forceConflicts = defaultTo(options.forceConflicts, true)
   const applyConcurrencyLimit = defaultTo(
     options.applyConcurrencyLimit,
     defaultOptions.applyConcurrencyLimit
@@ -63,7 +63,6 @@ module.exports = async (deploys, options, context) => {
     const kubectlDeployCommand = `
       apply
       -f -
-      ${dryRun ? "--dry-run=none" : ""}
       --force=${forceThisResource && !serverSide ? "true" : "false"}
       --validate=${validate ? "true" : "false"}
       --server-side=${serverSide ? "true" : "false"}
@@ -148,11 +147,9 @@ module.exports = async (deploys, options, context) => {
       }
     )
 
-  const applyPromise = async.mapLimit(
-    manifests,
-    applyConcurrencyLimit,
-    applyManifestWithRetry
-  )
+  const applyPromise = !dryRun
+    ? async.mapLimit(manifests, applyConcurrencyLimit, applyManifestWithRetry)
+    : null
 
   let stopRolloutStatus
 
@@ -170,11 +167,11 @@ module.exports = async (deploys, options, context) => {
 
   const promise = new Promise(async (resolve, reject) => {
     try {
-      await applyPromise
       if (dryRun) {
         resolve(true)
         return
       }
+      await applyPromise
       const { stop, promise: rolloutStatusPromise } = await rolloutStatus(
         context
       )
