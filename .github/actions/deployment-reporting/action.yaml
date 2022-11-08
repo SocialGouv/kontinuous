@@ -31,6 +31,6 @@ runs:
         deployment_id: ${{ inputs.deployment_id }}
 
     - name: Debug manifests
-      uses: socialgouv/kontinuous/.github/actions/debug-manifests@v1.96.0
+      uses: socialgouv/kontinuous/.github/actions/debug-manifests@v1.96.1
       with:
         token: ${{ inputs.token }}
