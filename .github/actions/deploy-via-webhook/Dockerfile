@@ -1,4 +1,4 @@
-FROM ghcr.io/socialgouv/kontinuous/gh-actions-common:v1.96.2
+FROM ghcr.io/socialgouv/kontinuous/gh-actions-common:v1.96.3
 
 COPY entrypoint.sh /entrypoint.sh
 
