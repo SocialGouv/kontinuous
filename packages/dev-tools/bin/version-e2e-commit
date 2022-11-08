@@ -22,7 +22,7 @@ VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
 yarn version-e2e:set
 yarn lint --fix
 git add --all
-git commit -m "chore: version ${VERSION} e2e linking"
+git commit --amend --no-edit
 set +e
 
 unstash
