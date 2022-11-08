@@ -91,11 +91,16 @@ echo "status:  $status"
 DEPLOYMENT_OK=$(echo "$DEPLOYMENT_STATUS" | jq .ok)
 echo "DEPLOYMENT_OK=$DEPLOYMENT_OK">>$GITHUB_ENV
 
-HOSTS=$(cat manifests.yaml | yq eval-all '.spec.rules[] .host')
-HOST=$(echo "$HOSTS" | head -n 1)
-DEPLOYMENT_URL="https://$HOST"
-echo "DEPLOYMENT_URL=$DEPLOYMENT_URL">>$GITHUB_ENV
+if [ -f manifests.yaml ]; then
+  HOSTS=$(cat manifests.yaml | yq eval-all '.spec.rules[] .host')
+  HOST=$(echo "$HOSTS" | head -n 1)
+  DEPLOYMENT_URL="https://$HOST"
+  echo "DEPLOYMENT_URL=$DEPLOYMENT_URL">>$GITHUB_ENV
+fi
+
+echo "DEPLOYMENT_OK=$DEPLOYMENT_OK"
 
 if [ "$DEPLOYMENT_OK" != "true" ]; then
+  echo "exit 1"
   exit 1
 fi
