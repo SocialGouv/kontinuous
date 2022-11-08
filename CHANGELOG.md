@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.96.0](https://github.com/socialgouv/kontinuous/compare/v1.95.38...v1.96.0) (2022-11-08)
+
+
+### Features
+
+* notify slack or mattermost ([88af4d0](https://github.com/socialgouv/kontinuous/commit/88af4d036ba1d394cf4d3a38a43a876375f18719))
+
+
+### Bug Fixes
+
+* kubectl dry-run ([c2dbeda](https://github.com/socialgouv/kontinuous/commit/c2dbeda12c40cc22a0392fd43c79fe4a5991ae65))
+* kubectl dry-run ([0fd3923](https://github.com/socialgouv/kontinuous/commit/0fd3923d8b7255414b9f4a23cee26dfd5c89e748))
+* links lower ([2d1e15b](https://github.com/socialgouv/kontinuous/commit/2d1e15b03de13535ea68907a1017d794066a03f6))
+
 ### [1.95.38](https://github.com/socialgouv/kontinuous/compare/v1.95.37...v1.95.38) (2022-11-07)
 
 
