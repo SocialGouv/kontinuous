@@ -1,3 +1,6 @@
+const path = require("path")
+
+const fs = require("fs-extra")
 const retry = require("async-retry")
 const degit = require("tiged")
 
@@ -60,6 +63,10 @@ module.exports = async (
         }
         if (ignoreNotEmpty && error.code === "DEST_NOT_EMPTY") {
           return
+        }
+        if (error.code === "Z_BUF_ERROR" && error.tarCode === "TAR_ABORT") {
+          await fs.remove(path.dirname(error.file))
+          throw error
         }
         logger.error({ error, uri, target }, `unable to degit`)
         bail(error)
