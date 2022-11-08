@@ -19,7 +19,7 @@ stash
 
 set -e
 VERSION=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('package.json')).version)")
-yarn version-e2e:set $VERSION
+yarn version-e2e:set "v${VERSION}"
 yarn lint --fix
 git add --all
 git commit --amend --no-edit
