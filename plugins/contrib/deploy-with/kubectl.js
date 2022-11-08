@@ -167,16 +167,14 @@ module.exports = async (deploys, options, context) => {
 
   const promise = new Promise(async (resolve, reject) => {
     try {
-      if (dryRun) {
-        resolve(true)
-        return
+      if (!dryRun) {
+        await applyPromise
+        const { stop, promise: rolloutStatusPromise } = await rolloutStatus(
+          context
+        )
+        stopRolloutStatus = stop
+        await rolloutStatusPromise
       }
-      await applyPromise
-      const { stop, promise: rolloutStatusPromise } = await rolloutStatus(
-        context
-      )
-      stopRolloutStatus = stop
-      await rolloutStatusPromise
       resolve(true)
     } catch (err) {
       reject(err)
