@@ -80,10 +80,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"minimist@npm:^1.2.0":
+  version: 1.2.7
+  resolution: "minimist@npm:1.2.7"
+  checksum: 7bb50119bb59f48228a834e293a566c4b0e1b6c4648db83fb88830b4f932bfeaca72158bcdcc8a74130b339167eda92ec4cabb65faf07ab8d32542889a451676
+  languageName: node
+  linkType: hard
+
 "retry@npm:0.13.1":
   version: 0.13.1
   resolution: "retry@npm:0.13.1"
   checksum: e26ac693801b9f84a369fe90800d844bbe7e4ae325b11496eef0fcb400d06a3f477e93701fc8ac99c110d893155f1e37fee6473b82e90c5ea5547076dac0af63
+  languageName: node
+  linkType: hard
+
+"slackstream@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "slackstream@npm:0.2.1"
+  dependencies:
+    minimist: "npm:^1.2.0"
+  bin:
+    slackstream: ./index.js
+  checksum: 87445819a1be3712f2bcd1a62970320d90f3eb82e3ac720a6ab6551ac94ede9e00f14634a36676889db5a71ab6ecdf1387e3d3c95d7ef53af4ed6febfa5002c6
   languageName: node
   linkType: hard
 
@@ -105,5 +123,6 @@ __metadata:
     lodash.clonedeep: "npm:^4.5.0"
     lodash.get: "npm:^4.4.2"
     lodash.set: "npm:^4.3.2"
+    slackstream: "npm:^0.2.1"
   languageName: unknown
   linkType: soft

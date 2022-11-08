@@ -27,6 +27,12 @@ dependencies:
     preDeploy:
       rancherNamespaces:
         enabled: true
+
+    postDeploy:
+      notifyMattermost:
+        enabled: true
+        options:
+          notifyWebhookUrlVarName: NOTIFY_WEBHOOK_URL
     
     deploySidecars:
       failfast:

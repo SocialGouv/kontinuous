@@ -138,13 +138,15 @@ module.exports = async (options) => {
     const errors = results
       .filter((result) => result?.errors)
       .flatMap((result) => result.errors)
-    if (errors.length) {
-      throw new AggregateError(errors, "errors encountered during deployment")
-    }
 
+    const success = errors.length === 0
     if (!config.disableStep.includes("post-deploy")) {
       logger.info("🌀 [LIFECYCLE]: post-deploy")
-      await deployHooks(allManifests, "post")
+      await deployHooks(allManifests, "post", { errors, success })
+    }
+
+    if (!success) {
+      throw new AggregateError(errors, "errors encountered during deployment")
     }
 
     logger.info(

@@ -46,3 +46,7 @@ deploySidecars:
     enabled: false
   progressing:
     enabled: false
+
+postDeploy:
+  notifyMattermost:
+    enabled: false

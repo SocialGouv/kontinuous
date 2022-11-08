@@ -7,7 +7,8 @@
     "lodash.camelcase": "^4.3.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.get": "^4.4.2",
-    "lodash.set": "^4.3.2"
+    "lodash.set": "^4.3.2",
+    "slackstream": "^0.2.1"
   },
   "license": "MIT",
   "private": true,
