@@ -9,6 +9,7 @@ const qs = require("qs")
 
 const configDependencyKey = require("~common/utils/config-dependency-key")
 
+const lowerKeys = require("~common/utils/lower-keys")
 const ctx = require("../ctx")
 const patternMatch = require("../utils/pattern-match")
 const loadStructuredConfig = require("../utils/load-structured-config")
@@ -479,6 +480,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     links: {
       transform: async (links = {}) => {
+        links = lowerKeys(links)
         if (!links["socialgouv/kontinuous"]) {
           const real = await fs.realpath(process.argv[1])
           if (real.endsWith("packages/kontinuous/bin/kontinuous")) {

@@ -51,8 +51,9 @@ const remapValues = (run) => {
 
 const useIsInPlugins = (use) => use.startsWith("~") || !use.includes("/")
 const locateUseInPlugins = async (use, config) => {
+  const lowerUse = use.toLowerCase()
   const found = await recurseLocate(
-    use.startsWith("~") ? use.slice(1) : use,
+    lowerUse.startsWith("~") ? lowerUse.slice(1) : lowerUse,
     config.dependencies,
     config
   )
@@ -81,6 +82,8 @@ const requireUse = async (
   let target = `${buildPath}/uses/${useSlug}`
   const { links = {} } = config
 
+  const lowerUse = use.toLowerCase()
+
   if (!downloadingPromises[useSlug]) {
     downloadingPromises[useSlug] = (async () => {
       if (use.startsWith(".") || use.startsWith("/")) {
@@ -104,11 +107,10 @@ const requireUse = async (
         run.use = use
       } else if (
         !use.includes("#") &&
-        Object.keys(links).some((key) => use.startsWith(key))
+        Object.keys(links).some((key) => lowerUse.startsWith(key))
       ) {
-        const lowerUse = use.toLowerCase()
         const [linkKey, linkPath] = Object.entries(links).find(([key]) =>
-          lowerUse.startsWith(key.toLowerCase())
+          lowerUse.startsWith(key)
         )
         const from = linkPath + use.substr(linkKey.length)
         logger.debug(`🗂️  use linked job: ${use}`)
@@ -227,14 +229,13 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
           run.localActionPath = found.jobPath
         } else {
           action = run.use
-
+          const lowerAction = action.toLowerCase()
           if (
             !action.includes("#") &&
-            Object.keys(links).some((lk) => action.startsWith(lk))
+            Object.keys(links).some((lk) => lowerAction.startsWith(lk))
           ) {
-            const lowerAction = action.toLowerCase()
             const [linkKey, linkPath] = Object.entries(links).find(([lk]) =>
-              lowerAction.startsWith(lk.toLowerCase())
+              lowerAction.startsWith(lk)
             )
             const from = linkPath + action.substr(linkKey.length)
             logger.debug(`🗂️  use linked action: ${from}`)

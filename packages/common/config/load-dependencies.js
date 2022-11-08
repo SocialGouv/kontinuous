@@ -25,7 +25,7 @@ module.exports = async (config, logger = globalLogger) => {
         const matchLink =
           !(importTarget.includes("@") || importTarget.includes("#")) &&
           Object.entries(links).find(([key]) =>
-            lowerImportTarget.startsWith(key.toLowerCase())
+            lowerImportTarget.startsWith(key)
           )
 
         if (matchLink) {
