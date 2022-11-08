@@ -98,9 +98,6 @@ if [ -f manifests.yaml ]; then
   echo "DEPLOYMENT_URL=$DEPLOYMENT_URL">>$GITHUB_ENV
 fi
 
-echo "DEPLOYMENT_OK=$DEPLOYMENT_OK"
-
 if [ "$DEPLOYMENT_OK" != "true" ]; then
-  echo "exit 1"
   exit 1
 fi
