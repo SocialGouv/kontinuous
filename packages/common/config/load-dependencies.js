@@ -21,10 +21,12 @@ module.exports = async (config, logger = globalLogger) => {
       let { import: importTarget } = definition
       if (importTarget && !(await fs.pathExists(target))) {
         importTarget = normalizeDegitUri(importTarget)
-
+        const lowerImportTarget = importTarget.toLowerCase()
         const matchLink =
           !(importTarget.includes("@") || importTarget.includes("#")) &&
-          Object.entries(links).find(([key]) => importTarget.startsWith(key))
+          Object.entries(links).find(([key]) =>
+            lowerImportTarget.startsWith(key.toLowerCase())
+          )
 
         if (matchLink) {
           const [linkKey, linkPath] = matchLink

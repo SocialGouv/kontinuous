@@ -106,8 +106,9 @@ const requireUse = async (
         !use.includes("#") &&
         Object.keys(links).some((key) => use.startsWith(key))
       ) {
+        const lowerUse = use.toLowerCase()
         const [linkKey, linkPath] = Object.entries(links).find(([key]) =>
-          use.startsWith(key)
+          lowerUse.startsWith(key.toLowerCase())
         )
         const from = linkPath + use.substr(linkKey.length)
         logger.debug(`🗂️  use linked job: ${use}`)
@@ -231,8 +232,9 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
             !action.includes("#") &&
             Object.keys(links).some((lk) => action.startsWith(lk))
           ) {
+            const lowerAction = action.toLowerCase()
             const [linkKey, linkPath] = Object.entries(links).find(([lk]) =>
-              action.startsWith(lk)
+              lowerAction.startsWith(lk.toLowerCase())
             )
             const from = linkPath + action.substr(linkKey.length)
             logger.debug(`🗂️  use linked action: ${from}`)
