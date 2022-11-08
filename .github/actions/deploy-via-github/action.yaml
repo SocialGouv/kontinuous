@@ -64,7 +64,7 @@ runs:
         KS_CHART: ${{ inputs.chart }}
         KS_INLINE_VALUES: ${{ inputs.inlineValues }}
         KS_INLINE_SET: ${{ inputs.inlineSet }}
-      run: packages/kontinuous/bin/kontinuous build --cwd ${{ env.PROJECT_PATH }}
+      run: $GITHUB_ACTION_PATH/packages/kontinuous/bin/kontinuous build --cwd ${{ env.PROJECT_PATH }}
 
     - name: Archive manifest
       uses: actions/upload-artifact@v2
@@ -114,7 +114,7 @@ runs:
         KS_ENVIRONMENT: ${{ inputs.environment }}
         KS_KUBECONFIG_CONTEXT: ${{ inputs.kubeconfigContext }}
         KS_DEPLOY_TIMEOUT: ${{ inputs.timeout }}
-      run: packages/kontinuous/bin/kontinuous deploy --cwd ${{ env.PROJECT_PATH }} -f ${{ env.KS_BUILD_PATH }}/manifests.yaml
+      run: $GITHUB_ACTION_PATH/packages/kontinuous/bin/kontinuous deploy --cwd ${{ env.PROJECT_PATH }} -f ${{ env.KS_BUILD_PATH }}/manifests.yaml
 
     - name: Define environment URL
       id: environment-url
