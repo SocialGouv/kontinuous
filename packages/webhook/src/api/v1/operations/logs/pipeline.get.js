@@ -68,7 +68,7 @@ module.exports = function ({ services }) {
         encoding: "utf-8",
         env: {
           ...process.env,
-          KUBECONFIG: kubeconfig,
+          ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
         },
       })
 

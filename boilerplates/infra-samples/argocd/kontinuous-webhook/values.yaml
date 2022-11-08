@@ -2,196 +2,23 @@ kontinuous-webhook:
   image: ghcr.io/socialgouv/kontinuous/webhook:v1.98.3
   # image: harbor.fabrique.social.gouv.fr/sre/kontinuous/webhook:1
   host: "kontinuous.fabrique.social.gouv.fr"
-  kubeconfigSecrets:
-    - name: kubeconfig-dev-archifiltre
-      cluster: dev
-      project: archifiltre
-    - name: kubeconfig-prod-archifiltre
-      cluster: prod
-      project: archifiltre
+  
+  # conventioned kube native permissions binding
+  allowAllOnCiNamespaceTemplate: "${project}-ci"
 
-    - name: kubeconfig-dev-carnet-de-bord
-      cluster: dev
-      project: carnet-de-bord
-    - name: kubeconfig-prod-carnet-de-bord
-      cluster: prod
-      project: carnet-de-bord
+  # specific access permissions binding
+  # kubeconfigSecrets:
+  #   - name: kubeconfig-dev-fabrique
+  #     cluster: dev
+  #     project: fabrique
+  #   - name: kubeconfig-prod-fabrique
+  #     cluster: prod
+  #     project: fabrique
 
-    - name: kubeconfig-dev-cdtn
-      cluster: dev
-      project: cdtn
-    - name: kubeconfig-prod-cdtn
-      cluster: prod
-      project: cdtn
-
-    - name: kubeconfig-dev-domifa
-      cluster: dev
-      project: domifa
-    - name: kubeconfig-prod-domifa
-      cluster: prod
-      project: domifa
-
-    - name: kubeconfig-dev-dora
-      cluster: dev
-      project: dora
-    - name: kubeconfig-prod-dora
-      cluster: prod
-      project: dora
-
-    - name: kubeconfig-dev-egapro
-      cluster: dev
-      project: egapro
-    - name: kubeconfig-prod-egapro
-      cluster: prod
-      project: egapro
-
-    - name: kubeconfig-dev-emjpm
-      cluster: dev
-      project: emjpm
-    - name: kubeconfig-prod-emjpm
-      cluster: prod
-      project: emjpm
-
-    - name: kubeconfig-dev-enfants-du-spectacle
-      cluster: dev
-      project: enfants-du-spectacle
-    - name: kubeconfig-prod-enfants-du-spectacle
-      cluster: prod
-      project: enfants-du-spectacle
-
-    - name: kubeconfig-dev-fabrique
-      cluster: dev
-      project: fabrique
-    - name: kubeconfig-prod-fabrique
-      cluster: prod
-      project: fabrique
-
-    - name: kubeconfig-dev-fce
-      cluster: dev
-      project: fce
-    - name: kubeconfig-prod-fce
-      cluster: prod
-      project: fce
-
-    - name: kubeconfig-dev-les1000jours
-      cluster: dev
-      project: les1000jours
-    - name: kubeconfig-prod-les1000jours
-      cluster: prod
-      project: les1000jours
-
-    - name: kubeconfig-dev-mano
-      cluster: dev
-      project: mano
-    - name: kubeconfig-prod-mano
-      cluster: prod
-      project: mano
+  # specific token secret
+  # tokenSecrets:
+  #   - name: webhook-token-fabrique
+  #     project: fabrique
     
-    - name: kubeconfig-dev-mon-psy-sante
-      cluster: dev
-      project: mon-psy-sante
-    - name: kubeconfig-prod-mon-psy-sante
-      cluster: prod
-      project: mon-psy-sante
-    
-    - name: kubeconfig-dev-monsuivipsy
-      cluster: dev
-      project: monsuivipsy
-    - name: kubeconfig-prod-monsuivipsy
-      cluster: prod
-      project: monsuivipsy
-
-    - name: kubeconfig-dev-ozensemble
-      cluster: dev
-      project: ozensemble
-    - name: kubeconfig-prod-ozensemble
-      cluster: prod
-      project: ozensemble
-
-    - name: kubeconfig-dev-ressourcerie
-      cluster: dev
-      project: ressourcerie
-    - name: kubeconfig-prod-ressourcerie
-      cluster: prod
-      project: ressourcerie
-
-    - name: kubeconfig-dev-reva
-      cluster: dev
-      project: reva
-    - name: kubeconfig-prod-reva
-      cluster: prod
-      project: reva
-
-    - name: kubeconfig-dev-sample-next-app
-      cluster: dev
-      project: sample-next-app
-    - name: kubeconfig-prod-sample-next-app
-      cluster: prod
-      project: sample-next-app
-
-    - name: kubeconfig-dev-secretariat
-      cluster: dev
-      project: secretariat
-    - name: kubeconfig-prod-secretariat
-      cluster: prod
-      project: secretariat
-
-    - name: kubeconfig-dev-transition-collective
-      cluster: dev
-      project: transition-collective
-    - name: kubeconfig-prod-transition-collective
-      cluster: prod
-      project: transition-collective
-
-    - name: kubeconfig-dev-tumeplay
-      cluster: dev
-      project: tumeplay
-    - name: kubeconfig-prod-tumeplay
-      cluster: prod
-      project: tumeplay
-
-
-  tokenSecrets:
-    - name: webhook-token-archifiltre
-      project: archifiltre
-    - name: webhook-token-carnet-de-bord
-      project: carnet-de-bord
-    - name: webhook-token-cdtn
-      project: cdtn
-    - name: webhook-token-domifa
-      project: domifa
-    - name: webhook-token-dora
-      project: dora
-    - name: webhook-token-egapro
-      project: egapro
-    - name: webhook-token-emjpm
-      project: emjpm
-    - name: webhook-token-enfants-du-spectacle
-      project: enfants-du-spectacle
-    - name: webhook-token-fabrique
-      project: fabrique
-    - name: webhook-token-fce
-      project: fce
-    - name: webhook-token-les1000jours
-      project: les1000jours
-    - name: webhook-token-mano
-      project: mano
-    - name: webhook-token-mon-psy-sante
-      project: mon-psy-sante
-    - name: webhook-token-monsuivipsy
-      project: monsuivipsy
-    - name: webhook-token-ozensemble
-      project: ozensemble
-    - name: webhook-token-ressourcerie
-      project: ressourcerie
-    - name: webhook-token-reva
-      project: reva
-    - name: webhook-token-sample-next-app
-      project: sample-next-app
-    - name: webhook-token-secretariat
-      project: secretariat
-    - name: webhook-token-transition-collective
-      project: transition-collective
-    - name: webhook-token-tumeplay
-      project: tumeplay
-    
+  # shared reloadable token secret
+  reloadableSharedSecretName: "reloadable-shared-secret"

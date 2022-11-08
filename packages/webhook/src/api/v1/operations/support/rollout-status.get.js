@@ -9,11 +9,6 @@ module.exports = function ({ services: { getRootKubeconfig } }) {
       const { cluster, namespace } = req.query
 
       const kubeconfig = getRootKubeconfig(cluster)
-      if (kubeconfig === false) {
-        return res
-          .status(404)
-          .json({ message: "kubeconfig for cluster not found" })
-      }
 
       logger.debug("--> getting rollout status:")
       const status = await rolloutStatus({

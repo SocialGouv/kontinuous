@@ -40,6 +40,8 @@ pipelineImageTag: v1
 # pipelineImage: harbor.fabrique.social.gouv.fr/sre/kontinuous:v1
 
 # ACL
+allowAllOnCiNamespaceTemplate: "${project}-ci"
+reloadableSharedSecretName: "reloadable-shared-secret"
 rootTokenSecret:
 rootTokenSecretKey: TOKEN
 rootKubeconfigSecrets: []
