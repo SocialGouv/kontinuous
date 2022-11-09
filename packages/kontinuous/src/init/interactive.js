@@ -13,6 +13,10 @@ const boilerplatesRootPath = "socialgouv/kontinuous/boilerplates/repositories"
 const nativePluginPrefix = "socialgouv/kontinuous/plugins"
 const defaultPluginPrefix = nativePluginPrefix
 
+const package = require("../../package.json")
+
+const [majorVersion] = package.version.split(".")
+
 module.exports = async (opts) => {
   const config = ctx.require("config")
   const logger = ctx.require("logger")
@@ -20,9 +24,9 @@ module.exports = async (opts) => {
   let boilerplate = opts.B
 
   const nativePluginsBoilerplate = {
-    "trunk-gitops": `${boilerplatesRootPath}/trunk-gitops`,
-    "trunk-manual-prod": `${boilerplatesRootPath}/trunk-manual-prod`,
-    "gitflow-gitops": `${boilerplatesRootPath}}/gitflow-gitops`,
+    "trunk-gitops": `${boilerplatesRootPath}/trunk-gitops#v${majorVersion}`,
+    "trunk-manual-prod": `${boilerplatesRootPath}/trunk-manual-prod#v${majorVersion}`,
+    "gitflow-gitops": `${boilerplatesRootPath}}/gitflow-gitops#v${majorVersion}`,
   }
 
   if (!boilerplate) {
