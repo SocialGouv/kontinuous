@@ -3,7 +3,7 @@ module.exports = {
     paths: ["./"],
     recursive: true,
     silent: false,
-    exclude: "*.md,node_modules",
+    exclude: "*.md,node_modules,boilerplates",
   },
   replacers: [
     {
