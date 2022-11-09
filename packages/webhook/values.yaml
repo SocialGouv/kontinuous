@@ -8,7 +8,7 @@ replicas: 2
 isProdCluster: true
 containerPort: 3000
 image: harbor.fabrique.social.gouv.fr/sre/kontinuous/webhook:latest
-# image: ghcr.io/socialgouv/kontinuous/webhook:v1.96.12
+# image: ghcr.io/socialgouv/kontinuous/webhook:v1.96.13
 resources:
   limits:
     cpu: 2
