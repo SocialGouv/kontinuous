@@ -13,9 +13,9 @@ const boilerplatesRootPath = "socialgouv/kontinuous/boilerplates/repositories"
 const nativePluginPrefix = "socialgouv/kontinuous/plugins"
 const defaultPluginPrefix = nativePluginPrefix
 
-const package = require("../../package.json")
+const packageDef = require("../../package.json")
 
-const [majorVersion] = package.version.split(".")
+const [majorVersion] = packageDef.version.split(".")
 
 module.exports = async (opts) => {
   const config = ctx.require("config")
