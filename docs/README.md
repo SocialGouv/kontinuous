@@ -1306,6 +1306,8 @@ VERSION=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('package.json
 yarn version:e2e "v${VERSION}"
 ```
 
+On webhook there is a query parameter that you can provide to select the tag of kontinuous docker image used for pipeline that is called `kontinuousVersion`, by setting it, locally, inside github action, or at repository settings level, you can target any version or feature branch you want.
+
 ##### Test
 
 all directories added to [packages/kontinuous/tests/samples](https://github.com/socialgouv/kontinuous/blob/master/packages/kontinuous/tests/samples) are like a `.kontinuous` directory in a project, it will be automatically tested when you will run `yarn test:kontinuous`. <br>
