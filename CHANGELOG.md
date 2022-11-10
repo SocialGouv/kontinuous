@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.97.0](https://github.com/socialgouv/kontinuous/compare/v1.96.21...v1.97.0) (2022-11-10)
+
+
+### Features
+
+* enable kubectl by default ([efcee8a](https://github.com/socialgouv/kontinuous/commit/efcee8a1358d4d968d22abd0633f7beca4b241cf))
+* use buildkit as default builder job ([c01e74a](https://github.com/socialgouv/kontinuous/commit/c01e74a77054c0e80dbd61e0306864ef07077abe))
+
 ### [1.96.21](https://github.com/socialgouv/kontinuous/compare/v1.96.20...v1.96.21) (2022-11-10)
 
 
