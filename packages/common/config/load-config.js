@@ -160,7 +160,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         } else if (config.gitBranchRetrieveDefaultFromRemote) {
           ref = await getGitRemoteDefaultBranch(config.gitRepositoryUrl)
         } else {
-          logger.warn(
+          logger.trace(
             `no git branch defined and can't be inferred, default to "imaginary"`
           )
           ref = "imaginary"
@@ -182,7 +182,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
             }
           }
         }
-        logger.warn(
+        logger.trace(
           `no git sha defined and can't be inferred, default to "0000000000000000000000000000000000000000"`
         )
         return "0000000000000000000000000000000000000000"
