@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.96.15](https://github.com/socialgouv/kontinuous/compare/v1.96.14...v1.96.15) (2022-11-10)
+
+
+### Bug Fixes
+
+* up rollout status running in internal kube ([2de1e40](https://github.com/socialgouv/kontinuous/commit/2de1e40c360a79e79f6120ea6cf9feac95330bbb))
+
 ### [1.96.14](https://github.com/socialgouv/kontinuous/compare/v1.96.13...v1.96.14) (2022-11-09)
 
 
