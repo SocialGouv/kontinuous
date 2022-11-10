@@ -108,13 +108,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app-api
     kontinuous/depname.resourcePath: deployment.app-api
     kontinuous/depname.resourceName: app-api
-    kapp.k14s.io/change-group.app-api: kontinuous/app-api
-    kapp.k14s.io/change-group.project-fabrique-c-11dqql: kontinuous/project.fabrique.contrib.app-api
-    kapp.k14s.io/change-group.project-fabrique-c-21ss6a: kontinuous/project.fabrique.contrib.app-api.deployment.app-api
-    kapp.k14s.io/change-group.project-fabrique-c-5kzatx: kontinuous/project.fabrique.contrib.app-api.app-api
-    kapp.k14s.io/change-group.app-api-deployment-25wxbs: kontinuous/app-api.deployment.app-api
-    kapp.k14s.io/change-group.app-api-app-api-2ocfhh: kontinuous/app-api.app-api
-    kapp.k14s.io/change-group.deployment-app-api-alof3a: kontinuous/deployment.app-api
+    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -260,26 +254,5 @@ spec:
         - >-
           app-api-test-long-branch-host-a-very-very-very-lo-47z9um.dev.fabrique.social.gouv.fr
       secretName: wildcard-crt
----
-apiVersion: kapp.k14s.io/v1alpha1
-kind: Config
-rebaseRules:
-  - path:
-      - metadata
-      - annotations
-      - field.cattle.io/publicEndpoints
-    type: copy
-    sources:
-      - existing
-      - new
-    resourceMatchers:
-      - apiVersionKindMatcher:
-          apiVersion: apps/v1
-          kind: Deployment
-metadata:
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 "
 `;

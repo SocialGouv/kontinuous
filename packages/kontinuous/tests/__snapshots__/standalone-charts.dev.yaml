@@ -20,13 +20,6 @@ metadata:
     kontinuous/depname.chartPath: project.job-extra
     kontinuous/depname.resourcePath: job.job-extra
     kontinuous/depname.resourceName: job-extra
-    kapp.k14s.io/change-group.job-extra: kontinuous/job-extra
-    kapp.k14s.io/change-group.project-job-extra-2rnry1: kontinuous/project.job-extra
-    kapp.k14s.io/change-group.project-job-extra-3kdzgn: kontinuous/project.job-extra.job.job-extra
-    kapp.k14s.io/change-group.project-job-extra-185izj: kontinuous/project.job-extra.job-extra
-    kapp.k14s.io/change-group.job-extra-job-job-gtc2ey: kontinuous/job-extra.job.job-extra
-    kapp.k14s.io/change-group.job-extra-job-extra-1t8xm9: kontinuous/job-extra.job-extra
-    kapp.k14s.io/change-group.job-job-extra-3xw8dm: kontinuous/job.job-extra
   labels:
     kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf93-5g1zo1
     kontinuous/deployment.env: test-standalone-charts-feature-branch-1

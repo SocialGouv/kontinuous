@@ -101,14 +101,6 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-test-include-file-feature-branch-1-say-hello
     kontinuous/depname.resourceName: job-test-include-file-feature-branch-1-say-hello
-    kapp.k14s.io/change-group.jobs: kontinuous/jobs
-    kapp.k14s.io/change-group.project-fabrique-c-1g5tpj: kontinuous/project.fabrique.contrib.jobs
-    kapp.k14s.io/change-group.project-fabrique-c-5y20bl: kontinuous/project.fabrique.contrib.jobs.job.say-hello
-    kapp.k14s.io/change-group.project-fabrique-c-42ng2v: kontinuous/project.fabrique.contrib.jobs.say-hello
-    kapp.k14s.io/change-group.jobs-job-say-hello-59o0xt: kontinuous/jobs.job.say-hello
-    kapp.k14s.io/change-group.jobs-say-hello-4o8gcl: kontinuous/jobs.say-hello
-    kapp.k14s.io/change-group.job-say-hello-s5sh2i: kontinuous/job.say-hello
-    kapp.k14s.io/change-group.say-hello: kontinuous/say-hello
   labels:
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
     kontinuous/deployment.env: test-include-file-feature-branch-1
@@ -194,26 +186,5 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
----
-apiVersion: kapp.k14s.io/v1alpha1
-kind: Config
-rebaseRules:
-  - path:
-      - metadata
-      - annotations
-      - field.cattle.io/publicEndpoints
-    type: copy
-    sources:
-      - existing
-      - new
-    resourceMatchers:
-      - apiVersionKindMatcher:
-          apiVersion: apps/v1
-          kind: Deployment
-metadata:
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 "
 `;

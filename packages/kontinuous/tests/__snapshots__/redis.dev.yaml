@@ -107,13 +107,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.redis
     kontinuous/depname.resourcePath: deployment.redis
     kontinuous/depname.resourceName: redis
-    kapp.k14s.io/change-group.redis: kontinuous/redis
-    kapp.k14s.io/change-group.project-fabrique-c-4d8u2l: kontinuous/project.fabrique.contrib.redis
-    kapp.k14s.io/change-group.project-fabrique-c-14iux0: kontinuous/project.fabrique.contrib.redis.deployment.redis
-    kapp.k14s.io/change-group.project-fabrique-c-lvjzbw: kontinuous/project.fabrique.contrib.redis.redis
-    kapp.k14s.io/change-group.redis-deployment-r-41ntk5: kontinuous/redis.deployment.redis
-    kapp.k14s.io/change-group.redis-redis-5kg0nk: kontinuous/redis.redis
-    kapp.k14s.io/change-group.deployment-redis-2p1d4t: kontinuous/deployment.redis
+    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -204,26 +198,5 @@ spec:
   selector:
     component: redis
   type: ClusterIP
----
-apiVersion: kapp.k14s.io/v1alpha1
-kind: Config
-rebaseRules:
-  - path:
-      - metadata
-      - annotations
-      - field.cattle.io/publicEndpoints
-    type: copy
-    sources:
-      - existing
-      - new
-    resourceMatchers:
-      - apiVersionKindMatcher:
-          apiVersion: apps/v1
-          kind: Deployment
-metadata:
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 "
 `;

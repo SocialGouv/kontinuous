@@ -139,13 +139,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.metabase
     kontinuous/depname.resourcePath: deployment.metabase
     kontinuous/depname.resourceName: metabase
-    kapp.k14s.io/change-group.metabase: kontinuous/metabase
-    kapp.k14s.io/change-group.project-fabrique-c-t0r3xb: kontinuous/project.fabrique.contrib.metabase
-    kapp.k14s.io/change-group.project-fabrique-c-16wd5v: kontinuous/project.fabrique.contrib.metabase.deployment.metabase
-    kapp.k14s.io/change-group.project-fabrique-c-4xxwku: kontinuous/project.fabrique.contrib.metabase.metabase
-    kapp.k14s.io/change-group.metabase-deploymen-2wgolc: kontinuous/metabase.deployment.metabase
-    kapp.k14s.io/change-group.metabase-metabase-1qgrhp: kontinuous/metabase.metabase
-    kapp.k14s.io/change-group.deployment-metabase-pznz69: kontinuous/deployment.metabase
+    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -236,13 +230,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.oauth2-proxy
     kontinuous/depname.resourcePath: deployment.oauth2-proxy
     kontinuous/depname.resourceName: oauth2-proxy
-    kapp.k14s.io/change-group.oauth2-proxy: kontinuous/oauth2-proxy
-    kapp.k14s.io/change-group.project-fabrique-c-2mv7e0: kontinuous/project.fabrique.contrib.oauth2-proxy
-    kapp.k14s.io/change-group.project-fabrique-c-1jwx5m: kontinuous/project.fabrique.contrib.oauth2-proxy.deployment.oauth2-proxy
-    kapp.k14s.io/change-group.project-fabrique-c-51acjs: kontinuous/project.fabrique.contrib.oauth2-proxy.oauth2-proxy
-    kapp.k14s.io/change-group.oauth2-proxy-deplo-31lhs3: kontinuous/oauth2-proxy.deployment.oauth2-proxy
-    kapp.k14s.io/change-group.oauth2-proxy-oauth-2gxof1: kontinuous/oauth2-proxy.oauth2-proxy
-    kapp.k14s.io/change-group.deployment-oauth2-154fgr: kontinuous/deployment.oauth2-proxy
+    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -413,26 +401,5 @@ spec:
     - hosts:
         - oauth2-proxy-test-oauth2-proxy-metabase.fabrique.social.gouv.fr
       secretName: oauth2-proxy-crt
----
-apiVersion: kapp.k14s.io/v1alpha1
-kind: Config
-rebaseRules:
-  - path:
-      - metadata
-      - annotations
-      - field.cattle.io/publicEndpoints
-    type: copy
-    sources:
-      - existing
-      - new
-    resourceMatchers:
-      - apiVersionKindMatcher:
-          apiVersion: apps/v1
-          kind: Deployment
-metadata:
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 "
 `;

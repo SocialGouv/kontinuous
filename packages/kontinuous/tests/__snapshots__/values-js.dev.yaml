@@ -107,13 +107,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    kapp.k14s.io/change-group.app: kontinuous/app
-    kapp.k14s.io/change-group.project-fabrique-c-7gj1ui: kontinuous/project.fabrique.contrib.app
-    kapp.k14s.io/change-group.project-fabrique-c-i3djtl: kontinuous/project.fabrique.contrib.app.deployment.app
-    kapp.k14s.io/change-group.project-fabrique-c-5nawz7: kontinuous/project.fabrique.contrib.app.app
-    kapp.k14s.io/change-group.app-deployment-app-3m2vpu: kontinuous/app.deployment.app
-    kapp.k14s.io/change-group.app-app-2laxj3: kontinuous/app.app
-    kapp.k14s.io/change-group.deployment-app-2yfbx7: kontinuous/deployment.app
+    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -256,26 +250,5 @@ spec:
     - hosts:
         - test.demo.net
       secretName: app-crt
----
-apiVersion: kapp.k14s.io/v1alpha1
-kind: Config
-rebaseRules:
-  - path:
-      - metadata
-      - annotations
-      - field.cattle.io/publicEndpoints
-    type: copy
-    sources:
-      - existing
-      - new
-    resourceMatchers:
-      - apiVersionKindMatcher:
-          apiVersion: apps/v1
-          kind: Deployment
-metadata:
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 "
 `;

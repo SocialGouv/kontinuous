@@ -159,14 +159,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app-2nd-instance
     kontinuous/depname.resourcePath: deployment.app-2nd-instance
     kontinuous/depname.resourceName: app-2nd-instance
-    kapp.k14s.io/change-group.app-2nd-instance: kontinuous/app-2nd-instance
-    kapp.k14s.io/change-group.project-fabrique-c-58iq26: kontinuous/project.fabrique.contrib.app-2nd-instance
-    kapp.k14s.io/change-group.project-fabrique-c-2m0fh3: >-
-      kontinuous/project.fabrique.contrib.app-2nd-instance.deployment.app-2nd-instance
-    kapp.k14s.io/change-group.project-fabrique-c-2cww08: kontinuous/project.fabrique.contrib.app-2nd-instance.app-2nd-instance
-    kapp.k14s.io/change-group.app-2nd-instance-d-5piji0: kontinuous/app-2nd-instance.deployment.app-2nd-instance
-    kapp.k14s.io/change-group.app-2nd-instance-a-3cwd49: kontinuous/app-2nd-instance.app-2nd-instance
-    kapp.k14s.io/change-group.deployment-app-2nd-17rsim: kontinuous/deployment.app-2nd-instance
+    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 2
   selector:
@@ -276,13 +269,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    kapp.k14s.io/change-group.app: kontinuous/app
-    kapp.k14s.io/change-group.project-fabrique-c-7gj1ui: kontinuous/project.fabrique.contrib.app
-    kapp.k14s.io/change-group.project-fabrique-c-i3djtl: kontinuous/project.fabrique.contrib.app.deployment.app
-    kapp.k14s.io/change-group.project-fabrique-c-5nawz7: kontinuous/project.fabrique.contrib.app.app
-    kapp.k14s.io/change-group.app-deployment-app-3m2vpu: kontinuous/app.deployment.app
-    kapp.k14s.io/change-group.app-app-2laxj3: kontinuous/app.app
-    kapp.k14s.io/change-group.deployment-app-2yfbx7: kontinuous/deployment.app
+    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 2
   selector:
@@ -392,13 +379,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.hasura
     kontinuous/depname.resourcePath: deployment.hasura
     kontinuous/depname.resourceName: hasura
-    kapp.k14s.io/change-group.hasura: kontinuous/hasura
-    kapp.k14s.io/change-group.project-fabrique-c-6bncjy: kontinuous/project.fabrique.contrib.hasura
-    kapp.k14s.io/change-group.project-fabrique-c-55rnho: kontinuous/project.fabrique.contrib.hasura.deployment.hasura
-    kapp.k14s.io/change-group.project-fabrique-c-42m6xl: kontinuous/project.fabrique.contrib.hasura.hasura
-    kapp.k14s.io/change-group.hasura-deployment-3ts8bo: kontinuous/hasura.deployment.hasura
-    kapp.k14s.io/change-group.hasura-hasura-5ba5zs: kontinuous/hasura.hasura
-    kapp.k14s.io/change-group.deployment-hasura-1jc1mt: kontinuous/deployment.hasura
+    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -492,13 +473,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.pgweb
     kontinuous/depname.resourcePath: deployment.pgweb
     kontinuous/depname.resourceName: pgweb
-    kapp.k14s.io/change-group.pgweb: kontinuous/pgweb
-    kapp.k14s.io/change-group.project-fabrique-c-4gl6ca: kontinuous/project.fabrique.contrib.pgweb
-    kapp.k14s.io/change-group.project-fabrique-c-xjp7lb: kontinuous/project.fabrique.contrib.pgweb.deployment.pgweb
-    kapp.k14s.io/change-group.project-fabrique-c-1yvhm5: kontinuous/project.fabrique.contrib.pgweb.pgweb
-    kapp.k14s.io/change-group.pgweb-deployment-p-236bnu: kontinuous/pgweb.deployment.pgweb
-    kapp.k14s.io/change-group.pgweb-pgweb-5aan8e: kontinuous/pgweb.pgweb
-    kapp.k14s.io/change-group.deployment-pgweb-3nppbo: kontinuous/deployment.pgweb
+    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -880,26 +855,5 @@ spec:
     - hosts:
         - pgweb-test-sample-1.fabrique.social.gouv.fr
       secretName: pgweb-crt
----
-apiVersion: kapp.k14s.io/v1alpha1
-kind: Config
-rebaseRules:
-  - path:
-      - metadata
-      - annotations
-      - field.cattle.io/publicEndpoints
-    type: copy
-    sources:
-      - existing
-      - new
-    resourceMatchers:
-      - apiVersionKindMatcher:
-          apiVersion: apps/v1
-          kind: Deployment
-metadata:
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 "
 `;

@@ -102,27 +102,6 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a
     kontinuous/depname.resourceName: job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a
-    kapp.k14s.io/change-group.jobs: kontinuous/jobs
-    kapp.k14s.io/change-group.project-fabrique-c-1g5tpj: kontinuous/project.fabrique.contrib.jobs
-    kapp.k14s.io/change-group.project-fabrique-c-4rzxtq: kontinuous/project.fabrique.contrib.jobs.job.db.create-db
-    kapp.k14s.io/change-group.project-fabrique-c-48reig: kontinuous/project.fabrique.contrib.jobs.db.create-db
-    kapp.k14s.io/change-group.jobs-job-db-create-491qs8: kontinuous/jobs.job.db.create-db
-    kapp.k14s.io/change-group.jobs-db-create-db-1u32xg: kontinuous/jobs.db.create-db
-    kapp.k14s.io/change-group.job-db-create-db-4fqeeh: kontinuous/job.db.create-db
-    kapp.k14s.io/change-group.db-create-db-1vqedp: kontinuous/db.create-db
-    kapp.k14s.io/change-group.project-fabrique-c-4zmbb4: kontinuous/project.fabrique.contrib.jobs.job.db
-    kapp.k14s.io/change-group.project-fabrique-c-4g7lb7: kontinuous/project.fabrique.contrib.jobs.db
-    kapp.k14s.io/change-group.jobs-job-db-4pmoj8: kontinuous/jobs.job.db
-    kapp.k14s.io/change-group.jobs-db-4g5hgy: kontinuous/jobs.db
-    kapp.k14s.io/change-group.job-db-3np5js: kontinuous/job.db
-    kapp.k14s.io/change-group.db: kontinuous/db
-    kapp.k14s.io/change-group.project-fabrique-c-504l2h: kontinuous/project.fabrique.contrib.jobs.job.db..create-db
-    kapp.k14s.io/change-group.project-fabrique-c-xjvvl1: kontinuous/project.fabrique.contrib.jobs.db..create-db
-    kapp.k14s.io/change-group.jobs-job-db-create-4kcfqh: kontinuous/jobs.job.db..create-db
-    kapp.k14s.io/change-group.jobs-db-create-db-693mcw: kontinuous/jobs.db..create-db
-    kapp.k14s.io/change-group.job-db-create-db-11odv2: kontinuous/job.db..create-db
-    kapp.k14s.io/change-group.db-create-db-27la6y: kontinuous/db..create-db
-    kapp.k14s.io/change-rule.db-create-secret-1sm3f3: upsert after upserting kontinuous/db..create-secret
   labels:
     kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b08-4ym7iz
     kontinuous/deployment.env: test-jobs-runs-map-feature-branch-1
@@ -152,6 +131,21 @@ spec:
     spec:
       restartPolicy: Never
       initContainers:
+        - name: kontinuous-wait-needs
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.97.1
+          env:
+            - name: WAIT_NEEDS_ANNOTATIONS_REF
+              value: >-
+                awesome-ci/Job/job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a
+            - name: WAIT_NEEDS
+              value: >-
+                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-jobs-runs-map-feature-branch-1-db-create-secret-3ea5t8\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-jobs-runs-map-feature-branch-1-db-c-4mj01z\\"},\\"needOnce\\":true}]
+            - name: KUBECONFIG
+              value: /secrets/kubeconfig
+          volumeMounts:
+            - name: kontinuous-wait-needs-kubeconfig
+              mountPath: /secrets
+          imagePullPolicy: Always
         - name: degit-action
           image: ghcr.io/socialgouv/kontinuous/degit:v1.97.1
           command:
@@ -236,6 +230,12 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
+        - name: kontinuous-wait-needs-kubeconfig
+          secret:
+            secretName: kubeconfig
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
 ---
 apiVersion: batch/v1
 kind: Job
@@ -260,26 +260,6 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-test-jobs-runs-map-feature-branch-1-db-create-secret-3ea5t8
     kontinuous/depname.resourceName: job-test-jobs-runs-map-feature-branch-1-db-create-secret-3ea5t8
-    kapp.k14s.io/change-group.jobs: kontinuous/jobs
-    kapp.k14s.io/change-group.project-fabrique-c-1g5tpj: kontinuous/project.fabrique.contrib.jobs
-    kapp.k14s.io/change-group.project-fabrique-c-4zmbb4: kontinuous/project.fabrique.contrib.jobs.job.db
-    kapp.k14s.io/change-group.project-fabrique-c-4g7lb7: kontinuous/project.fabrique.contrib.jobs.db
-    kapp.k14s.io/change-group.jobs-job-db-4pmoj8: kontinuous/jobs.job.db
-    kapp.k14s.io/change-group.jobs-db-4g5hgy: kontinuous/jobs.db
-    kapp.k14s.io/change-group.job-db-3np5js: kontinuous/job.db
-    kapp.k14s.io/change-group.db: kontinuous/db
-    kapp.k14s.io/change-group.project-fabrique-c-2nbhfr: kontinuous/project.fabrique.contrib.jobs.job.db.create-secret
-    kapp.k14s.io/change-group.project-fabrique-c-5n582s: kontinuous/project.fabrique.contrib.jobs.db.create-secret
-    kapp.k14s.io/change-group.jobs-job-db-create-5vxbl6: kontinuous/jobs.job.db.create-secret
-    kapp.k14s.io/change-group.jobs-db-create-sec-155nuu: kontinuous/jobs.db.create-secret
-    kapp.k14s.io/change-group.job-db-create-secr-36xbgm: kontinuous/job.db.create-secret
-    kapp.k14s.io/change-group.db-create-secret-6a711z: kontinuous/db.create-secret
-    kapp.k14s.io/change-group.project-fabrique-c-6bhrzw: kontinuous/project.fabrique.contrib.jobs.job.db..create-secret
-    kapp.k14s.io/change-group.project-fabrique-c-3lt4hb: kontinuous/project.fabrique.contrib.jobs.db..create-secret
-    kapp.k14s.io/change-group.jobs-job-db-create-3c6mqu: kontinuous/jobs.job.db..create-secret
-    kapp.k14s.io/change-group.jobs-db-create-sec-4e7e29: kontinuous/jobs.db..create-secret
-    kapp.k14s.io/change-group.job-db-create-secr-yqquct: kontinuous/job.db..create-secret
-    kapp.k14s.io/change-group.db-create-secret-1sm3f3: kontinuous/db..create-secret
   labels:
     kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b08-4ym7iz
     kontinuous/deployment.env: test-jobs-runs-map-feature-branch-1
@@ -380,26 +360,5 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
----
-apiVersion: kapp.k14s.io/v1alpha1
-kind: Config
-rebaseRules:
-  - path:
-      - metadata
-      - annotations
-      - field.cattle.io/publicEndpoints
-    type: copy
-    sources:
-      - existing
-      - new
-    resourceMatchers:
-      - apiVersionKindMatcher:
-          apiVersion: apps/v1
-          kind: Deployment
-metadata:
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 "
 `;

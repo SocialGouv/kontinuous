@@ -82,13 +82,13 @@ automountServiceAccountToken: false
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-jobs-build-options-feature-branch-1-build-app-gre3q1
+  name: job-test-jobs-build-options-feature-branch-1-build-app-5j2qyt
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kontinuous/needsName: build-app.kaniko
-    kontinuous/needsNames: '[\\"build-app\\",\\"build-app.kaniko\\",\\"build-app..kaniko\\"]'
+    kontinuous/needsName: build-app.buildkit
+    kontinuous/needsNames: '[\\"build-app\\",\\"build-app.buildkit\\",\\"build-app..buildkit\\"]'
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
@@ -96,37 +96,17 @@ metadata:
     kapp.k14s.io/disable-original: ''
     kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-jobs-build-options-feature-branch-1-build-app-gre3q1
-    kontinuous/depname.chartResource: jobs.job.job-test-jobs-build-options-feature-branch-1-build-app-gre3q1
+      project.fabrique.contrib.jobs.job.job-test-jobs-build-options-feature-branch-1-build-app-5j2qyt
+    kontinuous/depname.chartResource: jobs.job.job-test-jobs-build-options-feature-branch-1-build-app-5j2qyt
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-jobs-build-options-feature-branch-1-build-app-gre3q1
-    kontinuous/depname.resourceName: job-test-jobs-build-options-feature-branch-1-build-app-gre3q1
-    kapp.k14s.io/change-group.jobs: kontinuous/jobs
-    kapp.k14s.io/change-group.project-fabrique-c-1g5tpj: kontinuous/project.fabrique.contrib.jobs
-    kapp.k14s.io/change-group.project-fabrique-c-lwj39z: kontinuous/project.fabrique.contrib.jobs.job.build-app.kaniko
-    kapp.k14s.io/change-group.project-fabrique-c-59qpjf: kontinuous/project.fabrique.contrib.jobs.build-app.kaniko
-    kapp.k14s.io/change-group.jobs-job-build-app-dro60v: kontinuous/jobs.job.build-app.kaniko
-    kapp.k14s.io/change-group.jobs-build-app-kan-22iut9: kontinuous/jobs.build-app.kaniko
-    kapp.k14s.io/change-group.job-build-app-kani-4oz5p3: kontinuous/job.build-app.kaniko
-    kapp.k14s.io/change-group.build-app-kaniko-2iupr5: kontinuous/build-app.kaniko
-    kapp.k14s.io/change-group.project-fabrique-c-25vb4e: kontinuous/project.fabrique.contrib.jobs.job.build-app
-    kapp.k14s.io/change-group.project-fabrique-c-2x1zpy: kontinuous/project.fabrique.contrib.jobs.build-app
-    kapp.k14s.io/change-group.jobs-job-build-app-3zd5kn: kontinuous/jobs.job.build-app
-    kapp.k14s.io/change-group.jobs-build-app-605yp1: kontinuous/jobs.build-app
-    kapp.k14s.io/change-group.job-build-app-11ytjs: kontinuous/job.build-app
-    kapp.k14s.io/change-group.build-app: kontinuous/build-app
-    kapp.k14s.io/change-group.project-fabrique-c-5vt2wq: kontinuous/project.fabrique.contrib.jobs.job.build-app..kaniko
-    kapp.k14s.io/change-group.project-fabrique-c-4wdn94: kontinuous/project.fabrique.contrib.jobs.build-app..kaniko
-    kapp.k14s.io/change-group.jobs-job-build-app-61ujcy: kontinuous/jobs.job.build-app..kaniko
-    kapp.k14s.io/change-group.jobs-build-app-kan-5rjrfo: kontinuous/jobs.build-app..kaniko
-    kapp.k14s.io/change-group.job-build-app-kani-5a51zx: kontinuous/job.build-app..kaniko
-    kapp.k14s.io/change-group.build-app-kaniko-1rr3r2: kontinuous/build-app..kaniko
+    kontinuous/depname.resourcePath: job.job-test-jobs-build-options-feature-branch-1-build-app-5j2qyt
+    kontinuous/depname.resourceName: job-test-jobs-build-options-feature-branch-1-build-app-5j2qyt
   labels:
     kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
     kontinuous/deployment.env: test-jobs-build-options-feature-branch-1
     kontinuous/ref: feature-branch-1
-    kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-options-feature-branch-1-2auuh2
+    kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-options-feature-branch-1-1sneqi
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -135,6 +115,9 @@ spec:
   ttlSecondsAfterFinished: 1800
   template:
     metadata:
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/job: unconfined
+        kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
       labels:
         environment: dev
         ref: feature-branch-1
@@ -143,11 +126,9 @@ spec:
         kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
         kontinuous/deployment.env: test-jobs-build-options-feature-branch-1
         kontinuous/ref: feature-branch-1
-        kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-options-feature-branch-1-2auuh2
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-build-options-feature-branch-1-1sneqi
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
-      annotations:
-        kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbbf9-63jpvb
     spec:
       restartPolicy: Never
       initContainers:
@@ -176,82 +157,66 @@ spec:
               memory: 64Mi
       containers:
         - name: job
-          image: gcr.io/kaniko-project/executor:v1.9.1-debug
+          image: moby/buildkit:v0.10.5-rootless
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
                 name: harbor
+          env:
+            - name: BUILDKITD_FLAGS
+              value: '--oci-worker-no-process-sandbox'
           command:
-            - /busybox/sh
+            - /bin/sh
             - '-c'
             - >
               set -e
 
-              mkdir -p /kaniko/.docker
+              mkdir -p /home/user/.docker
 
               echo
               \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\"
-              > /kaniko/.docker/config.json
+              > /home/user/.docker/config.json
 
-              export RELATIVE_IMAGE_PATH=/test-jobs-build-options/app
+              export IMAGE_PATH=$CI_REGISTRY/test-jobs-build-options/app
 
-              export IMAGE_PATH=$CI_REGISTRY$RELATIVE_IMAGE_PATH
-
-
-              # skip image build if already exist on registry
-
-              if [ -n \\"true\\" ]; then
-                URL=\\"\${CI_REGISTRY}/v2/\${RELATIVE_IMAGE_PATH}/manifests/sha-ffac537e6cbbf934b08745a378932722df287a53\\"
-                echo \\"docker build: check image at \${URL}\\"
-                if [ -n \\"$CI_REGISTRY_USER\\" ]; then
-                  IMAGE_EXISTS=$(wget -q --no-check-certificate \\"http://\${CI_REGISTRY_USER}:\${CI_REGISTRY_PASSWORD}@\${URL}\\" || echo \\"1\\")
-                else
-                  IMAGE_EXISTS=$(wget -q --no-check-certificate \\"http://\${URL}\\" || echo \\"1\\")
-                fi
-                if [ -z $IMAGE_EXISTS ]; then
-                    echo \\"docker build: skip, image \${RELATIVE_IMAGE_PATH}:sha-ffac537e6cbbf934b08745a378932722df287a53 alreay exist on registry\\"
-                    exit 0
-                fi
-              fi
-
-
-              /kaniko/executor \\\\
-                --context=dir:///workspace \\\\
-                --dockerfile=/workspace/Dockerfile \\\\
-                --destination=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53 \\\\
-                --destination=$IMAGE_PATH:feature-branch-1 \\\\
-                --cache=true \\\\
-                --cache-repo=$IMAGE_PATH \\\\
-                --snapshotMode=redo \\\\
-                --skip-unused-stages \\\\
-                --use-new-run \\\\
-                --cache-ttl=336h \\\\
-                --insecure --single-snapshot --ignore-path=/product_uuid --compressed-caching=false \\\\
-                --build-arg=\\"arg1=value1\\" \\\\
-                --build-arg=\\"arg2=value2\\" \\\\
+              buildctl-daemonless.sh \\\\
+                build \\\\
+                --frontend dockerfile.v0 \\\\
+                --local context=/workspace/ \\\\
+                --local dockerfile=/workspace \\\\
+                --opt filename=./Dockerfile \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
+                --export-cache type=inline \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                --opt build-arg=\\"arg1=value1\\" \\\\
+                --opt build-arg=\\"arg2=value2\\" \\\\
                 
           resources:
             limits:
               cpu: 2
               memory: 4Gi
             requests:
-              cpu: 100m
-              memory: 500Mi
+              cpu: 500m
+              memory: 1Gi
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
+            runAsUser: 1000
+            runAsGroup: 1000
           volumeMounts:
             - name: workspace
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - mountPath: /home/user/.local/share/buildkit
+              name: buildkitd
       securityContext:
-        fsGroup: 0
+        fsGroup: 1000
       volumes:
         - name: workspace
           emptyDir: {}
         - name: action
           emptyDir: {}
+        - emptyDir: {}
+          name: buildkitd
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -283,14 +248,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    kapp.k14s.io/change-group.app: kontinuous/app
-    kapp.k14s.io/change-group.project-fabrique-c-7gj1ui: kontinuous/project.fabrique.contrib.app
-    kapp.k14s.io/change-group.project-fabrique-c-i3djtl: kontinuous/project.fabrique.contrib.app.deployment.app
-    kapp.k14s.io/change-group.project-fabrique-c-5nawz7: kontinuous/project.fabrique.contrib.app.app
-    kapp.k14s.io/change-group.app-deployment-app-3m2vpu: kontinuous/app.deployment.app
-    kapp.k14s.io/change-group.app-app-2laxj3: kontinuous/app.app
-    kapp.k14s.io/change-group.deployment-app-2yfbx7: kontinuous/deployment.app
-    kapp.k14s.io/change-rule.build-app: upsert after upserting kontinuous/build-app
+    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -371,6 +329,29 @@ spec:
                 name: app-sealed-secret
             - configMapRef:
                 name: app-configmap
+      initContainers:
+        - name: kontinuous-wait-needs
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.97.1
+          env:
+            - name: WAIT_NEEDS_ANNOTATIONS_REF
+              value: test-jobs-build-options-feature-branch-1/Deployment/app
+            - name: WAIT_NEEDS
+              value: >-
+                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-jobs-build-options-feature-branch-1-build-app-5j2qyt\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-jobs-build-options-feature-branch-1-1sneqi\\"},\\"needOnce\\":true}]
+            - name: KUBECONFIG
+              value: /secrets/kubeconfig
+          volumeMounts:
+            - name: kontinuous-wait-needs-kubeconfig
+              mountPath: /secrets
+          imagePullPolicy: Always
+      volumes:
+        - name: kontinuous-wait-needs-kubeconfig
+          secret:
+            secretName: kubeconfig
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
+  progressDeadlineSeconds: 1200000
 ---
 apiVersion: v1
 kind: Service
@@ -440,26 +421,5 @@ spec:
     - hosts:
         - test-jobs-build-options-feature-branch-1.dev.fabrique.social.gouv.fr
       secretName: wildcard-crt
----
-apiVersion: kapp.k14s.io/v1alpha1
-kind: Config
-rebaseRules:
-  - path:
-      - metadata
-      - annotations
-      - field.cattle.io/publicEndpoints
-    type: copy
-    sources:
-      - existing
-      - new
-    resourceMatchers:
-      - apiVersionKindMatcher:
-          apiVersion: apps/v1
-          kind: Deployment
-metadata:
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 "
 `;

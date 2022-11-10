@@ -264,13 +264,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.metabase-app1
     kontinuous/depname.resourcePath: deployment.metabase-app1
     kontinuous/depname.resourceName: metabase-app1
-    kapp.k14s.io/change-group.metabase-app1: kontinuous/metabase-app1
-    kapp.k14s.io/change-group.project-fabrique-c-6dcasm: kontinuous/project.fabrique.contrib.metabase-app1
-    kapp.k14s.io/change-group.project-fabrique-c-48cn2p: kontinuous/project.fabrique.contrib.metabase-app1.deployment.metabase-app1
-    kapp.k14s.io/change-group.project-fabrique-c-3jy3fs: kontinuous/project.fabrique.contrib.metabase-app1.metabase-app1
-    kapp.k14s.io/change-group.metabase-app1-depl-2la2u9: kontinuous/metabase-app1.deployment.metabase-app1
-    kapp.k14s.io/change-group.metabase-app1-meta-fvlr11: kontinuous/metabase-app1.metabase-app1
-    kapp.k14s.io/change-group.deployment-metabas-qbruia: kontinuous/deployment.metabase-app1
+    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -365,13 +359,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.metabase-app2
     kontinuous/depname.resourcePath: deployment.metabase-app2
     kontinuous/depname.resourceName: metabase-app2
-    kapp.k14s.io/change-group.metabase-app2: kontinuous/metabase-app2
-    kapp.k14s.io/change-group.project-fabrique-c-15vk9u: kontinuous/project.fabrique.contrib.metabase-app2
-    kapp.k14s.io/change-group.project-fabrique-c-3txu15: kontinuous/project.fabrique.contrib.metabase-app2.deployment.metabase-app2
-    kapp.k14s.io/change-group.project-fabrique-c-lfpsp3: kontinuous/project.fabrique.contrib.metabase-app2.metabase-app2
-    kapp.k14s.io/change-group.metabase-app2-depl-5hoc48: kontinuous/metabase-app2.deployment.metabase-app2
-    kapp.k14s.io/change-group.metabase-app2-meta-2vlf8t: kontinuous/metabase-app2.metabase-app2
-    kapp.k14s.io/change-group.deployment-metabas-5p8yvf: kontinuous/deployment.metabase-app2
+    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -580,26 +568,5 @@ spec:
     - hosts:
         - metabase-app2-test-metabase.fabrique.social.gouv.fr
       secretName: metabase-app2-crt
----
-apiVersion: kapp.k14s.io/v1alpha1
-kind: Config
-rebaseRules:
-  - path:
-      - metadata
-      - annotations
-      - field.cattle.io/publicEndpoints
-    type: copy
-    sources:
-      - existing
-      - new
-    resourceMatchers:
-      - apiVersionKindMatcher:
-          apiVersion: apps/v1
-          kind: Deployment
-metadata:
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 "
 `;

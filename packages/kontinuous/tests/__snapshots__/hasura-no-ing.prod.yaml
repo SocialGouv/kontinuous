@@ -106,13 +106,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.hasura
     kontinuous/depname.resourcePath: deployment.hasura
     kontinuous/depname.resourceName: hasura
-    kapp.k14s.io/change-group.hasura: kontinuous/hasura
-    kapp.k14s.io/change-group.project-fabrique-c-6bncjy: kontinuous/project.fabrique.contrib.hasura
-    kapp.k14s.io/change-group.project-fabrique-c-55rnho: kontinuous/project.fabrique.contrib.hasura.deployment.hasura
-    kapp.k14s.io/change-group.project-fabrique-c-42m6xl: kontinuous/project.fabrique.contrib.hasura.hasura
-    kapp.k14s.io/change-group.hasura-deployment-3ts8bo: kontinuous/hasura.deployment.hasura
-    kapp.k14s.io/change-group.hasura-hasura-5ba5zs: kontinuous/hasura.hasura
-    kapp.k14s.io/change-group.deployment-hasura-1jc1mt: kontinuous/deployment.hasura
+    reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
   selector:
@@ -201,26 +195,5 @@ spec:
   selector:
     component: hasura
   type: ClusterIP
----
-apiVersion: kapp.k14s.io/v1alpha1
-kind: Config
-rebaseRules:
-  - path:
-      - metadata
-      - annotations
-      - field.cattle.io/publicEndpoints
-    type: copy
-    sources:
-      - existing
-      - new
-    resourceMatchers:
-      - apiVersionKindMatcher:
-          apiVersion: apps/v1
-          kind: Deployment
-metadata:
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/config.kapp.yaml
 "
 `;
