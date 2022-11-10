@@ -21,7 +21,7 @@ ENV KUBECTL_VERSION=$KUBECTL_VERSION
 RUN curl --fail -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl
 
-ARG ROLLOUT_STATUS_VERSION=v1.10.0
+ARG ROLLOUT_STATUS_VERSION=v1.11.2
 ENV ROLLOUT_STATUS_VERSION=$ROLLOUT_STATUS_VERSION
 RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/download/${ROLLOUT_STATUS_VERSION}/rollout-status-${ROLLOUT_STATUS_VERSION}-linux-amd64 > /tmp/rollout-status \
   && mv /tmp/rollout-status /usr/local/bin/rollout-status \
