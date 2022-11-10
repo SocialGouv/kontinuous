@@ -1275,6 +1275,37 @@ yarn dev:webhook
 open your navigator on [http://localhost:7530/api/v1/swagger/](http://localhost:7530/api/v1/swagger/) to test the OpenAPI using the provided and awesome Swagger.
 
 
+##### Review branches
+
+Kontinuous has many interconnected dependencies that make flow, it's can be hard to set version manually on each component, so there a great dev feature that it's called e2e-version. The default implementation target the major version that is linked on branch v1, to create review branch of kontinuous and test it from end to end, here is the process:
+
+```sh
+# prepare kontinuous
+git clone https://github.com/socialgouv/kontinuous.git
+cd kontinuous
+yarn install
+
+# create a new branch
+git checkout -b feat/my-new-kontinuous-feature
+
+# hardlink the branch version of kontinuous in the whole code
+yarn version:e2e
+
+# commit on branch
+git commit -a -m "chore: temp set e2e version on the whole repo code"
+```
+
+Then work on you feature and publish branch. By doign so, you'll can use kontinuous github action suffixed by `@feat/my-new-kontinuous-feature` and you'll get full linked version, same for docker images (slugified) `:feat-my-new-kontinuous-feature`, and for kontinuous plugins.
+From anywhere of your workflow you target version (branch or precise versioning), all the subsquent workflows will be linked to this version.
+
+When you have finished to work on your feature branch, if you merge PR, the version you setted will be automatically replaced by the releasing process.
+But if you want to do it manually for some reason (like merge branch yourself using git) you can do like this:
+
+```sh
+VERSION=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('package.json')).version)")
+yarn version:e2e "v${VERSION}"
+```
+
 ##### Test
 
 all directories added to [packages/kontinuous/tests/samples](https://github.com/socialgouv/kontinuous/blob/master/packages/kontinuous/tests/samples) are like a `.kontinuous` directory in a project, it will be automatically tested when you will run `yarn test:kontinuous`. <br>
@@ -1288,30 +1319,17 @@ More options on existing charts will be carefully design, in case of doubt, or i
 
 ##### Contribute adding more plugins
 
-New patches are welcome in folder [plugins/fabrique/patches/](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/patches/). <br>
-New validators are welcome in folder [plugins/fabrique/validators/](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/validators/). <br>
+New patches are welcome in folder [plugins/contrib/patches/](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/patches/). <br>
+New validators are welcome in folder [plugins/contrib/validators/](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/validators/). <br>
 New jobs are welcome in folder [plugins/contrib/jobs/](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/jobs/). <br>
-New values-compilers are welcome in folder [plugins/fabrique/values-compilers/](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/values-compilers/). <br>
+New values-compilers are welcome in folder [plugins/contrib/values-compilers/](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/values-compilers/). <br>
+New pre-deploy are welcome in folder [plugins/contrib/pre-deploy/](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/pre-deploy/). <br>
+New post-deploy are welcome in folder [plugins/contrib/post-deploy/](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/post-deploy/). <br>
+New deploy-with are welcome in folder [plugins/contrib/deploy-with/](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/deploy-with/). <br>
+New deploy-sidecar are welcome in folder [plugins/contrib/deploy-sidecar/](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/deploy-sidecar/). <br>
+New extends are welcome in folder plugins/contrib/extends/. <br>
 
 ##### *La Fabrique* images CI build
-
-To be independent from github, the images used by default by the webhook Chart is retrieved from our GitLab instance at https://gitlab.fabrique.social.gouv.fr
-
-When pushing to github there is a github action that make mirror sync to gitlab repository and wait for gitlab CI to complete, retrieving logging.
-
-##### Docker image kontinuous cli
-
-**to use official docker image**
-```sh
-docker run 
-  -t \
-  -v $PWD:/workspace \
-  -v $HOME/.kube:/home/ubuntu/.kube \
-  harbor.fabrique.social.gouv.fr/sre/kontinuous \
-  --help
-```
-
-
 
 **to build local docker image**
 ```sh
