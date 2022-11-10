@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.96.21](https://github.com/socialgouv/kontinuous/compare/v1.96.20...v1.96.21) (2022-11-10)
+
+
+### Bug Fixes
+
+* delete event disable debug manifests ([3b2d9c9](https://github.com/socialgouv/kontinuous/commit/3b2d9c9ddd4b380e4bde20ba2eab2baf4c83e2a2))
+
 ### [1.96.20](https://github.com/socialgouv/kontinuous/compare/v1.96.19...v1.96.20) (2022-11-10)
 
 
