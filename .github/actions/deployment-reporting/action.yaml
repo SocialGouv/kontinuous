@@ -41,6 +41,7 @@ runs:
 
     - name: Debug manifests
       uses: socialgouv/kontinuous/.github/actions/debug-manifests@v1.96.20
+      if: github.event_name != 'delete'
       with:
         token: ${{ inputs.token }}
 
