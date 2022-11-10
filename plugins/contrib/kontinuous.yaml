@@ -8,15 +8,15 @@ patches:
   rancherProjectId:
     enabled: false
   reloader:
-    enabled: false
+    enabled: true
   needs:
     enabled: true
   needsUsingInitcontainers:
-    enabled: false
-  needsUsingKapp:
     enabled: true
-  filterDisableKapp:
+  needsUsingKapp:
     enabled: false
+  filterDisableKapp:
+    enabled: true
   helm:
     enabled: false
 
@@ -38,14 +38,16 @@ preDeploy:
     enabled: true
   clear:
     enabled: false
+  cleanFailed:
+    enabled: false
 
 deploySidecars:
   failfast:
     enabled: false
   stern:
-    enabled: false
+    enabled: true
   progressing:
-    enabled: false
+    enabled: true
 
 postDeploy:
   notifyMattermost:

@@ -14,7 +14,13 @@ dependencies:
       rancherProjectId:
         enabled: true
       reloader:
+        enabled: true
+      needsUsingInitcontainers:
+        enabled: true
+      needsUsingKapp:
         enabled: false
+      filterDisableKapp:
+        enabled: true
 
     validators:
       rancherProjectId:
@@ -27,6 +33,8 @@ dependencies:
     preDeploy:
       rancherNamespaces:
         enabled: true
+      cleanFailed:
+        enabled: false
 
     postDeploy:
       notifyMattermost:
@@ -38,7 +46,9 @@ dependencies:
       failfast:
         enabled: false
       stern:
-        enabled: false
+        enabled: true
+      progressing:
+        enabled: true
 
     deployWith:
       kapp:

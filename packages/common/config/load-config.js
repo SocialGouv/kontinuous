@@ -391,7 +391,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
       option: "deploy-with",
       defaultFunction: (config) => {
         config.deployWithPluginIsDefault = true
-        return "kapp"
+        return "kubectl"
       },
     },
     statusUrl: {
