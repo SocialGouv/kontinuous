@@ -21,7 +21,7 @@ runs:
     
     - name: Notify deployment end
       uses: bobheadxi/deployments@v1
-      if: ${{ env.DEPLOYMENT_OK == 'true' }}
+      if: env.KS_EVENT == 'pushed' && env.DEPLOYMENT_OK == 'true'
       with:
         step: finish
         status: ${{ job.status }}
@@ -29,6 +29,15 @@ runs:
         env_url: ${{ env.DEPLOYMENT_URL }}
         env: ${{ env.DEPLOYMENT_NAME }}
         deployment_id: ${{ inputs.deployment_id }}
+    
+    - name: Clean deployment
+      uses: bobheadxi/deployments@v1
+      if: env.KS_EVENT == 'deleted'
+      with:
+        step: deactivate-env
+        token: ${{ inputs.token }}
+        env: ${{ env.KS_GIT_BRANCH }}
+        desc: Environment was pruned
 
     - name: Debug manifests
       uses: socialgouv/kontinuous/.github/actions/debug-manifests@v1.96.15
@@ -39,7 +48,7 @@ runs:
       shell: bash
       run: |
         if [ "$DEPLOYMENT_OK" != "true" ]; then
-          echo "Pipeline failed"
-          echo 'see "Kontinupus Pipeline" step to inspect full logs'
+          echo "Pipeline failed ❌"
+          echo 'see "Kontinuous Pipeline 🥷" step to inspect full logs'
           exit 1
         fi

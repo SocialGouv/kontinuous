@@ -17,6 +17,7 @@ runs:
     - name: Notify deployment start
       uses: bobheadxi/deployments@v1
       id: deployment
+      if: env.KS_EVENT == 'pushed'
       with:
         step: start
         token: ${{ inputs.token }}
