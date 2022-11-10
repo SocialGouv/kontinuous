@@ -21,7 +21,7 @@ runs:
     
     - name: Notify deployment end
       uses: bobheadxi/deployments@v1
-      if: env.KS_EVENT == 'pushed' && env.DEPLOYMENT_OK == 'true'
+      if: github.event_name != 'delete' && env.DEPLOYMENT_OK == 'true'
       with:
         step: finish
         status: ${{ job.status }}
@@ -32,7 +32,7 @@ runs:
     
     - name: Clean deployment
       uses: bobheadxi/deployments@v1
-      if: env.KS_EVENT == 'deleted'
+      if: github.event_name == 'delete'
       with:
         step: deactivate-env
         token: ${{ inputs.token }}

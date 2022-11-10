@@ -17,7 +17,7 @@ runs:
     - name: Notify deployment start
       uses: bobheadxi/deployments@v1
       id: deployment
-      if: env.KS_EVENT == 'pushed'
+      if: github.event_name != 'delete'
       with:
         step: start
         token: ${{ inputs.token }}
