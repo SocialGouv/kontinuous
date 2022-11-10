@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.97.1](https://github.com/socialgouv/kontinuous/compare/v1.97.0...v1.97.1) (2022-11-10)
+
+
+### Bug Fixes
+
+* kubectl delete job ([246f659](https://github.com/socialgouv/kontinuous/commit/246f65906f61b1d8b90320b22b4f579f7b4b8e92))
+
 ## [1.97.0](https://github.com/socialgouv/kontinuous/compare/v1.96.21...v1.97.0) (2022-11-10)
 
 
