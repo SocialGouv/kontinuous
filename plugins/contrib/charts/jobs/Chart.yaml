@@ -1,8 +1,8 @@
 apiVersion: v2
 name: jobs
-version: 1.96.16
+version: 1.96.17
 dependencies:
   - name: rancher-namespace
     repository: file://../rancher-namespace
-    version: 1.96.16
+    version: 1.96.17
     condition: createRancherNamespace
