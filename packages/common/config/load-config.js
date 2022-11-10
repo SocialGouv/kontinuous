@@ -141,6 +141,9 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         return dirname
       },
     },
+    gitDefaultBranch: {
+      env: "KS_DEFAULT_BRANCH",
+    },
     gitBranchRetrieveDefaultFromRemote: {
       env: "KS_GIT_BRANCH_RETRIEVE_DEFAULT_FROM_REMOTE",
       option: "remote",
@@ -157,8 +160,14 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
           ref = environ.KS_GIT_REF
         } else if (config.git) {
           ref = await getGitRef(config.workspacePath)
+        } else if (config.gitDefaultBranch) {
+          ref = config.gitDefaultBranch
         } else if (config.gitBranchRetrieveDefaultFromRemote) {
-          ref = await getGitRemoteDefaultBranch(config.gitRepositoryUrl)
+          const gitDefaultBranch = await getGitRemoteDefaultBranch(
+            config.gitRepositoryUrl
+          )
+          config.gitDefaultBranch = gitDefaultBranch
+          ref = gitDefaultBranch
         } else {
           logger.trace(
             `no git branch defined and can't be inferred, default to "imaginary"`

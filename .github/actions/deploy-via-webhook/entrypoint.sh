@@ -38,6 +38,8 @@ else
   KS_EVENT=pushed
 fi
 
+export KS_DEFAULT_BRANCH=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('$GITHUB_EVENT_PATH')).repository?.default_branch)")
+
 export KS_GIT
 export KS_GIT_BRANCH
 export KS_GIT_SHA
