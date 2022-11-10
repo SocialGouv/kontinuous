@@ -44,11 +44,6 @@ module.exports = (
   logger = globalLogger,
   extraOptions = {}
 ) => {
-  // debugging
-  process.stderr.write(
-    `async_shell ${arg} ${JSON.stringify(new Error().stack, null, 2)}\n`
-  )
-
   const [cmd, args] = parseCommand(arg)
   const defaultOptions = { encoding: "utf-8" }
   const childProcess = spawn(cmd, args, { ...defaultOptions, ...options })

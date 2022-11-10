@@ -37,10 +37,19 @@ module.exports = (program) =>
         // const ref = event === "deleted" ? "HEAD" : config.gitBranch
         let ref = config.gitBranch
         if (event === "deleted") {
-          let gitUrl = await getGitUrl()
-          const protocol = config.deployKeyFile ? "ssh" : "https"
-          gitUrl = normalizeRepositoryUrl(gitUrl, protocol)
-          ref = await getGitRemoteDefaultBranch(gitUrl)
+          if (config.gitDefaultBranch) {
+            ref = config.gitDefaultBranch
+          } else {
+            let gitUrl
+            if (config.gitRepositoryUrl) {
+              gitUrl = config.gitRepositoryUrl
+            } else {
+              gitUrl = await getGitUrl()
+            }
+            const protocol = config.deployKeyFile ? "ssh" : "https"
+            gitUrl = normalizeRepositoryUrl(gitUrl, protocol)
+            ref = await getGitRemoteDefaultBranch(gitUrl)
+          }
         }
 
         const kontinuousRepoConfig = await getRemoteKontinuousConfigFile(
