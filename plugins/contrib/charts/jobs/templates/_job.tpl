@@ -176,7 +176,11 @@ spec:
             - name: "{{ $name }}"
               value: "{{ tpl $value $ }}"
             {{- end }}
-          
+            {{- if and $run.kubernetes (eq $run.kubernetesMethod "kubeconfig") }}
+            - name: "KUBECONFIG"
+              value: "/secrets/k8s/kubeconfig"
+            {{- end }}
+
           {{- if or $run.entrypoint $run.run $run.action }}
           command:
             {{- if $run.entrypoint }}
@@ -218,11 +222,13 @@ spec:
               mountPath: /action
             {{ if and .Values.deployKey.enabled (or $run.mountDeployKey .Values.mountDeployKey) }}
             - name: deploy-key
-              secret:
-                secretName: {{ .Values.deployKey.secretRefName }}
-                items:
-                  - key: {{ .Values.deployKey.secretRefKey }}
-                    path: deploy-key
+              mountPath: /secrets/ssh
+              readOnly: true
+            {{ end }}
+            {{- if and $run.kubernetes (eq $run.kubernetesMethod "kubeconfig") }}
+            - name: kubeconfig
+              mountPath: /secrets/k8s
+              readOnly: true
             {{ end }}
             {{/*
             - name: workflow
@@ -258,6 +264,14 @@ spec:
             items:
               - key: {{ .Values.deployKey.secretRefKey }}
                 path: deploy-key
+        {{ end }}
+        {{- if and $run.kubernetes (eq $run.kubernetesMethod "kubeconfig") }}
+        - name: kubeconfig
+          secret:
+            secretName: {{ .Values.kubeconfig.secretRefName }}
+            items:
+              - key: {{ .Values.kubeconfig.secretRefKey }}
+                path: kubeconfig
         {{ end }}
         {{/*
         {{ if and .Values.global.extra.jobs.sharedStorage.enabled }}

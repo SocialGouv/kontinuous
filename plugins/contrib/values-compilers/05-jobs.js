@@ -42,10 +42,18 @@ const recurseLocate = async (
   }
 }
 
-const remapValues = (run) => {
+const remapValues = (run, context) => {
+  const { options } = context
   if (run["~needs"]) {
     run.needs = run["~needs"]
     delete run["~needs"]
+  }
+
+  const { kubernetesMethod = "kubeconfig" } = options
+  run.kubernetesMethod = kubernetesMethod
+  if (kubernetesMethod === "serviceaccount") {
+    const { serviceAccountName = "kontinuous-sa" } = options
+    run.serviceAccountName = serviceAccountName
   }
 }
 
@@ -207,7 +215,7 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
       currentScope.join("--"),
     ])
 
-    remapValues(run)
+    remapValues(run, context)
 
     if (!run.use) {
       newRuns[key] = run
@@ -220,7 +228,7 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
       await compile(context, runValues, scope, run.parentWith)
 
       for (const [runKey, r] of Object.entries(runValues.runs)) {
-        remapValues(r)
+        remapValues(r, context)
         let action
         if (useIsInPlugins(run.use)) {
           const found = await locateUseInPlugins(run.use, config)
@@ -316,8 +324,8 @@ const compileValues = async (values, context) => {
   )
 }
 
-module.exports = async (values, _options, context, _scope) => {
-  context = { ...context, downloadingPromises: {} }
+module.exports = async (values, options, context, _scope) => {
+  context = { ...context, downloadingPromises: {}, options }
   await compileValues(values, context)
   return values
 }

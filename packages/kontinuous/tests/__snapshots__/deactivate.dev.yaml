@@ -85,12 +85,11 @@ spec:
         - name: job
           image: bitnami/kubectl:latest
           imagePullPolicy: IfNotPresent
-          envFrom:
-            - secretRef:
-                name: kubeconfig
           env:
             - name: NAMESPACE
               value: test-deactivate-feature-branch-1
+            - name: KUBECONFIG
+              value: /secrets/k8s/kubeconfig
           command:
             - /bin/bash
             - '-c'
@@ -118,6 +117,9 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - name: kubeconfig
+              mountPath: /secrets/k8s
+              readOnly: true
       securityContext:
         fsGroup: 1001
       volumes:
@@ -125,5 +127,11 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
+        - name: kubeconfig
+          secret:
+            secretName: kubeconfig
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
 "
 `;

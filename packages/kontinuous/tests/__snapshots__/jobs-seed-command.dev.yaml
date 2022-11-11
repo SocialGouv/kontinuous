@@ -330,8 +330,6 @@ spec:
           envFrom:
             - secretRef:
                 name: azure-pg-admin-user
-            - secretRef:
-                name: kubeconfig
           env:
             - name: USE_AZURE_FLEX
               value: 'false'
@@ -347,6 +345,8 @@ spec:
               value: user_feature-branch-1
             - name: SECRET_TTL
               value: 24h
+            - name: KUBECONFIG
+              value: /secrets/k8s/kubeconfig
           command:
             - /bin/bash
             - '-c'
@@ -368,6 +368,9 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - name: kubeconfig
+              mountPath: /secrets/k8s
+              readOnly: true
       securityContext:
         fsGroup: 1001
       volumes:
@@ -375,6 +378,12 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
+        - name: kubeconfig
+          secret:
+            secretName: kubeconfig
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
 ---
 apiVersion: batch/v1
 kind: Job
