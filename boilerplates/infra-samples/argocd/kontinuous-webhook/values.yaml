@@ -4,8 +4,8 @@ kontinuous-webhook:
   host: "kontinuous.fabrique.social.gouv.fr"
   
   # conventioned kube native permissions binding
-  allowAllOnCiNamespace:
-    enabled: true
+  ciNamespace:
+    allowAll: true
     template: "${project}-ci"
 
   # specific access permissions binding

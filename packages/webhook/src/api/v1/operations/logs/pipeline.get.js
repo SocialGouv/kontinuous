@@ -139,7 +139,7 @@ module.exports = function ({ services }) {
 
     let kubeconfig
     try {
-      kubeconfig = await services.getKubeconfig(cluster)
+      kubeconfig = await services.getKubeconfigForCiNamespace(cluster)
     } catch (error) {
       res.writeHead(404, {
         "Content-Type": "text/plain",

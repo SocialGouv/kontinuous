@@ -11,6 +11,7 @@ const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = ({ services }) => {
   const logger = ctx.require("logger")
+  const config = ctx.require("config")
   return async ({
     eventName,
     env,
@@ -29,7 +30,7 @@ module.exports = ({ services }) => {
     const gitBranch = cleanGitRef(ref)
     const gitCommit = after || "0000000000000000000000000000000000000000"
 
-    const repositories = ctx.require("config.project.repositories")
+    const { repositories } = config.project
     const repositoryKey = normalizeRepositoryKey(repositoryUrl)
     const repo = repositories[repositoryKey]
 
@@ -68,7 +69,7 @@ module.exports = ({ services }) => {
 
     let kubeconfig
     try {
-      kubeconfig = await services.getKubeconfig(cluster)
+      kubeconfig = await services.getKubeconfigForCiNamespace(cluster)
     } catch (_error) {
       return false
     }

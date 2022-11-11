@@ -40,8 +40,8 @@ pipelineImageTag: v1
 # pipelineImage: harbor.fabrique.social.gouv.fr/sre/kontinuous:v1
 
 # ACL
-allowAllOnCiNamespace:
-  enabled: true
+ciNamespace:
+  allowAll: true
   template: "${project}-ci"
 reloadableTokensSecret:
   enabled: true

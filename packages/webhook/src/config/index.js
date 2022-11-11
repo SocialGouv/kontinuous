@@ -91,11 +91,10 @@ module.exports = async function createConfig() {
 
   const serviceName = `kontinuous webhook server v${kontinuousVersion}`
 
-  const allowAllOnCiNamespaceEnabled =
-    process.env.KUBEWEBHOOK_ALLOW_ALL_ON_CI_NAMESPACE_ENABLED === "true"
-  const allowAllOnCiNamespaceTemplate =
-    process.env.KUBEWEBHOOK_ALLOW_ALL_ON_CI_NAMESPACE_TEMPLATE ||
-    "${project}-ci"
+  const ciNamespaceAllowAll =
+    process.env.KUBEWEBHOOK_CI_NAMESPACE_ALLOW_ALL === "true"
+  const ciNamespaceTemplate =
+    process.env.KUBEWEBHOOK_CI_NAMESPACE_TEMPLATE || "${project}-ci"
 
   const config = {
     project: {
@@ -117,9 +116,9 @@ module.exports = async function createConfig() {
       pipelineImageTag,
       pipelineCheckoutImage,
       pipelineCheckoutImageTag,
-      allowAllOnCiNamespace: {
-        enabled: allowAllOnCiNamespaceEnabled,
-        template: allowAllOnCiNamespaceTemplate,
+      ciNamespace: {
+        allowAll: ciNamespaceAllowAll,
+        template: ciNamespaceTemplate,
       },
     },
     microserviceOapi: { serviceName },
