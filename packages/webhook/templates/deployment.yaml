@@ -24,6 +24,11 @@ spec:
         - name: artifacts
           persistentVolumeClaim:
             claimName: artifacts
+        {{ if .Values.reloadableSharedSecret.enabled }}
+        - name: reloadable-shared-secret
+          secret:
+            secretName: {{ .Values.reloadableSharedSecret.name }}
+        {{ end }}
         {{ range $secret := .Values.rootKubeconfigSecrets }}
         - name: secret-root-kubeconfig-{{ $secret.name }}
           secret:
@@ -74,6 +79,10 @@ spec:
               subPath: config.yaml
             - name: artifacts
               mountPath: /artifacts
+            {{ if .Values.reloadableSharedSecret.enabled }}
+            - name: reloadable-shared-secret
+              mountPath: /secrets/shared
+            {{ end }}
             {{ range $secret := .Values.rootKubeconfigSecrets }}
             - name: secret-root-kubeconfig-{{ $secret.name }}
               mountPath: /secrets/{{ or $secret.project $secret.name }}/root-kubeconfig/{{ $secret.cluster }}

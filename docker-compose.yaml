@@ -10,6 +10,7 @@ services:
     volumes:
       - ./:/app
       - ${KUBECONFIG:-~/.kube/config}:/home/ubuntu/.kube/config:ro
+      - ./packages/webhook/tests/secrets/shared:/secrets/shared
     ports:
       - ${KUBEWEBHOOK_EXPOSED_PORT:-7530}:3000
     environment:
