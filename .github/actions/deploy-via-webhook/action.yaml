@@ -14,7 +14,7 @@ inputs:
 runs:
   using: docker
   # image: Dockerfile
-  image: ghcr.io/socialgouv/kontinuous/gh-action-deploy-via-webhook:v1.97.3
+  image: ghcr.io/socialgouv/kontinuous/gh-action-deploy-via-webhook:v1.97.4
   args:
     - '${{ inputs.environment }}'
     - '${{ inputs.webhookToken }}'
