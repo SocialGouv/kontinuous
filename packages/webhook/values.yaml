@@ -41,10 +41,9 @@ pipelineImageTag: v1
 
 # ACL
 allowAllOnCiNamespaceTemplate: "${project}-ci"
-reloadableSharedSecret:
+reloadableTokensSecret:
   enabled: true
-  name: "reloadable-shared-secret"
-useReloadableSharedSecret: true
+  name: "reloadable-tokens-secret"
 rootTokenSecret:
 rootTokenSecretKey: TOKEN
 rootKubeconfigSecrets: []

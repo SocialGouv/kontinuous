@@ -1,38 +1,38 @@
-const { watch } = require("node:fs/promises")
+const chokidar = require("chokidar")
 
 const fs = require("fs-extra")
 
 const { ctx } = require("@modjo-plugins/core")
 
+const loadFinalConfig = require("~/config/load-final-config")
+
 module.exports = async () => {
   const logger = ctx.require("logger")
+  const config = ctx.require("config")
 
-  const sharedSecretDir = `/secrets/shared`
-  if (!(await fs.pathExists(sharedSecretDir))) {
+  const { reloadableSecretsRootPath } = config.project.paths
+  if (!(await fs.pathExists(reloadableSecretsRootPath))) {
     return
   }
 
-  const _config = ctx.require("config")
-  const reloadConfig = (_event) => {
-    logger.info("shared secret changes detected, reloading config...")
-    // TODO
+  const reloadConfig = async (_event) => {
+    logger.info("secrets changes detected, reloading config...")
+    await loadFinalConfig(config)
   }
 
-  const ac = new AbortController()
-  const { signal } = ac
   const shutdownHandlers = ctx.require("shutdownHandlers")
-  shutdownHandlers.push(() => {
-    ac.abort()
+
+  const watcher = chokidar.watch(reloadableSecretsRootPath, {
+    followSymlinks: true,
+    usePolling: true,
+    interval: 2000,
+    binaryInterval: 3000,
+    ignoreInitial: true,
   })
-  ;(async () => {
-    try {
-      const watcher = watch(sharedSecretDir, { signal })
-      for await (const event of watcher) {
-        reloadConfig(event)
-      }
-    } catch (err) {
-      if (err.name === "AbortError") return
-      throw err
-    }
-  })()
+
+  watcher.on("all", reloadConfig)
+
+  shutdownHandlers.push(async () => {
+    await watcher.close()
+  })
 }

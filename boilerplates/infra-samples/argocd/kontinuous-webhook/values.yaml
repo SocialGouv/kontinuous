@@ -20,5 +20,5 @@ kontinuous-webhook:
   #   - name: webhook-token-fabrique
   #     project: fabrique
     
-  # shared reloadable token secret
-  reloadableSharedSecretName: "reloadable-shared-secret"
+  # reloadable tokens secret
+  tokensSecretName: "reloadable-tokens-secret"
