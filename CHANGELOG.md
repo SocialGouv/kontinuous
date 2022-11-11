@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.97.2](https://github.com/socialgouv/kontinuous/compare/v1.97.1...v1.97.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* improve buildkit cache ref ([7dbc23c](https://github.com/socialgouv/kontinuous/commit/7dbc23cc0a0ce9718a206dbeac11475760650905))
+* update snapshots ([457597f](https://github.com/socialgouv/kontinuous/commit/457597f057b6580eb302169c35a1d40acb7bf73f))
+
 ### [1.97.1](https://github.com/socialgouv/kontinuous/compare/v1.97.0...v1.97.1) (2022-11-10)
 
 
