@@ -1,0 +1,8 @@
+dependencies:
+  contrib:
+    preDeploy:
+      needsKubeconfig:
+        enabled: false
+options:
+  kubernetesMethod: serviceaccount
+  serviceAccountName: nsplease-sa

@@ -63,6 +63,7 @@ config:
   webhookUri: https://kontinuous.fabrique.social.gouv.fr
 
 options:
+  kubernetesMethod: kubeconfig
   clusters:
     dev:
       kubesealEndpoint: "https://kubeseal.dev2.fabrique.social.gouv.fr"
