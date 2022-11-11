@@ -20,8 +20,6 @@ kontinuous config --remote --format json>$KONTINUOUS_CONFIG
 echo "KONTINUOUS_CONFIG=$KONTINUOUS_CONFIG">>$GITHUB_ENV
 echo "kontinuous_config=$KONTINUOUS_CONFIG">>$GITHUB_OUTPUT
 
-if [ "$GITHUB_EVENT_NAME" != "delete"  ]; then
-  DEPLOYMENT_NAME=$(get-deployment-name)
-  echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME">>$GITHUB_ENV
-  echo "deployment_name=$DEPLOYMENT_NAME">>$GITHUB_OUTPUT
-fi
+DEPLOYMENT_NAME=$(get-deployment-name)
+echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME">>$GITHUB_ENV
+echo "deployment_name=$DEPLOYMENT_NAME">>$GITHUB_OUTPUT

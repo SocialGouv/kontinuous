@@ -36,7 +36,7 @@ runs:
       with:
         step: deactivate-env
         token: ${{ inputs.token }}
-        env: ${{ env.KS_GIT_BRANCH }}
+        env: ${{ env.DEPLOYMENT_NAME }}
         desc: Environment was pruned
 
     - name: Debug manifests
