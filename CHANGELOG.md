@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.97.15](https://github.com/socialgouv/kontinuous/compare/v1.97.14...v1.97.15) (2022-11-11)
+
+
+### Bug Fixes
+
+* deactive env ([a075a5b](https://github.com/socialgouv/kontinuous/commit/a075a5b974ca6b10da806b25b6eb239f56f305ff))
+* deactive env ([1eda067](https://github.com/socialgouv/kontinuous/commit/1eda067a47b3d06efaadcd355556f9c1e39e548a))
+
 ### [1.97.14](https://github.com/socialgouv/kontinuous/compare/v1.97.13...v1.97.14) (2022-11-11)
 
 
