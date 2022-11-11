@@ -16,7 +16,7 @@ runs:
       id: finder
 
     - name: ⛑ Comment PR
-      if: github.event_name != 'delete' && env.DEPLOYMENT_OK == 'true'
+      if: env.DEPLOYMENT_OK == 'true'
       uses: marocchino/sticky-pull-request-comment@v2
       with:
         number: ${{ steps.finder.outputs.pr }}
