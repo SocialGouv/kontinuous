@@ -470,7 +470,7 @@ spec:
                 --opt filename=./Dockerfile \\\\
                 --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
-                --import-cache type=registry,ref=$IMAGE_PATH:buildcache \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 
           resources:
             limits:
@@ -607,7 +607,7 @@ spec:
                 --opt filename=./Dockerfile \\\\
                 --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
-                --import-cache type=registry,ref=$IMAGE_PATH:buildcache \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 
           resources:
             limits:
