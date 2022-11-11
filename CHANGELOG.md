@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.97.3](https://github.com/socialgouv/kontinuous/compare/v1.97.2...v1.97.3) (2022-11-11)
+
+
+### Bug Fixes
+
+* try again continue-on-error: true ([0dd3760](https://github.com/socialgouv/kontinuous/commit/0dd3760b311254d67c51acbd2f235b8bd2131912))
+* up snapshots ([1c88154](https://github.com/socialgouv/kontinuous/commit/1c881544bc4ca8339359309232bff95cce9abd65))
+* use built images on gh actions ([6d7c203](https://github.com/socialgouv/kontinuous/commit/6d7c203261eaa6bb6e367585e5c11699faa3d575))
+
 ### [1.97.2](https://github.com/socialgouv/kontinuous/compare/v1.97.1...v1.97.2) (2022-11-11)
 
 
