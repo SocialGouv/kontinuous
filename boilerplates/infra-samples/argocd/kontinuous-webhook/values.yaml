@@ -4,7 +4,9 @@ kontinuous-webhook:
   host: "kontinuous.fabrique.social.gouv.fr"
   
   # conventioned kube native permissions binding
-  allowAllOnCiNamespaceTemplate: "${project}-ci"
+  allowAllOnCiNamespace:
+    enabled: true
+    template: "${project}-ci"
 
   # specific access permissions binding
   # kubeconfigSecrets:
@@ -21,4 +23,6 @@ kontinuous-webhook:
   #     project: fabrique
     
   # reloadable tokens secret
-  tokensSecretName: "reloadable-tokens-secret"
+  reloadableTokensSecret:
+    enabled: true
+    name: "reloadable-tokens-secret"

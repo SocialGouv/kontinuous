@@ -90,6 +90,13 @@ module.exports = async function createConfig() {
     process.env.KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE_TAG || "v1"
 
   const serviceName = `kontinuous webhook server v${kontinuousVersion}`
+
+  const allowAllOnCiNamespaceEnabled =
+    process.env.KUBEWEBHOOK_ALLOW_ALL_ON_CI_NAMESPACE_ENABLED === "true"
+  const allowAllOnCiNamespaceTemplate =
+    process.env.KUBEWEBHOOK_ALLOW_ALL_ON_CI_NAMESPACE_TEMPLATE ||
+    "${project}-ci"
+
   const config = {
     project: {
       oas: {
@@ -110,6 +117,10 @@ module.exports = async function createConfig() {
       pipelineImageTag,
       pipelineCheckoutImage,
       pipelineCheckoutImageTag,
+      allowAllOnCiNamespace: {
+        enabled: allowAllOnCiNamespaceEnabled,
+        template: allowAllOnCiNamespaceTemplate,
+      },
     },
     microserviceOapi: { serviceName },
     logger: {

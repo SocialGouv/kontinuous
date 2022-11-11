@@ -125,6 +125,10 @@ spec:
                   key: {{ .Values.rootTokenSecretKey }}
                   name: {{ .Values.rootTokenSecret }}
             {{ end }}
+            - name: KUBEWEBHOOK_ALLOW_ALL_ON_CI_NAMESPACE_ENABLED
+              value: "{{ .Values.allowAllOnCiNamespace.enabled }}"
+            - name: KUBEWEBHOOK_ALLOW_ALL_ON_CI_NAMESPACE_TEMPLATE
+              value: "{{ .Values.allowAllOnCiNamespace.template }}"
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}
