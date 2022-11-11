@@ -28,6 +28,7 @@ jobs:
 
       - name: Kontinuous Pipeline 🥷
         uses: socialgouv/kontinuous/.github/actions/deploy-via-webhook@v1.97.2
+        continue-on-error: true
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           webhookToken: ${{ secrets.KUBEWEBHOOK_TOKEN }}
