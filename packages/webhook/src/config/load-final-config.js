@@ -10,19 +10,21 @@ module.exports = async (config) => {
 
   const tokensSecretPath = `${reloadableSecretsRootPath}/${tokensSecretDir}`
 
-  const files = await fs.readdir(tokensSecretPath)
-  Object.assign(
-    tokens,
-    await files.reduce(async (o, filename) => {
-      const content = await fs.readFile(`${tokensSecretPath}/${filename}`, {
-        encoding: "utf-8",
-      })
-      return {
-        ...(await o),
-        [filename]: content.split("\n").filter((token) => token !== ""),
-      }
-    }, {})
-  )
+  if (await fs.pathExists(tokensSecretPath)) {
+    const files = await fs.readdir(tokensSecretPath)
+    Object.assign(
+      tokens,
+      await files.reduce(async (o, filename) => {
+        const content = await fs.readFile(`${tokensSecretPath}/${filename}`, {
+          encoding: "utf-8",
+        })
+        return {
+          ...(await o),
+          [filename]: content.split("\n").filter((token) => token !== ""),
+        }
+      }, {})
+    )
+  }
 
   // console.log(tokens)
 
