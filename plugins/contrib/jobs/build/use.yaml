@@ -40,7 +40,7 @@ runs:
         --opt filename=./{{ or $.with.dockerfile "Dockerfile" }} \
         --output type=image,\"name=$IMAGE_PATH:{{ or $.with.imageTag $.Values.global.imageTag }},$IMAGE_PATH:{{ $.Values.global.branchSlug32 }}\",push=true \
         --export-cache type=inline \
-        --import-cache type=registry,ref=$IMAGE_PATH:buildcache \
+        --import-cache type=registry,ref=$IMAGE_PATH:{{ $.Values.global.branchSlug32 }} \
         {{ if $.with.buildArgs -}}
         {{- range $key, $val := $.with.buildArgs -}}
         --opt build-arg="{{ tpl $key $ }}={{ tpl $val $ }}" \
