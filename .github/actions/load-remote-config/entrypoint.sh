@@ -26,8 +26,10 @@ echo "kontinuous_config=$KONTINUOUS_CONFIG">>$GITHUB_OUTPUT
 # set branch after load remote config, avoid trying to get config from deleted branch
 if [ "$GITHUB_EVENT_NAME" = "delete"  ]; then
   export KS_GIT_BRANCH=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('$GITHUB_EVENT_PATH')).ref)")
+  DEPLOYMENT_NAME=$(get-deployment-name $KS_GIT_BRANCH)
+else
+  DEPLOYMENT_NAME=$(get-deployment-name)
 fi
 
-DEPLOYMENT_NAME=$(get-deployment-name)
 echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME">>$GITHUB_ENV
 echo "deployment_name=$DEPLOYMENT_NAME">>$GITHUB_OUTPUT
