@@ -5,6 +5,7 @@ inputs:
     description: "Your manifests YAML file path"
 runs:
   using: docker
-  image: Dockerfile
+  # image: Dockerfile
+  image: ghcr.io/socialgouv/kontinuous/gh-action-debug-manifests-output:v1.97.2
   args:  
     - '${{ inputs.path }}'

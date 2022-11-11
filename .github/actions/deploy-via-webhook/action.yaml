@@ -13,7 +13,8 @@ inputs:
     description: "The deployment environment (dev | preprod | prod), default to prod on version tag, preprod on master or main, else dev"
 runs:
   using: docker
-  image: Dockerfile
+  # image: Dockerfile
+  image: ghcr.io/socialgouv/kontinuous/gh-action-deploy-via-webhook:v1.97.2
   args:
     - '${{ inputs.environment }}'
     - '${{ inputs.webhookToken }}'

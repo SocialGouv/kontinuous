@@ -7,4 +7,5 @@ outputs:
     description: deployment id
 runs:
   using: docker
-  image: Dockerfile
+  # image: Dockerfile
+  image: ghcr.io/socialgouv/kontinuous/gh-action-load-remote-config:v1.97.2
