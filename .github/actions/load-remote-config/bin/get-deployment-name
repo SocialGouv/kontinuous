@@ -7,17 +7,21 @@ const slug = require("/opt/kontinuous/packages/common/utils/slug")
 
 let deploymentId
 
-const jsonConfig = fs.readFileSync(process.env.KONTINUOUS_CONFIG)
-const kontinuousConfig = JSON.parse(jsonConfig)
-
-const { environment, repositoryName, gitBranch } = kontinuousConfig
-
-if (environment === "prod") {
-  deploymentId = "production"
-} else if (environment === "preprod") {
-  deploymentId = "preprod"
+if (process.argv[2]){
+  deploymentId = slug(`${repositoryName}-${process.argv[2]}`)
 } else {
-  deploymentId = slug(`${repositoryName}-${gitBranch}`)
+  const jsonConfig = fs.readFileSync(process.env.KONTINUOUS_CONFIG)
+  const kontinuousConfig = JSON.parse(jsonConfig)
+  
+  const { environment, repositoryName, gitBranch } = kontinuousConfig
+  
+  if (environment === "prod") {
+    deploymentId = "production"
+  } else if (environment === "preprod") {
+    deploymentId = "preprod"
+  } else {
+    deploymentId = slug(`${repositoryName}-${gitBranch}`)
+  }
 }
 
 process.stdout.write(deploymentId)
