@@ -20,4 +20,6 @@ runs:
       echo "$KUBECONFIG" > /tmp/.kube/config
       export KUBECONFIG=/tmp/.kube/config
 
-      kubectl delete namespace "$NAMESPACE" --now=true --wait=false
+      if kubectl get namespace "$NAMESPACE">/dev/null 2>&1; then
+        kubectl delete namespace "$NAMESPACE" --now=true --wait=false
+      fi
