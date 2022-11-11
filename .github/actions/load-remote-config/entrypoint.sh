@@ -7,21 +7,16 @@ export PATH=$PATH:/opt/kontinuous/packages/kontinuous/bin
 export KS_GIT=false
 export KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
 
-if [ -n "$GITHUB_HEAD_REF" ]; then
-  KS_GIT_BRANCH=$GITHUB_HEAD_REF
-else
-  KS_GIT_BRANCH=$GITHUB_REF
-fi
-KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/heads/}
-KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/tags/}
 if [ "$GITHUB_EVENT_NAME" = "delete"  ]; then
-  KS_EVENT=deleted  
-  export EVENT_REF=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('$GITHUB_EVENT_PATH')).ref)")
-  KS_GIT_BRANCH="$EVENT_REF"
-  KS_GIT_BRANCH_URLENCODED=$(echo $KS_GIT_BRANCH | sed 's/\//\%2f/g')
-  KS_GIT_SHA="0000000000000000000000000000000000000000"
+  KS_GIT_BRANCH=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('$GITHUB_EVENT_PATH')).ref)")
 else
-  KS_EVENT=pushed
+  if [ -n "$GITHUB_HEAD_REF" ]; then
+    KS_GIT_BRANCH=$GITHUB_HEAD_REF
+  else
+    KS_GIT_BRANCH=$GITHUB_REF
+  fi
+  KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/heads/}
+  KS_GIT_BRANCH=${KS_GIT_BRANCH#refs/tags/}
 fi
 
 export KS_GIT_BRANCH
