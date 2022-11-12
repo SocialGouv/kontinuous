@@ -1,5 +1,3 @@
-require("~/ts-node")
-
 const path = require("path")
 
 const camelCase = require("lodash.camelcase")
@@ -11,8 +9,12 @@ const patternMatch = require("~common/utils/pattern-match")
 const pluginFunction = require("./function")
 
 function requireTs(filePath) {
+  require("~/ts-node")
   const result = require(filePath)
   return result.default || result
+}
+function requireJs(filePath) {
+  return require(filePath)
 }
 
 module.exports = (type, context) => {
@@ -58,7 +60,7 @@ module.exports = (type, context) => {
       if (ext === ".ts") {
         requireFunc = requireTs
       } else {
-        requireFunc = (r) => require(r)
+        requireFunc = requireJs
       }
 
       let plugin = requireFunc(rPath)
