@@ -24,6 +24,7 @@ module.exports = ({ services }) => {
     commits,
     cluster,
     kontinuousVersion,
+    mountKubeconfig,
   }) => {
     const repositoryPath = repositoryFromGitUrl(repositoryUrl)
     const repositoryName = repositoryPath.split("/").pop()
@@ -115,6 +116,7 @@ module.exports = ({ services }) => {
       commits,
       deployKeyCiSecretName,
       kontinuousVersion,
+      mountKubeconfig,
     })
 
     return async () => {

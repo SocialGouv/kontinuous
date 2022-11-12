@@ -27,7 +27,7 @@ module.exports = function ({ services: { pushed, deleted } }) {
 
       const { clone_url: repositoryUrl, commits } = body.repository
 
-      const { kontinuousVersion } = query
+      const { kontinuousVersion, mountKubeconfig } = query
 
       const runJob = await eventHandlers[eventName]({
         ref,
@@ -35,6 +35,7 @@ module.exports = function ({ services: { pushed, deleted } }) {
         repositoryUrl,
         commits,
         kontinuousVersion,
+        mountKubeconfig,
       })
       if (!runJob) {
         return res.status(204).json({ message: "no-op" })

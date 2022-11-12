@@ -8,6 +8,16 @@ parameters:
       type: string
       format: projectName
     required: true
+  - in: query
+    name: kontinuousVersion
+    schema:
+      type: string
+    required: false
+  - in: query
+    name: mountKubeconfig
+    schema:
+      type: boolean
+    required: false
 
 requestBody:
   required: true

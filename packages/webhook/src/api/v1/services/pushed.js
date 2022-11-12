@@ -1,6 +1,14 @@
 module.exports =
   ({ services }) =>
-  async ({ ref, after, repositoryUrl, commits, env, kontinuousVersion }) =>
+  async ({
+    ref,
+    after,
+    repositoryUrl,
+    commits,
+    env,
+    kontinuousVersion,
+    mountKubeconfig,
+  }) =>
     services.pipeline({
       eventName: "pushed",
       ref,
@@ -11,4 +19,5 @@ module.exports =
       commits,
       env,
       kontinuousVersion,
+      mountKubeconfig,
     })

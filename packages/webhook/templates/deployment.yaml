@@ -129,6 +129,10 @@ spec:
               value: "{{ .Values.ciNamespace.allowAll }}"
             - name: KUBEWEBHOOK_CI_NAMESPACE_TEMPLATE
               value: "{{ .Values.ciNamespace.template }}"
+            - name: KUBEWEBHOOK_CI_NAMESPACE_MOUNT_KUBECONFIG_DEFAULT
+              value: "{{ .Values.ciNamespace.mountKubeconfigDefault }}"
+            - name: KUBEWEBHOOK_CI_NAMESPACE_KUBECONFIG_SECRET_NAME
+              value: "{{ .Values.ciNamespace.kubeconfigSecretName }}"
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}

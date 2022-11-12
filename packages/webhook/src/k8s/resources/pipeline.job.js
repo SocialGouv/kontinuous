@@ -18,11 +18,19 @@ module.exports = ({
   commits,
   deployKeyCiSecretName,
   kontinuousVersion,
+  mountKubeconfig,
 }) => {
-  const config = ctx.require("config.project")
+  const config = ctx.require("config")
+  const projectConfig = config.project
 
-  const { pipelineImage, pipelineCheckoutImage } = config
-  let { pipelineImageTag, pipelineCheckoutImageTag } = config
+  const { mountKubeconfigDefault, kubeconfigSecretName = "kubeconfig" } =
+    projectConfig.ciNamespace
+  if (mountKubeconfig === undefined || mountKubeconfig === null) {
+    mountKubeconfig = mountKubeconfigDefault
+  }
+
+  const { pipelineImage, pipelineCheckoutImage } = projectConfig
+  let { pipelineImageTag, pipelineCheckoutImageTag } = projectConfig
 
   if (kontinuousVersion) {
     pipelineImageTag = kontinuousVersion
@@ -170,10 +178,14 @@ module.exports = ({
                       },
                     ]
                   : []),
-                {
-                  name: "KUBECONFIG",
-                  value: "/secrets/kubeconfig/cluster",
-                },
+                ...(mountKubeconfig
+                  ? [
+                      {
+                        name: "KUBECONFIG",
+                        value: "/secrets/kubeconfig/cluster",
+                      },
+                    ]
+                  : []),
                 ...(deployKeyCiSecretName
                   ? [
                       {
@@ -188,10 +200,14 @@ module.exports = ({
                   name: "workspace",
                   mountPath: "/workspace",
                 },
-                {
-                  name: "kubeconfig",
-                  mountPath: "/secrets/kubeconfig",
-                },
+                ...(mountKubeconfig
+                  ? [
+                      {
+                        name: "kubeconfig",
+                        mountPath: "/secrets/kubeconfig",
+                      },
+                    ]
+                  : []),
                 ...(deployKeyCiSecretName
                   ? [
                       {
@@ -205,18 +221,22 @@ module.exports = ({
           ],
           volumes: [
             { name: "workspace", emptyDir: {} },
-            {
-              name: "kubeconfig",
-              secret: {
-                secretName: "kubeconfig",
-                items: [
+            ...(mountKubeconfig
+              ? [
                   {
-                    key: "KUBECONFIG",
-                    path: "cluster",
+                    name: "kubeconfig",
+                    secret: {
+                      secretName: kubeconfigSecretName,
+                      items: [
+                        {
+                          key: "KUBECONFIG",
+                          path: "cluster",
+                        },
+                      ],
+                    },
                   },
-                ],
-              },
-            },
+                ]
+              : []),
             ...(deployKeyCiSecretName
               ? [
                   {

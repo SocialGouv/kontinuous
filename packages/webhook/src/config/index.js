@@ -95,6 +95,10 @@ module.exports = async function createConfig() {
     process.env.KUBEWEBHOOK_CI_NAMESPACE_ALLOW_ALL === "true"
   const ciNamespaceTemplate =
     process.env.KUBEWEBHOOK_CI_NAMESPACE_TEMPLATE || "${project}-ci"
+  const ciNamespaceMountKubeconfigDefault =
+    process.env.KUBEWEBHOOK_CI_NAMESPACE_MOUNT_KUBECONFIG_DEFAULT === "true"
+  const ciNamespaceKubeconfigSecretName =
+    process.env.KUBEWEBHOOK_CI_NAMESPACE_KUBECONFIG_SECRET_NAME || "kubeconfig"
 
   const config = {
     project: {
@@ -119,6 +123,8 @@ module.exports = async function createConfig() {
       ciNamespace: {
         allowAll: ciNamespaceAllowAll,
         template: ciNamespaceTemplate,
+        mountKubeconfigDefault: ciNamespaceMountKubeconfigDefault,
+        kubeconfigSecretName: ciNamespaceKubeconfigSecretName,
       },
     },
     microserviceOapi: { serviceName },

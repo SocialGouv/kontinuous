@@ -1,7 +1,14 @@
 module.exports = function ({ services: { custom } }) {
   return [
     async (req, res) => {
-      const { env, cluster, hash, repositoryUrl, kontinuousVersion } = req.query
+      const {
+        env,
+        cluster,
+        hash,
+        repositoryUrl,
+        kontinuousVersion,
+        mountKubeconfig,
+      } = req.query
       const [manifestsFile] = req.files
 
       if (!(cluster || env)) {
@@ -19,6 +26,7 @@ module.exports = function ({ services: { custom } }) {
         repositoryUrl,
         manifests,
         kontinuousVersion,
+        mountKubeconfig,
       })
 
       if (!runJob) {

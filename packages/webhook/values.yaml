@@ -43,6 +43,8 @@ pipelineImageTag: v1
 ciNamespace:
   allowAll: true
   template: "${project}-ci"
+  mountKubeconfigDefault: true
+  kubeconfigSecretName: kubeconfig
 reloadableTokensSecret:
   enabled: true
   name: "reloadable-tokens-secret"
