@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.97.17](https://github.com/socialgouv/kontinuous/compare/v1.97.16...v1.97.17) (2022-11-13)
+
+
+### Bug Fixes
+
+* bearer auth spec enable ([f2ce3b8](https://github.com/socialgouv/kontinuous/commit/f2ce3b8b5b4015471d6a415116fa278959fccccb))
+
 ### 1.97.16 (2022-11-13)
 
 
