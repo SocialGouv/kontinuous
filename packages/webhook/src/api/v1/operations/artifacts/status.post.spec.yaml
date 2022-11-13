@@ -1,5 +1,6 @@
 security: 
   - token: ["status"]
+  - bearerAuth: ["status"]
 
 parameters:
   - in: query

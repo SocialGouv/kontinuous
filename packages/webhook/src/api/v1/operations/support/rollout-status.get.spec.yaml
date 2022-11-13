@@ -1,5 +1,6 @@
 security:
   - token: ["webhook"]
+  - bearerAuth: ["webhook"]
 
 parameters:
   - in: query

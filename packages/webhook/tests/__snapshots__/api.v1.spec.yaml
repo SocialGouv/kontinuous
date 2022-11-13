@@ -65,6 +65,8 @@ paths:
       security:
         - token:
             - artifacts
+        - bearerAuth:
+            - artifacts
       parameters:
         - in: query
           name: project
@@ -116,6 +118,8 @@ paths:
     get:
       security:
         - token:
+            - status
+        - bearerAuth:
             - status
       parameters:
         - in: query
@@ -175,6 +179,8 @@ paths:
     post:
       security:
         - token:
+            - status
+        - bearerAuth:
             - status
       parameters:
         - in: query
@@ -239,6 +245,8 @@ paths:
     post:
       security:
         - token:
+            - artifacts
+        - bearerAuth:
             - artifacts
       parameters:
         - in: query
@@ -308,6 +316,8 @@ paths:
     post:
       security:
         - token:
+            - webhook
+        - bearerAuth:
             - webhook
       parameters:
         - in: query
@@ -567,6 +577,8 @@ paths:
       security:
         - token:
             - webhook
+        - bearerAuth:
+            - webhook
       parameters:
         - in: query
           name: project
@@ -658,6 +670,8 @@ paths:
       security:
         - token:
             - logs
+        - bearerAuth:
+            - logs
       parameters:
         - in: query
           name: project
@@ -739,7 +753,8 @@ paths:
       security:
         - token:
             - webhook
-        - bearerAuth: []
+        - bearerAuth:
+            - webhook
       parameters:
         - in: query
           name: cluster
@@ -768,6 +783,8 @@ paths:
     get:
       security:
         - token:
+            - webhook
+        - bearerAuth:
             - webhook
       parameters:
         - in: query
