@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.97.16 (2022-11-13)
+
+
+### Bug Fixes
+
+* token get param to header bearer ([#72](https://github.com/socialgouv/kontinuous/issues/72)) ([86a7475](https://github.com/socialgouv/kontinuous/commit/86a7475edc63198cb6bd9da59bf2fcd946d0ca2a))
+
 ### [1.97.15](https://github.com/socialgouv/kontinuous/compare/v1.97.14...v1.97.15) (2022-11-11)
 
 
