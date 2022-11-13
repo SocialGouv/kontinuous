@@ -86,9 +86,9 @@ kontinuous logs
 
 kontinuous download manifests manifests.yaml
 
-wget --content-on-error -q -O \
+wget --content-on-error -q \
   --header="Authorization: Bearer ${KS_WEBHOOK_TOKEN}" \
-  deployment-status.json \
+  -O deployment-status.json \
   "${KS_WEBHOOK_URI}/api/v1/oas/artifacts/status?project=${KS_PROJECT_NAME}&repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}"
 
 DEPLOYMENT_STATUS=$(cat deployment-status.json)
