@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.97.18](https://github.com/socialgouv/kontinuous/compare/v1.97.17...v1.97.18) (2022-11-13)
+
+
+### Bug Fixes
+
+* webhook up use last locked kontinuous image ([60cb577](https://github.com/socialgouv/kontinuous/commit/60cb577fd102368ad21b6923f987eaa683c3bfa3))
+
 ### [1.97.17](https://github.com/socialgouv/kontinuous/compare/v1.97.16...v1.97.17) (2022-11-13)
 
 
