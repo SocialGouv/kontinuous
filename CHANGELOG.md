@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.97.19](https://github.com/socialgouv/kontinuous/compare/v1.97.18...v1.97.19) (2022-11-13)
+
+
+### Bug Fixes
+
+* deployment-status wget ([65a2db5](https://github.com/socialgouv/kontinuous/commit/65a2db5a64fff5ac70202bfb47a282fad5de026e))
+
 ### [1.97.18](https://github.com/socialgouv/kontinuous/compare/v1.97.17...v1.97.18) (2022-11-13)
 
 
