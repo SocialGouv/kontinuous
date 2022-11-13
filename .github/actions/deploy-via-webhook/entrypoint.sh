@@ -76,16 +76,21 @@ if [ -n "$TRIGGER_WEBHOOK" ] && [ "$TRIGGER_WEBHOOK" != "false" ] || [ "$GITHUB_
     echo "Trigger webhook from action"
   fi
   wget --content-on-error -qO- \
-    --post-data "{\"repositoryUrl\":\"${KS_GIT_REPOSITORY}\",\"ref\":\"${KS_GIT_BRANCH}\",\"commit\":\"${KS_GIT_SHA}\"}" \
+    --header="Authorization: Bearer ${KS_WEBHOOK_TOKEN}" \
     --header='Content-Type:application/json' \
-    "${KS_WEBHOOK_URI}/api/v1/oas/hooks/user?project=${KS_PROJECT_NAME}&event=${KS_EVENT}&env=${KS_ENVIRONMENT}&token=${KS_WEBHOOK_TOKEN}"
+    --post-data "{\"repositoryUrl\":\"${KS_GIT_REPOSITORY}\",\"ref\":\"${KS_GIT_BRANCH}\",\"commit\":\"${KS_GIT_SHA}\"}" \
+    "${KS_WEBHOOK_URI}/api/v1/oas/hooks/user?project=${KS_PROJECT_NAME}&event=${KS_EVENT}&env=${KS_ENVIRONMENT}"
 fi
 
 kontinuous logs
 
 kontinuous download manifests manifests.yaml
 
-wget --content-on-error -q -O deployment-status.json "${KS_WEBHOOK_URI}/api/v1/oas/artifacts/status?project=${KS_PROJECT_NAME}&repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}&token=${KS_WEBHOOK_TOKEN}"
+wget --content-on-error -q -O \
+  --header="Authorization: Bearer ${KS_WEBHOOK_TOKEN}" \
+  deployment-status.json \
+  "${KS_WEBHOOK_URI}/api/v1/oas/artifacts/status?project=${KS_PROJECT_NAME}&repository=${KS_GIT_REPOSITORY_URLENCODED}&branch=${KS_GIT_BRANCH_URLENCODED}&commit=${KS_GIT_SHA}"
+
 DEPLOYMENT_STATUS=$(cat deployment-status.json)
 status=$(echo "$DEPLOYMENT_STATUS" | jq .status)
 echo "status:  $status"

@@ -11,9 +11,7 @@ module.exports =
       return false
     }
 
-    const extractedToken = Buffer.from(splits[1], "base64")
-      .toString("utf-8")
-      .trim()
+    const extractedToken = splits[1].trim()
 
     const tokens = getProjectTokens(req)
     if (tokens.length === 0) {

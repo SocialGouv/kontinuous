@@ -43,7 +43,6 @@ module.exports = async (options) => {
     commit,
     catch: options.catch ? true : undefined,
     follow: true,
-    token,
   })
   const url = `${webhookUri}/api/v1/oas/logs/pipeline?${query}`
 
@@ -85,6 +84,7 @@ module.exports = async (options) => {
             method: "get",
             url,
             responseType: "stream",
+            headers: { Authorization: `Bearer ${token}` },
           })
           response.data.on("data", handleOut)
           response.data.pipe(writeStream)
