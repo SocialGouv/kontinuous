@@ -357,6 +357,11 @@ paths:
           schema:
             type: string
           required: false
+        - in: query
+          name: mountKubeconfig
+          schema:
+            type: boolean
+          required: false
       requestBody:
         required: true
         content:
@@ -422,6 +427,11 @@ paths:
           name: kontinuousVersion
           schema:
             type: string
+          required: false
+        - in: query
+          name: mountKubeconfig
+          schema:
+            type: boolean
           required: false
       requestBody:
         required: true
@@ -509,6 +519,16 @@ paths:
             type: string
             format: projectName
           required: true
+        - in: query
+          name: kontinuousVersion
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: mountKubeconfig
+          schema:
+            type: boolean
+          required: false
       requestBody:
         required: true
         content:
@@ -604,6 +624,16 @@ paths:
               - preprod
               - prod
           allowEmptyValue: true
+        - in: query
+          name: kontinuousVersion
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: mountKubeconfig
+          schema:
+            type: boolean
+          required: false
       requestBody:
         required: true
         content:
