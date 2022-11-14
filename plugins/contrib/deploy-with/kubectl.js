@@ -128,6 +128,14 @@ module.exports = async (deploys, options, context) => {
           const r = await applyManifest(manifest)
           return r
         } catch (err) {
+          if (err.message.includes("no matches for kind")) {
+            logger.debug(
+              { error: err },
+              `kubectl server error(no matches for kind, maybe broken cluster again): retrying...`
+            )
+            await sleep(3000)
+            throw err
+          }
           if (
             err.message.includes(
               "error trying to reach service: dial tcp 10.0.0.1:443: connect: connection refused"
@@ -147,7 +155,7 @@ module.exports = async (deploys, options, context) => {
         }
       },
       {
-        retries: 4,
+        retries: 10,
         factor: 2,
         minTimeout: 1000,
         maxTimeout: 15000,
