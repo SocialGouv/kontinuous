@@ -21,7 +21,7 @@ module.exports = async (deploys, options, context) => {
     validate: true,
     force: true,
     recreate: false,
-    applyConcurrencyLimit: 3,
+    applyConcurrencyLimit: 2,
   }
 
   const force = defaultTo(options.force, defaultOptions.force)
@@ -139,7 +139,7 @@ module.exports = async (deploys, options, context) => {
         }
       },
       {
-        retries: 2,
+        retries: 4,
         factor: 2,
         minTimeout: 1000,
         maxTimeout: 15000,
