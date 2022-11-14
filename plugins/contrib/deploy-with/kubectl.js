@@ -1,3 +1,5 @@
+const { setTimeout: sleep } = require("timers/promises")
+
 const retry = require("async-retry")
 const async = require("async")
 
@@ -21,7 +23,7 @@ module.exports = async (deploys, options, context) => {
     validate: true,
     force: true,
     recreate: false,
-    applyConcurrencyLimit: 2,
+    applyConcurrencyLimit: 1,
   }
 
   const force = defaultTo(options.force, defaultOptions.force)
@@ -127,11 +129,17 @@ module.exports = async (deploys, options, context) => {
           return r
         } catch (err) {
           if (
-            // err.message.includes(
-            //   "error trying to reach service: dial tcp 10.0.0.1:443: connect: connection refused"
-            // ) ||
-            err.message.includes("InternalError")
+            err.message.includes(
+              "error trying to reach service: dial tcp 10.0.0.1:443: connect: connection refused"
+            )
           ) {
+            logger.debug(
+              `kubectl server error(connection refused): retrying...`
+            )
+            await sleep(3000)
+            throw err
+          }
+          if (err.message.includes("InternalError")) {
             logger.debug(`kubectl server error(InternalError): retrying...`)
             throw err
           }
