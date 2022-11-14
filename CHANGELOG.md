@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.97.21](https://github.com/socialgouv/kontinuous/compare/v1.97.20...v1.97.21) (2022-11-14)
+
+
+### Bug Fixes
+
+* adjust kubectl retry ([83627b1](https://github.com/socialgouv/kontinuous/commit/83627b106a9a5f9d7be8d993dd9992be1567fa9a))
+
 ### [1.97.20](https://github.com/socialgouv/kontinuous/compare/v1.97.19...v1.97.20) (2022-11-14)
 
 

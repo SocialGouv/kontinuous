@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: kontinuous pipeline
-        uses: socialgouv/kontinuous/.github/actions/deploy-via-github@v1.97.20
+        uses: socialgouv/kontinuous/.github/actions/deploy-via-github@v1.97.21
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           kubeconfig: ${{ secrets.KUBECONFIG }}
