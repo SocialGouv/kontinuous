@@ -54,6 +54,9 @@ module.exports = async (deploys, options, context) => {
 
   const recreateAnnotationKey = "kontinuous/kubectl-recreate"
   const getRecreateThisResource = (manifest) => {
+    if (manifest.kind === "Job") {
+      return true
+    }
     const manifestsRecreateResourceOption =
       manifest.metadata?.annotations?.[recreateAnnotationKey]
     return defaultTo(manifestsRecreateResourceOption, recreate)
