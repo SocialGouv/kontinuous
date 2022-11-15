@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.97.24](https://github.com/socialgouv/kontinuous/compare/v1.97.23...v1.97.24) (2022-11-15)
+
+
+### Bug Fixes
+
+* build add registry override with ([90d1d41](https://github.com/socialgouv/kontinuous/commit/90d1d41e590eedec09f1c177b380d7c8a1d9dceb))
+* up snapshots ([1ddb88b](https://github.com/socialgouv/kontinuous/commit/1ddb88b5d1b175afda7fa9c7ab1897ed84a21cb6))
+
 ### [1.97.23](https://github.com/socialgouv/kontinuous/compare/v1.97.22...v1.97.23) (2022-11-14)
 
 
