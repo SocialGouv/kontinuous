@@ -25,9 +25,6 @@ module.exports = (manifests, _options, { config, utils }) => {
     if (!manifest.metadata.labels) {
       manifest.metadata.labels = {}
     }
-    if (!manifest.metadata.annotations) {
-      manifest.metadata.annotations = {}
-    }
 
     const name = kind === "Namespace" ? manifest.name : manifest.metadata.name
 
@@ -42,12 +39,7 @@ module.exports = (manifests, _options, { config, utils }) => {
       "app.kubernetes.io/manifest-created-by": "kontinuous",
     }
 
-    const annotations = {
-      [deploymentLabelKey]: deploymentLabelValue,
-    }
-
     Object.assign(manifest.metadata.labels, labels)
-    Object.assign(manifest.metadata.annotations, annotations)
 
     if (templateLabelKinds.includes(kind)) {
       if (!manifest.spec) {
@@ -62,11 +54,7 @@ module.exports = (manifests, _options, { config, utils }) => {
       if (!manifest.spec.template.metadata.labels) {
         manifest.spec.template.metadata.labels = {}
       }
-      if (!manifest.spec.template.metadata.annotations) {
-        manifest.spec.template.metadata.annotations = {}
-      }
       Object.assign(manifest.spec.template.metadata.labels, labels)
-      Object.assign(manifest.spec.template.metadata.annotations, annotations)
     }
   }
 
