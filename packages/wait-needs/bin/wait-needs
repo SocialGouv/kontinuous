@@ -65,6 +65,9 @@ const runWaitNeeds = async ({ waitNeeds, annotationsRef, timeout = 900 }) => {
             // kubecontext,
             logger,
           })
+          if (result.error) {
+            result.error.selector = selector
+          }
           resolve(result)
         } catch (err) {
           reject(err)
