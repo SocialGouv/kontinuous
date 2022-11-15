@@ -94,7 +94,7 @@ const runWaitNeeds = async ({ waitNeeds, annotationsRef, timeout = 900 }) => {
     }
   }
   if (errors.length > 0) {
-    logger.error({ errors }, "required dependencies could not be satistfied")
+    logger.error({ errors }, "required dependencies could not be satisfied")
     return false
   }
   logger.info("all dependencies are ready")
