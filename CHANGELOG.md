@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.98.0](https://github.com/socialgouv/kontinuous/compare/v1.97.24...v1.98.0) (2022-11-15)
+
+
+### Features
+
+* add appVersion and gitSha labels ([99c5b57](https://github.com/socialgouv/kontinuous/commit/99c5b5795763cb522d06f142836e328a6e64e7f8))
+
+
+### Bug Fixes
+
+* decouple labels and annotations patches ([4368e14](https://github.com/socialgouv/kontinuous/commit/4368e146e44e9f415b473907943b3e9fa16d9513))
+
 ### [1.97.24](https://github.com/socialgouv/kontinuous/compare/v1.97.23...v1.97.24) (2022-11-15)
 
 
