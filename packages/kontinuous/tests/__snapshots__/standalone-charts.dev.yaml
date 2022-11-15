@@ -24,6 +24,8 @@ metadata:
     kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf93-5g1zo1
     kontinuous/deployment.env: test-standalone-charts-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: job-4bkfwz-job-extra
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -37,6 +39,8 @@ spec:
         kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf93-5g1zo1
         kontinuous/deployment.env: test-standalone-charts-feature-branch-1
         kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/resourceName: job-4bkfwz-job-extra
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous

@@ -18,6 +18,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -38,6 +40,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -71,6 +75,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: serviceaccount-4nws8p-default
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -90,6 +96,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: configmap-e4ces7-app-configmap
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -113,6 +121,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: sealedsecret-5ip1a4-hasura-sealed-secret
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -139,6 +149,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: deployment-3d60sq-app-2nd-instance
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -174,6 +186,8 @@ spec:
         kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
         kontinuous/deployment.env: test-sample-1-feature-branch-1
         kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/resourceName: deployment-3d60sq-app-2nd-instance
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
@@ -249,6 +263,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: deployment-3d60sq-app
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -284,6 +300,8 @@ spec:
         kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
         kontinuous/deployment.env: test-sample-1-feature-branch-1
         kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/resourceName: deployment-3d60sq-app
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
@@ -359,6 +377,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: deployment-3d60sq-hasura
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -393,6 +413,8 @@ spec:
         kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
         kontinuous/deployment.env: test-sample-1-feature-branch-1
         kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/resourceName: deployment-3d60sq-hasura
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
@@ -453,6 +475,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: deployment-3d60sq-pgweb
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -487,6 +511,8 @@ spec:
         kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
         kontinuous/deployment.env: test-sample-1-feature-branch-1
         kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/resourceName: deployment-3d60sq-pgweb
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
@@ -559,6 +585,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: service-5cfizy-app-2nd-instance
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -590,6 +618,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: service-5cfizy-app
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -620,6 +650,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: service-5cfizy-hasura
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -651,6 +683,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: service-5cfizy-pgweb
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -702,6 +736,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: ingress-5dz9oh-app-2nd-instance
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -753,6 +789,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: ingress-5dz9oh-app
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -794,6 +832,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: ingress-5dz9oh-hasura
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -834,6 +874,8 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: ingress-5dz9oh-pgweb
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous

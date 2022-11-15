@@ -18,6 +18,8 @@ metadata:
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
     kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -38,6 +40,8 @@ metadata:
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
     kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -71,6 +75,8 @@ metadata:
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
     kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: serviceaccount-4nws8p-default
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -86,6 +92,8 @@ metadata:
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
     kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: configmap-e4ces7-metabase
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -119,6 +127,8 @@ metadata:
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
     kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: deployment-3d60sq-metabase
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -152,6 +162,8 @@ spec:
         kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
         kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
         kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/resourceName: deployment-3d60sq-metabase
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
@@ -210,6 +222,8 @@ metadata:
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
     kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: service-5cfizy-metabase
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -251,6 +265,8 @@ metadata:
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cbbf-2rmdjf
     kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
     kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: ingress-5dz9oh-metabase
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous

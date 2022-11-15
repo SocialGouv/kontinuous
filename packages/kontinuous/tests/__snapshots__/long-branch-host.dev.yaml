@@ -19,6 +19,8 @@ metadata:
     kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
     kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: namespace-4wnyh3
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -40,6 +42,8 @@ metadata:
     kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
     kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -73,6 +77,8 @@ metadata:
     kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
     kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: serviceaccount-4nws8p-default
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -88,6 +94,8 @@ metadata:
     kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
     kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: deployment-3d60sq-app-api
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -123,6 +131,8 @@ spec:
         kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
         kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
         kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/resourceName: deployment-3d60sq-app-api
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
@@ -193,6 +203,8 @@ metadata:
     kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
     kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: service-5cfizy-app-api
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
@@ -231,6 +243,8 @@ metadata:
     kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
     kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: ingress-5dz9oh-app-api
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
