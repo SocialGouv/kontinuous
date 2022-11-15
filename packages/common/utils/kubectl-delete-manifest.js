@@ -9,7 +9,7 @@ const yaml = require("./yaml")
 
 module.exports = async (
   manifest,
-  { kubeconfig, kubeconfigContext, rootDir = os.tmpdir() }
+  { kubeconfig, kubeconfigContext, rootDir = os.tmpdir() } = {}
 ) => {
   const tmpdir = await mkdtemp(path.join(rootDir, "tmp-"))
   const file = `${tmpdir}/clean-resource.yaml`

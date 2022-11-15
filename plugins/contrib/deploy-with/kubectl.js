@@ -112,7 +112,7 @@ module.exports = async (deploys, options, context) => {
     const recreateThisResource = getRecreateThisResource(manifest)
     try {
       if (recreateThisResource) {
-        await kubectlDeleteManifest(manifest)
+        await kubectlDeleteManifest(manifest, kubectlDeleteManifestOptions)
       }
       result = await kubectlApplyManifest(manifest)
     } catch (err) {
