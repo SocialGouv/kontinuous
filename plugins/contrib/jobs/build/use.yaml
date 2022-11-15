@@ -29,6 +29,9 @@ runs:
       - mountPath: /home/user/.local/share/buildkit
         name: buildkitd
     run: |
+      if [ "{{ $.with.registry }}" != "" ]; then
+        export CI_REGISTRY="{{ $.with.registry }}"
+      fi
       mkdir -p /home/user/.docker
       echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /home/user/.docker/config.json
       export IMAGE_PATH=$CI_REGISTRY{{ if (or $.with.imageProject $.Values.global.imageProject) }}{{ (print "/" (or $.with.imageProject $.Values.global.imageProject)) }}{{ end }}/{{ or $.with.imageRepository $.Values.global.imageRepository }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}{{ if $.with.target }}{{ (print "-" $.with.target) }}{{ end }}
