@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.98.1](https://github.com/socialgouv/kontinuous/compare/v1.98.0...v1.98.1) (2022-11-15)
+
+
+### Bug Fixes
+
+* add selector to error on wait-needs ([9610cb8](https://github.com/socialgouv/kontinuous/commit/9610cb8afadaca1c6fac511c974dffa7b791a6a6))
+* autodelete job kind before apply ([c87e466](https://github.com/socialgouv/kontinuous/commit/c87e466e23774dfe97250de7bd857f2293950382))
+
 ## [1.98.0](https://github.com/socialgouv/kontinuous/compare/v1.97.24...v1.98.0) (2022-11-15)
 
 
