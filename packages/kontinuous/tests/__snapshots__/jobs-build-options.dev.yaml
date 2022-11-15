@@ -171,6 +171,10 @@ spec:
             - >
               set -e
 
+              if [ \\"\\" != \\"\\" ]; then
+                export CI_REGISTRY=\\"\\"
+              fi
+
               mkdir -p /home/user/.docker
 
               echo
@@ -188,8 +192,8 @@ spec:
                 --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
-                --opt build-arg=\\"arg1=value1\\" \\\\
-                --opt build-arg=\\"arg2=value2\\" \\\\
+                --opt build-arg:\\"arg1=value1\\" \\\\
+                --opt build-arg:\\"arg2=value2\\" \\\\
                 
           resources:
             limits:

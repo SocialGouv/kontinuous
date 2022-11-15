@@ -457,6 +457,10 @@ spec:
             - >
               set -e
 
+              if [ \\"\\" != \\"\\" ]; then
+                export CI_REGISTRY=\\"\\"
+              fi
+
               mkdir -p /home/user/.docker
 
               echo
@@ -594,6 +598,10 @@ spec:
             - '-c'
             - >
               set -e
+
+              if [ \\"\\" != \\"\\" ]; then
+                export CI_REGISTRY=\\"\\"
+              fi
 
               mkdir -p /home/user/.docker
 
