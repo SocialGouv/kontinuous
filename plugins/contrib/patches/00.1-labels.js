@@ -10,7 +10,7 @@ module.exports = (manifests, _options, { config, utils }) => {
     deploymentEnvLabelValue,
   } = config
 
-  const { slug } = utils
+  const { slug, isVersionTag } = utils
 
   for (const manifest of manifests) {
     const { kind, apiVersion } = manifest
@@ -32,6 +32,10 @@ module.exports = (manifests, _options, { config, utils }) => {
       [deploymentLabelKey]: deploymentLabelValue,
       [deploymentEnvLabelKey]: deploymentEnvLabelValue,
       [refLabelKey]: refLabelValue,
+      "kontinuous/gitSha": config.gitSha,
+      "kontinuous/appVersion": isVersionTag(config.gitBranch)
+        ? config.gitBranch
+        : config.gitSha,
       "kontinuous/resourceName": slug([kind, name]),
       // "app.kubernetes.io/managed-by": "kontinuous", // incompatible with helm deployment
       // "app.kubernetes.io/created-by": "kontinuous", // incompatible with helm deployment
