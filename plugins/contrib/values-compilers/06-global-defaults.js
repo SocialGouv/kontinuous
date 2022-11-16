@@ -33,7 +33,7 @@ module.exports = async (values, options, { config, utils, ctx }) => {
     imageTag = `preprod-${sha}`
   } else if (isProd) {
     if (isVersionTag(gitBranch)) {
-      imageTag = gitBranch.substring(1)
+      imageTag = gitBranch
     } else {
       imageTag = "prod"
     }
