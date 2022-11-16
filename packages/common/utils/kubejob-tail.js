@@ -1,5 +1,7 @@
 const kubectlRetry = require("./kubectl-retry")
 
+// this adress this issue https://github.com/kubernetes/kubernetes/issues/28369
+
 module.exports = async (jobName, options = {}) => {
   const { namespace, stdout = process.stdout } = options
 
