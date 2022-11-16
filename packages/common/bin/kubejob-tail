@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+const kubejobTail = require("../utils/kubejob-tail")
+
+// eslint-disable-next-line prettier/prettier
+;
+
+(async () => {
+  const jobName = process.argv[2]
+  await kubejobTail(jobName)
+})()
