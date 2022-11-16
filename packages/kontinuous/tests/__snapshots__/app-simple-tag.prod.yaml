@@ -154,7 +154,7 @@ spec:
                         - app
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: harbor.fabrique.social.gouv.fr/test-app-simple-tag/app:1.2.3
+        - image: harbor.fabrique.social.gouv.fr/test-app-simple-tag/app:v1.2.3
           name: app
           ports:
             - containerPort: 3000
