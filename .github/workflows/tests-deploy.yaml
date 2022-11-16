@@ -124,8 +124,7 @@ jobs:
               imageRepository: ""
               registry: docker.io
               containerPort: 80
-        env:
-          KS_GIT_REF: 1.21.6
+              imageTag: 1.21.6
       - run: kubectl get pods -n kontinuous
       - run: kubectl get pods -n kontinuous --field-selector=status.phase=Running | grep "app"
       - name: "use tagged image"
