@@ -143,7 +143,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.99.1
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.99.2
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
@@ -158,7 +158,7 @@ spec:
               mountPath: /secrets
           imagePullPolicy: Always
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.99.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.99.2
           command:
             - sh
             - '-c'
@@ -305,7 +305,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.99.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.99.2
           command:
             - sh
             - '-c'
@@ -443,7 +443,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.99.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.99.2
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -588,7 +588,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.99.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.99.2
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -792,7 +792,7 @@ spec:
                 name: app-configmap
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.99.1
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.99.2
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: test-jobs-build-feature-branch-1/Deployment/app
@@ -915,7 +915,7 @@ spec:
                 name: hasura-configmap
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.99.1
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.99.2
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: test-jobs-build-feature-branch-1/Deployment/hasura
@@ -993,7 +993,7 @@ spec:
     spec:
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.99.1
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.99.2
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: test-jobs-build-feature-branch-1/Deployment/pgweb

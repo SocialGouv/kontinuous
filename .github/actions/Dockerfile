@@ -1,4 +1,4 @@
-FROM ghcr.io/socialgouv/kontinuous:v1.99.1 as base
+FROM ghcr.io/socialgouv/kontinuous:v1.99.2 as base
 
 USER 0
 RUN apt-get update && \
