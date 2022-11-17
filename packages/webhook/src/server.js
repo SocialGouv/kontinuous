@@ -14,6 +14,9 @@ module.exports = async (options = {}) => {
           ctx.set("customConfig", customConfig)
         },
       },
+      configReloader: {
+        dependencies: ["config", "logger", "shutdownHandlers"],
+      },
       home: {
         dependencies: ["express"],
       },
@@ -24,6 +27,9 @@ module.exports = async (options = {}) => {
       },
       home: {
         pluginName: "home",
+      },
+      configReloader: {
+        pluginName: "configReloader",
       },
     },
   })

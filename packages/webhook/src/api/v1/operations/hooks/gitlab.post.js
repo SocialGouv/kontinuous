@@ -24,12 +24,20 @@ module.exports = function ({ services: { pushed, deleted } }) {
         return res.status(204).json({ message: "no-op" })
       }
 
-      const { body } = req
+      const { body, query } = req
       const { ref, after, commits } = body
       const { git_http_url: repositoryUrl } = body.project
 
+      const { mountKubeconfig, kontinuousVersion } = query
       try {
-        await eventHandlers[eventName]({ ref, after, repositoryUrl, commits })
+        await eventHandlers[eventName]({
+          ref,
+          after,
+          repositoryUrl,
+          commits,
+          mountKubeconfig,
+          kontinuousVersion,
+        })
       } catch (err) {
         const logger = reqCtx.require("logger")
         logger.error(err)

@@ -40,6 +40,14 @@ pipelineImageTag: v1
 # pipelineImage: harbor.fabrique.social.gouv.fr/sre/kontinuous:v1
 
 # ACL
+ciNamespace:
+  allowAll: true
+  template: "${project}-ci"
+  mountKubeconfigDefault: true
+  kubeconfigSecretName: kubeconfig
+reloadableTokensSecret:
+  enabled: true
+  name: "reloadable-tokens-secret"
 rootTokenSecret:
 rootTokenSecretKey: TOKEN
 rootKubeconfigSecrets: []

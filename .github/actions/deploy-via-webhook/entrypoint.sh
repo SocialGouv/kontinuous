@@ -26,10 +26,12 @@ KS_GIT_REPOSITORY_URLENCODED=$(echo $KS_GIT_REPOSITORY | sed 's/\//\%2f/g')
 KS_GIT_SHA=$GITHUB_SHA
 KS_DEBUG=true
 
+GH_EVENT_JSON_CONFIG=$(node -e "process.stdout.write(fs.readFileSync('$GITHUB_EVENT_PATH',{encoding:'utf-8'}))")
+
 if [ "$GITHUB_EVENT_NAME" = "delete"  ]; then
   KS_EVENT=deleted
   
-  export EVENT_REF=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('$GITHUB_EVENT_PATH')).ref)")
+  export EVENT_REF=$(node -e "process.stdout.write(($GH_EVENT_JSON_CONFIG).ref || '')")
 
   KS_GIT_BRANCH="$EVENT_REF"
   KS_GIT_BRANCH_URLENCODED=$(echo $KS_GIT_BRANCH | sed 's/\//\%2f/g')
@@ -38,7 +40,7 @@ else
   KS_EVENT=pushed
 fi
 
-export KS_DEFAULT_BRANCH=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('$GITHUB_EVENT_PATH')).repository?.default_branch)")
+export KS_DEFAULT_BRANCH=$(node -e "process.stdout.write(($GH_EVENT_JSON_CONFIG).repository?.default_branch || '')")
 
 export KS_GIT
 export KS_GIT_BRANCH
@@ -50,9 +52,12 @@ export KS_DEBUG
 mkdir -p .kontinuous
 kontinuous config --remote --format json>.kontinuous/config.yaml
 
-export KS_ENVIRONMENT=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('.kontinuous/config.yaml')).environment)")
-KS_WEBHOOK_URI=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('.kontinuous/config.yaml')).webhookUri)")
-KS_PROJECT_NAME=$(node -e "process.stdout.write(JSON.parse(fs.readFileSync('.kontinuous/config.yaml')).projectName)")
+KONTINUOUS_JSON_CONFIG=$(node -e "process.stdout.write(fs.readFileSync('.kontinuous/config.yaml',{encoding:'utf-8'}))")
+
+export KS_ENVIRONMENT=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).environment || '')")
+KS_WEBHOOK_URI=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).webhookUri || '')")
+KS_PROJECT_NAME=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).projectName || '')")
+KS_WEBHOOK_MOUNT_KUBECONFIG=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).webhhookMountKubeconfig || '')")
 
 echo "env=$KS_ENVIRONMENT">>$GITHUB_OUTPUT
 
@@ -75,11 +80,15 @@ if [ -n "$TRIGGER_WEBHOOK" ] && [ "$TRIGGER_WEBHOOK" != "false" ] || [ "$GITHUB_
   else
     echo "Trigger webhook from action"
   fi
+  URI="${KS_WEBHOOK_URI}/api/v1/oas/hooks/user?project=${KS_PROJECT_NAME}&event=${KS_EVENT}&env=${KS_ENVIRONMENT}"
+  if [ "$KS_WEBHOOK_MOUNT_KUBECONFIG" != "" ]; then
+    URI="${URI}&mountKubeconfig=${KS_WEBHOOK_MOUNT_KUBECONFIG}"
+  fi
   wget --content-on-error -qO- \
     --header="Authorization: Bearer ${KS_WEBHOOK_TOKEN}" \
     --header='Content-Type:application/json' \
     --post-data "{\"repositoryUrl\":\"${KS_GIT_REPOSITORY}\",\"ref\":\"${KS_GIT_BRANCH}\",\"commit\":\"${KS_GIT_SHA}\"}" \
-    "${KS_WEBHOOK_URI}/api/v1/oas/hooks/user?project=${KS_PROJECT_NAME}&event=${KS_EVENT}&env=${KS_ENVIRONMENT}"
+    "$URI"
 fi
 
 kontinuous logs

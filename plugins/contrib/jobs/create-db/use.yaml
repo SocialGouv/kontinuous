@@ -3,11 +3,10 @@ runs:
     checkout: false
     image: bitnami/kubectl:latest
     user: 1001
+    kubernetes: true
     envFrom:
       - secretRef:
           name: "{{ tpl (or $.with.pgAdminSecretRefName $.parentWith.pgAdminSecretRefName) . }}"
-      - secretRef:
-          name: kubeconfig
     vars:
       DB_SECRET_NAME: "{{ tpl (or $.with.pgSecretName $.Values.global.pgSecretName) . }}"
       NAMESPACE: "{{ $.Values.global.namespace }}"

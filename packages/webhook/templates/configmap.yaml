@@ -12,19 +12,19 @@ data:
     tokens:
       {{ range $index, $secret := .Values.tokenSecrets }}
       - project: {{ $secret.project | quote }}
-        file: /secrets/{{ or $secret.project $secret.name }}/tokens/{{ or $secret.tokenId $index }}/token
+        file: /secrets/projects/{{ or $secret.project $secret.name }}/tokens/{{ or $secret.tokenId $index }}/token
       {{ end }}
 
     rootKubeconfigs:
       {{ range $secret := .Values.rootKubeconfigSecrets }}
-      - file: "/secrets/{{ or $secret.project $secret.name }}/root-kubeconfig/{{ $secret.cluster }}/kubeconfig"
+      - file: "/secrets/projects/{{ or $secret.project $secret.name }}/root-kubeconfig/{{ $secret.cluster }}/kubeconfig"
         cluster: {{ $secret.cluster | quote }}
       {{ end }}
 
     kubeconfigs:
       {{ range $secret := .Values.kubeconfigSecrets }}
       - project: {{ $secret.project | quote }}
-        file: "/secrets/{{ or $secret.project $secret.name }}/kubeconfig/{{ $secret.cluster }}/kubeconfig"
+        file: "/secrets/projects/{{ or $secret.project $secret.name }}/kubeconfig/{{ $secret.cluster }}/kubeconfig"
         cluster: {{ $secret.cluster | quote }}
       {{ end }}
 
@@ -34,7 +34,7 @@ data:
         repository: {{ $repository.repository | quote }}
         private: {{ or $repository.private "false" }}
         {{ if (or $repository.deployKeySecretName $repository.private) }}
-        deployKeyFile: "/secrets/{{ $repository.project }}/repositories/{{ $repository.repository | adler32sum }}/ssh/deploy-key"
+        deployKeyFile: "/secrets/projects/{{ $repository.project }}/repositories/{{ $repository.repository | adler32sum }}/ssh/deploy-key"
         {{ end }}
         {{ if $repository.deployKeyCiSecretName }}
         deployKeyCiSecretName: {{ $repository.deployKeyCiSecretName | quote }}

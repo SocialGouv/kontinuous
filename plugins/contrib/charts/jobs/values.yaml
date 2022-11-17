@@ -44,5 +44,8 @@ deployKey:
   enabled: false
   secretRefName: deploy-key
   secretRefKey: DEPLOY_KEY
+kubeconfig:
+  secretRefName: kubeconfig
+  secretRefKey: KUBECONFIG
 mountDeployKey: false
 _pluginValuesCompilerRecommendedJobs: true

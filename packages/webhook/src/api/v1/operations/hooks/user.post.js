@@ -3,20 +3,23 @@ module.exports = function ({ services: { pushed, deleted } }) {
 
   return [
     async (req, res) => {
-      const { body } = req
+      const { body, query } = req
 
-      const { event: eventName, env } = req.query
+      const { event: eventName, env } = query
       if (!eventName || !eventHandlers[eventName]) {
         return res.status(204).json({ message: "no-op" })
       }
 
       const { ref, repositoryUrl, commit } = body
+      const { mountKubeconfig, kontinuousVersion } = query
 
       const runJob = await eventHandlers[eventName]({
         ref,
         after: commit,
         repositoryUrl,
         env,
+        kontinuousVersion,
+        mountKubeconfig,
       })
       if (!runJob) {
         return res.status(204).json({ message: "no-op" })

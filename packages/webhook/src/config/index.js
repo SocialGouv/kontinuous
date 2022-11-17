@@ -6,10 +6,15 @@ const normalizeRepositoryUrl = require("~common/utils/normalize-repository-url")
 const yaml = require("~common/utils/yaml")
 
 const oasUri = require("./oas-uri")
+const loadFinalConfig = require("./load-final-config")
 
 module.exports = async function createConfig() {
   const configPath =
     process.env.KUBEWEBHOOK_CONFIG_PATH || `${process.cwd()}/config.yaml`
+  const reloadableSecretsRootPath =
+    process.env.KUBEWEBHOOK_RELOADABLE_SECRETS_ROOT_PATH ||
+    `/secrets/reloadable`
+  const tokensSecretDir = process.env.KUBEWEBHOOK_TOKENS_SECRET_DIR || `tokens`
 
   let yamlConfig = {}
   if (await fs.pathExists(configPath)) {
@@ -24,13 +29,13 @@ module.exports = async function createConfig() {
     repositories: projectRepositories = [],
   } = yamlConfig
 
-  const tokens = {}
+  const tokensFromConfig = {}
   for (const { project, file } of projectTokens) {
-    if (!tokens[project]) {
-      tokens[project] = []
+    if (!tokensFromConfig[project]) {
+      tokensFromConfig[project] = []
     }
     const content = await fs.readFile(file, { encoding: "utf-8" })
-    tokens[project].push(content)
+    tokensFromConfig[project].push(content)
   }
 
   const kubeconfigs = {}
@@ -85,35 +90,53 @@ module.exports = async function createConfig() {
     process.env.KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE_TAG || "v1"
 
   const serviceName = `kontinuous webhook server v${kontinuousVersion}`
+
+  const ciNamespaceAllowAll =
+    process.env.KUBEWEBHOOK_CI_NAMESPACE_ALLOW_ALL === "true"
+  const ciNamespaceTemplate =
+    process.env.KUBEWEBHOOK_CI_NAMESPACE_TEMPLATE || "${project}-ci"
+  const ciNamespaceMountKubeconfigDefault =
+    process.env.KUBEWEBHOOK_CI_NAMESPACE_MOUNT_KUBECONFIG_DEFAULT === "true"
+  const ciNamespaceKubeconfigSecretName =
+    process.env.KUBEWEBHOOK_CI_NAMESPACE_KUBECONFIG_SECRET_NAME || "kubeconfig"
+
   const config = {
     project: {
       oas: {
         uri: oasUri(),
       },
       secrets: {
-        tokens,
+        tokensFromConfig,
         supertoken,
         kubeconfigs,
         rootKubeconfigs,
+      },
+      paths: {
+        reloadableSecretsRootPath,
+        tokensSecretDir,
       },
       repositories,
       pipelineImage,
       pipelineImageTag,
       pipelineCheckoutImage,
       pipelineCheckoutImageTag,
+      ciNamespace: {
+        allowAll: ciNamespaceAllowAll,
+        template: ciNamespaceTemplate,
+        mountKubeconfigDefault: ciNamespaceMountKubeconfigDefault,
+        kubeconfigSecretName: ciNamespaceKubeconfigSecretName,
+      },
     },
     microserviceOapi: { serviceName },
     logger: {
       level: "debug",
     },
     httpLogger: {
-      hideSecrets: [
-        ...Object.values(tokens).flatMap((values) => values),
-        ...(supertoken ? [supertoken] : []),
-      ],
       ignoreUserAgents,
     },
   }
+
+  await loadFinalConfig(config)
 
   return config
 }

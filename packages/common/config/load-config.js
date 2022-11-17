@@ -52,6 +52,8 @@ const mergeProjectsAndOrganizations = (config) => {
 
 const defaultRepositoryProvider = "https://github.com" // degit/tiged like
 
+const envYamlParser = (str) => yaml.load(str)
+
 module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
   const env = ctx.get("env") || process.env
 
@@ -79,7 +81,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     git: {
       env: "KS_GIT",
-      envParser: (str) => yaml.load(str),
+      envParser: envYamlParser,
       defaultFunction: async (config) => {
         const { workspacePath } = config
         try {
@@ -92,7 +94,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     gitRequired: {
       env: "KS_GIT_REQUIRED",
-      envParser: (str) => yaml.load(str),
+      envParser: envYamlParser,
     },
     gitRepositoryUrl: {
       defaultFunction: async (config, { options, env: environ }) => {
@@ -227,7 +229,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     deploymentLabelForceNewDeploy: {
       default: true,
       env: "KS_FORCE_NEW_DEPLOY",
-      envParser: (str) => yaml.load(str),
+      envParser: envYamlParser,
     },
     deploymentLabelValue: {
       defaultFunction: (config) => {
@@ -277,7 +279,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     configSet: {
       env: "KS_INLINE_CONFIG_SET",
-      envParser: (str) => yaml.load(str),
+      envParser: envYamlParser,
       option: "config-set",
     },
     inlineValues: {
@@ -286,7 +288,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     set: {
       env: "KS_INLINE_SET",
-      envParser: (str) => yaml.load(str),
+      envParser: envYamlParser,
       option: "set",
     },
     buildRootPath: {
@@ -341,6 +343,10 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
           return config.webhook.uri
         }
       },
+    },
+    webhhookMountKubeconfig: {
+      env: "KS_WEBHOOK_MOUNT_KUBECONFIG",
+      envParser: envYamlParser,
     },
     upload: {
       env: "KS_BUILD_UPLOAD",
@@ -504,7 +510,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     private: {
       option: "private",
       env: "KS_PRIVATE",
-      envParser: (str) => yaml.load(str),
+      envParser: envYamlParser,
       default: false,
     },
     deployKeyFile: {
@@ -577,7 +583,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     commits: {
       env: "KS_COMMITS",
-      envParser: (str) => yaml.load(str),
+      envParser: envYamlParser,
       defaultFunction: async (config) => {
         const commits = {
           added: [],
@@ -640,30 +646,30 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     ignoreProjectTemplates: {
       env: "KS_IGNORE_PROJECT_TEMPLATES",
-      envParser: (str) => yaml.load(str),
+      envParser: envYamlParser,
       option: "ignoreProjectTemplates",
       default: false,
     },
     externalBinForceDownload: {
       env: "KS_EXTERNAL_BIN_FORCE_DOWNLOAD",
-      envParser: (str) => yaml.load(str),
+      envParser: envYamlParser,
       default: true,
     },
     disablePlugin: {
       env: "KS_DISABLE_PLUGIN",
-      envParser: (str) => yaml.load(str),
+      envParser: envYamlParser,
       option: "disable-plugin",
       default: [],
     },
     disableStep: {
       env: "KS_DISABLE_STEP",
-      envParser: (str) => yaml.load(str),
+      envParser: envYamlParser,
       option: "disable-step",
       default: [],
     },
     noValidate: {
       env: "KS_NO_VALIDATE",
-      envParser: (str) => yaml.load(str),
+      envParser: envYamlParser,
       option: "no-validate",
     },
   }

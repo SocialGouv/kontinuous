@@ -53,6 +53,11 @@ module.exports = async ({
     env: environment,
     hash: jobHash,
     repositoryUrl: gitRepositoryUrl,
+    ...(config.webhhookMountKubeconfig !== undefined
+      ? {
+          mountKubeconfig: config.webhhookMountKubeconfig ? "true" : "false",
+        }
+      : {}),
   })
 
   const url = `${webhookUri}/api/v1/oas/hooks/custom?${query}`

@@ -24,6 +24,11 @@ spec:
         - name: artifacts
           persistentVolumeClaim:
             claimName: artifacts
+        {{ if .Values.reloadableTokensSecret.enabled }}
+        - name: reloadable-tokens-secret
+          secret:
+            secretName: {{ .Values.reloadableTokensSecret.name }}
+        {{ end }}
         {{ range $secret := .Values.rootKubeconfigSecrets }}
         - name: secret-root-kubeconfig-{{ $secret.name }}
           secret:
@@ -74,21 +79,25 @@ spec:
               subPath: config.yaml
             - name: artifacts
               mountPath: /artifacts
+            {{ if .Values.reloadableTokensSecret.enabled }}
+            - name: reloadable-tokens-secret
+              mountPath: /secrets/tokens
+            {{ end }}
             {{ range $secret := .Values.rootKubeconfigSecrets }}
             - name: secret-root-kubeconfig-{{ $secret.name }}
-              mountPath: /secrets/{{ or $secret.project $secret.name }}/root-kubeconfig/{{ $secret.cluster }}
+              mountPath: /secrets/projects/{{ or $secret.project $secret.name }}/root-kubeconfig/{{ $secret.cluster }}
             {{ end }}
             {{ range $secret := .Values.kubeconfigSecrets }}
             - name: secret-kubeconfig-{{ $secret.name }}
-              mountPath: /secrets/{{ or $secret.project $secret.name }}/kubeconfig/{{ $secret.cluster }}
+              mountPath: /secrets/projects/{{ or $secret.project $secret.name }}/kubeconfig/{{ $secret.cluster }}
             {{ end }}
             {{ range $index, $secret := .Values.tokenSecrets }}
             - name: secret-token-{{ $secret.name }}
-              mountPath: /secrets/{{ or $secret.project $secret.name }}/tokens/{{ or $secret.tokenId $index }}
+              mountPath: /secrets/projects/{{ or $secret.project $secret.name }}/tokens/{{ or $secret.tokenId $index }}
             {{ end }}
             {{ range $repository := .Values.repositories }}
             - name: repository-deploy-{{ $repository.repository | adler32sum }}
-              mountPath: "/secrets/{{ $repository.project }}/repositories/{{ $repository.repository | adler32sum }}/ssh"
+              mountPath: "/secrets/projects/{{ $repository.project }}/repositories/{{ $repository.repository | adler32sum }}/ssh"
             {{ end }}
           env:
             - name: KUBEWEBHOOK_CONFIG_PATH
@@ -116,6 +125,14 @@ spec:
                   key: {{ .Values.rootTokenSecretKey }}
                   name: {{ .Values.rootTokenSecret }}
             {{ end }}
+            - name: KUBEWEBHOOK_CI_NAMESPACE_ALLOW_ALL
+              value: "{{ .Values.ciNamespace.allowAll }}"
+            - name: KUBEWEBHOOK_CI_NAMESPACE_TEMPLATE
+              value: "{{ .Values.ciNamespace.template }}"
+            - name: KUBEWEBHOOK_CI_NAMESPACE_MOUNT_KUBECONFIG_DEFAULT
+              value: "{{ .Values.ciNamespace.mountKubeconfigDefault }}"
+            - name: KUBEWEBHOOK_CI_NAMESPACE_KUBECONFIG_SECRET_NAME
+              value: "{{ .Values.ciNamespace.kubeconfigSecretName }}"
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}

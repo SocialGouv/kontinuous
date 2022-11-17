@@ -1,5 +1,5 @@
 module.exports = function ({ services }) {
-  return ({ ref, after, repositoryUrl, kontinuousVersion }) =>
+  return ({ ref, after, repositoryUrl, kontinuousVersion, mountKubeconfig }) =>
     services.pipeline({
       eventName: "deleted",
       ref,
@@ -8,5 +8,6 @@ module.exports = function ({ services }) {
       args: ["deploy", "--chart", "deactivate", "--ignore-project-templates"],
       checkout: true,
       kontinuousVersion,
+      mountKubeconfig,
     })
 }

@@ -10,6 +10,7 @@ services:
     volumes:
       - ./:/app
       - ${KUBECONFIG:-~/.kube/config}:/home/ubuntu/.kube/config:ro
+      - ./packages/webhook/tests/secrets/reloadable:/secrets/reloadable
     ports:
       - ${KUBEWEBHOOK_EXPOSED_PORT:-7530}:3000
     environment:
@@ -18,4 +19,5 @@ services:
       KUBEWEBHOOK_EXPOSED_PORT: ${KUBEWEBHOOK_EXPOSED_PORT:-7530}
       KUBEWEBHOOK_PIPELINE_IMAGE: ${KUBEWEBHOOK_PIPELINE_IMAGE:-"ghcr.io/socialgouv/kontinuous:v1.98.3"}
       KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE: ${KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE:-"ghcr.io/socialgouv/kontinuous/degit:v1.98.3"}
+      KUBEWEBHOOK_CI_NAMESPACE_ALLOW_ALL: ${KUBEWEBHOOK_CI_NAMESPACE_ALLOW_ALL:-"true"}
       KS_LOG_LEVEL: "trace"

@@ -8,6 +8,8 @@ const checkNamespaceIsAvailable = async ({
   kubeconfigContext,
   namespace,
   logger,
+  check,
+  bail,
 }) => {
   logger.debug("checking if namespace is available")
   try {
@@ -21,7 +23,14 @@ const checkNamespaceIsAvailable = async ({
     const data = JSON.parse(json)
     const phase = data?.status.phase
     // logger.debug(`namespace "${namespace}" phase is "${phase}"`)
-    return phase === "Active"
+    if (phase === "Active") {
+      if (check) {
+        const ready = await check(data, bail)
+        return ready
+      }
+      return true
+    }
+    return false
   } catch (err) {
     // do nothing
     // logger.debug(err)
@@ -34,6 +43,7 @@ module.exports = async ({
   kubeconfigContext,
   manifest,
   logger = defaultLogger,
+  check,
 }) => {
   const namespace = manifest.metadata.name
 
@@ -70,13 +80,15 @@ module.exports = async ({
   await ensureNamespace(["create", "--save-config"])
 
   await retry(
-    async () => {
+    async (bail) => {
       if (
         !(await checkNamespaceIsAvailable({
           kubeconfig,
           kubeconfigContext,
           namespace,
           logger,
+          bail,
+          check,
         }))
       ) {
         throw Error(`namespace "${namespace}" is not available`)

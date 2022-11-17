@@ -68,7 +68,7 @@ module.exports = function ({ services }) {
         encoding: "utf-8",
         env: {
           ...process.env,
-          KUBECONFIG: kubeconfig,
+          ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
         },
       })
 
@@ -139,7 +139,7 @@ module.exports = function ({ services }) {
 
     let kubeconfig
     try {
-      kubeconfig = await services.getKubeconfig(cluster)
+      kubeconfig = await services.getKubeconfigForCiNamespace(cluster)
     } catch (error) {
       res.writeHead(404, {
         "Content-Type": "text/plain",

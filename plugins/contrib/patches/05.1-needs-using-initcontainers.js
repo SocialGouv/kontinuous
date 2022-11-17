@@ -7,6 +7,8 @@ module.exports = async (manifests, options, context) => {
   const { utils, logger } = context
   const { kindIsRunnable, KontinuousPluginError } = utils
 
+  const { kubernetesMethod = "kubeconfig" } = options
+
   const deps = getDeps(manifests, context)
 
   for (const manifest of manifests) {
@@ -73,6 +75,11 @@ module.exports = async (manifests, options, context) => {
     const initContainer = {
       name: "kontinuous-wait-needs",
       image: kontinuousNeedsImage,
+      ...(kubernetesMethod === "serviceaccount"
+        ? {
+            serviceAccountName: options.serviceAccountName || "kontinuous-sa",
+          }
+        : {}),
       env: [
         {
           name: "WAIT_NEEDS_ANNOTATIONS_REF",
@@ -83,31 +90,39 @@ module.exports = async (manifests, options, context) => {
           ].join("/"),
         },
         { name: "WAIT_NEEDS", value: jsonDependencies },
-        { name: "KUBECONFIG", value: "/secrets/kubeconfig" },
+        ...(kubernetesMethod === "kubeconfig"
+          ? [{ name: "KUBECONFIG", value: "/secrets/kubeconfig" }]
+          : []),
       ],
       volumeMounts: [
-        {
-          name: "kontinuous-wait-needs-kubeconfig",
-          mountPath: "/secrets",
-        },
+        ...(kubernetesMethod === "kubeconfig"
+          ? [
+              {
+                name: "kontinuous-wait-needs-kubeconfig",
+                mountPath: "/secrets",
+              },
+            ]
+          : []),
       ],
       imagePullPolicy: "Always", // let for kontinuous-wait-dep image dev
     }
 
-    const volume = {
-      name: "kontinuous-wait-needs-kubeconfig",
-      secret: {
-        secretName: "kubeconfig",
-        items: [
-          {
-            key: "KUBECONFIG",
-            path: "kubeconfig",
-          },
-        ],
-      },
+    if (kubernetesMethod === "kubeconfig") {
+      const volume = {
+        name: "kontinuous-wait-needs-kubeconfig",
+        secret: {
+          secretName: "kubeconfig",
+          items: [
+            {
+              key: "KUBECONFIG",
+              path: "kubeconfig",
+            },
+          ],
+        },
+      }
+      volumes.push(volume)
     }
 
-    volumes.push(volume)
     initContainers.unshift(initContainer)
   }
 
