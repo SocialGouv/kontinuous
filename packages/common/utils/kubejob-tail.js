@@ -3,19 +3,34 @@ const kubectlRetry = require("./kubectl-retry")
 // this adress this issue https://github.com/kubernetes/kubernetes/issues/28369
 
 module.exports = async (jobName, options = {}) => {
-  const { namespace, stdout = process.stdout } = options
+  const {
+    namespace,
+    stdout = process.stdout,
+    since,
+    follow = true,
+    kubeconfig,
+  } = options
 
   // to debug/test remove --follow and reswitch getLogs
 
-  const { $ } = await import("zx")
+  const { YZX } = await import("yzx")
+  const $ = YZX()
   $.verbose = false
+  $.env = {
+    ...process.env,
+    ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
+  }
 
   let lastTimestamp
+
+  const sinceParam = `${since ? `--since=${since}` : ""}`
+  const followParam = `${follow ? "--follow" : ""}`
+
   const getLogs = async (retrying = false) => {
     const resource = `jobs/${jobName}`
-    const logging = $`kubectl logs ${resource} ${
-      retrying ? `--since=10s` : ""
-    } --timestamps --follow`
+    const logging = $`kubectl -n ${namespace} logs ${resource} ${
+      retrying ? `--since=10s` : sinceParam
+    } ${followParam} --timestamps`
     for await (const chunk of logging.stdout) {
       const lines = Buffer.from(chunk).toString()
       for (const line of lines.split("\n")) {
