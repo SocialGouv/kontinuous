@@ -13,22 +13,22 @@ module.exports = async (jobName, options = {}) => {
 
   // to debug/test remove --follow and reswitch getLogs
 
-  const { YZX } = await import("yzx")
-  const $ = YZX()
+  const { $ } = await import("zx")
   $.verbose = false
-  $.env = {
-    ...process.env,
-    ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
-  }
 
   let lastTimestamp
 
   const sinceParam = `${since ? `--since=${since}` : ""}`
   const followParam = `${follow ? "--follow" : ""}`
+  const namespaceParam = `${namespace ? `-n ${namespace}` : ""}`
 
   const getLogs = async (retrying = false) => {
     const resource = `jobs/${jobName}`
-    const logging = $`kubectl -n ${namespace} logs ${resource} ${
+    $.env = {
+      ...process.env,
+      ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
+    }
+    const logging = $`kubectl ${namespaceParam} logs ${resource} ${
       retrying ? `--since=10s` : sinceParam
     } ${followParam} --timestamps`
     for await (const chunk of logging.stdout) {
@@ -62,7 +62,7 @@ module.exports = async (jobName, options = {}) => {
       `${
         namespace ? `-n ${namespace}` : ""
       } get job ${jobName} -o jsonpath={.status}`,
-      { logInfo: false }
+      { logInfo: false, kubeconfig }
     )
     const status = JSON.parse(jsonStatus)
     ended =
