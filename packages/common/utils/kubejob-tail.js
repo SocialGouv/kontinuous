@@ -20,7 +20,7 @@ module.exports = async (jobName, options = {}) => {
 
   const sinceParam = `${since ? `--since=${since}` : ""}`
   const followParam = `${follow ? "--follow" : ""}`
-  const namespaceParam = `${namespace ? `-n ${namespace}` : ""}`
+  const namespaceParam = `${namespace ? `--namespace=${namespace}` : ""}`
 
   const getLogs = async (retrying = false) => {
     const resource = `jobs/${jobName}`
