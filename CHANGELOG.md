@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.99.1](https://github.com/socialgouv/kontinuous/compare/v1.99.0...v1.99.1) (2022-11-17)
+
+
+### Bug Fixes
+
+* kubectl logs retry ([1927576](https://github.com/socialgouv/kontinuous/commit/19275765c433774fa497dde99e9339d31f7de0f8))
+* multithread yzx + kjtail options ([ea7d0e9](https://github.com/socialgouv/kontinuous/commit/ea7d0e978ff39a2139f15c74e78bcdec2c863052))
+
 ## 1.99.0 (2022-11-17)
 
 
