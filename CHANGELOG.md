@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.99.0 (2022-11-17)
+
+
+### Features
+
+* nsplease and native kube rbac ([#75](https://github.com/socialgouv/kontinuous/issues/75)) ([85cf605](https://github.com/socialgouv/kontinuous/commit/85cf605905a827230ae2aa701f74be0b0a7f82ab))
+
 ### [1.98.3](https://github.com/socialgouv/kontinuous/compare/v1.98.2...v1.98.3) (2022-11-16)
 
 
