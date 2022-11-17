@@ -1,15 +1,13 @@
-const { spawn } = require("child_process")
-
 const retry = require("async-retry")
 const { ctx } = require("@modjo-plugins/core")
 const { reqCtx } = require("@modjo-plugins/express/ctx")
 
 const cleanGitRef = require("~common/utils/clean-git-ref")
-const parseCommand = require("~common/utils/parse-command")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const normalizeRepositoryKey = require("~common/utils/normalize-repository-key")
 const refEnv = require("~common/utils/ref-env")
 const kubectlRetry = require("~common/utils/kubectl-retry")
+const kubejobTail = require("~common/utils/kubejob-tail")
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = function ({ services }) {
@@ -55,36 +53,12 @@ module.exports = function ({ services }) {
 
   const runLogStream = async ({ res, kubeconfig, follow, since, jobName }) => {
     const jobNamespace = reqCtx.require("jobNamespace")
-    const [cmd, args] = parseCommand(`
-      kubectl
-        -n ${jobNamespace}
-        logs
-        ${since ? `--since=${since}` : ""}
-        ${follow && follow !== "false" ? "--follow" : ""}
-        job.batch/${jobName}
-    `)
-    await new Promise((resolve, reject) => {
-      const proc = spawn(cmd, args, {
-        encoding: "utf-8",
-        env: {
-          ...process.env,
-          ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
-        },
-      })
-
-      proc.stdout.on("data", (buffer) => {
-        res.write(buffer)
-      })
-      proc.stderr.on("data", (buffer) => {
-        res.write(buffer)
-      })
-      proc.on("close", (code) => {
-        if (code === 0) {
-          resolve()
-        } else {
-          reject(new Error(`kubectl logs exit with code ${code}`))
-        }
-      })
+    await kubejobTail(jobName, {
+      namespace: jobNamespace,
+      since,
+      follow: !!follow,
+      kubeconfig,
+      stdout: res,
     })
   }
 
