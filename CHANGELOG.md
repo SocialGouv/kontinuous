@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.99.3](https://github.com/socialgouv/kontinuous/compare/v1.99.2...v1.99.3) (2022-11-17)
+
+
+### Bug Fixes
+
+* kubejob-tail ([eac412d](https://github.com/socialgouv/kontinuous/commit/eac412d74f8fd4fb7f26e9e6a99dc6e7b95e472e))
+
 ### [1.99.2](https://github.com/socialgouv/kontinuous/compare/v1.99.1...v1.99.2) (2022-11-17)
 
 
