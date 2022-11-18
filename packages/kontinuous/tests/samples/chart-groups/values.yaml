@@ -1,0 +1,13 @@
+app:
+  ~chart: app
+
+api1:
+  ~chart: app
+  ~chart-group: [the-group,second-group]
+
+api2:
+  ~chart: app
+  ~chart-group: the-group
+
+api3:
+  ~chart-group: app

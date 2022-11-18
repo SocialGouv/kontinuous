@@ -6,9 +6,14 @@ const recursiveEnableChartGroup = (values, chartGroup) => {
     if (typeof val !== "object" || val === null) {
       continue
     }
-    const valChartGroup = val["~chart-group"]
-    if (valChartGroup && chartGroup === valChartGroup) {
-      val.enabled = true
+    let valChartGroup = val["~chart-group"]
+    if (valChartGroup) {
+      if (!Array.isArray(valChartGroup)) {
+        valChartGroup = [valChartGroup]
+      }
+      if (valChartGroup.some((group) => group === chartGroup)) {
+        val.enabled = true
+      }
     }
     recursiveEnableChartGroup(val)
   }
