@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.101.0](https://github.com/socialgouv/kontinuous/compare/v1.100.4...v1.101.0) (2022-11-18)
+
+
+### Features
+
+* chart-group meta-value + tests ([a9efd81](https://github.com/socialgouv/kontinuous/commit/a9efd814f2c9ff2b6ebf52862358c985bcd67804))
+* chart-group multi ([ffefd2c](https://github.com/socialgouv/kontinuous/commit/ffefd2c395ae027dca9679c59633ba5f2a7f6e59))
+
+
+### Bug Fixes
+
+* add input chart to workflow deploy ([5d8d97f](https://github.com/socialgouv/kontinuous/commit/5d8d97fe09cef2d48422dd97aae6f6fd3145e19d))
+
 ### [1.100.4](https://github.com/socialgouv/kontinuous/compare/v1.100.3...v1.100.4) (2022-11-18)
 
 
