@@ -1,6 +1,19 @@
 const get = require("lodash.get")
 const set = require("lodash.set")
 
+const recursiveEnableChartGroup = (values, chartGroup) => {
+  for (const val of Object.values(values)) {
+    if (typeof val !== "object" || val === null) {
+      continue
+    }
+    const valChartGroup = val["~chart-group"]
+    if (valChartGroup && chartGroup === valChartGroup) {
+      val.enabled = true
+    }
+    recursiveEnableChartGroup(val)
+  }
+}
+
 module.exports = (values, config) => {
   const hasAll = !(config.chart && config.chart.length > 0)
   values.global.kontinuous.hasChart = !hasAll
@@ -26,5 +39,6 @@ module.exports = (values, config) => {
       set(values, key, v)
     }
     v.enabled = true
+    recursiveEnableChartGroup(values, key)
   }
 }

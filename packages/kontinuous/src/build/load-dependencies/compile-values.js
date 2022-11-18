@@ -1,11 +1,11 @@
 const fs = require("fs-extra")
 
 const getYamlPath = require("~common/utils/get-yaml-path")
+
 const createContext = require("~/plugins/context")
 const pluginFunction = require("~/plugins/context/function")
 
 const valuesEnableStandaloneCharts = require("./values-enable-standalone-charts")
-
 const beforeMergeProjectValues = require("./before-merge-project-values")
 const cleanMetaValues = require("./clean-meta-values")
 const removeNotEnabledValues = require("./remove-not-enabled-values")
@@ -52,6 +52,7 @@ module.exports = async (config, logger) => {
   }
 
   valuesEnableStandaloneCharts(values, config)
+
   valuesOverride(values, config, logger)
 
   const chartsAliasMap = new Map()

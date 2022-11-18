@@ -1,0 +1,352 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test build manifests with snapshots chart-group.dev 1`] = `
+"apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: api1
+    application: test-chart-group
+    kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+    kontinuous/deployment.env: test-chart-group-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-3d60sq-api1
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: api1
+  namespace: test-chart-group-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.api1
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/api1/templates/deployment.yaml
+    kontinuous/plugin.chart-group: the-group
+    kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+    kontinuous/depname.full: project.fabrique.contrib.api1.deployment.api1
+    kontinuous/depname.chartResource: api1.deployment.api1
+    kontinuous/depname.chartName: api1
+    kontinuous/depname.chartPath: project.fabrique.contrib.api1
+    kontinuous/depname.resourcePath: deployment.api1
+    kontinuous/depname.resourceName: api1
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: api1
+  template:
+    metadata:
+      labels:
+        component: api1
+        application: test-chart-group
+        namespace: test-chart-group-feature-branch-1
+        kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+        kontinuous/deployment.env: test-chart-group-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-3d60sq-api1
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-chart-group-feature-branch-1
+                    - key: component
+                      operator: In
+                      values:
+                        - api1
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            harbor.fabrique.social.gouv.fr/test-chart-group/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: api2
+    application: test-chart-group
+    kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+    kontinuous/deployment.env: test-chart-group-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-3d60sq-api2
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: api2
+  namespace: test-chart-group-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.api2
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/api2/templates/deployment.yaml
+    kontinuous/plugin.chart-group: the-group
+    kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+    kontinuous/depname.full: project.fabrique.contrib.api2.deployment.api2
+    kontinuous/depname.chartResource: api2.deployment.api2
+    kontinuous/depname.chartName: api2
+    kontinuous/depname.chartPath: project.fabrique.contrib.api2
+    kontinuous/depname.resourcePath: deployment.api2
+    kontinuous/depname.resourceName: api2
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: api2
+  template:
+    metadata:
+      labels:
+        component: api2
+        application: test-chart-group
+        namespace: test-chart-group-feature-branch-1
+        kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+        kontinuous/deployment.env: test-chart-group-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-3d60sq-api2
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-chart-group-feature-branch-1
+                    - key: component
+                      operator: In
+                      values:
+                        - api2
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            harbor.fabrique.social.gouv.fr/test-chart-group/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: api1
+    application: test-chart-group
+    kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+    kontinuous/deployment.env: test-chart-group-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-5cfizy-api1
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: api1
+  namespace: test-chart-group-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.api1
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/api1/templates/service.yaml
+    kontinuous/plugin.chart-group: the-group
+    kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: api1
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: api2
+    application: test-chart-group
+    kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+    kontinuous/deployment.env: test-chart-group-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-5cfizy-api2
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: api2
+  namespace: test-chart-group-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.api2
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/api2/templates/service.yaml
+    kontinuous/plugin.chart-group: the-group
+    kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: api2
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.api1
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/api1/templates/ingress.yaml
+    kontinuous/plugin.chart-group: the-group
+    kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+  labels:
+    component: api1
+    application: test-chart-group
+    kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+    kontinuous/deployment.env: test-chart-group-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-5dz9oh-api1
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: api1
+  namespace: test-chart-group-feature-branch-1
+spec:
+  rules:
+    - host: api1-test-chart-group-feature-branch-1.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: api1
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - api1-test-chart-group-feature-branch-1.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.api2
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/api2/templates/ingress.yaml
+    kontinuous/plugin.chart-group: the-group
+    kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+  labels:
+    component: api2
+    application: test-chart-group
+    kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b0874-391tlh
+    kontinuous/deployment.env: test-chart-group-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-5dz9oh-api2
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: api2
+  namespace: test-chart-group-feature-branch-1
+spec:
+  rules:
+    - host: api2-test-chart-group-feature-branch-1.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: api2
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - api2-test-chart-group-feature-branch-1.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+"
+`;
