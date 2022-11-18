@@ -11,7 +11,12 @@ module.exports = function ({ services: { pushed, deleted } }) {
       }
 
       const { ref, repositoryUrl, commit } = body
-      const { mountKubeconfig, kontinuousVersion } = query
+      const {
+        mountKubeconfig,
+        kontinuousVersion,
+        chart,
+        ignoreProjectTemplates,
+      } = query
 
       const runJob = await eventHandlers[eventName]({
         ref,
@@ -20,7 +25,10 @@ module.exports = function ({ services: { pushed, deleted } }) {
         env,
         kontinuousVersion,
         mountKubeconfig,
+        chart,
+        ignoreProjectTemplates,
       })
+
       if (!runJob) {
         return res.status(204).json({ message: "no-op" })
       }

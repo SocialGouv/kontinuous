@@ -17,6 +17,8 @@ module.exports = ({
   initContainers = [],
   commits,
   deployKeyCiSecretName,
+  chart,
+  ignoreProjectTemplates,
   kontinuousVersion,
   mountKubeconfig,
 }) => {
@@ -191,6 +193,22 @@ module.exports = ({
                       {
                         name: "KS_DEPLOY_KEY_FILE",
                         value: "/secrets/ssh/deploy-key",
+                      },
+                    ]
+                  : []),
+                ...(chart
+                  ? [
+                      {
+                        name: "KS_CHART",
+                        value: chart,
+                      },
+                    ]
+                  : []),
+                ...(ignoreProjectTemplates
+                  ? [
+                      {
+                        name: "KS_IGNORE_PROJECT_TEMPLATES",
+                        value: "true",
                       },
                     ]
                   : []),

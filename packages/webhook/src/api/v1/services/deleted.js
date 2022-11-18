@@ -5,9 +5,11 @@ module.exports = function ({ services }) {
       ref,
       after,
       repositoryUrl,
-      args: ["deploy", "--chart", "deactivate", "--ignore-project-templates"],
+      args: ["deploy"],
       checkout: true,
       kontinuousVersion,
       mountKubeconfig,
+      chart: "deactivate",
+      ignoreProjectTemplates: true,
     })
 }

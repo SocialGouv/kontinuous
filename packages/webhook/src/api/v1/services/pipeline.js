@@ -23,6 +23,8 @@ module.exports = ({ services }) => {
     initContainers,
     commits,
     cluster,
+    chart,
+    ignoreProjectTemplates,
     kontinuousVersion,
     mountKubeconfig,
   }) => {
@@ -115,6 +117,8 @@ module.exports = ({ services }) => {
       webhookToken,
       commits,
       deployKeyCiSecretName,
+      chart,
+      ignoreProjectTemplates,
       kontinuousVersion,
       mountKubeconfig,
     })

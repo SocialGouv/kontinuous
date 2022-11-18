@@ -74,6 +74,8 @@ echo "KS_GIT_REPOSITORY_URLENCODED=$KS_GIT_REPOSITORY_URLENCODED">>$GITHUB_ENV
 echo "KS_EVENT=$KS_EVENT">>$GITHUB_ENV
 echo "KS_DEBUG=$KS_DEBUG">>$GITHUB_ENV
 
+echo "KS_CHART=$KS_CHART">>$GITHUB_ENV
+
 if [ -n "$TRIGGER_WEBHOOK" ] && [ "$TRIGGER_WEBHOOK" != "false" ] || [ "$GITHUB_RUN_ATTEMPT" -gt "1" ]; then
   if [ "$GITHUB_RUN_ATTEMPT" -gt "1" ]; then
     echo "Trigger webhook from action for rerun attempt #${GITHUB_RUN_ATTEMPT}"
@@ -81,6 +83,9 @@ if [ -n "$TRIGGER_WEBHOOK" ] && [ "$TRIGGER_WEBHOOK" != "false" ] || [ "$GITHUB_
     echo "Trigger webhook from action"
   fi
   URI="${KS_WEBHOOK_URI}/api/v1/oas/hooks/user?project=${KS_PROJECT_NAME}&event=${KS_EVENT}&env=${KS_ENVIRONMENT}"
+  if [ "$KS_CHART" != "" ]; then
+    URI="${URI}&chart=${KS_CHART}"
+  fi
   if [ "$KS_WEBHOOK_MOUNT_KUBECONFIG" != "" ]; then
     URI="${URI}&mountKubeconfig=${KS_WEBHOOK_MOUNT_KUBECONFIG}"
   fi

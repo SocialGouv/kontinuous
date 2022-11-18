@@ -4,6 +4,9 @@ on:
       webhookUri:
         required: false
         type: string
+      chart:
+        required: false
+        type: string
     secrets:
       KUBEWEBHOOK_TOKEN:
         required: true
@@ -29,6 +32,7 @@ jobs:
           webhookUri: ${{ inputs.webhookUri }}
           triggerWebhook: "true"
           environment: "prod"
+          chart: ${{ inputs.chart }}
       
       - name: Reporting 📜
         uses: socialgouv/kontinuous/.github/actions/deployment-reporting@v1.101.0

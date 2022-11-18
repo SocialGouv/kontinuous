@@ -28,15 +28,23 @@ module.exports = function ({ services: { pushed, deleted } }) {
       const { ref, after, commits } = body
       const { git_http_url: repositoryUrl } = body.project
 
-      const { mountKubeconfig, kontinuousVersion } = query
+      const {
+        mountKubeconfig,
+        kontinuousVersion,
+        chart,
+        ignoreProjectTemplates,
+      } = query
+
       try {
         await eventHandlers[eventName]({
           ref,
           after,
           repositoryUrl,
           commits,
+          chart,
           mountKubeconfig,
           kontinuousVersion,
+          ignoreProjectTemplates,
         })
       } catch (err) {
         const logger = reqCtx.require("logger")
