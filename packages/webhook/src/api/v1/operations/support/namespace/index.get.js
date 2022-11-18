@@ -3,11 +3,14 @@ const { ctx } = require("@modjo-plugins/core")
 
 async function listNamespaces({ kubeconfig }) {
   const logger = ctx.require("logger")
+  const config = ctx.require("config")
+  const { surviveOnBrokenCluster } = config.project
   logger.debug("getting list of namespaces")
   const json = await kubectlRetry("get namespace -o json", {
     kubeconfig,
     logInfo: false,
     logger,
+    surviveOnBrokenCluster,
   })
   const data = JSON.parse(json)
   return data.items.map((ns) => ns.metadata.name)

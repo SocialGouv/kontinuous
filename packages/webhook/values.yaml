@@ -54,3 +54,5 @@ rootKubeconfigSecrets: []
 kubeconfigSecrets: []
 tokenSecrets: []
 repositories: []
+
+surviveOnBrokenCluster: true

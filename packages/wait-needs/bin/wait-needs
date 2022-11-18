@@ -4,7 +4,13 @@ const rolloutStatusWatch = require("~common/utils/rollout-status-watch")
 const logger = require("~common/utils/logger")
 const kubectlRetry = require("~common/utils/kubectl-retry")
 
-const runWaitNeeds = async ({ waitNeeds, annotationsRef, timeout = 900 }) => {
+const runWaitNeeds = async ({
+  waitNeeds,
+  annotationsRef,
+  kubectlRetryOptions,
+  surviveOnBrokenCluster,
+  timeout = 900,
+}) => {
   const interceptor = {}
 
   setTimeout(() => {
@@ -21,7 +27,11 @@ const runWaitNeeds = async ({ waitNeeds, annotationsRef, timeout = 900 }) => {
   const getSelfRefAnnotations = async () => {
     const annotationsJSON = await kubectlRetry(
       `-n ${selfRefNamespace} get ${lowerkind}/${selfRefName} -o json`,
-      { logInfo: false }
+      {
+        logInfo: false,
+        retryOptions: kubectlRetryOptions,
+        surviveOnBrokenCluster,
+      }
     )
     const manifest = JSON.parse(annotationsJSON)
     const { annotations = {} } = manifest.metadata
@@ -34,7 +44,11 @@ const runWaitNeeds = async ({ waitNeeds, annotationsRef, timeout = 900 }) => {
 
   const annotateCompletedOnce = async () => {
     await kubectlRetry(
-      `-n ${selfRefNamespace} annotate ${lowerkind}/${selfRefName} ${completedOnceAnnotationKey}=${deploymentSelector} --overwrite`
+      `-n ${selfRefNamespace} annotate ${lowerkind}/${selfRefName} ${completedOnceAnnotationKey}=${deploymentSelector} --overwrite`,
+      {
+        kubectlRetryOptions,
+        surviveOnBrokenCluster,
+      }
     )
   }
 
@@ -108,14 +122,23 @@ const runWaitNeeds = async ({ waitNeeds, annotationsRef, timeout = 900 }) => {
 const main = async () => {
   const jsonWaitNeeds = process.env.WAIT_NEEDS
   const annotationsRef = process.env.WAIT_NEEDS_ANNOTATIONS_REF
+  const surviveOnBrokenCluster =
+    process.env.SURVIVE_ON_BROKEN_CLUSTER === "true"
   const waitNeeds = JSON.parse(jsonWaitNeeds)
+  const kubectlRetryOptions = {}
   let timeout = process.env.TIMEOUT
   if (timeout) {
     timeout = parseInt(timeout, 10)
   } else {
     timeout = undefined
   }
-  const ok = await runWaitNeeds({ waitNeeds, annotationsRef, timeout })
+  const ok = await runWaitNeeds({
+    waitNeeds,
+    annotationsRef,
+    timeout,
+    surviveOnBrokenCluster,
+    kubectlRetryOptions,
+  })
   if (ok) {
     process.exit(0)
   } else {

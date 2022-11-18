@@ -104,7 +104,7 @@ module.exports = async (kubectlArgs, options = {}) => {
             throw err
           }
           if (surviveOnBrokenCluster) {
-            const retriable = retriableOnBrokenCluster()
+            const retriable = retriableOnBrokenCluster(err)
             if (retriable.retry) {
               logger.debug({ error: err }, `${retriable.message}, retrying...`)
               await sleep(3000)

@@ -39,12 +39,15 @@ module.exports = async (
     (manifest) => manifest.metadata?.name || manifest.name
   )
 
+  const { surviveOnBrokenCluster = false } = options
+
   await needBin(utils.needKubectl)
   const { kubectlDeleteManifest } = utils
   const kubectlDeleteManifestOptions = {
     rootDir: config.buildPath,
     kubeconfig: config.kubeconfig,
     kubeconfigContext: config.kubeconfigContext,
+    surviveOnBrokenCluster,
   }
   await kubectlDeleteManifest(manifestsToClean, kubectlDeleteManifestOptions)
 

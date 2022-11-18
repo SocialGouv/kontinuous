@@ -9,6 +9,8 @@ module.exports = async (jobName, options = {}) => {
     since,
     follow = true,
     kubeconfig,
+    kubectlRetryOptions,
+    surviveOnBrokenCluster,
   } = options
 
   // to debug/test remove --follow and reswitch getLogs
@@ -62,7 +64,12 @@ module.exports = async (jobName, options = {}) => {
       `${
         namespace ? `-n ${namespace}` : ""
       } get job ${jobName} -o jsonpath={.status}`,
-      { logInfo: false, kubeconfig }
+      {
+        logInfo: false,
+        kubeconfig,
+        retryOptions: kubectlRetryOptions,
+        surviveOnBrokenCluster,
+      }
     )
     const status = JSON.parse(jsonStatus)
     ended =
