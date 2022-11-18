@@ -7,6 +7,9 @@ on:
       environment:
         type: string
         required: false
+      chart:
+        type: string
+        required: false
 
 jobs:
   deploy:
@@ -22,3 +25,4 @@ jobs:
           ciNamespace: "${{ secrets.RANCHER_PROJECT_NAME }}-ci"
           environment: "${{ inputs.environment }}"
           disableDiff: "${{ inputs.disableDiff }}"
+          chart: "${{ inputs.chart }}"
