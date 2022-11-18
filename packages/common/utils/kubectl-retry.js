@@ -1,9 +1,12 @@
+const { setTimeout: sleep } = require("timers/promises")
 const { spawn } = require("child_process")
 
 const retry = require("async-retry")
 
 const parseCommand = require("./parse-command")
 const defaultLogger = require("./logger")
+const retriableOnBrokenCluster = require("./retriable-on-broken-cluster")
+const retriableNetwork = require("./retriable-network")
 
 const kubectlRun = async (kubectlArgs, options = {}) => {
   const {
@@ -78,7 +81,9 @@ module.exports = async (kubectlArgs, options = {}) => {
     logger = defaultLogger,
     logError = true,
     logInfo = true,
+    retryOptions = {},
     collectProcesses = [],
+    surviveOnBrokenCluster = false,
   } = options
 
   let result
@@ -93,23 +98,18 @@ module.exports = async (kubectlArgs, options = {}) => {
           })
           return output
         } catch (err) {
-          if (
-            err.message.includes(
-              "Unable to connect to the server: net/http: TLS handshake timeout"
-            )
-          ) {
-            logger.debug(
-              `kubectl network error(net/http: TLS handshake timeout): retrying...`
-            )
+          const retriableNetworkError = retriableNetwork(err)
+          if (retriableNetworkError.retry) {
+            logger.debug(`${retriableNetworkError.message}, retrying...`)
             throw err
           }
-          if (err.message.includes("timeout")) {
-            logger.debug(`kubectl network error(timeout stuff): retrying...`)
-            throw err
-          }
-          if (err.message.includes("the server doesn't have a resource type")) {
-            logger.debug(`kubectl api resource type error: retrying...`)
-            throw err
+          if (surviveOnBrokenCluster) {
+            const retriable = retriableOnBrokenCluster()
+            if (retriable.retry) {
+              logger.debug({ error: err }, `${retriable.message}, retrying...`)
+              await sleep(3000)
+              throw err
+            }
           }
           bail(err)
         }
@@ -119,6 +119,7 @@ module.exports = async (kubectlArgs, options = {}) => {
         factor: 1,
         minTimeout: 1000,
         maxTimeout: 3000,
+        ...retryOptions,
       }
     )
     if (logInfo) {
