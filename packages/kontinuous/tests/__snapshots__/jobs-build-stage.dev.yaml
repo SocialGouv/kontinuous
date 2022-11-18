@@ -154,6 +154,8 @@ spec:
                 [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-jobs-build-stage-feature-branch-1-db-create-se-127cnw\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-jobs-build-stage-feature-branch-1-d-65jnt4\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
+            - name: SURVIVE_ON_BROKEN_CLUSTER
+              value: 'true'
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
@@ -805,6 +807,8 @@ spec:
                 [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-jobs-build-stage-feature-branch-1-build-app-bu-1x52v5\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-jobs-build-stage-feature-branch-1-b-5tofle\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
+            - name: SURVIVE_ON_BROKEN_CLUSTER
+              value: 'true'
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
@@ -928,6 +932,8 @@ spec:
                 [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-jobs-build-stage-feature-branch-1-build-app-bu-1x52v5\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-jobs-build-stage-feature-branch-1-b-5tofle\\"},\\"needOnce\\":true},{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-jobs-build-stage-feature-branch-1-db-create-db-13oc8a\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-jobs-build-stage-feature-branch-1-d-1p343v\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
+            - name: SURVIVE_ON_BROKEN_CLUSTER
+              value: 'true'
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets

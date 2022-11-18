@@ -100,6 +100,9 @@ module.exports = async function createConfig() {
   const ciNamespaceKubeconfigSecretName =
     process.env.KUBEWEBHOOK_CI_NAMESPACE_KUBECONFIG_SECRET_NAME || "kubeconfig"
 
+  const surviveOnBrokenCluster =
+    process.env.KUBEWEBHOOK_SURVIVE_ON_BROKEN_CLUSTER === "true"
+
   const config = {
     project: {
       oas: {
@@ -126,6 +129,7 @@ module.exports = async function createConfig() {
         mountKubeconfigDefault: ciNamespaceMountKubeconfigDefault,
         kubeconfigSecretName: ciNamespaceKubeconfigSecretName,
       },
+      surviveOnBrokenCluster,
     },
     microserviceOapi: { serviceName },
     logger: {

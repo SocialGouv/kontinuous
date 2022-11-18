@@ -8,6 +8,7 @@ module.exports = async (manifests, options, context) => {
   const { kindIsRunnable, KontinuousPluginError } = utils
 
   const { kubernetesMethod = "kubeconfig" } = options
+  const { surviveOnBrokenCluster } = options
 
   const deps = getDeps(manifests, context)
 
@@ -92,6 +93,9 @@ module.exports = async (manifests, options, context) => {
         { name: "WAIT_NEEDS", value: jsonDependencies },
         ...(kubernetesMethod === "kubeconfig"
           ? [{ name: "KUBECONFIG", value: "/secrets/kubeconfig" }]
+          : []),
+        ...(surviveOnBrokenCluster
+          ? [{ name: "SURVIVE_ON_BROKEN_CLUSTER", value: "true" }]
           : []),
       ],
       volumeMounts: [

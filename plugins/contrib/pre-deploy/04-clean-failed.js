@@ -2,7 +2,7 @@ const handledKinds = ["Deployment", "StatefulSet", "Job"]
 
 module.exports = async (
   manifests,
-  _options,
+  options,
   { utils, config, logger, needBin }
 ) => {
   const { refLabelKey, kubeconfig, kubeconfigContext: kubecontext } = config
@@ -73,12 +73,15 @@ module.exports = async (
     (manifest) => manifest.metadata?.name || manifest.name
   )
 
+  const { surviveOnBrokenCluster = false } = options
+
   await needBin(utils.needKubectl)
   const { kubectlDeleteManifest } = utils
   const kubectlDeleteManifestOptions = {
     rootDir: config.buildPath,
     kubeconfig: config.kubeconfig,
     kubeconfigContext: config.kubeconfigContext,
+    surviveOnBrokenCluster,
   }
 
   logger.debug("♻️ cleaning failed resources")

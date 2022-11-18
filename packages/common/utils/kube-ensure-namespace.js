@@ -1,42 +1,8 @@
 const retry = require("async-retry")
+
 const kubectlRetry = require("./kubectl-retry")
-
+const checkNamespaceIsAvailable = require("./check-namespace-is-available")
 const defaultLogger = require("./logger")
-
-const checkNamespaceIsAvailable = async ({
-  kubeconfig,
-  kubeconfigContext,
-  namespace,
-  logger,
-  check,
-  bail,
-}) => {
-  logger.debug("checking if namespace is available")
-  try {
-    const json = await kubectlRetry(`get ns ${namespace} -o json`, {
-      kubeconfig,
-      kubeconfigContext,
-      logInfo: false,
-      ignoreErrors: ["NotFound", "Forbidden"],
-      logger,
-    })
-    const data = JSON.parse(json)
-    const phase = data?.status.phase
-    // logger.debug(`namespace "${namespace}" phase is "${phase}"`)
-    if (phase === "Active") {
-      if (check) {
-        const ready = await check(data, bail)
-        return ready
-      }
-      return true
-    }
-    return false
-  } catch (err) {
-    // do nothing
-    // logger.debug(err)
-  }
-  return false
-}
 
 module.exports = async ({
   kubeconfig,
@@ -44,34 +10,35 @@ module.exports = async ({
   manifest,
   logger = defaultLogger,
   check,
+  surviveOnBrokenCluster,
+  kubectlRetryOptions,
+  retryOptions = {},
 }) => {
   const namespace = manifest.metadata.name
 
+  const kubectlOptions = {
+    kubeconfig,
+    kubeconfigContext,
+    surviveOnBrokenCluster,
+    retryOptions: kubectlRetryOptions,
+    logger,
+  }
+
   const ensureNamespace = async (verb) => {
-    await kubectlRetry(
-      [
-        ...(kubeconfigContext ? [`--context=${kubeconfigContext}`] : []),
-        ...verb,
-        "-f",
-        "-",
-      ],
-      {
-        kubeconfig,
-        ignoreErrors: ["AlreadyExists"],
-        stdin: JSON.stringify(manifest),
-      }
-    )
+    await kubectlRetry([...verb, "-f", "-"], {
+      ...kubectlOptions,
+      ignoreErrors: ["AlreadyExists"],
+      stdin: JSON.stringify(manifest),
+    })
+  }
+
+  const checkNamespaceIsAvailableOptions = {
+    ...kubectlOptions,
+    namespace,
   }
 
   logger.info(`ensure namespace "${namespace}" is active`)
-  if (
-    await checkNamespaceIsAvailable({
-      kubeconfig,
-      kubeconfigContext,
-      namespace,
-      logger,
-    })
-  ) {
+  if (await checkNamespaceIsAvailable(checkNamespaceIsAvailableOptions)) {
     logger.info({ namespace }, "apply namespace")
     await ensureNamespace(["apply"])
     return
@@ -83,10 +50,7 @@ module.exports = async ({
     async (bail) => {
       if (
         !(await checkNamespaceIsAvailable({
-          kubeconfig,
-          kubeconfigContext,
-          namespace,
-          logger,
+          ...checkNamespaceIsAvailableOptions,
           bail,
           check,
         }))
@@ -99,6 +63,7 @@ module.exports = async ({
       factor: 1,
       minTimeout: 1000,
       maxTimeout: 3000,
+      ...retryOptions,
     }
   )
 }

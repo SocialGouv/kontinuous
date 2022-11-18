@@ -1,6 +1,3 @@
-const { setTimeout: sleep } = require("timers/promises")
-
-const retry = require("async-retry")
 const async = require("async")
 
 const rolloutStatus = require("../lib/rollout-status")
@@ -38,11 +35,23 @@ module.exports = async (deploys, options, context) => {
     !config.noValidate && defaultOptions.validate
   )
 
+  const kubectlRetryOptions = {
+    retries: 10,
+    factor: 2,
+    minTimeout: 1000,
+    maxTimeout: 15000,
+    randomize: true,
+  }
+
+  const { surviveOnBrokenCluster = false } = options
+
   const kubectlProcesses = []
   const kubectlDeleteManifestOptions = {
     rootDir: config.buildPath,
     kubeconfig,
     kubeconfigContext,
+    retryOptions: kubectlRetryOptions,
+    surviveOnBrokenCluster,
   }
 
   const forceAnnotationKey = "kontinuous/kubectl-force"
@@ -83,6 +92,8 @@ module.exports = async (deploys, options, context) => {
       collectProcesses: kubectlProcesses,
       logInfo: true,
       logError: false,
+      retryOptions: kubectlRetryOptions,
+      surviveOnBrokenCluster,
     })
   }
 
@@ -124,50 +135,8 @@ module.exports = async (deploys, options, context) => {
     return result
   }
 
-  const applyManifestWithRetry = async (manifest) =>
-    retry(
-      async (bail) => {
-        try {
-          const r = await applyManifest(manifest)
-          return r
-        } catch (err) {
-          if (err.message.includes("no matches for kind")) {
-            logger.debug(
-              { error: err },
-              `kubectl server error(no matches for kind, maybe broken cluster again): retrying...`
-            )
-            await sleep(3000)
-            throw err
-          }
-          if (
-            err.message.includes(
-              "error trying to reach service: dial tcp 10.0.0.1:443: connect: connection refused"
-            )
-          ) {
-            logger.debug(
-              `kubectl server error(connection refused): retrying...`
-            )
-            await sleep(3000)
-            throw err
-          }
-          if (err.message.includes("InternalError")) {
-            logger.debug(`kubectl server error(InternalError): retrying...`)
-            throw err
-          }
-          bail(err)
-        }
-      },
-      {
-        retries: 10,
-        factor: 2,
-        minTimeout: 1000,
-        maxTimeout: 15000,
-        randomize: true,
-      }
-    )
-
   const applyPromise = !dryRun
-    ? async.mapLimit(manifests, applyConcurrencyLimit, applyManifestWithRetry)
+    ? async.mapLimit(manifests, applyConcurrencyLimit, applyManifest)
     : null
 
   let stopRolloutStatus

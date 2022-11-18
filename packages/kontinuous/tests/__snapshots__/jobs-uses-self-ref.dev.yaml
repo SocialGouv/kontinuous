@@ -152,6 +152,8 @@ spec:
                 [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-jobs-uses-self-ref-feature-branch-1-db-create-2oa7d4\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-jobs-uses-self-ref-feature-branch-1-1jp7w3\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
+            - name: SURVIVE_ON_BROKEN_CLUSTER
+              value: 'true'
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets

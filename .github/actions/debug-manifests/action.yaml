@@ -3,6 +3,9 @@ description: "Debug some kubernetes manifests"
 inputs:
   token:
     description: "Github token for PR comment"
+  path:
+    description: "Manifests file path, default manifests.yaml"
+    default: "manifests.yaml"
 runs:
   using: "composite"
   steps:
@@ -10,7 +13,7 @@ runs:
       id: debug-manifests
       uses: socialgouv/kontinuous/.github/actions/debug-manifests-output@v1.99.3
       with:
-        path: manifests.yaml
+        path: ${{ inputs.path }}
 
     - uses: jwalton/gh-find-current-pr@v1
       id: finder

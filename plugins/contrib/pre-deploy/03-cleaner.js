@@ -2,16 +2,20 @@ const matchAnnotation = "kontinuous/plugin.preDeploy.cleaner"
 
 module.exports = async (
   manifests,
-  _options,
+  options,
   { utils, config, logger, needBin }
 ) => {
   await needBin(utils.needKubectl)
 
   const { kubectlDeleteManifest } = utils
+
+  const { surviveOnBrokenCluster = false } = options
+
   const kubectlDeleteManifestOptions = {
     rootDir: config.buildPath,
     kubeconfig: config.kubeconfig,
     kubeconfigContext: config.kubeconfigContext,
+    surviveOnBrokenCluster,
   }
 
   const promises = []

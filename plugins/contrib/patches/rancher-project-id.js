@@ -34,6 +34,8 @@ module.exports = async (
     `missing rancher projectId, getting from cluster using ci-namespace "${ciNamespace}"`
   )
 
+  const { surviveOnBrokenCluster = false } = options
+
   let rancherProjectId = ""
   if (options.rancherProjectId) {
     rancherProjectId = options.rancherProjectId
@@ -49,6 +51,7 @@ module.exports = async (
         {
           kubeconfig,
           logInfo: false,
+          surviveOnBrokenCluster,
         }
       )
       const data = JSON.parse(json)

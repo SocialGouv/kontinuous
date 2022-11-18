@@ -153,6 +153,8 @@ spec:
                 [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-jobs-seed-command-feature-branch-1-db-create-s-34sf13\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-jobs-seed-command-feature-branch-1-61qgw4\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
+            - name: SURVIVE_ON_BROKEN_CLUSTER
+              value: 'true'
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
@@ -494,6 +496,8 @@ spec:
                 [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-jobs-seed-command-feature-branch-1-db-create-db-13oc8a\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-jobs-seed-command-feature-branch-1-5a4gq8\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
+            - name: SURVIVE_ON_BROKEN_CLUSTER
+              value: 'true'
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
@@ -618,6 +622,8 @@ spec:
                 [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-jobs-seed-command-feature-branch-1-seed\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-jobs-seed-command-feature-branch-1-seed\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
+            - name: SURVIVE_ON_BROKEN_CLUSTER
+              value: 'true'
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets

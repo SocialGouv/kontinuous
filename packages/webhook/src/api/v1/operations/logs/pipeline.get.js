@@ -12,6 +12,8 @@ const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = function ({ services }) {
   const logger = ctx.require("logger")
+  const config = ctx.require("config")
+  const { surviveOnBrokenCluster } = config.project
   const readyToLogPhases = ["Running", "Succeeded", "Failed"]
   const checkJobExists = async ({ jobName, commit, kubeconfig }) => {
     const jobNamespace = reqCtx.require("jobNamespace")
@@ -23,7 +25,7 @@ module.exports = function ({ services }) {
         --sort-by=.metadata.creationTimestamp
         --output=jsonpath={.items[-1].status}
       `,
-        { kubeconfig, logger }
+        { kubeconfig, logger, surviveOnBrokenCluster }
       )
       const podStatus = JSON.parse(jsonPodStatus)
       const { phase } = podStatus

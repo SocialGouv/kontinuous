@@ -358,6 +358,8 @@ spec:
                 [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-jobs-build-options-feature-branch-1-build-app-5j2qyt\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-jobs-build-options-feature-branch-1-1sneqi\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
+            - name: SURVIVE_ON_BROKEN_CLUSTER
+              value: 'true'
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
