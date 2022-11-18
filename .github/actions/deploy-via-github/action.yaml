@@ -131,6 +131,6 @@ runs:
     - name: Debug manifests
       uses: socialgouv/kontinuous/.github/actions/debug-manifests@v1.99.3
       if: github.event_name != 'delete'
-      working-directory: ${{ env.KS_BUILD_PATH }}
       with:
         token: ${{ inputs.token }}
+        path: ${{ env.KS_BUILD_PATH }}/manifests.yaml
