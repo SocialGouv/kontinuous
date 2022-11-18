@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.101.2](https://github.com/socialgouv/kontinuous/compare/v1.101.1...v1.101.2) (2022-11-18)
+
+
+### Bug Fixes
+
+* add ignoreProjectTemplates to wh gh actions ([ee23699](https://github.com/socialgouv/kontinuous/commit/ee2369973736dd7dfbbe4beb4e4ad285587ed350))
+* up webhook snapshots ([de4c2b9](https://github.com/socialgouv/kontinuous/commit/de4c2b90881165f32270987ebdb1b35f16025617))
+
 ### [1.101.1](https://github.com/socialgouv/kontinuous/compare/v1.101.0...v1.101.1) (2022-11-18)
 
 
