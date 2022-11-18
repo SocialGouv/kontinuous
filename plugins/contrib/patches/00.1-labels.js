@@ -1,5 +1,3 @@
-const sanitizeLabel = require("~common/utils/sanitize-label")
-
 const templateLabelKinds = ["Job", "Deployment", "StatefulSet", "DaemonSet"]
 
 module.exports = (manifests, _options, { config, utils }) => {
@@ -12,7 +10,7 @@ module.exports = (manifests, _options, { config, utils }) => {
     deploymentEnvLabelValue,
   } = config
 
-  const { slug, isVersionTag } = utils
+  const { slug, isVersionTag, sanitizeLabel } = utils
 
   for (const manifest of manifests) {
     const { kind, apiVersion } = manifest
