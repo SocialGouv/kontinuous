@@ -36,7 +36,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
     kontinuous/deployment.env: test-include-file-feature-branch-1
@@ -71,7 +70,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
     kontinuous/deployment.env: test-include-file-feature-branch-1
@@ -98,8 +96,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
       project.fabrique.contrib.jobs.job.job-test-include-file-feature-branch-1-say-hello
     kontinuous/depname.chartResource: jobs.job.job-test-include-file-feature-branch-1-say-hello

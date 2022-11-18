@@ -36,7 +36,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbbf9-4qagag
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbbf9-4qagag
     kontinuous/deployment.env: test-jobs-uses-relative-feature-branch-1
@@ -71,7 +70,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbbf9-4qagag
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbbf9-4qagag
     kontinuous/deployment.env: test-jobs-uses-relative-feature-branch-1
@@ -99,8 +97,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbbf9-4qagag
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
       project.fabrique.contrib.jobs.job.job-test-jobs-uses-relative-feature-branch-1-db-create-58nity
     kontinuous/depname.chartResource: jobs.job.job-test-jobs-uses-relative-feature-branch-1-db-create-58nity
@@ -263,8 +259,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbbf9-4qagag
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
       project.fabrique.contrib.jobs.job.job-test-jobs-uses-relative-feature-branch-1-db-create-2w732p
     kontinuous/depname.chartResource: jobs.job.job-test-jobs-uses-relative-feature-branch-1-db-create-2w732p

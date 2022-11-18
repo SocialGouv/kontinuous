@@ -37,7 +37,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf934-6bjy8r
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf934-6bjy8r
     kontinuous/deployment.env: test-jobs-build-stage-feature-branch-1
@@ -72,7 +71,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf934-6bjy8r
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf934-6bjy8r
     kontinuous/deployment.env: test-jobs-build-stage-feature-branch-1
@@ -100,8 +98,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs-dev
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs-dev/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf934-6bjy8r
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
       project.fabrique.contrib.jobs-dev.job.job-test-jobs-build-stage-feature-branch-1-db-create-db-13oc8a
     kontinuous/depname.chartResource: >-
@@ -265,8 +261,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs-dev
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs-dev/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf934-6bjy8r
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
       project.fabrique.contrib.jobs-dev.job.job-test-jobs-build-stage-feature-branch-1-db-create-se-127cnw
     kontinuous/depname.chartResource: >-
@@ -404,8 +398,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf934-6bjy8r
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
       project.fabrique.contrib.jobs.job.job-test-jobs-build-stage-feature-branch-1-build-app-bu-1x52v5
     kontinuous/depname.chartResource: jobs.job.job-test-jobs-build-stage-feature-branch-1-build-app-bu-1x52v5
@@ -550,8 +542,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf934-6bjy8r
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
       project.fabrique.contrib.jobs.job.job-test-jobs-build-stage-feature-branch-1-build-hasura-18bc3e
     kontinuous/depname.chartResource: jobs.job.job-test-jobs-build-stage-feature-branch-1-build-hasura-18bc3e
@@ -703,10 +693,6 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"build\\"]'
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf934-6bjy8r
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/nonce: ''
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
     kontinuous/depname.chartResource: app.deployment.app
     kontinuous/depname.chartName: app
@@ -844,10 +830,6 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"build\\",\\"db\\"]'
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf934-6bjy8r
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/nonce: ''
     kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
     kontinuous/depname.chartResource: hasura.deployment.hasura
     kontinuous/depname.chartName: hasura
@@ -968,9 +950,6 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
     kontinuous/plugin.needs: '[\\"build\\"]'
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf934-6bjy8r
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
 spec:
   ports:
     - name: http
@@ -1002,9 +981,6 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
     kontinuous/plugin.needs: '[\\"build\\",\\"db\\"]'
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf934-6bjy8r
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
 spec:
   ports:
     - name: http
@@ -1023,7 +999,6 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
     kontinuous/plugin.needs: '[\\"build\\"]'
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf934-6bjy8r
-    kapp.k14s.io/disable-original: ''
   labels:
     component: app
     application: test-jobs-build-stage
@@ -1064,7 +1039,6 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
     kontinuous/plugin.needs: '[\\"build\\",\\"db\\"]'
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf934-6bjy8r
-    kapp.k14s.io/disable-original: ''
   labels:
     component: hasura
     application: test-jobs-build-stage

@@ -37,7 +37,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
     kontinuous/deployment.env: test-jobs-seed-sql-feature-branch-1
@@ -72,7 +71,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
     kontinuous/deployment.env: test-jobs-seed-sql-feature-branch-1
@@ -100,8 +98,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
       project.fabrique.contrib.jobs.job.job-test-jobs-seed-sql-feature-branch-1-db-create-db-13oc8a
     kontinuous/depname.chartResource: jobs.job.job-test-jobs-seed-sql-feature-branch-1-db-create-db-13oc8a
@@ -264,8 +260,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
       project.fabrique.contrib.jobs.job.job-test-jobs-seed-sql-feature-branch-1-db-create-secret-3ea5t8
     kontinuous/depname.chartResource: jobs.job.job-test-jobs-seed-sql-feature-branch-1-db-create-secret-3ea5t8
@@ -402,8 +396,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
       project.fabrique.contrib.jobs.job.job-test-jobs-seed-sql-feature-branch-1-seed-import-sec-shgdmm
     kontinuous/depname.chartResource: jobs.job.job-test-jobs-seed-sql-feature-branch-1-seed-import-sec-shgdmm
@@ -552,8 +544,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
       project.fabrique.contrib.jobs.job.job-test-jobs-seed-sql-feature-branch-1-seed-seed-db-5pgwgr
     kontinuous/depname.chartResource: jobs.job.job-test-jobs-seed-sql-feature-branch-1-seed-seed-db-5pgwgr
@@ -720,10 +710,6 @@ metadata:
       project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"seed\\"]'
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/nonce: ''
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
     kontinuous/depname.chartResource: app.deployment.app
     kontinuous/depname.chartName: app
@@ -853,9 +839,6 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
     kontinuous/plugin.needs: '[\\"seed\\"]'
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
 spec:
   ports:
     - name: http
@@ -874,7 +857,6 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
     kontinuous/plugin.needs: '[\\"seed\\"]'
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b08-c29nbt
-    kapp.k14s.io/disable-original: ''
   labels:
     component: app
     application: test-jobs-seed-sql

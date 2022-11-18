@@ -36,7 +36,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b08-4ym7iz
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b08-4ym7iz
     kontinuous/deployment.env: test-jobs-runs-map-feature-branch-1
@@ -71,7 +70,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b08-4ym7iz
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b08-4ym7iz
     kontinuous/deployment.env: test-jobs-runs-map-feature-branch-1
@@ -99,8 +97,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b08-4ym7iz
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
       project.fabrique.contrib.jobs.job.job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a
     kontinuous/depname.chartResource: jobs.job.job-test-jobs-runs-map-feature-branch-1-db-create-db-13oc8a
@@ -263,8 +259,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b08-4ym7iz
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
       project.fabrique.contrib.jobs.job.job-test-jobs-runs-map-feature-branch-1-db-create-secret-3ea5t8
     kontinuous/depname.chartResource: jobs.job.job-test-jobs-runs-map-feature-branch-1-db-create-secret-3ea5t8

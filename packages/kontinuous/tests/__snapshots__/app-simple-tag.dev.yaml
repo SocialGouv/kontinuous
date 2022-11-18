@@ -37,7 +37,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
     kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dn
@@ -72,7 +71,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
     kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dn
@@ -106,10 +104,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/nonce: ''
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
     kontinuous/depname.chartResource: app.deployment.app
     kontinuous/depname.chartName: app
@@ -213,9 +207,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
 spec:
   ports:
     - name: http
@@ -233,7 +224,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
-    kapp.k14s.io/disable-original: ''
   labels:
     component: app
     application: test-app-simple-tag

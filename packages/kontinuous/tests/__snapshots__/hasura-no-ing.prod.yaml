@@ -35,7 +35,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
     kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
@@ -70,7 +69,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
     kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
@@ -104,10 +102,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/nonce: ''
     kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
     kontinuous/depname.chartResource: hasura.deployment.hasura
     kontinuous/depname.chartName: hasura
@@ -196,9 +190,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b08-4sslo3
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
 spec:
   ports:
     - name: http

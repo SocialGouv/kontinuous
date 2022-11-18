@@ -17,6 +17,8 @@ dependencies:
         enabled: true
       needsUsingInitcontainers:
         enabled: true
+      kapp:
+        enabled: false
       needsUsingKapp:
         enabled: false
       filterDisableKapp:

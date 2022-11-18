@@ -36,7 +36,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
     kontinuous/deployment.env: test-redis-feature-branch-1
@@ -71,7 +70,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
-    kapp.k14s.io/disable-original: ''
   labels:
     kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
     kontinuous/deployment.env: test-redis-feature-branch-1
@@ -105,10 +103,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/redis/templates/deployment.yaml
     kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
-    kapp.k14s.io/update-strategy: fallback-on-replace
-    kapp.k14s.io/nonce: ''
     kontinuous/depname.full: project.fabrique.contrib.redis.deployment.redis
     kontinuous/depname.chartResource: redis.deployment.redis
     kontinuous/depname.chartName: redis
@@ -199,9 +193,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.redis
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/redis/templates/service.yaml
     kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a3789-2pk9j6
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
 spec:
   ports:
     - name: http

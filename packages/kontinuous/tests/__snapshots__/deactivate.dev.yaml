@@ -17,8 +17,6 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/deactivate/charts/jobs-deactivate/templates/jobs.yaml
     kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b08745-2ugc7f
-    kapp.k14s.io/disable-original: ''
-    kapp.k14s.io/create-strategy: fallback-on-update
     kontinuous/depname.full: >-
       project.fabrique.contrib.deactivate.jobs-deactivate.job.job-test-deactivate-feature-branch-1-deactivate-delete-e4580t
     kontinuous/depname.chartResource: >-
