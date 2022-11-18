@@ -143,7 +143,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.100.2
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.100.3
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
@@ -160,7 +160,7 @@ spec:
               mountPath: /secrets
           imagePullPolicy: Always
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.100.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.100.3
           command:
             - sh
             - '-c'
@@ -307,7 +307,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.100.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.100.3
           command:
             - sh
             - '-c'
@@ -487,7 +487,7 @@ spec:
                 path: kubeconfig
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.100.2
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.100.3
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: awesome-ci/Job/job-test-jobs-seed-command-feature-branch-1-seed
@@ -613,7 +613,7 @@ spec:
               memory: 128Mi
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.100.2
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.100.3
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: test-jobs-seed-command-feature-branch-1/Deployment/app
