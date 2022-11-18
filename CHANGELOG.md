@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.101.1](https://github.com/socialgouv/kontinuous/compare/v1.101.0...v1.101.1) (2022-11-18)
+
+
+### Bug Fixes
+
+* add chart to webhook gh actions ([43c42e0](https://github.com/socialgouv/kontinuous/commit/43c42e0d8bb8496c7d579ece827de23b78ee5b19))
+
 ## [1.101.0](https://github.com/socialgouv/kontinuous/compare/v1.100.4...v1.101.0) (2022-11-18)
 
 
