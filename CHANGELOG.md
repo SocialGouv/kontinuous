@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.100.4](https://github.com/socialgouv/kontinuous/compare/v1.100.3...v1.100.4) (2022-11-18)
+
+
+### Bug Fixes
+
+* disable default kapp patch ([d9efe10](https://github.com/socialgouv/kontinuous/commit/d9efe10ee060239121de4b8e35a34571ca5d3e95))
+
 ### [1.100.3](https://github.com/socialgouv/kontinuous/compare/v1.100.2...v1.100.3) (2022-11-18)
 
 
