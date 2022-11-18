@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.100.2](https://github.com/socialgouv/kontinuous/compare/v1.100.1...v1.100.2) (2022-11-18)
+
+
+### Bug Fixes
+
+* output add linefeed ([9a9ae8a](https://github.com/socialgouv/kontinuous/commit/9a9ae8ab797b0892e44de1268cfae9d5e7154af9))
+* sanitize label ([52e057b](https://github.com/socialgouv/kontinuous/commit/52e057ba5723e440153241a19193ceac0f17a946))
+
 ### [1.100.1](https://github.com/socialgouv/kontinuous/compare/v1.100.0...v1.100.1) (2022-11-18)
 
 
