@@ -34,7 +34,7 @@ module.exports = (manifests, _options, { config, utils }) => {
       [refLabelKey]: refLabelValue,
       "kontinuous/gitSha": config.gitSha,
       "kontinuous/appVersion": isVersionTag(config.gitBranch)
-        ? config.gitBranch
+        ? slug(config.gitBranch)
         : config.gitSha,
       "kontinuous/resourceName": slug([kind, name]),
       // "app.kubernetes.io/managed-by": "kontinuous", // incompatible with helm deployment
