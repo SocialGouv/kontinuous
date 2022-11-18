@@ -89,6 +89,7 @@ if [ -n "$TRIGGER_WEBHOOK" ] && [ "$TRIGGER_WEBHOOK" != "false" ] || [ "$GITHUB_
     --header='Content-Type:application/json' \
     --post-data "{\"repositoryUrl\":\"${KS_GIT_REPOSITORY}\",\"ref\":\"${KS_GIT_BRANCH}\",\"commit\":\"${KS_GIT_SHA}\"}" \
     "$URI"
+  echo ""
 fi
 
 kontinuous logs
