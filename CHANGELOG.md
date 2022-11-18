@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.100.0 (2022-11-18)
+
+
+### Features
+
+* surviveOnBrokenCluster (+ fix gh action comment pr) ([#78](https://github.com/socialgouv/kontinuous/issues/78)) ([44ba0ee](https://github.com/socialgouv/kontinuous/commit/44ba0ee5a7278378fc35387c88c0cdcc1eecfae6))
+
 ### [1.99.3](https://github.com/socialgouv/kontinuous/compare/v1.99.2...v1.99.3) (2022-11-17)
 
 
