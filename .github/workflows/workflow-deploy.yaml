@@ -10,6 +10,9 @@ on:
       chart:
         type: string
         required: false
+      ignoreProjectTemplates:
+        type: boolean
+        required: false
 
 jobs:
   deploy:
@@ -26,3 +29,4 @@ jobs:
           environment: "${{ inputs.environment }}"
           disableDiff: "${{ inputs.disableDiff }}"
           chart: "${{ inputs.chart }}"
+          ignoreProjectTemplates: "${{ inputs.ignoreProjectTemplates }}"

@@ -13,6 +13,9 @@ on:
       chart:
         required: false
         type: string
+      ignoreProjectTemplates:
+        required: false
+        type: boolean
     secrets:
       KUBEWEBHOOK_TOKEN:
         required: true
@@ -39,6 +42,7 @@ jobs:
           triggerWebhook: ${{ inputs.triggerWebhook }}
           environment: ${{ inputs.environment }}
           chart: ${{ inputs.chart }}
+          ignoreProjectTemplates: ${{ inputs.ignoreProjectTemplates }}
       
       - name: Reporting 📜
         uses: socialgouv/kontinuous/.github/actions/deployment-reporting@v1.101.1

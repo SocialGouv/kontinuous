@@ -75,6 +75,7 @@ echo "KS_EVENT=$KS_EVENT">>$GITHUB_ENV
 echo "KS_DEBUG=$KS_DEBUG">>$GITHUB_ENV
 
 echo "KS_CHART=$KS_CHART">>$GITHUB_ENV
+echo "KS_IGNORE_PROJECT_TEMPLATES=$KS_IGNORE_PROJECT_TEMPLATES">>$GITHUB_ENV
 
 if [ -n "$TRIGGER_WEBHOOK" ] && [ "$TRIGGER_WEBHOOK" != "false" ] || [ "$GITHUB_RUN_ATTEMPT" -gt "1" ]; then
   if [ "$GITHUB_RUN_ATTEMPT" -gt "1" ]; then
@@ -85,6 +86,9 @@ if [ -n "$TRIGGER_WEBHOOK" ] && [ "$TRIGGER_WEBHOOK" != "false" ] || [ "$GITHUB_
   URI="${KS_WEBHOOK_URI}/api/v1/oas/hooks/user?project=${KS_PROJECT_NAME}&event=${KS_EVENT}&env=${KS_ENVIRONMENT}"
   if [ "$KS_CHART" != "" ]; then
     URI="${URI}&chart=${KS_CHART}"
+  fi
+  if [ "$KS_IGNORE_PROJECT_TEMPLATES" != "" ]; then
+    URI="${URI}&ignoreProjectTemplates=${KS_IGNORE_PROJECT_TEMPLATES}"
   fi
   if [ "$KS_WEBHOOK_MOUNT_KUBECONFIG" != "" ]; then
     URI="${URI}&mountKubeconfig=${KS_WEBHOOK_MOUNT_KUBECONFIG}"

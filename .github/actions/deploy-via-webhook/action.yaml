@@ -13,12 +13,15 @@ inputs:
     description: "The deployment environment (dev | preprod | prod), default to prod on version tag, preprod on master or main, else dev"
   chart:
     description: "charts to enable as standalone, you can add multiple separated by comma"
+  ignoreProjectTemplates:
+    description: "don't merge project's root templates and env templates"
 runs:
   using: docker
   # image: Dockerfile
   image: docker://ghcr.io/socialgouv/kontinuous/gh-action-deploy-via-webhook:v1.101.1
   env:
     KS_CHART: ${{ inputs.chart }}
+    KS_IGNORE_PROJECT_TEMPLATES: ${{ inputs.ignoreProjectTemplates }}
   args:
     - '${{ inputs.environment }}'
     - '${{ inputs.webhookToken }}'
