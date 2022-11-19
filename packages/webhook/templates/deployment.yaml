@@ -133,6 +133,8 @@ spec:
               value: "{{ .Values.ciNamespace.mountKubeconfigDefault }}"
             - name: KUBEWEBHOOK_CI_NAMESPACE_KUBECONFIG_SECRET_NAME
               value: "{{ .Values.ciNamespace.kubeconfigSecretName }}"
+            - name: KUBEWEBHOOK_CI_NAMESPACE_KUBECONFIG_SECRET_NAME
+              value: "{{ .Values.ciNamespace.mountSecretsDefault | toJson }}"
             - name: KUBEWEBHOOK_SURVIVE_ON_BROKEN_CLUSTER
               value: "{{ .Values.surviveOnBrokenCluster }}"
           resources:

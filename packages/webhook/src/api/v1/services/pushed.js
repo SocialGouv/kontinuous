@@ -7,8 +7,10 @@ module.exports =
     commits,
     env,
     kontinuousVersion,
-    mountKubeconfig,
     chart,
+    ignoreProjectTemplates,
+    mountKubeconfig,
+    mountSecrets,
   }) =>
     services.pipeline({
       eventName: "pushed",
@@ -21,5 +23,7 @@ module.exports =
       env,
       kontinuousVersion,
       mountKubeconfig,
+      mountSecrets,
       chart,
+      ignoreProjectTemplates,
     })

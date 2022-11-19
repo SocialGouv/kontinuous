@@ -362,6 +362,15 @@ paths:
           schema:
             type: boolean
           required: false
+        - in: query
+          name: mountSecrets
+          required: false
+          schema:
+            oneOf:
+              - type: array
+                items:
+                  type: string
+              - type: string
       requestBody:
         required: true
         content:
@@ -443,6 +452,15 @@ paths:
           schema:
             type: boolean
           required: false
+        - in: query
+          name: mountSecrets
+          required: false
+          schema:
+            oneOf:
+              - type: array
+                items:
+                  type: string
+              - type: string
       requestBody:
         required: true
         content:
@@ -549,6 +567,15 @@ paths:
           schema:
             type: boolean
           required: false
+        - in: query
+          name: mountSecrets
+          required: false
+          schema:
+            oneOf:
+              - type: array
+                items:
+                  type: string
+              - type: string
       requestBody:
         required: true
         content:
@@ -664,6 +691,15 @@ paths:
           schema:
             type: boolean
           required: false
+        - in: query
+          name: mountSecrets
+          required: false
+          schema:
+            oneOf:
+              - type: array
+                items:
+                  type: string
+              - type: string
       requestBody:
         required: true
         content:

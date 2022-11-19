@@ -1,6 +1,7 @@
 const { ctx } = require("@modjo-plugins/core")
 
 const gitSshCommand = require("~common/utils/git-ssh-command")
+const castArray = require("~common/utils/cast-array")
 
 module.exports = ({
   namespace,
@@ -21,15 +22,27 @@ module.exports = ({
   ignoreProjectTemplates,
   kontinuousVersion,
   mountKubeconfig,
+  mountSecrets,
 }) => {
   const config = ctx.require("config")
   const projectConfig = config.project
 
-  const { mountKubeconfigDefault, kubeconfigSecretName = "kubeconfig" } =
-    projectConfig.ciNamespace
+  const {
+    mountKubeconfigDefault,
+    mountSecretsDefault,
+    kubeconfigSecretName = "kubeconfig",
+  } = projectConfig.ciNamespace
+
   if (mountKubeconfig === undefined || mountKubeconfig === null) {
     mountKubeconfig = mountKubeconfigDefault
   }
+
+  mountSecrets = [...mountSecretsDefault, ...castArray(mountSecrets)]
+  const mountSecretsEnvFroms = mountSecrets.map((secretName) => ({
+    secretRef: {
+      name: secretName,
+    },
+  }))
 
   const { pipelineImage, pipelineCheckoutImage } = projectConfig
   let { pipelineImageTag, pipelineCheckoutImageTag } = projectConfig
@@ -122,6 +135,7 @@ module.exports = ({
               image: `${pipelineImage}:${pipelineImageTag}`,
               imagePullPolicy: "Always",
               args,
+              envFrom: [...mountSecretsEnvFroms],
               env: [
                 {
                   name: "KS_WORKSPACE_PATH",

@@ -41,6 +41,15 @@ parameters:
     schema:
       type: boolean
     required: false
+  - in: query
+    name: mountSecrets
+    required: false
+    schema:
+      oneOf:
+        - type: array
+          items:
+            type: string
+        - type: string
  
 
 requestBody:

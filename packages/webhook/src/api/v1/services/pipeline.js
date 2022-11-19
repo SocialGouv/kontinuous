@@ -3,8 +3,8 @@ const { reqCtx } = require("@modjo-plugins/express/ctx")
 
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const cleanGitRef = require("~common/utils/clean-git-ref")
-
 const normalizeRepositoryKey = require("~common/utils/normalize-repository-key")
+
 const jobRun = require("~/k8s/command/job-run")
 const pipelineJob = require("~/k8s/resources/pipeline.job")
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
@@ -27,6 +27,7 @@ module.exports = ({ services }) => {
     ignoreProjectTemplates,
     kontinuousVersion,
     mountKubeconfig,
+    mountSecrets,
   }) => {
     const repositoryPath = repositoryFromGitUrl(repositoryUrl)
     const repositoryName = repositoryPath.split("/").pop()
@@ -121,6 +122,7 @@ module.exports = ({ services }) => {
       ignoreProjectTemplates,
       kontinuousVersion,
       mountKubeconfig,
+      mountSecrets,
     })
 
     return async () => {

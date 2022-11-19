@@ -45,6 +45,7 @@ ciNamespace:
   template: "${project}-ci"
   mountKubeconfigDefault: true
   kubeconfigSecretName: kubeconfig
+  mountSecretsDefault: []
 reloadableTokensSecret:
   enabled: true
   name: "reloadable-tokens-secret"
