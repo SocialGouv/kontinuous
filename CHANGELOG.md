@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.102.0](https://github.com/socialgouv/kontinuous/compare/v1.101.2...v1.102.0) (2022-11-19)
+
+
+### Features
+
+* pipeline mountSecrets ([80fd7d1](https://github.com/socialgouv/kontinuous/commit/80fd7d1f87cf214945085b3a062bca060c6b92a7))
+
 ### [1.101.2](https://github.com/socialgouv/kontinuous/compare/v1.101.1...v1.101.2) (2022-11-18)
 
 
