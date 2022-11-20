@@ -356,7 +356,6 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
           repository: config.gitRepositoryUrl,
           branch: config.gitBranch,
           commit: config.gitSha,
-          token: webhookToken,
         })
         return `${webhookUri}/api/v1/oas/artifacts/upload?${query}`
       },
@@ -374,7 +373,6 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
           repository: config.gitRepositoryUrl,
           branch: config.gitBranch,
           commit: config.gitSha,
-          token: webhookToken,
         })
         return `${webhookUri}/api/v1/oas/artifacts/download?${query}`
       },
@@ -404,7 +402,6 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
           repository: config.gitRepositoryUrl,
           branch: config.gitBranch,
           commit: config.gitSha,
-          token: webhookToken,
         })
         return `${webhookUri}/api/v1/oas/artifacts/status?${query}`
       },

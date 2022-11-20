@@ -15,6 +15,7 @@ module.exports = async ({ name, file }) => {
     file = `${dest}.yaml`
   }
   let { downloadUrl } = config
+  const { webhookToken: token } = config
 
   if (name) {
     const url = new URL(downloadUrl)
@@ -30,6 +31,7 @@ module.exports = async ({ name, file }) => {
     const writer = fs.createWriteStream(file)
     const response = await axios.request({
       method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
       url: downloadUrl,
       responseType: "stream",
     })

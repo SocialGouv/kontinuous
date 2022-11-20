@@ -18,6 +18,8 @@ module.exports = async ({ name, file }) => {
 
   let { uploadUrl } = config
 
+  const { webhookToken: token } = config
+
   if (name) {
     const url = new URL(uploadUrl)
     url.search = qs.stringify({
@@ -39,7 +41,10 @@ module.exports = async ({ name, file }) => {
       method: "POST",
       url: uploadUrl,
       data: form,
-      headers: form.getHeaders(),
+      headers: {
+        ...form.getHeaders(),
+        Authorization: `Bearer ${token}`,
+      },
     })
     logger.debug(response.data)
     logger.info(`uploaded "${file}" as artifact "${dest}"`)

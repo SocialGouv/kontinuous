@@ -20,12 +20,13 @@ const setStatus = async ({ url, token, status, ok = null }) => {
   }
 }
 
-const getStatus = async ({ url }) => {
+const getStatus = async ({ url, token }) => {
   const logger = ctx.require("logger")
   logger.debug(`getting deploy status`)
   try {
     const response = await axios.request({
       method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
       url,
     })
     logger.debug(`deploy status: ${response.data.status}`)
