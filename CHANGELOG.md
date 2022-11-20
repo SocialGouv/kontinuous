@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.102.1](https://github.com/socialgouv/kontinuous/compare/v1.102.0...v1.102.1) (2022-11-20)
+
+
+### Bug Fixes
+
+* add webhhookMountSecrets url param in actions ([43db08f](https://github.com/socialgouv/kontinuous/commit/43db08f9d469b3a5f2cd932ed492e303dec26f70))
+
 ## [1.102.0](https://github.com/socialgouv/kontinuous/compare/v1.101.2...v1.102.0) (2022-11-19)
 
 
