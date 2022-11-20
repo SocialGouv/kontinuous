@@ -29,10 +29,8 @@ module.exports = async (config) => {
   // console.log(tokens)
 
   project.secrets.tokens = tokens
-  config.httpLogger = {
-    hideSecrets: [
-      ...Object.values(tokens).flatMap((values) => values),
-      ...(supertoken ? [supertoken] : []),
-    ],
-  }
+  config.httpLogger.hideSecrets = [
+    ...Object.values(tokens).flatMap((values) => values),
+    ...(supertoken ? [supertoken] : []),
+  ]
 }
