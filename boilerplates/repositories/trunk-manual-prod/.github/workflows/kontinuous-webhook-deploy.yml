@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   deploy:
-    uses: socialgouv/kontinuous/.github/workflows/workflow-webhook.yaml@v1.102.2
+    uses: socialgouv/kontinuous/.github/workflows/workflow-webhook.yaml@v1.102.3
     secrets: inherit
     with:
       triggerWebhook: true # comment this line when enabling webhook on repository

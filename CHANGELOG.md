@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.102.3](https://github.com/socialgouv/kontinuous/compare/v1.102.2...v1.102.3) (2022-11-20)
+
+
+### Bug Fixes
+
+* httplogger config ([b0ce635](https://github.com/socialgouv/kontinuous/commit/b0ce635e88967a8f9ca7381868685779647c85a8))
+* missing mountSecrets bridges ([d174c1a](https://github.com/socialgouv/kontinuous/commit/d174c1ab0993099d070fe118caa0feae8d946899))
+
 ### [1.102.2](https://github.com/socialgouv/kontinuous/compare/v1.102.1...v1.102.2) (2022-11-20)
 
 
