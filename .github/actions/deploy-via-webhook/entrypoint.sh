@@ -58,6 +58,7 @@ export KS_ENVIRONMENT=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).
 KS_WEBHOOK_URI=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).webhookUri || '')")
 KS_PROJECT_NAME=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).projectName || '')")
 KS_WEBHOOK_MOUNT_KUBECONFIG=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).webhhookMountKubeconfig || '')")
+KS_WEBHOOK_MOUNT_SECRETS=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).webhhookMountSecrets?.join(',') || '')")
 
 echo "env=$KS_ENVIRONMENT">>$GITHUB_OUTPUT
 
@@ -92,6 +93,9 @@ if [ -n "$TRIGGER_WEBHOOK" ] && [ "$TRIGGER_WEBHOOK" != "false" ] || [ "$GITHUB_
   fi
   if [ "$KS_WEBHOOK_MOUNT_KUBECONFIG" != "" ]; then
     URI="${URI}&mountKubeconfig=${KS_WEBHOOK_MOUNT_KUBECONFIG}"
+  fi
+  if [ "$KS_WEBHOOK_MOUNT_SECRETS" != "" ]; then
+    URI="${URI}&mountSecrets=${KS_WEBHOOK_MOUNT_SECRETS}"
   fi
   wget --content-on-error -qO- \
     --header="Authorization: Bearer ${KS_WEBHOOK_TOKEN}" \

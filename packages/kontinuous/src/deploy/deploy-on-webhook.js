@@ -58,6 +58,11 @@ module.exports = async ({
           mountKubeconfig: config.webhhookMountKubeconfig ? "true" : "false",
         }
       : {}),
+    ...(config.webhhookMountSecrets && config.webhhookMountSecrets.length > 0
+      ? {
+          mountSecrets: JSON.stringify(config.webhhookMountSecrets),
+        }
+      : {}),
   })
 
   const url = `${webhookUri}/api/v1/oas/hooks/custom?${query}`
