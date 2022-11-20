@@ -29,7 +29,7 @@ module.exports = async (config) => {
   // console.log(tokens)
 
   project.secrets.tokens = tokens
-  project.httpLogger = {
+  config.httpLogger = {
     hideSecrets: [
       ...Object.values(tokens).flatMap((values) => values),
       ...(supertoken ? [supertoken] : []),
