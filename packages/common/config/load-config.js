@@ -28,31 +28,18 @@ const slug = require("../utils/slug")
 const normalizeRepositoryUrl = require("../utils/normalize-repository-url")
 
 const gitEnv = require("../utils/git-env")
+
 const loadDependencies = require("./load-dependencies")
 const recurseDependency = require("./recurse-dependencies")
 
+const envParserYaml = require("./env-parsers/yaml")
+const envParserCastArray = require("./env-parsers/cast-array")
+
 const { version } = require(`${__dirname}/../package.json`)
 
-const mergeProjectsAndOrganizations = (config) => {
-  const { organizations, projects, projectName, gitRepositoryName } = config
-  if (projects && projects[projectName]) {
-    const projectConfig = projects[projectName]
-    const { organization } = projectConfig
-    if (organization && organizations[organization]) {
-      const org = organizations[organization]
-      deepmerge(config, org)
-    }
-    deepmerge(config, projectConfig)
-    const repositoryConfig = projectConfig.repositories?.[gitRepositoryName]
-    if (repositoryConfig) {
-      deepmerge(config, repositoryConfig)
-    }
-  }
-}
+const mergeProjectsAndOrganizations = require("./merge-projects-and-organizations")
 
 const defaultRepositoryProvider = "https://github.com" // degit/tiged like
-
-const envYamlParser = (str) => yaml.load(str)
 
 module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
   const env = ctx.get("env") || process.env
@@ -81,7 +68,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     git: {
       env: "KS_GIT",
-      envParser: envYamlParser,
+      envParser: envParserYaml,
       defaultFunction: async (config) => {
         const { workspacePath } = config
         try {
@@ -94,7 +81,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     gitRequired: {
       env: "KS_GIT_REQUIRED",
-      envParser: envYamlParser,
+      envParser: envParserYaml,
     },
     gitRepositoryUrl: {
       defaultFunction: async (config, { options, env: environ }) => {
@@ -229,7 +216,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     deploymentLabelForceNewDeploy: {
       default: true,
       env: "KS_FORCE_NEW_DEPLOY",
-      envParser: envYamlParser,
+      envParser: envParserYaml,
     },
     deploymentLabelValue: {
       defaultFunction: (config) => {
@@ -279,7 +266,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     configSet: {
       env: "KS_INLINE_CONFIG_SET",
-      envParser: envYamlParser,
+      envParser: envParserYaml,
       option: "config-set",
     },
     inlineValues: {
@@ -288,7 +275,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     set: {
       env: "KS_INLINE_SET",
-      envParser: envYamlParser,
+      envParser: envParserYaml,
       option: "set",
     },
     buildRootPath: {
@@ -346,7 +333,11 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     webhhookMountKubeconfig: {
       env: "KS_WEBHOOK_MOUNT_KUBECONFIG",
-      envParser: envYamlParser,
+      envParser: envParserYaml,
+    },
+    webhhookMountSecrets: {
+      env: "KS_WEBHOOK_MOUNT_SECRETS",
+      envParser: envParserCastArray,
     },
     upload: {
       env: "KS_BUILD_UPLOAD",
@@ -510,7 +501,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     private: {
       option: "private",
       env: "KS_PRIVATE",
-      envParser: envYamlParser,
+      envParser: envParserYaml,
       default: false,
     },
     deployKeyFile: {
@@ -583,7 +574,7 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     commits: {
       env: "KS_COMMITS",
-      envParser: envYamlParser,
+      envParser: envParserYaml,
       defaultFunction: async (config) => {
         const commits = {
           added: [],
@@ -646,30 +637,30 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     },
     ignoreProjectTemplates: {
       env: "KS_IGNORE_PROJECT_TEMPLATES",
-      envParser: envYamlParser,
+      envParser: envParserYaml,
       option: "ignoreProjectTemplates",
       default: false,
     },
     externalBinForceDownload: {
       env: "KS_EXTERNAL_BIN_FORCE_DOWNLOAD",
-      envParser: envYamlParser,
+      envParser: envParserYaml,
       default: true,
     },
     disablePlugin: {
       env: "KS_DISABLE_PLUGIN",
-      envParser: envYamlParser,
+      envParser: envParserYaml,
       option: "disable-plugin",
       default: [],
     },
     disableStep: {
       env: "KS_DISABLE_STEP",
-      envParser: envYamlParser,
+      envParser: envParserYaml,
       option: "disable-step",
       default: [],
     },
     noValidate: {
       env: "KS_NO_VALIDATE",
-      envParser: envYamlParser,
+      envParser: envParserYaml,
       option: "no-validate",
     },
   }
