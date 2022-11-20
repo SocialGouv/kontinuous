@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.102.2](https://github.com/socialgouv/kontinuous/compare/v1.102.1...v1.102.2) (2022-11-20)
+
+
+### Bug Fixes
+
+* bearer token to download, upload, status ([ded4831](https://github.com/socialgouv/kontinuous/commit/ded483182330d1aa3019a8ce516d7f853a3afb02))
+* httpLogger hide secrets ([e5ff761](https://github.com/socialgouv/kontinuous/commit/e5ff761f295d85b386fd863c9a311fabd443d0bf))
+
 ### [1.102.1](https://github.com/socialgouv/kontinuous/compare/v1.102.0...v1.102.1) (2022-11-20)
 
 
