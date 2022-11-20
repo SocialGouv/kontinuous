@@ -8,6 +8,7 @@ module.exports = function ({ services: { custom } }) {
         repositoryUrl,
         kontinuousVersion,
         mountKubeconfig,
+        mountSecrets,
       } = req.query
       const [manifestsFile] = req.files
 
@@ -27,6 +28,7 @@ module.exports = function ({ services: { custom } }) {
         manifests,
         kontinuousVersion,
         mountKubeconfig,
+        mountSecrets,
       })
 
       if (!runJob) {

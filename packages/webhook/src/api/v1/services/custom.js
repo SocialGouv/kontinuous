@@ -10,6 +10,7 @@ module.exports =
     repositoryUrl,
     kontinuousVersion,
     mountKubeconfig,
+    mountSecrets,
   }) => {
     const sanitizedManifests = yaml.dumpAll(yaml.loadAll(manifests)) // protect against injections
     const initContainers = [
@@ -46,5 +47,6 @@ EOF
       initContainers,
       kontinuousVersion,
       mountKubeconfig,
+      mountSecrets,
     })
   }

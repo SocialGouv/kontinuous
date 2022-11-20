@@ -30,6 +30,7 @@ module.exports = function ({ services: { pushed, deleted } }) {
       const {
         kontinuousVersion,
         mountKubeconfig,
+        mountSecrets,
         chart,
         ignoreProjectTemplates,
       } = query
@@ -41,6 +42,7 @@ module.exports = function ({ services: { pushed, deleted } }) {
         commits,
         kontinuousVersion,
         mountKubeconfig,
+        mountSecrets,
         chart,
         ignoreProjectTemplates,
       })
