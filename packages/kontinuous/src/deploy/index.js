@@ -133,8 +133,12 @@ module.exports = async (options) => {
       runContext.deploysPromise,
       runContext.sidecarsPromise,
     ])
-    runContext.stopSidecars()
-    runContext.stopDeploys()
+    if (runContext.stopSidecars) {
+      runContext.stopSidecars()
+    }
+    if (runContext.stopDeploys) {
+      runContext.stopDeploys()
+    }
     const errors = results
       .filter((result) => result?.errors)
       .flatMap((result) => result.errors)
