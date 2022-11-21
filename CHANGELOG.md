@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.103.5](https://github.com/socialgouv/kontinuous/compare/v1.103.4...v1.103.5) (2022-11-21)
+
+
+### Bug Fixes
+
+* remove default kubeconfig ([c6ca226](https://github.com/socialgouv/kontinuous/commit/c6ca226a47a23fb3b6becf9a737805e47cfd0f9f))
+
 ### [1.103.4](https://github.com/socialgouv/kontinuous/compare/v1.103.3...v1.103.4) (2022-11-21)
 
 
