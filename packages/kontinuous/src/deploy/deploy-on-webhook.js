@@ -58,9 +58,9 @@ module.exports = async ({
           serviceAccountName: config.webhhookServiceAccountName,
         }
       : {}),
-    ...(config.webhhookMountKubeconfig !== undefined
+    ...(config.webhookMountKubeconfig !== undefined
       ? {
-          mountKubeconfig: config.webhhookMountKubeconfig ? "true" : "false",
+          mountKubeconfig: config.webhookMountKubeconfig ? "true" : "false",
         }
       : {}),
     ...(config.webhhookMountSecrets && config.webhhookMountSecrets.length > 0
