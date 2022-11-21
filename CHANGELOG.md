@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.103.0](https://github.com/socialgouv/kontinuous/compare/v1.102.6...v1.103.0) (2022-11-21)
+
+
+### Features
+
+* serviceAccountName webhook relay to pipeline ([b1afb41](https://github.com/socialgouv/kontinuous/commit/b1afb418db92b9b9f116bc4cc6948398dcc6f5b2))
+
 ### [1.102.6](https://github.com/socialgouv/kontinuous/compare/v1.102.5...v1.102.6) (2022-11-21)
 
 
