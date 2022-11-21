@@ -46,7 +46,10 @@ module.exports = async (manifests, options, context) => {
 
     const { spec } = manifest.spec.template
 
-    if (!spec.serviceAccountName && kubernetesMethod === "serviceaccount") {
+    if (
+      (!spec.serviceAccountName || spec.serviceAccountName === "default") &&
+      kubernetesMethod === "serviceaccount"
+    ) {
       spec.serviceAccountName = serviceAccountName
     }
 
