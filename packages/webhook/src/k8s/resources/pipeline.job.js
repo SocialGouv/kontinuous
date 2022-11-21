@@ -38,6 +38,9 @@ module.exports = ({
   if (mountKubeconfig === undefined || mountKubeconfig === null) {
     mountKubeconfig = mountKubeconfigDefault
   }
+  if (mountKubeconfig === "false") {
+    mountKubeconfig = false
+  }
   if (serviceAccountName === undefined || serviceAccountName === null) {
     serviceAccountName = serviceAccountNameDefault
   }
