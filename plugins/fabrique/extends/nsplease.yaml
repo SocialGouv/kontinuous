@@ -1,8 +1,12 @@
 dependencies:
   contrib:
     preDeploy:
+      rancherNamespace:
+        enabled: false
       needsKubeconfig:
         enabled: false
+      nspleaseNamespace:
+        enabled: true
 options:
   kubernetesMethod: serviceaccount
   serviceAccountName: nsplease-sa
