@@ -8,6 +8,7 @@ module.exports = async (manifests, options, context) => {
   const { kindIsRunnable, KontinuousPluginError } = utils
 
   const { kubernetesMethod = "kubeconfig" } = options
+  const { serviceAccountName = "kontinuous-sa" } = options
   const { surviveOnBrokenCluster } = options
 
   const deps = getDeps(manifests, context)
@@ -44,6 +45,10 @@ module.exports = async (manifests, options, context) => {
     }
 
     const { spec } = manifest.spec.template
+
+    if (!spec.serviceAccountName && kubernetesMethod === "serviceaccount") {
+      spec.serviceAccountName = serviceAccountName
+    }
 
     if (kind === "Deployment") {
       manifest.spec.progressDeadlineSeconds =
