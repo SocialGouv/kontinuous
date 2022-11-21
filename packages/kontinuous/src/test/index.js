@@ -45,6 +45,7 @@ module.exports = async (opts) => {
               environment,
               gitBranch: "master",
               gitSha: "0000000000000000000000000000000000000000",
+              deploymentLabelForceNewDeploy: false,
             })
             ctx.set("config", ctxConfig)
             const loggerChild = logger.child({})
