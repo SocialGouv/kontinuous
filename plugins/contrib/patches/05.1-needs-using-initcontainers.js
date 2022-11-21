@@ -76,11 +76,6 @@ module.exports = async (manifests, options, context) => {
     const initContainer = {
       name: "kontinuous-wait-needs",
       image: kontinuousNeedsImage,
-      ...(kubernetesMethod === "serviceaccount"
-        ? {
-            serviceAccountName: options.serviceAccountName || "kontinuous-sa",
-          }
-        : {}),
       env: [
         {
           name: "WAIT_NEEDS_ANNOTATIONS_REF",
