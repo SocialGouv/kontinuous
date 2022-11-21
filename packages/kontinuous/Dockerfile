@@ -106,7 +106,6 @@ ENV YARN_CACHE_FOLDER /yarn
 ENV HOME=/home/ubuntu
 RUN chmod a+rw $HOME
 RUN git config --global --add safe.directory /workspace
-ENV KUBECONFIG=$HOME/.kube/config
 RUN mkdir $HOME/.kube
 
 ENV KS_INLINE_CONFIG_SET "links.socialgouv/kontinuous=/opt/kontinuous"
