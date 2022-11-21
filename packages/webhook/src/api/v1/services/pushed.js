@@ -10,6 +10,7 @@ module.exports =
     chart,
     ignoreProjectTemplates,
     mountKubeconfig,
+    serviceAccountName,
     mountSecrets,
   }) =>
     services.pipeline({
@@ -23,6 +24,7 @@ module.exports =
       env,
       kontinuousVersion,
       mountKubeconfig,
+      serviceAccountName,
       mountSecrets,
       chart,
       ignoreProjectTemplates,

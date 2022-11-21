@@ -27,6 +27,7 @@ module.exports = ({ services }) => {
     ignoreProjectTemplates,
     kontinuousVersion,
     mountKubeconfig,
+    serviceAccountName,
     mountSecrets,
   }) => {
     const repositoryPath = repositoryFromGitUrl(repositoryUrl)
@@ -122,6 +123,7 @@ module.exports = ({ services }) => {
       ignoreProjectTemplates,
       kontinuousVersion,
       mountKubeconfig,
+      serviceAccountName,
       mountSecrets,
     })
 

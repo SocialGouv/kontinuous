@@ -57,6 +57,7 @@ KONTINUOUS_JSON_CONFIG=$(node -e "process.stdout.write(fs.readFileSync('.kontinu
 export KS_ENVIRONMENT=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).environment || '')")
 KS_WEBHOOK_URI=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).webhookUri || '')")
 KS_PROJECT_NAME=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).projectName || '')")
+KS_WEBHOOK_SERVICE_ACCOUNT_NAME=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).webhhookServiceAccountName || '')")
 KS_WEBHOOK_MOUNT_KUBECONFIG=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).webhhookMountKubeconfig || '')")
 KS_WEBHOOK_MOUNT_SECRETS=$(node -e "process.stdout.write(($KONTINUOUS_JSON_CONFIG).webhhookMountSecrets?.join(',') || '')")
 
@@ -90,6 +91,9 @@ if [ -n "$TRIGGER_WEBHOOK" ] && [ "$TRIGGER_WEBHOOK" != "false" ] || [ "$GITHUB_
   fi
   if [ "$KS_IGNORE_PROJECT_TEMPLATES" != "" ]; then
     URI="${URI}&ignoreProjectTemplates=${KS_IGNORE_PROJECT_TEMPLATES}"
+  fi
+  if [ "$KS_WEBHOOK_SERVICE_ACCOUNT_NAME" != "" ]; then
+    URI="${URI}&serviceAccountName=${KS_WEBHOOK_SERVICE_ACCOUNT_NAME}"
   fi
   if [ "$KS_WEBHOOK_MOUNT_KUBECONFIG" != "" ]; then
     URI="${URI}&mountKubeconfig=${KS_WEBHOOK_MOUNT_KUBECONFIG}"

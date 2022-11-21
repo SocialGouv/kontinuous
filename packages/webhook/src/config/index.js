@@ -95,13 +95,17 @@ module.exports = async function createConfig() {
     process.env.KUBEWEBHOOK_CI_NAMESPACE_ALLOW_ALL === "true"
   const ciNamespaceTemplate =
     process.env.KUBEWEBHOOK_CI_NAMESPACE_TEMPLATE || "${project}-ci"
+
   const ciNamespaceMountKubeconfigDefault =
     process.env.KUBEWEBHOOK_CI_NAMESPACE_MOUNT_KUBECONFIG_DEFAULT === "true"
   const ciNamespaceKubeconfigSecretName =
     process.env.KUBEWEBHOOK_CI_NAMESPACE_KUBECONFIG_SECRET_NAME || "kubeconfig"
+
   const ciNamespaceMountSecretsDefault = JSON.parse(
     process.env.KUBEWEBHOOK_CI_NAMESPACE_MOUNT_SECRETS_DEFAULT || "[]"
   )
+  const ciNamespaceServiceAccountNameDefault =
+    process.env.KUBEWEBHOOK_CI_NAMESPACE_SERVICE_ACCOUNT_NAME_DEFAULT
 
   const surviveOnBrokenCluster =
     process.env.KUBEWEBHOOK_SURVIVE_ON_BROKEN_CLUSTER === "true"
@@ -130,6 +134,7 @@ module.exports = async function createConfig() {
         allowAll: ciNamespaceAllowAll,
         template: ciNamespaceTemplate,
         mountKubeconfigDefault: ciNamespaceMountKubeconfigDefault,
+        serviceAccountNameDefault: ciNamespaceServiceAccountNameDefault,
         kubeconfigSecretName: ciNamespaceKubeconfigSecretName,
         mountSecretsDefault: ciNamespaceMountSecretsDefault,
       },

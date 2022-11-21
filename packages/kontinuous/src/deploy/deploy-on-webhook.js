@@ -53,6 +53,11 @@ module.exports = async ({
     env: environment,
     hash: jobHash,
     repositoryUrl: gitRepositoryUrl,
+    ...(config.webhhookServiceAccountName
+      ? {
+          serviceAccountName: config.webhhookServiceAccountName,
+        }
+      : {}),
     ...(config.webhhookMountKubeconfig !== undefined
       ? {
           mountKubeconfig: config.webhhookMountKubeconfig ? "true" : "false",

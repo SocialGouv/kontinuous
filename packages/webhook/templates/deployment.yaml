@@ -129,6 +129,8 @@ spec:
               value: "{{ .Values.ciNamespace.allowAll }}"
             - name: KUBEWEBHOOK_CI_NAMESPACE_TEMPLATE
               value: "{{ .Values.ciNamespace.template }}"
+            - name: KUBEWEBHOOK_CI_NAMESPACE_SERVICE_ACCOUNT_NAME_DEFAULT
+              value: "{{ .Values.ciNamespace.serviceAccountNameDefault }}"
             - name: KUBEWEBHOOK_CI_NAMESPACE_MOUNT_KUBECONFIG_DEFAULT
               value: "{{ .Values.ciNamespace.mountKubeconfigDefault }}"
             - name: KUBEWEBHOOK_CI_NAMESPACE_KUBECONFIG_SECRET_NAME

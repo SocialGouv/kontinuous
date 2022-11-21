@@ -22,6 +22,7 @@ module.exports = ({
   ignoreProjectTemplates,
   kontinuousVersion,
   mountKubeconfig,
+  serviceAccountName,
   mountSecrets,
 }) => {
   const config = ctx.require("config")
@@ -29,12 +30,16 @@ module.exports = ({
 
   const {
     mountKubeconfigDefault,
+    serviceAccountNameDefault,
     mountSecretsDefault,
     kubeconfigSecretName = "kubeconfig",
   } = projectConfig.ciNamespace
 
   if (mountKubeconfig === undefined || mountKubeconfig === null) {
     mountKubeconfig = mountKubeconfigDefault
+  }
+  if (serviceAccountName === undefined || serviceAccountName === null) {
+    serviceAccountName = serviceAccountNameDefault
   }
 
   mountSecrets = [...mountSecretsDefault, ...castArray(mountSecrets)]
@@ -80,6 +85,7 @@ module.exports = ({
         spec: {
           restartPolicy: "Never",
           terminationGracePeriodSeconds: 5,
+          ...(serviceAccountName ? { serviceAccountName } : {}),
           initContainers: [
             ...(checkout
               ? [

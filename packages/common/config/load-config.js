@@ -331,6 +331,9 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
         }
       },
     },
+    webhhookServiceAccountName: {
+      env: "KS_WEBHOOK_SERVICE_ACCOUNT_NAME",
+    },
     webhhookMountKubeconfig: {
       env: "KS_WEBHOOK_MOUNT_KUBECONFIG",
       envParser: envParserYaml,

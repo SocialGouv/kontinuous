@@ -5,6 +5,7 @@ module.exports = function ({ services }) {
     repositoryUrl,
     kontinuousVersion,
     mountKubeconfig,
+    serviceAccountName,
     mountSecrets,
   }) =>
     services.pipeline({
@@ -16,6 +17,7 @@ module.exports = function ({ services }) {
       checkout: true,
       kontinuousVersion,
       mountKubeconfig,
+      serviceAccountName,
       mountSecrets,
       chart: "deactivate",
       ignoreProjectTemplates: true,

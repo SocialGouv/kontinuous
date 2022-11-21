@@ -13,6 +13,7 @@ module.exports = function ({ services: { pushed, deleted } }) {
       const { ref, repositoryUrl, commit } = body
       const {
         mountKubeconfig,
+        serviceAccountName,
         mountSecrets,
         kontinuousVersion,
         chart,
@@ -26,6 +27,7 @@ module.exports = function ({ services: { pushed, deleted } }) {
         env,
         kontinuousVersion,
         mountKubeconfig,
+        serviceAccountName,
         mountSecrets,
         chart,
         ignoreProjectTemplates,
