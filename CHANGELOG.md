@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.103.2](https://github.com/socialgouv/kontinuous/compare/v1.103.1...v1.103.2) (2022-11-21)
+
+
+### Bug Fixes
+
+* cast mountKubeconfig as bool ([782e091](https://github.com/socialgouv/kontinuous/commit/782e091b8f4fa8d3791f4e849d3b2cbfadb4acb1))
+
 ### [1.103.1](https://github.com/socialgouv/kontinuous/compare/v1.103.0...v1.103.1) (2022-11-21)
 
 
