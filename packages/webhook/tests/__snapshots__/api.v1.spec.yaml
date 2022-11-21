@@ -358,6 +358,11 @@ paths:
             type: string
           required: false
         - in: query
+          name: serviceAccountName
+          schema:
+            type: string
+          required: false
+        - in: query
           name: mountKubeconfig
           schema:
             type: boolean
@@ -444,6 +449,11 @@ paths:
           required: false
         - in: query
           name: kontinuousVersion
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: serviceAccountName
           schema:
             type: string
           required: false
@@ -559,6 +569,11 @@ paths:
           required: false
         - in: query
           name: kontinuousVersion
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: serviceAccountName
           schema:
             type: string
           required: false
@@ -683,6 +698,11 @@ paths:
           allowEmptyValue: true
         - in: query
           name: kontinuousVersion
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: serviceAccountName
           schema:
             type: string
           required: false
