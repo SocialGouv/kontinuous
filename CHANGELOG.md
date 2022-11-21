@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.102.5](https://github.com/socialgouv/kontinuous/compare/v1.102.4...v1.102.5) (2022-11-21)
+
+
+### Bug Fixes
+
+* nsplease extends ([a27faaf](https://github.com/socialgouv/kontinuous/commit/a27faaffe60000ce5d7c64e37acb7cc14bea6d20))
+
 ### [1.102.4](https://github.com/socialgouv/kontinuous/compare/v1.102.3...v1.102.4) (2022-11-21)
 
 
