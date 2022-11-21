@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.102.4](https://github.com/socialgouv/kontinuous/compare/v1.102.3...v1.102.4) (2022-11-21)
+
+
+### Bug Fixes
+
+* deploy-via-github ([9f1cd58](https://github.com/socialgouv/kontinuous/commit/9f1cd5818b671c7b12ffb6bee09aab001b4e7f0a))
+* disable step ([1ba59a6](https://github.com/socialgouv/kontinuous/commit/1ba59a6471933a48f285a46ec339240383e7bfef))
+
 ### [1.102.3](https://github.com/socialgouv/kontinuous/compare/v1.102.2...v1.102.3) (2022-11-20)
 
 
