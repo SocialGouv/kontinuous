@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.103.13](https://github.com/socialgouv/kontinuous/compare/v1.103.12...v1.103.13) (2022-11-22)
+
+
+### Bug Fixes
+
+* aggregate-error deploy catch ([92f935f](https://github.com/socialgouv/kontinuous/commit/92f935ffc866b382ce88ea87611a6f544829d105))
+* better error handling ([e4ad698](https://github.com/socialgouv/kontinuous/commit/e4ad698290466bec537a3b60864226f1443c9b6d))
+* default kubeconfig when not in kube pod ([169ef73](https://github.com/socialgouv/kontinuous/commit/169ef732fd20d16a0c34ec163aa2ddabf086cb0a))
+* Fix ready log emoji on macos ([269ee02](https://github.com/socialgouv/kontinuous/commit/269ee025d20ae101f901a949f1bca903aadfe2ec))
+* tyop ([ea23915](https://github.com/socialgouv/kontinuous/commit/ea23915e4e4cb400afc5b82002bb06295e882465))
+* vscode ([f482fb4](https://github.com/socialgouv/kontinuous/commit/f482fb4c9cc5ebf91defdcab1570e8696427116b))
+
 ### [1.103.12](https://github.com/socialgouv/kontinuous/compare/v1.103.10...v1.103.12) (2022-11-22)
 
 
