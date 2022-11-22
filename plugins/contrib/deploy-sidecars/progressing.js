@@ -101,6 +101,11 @@ module.exports = async (
     clearInterval(intervalsMap[key])
     logState(msg, param)
   })
+  eventsBucket.on("closed", (param) => {
+    const key = getEventUniqKey(param)
+    promisesMap[key].resolve(null)
+    clearInterval(intervalsMap[key])
+  })
 
   const promise = new Promise(async (resolve, reject) => {
     await Promise.allSettled([deploysPromise])

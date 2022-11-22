@@ -90,22 +90,32 @@ module.exports = async (context) => {
             logger,
           })
 
-          if (!result.success) {
-            logger.error(
-              { namespace, selector },
-              `resource "${resourceName}" failed`
-            )
-            eventsBucket.trigger("failed", eventParam)
-            endAll()
-          } else {
+          if (result.success) {
             logger.debug(
               { namespace, selector },
               `resource "${resourceName}" ready`
             )
             eventsBucket.trigger("ready", eventParam)
+          } else if (result.error?.code || result.error?.reason) {
+            logger.error(
+              {
+                namespace,
+                selector,
+                error: result.error,
+              },
+              `resource "${resourceName}" failed`
+            )
+            eventsBucket.trigger("failed", eventParam)
+            endAll()
+          } else {
+            eventsBucket.trigger("closed", eventParam)
           }
 
-          resolve(result)
+          resolve({
+            ...result,
+            namespace,
+            selector,
+          })
         } catch (err) {
           reject(err)
         }
@@ -123,7 +133,7 @@ module.exports = async (context) => {
       const errors = []
       for (const result of results) {
         if (result.success !== true && result.error?.code) {
-          errors.push(result.error)
+          errors.push(result)
         }
       }
       if (errors.length) {
@@ -140,9 +150,13 @@ module.exports = async (context) => {
         // }
         throw new AggregateError(
           errors.map(
-            (err) =>
+            ({ error, namespace, selector }) =>
               new Error(
-                errorFields.map((field) => optionalField(err, field)).join(", ")
+                `${errorFields
+                  .map((field) => optionalField(error, field))
+                  .join(
+                    ", "
+                  )} on namespace="${namespace}" selector="${selector}"`
               )
           ),
           "rollout-status error"
