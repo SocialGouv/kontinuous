@@ -1,7 +1,7 @@
 const fs = require("fs-extra")
 
 const ctx = require("~common/ctx")
-const promiseAll = require("~common/utils/promise-all")
+const promiseGetAll = require("~common/utils/promise-get-all")
 
 const createContext = require("~/plugins/context")
 const pluginFunction = require("~/plugins/context/function")
@@ -39,10 +39,12 @@ module.exports = async ({ manifests, runContext, dryRun }) => {
 
   const sidecarsPromise = new Promise(async (resolve, reject) => {
     try {
-      const results = await promiseAll(sidecarPromises)
-      const errors = results
-        .filter((result) => result?.errors)
-        .flatMap((result) => result.errors)
+      const { values, errors } = await promiseGetAll(sidecarPromises)
+      errors.push(
+        ...values
+          .filter((result) => result?.errors)
+          .flatMap((result) => result.errors)
+      )
       resolve({ errors })
     } catch (err) {
       reject(err)
