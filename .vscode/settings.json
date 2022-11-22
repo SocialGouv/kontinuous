@@ -4,5 +4,8 @@
   },
   "eslint.validate": [
     "javascript"
-  ]
+  ],
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  }
 }
