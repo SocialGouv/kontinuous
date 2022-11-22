@@ -46,7 +46,7 @@ module.exports = (program) =>
     .option("--timeout <timeout>", "deploy wait timeout, default 15m")
     .option("--dry-run", "run all things except the deployment")
     .description(
-      "Deploy manifests using kapp with current directory configuration"
+      "Deploy manifests to kubernetes with current directory configuration"
     )
     .action(async (_opts, command) => {
       const opts = command.optsWithGlobals()
