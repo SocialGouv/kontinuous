@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.103.12](https://github.com/socialgouv/kontinuous/compare/v1.103.10...v1.103.12) (2022-11-22)
+
+
+### Bug Fixes
+
+* envPath unshift ([7826acf](https://github.com/socialgouv/kontinuous/commit/7826acf7fd9054be8fcd2ae8ca0e2534dd891b38))
+* help label ([916f766](https://github.com/socialgouv/kontinuous/commit/916f76656bd63624834fe5b8934e19788b88b3fc))
+
 ### 1.103.11 (2022-11-22)
 
 ### [1.103.10](https://github.com/socialgouv/kontinuous/compare/v1.103.9...v1.103.10) (2022-11-22)

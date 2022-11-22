@@ -12,7 +12,7 @@ runs:
   steps:
     - name: Load kontinuous config
       id: kontinuous-config
-      uses: socialgouv/kontinuous/.github/actions/load-remote-config@v1.103.11
+      uses: socialgouv/kontinuous/.github/actions/load-remote-config@v1.103.12
     
     - name: Notify deployment start
       uses: bobheadxi/deployments@v1
