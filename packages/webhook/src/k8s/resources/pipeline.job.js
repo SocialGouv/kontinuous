@@ -41,6 +41,10 @@ module.exports = ({
   if (mountKubeconfig === "false") {
     mountKubeconfig = false
   }
+  if (ignoreProjectTemplates === "false") {
+    ignoreProjectTemplates = false
+  }
+
   if (serviceAccountName === undefined || serviceAccountName === null) {
     serviceAccountName = serviceAccountNameDefault
   }
