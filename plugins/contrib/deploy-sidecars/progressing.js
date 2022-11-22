@@ -91,8 +91,8 @@ module.exports = async (
     const key = getEventUniqKey(param)
     promisesMap[key].resolve(true)
     clearInterval(intervalsMap[key])
-  })
     logState("✔ ready", param)
+  })
   eventsBucket.on("failed", (param) => {
     const key = getEventUniqKey(param)
     const msg = "❌ failed"
