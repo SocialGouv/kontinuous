@@ -46,7 +46,7 @@ module.exports = async (manifests, options, context) => {
             if (err.response?.status === 429) {
               logger.debug(
                 { endpoint },
-                `kubeseal verify endpoint rate limit exceeded, trying`
+                `kubeseal verify endpoint rate limit exceeded, retrying`
               )
               throw new KontinuousPluginError("rate limit exceeded")
             }
