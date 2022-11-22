@@ -31,7 +31,7 @@ module.exports = async (bin, downloadFunc, options = {}) => {
   await fs.ensureDir(addPath)
   const envPaths = envPath.split(path.delimiter)
   if (!envPaths.includes(addPath)) {
-    envPaths.push(addPath)
+    envPaths.unshift(addPath)
     envPath = envPaths.join(path.delimiter)
     if (!options.noSetEnv) {
       process.env.PATH = envPath
