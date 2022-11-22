@@ -449,6 +449,14 @@ module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
     kubeconfig: {
       option: "kubeconfig",
       env: ["KS_KUBECONFIG", "KUBECONFIG"],
+      defaultFunction: () => {
+        if (!env.KUBERNETES_SERVICE_HOST) {
+          const homedir = os.homedir()
+          if (homedir) {
+            return `${homedir}/.kube/config`
+          }
+        }
+      },
     },
     kubeconfigContextEnvironments: {
       defaultFunction: (config) => config.clusterEnvironments,
