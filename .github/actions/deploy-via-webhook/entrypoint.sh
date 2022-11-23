@@ -6,7 +6,7 @@ export PATH=$PATH:/opt/kontinuous/packages/kontinuous/bin
 
 export KS_ENVIRONMENT="$1"
 export KS_WEBHOOK_TOKEN="$2"
-export TRIGGER_WEBHOOK="$3"
+export TRIGGER_WEBHOOK=${3:-"true"}
 
 KS_GIT=false
 
