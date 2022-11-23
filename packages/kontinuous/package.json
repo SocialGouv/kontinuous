@@ -28,7 +28,7 @@
     "lodash.mergewith": "^4.6.2",
     "lodash.set": "^4.3.2",
     "nctx": "^1.3.0",
-    "nowtest": "^1.1.0",
+    "nowtest": "^1.1.1",
     "pino": "^8.3.1",
     "pino-bfuscate": "^1.0.0",
     "pino-pretty": "^8.1.0",

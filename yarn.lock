@@ -8588,7 +8588,7 @@ __metadata:
     lodash.mergewith: "npm:^4.6.2"
     lodash.set: "npm:^4.3.2"
     nctx: "npm:^1.3.0"
-    nowtest: "npm:^1.1.0"
+    nowtest: "npm:^1.1.1"
     pino: "npm:^8.3.1"
     pino-bfuscate: "npm:^1.0.0"
     pino-pretty: "npm:^8.1.0"
@@ -9657,14 +9657,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nowtest@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "nowtest@npm:1.1.0"
+"nowtest@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "nowtest@npm:1.1.1"
   dependencies:
     fast-equals: "npm:^1.6.1"
     json-stringify-safe: "npm:^5.0.1"
     npdefer: "npm:^1.0.5"
-  checksum: da6d52e58c848392aef42e1e172f375ad902d27bc576df19bf58182c3a9b4bca39713a16ca61b54e8a69b8d64c68b742c72ab7d2135d646afc3d2748e67e3671
+  checksum: 3879f0a0f78f2a58fa38f9e16962fcc016c2be6c9d7c3f802b02fa0fa9f4938dfb198540aab839874b94470fb8b0fa08b96121a14d64ed03d5d56ad392edbe82
   languageName: node
   linkType: hard
 
