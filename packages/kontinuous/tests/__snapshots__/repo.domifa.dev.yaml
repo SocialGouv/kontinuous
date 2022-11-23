@@ -122,7 +122,7 @@ data:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-repo-domifa-2d4jn8-feature-branch-1-build-back-4k4xvy
+  name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-412srd
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -134,19 +134,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-build-back-4k4xvy
-    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-build-back-4k4xvy
+      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-412srd
+    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-412srd
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-build-back-4k4xvy
-    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-build-back-4k4xvy
+    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-412srd
+    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-412srd
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-2stifo
+    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-2ll1vq
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -168,7 +168,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-2stifo
+        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-2ll1vq
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
     spec:
@@ -270,7 +270,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-repo-domifa-2d4jn8-feature-branch-1-build-fron-3jcskb
+  name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5bi6sa
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -282,19 +282,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-build-fron-3jcskb
-    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-build-fron-3jcskb
+      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5bi6sa
+    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5bi6sa
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-build-fron-3jcskb
-    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-build-fron-3jcskb
+    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5bi6sa
+    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5bi6sa
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-66gcje
+    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-6cax17
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -316,7 +316,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-66gcje
+        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-6cax17
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
     spec:
@@ -419,7 +419,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-repo-domifa-2d4jn8-feature-branch-1-build-port-1gyhrn
+  name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1cmbis
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -432,19 +432,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-build-port-1gyhrn
-    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-build-port-1gyhrn
+      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1cmbis
+    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1cmbis
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-build-port-1gyhrn
-    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-build-port-1gyhrn
+    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1cmbis
+    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1cmbis
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-5mofqa
+    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-5buu0s
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -466,7 +466,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-5mofqa
+        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-5buu0s
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
     spec:
@@ -566,7 +566,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-repo-domifa-2d4jn8-feature-branch-1-build-port-47mqud
+  name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5t07hs
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -579,19 +579,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-build-port-47mqud
-    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-build-port-47mqud
+      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5t07hs
+    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5t07hs
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-build-port-47mqud
-    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-build-port-47mqud
+    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5t07hs
+    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5t07hs
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-33t3lw
+    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-29yf2v
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -613,7 +613,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-33t3lw
+        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-29yf2v
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
     spec:
@@ -714,7 +714,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-repo-domifa-2d4jn8-feature-branch-1-create-db-69tyoi
+  name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4z7evj
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -727,19 +727,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-create-db-69tyoi
-    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-create-db-69tyoi
+      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4z7evj
+    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4z7evj
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-create-db-69tyoi
-    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-create-db-69tyoi
+    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4z7evj
+    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4z7evj
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-3aiqa8
+    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-59ajz6
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -758,7 +758,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-3aiqa8
+        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-59ajz6
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
@@ -771,10 +771,10 @@ spec:
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
-                awesome-ci/Job/job-test-repo-domifa-2d4jn8-feature-branch-1-create-db-69tyoi
+                awesome-ci/Job/job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4z7evj
             - name: WAIT_NEEDS
               value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-create-db-4zq7ob\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-1r3zal\\"},\\"needOnce\\":true},{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-drop-db-dr-14h03a\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-5kon91\\"},\\"needOnce\\":true}]
+                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-13jq8q\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-1c6eyv\\"},\\"needOnce\\":true},{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1csza1\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-3lxezf\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
@@ -877,7 +877,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-repo-domifa-2d4jn8-feature-branch-1-create-db-4zq7ob
+  name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-13jq8q
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -890,19 +890,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-create-db-4zq7ob
-    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-create-db-4zq7ob
+      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-13jq8q
+    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-13jq8q
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-create-db-4zq7ob
-    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-create-db-4zq7ob
+    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-13jq8q
+    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-13jq8q
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-1r3zal
+    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-1c6eyv
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -921,7 +921,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-1r3zal
+        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-1c6eyv
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
@@ -934,10 +934,10 @@ spec:
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
-                awesome-ci/Job/job-test-repo-domifa-2d4jn8-feature-branch-1-create-db-4zq7ob
+                awesome-ci/Job/job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-13jq8q
             - name: WAIT_NEEDS
               value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-drop-db-dr-14h03a\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-5kon91\\"},\\"needOnce\\":true}]
+                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1csza1\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-3lxezf\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
@@ -1036,7 +1036,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-repo-domifa-2d4jn8-feature-branch-1-drop-db-dr-14h03a
+  name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1csza1
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -1048,19 +1048,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-drop-db-dr-14h03a
-    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-drop-db-dr-14h03a
+      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1csza1
+    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1csza1
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-drop-db-dr-14h03a
-    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-drop-db-dr-14h03a
+    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1csza1
+    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1csza1
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-5kon91
+    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-3lxezf
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -1079,7 +1079,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-5kon91
+        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-3lxezf
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
@@ -1150,7 +1150,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-repo-domifa-2d4jn8-feature-branch-1-seed-impor-4wcdu1
+  name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4dyf9p
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -1163,19 +1163,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-seed-impor-4wcdu1
-    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-seed-impor-4wcdu1
+      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4dyf9p
+    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4dyf9p
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-seed-impor-4wcdu1
-    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-seed-impor-4wcdu1
+    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4dyf9p
+    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4dyf9p
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-59z03x
+    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-t36r8z
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -1194,7 +1194,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-59z03x
+        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-t36r8z
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
@@ -1207,7 +1207,7 @@ spec:
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
-                awesome-ci/Job/job-test-repo-domifa-2d4jn8-feature-branch-1-seed-impor-4wcdu1
+                awesome-ci/Job/job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4dyf9p
             - name: WAIT_NEEDS
               value: >-
                 [{\\"namespace\\":\\"test-repo-domifa-feature-branch-1-o91f7v\\",\\"kind\\":\\"Deployment\\",\\"name\\":\\"backend\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"deployment-3d60sq-backend\\"},\\"needOnce\\":false}]
@@ -1298,7 +1298,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-repo-domifa-2d4jn8-feature-branch-1-seed-seed-5oympv
+  name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1q58c3
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -1311,19 +1311,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-seed-seed-5oympv
-    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-seed-seed-5oympv
+      project.fabrique.contrib.jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1q58c3
+    kontinuous/depname.chartResource: jobs.job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1q58c3
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-seed-seed-5oympv
-    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-seed-seed-5oympv
+    kontinuous/depname.resourcePath: job.job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1q58c3
+    kontinuous/depname.resourceName: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1q58c3
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b0874-515ca1
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-527vit
+    kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-8tlo83
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -1342,7 +1342,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-527vit
+        kontinuous/resourceName: job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-8tlo83
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
@@ -1355,10 +1355,10 @@ spec:
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
-                awesome-ci/Job/job-test-repo-domifa-2d4jn8-feature-branch-1-seed-seed-5oympv
+                awesome-ci/Job/job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1q58c3
             - name: WAIT_NEEDS
               value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-seed-impor-4wcdu1\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-59z03x\\"},\\"needOnce\\":true},{\\"namespace\\":\\"test-repo-domifa-feature-branch-1-o91f7v\\",\\"kind\\":\\"Deployment\\",\\"name\\":\\"backend\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"deployment-3d60sq-backend\\"},\\"needOnce\\":false}]
+                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4dyf9p\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-t36r8z\\"},\\"needOnce\\":true},{\\"namespace\\":\\"test-repo-domifa-feature-branch-1-o91f7v\\",\\"kind\\":\\"Deployment\\",\\"name\\":\\"backend\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"deployment-3d60sq-backend\\"},\\"needOnce\\":false}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
@@ -1601,7 +1601,7 @@ spec:
               value: test-repo-domifa-feature-branch-1-o91f7v/Deployment/backend-cron
             - name: WAIT_NEEDS
               value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-build-back-4k4xvy\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-2stifo\\"},\\"needOnce\\":true}]
+                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-412srd\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-2ll1vq\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
@@ -1775,7 +1775,7 @@ spec:
               value: test-repo-domifa-feature-branch-1-o91f7v/Deployment/backend
             - name: WAIT_NEEDS
               value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-build-back-4k4xvy\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-2stifo\\"},\\"needOnce\\":true}]
+                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-412srd\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-2ll1vq\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
@@ -1898,7 +1898,7 @@ spec:
               value: test-repo-domifa-feature-branch-1-o91f7v/Deployment/frontend
             - name: WAIT_NEEDS
               value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-build-fron-3jcskb\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-66gcje\\"},\\"needOnce\\":true}]
+                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5bi6sa\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-6cax17\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
@@ -2029,7 +2029,7 @@ spec:
                 test-repo-domifa-feature-branch-1-o91f7v/Deployment/portail-admins
             - name: WAIT_NEEDS
               value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-build-port-1gyhrn\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-5mofqa\\"},\\"needOnce\\":true}]
+                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1cmbis\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-5buu0s\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
@@ -2160,7 +2160,7 @@ spec:
                 test-repo-domifa-feature-branch-1-o91f7v/Deployment/portail-usagers
             - name: WAIT_NEEDS
               value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-build-port-47mqud\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-33t3lw\\"},\\"needOnce\\":true}]
+                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5t07hs\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-29yf2v\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER

@@ -85,7 +85,7 @@ automountServiceAccountToken: false
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-include-file-feature-branch-1-say-hello
+  name: job-test-include-file-feature-branch-1-jobs-con-6v7vwk-3h2gmo
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -97,19 +97,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-include-file-feature-branch-1-say-hello
-    kontinuous/depname.chartResource: jobs.job.job-test-include-file-feature-branch-1-say-hello
+      project.fabrique.contrib.jobs.job.job-test-include-file-feature-branch-1-jobs-con-6v7vwk-3h2gmo
+    kontinuous/depname.chartResource: jobs.job.job-test-include-file-feature-branch-1-jobs-con-6v7vwk-3h2gmo
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-include-file-feature-branch-1-say-hello
-    kontinuous/depname.resourceName: job-test-include-file-feature-branch-1-say-hello
+    kontinuous/depname.resourcePath: job.job-test-include-file-feature-branch-1-jobs-con-6v7vwk-3h2gmo
+    kontinuous/depname.resourceName: job-test-include-file-feature-branch-1-jobs-con-6v7vwk-3h2gmo
   labels:
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b087-3mtci4
     kontinuous/deployment.env: test-include-file-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-test-include-file-feature-branch-1-say-hello
+    kontinuous/resourceName: job-4bkfwz-job-test-include-file-feature-branch-1-jobs-68y0n0
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -128,7 +128,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-test-include-file-feature-branch-1-say-hello
+        kontinuous/resourceName: job-4bkfwz-job-test-include-file-feature-branch-1-jobs-68y0n0
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:

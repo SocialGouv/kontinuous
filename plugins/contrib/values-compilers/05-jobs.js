@@ -153,7 +153,13 @@ const runsArrayToMap = (runs) => {
   }, {})
 }
 
-async function compile(context, values, parentScope = [], parentWith = {}) {
+async function compile(
+  context,
+  values,
+  chartScope,
+  parentScope = [],
+  parentWith = {}
+) {
   values.runs = runsArrayToMap(values.runs)
 
   const { config, logger, utils } = context
@@ -208,10 +214,13 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
       run.needs = []
     }
 
+    const chartJobsKey = [...chartScope].reverse().join("-")
+
     run.jobName = slug([
       "job",
       [repositoryName, 24],
       [gitBranch, 16],
+      [chartJobsKey, 16],
       currentScope.join("--"),
     ])
 
@@ -225,7 +234,7 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
       const runValues = yaml.load(
         await fs.readFile(target, { encoding: "utf-8" })
       )
-      await compile(context, runValues, scope, run.parentWith)
+      await compile(context, runValues, chartScope, scope, run.parentWith)
 
       for (const [runKey, r] of Object.entries(runValues.runs)) {
         remapValues(r, context)
@@ -291,7 +300,7 @@ async function compile(context, values, parentScope = [], parentWith = {}) {
   values.runs = newRuns
 }
 
-const compileJobsValues = async (values, context) => {
+const compileJobsValues = async (values, context, chartScope) => {
   const { config } = context
   if (config.deployKeySecretEnabled) {
     if (!values.deployKey) {
@@ -302,12 +311,12 @@ const compileJobsValues = async (values, context) => {
       values.deployKey.secretRefName = config.deployKeySecretName
     }
   }
-  await compile(context, values)
+  await compile(context, values, chartScope)
 }
 
-const compileValues = async (values, context) => {
+const compileValues = async (values, context, chartScope = []) => {
   await Promise.all(
-    Object.values(values).map(async (subValues) => {
+    Object.entries(values).map(async ([key, subValues]) => {
       if (
         typeof subValues !== "object" ||
         subValues === null ||
@@ -315,10 +324,11 @@ const compileValues = async (values, context) => {
       ) {
         return
       }
+      const childChartScope = [...chartScope, key]
       if (subValues._pluginValuesCompilerRecommendedJobs) {
-        await compileJobsValues(subValues, context)
+        await compileJobsValues(subValues, context, childChartScope)
       } else {
-        await compileValues(subValues, context)
+        await compileValues(subValues, context, childChartScope)
       }
     })
   )

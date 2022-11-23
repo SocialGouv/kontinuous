@@ -86,7 +86,7 @@ automountServiceAccountToken: false
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-init-container-feature-branch-1-seed
+  name: job-test-init-container-feature-branch-1-jobs-con-6v7vwk-seed
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -98,19 +98,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-init-container-feature-branch-1-ffac537e6cbbf934b0-32fk0x
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-init-container-feature-branch-1-seed
-    kontinuous/depname.chartResource: jobs.job.job-test-init-container-feature-branch-1-seed
+      project.fabrique.contrib.jobs.job.job-test-init-container-feature-branch-1-jobs-con-6v7vwk-seed
+    kontinuous/depname.chartResource: jobs.job.job-test-init-container-feature-branch-1-jobs-con-6v7vwk-seed
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-init-container-feature-branch-1-seed
-    kontinuous/depname.resourceName: job-test-init-container-feature-branch-1-seed
+    kontinuous/depname.resourcePath: job.job-test-init-container-feature-branch-1-jobs-con-6v7vwk-seed
+    kontinuous/depname.resourceName: job-test-init-container-feature-branch-1-jobs-con-6v7vwk-seed
   labels:
     kontinuous/deployment: test-init-container-feature-branch-1-ffac537e6cbbf934b0-32fk0x
     kontinuous/deployment.env: test-init-container-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-test-init-container-feature-branch-1-seed
+    kontinuous/resourceName: job-4bkfwz-job-test-init-container-feature-branch-1-job-5bdgm5
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -129,7 +129,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-test-init-container-feature-branch-1-seed
+        kontinuous/resourceName: job-4bkfwz-job-test-init-container-feature-branch-1-job-5bdgm5
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
@@ -306,7 +306,7 @@ spec:
               value: test-init-container-feature-branch-1/Deployment/app
             - name: WAIT_NEEDS
               value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-init-container-feature-branch-1-seed\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-init-container-feature-branch-1-seed\\"},\\"needOnce\\":true}]
+                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-init-container-feature-branch-1-jobs-con-6v7vwk-seed\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-init-container-feature-branch-1-job-5bdgm5\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER

@@ -85,7 +85,7 @@ automountServiceAccountToken: false
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-jobs-uses-relative-feature-branch-1-db-create-58nity
+  name: job-test-jobs-uses-relative-feature-branch-1-jobs-con-6-1qx7fk
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -98,19 +98,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbbf9-4qagag
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-jobs-uses-relative-feature-branch-1-db-create-58nity
-    kontinuous/depname.chartResource: jobs.job.job-test-jobs-uses-relative-feature-branch-1-db-create-58nity
+      project.fabrique.contrib.jobs.job.job-test-jobs-uses-relative-feature-branch-1-jobs-con-6-1qx7fk
+    kontinuous/depname.chartResource: jobs.job.job-test-jobs-uses-relative-feature-branch-1-jobs-con-6-1qx7fk
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-jobs-uses-relative-feature-branch-1-db-create-58nity
-    kontinuous/depname.resourceName: job-test-jobs-uses-relative-feature-branch-1-db-create-58nity
+    kontinuous/depname.resourcePath: job.job-test-jobs-uses-relative-feature-branch-1-jobs-con-6-1qx7fk
+    kontinuous/depname.resourceName: job-test-jobs-uses-relative-feature-branch-1-jobs-con-6-1qx7fk
   labels:
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbbf9-4qagag
     kontinuous/deployment.env: test-jobs-uses-relative-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-relative-feature-branch-1-24i8nb
+    kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-relative-feature-branch-1-2y886f
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -129,7 +129,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-relative-feature-branch-1-24i8nb
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-relative-feature-branch-1-2y886f
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
@@ -142,10 +142,10 @@ spec:
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
-                awesome-ci/Job/job-test-jobs-uses-relative-feature-branch-1-db-create-58nity
+                awesome-ci/Job/job-test-jobs-uses-relative-feature-branch-1-jobs-con-6-1qx7fk
             - name: WAIT_NEEDS
               value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-jobs-uses-relative-feature-branch-1-db-create-2w732p\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-jobs-uses-relative-feature-branch-1-5h1agc\\"},\\"needOnce\\":true}]
+                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-jobs-uses-relative-feature-branch-1-jobs-con-6-q7635e\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-jobs-uses-relative-feature-branch-1-1zdo0n\\"},\\"needOnce\\":true}]
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
@@ -248,7 +248,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-jobs-uses-relative-feature-branch-1-db-create-2w732p
+  name: job-test-jobs-uses-relative-feature-branch-1-jobs-con-6-q7635e
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
@@ -260,19 +260,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbbf9-4qagag
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-jobs-uses-relative-feature-branch-1-db-create-2w732p
-    kontinuous/depname.chartResource: jobs.job.job-test-jobs-uses-relative-feature-branch-1-db-create-2w732p
+      project.fabrique.contrib.jobs.job.job-test-jobs-uses-relative-feature-branch-1-jobs-con-6-q7635e
+    kontinuous/depname.chartResource: jobs.job.job-test-jobs-uses-relative-feature-branch-1-jobs-con-6-q7635e
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-jobs-uses-relative-feature-branch-1-db-create-2w732p
-    kontinuous/depname.resourceName: job-test-jobs-uses-relative-feature-branch-1-db-create-2w732p
+    kontinuous/depname.resourcePath: job.job-test-jobs-uses-relative-feature-branch-1-jobs-con-6-q7635e
+    kontinuous/depname.resourceName: job-test-jobs-uses-relative-feature-branch-1-jobs-con-6-q7635e
   labels:
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbbf9-4qagag
     kontinuous/deployment.env: test-jobs-uses-relative-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-relative-feature-branch-1-5h1agc
+    kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-relative-feature-branch-1-1zdo0n
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -291,7 +291,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-relative-feature-branch-1-5h1agc
+        kontinuous/resourceName: job-4bkfwz-job-test-jobs-uses-relative-feature-branch-1-1zdo0n
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
