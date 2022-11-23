@@ -1,7 +1,7 @@
 const pino = require("pino")
 const fs = require("fs-extra")
 const nctx = require("nctx")
-const { default: test } = require("testnow")
+const nowtest = require("nowtest")
 
 const ctx = require("~common/ctx")
 const snapshotDiff = require("~common/utils/snapshot-diff")
@@ -32,6 +32,10 @@ module.exports = async (opts) => {
     snapshotsDir,
     update: opts.U,
   }
+
+  const test = nowtest({
+    timeout: 120000,
+  })
 
   const runSnapshotsTests = async ({ title, subdir }) =>
     test.group(title, () => {
