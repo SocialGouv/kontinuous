@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.104.0](https://github.com/socialgouv/kontinuous/compare/v1.103.13...v1.104.0) (2022-11-23)
+
+
+### Features
+
+* run parallel charts pipelines from webhook ([c881909](https://github.com/socialgouv/kontinuous/commit/c881909ecb290dd4cbc55dd3b888e1783b610832))
+
+
+### Bug Fixes
+
+* default triggerWebhook gh deploy-via-webhook ([de32fa7](https://github.com/socialgouv/kontinuous/commit/de32fa788d027ee55e7b6439e93f86ac957f46f6))
+
 ### [1.103.13](https://github.com/socialgouv/kontinuous/compare/v1.103.12...v1.103.13) (2022-11-22)
 
 

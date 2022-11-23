@@ -18,7 +18,7 @@ inputs:
 runs:
   using: docker
   # image: Dockerfile
-  image: docker://ghcr.io/socialgouv/kontinuous/gh-action-deploy-via-webhook:v1.103.13
+  image: docker://ghcr.io/socialgouv/kontinuous/gh-action-deploy-via-webhook:v1.104.0
   env:
     KS_CHART: ${{ inputs.chart }}
     KS_IGNORE_PROJECT_TEMPLATES: ${{ inputs.ignoreProjectTemplates }}
