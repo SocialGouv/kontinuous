@@ -41,6 +41,11 @@ parameters:
       enum: [dev, preprod, prod]
     allowEmptyValue: true
   - in: query
+    name: chart
+    schema:
+      type: string
+    required: false
+  - in: query
     name: follow
     schema:
       type: boolean

@@ -73,6 +73,7 @@ module.exports = function ({ services }) {
       follow,
       catch: catchJob,
       since,
+      chart,
     } = req.query
 
     let { env } = req.query
@@ -129,6 +130,7 @@ module.exports = function ({ services }) {
       eventName: event,
       repositoryName,
       gitBranch,
+      chart,
     })
 
     res.writeHead(200, {

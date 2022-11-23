@@ -83,6 +83,7 @@ module.exports = ({ services }) => {
       eventName,
       repositoryName,
       gitBranch,
+      chart,
     })
 
     const webhookUri = ctx.require("config.project.oas.uri")

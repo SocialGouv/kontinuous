@@ -34,6 +34,8 @@ module.exports = async (options) => {
 
   const { webhookUri, webhookToken: token } = config
 
+  const { chart } = config
+
   const query = qs.stringify({
     project: config.projectName,
     repository,
@@ -43,6 +45,11 @@ module.exports = async (options) => {
     commit,
     catch: options.catch ? true : undefined,
     follow: true,
+    ...(chart
+      ? {
+          chart: chart.join(","),
+        }
+      : {}),
   })
   const url = `${webhookUri}/api/v1/oas/logs/pipeline?${query}`
 
