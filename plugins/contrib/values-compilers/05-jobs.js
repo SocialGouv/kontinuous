@@ -2,6 +2,10 @@ const path = require("path")
 
 const fs = require("fs-extra")
 
+const omit = require("lodash.omit")
+// const pick = require("lodash.pick")
+const defaults = require("lodash.defaults")
+
 const recurseLocate = async (
   jobName,
   dependencies,
@@ -153,122 +157,116 @@ const runsArrayToMap = (runs) => {
   }, {})
 }
 
-async function compile(
-  context,
-  values,
-  chartScope,
-  parentScope = [],
-  parentWith = {}
-) {
-  values.runs = runsArrayToMap(values.runs)
-
+const compileRun = async (key, run, compileCommon) => {
+  const { context, chartScope, parentScope, parentWith, newRuns } =
+    compileCommon
   const { config, logger, utils } = context
   const { gitBranch, gitRepositoryName: repositoryName, links } = config
   const { slug, yaml } = utils
 
-  const newRuns = {}
-  for (const [key, run] of Object.entries(values.runs)) {
-    if (!run.name) {
-      run.name = key
-    }
-    if (!run.with) {
-      run.with = {}
-    }
+  if (!run.name) {
+    run.name = key
+  }
+  if (!run.with) {
+    run.with = {}
+  }
 
-    if (!run.labels) {
-      run.labels = {}
-    }
-    Object.assign(run.labels, {
-      repository: repositoryName,
-      ref: slug(gitBranch),
-      environment: config.environment,
-      ...(run.use ? {} : {}),
-    })
-    run.labels.runName = run.use
-      ? slug(
-          run.use
-            .replace("@", "#")
-            .split("#")
-            .shift()
-            .split("/")
-            .pop()
-            .replace("~", "")
-        )
-      : "custom"
-
-    const scope = [...parentScope, run.name]
-    run.scope = scope
-    const scopes = []
-    const currentScope = []
-    for (const sc of scope) {
-      currentScope.push(sc)
-      scopes.push(currentScope.join("."))
-    }
-    if (scope.length > 1) {
-      scopes.push([scope[0], scope[scope.length - 1]].join(".."))
-    }
-    run.scopes = scopes
-    run.parentWith = { ...parentWith, ...run.with }
-
-    if (!run.needs) {
-      run.needs = []
-    }
-
-    const chartJobsKey = [...chartScope].reverse().join("-")
-
-    run.jobName = slug([
-      "job",
-      [repositoryName, 24],
-      [gitBranch, 16],
-      [chartJobsKey, 16],
-      currentScope.join("--"),
-    ])
-
-    remapValues(run, context)
-
-    if (!run.use) {
-      newRuns[key] = run
-    } else {
-      newRuns[key] = { enabled: false }
-      const { target } = await requireUse(run, context)
-      const runValues = yaml.load(
-        await fs.readFile(target, { encoding: "utf-8" })
+  if (!run.labels) {
+    run.labels = {}
+  }
+  Object.assign(run.labels, {
+    repository: repositoryName,
+    ref: slug(gitBranch),
+    environment: config.environment,
+    ...(run.use ? {} : {}),
+  })
+  run.labels.runName = run.use
+    ? slug(
+        run.use
+          .replace("@", "#")
+          .split("#")
+          .shift()
+          .split("/")
+          .pop()
+          .replace("~", "")
       )
-      await compile(context, runValues, chartScope, scope, run.parentWith)
+    : "custom"
 
-      for (const [runKey, r] of Object.entries(runValues.runs)) {
-        remapValues(r, context)
-        let action
-        if (useIsInPlugins(run.use)) {
-          const found = await locateUseInPlugins(run.use, config)
-          logger.debug(`🗂️  use plugin action: ${found.jobPath}`)
-          action = found.use
-          run.localActionPath = found.jobPath
-        } else {
-          action = run.use
-          const lowerAction = action.toLowerCase()
-          if (
-            !action.includes("#") &&
-            Object.keys(links).some((lk) => lowerAction.startsWith(lk))
-          ) {
-            const [linkKey, linkPath] = Object.entries(links).find(([lk]) =>
-              lowerAction.startsWith(lk)
-            )
-            const from = linkPath + action.substr(linkKey.length)
-            logger.debug(`🗂️  use linked action: ${from}`)
-            run.localActionPath = from
-          }
+  const scope = [...parentScope, run.name]
+  run.scope = scope
+  const scopes = []
+  const currentScope = []
+  for (const sc of scope) {
+    currentScope.push(sc)
+    scopes.push(currentScope.join("."))
+  }
+  if (scope.length > 1) {
+    scopes.push([scope[0], scope[scope.length - 1]].join(".."))
+  }
+  run.scopes = scopes
+  run.parentWith = { ...parentWith, ...run.with }
+
+  if (!run.needs) {
+    run.needs = []
+  }
+
+  const chartJobsKey = [...chartScope].reverse().join("-")
+
+  run.jobName = slug([
+    "job",
+    [repositoryName, 24],
+    [gitBranch, 16],
+    [chartJobsKey, 16],
+    currentScope.join("--"),
+  ])
+  run.needsNames = [slug([[chartJobsKey, 16]]), ...scopes]
+
+  remapValues(run, context)
+
+  if (!run.use) {
+    newRuns[key] = run
+  } else {
+    newRuns[key] = { enabled: false }
+    const { target } = await requireUse(run, context)
+    const runValues = yaml.load(
+      await fs.readFile(target, { encoding: "utf-8" })
+    )
+
+    // eslint-disable-next-line no-use-before-define
+    await compile(context, runValues, chartScope, scope, run.parentWith)
+
+    for (const [runKey, r] of Object.entries(runValues.runs)) {
+      remapValues(r, context)
+      let action
+      if (useIsInPlugins(run.use)) {
+        const found = await locateUseInPlugins(run.use, config)
+        logger.debug(`🗂️  use plugin action: ${found.jobPath}`)
+        action = found.use
+        run.localActionPath = found.jobPath
+      } else {
+        action = run.use
+        const lowerAction = action.toLowerCase()
+        if (
+          !action.includes("#") &&
+          Object.keys(links).some((lk) => lowerAction.startsWith(lk))
+        ) {
+          const [linkKey, linkPath] = Object.entries(links).find(([lk]) =>
+            lowerAction.startsWith(lk)
+          )
+          const from = linkPath + action.substr(linkKey.length)
+          logger.debug(`🗂️  use linked action: ${from}`)
+          run.localActionPath = from
         }
-        const newRun = {
-          action,
-        }
-        for (const k of Object.keys(r)) {
-          if (k === "use") {
-            continue
-          }
-          newRun[k] = r[k]
-        }
-        const jobRunOmitKeys = [
+      }
+      const newRun = {
+        action,
+      }
+
+      Object.assign(newRun, omit(r, ["use"]))
+
+      Object.assign(
+        newRun,
+        omit(run, [
           "use",
           "name",
           "jobName",
@@ -276,31 +274,119 @@ async function compile(
           "scope",
           "scopes",
           "parentWith",
-        ]
-        for (const k of Object.keys(run)) {
-          if (jobRunOmitKeys.includes(k)) {
-            continue
-          }
-          newRun[k] = run[k]
-        }
-        if (!newRun.needs) {
-          newRun.needs = []
-        }
-        newRun.needs = newRun.needs.map((r2) => [scope[0], r2].join(".."))
-        newRun.needs = [...new Set([...newRun.needs, ...run.needs])]
-        if (run.stage) {
-          newRun.stage = run.stage
-        }
-        const subKey = [key, runKey].join(".")
-        newRun.name = subKey
-        newRuns[subKey] = newRun
+        ])
+      )
+
+      if (!newRun.needs) {
+        newRun.needs = []
       }
+      newRun.needs = newRun.needs.map((r2) => [scope[0], r2].join(".."))
+      newRun.needs = [...new Set([...newRun.needs, ...run.needs])]
+      if (run.stage) {
+        newRun.stage = run.stage
+      }
+      const subKey = [key, runKey].join(".")
+      newRun.name = subKey
+      newRuns[subKey] = newRun
     }
+  }
+}
+
+async function compile(
+  context,
+  values,
+  chartScope,
+  parentScope = [],
+  parentWith = {}
+) {
+  const newRuns = {}
+  const compileCommon = {
+    context,
+    chartScope,
+    parentScope,
+    parentWith,
+    newRuns,
+  }
+
+  values.runs = runsArrayToMap(values.runs)
+  for (const [key, run] of Object.entries(values.runs)) {
+    await compileRun(key, run, compileCommon)
   }
   values.runs = newRuns
 }
 
-const compileJobsValues = async (values, context, chartScope) => {
+const compileMulti = async (context, values, chartScope) => {
+  await compile(context, values, chartScope)
+}
+
+const compileSingle = async (context, values, chartScope) => {
+  await compile(context, values, chartScope)
+  const key = chartScope[chartScope.length - 1]
+  const run = omit(values, [
+    "_pluginValuesCompilerContribJob",
+    "_pluginValuesCompilerContribJobs",
+    "runs",
+    "enabled",
+    "_isProjectValues",
+    "_isChartValues",
+    "~chart",
+    "~chart-group",
+  ])
+  // const run = pick(values, [
+  //   "use",
+  //   "with",
+  //   "run",
+  //   "image",
+  //   "checkout",
+  //   "action",
+  //   "envFrom",
+  //   "volumeMounts",
+  //   "volumes",
+  //   "env",
+  //   "vars",
+  //   "workingDir",
+  //   "cpuLimit",
+  //   "cpuRequest",
+  //   "memoryLimit",
+  //   "memoryRequest",
+  //   "user",
+  //   "group",
+  //   "fsGroup",
+  //   "jobName",
+  //   "namespace",
+  //   "name",
+  //   "stage",
+  //   "onChangedPaths",
+  //   "onChangedNeeds",
+  //   "onChangedAnnotate",
+  //   "retry",
+  //   "activeDeadlineSeconds",
+  //   "annotations",
+  //   "labels",
+  //   "priorityClassName",
+  //   "kubernetes",
+  //   "kubernetesMethod",
+  //   "serviceAccountName",
+  //   "degitRepositoryCpuLimit",
+  //   "degitRepositoryMemoryLimit",
+  //   "degitRepositoryCpuRequest",
+  //   "degitRepositoryMemoryRequest",
+  //   "degitActionCpuLimit",
+  //   "degitActionMemoryLimit",
+  //   "degitActionCpuRequest",
+  //   "degitActionMemoryRequest",
+  // ])
+  values.runs = {
+    [key]: run,
+  }
+  await compile(context, values, chartScope)
+  defaults(values, values.defaults)
+}
+
+const compileJobsValues = async (values, context, chartScope, chartConf) => {
+  if (!values.enabled) {
+    return
+  }
   const { config } = context
   if (config.deployKeySecretEnabled) {
     if (!values.deployKey) {
@@ -311,7 +397,11 @@ const compileJobsValues = async (values, context, chartScope) => {
       values.deployKey.secretRefName = config.deployKeySecretName
     }
   }
-  await compile(context, values, chartScope)
+  if (chartConf.isJob) {
+    await compileSingle(context, values, chartScope)
+  } else {
+    await compileMulti(context, values, chartScope)
+  }
 }
 
 const compileValues = async (values, context, chartScope = []) => {
@@ -325,8 +415,11 @@ const compileValues = async (values, context, chartScope = []) => {
         return
       }
       const childChartScope = [...chartScope, key]
-      if (subValues._pluginValuesCompilerContribJobs) {
-        await compileJobsValues(subValues, context, childChartScope)
+      const isJob = subValues._pluginValuesCompilerContribJob
+      const isJobs = subValues._pluginValuesCompilerContribJobs
+      if (isJob || isJobs) {
+        const chartConf = { isJob, isJobs }
+        await compileJobsValues(subValues, context, childChartScope, chartConf)
       } else {
         await compileValues(subValues, context, childChartScope)
       }

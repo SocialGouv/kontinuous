@@ -1,7 +1,1 @@
----
-{{- $context := (merge (dict "run" .Values "with" .Values.with "parentWith" .Values.parentWith "name" (or .Chart.Name) ) $) -}}
-{{- if not .Values.if }}
-  {{- include "contrib-helpers.job" $context }}
-{{- else if (tpl .Values.if $context) }}
-  {{- include "contrib-helpers.job" $context }}
-{{- end }}
+{{- include "contrib-helpers.jobs" $ }}

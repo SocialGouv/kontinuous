@@ -6,7 +6,10 @@
     "fs-extra": "^10.1.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.clonedeep": "^4.5.0",
+    "lodash.defaults": "^4.2.0",
     "lodash.get": "^4.4.2",
+    "lodash.omit": "^4.5.0",
+    "lodash.pick": "^4.4.0",
     "lodash.set": "^4.3.2",
     "slackstream": "^0.2.1"
   },

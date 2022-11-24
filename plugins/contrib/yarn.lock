@@ -66,10 +66,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.defaults@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "lodash.defaults@npm:4.2.0"
+  checksum: 6ef1b158c3b00b1885abc4dbc4266863dcf4b978a433b7512191243a4ad029d44d9da2ef2c0cc08dc735b6091ff73434023877f8abc39882bd748ab4bda7e692
+  languageName: node
+  linkType: hard
+
 "lodash.get@npm:^4.4.2":
   version: 4.4.2
   resolution: "lodash.get@npm:4.4.2"
   checksum: 779e6f3d2c59b82cfee2407abe0fb7f2cefb6eda9a23ffd7caa1390ebcd40697a03a46622294a10f99e9fc0197fb844f3c433400d67584d722aa46b606c43590
+  languageName: node
+  linkType: hard
+
+"lodash.omit@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "lodash.omit@npm:4.5.0"
+  checksum: 877a363b41174a9a59efc00429a3f3c13729df9f78534ceb5859eea84af70bab21604d5839a1394648f92ebd168722b112018b1d7034906f9a234b1707e00190
+  languageName: node
+  linkType: hard
+
+"lodash.pick@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "lodash.pick@npm:4.4.0"
+  checksum: b48b403749e80338291f4eb5dc669a45ea07032555dfd16f664f860b96fd5037549e1fe1d043a78b0bac54d6ca99ea4e86b8e8228a5c5b4a8dc8d1c1d7a45c6c
   languageName: node
   linkType: hard
 
@@ -121,7 +142,10 @@ __metadata:
     fs-extra: "npm:^10.1.0"
     lodash.camelcase: "npm:^4.3.0"
     lodash.clonedeep: "npm:^4.5.0"
+    lodash.defaults: "npm:^4.2.0"
     lodash.get: "npm:^4.4.2"
+    lodash.omit: "npm:^4.5.0"
+    lodash.pick: "npm:^4.4.0"
     lodash.set: "npm:^4.3.2"
     slackstream: "npm:^0.2.1"
   languageName: unknown
