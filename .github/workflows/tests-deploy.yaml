@@ -38,7 +38,7 @@ jobs:
           cwd: .github/e2e/standalone-charts
           kubeconfigContext: kind-chart-testing
       - run: kubectl get jobs -n test-project-ci
-      - run: kubectl get jobs -n test-project-ci --field-selector status.successful=1 | grep "job-extra" # additionnal grep to exit 1 on error
+      - run: kubectl get jobs -n test-project-ci --field-selector status.successful=1 | grep "extra-job" # additionnal grep to exit 1 on error
   test-values-js:
     runs-on: ubuntu-latest
     steps:

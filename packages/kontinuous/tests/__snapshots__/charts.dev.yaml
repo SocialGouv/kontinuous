@@ -64,6 +64,26 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  name: kaniko
+  annotations:
+    kontinuous/chartPath: project.extra-job
+    kontinuous/source: project/charts/extra-job/templates/sa.yaml
+    kontinuous/deployment: test-charts-feature-branch-1-ffac537e6cbbf934b08745a378-4f4nbj
+  labels:
+    kontinuous/deployment: test-charts-feature-branch-1-ffac537e6cbbf934b08745a378-4f4nbj
+    kontinuous/deployment.env: test-charts-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: serviceaccount-4nws8p-kaniko
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-charts-feature-branch-1
+automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
@@ -82,50 +102,30 @@ metadata:
   namespace: test-charts-feature-branch-1
 automountServiceAccountToken: false
 ---
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: kaniko
-  annotations:
-    kontinuous/chartPath: project.job-extra
-    kontinuous/source: project/charts/job-extra/templates/sa.yaml
-    kontinuous/deployment: test-charts-feature-branch-1-ffac537e6cbbf934b08745a378-4f4nbj
-  labels:
-    kontinuous/deployment: test-charts-feature-branch-1-ffac537e6cbbf934b08745a378-4f4nbj
-    kontinuous/deployment.env: test-charts-feature-branch-1
-    kontinuous/ref: feature-branch-1
-    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: serviceaccount-4nws8p-kaniko
-    app.kubernetes.io/manifest-managed-by: kontinuous
-    app.kubernetes.io/manifest-created-by: kontinuous
-  namespace: test-charts-feature-branch-1
-automountServiceAccountToken: false
----
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-extra
+  name: extra-job
   namespace: awesome-ci
   annotations:
     kapp.k14s.io/nonce: ''
     kapp.k14s.io/update-strategy: fallback-on-replace
-    kontinuous/chartPath: project.job-extra
-    kontinuous/source: project/charts/job-extra/templates/my-job.yaml
+    kontinuous/chartPath: project.extra-job
+    kontinuous/source: project/charts/extra-job/templates/my-job.yaml
     kontinuous/deployment: test-charts-feature-branch-1-ffac537e6cbbf934b08745a378-4f4nbj
-    kontinuous/depname.full: project.job-extra.job.job-extra
-    kontinuous/depname.chartResource: job-extra.job.job-extra
-    kontinuous/depname.chartName: job-extra
-    kontinuous/depname.chartPath: project.job-extra
-    kontinuous/depname.resourcePath: job.job-extra
-    kontinuous/depname.resourceName: job-extra
+    kontinuous/depname.full: project.extra-job.job.extra-job
+    kontinuous/depname.chartResource: extra-job.job.extra-job
+    kontinuous/depname.chartName: extra-job
+    kontinuous/depname.chartPath: project.extra-job
+    kontinuous/depname.resourcePath: job.extra-job
+    kontinuous/depname.resourceName: extra-job
   labels:
     kontinuous/deployment: test-charts-feature-branch-1-ffac537e6cbbf934b08745a378-4f4nbj
     kontinuous/deployment.env: test-charts-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-extra
+    kontinuous/resourceName: job-4bkfwz-extra-job
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -140,7 +140,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-extra
+        kontinuous/resourceName: job-4bkfwz-extra-job
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:

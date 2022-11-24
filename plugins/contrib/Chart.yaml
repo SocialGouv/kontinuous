@@ -33,6 +33,10 @@ dependencies:
     repository: file://./charts/jobs
     version: 1.104.0
     condition: jobs.enabled
+  - name: job
+    repository: file://./charts/job
+    version: 1.104.0
+    condition: job.enabled
   - name: maildev
     repository: file://./charts/maildev
     version: 1.104.0

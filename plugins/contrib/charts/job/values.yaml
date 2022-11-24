@@ -1,0 +1,51 @@
+enabled:
+createRancherNamespace: false
+namespace: 
+repository: 
+gitBranch: 
+runs: {}
+image: "debian:stable"
+
+degitImage: ghcr.io/socialgouv/kontinuous/degit:v1.104.0
+# degitImagePullPolicy: Always
+degitImagePullPolicy: IfNotPresent
+
+# degitImage: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
+# extra:
+#   jobs:
+#     sharedStorage:
+#       enabled:
+priorityClassName: ""
+serviceAccountName: ""
+resources:
+  limits:
+    cpu: "1"
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+degitRepository:
+  resources:
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 10m
+      memory: 64Mi
+degitAction:
+  resources:
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 10m
+      memory: 64Mi
+deployKey:
+  enabled: false
+  secretRefName: deploy-key
+  secretRefKey: DEPLOY_KEY
+kubeconfig:
+  secretRefName: kubeconfig
+  secretRefKey: KUBECONFIG
+mountDeployKey: false
+_pluginValuesCompilerContribJobs: true
