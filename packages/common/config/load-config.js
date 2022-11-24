@@ -6,6 +6,7 @@ const fs = require("fs-extra")
 const set = require("lodash.set")
 const defaultsDeep = require("lodash.defaultsdeep")
 const qs = require("qs")
+const pino = require("pino")
 
 const configDependencyKey = require("~common/utils/config-dependency-key")
 
@@ -22,7 +23,7 @@ const cleanGitRef = require("../utils/clean-git-ref")
 const yaml = require("../utils/yaml")
 const asyncShell = require("../utils/async-shell")
 const deepmerge = require("../utils/deepmerge")
-const logger = require("../utils/logger")
+const defaultLogger = require("../utils/logger")
 const refEnv = require("../utils/ref-env")
 const slug = require("../utils/slug")
 const normalizeRepositoryUrl = require("../utils/normalize-repository-url")
@@ -41,8 +42,22 @@ const mergeProjectsAndOrganizations = require("./merge-projects-and-organization
 
 const defaultRepositoryProvider = "https://github.com" // degit/tiged like
 
-module.exports = async (opts = {}, inlineConfigs = [], rootConfig = {}) => {
+module.exports = async (
+  opts = {},
+  inlineConfigs = [],
+  rootConfig = {},
+  loadConfigOptions = {}
+) => {
   const env = ctx.get("env") || process.env
+
+  const logger = defaultLogger.child({})
+  if (loadConfigOptions.logLevel) {
+    let { logLevel } = loadConfigOptions
+    if (typeof logLevel === "string") {
+      logLevel = pino.levels.values[loadConfigOptions.logLevel]
+    }
+    logger.level = logLevel
+  }
 
   const rootConfigOverride = {
     kontinuousHomeDir: {

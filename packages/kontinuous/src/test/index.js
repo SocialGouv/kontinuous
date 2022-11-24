@@ -45,13 +45,24 @@ module.exports = async (opts) => {
         }
         test(`generate manifests for env: ${environment}`, async (end) => {
           await nctx.fork(async () => {
-            const ctxConfig = await loadConfig(opts, [], {
+            const rootConfig = {
               environment,
               gitBranch: "master",
               gitSha: "0000000000000000000000000000000000000000",
               deploymentLabelForceNewDeploy: false,
-            })
+            }
+            const loadConfigOptions = {
+              logLevel: "error",
+            }
+            const inlineConfigs = []
+            const ctxConfig = await loadConfig(
+              opts,
+              inlineConfigs,
+              rootConfig,
+              loadConfigOptions
+            )
             ctx.set("config", ctxConfig)
+
             const loggerChild = logger.child({})
             loggerChild.level = pino.levels.values.error
             ctx.set("logger", loggerChild)
