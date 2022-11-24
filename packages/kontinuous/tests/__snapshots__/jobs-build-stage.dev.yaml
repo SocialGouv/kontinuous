@@ -89,8 +89,6 @@ metadata:
   name: job-test-jobs-build-stage-feature-branch-1-jobs-dev-4gt-3mmnpp
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: db.create-db
     kontinuous/needsNames: '[\\"db\\",\\"db.create-db\\",\\"db..create-db\\"]'
     kontinuous/plugin.needs: '[\\"db..create-secret\\"]'
@@ -253,8 +251,6 @@ metadata:
   name: job-test-jobs-build-stage-feature-branch-1-jobs-dev-4gt-1lq757
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: db.create-secret
     kontinuous/needsNames: '[\\"db\\",\\"db.create-secret\\",\\"db..create-secret\\"]'
     janitor/ttl: 7d
@@ -389,8 +385,6 @@ metadata:
   name: job-test-jobs-build-stage-feature-branch-1-jobs-con-6v7-2i3u53
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: build-app.buildkit
     kontinuous/plugin.stage: build
     kontinuous/needsNames: '[\\"build-app\\",\\"build-app.buildkit\\",\\"build-app..buildkit\\"]'
@@ -533,8 +527,6 @@ metadata:
   name: job-test-jobs-build-stage-feature-branch-1-jobs-con-6v7-16cyff
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: build-hasura.buildkit
     kontinuous/plugin.stage: build
     kontinuous/needsNames: '[\\"build-hasura\\",\\"build-hasura.buildkit\\",\\"build-hasura..buildkit\\"]'

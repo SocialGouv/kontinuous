@@ -2,6 +2,9 @@ apiVersion: v2
 name: jobs
 version: 1.104.0
 dependencies:
+  - name: contrib-helpers
+    repository: file://../contrib-helpers
+    version: 1.104.0
   - name: rancher-namespace
     repository: file://../rancher-namespace
     version: 1.104.0

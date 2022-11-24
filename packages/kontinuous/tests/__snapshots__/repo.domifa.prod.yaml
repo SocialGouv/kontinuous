@@ -178,8 +178,6 @@ metadata:
   name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-412srd
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: build-backend.buildkit
     kontinuous/needsNames: '[\\"build-backend\\",\\"build-backend.buildkit\\",\\"build-backend..buildkit\\"]'
     janitor/ttl: 7d
@@ -325,8 +323,6 @@ metadata:
   name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5bi6sa
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: build-frontend.buildkit
     kontinuous/needsNames: '[\\"build-frontend\\",\\"build-frontend.buildkit\\",\\"build-frontend..buildkit\\"]'
     janitor/ttl: 7d
@@ -474,8 +470,6 @@ metadata:
   name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1cmbis
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: build-portail-admins.buildkit
     kontinuous/needsNames: >-
       [\\"build-portail-admins\\",\\"build-portail-admins.buildkit\\",\\"build-portail-admins..buildkit\\"]
@@ -622,8 +616,6 @@ metadata:
   name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5t07hs
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: build-portail-usagers.buildkit
     kontinuous/needsNames: >-
       [\\"build-portail-usagers\\",\\"build-portail-usagers.buildkit\\",\\"build-portail-usagers..buildkit\\"]

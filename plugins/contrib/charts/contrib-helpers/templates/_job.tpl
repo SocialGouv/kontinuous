@@ -1,4 +1,4 @@
-{{- define "job" -}}
+{{- define "contrib-helpers.job" -}}
 
 {{ $run := $.run }}
 {{ $with := $.with }}
@@ -37,8 +37,6 @@ metadata:
   namespace: {{ or $val.namespace $val.global.ciNamespace }}
   {{ end }}
   annotations:
-    kapp.k14s.io/nonce: ""
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: "{{ $run.name }}"
     {{- if $run.stage }}
     # kapp.k14s.io/change-group.stage: "kontinuous/{{ $run.stage }}"

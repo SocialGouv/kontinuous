@@ -89,8 +89,6 @@ metadata:
   name: job-test-jobs-seed-command-feature-branch-1-jobs-con-6v-2vy2qj
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: db.create-db
     kontinuous/needsNames: '[\\"db\\",\\"db.create-db\\",\\"db..create-db\\"]'
     kontinuous/plugin.needs: '[\\"db..create-secret\\"]'
@@ -252,8 +250,6 @@ metadata:
   name: job-test-jobs-seed-command-feature-branch-1-jobs-con-6v-539y07
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: db.create-secret
     kontinuous/needsNames: '[\\"db\\",\\"db.create-secret\\",\\"db..create-secret\\"]'
     janitor/ttl: 7d
@@ -387,8 +383,6 @@ metadata:
   name: job-test-jobs-seed-command-feature-branch-1-jobs-con-6v-414e4s
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: seed
     kontinuous/needsNames: '[\\"seed\\"]'
     kontinuous/plugin.needs: '[\\"db\\"]'

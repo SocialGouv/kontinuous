@@ -125,8 +125,6 @@ metadata:
   name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-412srd
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: build-backend.buildkit
     kontinuous/needsNames: '[\\"build-backend\\",\\"build-backend.buildkit\\",\\"build-backend..buildkit\\"]'
     janitor/ttl: 7d
@@ -273,8 +271,6 @@ metadata:
   name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5bi6sa
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: build-frontend.buildkit
     kontinuous/needsNames: '[\\"build-frontend\\",\\"build-frontend.buildkit\\",\\"build-frontend..buildkit\\"]'
     janitor/ttl: 7d
@@ -422,8 +418,6 @@ metadata:
   name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1cmbis
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: build-portail-admins.buildkit
     kontinuous/needsNames: >-
       [\\"build-portail-admins\\",\\"build-portail-admins.buildkit\\",\\"build-portail-admins..buildkit\\"]
@@ -569,8 +563,6 @@ metadata:
   name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5t07hs
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: build-portail-usagers.buildkit
     kontinuous/needsNames: >-
       [\\"build-portail-usagers\\",\\"build-portail-usagers.buildkit\\",\\"build-portail-usagers..buildkit\\"]
@@ -717,8 +709,6 @@ metadata:
   name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4z7evj
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: create-db.create-db
     kontinuous/needsNames: '[\\"create-db\\",\\"create-db.create-db\\",\\"create-db..create-db\\"]'
     kontinuous/plugin.needs: '[\\"create-db..create-secret\\",\\"drop-db\\"]'
@@ -880,8 +870,6 @@ metadata:
   name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-13jq8q
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: create-db.create-secret
     kontinuous/needsNames: '[\\"create-db\\",\\"create-db.create-secret\\",\\"create-db..create-secret\\"]'
     kontinuous/plugin.needs: '[\\"drop-db\\"]'
@@ -1039,8 +1027,6 @@ metadata:
   name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1csza1
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: drop-db.drop-db
     kontinuous/needsNames: '[\\"drop-db\\",\\"drop-db.drop-db\\",\\"drop-db..drop-db\\"]'
     janitor/ttl: 7d
@@ -1153,8 +1139,6 @@ metadata:
   name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-4dyf9p
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: seed.import-secret
     kontinuous/needsNames: '[\\"seed\\",\\"seed.import-secret\\",\\"seed..import-secret\\"]'
     kontinuous/plugin.needs: '[\\"backend\\"]'
@@ -1301,8 +1285,6 @@ metadata:
   name: job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1q58c3
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: seed.seed-db
     kontinuous/needsNames: '[\\"seed\\",\\"seed.seed-db\\",\\"seed..seed-db\\"]'
     kontinuous/plugin.needs: '[\\"seed..import-secret\\",\\"backend\\"]'

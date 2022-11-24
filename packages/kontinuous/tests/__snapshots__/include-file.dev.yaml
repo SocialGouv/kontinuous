@@ -88,8 +88,6 @@ metadata:
   name: job-test-include-file-feature-branch-1-jobs-con-6v7vwk-3h2gmo
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: say-hello
     kontinuous/needsNames: '[\\"say-hello\\"]'
     janitor/ttl: 7d

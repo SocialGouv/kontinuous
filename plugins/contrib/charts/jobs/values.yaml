@@ -48,4 +48,4 @@ kubeconfig:
   secretRefName: kubeconfig
   secretRefKey: KUBECONFIG
 mountDeployKey: false
-_pluginValuesCompilerRecommendedJobs: true
+_pluginValuesCompilerContribJobs: true

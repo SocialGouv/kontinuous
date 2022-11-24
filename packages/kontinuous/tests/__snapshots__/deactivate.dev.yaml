@@ -7,8 +7,6 @@ metadata:
   name: job-test-deactivate-feature-branch-1-jobs-dea-68s7ok-de-4l57q8
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: deactivate.delete-namespace
     kontinuous/needsNames: >-
       [\\"deactivate\\",\\"deactivate.delete-namespace\\",\\"deactivate..delete-namespace\\"]

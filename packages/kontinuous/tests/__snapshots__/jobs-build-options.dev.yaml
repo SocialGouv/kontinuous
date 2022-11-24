@@ -89,8 +89,6 @@ metadata:
   name: job-test-jobs-build-options-feature-branch-1-jobs-con-6-43th2s
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
-    kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/needsName: build-app.buildkit
     kontinuous/needsNames: '[\\"build-app\\",\\"build-app.buildkit\\",\\"build-app..buildkit\\"]'
     janitor/ttl: 7d

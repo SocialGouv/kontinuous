@@ -325,7 +325,7 @@ const compileValues = async (values, context, chartScope = []) => {
         return
       }
       const childChartScope = [...chartScope, key]
-      if (subValues._pluginValuesCompilerRecommendedJobs) {
+      if (subValues._pluginValuesCompilerContribJobs) {
         await compileJobsValues(subValues, context, childChartScope)
       } else {
         await compileValues(subValues, context, childChartScope)
