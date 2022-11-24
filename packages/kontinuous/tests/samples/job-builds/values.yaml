@@ -1,0 +1,16 @@
+build-app:
+  ~chart: job
+  use: build
+  memoryLimit: 8Gi
+  memoryRequest: 4Gi
+  with:
+    imagePackage: app
+    buildArgs:
+      NEXT_PUBLIC_HASURA_URL: "https://hasura-{{ .Values.global.host }}/v1/graphql"
+
+build-hasura:
+  ~chart: job
+  use: build
+  with:
+    imagePackage: hasura
+    context: packages/hasura
