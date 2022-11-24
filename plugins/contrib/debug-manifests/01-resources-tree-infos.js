@@ -215,7 +215,7 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
     for (const resource of kindResources) {
       const { manifest } = resource
       const { apiVersion } = manifest
-      if (apiVersion.startsWith("kapp.k14s.io")) {
+      if (apiVersion?.startsWith("kapp.k14s.io")) {
         continue
       }
       if (getTreeInfos[kind]) {

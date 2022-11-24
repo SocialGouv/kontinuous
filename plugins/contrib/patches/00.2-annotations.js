@@ -6,7 +6,7 @@ module.exports = (manifests, _options, { config }) => {
   for (const manifest of manifests) {
     const { kind, apiVersion } = manifest
 
-    if (apiVersion.startsWith("kapp.k14s.io")) {
+    if (apiVersion?.startsWith("kapp.k14s.io")) {
       continue
     }
 
