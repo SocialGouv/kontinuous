@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.105.0](https://github.com/socialgouv/kontinuous/compare/v1.104.0...v1.105.0) (2022-11-24)
+
+
+### Features
+
+* add single job chart ([3c13b49](https://github.com/socialgouv/kontinuous/commit/3c13b4911fefe0ac553374d37336800c23f3acd1))
+* single job chart values-compiler and fix ([6dc28a1](https://github.com/socialgouv/kontinuous/commit/6dc28a15247c83ea49f7310eb63052e8159b6ff9))
+* single job test ([32829df](https://github.com/socialgouv/kontinuous/commit/32829df79df1d968f2d455bd3c2cbcc5790876e5))
+
+
+### Bug Fixes
+
+* default enabled for rancher-namespace ([bb7962a](https://github.com/socialgouv/kontinuous/commit/bb7962ad2d53e0f6f23f3eb11af3f95aaae291eb))
+* empty apiVersion ([20402b0](https://github.com/socialgouv/kontinuous/commit/20402b09fda2519725103abf04bdd3084e41e538))
+* job's chart collision ([431e5bb](https://github.com/socialgouv/kontinuous/commit/431e5bb3781c31d3733b88ab21f5635b527eb45b))
+* now test ([36f202a](https://github.com/socialgouv/kontinuous/commit/36f202a77ce7245740d61a3513501825241400f8))
+* refactor decouple job as help + clean kapp ([e98a6fa](https://github.com/socialgouv/kontinuous/commit/e98a6fafaab07794700f304dee180624cc659c73))
+* test quiet config buildPath ([ed6b941](https://github.com/socialgouv/kontinuous/commit/ed6b941c868decf23cae32eb355a67b6351d1c3d))
+* use nowtest and increase timeout ([b021955](https://github.com/socialgouv/kontinuous/commit/b02195519c34ae4714b0b42f5c33b825268f76ea))
+
 ## [1.104.0](https://github.com/socialgouv/kontinuous/compare/v1.103.13...v1.104.0) (2022-11-23)
 
 
