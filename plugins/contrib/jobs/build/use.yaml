@@ -46,7 +46,7 @@ runs:
         --import-cache type=registry,ref=$IMAGE_PATH:{{ $.Values.global.branchSlug32 }} \
         {{ if $.with.buildArgs -}}
         {{- range $key, $val := $.with.buildArgs -}}
-        --opt build-arg:"{{ tpl $key $ }}={{ tpl $val $ }}" \
+        --opt build-arg:"{{ tpl $key $ }}={{ tpl (print $val) $ }}" \
         {{ end -}}
         {{ end -}}
         {{ if $.with.target -}}
