@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.105.3](https://github.com/socialgouv/kontinuous/compare/v1.105.2...v1.105.3) (2022-11-24)
+
+
+### Bug Fixes
+
+* helm var cast to string ([4f74c42](https://github.com/socialgouv/kontinuous/commit/4f74c42d63c1892a4024c39523404db3111f9ee4))
+
 ### 1.105.2 (2022-11-24)
 
 ### [1.105.1](https://github.com/socialgouv/kontinuous/compare/v1.105.0...v1.105.1) (2022-11-24)
