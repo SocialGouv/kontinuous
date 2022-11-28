@@ -1,3 +1,4 @@
+const fs = require("fs-extra")
 const launch = require("launch-editor")
 const { highlight, fromJson: themeFromJson } = require("cli-highlight")
 
@@ -8,6 +9,12 @@ const builder = require("./builder")
 module.exports = async (options) => {
   const config = ctx.require("config")
   const logger = ctx.require("logger")
+
+  if (!(await fs.pathExists(config.workspaceKsPath))) {
+    logger.warn(
+      `🏜️ Your current directory "${config.workspacePath}" doesn't contain the expected folder "${config.workspaceSubPath}".`
+    )
+  }
 
   const result = await builder(options)
 
