@@ -34,7 +34,7 @@ module.exports = async (opts) => {
   }
 
   const test = nowtest({
-    timeout: 120000,
+    timeout: 300000,
   })
 
   const runSnapshotsTests = async ({ title, subdir }) =>
