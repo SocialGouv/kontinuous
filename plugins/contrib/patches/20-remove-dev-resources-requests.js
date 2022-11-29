@@ -2,9 +2,10 @@ const runnableKinds = ["Deployment", "Job", "StatefulSet", "DaemonSet"]
 
 const removeContainersRequests = (containers = []) => {
   for (const container of containers) {
-    if (container.resources?.requests !== undefined) {
-      delete container.resources.requests
+    if (!container.resources) {
+      container.resources = {}
     }
+    container.resources.requests = { cpu: 0, memory: 0 }
   }
 }
 
