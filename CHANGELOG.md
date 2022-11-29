@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.106.0 (2022-11-29)
+
+
+### Features
+
+* remove-dev-resources-requests patch ([#91](https://github.com/socialgouv/kontinuous/issues/91)) ([42f9b25](https://github.com/socialgouv/kontinuous/commit/42f9b255a532db7ce4fb04e0a50c984b369d771d))
+
 ### [1.105.3](https://github.com/socialgouv/kontinuous/compare/v1.105.2...v1.105.3) (2022-11-24)
 
 

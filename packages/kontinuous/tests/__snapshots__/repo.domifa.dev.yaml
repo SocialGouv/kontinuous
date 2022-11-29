@@ -173,7 +173,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -313,7 +313,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -455,7 +455,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -594,7 +594,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -733,7 +733,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.0
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
@@ -750,7 +750,7 @@ spec:
               mountPath: /secrets
           imagePullPolicy: Always
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.0
           command:
             - sh
             - '-c'
@@ -888,7 +888,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.0
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
@@ -905,7 +905,7 @@ spec:
               mountPath: /secrets
           imagePullPolicy: Always
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.0
           command:
             - sh
             - '-c'
@@ -1038,7 +1038,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.0
           command:
             - sh
             - '-c'
@@ -1145,7 +1145,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.0
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
@@ -1162,7 +1162,7 @@ spec:
               mountPath: /secrets
           imagePullPolicy: Always
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.0
           command:
             - sh
             - '-c'
@@ -1285,7 +1285,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.0
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
@@ -1302,7 +1302,7 @@ spec:
               mountPath: /secrets
           imagePullPolicy: Always
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -1322,7 +1322,7 @@ spec:
               cpu: 100m
               memory: 256Mi
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.0
           command:
             - sh
             - '-c'
@@ -1517,7 +1517,7 @@ spec:
                 name: backend-configmap
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.0
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: test-repo-domifa-feature-branch-1-o91f7v/Deployment/backend-cron
@@ -1688,7 +1688,7 @@ spec:
               name: files
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.0
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: test-repo-domifa-feature-branch-1-o91f7v/Deployment/backend
@@ -1808,7 +1808,7 @@ spec:
               memory: 1Gi
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.0
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: test-repo-domifa-feature-branch-1-o91f7v/Deployment/frontend
@@ -1935,7 +1935,7 @@ spec:
               memory: 512Mi
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.0
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
@@ -2063,7 +2063,7 @@ spec:
               memory: 512Mi
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.105.3
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.0
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
