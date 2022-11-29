@@ -156,6 +156,9 @@ spec:
             limits:
               cpu: 100m
               memory: 256Mi
+            requests:
+              cpu: 0
+              memory: 0
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -200,6 +203,9 @@ spec:
             limits:
               cpu: '2'
               memory: 4Gi
+            requests:
+              cpu: 0
+              memory: 0
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -321,6 +327,9 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
+            requests:
+              cpu: 0
+              memory: 0
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -345,6 +354,10 @@ spec:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
           imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 0
+              memory: 0
       volumes:
         - name: kontinuous-wait-needs-kubeconfig
           secret:
