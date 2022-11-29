@@ -152,6 +152,10 @@ spec:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
           imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 0
+              memory: 0
         - name: degit-action
           image: ghcr.io/socialgouv/kontinuous/degit:v1.106.0
           command:
@@ -168,6 +172,9 @@ spec:
             limits:
               cpu: 100m
               memory: 256Mi
+            requests:
+              cpu: 0
+              memory: 0
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:6.70.0
@@ -215,6 +222,9 @@ spec:
             limits:
               cpu: '1'
               memory: 512Mi
+            requests:
+              cpu: 0
+              memory: 0
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -305,6 +315,9 @@ spec:
             limits:
               cpu: 100m
               memory: 256Mi
+            requests:
+              cpu: 0
+              memory: 0
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -339,6 +352,9 @@ spec:
             limits:
               cpu: '1'
               memory: 512Mi
+            requests:
+              cpu: 0
+              memory: 0
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001

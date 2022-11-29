@@ -158,5 +158,9 @@ spec:
               set -e
               echo Hello World
               FOO=\\"barjo\\"\\"
+          resources:
+            requests:
+              cpu: 0
+              memory: 0
 "
 `;

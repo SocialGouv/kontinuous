@@ -56,5 +56,9 @@ spec:
             - |
               set -e
               echo Hello World
+          resources:
+            requests:
+              cpu: 0
+              memory: 0
 "
 `;

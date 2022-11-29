@@ -154,6 +154,9 @@ spec:
             limits:
               cpu: 100m
               memory: 256Mi
+            requests:
+              cpu: 0
+              memory: 0
       containers:
         - name: job
           image: debian:stable
@@ -169,6 +172,9 @@ spec:
             limits:
               cpu: '1'
               memory: 512Mi
+            requests:
+              cpu: 0
+              memory: 0
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
