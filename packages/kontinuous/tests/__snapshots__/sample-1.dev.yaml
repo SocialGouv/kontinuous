@@ -241,9 +241,6 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -359,9 +356,6 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -453,9 +447,6 @@ spec:
             limits:
               cpu: 500m
               memory: 1280Mi
-            requests:
-              cpu: 50m
-              memory: 128Mi
           startupProbe:
             failureThreshold: 30
             httpGet:
@@ -574,9 +565,6 @@ spec:
             limits:
               cpu: 20m
               memory: 32Mi
-            requests:
-              cpu: 5m
-              memory: 16Mi
       containers:
         - image: sosedoff/pgweb:0.11.8
           name: pgweb
@@ -613,9 +601,6 @@ spec:
             limits:
               cpu: 500m
               memory: 256Mi
-            requests:
-              cpu: 100m
-              memory: 64Mi
       volumes:
         - name: kontinuous-wait-needs-kubeconfig
           secret:

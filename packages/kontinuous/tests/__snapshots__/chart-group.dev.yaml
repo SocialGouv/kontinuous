@@ -102,9 +102,6 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -207,9 +204,6 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
 ---
 apiVersion: v1
 kind: Service

@@ -156,9 +156,6 @@ spec:
             limits:
               cpu: 100m
               memory: 256Mi
-            requests:
-              cpu: 10m
-              memory: 64Mi
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -200,11 +197,8 @@ spec:
                 
           resources:
             limits:
-              cpu: 2
+              cpu: '2'
               memory: 8Gi
-            requests:
-              cpu: 500m
-              memory: 4Gi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -300,9 +294,6 @@ spec:
             limits:
               cpu: 100m
               memory: 256Mi
-            requests:
-              cpu: 10m
-              memory: 64Mi
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -343,11 +334,8 @@ spec:
                 
           resources:
             limits:
-              cpu: 2
+              cpu: '2'
               memory: 4Gi
-            requests:
-              cpu: 500m
-              memory: 1Gi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

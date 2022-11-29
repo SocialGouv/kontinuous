@@ -170,9 +170,6 @@ spec:
             limits:
               cpu: 100m
               memory: 256Mi
-            requests:
-              cpu: 10m
-              memory: 64Mi
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:6.70.0
@@ -218,11 +215,8 @@ spec:
               /action/ensure-db.sh
           resources:
             limits:
-              cpu: 1
+              cpu: '1'
               memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -314,9 +308,6 @@ spec:
             limits:
               cpu: 100m
               memory: 256Mi
-            requests:
-              cpu: 10m
-              memory: 64Mi
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -349,11 +340,8 @@ spec:
               /action/create-secret.sh
           resources:
             limits:
-              cpu: 1
+              cpu: '1'
               memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -453,9 +441,6 @@ spec:
             limits:
               cpu: 100m
               memory: 256Mi
-            requests:
-              cpu: 10m
-              memory: 64Mi
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -496,11 +481,8 @@ spec:
                 
           resources:
             limits:
-              cpu: 2
+              cpu: '2'
               memory: 4Gi
-            requests:
-              cpu: 500m
-              memory: 1Gi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -595,9 +577,6 @@ spec:
             limits:
               cpu: 100m
               memory: 256Mi
-            requests:
-              cpu: 10m
-              memory: 64Mi
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -638,11 +617,8 @@ spec:
                 
           resources:
             limits:
-              cpu: 2
+              cpu: '2'
               memory: 4Gi
-            requests:
-              cpu: 500m
-              memory: 1Gi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -764,9 +740,6 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -878,9 +851,6 @@ spec:
             limits:
               cpu: 500m
               memory: 1280Mi
-            requests:
-              cpu: 50m
-              memory: 128Mi
           startupProbe:
             failureThreshold: 30
             httpGet:

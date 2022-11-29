@@ -146,7 +146,7 @@ spec:
               cpu: {{ or $run.degitActionCpuRequest .Values.degitAction.resources.requests.cpu }}
               memory: {{ or $run.degitActionMemoryRequest .Values.degitAction.resources.requests.memory }}
       {{- end }}
-      containers:          
+      containers:
         - name: job
           image: "{{ tpl (or $run.image $.Values.image) $ }}"
           imagePullPolicy: IfNotPresent
@@ -199,10 +199,10 @@ spec:
           {{- end }}
           resources:
             limits:
-              cpu: {{ or $run.cpuLimit .Values.resources.limits.cpu }}
+              cpu: {{ or $run.cpuLimit .Values.resources.limits.cpu | quote }}
               memory: {{ or $run.memoryLimit .Values.resources.limits.memory }}
             requests:
-              cpu: {{ or $run.cpuRequest .Values.resources.requests.cpu }}
+              cpu: {{ or $run.cpuRequest .Values.resources.requests.cpu | quote }}
               memory: {{ or $run.memoryRequest .Values.resources.requests.memory }}
           securityContext:
             runAsUser: {{ $user }}
