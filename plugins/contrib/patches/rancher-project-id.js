@@ -30,10 +30,6 @@ module.exports = async (
     return
   }
 
-  logger.info(
-    `missing rancher projectId, getting from cluster using ci-namespace "${ciNamespace}"`
-  )
-
   const { surviveOnBrokenCluster = false } = options
 
   let rancherProjectId = ""
@@ -42,6 +38,9 @@ module.exports = async (
   } else if (process.env.RANCHER_PROJECT_ID) {
     rancherProjectId = process.env.RANCHER_PROJECT_ID
   } else {
+    logger.info(
+      `missing rancher projectId, getting from cluster using ci-namespace "${ciNamespace}"`
+    )
     await needBin(utils.needKubectl)
     try {
       const json = await kubectlRetry(
