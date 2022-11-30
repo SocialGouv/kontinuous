@@ -52,6 +52,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"kubernetes-resource-parser@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "kubernetes-resource-parser@npm:0.1.0"
+  checksum: 1251283044b538a4dde7d19c7db37bd819ecff36eb9b2fb36b19fd4a548837e4e304e02d0e9a3925206fa8680dcb591216476e70fec5912cff3b8f15dfbb96c4
+  languageName: node
+  linkType: hard
+
 "lodash.camelcase@npm:^4.3.0":
   version: 4.3.0
   resolution: "lodash.camelcase@npm:4.3.0"
@@ -140,6 +147,7 @@ __metadata:
     async: "npm:^3.2.4"
     async-retry: "npm:^1.3.3"
     fs-extra: "npm:^10.1.0"
+    kubernetes-resource-parser: "npm:^0.1.0"
     lodash.camelcase: "npm:^4.3.0"
     lodash.clonedeep: "npm:^4.5.0"
     lodash.defaults: "npm:^4.2.0"
