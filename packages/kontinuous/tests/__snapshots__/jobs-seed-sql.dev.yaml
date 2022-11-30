@@ -137,7 +137,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.2
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.0
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
@@ -158,7 +158,7 @@ spec:
               cpu: '0.081'
               memory: 227.555Mi
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.107.0
           command:
             - sh
             - '-c'
@@ -301,7 +301,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.107.0
           command:
             - sh
             - '-c'
@@ -435,7 +435,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.2
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.0
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
@@ -456,7 +456,7 @@ spec:
               cpu: '0.081'
               memory: 227.555Mi
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.107.0
           command:
             - sh
             - '-c'
@@ -585,7 +585,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.2
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.0
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: >-
@@ -606,7 +606,7 @@ spec:
               cpu: '0.081'
               memory: 227.555Mi
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.107.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -629,7 +629,7 @@ spec:
               cpu: '0.081'
               memory: 227.555Mi
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.106.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.107.0
           command:
             - sh
             - '-c'
@@ -798,7 +798,7 @@ spec:
               memory: 227.555Mi
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.2
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.0
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: test-jobs-seed-sql-feature-branch-1/Deployment/app

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.107.0](https://github.com/socialgouv/kontinuous/compare/v1.106.2...v1.107.0) (2022-11-30)
+
+
+### Features
+
+* minimize dev res req avoidOutOfpods ([2610f1e](https://github.com/socialgouv/kontinuous/commit/2610f1ecc63b137c37c8b938437ae3de553e1fbf))
+
 ### [1.106.2](https://github.com/socialgouv/kontinuous/compare/v1.106.1...v1.106.2) (2022-11-30)
 
 
