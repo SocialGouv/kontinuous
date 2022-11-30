@@ -193,8 +193,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -243,8 +243,8 @@ spec:
               cpu: '2'
               memory: 4Gi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -339,8 +339,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -390,8 +390,8 @@ spec:
               cpu: '2'
               memory: 4Gi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -487,8 +487,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -535,8 +535,8 @@ spec:
               cpu: '2'
               memory: 4Gi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -632,8 +632,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -681,8 +681,8 @@ spec:
               cpu: '2'
               memory: 4Gi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -775,8 +775,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
         - name: degit-action
           image: ghcr.io/socialgouv/kontinuous/degit:v1.106.2
           command:
@@ -794,8 +794,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:6.70.0
@@ -844,8 +844,8 @@ spec:
               cpu: '1'
               memory: 512Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -940,8 +940,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
         - name: degit-action
           image: ghcr.io/socialgouv/kontinuous/degit:v1.106.2
           command:
@@ -959,8 +959,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -996,8 +996,8 @@ spec:
               cpu: '1'
               memory: 512Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -1098,8 +1098,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:7.0.0
@@ -1123,8 +1123,8 @@ spec:
               cpu: '1'
               memory: 512Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -1213,8 +1213,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
         - name: degit-action
           image: ghcr.io/socialgouv/kontinuous/degit:v1.106.2
           command:
@@ -1232,8 +1232,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -1258,8 +1258,8 @@ spec:
               cpu: '1'
               memory: 512Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -1363,8 +1363,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
         - name: degit-repository
           image: ghcr.io/socialgouv/kontinuous/degit:v1.106.2
           imagePullPolicy: IfNotPresent
@@ -1386,8 +1386,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
         - name: degit-action
           image: ghcr.io/socialgouv/kontinuous/degit:v1.106.2
           command:
@@ -1405,8 +1405,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:7.0.0
@@ -1429,8 +1429,8 @@ spec:
               cpu: '1'
               memory: 512Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -1555,8 +1555,8 @@ spec:
               cpu: '1.5'
               memory: 2Gi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
           env:
             - name: TZ
               value: Europe/Paris
@@ -1610,8 +1610,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       volumes:
         - name: kontinuous-wait-needs-kubeconfig
           secret:
@@ -1732,8 +1732,8 @@ spec:
               cpu: '1.5'
               memory: 2Gi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
           env:
             - name: TZ
               value: Europe/Paris
@@ -1788,8 +1788,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
   progressDeadlineSeconds: 1200000
 ---
 apiVersion: apps/v1
@@ -1894,8 +1894,8 @@ spec:
               cpu: '1'
               memory: 1Gi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       initContainers:
         - name: kontinuous-wait-needs
           image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.2
@@ -1915,8 +1915,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       volumes:
         - name: kontinuous-wait-needs-kubeconfig
           secret:
@@ -2028,8 +2028,8 @@ spec:
               cpu: 500m
               memory: 512Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       initContainers:
         - name: kontinuous-wait-needs
           image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.2
@@ -2050,8 +2050,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       volumes:
         - name: kontinuous-wait-needs-kubeconfig
           secret:
@@ -2163,8 +2163,8 @@ spec:
               cpu: 500m
               memory: 512Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       initContainers:
         - name: kontinuous-wait-needs
           image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.106.2
@@ -2185,8 +2185,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       volumes:
         - name: kontinuous-wait-needs-kubeconfig
           secret:

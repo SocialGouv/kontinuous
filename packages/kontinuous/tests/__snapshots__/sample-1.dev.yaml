@@ -242,8 +242,8 @@ spec:
               cpu: 500m
               memory: 512Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -360,8 +360,8 @@ spec:
               cpu: 500m
               memory: 512Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -454,8 +454,8 @@ spec:
               cpu: 500m
               memory: 1280Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
           startupProbe:
             failureThreshold: 30
             httpGet:
@@ -488,8 +488,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       volumes:
         - name: kontinuous-wait-needs-kubeconfig
           secret:
@@ -567,8 +567,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
         - name: wait-for-postgres
           image: ghcr.io/socialgouv/docker/wait-for-postgres:6.56.1
           imagePullPolicy: Always
@@ -583,8 +583,8 @@ spec:
               cpu: 20m
               memory: 32Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       containers:
         - image: sosedoff/pgweb:0.11.8
           name: pgweb
@@ -622,8 +622,8 @@ spec:
               cpu: 500m
               memory: 256Mi
             requests:
-              cpu: 0
-              memory: 0
+              cpu: '0.081'
+              memory: 227.555Mi
       volumes:
         - name: kontinuous-wait-needs-kubeconfig
           secret:
