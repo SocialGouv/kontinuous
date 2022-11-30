@@ -23,7 +23,7 @@ module.exports = async (options) => {
         default: "gray",
       })
       m = highlight(m, {
-        language: "~common/utils/yaml",
+        language: "yaml",
         theme,
       })
     }
