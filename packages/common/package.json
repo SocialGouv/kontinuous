@@ -3,18 +3,6 @@
   "version": "1.106.1",
   "description": "",
   "license": "MIT",
-  "author": "",
-  "peerDependencies": {
-    "fs-extra": "^10.0.1",
-    "js-yaml": "^4.1.0",
-    "lodash.defaultsdeep": "^4.6.1",
-    "lodash.mergewith": "^4.6.2",
-    "pino": "^7.10.0",
-    "pino-bfuscate": "^1.0.0",
-    "pino-pretty": "^7.6.1",
-    "pretty-ms": "^7.0.1",
-    "slugify": "^1.6.5"
-  },
   "engines": {
     "node": ">=14"
   },
