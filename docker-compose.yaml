@@ -3,7 +3,7 @@ version: "3.8"
 services:
   webhook:
     image: kontinuous_webhook
-    restart: always
+    restart: "no"
     build:
       context: .
       dockerfile: ./packages/webhook/Dockerfile.dev
