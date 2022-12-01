@@ -10,17 +10,20 @@ module.exports.create = () => {
   return (req, res, next) => {
     const originalSend = res.send
     const userAgent = req.headers["user-agent"]
+
+    let { originalUrl: url } = req
+    for (const secret of hideSecrets) {
+      url = url.replaceAll(secret, "*".repeat(secret.length))
+    }
+
+    logger.info({ userAgent }, `REQ ${req.method} ${url}`)
+
     if (!ignoreUserAgents.includes(userAgent)) {
       res.send = function (...args) {
         originalSend.apply(res, args)
-
-        let { originalUrl: url } = req
-        for (const secret of hideSecrets) {
-          url = url.replaceAll(secret, "*".repeat(secret.length))
-        }
         logger.info(
           { userAgent, code: res.statusCode },
-          `${req.method} ${url} ${res.statusCode}`
+          `RES ${req.method} ${url} ${res.statusCode}`
         )
       }
     }
