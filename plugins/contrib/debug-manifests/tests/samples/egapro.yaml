@@ -1,0 +1,2719 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: c-gjtkk:p-bgthz
+    kontinuous/gitBranch: master
+    kontinuous/mainNamespace: 'true'
+    kapp.k14s.io/exists: ''
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: namespace-4wnyh3
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+    cert: wildcard
+  name: egapro-preprod
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: serviceaccount-4nws8p-default
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: egapro-preprod
+automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: files
+  annotations:
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/files.pvc.yaml
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: persistentvolumeclaim-ujhm57-files
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: egapro-preprod
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: azurefile
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/cluster-wide: 'true'
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/basic-auth.sealed-secret.yaml
+    kontinuous/deployment: egapro-master-1669991086
+  name: basic-auth
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: sealedsecret-5ip1a4-basic-auth
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: egapro-preprod
+spec:
+  encryptedData:
+    auth: >-
+      AgCc+aHAup6flqNssIYx/A4psDGTY/aG/CAIXb3tOTYvRaFohArlwu7cxMP4PXsc3h+nucW0Qdel0EHS06hbjcow4fRdjhDiv9W8hTbftXc/u99tmn0AYTBHRIUTZ6DbjpRcVY4Y+QZ7zhQpu5ZaJ8jkaOGHJol2KqwZw0GpVMygS37Fm6ylDFZHLdqPUHWzX4+Yi3wAio7fSem0ljp4Mdb4Yx6i8DWgU2H6gnXuq4VNCI3U13fcet7qoYM1A9c6a8srlTbCC2BHGnQ+0CPl8b9lx/qZ865bhOnlFiw1B+gZDX8hGRnTEcCZD0PD/feTQ7yQcdlT1istw1RmCe0Ng9bcyWTebgwzeys7YufyN6VmH+Gbv5dOPA3PuZmjcJoyaIqGcuzZ2iYkIilnIQtCeasCQDv/HfTRf8hkW0j/ns4Doihu1tGbrGm3fghk4EAU3CCnY+XP6VFo+Y6PoNydS+VKQ3pA1lLh5/hae3to2rkHn1avbs12aNJP3zVH6IVEJw9q3t8t5FlAwmHpV+rBlltWBFjL72w+4gAAOEr7LGLdsJTpIwOAZXYSV6gjg5v9IfNl85SAbYJQ1XJmeFyrjkbyR9SuUHYo4SfdNEgrOik1kUC6gmPQtbXWO3AsDe4B40g+mWIz9jqr0P2rgZPMqv5XKnImoiE/QMQ9kJBmoaArPUBatalJi2j5EJ1ZIhWJ8M1Fwwyv3BM7qvSYu2F0jT125Ng+3XhVjDM/XLsyTjIOAWC0MRZP1FlxAyZVtQM9YUiwrJwUSCRhN7weYPxA5S2sBtFOqVXQJUOArGv1al7Y+TBLQcjRv8OVtcRqyp9vGt4xd0Rh9BH89yvxvmOmYJSkCJu7PUDNutWRgjfeqvfG59eCFUmIjXmGz8Mq6f7H4WhjTBzg5QK/GF6L7iplLrKg3yS5cnfvPxY4wFZHhmWYPzrB6SxSexX20RmuFV0gxvX/g2+ieiBcPNqas/19lljZp5jH
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/cluster-wide: 'true'
+      name: basic-auth
+    type: Opaque
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/cluster-wide: 'true'
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/staff.sealed-secret.yaml
+    kontinuous/deployment: egapro-master-1669991086
+  name: staff
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: sealedsecret-5ip1a4-staff
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: egapro-preprod
+spec:
+  encryptedData:
+    EGAPRO_STAFF: >-
+      AgANZCPz1t8CrjKIS5v1kDS2oL9G6JELTYHJmEcYOpha7SsL4/y0oBsuc/CVlLQzdX1sWM4mIpY8oxE5zdErQHPCaRJpOcWAhXBA6pRxOa6fwCRivZ++/WyYdjOU8L8ZheYDLUZkAgVx5Gv+za4kjLRBNX2AF48cg+abGw8zpBVY/oGQR/mIXt42Z4il9LXwNO6S3HCKNaPpZwsusl4BdHWuqtmR6gfTTV6JvQGtb85LsePQ0cxo2GOYPcMgytj5LgaYr3NtbVCUbYC5m32624musfhKwWQLTOt+yG6A56u1JYaYwwhdVVMnRCpm0z6v8+aMkj+/HXr9tvv8qu74cB0YvIMJK8EhyHqFs3ZV0OP7xDkdH3m+HoJlZq84ViSUbBGrdjHJvRkkvHMHWeftSM2mm42WxP0Q1/+Z4wRTOXYTkUJkX+j8+Z4UaSjn9dIJN/p1LQD4JWIeU86WvpqQ81jgYOdNUhAdMFPckmUFrOOjyKEloKR8cFu91UtGvYI1HpDxQ9MWO0KLW5ij1RC0DpC3gXbGv0JXE+sES4j0sz+YDtqNdHr57yamOvbeiN3Am+VdvWi6fotdFnR/ex1nCOAH2uME3BEFj2hy2lbc/iauUd5bvQUb2hwU50H0kJm63Mnji70aPUMFF55cIrs9Ih4o4ovGwAxTvyS043TG6z2hcblooDEpPs0MuDafQ7Y4dj4b+Gq58PKTcOEHOCRbR+wCE8qKxRI9Po11GERs++Q+2fDhAqmH48+GS1I/1QeMF7KuUQMmDH/cDPckMuIzahthwbJHY9oEKdlJqUJJmGSnTCSdByY7q9D7XwYBwdwXZIXoZ11QKeIHoL3Y+P+ASlxEo1Rhf3krsqgPAB+ATZOj2RH5X+HYyfXvrlXUAs/3TC6qEgg=
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/cluster-wide: 'true'
+      name: staff
+    type: Opaque
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-egapro-master-jobs-con-6v7vwk-build-api-buildkit-4zg3ke
+  namespace: egapro-ci
+  annotations:
+    kontinuous/needsName: build-api.buildkit
+    kontinuous/needsNames: '["build-api","build-api.buildkit","build-api..buildkit"]'
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/depname.full: >-
+      project.fabrique.contrib.jobs.job.job-egapro-master-jobs-con-6v7vwk-build-api-buildkit-4zg3ke
+    kontinuous/depname.chartResource: jobs.job.job-egapro-master-jobs-con-6v7vwk-build-api-buildkit-4zg3ke
+    kontinuous/depname.chartName: jobs
+    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
+    kontinuous/depname.resourcePath: job.job-egapro-master-jobs-con-6v7vwk-build-api-buildkit-4zg3ke
+    kontinuous/depname.resourceName: job-egapro-master-jobs-con-6v7vwk-build-api-buildkit-4zg3ke
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-api-2l46k7
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/job: unconfined
+        kontinuous/deployment: egapro-master-1669991086
+      labels:
+        environment: preprod
+        ref: master
+        repository: egapro
+        runName: build
+        kontinuous/deployment: egapro-master-1669991086
+        kontinuous/deployment.env: egapro-master
+        kontinuous/ref: master
+        kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/resourceName: job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-api-2l46k7
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-repository
+          image: ghcr.io/socialgouv/kontinuous/degit:v1
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - '-c'
+            - |
+
+              degit SocialGouv/egapro#master \
+                /workspace
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
+      containers:
+        - name: job
+          image: moby/buildkit:v0.10.5-rootless
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: harbor
+          env:
+            - name: BUILDKITD_FLAGS
+              value: '--oci-worker-no-process-sandbox'
+          command:
+            - /bin/sh
+            - '-c'
+            - >
+              set -e
+
+              if [ "" != "" ]; then
+                export CI_REGISTRY=""
+              fi
+
+              mkdir -p /home/user/.docker
+
+              echo
+              "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}"
+              > /home/user/.docker/config.json
+
+              export IMAGE_PATH=$CI_REGISTRY/egapro/egapro/api
+
+              buildctl-daemonless.sh \
+                build \
+                --frontend dockerfile.v0 \
+                --local context=/workspace//packages/api \
+                --local dockerfile=/workspace/packages/api \
+                --opt filename=./Dockerfile \
+                --output type=image,\"name=$IMAGE_PATH:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8,$IMAGE_PATH:master\",push=true \
+                --export-cache type=inline \
+                --import-cache type=registry,ref=$IMAGE_PATH:master \
+                
+          resources:
+            limits:
+              cpu: '2'
+              memory: 4Gi
+            requests:
+              cpu: 500m
+              memory: 1Gi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - mountPath: /home/user/.local/share/buildkit
+              name: buildkitd
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - emptyDir: {}
+          name: buildkitd
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-egapro-master-jobs-con-6v7vwk-build-app-buildkit-1ngsea
+  namespace: egapro-ci
+  annotations:
+    kontinuous/needsName: build-app.buildkit
+    kontinuous/needsNames: '["build-app","build-app.buildkit","build-app..buildkit"]'
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/depname.full: >-
+      project.fabrique.contrib.jobs.job.job-egapro-master-jobs-con-6v7vwk-build-app-buildkit-1ngsea
+    kontinuous/depname.chartResource: jobs.job.job-egapro-master-jobs-con-6v7vwk-build-app-buildkit-1ngsea
+    kontinuous/depname.chartName: jobs
+    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
+    kontinuous/depname.resourcePath: job.job-egapro-master-jobs-con-6v7vwk-build-app-buildkit-1ngsea
+    kontinuous/depname.resourceName: job-egapro-master-jobs-con-6v7vwk-build-app-buildkit-1ngsea
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-app-651p65
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/job: unconfined
+        kontinuous/deployment: egapro-master-1669991086
+      labels:
+        environment: preprod
+        ref: master
+        repository: egapro
+        runName: build
+        kontinuous/deployment: egapro-master-1669991086
+        kontinuous/deployment.env: egapro-master
+        kontinuous/ref: master
+        kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/resourceName: job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-app-651p65
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-repository
+          image: ghcr.io/socialgouv/kontinuous/degit:v1
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - '-c'
+            - |
+
+              degit SocialGouv/egapro#master \
+                /workspace
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
+      containers:
+        - name: job
+          image: moby/buildkit:v0.10.5-rootless
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: harbor
+          env:
+            - name: BUILDKITD_FLAGS
+              value: '--oci-worker-no-process-sandbox'
+          command:
+            - /bin/sh
+            - '-c'
+            - >
+              set -e
+
+              if [ "" != "" ]; then
+                export CI_REGISTRY=""
+              fi
+
+              mkdir -p /home/user/.docker
+
+              echo
+              "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}"
+              > /home/user/.docker/config.json
+
+              export IMAGE_PATH=$CI_REGISTRY/egapro/egapro/app
+
+              buildctl-daemonless.sh \
+                build \
+                --frontend dockerfile.v0 \
+                --local context=/workspace/ \
+                --local dockerfile=/workspace \
+                --opt filename=./packages/app/Dockerfile \
+                --output type=image,\"name=$IMAGE_PATH:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8,$IMAGE_PATH:master\",push=true \
+                --export-cache type=inline \
+                --import-cache type=registry,ref=$IMAGE_PATH:master \
+                --opt build-arg:"NEXT_PUBLIC_API_URL=https://egapro-preprod.dev.fabrique.social.gouv.fr/api" \
+                
+          resources:
+            limits:
+              cpu: '2'
+              memory: 14Gi
+            requests:
+              cpu: 500m
+              memory: 2Gi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - mountPath: /home/user/.local/share/buildkit
+              name: buildkitd
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - emptyDir: {}
+          name: buildkitd
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-egapro-master-jobs-con-6v7vwk-build-declaration-bui-3ykcwt
+  namespace: egapro-ci
+  annotations:
+    kontinuous/needsName: build-declaration.buildkit
+    kontinuous/needsNames: >-
+      ["build-declaration","build-declaration.buildkit","build-declaration..buildkit"]
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/depname.full: >-
+      project.fabrique.contrib.jobs.job.job-egapro-master-jobs-con-6v7vwk-build-declaration-bui-3ykcwt
+    kontinuous/depname.chartResource: jobs.job.job-egapro-master-jobs-con-6v7vwk-build-declaration-bui-3ykcwt
+    kontinuous/depname.chartName: jobs
+    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
+    kontinuous/depname.resourcePath: job.job-egapro-master-jobs-con-6v7vwk-build-declaration-bui-3ykcwt
+    kontinuous/depname.resourceName: job-egapro-master-jobs-con-6v7vwk-build-declaration-bui-3ykcwt
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-decl-3pwjq8
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/job: unconfined
+        kontinuous/deployment: egapro-master-1669991086
+      labels:
+        environment: preprod
+        ref: master
+        repository: egapro
+        runName: build
+        kontinuous/deployment: egapro-master-1669991086
+        kontinuous/deployment.env: egapro-master
+        kontinuous/ref: master
+        kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/resourceName: job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-decl-3pwjq8
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-repository
+          image: ghcr.io/socialgouv/kontinuous/degit:v1
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - '-c'
+            - |
+
+              degit SocialGouv/egapro#master \
+                /workspace
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
+      containers:
+        - name: job
+          image: moby/buildkit:v0.10.5-rootless
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: harbor
+          env:
+            - name: BUILDKITD_FLAGS
+              value: '--oci-worker-no-process-sandbox'
+          command:
+            - /bin/sh
+            - '-c'
+            - >
+              set -e
+
+              if [ "" != "" ]; then
+                export CI_REGISTRY=""
+              fi
+
+              mkdir -p /home/user/.docker
+
+              echo
+              "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}"
+              > /home/user/.docker/config.json
+
+              export IMAGE_PATH=$CI_REGISTRY/egapro/egapro/declaration
+
+              buildctl-daemonless.sh \
+                build \
+                --frontend dockerfile.v0 \
+                --local context=/workspace//packages/declaration \
+                --local dockerfile=/workspace/packages/declaration \
+                --opt filename=./Dockerfile \
+                --output type=image,\"name=$IMAGE_PATH:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8,$IMAGE_PATH:master\",push=true \
+                --export-cache type=inline \
+                --import-cache type=registry,ref=$IMAGE_PATH:master \
+                --opt build-arg:"BASE_URL=https://egapro-preprod.dev.fabrique.social.gouv.fr/index-egapro/declaration" \
+                --opt build-arg:"EGAPRO_API_URL=https://egapro-preprod.dev.fabrique.social.gouv.fr/api" \
+                
+          resources:
+            limits:
+              cpu: '2'
+              memory: 4Gi
+            requests:
+              cpu: 500m
+              memory: 1Gi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - mountPath: /home/user/.local/share/buildkit
+              name: buildkitd
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - emptyDir: {}
+          name: buildkitd
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-egapro-master-jobs-con-6v7vwk-build-simulateur-buil-3zbx3v
+  namespace: egapro-ci
+  annotations:
+    kontinuous/needsName: build-simulateur.buildkit
+    kontinuous/needsNames: >-
+      ["build-simulateur","build-simulateur.buildkit","build-simulateur..buildkit"]
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/depname.full: >-
+      project.fabrique.contrib.jobs.job.job-egapro-master-jobs-con-6v7vwk-build-simulateur-buil-3zbx3v
+    kontinuous/depname.chartResource: jobs.job.job-egapro-master-jobs-con-6v7vwk-build-simulateur-buil-3zbx3v
+    kontinuous/depname.chartName: jobs
+    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
+    kontinuous/depname.resourcePath: job.job-egapro-master-jobs-con-6v7vwk-build-simulateur-buil-3zbx3v
+    kontinuous/depname.resourceName: job-egapro-master-jobs-con-6v7vwk-build-simulateur-buil-3zbx3v
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-simu-mf8a11
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/job: unconfined
+        kontinuous/deployment: egapro-master-1669991086
+      labels:
+        environment: preprod
+        ref: master
+        repository: egapro
+        runName: build
+        kontinuous/deployment: egapro-master-1669991086
+        kontinuous/deployment.env: egapro-master
+        kontinuous/ref: master
+        kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/resourceName: job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-simu-mf8a11
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-repository
+          image: ghcr.io/socialgouv/kontinuous/degit:v1
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - '-c'
+            - |
+
+              degit SocialGouv/egapro#master \
+                /workspace
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
+      containers:
+        - name: job
+          image: moby/buildkit:v0.10.5-rootless
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: harbor
+          env:
+            - name: BUILDKITD_FLAGS
+              value: '--oci-worker-no-process-sandbox'
+          command:
+            - /bin/sh
+            - '-c'
+            - >
+              set -e
+
+              if [ "" != "" ]; then
+                export CI_REGISTRY=""
+              fi
+
+              mkdir -p /home/user/.docker
+
+              echo
+              "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}"
+              > /home/user/.docker/config.json
+
+              export IMAGE_PATH=$CI_REGISTRY/egapro/egapro/simulateur
+
+              buildctl-daemonless.sh \
+                build \
+                --frontend dockerfile.v0 \
+                --local context=/workspace/ \
+                --local dockerfile=/workspace \
+                --opt filename=./packages/simulateur/Dockerfile \
+                --output type=image,\"name=$IMAGE_PATH:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8,$IMAGE_PATH:master\",push=true \
+                --export-cache type=inline \
+                --import-cache type=registry,ref=$IMAGE_PATH:master \
+                --opt build-arg:"PUBLIC_URL=/index-egapro" \
+                --opt build-arg:"REACT_APP_DECLARATION_URL=https://egapro-preprod.dev.fabrique.social.gouv.fr/index-egapro/declaration" \
+                --opt build-arg:"REACT_APP_EGAPRO_API_URL=https://egapro-preprod.dev.fabrique.social.gouv.fr/api" \
+                --opt build-arg:"REACT_APP_VERSION=master" \
+                
+          resources:
+            limits:
+              cpu: '2'
+              memory: 10Gi
+            requests:
+              cpu: 500m
+              memory: 2Gi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - mountPath: /home/user/.local/share/buildkit
+              name: buildkitd
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - emptyDir: {}
+          name: buildkitd
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-egapro-master-jobs-con-6v7vwk-build-storybook-build-287ohe
+  namespace: egapro-ci
+  annotations:
+    kontinuous/needsName: build-storybook.buildkit
+    kontinuous/needsNames: '["build-storybook","build-storybook.buildkit","build-storybook..buildkit"]'
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/depname.full: >-
+      project.fabrique.contrib.jobs.job.job-egapro-master-jobs-con-6v7vwk-build-storybook-build-287ohe
+    kontinuous/depname.chartResource: jobs.job.job-egapro-master-jobs-con-6v7vwk-build-storybook-build-287ohe
+    kontinuous/depname.chartName: jobs
+    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
+    kontinuous/depname.resourcePath: job.job-egapro-master-jobs-con-6v7vwk-build-storybook-build-287ohe
+    kontinuous/depname.resourceName: job-egapro-master-jobs-con-6v7vwk-build-storybook-build-287ohe
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-stor-4xn26h
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/job: unconfined
+        kontinuous/deployment: egapro-master-1669991086
+      labels:
+        environment: preprod
+        ref: master
+        repository: egapro
+        runName: build
+        kontinuous/deployment: egapro-master-1669991086
+        kontinuous/deployment.env: egapro-master
+        kontinuous/ref: master
+        kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/resourceName: job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-stor-4xn26h
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-repository
+          image: ghcr.io/socialgouv/kontinuous/degit:v1
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - '-c'
+            - |
+
+              degit SocialGouv/egapro#master \
+                /workspace
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
+      containers:
+        - name: job
+          image: moby/buildkit:v0.10.5-rootless
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: harbor
+          env:
+            - name: BUILDKITD_FLAGS
+              value: '--oci-worker-no-process-sandbox'
+          command:
+            - /bin/sh
+            - '-c'
+            - >
+              set -e
+
+              if [ "" != "" ]; then
+                export CI_REGISTRY=""
+              fi
+
+              mkdir -p /home/user/.docker
+
+              echo
+              "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}"
+              > /home/user/.docker/config.json
+
+              export IMAGE_PATH=$CI_REGISTRY/egapro/egapro/storybook
+
+              buildctl-daemonless.sh \
+                build \
+                --frontend dockerfile.v0 \
+                --local context=/workspace/ \
+                --local dockerfile=/workspace \
+                --opt filename=./packages/app/.storybook/Dockerfile \
+                --output type=image,\"name=$IMAGE_PATH:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8,$IMAGE_PATH:master\",push=true \
+                --export-cache type=inline \
+                --import-cache type=registry,ref=$IMAGE_PATH:master \
+                
+          resources:
+            limits:
+              cpu: '2'
+              memory: 8Gi
+            requests:
+              cpu: 500m
+              memory: 2Gi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - mountPath: /home/user/.local/share/buildkit
+              name: buildkitd
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - emptyDir: {}
+          name: buildkitd
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: api
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: deployment-3d60sq-api
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: api
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.api
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/api/templates/deployment.yaml
+    kontinuous/plugin.needs: '["build-api"]'
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/depname.full: project.fabrique.contrib.api.deployment.api
+    kontinuous/depname.chartResource: api.deployment.api
+    kontinuous/depname.chartName: api
+    kontinuous/depname.chartPath: project.fabrique.contrib.api
+    kontinuous/depname.resourcePath: deployment.api
+    kontinuous/depname.resourceName: api
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: api
+  template:
+    metadata:
+      labels:
+        component: api
+        application: egapro
+        namespace: egapro-preprod
+        kontinuous/deployment: egapro-master-1669991086
+        kontinuous/deployment.env: egapro-master
+        kontinuous/ref: master
+        kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/resourceName: deployment-3d60sq-api
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: egapro-master-1669991086
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - egapro-preprod
+                    - key: component
+                      operator: In
+                      values:
+                        - api
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+          name: app
+          ports:
+            - containerPort: 2626
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          env:
+            - name: EGAPRO_DBHOST
+              value: $(PGHOST)
+            - name: EGAPRO_DBNAME
+              value: $(PGDATABASE)
+            - name: EGAPRO_DBPASS
+              value: $(PGPASSWORD)
+            - name: EGAPRO_DBPORT
+              value: $(PGPORT)
+            - name: EGAPRO_DBSSL
+              value: $(PGSSLMODE)
+            - name: EGAPRO_DBUSER
+              value: $(PGUSER)
+            - name: EGAPRO_SEND_EMAILS
+              value: 'True'
+            - name: EGAPRO_SENTRY_DSN
+              value: >-
+                https://084bf19c0e1141ddadbc1f7b86d2eb57@sentry.fabrique.social.gouv.fr/22
+            - name: EGAPRO_SMTP_HOST
+              value: maildev
+            - name: EGAPRO_SMTP_LOGIN
+              value: ''
+            - name: EGAPRO_SMTP_PASSWORD
+              value: ''
+            - name: EGAPRO_SMTP_PORT
+              value: '1025'
+            - name: EGAPRO_SMTP_SSL
+              value: ''
+          envFrom:
+            - secretRef:
+                name: pg-user
+            - secretRef:
+                name: staff
+      initContainers:
+        - name: kontinuous-wait-needs
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+          env:
+            - name: WAIT_NEEDS_ANNOTATIONS_REF
+              value: egapro-preprod/Deployment/api
+            - name: WAIT_NEEDS
+              value: >-
+                [{"namespace":"egapro-ci","kind":"Job","name":"job-egapro-master-jobs-con-6v7vwk-build-api-buildkit-4zg3ke","selectors":{"kontinuous/resourceName":"job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-api-2l46k7"},"needOnce":true}]
+            - name: KUBECONFIG
+              value: /secrets/kubeconfig
+            - name: SURVIVE_ON_BROKEN_CLUSTER
+              value: 'true'
+          volumeMounts:
+            - name: kontinuous-wait-needs-kubeconfig
+              mountPath: /secrets
+          imagePullPolicy: Always
+      volumes:
+        - name: kontinuous-wait-needs-kubeconfig
+          secret:
+            secretName: kubeconfig
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
+  progressDeadlineSeconds: 1200000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: deployment-3d60sq-app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/plugin.needs: '["build-app"]'
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
+    kontinuous/depname.chartName: app
+    kontinuous/depname.chartPath: project.fabrique.contrib.app
+    kontinuous/depname.resourcePath: deployment.app
+    kontinuous/depname.resourceName: app
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  template:
+    metadata:
+      labels:
+        component: app
+        application: egapro
+        namespace: egapro-preprod
+        kontinuous/deployment: egapro-master-1669991086
+        kontinuous/deployment.env: egapro-master
+        kontinuous/ref: master
+        kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/resourceName: deployment-3d60sq-app
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: egapro-master-1669991086
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - egapro-preprod
+                    - key: component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            harbor.fabrique.social.gouv.fr/egapro/egapro/app:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          env:
+            - name: EGAPRO_ENV
+              value: preprod
+            - name: POSTGRES_DB
+              value: $(PGDATABASE)
+            - name: POSTGRES_HOST
+              value: $(PGHOST)
+            - name: POSTGRES_PASSWORD
+              value: $(PGPASSWORD)
+            - name: POSTGRES_PORT
+              value: $(PGPORT)
+            - name: POSTGRES_SSLMODE
+              value: $(PGSSLMODE)
+            - name: POSTGRES_USER
+              value: $(PGUSER)
+            - name: SENTRY_DSN
+              value: >-
+                https://084bf19c0e1141ddadbc1f7b86d2eb57@sentry.fabrique.social.gouv.fr/22
+          envFrom:
+            - secretRef:
+                name: pg-user
+            - secretRef:
+                name: staff
+      initContainers:
+        - name: kontinuous-wait-needs
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+          env:
+            - name: WAIT_NEEDS_ANNOTATIONS_REF
+              value: egapro-preprod/Deployment/app
+            - name: WAIT_NEEDS
+              value: >-
+                [{"namespace":"egapro-ci","kind":"Job","name":"job-egapro-master-jobs-con-6v7vwk-build-app-buildkit-1ngsea","selectors":{"kontinuous/resourceName":"job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-app-651p65"},"needOnce":true}]
+            - name: KUBECONFIG
+              value: /secrets/kubeconfig
+            - name: SURVIVE_ON_BROKEN_CLUSTER
+              value: 'true'
+          volumeMounts:
+            - name: kontinuous-wait-needs-kubeconfig
+              mountPath: /secrets
+          imagePullPolicy: Always
+      volumes:
+        - name: kontinuous-wait-needs-kubeconfig
+          secret:
+            secretName: kubeconfig
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
+  progressDeadlineSeconds: 1200000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: declaration
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: deployment-3d60sq-declaration
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: declaration
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.declaration
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/declaration/templates/deployment.yaml
+    kontinuous/plugin.needs: '["build-declaration"]'
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/depname.full: project.fabrique.contrib.declaration.deployment.declaration
+    kontinuous/depname.chartResource: declaration.deployment.declaration
+    kontinuous/depname.chartName: declaration
+    kontinuous/depname.chartPath: project.fabrique.contrib.declaration
+    kontinuous/depname.resourcePath: deployment.declaration
+    kontinuous/depname.resourceName: declaration
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: declaration
+  template:
+    metadata:
+      labels:
+        component: declaration
+        application: egapro
+        namespace: egapro-preprod
+        kontinuous/deployment: egapro-master-1669991086
+        kontinuous/deployment.env: egapro-master
+        kontinuous/ref: master
+        kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/resourceName: deployment-3d60sq-declaration
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: egapro-master-1669991086
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - egapro-preprod
+                    - key: component
+                      operator: In
+                      values:
+                        - declaration
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            harbor.fabrique.social.gouv.fr/egapro/egapro/declaration:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+          name: app
+          ports:
+            - containerPort: 8080
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      initContainers:
+        - name: kontinuous-wait-needs
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+          env:
+            - name: WAIT_NEEDS_ANNOTATIONS_REF
+              value: egapro-preprod/Deployment/declaration
+            - name: WAIT_NEEDS
+              value: >-
+                [{"namespace":"egapro-ci","kind":"Job","name":"job-egapro-master-jobs-con-6v7vwk-build-declaration-bui-3ykcwt","selectors":{"kontinuous/resourceName":"job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-decl-3pwjq8"},"needOnce":true}]
+            - name: KUBECONFIG
+              value: /secrets/kubeconfig
+            - name: SURVIVE_ON_BROKEN_CLUSTER
+              value: 'true'
+          volumeMounts:
+            - name: kontinuous-wait-needs-kubeconfig
+              mountPath: /secrets
+          imagePullPolicy: Always
+      volumes:
+        - name: kontinuous-wait-needs-kubeconfig
+          secret:
+            secretName: kubeconfig
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
+  progressDeadlineSeconds: 1200000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: files
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: deployment-3d60sq-files
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: files
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.files
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/files/templates/deployment.yaml
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/depname.full: project.fabrique.contrib.files.deployment.files
+    kontinuous/depname.chartResource: files.deployment.files
+    kontinuous/depname.chartName: files
+    kontinuous/depname.chartPath: project.fabrique.contrib.files
+    kontinuous/depname.resourcePath: deployment.files
+    kontinuous/depname.resourceName: files
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: files
+  template:
+    metadata:
+      labels:
+        component: files
+        application: egapro
+        namespace: egapro-preprod
+        kontinuous/deployment: egapro-master-1669991086
+        kontinuous/deployment.env: egapro-master
+        kontinuous/ref: master
+        kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/resourceName: deployment-3d60sq-files
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: egapro-master-1669991086
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - egapro-preprod
+                    - key: component
+                      operator: In
+                      values:
+                        - files
+                topologyKey: kubernetes.io/hostname
+      volumes:
+        - name: files
+          persistentVolumeClaim:
+            claimName: files
+      containers:
+        - image: ghcr.io/socialgouv/docker/nginx:7.0.1
+          name: app
+          ports:
+            - containerPort: 8080
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            tcpSocket:
+              port: 8080
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            tcpSocket:
+              port: 8080
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            periodSeconds: 5
+            tcpSocket:
+              port: 8080
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: files
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: maildev
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: deployment-3d60sq-maildev
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: maildev
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.maildev
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/maildev/templates/deployment.yaml
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/depname.full: project.fabrique.contrib.maildev.deployment.maildev
+    kontinuous/depname.chartResource: maildev.deployment.maildev
+    kontinuous/depname.chartName: maildev
+    kontinuous/depname.chartPath: project.fabrique.contrib.maildev
+    kontinuous/depname.resourcePath: deployment.maildev
+    kontinuous/depname.resourceName: maildev
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: maildev
+  template:
+    metadata:
+      labels:
+        component: maildev
+        application: egapro
+        kontinuous/deployment: egapro-master-1669991086
+        kontinuous/deployment.env: egapro-master
+        kontinuous/ref: master
+        kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/resourceName: deployment-3d60sq-maildev
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: egapro-master-1669991086
+    spec:
+      containers:
+        - image: maildev/maildev:latest
+          name: maildev
+          ports:
+            - containerPort: 1080
+              name: http
+            - containerPort: 1025
+              name: smtp
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: simulateur
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: deployment-3d60sq-simulateur
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: simulateur
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.simulateur
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/simulateur/templates/deployment.yaml
+    kontinuous/plugin.needs: '["build-simulateur"]'
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/depname.full: project.fabrique.contrib.simulateur.deployment.simulateur
+    kontinuous/depname.chartResource: simulateur.deployment.simulateur
+    kontinuous/depname.chartName: simulateur
+    kontinuous/depname.chartPath: project.fabrique.contrib.simulateur
+    kontinuous/depname.resourcePath: deployment.simulateur
+    kontinuous/depname.resourceName: simulateur
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: simulateur
+  template:
+    metadata:
+      labels:
+        component: simulateur
+        application: egapro
+        namespace: egapro-preprod
+        kontinuous/deployment: egapro-master-1669991086
+        kontinuous/deployment.env: egapro-master
+        kontinuous/ref: master
+        kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/resourceName: deployment-3d60sq-simulateur
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: egapro-master-1669991086
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - egapro-preprod
+                    - key: component
+                      operator: In
+                      values:
+                        - simulateur
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            harbor.fabrique.social.gouv.fr/egapro/egapro/simulateur:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+          name: app
+          ports:
+            - containerPort: 8080
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      initContainers:
+        - name: kontinuous-wait-needs
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+          env:
+            - name: WAIT_NEEDS_ANNOTATIONS_REF
+              value: egapro-preprod/Deployment/simulateur
+            - name: WAIT_NEEDS
+              value: >-
+                [{"namespace":"egapro-ci","kind":"Job","name":"job-egapro-master-jobs-con-6v7vwk-build-simulateur-buil-3zbx3v","selectors":{"kontinuous/resourceName":"job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-simu-mf8a11"},"needOnce":true}]
+            - name: KUBECONFIG
+              value: /secrets/kubeconfig
+            - name: SURVIVE_ON_BROKEN_CLUSTER
+              value: 'true'
+          volumeMounts:
+            - name: kontinuous-wait-needs-kubeconfig
+              mountPath: /secrets
+          imagePullPolicy: Always
+      volumes:
+        - name: kontinuous-wait-needs-kubeconfig
+          secret:
+            secretName: kubeconfig
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
+  progressDeadlineSeconds: 1200000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: storybook
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: deployment-3d60sq-storybook
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: storybook
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.storybook
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/storybook/templates/deployment.yaml
+    kontinuous/plugin.needs: '["build-storybook"]'
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/depname.full: project.fabrique.contrib.storybook.deployment.storybook
+    kontinuous/depname.chartResource: storybook.deployment.storybook
+    kontinuous/depname.chartName: storybook
+    kontinuous/depname.chartPath: project.fabrique.contrib.storybook
+    kontinuous/depname.resourcePath: deployment.storybook
+    kontinuous/depname.resourceName: storybook
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: storybook
+  template:
+    metadata:
+      labels:
+        component: storybook
+        application: egapro
+        namespace: egapro-preprod
+        kontinuous/deployment: egapro-master-1669991086
+        kontinuous/deployment.env: egapro-master
+        kontinuous/ref: master
+        kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+        kontinuous/resourceName: deployment-3d60sq-storybook
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: egapro-master-1669991086
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - egapro-preprod
+                    - key: component
+                      operator: In
+                      values:
+                        - storybook
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            harbor.fabrique.social.gouv.fr/egapro/egapro/storybook:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+          name: app
+          ports:
+            - containerPort: 8080
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      initContainers:
+        - name: kontinuous-wait-needs
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+          env:
+            - name: WAIT_NEEDS_ANNOTATIONS_REF
+              value: egapro-preprod/Deployment/storybook
+            - name: WAIT_NEEDS
+              value: >-
+                [{"namespace":"egapro-ci","kind":"Job","name":"job-egapro-master-jobs-con-6v7vwk-build-storybook-build-287ohe","selectors":{"kontinuous/resourceName":"job-4bkfwz-job-egapro-master-jobs-con-6v7vwk-build-stor-4xn26h"},"needOnce":true}]
+            - name: KUBECONFIG
+              value: /secrets/kubeconfig
+            - name: SURVIVE_ON_BROKEN_CLUSTER
+              value: 'true'
+          volumeMounts:
+            - name: kontinuous-wait-needs-kubeconfig
+              mountPath: /secrets
+          imagePullPolicy: Always
+      volumes:
+        - name: kontinuous-wait-needs-kubeconfig
+          secret:
+            secretName: kubeconfig
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
+  progressDeadlineSeconds: 1200000
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: export-public-data
+  annotations:
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/api-jobs.cronjob.yaml
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: cronjob-17u4rl-export-public-data
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: egapro-preprod
+spec:
+  schedule: 0 0 * * *
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: export-public-data
+          namespace: egapro-preprod
+        spec:
+          restartPolicy: OnFailure
+          volumes:
+            - name: files
+              persistentVolumeClaim:
+                claimName: files
+          containers:
+            - name: job
+              image: >-
+                harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+              volumeMounts:
+                - name: files
+                  mountPath: /mnt/files
+              command:
+                - sh
+                - '-c'
+                - |
+                  set -e
+                  egapro export-public-data /mnt/files/index-egalite-fh.csv
+              args: []
+              envFrom:
+                - secretRef:
+                    name: pg-user
+              env:
+                - name: EGAPRO_DBHOST
+                  value: $(PGHOST)
+                - name: EGAPRO_DBNAME
+                  value: $(PGDATABASE)
+                - name: EGAPRO_DBPORT
+                  value: $(PGPORT)
+                - name: EGAPRO_DBUSER
+                  value: $(PGUSER)
+                - name: EGAPRO_DBPASS
+                  value: $(PGPASSWORD)
+                - name: EGAPRO_DBSSL
+                  value: $(PGSSLMODE)
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dump-dgt
+  annotations:
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/api-jobs.cronjob.yaml
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: cronjob-17u4rl-dump-dgt
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: egapro-preprod
+spec:
+  schedule: 0 0 * * *
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: dump-dgt
+          namespace: egapro-preprod
+        spec:
+          restartPolicy: OnFailure
+          volumes:
+            - name: files
+              persistentVolumeClaim:
+                claimName: files
+          containers:
+            - name: job
+              image: >-
+                harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+              volumeMounts:
+                - name: files
+                  mountPath: /mnt/files
+              command:
+                - sh
+                - '-c'
+                - |
+                  set -e
+                  egapro dump-dgt /mnt/files/dgt.xlsx
+              args: []
+              envFrom:
+                - secretRef:
+                    name: pg-user
+              env:
+                - name: EGAPRO_DBHOST
+                  value: $(PGHOST)
+                - name: EGAPRO_DBNAME
+                  value: $(PGDATABASE)
+                - name: EGAPRO_DBPORT
+                  value: $(PGPORT)
+                - name: EGAPRO_DBUSER
+                  value: $(PGUSER)
+                - name: EGAPRO_DBPASS
+                  value: $(PGPASSWORD)
+                - name: EGAPRO_DBSSL
+                  value: $(PGSSLMODE)
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dump-dgt-representation
+  annotations:
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/api-jobs.cronjob.yaml
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: cronjob-17u4rl-dump-dgt-representation
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: egapro-preprod
+spec:
+  schedule: 0 0 * * *
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: dump-dgt-representation
+          namespace: egapro-preprod
+        spec:
+          restartPolicy: OnFailure
+          volumes:
+            - name: files
+              persistentVolumeClaim:
+                claimName: files
+          containers:
+            - name: job
+              image: >-
+                harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+              volumeMounts:
+                - name: files
+                  mountPath: /mnt/files
+              command:
+                - sh
+                - '-c'
+                - >
+                  set -e
+
+                  egapro dump-dgt-representation
+                  /mnt/files/dgt-representation.xlsx
+              args: []
+              envFrom:
+                - secretRef:
+                    name: pg-user
+              env:
+                - name: EGAPRO_DBHOST
+                  value: $(PGHOST)
+                - name: EGAPRO_DBNAME
+                  value: $(PGDATABASE)
+                - name: EGAPRO_DBPORT
+                  value: $(PGPORT)
+                - name: EGAPRO_DBUSER
+                  value: $(PGUSER)
+                - name: EGAPRO_DBPASS
+                  value: $(PGPASSWORD)
+                - name: EGAPRO_DBSSL
+                  value: $(PGSSLMODE)
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: full
+  annotations:
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/api-jobs.cronjob.yaml
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: cronjob-17u4rl-full
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: egapro-preprod
+spec:
+  schedule: 0 0 * * *
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: full
+          namespace: egapro-preprod
+        spec:
+          restartPolicy: OnFailure
+          volumes:
+            - name: files
+              persistentVolumeClaim:
+                claimName: files
+          containers:
+            - name: job
+              image: >-
+                harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+              volumeMounts:
+                - name: files
+                  mountPath: /mnt/files
+              command:
+                - sh
+                - '-c'
+                - |
+                  set -e
+                  egapro full /mnt/files/full.ndjson
+              args: []
+              envFrom:
+                - secretRef:
+                    name: pg-user
+              env:
+                - name: EGAPRO_DBHOST
+                  value: $(PGHOST)
+                - name: EGAPRO_DBNAME
+                  value: $(PGDATABASE)
+                - name: EGAPRO_DBPORT
+                  value: $(PGPORT)
+                - name: EGAPRO_DBUSER
+                  value: $(PGUSER)
+                - name: EGAPRO_DBPASS
+                  value: $(PGPASSWORD)
+                - name: EGAPRO_DBSSL
+                  value: $(PGSSLMODE)
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: export-indexes
+  annotations:
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/api-jobs.cronjob.yaml
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: cronjob-17u4rl-export-indexes
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: egapro-preprod
+spec:
+  schedule: 0 0 * * *
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: export-indexes
+          namespace: egapro-preprod
+        spec:
+          restartPolicy: OnFailure
+          volumes:
+            - name: files
+              persistentVolumeClaim:
+                claimName: files
+          containers:
+            - name: job
+              image: >-
+                harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+              volumeMounts:
+                - name: files
+                  mountPath: /mnt/files
+              command:
+                - sh
+                - '-c'
+                - |
+                  set -e
+                  egapro export-indexes /mnt/files/indexes.csv
+              args: []
+              envFrom:
+                - secretRef:
+                    name: pg-user
+              env:
+                - name: EGAPRO_DBHOST
+                  value: $(PGHOST)
+                - name: EGAPRO_DBNAME
+                  value: $(PGDATABASE)
+                - name: EGAPRO_DBPORT
+                  value: $(PGPORT)
+                - name: EGAPRO_DBUSER
+                  value: $(PGUSER)
+                - name: EGAPRO_DBPASS
+                  value: $(PGPASSWORD)
+                - name: EGAPRO_DBSSL
+                  value: $(PGSSLMODE)
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: export-representation
+  annotations:
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/api-jobs.cronjob.yaml
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: cronjob-17u4rl-export-representation
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: egapro-preprod
+spec:
+  schedule: 0 0 * * *
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: export-representation
+          namespace: egapro-preprod
+        spec:
+          restartPolicy: OnFailure
+          volumes:
+            - name: files
+              persistentVolumeClaim:
+                claimName: files
+          containers:
+            - name: job
+              image: >-
+                harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+              volumeMounts:
+                - name: files
+                  mountPath: /mnt/files
+              command:
+                - sh
+                - '-c'
+                - >
+                  set -e
+
+                  egapro export-representation
+                  /mnt/files/dgt-export-representation.xlsx
+              args: []
+              envFrom:
+                - secretRef:
+                    name: pg-user
+              env:
+                - name: EGAPRO_DBHOST
+                  value: $(PGHOST)
+                - name: EGAPRO_DBNAME
+                  value: $(PGDATABASE)
+                - name: EGAPRO_DBPORT
+                  value: $(PGPORT)
+                - name: EGAPRO_DBUSER
+                  value: $(PGUSER)
+                - name: EGAPRO_DBPASS
+                  value: $(PGPASSWORD)
+                - name: EGAPRO_DBSSL
+                  value: $(PGSSLMODE)
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: api
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: service-5cfizy-api
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: api
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.api
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/api/templates/service.yaml
+    kontinuous/plugin.needs: '["build-api"]'
+    kontinuous/deployment: egapro-master-1669991086
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 2626
+  selector:
+    component: api
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: service-5cfizy-app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
+    kontinuous/plugin.needs: '["build-app"]'
+    kontinuous/deployment: egapro-master-1669991086
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: declaration
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: service-5cfizy-declaration
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: declaration
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.declaration
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/declaration/templates/service.yaml
+    kontinuous/plugin.needs: '["build-declaration"]'
+    kontinuous/deployment: egapro-master-1669991086
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    component: declaration
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: files
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: service-5cfizy-files
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: files
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.files
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/files/templates/service.yaml
+    kontinuous/deployment: egapro-master-1669991086
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    component: files
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: maildev
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: service-5cfizy-maildev
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: maildev
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.maildev
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/maildev/templates/service.yaml
+    kontinuous/deployment: egapro-master-1669991086
+spec:
+  ports:
+    - name: http
+      port: 1080
+      targetPort: 1080
+    - name: smtp
+      port: 1025
+      targetPort: 1025
+  selector:
+    component: maildev
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: simulateur
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: service-5cfizy-simulateur
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: simulateur
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.simulateur
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/simulateur/templates/service.yaml
+    kontinuous/plugin.needs: '["build-simulateur"]'
+    kontinuous/deployment: egapro-master-1669991086
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    component: simulateur
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: storybook
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: service-5cfizy-storybook
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: storybook
+  namespace: egapro-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.storybook
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/storybook/templates/service.yaml
+    kontinuous/plugin.needs: '["build-storybook"]'
+    kontinuous/deployment: egapro-master-1669991086
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    component: storybook
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    kontinuous/chartPath: project.fabrique.contrib.api
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/api/templates/ingress.yaml
+    kontinuous/plugin.needs: '["build-api"]'
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    component: api
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: ingress-5dz9oh-api
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: api
+  namespace: egapro-preprod
+spec:
+  rules:
+    - host: egapro-preprod.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: api
+                port:
+                  name: http
+            path: /api(/|$)(.*)
+            pathType: Prefix
+  tls:
+    - hosts:
+        - egapro-preprod.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/plugin.needs: '["build-app"]'
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    component: app
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: ingress-5dz9oh-app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: egapro-preprod
+spec:
+  rules:
+    - host: egapro-preprod.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - egapro-preprod.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    kontinuous/chartPath: project.fabrique.contrib.declaration
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/declaration/templates/ingress.yaml
+    kontinuous/plugin.needs: '["build-declaration"]'
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    component: declaration
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: ingress-5dz9oh-declaration
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: declaration
+  namespace: egapro-preprod
+spec:
+  rules:
+    - host: egapro-preprod.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: declaration
+                port:
+                  name: http
+            path: /index-egapro/declaration(/|$)(.*)
+            pathType: Prefix
+  tls:
+    - hosts:
+        - egapro-preprod.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.maildev
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/maildev/templates/ingress.yaml
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    component: maildev
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: ingress-5dz9oh-maildev
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: maildev
+  namespace: egapro-preprod
+spec:
+  rules:
+    - host: maildev-egapro-preprod.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: maildev
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - maildev-egapro-preprod.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    kontinuous/chartPath: project.fabrique.contrib.simulateur
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/simulateur/templates/ingress.yaml
+    kontinuous/plugin.needs: '["build-simulateur"]'
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    component: simulateur
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: ingress-5dz9oh-simulateur
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: simulateur
+  namespace: egapro-preprod
+spec:
+  rules:
+    - host: egapro-preprod.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: simulateur
+                port:
+                  name: http
+            path: /index-egapro(/|$)(.*)
+            pathType: Prefix
+  tls:
+    - hosts:
+        - egapro-preprod.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    kontinuous/chartPath: project.fabrique.contrib.storybook
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/storybook/templates/ingress.yaml
+    kontinuous/plugin.needs: '["build-storybook"]'
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    component: storybook
+    application: egapro
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: ingress-5dz9oh-storybook
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: storybook
+  namespace: egapro-preprod
+spec:
+  rules:
+    - host: egapro-preprod.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: storybook
+                port:
+                  name: http
+            path: /storybook(/|$)(.*)
+            pathType: Prefix
+  tls:
+    - hosts:
+        - egapro-preprod.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: files-public
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/files-public.ingress.yaml
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: ingress-5dz9oh-files-public
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: egapro-preprod
+spec:
+  tls:
+    - hosts:
+        - egapro-preprod.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+  rules:
+    - host: egapro-preprod.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - path: /index-egalite-fh.csv
+            pathType: Exact
+            backend:
+              service:
+                name: files
+                port:
+                  number: 80
+    - host: egapro-preprod.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - path: /dgt-export-representation.xlsx
+            pathType: Exact
+            backend:
+              service:
+                name: files
+                port:
+                  number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: files-restricted
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/satisfy: any
+    nginx.ingress.kubernetes.io/whitelist-source-range: 94.23.250.213,37.187.27.197,37.187.137.149,217.182.142.112
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    nginx.ingress.kubernetes.io/auth-realm: Identification
+    kontinuous/chartPath: project
+    kontinuous/source: project/templates/files-restricted.ingress.yaml
+    kontinuous/deployment: egapro-master-1669991086
+  labels:
+    kontinuous/deployment: egapro-master-1669991086
+    kontinuous/deployment.env: egapro-master
+    kontinuous/ref: master
+    kontinuous/gitSha: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/appVersion: b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    kontinuous/resourceName: ingress-5dz9oh-files-restricted
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: egapro-preprod
+spec:
+  tls:
+    - hosts:
+        - egapro-preprod.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+  rules:
+    - host: egapro-preprod.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - path: /dgt.xlsx
+            pathType: Exact
+            backend:
+              service:
+                name: files
+                port:
+                  number: 80
+    - host: egapro-preprod.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - path: /dgt-representation.xlsx
+            pathType: Exact
+            backend:
+              service:
+                name: files
+                port:
+                  number: 80
+    - host: egapro-preprod.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - path: /full.ndjson
+            pathType: Exact
+            backend:
+              service:
+                name: files
+                port:
+                  number: 80
+    - host: egapro-preprod.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - path: /indexes.csv
+            pathType: Exact
+            backend:
+              service:
+                name: files
+                port:
+                  number: 80
