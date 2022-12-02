@@ -6,7 +6,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/permanent-redirect: https://{{- include "contrib-helpers.ingress-host" . -}}$request_uri
-    {{- range $key, $val := (merge .Values.global.ingress.annotations .Values.ingress.annotations) }}
+    {{- range $key, $val := (merge dict .Values.global.ingress.annotations .Values.ingress.annotations) }}
     "{{ $key }}": {{ $val | quote }}
     {{- end }}
 spec:
