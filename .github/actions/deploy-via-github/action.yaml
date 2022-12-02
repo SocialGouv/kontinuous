@@ -129,7 +129,7 @@ runs:
         env_url: ${{ steps.environment-url.outputs.url }}
 
     - name: Debug manifests
-      uses: socialgouv/kontinuous/.github/actions/debug-manifests@v1.107.0
+      uses: socialgouv/kontinuous/.github/actions/debug-manifests@v1.107.1
       if: github.event_name != 'delete'
       with:
         token: ${{ inputs.token }}

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.107.1 (2022-12-02)
+
+
+### Bug Fixes
+
+* dont override globals in ingress ([#95](https://github.com/socialgouv/kontinuous/issues/95)) ([6656867](https://github.com/socialgouv/kontinuous/commit/665686715be26944b72106b42df1246667a53759))
+
 ## [1.107.0](https://github.com/socialgouv/kontinuous/compare/v1.106.2...v1.107.0) (2022-11-30)
 
 
