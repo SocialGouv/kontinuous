@@ -143,11 +143,3 @@ exports[`egapro 1`] = `
             └── https://egapro-preprod.dev.fabrique.social.gouv.fr
 "
 `;
-
-exports[`test2 1`] = `
-"resources summary:
-├── resources
-└── globals
-    └── Ingress
-"
-`;
