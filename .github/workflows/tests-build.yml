@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      
+
       - name: write .kontinuous/config.yaml
         shell: bash
         run: ./.github/scripts/write-kontinuous-config-yaml.sh
@@ -32,3 +32,8 @@ jobs:
 
       - name: Run tests
         run: yarn test
+
+      - name: Run plugins contrib
+        run: |
+          yarn --cwd plugins/contrib
+          yarn --cwd plugins/contrib test
