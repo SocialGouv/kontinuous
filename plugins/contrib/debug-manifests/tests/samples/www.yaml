@@ -1,0 +1,436 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    janitor/ttl: 7d
+    field.cattle.io/projectId: c-gjtkk:p-qxn46
+    kontinuous/gitBranch: kontinuous-ac
+    kontinuous/mainNamespace: 'true'
+    kapp.k14s.io/exists: ''
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: www-kontinuous-ac-1669740582
+  labels:
+    application: www
+    kontinuous/deployment: www-kontinuous-ac-1669740582
+    kontinuous/deployment.env: www-kontinuous-ac
+    kontinuous/ref: kontinuous-ac
+    kontinuous/gitSha: 1ca3107affe6e436280896ab63b912d536790cfe
+    kontinuous/appVersion: 1ca3107affe6e436280896ab63b912d536790cfe
+    kontinuous/resourceName: namespace-4wnyh3
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+    cert: wildcard
+  name: www-kontinuous-ac
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: www-kontinuous-ac
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: www-kontinuous-ac-1669740582
+  labels:
+    kontinuous/deployment: www-kontinuous-ac-1669740582
+    kontinuous/deployment.env: www-kontinuous-ac
+    kontinuous/ref: kontinuous-ac
+    kontinuous/gitSha: 1ca3107affe6e436280896ab63b912d536790cfe
+    kontinuous/appVersion: 1ca3107affe6e436280896ab63b912d536790cfe
+    kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: www-kontinuous-ac-1669740582
+  labels:
+    kontinuous/deployment: www-kontinuous-ac-1669740582
+    kontinuous/deployment.env: www-kontinuous-ac
+    kontinuous/ref: kontinuous-ac
+    kontinuous/gitSha: 1ca3107affe6e436280896ab63b912d536790cfe
+    kontinuous/appVersion: 1ca3107affe6e436280896ab63b912d536790cfe
+    kontinuous/resourceName: serviceaccount-4nws8p-default
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: www-kontinuous-ac
+automountServiceAccountToken: false
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-www-kontinuous-ac-jobs-con-6v7vwk-build-app-buildkit-1ngsea
+  namespace: fabrique-ci
+  annotations:
+    kontinuous/needsName: build-app.buildkit
+    kontinuous/needsNames: '["build-app","build-app.buildkit","build-app..buildkit"]'
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: www-kontinuous-ac-1669740582
+    kontinuous/depname.full: >-
+      project.fabrique.contrib.jobs.job.job-www-kontinuous-ac-jobs-con-6v7vwk-build-app-buildkit-1ngsea
+    kontinuous/depname.chartResource: jobs.job.job-www-kontinuous-ac-jobs-con-6v7vwk-build-app-buildkit-1ngsea
+    kontinuous/depname.chartName: jobs
+    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
+    kontinuous/depname.resourcePath: job.job-www-kontinuous-ac-jobs-con-6v7vwk-build-app-buildkit-1ngsea
+    kontinuous/depname.resourceName: job-www-kontinuous-ac-jobs-con-6v7vwk-build-app-buildkit-1ngsea
+  labels:
+    kontinuous/deployment: www-kontinuous-ac-1669740582
+    kontinuous/deployment.env: www-kontinuous-ac
+    kontinuous/ref: kontinuous-ac
+    kontinuous/gitSha: 1ca3107affe6e436280896ab63b912d536790cfe
+    kontinuous/appVersion: 1ca3107affe6e436280896ab63b912d536790cfe
+    kontinuous/resourceName: job-4bkfwz-job-www-kontinuous-ac-jobs-con-6v7vwk-build-1a7bll
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/job: unconfined
+        kontinuous/deployment: www-kontinuous-ac-1669740582
+      labels:
+        environment: dev
+        ref: kontinuous-ac
+        repository: www
+        runName: build
+        kontinuous/deployment: www-kontinuous-ac-1669740582
+        kontinuous/deployment.env: www-kontinuous-ac
+        kontinuous/ref: kontinuous-ac
+        kontinuous/gitSha: 1ca3107affe6e436280896ab63b912d536790cfe
+        kontinuous/appVersion: 1ca3107affe6e436280896ab63b912d536790cfe
+        kontinuous/resourceName: job-4bkfwz-job-www-kontinuous-ac-jobs-con-6v7vwk-build-1a7bll
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-repository
+          image: ghcr.io/socialgouv/kontinuous/degit:v1
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - '-c'
+            - |
+
+              degit SocialGouv/www#kontinuous-ac \
+                /workspace
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 0
+              memory: 0
+      containers:
+        - name: job
+          image: moby/buildkit:v0.10.5-rootless
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: harbor
+          env:
+            - name: BUILDKITD_FLAGS
+              value: '--oci-worker-no-process-sandbox'
+          command:
+            - /bin/sh
+            - '-c'
+            - >
+              set -e
+
+              if [ "" != "" ]; then
+                export CI_REGISTRY=""
+              fi
+
+              mkdir -p /home/user/.docker
+
+              echo
+              "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}"
+              > /home/user/.docker/config.json
+
+              export IMAGE_PATH=$CI_REGISTRY/socialgouv/www
+
+              buildctl-daemonless.sh \
+                build \
+                --frontend dockerfile.v0 \
+                --local context=/workspace/ \
+                --local dockerfile=/workspace \
+                --opt filename=./Dockerfile \
+                --output type=image,\"name=$IMAGE_PATH:sha-1ca3107affe6e436280896ab63b912d536790cfe,$IMAGE_PATH:kontinuous-ac\",push=true \
+                --export-cache type=inline \
+                --import-cache type=registry,ref=$IMAGE_PATH:kontinuous-ac \
+                
+          resources:
+            limits:
+              cpu: '2'
+              memory: 4Gi
+            requests:
+              cpu: 0
+              memory: 0
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - mountPath: /home/user/.local/share/buildkit
+              name: buildkitd
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - emptyDir: {}
+          name: buildkitd
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app
+    application: www
+    kontinuous/deployment: www-kontinuous-ac-1669740582
+    kontinuous/deployment.env: www-kontinuous-ac
+    kontinuous/ref: kontinuous-ac
+    kontinuous/gitSha: 1ca3107affe6e436280896ab63b912d536790cfe
+    kontinuous/appVersion: 1ca3107affe6e436280896ab63b912d536790cfe
+    kontinuous/resourceName: deployment-3d60sq-app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: www-kontinuous-ac
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/plugin.needs: '["build-app"]'
+    kontinuous/deployment: www-kontinuous-ac-1669740582
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
+    kontinuous/depname.chartName: app
+    kontinuous/depname.chartPath: project.fabrique.contrib.app
+    kontinuous/depname.resourcePath: deployment.app
+    kontinuous/depname.resourceName: app
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  template:
+    metadata:
+      labels:
+        component: app
+        application: www
+        namespace: www-kontinuous-ac
+        kontinuous/deployment: www-kontinuous-ac-1669740582
+        kontinuous/deployment.env: www-kontinuous-ac
+        kontinuous/ref: kontinuous-ac
+        kontinuous/gitSha: 1ca3107affe6e436280896ab63b912d536790cfe
+        kontinuous/appVersion: 1ca3107affe6e436280896ab63b912d536790cfe
+        kontinuous/resourceName: deployment-3d60sq-app
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: www-kontinuous-ac-1669740582
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - www-kontinuous-ac
+                    - key: component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            ghcr.io/socialgouv/www/app:sha-1ca3107affe6e436280896ab63b912d536790cfe
+          name: app
+          ports:
+            - containerPort: 8080
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 0
+              memory: 0
+      initContainers:
+        - name: kontinuous-wait-needs
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+          env:
+            - name: WAIT_NEEDS_ANNOTATIONS_REF
+              value: www-kontinuous-ac/Deployment/app
+            - name: WAIT_NEEDS
+              value: >-
+                [{"namespace":"fabrique-ci","kind":"Job","name":"job-www-kontinuous-ac-jobs-con-6v7vwk-build-app-buildkit-1ngsea","selectors":{"kontinuous/resourceName":"job-4bkfwz-job-www-kontinuous-ac-jobs-con-6v7vwk-build-1a7bll"},"needOnce":true}]
+            - name: KUBECONFIG
+              value: /secrets/kubeconfig
+            - name: SURVIVE_ON_BROKEN_CLUSTER
+              value: 'true'
+          volumeMounts:
+            - name: kontinuous-wait-needs-kubeconfig
+              mountPath: /secrets
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 0
+              memory: 0
+      volumes:
+        - name: kontinuous-wait-needs-kubeconfig
+          secret:
+            secretName: kubeconfig
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
+  progressDeadlineSeconds: 1200000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: www
+    kontinuous/deployment: www-kontinuous-ac-1669740582
+    kontinuous/deployment.env: www-kontinuous-ac
+    kontinuous/ref: kontinuous-ac
+    kontinuous/gitSha: 1ca3107affe6e436280896ab63b912d536790cfe
+    kontinuous/appVersion: 1ca3107affe6e436280896ab63b912d536790cfe
+    kontinuous/resourceName: service-5cfizy-app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: www-kontinuous-ac
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
+    kontinuous/plugin.needs: '["build-app"]'
+    kontinuous/deployment: www-kontinuous-ac-1669740582
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    component: app
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/configuration-snippet: >
+      more_set_headers "Content-Security-Policy: default-src 'none'; connect-src
+      'self' https://*.gouv.fr; font-src 'self'; img-src 'self'; prefetch-src
+      'self' https://*.gouv.fr; script-src 'self' https://*.gouv.fr; frame-src
+      'self' https://*.gouv.fr; style-src 'self' 'unsafe-inline'";
+
+      more_set_headers "X-Frame-Options: deny";
+
+      more_set_headers "X-XSS-Protection: 1; mode=block";
+
+      more_set_headers "X-Content-Type-Options: nosniff";
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/plugin.needs: '["build-app"]'
+    kontinuous/deployment: www-kontinuous-ac-1669740582
+  labels:
+    component: app
+    application: www
+    kontinuous/deployment: www-kontinuous-ac-1669740582
+    kontinuous/deployment.env: www-kontinuous-ac
+    kontinuous/ref: kontinuous-ac
+    kontinuous/gitSha: 1ca3107affe6e436280896ab63b912d536790cfe
+    kontinuous/appVersion: 1ca3107affe6e436280896ab63b912d536790cfe
+    kontinuous/resourceName: ingress-5dz9oh-app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: www-kontinuous-ac
+spec:
+  rules:
+    - host: www-kontinuous-ac.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - www-kontinuous-ac.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt

@@ -143,3 +143,291 @@ exports[`egapro 1`] = `
             └── https://egapro-preprod.dev.fabrique.social.gouv.fr
 "
 `;
+
+exports[`template 1`] = `
+"resources summary:
+├── resources
+│   ├── api
+│   │   ├── Deployment
+│   │   │   ├── app
+│   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+│   │   │   │   └── port: 2626
+│   │   │   └── kontinuous-wait-needs (init)
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+│   │   ├── Service
+│   │   │   └── port: http=80:2626
+│   │   └── Ingress
+│   │       └── hosts
+│   │           └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+│   ├── app
+│   │   ├── Deployment
+│   │   │   ├── app
+│   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/app:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+│   │   │   │   └── port: 3000
+│   │   │   └── kontinuous-wait-needs (init)
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+│   │   ├── Service
+│   │   │   └── port: http=80:3000
+│   │   └── Ingress
+│   │       └── hosts
+│   │           └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+│   ├── declaration
+│   │   ├── Deployment
+│   │   │   ├── app
+│   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/declaration:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+│   │   │   │   └── port: 8080
+│   │   │   └── kontinuous-wait-needs (init)
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+│   │   ├── Service
+│   │   │   └── port: http=80:8080
+│   │   └── Ingress
+│   │       └── hosts
+│   │           └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+│   ├── files
+│   │   ├── Deployment
+│   │   │   └── app
+│   │   │       ├── image: ghcr.io/socialgouv/docker/nginx:7.0.1
+│   │   │       └── port: 8080
+│   │   └── Service
+│   │       └── port: http=80:8080
+│   ├── maildev
+│   │   ├── Deployment
+│   │   │   └── maildev
+│   │   │       ├── image: maildev/maildev:latest
+│   │   │       └── ports: 1080,1025
+│   │   ├── Service
+│   │   │   └── ports: http=1080:1080,smtp=1025:1025
+│   │   └── Ingress
+│   │       └── hosts
+│   │           └── https://maildev-egapro-preprod.dev.fabrique.social.gouv.fr
+│   ├── simulateur
+│   │   ├── Deployment
+│   │   │   ├── app
+│   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/simulateur:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+│   │   │   │   └── port: 8080
+│   │   │   └── kontinuous-wait-needs (init)
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+│   │   ├── Service
+│   │   │   └── port: http=80:8080
+│   │   └── Ingress
+│   │       └── hosts
+│   │           └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+│   └── storybook
+│       ├── Deployment
+│       │   ├── app
+│       │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/storybook:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+│       │   │   └── port: 8080
+│       │   └── kontinuous-wait-needs (init)
+│       │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+│       ├── Service
+│       │   └── port: http=80:8080
+│       └── Ingress
+│           └── hosts
+│               └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+└── globals
+    ├── Namespace
+    │   └── name: egapro-preprod
+    ├── NetworkPolicy
+    │   └── name: netpol-ingress
+    ├── ServiceAccount
+    │   └── name: default
+    ├── PersistentVolumeClaim
+    │   └── name: files
+    ├── SealedSecret
+    │   ├── name: basic-auth
+    │   └── name: staff
+    ├── Job
+    │   ├── job
+    │   │   └── image: moby/buildkit:v0.10.5-rootless
+    │   ├── degit-repository (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1
+    │   ├── job
+    │   │   └── image: moby/buildkit:v0.10.5-rootless
+    │   ├── degit-repository (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1
+    │   ├── job
+    │   │   └── image: moby/buildkit:v0.10.5-rootless
+    │   ├── degit-repository (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1
+    │   ├── job
+    │   │   └── image: moby/buildkit:v0.10.5-rootless
+    │   ├── degit-repository (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1
+    │   ├── job
+    │   │   └── image: moby/buildkit:v0.10.5-rootless
+    │   └── degit-repository (init)
+    │       └── image: ghcr.io/socialgouv/kontinuous/degit:v1
+    ├── CronJob
+    │   ├── schedule: 0 0 * * *
+    │   ├── job
+    │   │   └── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    │   ├── schedule: 0 0 * * *
+    │   ├── job
+    │   │   └── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    │   ├── schedule: 0 0 * * *
+    │   ├── job
+    │   │   └── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    │   ├── schedule: 0 0 * * *
+    │   ├── job
+    │   │   └── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    │   ├── schedule: 0 0 * * *
+    │   ├── job
+    │   │   └── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    │   ├── schedule: 0 0 * * *
+    │   └── job
+    │       └── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    └── Ingress
+        ├── hosts
+        │   ├── https://egapro-preprod.dev.fabrique.social.gouv.fr
+        │   └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+        └── hosts
+            ├── https://egapro-preprod.dev.fabrique.social.gouv.fr
+            ├── https://egapro-preprod.dev.fabrique.social.gouv.fr
+            ├── https://egapro-preprod.dev.fabrique.social.gouv.fr
+            └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+"
+`;
+
+exports[`www 1`] = `
+"resources summary:
+├── resources
+│   ├── api
+│   │   ├── Deployment
+│   │   │   ├── app
+│   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+│   │   │   │   └── port: 2626
+│   │   │   └── kontinuous-wait-needs (init)
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+│   │   ├── Service
+│   │   │   └── port: http=80:2626
+│   │   └── Ingress
+│   │       └── hosts
+│   │           └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+│   ├── app
+│   │   ├── Deployment
+│   │   │   ├── app
+│   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/app:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+│   │   │   │   └── port: 3000
+│   │   │   └── kontinuous-wait-needs (init)
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+│   │   ├── Service
+│   │   │   └── port: http=80:3000
+│   │   └── Ingress
+│   │       └── hosts
+│   │           └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+│   ├── declaration
+│   │   ├── Deployment
+│   │   │   ├── app
+│   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/declaration:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+│   │   │   │   └── port: 8080
+│   │   │   └── kontinuous-wait-needs (init)
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+│   │   ├── Service
+│   │   │   └── port: http=80:8080
+│   │   └── Ingress
+│   │       └── hosts
+│   │           └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+│   ├── files
+│   │   ├── Deployment
+│   │   │   └── app
+│   │   │       ├── image: ghcr.io/socialgouv/docker/nginx:7.0.1
+│   │   │       └── port: 8080
+│   │   └── Service
+│   │       └── port: http=80:8080
+│   ├── maildev
+│   │   ├── Deployment
+│   │   │   └── maildev
+│   │   │       ├── image: maildev/maildev:latest
+│   │   │       └── ports: 1080,1025
+│   │   ├── Service
+│   │   │   └── ports: http=1080:1080,smtp=1025:1025
+│   │   └── Ingress
+│   │       └── hosts
+│   │           └── https://maildev-egapro-preprod.dev.fabrique.social.gouv.fr
+│   ├── simulateur
+│   │   ├── Deployment
+│   │   │   ├── app
+│   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/simulateur:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+│   │   │   │   └── port: 8080
+│   │   │   └── kontinuous-wait-needs (init)
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+│   │   ├── Service
+│   │   │   └── port: http=80:8080
+│   │   └── Ingress
+│   │       └── hosts
+│   │           └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+│   └── storybook
+│       ├── Deployment
+│       │   ├── app
+│       │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/storybook:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+│       │   │   └── port: 8080
+│       │   └── kontinuous-wait-needs (init)
+│       │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1
+│       ├── Service
+│       │   └── port: http=80:8080
+│       └── Ingress
+│           └── hosts
+│               └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+└── globals
+    ├── Namespace
+    │   └── name: egapro-preprod
+    ├── NetworkPolicy
+    │   └── name: netpol-ingress
+    ├── ServiceAccount
+    │   └── name: default
+    ├── PersistentVolumeClaim
+    │   └── name: files
+    ├── SealedSecret
+    │   ├── name: basic-auth
+    │   └── name: staff
+    ├── Job
+    │   ├── job
+    │   │   └── image: moby/buildkit:v0.10.5-rootless
+    │   ├── degit-repository (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1
+    │   ├── job
+    │   │   └── image: moby/buildkit:v0.10.5-rootless
+    │   ├── degit-repository (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1
+    │   ├── job
+    │   │   └── image: moby/buildkit:v0.10.5-rootless
+    │   ├── degit-repository (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1
+    │   ├── job
+    │   │   └── image: moby/buildkit:v0.10.5-rootless
+    │   ├── degit-repository (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1
+    │   ├── job
+    │   │   └── image: moby/buildkit:v0.10.5-rootless
+    │   └── degit-repository (init)
+    │       └── image: ghcr.io/socialgouv/kontinuous/degit:v1
+    ├── CronJob
+    │   ├── schedule: 0 0 * * *
+    │   ├── job
+    │   │   └── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    │   ├── schedule: 0 0 * * *
+    │   ├── job
+    │   │   └── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    │   ├── schedule: 0 0 * * *
+    │   ├── job
+    │   │   └── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    │   ├── schedule: 0 0 * * *
+    │   ├── job
+    │   │   └── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    │   ├── schedule: 0 0 * * *
+    │   ├── job
+    │   │   └── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    │   ├── schedule: 0 0 * * *
+    │   └── job
+    │       └── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
+    └── Ingress
+        ├── hosts
+        │   ├── https://egapro-preprod.dev.fabrique.social.gouv.fr
+        │   └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+        └── hosts
+            ├── https://egapro-preprod.dev.fabrique.social.gouv.fr
+            ├── https://egapro-preprod.dev.fabrique.social.gouv.fr
+            ├── https://egapro-preprod.dev.fabrique.social.gouv.fr
+            └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+"
+`;
