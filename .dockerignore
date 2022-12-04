@@ -3,6 +3,7 @@ node_modules
 .github
 .husky
 tests
+plugins/**/tests
 CHANGELOG.md
 README.md
 Dockerfile
