@@ -87,8 +87,8 @@ FROM node as plugins
 # pre-cache yarn package for official local plugins optimization
 COPY --chown=1001:1001 plugins/ /app/plugins/
 RUN \
-  cd /app/plugins/contrib && yarn  && \
-  cd /app/plugins/fabrique && yarn && \
+  cd /app/plugins/contrib && yarn workspaces focus --production  && \
+  cd /app/plugins/fabrique && yarn workspaces focus --production && \
   yarn cache clean
 
 FROM node as cli
