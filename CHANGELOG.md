@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.107.3](https://github.com/socialgouv/kontinuous/compare/v1.107.2...v1.107.3) (2022-12-04)
+
+
+### Bug Fixes
+
+* .dockerignore plugins tests ([d239f1f](https://github.com/socialgouv/kontinuous/commit/d239f1fb104ca5ddb991766c03a1cca58a6e4bfa))
+* clean yarn install in plugins ([d2c603b](https://github.com/socialgouv/kontinuous/commit/d2c603b4d5648fd027542e1fe3fd2c10c2b490ce))
+* optimize yarn install on plugins ([2487de1](https://github.com/socialgouv/kontinuous/commit/2487de1868b8afbc4705fc8df08266d547d4e315))
+
 ### 1.107.2 (2022-12-02)
 
 ### 1.107.1 (2022-12-02)
