@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.107.5](https://github.com/socialgouv/kontinuous/compare/v1.107.4...v1.107.5) (2022-12-05)
+
+
+### Bug Fixes
+
+* improve userAgent handling ([7d6e84e](https://github.com/socialgouv/kontinuous/commit/7d6e84e62687719a8869c58cf286448a522e565f))
+
 ### [1.107.4](https://github.com/socialgouv/kontinuous/compare/v1.107.3...v1.107.4) (2022-12-05)
 
 
