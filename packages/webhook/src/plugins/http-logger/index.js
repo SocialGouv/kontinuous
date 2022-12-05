@@ -16,11 +16,14 @@ module.exports.create = () => {
       url = url.replaceAll(secret, "*".repeat(secret.length))
     }
 
-    logger.info({ userAgent }, `REQ ${req.method} ${url}`)
+    const ignoreThisUserAgent = ignoreUserAgents.includes(userAgent)
 
-    if (!ignoreUserAgents.includes(userAgent)) {
-      res.send = function (...args) {
-        originalSend.apply(res, args)
+    if (!ignoreThisUserAgent) {
+      logger.info({ userAgent }, `REQ ${req.method} ${url}`)
+    }
+    res.send = function (...args) {
+      originalSend.apply(res, args)
+      if (!ignoreThisUserAgent || res.statusCode >= 400) {
         logger.info(
           { userAgent, code: res.statusCode },
           `RES ${req.method} ${url} ${res.statusCode}`
