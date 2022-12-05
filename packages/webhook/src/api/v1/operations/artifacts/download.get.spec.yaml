@@ -1,6 +1,6 @@
 security: 
-  - token: ["artifacts"]
   - bearerAuth: ["artifacts"]
+  - token: ["artifacts"]
 
 parameters:
   - in: query

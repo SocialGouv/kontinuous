@@ -1,6 +1,6 @@
 security: 
-  - token: ["logs"]
   - bearerAuth: ["logs"]
+  - token: ["logs"]
 
 parameters:
   - in: query
