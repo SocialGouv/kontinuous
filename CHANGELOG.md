@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.107.4](https://github.com/socialgouv/kontinuous/compare/v1.107.3...v1.107.4) (2022-12-05)
+
+
+### Bug Fixes
+
+* reverse oapi security order improve debug msg ([f20e236](https://github.com/socialgouv/kontinuous/commit/f20e2363fc220958ccad167ce17a1a353a22cfa1))
+
 ### [1.107.3](https://github.com/socialgouv/kontinuous/compare/v1.107.2...v1.107.3) (2022-12-04)
 
 

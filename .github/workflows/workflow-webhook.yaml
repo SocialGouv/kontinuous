@@ -28,13 +28,13 @@ jobs:
     steps:
 
       - name: Starting Deployment 🎬
-        uses: socialgouv/kontinuous/.github/actions/deployment-starting@v1.107.3
+        uses: socialgouv/kontinuous/.github/actions/deployment-starting@v1.107.4
         id: deployment-starting
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Kontinuous Pipeline 🥷
-        uses: socialgouv/kontinuous/.github/actions/deploy-via-webhook@v1.107.3
+        uses: socialgouv/kontinuous/.github/actions/deploy-via-webhook@v1.107.4
         continue-on-error: true
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -46,7 +46,7 @@ jobs:
           ignoreProjectTemplates: ${{ inputs.ignoreProjectTemplates }}
       
       - name: Reporting 📜
-        uses: socialgouv/kontinuous/.github/actions/deployment-reporting@v1.107.3
+        uses: socialgouv/kontinuous/.github/actions/deployment-reporting@v1.107.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           deployment_id: ${{ steps.deployment-starting.outputs.deployment_id }}
