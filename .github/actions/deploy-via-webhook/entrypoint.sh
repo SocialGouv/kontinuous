@@ -101,6 +101,8 @@ if [ -n "$TRIGGER_WEBHOOK" ] && [ "$TRIGGER_WEBHOOK" != "false" ] || [ "$GITHUB_
   if [ "$KS_WEBHOOK_MOUNT_SECRETS" != "" ]; then
     URI="${URI}&mountSecrets=${KS_WEBHOOK_MOUNT_SECRETS}"
   fi
+  KONTINUOUS_VERSION=$(cat /kontinuousVersion | awk -F: '{print $NF}' | tr -d '\n')
+  URI="${URI}&kontinuousVersion=${KONTINUOUS_VERSION}"
   wget --content-on-error -qO- \
     --header="Authorization: Bearer ${KS_WEBHOOK_TOKEN}" \
     --header='Content-Type:application/json' \
