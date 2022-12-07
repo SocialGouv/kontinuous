@@ -1,5 +1,6 @@
 runs:
   drop-db:
+    retry: 3
     use: socialgouv/kontinuous/plugins/contrib/jobs/drop-db
     if: "{{ or $.with.db $.with.pgAdminSecretRefName $.with.database }}"
     with:
@@ -9,6 +10,7 @@ runs:
   delete-namespace:
     checkout: false
     image: bitnami/kubectl:latest
+    retry: 3
     user: 1001
     kubernetes: true
     vars:
