@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.107.7](https://github.com/socialgouv/kontinuous/compare/v1.107.6...v1.107.7) (2022-12-07)
+
+
+### Bug Fixes
+
+* increase checkForNewResourceInterval to 15s ([81110c5](https://github.com/socialgouv/kontinuous/commit/81110c533075490f73fbf076afeddbde86429207))
+
 ### [1.107.6](https://github.com/socialgouv/kontinuous/compare/v1.107.5...v1.107.6) (2022-12-07)
 
 

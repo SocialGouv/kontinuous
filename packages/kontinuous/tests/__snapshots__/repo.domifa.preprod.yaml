@@ -171,7 +171,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.107.6
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.107.7
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -313,7 +313,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.107.6
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.107.7
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -461,7 +461,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.107.6
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.107.7
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -606,7 +606,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.107.6
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.107.7
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -836,7 +836,7 @@ spec:
                 name: backend-configmap
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.6
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.7
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: test-repo.domifa-preprod/Deployment/backend-cron
@@ -1012,7 +1012,7 @@ spec:
               mountPath: /mnt/files
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.6
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.7
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: test-repo.domifa-preprod/Deployment/backend
@@ -1135,7 +1135,7 @@ spec:
               memory: 256Mi
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.6
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.7
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: test-repo.domifa-preprod/Deployment/frontend
@@ -1265,7 +1265,7 @@ spec:
               memory: 128Mi
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.6
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.7
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: test-repo.domifa-preprod/Deployment/portail-admins
@@ -1395,7 +1395,7 @@ spec:
               memory: 128Mi
       initContainers:
         - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.6
+          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.7
           env:
             - name: WAIT_NEEDS_ANNOTATIONS_REF
               value: test-repo.domifa-preprod/Deployment/portail-usagers
