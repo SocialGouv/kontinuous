@@ -11,6 +11,7 @@ module.exports = async (jobName, options = {}) => {
     kubeconfig,
     kubectlRetryOptions,
     surviveOnBrokenCluster,
+    retrySince = "20s",
   } = options
 
   // to debug/test remove --follow and reswitch getLogs
@@ -31,7 +32,7 @@ module.exports = async (jobName, options = {}) => {
       ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
     }
     const logging = $`kubectl ${namespaceParam} logs ${resource} ${
-      retrying ? `--since=10s` : sinceParam
+      retrying ? `--since=${retrySince}` : sinceParam
     } ${followParam} --timestamps`
     for await (const chunk of logging.stdout) {
       const lines = Buffer.from(chunk).toString()
