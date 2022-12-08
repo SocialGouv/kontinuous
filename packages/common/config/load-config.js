@@ -753,7 +753,9 @@ module.exports = async (
 
   logger.info(`📂 buildPath: file://${config.buildPath}`)
 
-  await loadDependencies(config)
+  if (loadConfigOptions.loadDependencies !== false) {
+    await loadDependencies(config)
+  }
 
   await recurseDependency({
     config,

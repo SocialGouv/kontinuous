@@ -22,6 +22,7 @@ module.exports = (program) =>
       "--remote",
       "select config using kontinuous config from remote repo"
     )
+    .option("--disable-load-dependencies", "disable load dependencies")
     .option(
       "--format <format>",
       "select output format for objects: yaml|json, default to yaml"
@@ -52,12 +53,19 @@ module.exports = (program) =>
           }
         }
 
+        const loadDependencies = opts.disableLoadDependencies !== true
+
         const kontinuousRepoConfig = await getRemoteKontinuousConfigFile(
           config.gitRepositoryUrl,
           ref,
           { logger, deployKey: config.deployKeyFile }
         )
-        config = await loadConfig(opts, [kontinuousRepoConfig])
+        config = await loadConfig(
+          opts,
+          [kontinuousRepoConfig],
+          {},
+          { loadDependencies }
+        )
       }
 
       let value

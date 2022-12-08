@@ -11,7 +11,8 @@ module.exports = async ({ repository, ref, deployKey }, rootConfig = {}) => {
   const repositoryConfig = await loadConfig(
     options,
     [kontinuousRepoConfig],
-    rootConfig
+    rootConfig,
+    { loadDependencies: false }
   )
   return repositoryConfig
 }
