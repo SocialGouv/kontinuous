@@ -10,5 +10,5 @@ concurrency:
 
 jobs:
   deploy:
-    uses: socialgouv/kontinuous/.github/workflows/workflow-gotoprod-manual.yaml@v1.107.8
+    uses: socialgouv/kontinuous/.github/workflows/workflow-gotoprod-manual.yaml@v1.107.9
     secrets: inherit
