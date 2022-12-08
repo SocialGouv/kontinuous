@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.107.8](https://github.com/socialgouv/kontinuous/compare/v1.107.7...v1.107.8) (2022-12-08)
+
+
+### Bug Fixes
+
+* disable load dependencies in webhook + opt ([382012d](https://github.com/socialgouv/kontinuous/commit/382012d42387ba139a357f6172e85797743164e0))
+
 ### [1.107.7](https://github.com/socialgouv/kontinuous/compare/v1.107.6...v1.107.7) (2022-12-07)
 
 
