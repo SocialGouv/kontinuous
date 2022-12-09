@@ -1,5 +1,6 @@
 const crypto = require("crypto")
 const qs = require("qs")
+const pick = require("lodash.pick")
 const FormData = require("form-data")
 
 const ctx = require("~common/ctx")
@@ -47,7 +48,29 @@ module.exports = async ({
     filename: "manifests.yaml",
     contentType: "text/x-yaml",
   })
-  form.append("deployConfig", JSON.stringify(config))
+  form.append(
+    "deployConfig",
+    JSON.stringify(
+      pick(config, [
+        "gitRepositoryUrl",
+        "gitRepository",
+        "gitBranch",
+        "gitSha",
+        "gitRepositoryName",
+        "repositoryName",
+        "refLabelKey",
+        "refLabelValue",
+        "deploymentEnvLabelKey",
+        "deploymentEnvLabelValue",
+        "deploymentLabelKey",
+        "deploymentLabelForceNewDeploy",
+        "deploymentLabelValue",
+        "dependencies",
+        "config",
+        "options",
+      ])
+    )
+  )
 
   const query = qs.stringify({
     project: config.projectName,
