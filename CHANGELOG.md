@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.107.12](https://github.com/socialgouv/kontinuous/compare/v1.107.11...v1.107.12) (2022-12-09)
+
+
+### Bug Fixes
+
+* deploy --on-webhook ([f135de1](https://github.com/socialgouv/kontinuous/commit/f135de1533be8166600d71a57b093373230c1350))
+
 ### [1.107.11](https://github.com/socialgouv/kontinuous/compare/v1.107.10...v1.107.11) (2022-12-09)
 
 
