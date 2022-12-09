@@ -52,6 +52,7 @@ module.exports = async ({
     "deployConfig",
     JSON.stringify(
       pick(config, [
+        "deployWithPlugin",
         "gitRepositoryUrl",
         "gitRepository",
         "gitBranch",
