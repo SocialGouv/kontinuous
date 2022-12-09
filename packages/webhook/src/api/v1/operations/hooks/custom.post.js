@@ -12,6 +12,7 @@ module.exports = function ({ services: { custom } }) {
         mountSecrets,
       } = req.query
       const [manifestsFile] = req.files
+      const { deployConfig = "" } = req.body
 
       if (!(cluster || env)) {
         return res
@@ -27,6 +28,7 @@ module.exports = function ({ services: { custom } }) {
         hash,
         repositoryUrl,
         manifests,
+        deployConfig,
         kontinuousVersion,
         serviceAccountName,
         mountKubeconfig,

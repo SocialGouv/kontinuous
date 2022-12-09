@@ -7,6 +7,7 @@ module.exports =
     env,
     hash,
     manifests,
+    deployConfig,
     repositoryUrl,
     kontinuousVersion,
     mountKubeconfig,
@@ -14,6 +15,7 @@ module.exports =
     mountSecrets,
   }) => {
     const sanitizedManifests = yaml.dumpAll(yaml.loadAll(manifests)) // protect against injections
+    const sanitizedConfig = yaml.dumpAll(yaml.loadAll(deployConfig)) // protect against injections
     const initContainers = [
       {
         name: "write-custom-manifest",
@@ -22,8 +24,13 @@ module.exports =
           "sh",
           "-c",
           `
-cat <<'EOF' > /workspace/manifests.yaml
+cd /workspace
+cat <<'EOF' > manifests.yaml
 ${sanitizedManifests}
+EOF
+mkdir -p .kontinuous
+cat <<'EOF' > .kontinuous/config.yaml
+${sanitizedConfig}
 EOF
 `,
         ],
@@ -43,7 +50,7 @@ EOF
       ref: hash,
       after: null,
       repositoryUrl,
-      args: ["deploy", "-f", "/workspace/manifests.yaml"],
+      args: ["deploy", "-f", "manifests.yaml"],
       checkout: false,
       initContainers,
       kontinuousVersion,

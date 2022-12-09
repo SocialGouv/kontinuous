@@ -68,6 +68,8 @@ requestBody:
           manifests:
             type: string
             format: binary
+          deployConfig:
+            type: string
         required:
           - manifests
       encoding:

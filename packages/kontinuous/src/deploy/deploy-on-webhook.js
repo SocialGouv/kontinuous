@@ -47,6 +47,7 @@ module.exports = async ({
     filename: "manifests.yaml",
     contentType: "text/x-yaml",
   })
+  form.append("deployConfig", JSON.stringify(config))
 
   const query = qs.stringify({
     project: config.projectName,
