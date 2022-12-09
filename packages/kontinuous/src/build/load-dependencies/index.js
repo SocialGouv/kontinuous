@@ -2,10 +2,8 @@ const fs = require("fs-extra")
 
 const yaml = require("~common/utils/yaml")
 
-const installPackages = require("~/plugins/install-packages")
-
 const chartTools = require("./chart-tools")
-const buildDependencies = require("./build-dependencies")
+const dependencies = require("./dependencies")
 const mergeEnvTemplates = require("./merge-env-templates")
 const compileValues = require("./compile-values")
 const copyFilesDir = require("./copy-files-dir")
@@ -13,8 +11,8 @@ const copyFilesDir = require("./copy-files-dir")
 module.exports = async (config, logger) => {
   const { buildPath } = config
 
-  await buildDependencies(config, logger)
-  await installPackages(config)
+  await dependencies(config, logger)
+
   if (!config.ignoreProjectTemplates) {
     await mergeEnvTemplates(`${buildPath}/charts/project`, config)
   }

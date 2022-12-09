@@ -10,6 +10,7 @@ const build = require("~/build")
 const { setStatus } = require("~/status")
 
 const validateManifests = require("../build/validate-manifests")
+const dependencies = require("../build/load-dependencies/dependencies")
 const deployHooks = require("./deploy-hooks")
 const deployOnWebhook = require("./deploy-on-webhook")
 const buildDeployPlugins = require("./build-deploy-plugins")
@@ -52,6 +53,7 @@ module.exports = async (options) => {
     } else {
       manifests = await fs.readFile(manifestsFile, { encoding: "utf-8" })
       const manifestsObjects = yaml.loadAll(manifests)
+      await dependencies(config, logger)
       await validateManifests(manifestsObjects)
     }
 
