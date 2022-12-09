@@ -1,11 +1,11 @@
 apiVersion: v2
 name: jobs
-version: 1.107.12
+version: 1.107.13
 dependencies:
   - name: contrib-helpers
     repository: file://../contrib-helpers
-    version: 1.107.12
+    version: 1.107.13
   - name: rancher-namespace
     repository: file://../rancher-namespace
-    version: 1.107.12
+    version: 1.107.13
     condition: createRancherNamespace
