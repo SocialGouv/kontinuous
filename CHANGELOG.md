@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.107.14](https://github.com/socialgouv/kontinuous/compare/v1.107.13...v1.107.14) (2022-12-10)
+
+
+### Bug Fixes
+
+* deployCustomManifestsOnWebhook ([3bb0ab8](https://github.com/socialgouv/kontinuous/commit/3bb0ab8c395d27b060d2829e006143218429a7d4))
+
 ### [1.107.13](https://github.com/socialgouv/kontinuous/compare/v1.107.12...v1.107.13) (2022-12-09)
 
 
