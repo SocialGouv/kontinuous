@@ -45,6 +45,11 @@ module.exports = async (options) => {
     commit,
     catch: options.catch ? true : undefined,
     follow: true,
+    ...(deployCustomManifestsOnWebhook
+      ? {
+          catch: true,
+        }
+      : {}),
     ...(chart && !deployCustomManifestsOnWebhook
       ? {
           chart: chart.join(","),
