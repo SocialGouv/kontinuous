@@ -395,6 +395,9 @@ module.exports = async (
         return `${webhookUri}/api/v1/oas/artifacts/download?${query}`
       },
     },
+    deployCustomManifestsOnWebhook: {
+      option: "W",
+    },
     editor: {
       env: "KS_EDITOR",
       options: "editor",

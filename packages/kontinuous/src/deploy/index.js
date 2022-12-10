@@ -34,9 +34,8 @@ module.exports = async (options) => {
     webhookToken: token,
     kubeconfig,
     kubeconfigContext,
+    deployCustomManifestsOnWebhook,
   } = config
-
-  const onWebhook = options.W
 
   try {
     const elapsed = timeLogger({
@@ -57,7 +56,7 @@ module.exports = async (options) => {
       await validateManifests(manifestsObjects)
     }
 
-    if (onWebhook) {
+    if (deployCustomManifestsOnWebhook) {
       await deployOnWebhook({
         options,
         manifests,

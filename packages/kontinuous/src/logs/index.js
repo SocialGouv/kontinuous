@@ -34,7 +34,7 @@ module.exports = async (options) => {
 
   const { webhookUri, webhookToken: token } = config
 
-  const { chart } = config
+  const { chart, deployCustomManifestsOnWebhook } = config
 
   const query = qs.stringify({
     project: config.projectName,
@@ -45,7 +45,7 @@ module.exports = async (options) => {
     commit,
     catch: options.catch ? true : undefined,
     follow: true,
-    ...(chart
+    ...(chart && !deployCustomManifestsOnWebhook
       ? {
           chart: chart.join(","),
         }
