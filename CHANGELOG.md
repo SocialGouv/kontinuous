@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.107.17](https://github.com/socialgouv/kontinuous/compare/v1.107.15...v1.107.17) (2022-12-12)
+
+
+### Bug Fixes
+
+* add min dev res optout annotation ([1ba1990](https://github.com/socialgouv/kontinuous/commit/1ba1990d795390caa476e21f5e6938c483cd7dd5))
+* min res patch initct + divide by containers ([9e1b2e0](https://github.com/socialgouv/kontinuous/commit/9e1b2e01f1289550afdbca8c2fd2f2786014b747))
+* retry jobs too ([#97](https://github.com/socialgouv/kontinuous/issues/97)) ([425784b](https://github.com/socialgouv/kontinuous/commit/425784bf4f2dde8a9aa0f1899672304f91001d91))
+* round memory resources ([bc546f0](https://github.com/socialgouv/kontinuous/commit/bc546f0dd56c989d01755818dc82d69bac1bc473))
+
 ### 1.107.16 (2022-12-12)
 
 
