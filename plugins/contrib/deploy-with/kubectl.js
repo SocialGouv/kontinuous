@@ -1,4 +1,4 @@
-const async = require("async")
+// const async = require("async")
 
 const getDeps = require("../lib/get-needs-deps")
 
@@ -30,10 +30,10 @@ module.exports = async (deploys, options, context) => {
   const force = defaultTo(options.force, defaultOptions.force)
   const recreate = defaultTo(options.recreate, defaultOptions.recreate)
   const forceConflicts = defaultTo(options.forceConflicts, true)
-  const applyConcurrencyLimit = defaultTo(
-    options.applyConcurrencyLimit,
-    defaultOptions.applyConcurrencyLimit
-  )
+  // const applyConcurrencyLimit = defaultTo(
+  //   options.applyConcurrencyLimit,
+  //   defaultOptions.applyConcurrencyLimit
+  // )
   const validate = defaultTo(
     options.validate,
     !config.noValidate && defaultOptions.validate
@@ -341,7 +341,12 @@ module.exports = async (deploys, options, context) => {
       console.log(
         `   [${manifest.kind}: ${manifest.metadata.name}]: waiting for dependencies`
       )
-      await waitForDendencies(manifest)
+      try {
+        await waitForDendencies(manifest)
+      } catch (error) {
+        console.log(` .       Err: ${error.message}`)
+        return null
+      }
     }
 
     console.log(
@@ -355,9 +360,41 @@ module.exports = async (deploys, options, context) => {
     return result
   }
 
-  const applyPromise = !dryRun
-    ? async.mapLimit(manifests, applyConcurrencyLimit, processManifest)
-    : null
+  // const applyPromise = !dryRun
+  //   ? async.mapLimit(manifests, applyConcurrencyLimit, processManifest)
+  //   : null
+
+  let applyPromise = null
+
+  if (!dryRun) {
+    let manifestsToProcess = manifests.slice()
+    const applyPromises = []
+
+    let iteration = 0
+    const maxIterations = 10
+
+    while (manifestsToProcess.length > 0 && iteration < maxIterations) {
+      iteration += 1
+      const manifestsToReProcess = []
+
+      console.log(
+        `==> Processing manifests iteration ${iteration} : ${manifestsToProcess.length} manifests to process`
+      )
+
+      for (const manifest of manifestsToProcess) {
+        const result = await processManifest(manifest)
+        if (result !== null) {
+          manifestsToReProcess.push(manifest)
+        } else {
+          applyPromises.push(result)
+        }
+      }
+
+      manifestsToProcess = manifestsToReProcess
+    }
+
+    applyPromise = Promise.all(applyPromises)
+  }
 
   let stopRolloutStatus
 
