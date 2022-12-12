@@ -1,17 +1,26 @@
 const async = require("async")
 
-const rolloutStatus = require("../lib/rollout-status")
+const getDeps = require("../lib/get-needs-deps")
 
 const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
+
+const handledKinds = ["Deployment", "StatefulSet", "Job"]
 
 const isNotDefined = (val) => val === undefined || val === null || val === ""
 const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
 
 module.exports = async (deploys, options, context) => {
-  const { config, utils, manifests, dryRun } = context
+  const { config, utils, manifests, dryRun, runContext } = context
 
-  const { yaml, kubectlRetry, logger, kubectlDeleteManifest, kindIsRunnable } =
-    utils
+  const {
+    yaml,
+    kubectlRetry,
+    logger,
+    kubectlDeleteManifest,
+    kindIsRunnable,
+    KontinuousPluginError,
+    rolloutStatusWatch,
+  } = utils
 
   const { kubeconfigContext, kubeconfig, deployTimeout } = config
 
@@ -72,7 +81,7 @@ module.exports = async (deploys, options, context) => {
     return defaultTo(manifestsRecreateResourceOption, recreate)
   }
 
-  const kubectlApplyManifest = async (manifest) => {
+  const kubectlApplyManifestExec = async (manifest) => {
     const yamlManifest = yaml.dump(manifest)
     const forceThisResource = getForceThisResource(manifest)
     const kubectlDeployCommand = `
@@ -96,6 +105,14 @@ module.exports = async (deploys, options, context) => {
       retryOptions: kubectlRetryOptions,
       surviveOnBrokenCluster,
     })
+  }
+
+  const q = async.queue(async (manifest) => {
+    await kubectlApplyManifestExec(manifest)
+  }, applyConcurrencyLimit)
+
+  const kubectlApplyManifest = async (manifest) => {
+    await q.push(manifest)
   }
 
   const forceApply = async (manifest) => {
@@ -136,27 +153,179 @@ module.exports = async (deploys, options, context) => {
     return result
   }
 
-  const { runContext } = context
+  const deps = getDeps(manifests, context)
+
+  const getManifestDependencies = (manifest) => {
+    const { metadata, kind } = manifest
+    const annotations = metadata?.annotations
+    if (!annotations) {
+      return
+    }
+
+    const jsonNeeds = annotations["kontinuous/plugin.needs"]
+
+    if (!kindIsRunnable(kind)) {
+      return
+    }
+    if (!jsonNeeds) {
+      return
+    }
+    const needs = JSON.parse(jsonNeeds)
+    const needsManifests = new Set()
+    for (const need of needs) {
+      const matchingDeps = deps[need]
+      if (matchingDeps.length === 0) {
+        const msg = `could not find dependency "${need}" for kind "${kind}" name "${metadata.name}" on namespace "${metadata.namespace}"`
+        logger.error({ need }, msg)
+        throw new KontinuousPluginError(msg)
+      }
+      needsManifests.add(...matchingDeps)
+    }
+
+    const dependencies = [...needsManifests].map((m) => {
+      const { namespace, labels } = m.metadata
+      const resourceName = labels["kontinuous/resourceName"]
+      return {
+        namespace,
+        resourceName,
+      }
+    })
+
+    return dependencies
+  }
+
   const { eventsBucket } = runContext
+
+  const dependenciesReady = async (manifest) => {
+    const dependencies = getManifestDependencies(manifest)
+    if (!dependencies) {
+      return
+    }
+    await Promise.all(
+      dependencies.map(async (dependency) => {
+        await new Promise((resolve, reject) => {
+          const dependencyKey = `${dependency.namespace}/${dependency.resourceName}`
+          eventsBucket.on("ready", ({ resourceName, namespace }) => {
+            const key = `${namespace}/${resourceName}`
+            if (key !== dependencyKey) {
+              return
+            }
+            resolve()
+          })
+          eventsBucket.on("failed", ({ resourceName, namespace }) => {
+            const key = `${namespace}/${resourceName}`
+            if (key !== dependencyKey) {
+              return
+            }
+            reject()
+          })
+        })
+      })
+    )
+  }
+
   const countAllRunnable = manifests.filter((manifest) =>
     kindIsRunnable(manifest.kind)
   ).length
   eventsBucket.trigger("initDeployment", { countAllRunnable })
 
+  const { deploymentLabelKey } = config
+  const rolloutStatusProcesses = {}
+  const interceptor = { stop: false }
+  const rolloutStatusManifest = async (manifest) => {
+    const { kind } = manifest
+    if (!handledKinds.includes(kind)) {
+      return
+    }
+    const resourceName = manifest.metadata.labels?.["kontinuous/resourceName"]
+    const deploymentLabelValue = manifest.metadata?.labels?.[deploymentLabelKey]
+    const namespace = manifest.metadata?.namespace
+    if (!resourceName) {
+      return
+    }
+    const labelSelectors = []
+    labelSelectors.push(`kontinuous/resourceName=${resourceName}`)
+    if (deploymentLabelValue) {
+      labelSelectors.push(`${deploymentLabelKey}=${deploymentLabelValue}`)
+    }
+    const selector = labelSelectors.join(",")
+
+    await new Promise(async (resolve, reject) => {
+      try {
+        logger.debug(
+          { namespace, selector },
+          `watching resource: ${resourceName}`
+        )
+        const eventParam = { namespace, resourceName, selector }
+        eventsBucket.trigger("waiting", eventParam)
+        const result = await rolloutStatusWatch({
+          namespace,
+          selector,
+          interceptor,
+          rolloutStatusProcesses,
+          kubeconfig,
+          kubecontext: kubeconfigContext,
+          logger,
+        })
+
+        if (result.success) {
+          logger.debug(
+            { namespace, selector },
+            `resource "${resourceName}" ready`
+          )
+          eventsBucket.trigger("ready", eventParam)
+        } else if (result.error?.code || result.error?.reason) {
+          logger.error(
+            {
+              namespace,
+              selector,
+              error: result.error,
+            },
+            `resource "${resourceName}" failed`
+          )
+          eventsBucket.trigger("failed", eventParam)
+        } else {
+          eventsBucket.trigger("closed", eventParam)
+        }
+
+        resolve({
+          ...result,
+          namespace,
+          selector,
+        })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
   const applyPromise = !dryRun
-    ? async.mapLimit(manifests, applyConcurrencyLimit, applyManifest)
+    ? Promise.all(
+        manifests.map(async (manifest) => {
+          await dependenciesReady(manifest)
+          await applyManifest(manifest)
+          await rolloutStatusManifest(manifest)
+        })
+      )
     : null
 
-  let stopRolloutStatus
+  const stopRolloutStatus = () => {
+    interceptor.stop = true
+    for (const p of Object.values(rolloutStatusProcesses)) {
+      try {
+        process.kill(p.pid, "SIGKILL")
+      } catch (_err) {
+        // do nothing
+      }
+    }
+  }
 
   for (const signal of signals) {
     process.on(signal, () => {
       for (const kubectlProc of kubectlProcesses) {
         kubectlProc.kill(signal)
       }
-      if (stopRolloutStatus) {
-        stopRolloutStatus()
-      }
+      stopRolloutStatus()
       process.exit(0)
     })
   }
@@ -165,11 +334,6 @@ module.exports = async (deploys, options, context) => {
     try {
       if (!dryRun) {
         await applyPromise
-        const { stop, promise: rolloutStatusPromise } = await rolloutStatus(
-          context
-        )
-        stopRolloutStatus = stop
-        await rolloutStatusPromise
       }
       resolve(true)
     } catch (err) {
@@ -185,9 +349,7 @@ module.exports = async (deploys, options, context) => {
     } catch (_err) {
       // do nothing
     }
-    if (stopRolloutStatus) {
-      stopRolloutStatus()
-    }
+    stopRolloutStatus()
   }
 
   deploys.push({ promise, stopDeploy })
