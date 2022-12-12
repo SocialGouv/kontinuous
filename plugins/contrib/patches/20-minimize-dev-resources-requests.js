@@ -84,6 +84,14 @@ module.exports = (manifests, options, { config, logger }) => {
       continue
     }
 
+    if (
+      manifest.metadata?.annotations?.[
+        "patches.kontinuous/minimize-dev-resources-requests-disable"
+      ]
+    ) {
+      continue
+    }
+
     const containers = manifest.spec?.template?.spec?.containers
     if (containers && containers.length > 0) {
       let cpuByContainer = cpu
