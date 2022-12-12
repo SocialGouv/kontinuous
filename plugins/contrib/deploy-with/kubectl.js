@@ -1,5 +1,7 @@
 const async = require("async")
 
+const getDeps = require("../lib/get-needs-deps")
+
 const rolloutStatus = require("../lib/rollout-status")
 
 const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
@@ -14,7 +16,9 @@ module.exports = async (deploys, options, context) => {
 
   const { kubeconfigContext, kubeconfig, deployTimeout } = config
 
-  const { serverSide = true } = options
+  const { serverSide = true, dependsOnEnabled = false } = options
+
+  logger.debug(`dependsOnEnabled: ${dependsOnEnabled}`)
 
   const defaultOptions = {
     validate: true,
@@ -135,8 +139,224 @@ module.exports = async (deploys, options, context) => {
     return result
   }
 
+  const { kindIsRunnable, KontinuousPluginError, rolloutStatusWatch } = utils
+  const { kubernetesMethod = "kubeconfig" } = options
+  const { serviceAccountName = "kontinuous-sa" } = options
+  const deps = getDeps(manifests, context)
+
+  const runWaitNeeds = async ({ waitNeeds, annotationsRef, timeout = 900 }) => {
+    console.log(` .   => waiting needs: ${JSON.stringify(waitNeeds)}`)
+    const interceptor = {}
+
+    setTimeout(() => {
+      interceptor.stop = true
+      setTimeout(() => {
+        process.exit(1)
+      }, 1000)
+    }, timeout * 1000)
+
+    const completedOnceAnnotationKey = "kontinuous/completedOnce"
+
+    const [selfRefNamespace, selfRefKind, selfRefName] =
+      annotationsRef.split("/")
+    const lowerkind = selfRefKind.toLowerCase()
+    const getSelfRefAnnotations = async () => {
+      const annotationsJSON = await kubectlRetry(
+        `-n ${selfRefNamespace} get ${lowerkind}/${selfRefName} -o json`,
+        {
+          logInfo: false,
+          retryOptions: kubectlRetryOptions,
+          surviveOnBrokenCluster,
+        }
+      )
+      const manifest = JSON.parse(annotationsJSON)
+      const { annotations = {} } = manifest.metadata
+      return annotations
+    }
+
+    const annotations = await getSelfRefAnnotations()
+
+    const deploymentSelector = annotations["kontinuous/deployment"]
+
+    const annotateCompletedOnce = async () => {
+      await kubectlRetry(
+        `-n ${selfRefNamespace} annotate ${lowerkind}/${selfRefName} ${completedOnceAnnotationKey}=${deploymentSelector} --overwrite`,
+        {
+          kubectlRetryOptions,
+          surviveOnBrokenCluster,
+        }
+      )
+    }
+
+    const completedOnce =
+      annotations[completedOnceAnnotationKey] === deploymentSelector
+    logger.info(`completedOnce: ${completedOnce}`)
+
+    const promises = []
+    for (const { namespace, selectors, needOnce } of waitNeeds) {
+      const selector = Object.entries(selectors)
+        .map(([label, value]) => `${label}=${value}`)
+        .join(",")
+
+      if (needOnce && completedOnce) {
+        continue
+      }
+
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            logger.info({ namespace, selector }, `watching`)
+            const result = await rolloutStatusWatch({
+              namespace,
+              selector,
+              interceptor,
+              // rolloutStatusProcesses,
+              // kubeconfig,
+              // kubecontext,
+              logger,
+            })
+            if (result.error) {
+              result.error.selector = selector
+            }
+            resolve(result)
+          } catch (err) {
+            reject(err)
+          }
+        })
+      )
+    }
+
+    const results = await Promise.allSettled(promises)
+    const errors = []
+    for (const result of results) {
+      const { status } = result
+      if (status === "rejected") {
+        const { reason } = result
+        if (reason instanceof Error) {
+          errors.push(reason.message)
+        } else {
+          errors.push(reason)
+        }
+      } else if (status === "fulfilled") {
+        const { value } = result
+        if (value.success !== true) {
+          errors.push(value.error)
+        }
+      } else {
+        logger.fatal({ result }, `unexpected promise result`)
+      }
+    }
+    if (errors.length > 0) {
+      logger.error({ errors }, "required dependencies could not be satisfied")
+      return false
+    }
+    logger.info("all dependencies are ready")
+    await annotateCompletedOnce()
+    return true
+  }
+
+  const waitForDendencies = async (manifest) => {
+    // ---- needs-using-initcontainers
+
+    const { metadata, kind } = manifest
+    const annotations = metadata?.annotations
+    if (!annotations) {
+      return
+    }
+
+    const jsonNeeds = annotations["kontinuous/plugin.needs"]
+    // if (annotations["kontinuous/plugin.needs"]) {
+    //   delete annotations["kontinuous/plugin.needs"]
+    // }
+
+    if (!kindIsRunnable(kind)) {
+      return
+    }
+    if (!jsonNeeds) {
+      return
+    }
+    const needs = JSON.parse(jsonNeeds)
+    const needsManifests = new Set()
+    for (const need of needs) {
+      const matchingDeps = deps[need]
+      if (matchingDeps.length === 0) {
+        const msg = `could not find dependency "${need}" for kind "${kind}" name "${metadata.name}" on namespace "${metadata.namespace}"`
+        logger.error({ need }, msg)
+        throw new KontinuousPluginError(msg)
+      }
+      needsManifests.add(...matchingDeps)
+    }
+
+    const { spec } = manifest.spec.template
+
+    if (
+      (!spec.serviceAccountName || spec.serviceAccountName === "default") &&
+      kubernetesMethod === "serviceaccount"
+    ) {
+      spec.serviceAccountName = serviceAccountName
+    }
+
+    if (kind === "Deployment") {
+      manifest.spec.progressDeadlineSeconds =
+        options.progressDeadlineSeconds || 1200000 // 20 minutes
+    }
+
+    const dependencies = [...needsManifests].map((m) => {
+      const { namespace, labels, name } = m.metadata
+      const resourceName = labels["kontinuous/resourceName"]
+      const selectors = { "kontinuous/resourceName": resourceName }
+      return {
+        namespace,
+        kind: m.kind,
+        name,
+        selectors,
+        needOnce: m.kind === "Job",
+      }
+    })
+
+    // ------- wait-needs
+    const annotationsRef = [
+      manifest.metadata.namespace,
+      kind,
+      manifest.metadata.name,
+    ].join("/")
+    let timeout = process.env.TIMEOUT
+    if (timeout) {
+      timeout = parseInt(timeout, 10)
+    } else {
+      timeout = undefined
+    }
+    return runWaitNeeds({
+      waitNeeds: dependencies,
+      annotationsRef,
+      timeout,
+    })
+  }
+
+  const processManifest = async (manifest) => {
+    console.log(
+      `   [${manifest.kind}: ${manifest.metadata.name}]: loading manifest`
+    )
+    if (dependsOnEnabled) {
+      console.log(
+        `   [${manifest.kind}: ${manifest.metadata.name}]: waiting for dependencies`
+      )
+      await waitForDendencies(manifest)
+    }
+
+    console.log(
+      `   [${manifest.kind}: ${manifest.metadata.name}]: applying manifest`
+    )
+    const result = await applyManifest(manifest)
+
+    console.log(
+      `   [${manifest.kind}: ${manifest.metadata.name}]: done! result="${result}"`
+    )
+    return result
+  }
+
   const applyPromise = !dryRun
-    ? async.mapLimit(manifests, applyConcurrencyLimit, applyManifest)
+    ? async.mapLimit(manifests, applyConcurrencyLimit, processManifest)
     : null
 
   let stopRolloutStatus
