@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.108.0 (2022-12-12)
+
+
+### Features
+
+* kubectl dependency tree ([#107](https://github.com/socialgouv/kontinuous/issues/107)) ([5ad1d50](https://github.com/socialgouv/kontinuous/commit/5ad1d50a4313d076b92f923f2bd1a7807e94c910))
+
 ### [1.107.17](https://github.com/socialgouv/kontinuous/compare/v1.107.15...v1.107.17) (2022-12-12)
 
 
