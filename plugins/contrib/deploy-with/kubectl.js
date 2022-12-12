@@ -10,7 +10,8 @@ const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
 module.exports = async (deploys, options, context) => {
   const { config, utils, manifests, dryRun } = context
 
-  const { yaml, kubectlRetry, logger, kubectlDeleteManifest } = utils
+  const { yaml, kubectlRetry, logger, kubectlDeleteManifest, kindIsRunnable } =
+    utils
 
   const { kubeconfigContext, kubeconfig, deployTimeout } = config
 
@@ -134,6 +135,13 @@ module.exports = async (deploys, options, context) => {
     }
     return result
   }
+
+  const { runContext } = context
+  const { eventsBucket } = runContext
+  const countAllRunnable = manifests.filter((manifest) =>
+    kindIsRunnable(manifest.kind)
+  ).length
+  eventsBucket.trigger("initDeployment", { countAllRunnable })
 
   const applyPromise = !dryRun
     ? async.mapLimit(manifests, applyConcurrencyLimit, applyManifest)

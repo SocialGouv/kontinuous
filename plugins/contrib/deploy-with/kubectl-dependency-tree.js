@@ -224,6 +224,11 @@ module.exports = async (deploys, options, context) => {
     )
   }
 
+  const countAllRunnable = manifests.filter((manifest) =>
+    kindIsRunnable(manifest.kind)
+  ).length
+  eventsBucket.trigger("initDeployment", { countAllRunnable })
+
   const { deploymentLabelKey } = config
   const rolloutStatusProcesses = {}
   const interceptor = { stop: false }

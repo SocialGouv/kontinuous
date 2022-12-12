@@ -52,21 +52,27 @@ module.exports = async (
 
   const { eventsBucket } = runContext
 
+  let countTotal
+  eventsBucket.on("initDeployment", ({ countAllRunnable }) => {
+    countTotal = countAllRunnable
+  })
+
   const globalProgressing = () => {
     elapsedMap[".global"] = new Date()
     intervalsMap[".global"] = setInterval(() => {
       const promiseValues = Object.values(promisesMap)
-      const countTotal = promiseValues.length
-      if (countTotal === 0) {
+      const countLaunched = promiseValues.length
+      if (!countTotal) {
         return
       }
       const countResolved = promiseValues.reduce(
         (n, { resolved }) => (resolved ? n + 1 : n),
         0
       )
+      const countLoading = countLaunched - countResolved
       const elapsed = getElapsed(".global")
       logger.info(
-        `↪️  loading [${countResolved}/${countTotal}], elapsed: [${elapsed}]`
+        `↪️  ready [${countResolved}/${countTotal}], loading [${countLoading}], elapsed: [${elapsed}]`
       )
     }, interval * 1000)
   }
