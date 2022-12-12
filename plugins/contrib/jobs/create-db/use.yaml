@@ -1,5 +1,6 @@
 runs:
   - name: create-secret
+    retry: 3
     checkout: false
     image: bitnami/kubectl:latest
     user: 1001
@@ -16,10 +17,11 @@ runs:
       SECRET_TTL: '{{ tpl (or $.with.secretTTL "24h") . }}'
     env:
       - name: USE_AZURE_FLEX
-        value: '{{ if kindIs "invalid" $.with.useAzureFlex }}false{{ else }}{{ tpl $.with.useAzureFlex . }}{{ end }}' 
+        value: '{{ if kindIs "invalid" $.with.useAzureFlex }}false{{ else }}{{ tpl $.with.useAzureFlex . }}{{ end }}'
     run: /action/create-secret.sh
 
   - name: create-db
+    retry: 3
     needs: [create-secret]
     checkout: false
     image: ghcr.io/socialgouv/docker/psql:6.70.0
