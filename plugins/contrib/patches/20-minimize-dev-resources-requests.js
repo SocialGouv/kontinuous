@@ -62,9 +62,7 @@ module.exports = (manifests, options, { config, logger }) => {
       const memoryNodeAsNum = getMemoryAsNum(memoryNodeConfig)
       const memoryMarginAsNum = getMemoryAsNum(memoryAvoidOutOfpodsMargin)
       const minimumMemoryNumber = memoryNodeAsNum / maxPods + memoryMarginAsNum
-      memory = `${(
-        Math.round((minimumMemoryNumber * 1000) / 1024 ** 2) / 1000
-      ).toString()}Mi`
+      memory = `${Math.round(minimumMemoryNumber / 1024 ** 2).toString()}Mi`
       logger.trace(
         `calculated min memory: ${memoryNodeConfig}/${maxPods}${
           memoryMarginAsNum ? ` + ${memoryAvoidOutOfpodsMargin}` : ""
