@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.108.1](https://github.com/socialgouv/kontinuous/compare/v1.108.0...v1.108.1) (2022-12-12)
+
+
+### Bug Fixes
+
+* disable needs kubeconfig predeploy ([18fc1d3](https://github.com/socialgouv/kontinuous/commit/18fc1d3026730c8e40d7739fefb3c32d95802cae))
+* revert checkForNewResourceInterval ([dba7af7](https://github.com/socialgouv/kontinuous/commit/dba7af7ef49737b3cf823e943969e70376085015))
+
 ## 1.108.0 (2022-12-12)
 
 
