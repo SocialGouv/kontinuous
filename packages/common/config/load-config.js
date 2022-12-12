@@ -407,7 +407,7 @@ module.exports = async (
       option: "deploy-with",
       defaultFunction: (config) => {
         config.deployWithPluginIsDefault = true
-        return "kubectl"
+        return "kubectlDependencyTree"
       },
     },
     statusUrl: {

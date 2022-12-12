@@ -12,7 +12,7 @@ patches:
   needs:
     enabled: true
   needsUsingInitcontainers:
-    enabled: true
+    enabled: false
   kapp:
     enabled: false
   needsUsingKapp:

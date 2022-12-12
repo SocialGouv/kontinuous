@@ -1,0 +1,8 @@
+config:
+  deployWithPlugin: kubectl-dependency-tree
+  
+dependencies:
+  contrib:
+    patches:
+      needsUsingInitcontainers:
+        enabled: false
