@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.108.2](https://github.com/socialgouv/kontinuous/compare/v1.108.1...v1.108.2) (2022-12-12)
+
+
+### Bug Fixes
+
+* stream network error handling ([09664b9](https://github.com/socialgouv/kontinuous/commit/09664b9beabf39a5e90cf7ac2e4b33e4dd9e7318))
+
 ### [1.108.1](https://github.com/socialgouv/kontinuous/compare/v1.108.0...v1.108.1) (2022-12-12)
 
 
