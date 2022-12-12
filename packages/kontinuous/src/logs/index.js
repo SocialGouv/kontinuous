@@ -100,14 +100,22 @@ module.exports = async (options) => {
           })
           response.data.on("data", handleOut)
           response.data.pipe(writeStream)
-          await new Promise((resolve, _reject) => {
+          await new Promise((resolve, reject) => {
+            response.data.on("error", () => {
+              const newtworkError = new Error("network error")
+              reject(newtworkError)
+            })
             response.data.on("end", () => {
               writeStream.write("\n")
               resolve()
             })
           })
         } catch (err) {
-          bail(err)
+          if (err.status) {
+            bail(err)
+            return
+          }
+          // network error... retry
         }
         if (!realFinish) {
           logger.warn("stream interrupted, retrying...")
