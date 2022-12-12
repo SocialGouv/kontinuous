@@ -62,7 +62,7 @@ module.exports = (manifests, options, { config, logger }) => {
       const memoryNodeAsNum = getMemoryAsNum(memoryNodeConfig)
       const memoryMarginAsNum = getMemoryAsNum(memoryAvoidOutOfpodsMargin)
       const minimumMemoryNumber = memoryNodeAsNum / maxPods + memoryMarginAsNum
-      memory = `${Math.round(minimumMemoryNumber / 1024 ** 2).toString()}Mi`
+      memory = `${Math.ceil(minimumMemoryNumber / 1024 ** 2).toString()}Mi`
       logger.trace(
         `calculated min memory: ${memoryNodeConfig}/${maxPods}${
           memoryMarginAsNum ? ` + ${memoryAvoidOutOfpodsMargin}` : ""
@@ -73,18 +73,10 @@ module.exports = (manifests, options, { config, logger }) => {
     }
   }
 
-  const setupContainersRequests = (containers = []) => {
-    for (const container of containers) {
-      if (!container.resources) {
-        container.resources = {}
-      }
-      container.resources.requests = {
-        cpu: cpu.toString(),
-        memory: memory.toString(),
-      }
-    }
+  const initContainersResourcesRequests = {
+    cpu: "0",
+    memory: "0",
   }
-
   for (const manifest of manifests) {
     const { kind } = manifest
 
@@ -92,8 +84,39 @@ module.exports = (manifests, options, { config, logger }) => {
       continue
     }
 
-    setupContainersRequests(manifest.spec?.template?.spec?.containers)
-    setupContainersRequests(manifest.spec?.template?.spec?.initContainers)
+    const containers = manifest.spec?.template?.spec?.containers
+    if (containers && containers.length > 0) {
+      let cpuByContainer = cpu
+      let memoryByContainer = memory
+      if (containers.length > 1) {
+        const cpuByContainerNumber =
+          Math.ceil((getCpuAsNum(cpu) / containers.length) * 1000) / 1000
+        const memoryByContainerNumber = Math.ceil(
+          getMemoryAsNum(memory) / containers.length
+        )
+        cpuByContainer = Math.round(cpuByContainerNumber * 1000) / 1000
+        memoryByContainer = `${Math.round(
+          memoryByContainerNumber / 1024 ** 2
+        ).toString()}Mi`
+      }
+      for (const container of containers) {
+        if (!container.resources) {
+          container.resources = {}
+        }
+        container.resources.requests = {
+          cpu: cpuByContainer.toString(),
+          memory: memoryByContainer.toString(),
+        }
+      }
+    }
+
+    const initContainers = manifest.spec?.template?.spec?.initContainers || []
+    for (const container of initContainers) {
+      if (!container.resources) {
+        container.resources = {}
+      }
+      container.resources.requests = { ...initContainersResourcesRequests }
+    }
   }
 
   return manifests

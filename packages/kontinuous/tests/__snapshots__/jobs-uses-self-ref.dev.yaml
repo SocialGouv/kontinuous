@@ -154,8 +154,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
         - name: degit-action
           image: ghcr.io/socialgouv/kontinuous/degit:v1.107.16
           command:
@@ -173,8 +173,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:6.70.0
@@ -224,7 +224,7 @@ spec:
               memory: 512Mi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -316,8 +316,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -354,7 +354,7 @@ spec:
               memory: 512Mi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001

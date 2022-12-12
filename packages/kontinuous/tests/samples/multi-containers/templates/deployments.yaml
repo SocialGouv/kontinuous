@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ (or .Values.component .Chart.Name) | lower }}
+spec:
+  selector:
+    matchLabels:
+      component: {{ or .Values.component .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        component: {{ or .Values.component .Chart.Name }}
+    spec:
+      containers:
+        - name: a
+          image: debian:stable
+          resources:
+            limits:
+              cpu: 2
+              memory: 20Mi
+            requests:
+              cpu: 1
+              memory: 10Mi
+        
+        - name: b
+          image: debian:stable
+          resources:
+            limits:
+              cpu: 2
+              memory: 20Mi
+            requests:
+              cpu: 1
+              memory: 10Mi

@@ -155,8 +155,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: debian:stable
@@ -174,7 +174,7 @@ spec:
               memory: 512Mi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

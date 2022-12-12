@@ -243,7 +243,7 @@ spec:
               memory: 512Mi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -361,7 +361,7 @@ spec:
               memory: 512Mi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -455,7 +455,7 @@ spec:
               memory: 1280Mi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
           startupProbe:
             failureThreshold: 30
             httpGet:
@@ -488,8 +488,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
       volumes:
         - name: kontinuous-wait-needs-kubeconfig
           secret:
@@ -567,8 +567,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
         - name: wait-for-postgres
           image: ghcr.io/socialgouv/docker/wait-for-postgres:6.56.1
           imagePullPolicy: Always
@@ -583,8 +583,8 @@ spec:
               cpu: 20m
               memory: 32Mi
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
       containers:
         - image: sosedoff/pgweb:0.11.8
           name: pgweb
@@ -623,7 +623,7 @@ spec:
               memory: 256Mi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
       volumes:
         - name: kontinuous-wait-needs-kubeconfig
           secret:

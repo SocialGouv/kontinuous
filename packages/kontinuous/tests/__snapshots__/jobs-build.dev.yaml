@@ -156,8 +156,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
         - name: degit-action
           image: ghcr.io/socialgouv/kontinuous/degit:v1.107.16
           command:
@@ -175,8 +175,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:6.70.0
@@ -226,7 +226,7 @@ spec:
               memory: 512Mi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -319,8 +319,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -357,7 +357,7 @@ spec:
               memory: 512Mi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -457,8 +457,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -503,7 +503,7 @@ spec:
               memory: 4Gi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -598,8 +598,8 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -644,7 +644,7 @@ spec:
               memory: 4Gi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -768,7 +768,7 @@ spec:
               memory: 512Mi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -795,8 +795,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
       volumes:
         - name: kontinuous-wait-needs-kubeconfig
           secret:
@@ -886,7 +886,7 @@ spec:
               memory: 1280Mi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
           startupProbe:
             failureThreshold: 30
             httpGet:
@@ -920,8 +920,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
       volumes:
         - name: kontinuous-wait-needs-kubeconfig
           secret:
@@ -1000,8 +1000,8 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
         - name: wait-for-postgres
           image: ghcr.io/socialgouv/docker/wait-for-postgres:6.56.1
           imagePullPolicy: Always
@@ -1016,8 +1016,8 @@ spec:
               cpu: 20m
               memory: 32Mi
             requests:
-              cpu: '0.081'
-              memory: 227.555Mi
+              cpu: '0'
+              memory: '0'
       containers:
         - image: sosedoff/pgweb:0.11.8
           name: pgweb
@@ -1056,7 +1056,7 @@ spec:
               memory: 256Mi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
       volumes:
         - name: kontinuous-wait-needs-kubeconfig
           secret:

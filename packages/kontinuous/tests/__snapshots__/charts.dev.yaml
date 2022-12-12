@@ -161,6 +161,6 @@ spec:
           resources:
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
 "
 `;

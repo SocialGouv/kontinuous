@@ -104,7 +104,7 @@ spec:
               memory: 512Mi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -209,7 +209,7 @@ spec:
               memory: 512Mi
             requests:
               cpu: '0.081'
-              memory: 227.555Mi
+              memory: 228Mi
 ---
 apiVersion: v1
 kind: Service
