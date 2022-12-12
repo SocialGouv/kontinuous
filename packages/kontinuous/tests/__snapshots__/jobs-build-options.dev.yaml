@@ -337,35 +337,6 @@ spec:
                 name: app-sealed-secret
             - configMapRef:
                 name: app-configmap
-      initContainers:
-        - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.17
-          env:
-            - name: WAIT_NEEDS_ANNOTATIONS_REF
-              value: test-jobs-build-options-feature-branch-1/Deployment/app
-            - name: WAIT_NEEDS
-              value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-jobs-build-options-feature-branch-1-jobs-con-6-43th2s\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-jobs-build-options-feature-branch-1-6b5f8e\\"},\\"needOnce\\":true}]
-            - name: KUBECONFIG
-              value: /secrets/kubeconfig
-            - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
-          volumeMounts:
-            - name: kontinuous-wait-needs-kubeconfig
-              mountPath: /secrets
-          imagePullPolicy: Always
-          resources:
-            requests:
-              cpu: '0'
-              memory: '0'
-      volumes:
-        - name: kontinuous-wait-needs-kubeconfig
-          secret:
-            secretName: kubeconfig
-            items:
-              - key: KUBECONFIG
-                path: kubeconfig
-  progressDeadlineSeconds: 1200000
 ---
 apiVersion: v1
 kind: Service

@@ -834,31 +834,6 @@ spec:
                 name: backend-sealed-secret
             - configMapRef:
                 name: backend-configmap
-      initContainers:
-        - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.17
-          env:
-            - name: WAIT_NEEDS_ANNOTATIONS_REF
-              value: test-repo.domifa-preprod/Deployment/backend-cron
-            - name: WAIT_NEEDS
-              value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-412srd\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-2ll1vq\\"},\\"needOnce\\":true}]
-            - name: KUBECONFIG
-              value: /secrets/kubeconfig
-            - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
-          volumeMounts:
-            - name: kontinuous-wait-needs-kubeconfig
-              mountPath: /secrets
-          imagePullPolicy: Always
-      volumes:
-        - name: kontinuous-wait-needs-kubeconfig
-          secret:
-            secretName: kubeconfig
-            items:
-              - key: KUBECONFIG
-                path: kubeconfig
-  progressDeadlineSeconds: 1200000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -931,12 +906,6 @@ spec:
         - name: files
           persistentVolumeClaim:
             claimName: files
-        - name: kontinuous-wait-needs-kubeconfig
-          secret:
-            secretName: kubeconfig
-            items:
-              - key: KUBECONFIG
-                path: kubeconfig
       containers:
         - image: >-
             harbor.fabrique.social.gouv.fr/domifa/test-repo.domifa/backend:preprod-ffac537e6cbbf934b08745a378932722df287a53
@@ -1010,24 +979,6 @@ spec:
           volumeMounts:
             - name: files
               mountPath: /mnt/files
-      initContainers:
-        - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.17
-          env:
-            - name: WAIT_NEEDS_ANNOTATIONS_REF
-              value: test-repo.domifa-preprod/Deployment/backend
-            - name: WAIT_NEEDS
-              value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-412srd\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-2ll1vq\\"},\\"needOnce\\":true}]
-            - name: KUBECONFIG
-              value: /secrets/kubeconfig
-            - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
-          volumeMounts:
-            - name: kontinuous-wait-needs-kubeconfig
-              mountPath: /secrets
-          imagePullPolicy: Always
-  progressDeadlineSeconds: 1200000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -1133,31 +1084,6 @@ spec:
             requests:
               cpu: '0.2'
               memory: 256Mi
-      initContainers:
-        - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.17
-          env:
-            - name: WAIT_NEEDS_ANNOTATIONS_REF
-              value: test-repo.domifa-preprod/Deployment/frontend
-            - name: WAIT_NEEDS
-              value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5bi6sa\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-6cax17\\"},\\"needOnce\\":true}]
-            - name: KUBECONFIG
-              value: /secrets/kubeconfig
-            - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
-          volumeMounts:
-            - name: kontinuous-wait-needs-kubeconfig
-              mountPath: /secrets
-          imagePullPolicy: Always
-      volumes:
-        - name: kontinuous-wait-needs-kubeconfig
-          secret:
-            secretName: kubeconfig
-            items:
-              - key: KUBECONFIG
-                path: kubeconfig
-  progressDeadlineSeconds: 1200000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -1263,31 +1189,6 @@ spec:
             requests:
               cpu: 100m
               memory: 128Mi
-      initContainers:
-        - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.17
-          env:
-            - name: WAIT_NEEDS_ANNOTATIONS_REF
-              value: test-repo.domifa-preprod/Deployment/portail-admins
-            - name: WAIT_NEEDS
-              value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-1cmbis\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-5buu0s\\"},\\"needOnce\\":true}]
-            - name: KUBECONFIG
-              value: /secrets/kubeconfig
-            - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
-          volumeMounts:
-            - name: kontinuous-wait-needs-kubeconfig
-              mountPath: /secrets
-          imagePullPolicy: Always
-      volumes:
-        - name: kontinuous-wait-needs-kubeconfig
-          secret:
-            secretName: kubeconfig
-            items:
-              - key: KUBECONFIG
-                path: kubeconfig
-  progressDeadlineSeconds: 1200000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -1393,31 +1294,6 @@ spec:
             requests:
               cpu: 100m
               memory: 128Mi
-      initContainers:
-        - name: kontinuous-wait-needs
-          image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.107.17
-          env:
-            - name: WAIT_NEEDS_ANNOTATIONS_REF
-              value: test-repo.domifa-preprod/Deployment/portail-usagers
-            - name: WAIT_NEEDS
-              value: >-
-                [{\\"namespace\\":\\"awesome-ci\\",\\"kind\\":\\"Job\\",\\"name\\":\\"job-test-repo-domifa-2d4jn8-feature-branch-1-jobs-con-6-5t07hs\\",\\"selectors\\":{\\"kontinuous/resourceName\\":\\"job-4bkfwz-job-test-repo-domifa-2d4jn8-feature-branch-1-29yf2v\\"},\\"needOnce\\":true}]
-            - name: KUBECONFIG
-              value: /secrets/kubeconfig
-            - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
-          volumeMounts:
-            - name: kontinuous-wait-needs-kubeconfig
-              mountPath: /secrets
-          imagePullPolicy: Always
-      volumes:
-        - name: kontinuous-wait-needs-kubeconfig
-          secret:
-            secretName: kubeconfig
-            items:
-              - key: KUBECONFIG
-                path: kubeconfig
-  progressDeadlineSeconds: 1200000
 ---
 apiVersion: v1
 kind: Service
