@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.108.4](https://github.com/socialgouv/kontinuous/compare/v1.108.3...v1.108.4) (2022-12-13)
+
+
+### Bug Fixes
+
+* add catch error event on stream ([23c875c](https://github.com/socialgouv/kontinuous/commit/23c875c5128c29ed98d86ff3a086e5b68f9e753c))
+* kubectl-dependency-tree needs rollout-status ([c285a3b](https://github.com/socialgouv/kontinuous/commit/c285a3bc66e933d028ae3b2ee3731ddc62ffb870))
+
 ### [1.108.3](https://github.com/socialgouv/kontinuous/compare/v1.108.2...v1.108.3) (2022-12-13)
 
 
