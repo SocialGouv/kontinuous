@@ -111,11 +111,18 @@ module.exports = async (deploys, options, context) => {
   }
 
   const q = async.queue(async (manifest) => {
-    await kubectlApplyManifestExec(manifest)
+    try {
+      await kubectlApplyManifestExec(manifest)
+    } catch (err) {
+      return err
+    }
   }, applyConcurrencyLimit)
 
   const kubectlApplyManifest = async (manifest) => {
-    await q.push(manifest)
+    const result = await q.push(manifest)
+    if (result instanceof Error) {
+      throw result
+    }
   }
 
   const forceApply = async (manifest) => {
@@ -220,7 +227,7 @@ module.exports = async (deploys, options, context) => {
             if (key !== dependencyKey) {
               return
             }
-            reject()
+            reject(new Error(`resource ${namespace}/${resourceName} failed`))
           })
         })
       })
@@ -254,12 +261,12 @@ module.exports = async (deploys, options, context) => {
     const selector = labelSelectors.join(",")
 
     await new Promise(async (resolve, reject) => {
+      const eventParam = { namespace, resourceName, selector }
       try {
         logger.debug(
           { namespace, selector },
           `watching resource: ${resourceName}`
         )
-        const eventParam = { namespace, resourceName, selector }
         eventsBucket.trigger("waiting", eventParam)
         const result = await rolloutStatusWatch({
           namespace,
@@ -277,26 +284,28 @@ module.exports = async (deploys, options, context) => {
             `resource "${resourceName}" ready`
           )
           eventsBucket.trigger("ready", eventParam)
+          resolve({
+            ...result,
+            namespace,
+            selector,
+          })
         } else if (result.error?.code || result.error?.reason) {
+          const errMsg = `resource "${resourceName}" failed`
           logger.error(
             {
               namespace,
               selector,
               error: result.error,
             },
-            `resource "${resourceName}" failed`
+            errMsg
           )
           eventsBucket.trigger("failed", eventParam)
+          throw new Error(errMsg)
         } else {
           eventsBucket.trigger("closed", eventParam)
         }
-
-        resolve({
-          ...result,
-          namespace,
-          selector,
-        })
       } catch (err) {
+        eventsBucket.trigger("failed", eventParam)
         reject(err)
       }
     })
