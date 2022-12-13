@@ -10,7 +10,7 @@ const isNotDefined = (val) => val === undefined || val === null || val === ""
 const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
 
 module.exports = async (deploys, options, context) => {
-  const { config, utils, manifests, dryRun, runContext } = context
+  const { config, utils, manifests, dryRun, runContext, needBin } = context
 
   const {
     yaml,
@@ -20,7 +20,10 @@ module.exports = async (deploys, options, context) => {
     kindIsRunnable,
     KontinuousPluginError,
     rolloutStatusWatch,
+    needRolloutStatus,
   } = utils
+
+  await needBin(needRolloutStatus)
 
   const { kubeconfigContext, kubeconfig, deployTimeout } = config
 
@@ -361,5 +364,5 @@ reading:
     why --force is not supported with server-side apply (but we workaround to support this in this plugin)
   - https://kubernetes.io/blog/2022/10/20/advanced-server-side-apply/
   - https://medium.com/swlh/break-down-kubernetes-server-side-apply-5d59f6a14e26
-  
+
 */
