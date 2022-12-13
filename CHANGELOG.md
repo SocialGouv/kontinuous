@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.108.3](https://github.com/socialgouv/kontinuous/compare/v1.108.2...v1.108.3) (2022-12-13)
+
+
+### Bug Fixes
+
+* deactivate as default chart on deleted event ([ea3a742](https://github.com/socialgouv/kontinuous/commit/ea3a7429b3cf432b61b8831d5f88fc28708cd9d3))
+* logs error improve debug ([ba7b80a](https://github.com/socialgouv/kontinuous/commit/ba7b80af3a1c2bbcbd0b8ac0a831f2f780afb5e1))
+
 ### [1.108.2](https://github.com/socialgouv/kontinuous/compare/v1.108.1...v1.108.2) (2022-12-12)
 
 
