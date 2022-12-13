@@ -6,6 +6,7 @@ module.exports = ({
   namespace,
   selector,
   ignoreSecretNotFound,
+  intervalSeconds,
 }) => {
   const args = []
   if (kubeconfig) {
@@ -23,7 +24,9 @@ module.exports = ({
   if (ignoreSecretNotFound) {
     args.push("-ignore-secret-not-found")
   }
-  args.push(...["-interval", "10s"])
+  if (intervalSeconds) {
+    args.push(...["-interval", `${intervalSeconds}s`])
+  }
   const proc = spawn("rollout-status", args, { encoding: "utf-8" })
   proc.on("error", () => {}) // avoid crash on not found executable
 
