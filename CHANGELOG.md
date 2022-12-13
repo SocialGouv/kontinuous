@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.108.5](https://github.com/socialgouv/kontinuous/compare/v1.108.4...v1.108.5) (2022-12-13)
+
+
+### Bug Fixes
+
+* axios different type of network error ([7c82130](https://github.com/socialgouv/kontinuous/commit/7c821307bf3ed27aebac462fa8daf6e01742c11f))
+
 ### [1.108.4](https://github.com/socialgouv/kontinuous/compare/v1.108.3...v1.108.4) (2022-12-13)
 
 
