@@ -4,6 +4,7 @@ const retry = require("async-retry")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const axios = require("~common/utils/axios-retry")
 const handleAxiosError = require("~common/utils/handle-axios-error")
+const axiosIsNetworkError = require("~common/utils/axios-is-network-error")
 
 const ctx = require("~common/ctx")
 const NetworkError = require("~common/utils/network-error.class")
@@ -112,7 +113,13 @@ module.exports = async (options) => {
             })
           })
         } catch (err) {
-          if (!(err instanceof NetworkError)) {
+          if (
+            !(
+              err instanceof NetworkError ||
+              axiosIsNetworkError(err) ||
+              err.code === "ECONNABORTED"
+            )
+          ) {
             finished = true
             bail(err)
           }
@@ -124,7 +131,7 @@ module.exports = async (options) => {
         }
       },
       {
-        retries: 2,
+        retries: 3,
         factor: 1,
         minTimeout: 1000,
         maxTimeout: 3000,
