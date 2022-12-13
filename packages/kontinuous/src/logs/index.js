@@ -6,6 +6,7 @@ const axios = require("~common/utils/axios-retry")
 const handleAxiosError = require("~common/utils/handle-axios-error")
 
 const ctx = require("~common/ctx")
+const NetworkError = require("~common/utils/network-error.class")
 
 module.exports = async (options) => {
   const config = ctx.require("config")
@@ -60,7 +61,7 @@ module.exports = async (options) => {
 
   const writeStream = process.stdout
 
-  let realFinish = false
+  let finished = false
   let finalState
 
   try {
@@ -68,7 +69,7 @@ module.exports = async (options) => {
       async (bail) => {
         let currentLine = ""
         const checkEndFlagCurrentLine = (line) => {
-          if (realFinish) {
+          if (finished) {
             try {
               finalState = JSON.parse(line)
             } catch (_err) {
@@ -76,7 +77,7 @@ module.exports = async (options) => {
             }
           }
           if (line === "### KONTINUOUS-STREAM-END ###") {
-            realFinish = true
+            finished = true
           }
         }
         const handleOut = (outputBuffer) => {
@@ -102,7 +103,7 @@ module.exports = async (options) => {
           response.data.pipe(writeStream)
           await new Promise((resolve, reject) => {
             response.data.on("error", () => {
-              const newtworkError = new Error("network error")
+              const newtworkError = new NetworkError("network error")
               reject(newtworkError)
             })
             response.data.on("end", () => {
@@ -111,13 +112,13 @@ module.exports = async (options) => {
             })
           })
         } catch (err) {
-          if (err.status) {
+          if (!(err instanceof NetworkError)) {
+            finished = true
             bail(err)
-            return
           }
-          // network error... retry
+          return
         }
-        if (!realFinish) {
+        if (!finished) {
           logger.warn("stream interrupted, retrying...")
           throw Error("not true finish, retry")
         }
@@ -133,7 +134,7 @@ module.exports = async (options) => {
     handleAxiosError(error, logger)
   }
 
-  if (!realFinish) {
+  if (!finished) {
     logger.error("logs streaming was interrupted, retry limit reached")
     process.exit(1)
   }
