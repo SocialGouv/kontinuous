@@ -38,6 +38,10 @@ module.exports = async ({ name, file }) => {
     await new Promise((resolve, reject) => {
       response.data.pipe(writer)
       let error = null
+      response.data.on("error", (err) => {
+        error = err
+        reject(err)
+      })
       writer.on("error", (err) => {
         error = err
         writer.close()

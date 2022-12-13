@@ -17,6 +17,9 @@ module.exports = async (fileUrl, outputLocationPath, logger) => {
       responseType: "stream",
     })
     response.data.pipe(writer)
+    response.data.on("error", (err) => {
+      logger.error(err)
+    })
     return finished(writer)
   } catch (error) {
     handleAxiosError(error, logger)
