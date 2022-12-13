@@ -1,3 +1,48 @@
+const uniqBy = (key) => (current, i, all) =>
+  !all
+    .slice(0, i)
+    .map((j) => j[key])
+    .includes(current[key])
+
+const trimLine = (str, maxLength = 50) => {
+  if (str.length > maxLength) {
+    return `${str.slice(0, maxLength)}...`
+  }
+  return str.trim()
+}
+
+const getContainerTree = (container, label) => {
+  const children = [
+    {
+      name: `image: ${container.image}`,
+    },
+  ]
+  if (container.command && container.command.length) {
+    children.push({
+      name: `command: ${trimLine(
+        container.command.join(" ").replace(/\n/g, " ")
+      )}`,
+    })
+  }
+  if (container.args && container.args.length) {
+    children.push({
+      name: `args: ${container.args.join(" ").replace(/\n/, " ")}`,
+    })
+  }
+  if (container.ports && container.ports.length) {
+    children.push({
+      name: `port${container.ports.length > 1 ? "s" : ""}: ${container.ports
+        .map(({ containerPort }) => containerPort)
+        .join(",")}`,
+    })
+  }
+
+  return {
+    name: `${container.name}${label ? ` (${label})` : ``}`,
+    children,
+  }
+}
+
 const getTreeInfos = {}
 
 getTreeInfos.default = (resource) => {
@@ -21,9 +66,11 @@ getTreeInfos.Ingress = (resource) => {
       ? [
           {
             name: "hosts",
-            children: manifest.spec.rules.map(({ host }) => ({
-              name: `https://${host}`,
-            })),
+            children: manifest.spec.rules
+              .map(({ host }) => ({
+                name: `https://${host}`,
+              }))
+              .filter(uniqBy("name")),
           },
         ]
       : []),
@@ -43,33 +90,8 @@ getTreeInfos.Deployment = (resource) => {
   const containers = manifest.spec?.template?.spec?.containers || []
   const initContainers = manifest.spec?.template?.spec?.initContainers || []
   return [
-    ...containers.map((container) => ({
-      name: container.name,
-      children: [
-        {
-          name: `image: ${container.image}`,
-        },
-        ...(container.ports
-          ? [
-              {
-                name: `port${
-                  container.ports.length > 1 ? "s" : ""
-                }: ${container.ports
-                  .map(({ containerPort }) => containerPort)
-                  .join(",")}`,
-              },
-            ]
-          : []),
-      ],
-    })),
-    ...initContainers.map((container) => ({
-      name: `${container.name} (init)`,
-      children: [
-        {
-          name: `image: ${container.image}`,
-        },
-      ],
-    })),
+    ...containers.map(getContainerTree),
+    ...initContainers.map((container) => getContainerTree(container, "init")),
   ]
 }
 
@@ -104,25 +126,9 @@ getTreeInfos.Job = (resource) => {
   const containers = manifest.spec?.template?.spec?.containers
   const initContainers = manifest.spec?.template?.spec?.initContainers
   return [
-    ...(containers
-      ? containers.map((container) => ({
-          name: container.name,
-          children: [
-            {
-              name: `image: ${container.image}`,
-            },
-          ],
-        }))
-      : []),
+    ...(containers ? containers.map(getContainerTree) : []),
     ...(initContainers
-      ? initContainers.map((container) => ({
-          name: `${container.name} (init)`,
-          children: [
-            {
-              name: `image: ${container.image}`,
-            },
-          ],
-        }))
+      ? initContainers.map((container) => getContainerTree(container, "init"))
       : []),
   ]
 }
@@ -136,24 +142,10 @@ getTreeInfos.CronJob = (resource) => {
   return [
     { name: `schedule: ${manifest.spec.schedule}` },
     ...(containers
-      ? containers.map((container) => ({
-          name: container.name,
-          children: [
-            {
-              name: `image: ${container.image}`,
-            },
-          ],
-        }))
+      ? containers.map((container) => getContainerTree(container))
       : []),
     ...(initContainers
-      ? initContainers.map((container) => ({
-          name: `${container.name} (init)`,
-          children: [
-            {
-              name: `image: ${container.image}`,
-            },
-          ],
-        }))
+      ? initContainers.map((container) => getContainerTree(container, "init"))
       : []),
   ]
 }
