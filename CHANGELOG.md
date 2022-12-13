@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.108.6](https://github.com/socialgouv/kontinuous/compare/v1.108.5...v1.108.6) (2022-12-13)
+
+
+### Bug Fixes
+
+* disable rollout-status interval 10s ([86343c9](https://github.com/socialgouv/kontinuous/commit/86343c92e4356da7240ecb4663cf890514d5b1fc))
+* infinite wait deployment ([4dd69bd](https://github.com/socialgouv/kontinuous/commit/4dd69bd95b2369545f04539f2bd844390b59821e))
+
 ### [1.108.5](https://github.com/socialgouv/kontinuous/compare/v1.108.4...v1.108.5) (2022-12-13)
 
 
