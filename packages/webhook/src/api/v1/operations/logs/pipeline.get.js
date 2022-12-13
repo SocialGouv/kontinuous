@@ -73,7 +73,6 @@ module.exports = function ({ services }) {
       follow,
       catch: catchJob,
       since,
-      chart,
     } = req.query
 
     let { env } = req.query
@@ -126,6 +125,10 @@ module.exports = function ({ services }) {
       return
     }
 
+    let { chart } = req.query
+    if (!chart && event === "deleted") {
+      chart = "deactivate"
+    }
     const jobName = pipelineJobName({
       eventName: event,
       repositoryName,
