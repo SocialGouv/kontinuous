@@ -9,7 +9,7 @@ module.exports = async (
 
   const { kubectlDeleteManifest } = utils
 
-  const { surviveOnBrokenCluster = false } = options
+  const { surviveOnBrokenCluster = false, cleanKinds = ["Job"] } = options
 
   const kubectlDeleteManifestOptions = {
     rootDir: config.buildPath,
@@ -21,8 +21,9 @@ module.exports = async (
   const promises = []
   for (const manifest of manifests) {
     const { metadata } = manifest
+    const cleanKind = cleanKinds.includes(manifest.kind)
     const clean = metadata?.annotations?.[matchAnnotation]
-    if (clean !== "true") {
+    if (!cleanKind && clean !== "true") {
       continue
     }
     const { kind } = manifest
