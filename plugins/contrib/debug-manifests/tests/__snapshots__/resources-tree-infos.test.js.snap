@@ -9,7 +9,7 @@ exports[`egapro 1`] = `
 │   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │   │   └── port: 2626
 │   │   │   └── kontinuous-wait-needs (init)
-│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │   │   ├── Service
 │   │   │   └── port: http=80:2626
 │   │   └── Ingress
@@ -21,7 +21,7 @@ exports[`egapro 1`] = `
 │   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/app:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │   │   └── port: 3000
 │   │   │   └── kontinuous-wait-needs (init)
-│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │   │   ├── Service
 │   │   │   └── port: http=80:3000
 │   │   └── Ingress
@@ -33,7 +33,7 @@ exports[`egapro 1`] = `
 │   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/declaration:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │   │   └── port: 8080
 │   │   │   └── kontinuous-wait-needs (init)
-│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │   │   ├── Service
 │   │   │   └── port: http=80:8080
 │   │   └── Ingress
@@ -62,7 +62,7 @@ exports[`egapro 1`] = `
 │   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/simulateur:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │   │   └── port: 8080
 │   │   │   └── kontinuous-wait-needs (init)
-│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │   │   ├── Service
 │   │   │   └── port: http=80:8080
 │   │   └── Ingress
@@ -74,7 +74,7 @@ exports[`egapro 1`] = `
 │       │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/storybook:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │       │   │   └── port: 8080
 │       │   └── kontinuous-wait-needs (init)
-│       │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│       │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │       ├── Service
 │       │   └── port: http=80:8080
 │       └── Ingress
@@ -96,23 +96,23 @@ exports[`egapro 1`] = `
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   └── degit-repository (init)
-    │       └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │       └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     ├── CronJob
     │   ├── schedule: 0 0 * * *
     │   ├── job
@@ -153,7 +153,7 @@ exports[`template 1`] = `
 │   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │   │   └── port: 2626
 │   │   │   └── kontinuous-wait-needs (init)
-│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │   │   ├── Service
 │   │   │   └── port: http=80:2626
 │   │   └── Ingress
@@ -165,7 +165,7 @@ exports[`template 1`] = `
 │   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/app:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │   │   └── port: 3000
 │   │   │   └── kontinuous-wait-needs (init)
-│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │   │   ├── Service
 │   │   │   └── port: http=80:3000
 │   │   └── Ingress
@@ -177,7 +177,7 @@ exports[`template 1`] = `
 │   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/declaration:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │   │   └── port: 8080
 │   │   │   └── kontinuous-wait-needs (init)
-│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │   │   ├── Service
 │   │   │   └── port: http=80:8080
 │   │   └── Ingress
@@ -206,7 +206,7 @@ exports[`template 1`] = `
 │   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/simulateur:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │   │   └── port: 8080
 │   │   │   └── kontinuous-wait-needs (init)
-│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │   │   ├── Service
 │   │   │   └── port: http=80:8080
 │   │   └── Ingress
@@ -218,7 +218,7 @@ exports[`template 1`] = `
 │       │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/storybook:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │       │   │   └── port: 8080
 │       │   └── kontinuous-wait-needs (init)
-│       │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│       │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │       ├── Service
 │       │   └── port: http=80:8080
 │       └── Ingress
@@ -240,23 +240,23 @@ exports[`template 1`] = `
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   └── degit-repository (init)
-    │       └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │       └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     ├── CronJob
     │   ├── schedule: 0 0 * * *
     │   ├── job
@@ -297,7 +297,7 @@ exports[`www 1`] = `
 │   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │   │   └── port: 2626
 │   │   │   └── kontinuous-wait-needs (init)
-│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │   │   ├── Service
 │   │   │   └── port: http=80:2626
 │   │   └── Ingress
@@ -309,7 +309,7 @@ exports[`www 1`] = `
 │   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/app:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │   │   └── port: 3000
 │   │   │   └── kontinuous-wait-needs (init)
-│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │   │   ├── Service
 │   │   │   └── port: http=80:3000
 │   │   └── Ingress
@@ -321,7 +321,7 @@ exports[`www 1`] = `
 │   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/declaration:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │   │   └── port: 8080
 │   │   │   └── kontinuous-wait-needs (init)
-│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │   │   ├── Service
 │   │   │   └── port: http=80:8080
 │   │   └── Ingress
@@ -350,7 +350,7 @@ exports[`www 1`] = `
 │   │   │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/simulateur:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │   │   └── port: 8080
 │   │   │   └── kontinuous-wait-needs (init)
-│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│   │   │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │   │   ├── Service
 │   │   │   └── port: http=80:8080
 │   │   └── Ingress
@@ -362,7 +362,7 @@ exports[`www 1`] = `
 │       │   │   ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/storybook:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │       │   │   └── port: 8080
 │       │   └── kontinuous-wait-needs (init)
-│       │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.7
+│       │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.108.8
 │       ├── Service
 │       │   └── port: http=80:8080
 │       └── Ingress
@@ -384,23 +384,23 @@ exports[`www 1`] = `
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     │   ├── job
     │   │   └── image: moby/buildkit:v0.10.5-rootless
     │   └── degit-repository (init)
-    │       └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.7
+    │       └── image: ghcr.io/socialgouv/kontinuous/degit:v1.108.8
     ├── CronJob
     │   ├── schedule: 0 0 * * *
     │   ├── job
