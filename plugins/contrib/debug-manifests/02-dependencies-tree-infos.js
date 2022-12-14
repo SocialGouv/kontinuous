@@ -9,7 +9,7 @@ module.exports = async (manifests, _options, context) => {
 
   if (!(await utils.graphEasyExists())) {
     logger.debug(
-      "unable to display dependencies diagram, graph-easy not available, skipping"
+      "unable to display dependencies diagram, graph-easy (libgraph-easy-perl) not available, skipping"
     )
     return
   }
