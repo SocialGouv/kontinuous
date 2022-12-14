@@ -8,10 +8,18 @@ const isNotDefined = (val) => val === undefined || val === null || val === ""
 const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
 
 module.exports = async (deploys, options, context) => {
-  const { config, utils, manifests, dryRun } = context
+  const { config, utils, manifests, dryRun, needBin } = context
 
-  const { yaml, kubectlRetry, logger, kubectlDeleteManifest, kindIsRunnable } =
-    utils
+  const {
+    yaml,
+    kubectlRetry,
+    logger,
+    kubectlDeleteManifest,
+    kindIsRunnable,
+    needKubectl,
+  } = utils
+
+  await needBin(needKubectl)
 
   const { kubeconfigContext, kubeconfig, deployTimeout } = config
 

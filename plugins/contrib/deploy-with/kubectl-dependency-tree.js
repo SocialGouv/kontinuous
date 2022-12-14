@@ -21,8 +21,10 @@ module.exports = async (deploys, options, context) => {
     KontinuousPluginError,
     rolloutStatusWatch,
     needRolloutStatus,
+    needKubectl,
   } = utils
 
+  await needBin(needKubectl)
   await needBin(needRolloutStatus)
 
   const { kubeconfigContext, kubeconfig, deployTimeout } = config
