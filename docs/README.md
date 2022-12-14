@@ -1399,6 +1399,7 @@ to enable correct syntax recognition and coloration of yaml helm templates in vs
 - [Kubernetes doc](https://kubernetes.io/docs/concepts/)
 - [Helm doc](https://helm.sh/docs/)
 - [Container training](https://container.training/)
+- [A visual guide on troubleshooting Kubernetes deployments](https://learnk8s.io/troubleshooting-deployments)
 
 #### Others CI/CD software
 
