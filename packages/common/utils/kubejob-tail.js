@@ -1,4 +1,11 @@
+const { setTimeout: sleep } = require("timers/promises")
+
+const retry = require("async-retry")
+
 const kubectlRetry = require("./kubectl-retry")
+const retriableNetwork = require("./retriable-network")
+const retriableOnBrokenCluster = require("./retriable-on-broken-cluster")
+const defaultLogger = require("./logger")
 
 // this adress this issue https://github.com/kubernetes/kubernetes/issues/28369
 
@@ -12,6 +19,8 @@ module.exports = async (jobName, options = {}) => {
     kubectlRetryOptions,
     surviveOnBrokenCluster,
     retrySince = "20s",
+    logger = defaultLogger,
+    retryErrorsConfig = {},
   } = options
 
   // to debug/test remove --follow and reswitch getLogs
@@ -54,12 +63,44 @@ module.exports = async (jobName, options = {}) => {
     await logging
   }
 
+  const getLogsWithErrorRetry = async (...args) => {
+    await retry(
+      async (bail) => {
+        try {
+          await getLogs(...args)
+        } catch (err) {
+          const retriableNetworkError = retriableNetwork(err)
+          if (retriableNetworkError.retry) {
+            logger.debug(`${retriableNetworkError.message}, retrying...`)
+            throw err
+          }
+          if (surviveOnBrokenCluster) {
+            const retriable = retriableOnBrokenCluster(err)
+            if (retriable.retry) {
+              logger.debug({ error: err }, `${retriable.message}, retrying...`)
+              await sleep(3000)
+              throw err
+            }
+          }
+          bail(err)
+        }
+      },
+      {
+        retries: 2,
+        factor: 1,
+        minTimeout: 1000,
+        maxTimeout: 3000,
+        ...retryErrorsConfig,
+      }
+    )
+  }
+
   let ended = false
   const maxIterations = 10
   let countIterations = 0
   while (!ended && countIterations <= maxIterations) {
-    await getLogs(countIterations > 0)
-    // await getLogs(true) // debug/test
+    await getLogsWithErrorRetry(countIterations > 0)
+    // await getLogsWithErrorRetry(true) // debug/test
 
     const jsonStatus = await kubectlRetry(
       `${

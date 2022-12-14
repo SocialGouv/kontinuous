@@ -14,5 +14,9 @@ const errorsMapping = [
     includes: "the server doesn't have a resource type",
     message: `kubectl api resource type error`,
   },
+  {
+    includes: "INTERNAL_ERROR; received from peer",
+    message: `kubectl network error(received from peer)`,
+  },
 ]
 module.exports = (err) => retriableMatch(err, errorsMapping)
