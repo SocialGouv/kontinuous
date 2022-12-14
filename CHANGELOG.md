@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.108.9](https://github.com/socialgouv/kontinuous/compare/v1.108.8...v1.108.9) (2022-12-14)
+
+
+### Bug Fixes
+
+* default auto-clean jobs on predeploy ([dd362e8](https://github.com/socialgouv/kontinuous/commit/dd362e800888bc51e676bab071772886ba1ccd11))
+
 ### [1.108.8](https://github.com/socialgouv/kontinuous/compare/v1.108.7...v1.108.8) (2022-12-14)
 
 
