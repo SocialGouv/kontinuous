@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.109.0](https://github.com/socialgouv/kontinuous/compare/v1.108.9...v1.109.0) (2022-12-14)
+
+
+### Features
+
+* clean-oprhan (not default enabled yet on fabrique) ([e5c6196](https://github.com/socialgouv/kontinuous/commit/e5c61960ab8c159e11f0f266dabf3af9cbf910fe))
+
+
+### Bug Fixes
+
+* add need kubectl ([4e4d654](https://github.com/socialgouv/kontinuous/commit/4e4d654ef0ac4d3f281075bdab6558b4eaae5496))
+* improve kubectl debug ([95c9fd4](https://github.com/socialgouv/kontinuous/commit/95c9fd490de6af933cb563802af21271649b04f0))
+
 ### [1.108.9](https://github.com/socialgouv/kontinuous/compare/v1.108.8...v1.108.9) (2022-12-14)
 
 
