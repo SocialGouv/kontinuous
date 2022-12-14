@@ -11,7 +11,7 @@ Kontinuous addresses all theses needs and, by using it's rich ***out-of-the-box*
 
 In a simple sentence: Kubernetes manifests as pipelines. <br>
 What does that means ? <br>
-All CI+CD pipelines are reproductible running kapp/kubectl cli deploy command on the built yaml manifests.
+All CI+CD pipelines are reproductible applying the built yaml manifests.
 
 ***Philosophy***
 
@@ -139,7 +139,7 @@ Minimal dependencies:
 ### 🕮 Summary
 
 1. [Getting Started](#_1-getting-started)
-    1. [Directory structure](#_12-directory-structure)
+    1. [Directory structure](#_11-directory-structure)
 
 2. [Configuration](#_2-configuration)
     1. [Repository config](#_21-repository-config)
