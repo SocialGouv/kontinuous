@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.108.7](https://github.com/socialgouv/kontinuous/compare/v1.108.6...v1.108.7) (2022-12-14)
+
+
+### Bug Fixes
+
+* add libgraph-easy-perl package name ([ee189b0](https://github.com/socialgouv/kontinuous/commit/ee189b02e072770bdb2e6daf24e0b09d2dc8cd72))
+* retry errors on kubectl logs +new known error ([04158cb](https://github.com/socialgouv/kontinuous/commit/04158cb4f983efb81b78b4d402324287b7405f25))
+
 ### [1.108.6](https://github.com/socialgouv/kontinuous/compare/v1.108.5...v1.108.6) (2022-12-13)
 
 
