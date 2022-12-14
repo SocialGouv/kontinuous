@@ -64,7 +64,9 @@ const kubectlRun = async (kubectlArgs, options = {}) => {
       } else {
         reject(
           new Error(
-            `kubectl failed with exit code ${code}: ${errorMessages.join("")}`
+            `kubectl ${kubectlArgs}; failed with exit code ${code}: ${errorMessages.join(
+              ""
+            )}`
           )
         )
       }
