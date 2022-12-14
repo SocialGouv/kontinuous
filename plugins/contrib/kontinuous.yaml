@@ -42,6 +42,8 @@ preDeploy:
     enabled: false
   cleanFailed:
     enabled: false
+  cleanOrphan:
+    enabled: true
 
 deploySidecars:
   failfast:

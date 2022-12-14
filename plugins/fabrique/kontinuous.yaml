@@ -47,6 +47,21 @@ dependencies:
         enabled: true
       cleanFailed:
         enabled: false
+      cleanOrphan:
+        enabled: false
+        options:
+          nativeApiResources:
+            - configmaps
+            - horizontalpodautoscalers
+            - persistentvolumeclaims
+            - cronjobs
+            - jobs
+            - deployments
+            - statefulsets
+            - ingresses
+          crdApiResources:
+            - sealedsecrets
+
 
     postDeploy:
       notifyMattermost:
