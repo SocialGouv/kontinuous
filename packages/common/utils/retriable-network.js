@@ -7,7 +7,8 @@ const errorsMapping = [
     message: `kubectl network error(net/http: TLS handshake timeout)`,
   },
   {
-    includes: "timeout",
+    // includes: "timeout",
+    regex: /^(?!--)(.*timeout.*)$/,
     message: `kubectl network error(timeout stuff)`,
   },
   {
