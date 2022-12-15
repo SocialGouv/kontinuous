@@ -86,7 +86,7 @@ module.exports = async (deploys, options, context) => {
     return defaultTo(manifestsRecreateResourceOption, recreate)
   }
 
-  const kubectlApplyManifestExec = async (manifest) => {
+  const kubectlApplyManifest = async (manifest) => {
     const yamlManifest = yaml.dump(manifest)
     const forceThisResource = getForceThisResource(manifest)
     const kubectlDeployCommand = `
@@ -112,25 +112,7 @@ module.exports = async (deploys, options, context) => {
     })
   }
 
-  const q = async.queue(async (manifest) => {
-    try {
-      await kubectlApplyManifestExec(manifest)
-    } catch (err) {
-      return err
-    }
-  }, applyConcurrencyLimit)
-
   const { eventsBucket } = runContext
-
-  const kubectlApplyManifest = async (manifest) => {
-    const result = await q.push(manifest)
-    if (result instanceof Error) {
-      const { namespace, labels } = manifest.metadata
-      const resourceName = labels["kontinuous/resourceName"]
-      eventsBucket.trigger("failed", { namespace, resourceName })
-      throw result
-    }
-  }
 
   const forceApply = async (manifest) => {
     await kubectlDeleteManifest(manifest, kubectlDeleteManifestOptions)
@@ -154,7 +136,7 @@ module.exports = async (deploys, options, context) => {
     return forceApply(manifest, err)
   }
 
-  const applyManifest = async (manifest) => {
+  const applyManifestExec = async (manifest) => {
     let result
     const recreateThisResource = getRecreateThisResource(manifest)
     try {
@@ -169,6 +151,21 @@ module.exports = async (deploys, options, context) => {
       throw err
     }
     return result
+  }
+
+  const q = async.queue(async (manifest) => {
+    try {
+      await applyManifestExec(manifest)
+    } catch (err) {
+      return err
+    }
+  }, applyConcurrencyLimit)
+
+  const applyManifest = async (manifest) => {
+    const result = await q.push(manifest)
+    if (result instanceof Error) {
+      throw result
+    }
   }
 
   const deps = getDeps(manifests, context)
