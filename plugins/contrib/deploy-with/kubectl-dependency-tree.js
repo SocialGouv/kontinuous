@@ -287,11 +287,7 @@ module.exports = async (deploys, options, context) => {
             `resource "${resourceName}" ready`
           )
           eventsBucket.trigger("ready", eventParam)
-          resolve({
-            ...result,
-            namespace,
-            selector,
-          })
+          resolve()
         } else if (result.error?.code || result.error?.reason) {
           const errMsg = `resource "${resourceName}" failed`
           logger.error(
@@ -306,6 +302,7 @@ module.exports = async (deploys, options, context) => {
           throw new Error(errMsg)
         } else {
           eventsBucket.trigger("closed", eventParam)
+          resolve()
         }
       } catch (err) {
         eventsBucket.trigger("failed", eventParam)
@@ -314,15 +311,16 @@ module.exports = async (deploys, options, context) => {
     })
   }
 
-  const applyPromise = !dryRun
-    ? Promise.all(
-        manifests.map(async (manifest) => {
-          await dependenciesReady(manifest)
-          await applyManifest(manifest)
-          await rolloutStatusManifest(manifest)
-        })
-      )
-    : null
+  const applyAll = async () =>
+    Promise.all(
+      manifests.map(async (manifest) => {
+        await dependenciesReady(manifest)
+        await applyManifest(manifest)
+        await rolloutStatusManifest(manifest)
+      })
+    )
+
+  const applyPromise = !dryRun ? applyAll() : null
 
   const stopRolloutStatus = () => {
     interceptor.stop = true
