@@ -19,8 +19,10 @@ module.exports = async (
   const elapsedMap = {}
 
   const getElapsed = (key) => {
-    const elapsed = prettyTime(new Date() - elapsedMap[key])
-    return elapsed
+    if (elapsedMap[key]) {
+      const elapsed = prettyTime(new Date() - elapsedMap[key])
+      return elapsed
+    }
   }
 
   const getStateMsg = (msg, param) => {
@@ -83,6 +85,7 @@ module.exports = async (
   eventsBucket.on("waiting", (param) => {
     const key = getEventUniqKey(param)
     let i = 0
+    elapsedMap[key] = new Date()
     const intvl = setInterval(() => {
       if (i++ === 0) {
         return
@@ -91,7 +94,6 @@ module.exports = async (
     }, interval * 1000)
     intervalsMap[key] = intvl
     promisesMap[key] = publicPromise()
-    elapsedMap[key] = new Date()
   })
   eventsBucket.on("ready", (param) => {
     const key = getEventUniqKey(param)
