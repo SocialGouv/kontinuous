@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.109.1 (2022-12-15)
+
+
+### Bug Fixes
+
+* hanging indefinitely ([#109](https://github.com/socialgouv/kontinuous/issues/109)) ([fb684c4](https://github.com/socialgouv/kontinuous/commit/fb684c47583f9eb2665c8ee3b24e2a48739ef4d2))
+
 ## [1.109.0](https://github.com/socialgouv/kontinuous/compare/v1.108.9...v1.109.0) (2022-12-14)
 
 
