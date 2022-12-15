@@ -120,9 +120,14 @@ module.exports = async (deploys, options, context) => {
     }
   }, applyConcurrencyLimit)
 
+  const { eventsBucket } = runContext
+
   const kubectlApplyManifest = async (manifest) => {
     const result = await q.push(manifest)
     if (result instanceof Error) {
+      const { namespace, labels } = manifest.metadata
+      const resourceName = labels["kontinuous/resourceName"]
+      eventsBucket.trigger("failed", { namespace, resourceName })
       throw result
     }
   }
@@ -205,8 +210,6 @@ module.exports = async (deploys, options, context) => {
 
     return dependencies
   }
-
-  const { eventsBucket } = runContext
 
   const dependenciesReady = async (manifest) => {
     const dependencies = getManifestDependencies(manifest)
