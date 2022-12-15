@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.109.2](https://github.com/socialgouv/kontinuous/compare/v1.109.1...v1.109.2) (2022-12-15)
+
+
+### Bug Fixes
+
+* timeout regex for retry error ([26faba1](https://github.com/socialgouv/kontinuous/commit/26faba1503ad4bbd4fd18226808833b37fea1101))
+
 ### 1.109.1 (2022-12-15)
 
 
