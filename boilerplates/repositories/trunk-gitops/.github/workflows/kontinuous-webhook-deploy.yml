@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - "**"
+    tags:
+      - v*
       
 concurrency:
   cancel-in-progress: true
