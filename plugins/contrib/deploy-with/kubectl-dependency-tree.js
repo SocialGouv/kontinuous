@@ -130,7 +130,7 @@ module.exports = async (deploys, options, context) => {
       throw err
     }
     logger.warn(
-      { err },
+      { error: err.message },
       `💥 delete resource "${resourceName}" before recreate to force immutable field conflict`
     )
     return forceApply(manifest, err)
