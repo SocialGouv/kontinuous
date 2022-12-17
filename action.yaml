@@ -30,6 +30,7 @@ inputs:
     description: "override final values using in yaml format, supporting subkeys"
   disableDiff:
     description: "disable diff branch"
+    default: "true"
 runs:
   using: "composite"
   steps:
