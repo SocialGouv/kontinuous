@@ -1,8 +1,6 @@
-name: "Kontinuous Webhook"
-description: "Run a kontinuous pipeline on kubernetes via webhook"
+name: "Kontinuous Pipeline 🥷"
+description: "Deploy on Kubernetes via Webhook"
 inputs:
-  token:
-    description: "The github authentication token"
   webhookToken:
     description: "The webhook authentication token, usually secrets.KUBEWEBHOOK_TOKEN"
   webhookUri:

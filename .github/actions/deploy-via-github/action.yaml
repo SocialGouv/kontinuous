@@ -1,5 +1,5 @@
-name: "Autodevops deploy"
-description: "Autodevops deploy using Helm template and kapp"
+name: "Kontinuous Pipeline 🥷"
+description: "Deploy on Kubernetes via Github"
 inputs:
   rancherProjectId:
     description: "The Rancher project ID, usually secrets.RANCHER_PROJECT_ID"
