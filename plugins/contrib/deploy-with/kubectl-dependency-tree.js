@@ -1,4 +1,4 @@
-const async = require("async")
+// const async = require("async")
 
 const getDeps = require("../lib/get-needs-deps")
 
@@ -41,10 +41,10 @@ module.exports = async (deploys, options, context) => {
   const force = defaultTo(options.force, defaultOptions.force)
   const recreate = defaultTo(options.recreate, defaultOptions.recreate)
   const forceConflicts = defaultTo(options.forceConflicts, true)
-  const applyConcurrencyLimit = defaultTo(
-    options.applyConcurrencyLimit,
-    defaultOptions.applyConcurrencyLimit
-  )
+  // const applyConcurrencyLimit = defaultTo(
+  //   options.applyConcurrencyLimit,
+  //   defaultOptions.applyConcurrencyLimit
+  // )
   const validate = defaultTo(
     options.validate,
     !config.noValidate && defaultOptions.validate
@@ -153,6 +153,7 @@ module.exports = async (deploys, options, context) => {
     return result
   }
 
+  /*
   const q = async.queue(async (manifest) => {
     try {
       await applyManifestExec(manifest)
@@ -167,6 +168,8 @@ module.exports = async (deploys, options, context) => {
       throw result
     }
   }
+  */
+  const applyManifest = applyManifestExec
 
   const deps = getDeps(manifests, context)
 
