@@ -117,12 +117,15 @@ module.exports = async (
 
   const promise = new Promise(async (resolve, reject) => {
     await Promise.allSettled([deploysPromise])
+    logger.debug("progressing allSettled")
     stopSidecar()
     try {
       const results = await promiseAll(Object.values(promisesMap))
+      logger.debug("progressing results")
       const errors = results.filter((result) => result instanceof Error)
       resolve({ errors })
     } catch (err) {
+      logger.debug("progressing reject")
       reject(err)
     }
   })
