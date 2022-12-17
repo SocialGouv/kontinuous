@@ -164,6 +164,7 @@ module.exports = async (options) => {
     if (statusUrl) {
       await setStatus({ url: statusUrl, token, status: "success", ok: true })
     }
+    process.exit(0)
   } catch (err) {
     logger.error(err)
     if (statusUrl) {

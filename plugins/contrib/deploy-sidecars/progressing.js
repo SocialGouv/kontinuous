@@ -41,6 +41,7 @@ module.exports = async (
   const promisesMap = {}
   const intervalsMap = {}
 
+  let ended = false
   const stopSidecar = () => {
     for (const i of Object.values(intervalsMap)) {
       clearInterval(i)
@@ -79,6 +80,9 @@ module.exports = async (
     }, interval * 1000)
   }
   setTimeout(() => {
+    if (ended) {
+      return
+    }
     globalProgressing()
   }, globalProgressingInitialDelay * 1000)
 
@@ -117,7 +121,7 @@ module.exports = async (
 
   const promise = new Promise(async (resolve, reject) => {
     await Promise.allSettled([deploysPromise])
-    clearInterval(intervalsMap[".global"])
+    ended = true
     stopSidecar()
     try {
       const results = await promiseAll(Object.values(promisesMap))
