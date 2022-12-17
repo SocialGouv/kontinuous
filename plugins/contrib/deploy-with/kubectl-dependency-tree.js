@@ -348,7 +348,6 @@ module.exports = async (deploys, options, context) => {
       if (!dryRun) {
         await applyPromise
       }
-      logger.debug("deploy-with kubectl-dependency-tree end")
       resolve(true)
     } catch (err) {
       reject(err)
