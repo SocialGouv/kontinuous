@@ -16,11 +16,11 @@ inputs:
 runs:
   using: docker
   # image: Dockerfile
-  image: docker://ghcr.io/socialgouv/kontinuous/gh-action-deploy-via-webhook:v1.109.13
+  image: docker://ghcr.io/socialgouv/kontinuous/deploy-via-webhook:v1.109.13
   env:
+    KS_WEBHOOK_TOKEN: ${{ inputs.webhookToken }}
+    KS_WEBHOOK_URI: ${{ inputs.webhookUri }}
+    TRIGGER_WEBHOOK: ${{ inputs.triggerWebhook }}
+    KS_ENVIRONMENT: ${{ inputs.environment }}
     KS_CHART: ${{ inputs.chart }}
     KS_IGNORE_PROJECT_TEMPLATES: ${{ inputs.ignoreProjectTemplates }}
-  args:
-    - '${{ inputs.environment }}'
-    - '${{ inputs.webhookToken }}'
-    - '${{ inputs.triggerWebhook }}'
