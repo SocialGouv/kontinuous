@@ -23,8 +23,7 @@ module.exports = async (deploys, options, context) => {
 
   const { kubeconfigContext, kubeconfig } = config
 
-  const { applyTimeoutSeconds = 120 } = options
-  const applyTimeout = applyTimeoutSeconds * 1000
+  const { applyTimeout = "2m" } = options
 
   const { serverSide = true } = options
 
