@@ -33,5 +33,5 @@ runs:
     KS_KUBECONFIG_CONTEXT: ${{ inputs.kubeconfigContext }}    
     KS_INLINE_VALUES: ${{ inputs.inlineValues }}    
     KS_INLINE_SET: ${{ inputs.inlineSet }}    
-    KS_GIT_REPOSITORY: ${{ github.repository }}
+    KS_GIT_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
     KS_LOG_LEVEL: ${{ inputs.logLevel }}
