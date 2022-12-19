@@ -2,14 +2,8 @@ name: Build Docker Image Webhook
 
 on:
   push:
-    branches:
-      - '**'
-      - '!master'
-    paths:
-      - packages/webhook/**
-      - packages/common/**
-      - yarn.lock
-      - .yarnrc.yml
+    tags:
+      - 'v*.*.*'
 
 concurrency:
   cancel-in-progress: true

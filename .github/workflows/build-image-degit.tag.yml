@@ -1,15 +1,9 @@
-name: Build Docker Image Webhook
+name: Build Docker Image Degit
 
 on:
   push:
-    branches:
-      - '**'
-      - '!master'
-    paths:
-      - packages/webhook/**
-      - packages/common/**
-      - yarn.lock
-      - .yarnrc.yml
+    tags:
+      - 'v*.*.*'
 
 concurrency:
   cancel-in-progress: true
@@ -28,6 +22,6 @@ jobs:
         uses: ./.github/actions/build-images
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: packages/webhook/Dockerfile
-          destination: /webhook
+          dockerfile: packages/degit/Dockerfile
+          destination: /degit
   
