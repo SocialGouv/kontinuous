@@ -1,4 +1,4 @@
-name: Build Docker Images
+name: Build Docker Image Webhook
 
 on:
   push:
@@ -7,10 +7,15 @@ on:
       - '!master'
     tags:
       - 'v*.*.*'
+    paths:
+      - packages/kontinuous/**
+      - packages/common/**
+      - yarn.lock
+      - .yarnrc.yml
 
 concurrency:
   cancel-in-progress: true
-  group: build-docker-images-${{ github.ref_name }}
+  group: ${{ github.workflow }}-${{ github.event.ref }}
 
 jobs:
   build-base-images:
@@ -18,18 +23,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - destination: ""
-            dockerfile: packages/kontinuous/Dockerfile
-          - destination: "/webhook"
-            dockerfile: packages/webhook/Dockerfile
-          - destination: "/degit"
-            dockerfile: packages/degit/Dockerfile
-          - destination: "/wait-needs"
-            dockerfile: packages/wait-needs/Dockerfile
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -37,9 +30,8 @@ jobs:
         uses: ./.github/actions/build-images
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          context: ${{ matrix.context }}
-          dockerfile: ${{ matrix.dockerfile }}
-          destination: ${{ matrix.destination }}
+          dockerfile: packages/kontinuous/Dockerfile
+          destination: ""
   
   build-actions:
     needs: [build-base-images]
