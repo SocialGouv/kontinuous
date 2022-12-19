@@ -1,5 +1,10 @@
 FROM ghcr.io/socialgouv/kontinuous:next-workflows
 
+RUN apt-get update && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
+    curl \
+  && rm -rf /var/lib/apt/lists/*
+
 ARG JQ_VERSION=1.6
 ENV JQ_VERSION=$JQ_VERSION
 RUN curl --fail -sL https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64 > /tmp/jq \
