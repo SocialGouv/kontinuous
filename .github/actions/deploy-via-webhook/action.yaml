@@ -14,10 +14,6 @@ inputs:
   ignoreProjectTemplates:
     description: "don't merge project's root templates and env templates"
 
-outputs:
-  deploymentOk:
-    description: "Deployment status as boolean"
-
 runs:
   using: docker
   # image: Dockerfile
