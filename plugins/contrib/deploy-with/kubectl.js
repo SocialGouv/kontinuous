@@ -21,7 +21,10 @@ module.exports = async (deploys, options, context) => {
 
   await needBin(needKubectl)
 
-  const { kubeconfigContext, kubeconfig, deployTimeout } = config
+  const { kubeconfigContext, kubeconfig } = config
+
+  const { applyTimeoutSeconds = 120 } = options
+  const applyTimeout = applyTimeoutSeconds * 1000
 
   const { serverSide = true } = options
 
@@ -92,7 +95,7 @@ module.exports = async (deploys, options, context) => {
       --force-conflicts=${serverSide && forceConflicts ? "true" : "false"}
       --overwrite
       --wait
-      --timeout=${deployTimeout}
+      --timeout=${applyTimeout}
   `
     return kubectlRetry(kubectlDeployCommand, {
       kubeconfig,
