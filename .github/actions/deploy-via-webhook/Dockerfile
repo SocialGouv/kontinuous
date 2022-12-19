@@ -1,4 +1,4 @@
-FROM ghcr.io/socialgouv/kontinuous:v1.109.13
+FROM ghcr.io/socialgouv/kontinuous:next-workflows
 
 ARG JQ_VERSION=1.6
 ENV JQ_VERSION=$JQ_VERSION
