@@ -20,6 +20,11 @@ inputs:
   logLevel:
     description: "Set kontinuous logger verbosity, possible values: trace, debug, info, warn, error"
     default: "debug"
+
+outputs:
+  deploymentOk:
+    description: "Deployment status as boolean"
+
 runs:
   using: docker
   # image: Dockerfile
