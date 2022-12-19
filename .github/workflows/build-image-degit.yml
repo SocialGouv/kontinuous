@@ -1,6 +1,7 @@
 name: Build Docker Image Degit
 
 on:
+  create:
   push:
     branches:
       - '**'
