@@ -19,4 +19,14 @@ EXIT_CODE=$?
 mv "$KS_BUILD_PATH/manifests.yaml" \
    "$GITHUB_WORKSPACE/manifests.yaml"
 
-exit $EXIT_CODE
+if [ "$EXIT_CODE" = "0" ]; then
+  DEPLOYMENT_OK="true"
+else
+  DEPLOYMENT_OK="false"
+fi
+echo "deploymentOk=$DEPLOYMENT_OK">>$GITHUB_OUTPUT
+
+if [ "$DEPLOYMENT_OK" != "true" ]; then
+  echo "Pipeline failed ❌"
+  exit 1
+fi
