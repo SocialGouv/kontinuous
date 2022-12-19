@@ -123,7 +123,6 @@ status=$(echo "$DEPLOYMENT_STATUS" | jq .status)
 echo "status:  $status"
 
 DEPLOYMENT_OK=$(echo "$DEPLOYMENT_STATUS" | jq .ok)
-echo "deploymentOk=$DEPLOYMENT_OK">>$GITHUB_OUTPUT
 
 if [ "$DEPLOYMENT_OK" != "true" ]; then
   echo "Pipeline failed ❌"
