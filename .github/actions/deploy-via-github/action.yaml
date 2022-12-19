@@ -1,136 +1,37 @@
 name: "Kontinuous Pipeline 🥷"
 description: "Deploy on Kubernetes via Github"
 inputs:
-  rancherProjectId:
-    description: "The Rancher project ID, usually secrets.RANCHER_PROJECT_ID"
-    required: true
-  ciNamespace:
-    description: "The Rancher project name, usually $RANCHER_PROJECT_NAME-ci, usefull jobs that needs secrets or ci namespaces"
-    required: true
   environment:
     description: "The deployment environment (dev | preprod | prod), default to prod on version tag, preprod on master or main, else dev"
-  kubeconfig:
-    description: "The Kubernetes authentication configuration"
-  token:
-    description: "The Github authentication token"
   chart:
     description: "charts to enable as standalone, you can add multiple separated by comma"
-  actionName:
-    description: "override manifests name as manifest-$name.yaml, default to manifest-$environment.yaml"
-  timeout:
-    description: "override default kapp --wait-timeout, default to 15m"
+  ignoreProjectTemplates:
+    description: "don't merge project's root templates and env templates"
   cwd:
     description: "working directory where is located .kontinuous"
+  kubeconfig:
+    description: "The Kubernetes authentication configuration content"
   kubeconfigContext:
     description: "override kubeconfig context, default dev or prod according to environment"
   inlineValues:
     description: "deep final override of values in yaml format"
   inlineSet:
     description: "override final values using in yaml format, supporting subkeys"
-  disableDiff:
-    description: "disable diff branch"
+  logLevel:
+    description: "Set kontinuous logger verbosity, possible values: trace, debug, info, warn, error"
+    default: "debug"
 runs:
-  using: "composite"
-  steps:
-
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Setup env
-      shell: bash
-      run: |
-        KS_BUILD_PATH=/tmp/autodevops
-        KS_DISABLE_DIFF="${{ inputs.disableDiff }}"
-        mkdir -p $KS_BUILD_PATH
-        PROJECT_PATH="${{ github.workspace }}/${{ inputs.cwd }}"
-        echo "KS_BUILD_PATH=$KS_BUILD_PATH" >> $GITHUB_ENV
-        echo "KS_DISABLE_DIFF=$KS_DISABLE_DIFF" >> $GITHUB_ENV
-        echo "KS_DEBUG=true" >> $GITHUB_ENV
-        echo "PROJECT_PATH=$PROJECT_PATH" >> $GITHUB_ENV
-    - name: Install dependencies
-      working-directory: "${{ github.action_path }}"
-      shell: bash
-      run: |
-        yarn workspaces focus kontinuous --production
-
-    - name: Build manifests
-      working-directory: "${{ github.action_path }}"
-      shell: bash
-      env:
-        KS_CI_NAMESPACE: ${{ inputs.ciNamespace }}
-        RANCHER_PROJECT_ID: ${{ inputs.rancherProjectId }}
-        KS_ENVIRONMENT: ${{ inputs.environment }}
-        KS_CHART: ${{ inputs.chart }}
-        KS_INLINE_VALUES: ${{ inputs.inlineValues }}
-        KS_INLINE_SET: ${{ inputs.inlineSet }}
-      run: $GITHUB_ACTION_PATH/../../../packages/kontinuous/bin/kontinuous build --cwd ${{ env.PROJECT_PATH }}
-
-    - name: Archive manifest
-      uses: actions/upload-artifact@v2
-      with:
-        name: manifests-${{ inputs.actionName || inputs.environment }}.yaml
-        path: ${{ env.KS_BUILD_PATH }}/manifests.yaml
-
-    - name: Setup namespace env var
-      shell: bash
-      working-directory: ${{ env.KS_BUILD_PATH }}
-      run: |
-        NAMESPACE=$(cat manifests.yaml | yq eval-all 'select(.kind=="Namespace").metadata.name')
-        echo "NAMESPACE=$NAMESPACE" >> $GITHUB_ENV
-
-    - name: Notify deployment start
-      uses: bobheadxi/deployments@v0.4.3
-      id: deployment
-      with:
-        step: start
-        token: ${{ inputs.token }}
-        desc: "Deploying environment: ${{ env.NAMESPACE }}"
-        env: ${{ inputs.environment == 'dev' && env.NAMESPACE || inputs.environment == 'preproduction' && 'preproduction' || 'production' }}
-
-    - name: Create kubernetes config
-      shell: bash
-      run: |
-        if [ -z "${{ inputs.kubeconfig }}" ]; then
-          exit 0
-        fi
-        mkdir -p ~/.kube
-        touch ~/.kube/config
-        echo ${{ inputs.kubeconfig }} | base64 -d > ~/.kube/config
-    
-    - name: Deploy manifests
-      working-directory: "${{ github.action_path }}"
-      shell: bash
-      env:
-        KS_CI_NAMESPACE: ${{ inputs.ciNamespace }}
-        RANCHER_PROJECT_ID: ${{ inputs.rancherProjectId }}
-        KS_GIT_REPOSITORY: ${{ github.repository }}
-        KS_ENVIRONMENT: ${{ inputs.environment }}
-        KS_KUBECONFIG_CONTEXT: ${{ inputs.kubeconfigContext }}
-        KS_DEPLOY_TIMEOUT: ${{ inputs.timeout }}
-      run: $GITHUB_ACTION_PATH/../../../packages/kontinuous/bin/kontinuous deploy --cwd ${{ env.PROJECT_PATH }} -f ${{ env.KS_BUILD_PATH }}/manifests.yaml
-
-    - name: Define environment URL
-      id: environment-url
-      shell: bash
-      working-directory: ${{ env.KS_BUILD_PATH }}
-      run: |
-        HOSTS=$(cat manifests.yaml | yq eval-all '.spec.rules[] .host')
-        HOST=$(echo "$HOSTS" | head -n 1)
-        echo $HOST
-        echo "url=https://$HOST">>$GITHUB_OUTPUT
-
-    - name: Notify deployment end
-      uses: bobheadxi/deployments@v0.4.3
-      with:
-        step: finish
-        status: ${{ job.status }}
-        token: ${{ inputs.token }}
-        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-        env_url: ${{ steps.environment-url.outputs.url }}
-
-    - name: Debug manifests
-      uses: socialgouv/kontinuous/.github/actions/debug-manifests@v1.109.13
-      if: github.event_name != 'delete'
-      with:
-        token: ${{ inputs.token }}
-        path: ${{ env.KS_BUILD_PATH }}/manifests.yaml
+  using: docker
+  # image: Dockerfile
+  image: docker://ghcr.io/socialgouv/kontinuous/deploy-via-github:v1.109.13
+  env:
+    KS_ENVIRONMENT: ${{ inputs.environment }}
+    KS_CHART: ${{ inputs.chart }}
+    KS_IGNORE_PROJECT_TEMPLATES: ${{ inputs.ignoreProjectTemplates }}
+    KS_WORKSPACE_PATH: ${{ inputs.cwd }}
+    KUBECONFIG_B64: ${{ inputs.kubeconfig }}    
+    KS_KUBECONFIG_CONTEXT: ${{ inputs.kubeconfigContext }}    
+    KS_INLINE_VALUES: ${{ inputs.inlineValues }}    
+    KS_INLINE_SET: ${{ inputs.inlineSet }}    
+    KS_GIT_REPOSITORY: ${{ github.repository }}
+    KS_LOG_LEVEL: ${{ inputs.logLevel }}

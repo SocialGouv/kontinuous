@@ -40,8 +40,8 @@ jobs:
           context: ${{ matrix.context }}
           dockerfile: ${{ matrix.dockerfile }}
           destination: ${{ matrix.destination }}
-
-  build-actions-common:
+  
+  build-actions:
     needs: [build-base-images]
     runs-on: ubuntu-latest
     permissions:
@@ -51,39 +51,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - destination: "/gh-actions-common"
-            dockerfile: .github/actions/Dockerfile
-            context: .github/actions
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Build image
-        uses: ./.github/actions/build-images
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          context: ${{ matrix.context }}
-          dockerfile: ${{ matrix.dockerfile }}
-          destination: ${{ matrix.destination }}
-  
-  build-actions:
-    needs: [build-actions-common]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - destination: "/gh-action-debug-manifests-output"
-            dockerfile: .github/actions/debug-manifests-output/Dockerfile
-            context: .github/actions/debug-manifests-output
-          - destination: "/gh-action-deploy-via-webhook"
+          - destination: "/deploy-via-github"
+            dockerfile: .github/actions/deploy-via-github/Dockerfile
+            context: .github/actions/deploy-via-github
+          - destination: "/deploy-via-webhook"
             dockerfile: .github/actions/deploy-via-webhook/Dockerfile
             context: .github/actions/deploy-via-webhook
-          - destination: "/gh-action-load-remote-config"
-            dockerfile: .github/actions/load-remote-config/Dockerfile
-            context: .github/actions/load-remote-config
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

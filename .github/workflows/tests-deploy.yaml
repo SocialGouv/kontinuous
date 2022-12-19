@@ -1,12 +1,6 @@
 name: Tests deploy
 
 on:
-#   push:
-#     branches:
-#       - "**"
-#       - "!v*"
-#     tags-ignore:
-#       - "**"
   workflow_run:
     workflows: ["Build Docker Images"]
     types:
