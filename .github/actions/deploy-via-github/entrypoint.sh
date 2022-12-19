@@ -14,7 +14,7 @@ export KS_BUILD_PATH=/tmp/kontinuous-deploy-via-github/
 kontinuous deploy
 EXIT_CODE=$?
 
-mv "$KS_BUILD_PATH/tmp/kontinuous-deploy-via-github/manifests.yaml" \
+mv "$KS_BUILD_PATH/manifests.yaml" \
    "$GITHUB_WORKSPACE/manifests.yaml"
 
 exit $EXIT_CODE
