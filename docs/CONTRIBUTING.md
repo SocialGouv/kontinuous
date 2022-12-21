@@ -1,4 +1,4 @@
-### 7. Development
+### Development
 
 ```sh
 git clone git@github.com:socialgouv/kontinuous.git
