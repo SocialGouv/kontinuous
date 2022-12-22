@@ -12,9 +12,6 @@
           coded with 💙🤍❤️
           by SocialGouv
         </div>
-        <div style="float:left;">
-          <img src="_media/socialgroove-100.jpg" width="24px" height="24px">
-        </div>
       </div>
     </a>
   </div>

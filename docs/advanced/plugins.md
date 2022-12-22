@@ -1,4 +1,4 @@
-## Plugins
+# Plugins
 
 **Core**
 
@@ -8,7 +8,7 @@ The core is responsible to merge config, values, templates and process plugins, 
 
 All custom logic can be implemented in plugins. By creating plugins you can covers all uses cases.
 
-#### 4.1 types
+## types
 
 There are differents type of plugins:
 
@@ -82,7 +82,7 @@ options:
   domain: "fabrique.social.gouv.fr"
 ```
 
-#### 4.2 umbrella
+## umbrella
 
 An umbrella plugin is the container for all other plugins types. It's basically a git repository, or subdirectory of a git repository. It can be versioned as a git repo. <br>
 A umbrella plugin can import other umbrella plugins, dependencies are recursives. <br>
@@ -146,13 +146,13 @@ You can create and use `charts`, `values-compilers`, `patches`, `validators`, `d
 
 You can add a `package.json` and a `yarn.lock` file at root of your kontinuous plugin directory, kontinuous will install it using `yarn` (yes, it's opinionated), so you can use node dependencies in your `values-compilers`, `patches`, `validators`, `debug-manifests`, `pre-deploy`, `post-deploy`, `deploy-sidecar` and `deploy-with` plugins.
 
-#### 4.3 charts
+## charts
 
 Charts plugin are basically helm charts, that can be autolinked from the umbrella (name for the main chart in helm jargon). <br>
 If you doesn't create a `Chart.yaml` in a chart repository, a default on will be created for you by kontinuous. <br>
 A parent chart will be automatically created from project/plugin path, charts that are present in the `charts` directory will be automatically added to this chart as subcharts (`dependencies` key in `Chart.yaml`). <br>
 
-#### 4.4 values-compilers
+## values-compilers
 
 As it's name suggest it, it's values compilers, that will transform values declared in `values.yaml` files in final values that will be consumed by `helm`. <br>
 Most often values-compilers are here to make values leaner to declare for final dev user. <br>
@@ -175,11 +175,11 @@ Here are the args that the function will receive: `module.exports = (values, opt
 - `utils` is a toolset of helpers function used in kontinuous itself and exposed, all are defined here: [packages/common/utils](https://github.com/socialgouv/kontinuous/blob/master/packages/common/utils)
 - `ctx` is the async context dependency injection container of kontinous, it can be used to retrieve config or logger, eg: `logger = ctx.get("logger")`
 
-#### 4.4-bis values.js
+#### values.js
 
 Instead or additionaly to using a `values.yaml`, you can use a project level only values compiler, that will be runned before all others (bu after retrieving and merging values from `values.yaml` files), creating a values.js file.
 
-#### 4.5 patches
+#### patches
 
 Patches are pure nodeJS file used to modify final `manifests` after compiled by `helm template`. <br>
 Same as `values-compilers` and `validators`, patches has to expose a function using commonJS. This function will receive the kubernetes manifests as an array of object that you can mutate directly or use to produce a new one that you will return. <br>
@@ -193,7 +193,7 @@ NodeJS patches are more flexible than `kustomize` patches that had be abandonned
 
 If you want to use `kustomize` anyway, the easiest way is to use [`post-renderer`](#_45-bis-post-renderer)
 
-#### 4.5-bis post-renderer
+#### post-renderer
 
 Aka _Hack the manifests_
 
@@ -223,7 +223,7 @@ echo "$manifest" > base.yaml
 kustomize build .
 ```
 
-#### 4.6 validators
+#### validators
 
 Validators are pure nodeJS file used to validate final `manifests` after compiled by `helm template`. <br>
 Same as `values-compilers` and `patches`, validators has to expose a function using commonJS. This function will receive the kubernetes manifests as an array of object. <br>

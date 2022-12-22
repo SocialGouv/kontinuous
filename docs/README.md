@@ -1,15 +1,15 @@
-# kontinuous : GitOps for Kubernetes
+# Getting started
 
 ## With kontinuous you can:
 
 - 📦 Define applications resources definitions and their dependencies in GIT
-- 🚧 Use common builtin jobs : docker builds, create-database...
+- 🚧 Use builtin jobs for common use cases : docker builds, database creation/seed...
 - 🌍 Deploy on many environments : review-branches, preprod, prod...
 - 🔐 Use GitHub, GitLab or your own machine to build and deploy; no vendor-lockin
 
 kontinuous is built ontop of [HELM](https://helm.sh/), it's modular and plugin-based so you can extend it at will.
 
-## Getting started
+## kontinuous CLI
 
 The CLI is fully documented, you can consult help using `npx kontinuous --help` to known all available commands. Consult help and availables options using `--help` on each command.
 
@@ -21,7 +21,7 @@ Every yaml file in `.kontinuous/templates` and `.kontinuous/${env}/templates` wi
 
 You'll find a detailed documentation below and plenty of examples in our [samples](https://github.com/socialgouv/kontinuous/packages/kontinuous/tests/samples).
 
-### Directory structure
+## Directory structure
 
 ```raw
 .kontinuous
@@ -49,17 +49,19 @@ You'll find a detailed documentation below and plenty of examples in our [sample
         └─ charts # if you have subcharts, you can nest infinitely
 ```
 
-### Build
+## Build
 
-Run `npx kontinuous build -o` to see your manifests and `npx kontinuous build -o | kubectl apply` to deploy to your cluster.
+Run `npx kontinuous build -o` to see your manifests YAML and `npx kontinuous build -o | kubectl apply` to deploy to your cluster.
 
-See [build](./build.md)
+See [build documentation](./advanced/build.md)
 
-### Environments
+## Environments
 
 Environment can be provided using `KS_ENVIRONMENT` environment variable, `--env` option, or is autoselected from `.git`.
 
 Env related `values.yaml` and templates directories will be merged from `.kontinuous/env/${env}`.
+
+When no explicit env is provided, kontinuous use the GIT head to select the correct environment
 
 | Branche or tag | environnement |
 | -------------- | ------------- |
@@ -80,23 +82,15 @@ Minimal dependencies:
 
 ## Advanced
 
-cf [full schema](https://mermaid.live/edit#pako:eNp9VE2PmzAQ_SvI14YogTQb0qqnVttK7aWtVKmwBwMTcGNs1x-bZTf73ztAEkhIqkjxzHjm-Xnm4ReSyRzImhSaqtL7-j0RiTAu7dz7Lz8TkTMNmWVS4O47dOERuFSgff_DvmDWU86UjVG6NBHdilu0LYnvmf3sUq_zHgb7ew1KGmalrv0dpKWU2_1hjX91q6eYAs4EYB2IvGE24HZIHvHbuhS0AAvG_yPTuHc9dHukE85WCsuEk87EvemljvH8YQR-VvlIuQM_k5ViHLQZJTuxkRwPw3Nx8ymeTqdXzlfUZiWMqzlNgWOYCiEtbeJNjjD-hj0lQgDk6Ne3QKWxvsYo6GvMts5YWbFnSMSupBYnqhPxfAMLr8lyioMa4zR0kHyGUzCQabCmMSiH3D_5TrC_DgQYtHc3jsghdYVfUcE2YOyVc0A1dxEZw6laDcj78RzqYhYosBJ4hcuhvY111hMM9BdDZ0RhoLnm1ykYE3uRDIJ7q1lR4DdxIeVhikG8_oA-42BcQPc2bpyqpjWteEfoPNbeQHFZX_S1CQ113UWwb0qDf6zo7RMME0Xb9s48du9YMJ7fRY2_w-_8_QnNNyyHjDYKGil1wENTgbPSvqAVGEUzHLP9n8CPdfiBsE2NvbUWdIU7qLqbSrvgo7QsNIqzJW-wXsTtv8dlYa4-PIMbxgP7oXt6Msvjw-q98bTkXDrrG_yCXQO3pUpdKCsRZEIqJE5Zjg_xSyI8LyG2hAoSskYzp3qbkES8Yp5TqFj4lDcPJ1lb7WBCqLPyRy0yst5QbuCY9JFRJFydotAWfeue-_bVnxBFBVm_kCey9her2TQKVkG4mM-iMAyjuwmpyXoeBtMgWobL-Wz5NooWYfA6Ic9SIu58GkazVbC4W4azaBmsVkEL-LvdbKi9_gPaEWbk)
+Detailed documention:
 
-See details of [kontinuous lifecycle and features](./features.md)
-
-### Kontinuous Configuration
-
-You can configure kontinuous at project level or global level
-
-see all [configurauion options](./configuration.md).
-
-### CI/CD
-
-To deploy with your preferred CI/CD see [deploy.md](./deploy.md)
-
-### Plugins
-
-Kontinuous provide many plugins and you can add your owns, see [plugins](./plugins.md)
+- [lifecycle](./advanced/lifecycle.md)
+- [features](./advanced/features.md)
+- [kontinuous configuration](./advanced/configuration.md)
+- [kontinuous build](./advanced/build.md)
+- [kontinuous deploy](./advanced/deploy.md)
+- [plugin system](./advanced/plugins.md)
+- [Webhook](./advanced/webhook.md)
 
 ## Samples projects
 

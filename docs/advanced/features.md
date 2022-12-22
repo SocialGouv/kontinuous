@@ -1,27 +1,6 @@
-# Advanced
+# ✨ Features
 
-## 🌀 Life Cycle
-
-### 📝 build manifests
-
-- load dependencies (from .kontinuous/config.yaml) ♾️ Git based extensible plugins ecosystem
-- values-compilers (and values.final.js) plugins 🐒 Expose easy to use options you choose for your final developers
-- helm template 🌟 Full access to rich helm ecosystem and fractal service definitions (subcharts)
-- patches (and post-renderer) plugins 🎯 Highly Customizable (better than kustomize)
-- validators plugins ✅ Verify compliance (opinionable)
-- debug-manifests plugins 🐞 Tailor makable debugging
-
-### 🚀 deploy manifests
-
-- pre-deploy plugins
-- deploy
-  - deploy-with plugins
-  - deploy-sidecars plugins
-- post-deploy plugins
-
-## ✨ Features
-
-### ☯️ Core features
+## ☯️ Core features
 
 - run anywhere
 - dependencies tree between jobs and deployment
@@ -41,7 +20,9 @@
 - adaptable to your infra
 - meta-values to patches even external charts (eg: using ~needs for dependencies tree)
 
-### ♾️ Plugin's features
+## ♾️ Plugin's features
+
+See [Plugins details](./advanced/plugins.md)
 
 - values-compilers
   - auto matching on nested charts

@@ -1,13 +1,13 @@
-## kontinuous Webhook
+# kontinuous Webhook
 
 Using the webhook service you can be totally independent and self-hosted for running you CI/CD workflow.
 The service can be deployed using an [official Helm chart](https://github.com/socialgouv/kontinuous/blob/master/packages/webhook/Chart.yaml).
 
-[![schema](./images/webhook-schema.png)](https://excalidraw.com/#json=OoAm9RLHobXlWw9DmzC6x,R0CXD2-2gYj8D-9OvJS3GA)
+[![schema](../images/webhook-schema.png)](https://excalidraw.com/#json=OoAm9RLHobXlWw9DmzC6x,R0CXD2-2gYj8D-9OvJS3GA)
 
-### deploy webhook
+## deploy webhook
 
-#### using Helm
+### using Helm
 
 It require you have predefined these secrets (in the namespace `myproject-ci` in example): <br>
 
@@ -37,7 +37,7 @@ helm template .  \
 kubectl --namespace myproject-ci apply manifests.yaml
 ```
 
-#### using ArgoCD
+### using ArgoCD
 
 Here is a sample of an [ArgoCD ApplicationSet](https://argo-cd.readthedocs.io/en/stable/roadmap/#applicationset): [plugins/fabrique/samples/argocd/kontinuous-webhooks.yaml](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/samples/argocd/kontinuous-webhooks.yaml)
 
@@ -45,7 +45,7 @@ Here is a sample of an [ArgoCD ApplicationSet](https://argo-cd.readthedocs.io/en
 
 You should configure webhook event on push event on repository (from github, gitlab (should be tested), gitea (should be dev))
 
-#### Github
+## Github repository settings
 
 In the github repository, go to **settings** -> **Webhooks** -> **Add webhook**
 

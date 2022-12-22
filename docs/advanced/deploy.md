@@ -1,6 +1,6 @@
-## Deploy
+# Applications deployment
 
-### with kontinuous CLI
+## with kontinuous CLI
 
 Run `npx kontinuous deploy` from your project repository. Depending of your infra, you will need to pass options as `--ci-namespace <ns>` (needed at **_La Fabrique_** for example).
 
@@ -19,7 +19,7 @@ kapp deploy /tmp/manifests.yaml
   -f /tmp/manifests.yaml
 ```
 
-### with GitHub Actions
+## with GitHub Actions
 
 - Option 1: **webhook + github logs** (the recommended one)
 
@@ -108,4 +108,4 @@ kapp deploy /tmp/manifests.yaml
 
 ### With Webhook
 
-If you dont want to distribute `KUBECONFIG`, you can use kontinuous webhook. See [./webhook](./webhook.md) for details.
+If you dont want to distribute `KUBECONFIG`, you can use kontinuous webhook. See [./webhook](./advanced/webhook.md) for details.

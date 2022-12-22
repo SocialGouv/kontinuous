@@ -1,6 +1,6 @@
-## Kontinuous configuration
+# Kontinuous configuration
 
-### Repository config
+## Repository config
 
 The repository config file path is `.kontinuous/config.yaml` and this file shoud be commited on the repo. No sensitive data should be included here.
 
@@ -40,7 +40,7 @@ dependencies:
               foo: bar
 ```
 
-### Global config
+## Global config
 
 The global config file path is `~/.kontinuous/config.yaml` where `~` is your `$HOME` path. You can configure specific environment for your workstation. This file can contain sensitive data as webhook token for projects.
 
@@ -67,12 +67,12 @@ projects:
     webhookToken: "********************************"
 ```
 
-### CLI config
+## CLI config
 
 CLI is fully documented, you can consult help using `npx kontinuous --help` to kown all available commands.
 Consult help and availables options using `--help` on each command, for example to display help from build command run `npx kontinuous build --help`.
 
-### Variables
+## Variables
 
 Most of the configuration can be defined in 3 ways:
 
