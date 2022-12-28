@@ -12,7 +12,12 @@
     "moduleResolution": "node",
     "allowJs": true,
     "noImplicitAny": false,
-    "isolatedModules": false
+    "isolatedModules": false,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"],
+      "~common/*": ["../common/*"]
+    }
   },
   "exclude":[
     "./node_modules"
