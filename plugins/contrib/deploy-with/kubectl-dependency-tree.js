@@ -153,20 +153,9 @@ module.exports = async (deploys, options, context) => {
     return result
   }
 
-  const q = async.queue(async (manifest) => {
-    try {
-      await applyManifestExec(manifest)
-    } catch (err) {
-      return err
-    }
-  }, applyConcurrencyLimit)
+  const q = async.queue(applyManifestExec, applyConcurrencyLimit)
 
-  const applyManifest = async (manifest) => {
-    const result = await q.push(manifest)
-    if (result instanceof Error) {
-      throw result
-    }
-  }
+  const applyManifest = async (manifest) => q.pushAsync(manifest)
 
   const deps = getDeps(manifests, context)
 
