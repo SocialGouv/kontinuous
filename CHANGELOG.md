@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.109.14](https://github.com/socialgouv/kontinuous/compare/v1.109.13...v1.109.14) (2023-01-03)
+
+
+### Bug Fixes
+
+* queue pushAsync ([d58f7d0](https://github.com/socialgouv/kontinuous/commit/d58f7d038e088fb47b8ca1a751b8dbabd25736a2))
+
 ### [1.109.13](https://github.com/socialgouv/kontinuous/compare/v1.109.12...v1.109.13) (2022-12-18)
 
 
