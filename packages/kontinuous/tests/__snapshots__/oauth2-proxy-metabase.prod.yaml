@@ -163,9 +163,16 @@ spec:
       annotations:
         kontinuous/deployment: test-oauth2-proxy-metabase-feature-branch-1-ffac537e6cb-1pmmy8
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
       containers:
         - image: metabase/metabase:v0.44.0
           name: metabase
+          securityContext:
+            allowPrivilegeEscalation: false
           envFrom:
             - configMapRef:
                 name: metabase
