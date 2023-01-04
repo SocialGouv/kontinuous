@@ -279,7 +279,11 @@ module.exports = async (deploys, options, context) => {
           )
           eventsBucket.trigger("ready", eventParam)
           resolve()
-        } else if (result.error?.code || result.error?.reason) {
+        } else if (result.error?.code === null) {
+          // killed
+          eventsBucket.trigger("closed", eventParam)
+          resolve()
+        } else {
           const errMsg = `resource "${resourceName}" failed`
           logger.error(
             {
@@ -291,9 +295,6 @@ module.exports = async (deploys, options, context) => {
           )
           eventsBucket.trigger("failed", eventParam)
           throw new Error(errMsg)
-        } else {
-          eventsBucket.trigger("closed", eventParam)
-          resolve()
         }
       } catch (err) {
         eventsBucket.trigger("failed", eventParam)
