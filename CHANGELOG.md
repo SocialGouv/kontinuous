@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.109.15 (2023-01-04)
+
+
+### Bug Fixes
+
+* **charts:** metabase upgrade to 0.45.1 and securityContext ([#116](https://github.com/socialgouv/kontinuous/issues/116)) ([facbbcd](https://github.com/socialgouv/kontinuous/commit/facbbcd2efc1ec4c7543da9796d79a94a5127cbd))
+
 ### [1.109.14](https://github.com/socialgouv/kontinuous/compare/v1.109.13...v1.109.14) (2023-01-03)
 
 
