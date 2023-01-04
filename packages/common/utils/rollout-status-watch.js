@@ -2,6 +2,7 @@ const { setTimeout: sleep } = require("timers/promises")
 
 const rolloutStatusExec = require("./rollout-status-exec")
 const defaultLogger = require("./logger")
+const retriableOnBrokenCluster = require("./retriable-on-broken-cluster")
 
 module.exports = async ({
   namespace,
@@ -15,6 +16,7 @@ module.exports = async ({
   maxErrorRetry = 3,
   waitBeforeRetryImagePullError = 10000,
   watchingTimeout = 3600000, // 60 minutes
+  surviveOnBrokenCluster = false,
 }) => {
   let errorRetry = 0
 
@@ -44,8 +46,21 @@ module.exports = async ({
           { namespace, selector },
           `rollout-status network error(net/http: TLS handshake timeout): retrying...`
         )
+        await sleep(3000)
         errorRetry++
         continue
+      }
+      if (surviveOnBrokenCluster) {
+        const retriable = retriableOnBrokenCluster(err)
+        if (retriable.retry) {
+          logger.debug(
+            { error: err, from: "rollout-status" },
+            `${retriable.message}, retrying...`
+          )
+          await sleep(3000)
+          errorRetry++
+          continue
+        }
       }
       if (err.message?.includes("ErrImagePull")) {
         logger.debug(

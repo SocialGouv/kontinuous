@@ -268,6 +268,7 @@ module.exports = async (deploys, options, context) => {
           kubeconfig,
           kubecontext: kubeconfigContext,
           logger,
+          surviveOnBrokenCluster,
         })
 
         if (result.success) {
