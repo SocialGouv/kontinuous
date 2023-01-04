@@ -18,10 +18,10 @@ spec:
         component: {{ (or .Values.component .Chart.Name) | lower }}
     spec:
       securityContext:
-        run_as_user: 1000
-        run_as_group: 1000
-        fs_group: 1000
-        run_as_non_root: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
       containers:
         - image: metabase/metabase:v0.44.0
           name: metabase
