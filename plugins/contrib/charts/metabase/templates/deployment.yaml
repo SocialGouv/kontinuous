@@ -17,7 +17,7 @@ spec:
       labels:
         component: {{ (or .Values.component .Chart.Name) | lower }}
     spec:
-      security_context:
+      securityContext:
         run_as_user: 1000
         run_as_group: 1000
         fs_group: 1000
@@ -25,8 +25,8 @@ spec:
       containers:
         - image: metabase/metabase:v0.44.0
           name: metabase
-          security_context:
-            allow_privilege_escalation: false
+          securityContext:
+            allowPrivilegeEscalation: false
           env:
             {{- if gt (len .Values.env) 0 }}
             {{- tpl (.Values.env | toYaml) . | nindent 12 }}
