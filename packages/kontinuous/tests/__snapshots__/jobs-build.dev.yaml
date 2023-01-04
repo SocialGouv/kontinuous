@@ -5,7 +5,6 @@ exports[`test build manifests with snapshots jobs-build.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    janitor/ttl: 7d
     field.cattle.io/projectId: '1234'
     kontinuous/gitBranch: feature-branch-1
     kontinuous/mainNamespace: 'true'
@@ -14,6 +13,7 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b08745-50be2a
+    janitor/ttl: 7d
   labels:
     application: test-jobs-build
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b08745-50be2a

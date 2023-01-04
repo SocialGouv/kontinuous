@@ -21,7 +21,8 @@ patches:
     enabled: true
   helm:
     enabled: false
-
+  janitor:
+    enabled: true
 
 validators:
   rancherProjectId:
