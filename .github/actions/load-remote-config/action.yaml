@@ -8,4 +8,4 @@ outputs:
 runs:
   using: docker
   # image: Dockerfile
-  image: docker://ghcr.io/socialgouv/kontinuous/gh-action-load-remote-config:v1.109.16
+  image: docker://ghcr.io/socialgouv/kontinuous/gh-action-load-remote-config:v1.109.17
