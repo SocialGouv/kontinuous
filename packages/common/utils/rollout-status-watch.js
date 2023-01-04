@@ -37,6 +37,9 @@ module.exports = async ({
     let status
     try {
       status = await rolloutStatusPromise
+      if (status.error?.code === "") {
+        throw new Error(status.error.message)
+      }
     } catch (err) {
       if (errorRetry >= maxErrorRetry) {
         throw err
