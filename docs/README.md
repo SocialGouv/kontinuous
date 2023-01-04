@@ -79,7 +79,8 @@ Minimal dependencies:
 - Kubernetes
   - giving the kubeconfig to kontinuous to access the project scope
   - a dedicated ci namespace per project and per cluster containing all needed secrets (optional)
-
+  - [kube-janitor](https://codeberg.org/hjacobs/kube-janitor) is recommended for automatic resources cleaning
+  
 ## Advanced
 
 Detailed documention:
