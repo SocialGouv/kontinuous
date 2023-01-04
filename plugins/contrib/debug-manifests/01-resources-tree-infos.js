@@ -26,7 +26,7 @@ const getContainerTree = (container, label) => {
   }
   if (container.args && container.args.length) {
     children.push({
-      name: `args: ${container.args.join(" ").replace(/\n/, " ")}`,
+      name: `args: ${container.args.join(" ").replace(/\n/g, " ")}`,
     })
   }
   if (container.ports && container.ports.length) {
