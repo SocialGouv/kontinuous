@@ -29,7 +29,7 @@ module.exports = ({
     args.push(...["-interval", `${intervalSeconds}s`])
   }
   if (kindFilter) {
-    args.push(...["-kind-filter", `${kindFilter}`])
+    args.push(...["-kind-filter", kindFilter.toLowerCase()])
   }
   const proc = spawn("rollout-status", args, { encoding: "utf-8" })
   proc.on("error", () => {}) // avoid crash on not found executable
