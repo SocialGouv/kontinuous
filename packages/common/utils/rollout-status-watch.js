@@ -17,6 +17,7 @@ module.exports = async ({
   waitBeforeRetryImagePullError = 10000,
   watchingTimeout = 3600000, // 60 minutes
   surviveOnBrokenCluster = false,
+  kindFilter,
 }) => {
   let errorRetry = 0
 
@@ -32,6 +33,7 @@ module.exports = async ({
         kubecontext,
         namespace,
         selector,
+        kindFilter,
       })
     rolloutStatusProcesses[selector] = rolloutStatusProcess
     let status
