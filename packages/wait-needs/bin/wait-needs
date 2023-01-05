@@ -78,6 +78,7 @@ const runWaitNeeds = async ({
             // kubeconfig,
             // kubecontext,
             logger,
+            surviveOnBrokenCluster,
           })
           if (result.error) {
             result.error.selector = selector

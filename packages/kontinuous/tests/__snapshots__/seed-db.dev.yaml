@@ -1,0 +1,369 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test build manifests with snapshots seed-db.dev 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    janitor/ttl: 7d
+    field.cattle.io/projectId: '1234'
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: 'true'
+    kapp.k14s.io/exists: ''
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+  labels:
+    application: test-seed-db
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment.env: test-seed-db-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: namespace-4wnyh3
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+    cert: wildcard
+  name: test-seed-db-feature-branch-1
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-seed-db-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+  labels:
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment.env: test-seed-db-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+  labels:
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment.env: test-seed-db-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: serviceaccount-4nws8p-default
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-seed-db-feature-branch-1
+automountServiceAccountToken: false
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-test-seed-db-feature-branch-1-jobs-con-6v7vwk-seed
+  namespace: awesome-ci
+  annotations:
+    kontinuous/needsName: seed
+    kontinuous/needsNames: '[\\"seed\\"]'
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/depname.full: >-
+      project.fabrique.contrib.jobs.job.job-test-seed-db-feature-branch-1-jobs-con-6v7vwk-seed
+    kontinuous/depname.chartResource: jobs.job.job-test-seed-db-feature-branch-1-jobs-con-6v7vwk-seed
+    kontinuous/depname.chartName: jobs
+    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
+    kontinuous/depname.resourcePath: job.job-test-seed-db-feature-branch-1-jobs-con-6v7vwk-seed
+    kontinuous/depname.resourceName: job-test-seed-db-feature-branch-1-jobs-con-6v7vwk-seed
+  labels:
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment.env: test-seed-db-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: job-4bkfwz-job-test-seed-db-feature-branch-1-jobs-con-6-2gkses
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      labels:
+        environment: dev
+        ref: feature-branch-1
+        repository: test-seed-db
+        runName: custom
+        kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+        kontinuous/deployment.env: test-seed-db-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: job-4bkfwz-job-test-seed-db-feature-branch-1-jobs-con-6-2gkses
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-repository
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.110.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - '-c'
+            - |
+
+              degit kontinuous/test-seed-db#feature-branch-1 \\\\
+                /workspace
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: '0'
+              memory: '0'
+      containers:
+        - name: job
+          image: >-
+            harbor.fabrique.social.gouv.fr/test-seed-db/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/bash
+            - '-c'
+            - |
+              set -e
+              yarn seed
+          resources:
+            limits:
+              cpu: '1'
+              memory: 512Mi
+            requests:
+              cpu: '0.081'
+              memory: 228Mi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app
+    application: test-seed-db
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment.env: test-seed-db-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-3d60sq-app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-seed-db-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/plugin.needs: '[\\"seed\\"]'
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
+    kontinuous/depname.chartName: app
+    kontinuous/depname.chartPath: project.fabrique.contrib.app
+    kontinuous/depname.resourcePath: deployment.app
+    kontinuous/depname.resourceName: app
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  template:
+    metadata:
+      labels:
+        component: app
+        application: test-seed-db
+        namespace: test-seed-db-feature-branch-1
+        kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+        kontinuous/deployment.env: test-seed-db-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-3d60sq-app
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-seed-db-feature-branch-1
+                    - key: component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            harbor.fabrique.social.gouv.fr/test-seed-db/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: '0.081'
+              memory: 228Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: test-seed-db
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment.env: test-seed-db-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-5cfizy-app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-seed-db-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
+    kontinuous/plugin.needs: '[\\"seed\\"]'
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"seed\\"]'
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+  labels:
+    component: app
+    application: test-seed-db
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment.env: test-seed-db-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-5dz9oh-app
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-seed-db-feature-branch-1
+spec:
+  rules:
+    - host: test-seed-db-feature-branch-1.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - test-seed-db-feature-branch-1.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+"
+`;

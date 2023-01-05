@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.110.0](https://github.com/socialgouv/kontinuous/compare/v1.109.17...v1.110.0) (2023-01-05)
+
+
+### Features
+
+* refactor rollout-status callers ([4086232](https://github.com/socialgouv/kontinuous/commit/40862329925a8118cb0e28af9dbd184bdb5f7e38))
+
+
+### Bug Fixes
+
+* lowercase kindfilter ([c6a8f67](https://github.com/socialgouv/kontinuous/commit/c6a8f67f4b12d8fba156607d59ed412cf5907189))
+* metabase version to 0.45.1 ([#119](https://github.com/socialgouv/kontinuous/issues/119)) ([148698d](https://github.com/socialgouv/kontinuous/commit/148698df4eabd094f02e42c857ae4210d6ca9ec9))
+* rename rolloutStatusManifest to more explicit ([e45df0f](https://github.com/socialgouv/kontinuous/commit/e45df0fdb7cda48a0c507ef0968addb2edf056ea))
+* upgrade rollout-status +add kind optimization ([529c91e](https://github.com/socialgouv/kontinuous/commit/529c91e0e010f725dc058a6a25cc78b2a145b11a))
+
+### 1.109.18 (2023-01-04)
+
+
+### Bug Fixes
+
+* metabase version to 0.45.1 ([#119](https://github.com/socialgouv/kontinuous/issues/119)) ([148698d](https://github.com/socialgouv/kontinuous/commit/148698df4eabd094f02e42c857ae4210d6ca9ec9))
+
+### [1.109.17](https://github.com/socialgouv/kontinuous/compare/v1.109.16...v1.109.17) (2023-01-04)
+
+
+### Bug Fixes
+
+* retry + logs ([19ea5fc](https://github.com/socialgouv/kontinuous/commit/19ea5fc9cdc056f71d278c0b97031e4363c65c6d))
+* various fixes ([211ead5](https://github.com/socialgouv/kontinuous/commit/211ead543d899c04903160014ba0c234e4a8f239))
+
+### [1.109.16](https://github.com/socialgouv/kontinuous/compare/v1.109.15...v1.109.16) (2023-01-04)
+
+
+### Bug Fixes
+
+* better handle of killed and error ([a42c8a8](https://github.com/socialgouv/kontinuous/commit/a42c8a80949d4228fc297ba9a1d74303778dd693))
+
+### 1.109.15 (2023-01-04)
+
+
+### Bug Fixes
+
+* **charts:** metabase upgrade to 0.45.1 and securityContext ([#116](https://github.com/socialgouv/kontinuous/issues/116)) ([facbbcd](https://github.com/socialgouv/kontinuous/commit/facbbcd2efc1ec4c7543da9796d79a94a5127cbd))
+
+### [1.109.14](https://github.com/socialgouv/kontinuous/compare/v1.109.13...v1.109.14) (2023-01-03)
+
+
+### Bug Fixes
+
+* queue pushAsync ([d58f7d0](https://github.com/socialgouv/kontinuous/commit/d58f7d038e088fb47b8ca1a751b8dbabd25736a2))
+
 ### [1.109.13](https://github.com/socialgouv/kontinuous/compare/v1.109.12...v1.109.13) (2022-12-18)
 
 

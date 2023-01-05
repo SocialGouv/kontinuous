@@ -58,6 +58,8 @@ module.exports = (opts = {}) => {
   }
   configureDebug(process.env.KS_DEBUG || process.env.DEBUG)
 
+  logger = logger.child({}, { serializers: { error: pino.stdSerializers.err } })
+
   logger.configureDebug = configureDebug
 
   return logger

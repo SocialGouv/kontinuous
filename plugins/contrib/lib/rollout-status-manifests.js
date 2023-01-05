@@ -50,7 +50,11 @@ module.exports = async (context) => {
 
   await needBin(needRolloutStatus)
 
-  const { kubeconfig, kubeconfigContext: kubecontext } = config
+  const {
+    kubeconfig,
+    kubeconfigContext: kubecontext,
+    surviveOnBrokenCluster,
+  } = config
 
   const promises = []
   for (const manifest of manifests) {
@@ -88,6 +92,7 @@ module.exports = async (context) => {
             kubeconfig,
             kubecontext,
             logger,
+            surviveOnBrokenCluster,
           })
 
           if (result.success) {

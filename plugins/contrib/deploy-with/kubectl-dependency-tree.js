@@ -265,11 +265,13 @@ module.exports = async (deploys, options, context) => {
         const result = await rolloutStatusWatch({
           namespace,
           selector,
+          kindFilter: kind,
           interceptor,
           rolloutStatusProcesses,
           kubeconfig,
           kubecontext: kubeconfigContext,
           logger,
+          surviveOnBrokenCluster,
         })
 
         if (result.success) {

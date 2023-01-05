@@ -293,9 +293,16 @@ spec:
       annotations:
         kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
       containers:
-        - image: metabase/metabase:v0.44.0
+        - image: metabase/metabase:v0.45.1
           name: metabase
+          securityContext:
+            allowPrivilegeEscalation: false
           envFrom:
             - configMapRef:
                 name: metabase-app1
@@ -388,9 +395,16 @@ spec:
       annotations:
         kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745a3-4mp1mz
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
       containers:
-        - image: metabase/metabase:v0.44.0
+        - image: metabase/metabase:v0.45.1
           name: metabase
+          securityContext:
+            allowPrivilegeEscalation: false
           envFrom:
             - configMapRef:
                 name: metabase-app2

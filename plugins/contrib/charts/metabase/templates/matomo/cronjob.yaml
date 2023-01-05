@@ -20,10 +20,17 @@ spec:
           name: {{ (or .Values.component .Chart.Name) | lower }}
           namespace: {{ .Values.namespace }}
         spec:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            runAsNonRoot: true
           restartPolicy: OnFailure
           containers:
             - name: {{ (or .Values.component .Chart.Name) | lower }}-container
               image: node:14-alpine
+              securityContext:
+                allowPrivilegeEscalation: false
               command:
                 - sh
                 - "-c"
