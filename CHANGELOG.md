@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.110.0](https://github.com/socialgouv/kontinuous/compare/v1.109.17...v1.110.0) (2023-01-05)
+
+
+### Features
+
+* refactor rollout-status callers ([4086232](https://github.com/socialgouv/kontinuous/commit/40862329925a8118cb0e28af9dbd184bdb5f7e38))
+
+
+### Bug Fixes
+
+* lowercase kindfilter ([c6a8f67](https://github.com/socialgouv/kontinuous/commit/c6a8f67f4b12d8fba156607d59ed412cf5907189))
+* metabase version to 0.45.1 ([#119](https://github.com/socialgouv/kontinuous/issues/119)) ([148698d](https://github.com/socialgouv/kontinuous/commit/148698df4eabd094f02e42c857ae4210d6ca9ec9))
+* rename rolloutStatusManifest to more explicit ([e45df0f](https://github.com/socialgouv/kontinuous/commit/e45df0fdb7cda48a0c507ef0968addb2edf056ea))
+* upgrade rollout-status +add kind optimization ([529c91e](https://github.com/socialgouv/kontinuous/commit/529c91e0e010f725dc058a6a25cc78b2a145b11a))
+
 ### 1.109.18 (2023-01-04)
 
 
