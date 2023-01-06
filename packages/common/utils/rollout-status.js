@@ -25,7 +25,7 @@ module.exports = async ({
       )
       throw err
     }
-    if (retryErrImagePull && err.message?.includes("ErrImagePull")) {
+    if (retryErrImagePull && status?.error?.message?.includes("ErrImagePull")) {
       logger.debug(
         { namespace, selector },
         `rollout-status registry error(ErrImagePull): retrying...`
