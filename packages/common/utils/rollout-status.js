@@ -42,7 +42,7 @@ module.exports = async ({
         throw err
       }
     }
-    if (status?.type === "program") {
+    if (status?.error?.type === "program") {
       throw new Error(status.error.message)
     }
   }
