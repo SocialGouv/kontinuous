@@ -17,18 +17,11 @@ module.exports = async ({
   kindFilter,
   surviveOnBrokenCluster,
 }) => {
-  const throwRetriableError = async (err, status) => {
+  const throwRetriableError = async (err) => {
     if (err.message?.includes("net/http: TLS handshake timeout")) {
       logger.debug(
         { namespace, selector },
         `rollout-status network error(net/http: TLS handshake timeout): retrying...`
-      )
-      throw err
-    }
-    if (retryErrImagePull && status?.error?.message?.includes("ErrImagePull")) {
-      logger.debug(
-        { namespace, selector },
-        `rollout-status registry error(ErrImagePull): retrying...`
       )
       throw err
     }
@@ -42,14 +35,12 @@ module.exports = async ({
         throw err
       }
     }
-    if (status?.error?.type === "program") {
-      throw new Error(status.error.message)
-    }
   }
 
   return retry(
     async (bail) => {
       let status
+      let error
       try {
         const { promise, process } = rolloutStatusExec({
           kubeconfig,
@@ -67,8 +58,24 @@ module.exports = async ({
           throw new Error(status.error.message)
         }
       } catch (err) {
-        throwRetriableError(err, status)
-        bail(err)
+        throwRetriableError(err)
+        error = err
+      }
+      if (
+        retryErrImagePull &&
+        status?.error?.message?.includes("ErrImagePull")
+      ) {
+        logger.debug(
+          { namespace, selector },
+          `rollout-status registry error(ErrImagePull): retrying...`
+        )
+        throw new Error(status.error.message)
+      }
+      if (status?.error?.type === "program") {
+        throw new Error(status.error.message)
+      }
+      if (error) {
+        bail(error)
       }
       return status
     },
