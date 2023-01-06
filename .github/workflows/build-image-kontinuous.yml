@@ -9,6 +9,7 @@ on:
     paths:
       - packages/kontinuous/**
       - packages/common/**
+      - plugins/**
       - yarn.lock
       - .yarnrc.yml
 
