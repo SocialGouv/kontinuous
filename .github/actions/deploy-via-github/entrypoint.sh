@@ -13,7 +13,12 @@ export KS_BUILD_PATH=/tmp/kontinuous-deploy-via-github/
 
 export KS_WORKSPACE_PATH=${KS_WORKSPACE_PATH:-"$GITHUB_WORKSPACE"}
 
-kontinuous deploy
+if [ -n "$KS_DEPLOY_WRITE_OUTPUT_FILE" ]; then
+  kontinuous deploy > >(tee -a $KS_DEPLOY_WRITE_OUTPUT_FILE) 2> >(tee -a $KS_DEPLOY_WRITE_OUTPUT_FILE >&2)
+else
+  kontinuous deploy
+fi
+
 EXIT_CODE=$?
 
 mv "$KS_BUILD_PATH/manifests.yaml" \
