@@ -2,6 +2,6 @@ jobs:
   enabled: true
   runs:
     db:
-      use: socialgouv/kontinuous/plugins/contrib/jobs/create-db@v1.110.2
+      use: socialgouv/kontinuous/plugins/contrib/jobs/create-db@v1.110.3
       with:
         pgAdminSecretRefName: pg-scaleway

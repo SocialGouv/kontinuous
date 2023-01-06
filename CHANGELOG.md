@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.110.3](https://github.com/socialgouv/kontinuous/compare/v1.110.2...v1.110.3) (2023-01-06)
+
+
+### Bug Fixes
+
+* improve immutable detection ([3c4a083](https://github.com/socialgouv/kontinuous/commit/3c4a08375ba7e6dd114b6f7321c882fdd88ee597))
+
 ### [1.110.2](https://github.com/socialgouv/kontinuous/compare/v1.110.1...v1.110.2) (2023-01-06)
 
 
