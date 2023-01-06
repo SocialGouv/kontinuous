@@ -371,5 +371,4 @@ reading:
     why --force is not supported with server-side apply (but we workaround to support this in this plugin)
   - https://kubernetes.io/blog/2022/10/20/advanced-server-side-apply/
   - https://medium.com/swlh/break-down-kubernetes-server-side-apply-5d59f6a14e26
-
 */
