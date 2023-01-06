@@ -1,4 +1,4 @@
-name: Build Docker Image Webhook
+name: Build Docker Image Kontinuous
 
 on:
   create:
