@@ -20,6 +20,9 @@ inputs:
   logLevel:
     description: "Set kontinuous logger verbosity, possible values: trace, debug, info, warn, error"
     default: "debug"
+  deployWriteOutputFile:
+    description: "Set file to tee output of kontinuous deploy command"
+    default: ""
 
 runs:
   using: docker
@@ -35,3 +38,4 @@ runs:
     KS_INLINE_VALUES: ${{ inputs.inlineValues }}    
     KS_INLINE_SET: ${{ inputs.inlineSet }}    
     KS_LOG_LEVEL: ${{ inputs.logLevel }}
+    KS_DEPLOY_WRITE_OUTPUT_FILE: ${{ inputs.deployWriteOutputFile }}
