@@ -145,7 +145,10 @@ module.exports = async (deploys, options, context) => {
       }
       result = await kubectlApplyManifest(manifest)
     } catch (err) {
-      if (err.message.includes("field is immutable")) {
+      if (
+        err.message.includes("field is immutable") ||
+        err.message.includes("invalid: spec: Forbidden: updates")
+      ) {
         return handleFieldIsImmutableError(manifest, err)
       }
       throw err
