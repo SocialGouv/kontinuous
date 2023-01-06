@@ -18,7 +18,7 @@ if [ -n "$KS_DEPLOY_WRITE_OUTPUT_FILE" ]; then
     export KS_DEPLOY_WRITE_OUTPUT_FILE="kontinuous-deployment-output.log"
   fi
   cd $GITHUB_WORKSPACE
-  script -q -c "kontinuous deploy" | tee "$KS_DEPLOY_WRITE_OUTPUT_FILE"
+  script -e -q -c "kontinuous deploy" | tee "$KS_DEPLOY_WRITE_OUTPUT_FILE"
 else
   kontinuous deploy
 fi
