@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.110.2](https://github.com/socialgouv/kontinuous/compare/v1.110.1...v1.110.2) (2023-01-06)
+
+
+### Bug Fixes
+
+* retry ErrImagePull ([10e2744](https://github.com/socialgouv/kontinuous/commit/10e2744cb36cfe8552bd6862f9c8995caf9839f2))
+
 ### [1.110.1](https://github.com/socialgouv/kontinuous/compare/v1.110.0...v1.110.1) (2023-01-06)
 
 
