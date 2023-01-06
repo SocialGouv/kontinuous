@@ -9,13 +9,13 @@ export KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
 
 export PATH=$PATH:/opt/kontinuous/packages/kontinuous/bin
 
-export KS_BUILD_PATH=/tmp/kontinuous-deploy-via-github/
+export KS_BUILD_PATH=/tmp/kontinuous-deploy-via-github
 
 export KS_WORKSPACE_PATH=${KS_WORKSPACE_PATH:-"$GITHUB_WORKSPACE"}
 
 if [ -n "$KS_DEPLOY_WRITE_OUTPUT_FILE" ]; then
   cd $GITHUB_WORKSPACE
-  unbuffer kontinuous deploy > >(tee -a $KS_DEPLOY_WRITE_OUTPUT_FILE) 2> >(tee -a $KS_DEPLOY_WRITE_OUTPUT_FILE >&2)
+  script -q -c "kontinuous deploy" | tee "$KS_DEPLOY_WRITE_OUTPUT_FILE"
 else
   kontinuous deploy
 fi
