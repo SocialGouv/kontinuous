@@ -35,7 +35,7 @@ const defaultEnv = {
   KS_FORCE_NEW_DEPLOY: "false",
 }
 
-const allEnvs = ["dev", "preprod", "prod"]
+const allEnvs = ["dev", "preprod", "prod", "local"]
 const cases = []
 for (const testdir of testdirs) {
   const afterDot = testdir.split(".").pop()
