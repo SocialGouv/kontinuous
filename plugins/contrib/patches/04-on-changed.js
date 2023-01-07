@@ -80,7 +80,7 @@ module.exports = async (manifests, _options, context) => {
       onChangedPaths = [onChangedPaths]
     }
 
-    const changed = changedPaths.some((p) => patternMatch(p, onChangedPaths))
+    const changed = patternMatch(changedPaths, onChangedPaths)
 
     const isFirstPushOnBranch = changedPaths.length === 0
 
