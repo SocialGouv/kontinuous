@@ -4,8 +4,13 @@ const fs = require("fs-extra")
 const camelCase = require("lodash.camelcase")
 
 const configDependencyKey = require("~common/utils/config-dependency-key")
+const patternMatch = require("~common/utils/pattern-match")
+const ctx = require("~common/ctx")
 
 module.exports = async (target, type, definition) => {
+  const config = ctx.require("config")
+  const { environment } = config
+
   const jsFile = `${target}/${type}/index.js`
   if (await fs.pathExists(jsFile)) {
     return
@@ -49,6 +54,16 @@ module.exports = async (target, type, definition) => {
 
   loads = Object.entries(loads)
     .filter(([_key, value]) => value.enabled !== false)
+    .filter(([_key, value]) => {
+      let { ifEnv } = value
+      if (!ifEnv) {
+        return true
+      }
+      if (!Array.isArray(ifEnv)) {
+        ifEnv = [ifEnv]
+      }
+      return patternMatch(environment, ifEnv)
+    })
     .reduce((acc, [key, value]) => {
       acc[key] = value
       return acc

@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.111.0 (2023-01-07)
+
+
+### Features
+
+* config plugin ifenv ([#120](https://github.com/socialgouv/kontinuous/issues/120)) ([2456d39](https://github.com/socialgouv/kontinuous/commit/2456d39ea5acfd1fea3750aa0b7dc27092d0eead))
+
+### [1.110.5](https://github.com/socialgouv/kontinuous/compare/v1.110.4...v1.110.5) (2023-01-06)
+
+
+### Bug Fixes
+
+* up rollout-status ([7cf9d7c](https://github.com/socialgouv/kontinuous/commit/7cf9d7c8561ce5fbbd9930ba5168257ad78bc92b))
+
+### [1.110.4](https://github.com/socialgouv/kontinuous/compare/v1.110.3...v1.110.4) (2023-01-06)
+
+
+### Bug Fixes
+
+* rollout-status retry status ([9c82ed5](https://github.com/socialgouv/kontinuous/commit/9c82ed572e57c497293112a05360d6189b2624b6))
+
+### [1.110.3](https://github.com/socialgouv/kontinuous/compare/v1.110.2...v1.110.3) (2023-01-06)
+
+
+### Bug Fixes
+
+* improve immutable detection ([3c4a083](https://github.com/socialgouv/kontinuous/commit/3c4a08375ba7e6dd114b6f7321c882fdd88ee597))
+
+### [1.110.2](https://github.com/socialgouv/kontinuous/compare/v1.110.1...v1.110.2) (2023-01-06)
+
+
+### Bug Fixes
+
+* retry ErrImagePull ([10e2744](https://github.com/socialgouv/kontinuous/commit/10e2744cb36cfe8552bd6862f9c8995caf9839f2))
+
 ### [1.110.1](https://github.com/socialgouv/kontinuous/compare/v1.110.0...v1.110.1) (2023-01-06)
 
 
