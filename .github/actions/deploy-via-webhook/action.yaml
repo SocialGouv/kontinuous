@@ -13,6 +13,9 @@ inputs:
     description: "charts to enable as standalone, you can add multiple separated by comma"
   ignoreProjectTemplates:
     description: "don't merge project's root templates and env templates"
+  deployWriteOutputFile:
+    description: "Set file to tee output of kontinuous logs command"
+    default: ""
 
 runs:
   using: docker
@@ -25,3 +28,4 @@ runs:
     KS_ENVIRONMENT: ${{ inputs.environment }}
     KS_CHART: ${{ inputs.chart }}
     KS_IGNORE_PROJECT_TEMPLATES: ${{ inputs.ignoreProjectTemplates }}
+    KS_DEPLOY_WRITE_OUTPUT_FILE: ${{ inputs.deployWriteOutputFile }}
