@@ -1,0 +1,11 @@
+dependencies:
+  fabrique:
+    import: socialgouv/kontinuous/plugins/fabrique
+    dependencies:
+      contrib:
+        patches:
+          certs:
+            enabled: true
+            ifEnv:
+              - "**"
+              - "!local"
