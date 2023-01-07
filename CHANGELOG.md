@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.111.0 (2023-01-07)
+
+
+### Features
+
+* config plugin ifenv ([#120](https://github.com/socialgouv/kontinuous/issues/120)) ([2456d39](https://github.com/socialgouv/kontinuous/commit/2456d39ea5acfd1fea3750aa0b7dc27092d0eead))
+
 ### [1.110.5](https://github.com/socialgouv/kontinuous/compare/v1.110.4...v1.110.5) (2023-01-06)
 
 
