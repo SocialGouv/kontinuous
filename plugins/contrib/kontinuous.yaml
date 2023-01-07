@@ -28,6 +28,7 @@ validators:
     enabled: false
   sealedSecrets:
     enabled: false
+    ifEnv: ["**", "!local"]
   noPlainSecrets:
     enabled: false
 
