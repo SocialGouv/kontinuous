@@ -80,10 +80,11 @@ module.exports = async ({
       return status
     },
     {
-      retries: 2,
-      factor: 1,
+      retries: 10,
+      factor: 2,
       minTimeout: 1000,
-      maxTimeout: 3000,
+      maxTimeout: 60000,
+      randomize: true,
     }
   )
 }
