@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.111.3](https://github.com/socialgouv/kontinuous/compare/v1.111.2...v1.111.3) (2023-01-09)
+
+
+### Bug Fixes
+
+* improve retry rollout-status debugging ([9780619](https://github.com/socialgouv/kontinuous/commit/97806191c7e36b62e3fa77789e946907b6c3b5e9))
+* log retry count ([219f9ee](https://github.com/socialgouv/kontinuous/commit/219f9eedf62ad0fcac5a928577ae5118663ffba6))
+
 ### [1.111.2](https://github.com/socialgouv/kontinuous/compare/v1.111.1...v1.111.2) (2023-01-09)
 
 
