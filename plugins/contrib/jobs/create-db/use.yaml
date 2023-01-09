@@ -1,6 +1,6 @@
 runs:
   - name: create-secret
-    retry: 3
+    retry: 6
     checkout: false
     image: bitnami/kubectl:latest
     user: 1001
