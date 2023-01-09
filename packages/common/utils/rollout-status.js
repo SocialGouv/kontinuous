@@ -17,7 +17,7 @@ module.exports = async ({
   kindFilter,
   surviveOnBrokenCluster,
 }) => {
-  const throwRetriableError = async (err) => {
+  const throwRetriableError = (err) => {
     if (err.message?.includes("net/http: TLS handshake timeout")) {
       logger.debug(
         { namespace, selector },
