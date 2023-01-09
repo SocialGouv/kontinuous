@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.111.1](https://github.com/socialgouv/kontinuous/compare/v1.111.0...v1.111.1) (2023-01-09)
+
+
+### Bug Fixes
+
+* async rollout-status throw-retriable ([74acac9](https://github.com/socialgouv/kontinuous/commit/74acac9fe0de86c32b13be6519343b339eee29a5))
+
 ## 1.111.0 (2023-01-07)
 
 
