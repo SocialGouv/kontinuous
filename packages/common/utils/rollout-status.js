@@ -17,21 +17,30 @@ module.exports = async ({
   kindFilter,
   surviveOnBrokenCluster,
 }) => {
+  let retryCount = 0
+  const throwErrorToRetry = ({ error, message }) => {
+    retryCount++
+    logger.debug(
+      { namespace, selector, from: "rollout-status", retryCount },
+      message
+    )
+    throw error
+  }
+
   const throwRetriableError = (err) => {
     if (err.message?.includes("net/http: TLS handshake timeout")) {
-      logger.debug(
-        { namespace, selector },
-        `rollout-status network error(net/http: TLS handshake timeout): retrying...`
-      )
-      throw err
+      throwErrorToRetry({
+        error: err,
+        message: `rollout-status network error(net/http: TLS handshake timeout): retrying...`,
+      })
     }
     if (surviveOnBrokenCluster) {
       const retriable = retriableOnBrokenCluster(err)
       if (retriable.retry) {
-        logger.debug(
-          { error: err, from: "rollout-status" },
-          `${retriable.message}, retrying...`
-        )
+        throwErrorToRetry({
+          error: err,
+          message: `${retriable.message}, retrying...`,
+        })
         throw err
       }
     }
@@ -65,14 +74,16 @@ module.exports = async ({
         retryErrImagePull &&
         status?.error?.message?.includes("ErrImagePull")
       ) {
-        logger.debug(
-          { namespace, selector },
-          `rollout-status registry error(ErrImagePull): retrying...`
-        )
-        throw new Error(status.error.message)
+        throwErrorToRetry({
+          error: new Error(status.error.message),
+          message: `rollout-status registry error(ErrImagePull): retrying...`,
+        })
       }
       if (status?.error?.type === "program") {
-        throw new Error(status.error.message)
+        throwErrorToRetry({
+          error: new Error(status.error.message),
+          message: `rollout-status program error: ${status.error.message}: retrying...`,
+        })
       }
       if (error) {
         bail(error)

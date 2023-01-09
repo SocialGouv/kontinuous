@@ -252,7 +252,7 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
-  backoffLimit: 3
+  backoffLimit: 6
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:

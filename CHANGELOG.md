@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.111.5](https://github.com/socialgouv/kontinuous/compare/v1.111.4...v1.111.5) (2023-01-09)
+
+
+### Bug Fixes
+
+* build tests snapshots ([b648a72](https://github.com/socialgouv/kontinuous/commit/b648a72de695421183bd014db0497f55f16b81ef))
+* up rollout-status ([3d075e9](https://github.com/socialgouv/kontinuous/commit/3d075e9e0bbf0fdc9bfd76e98c563d99b92ca50f))
+
+### 1.111.4 (2023-01-09)
+
+
+### Bug Fixes
+
+* more retries for jobs ([#121](https://github.com/socialgouv/kontinuous/issues/121)) ([0ecec04](https://github.com/socialgouv/kontinuous/commit/0ecec04a530b6f957c562df5173f829f84d191e2))
+
+### [1.111.3](https://github.com/socialgouv/kontinuous/compare/v1.111.2...v1.111.3) (2023-01-09)
+
+
+### Bug Fixes
+
+* improve retry rollout-status debugging ([9780619](https://github.com/socialgouv/kontinuous/commit/97806191c7e36b62e3fa77789e946907b6c3b5e9))
+* log retry count ([219f9ee](https://github.com/socialgouv/kontinuous/commit/219f9eedf62ad0fcac5a928577ae5118663ffba6))
+
+### [1.111.2](https://github.com/socialgouv/kontinuous/compare/v1.111.1...v1.111.2) (2023-01-09)
+
+
+### Bug Fixes
+
+* improve retries ([01076f5](https://github.com/socialgouv/kontinuous/commit/01076f520a82b90ba396e65fdf4209093ad29590))
+
+### [1.111.1](https://github.com/socialgouv/kontinuous/compare/v1.111.0...v1.111.1) (2023-01-09)
+
+
+### Bug Fixes
+
+* async rollout-status throw-retriable ([74acac9](https://github.com/socialgouv/kontinuous/commit/74acac9fe0de86c32b13be6519343b339eee29a5))
+
 ## 1.111.0 (2023-01-07)
 
 
