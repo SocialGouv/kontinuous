@@ -85,7 +85,7 @@ module.exports = async (
   }
 
   const resourceNames = manifestsToClean.map(
-    (manifest) => manifest.metadata?.name || manifest.name
+    (manifest) => manifest.metadata?.name
   )
 
   const { surviveOnBrokenCluster = false } = options

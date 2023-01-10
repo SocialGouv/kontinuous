@@ -2,9 +2,6 @@ apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
-    {{- if (or .Values.ttl .Values.global.ttl) }}
-    janitor/ttl: "{{ or .Values.ttl .Values.global.ttl }}"
-    {{- end }}
     field.cattle.io/projectId: "{{ .Values.global.rancherProjectId }}"
     kontinuous/gitBranch: "{{ or .Values.global.gitBranch "" }}"
     kontinuous/mainNamespace: "true"

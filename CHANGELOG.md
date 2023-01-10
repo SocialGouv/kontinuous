@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.111.8 (2023-01-10)
+
+### 1.111.7 (2023-01-10)
+
+
+### Bug Fixes
+
+* janitor as plugin fix [#111](https://github.com/socialgouv/kontinuous/issues/111) ([#117](https://github.com/socialgouv/kontinuous/issues/117)) ([f54427e](https://github.com/socialgouv/kontinuous/commit/f54427e210e35b84f95bdf8398fff7e14fb52e36))
+
+### [1.111.6](https://github.com/socialgouv/kontinuous/compare/v1.111.5...v1.111.6) (2023-01-10)
+
+
+### Bug Fixes
+
+* dependabot secu alerts ([0f328e2](https://github.com/socialgouv/kontinuous/commit/0f328e265bac9cdd19dfd8df096e143290e6b5eb))
+* namespace name ([80a8358](https://github.com/socialgouv/kontinuous/commit/80a8358baedf74f525e86684e37b352d24637ea6))
+
 ### [1.111.5](https://github.com/socialgouv/kontinuous/compare/v1.111.4...v1.111.5) (2023-01-09)
 
 

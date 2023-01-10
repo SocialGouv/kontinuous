@@ -20,7 +20,7 @@ metadata:
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: namespace-4wnyh3
+    kontinuous/resourceName: namespace-4wnyh3-test-oauth2-proxy-metabase
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: test-oauth2-proxy-metabase

@@ -26,7 +26,7 @@ module.exports = (manifests, _options, { config, utils }) => {
       manifest.metadata.labels = {}
     }
 
-    const name = kind === "Namespace" ? manifest.name : manifest.metadata.name
+    const { name } = manifest.metadata
 
     const labels = {
       [deploymentLabelKey]: deploymentLabelValue,
