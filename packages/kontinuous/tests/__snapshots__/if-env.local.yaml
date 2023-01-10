@@ -5,7 +5,6 @@ exports[`test build manifests with snapshots if-env.local 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    janitor/ttl: 7d
     kontinuous/gitBranch: feature-branch-1
     kontinuous/mainNamespace: 'true'
     kontinuous/chartPath: project.fabrique.contrib.namespace
