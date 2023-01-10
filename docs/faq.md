@@ -10,6 +10,8 @@ We want a powerful templating system that can handle many use-cases and benefit 
 
 We want a full portable and sef-hostable solution from repositories, to CI/CD.
 
+see [🐉 paradigm](./advanced/paradigm.md) for more detailed explanation.
+
 ## Define a custom docker registry
 
 [TODO]

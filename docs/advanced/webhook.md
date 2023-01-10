@@ -41,7 +41,7 @@ kubectl --namespace myproject-ci apply manifests.yaml
 
 Here is a sample of an [ArgoCD ApplicationSet](https://argo-cd.readthedocs.io/en/stable/roadmap/#applicationset): [plugins/fabrique/samples/argocd/kontinuous-webhooks.yaml](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/samples/argocd/kontinuous-webhooks.yaml)
 
-###configure webhook on repository
+#### configure webhook on repository
 
 You should configure webhook event on push event on repository (from github, gitlab (should be tested), gitea (should be dev))
 

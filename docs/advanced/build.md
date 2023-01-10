@@ -131,3 +131,51 @@ All theses files can use the Helm templating syntax (or not if you don't need it
 Both extensions yaml and yml are accepted.
 
 Usually, that's where you put your CronJob, ConfigMap and SealedSecret ressources.
+
+## CLI
+
+Go into to the repository directory containing `.kontinuous` dir, then run `npx kontinuous build -o`.
+You will see the generated manifests.
+
+You can also redirect it to file like this:
+```sh
+npx kontinuous build -o > manifests.yaml
+```
+
+If you want syntaxic coloration in shell:
+```sh
+npx kontinuous build -so
+```
+
+If you want to open it automatically in your favorite code editor:
+```sh
+npx kontinuous build --open
+```
+
+If you want to generate snapshots, so you can compare generated manifests for differents envs when making changes to values and charts.
+```sh
+npx kontinuous test
+```
+
+
+You can debug like this:
+```sh
+npx kontinuous build -d
+```
+
+To see all available options:
+```sh
+npx kontinuous build --help
+```
+
+For development (require helm):
+```sh
+git clone https://github.com/socialgouv/kontinuous.git ~/repos/kontinuous
+cd ~/repos/kontinuous
+yarn install
+
+cd ~/repos/my-project
+~/repos/kontinuous/kontinuous build
+```
+
+Obviously you can replace `~/repos/my-project` and `~/repos/kontinuous` by any directory path.

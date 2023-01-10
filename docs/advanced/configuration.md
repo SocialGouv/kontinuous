@@ -80,4 +80,6 @@ Most of the configuration can be defined in 3 ways:
 - environment variables (override config file)
 - command line options (override environment variables)
 
+Here is a non exhaustive [liste of variable](./advanced/configuration-vars.md#configuration-variables) with some informations on usage and behavior.
+
 For exhaustive description of behavior you can [check the source code](https://github.com/socialgouv/kontinuous/blob/master/packages/common/config/load-config.js). <br>
