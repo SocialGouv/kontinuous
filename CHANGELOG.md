@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.111.7 (2023-01-10)
+
+
+### Bug Fixes
+
+* janitor as plugin fix [#111](https://github.com/socialgouv/kontinuous/issues/111) ([#117](https://github.com/socialgouv/kontinuous/issues/117)) ([f54427e](https://github.com/socialgouv/kontinuous/commit/f54427e210e35b84f95bdf8398fff7e14fb52e36))
+
 ### [1.111.6](https://github.com/socialgouv/kontinuous/compare/v1.111.5...v1.111.6) (2023-01-10)
 
 
