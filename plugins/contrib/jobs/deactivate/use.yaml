@@ -10,7 +10,7 @@ runs:
   delete-namespace:
     checkout: false
     image: bitnami/kubectl:latest
-    retry: 3
+    retry: 6
     user: 1001
     kubernetes: true
     vars:

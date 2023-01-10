@@ -60,7 +60,7 @@ module.exports = async ({
     },
     {
       retries: 10,
-      factor: 1,
+      factor: 2,
       minTimeout: 1000,
       maxTimeout: 3000,
       ...retryOptions,

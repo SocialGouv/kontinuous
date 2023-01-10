@@ -90,6 +90,8 @@ module.exports = async (kubectlArgs, options = {}) => {
 
   let result
 
+  let retryCount = 0
+
   try {
     result = await retry(
       async (bail) => {
@@ -102,13 +104,21 @@ module.exports = async (kubectlArgs, options = {}) => {
         } catch (err) {
           const retriableNetworkError = retriableNetwork(err)
           if (retriableNetworkError.retry) {
-            logger.debug(`${retriableNetworkError.message}, retrying...`)
+            retryCount++
+            logger.debug(
+              { retryCount, kubectlArgs },
+              `${retriableNetworkError.message}, retrying...`
+            )
             throw err
           }
           if (surviveOnBrokenCluster) {
             const retriable = retriableOnBrokenCluster(err)
             if (retriable.retry) {
-              logger.debug({ error: err }, `${retriable.message}, retrying...`)
+              retryCount++
+              logger.debug(
+                { error: err, from: "kubectl", retryCount, kubectlArgs },
+                `${retriable.message}, retrying...`
+              )
               await sleep(3000)
               throw err
             }
@@ -117,10 +127,11 @@ module.exports = async (kubectlArgs, options = {}) => {
         }
       },
       {
-        retries: 2,
-        factor: 1,
+        retries: 10,
+        factor: 2,
         minTimeout: 1000,
-        maxTimeout: 3000,
+        maxTimeout: 60000,
+        randomize: true,
         ...retryOptions,
       }
     )

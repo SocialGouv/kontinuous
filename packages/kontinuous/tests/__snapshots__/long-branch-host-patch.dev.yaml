@@ -5,7 +5,6 @@ exports[`test build manifests with snapshots long-branch-host-patch.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    janitor/ttl: 7d
     field.cattle.io/projectId: '1234'
     kontinuous/gitBranch: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/mainNamespace: 'true'
@@ -14,6 +13,7 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
+    janitor/ttl: 7d
   labels:
     application: test-long-branch-host-patch
     kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-branc-2prquy
@@ -21,7 +21,7 @@ metadata:
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: namespace-4wnyh3
+    kontinuous/resourceName: namespace-4wnyh3-test-long-branch-host-patch-a-very-ver-22hpqh
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
     cert: wildcard

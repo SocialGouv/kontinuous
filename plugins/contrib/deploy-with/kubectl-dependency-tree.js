@@ -145,7 +145,10 @@ module.exports = async (deploys, options, context) => {
       }
       result = await kubectlApplyManifest(manifest)
     } catch (err) {
-      if (err.message.includes("field is immutable")) {
+      if (
+        err.message.includes("field is immutable") ||
+        err.message.includes("invalid: spec: Forbidden: updates")
+      ) {
         return handleFieldIsImmutableError(manifest, err)
       }
       throw err
@@ -153,20 +156,9 @@ module.exports = async (deploys, options, context) => {
     return result
   }
 
-  const q = async.queue(async (manifest) => {
-    try {
-      await applyManifestExec(manifest)
-    } catch (err) {
-      return err
-    }
-  }, applyConcurrencyLimit)
+  const q = async.queue(applyManifestExec, applyConcurrencyLimit)
 
-  const applyManifest = async (manifest) => {
-    const result = await q.push(manifest)
-    if (result instanceof Error) {
-      throw result
-    }
-  }
+  const applyManifest = async (manifest) => q.pushAsync(manifest)
 
   const deps = getDeps(manifests, context)
 
@@ -274,11 +266,13 @@ module.exports = async (deploys, options, context) => {
         const result = await rolloutStatusWatch({
           namespace,
           selector,
+          kindFilter: kind,
           interceptor,
           rolloutStatusProcesses,
           kubeconfig,
           kubecontext: kubeconfigContext,
           logger,
+          surviveOnBrokenCluster,
         })
 
         if (result.success) {
@@ -288,7 +282,11 @@ module.exports = async (deploys, options, context) => {
           )
           eventsBucket.trigger("ready", eventParam)
           resolve()
-        } else if (result.error?.code || result.error?.reason) {
+        } else if (result.error?.code === null) {
+          // killed
+          eventsBucket.trigger("closed", eventParam)
+          resolve()
+        } else {
           const errMsg = `resource "${resourceName}" failed`
           logger.error(
             {
@@ -300,9 +298,6 @@ module.exports = async (deploys, options, context) => {
           )
           eventsBucket.trigger("failed", eventParam)
           throw new Error(errMsg)
-        } else {
-          eventsBucket.trigger("closed", eventParam)
-          resolve()
         }
       } catch (err) {
         eventsBucket.trigger("failed", eventParam)

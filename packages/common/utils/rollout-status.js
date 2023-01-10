@@ -1,43 +1,101 @@
 const retry = require("async-retry")
 
 const rolloutStatusExec = require("./rollout-status-exec")
+const retriableOnBrokenCluster = require("./retriable-on-broken-cluster")
 
-const globalLogger = require("./logger")
+const defaultLogger = require("./logger")
 
 module.exports = async ({
   kubeconfig,
   kubecontext,
   namespace,
   selector,
-  logger = globalLogger,
+  logger = defaultLogger,
   ignoreSecretNotFound = true,
-}) =>
-  retry(
+  retryErrImagePull = true,
+  setProcessRef,
+  kindFilter,
+  surviveOnBrokenCluster,
+}) => {
+  let retryCount = 0
+  const throwErrorToRetry = ({ error, message }) => {
+    retryCount++
+    logger.debug(
+      { namespace, selector, from: "rollout-status", retryCount },
+      message
+    )
+    throw error
+  }
+
+  const throwRetriableError = (err) => {
+    if (err.message?.includes("net/http: TLS handshake timeout")) {
+      throwErrorToRetry({
+        error: err,
+        message: `rollout-status network error(net/http: TLS handshake timeout): retrying...`,
+      })
+    }
+    if (surviveOnBrokenCluster) {
+      const retriable = retriableOnBrokenCluster(err)
+      if (retriable.retry) {
+        throwErrorToRetry({
+          error: err,
+          message: `${retriable.message}, retrying...`,
+        })
+        throw err
+      }
+    }
+  }
+
+  return retry(
     async (bail) => {
+      let status
+      let error
       try {
-        const { promise } = rolloutStatusExec({
+        const { promise, process } = rolloutStatusExec({
           kubeconfig,
           kubecontext,
           namespace,
           selector,
           ignoreSecretNotFound,
+          kindFilter,
         })
-        const output = await promise
-        return output
-      } catch (err) {
-        if (err.message.includes("net/http: TLS handshake timeout")) {
-          logger.debug(
-            `rollout-status network error(net/http: TLS handshake timeout): retrying...`
-          )
-          throw err
+        if (setProcessRef) {
+          setProcessRef(process)
         }
-        bail(err)
+        status = await promise
+        if (status.error?.code === "") {
+          throw new Error(status.error.message)
+        }
+      } catch (err) {
+        throwRetriableError(err)
+        error = err
       }
+      if (
+        retryErrImagePull &&
+        status?.error?.message?.includes("ErrImagePull")
+      ) {
+        throwErrorToRetry({
+          error: new Error(status.error.message),
+          message: `rollout-status registry error(ErrImagePull): retrying...`,
+        })
+      }
+      if (status?.error?.type === "program") {
+        throwErrorToRetry({
+          error: new Error(status.error.message),
+          message: `rollout-status program error: ${status.error.message}: retrying...`,
+        })
+      }
+      if (error) {
+        bail(error)
+      }
+      return status
     },
     {
-      retries: 2,
-      factor: 1,
+      retries: 10,
+      factor: 2,
       minTimeout: 1000,
-      maxTimeout: 3000,
+      maxTimeout: 60000,
+      randomize: true,
     }
   )
+}

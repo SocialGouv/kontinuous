@@ -21,13 +21,15 @@ patches:
     enabled: true
   helm:
     enabled: false
-
+  janitor:
+    enabled: true
 
 validators:
   rancherProjectId:
     enabled: false
   sealedSecrets:
     enabled: false
+    ifEnv: ["**", "!local"]
   noPlainSecrets:
     enabled: false
 

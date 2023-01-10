@@ -1,6 +1,6 @@
 const async = require("async")
 
-const rolloutStatus = require("../lib/rollout-status")
+const rolloutStatusManifest = require("../lib/rollout-status-manifests")
 
 const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
 
@@ -173,9 +173,8 @@ module.exports = async (deploys, options, context) => {
     try {
       if (!dryRun) {
         await applyPromise
-        const { stop, promise: rolloutStatusPromise } = await rolloutStatus(
-          context
-        )
+        const { stop, promise: rolloutStatusPromise } =
+          await rolloutStatusManifest(context)
         stopRolloutStatus = stop
         await rolloutStatusPromise
       }
