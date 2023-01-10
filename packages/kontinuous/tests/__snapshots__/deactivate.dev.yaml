@@ -91,6 +91,10 @@ spec:
             - '-c'
             - |
               set -e
+              mkdir -p /tmp/.kube
+              echo \\"$KUBECONFIG\\" > /tmp/.kube/config
+              export KUBECONFIG=/tmp/.kube/config
+
               if kubectl get namespace \\"$NAMESPACE\\">/dev/null 2>&1; then
                 kubectl delete namespace \\"$NAMESPACE\\" --now=true --wait=false
               fi
