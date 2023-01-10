@@ -8763,23 +8763,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json5@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "json5@npm:1.0.1"
-  dependencies:
-    minimist: "npm:^1.2.0"
+"json5@npm:2.2.2":
+  version: 2.2.2
+  resolution: "json5@npm:2.2.2"
   bin:
     json5: lib/cli.js
-  checksum: fd9492140ea8a1ec338c96e8527e940c9464ca3c7ef8fbf00b8bbbac1c6e60d612bf6640885e8a9108c3b71dc913f9a07a628df36f462853ea8c59bbce192e32
-  languageName: node
-  linkType: hard
-
-"json5@npm:^2.2.1":
-  version: 2.2.1
-  resolution: "json5@npm:2.2.1"
-  bin:
-    json5: lib/cli.js
-  checksum: 8bb433c397375ec5b9150e08d1a323acf5258d51126c55e11e838136f201c197e1589cba42559c97d39bac54ed1293de1e5caff17ce0dc624bfd845c10d9eaba
+  checksum: da81dfa146a0285c3f76b361abdc89d697f732b4374a3fe4e5768011c56fdaac8c2e1746fb37efbd9161e06cbab09f9185c4b7106603c2b91c60d76a8ffea517
   languageName: node
   linkType: hard
 
@@ -10985,44 +10974,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:6.10.3":
-  version: 6.10.3
-  resolution: "qs@npm:6.10.3"
-  dependencies:
-    side-channel: "npm:^1.0.4"
-  checksum: 69daaebb744bec0bd455ac08973c47c3dcbdb389165ceee7522dec41b2b812ecbd2015c09bcc39309efced5d955f849f07dbc4bfdb5b77a360e1ea9a65fc506a
-  languageName: node
-  linkType: hard
-
-"qs@npm:6.9.3":
-  version: 6.9.3
-  resolution: "qs@npm:6.9.3"
-  checksum: b8a327a01e30c0bf37e0e1b4d5fadfd27e691639995376cc958d0735fa852a9cf8549e334e0999fd3783bad9fb1abecfc6524f8ba34406911200fd4520ee4e8a
-  languageName: node
-  linkType: hard
-
-"qs@npm:6.9.6":
-  version: 6.9.6
-  resolution: "qs@npm:6.9.6"
-  checksum: 28ec3a231da7e468bdcb0267c4662223d7be97a39f00fd260d3c34d5928a008f0397a8c82372193bb5db51bd6088cc62bd1c81ab3d48ef714157a2b2690db98e
-  languageName: node
-  linkType: hard
-
-"qs@npm:^6.10.3, qs@npm:^6.10.5":
-  version: 6.10.5
-  resolution: "qs@npm:6.10.5"
-  dependencies:
-    side-channel: "npm:^1.0.4"
-  checksum: 2f8e0ffcc49b09c524e3a5bbf93af89a604e338bb87e90b38ad93db2e770b0f3c08d8edc6d07b3396dcdc175065773ec10ef83021b5fecd9ee87caf2380eb38f
-  languageName: node
-  linkType: hard
-
-"qs@npm:^6.11.0":
-  version: 6.11.0
-  resolution: "qs@npm:6.11.0"
-  dependencies:
-    side-channel: "npm:^1.0.4"
-  checksum: 337966e2e957a7d2a69821c528f3d18a8b346ddb0f16cc08d11c6206aed3b6624927781ff437aa3909e54ad32ebdee2c5396ad4094b1c722760774f7082f6124
+"qs@npm:6.9.7":
+  version: 6.9.7
+  resolution: "qs@npm:6.9.7"
+  checksum: 93f75cd622be38fc3da0e7d922ffdd93e4e7a5a7fad009f8007c13e76e1d5ce996e33e3d090b34598084241850534dfd29700577be91e459b9d6cca20887d1c1
   languageName: node
   linkType: hard
 
