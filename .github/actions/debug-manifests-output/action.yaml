@@ -6,6 +6,6 @@ inputs:
 runs:
   using: docker
   # image: Dockerfile
-  image: docker://ghcr.io/socialgouv/kontinuous/gh-action-debug-manifests-output:v1.111.9
+  image: docker://ghcr.io/socialgouv/kontinuous/gh-action-debug-manifests-output:feat-sentry
   args:  
     - '${{ inputs.path }}'
