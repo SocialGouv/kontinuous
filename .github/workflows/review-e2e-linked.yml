@@ -16,7 +16,8 @@ jobs:
         name: Branch check convention
         run: |
           ok=no
-          if [[ "$GITHUB_REF" =~ ^dev-.* ]]; then
+          GIT_BRANCH=${GITHUB_REF#refs/heads/}
+          if [[ "$GIT_BRANCH" =~ ^dev-.* ]]; then
             ok=yes
           fi
           echo "ok=$ok" >> $GITHUB_OUTPUT
