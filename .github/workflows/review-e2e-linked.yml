@@ -4,14 +4,16 @@ on:
   create:
     branches:
       - "dev-**"
-
+    tags-ignores:
+      - "**"
+      
 concurrency:
   cancel-in-progress: true
   group: ${{ github.workflow }}-${{ github.ref_name }}
 
 jobs:
   commit-e2e-link:
-    name: Tests
+    name: Commit e2e link
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -34,7 +36,7 @@ jobs:
           GIT_BRANCH=${GITHUB_REF#refs/heads/}
           git commit -am "chore: link to branch $GIT_BRANCH"
       
-      - name: Push e2e lined to current branch
+      - name: Push e2e linked to current branch
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
