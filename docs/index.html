@@ -23,7 +23,8 @@
   <link rel="stylesheet" href="//unpkg.com/@fortawesome/fontawesome-free/css/brands.css" />
   <link rel="stylesheet" href="//unpkg.com/@fortawesome/fontawesome-free/css/regular.css" />
   <link rel="stylesheet" href="//unpkg.com/@fortawesome/fontawesome-free/css/solid.css" />
-
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
+  <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <link rel="stylesheet" href="//style.css" />
   <style>
     .markdown-section h2 {
@@ -37,6 +38,8 @@
 <body>
   <div id="app"></div>
   <script>
+    var mermaidCount = 0;
+    mermaid.initialize({ startOnLoad: false });
     window.$docsify = {
       name: 'Kontinuous',
       repo: 'https://github.com/socialgouv/kontinuous',
@@ -44,6 +47,8 @@
       logo: '/_media/kontinuous-logo-small.png',
       themeColor: '#3354bc',
       coverpage: true,
+      loadSidebar: true,
+      subMaxLevel: 2,
       
       // complete configuration parameters
       search: {
@@ -63,6 +68,19 @@
         depth: 2,
         hideOtherSidebarContent: false, // whether or not to hide other sidebar content
         namespace: 'kontinuous-docs',
+      },
+
+      markdown: {
+        renderer: {
+          code: function (code, lang) {
+            if (lang === "mermaid") {
+              return (
+                '<div class="mermaid">' + mermaid.render('mermaid-svg-' + mermaidCount++, code) + "</div>"
+              );
+            }
+            return this.origin.code.apply(this, arguments);
+          }
+        }
       },
 
       copyCode: {
