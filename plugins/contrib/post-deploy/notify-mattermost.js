@@ -5,7 +5,7 @@ module.exports = async (manifests, options, context) => {
 
   const { environment } = config
 
-  const { notifyWebhookUrlVarName = "NOTIFY_WEBHOOK_URL" } = options
+  const { notifyWebhookUrlVarName = "KS_NOTIFY_WEBHOOK_URL" } = options
 
   const notifyWebhookUrl = process.env[notifyWebhookUrlVarName]
 
