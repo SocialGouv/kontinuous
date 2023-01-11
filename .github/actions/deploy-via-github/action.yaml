@@ -23,6 +23,12 @@ inputs:
   deployWriteOutputFile:
     description: "Set file to tee output of kontinuous deploy command"
     default: ""
+  sentryDSN:
+      description: "Sentry DSN for error reporting"
+      default: ""
+  notifyWebhookUrl:
+      description: "Notify webhook url secret targeting mattermost or slack channel"
+      default: ""
 
 runs:
   using: docker
@@ -39,3 +45,5 @@ runs:
     KS_INLINE_SET: ${{ inputs.inlineSet }}    
     KS_LOG_LEVEL: ${{ inputs.logLevel }}
     KS_DEPLOY_WRITE_OUTPUT_FILE: ${{ inputs.deployWriteOutputFile }}
+    KS_NOTIFY_WEBHOOK_URL: ${{ inputs.notifyWebhookUrl }}
+    KS_SENTRY_DSN: ${{ inputs.sentryDSN }}
