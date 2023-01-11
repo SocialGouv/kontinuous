@@ -67,7 +67,7 @@ dependencies:
       notifyMattermost:
         enabled: true
         options:
-          notifyWebhookUrlVarName: NOTIFY_WEBHOOK_URL
+          notifyWebhookUrlVarName: KS_NOTIFY_MATTERMOST_WEBHOOK_URL
     
     deploySidecars:
       failfast:
