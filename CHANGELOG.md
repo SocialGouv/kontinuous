@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.112.0 (2023-01-11)
+
+
+### Features
+
+* add sentry to cli ([#124](https://github.com/socialgouv/kontinuous/issues/124)) ([2725a9a](https://github.com/socialgouv/kontinuous/commit/2725a9af4524ef4cecd7e5620a9080a1e34ffcbb))
+
 ### 1.111.9 (2023-01-11)
 
 ### 1.111.8 (2023-01-10)

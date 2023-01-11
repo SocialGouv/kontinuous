@@ -20,6 +20,9 @@ It contains some boilerplate that you can use to initialize your project:
 
 These two boilerplates are mirrors of [SocialGouv/sandbox-ks-gh](https://github.com/SocialGouv/sandbox-ks-gh/) and [SocialGouv/sandbox-ks-wh](https://github.com/SocialGouv/sandbox-ks-wh/) repositories, if you are a member of `SocialGouv` organization you can ask an access to *sandbox* team to do experiments.
 
+To use workflows that implements [socialgouv/kontinuous/deploy-via-github](https://github.com/SocialGouv/kontinuous/tree/master/.github/actions/deploy-via-github) the secret you need on your repo is a common `KUBECONFIG` and a `KUBECONFIG` override for `production` environnement.
+
+To use workflows that implements [socialgouv/kontinuous/deploy-via-webhook](https://github.com/SocialGouv/kontinuous/tree/master/.github/actions/deploy-via-webhook) the secret you need on your repo is only `KUBEWEBHOOK_TOKEN`.
 
 ## kontinuous CLI
 

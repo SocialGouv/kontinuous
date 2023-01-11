@@ -684,6 +684,13 @@ module.exports = async (
       envParser: envParserYaml,
       option: "no-validate",
     },
+    sentryDSN: {
+      env: "KS_SENTRY_DSN",
+    },
+    sentryEnabled: {
+      env: "KS_SENTRY_ENABLED",
+      defaultFunction: (config) => !!config.sentryDSN,
+    },
   }
 
   rootConfig = await loadStructuredConfig({

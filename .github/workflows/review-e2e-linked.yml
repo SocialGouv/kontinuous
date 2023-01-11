@@ -1,28 +1,40 @@
 name: Review e2e linked
 
 on:
-  create:
-    branches:
-      - "dev-**"
-
+  create
+      
 concurrency:
   cancel-in-progress: true
   group: ${{ github.workflow }}-${{ github.ref_name }}
 
 jobs:
-  commit-e2e-link:
-    name: Tests
+  link-e2e:
+    name: Link e2e if match dev-**
     runs-on: ubuntu-latest
     steps:
+      - id: check-convention
+        name: Branch check convention
+        run: |
+          GIT_BRANCH=${GITHUB_REF#refs/heads/}
+          if [[ "$GIT_BRANCH" =~ ^dev-.* ]]; then
+            ok=yes
+          else
+            ok=no
+          fi
+          echo "ok=$ok" >> $GITHUB_OUTPUT
+
       - name: Checkout repository
+        if: steps.check-convention.outputs.ok == 'yes'
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
       
       - name: Install dependencies
+        if: steps.check-convention.outputs.ok == 'yes'
         run: yarn --immutable
       
       - name: Run e2e link
+        if: steps.check-convention.outputs.ok == 'yes'
         env:
           GIT_AUTHOR_EMAIL: ${{ secrets.SOCIALGROOVYBOT_EMAIL }}
           GIT_AUTHOR_NAME: ${{ secrets.SOCIALGROOVYBOT_NAME }}
@@ -34,7 +46,8 @@ jobs:
           GIT_BRANCH=${GITHUB_REF#refs/heads/}
           git commit -am "chore: link to branch $GIT_BRANCH"
       
-      - name: Push e2e lined to current branch
+      - name: Push e2e linked to current branch
+        if: steps.check-convention.outputs.ok == 'yes'
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
