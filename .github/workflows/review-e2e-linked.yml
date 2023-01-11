@@ -15,10 +15,11 @@ jobs:
       - id: check-convention
         name: Branch check convention
         run: |
-          ok=no
           GIT_BRANCH=${GITHUB_REF#refs/heads/}
           if [[ "$GIT_BRANCH" =~ ^dev-.* ]]; then
             ok=yes
+          else
+            ok=no
           fi
           echo "ok=$ok" >> $GITHUB_OUTPUT
 
