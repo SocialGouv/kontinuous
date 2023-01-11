@@ -1,6 +1,10 @@
+const omit = require("lodash.omit")
+
 const ctx = require("~common/ctx")
 
 const createProgram = require("./program")
+
+const sentry = require("./sentry")
 
 const addCommands = [
   require("./commands/build"),
@@ -21,5 +25,43 @@ module.exports = async (args = process.argv) => {
   ctx.provide()
   const program = createProgram()
   addCommands.forEach((addCommand) => addCommand(program))
-  return program.parseAsync(args)
+
+  sentry.init()
+  let transaction
+  program.hook("preAction", async (_thisCommand, actionCommand) => {
+    const commandName = actionCommand.name()
+    const config = ctx.require("config")
+    const opts = actionCommand.optsWithGlobals()
+    sentry.setContext("config", omit(config, ["webhookToken"]))
+    sentry.setContext("command", {
+      name: commandName,
+      opts,
+      argv: process.argv,
+      env: Object.entries(process.env).reduce((acc, [key, value]) => {
+        if (!key.startsWith("KS_")) {
+          return acc
+        }
+        if (key.includes("TOKEN")) {
+          return acc
+        }
+        acc[key] = value
+        return acc
+      }, {}),
+    })
+    transaction = sentry.startTransaction({
+      op: `cli.${commandName}`,
+      name: `cli command "${commandName}"`,
+    })
+  })
+
+  try {
+    await program.parseAsync(args)
+  } catch (error) {
+    sentry.captureException(error)
+    throw error
+  } finally {
+    if (transaction) {
+      transaction.finish()
+    }
+  }
 }
