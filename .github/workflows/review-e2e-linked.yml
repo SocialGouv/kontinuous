@@ -9,7 +9,7 @@ concurrency:
 
 jobs:
   link-e2e:
-    name: Commit e2e link
+    name: Link e2e if match dev-**
     runs-on: ubuntu-latest
     steps:
       - id: check-convention
