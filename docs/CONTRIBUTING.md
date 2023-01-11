@@ -59,7 +59,7 @@ cd ~/repos/my-project
 ~/repos/kontinuous/kontinuous --help
 ```
 
-####### kontinuous webhook service
+#### kontinuous webhook service
 
 ```sh
 yarn dev:webhook
@@ -152,3 +152,111 @@ docker run \
 #### A note on YAML
 
 Kontinuous support retro-compatibility YAML syntax version 1.1, some chart, including the keycloak one need this. In old YAML syntax (1.1), octal can be converted to integer, for example octal `0555` is equal to integer `365`, in new YAML syntax (1.2) octal are considered as padded number, and it's not that do we want, because in this case octal `0555` is converted to integer `555` which is wrong. I don't know exact implementation of YAML in Helm, but current version of Helm v3 treat octal correctly, according to YAML 1.1 spec, and so, we can found charts that is compatible with Helm, but not compatible with new YAML syntax spec 1.2. In Kontinuous we need to parse `values.yaml` file including defaults one of charts that we merge in one global, so we need to support YAML 1.1 to be fully compliant with state of art.
+
+#### Possibles ways to deployment
+
+```mermaid
+graph LR
+
+subgraph GIT
+direction LR;
+developer-->|git push|github/gitlab/*
+github/gitlab/*-->action[GitHub/GitLab/* action]
+github/gitlab/*-->|repository-webhook|webhook[Webhook pipeline]
+end
+
+
+subgraph webhook
+direction LR;
+kubernetes-job[kubernetes job]
+end
+
+subgraph kontinuous[kontinuous build]
+direction LR;
+
+
+subgraph value-compilers
+direction LR;
+unfold
+jobs
+x[...]
+end
+
+subgraph patches
+direction LR;
+labels
+annotations
+dns-fix
+needs
+y[...]
+end
+
+subgraph post-renderers
+direction LR;
+kustomize
+whatever
+z[...]
+end
+
+subgraph validators
+direction LR;
+dns-check
+secrets
+sealed-secrets
+uniqueness
+w[...]
+end
+
+subgraph debug-manifests
+direction LR;
+dependencies-tree
+v[...]
+end
+
+value-compilers-->helm-->patches-->post-renderers-->validators-->debug-manifests
+
+end
+
+
+
+
+action-->kontinuous
+action-->|trigger-webhook|webhook
+action-->|send-manifests|webhook
+webhook-->kontinuous
+kontinuous-->manifests.yaml
+
+
+manifests.yaml-->deploy
+
+subgraph deploy[kontinuous deploy]
+pre-deploy
+pre-deploy-->deploying
+deploying-->post-deploy
+end
+
+subgraph deploying
+deploy-with<-->deploy-sidecars
+end
+
+subgraph pre-deploy
+rancher-namespace
+t[...]
+end
+
+subgraph post-deploy
+notify-mattermost
+u[...]
+end
+
+subgraph deploy-sidecars
+progressing
+stern[stern logs]
+end
+
+
+subgraph deploy-with[deploy-with]
+kubectl[kubectl + rollout-status]
+kapp
+end
+```

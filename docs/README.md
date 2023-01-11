@@ -9,6 +9,18 @@
 
 kontinuous is built ontop of [HELM](https://helm.sh/), it's modular and plugin-based so you can extend it at will.
 
+## Example of implementation using Github workflows
+
+At *La Fabrique Numérique des Ministères Sociaux* we use github re-usable workflows from this repository: [https://github.com/SocialGouv/workflows](SocialGouv/workflows).
+
+It contains some boilerplate that you can use to initialize your project:
+
+- [deploy via github](https://github.com/SocialGouv/workflows/tree/master/boilerplates/ks-gh)
+- [deploy via webhook](https://github.com/SocialGouv/workflows/tree/master/boilerplates/ks-wh)
+
+These two boilerplates are mirrors of [SocialGouv/sandbox-ks-gh](https://github.com/SocialGouv/sandbox-ks-gh/) and [SocialGouv/sandbox-ks-wh](https://github.com/SocialGouv/sandbox-ks-wh/) repositories, if you are a member of `SocialGouv` organization you can ask an access to *sandbox* team to do experiments.
+
+
 ## kontinuous CLI
 
 The CLI is fully documented, you can consult help using `npx kontinuous --help` to known all available commands. Consult help and availables options using `--help` on each command.
@@ -81,6 +93,7 @@ Minimal dependencies:
   - a dedicated ci namespace per project and per cluster containing all needed secrets (optional)
   - [kube-janitor](https://codeberg.org/hjacobs/kube-janitor) is recommended for automatic resources cleaning
   
+
 ## Advanced
 
 Detailed documention:
@@ -91,7 +104,9 @@ Detailed documention:
 - [kontinuous build](./advanced/build.md)
 - [kontinuous deploy](./advanced/deploy.md)
 - [plugin system](./advanced/plugins.md)
-- [Webhook](./advanced/webhook.md)
+- [webhook](./advanced/webhook.md)
+- [paradigm](./advanced/paradigm.md)
+- [development](./CONTRIBUTING.md#development)
 
 ## Samples projects
 
