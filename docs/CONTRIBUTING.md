@@ -69,7 +69,12 @@ open your navigator on [http://localhost:7530/api/v1/swagger/](http://localhost:
 
 ### Review branches
 
-Kontinuous has many interconnected dependencies that make flow, it's can be hard to set version manually on each component, so there a great dev feature that it's called e2e-version. The default implementation target the major version that is linked on branch v1, to create review branch of kontinuous and test it from end to end, here is the process:
+Kontinuous has many interconnected dependencies that make flow, it's can be hard to set version manually on each component, so there a great dev feature that it's called e2e-version. The default implementation target the major version that is linked on branch v1.
+
+To create a review e2e linked branch of kontinuous and test it from end to end, you can just create a branch called `dev-**`, replacing `**` by a string containing only **lowercased alphanumerics** characters, `-` and `.`. Theses restriction are to be compliant with docker tagging rules.
+On pushing this branch for the first time a workflow will make the link, and commit it to the branch. Then just pull the branch and continue to work on it. After each new push on the branch, wait for all related github actions to end before you can use last version of your branch on your testing implementation.
+
+To create manually a review branch of kontinuous and test it from end to end, here is the process:
 
 ```sh
 # prepare kontinuous
