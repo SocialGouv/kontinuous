@@ -53,7 +53,7 @@ You'll find a detailed documentation below and plenty of examples in our [sample
 
 Run `npx kontinuous build -o` to see your manifests YAML and `npx kontinuous build -o | kubectl apply` to deploy to your cluster.
 
-See [build documentation](./advanced/build.md)
+See [build documentation](./advanced/build.md) to understand how to define your resources.
 
 ## Environments
 
@@ -69,26 +69,11 @@ When no explicit env is provided, kontinuous use the GIT head to select the corr
 | v\*.\*         | prod          |
 | \*             | dev           |
 
-## CI/CD with Github workflows
+## CI/CD
 
-We use github re-usable workflows from this repository: [https://github.com/SocialGouv/workflows](SocialGouv/workflows).
+You can deploy from GitHub, GitLab, or your own computer.
 
-You can use our boilerplates to setup the correct GitHub workflows on your project.
-
-### With GitHub actions
-
-Use the [ks-gh boilerplate](https://github.com/SocialGouv/workflows/tree/master/boilerplates/ks-gh) to deploy your environments using GitHub actions.
-
-You need to define two secrets in your GitHub repository config:
-
-- `KUBECONFIG` for the main cluster
-- `KUBECONFIG` override for a `production` environnement.
-
-### With Custom webhook
-
-Use the [ks-wh boilerplate](https://github.com/SocialGouv/workflows/tree/master/boilerplates/ks-wh) to deploy using a custom GIT webhook so you don't have to share your `KUBECONFIG`.
-
-See [Webhook section](./advanced/webhook.md) for the detailed webhook setup.
+See [Deployment docs](./advanced/deploy.md) for all available options
 
 ## Requirements
 
