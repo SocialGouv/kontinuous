@@ -1,5 +1,5 @@
 kontinuous-webhook:
-  image: ghcr.io/socialgouv/kontinuous/webhook:v1.113.0
+  image: ghcr.io/socialgouv/kontinuous/webhook:v1.113.1
   # image: harbor.fabrique.social.gouv.fr/sre/kontinuous/webhook:1
   host: "kontinuous.fabrique.social.gouv.fr"
   
