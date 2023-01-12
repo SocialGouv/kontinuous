@@ -20,6 +20,9 @@ module.exports = async (options = {}) => {
       home: {
         dependencies: ["express"],
       },
+      "microservice-oapi": {
+        dependencies: ["sentry"],
+      },
     },
     dependencies: {
       oapi: {
