@@ -1,9 +1,5 @@
-// const ctx = require("~common/ctx")
-
 module.exports = function ({ services: { pushed, deleted } }) {
   const eventHandlers = { pushed, deleted }
-
-  // const sentry = ctx.get("sentry")
 
   return [
     async (req, res) => {
