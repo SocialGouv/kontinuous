@@ -2176,18 +2176,18 @@ __metadata:
   linkType: hard
 
 "@modjo-plugins/config@npm:latest":
-  version: 1.2.2
-  resolution: "@modjo-plugins/config@npm:1.2.2"
+  version: 1.2.5
+  resolution: "@modjo-plugins/config@npm:1.2.5"
   dependencies:
     lodash.defaultsdeep: "npm:^4.6.1"
     nctx: "npm:^1.6.2"
-  checksum: 23baeefa45f0e0c8104dd2b6027df95e3b677ad5dbe8e79b4debc4772809691491e13cec240be970ca31fa405736a4914867a5e764682098f738ba45131b9ef6
+  checksum: b9799d2b2e8a5611566e685bd1fa23f8f9792cff9eb7c8b3e58e1ef3df8c13806781889d87e79124033221dba2dce67677f7d52bb4b62995654478701876619d
   languageName: node
   linkType: hard
 
 "@modjo-plugins/core@npm:latest":
-  version: 1.2.2
-  resolution: "@modjo-plugins/core@npm:1.2.2"
+  version: 1.2.5
+  resolution: "@modjo-plugins/core@npm:1.2.5"
   dependencies:
     commander: "npm:^9.1.0"
     fs-extra: "npm:^10.0.1"
@@ -2205,13 +2205,13 @@ __metadata:
     nctx: "npm:^1.6.2"
     pretty-ms: "npm:^7.0.1"
     yup: "npm:^0.32.11"
-  checksum: cdfc085eee84ea46e30261b33f012838e7a26feadb952461fa8eda21e5b29d71e15e9ef05c5a01c24845df9ac77d01d27e72be07d3e6ac33b67d2fa5d50e6dac
+  checksum: 1df8e57b35444e8448bd4884c6e25f9410f7ced119eb37771b14164bdb4bf5af41f30e7e58fd5ae3bc2805ba64fc41404e5c59e24bd50391b256b35f12e8ddaa
   languageName: node
   linkType: hard
 
 "@modjo-plugins/express@npm:latest":
-  version: 1.2.2
-  resolution: "@modjo-plugins/express@npm:1.2.2"
+  version: 1.2.5
+  resolution: "@modjo-plugins/express@npm:1.2.5"
   dependencies:
     "@modjo-plugins/config": "npm:*"
     "@modjo-plugins/http-logger": "npm:*"
@@ -2221,60 +2221,60 @@ __metadata:
     cors: "npm:^2.8.5"
     express: "npm:^5.0.0-beta.1"
     nctx: "npm:^1.6.2"
-  checksum: 5cb6b5523208c2be44d734403313ecdcd89e60c1349980406ca3661a5b8092b4f1bd465c3b4bfb942129148d4d4ff23c9a1a152a90604e1da0fbb2581fe6ac0b
+  checksum: d18fbd66c8ac64b6e6ebc34d5c706d8fbaa8fa55f103b02a7a0f7f64f3d874ed18216d0cd7f8b42cf990d6a184efaab8539966dbee2279cc69253e1a85cc56ec
   languageName: node
   linkType: hard
 
 "@modjo-plugins/http-logger@npm:latest":
-  version: 1.2.2
-  resolution: "@modjo-plugins/http-logger@npm:1.2.2"
+  version: 1.2.5
+  resolution: "@modjo-plugins/http-logger@npm:1.2.5"
   dependencies:
     "@modjo-plugins/config": "npm:*"
     nctx: "npm:^1.6.2"
-  checksum: 58596701eed0208803897eff57f03c74db9aba517a5e51318534ccab1a393559d8a21b4f8be43c2feaaf3ca311bd52962e2bec99aac931f3968b2ee44e6b768c
+  checksum: ef267ff5f63ba34b07cb05f939864c28956257ce518cbb4a0726edcff142aa73598d11b1041af65f5909218e015d479c3dfb8fef8a73f842f19c9856593fab6b
   languageName: node
   linkType: hard
 
 "@modjo-plugins/http-server@npm:latest":
-  version: 1.2.2
-  resolution: "@modjo-plugins/http-server@npm:1.2.2"
+  version: 1.2.5
+  resolution: "@modjo-plugins/http-server@npm:1.2.5"
   dependencies:
     "@modjo-plugins/config": "npm:*"
     "@modjo-plugins/lightship": "npm:*"
     "@modjo-plugins/logger": "npm:*"
     "@modjo-plugins/shutdown-handlers": "npm:*"
     nctx: "npm:^1.6.2"
-  checksum: acfffeeaa20e479f6649b38e5c1daacc77a7d73711707f71dc0dbdd163273297e970da7f6c4ee30bfa84bdce5da23ac4e5d106baecfd4c12e63ef6b56c67951d
+  checksum: 620ef3cc7329a3dbfd99fdf2e532af871602944e4948e4089cf8d56c523e3c513ba46af0850bc925a71e54674efbd0cafbc7fd95348005be5082d756e68df4fa
   languageName: node
   linkType: hard
 
 "@modjo-plugins/lightship@npm:latest":
-  version: 1.2.2
-  resolution: "@modjo-plugins/lightship@npm:1.2.2"
+  version: 1.2.5
+  resolution: "@modjo-plugins/lightship@npm:1.2.5"
   dependencies:
     "@modjo-plugins/logger": "npm:*"
     lightship: "npm:^7.0.2"
     nctx: "npm:^1.6.2"
-  checksum: 0c6f962b68a686a14b1592de7b8b26b86fed065fbd696d8a60befbee29b7aef963dc9590c20c4290ff9964f752107f7501757ae68b3fe1e45d012b5c17692ce7
+  checksum: ffdb8d31d472c7b5803dbc74e45abe2b263f6d7cb11296ee1e05175957e89e3592c242506447b06cd093e3b389d922cd1342b6223f7e7581b57e569236a43ea3
   languageName: node
   linkType: hard
 
 "@modjo-plugins/logger@npm:latest":
-  version: 1.2.2
-  resolution: "@modjo-plugins/logger@npm:1.2.2"
+  version: 1.2.5
+  resolution: "@modjo-plugins/logger@npm:1.2.5"
   dependencies:
     "@modjo-plugins/logger": "npm:*"
     nctx: "npm:^1.6.2"
     pino: "npm:^7.9.2"
     pino-abstract-transport: "npm:^1.0.0"
     pino-pretty: "npm:^7.6.0"
-  checksum: c92d87963553ef361d79f967667849a114c2700102746de346113d33e9c39d092ce7c97b76a7e375640f68c0cfe583d9ae36dd5cc1e0de3137ffab1bf523f700
+  checksum: db41b1d5b566ac2f5722f62f70bd12c7f29aa610f5fb6125cbc8c6437335747b316fa21b4670b523c926264e8010e498ef550fad4d04bdee5d3fcd55c2e98cb6
   languageName: node
   linkType: hard
 
 "@modjo-plugins/microservice-oapi@npm:latest":
-  version: 1.2.2
-  resolution: "@modjo-plugins/microservice-oapi@npm:1.2.2"
+  version: 1.2.5
+  resolution: "@modjo-plugins/microservice-oapi@npm:1.2.5"
   dependencies:
     "@modjo-plugins/core": "npm:*"
     "@modjo-plugins/express": "npm:*"
@@ -2286,13 +2286,13 @@ __metadata:
     "@modjo-plugins/oa": "npm:*"
     "@modjo-plugins/shutdown-handlers": "npm:*"
     nctx: "npm:^1.6.2"
-  checksum: 82793737fe0e8a908dd08e25b617b66946f772c007bd64b6df60fa7956af531a4c942c8f00fafd59f630439664ac2dbdd64fc33264d4f2e5c098a1a0d6f3d92a
+  checksum: 8df11caa1ce5806ad7f323bc5bc512af20e5b1b1b0802e5366f93080b80b1661a733473eab2f2a19296fc0730893c52dd9b07f61fde4b6b372e68451c4a8dfdb
   languageName: node
   linkType: hard
 
 "@modjo-plugins/oa@npm:latest":
-  version: 1.2.2
-  resolution: "@modjo-plugins/oa@npm:1.2.2"
+  version: 1.2.5
+  resolution: "@modjo-plugins/oa@npm:1.2.5"
   dependencies:
     "@modjo-plugins/config": "npm:*"
     "@modjo-plugins/core": "npm:*"
@@ -2314,27 +2314,27 @@ __metadata:
     openapi-schema-validator: "npm:^10.0.0"
     swagger-ui-dist: "npm:^4.10.0"
     swagger-ui-express: "npm:^4.3.0"
-  checksum: 32eb6eaa115ea482616fd368f2351e524b26e4dba5bea4631eacb42ace07853922316141ffc881ac4573dbe8b94f52d6becb0024c6a565580d2a439fc6173662
+  checksum: d8d7c992a6583e85022394d8417d58fdf6fa3e204833860fc2939f4ab663691422f67819af6d5924adaee3483d9a4075a8393ef31aa0d1ba8105df6c5518eeda
   languageName: node
   linkType: hard
 
 "@modjo-plugins/sentry@npm:latest":
-  version: 1.2.2
-  resolution: "@modjo-plugins/sentry@npm:1.2.2"
+  version: 1.2.5
+  resolution: "@modjo-plugins/sentry@npm:1.2.5"
   dependencies:
     "@sentry/node": "npm:^7.30.0"
     nctx: "npm:^1.6.2"
-  checksum: ff0116a68b5fbe7ba42a9d12c013c16cb92321efb76458ea0bf2c91da7262268225cd9fcb766f30e284272af474ecccacfafcb9df815d78bf1d9a38a46c1e9db
+  checksum: 833593f3da2a0af4f230c913093859c2270231110e87dcc95bffdcc7bdd0c6f761ef39fd9acdbbfb877eccd4c92bbe2ae708d90be0f25293477feb34d790551d
   languageName: node
   linkType: hard
 
 "@modjo-plugins/shutdown-handlers@npm:latest":
-  version: 1.2.2
-  resolution: "@modjo-plugins/shutdown-handlers@npm:1.2.2"
+  version: 1.2.5
+  resolution: "@modjo-plugins/shutdown-handlers@npm:1.2.5"
   dependencies:
     "@modjo-plugins/lightship": "npm:*"
     nctx: "npm:^1.6.2"
-  checksum: 12493ef999bc9f3654212dd17e09dcb1d92758eb573762f4b04f335d5930000ad44a3c47683cf7ea610dd75db6b1ad226755c6dd50a26f248d4ce4ae213d5244
+  checksum: 71a66c4a9d0539a89a8d1b90bccd561c205db121be91fa9bb9b9f3f94270e400d17a715d21ab75412bb4105ac2f618ce0b770d3c0683fda15525e0b451555ccd
   languageName: node
   linkType: hard
 
