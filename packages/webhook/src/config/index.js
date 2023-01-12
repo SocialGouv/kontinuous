@@ -74,41 +74,44 @@ module.exports = async function createConfig() {
     repositories[key] = repo
   }
 
-  const supertoken = process.env.KUBEWEBHOOK_SUPERTOKEN
+  const { env } = process
+
+  const supertoken = env.KUBEWEBHOOK_SUPERTOKEN
 
   const ignoreUserAgents = (
-    process.env.KUBEWEBHOOK_HTTPLOGGER_IGNOREUSERAGENTS || ""
+    env.KUBEWEBHOOK_HTTPLOGGER_IGNOREUSERAGENTS || ""
   ).split(",")
 
-  const pipelineImageTag = process.env.KUBEWEBHOOK_PIPELINE_IMAGE_TAG || "v1"
+  const pipelineImageTag = env.KUBEWEBHOOK_PIPELINE_IMAGE_TAG || "v1"
   const pipelineImage =
-    process.env.KUBEWEBHOOK_PIPELINE_IMAGE || "ghcr.io/socialgouv/kontinuous"
+    env.KUBEWEBHOOK_PIPELINE_IMAGE || "ghcr.io/socialgouv/kontinuous"
   const pipelineCheckoutImage =
-    process.env.KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE ||
+    env.KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE ||
     "ghcr.io/socialgouv/kontinuous/degit"
   const pipelineCheckoutImageTag =
-    process.env.KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE_TAG || "v1"
+    env.KUBEWEBHOOK_PIPELINE_CHECKOUT_IMAGE_TAG || "v1"
 
   const serviceName = `kontinuous webhook server v${kontinuousVersion}`
 
-  const ciNamespaceAllowAll =
-    process.env.KUBEWEBHOOK_CI_NAMESPACE_ALLOW_ALL === "true"
+  const ciNamespaceAllowAll = env.KUBEWEBHOOK_CI_NAMESPACE_ALLOW_ALL === "true"
   const ciNamespaceTemplate =
-    process.env.KUBEWEBHOOK_CI_NAMESPACE_TEMPLATE || "${project}-ci"
+    env.KUBEWEBHOOK_CI_NAMESPACE_TEMPLATE || "${project}-ci"
 
   const ciNamespaceMountKubeconfigDefault =
-    process.env.KUBEWEBHOOK_CI_NAMESPACE_MOUNT_KUBECONFIG_DEFAULT === "true"
+    env.KUBEWEBHOOK_CI_NAMESPACE_MOUNT_KUBECONFIG_DEFAULT === "true"
   const ciNamespaceKubeconfigSecretName =
-    process.env.KUBEWEBHOOK_CI_NAMESPACE_KUBECONFIG_SECRET_NAME || "kubeconfig"
+    env.KUBEWEBHOOK_CI_NAMESPACE_KUBECONFIG_SECRET_NAME || "kubeconfig"
 
   const ciNamespaceMountSecretsDefault = JSON.parse(
-    process.env.KUBEWEBHOOK_CI_NAMESPACE_MOUNT_SECRETS_DEFAULT || "[]"
+    env.KUBEWEBHOOK_CI_NAMESPACE_MOUNT_SECRETS_DEFAULT || "[]"
   )
   const ciNamespaceServiceAccountNameDefault =
-    process.env.KUBEWEBHOOK_CI_NAMESPACE_SERVICE_ACCOUNT_NAME_DEFAULT
+    env.KUBEWEBHOOK_CI_NAMESPACE_SERVICE_ACCOUNT_NAME_DEFAULT
 
   const surviveOnBrokenCluster =
-    process.env.KUBEWEBHOOK_SURVIVE_ON_BROKEN_CLUSTER === "true"
+    env.KUBEWEBHOOK_SURVIVE_ON_BROKEN_CLUSTER === "true"
+
+  const sentryDsn = env.KUBEWEBHOOK_SENTRY_DSN
 
   const config = {
     project: {
@@ -146,6 +149,9 @@ module.exports = async function createConfig() {
     },
     httpLogger: {
       ignoreUserAgents,
+    },
+    sentry: {
+      dsn: sentryDsn,
     },
   }
 
