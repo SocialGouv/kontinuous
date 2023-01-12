@@ -125,6 +125,13 @@ spec:
                   key: {{ .Values.rootTokenSecretKey }}
                   name: {{ .Values.rootTokenSecret }}
             {{ end }}
+            {{ if .Values.sentrySecret }}
+            - name: KUBEWEBHOOK_SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.sentrySecretKey }}
+                  name: {{ .Values.sentrySecret }}
+            {{ end }}
             - name: KUBEWEBHOOK_CI_NAMESPACE_ALLOW_ALL
               value: "{{ .Values.ciNamespace.allowAll }}"
             - name: KUBEWEBHOOK_CI_NAMESPACE_TEMPLATE
