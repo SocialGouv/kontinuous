@@ -1,0 +1,20 @@
+security:
+  - bearerAuth: ["webhook"]
+  - token: ["webhook"]
+
+parameters: []
+
+responses:
+  500:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            code:
+              type: integer
+            message:
+              type: string
+            sentry:
+              type: string
+              

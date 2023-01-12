@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.113.0 (2023-01-12)
+
+
+### Features
+
+* sentry in webhook ([#126](https://github.com/socialgouv/kontinuous/issues/126)) ([0c7cf70](https://github.com/socialgouv/kontinuous/commit/0c7cf70b3e5b05745de4658802def9d7b82073ad))
+
 ## 1.112.0 (2023-01-11)
 
 

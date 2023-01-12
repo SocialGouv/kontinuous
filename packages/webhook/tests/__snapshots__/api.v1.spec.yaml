@@ -902,12 +902,39 @@ paths:
       summary: getManySupportNamespace
     parameters: []
     description: /support/namespace/
+  /support/debug-sentry:
+    get:
+      security:
+        - bearerAuth:
+            - webhook
+        - token:
+            - webhook
+      parameters: []
+      responses:
+        '500':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                  sentry:
+                    type: string
+          description: 'Default description: HTTP 500 for getOneSupportDebugSentry'
+      operationId: getOneSupportDebugSentry
+      description: 'Default description: Query: getOneSupportDebugSentry'
+      summary: getOneSupportDebugSentry
+    parameters: []
+    description: /support/debug-sentry
   /support/rollout-status:
     get:
       security:
-        - token:
-            - webhook
         - bearerAuth:
+            - webhook
+        - token:
             - webhook
       parameters:
         - in: query
