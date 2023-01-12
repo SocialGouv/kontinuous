@@ -190,6 +190,7 @@ module.exports = function ({ services }) {
       writeStreamEnd({ ok: true })
     } catch (err) {
       logger.error(err)
+      // TODO capture with sentry
       res.write(
         `\n❌ end of logging with error, consult webhook service pod logs for full details\n`
       )
