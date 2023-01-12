@@ -6,6 +6,6 @@ inputs:
 runs:
   using: docker
   # image: Dockerfile
-  image: docker://ghcr.io/socialgouv/kontinuous/gh-action-debug-manifests-output:v1.112.0
+  image: docker://ghcr.io/socialgouv/kontinuous/gh-action-debug-manifests-output:v1.113.0
   args:  
     - '${{ inputs.path }}'
