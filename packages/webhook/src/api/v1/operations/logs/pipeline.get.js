@@ -13,6 +13,7 @@ const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 module.exports = function ({ services }) {
   const logger = ctx.require("logger")
   const config = ctx.require("config")
+  const sentry = ctx.get("sentry")
   const { surviveOnBrokenCluster } = config.project
   const readyToLogPhases = ["Running", "Succeeded", "Failed"]
   const checkJobExists = async ({ jobName, commit, kubeconfig }) => {
@@ -190,7 +191,9 @@ module.exports = function ({ services }) {
       writeStreamEnd({ ok: true })
     } catch (err) {
       logger.error(err)
-      // TODO capture with sentry
+      if (sentry) {
+        sentry.captureException(err)
+      }
       res.write(
         `\n❌ end of logging with error, consult webhook service pod logs for full details\n`
       )
