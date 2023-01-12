@@ -3,7 +3,11 @@ const slackstream = require("slackstream")
 module.exports = async (manifests, options, context) => {
   const { success, errors, config, logger } = context
 
-  const { environment } = config
+  const { environment, event, gitBranch, repositoryName } = config
+
+  if (event !== "pushed") {
+    return
+  }
 
   const { notifyWebhookUrlVarName = "KS_NOTIFY_WEBHOOK_URL" } = options
 
@@ -19,17 +23,25 @@ module.exports = async (manifests, options, context) => {
 
   const stream = slackstream(notifyWebhookUrl)
   const deploymentMessage = []
+  const deploymentName = environment === "dev" ? gitBranch : environment
 
   deploymentMessage.push(
-    `${environment} deployment ${success ? "success ✅" : "failed ❌"}`
+    `${repositoryName} ${deploymentName} deployment ${
+      success ? "success ✅" : "failed ❌"
+    }`
   )
 
   if (success) {
-    const firstIngress = manifests.find(({ kind }) => kind === "Ingress")
-    if (firstIngress) {
-      const host = firstIngress.spec.rules[0]?.host
+    for (const manifest of manifests) {
+      const { kind } = manifest
+      if (kind !== "Ingress") {
+        continue
+      }
+      const { spec } = manifest
+      const host = spec.rules[0]?.host
       if (host) {
         deploymentMessage.push(`https://${host}`)
+        break
       }
     }
   } else {
