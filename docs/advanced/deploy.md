@@ -8,7 +8,7 @@ Run `npx kontinuous build -o | kubectl apply -f -` from your project repository
 
 Run `npx kontinuous deploy` from your project repository
 
-## With GitHub actions
+## with GitHub actions
 
 Use the [ks-gh boilerplate](https://github.com/SocialGouv/workflows/tree/master/boilerplates/ks-gh) to deploy your environments using GitHub actions.
 
@@ -17,7 +17,7 @@ You need to define two secrets in your GitHub repository config :
 - `KUBECONFIG` as default cluster
 - `KUBECONFIG` for a `production` environnement.
 
-## With Custom webhook
+## with Custom webhook
 
 Use the [ks-wh boilerplate](https://github.com/SocialGouv/workflows/tree/master/boilerplates/ks-wh) to deploy using a custom GIT webhook so you don't have to share your `KUBECONFIG`.
 
