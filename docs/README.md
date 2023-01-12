@@ -9,21 +9,6 @@
 
 kontinuous is built ontop of [HELM](https://helm.sh/), it's modular and plugin-based so you can extend it at will.
 
-## Example of implementation using Github workflows
-
-At *La Fabrique Numérique des Ministères Sociaux* we use github re-usable workflows from this repository: [https://github.com/SocialGouv/workflows](SocialGouv/workflows).
-
-It contains some boilerplate that you can use to initialize your project:
-
-- [deploy via github](https://github.com/SocialGouv/workflows/tree/master/boilerplates/ks-gh)
-- [deploy via webhook](https://github.com/SocialGouv/workflows/tree/master/boilerplates/ks-wh)
-
-These two boilerplates are mirrors of [SocialGouv/sandbox-ks-gh](https://github.com/SocialGouv/sandbox-ks-gh/) and [SocialGouv/sandbox-ks-wh](https://github.com/SocialGouv/sandbox-ks-wh/) repositories, if you are a member of `SocialGouv` organization you can ask an access to *sandbox* team to do experiments.
-
-To use workflows that implements [socialgouv/kontinuous/deploy-via-github](https://github.com/SocialGouv/kontinuous/tree/master/.github/actions/deploy-via-github) the secret you need on your repo is a common `KUBECONFIG` and a `KUBECONFIG` override for `production` environnement.
-
-To use workflows that implements [socialgouv/kontinuous/deploy-via-webhook](https://github.com/SocialGouv/kontinuous/tree/master/.github/actions/deploy-via-webhook) the secret you need on your repo is only `KUBEWEBHOOK_TOKEN`.
-
 ## kontinuous CLI
 
 The CLI is fully documented, you can consult help using `npx kontinuous --help` to known all available commands. Consult help and availables options using `--help` on each command.
@@ -84,6 +69,27 @@ When no explicit env is provided, kontinuous use the GIT head to select the corr
 | v\*.\*         | prod          |
 | \*             | dev           |
 
+## CI/CD with Github workflows
+
+We use github re-usable workflows from this repository: [https://github.com/SocialGouv/workflows](SocialGouv/workflows).
+
+You can use our boilerplates to setup the correct GitHub workflows on your project.
+
+### With GitHub actions
+
+Use the [ks-gh boilerplate](https://github.com/SocialGouv/workflows/tree/master/boilerplates/ks-gh) to deploy your environments using GitHub actions.
+
+You need to define two secrets in your GitHub repository config:
+
+- `KUBECONFIG` for the main cluster
+- `KUBECONFIG` override for a `production` environnement.
+
+### With Custom webhook
+
+Use the [ks-wh boilerplate](https://github.com/SocialGouv/workflows/tree/master/boilerplates/ks-wh) to deploy using a custom GIT webhook so you don't have to share your `KUBECONFIG`.
+
+See [Webhook section](./advanced/webhook.md) for the detailed webhook setup.
+
 ## Requirements
 
 [TODO]: on the cluster
@@ -95,7 +101,6 @@ Minimal dependencies:
   - giving the kubeconfig to kontinuous to access the project scope
   - a dedicated ci namespace per project and per cluster containing all needed secrets (optional)
   - [kube-janitor](https://codeberg.org/hjacobs/kube-janitor) is recommended for automatic resources cleaning
-  
 
 ## Advanced
 
