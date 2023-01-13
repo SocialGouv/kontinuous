@@ -7,6 +7,10 @@ const yarnNotIgnore = [
   ".yarn/cache",
 ]
 
+/**
+ * @param {string} src
+ * @returns boolean
+ */
 module.exports = (src) => {
   if (src.includes("node_modules/") || src.endsWith("node_modules")) {
     return false

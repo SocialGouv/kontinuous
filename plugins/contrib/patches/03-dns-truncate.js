@@ -1,9 +1,9 @@
 const MAX_DNS_LENGTH = 63
 
+/** @type {Kontinuous.PatchFunction} */
 module.exports = (manifests, _options, context) => {
   const { utils } = context
   const { yaml, slug, logger } = utils
-
   let subdomainsToTruncate = []
   do {
     subdomainsToTruncate = []

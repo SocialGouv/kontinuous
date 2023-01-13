@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "target": "es2015",
+    "checkJs": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "noEmit": true,
+    "strict": false
+  },
+  "include": [
+    "plugins/contrib/patches/*.js",
+    "packages/common/utils/**/*",
+    //"packages/common/utils/kind-is-runnable",
+    "index.d.ts"
+  ]
+}

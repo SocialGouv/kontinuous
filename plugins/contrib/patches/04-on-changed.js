@@ -3,9 +3,14 @@ const changeGroupPrefix = "kapp.k14s.io/change-group"
 const changeGroupValuePrefix = "kontinuous/"
 const changeRuleValuePrefix = "upsert after upserting kontinuous/"
 
+/**
+ *
+ * @param {Kontinuous.Manifest} manifest
+ * @returns Set<string>
+ */
 const getChangeGroupOf = (manifest) => {
   const changeGroups = new Set()
-  for (const [key, group] of Object.entries(manifest.metadata.annotations)) {
+  for (const [key, group] of Object.entries(manifest.metadata?.annotations)) {
     if (key === changeGroupPrefix || key.startsWith(`${changeGroupPrefix}.`)) {
       changeGroups.add(group.slice(changeGroupValuePrefix.length))
     }
@@ -13,9 +18,14 @@ const getChangeGroupOf = (manifest) => {
   return changeGroups
 }
 
+/**
+ * @param {Kontinuous.Manifests} manifests
+ * @param {Set<string>} changeGroups
+ * @returns Kontinuous.Manifests
+ */
 const findDependentsOfGroup = (manifests, changeGroups) =>
   manifests.filter((manifest) => {
-    for (const [key, rule] of Object.entries(manifest.metadata.annotations)) {
+    for (const [key, rule] of Object.entries(manifest.metadata?.annotations)) {
       if (
         (key === changeRulePrefix || key.startsWith(`${changeRulePrefix}.`)) &&
         rule.startsWith(changeRuleValuePrefix)
@@ -27,16 +37,25 @@ const findDependentsOfGroup = (manifests, changeGroups) =>
     return false
   })
 
+/**
+ * @param {Kontinuous.Manifests} manifests
+ * @param {Kontinuous.Manifest} neededManifest
+ * @returns Kontinuous.Manifests
+ */
 const findDependentsOf = (manifests, neededManifest) => {
   const changeGroups = getChangeGroupOf(neededManifest)
   return findDependentsOfGroup(manifests, changeGroups)
 }
-
+/**
+ * @param {Kontinuous.Manifests} manifests
+ * @param {Kontinuous.Manifest} neededManifest
+ * @returns {void}
+ */
 const unbindDependentsOf = (manifests, neededManifest) => {
   const changeGroups = getChangeGroupOf(neededManifest)
   const manifestToUnbind = findDependentsOfGroup(manifests, changeGroups)
   for (const manifest of manifestToUnbind) {
-    const { annotations } = manifest.metadata
+    const { annotations = {} } = manifest.metadata || {}
     for (const [key, rule] of Object.entries(annotations)) {
       if (
         (key === changeRulePrefix || key.startsWith(`${changeRulePrefix}.`)) &&
@@ -51,6 +70,13 @@ const unbindDependentsOf = (manifests, neededManifest) => {
   }
 }
 
+/**
+ *
+ * @param {Kontinuous.Manifests} manifests
+ * @param {*} neededManifest
+ * @param {*} removeManifests
+ * @returns
+ */
 const removeDependentsOf = (
   manifests,
   neededManifest,
@@ -63,6 +89,7 @@ const removeDependentsOf = (
   return removeManifests
 }
 
+/** @type {Kontinuous.PatchFunction} */
 module.exports = async (manifests, _options, context) => {
   const { config, utils } = context
   const { yaml, KontinuousPluginError, patternMatch } = utils

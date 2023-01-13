@@ -141,7 +141,7 @@ module.exports = async (options, context) => {
   const { ctx } = context
   const eventsBucket = ctx.require("eventsBucket")
   const countAllRunnable = manifests.filter((manifest) =>
-    kindIsWaitable(manifest.kind, options.customWaitableKinds)
+    kindIsWaitable(manifest)
   ).length
   eventsBucket.emit("deploy-with:plugin:initDeployment", { countAllRunnable })
 

@@ -1,6 +1,11 @@
 const defaultOptions = {
   overrideDefault: true,
 }
+
+/**
+ * @type {Kontinuous.PatchFunction}
+ * @param {Kontinuous.PatchNamespaceOptions} options
+ */
 module.exports = (manifests, options, { values }) => {
   const opts = { ...defaultOptions, ...options }
   const { overrideDefault } = opts

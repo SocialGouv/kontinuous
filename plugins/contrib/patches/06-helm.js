@@ -1,3 +1,4 @@
+/** @type {Kontinuous.PatchFunction} */
 module.exports = async (manifests, _options, context) => {
   const { config, utils } = context
   const { slug } = utils

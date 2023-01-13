@@ -24,7 +24,7 @@ const download = async (options) => {
   switch (platform) {
     case "darwin":
       break
-    case "windows":
+    case "win32":
       ext = ".exe"
       break
     case "linux":

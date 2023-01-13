@@ -19,7 +19,7 @@ module.exports = async (manifests, options, context) => {
   const umlSet = new Set()
 
   for (const manifest of manifests) {
-    const { metadata, kind } = manifest
+    const { metadata } = manifest
     const annotations = metadata?.annotations
     if (!annotations) {
       continue
@@ -27,7 +27,7 @@ module.exports = async (manifests, options, context) => {
 
     const yamlNeeds = annotations["kontinuous/plugin.needs"]
 
-    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
+    if (!kindIsWaitable(manifest)) {
       continue
     }
 

@@ -178,7 +178,7 @@ module.exports = async (options, context) => {
 
     const yamlNeeds = annotations["kontinuous/plugin.needs"]
 
-    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
+    if (!kindIsWaitable(manifest)) {
       return
     }
     if (!yamlNeeds) {

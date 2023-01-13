@@ -1,25 +1,24 @@
-const kindIsWaitable = require("../lib/kind-is-waitable")
 const getChartNameTopParts = require("../lib/get-chart-name-top-parts")
 
-module.exports = async (manifests, options, { config }) => {
+/** @type {Kontinuous.PatchFunction} */
+module.exports = async (manifests, options, context) => {
+  const { utils } = context
+  const { kindIsWaitable } = utils
   for (const manifest of manifests) {
-    const { kind } = manifest
-    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
+    const { kind, metadata } = manifest
+    const annotations = metadata?.annotations
+    if (!annotations || !kindIsWaitable(manifest)) {
       continue
     }
     if (!manifest.metadata) {
       manifest.metadata = {}
     }
-    const { metadata } = manifest
-    if (!metadata.annotations) {
-      metadata.annotations = {}
-    }
-    const { annotations } = metadata
 
     const chartPath = annotations["kontinuous/chartPath"]
     const { name } = metadata
     const chartName = chartPath.split(".").pop()
 
+    // @ts-ignore TODO
     const lowerKind = kind.toLowerCase()
     annotations["kontinuous/depname.full"] = `${chartPath}.${lowerKind}.${name}`
     annotations[
