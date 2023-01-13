@@ -12,7 +12,9 @@ module.exports = async (deploys, options, context) => {
 
   const { yaml, logger, kubectlDeleteManifest, kindIsRunnable } = utils
 
-  const { kubeconfigContext, kubeconfig, deployTimeout } = config
+  const { kubeconfigContext, kubeconfig } = config
+
+  const { applyTimeout = "2m" } = options
 
   const { serverSide = true } = options
 
@@ -84,7 +86,7 @@ module.exports = async (deploys, options, context) => {
       --force-conflicts=${serverSide && forceConflicts ? "true" : "false"}
       --overwrite
       --wait
-      --timeout=${deployTimeout}
+      --timeout=${applyTimeout}
   `
     return kubectl(kubectlDeployCommand, {
       kubeconfig,

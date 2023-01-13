@@ -505,11 +505,6 @@ module.exports = async (
         }
       },
     },
-    deployTimeout: {
-      option: "timeout",
-      env: "KS_DEPLOY_TIMEOUT",
-      default: "15m",
-    },
     links: {
       transform: async (links = {}) => {
         links = lowerKeys(links)

@@ -13,13 +13,12 @@ const escapeCurlyGo = {
 
 module.exports = async (
   deploys,
-  _options,
+  options,
   { config, logger, needBin, utils, manifestsYaml, dryRun }
 ) => {
   const { parseCommand, needHelm, slug, createChart, yaml } = utils
 
-  const { kubeconfigContext, kubeconfig, repositoryName, deployTimeout } =
-    config
+  const { kubeconfigContext, kubeconfig, repositoryName } = config
 
   const charts = config.chart?.join(",")
 
@@ -44,6 +43,8 @@ module.exports = async (
       yaml.dump(createChart(slug(repositoryName), {}))
     ),
   ])
+
+  const { deployTimeout = "15m" } = options
 
   const helmDeployCommand = dryRun
     ? "helm version"

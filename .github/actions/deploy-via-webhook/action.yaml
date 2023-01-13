@@ -13,14 +13,19 @@ inputs:
     description: "charts to enable as standalone, you can add multiple separated by comma"
   ignoreProjectTemplates:
     description: "don't merge project's root templates and env templates"
+  deployWriteOutputFile:
+    description: "Set file to tee output of kontinuous logs command"
+    default: ""
+
 runs:
   using: docker
   # image: Dockerfile
-  image: docker://ghcr.io/socialgouv/kontinuous/gh-action-deploy-via-webhook:v1.114.1
+  image: docker://ghcr.io/socialgouv/kontinuous/deploy-via-webhook:1.109.13-beta.1
   env:
+    KS_WEBHOOK_TOKEN: ${{ inputs.webhookToken }}
+    KS_WEBHOOK_URI: ${{ inputs.webhookUri }}
+    TRIGGER_WEBHOOK: ${{ inputs.triggerWebhook }}
+    KS_ENVIRONMENT: ${{ inputs.environment }}
     KS_CHART: ${{ inputs.chart }}
     KS_IGNORE_PROJECT_TEMPLATES: ${{ inputs.ignoreProjectTemplates }}
-  args:
-    - '${{ inputs.environment }}'
-    - '${{ inputs.webhookToken }}'
-    - '${{ inputs.triggerWebhook }}'
+    KS_DEPLOY_WRITE_OUTPUT_FILE: ${{ inputs.deployWriteOutputFile }}

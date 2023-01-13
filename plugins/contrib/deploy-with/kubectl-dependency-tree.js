@@ -29,7 +29,7 @@ module.exports = async (deploys, options, context) => {
     rolloutStatusWatch,
   } = utils
 
-  const { kubeconfigContext, kubeconfig, deployTimeout } = config
+  const { kubeconfigContext, kubeconfig } = config
 
   const { serverSide = true } = options
 
@@ -61,6 +61,8 @@ module.exports = async (deploys, options, context) => {
   }
 
   const { surviveOnBrokenCluster = false } = options
+
+  const { applyTimeout = "2m" } = options
 
   const kubectlProcesses = []
   const kubectlDeleteManifestOptions = {
@@ -101,7 +103,7 @@ module.exports = async (deploys, options, context) => {
       --force-conflicts=${serverSide && forceConflicts ? "true" : "false"}
       --overwrite
       --wait
-      --timeout=${deployTimeout}
+      --timeout=${applyTimeout}
   `
     return kubectl(kubectlDeployCommand, {
       kubeconfig,
@@ -373,5 +375,5 @@ reading:
     why --force is not supported with server-side apply (but we workaround to support this in this plugin)
   - https://kubernetes.io/blog/2022/10/20/advanced-server-side-apply/
   - https://medium.com/swlh/break-down-kubernetes-server-side-apply-5d59f6a14e26
-
+  
 */

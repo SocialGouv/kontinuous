@@ -10,12 +10,7 @@ module.exports = async (
 ) => {
   const { parseCommand, needKapp } = utils
 
-  const {
-    kubeconfigContext,
-    kubeconfig,
-    deployTimeout,
-    deploymentEnvLabelValue,
-  } = config
+  const { kubeconfigContext, kubeconfig, deploymentEnvLabelValue } = config
 
   const {
     kubeApiQps = 1000,
@@ -25,6 +20,7 @@ module.exports = async (
     existingNonLabeledResourcesCheckConcurrency = 100,
     existingNonLabeledResourcesCheck = true,
     logsAll = true,
+    deployTimeout = "15m",
   } = options
 
   await needBin(needKapp)

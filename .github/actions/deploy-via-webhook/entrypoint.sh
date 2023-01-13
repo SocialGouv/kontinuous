@@ -4,9 +4,7 @@ set -e
 
 export PATH=$PATH:/opt/kontinuous/packages/kontinuous/bin
 
-export KS_ENVIRONMENT="$1"
-export KS_WEBHOOK_TOKEN="$2"
-export TRIGGER_WEBHOOK=${3:-"true"}
+export TRIGGER_WEBHOOK=${TRIGGER_WEBHOOK:-"true"}
 
 KS_GIT=false
 
@@ -111,7 +109,15 @@ if [ -n "$TRIGGER_WEBHOOK" ] && [ "$TRIGGER_WEBHOOK" != "false" ] || [ "$GITHUB_
   echo ""
 fi
 
-kontinuous logs
+if [ -n "$KS_DEPLOY_WRITE_OUTPUT_FILE" ]; then
+  if [ "$KS_DEPLOY_WRITE_OUTPUT_FILE" = "true" ]; then
+    export KS_DEPLOY_WRITE_OUTPUT_FILE="kontinuous-deployment-output.log"
+  fi
+  cd $GITHUB_WORKSPACE
+  script -e -q -f -c "kontinuous logs" "$KS_DEPLOY_WRITE_OUTPUT_FILE"
+else
+  kontinuous logs
+fi
 
 kontinuous download manifests manifests.yaml
 
@@ -125,14 +131,6 @@ status=$(echo "$DEPLOYMENT_STATUS" | jq .status)
 echo "status:  $status"
 
 DEPLOYMENT_OK=$(echo "$DEPLOYMENT_STATUS" | jq .ok)
-echo "DEPLOYMENT_OK=$DEPLOYMENT_OK">>$GITHUB_ENV
-
-if [ -f manifests.yaml ]; then
-  HOSTS=$(cat manifests.yaml | yq eval-all '.spec.rules[] .host')
-  HOST=$(echo "$HOSTS" | head -n 1)
-  DEPLOYMENT_URL="https://$HOST"
-  echo "DEPLOYMENT_URL=$DEPLOYMENT_URL">>$GITHUB_ENV
-fi
 
 if [ "$DEPLOYMENT_OK" != "true" ]; then
   echo "Pipeline failed ❌"
