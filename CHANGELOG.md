@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.114.1](https://github.com/socialgouv/kontinuous/compare/v1.114.0...v1.114.1) (2023-01-13)
+
+
+### Bug Fixes
+
+* upgrade rollout status ([2339c5f](https://github.com/socialgouv/kontinuous/commit/2339c5fc9e01fe1ec75193a47f51079dd1c67a3a))
+
 ## 1.114.0 (2023-01-13)
 
 
