@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.114.0 (2023-01-13)
+
+
+### Features
+
+* sentry improve tracking + refacto di ([#128](https://github.com/socialgouv/kontinuous/issues/128)) ([73f7b34](https://github.com/socialgouv/kontinuous/commit/73f7b34dba093fc2fb15dda96b02fcf314f030ce))
+
 ### 1.113.3 (2023-01-13)
 
 ### 1.113.2 (2023-01-12)
