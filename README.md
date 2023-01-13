@@ -1,4 +1,4 @@
-# Kontinuous - The CI/CD ninja for Kubernetes 🥷
+# Kontinuous - GitOps for Kubernetes 🥷
 
 <p align="center">
   <a href="https://socialgouv.github.io/kontinuous/" rel="nofollow">
