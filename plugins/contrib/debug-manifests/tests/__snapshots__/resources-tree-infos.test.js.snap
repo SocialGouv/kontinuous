@@ -97,27 +97,32 @@ exports[`egapro 1`] = `
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   ├── job
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   ├── job
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   ├── job
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   ├── job
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   └── degit-repository (init)
-    │       └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │       ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │       └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     ├── CronJob
     │   ├── schedule: 0 0 * * *
     │   ├── job
@@ -248,27 +253,32 @@ exports[`template 1`] = `
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   ├── job
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   ├── job
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   ├── job
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   ├── job
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   └── degit-repository (init)
-    │       └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │       ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │       └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     ├── CronJob
     │   ├── schedule: 0 0 * * *
     │   ├── job
@@ -399,27 +409,32 @@ exports[`www 1`] = `
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   ├── job
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   ├── job
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   ├── job
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── degit-repository (init)
-    │   │   └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   ├── job
     │   │   ├── image: moby/buildkit:v0.10.5-rootless
     │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   └── degit-repository (init)
-    │       └── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │       ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
+    │       └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     ├── CronJob
     │   ├── schedule: 0 0 * * *
     │   ├── job
