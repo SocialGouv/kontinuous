@@ -1,9 +1,4 @@
-module.exports = async (
-  manifests,
-  options,
-  { config, logger, utils, needBin }
-) => {
-  const { kubectlRetry } = utils
+module.exports = async (manifests, options, { config, logger, kubectl }) => {
   const { ciNamespace, kubeconfig, kubeconfigContext } = config
 
   const rancherNsMissingProjectId = []
@@ -41,9 +36,8 @@ module.exports = async (
     logger.info(
       `missing rancher projectId, getting from cluster using ci-namespace "${ciNamespace}"`
     )
-    await needBin(utils.needKubectl)
     try {
-      const json = await kubectlRetry(
+      const json = await kubectl(
         `${
           kubeconfigContext ? `--context ${kubeconfigContext}` : ""
         } get ns ${ciNamespace} -o json`,

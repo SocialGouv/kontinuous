@@ -1,7 +1,7 @@
 module.exports = async (
   manifests,
   _options,
-  { utils, config, logger, needBin }
+  { utils, config, logger, kubectl }
 ) => {
   const { kubeEnsureNamespace } = utils
   const { kubeconfig, kubeconfigContext } = config
@@ -20,11 +20,9 @@ module.exports = async (
 
   logger.debug({ namespaces }, "ensure namespaces are availables")
 
-  await needBin(utils.needKubectl)
-
   await Promise.all(
     namespacesManifests.map((manifest) =>
-      kubeEnsureNamespace({ kubeconfig, kubeconfigContext, manifest })
+      kubeEnsureNamespace({ kubeconfig, kubeconfigContext, manifest, kubectl })
     )
   )
   logger.debug({ namespaces }, "namespaces ready")

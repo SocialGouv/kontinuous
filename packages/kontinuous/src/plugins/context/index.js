@@ -1,6 +1,9 @@
 const utils = require("~common/utils")
 const ctx = require("~common/ctx")
-const needBin = require("~/bin/need-bin")
+
+const needBin = require("~/lib/need-bin")
+const kubectl = require("~/lib/kubectl")
+const rolloutStatus = require("~/lib/rollout-status")
 
 const getOptions = require("./get-options")
 const getScope = require("./get-scope")
@@ -14,6 +17,8 @@ module.exports = ({ type, ...extra }) => {
     logger,
     utils,
     needBin,
+    kubectl,
+    rolloutStatus,
     ctx,
     getOptions,
     getScope,

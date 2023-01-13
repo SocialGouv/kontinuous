@@ -1,10 +1,11 @@
 const omit = require("lodash.omit")
 
 const ctx = require("~common/ctx")
+const ExitError = require("~/errors/exit-error")
 
 const createProgram = require("./program")
 
-const sentry = require("./sentry")
+const Sentry = require("./sentry")
 
 const addCommands = [
   require("./commands/build"),
@@ -26,42 +27,53 @@ module.exports = async (args = process.argv) => {
   const program = createProgram()
   addCommands.forEach((addCommand) => addCommand(program))
 
-  sentry.init()
-  let transaction
+  const sentry = Sentry.init()
+
   program.hook("preAction", async (_thisCommand, actionCommand) => {
     const commandName = actionCommand.name()
     const config = ctx.require("config")
     const opts = actionCommand.optsWithGlobals()
-    sentry.setContext("config", omit(config, ["webhookToken"]))
-    sentry.setContext("command", {
-      name: commandName,
-      opts,
-      argv: process.argv,
-      env: Object.entries(process.env).reduce((acc, [key, value]) => {
-        if (!key.startsWith("KS_")) {
+    if (sentry) {
+      ctx.set("sentry", sentry)
+      sentry.setContext("config", omit(config, ["webhookToken", "sentryDSN"]))
+      sentry.setContext("command", {
+        name: commandName,
+        opts,
+        argv: process.argv,
+        env: Object.entries(process.env).reduce((acc, [key, value]) => {
+          if (
+            !key.startsWith("KS_") ||
+            key.includes("TOKEN") ||
+            key === "KS_SENTRY_DSN"
+          ) {
+            return acc
+          }
+          acc[key] = value
           return acc
-        }
-        if (key.includes("TOKEN")) {
-          return acc
-        }
-        acc[key] = value
-        return acc
-      }, {}),
-    })
-    transaction = sentry.startTransaction({
-      op: `cli.${commandName}`,
-      name: `cli command "${commandName}"`,
-    })
+        }, {}),
+      })
+    }
   })
 
+  let exitCode = 0
   try {
     await program.parseAsync(args)
-  } catch (error) {
-    sentry.captureException(error)
+  } catch (err) {
+    let error = err
+    if (error instanceof ExitError) {
+      exitCode = error.exitCode
+      error = error.error
+    } else {
+      exitCode = 1
+    }
+    if (sentry) {
+      sentry.captureException(error)
+    }
     throw error
   } finally {
-    if (transaction) {
-      transaction.finish()
+    if (sentry) {
+      await sentry.close(5000)
     }
+    process.exit(exitCode)
   }
 }

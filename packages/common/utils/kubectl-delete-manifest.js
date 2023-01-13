@@ -14,6 +14,7 @@ module.exports = async (manifest, options = {}) => {
     rootDir = os.tmpdir(),
     retryOptions,
     surviveOnBrokenCluster,
+    kubectl = kubectlRetry,
   } = options
   const tmpdir = await mkdtemp(path.join(rootDir, "tmp-"))
   const file = `${tmpdir}/clean-resource.yaml`
@@ -24,7 +25,7 @@ module.exports = async (manifest, options = {}) => {
 
   await fs.writeFile(file, dump)
 
-  await kubectlRetry(`delete --ignore-not-found=true -f ${file}`, {
+  await kubectl(`delete --ignore-not-found=true -f ${file}`, {
     kubeconfig,
     kubeconfigContext,
     retryOptions,

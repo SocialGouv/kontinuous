@@ -1,12 +1,13 @@
-const kubectlRetry = require("~common/utils/kubectl-retry")
 const { ctx } = require("@modjo-plugins/core")
+
+const kubectl = require("~/k8s/utils/kubectl")
 
 async function listNamespaces({ kubeconfig }) {
   const logger = ctx.require("logger")
   const config = ctx.require("config")
   const { surviveOnBrokenCluster } = config.project
   logger.debug("getting list of namespaces")
-  const json = await kubectlRetry("get namespace -o json", {
+  const json = await kubectl("get namespace -o json", {
     kubeconfig,
     logInfo: false,
     logger,

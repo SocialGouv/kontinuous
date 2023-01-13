@@ -21,6 +21,7 @@ module.exports = async (jobName, options = {}) => {
     retrySince = "20s",
     logger = defaultLogger,
     retryErrorsConfig = {},
+    kubectl = kubectlRetry,
   } = options
 
   // to debug/test remove --follow and reswitch getLogs
@@ -103,7 +104,7 @@ module.exports = async (jobName, options = {}) => {
     await getLogsWithErrorRetry(countIterations > 0)
     // await getLogsWithErrorRetry(true) // debug/test
 
-    const jsonStatus = await kubectlRetry(
+    const jsonStatus = await kubectl(
       `${
         namespace ? `-n ${namespace}` : ""
       } get job ${jobName} -o jsonpath={.status}`,

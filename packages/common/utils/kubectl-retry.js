@@ -1,4 +1,3 @@
-const { setTimeout: sleep } = require("timers/promises")
 const { spawn } = require("child_process")
 
 const retry = require("async-retry")
@@ -83,58 +82,85 @@ module.exports = async (kubectlArgs, options = {}) => {
     logger = defaultLogger,
     logError = true,
     logInfo = true,
-    retryOptions = {},
     collectProcesses = [],
     surviveOnBrokenCluster = false,
+    sentry,
   } = options
+
+  let { retryOptions = {} } = options
+  retryOptions = {
+    retries: 10,
+    factor: 2,
+    minTimeout: 1000,
+    maxTimeout: 60000,
+    randomize: true,
+    ...retryOptions,
+  }
 
   let result
 
   let retryCount = 0
 
   try {
-    result = await retry(
-      async (bail) => {
-        try {
-          const output = await kubectlRun(kubectlArgs, {
-            ...options,
-            collectProcesses,
-          })
-          return output
-        } catch (err) {
-          const retriableNetworkError = retriableNetwork(err)
-          if (retriableNetworkError.retry) {
-            retryCount++
+    result = await retry(async (bail) => {
+      try {
+        const output = await kubectlRun(kubectlArgs, {
+          ...options,
+          collectProcesses,
+        })
+        return output
+      } catch (err) {
+        const retriableNetworkError = retriableNetwork(err)
+        if (retriableNetworkError.retry) {
+          retryCount++
+          const willRetry = retryCount <= retryOptions.retries
+          if (willRetry) {
             logger.debug(
               { retryCount, kubectlArgs },
               `${retriableNetworkError.message}, retrying...`
             )
-            throw err
           }
-          if (surviveOnBrokenCluster) {
-            const retriable = retriableOnBrokenCluster(err)
-            if (retriable.retry) {
-              retryCount++
+          if (sentry) {
+            sentry.captureException(err, {
+              level: willRetry ? "warning" : "fatal",
+              tags: {
+                retryCount: `${retryCount}`,
+                retryType: "network",
+                retryMessage: retriableNetworkError.message,
+                willRetry: willRetry ? "true" : "false",
+              },
+            })
+          }
+          throw err
+        }
+        if (surviveOnBrokenCluster) {
+          const retriable = retriableOnBrokenCluster(err)
+          if (retriable.retry) {
+            retryCount++
+            const willRetry = retryCount <= retryOptions.retries
+            if (willRetry) {
               logger.debug(
                 { error: err, from: "kubectl", retryCount, kubectlArgs },
                 `${retriable.message}, retrying...`
               )
-              await sleep(3000)
-              throw err
             }
+            if (sentry) {
+              sentry.captureException(err, {
+                level: willRetry ? "warning" : "fatal",
+                tags: {
+                  retryCount: `${retryCount}`,
+                  retryType: "cluster",
+                  retryMessage: retriable.message,
+                  willRetry: willRetry ? "true" : "false",
+                },
+              })
+            }
+            throw err
           }
-          bail(err)
         }
-      },
-      {
-        retries: 10,
-        factor: 2,
-        minTimeout: 1000,
-        maxTimeout: 60000,
-        randomize: true,
-        ...retryOptions,
+        bail(err)
       }
-    )
+    }, retryOptions)
     if (logInfo) {
       logger.info(result)
     }
