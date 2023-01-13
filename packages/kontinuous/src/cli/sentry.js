@@ -24,33 +24,7 @@ const init = (options = {}) => {
     dsn: sentryDSN,
     ...options,
   })
+  return Sentry
 }
 
-const startTransaction = (options = {}) => {
-  const { sentryEnabled, Sentry } = getConfig()
-  if (!sentryEnabled) {
-    return
-  }
-  const transaction = Sentry.startTransaction({
-    ...options,
-  })
-  return transaction
-}
-
-const captureException = (error) => {
-  const { sentryEnabled, Sentry } = getConfig()
-  if (!sentryEnabled) {
-    return
-  }
-  return Sentry.captureException(error)
-}
-
-const setContext = (name, context) => {
-  const { sentryEnabled, Sentry } = getConfig()
-  if (!sentryEnabled) {
-    return
-  }
-  return Sentry.setContext(name, context)
-}
-
-module.exports = { init, startTransaction, captureException, setContext }
+module.exports = { init, getConfig }

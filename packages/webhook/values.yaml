@@ -55,6 +55,8 @@ rootTokenSecretKey: TOKEN
 rootKubeconfigSecrets: []
 kubeconfigSecrets: []
 tokenSecrets: []
+sentrySecret:
+sentrySecretKey: KUBEWEBHOOK_SENTRY_DSN
 repositories: []
 
 surviveOnBrokenCluster: true

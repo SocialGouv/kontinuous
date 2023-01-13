@@ -1,7 +1,7 @@
 module.exports = async (
   manifests,
   _options,
-  { utils, config, logger, needBin }
+  { utils, config, logger, kubectl }
 ) => {
   const { kubeEnsureNamespace } = utils
   const { kubeconfig, kubeconfigContext } = config
@@ -20,8 +20,6 @@ module.exports = async (
 
   logger.debug({ namespaces }, "ensure nsplease namespaces are availables")
 
-  await needBin(utils.needKubectl)
-
   const check = async (remoteManifest, bail) => {
     const state = remoteManifest.metadata.annotations["nsplease/state"]
     if (state === "done") {
@@ -39,7 +37,13 @@ module.exports = async (
 
   await Promise.all(
     nspleaseManifests.map((manifest) =>
-      kubeEnsureNamespace({ kubeconfig, kubeconfigContext, manifest, check })
+      kubeEnsureNamespace({
+        kubeconfig,
+        kubeconfigContext,
+        manifest,
+        check,
+        kubectl,
+      })
     )
   )
   logger.debug({ namespaces }, "namespaces ready")

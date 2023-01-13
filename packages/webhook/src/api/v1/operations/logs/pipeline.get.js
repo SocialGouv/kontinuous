@@ -6,19 +6,20 @@ const cleanGitRef = require("~common/utils/clean-git-ref")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
 const normalizeRepositoryKey = require("~common/utils/normalize-repository-key")
 const refEnv = require("~common/utils/ref-env")
-const kubectlRetry = require("~common/utils/kubectl-retry")
 const kubejobTail = require("~common/utils/kubejob-tail")
+const kubectl = require("~/k8s/utils/kubectl")
 const pipelineJobName = require("~/k8s/resources/pipeline.job-name")
 
 module.exports = function ({ services }) {
   const logger = ctx.require("logger")
   const config = ctx.require("config")
+  const sentry = ctx.get("sentry")
   const { surviveOnBrokenCluster } = config.project
   const readyToLogPhases = ["Running", "Succeeded", "Failed"]
   const checkJobExists = async ({ jobName, commit, kubeconfig }) => {
     const jobNamespace = reqCtx.require("jobNamespace")
     try {
-      const jsonPodStatus = await kubectlRetry(
+      const jsonPodStatus = await kubectl(
         `-n ${jobNamespace}
         get pods
         --selector=job-name=${jobName},commit-sha=${commit}
@@ -61,6 +62,7 @@ module.exports = function ({ services }) {
       follow: !!follow,
       kubeconfig,
       stdout: res,
+      kubectl,
     })
   }
 
@@ -190,6 +192,9 @@ module.exports = function ({ services }) {
       writeStreamEnd({ ok: true })
     } catch (err) {
       logger.error(err)
+      if (sentry) {
+        sentry.captureException(err)
+      }
       res.write(
         `\n❌ end of logging with error, consult webhook service pod logs for full details\n`
       )

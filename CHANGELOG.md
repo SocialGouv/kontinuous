@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.114.0 (2023-01-13)
+
+
+### Features
+
+* sentry improve tracking + refacto di ([#128](https://github.com/socialgouv/kontinuous/issues/128)) ([73f7b34](https://github.com/socialgouv/kontinuous/commit/73f7b34dba093fc2fb15dda96b02fcf314f030ce))
+
+### 1.113.3 (2023-01-13)
+
+### 1.113.2 (2023-01-12)
+
+### [1.113.1](https://github.com/socialgouv/kontinuous/compare/v1.113.0...v1.113.1) (2023-01-12)
+
+
+### Bug Fixes
+
+* add sentry to webhook manifest ([bd0dc66](https://github.com/socialgouv/kontinuous/commit/bd0dc664f82a00538c9514d06c90d16c40e79573))
+* up webhook snapshots ([8d3cb8d](https://github.com/socialgouv/kontinuous/commit/8d3cb8d2e7f22fe7753cee6c5ed4017d82f1b736))
+
 ## 1.113.0 (2023-01-12)
 
 

@@ -16,14 +16,30 @@ module.exports = async ({
   setProcessRef,
   kindFilter,
   surviveOnBrokenCluster,
+  retries = 10,
+  sentry,
 }) => {
   let retryCount = 0
-  const throwErrorToRetry = ({ error, message }) => {
+  const throwErrorToRetry = ({ error, message, type }) => {
     retryCount++
-    logger.debug(
-      { namespace, selector, from: "rollout-status", retryCount },
-      message
-    )
+    const willRetry = retryCount <= retries
+    if (willRetry) {
+      logger.debug(
+        { namespace, selector, from: "rollout-status", retryCount },
+        message
+      )
+    }
+    if (sentry) {
+      sentry.captureException(error, {
+        level: willRetry ? "warning" : "fatal",
+        tags: {
+          retryCount: `${retryCount}`,
+          retryType: type,
+          retryMessage: message,
+          willRetry: willRetry ? "true" : "false",
+        },
+      })
+    }
     throw error
   }
 
@@ -32,6 +48,7 @@ module.exports = async ({
       throwErrorToRetry({
         error: err,
         message: `rollout-status network error(net/http: TLS handshake timeout): retrying...`,
+        type: "network",
       })
     }
     if (surviveOnBrokenCluster) {
@@ -40,6 +57,7 @@ module.exports = async ({
         throwErrorToRetry({
           error: err,
           message: `${retriable.message}, retrying...`,
+          type: "cluster",
         })
         throw err
       }
@@ -63,6 +81,10 @@ module.exports = async ({
           setProcessRef(process)
         }
         status = await promise
+        logger.debug(
+          { namespace, selector },
+          `rollout-status result: ${JSON.stringify(status)}`
+        )
         if (status.error?.code === "") {
           throw new Error(status.error.message)
         }
@@ -77,12 +99,14 @@ module.exports = async ({
         throwErrorToRetry({
           error: new Error(status.error.message),
           message: `rollout-status registry error(ErrImagePull): retrying...`,
+          type: "err-image-pull",
         })
       }
       if (status?.error?.type === "program") {
         throwErrorToRetry({
           error: new Error(status.error.message),
           message: `rollout-status program error: ${status.error.message}: retrying...`,
+          type: "rollout-status-program",
         })
       }
       if (error) {
@@ -91,7 +115,7 @@ module.exports = async ({
       return status
     },
     {
-      retries: 10,
+      retries,
       factor: 2,
       minTimeout: 1000,
       maxTimeout: 60000,

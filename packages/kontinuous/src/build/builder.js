@@ -6,7 +6,7 @@ const needHelm = require("~common/utils/need-helm")
 
 const copyFilter = require("~common/config/copy-filter")
 const ctx = require("~common/ctx")
-const needBin = require("~/bin/need-bin")
+const needBin = require("~/lib/need-bin")
 
 const applyPatches = require("./apply-patches")
 const postRenderer = require("./post-renderer")

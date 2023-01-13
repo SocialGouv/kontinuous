@@ -5,11 +5,12 @@ const handledKinds = ["Deployment", "StatefulSet", "Job"]
 const waitBeforeStopAllRolloutStatus = 5000 // try to collect more errors if there is any
 
 module.exports = async (context) => {
-  const { config, logger, utils, needBin, manifests, runContext } = context
+  const { config, logger, rolloutStatus, utils, manifests, runContext } =
+    context
 
   const { eventsBucket } = runContext
 
-  const { needRolloutStatus, rolloutStatusWatch, promiseAll } = utils
+  const { rolloutStatusWatch, promiseAll } = utils
 
   const rolloutStatusProcesses = {}
   const stopRolloutStatus = () => {
@@ -47,8 +48,6 @@ module.exports = async (context) => {
   }
 
   const { deploymentLabelKey } = config
-
-  await needBin(needRolloutStatus)
 
   const {
     kubeconfig,
@@ -91,8 +90,9 @@ module.exports = async (context) => {
             rolloutStatusProcesses,
             kubeconfig,
             kubecontext,
-            logger,
             surviveOnBrokenCluster,
+            logger,
+            rolloutStatus,
           })
 
           if (result.success) {

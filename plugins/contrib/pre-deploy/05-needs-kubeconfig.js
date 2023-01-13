@@ -1,5 +1,5 @@
 module.exports = async (manifests, options, context) => {
-  const { utils, config, logger } = context
+  const { utils, config, logger, kubectl } = context
   const { kindIsRunnable } = utils
   const hasWaitNeeds = !!manifests.find(
     (m) =>
@@ -12,7 +12,6 @@ module.exports = async (manifests, options, context) => {
     return
   }
 
-  const { kubectlRetry } = utils
   const { kubeconfig, kubeconfigContext, ciNamespace } = config
 
   const { surviveOnBrokenCluster = false } = options
@@ -28,7 +27,7 @@ module.exports = async (manifests, options, context) => {
   }
 
   const secretName = "kubeconfig"
-  const kubeconfigSecretJSON = await kubectlRetry(
+  const kubeconfigSecretJSON = await kubectl(
     `get -n ${ciNamespace} secret ${secretName} -ojson`,
     { ...kubectlOptions, logInfo: false }
   )
@@ -42,7 +41,7 @@ module.exports = async (manifests, options, context) => {
   await Promise.all(
     namespaces.map(async (namespace) => {
       try {
-        await kubectlRetry(`apply -n ${namespace} -f -`, {
+        await kubectl(`apply -n ${namespace} -f -`, {
           ...kubectlOptions,
           stdin: JSON.stringify(kubeconfigSecret),
         })

@@ -10,6 +10,7 @@ const runWaitNeeds = async ({
   kubectlRetryOptions,
   surviveOnBrokenCluster,
   timeout = 900,
+  kubectl = kubectlRetry,
 }) => {
   const interceptor = {}
 
@@ -25,7 +26,7 @@ const runWaitNeeds = async ({
   const [selfRefNamespace, selfRefKind, selfRefName] = annotationsRef.split("/")
   const lowerkind = selfRefKind.toLowerCase()
   const getSelfRefAnnotations = async () => {
-    const annotationsJSON = await kubectlRetry(
+    const annotationsJSON = await kubectl(
       `-n ${selfRefNamespace} get ${lowerkind}/${selfRefName} -o json`,
       {
         logInfo: false,
@@ -43,7 +44,7 @@ const runWaitNeeds = async ({
   const deploymentSelector = annotations["kontinuous/deployment"]
 
   const annotateCompletedOnce = async () => {
-    await kubectlRetry(
+    await kubectl(
       `-n ${selfRefNamespace} annotate ${lowerkind}/${selfRefName} ${completedOnceAnnotationKey}=${deploymentSelector} --overwrite`,
       {
         kubectlRetryOptions,
@@ -77,8 +78,8 @@ const runWaitNeeds = async ({
             // rolloutStatusProcesses,
             // kubeconfig,
             // kubecontext,
-            logger,
             surviveOnBrokenCluster,
+            logger,
           })
           if (result.error) {
             result.error.selector = selector

@@ -71,7 +71,6 @@ module.exports = async (
   for (const signal of signals) {
     process.on(signal, () => {
       proc.kill(signal)
-      process.exit(0)
     })
   }
 

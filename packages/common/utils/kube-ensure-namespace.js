@@ -13,6 +13,7 @@ module.exports = async ({
   surviveOnBrokenCluster,
   kubectlRetryOptions,
   retryOptions = {},
+  kubectl = kubectlRetry,
 }) => {
   const namespace = manifest.metadata.name
 
@@ -25,7 +26,7 @@ module.exports = async ({
   }
 
   const ensureNamespace = async (verb) => {
-    await kubectlRetry([...verb, "-f", "-"], {
+    await kubectl([...verb, "-f", "-"], {
       ...kubectlOptions,
       ignoreErrors: ["AlreadyExists"],
       stdin: JSON.stringify(manifest),
@@ -34,6 +35,7 @@ module.exports = async ({
 
   const checkNamespaceIsAvailableOptions = {
     ...kubectlOptions,
+    kubectl,
     namespace,
   }
 
@@ -62,7 +64,8 @@ module.exports = async ({
       retries: 10,
       factor: 2,
       minTimeout: 1000,
-      maxTimeout: 3000,
+      maxTimeout: 60000,
+      randomize: true,
       ...retryOptions,
     }
   )

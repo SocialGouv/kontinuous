@@ -9,6 +9,8 @@ const axiosIsNetworkError = require("~common/utils/axios-is-network-error")
 const ctx = require("~common/ctx")
 const NetworkError = require("~common/utils/network-error.class")
 
+const sentry = require("~/cli/sentry")
+
 module.exports = async (options) => {
   const config = ctx.require("config")
   const logger = ctx.require("logger")
@@ -131,14 +133,18 @@ module.exports = async (options) => {
         }
       },
       {
-        retries: 3,
-        factor: 1,
+        retries: 10,
+        factor: 2,
         minTimeout: 1000,
-        maxTimeout: 3000,
+        maxTimeout: 60000,
+        randomize: true,
       }
     )
   } catch (error) {
     handleAxiosError(error, logger)
+    if (!finished) {
+      sentry.captureException(error)
+    }
   }
 
   if (!finished) {
