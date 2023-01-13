@@ -11,10 +11,11 @@ module.exports = async ({
   bail,
   surviveOnBrokenCluster,
   retryOptions,
+  kubectl = kubectlRetry,
 }) => {
   logger.debug("checking if namespace is available")
   try {
-    const json = await kubectlRetry(`get ns ${namespace} -o json`, {
+    const json = await kubectl(`get ns ${namespace} -o json`, {
       kubeconfig,
       kubeconfigContext,
       logInfo: false,

@@ -1,5 +1,3 @@
-isLocal: true
-
 projects:
   my-project:
     webhookToken: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

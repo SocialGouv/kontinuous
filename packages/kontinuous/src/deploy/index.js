@@ -9,6 +9,8 @@ const promiseAll = require("~common/utils/promise-all")
 const build = require("~/build")
 const { setStatus } = require("~/status")
 
+const ExitError = require("~/errors/exit-error")
+
 const validateManifests = require("../build/validate-manifests")
 const dependencies = require("../build/load-dependencies/dependencies")
 const deployHooks = require("./deploy-hooks")
@@ -164,12 +166,10 @@ module.exports = async (options) => {
     if (statusUrl) {
       await setStatus({ url: statusUrl, token, status: "success", ok: true })
     }
-    process.exit(0)
   } catch (err) {
-    logger.error(err)
     if (statusUrl) {
       await setStatus({ url: statusUrl, token, status: "failed", ok: false })
     }
-    process.exit(1)
+    throw new ExitError(err)
   }
 }

@@ -1,5 +1,6 @@
-const rolloutStatus = require("~common/utils/rollout-status")
 const { ctx } = require("@modjo-plugins/core")
+
+const rolloutStatus = require("~/k8s/utils/rollout-status")
 
 module.exports = function ({ services: { getRootKubeconfig } }) {
   const logger = ctx.require("logger")

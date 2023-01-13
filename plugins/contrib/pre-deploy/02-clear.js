@@ -6,7 +6,7 @@ const defaultOptions = {
 module.exports = async (
   manifests,
   options,
-  { utils, config, logger, needBin }
+  { utils, config, logger, kubectl }
 ) => {
   const opts = { ...defaultOptions, ...options }
 
@@ -41,13 +41,13 @@ module.exports = async (
 
   const { surviveOnBrokenCluster = false } = options
 
-  await needBin(utils.needKubectl)
   const { kubectlDeleteManifest } = utils
   const kubectlDeleteManifestOptions = {
     rootDir: config.buildPath,
     kubeconfig: config.kubeconfig,
     kubeconfigContext: config.kubeconfigContext,
     surviveOnBrokenCluster,
+    kubectl,
   }
   await kubectlDeleteManifest(manifestsToClean, kubectlDeleteManifestOptions)
 

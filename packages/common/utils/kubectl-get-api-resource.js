@@ -1,7 +1,7 @@
 const kubectlRetry = require("./kubectl-retry")
 
-module.exports = async (kubectlOptions = {}) => {
-  const apiResourcesOutput = await kubectlRetry(
+module.exports = async ({ kubectl = kubectlRetry, ...kubectlOptions } = {}) => {
+  const apiResourcesOutput = await kubectl(
     "api-resources --namespaced=true --no-headers -o name",
     { logInfo: false, ...kubectlOptions }
   )

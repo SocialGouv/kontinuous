@@ -8,18 +8,9 @@ const isNotDefined = (val) => val === undefined || val === null || val === ""
 const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
 
 module.exports = async (deploys, options, context) => {
-  const { config, utils, manifests, dryRun, needBin } = context
+  const { config, utils, manifests, dryRun, kubectl } = context
 
-  const {
-    yaml,
-    kubectlRetry,
-    logger,
-    kubectlDeleteManifest,
-    kindIsRunnable,
-    needKubectl,
-  } = utils
-
-  await needBin(needKubectl)
+  const { yaml, logger, kubectlDeleteManifest, kindIsRunnable } = utils
 
   const { kubeconfigContext, kubeconfig, deployTimeout } = config
 
@@ -61,6 +52,7 @@ module.exports = async (deploys, options, context) => {
     kubeconfigContext,
     retryOptions: kubectlRetryOptions,
     surviveOnBrokenCluster,
+    kubectl,
   }
 
   const forceAnnotationKey = "kontinuous/kubectl-force"
@@ -94,7 +86,7 @@ module.exports = async (deploys, options, context) => {
       --wait
       --timeout=${deployTimeout}
   `
-    return kubectlRetry(kubectlDeployCommand, {
+    return kubectl(kubectlDeployCommand, {
       kubeconfig,
       kubeconfigContext,
       stdin: yamlManifest,
@@ -103,6 +95,7 @@ module.exports = async (deploys, options, context) => {
       logError: false,
       retryOptions: kubectlRetryOptions,
       surviveOnBrokenCluster,
+      kubectl,
     })
   }
 
@@ -165,7 +158,6 @@ module.exports = async (deploys, options, context) => {
       if (stopRolloutStatus) {
         stopRolloutStatus()
       }
-      process.exit(0)
     })
   }
 

@@ -4,6 +4,8 @@ const fs = require("fs-extra")
 
 const ctx = require("~common/ctx")
 
+const ExitError = require("~/errors/exit-error")
+
 module.exports = (program) =>
   program
     .command("clean")
@@ -23,7 +25,7 @@ module.exports = (program) =>
         await fs.remove(buildRootPath)
       } catch (error) {
         logger.error(error)
-        process.exit(1)
+        throw ExitError(error, 1)
       }
 
       const homeOrTmpDir = os.homedir() || os.tmpdir()
@@ -41,7 +43,7 @@ module.exports = (program) =>
           )
         } catch (error) {
           logger.error(error)
-          process.exit(1)
+          throw ExitError(error, 1)
         }
       }
 

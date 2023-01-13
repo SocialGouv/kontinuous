@@ -22,6 +22,14 @@ const ctx = require("~common/ctx")
 
 const cli = require("~/cli")
 
+const MockExit = require("~/errors/mock-exit")
+
+const mockProcessExit = jest
+  .spyOn(process, "exit")
+  .mockImplementation((code) => {
+    throw new MockExit(code) // Forces the code to throw instead of exit
+  })
+
 const samplesDir = `${__dirname}/samples`
 const testdirs = getDirectoriesSync(samplesDir)
 
@@ -57,6 +65,10 @@ for (const testdir of testdirs) {
 }
 
 describe("test build manifests with snapshots", () => {
+  beforeEach(() => {
+    mockProcessExit.mockClear()
+  })
+
   test.each(cases)("%s.%s", async (testdir, environment) => {
     const testdirPath = `${samplesDir}/${testdir}`
     const tmpdir = os.tmpdir()
@@ -101,7 +113,14 @@ describe("test build manifests with snapshots", () => {
       })
     )
 
-    await cli([...process.argv.slice(0, 2), "build"])
+    try {
+      await cli([...process.argv.slice(0, 2), "build"])
+    } catch (error) {
+      if (!(error instanceof MockExit && error.exitCode === 0)) {
+        throw error
+      }
+    }
+
     const result = ctx.require("result")
     const { manifests } = result
     expect(manifests).toMatchSpecificSnapshot(

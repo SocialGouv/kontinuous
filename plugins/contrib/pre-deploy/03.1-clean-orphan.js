@@ -13,12 +13,10 @@ const defaultApiResources = [
 module.exports = async (
   manifests,
   options,
-  { utils, config, logger, needBin }
+  { utils, config, logger, kubectl }
 ) => {
   const { kubeconfig, kubeconfigContext } = config
-  const { kubectlRetry, kubectlGetApiResource } = utils
-
-  await needBin(utils.needRolloutStatus)
+  const { kubectlGetApiResource } = utils
 
   logger.debug("♻️ check for orphan resources to clean")
 
@@ -53,7 +51,7 @@ module.exports = async (
   } = options
   let { apiResources } = options
   if (guessApiResources) {
-    apiResources = await kubectlGetApiResource(kubectlOptions)
+    apiResources = await kubectlGetApiResource({ ...kubectlOptions, kubectl })
   } else if (!apiResources) {
     apiResources = [...nativeApiResources, ...crdApiResources]
   }
@@ -62,7 +60,7 @@ module.exports = async (
     namespaces.map(async (ns) =>
       Promise.all(
         apiResources.map(async (apiResource) => {
-          const resourcesOutput = await kubectlRetry(
+          const resourcesOutput = await kubectl(
             `get ${apiResource} -n ${ns} -o json -l ${deploymentEnvLabelKey}=${deploymentEnvLabelValue}`,
             { ...kubectlOptions, logInfo: false }
           )
@@ -96,6 +94,7 @@ module.exports = async (
     kubeconfig: config.kubeconfig,
     kubeconfigContext: config.kubeconfigContext,
     surviveOnBrokenCluster,
+    kubectl,
   }
 
   logger.debug("♻️ cleaning orphan resources")

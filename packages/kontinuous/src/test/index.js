@@ -8,6 +8,8 @@ const snapshotDiff = require("~common/utils/snapshot-diff")
 const loadConfig = require("~common/config/load-config")
 const build = require("~/build")
 
+const ExitError = require("~/errors/exit-error")
+
 const DiffError = require("./diff-error")
 const reporter = require("./reporter")
 
@@ -107,6 +109,6 @@ module.exports = async (opts) => {
   const results = await test.run()
   reporter(results)
   if (results.errors.length > 0) {
-    process.exit(1)
+    throw ExitError("tests failed with errors", 1)
   }
 }
