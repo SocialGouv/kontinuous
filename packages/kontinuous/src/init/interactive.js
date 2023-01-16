@@ -24,9 +24,10 @@ module.exports = async (opts) => {
   let boilerplate = opts.B
 
   const nativePluginsBoilerplate = {
-    "trunk-gitops": `${boilerplatesRootPath}/trunk-gitops#v${majorVersion}`,
-    "trunk-manual-prod": `${boilerplatesRootPath}/trunk-manual-prod#v${majorVersion}`,
-    "gitflow-gitops": `${boilerplatesRootPath}}/gitflow-gitops#v${majorVersion}`,
+    "static-app": `${boilerplatesRootPath}/static-app#v${majorVersion}`,
+    "next-app": `${boilerplatesRootPath}/next-app#v${majorVersion}`,
+    "app-with-db": `${boilerplatesRootPath}/app-with-db#v${majorVersion}`,
+    template: `${boilerplatesRootPath}}/template#v${majorVersion}`,
   }
 
   if (!boilerplate) {
@@ -121,7 +122,7 @@ module.exports = async (opts) => {
   if (!name) {
     const inputName = new Input({
       message:
-        "Project name (see documentation https://socialgouv.github.io/kontinuous/#/?id=_211-projectname)",
+        "Project name (see documentation https://socialgouv.github.io/kontinuous/#/./advanced/configuration?id=projectname)",
       initial: projectConfig.projectName || "",
     })
     name = await inputName.run()

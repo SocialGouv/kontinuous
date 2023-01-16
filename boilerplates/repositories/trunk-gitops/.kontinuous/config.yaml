@@ -1,3 +1,0 @@
-dependencies:
-  contrib:
-    import: socialgouv/kontinuous/plugins/contrib

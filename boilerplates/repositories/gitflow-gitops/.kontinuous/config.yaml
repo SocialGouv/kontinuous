@@ -1,7 +1,0 @@
-dependencies:
-  contrib:
-    import: socialgouv/kontinuous/plugins/contrib
-
-environmentPatterns:
-  prod: main
-  preprod: dev
