@@ -22,7 +22,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
             - "--mail-directory"
-            - "/home/node/maildev-data"
+            - "{{ .Values.persistence.mountPath }}"
             {{- if .Values.extraArgs }}
             {{- range .Values.extraArgs }}
             - {{ . | quote }}
@@ -30,7 +30,7 @@ spec:
             {{- end }}
           volumeMounts:
             - name: data
-              mountPath: /home/node/maildev-data
+              mountPath: {{ .Values.persistence.mountPath }}
           ports:
             - name: http
               containerPort: 1080
