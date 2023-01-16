@@ -20,18 +20,14 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.extraArgs }}
           args:
-            - "--web"
-            - "1080"
-            - "--smtp"
-            - "1025"
             - "--mail-directory"
             - "/home/node/maildev-data"
+            {{- if .Values.extraArgs }}
             {{- range .Values.extraArgs }}
             - {{ . | quote }}
             {{- end }}
-           {{- end }}
+            {{- end }}
           volumeMounts:
             - name: data
               mountPath: /home/node/maildev-data
