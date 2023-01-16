@@ -20,7 +20,7 @@ extraArgs:
 #  - "25"
 
 persistence:
-  enabled: false
+  enabled:
   accessMode: ReadWriteMany
   size: 1024M
   storageClass: ""
@@ -29,12 +29,12 @@ persistence:
 
 # To clean some old mails when persistence is enabled
 cron:
-  enabled: false
+  enabled:
   image:
     repository: busybox
     tag: latest
     pullPolicy: IfNotPresent
-  schedule: 0 1 * * *
+  schedule: "0 1 * * *"
   daysToKeep: 15
 
 ingress:

@@ -50,7 +50,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: data
-          {{- if .Values.persistence.enabled }}
+          {{- if (or (and (kindIs "invalid" .Values.persistence.enabled) (eq .Values.global.env "preprod")) .Values.persistence.enabled) }}
           persistentVolumeClaim:
             claimName: {{ .Values.persistence.existingClaim | default ((or .Values.component .Chart.Name) | lower) }}
           {{- else }}

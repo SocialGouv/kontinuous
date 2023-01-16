@@ -1,4 +1,4 @@
-{{- if and .Values.persistence.enabled (not .Values.persistence.existingClaim) }}
+{{- if and (or (and (kindIs "invalid" .Values.persistence.enabled) (eq .Values.global.env "preprod")) .Values.persistence.enabled) (not .Values.persistence.existingClaim) }}
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:

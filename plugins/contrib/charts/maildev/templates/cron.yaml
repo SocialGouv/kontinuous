@@ -1,4 +1,4 @@
-{{- if and .Values.cron.enabled .Values.persistence.enabled }}
+{{- if and (or (kindIs "invalid" .Values.cron.enabled) .Values.cron.enabled) (or (and (kindIs "invalid" .Values.persistence.enabled) (eq .Values.global.env "preprod")) .Values.persistence.enabled) }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
