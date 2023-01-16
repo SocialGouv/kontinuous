@@ -40,6 +40,10 @@ dependencies:
               foo: bar
 ```
 
+### projectName
+
+it must match the projectName defined at webhook level for scoping kubeconfig (and associated rights bindings) usually it match also the rancher project
+
 ## Global config
 
 The global config file path is `~/.kontinuous/config.yaml` where `~` is your `$HOME` path. You can configure specific environment for your workstation. This file can contain sensitive data as webhook token for projects.
