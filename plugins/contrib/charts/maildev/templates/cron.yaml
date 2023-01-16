@@ -8,7 +8,7 @@ metadata:
     application: {{ .Values.global.repositoryName }}
   namespace: {{ or .Values.namespace .Values.global.namespace }}
 spec:
-  schedule: {{ .Values.cron.schedule }}
+  schedule: {{ .Values.cron.schedule | quote }}
   startingDeadlineSeconds: 100
   jobTemplate:
     spec:
