@@ -1,4 +1,4 @@
-FROM ghcr.io/socialgouv/kontinuous:v1.115.1
+FROM ghcr.io/socialgouv/kontinuous:dev-maildev-persistence
 
 COPY entrypoint.sh /entrypoint.sh
 
