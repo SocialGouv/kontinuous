@@ -18,8 +18,6 @@ extraArgs:
 #  - "smtp.yourdomaine.com"
 #  - "--outgoing-port"
 #  - "25"
-#  - "--mail-directory"
-#  - "/home/node/maildev-data"
 
 persistence:
   enabled: false
@@ -27,7 +25,6 @@ persistence:
   size: 1024M
   storageClass: ""
   existingClaim: ""
-  mountPath: /home/node/maildev-data
 
 # To clean some old mails when persistence is enabled
 cron:

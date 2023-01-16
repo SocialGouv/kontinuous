@@ -26,13 +26,15 @@ spec:
             - "1080"
             - "--smtp"
             - "1025"
+            - "--mail-directory"
+            - "/home/node/maildev-data"
             {{- range .Values.extraArgs }}
             - {{ . | quote }}
             {{- end }}
            {{- end }}
           volumeMounts:
             - name: data
-              mountPath: {{ .Values.persistence.mountPath }}
+              mountPath: /home/node/maildev-data
           ports:
             - name: http
               containerPort: 1080
