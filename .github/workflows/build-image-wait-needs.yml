@@ -1,11 +1,12 @@
 name: Build Docker Image Wait-needs
 
 on:
-  create:
   push:
     branches:
       - '**'
       - '!master'
+    tags:
+      - '**'
     paths:
       - packages/wait-needs/**
       - packages/common/**
