@@ -28,7 +28,7 @@ GH_EVENT_JSON_CONFIG=$(node -e "process.stdout.write(fs.readFileSync('$GITHUB_EV
 
 if [ "$GITHUB_EVENT_NAME" = "delete"  ]; then
   KS_EVENT=deleted
-  export KS_GIT_BRANCH=$(node -e "const githubEvent = $GH_EVENT_JSON_CONFIG;const ref = githubEvent.ref || githubEvent.pull_request?.head?.ref || '' ;process.stdout.write(ref);")
+  export KS_GIT_BRANCH=$(node -e "const githubEvent = $GH_EVENT_JSON_CONFIG;const ref = githubEvent.pull_request?.head?.ref || githubEvent.ref || '' ;process.stdout.write(ref);")
   KS_GIT_BRANCH_URLENCODED=$(echo $KS_GIT_BRANCH | sed 's/\//\%2f/g')
   KS_GIT_SHA="0000000000000000000000000000000000000000"
 else

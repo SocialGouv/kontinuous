@@ -18,7 +18,7 @@ if [ "$GITHUB_EVENT_NAME" = "delete"  ]; then
   export KS_EVENT=deleted
   export EVENT_REF=$(node -e "process.stdout.write(($GH_EVENT_JSON_CONFIG).ref || '')")
   GH_EVENT_JSON_CONFIG=$(node -e "process.stdout.write(fs.readFileSync('$GITHUB_EVENT_PATH',{encoding:'utf-8'}))")
-  export KS_GIT_BRANCH=$(node -e "const githubEvent = $GH_EVENT_JSON_CONFIG;const ref = githubEvent.ref || githubEvent.pull_request?.head?.ref || '' ;process.stdout.write(ref);")
+  export KS_GIT_BRANCH=$(node -e "const githubEvent = $GH_EVENT_JSON_CONFIG;const ref = githubEvent.pull_request?.head?.ref || githubEvent.ref || '' ;process.stdout.write(ref);")
   export KS_GIT_SHA="0000000000000000000000000000000000000000"
 else
   export KS_EVENT=pushed
