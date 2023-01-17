@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.117.0](https://github.com/socialgouv/kontinuous/compare/v1.116.3...v1.117.0) (2023-01-17)
+
+
+### Features
+
+* permanentDevEnvironmentBranches ([c2b496d](https://github.com/socialgouv/kontinuous/commit/c2b496d3800b321e6b6cf6f6141e3a52e94428a7))
+
+
+### Bug Fixes
+
+* improve slug ([6368623](https://github.com/socialgouv/kontinuous/commit/63686230fa8823ef712dcc2d4e5668f3090c5e1f))
+* job name avoid env on same branch collision ([5190ec4](https://github.com/socialgouv/kontinuous/commit/5190ec4fc8d2df26feae7ab37f6c638ad3ec6e8b))
+* up plugin fabrique new dev cluster ([dfa1b5f](https://github.com/socialgouv/kontinuous/commit/dfa1b5fd613719b3fac335e2bc2ee3d60e7ddf1f))
+* up snapshots ([a08e124](https://github.com/socialgouv/kontinuous/commit/a08e12461a5478801c104a203cbaf0fc7bf815c2))
+* up snapshots ([f30098f](https://github.com/socialgouv/kontinuous/commit/f30098f122bbcdb5a757ea6b69aac06494f59f7d))
+
 ### [1.116.3](https://github.com/socialgouv/kontinuous/compare/v1.116.2...v1.116.3) (2023-01-17)
 
 
