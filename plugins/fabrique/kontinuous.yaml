@@ -30,9 +30,9 @@ dependencies:
             cpu: 10m
             memory: 10Mi
           nodeConfig:
-            maxPods: 110
+            maxPods: 250
             cpu: 7820m
-            memory: 24505448Ki
+            memory: 27717Mi
 
     validators:
       rancherProjectId:
