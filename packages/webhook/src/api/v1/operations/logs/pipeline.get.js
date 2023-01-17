@@ -132,6 +132,7 @@ module.exports = function ({ services }) {
       chart = "deactivate"
     }
     const jobName = pipelineJobName({
+      env,
       eventName: event,
       repositoryName,
       gitBranch,

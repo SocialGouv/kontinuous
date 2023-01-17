@@ -80,6 +80,7 @@ module.exports = ({ services }) => {
     }
 
     const jobName = pipelineJobName({
+      env,
       eventName,
       repositoryName,
       gitBranch,

@@ -161,7 +161,12 @@ const compileRun = async (key, run, compileCommon) => {
   const { context, chartScope, parentScope, parentWith, newRuns } =
     compileCommon
   const { config, logger, utils } = context
-  const { gitBranch, gitRepositoryName: repositoryName, links } = config
+  const {
+    gitBranch,
+    gitRepositoryName: repositoryName,
+    links,
+    environment,
+  } = config
   const { slug, yaml } = utils
 
   if (!run.name) {
@@ -177,7 +182,7 @@ const compileRun = async (key, run, compileCommon) => {
   Object.assign(run.labels, {
     repository: repositoryName,
     ref: slug(gitBranch),
-    environment: config.environment,
+    environment,
     ...(run.use ? {} : {}),
   })
   run.labels.runName = run.use
@@ -214,7 +219,8 @@ const compileRun = async (key, run, compileCommon) => {
 
   run.jobName = slug([
     "job",
-    [repositoryName, 24],
+    [environment, 4],
+    [repositoryName, 10],
     [gitBranch, 16],
     [chartJobsKey, 16],
     currentScope.join("--"),
