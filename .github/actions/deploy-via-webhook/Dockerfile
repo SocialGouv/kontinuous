@@ -1,4 +1,4 @@
-FROM ghcr.io/socialgouv/kontinuous:dev-maildev-persistence as base
+FROM ghcr.io/socialgouv/kontinuous:v1.116.0 as base
 
 USER 0
 

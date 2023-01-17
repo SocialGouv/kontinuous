@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.116.0 (2023-01-17)
+
+
+### Features
+
+* maildev persistence ([#130](https://github.com/socialgouv/kontinuous/issues/130)) ([51762db](https://github.com/socialgouv/kontinuous/commit/51762dbc9c686e9c36cd0157cff297defa4683c7))
+
 ### [1.115.1](https://github.com/socialgouv/kontinuous/compare/v1.115.0...v1.115.1) (2023-01-16)
 
 

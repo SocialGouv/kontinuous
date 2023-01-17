@@ -6,7 +6,7 @@ gitBranch:
 runs: {}
 defaults:
   image: "debian:stable"
-  degitImage: ghcr.io/socialgouv/kontinuous/degit:dev-maildev-persistence
+  degitImage: ghcr.io/socialgouv/kontinuous/degit:v1.116.0
   # degitImagePullPolicy: Always
   degitImagePullPolicy: IfNotPresent
 
