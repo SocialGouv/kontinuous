@@ -173,8 +173,8 @@ spec:
               cpu: '1'
               memory: 512Mi
             requests:
-              cpu: '0.081'
-              memory: 228Mi
+              cpu: '0.041'
+              memory: 121Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

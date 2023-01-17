@@ -242,8 +242,8 @@ spec:
               cpu: 500m
               memory: 512Mi
             requests:
-              cpu: '0.081'
-              memory: 228Mi
+              cpu: '0.041'
+              memory: 121Mi
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -360,8 +360,8 @@ spec:
               cpu: 500m
               memory: 512Mi
             requests:
-              cpu: '0.081'
-              memory: 228Mi
+              cpu: '0.041'
+              memory: 121Mi
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -454,8 +454,8 @@ spec:
               cpu: 500m
               memory: 1280Mi
             requests:
-              cpu: '0.081'
-              memory: 228Mi
+              cpu: '0.041'
+              memory: 121Mi
           startupProbe:
             failureThreshold: 30
             httpGet:
@@ -575,8 +575,8 @@ spec:
               cpu: 500m
               memory: 256Mi
             requests:
-              cpu: '0.081'
-              memory: 228Mi
+              cpu: '0.041'
+              memory: 121Mi
 ---
 apiVersion: v1
 kind: Service

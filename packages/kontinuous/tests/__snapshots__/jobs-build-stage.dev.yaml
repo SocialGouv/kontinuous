@@ -204,8 +204,8 @@ spec:
               cpu: '1'
               memory: 512Mi
             requests:
-              cpu: '0.081'
-              memory: 228Mi
+              cpu: '0.041'
+              memory: 121Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -329,8 +329,8 @@ spec:
               cpu: '1'
               memory: 512Mi
             requests:
-              cpu: '0.081'
-              memory: 228Mi
+              cpu: '0.041'
+              memory: 121Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -476,8 +476,8 @@ spec:
               cpu: '2'
               memory: 4Gi
             requests:
-              cpu: '0.081'
-              memory: 228Mi
+              cpu: '0.041'
+              memory: 121Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -618,8 +618,8 @@ spec:
               cpu: '2'
               memory: 4Gi
             requests:
-              cpu: '0.081'
-              memory: 228Mi
+              cpu: '0.041'
+              memory: 121Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -742,8 +742,8 @@ spec:
               cpu: 500m
               memory: 512Mi
             requests:
-              cpu: '0.081'
-              memory: 228Mi
+              cpu: '0.041'
+              memory: 121Mi
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
@@ -831,8 +831,8 @@ spec:
               cpu: 500m
               memory: 1280Mi
             requests:
-              cpu: '0.081'
-              memory: 228Mi
+              cpu: '0.041'
+              memory: 121Mi
           startupProbe:
             failureThreshold: 30
             httpGet:
