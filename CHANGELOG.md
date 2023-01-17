@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.116.2](https://github.com/socialgouv/kontinuous/compare/v1.116.1...v1.116.2) (2023-01-17)
+
+
+### Bug Fixes
+
+* deactivate wip ([1c70f42](https://github.com/socialgouv/kontinuous/commit/1c70f423310f419614ff66b060dfdbb89543a732))
+* kubeconfig perms ([bc634e6](https://github.com/socialgouv/kontinuous/commit/bc634e6268972677d0d7da14cd58ff14a42573a0))
+
 ### [1.116.1](https://github.com/socialgouv/kontinuous/compare/v1.116.0...v1.116.1) (2023-01-17)
 
 
