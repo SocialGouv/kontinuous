@@ -12,15 +12,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
-    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
   labels:
     application: test-oauth2-proxy
-    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
     kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: namespace-4wnyh3-test-oauth2-proxy
+    kontinuous/resourceName: namespace-test-oauth2-proxy-269laotd
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: test-oauth2-proxy
@@ -34,14 +34,14 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
-    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
   labels:
-    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
     kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -68,14 +68,14 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
-    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
   labels:
-    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
     kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: serviceaccount-4nws8p-default
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   namespace: test-oauth2-proxy
@@ -87,12 +87,12 @@ metadata:
   labels:
     component: oauth2-proxy
     application: test-oauth2-proxy
-    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
     kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: deployment-3d60sq-oauth2-proxy
+    kontinuous/resourceName: deployment-oauth2-proxy-2mxxq2g2
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: oauth2-proxy
@@ -101,7 +101,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.oauth2-proxy
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/deployment.yaml
-    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
     kontinuous/depname.full: project.fabrique.contrib.oauth2-proxy.deployment.oauth2-proxy
     kontinuous/depname.chartResource: oauth2-proxy.deployment.oauth2-proxy
     kontinuous/depname.chartName: oauth2-proxy
@@ -119,16 +119,16 @@ spec:
       labels:
         component: oauth2-proxy
         application: test-oauth2-proxy
-        kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+        kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
         kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: deployment-3d60sq-oauth2-proxy
+        kontinuous/resourceName: deployment-oauth2-proxy-2mxxq2g2
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+        kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
     spec:
       containers:
         - image: quay.io/oauth2-proxy/oauth2-proxy:v7.2.1
@@ -185,12 +185,12 @@ metadata:
   labels:
     component: oauth2-proxy
     application: test-oauth2-proxy
-    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
     kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: service-5cfizy-oauth2-proxy
+    kontinuous/resourceName: service-oauth2-proxy-2b6xqw6n
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: oauth2-proxy
@@ -199,7 +199,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.oauth2-proxy
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/service.yaml
-    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
 spec:
   ports:
     - name: http
@@ -217,19 +217,19 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.oauth2-proxy
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/ingress.yaml
-    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
   labels:
     component: oauth2-proxy
     application: test-oauth2-proxy
-    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b087-1ed5fy
+    kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
     kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: ingress-5dz9oh-oauth2-proxy
+    kontinuous/resourceName: ingress-oauth2-proxy-v4oj8hlz
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: oauth2-proxy

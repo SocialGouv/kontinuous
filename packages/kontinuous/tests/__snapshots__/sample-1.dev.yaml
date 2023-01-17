@@ -12,16 +12,16 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     janitor/ttl: 7d
   labels:
     application: test-sample-1
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: namespace-4wnyh3-test-sample-1-feature-branch-1
+    kontinuous/resourceName: namespace-test-sample-1-feature-branch-1-zdu5k1mh
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
     cert: wildcard
@@ -36,14 +36,14 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   labels:
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -70,14 +70,14 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   labels:
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: serviceaccount-4nws8p-default
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   namespace: test-sample-1-feature-branch-1
@@ -90,14 +90,14 @@ metadata:
   annotations:
     kontinuous/chartPath: project
     kontinuous/source: project/templates/app.configmap.yaml
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   labels:
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: configmap-e4ces7-app-configmap
+    kontinuous/resourceName: configmap-app-configmap-519shm91
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   namespace: test-sample-1-feature-branch-1
@@ -114,15 +114,15 @@ metadata:
     sealedsecrets.bitnami.com/cluster-wide: 'true'
     kontinuous/chartPath: project
     kontinuous/source: project/templates/hasura.sealed-secret.yaml
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   name: hasura-sealed-secret
   labels:
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: sealedsecret-5ip1a4-hasura-sealed-secret
+    kontinuous/resourceName: sealedsecret-hasura-sealed-secret-2cipvz77
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   namespace: test-sample-1-feature-branch-1
@@ -147,12 +147,12 @@ metadata:
   labels:
     component: app-2nd-instance
     application: test-sample-1
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: deployment-3d60sq-app-2nd-instance
+    kontinuous/resourceName: deployment-app-2nd-instance-1yps0u02
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app-2nd-instance
@@ -161,7 +161,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.app-2nd-instance
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/deployment.yaml
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/depname.full: project.fabrique.contrib.app-2nd-instance.deployment.app-2nd-instance
     kontinuous/depname.chartResource: app-2nd-instance.deployment.app-2nd-instance
     kontinuous/depname.chartName: app-2nd-instance
@@ -180,16 +180,16 @@ spec:
         component: app-2nd-instance
         application: test-sample-1
         namespace: test-sample-1-feature-branch-1
-        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
         kontinuous/deployment.env: test-sample-1-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: deployment-3d60sq-app-2nd-instance
+        kontinuous/resourceName: deployment-app-2nd-instance-1yps0u02
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     spec:
       affinity:
         podAntiAffinity:
@@ -258,12 +258,12 @@ metadata:
   labels:
     component: app
     application: test-sample-1
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: deployment-3d60sq-app
+    kontinuous/resourceName: deployment-app-55fzcjih
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
@@ -272,7 +272,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
     kontinuous/depname.chartResource: app.deployment.app
     kontinuous/depname.chartName: app
@@ -291,16 +291,16 @@ spec:
         component: app
         application: test-sample-1
         namespace: test-sample-1-feature-branch-1
-        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
         kontinuous/deployment.env: test-sample-1-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: deployment-3d60sq-app
+        kontinuous/resourceName: deployment-app-55fzcjih
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     spec:
       affinity:
         podAntiAffinity:
@@ -381,12 +381,12 @@ metadata:
   labels:
     component: hasura
     application: test-sample-1
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: deployment-3d60sq-hasura
+    kontinuous/resourceName: deployment-hasura-3fivxu5u
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: hasura
@@ -396,7 +396,7 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
     kontinuous/plugin.needs: '[]'
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
     kontinuous/depname.chartResource: hasura.deployment.hasura
     kontinuous/depname.chartName: hasura
@@ -414,16 +414,16 @@ spec:
       labels:
         component: hasura
         application: test-sample-1
-        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
         kontinuous/deployment.env: test-sample-1-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: deployment-3d60sq-hasura
+        kontinuous/resourceName: deployment-hasura-3fivxu5u
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     spec:
       containers:
         - image: >-
@@ -477,12 +477,12 @@ metadata:
   labels:
     component: pgweb
     application: test-sample-1
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: deployment-3d60sq-pgweb
+    kontinuous/resourceName: deployment-pgweb-5afr2ikf
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: pgweb
@@ -492,7 +492,7 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/pgweb/templates/deployment.yaml
     kontinuous/plugin.needs: '[]'
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/depname.full: project.fabrique.contrib.pgweb.deployment.pgweb
     kontinuous/depname.chartResource: pgweb.deployment.pgweb
     kontinuous/depname.chartName: pgweb
@@ -510,16 +510,16 @@ spec:
       labels:
         component: pgweb
         application: test-sample-1
-        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
         kontinuous/deployment.env: test-sample-1-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: deployment-3d60sq-pgweb
+        kontinuous/resourceName: deployment-pgweb-5afr2ikf
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+        kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     spec:
       initContainers:
         - name: wait-for-postgres
@@ -584,12 +584,12 @@ metadata:
   labels:
     component: app-2nd-instance
     application: test-sample-1
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: service-5cfizy-app-2nd-instance
+    kontinuous/resourceName: service-app-2nd-instance-3rnz4xkc
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app-2nd-instance
@@ -598,7 +598,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.app-2nd-instance
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/service.yaml
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
 spec:
   ports:
     - name: http
@@ -614,12 +614,12 @@ metadata:
   labels:
     component: app
     application: test-sample-1
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: service-5cfizy-app
+    kontinuous/resourceName: service-app-46z2o1vv
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
@@ -627,7 +627,7 @@ metadata:
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
 spec:
   ports:
     - name: http
@@ -643,12 +643,12 @@ metadata:
   labels:
     component: hasura
     application: test-sample-1
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: service-5cfizy-hasura
+    kontinuous/resourceName: service-hasura-2b56e0cf
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: hasura
@@ -658,7 +658,7 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
     kontinuous/plugin.needs: '[]'
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
 spec:
   ports:
     - name: http
@@ -674,12 +674,12 @@ metadata:
   labels:
     component: pgweb
     application: test-sample-1
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: service-5cfizy-pgweb
+    kontinuous/resourceName: service-pgweb-2rlshjo0
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: pgweb
@@ -688,7 +688,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.pgweb
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/pgweb/templates/service.yaml
     kontinuous/plugin.needs: '[]'
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
 spec:
   ports:
     - name: http
@@ -706,16 +706,16 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.app-2nd-instance
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/ingress.yaml
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   labels:
     component: app-2nd-instance
     application: test-sample-1
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: ingress-5dz9oh-app-2nd-instance
+    kontinuous/resourceName: ingress-app-2nd-instance-55am4zdx
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app-2nd-instance
@@ -757,16 +757,16 @@ metadata:
       more_set_headers \\"X-Content-Type-Options: nosniff\\";
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   labels:
     component: app
     application: test-sample-1
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: ingress-5dz9oh-app
+    kontinuous/resourceName: ingress-app-b4kcj2bx
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
@@ -797,16 +797,16 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
     kontinuous/plugin.needs: '[]'
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   labels:
     component: hasura
     application: test-sample-1
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: ingress-5dz9oh-hasura
+    kontinuous/resourceName: ingress-hasura-2784v1wj
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: hasura
@@ -836,16 +836,16 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.pgweb
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/pgweb/templates/ingress.yaml
     kontinuous/plugin.needs: '[]'
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   labels:
     component: pgweb
     application: test-sample-1
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745a3-5y3s29
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: ingress-5dz9oh-pgweb
+    kontinuous/resourceName: ingress-pgweb-2mnfw5rd
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: pgweb

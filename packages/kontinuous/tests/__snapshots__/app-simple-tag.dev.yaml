@@ -12,38 +12,38 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
-    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
+    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
     janitor/ttl: 7d
   labels:
     application: test-app-simple-tag
-    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dn
-    kontinuous/ref: v1-2-3-5oe0cj
+    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
+    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
-    kontinuous/resourceName: namespace-4wnyh3-test-app-simple-tag-v1-2-3-3sg4dn
+    kontinuous/resourceName: namespace-test-app-simple-tag-v1-2-3-3sg4dnik-c3sc01m5
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
     cert: wildcard
-  name: test-app-simple-tag-v1-2-3-3sg4dn
+  name: test-app-simple-tag-v1-2-3-3sg4dnik
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: netpol-ingress
-  namespace: test-app-simple-tag-v1-2-3-3sg4dn
+  namespace: test-app-simple-tag-v1-2-3-3sg4dnik
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
-    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
+    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
   labels:
-    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dn
-    kontinuous/ref: v1-2-3-5oe0cj
+    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
+    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
-    kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -70,17 +70,17 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
-    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
+    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
   labels:
-    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dn
-    kontinuous/ref: v1-2-3-5oe0cj
+    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
+    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
-    kontinuous/resourceName: serviceaccount-4nws8p-default
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  namespace: test-app-simple-tag-v1-2-3-3sg4dn
+  namespace: test-app-simple-tag-v1-2-3-3sg4dnik
 automountServiceAccountToken: false
 ---
 apiVersion: apps/v1
@@ -89,21 +89,21 @@ metadata:
   labels:
     component: app
     application: test-app-simple-tag
-    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dn
-    kontinuous/ref: v1-2-3-5oe0cj
+    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
+    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
-    kontinuous/resourceName: deployment-3d60sq-app
+    kontinuous/resourceName: deployment-app-55fzcjih
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
-  namespace: test-app-simple-tag-v1-2-3-3sg4dn
+  namespace: test-app-simple-tag-v1-2-3-3sg4dnik
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
-    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
+    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
     kontinuous/depname.chartResource: app.deployment.app
     kontinuous/depname.chartName: app
@@ -121,17 +121,17 @@ spec:
       labels:
         component: app
         application: test-app-simple-tag
-        namespace: test-app-simple-tag-v1-2-3-3sg4dn
-        kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
-        kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dn
-        kontinuous/ref: v1-2-3-5oe0cj
+        namespace: test-app-simple-tag-v1-2-3-3sg4dnik
+        kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
+        kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+        kontinuous/ref: v1-2-3-5oe0cjpa
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: v1.2.3
-        kontinuous/resourceName: deployment-3d60sq-app
+        kontinuous/resourceName: deployment-app-55fzcjih
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
+        kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
     spec:
       affinity:
         podAntiAffinity:
@@ -143,7 +143,7 @@ spec:
                     - key: namespace
                       operator: In
                       values:
-                        - test-app-simple-tag-v1-2-3-3sg4dn
+                        - test-app-simple-tag-v1-2-3-3sg4dnik
                     - key: component
                       operator: In
                       values:
@@ -193,20 +193,20 @@ metadata:
   labels:
     component: app
     application: test-app-simple-tag
-    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dn
-    kontinuous/ref: v1-2-3-5oe0cj
+    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
+    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
-    kontinuous/resourceName: service-5cfizy-app
+    kontinuous/resourceName: service-app-46z2o1vv
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
-  namespace: test-app-simple-tag-v1-2-3-3sg4dn
+  namespace: test-app-simple-tag-v1-2-3-3sg4dnik
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
-    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
+    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
 spec:
   ports:
     - name: http
@@ -223,23 +223,23 @@ metadata:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
+    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
   labels:
     component: app
     application: test-app-simple-tag
-    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a37893-31xp2s
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dn
-    kontinuous/ref: v1-2-3-5oe0cj
+    kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
+    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
-    kontinuous/resourceName: ingress-5dz9oh-app
+    kontinuous/resourceName: ingress-app-b4kcj2bx
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
-  namespace: test-app-simple-tag-v1-2-3-3sg4dn
+  namespace: test-app-simple-tag-v1-2-3-3sg4dnik
 spec:
   rules:
-    - host: test-app-simple-tag-v1-2-3-3sg4dn.dev.fabrique.social.gouv.fr
+    - host: test-app-simple-tag-v1-2-3-3sg4dnik.dev.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -251,7 +251,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - test-app-simple-tag-v1-2-3-3sg4dn.dev.fabrique.social.gouv.fr
+        - test-app-simple-tag-v1-2-3-3sg4dnik.dev.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

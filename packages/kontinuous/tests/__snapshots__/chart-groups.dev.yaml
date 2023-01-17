@@ -7,12 +7,12 @@ metadata:
   labels:
     component: api1
     application: test-chart-groups
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
     kontinuous/deployment.env: test-chart-groups-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: deployment-3d60sq-api1
+    kontinuous/resourceName: deployment-api1-2ox4pttx
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: api1
@@ -22,7 +22,7 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/api1/templates/deployment.yaml
     kontinuous/plugin.chart-group: '[\\"the-group\\",\\"second-group\\"]'
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
     kontinuous/depname.full: project.fabrique.contrib.api1.deployment.api1
     kontinuous/depname.chartResource: api1.deployment.api1
     kontinuous/depname.chartName: api1
@@ -41,16 +41,16 @@ spec:
         component: api1
         application: test-chart-groups
         namespace: test-chart-groups-feature-branch-1
-        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
         kontinuous/deployment.env: test-chart-groups-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: deployment-3d60sq-api1
+        kontinuous/resourceName: deployment-api1-2ox4pttx
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
     spec:
       affinity:
         podAntiAffinity:
@@ -112,12 +112,12 @@ metadata:
   labels:
     component: api2
     application: test-chart-groups
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
     kontinuous/deployment.env: test-chart-groups-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: deployment-3d60sq-api2
+    kontinuous/resourceName: deployment-api2-2i11b8mt
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: api2
@@ -127,7 +127,7 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/api2/templates/deployment.yaml
     kontinuous/plugin.chart-group: the-group
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
     kontinuous/depname.full: project.fabrique.contrib.api2.deployment.api2
     kontinuous/depname.chartResource: api2.deployment.api2
     kontinuous/depname.chartName: api2
@@ -146,16 +146,16 @@ spec:
         component: api2
         application: test-chart-groups
         namespace: test-chart-groups-feature-branch-1
-        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
         kontinuous/deployment.env: test-chart-groups-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: deployment-3d60sq-api2
+        kontinuous/resourceName: deployment-api2-2i11b8mt
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
     spec:
       affinity:
         podAntiAffinity:
@@ -217,12 +217,12 @@ metadata:
   labels:
     component: api1
     application: test-chart-groups
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
     kontinuous/deployment.env: test-chart-groups-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: service-5cfizy-api1
+    kontinuous/resourceName: service-api1-21czkqpw
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: api1
@@ -231,7 +231,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.api1
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/api1/templates/service.yaml
     kontinuous/plugin.chart-group: '[\\"the-group\\",\\"second-group\\"]'
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
 spec:
   ports:
     - name: http
@@ -247,12 +247,12 @@ metadata:
   labels:
     component: api2
     application: test-chart-groups
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
     kontinuous/deployment.env: test-chart-groups-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: service-5cfizy-api2
+    kontinuous/resourceName: service-api2-69clm8c9
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: api2
@@ -261,7 +261,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.api2
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/api2/templates/service.yaml
     kontinuous/plugin.chart-group: the-group
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
 spec:
   ports:
     - name: http
@@ -279,16 +279,16 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.api1
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/api1/templates/ingress.yaml
     kontinuous/plugin.chart-group: '[\\"the-group\\",\\"second-group\\"]'
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
   labels:
     component: api1
     application: test-chart-groups
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
     kontinuous/deployment.env: test-chart-groups-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: ingress-5dz9oh-api1
+    kontinuous/resourceName: ingress-api1-2tu6iico
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: api1
@@ -318,16 +318,16 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.api2
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/api2/templates/ingress.yaml
     kontinuous/plugin.chart-group: the-group
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
   labels:
     component: api2
     application: test-chart-groups
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b087-4i9brj
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
     kontinuous/deployment.env: test-chart-groups-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: ingress-5dz9oh-api2
+    kontinuous/resourceName: ingress-api2-34tx8649
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: api2

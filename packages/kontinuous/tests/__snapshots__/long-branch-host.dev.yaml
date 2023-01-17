@@ -12,38 +12,38 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
-    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
+    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-na-24deasgq
     janitor/ttl: 7d
   labels:
     application: test-long-branch-host
-    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
-    kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-na-24deasgq
+    kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: namespace-4wnyh3-test-long-branch-host-a-very-very-very-f7f6yr
+    kontinuous/resourceName: namespace-test-long-branch-host-a-very-very-very-long-44510hnk
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
     cert: wildcard
-  name: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+  name: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: netpol-ingress
-  namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+  namespace: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
-    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
+    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-na-24deasgq
   labels:
-    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
-    kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-na-24deasgq
+    kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -70,17 +70,17 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
-    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
+    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-na-24deasgq
   labels:
-    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
-    kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-na-24deasgq
+    kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: serviceaccount-4nws8p-default
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+  namespace: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
 automountServiceAccountToken: false
 ---
 apiVersion: apps/v1
@@ -89,21 +89,21 @@ metadata:
   labels:
     component: app-api
     application: test-long-branch-host
-    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
-    kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-na-24deasgq
+    kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: deployment-3d60sq-app-api
+    kontinuous/resourceName: deployment-app-api-5x001oij
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app-api
-  namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+  namespace: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app-api
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app-api/templates/deployment.yaml
-    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
+    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-na-24deasgq
     kontinuous/depname.full: project.fabrique.contrib.app-api.deployment.app-api
     kontinuous/depname.chartResource: app-api.deployment.app-api
     kontinuous/depname.chartName: app-api
@@ -121,17 +121,17 @@ spec:
       labels:
         component: app-api
         application: test-long-branch-host
-        namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
-        kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
-        kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+        namespace: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
+        kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-na-24deasgq
+        kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
         kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: deployment-3d60sq-app-api
+        kontinuous/resourceName: deployment-app-api-5x001oij
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
+        kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-na-24deasgq
     spec:
       affinity:
         podAntiAffinity:
@@ -144,7 +144,7 @@ spec:
                       operator: In
                       values:
                         - >-
-                          test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+                          test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
                     - key: component
                       operator: In
                       values:
@@ -194,21 +194,21 @@ metadata:
   labels:
     component: app-api
     application: test-long-branch-host
-    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
-    kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-na-24deasgq
+    kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: service-5cfizy-app-api
+    kontinuous/resourceName: service-app-api-2ized8am
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app-api
-  namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+  namespace: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app-api
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app-api/templates/service.yaml
-    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
+    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-na-24deasgq
 spec:
   ports:
     - name: http
@@ -226,24 +226,24 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.app-api
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app-api/templates/ingress.yaml
-    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
+    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-na-24deasgq
   labels:
     component: app-api
     application: test-long-branch-host
-    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-name-24deas
-    kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+    kontinuous/deployment: test-long-branch-host-a-very-very-very-long-branch-na-24deasgq
+    kontinuous/deployment.env: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
     kontinuous/ref: a-very-very-very-long-branch-name-to-test-host-truncation
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: ingress-5dz9oh-app-api
+    kontinuous/resourceName: ingress-app-api-25u7pj18
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app-api
-  namespace: test-long-branch-host-a-very-very-very-long-branch-name-47z9um
+  namespace: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
 spec:
   rules:
     - host: >-
-        app-api-test-long-branch-host-a-very-very-very-lo-47z9um.dev.fabrique.social.gouv.fr
+        app-api-test-long-branch-host-a-very-very-very-47z9um9b.dev.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -256,7 +256,7 @@ spec:
   tls:
     - hosts:
         - >-
-          app-api-test-long-branch-host-a-very-very-very-lo-47z9um.dev.fabrique.social.gouv.fr
+          app-api-test-long-branch-host-a-very-very-very-47z9um9b.dev.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

@@ -12,16 +12,16 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
-    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     janitor/ttl: 7d
   labels:
     application: test-seed-db
-    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     kontinuous/deployment.env: test-seed-db-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: namespace-4wnyh3-test-seed-db-feature-branch-1
+    kontinuous/resourceName: namespace-test-seed-db-feature-branch-1-12flzfut
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
     cert: wildcard
@@ -36,14 +36,14 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
-    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
   labels:
-    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     kontinuous/deployment.env: test-seed-db-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: networkpolicy-49u3gn-netpol-ingress
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -70,14 +70,14 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
-    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
   labels:
-    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     kontinuous/deployment.env: test-seed-db-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: serviceaccount-4nws8p-default
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   namespace: test-seed-db-feature-branch-1
@@ -86,7 +86,7 @@ automountServiceAccountToken: false
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-test-seed-db-feature-branch-1-jobs-con-6v7vwk-seed
+  name: job-dev-test-seed-db-feature-branch-1-jobs-contrib-fa-23vg1bzw
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: seed
@@ -94,21 +94,21 @@ metadata:
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
-    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-test-seed-db-feature-branch-1-jobs-con-6v7vwk-seed
-    kontinuous/depname.chartResource: jobs.job.job-test-seed-db-feature-branch-1-jobs-con-6v7vwk-seed
+      project.fabrique.contrib.jobs.job.job-dev-test-seed-db-feature-branch-1-jobs-contrib-fa-23vg1bzw
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-seed-db-feature-branch-1-jobs-contrib-fa-23vg1bzw
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-test-seed-db-feature-branch-1-jobs-con-6v7vwk-seed
-    kontinuous/depname.resourceName: job-test-seed-db-feature-branch-1-jobs-con-6v7vwk-seed
+    kontinuous/depname.resourcePath: job.job-dev-test-seed-db-feature-branch-1-jobs-contrib-fa-23vg1bzw
+    kontinuous/depname.resourceName: job-dev-test-seed-db-feature-branch-1-jobs-contrib-fa-23vg1bzw
   labels:
-    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     kontinuous/deployment.env: test-seed-db-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-4bkfwz-job-test-seed-db-feature-branch-1-jobs-con-6-2gkses
+    kontinuous/resourceName: job-job-dev-test-seed-db-feature-branch-1-jobs-contri-68njhvv4
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -122,16 +122,16 @@ spec:
         ref: feature-branch-1
         repository: test-seed-db
         runName: custom
-        kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+        kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
         kontinuous/deployment.env: test-seed-db-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-4bkfwz-job-test-seed-db-feature-branch-1-jobs-con-6-2gkses
+        kontinuous/resourceName: job-job-dev-test-seed-db-feature-branch-1-jobs-contri-68njhvv4
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+        kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     spec:
       restartPolicy: Never
       initContainers:
@@ -198,12 +198,12 @@ metadata:
   labels:
     component: app
     application: test-seed-db
-    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     kontinuous/deployment.env: test-seed-db-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: deployment-3d60sq-app
+    kontinuous/resourceName: deployment-app-55fzcjih
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
@@ -213,7 +213,7 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"seed\\"]'
-    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
     kontinuous/depname.chartResource: app.deployment.app
     kontinuous/depname.chartName: app
@@ -232,16 +232,16 @@ spec:
         component: app
         application: test-seed-db
         namespace: test-seed-db-feature-branch-1
-        kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+        kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
         kontinuous/deployment.env: test-seed-db-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: deployment-3d60sq-app
+        kontinuous/resourceName: deployment-app-55fzcjih
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+        kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     spec:
       affinity:
         podAntiAffinity:
@@ -303,12 +303,12 @@ metadata:
   labels:
     component: app
     application: test-seed-db
-    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     kontinuous/deployment.env: test-seed-db-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: service-5cfizy-app
+    kontinuous/resourceName: service-app-46z2o1vv
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
@@ -317,7 +317,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
     kontinuous/plugin.needs: '[\\"seed\\"]'
-    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
 spec:
   ports:
     - name: http
@@ -335,16 +335,16 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
     kontinuous/plugin.needs: '[\\"seed\\"]'
-    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
   labels:
     component: app
     application: test-seed-db
-    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a37-24qzpe
+    kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     kontinuous/deployment.env: test-seed-db-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: ingress-5dz9oh-app
+    kontinuous/resourceName: ingress-app-b4kcj2bx
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
