@@ -2,6 +2,7 @@
 
 mkdir -p ~/.kube
 touch ~/.kube/config
+chmod go-r ~/.kube/config
 echo $KUBECONFIG_B64 | base64 -d > ~/.kube/config
 export KUBECONFIG=~/.kube/config
 
