@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.116.3](https://github.com/socialgouv/kontinuous/compare/v1.116.2...v1.116.3) (2023-01-17)
+
+
+### Bug Fixes
+
+* deactivate wip ([557fd28](https://github.com/socialgouv/kontinuous/commit/557fd288fcff0d17824e93b00bbcebe0bdb0393b))
+
 ### [1.116.2](https://github.com/socialgouv/kontinuous/compare/v1.116.1...v1.116.2) (2023-01-17)
 
 
