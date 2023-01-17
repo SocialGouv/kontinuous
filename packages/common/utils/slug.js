@@ -14,15 +14,15 @@ slugify.extend({
 const KUBERNETS_MAX_NAME_LENGTH = 63
 const SUFFIX_SHA_LENGTH = 8
 
-const suffix = (name) => {
+const suffix = (name, len = SUFFIX_SHA_LENGTH) => {
   const hex = Buffer.from(
     createHash("sha256").update(name).digest("hex")
   ).toString()
 
-  return parseInt(hex, 16).toString(36).slice(0, 6)
+  return parseInt(hex, 16).toString(36).slice(0, len)
 }
 
-const slugString = (name, len) => {
+const slugString = (name, len, shalen, slugSource = name) => {
   let slugified = slugify(name, {
     lower: true,
   })
@@ -33,10 +33,11 @@ const slugString = (name, len) => {
 
   slugified = slugified.replace(/-+$/, "") // domain doesn't support --
 
-  if (slugified.length > len || slugified !== name) {
-    const shortSlug = slugified.slice(0, len - SUFFIX_SHA_LENGTH)
+  if ((shalen > 0 && slugified.length > len) || slugified !== name) {
+    const shortSlug = slugified.slice(0, len - shalen - 2)
     slugified = `${shortSlug}${shortSlug.endsWith("-") ? "" : "-"}${suffix(
-      name
+      slugSource,
+      shalen
     )}`
   }
   return slugified
@@ -45,6 +46,7 @@ const slugString = (name, len) => {
 const slug = (mixed, options = {}) => {
   const {
     maxLength = KUBERNETS_MAX_NAME_LENGTH,
+    shaLength = SUFFIX_SHA_LENGTH,
     partMaxLength = Infinity,
     glue = "-",
   } = options
@@ -66,11 +68,16 @@ const slug = (mixed, options = {}) => {
       name = part
       pml = partMaxLength
     }
-    const slugified = slugString(name, pml)
+    const slugified = slugString(name, pml, 0)
     parts.push(slugified)
   }
 
-  const slugified = slugString(parts.join(glue), maxLength)
+  const slugified = slugString(
+    parts.join(glue),
+    maxLength,
+    shaLength,
+    mixed.join(glue)
+  )
 
   return slugified
 }
