@@ -3,6 +3,14 @@ module.exports = (manifests, options, { config, values }) => {
     return manifests
   }
 
+  const {
+    permanentDevEnvironmentBranches = ["master", "main", "dev", "develop"],
+  } = options
+
+  if (permanentDevEnvironmentBranches.includes(config.gitBranch)) {
+    return
+  }
+
   const ttl =
     (values && (values.ttl || (values.global && values.global.ttl))) || "7d"
 
