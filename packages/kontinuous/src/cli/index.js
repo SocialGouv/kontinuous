@@ -1,6 +1,8 @@
 const omit = require("lodash.omit")
 
 const ctx = require("~common/ctx")
+const logger = require("~common/utils/logger")
+
 const ExitError = require("~/errors/exit-error")
 
 const createProgram = require("./program")
@@ -58,10 +60,11 @@ module.exports = async (args = process.argv) => {
   })
 
   let exitCode = 0
+  let error
   try {
     await program.parseAsync(args)
   } catch (err) {
-    let error = err
+    error = err
     if (error instanceof ExitError) {
       exitCode = error.exitCode
       error = error.error
@@ -76,6 +79,7 @@ module.exports = async (args = process.argv) => {
     if (sentry) {
       await sentry.close(5000)
     }
+    logger.error(error)
     process.exit(exitCode)
   }
 }
