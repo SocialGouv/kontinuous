@@ -44,7 +44,8 @@ module.exports = async (args = process.argv) => {
           if (
             !key.startsWith("KS_") ||
             key.includes("TOKEN") ||
-            key === "KS_SENTRY_DSN"
+            key === "KS_SENTRY_DSN" ||
+            key === "KS_NOTIFY_WEBHOOK_URL"
           ) {
             return acc
           }
