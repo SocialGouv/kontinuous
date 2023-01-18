@@ -52,6 +52,13 @@ const loadConfig = async (
 ) => {
   const env = ctx.get("env") || process.env
 
+  const setConfigMeta = (configKey, key, value) => {
+    if (!configMeta[configKey]) {
+      configMeta[configKey] = {}
+    }
+    configMeta[configKey][key] = value
+  }
+
   const logger = defaultLogger.child({})
   if (loadConfigOptions.logLevel) {
     let { logLevel } = loadConfigOptions
@@ -752,7 +759,7 @@ const loadConfig = async (
     deepmerge(config, inlineConfig)
 
     for (const rootKey of Object.keys(inlineConfig)) {
-      configMeta[rootKey].isDefault = false
+      setConfigMeta(rootKey, "isDefault", true)
     }
   }
   const { configSet } = config
@@ -760,7 +767,7 @@ const loadConfig = async (
     set(config, key, val)
 
     const [rootKey] = key.split(".")
-    configMeta[rootKey].isDefault = false
+    setConfigMeta(rootKey, "isDefault", true)
   }
 
   // reload overrided config defaults
@@ -790,7 +797,9 @@ const loadConfig = async (
       return acc
     }, {})
 
-  logger.info(`📂 buildPath: file://${config.buildPath}`)
+  if (!isReloadingConfig) {
+    logger.info(`📂 buildPath: file://${config.buildPath}`)
+  }
 
   if (loadConfigOptions.loadDependencies !== false) {
     await loadDependencies(config)
