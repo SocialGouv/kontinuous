@@ -7,8 +7,8 @@ metadata:
   labels:
     component: app
     application: test-chart-not-in-values
-    kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-42k0bybd
-    kontinuous/deployment.env: test-chart-not-in-values-feature-branch-1
+    kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-1fqfb7ju
+    kontinuous/deployment.env: test-chart-not-in-values-feature-branch-1-app
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -21,7 +21,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
-    kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-42k0bybd
+    kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-1fqfb7ju
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
     kontinuous/depname.chartResource: app.deployment.app
     kontinuous/depname.chartName: app
@@ -40,8 +40,8 @@ spec:
         component: app
         application: test-chart-not-in-values
         namespace: test-chart-not-in-values-feature-branch-1
-        kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-42k0bybd
-        kontinuous/deployment.env: test-chart-not-in-values-feature-branch-1
+        kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-1fqfb7ju
+        kontinuous/deployment.env: test-chart-not-in-values-feature-branch-1-app
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -49,7 +49,7 @@ spec:
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-42k0bybd
+        kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-1fqfb7ju
     spec:
       affinity:
         podAntiAffinity:
@@ -111,8 +111,8 @@ metadata:
   labels:
     component: app
     application: test-chart-not-in-values
-    kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-42k0bybd
-    kontinuous/deployment.env: test-chart-not-in-values-feature-branch-1
+    kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-1fqfb7ju
+    kontinuous/deployment.env: test-chart-not-in-values-feature-branch-1-app
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -124,7 +124,7 @@ metadata:
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
-    kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-42k0bybd
+    kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-1fqfb7ju
 spec:
   ports:
     - name: http
@@ -141,12 +141,12 @@ metadata:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-42k0bybd
+    kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-1fqfb7ju
   labels:
     component: app
     application: test-chart-not-in-values
-    kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-42k0bybd
-    kontinuous/deployment.env: test-chart-not-in-values-feature-branch-1
+    kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-1fqfb7ju
+    kontinuous/deployment.env: test-chart-not-in-values-feature-branch-1-app
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53

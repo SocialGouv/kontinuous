@@ -11,7 +11,7 @@ metadata:
     kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/chartPath: project.extra-job
     kontinuous/source: project/charts/extra-job/templates/my-job.yaml
-    kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf-5g1zo1pl
+    kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf-6atwtfds
     kontinuous/depname.full: project.extra-job.job.extra-job
     kontinuous/depname.chartResource: extra-job.job.extra-job
     kontinuous/depname.chartName: extra-job
@@ -19,8 +19,8 @@ metadata:
     kontinuous/depname.resourcePath: job.extra-job
     kontinuous/depname.resourceName: extra-job
   labels:
-    kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf-5g1zo1pl
-    kontinuous/deployment.env: test-standalone-charts-feature-branch-1
+    kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf-6atwtfds
+    kontinuous/deployment.env: test-standalone-charts-feature-branch-1-extra-job
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -34,8 +34,8 @@ spec:
   template:
     metadata:
       labels:
-        kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf-5g1zo1pl
-        kontinuous/deployment.env: test-standalone-charts-feature-branch-1
+        kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf-6atwtfds
+        kontinuous/deployment.env: test-standalone-charts-feature-branch-1-extra-job
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -43,7 +43,7 @@ spec:
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf-5g1zo1pl
+        kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf-6atwtfds
     spec:
       restartPolicy: Never
       containers:

@@ -14,7 +14,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.deactivate.jobs-deactivate
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/deactivate/charts/jobs-deactivate/templates/jobs.yaml
-    kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b087-2ugc7fik
+    kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b087-43cki7aw
     kontinuous/depname.full: >-
       project.fabrique.contrib.deactivate.jobs-deactivate.job.job-dev-test-deactivate-feature-branch-1-jobs-deactiv-4i47371e
     kontinuous/depname.chartResource: >-
@@ -24,8 +24,8 @@ metadata:
     kontinuous/depname.resourcePath: job.job-dev-test-deactivate-feature-branch-1-jobs-deactiv-4i47371e
     kontinuous/depname.resourceName: job-dev-test-deactivate-feature-branch-1-jobs-deactiv-4i47371e
   labels:
-    kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b087-2ugc7fik
-    kontinuous/deployment.env: test-deactivate-feature-branch-1
+    kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b087-43cki7aw
+    kontinuous/deployment.env: test-deactivate-feature-branch-1-deactivate
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -43,8 +43,8 @@ spec:
         ref: feature-branch-1
         repository: test-deactivate
         runName: deactivate
-        kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b087-2ugc7fik
-        kontinuous/deployment.env: test-deactivate-feature-branch-1
+        kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b087-43cki7aw
+        kontinuous/deployment.env: test-deactivate-feature-branch-1-deactivate
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -52,7 +52,7 @@ spec:
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b087-2ugc7fik
+        kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b087-43cki7aw
     spec:
       restartPolicy: Never
       initContainers:

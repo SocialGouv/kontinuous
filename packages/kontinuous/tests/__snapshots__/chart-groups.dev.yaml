@@ -7,8 +7,8 @@ metadata:
   labels:
     component: api1
     application: test-chart-groups
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
-    kontinuous/deployment.env: test-chart-groups-feature-branch-1
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
+    kontinuous/deployment.env: test-chart-groups-feature-branch-1-the-group
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -22,7 +22,7 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/api1/templates/deployment.yaml
     kontinuous/plugin.chart-group: '[\\"the-group\\",\\"second-group\\"]'
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
     kontinuous/depname.full: project.fabrique.contrib.api1.deployment.api1
     kontinuous/depname.chartResource: api1.deployment.api1
     kontinuous/depname.chartName: api1
@@ -41,8 +41,8 @@ spec:
         component: api1
         application: test-chart-groups
         namespace: test-chart-groups-feature-branch-1
-        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
-        kontinuous/deployment.env: test-chart-groups-feature-branch-1
+        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
+        kontinuous/deployment.env: test-chart-groups-feature-branch-1-the-group
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -50,7 +50,7 @@ spec:
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
+        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
     spec:
       affinity:
         podAntiAffinity:
@@ -112,8 +112,8 @@ metadata:
   labels:
     component: api2
     application: test-chart-groups
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
-    kontinuous/deployment.env: test-chart-groups-feature-branch-1
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
+    kontinuous/deployment.env: test-chart-groups-feature-branch-1-the-group
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -127,7 +127,7 @@ metadata:
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/api2/templates/deployment.yaml
     kontinuous/plugin.chart-group: the-group
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
     kontinuous/depname.full: project.fabrique.contrib.api2.deployment.api2
     kontinuous/depname.chartResource: api2.deployment.api2
     kontinuous/depname.chartName: api2
@@ -146,8 +146,8 @@ spec:
         component: api2
         application: test-chart-groups
         namespace: test-chart-groups-feature-branch-1
-        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
-        kontinuous/deployment.env: test-chart-groups-feature-branch-1
+        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
+        kontinuous/deployment.env: test-chart-groups-feature-branch-1-the-group
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -155,7 +155,7 @@ spec:
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
+        kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
     spec:
       affinity:
         podAntiAffinity:
@@ -217,8 +217,8 @@ metadata:
   labels:
     component: api1
     application: test-chart-groups
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
-    kontinuous/deployment.env: test-chart-groups-feature-branch-1
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
+    kontinuous/deployment.env: test-chart-groups-feature-branch-1-the-group
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -231,7 +231,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.api1
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/api1/templates/service.yaml
     kontinuous/plugin.chart-group: '[\\"the-group\\",\\"second-group\\"]'
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
 spec:
   ports:
     - name: http
@@ -247,8 +247,8 @@ metadata:
   labels:
     component: api2
     application: test-chart-groups
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
-    kontinuous/deployment.env: test-chart-groups-feature-branch-1
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
+    kontinuous/deployment.env: test-chart-groups-feature-branch-1-the-group
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -261,7 +261,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.api2
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/api2/templates/service.yaml
     kontinuous/plugin.chart-group: the-group
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
 spec:
   ports:
     - name: http
@@ -279,12 +279,12 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.api1
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/api1/templates/ingress.yaml
     kontinuous/plugin.chart-group: '[\\"the-group\\",\\"second-group\\"]'
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
   labels:
     component: api1
     application: test-chart-groups
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
-    kontinuous/deployment.env: test-chart-groups-feature-branch-1
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
+    kontinuous/deployment.env: test-chart-groups-feature-branch-1-the-group
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -318,12 +318,12 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.api2
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/api2/templates/ingress.yaml
     kontinuous/plugin.chart-group: the-group
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
   labels:
     component: api2
     application: test-chart-groups
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-4i9brjoa
-    kontinuous/deployment.env: test-chart-groups-feature-branch-1
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
+    kontinuous/deployment.env: test-chart-groups-feature-branch-1-the-group
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
