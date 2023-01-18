@@ -1,10 +1,36 @@
-const handledKinds = ["Deployment", "StatefulSet", "Job"]
+const allHandledKinds = ["Deployment", "StatefulSet", "Job"]
+
+const defaultHandledKinds = ["StatefulSet"]
+/*
+see
+  https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#forced-rollback
+  https://github.com/kubernetes/kubernetes/issues/67250
+  https://github.com/kubernetes/enhancements/pull/3562
+*/
 
 module.exports = async (
   manifests,
   options,
   { utils, config, logger, kubectl, rolloutStatus, ctx }
 ) => {
+  const { surviveOnBrokenCluster = false, all = false } = options
+  let { handledKinds } = options
+  if (!handledKinds) {
+    handledKinds = all ? allHandledKinds : defaultHandledKinds
+  }
+
+  const { KontinuousPluginError } = utils
+
+  handledKinds.forEach((kind) => {
+    if (!allHandledKinds.includes(kind)) {
+      throw new KontinuousPluginError(
+        `kind "${kind}" is not an handled kind, supported values are: ${allHandledKinds.join(
+          ","
+        )}`
+      )
+    }
+  })
+
   const { refLabelKey, kubeconfig, kubeconfigContext: kubecontext } = config
 
   logger.debug("♻️ check for failed resources to clean")
@@ -72,8 +98,6 @@ module.exports = async (
   const resourceNames = manifestsToClean.map(
     (manifest) => manifest.metadata?.name
   )
-
-  const { surviveOnBrokenCluster = false } = options
 
   const { kubectlDeleteManifest } = utils
   const kubectlDeleteManifestOptions = {

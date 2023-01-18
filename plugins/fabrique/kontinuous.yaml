@@ -46,7 +46,7 @@ dependencies:
       rancherNamespaces:
         enabled: true
       cleanFailed:
-        enabled: false
+        enabled: true
       cleanOrphan:
         enabled: false
         options:

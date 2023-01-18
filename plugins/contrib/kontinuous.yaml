@@ -45,7 +45,7 @@ preDeploy:
   clear:
     enabled: false
   cleanFailed:
-    enabled: false
+    enabled: true
   cleanOrphan:
     enabled: true
 
