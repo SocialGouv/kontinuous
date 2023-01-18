@@ -43,6 +43,7 @@ module.exports = async (args = process.argv) => {
         env: Object.entries(process.env).reduce((acc, [key, value]) => {
           if (
             !key.startsWith("KS_") ||
+            !key.startsWith("GIT") || // git, github, gitlab
             key.includes("TOKEN") ||
             key === "KS_SENTRY_DSN" ||
             key === "KS_NOTIFY_WEBHOOK_URL"
