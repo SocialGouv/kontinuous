@@ -1,6 +1,5 @@
-const camelcase = require("lodash.camelcase")
-
 const getDeps = require("../lib/get-needs-deps")
+const getDepName = require("../lib/get-needs-dep-name")
 
 module.exports = async (manifests, _options, context) => {
   const { ctx, utils } = context
@@ -19,17 +18,6 @@ module.exports = async (manifests, _options, context) => {
   const deps = getDeps(manifests, context)
 
   const umlSet = new Set()
-
-  const getDepName = (manifest) => {
-    const { metadata } = manifest
-    const annotations = metadata?.annotations
-
-    const name =
-      annotations["kontinuous/needsName"] ||
-      annotations["kontinuous/depname.chartName"]
-
-    return camelcase(name)
-  }
 
   for (const manifest of manifests) {
     const { metadata, kind } = manifest

@@ -30,6 +30,8 @@ validators:
   sealedSecrets:
     enabled: false
     ifEnv: ["**", "!local"]
+  needsKapp:
+    enabled: false
   noPlainSecrets:
     enabled: false
 
