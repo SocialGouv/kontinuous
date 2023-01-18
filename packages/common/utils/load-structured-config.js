@@ -26,6 +26,7 @@ module.exports = async ({
   mergeWith = deepmerge,
   emptyAsUndefined: defaultEmptyAsUndefined = false,
   rootConfig: config = {},
+  configMeta = {},
 }) => {
   const extendsConfig = (src = {}) => {
     mergeWith(config, src)
@@ -45,12 +46,17 @@ module.exports = async ({
   const envKeys = Object.keys(env)
 
   for (const [key, def] of Object.entries(configOverride)) {
+    if (!configMeta[key]) {
+      configMeta[key] = {}
+    }
+
     const {
       envParser,
       default: defaultValue,
       defaultFunction,
       emptyAsUndefined = defaultEmptyAsUndefined,
       transform,
+      generate,
     } = def
 
     const optionKey =
@@ -84,11 +90,22 @@ module.exports = async ({
     ) {
       config[key] = options[optionKey]
     }
-    if (defaultFunction && isUndefined(config[key])) {
+    if (
+      defaultFunction &&
+      (isUndefined(config[key]) || configMeta[key].isDefault)
+    ) {
       config[key] = await defaultFunction(config, { options, env })
+      configMeta[key].isDefault = true
     }
-    if (defaultValue && isUndefined(config[key])) {
+    if (
+      defaultValue &&
+      (isUndefined(config[key]) || configMeta[key].isDefault)
+    ) {
       config[key] = defaultValue
+      configMeta[key].isDefault = true
+    }
+    if (generate) {
+      config[key] = await generate(config)
     }
     if (transform) {
       config[key] = await transform(config[key], config)

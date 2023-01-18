@@ -42,11 +42,13 @@ const mergeProjectsAndOrganizations = require("./merge-projects-and-organization
 
 const defaultRepositoryProvider = "https://github.com" // degit/tiged like
 
-module.exports = async (
+const loadConfig = async (
   opts = {},
   inlineConfigs = [],
   rootConfig = {},
-  loadConfigOptions = {}
+  loadConfigOptions = {},
+  configMeta = {},
+  isReloadingConfig = false
 ) => {
   const env = ctx.get("env") || process.env
 
@@ -722,6 +724,7 @@ module.exports = async (
     configOverride: rootConfigOverride,
     options: opts,
     env,
+    configMeta,
   })
 
   const configDirs = []
@@ -731,7 +734,7 @@ module.exports = async (
   }
   configDirs.push(rootConfig.workspaceKsPath)
 
-  const config = await loadStructuredConfig({
+  let config = await loadStructuredConfig({
     rootConfig,
     configBasename: "config",
     configDirs,
@@ -740,16 +743,39 @@ module.exports = async (
     options: opts,
     env,
     emptyAsUndefined: true,
+    configMeta,
   })
 
+  // override config
   if (config.inlineConfig) {
     const inlineConfig = yaml.load(config.inlineConfig)
     deepmerge(config, inlineConfig)
-  }
 
+    for (const rootKey of Object.keys(inlineConfig)) {
+      configMeta[rootKey].isDefault = false
+    }
+  }
   const { configSet } = config
   for (const [key, val] of Object.entries(configSet)) {
     set(config, key, val)
+
+    const [rootKey] = key.split(".")
+    configMeta[rootKey].isDefault = false
+  }
+
+  // reload overrided config defaults
+  if (
+    !isReloadingConfig &&
+    (Object.keys(configSet).length > 0 || config.inlineConfig)
+  ) {
+    config = await loadConfig(
+      opts,
+      inlineConfigs,
+      config,
+      loadConfigOptions,
+      configMeta,
+      true
+    )
   }
 
   let { dependencies } = config
@@ -819,3 +845,5 @@ module.exports = async (
 
   return config
 }
+
+module.exports = loadConfig
