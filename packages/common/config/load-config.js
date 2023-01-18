@@ -817,7 +817,5 @@ module.exports = async (
     },
   })
 
-  console.log(config)
-
   return config
 }
