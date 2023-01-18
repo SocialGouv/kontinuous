@@ -10,6 +10,7 @@ const build = require("~/build")
 const { setStatus } = require("~/status")
 
 const ExitError = require("~/errors/exit-error")
+const FailedDeploymentAggregateError = require("~/errors/failed-deployment-aggregate-error")
 
 const validateManifests = require("../build/validate-manifests")
 const dependencies = require("../build/load-dependencies/dependencies")
@@ -153,7 +154,10 @@ module.exports = async (options) => {
     }
 
     if (!success) {
-      throw new AggregateError(errors, "errors encountered during deployment")
+      throw new FailedDeploymentAggregateError(
+        errors,
+        "errors encountered during deployment"
+      )
     }
 
     logger.info(
