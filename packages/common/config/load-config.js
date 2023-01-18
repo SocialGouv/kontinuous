@@ -283,6 +283,29 @@ module.exports = async (
       env: "KS_INLINE_CONFIG_SET",
       envParser: envParserYaml,
       option: "config-set",
+      transform: (value) => {
+        const configSetMap = {}
+        if (typeof value === "string") {
+          value = value.split(",")
+        }
+        if (Array.isArray(value)) {
+          for (const s of value) {
+            const index = s.indexOf("=")
+            if (index === -1) {
+              logger.warn(
+                "bad format for --config-set option, expected: foo=bar"
+              )
+              continue
+            }
+            const key = s.slice(0, index)
+            const val = s.slice(index + 1)
+            configSetMap[`${key}`] = yaml.parse(val)
+          }
+        } else {
+          Object.assign(configSetMap, value)
+        }
+        return configSetMap
+      },
     },
     inlineValues: {
       env: "KS_INLINE_VALUES",
@@ -725,23 +748,8 @@ module.exports = async (
   }
 
   const { configSet } = config
-  if (configSet) {
-    if (Array.isArray(configSet)) {
-      for (const s of configSet) {
-        const index = s.indexOf("=")
-        if (index === -1) {
-          logger.warn("bad format for --config-set option, expected: foo=bar")
-          continue
-        }
-        const key = s.slice(0, index)
-        const val = s.slice(index + 1)
-        set(config, `${key}`, yaml.parse(val))
-      }
-    } else {
-      for (const [key, val] of Object.entries(configSet)) {
-        set(config, key, val)
-      }
-    }
+  for (const [key, val] of Object.entries(configSet)) {
+    set(config, key, val)
   }
 
   let { dependencies } = config
@@ -808,6 +816,8 @@ module.exports = async (
       }
     },
   })
+
+  console.log(config)
 
   return config
 }
