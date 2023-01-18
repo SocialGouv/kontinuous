@@ -3,18 +3,8 @@ const { spawn } = require("child_process")
 const handledKinds = ["Deployment", "StatefulSet", "Job", "DaemonSet"]
 
 module.exports = async (
-  sidecars,
   options,
-  {
-    config,
-    logger,
-    utils,
-    needBin,
-    manifests,
-    dryRun,
-    deploysPromise,
-    runContext,
-  }
+  { config, logger, utils, needBin, manifests, dryRun, ctx }
 ) => {
   if (dryRun) {
     return
@@ -36,8 +26,6 @@ module.exports = async (
     .map((containerName) => `--exclude-container=${containerName}`)
     .join(" ")
 
-  const { eventsBucket } = runContext
-
   const { needStern, parseCommand, promiseAll } = utils
 
   await needBin(needStern)
@@ -50,7 +38,7 @@ module.exports = async (
 
   const sternProcesses = {}
 
-  const stopSidecar = async () => {
+  const stopSidecar = () => {
     for (const p of Object.values(sternProcesses)) {
       try {
         process.kill(p.pid, "SIGKILL")
@@ -59,6 +47,8 @@ module.exports = async (
       }
     }
   }
+
+  const abortSignal = ctx.require("abortSignal")
 
   const promises = []
 
@@ -90,6 +80,7 @@ module.exports = async (
         --color always
         ${excludeContainerFlag}
     `
+
     const [cmd, args] = parseCommand(sternCmd)
 
     const proc = spawn(cmd, args, {
@@ -97,6 +88,7 @@ module.exports = async (
       env: {
         ...process.env,
         ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
+        signal: abortSignal,
       },
     })
 
@@ -124,6 +116,9 @@ module.exports = async (
     promises.push(promise)
   }
 
+  const eventsBucket = ctx.require("eventsBucket")
+  const events = ctx.require("events")
+
   eventsBucket.on("ready", ({ namespace, resourceName }) => {
     const key = `${namespace}/${resourceName}`
     if (sternProcesses[key]) {
@@ -135,11 +130,9 @@ module.exports = async (
     }
   })
 
-  const promise = promiseAll(promises)
-
-  sidecars.push({ stopSidecar, promise })
-  ;(async () => {
-    await Promise.allSettled([deploysPromise])
+  events.on("deploy-with:finish", () => {
     stopSidecar()
-  })()
+  })
+
+  return promiseAll(promises)
 }

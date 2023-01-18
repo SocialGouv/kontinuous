@@ -55,7 +55,7 @@ module.exports = (type, context) => {
       return (data) => data
     }
 
-    return async (data) => {
+    return async (data, parallel = false) => {
       let requireFunc
       if (ext === ".ts") {
         requireFunc = requireTs
@@ -66,10 +66,13 @@ module.exports = (type, context) => {
       let plugin = requireFunc(rPath)
 
       if (Array.isArray(plugin)) {
-        plugin = pluginFunction(plugin)
+        plugin = pluginFunction(plugin, parallel)
       }
 
       try {
+        if (parallel) {
+          return plugin(pluginOptions, context, scope)
+        }
         const result = await plugin(data, pluginOptions, context, scope)
         if (result) {
           data = result

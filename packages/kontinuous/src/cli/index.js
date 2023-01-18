@@ -1,3 +1,5 @@
+const { EventEmitter } = require("node:events")
+
 const omit = require("lodash.omit")
 
 const ctx = require("~common/ctx")
@@ -25,8 +27,46 @@ const addCommands = [
   require("./commands/test"),
 ]
 
+const gracefullShutdownTimeoutMs = 2000
+
 module.exports = async (args = process.argv) => {
   ctx.provide()
+
+  const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
+  const events = new EventEmitter()
+  ctx.set("events", events)
+  const abortController = new AbortController()
+  ctx.set("abortController", abortController)
+  ctx.set("abortSignal", abortController.signal)
+  signals.forEach((signal) => {
+    process.on(signal, () => {
+      if (abortController.signal.aborted) {
+        if (signal === "SIGINT") {
+          logger.info(`${signal} received twice, killing now`)
+          process.exit(1)
+        }
+        return
+      }
+      events.emit("stop")
+      logger.info(
+        {
+          gracefullShutdownTimeoutMs,
+        },
+        `${signal} received, aborting...`
+      )
+      abortController.abort() // if we pass argument, we can't detect AbortError anymore, so we have to let it empty
+      const shutdownTimeout = setTimeout(() => {
+        logger.info(`shutdown timeout reached, killing now`, {
+          gracefullShutdownTimeoutMs,
+        })
+        process.exit(1)
+      }, gracefullShutdownTimeoutMs)
+      events.on("finish", () => {
+        clearTimeout(shutdownTimeout)
+      })
+    })
+  })
+
   const program = createProgram()
   addCommands.forEach((addCommand) => addCommand(program))
 
@@ -64,6 +104,7 @@ module.exports = async (args = process.argv) => {
   let error
   try {
     await program.parseAsync(args)
+    events.emit("success")
   } catch (err) {
     error = err
     if (error instanceof ExitError) {
@@ -75,12 +116,14 @@ module.exports = async (args = process.argv) => {
     if (sentry) {
       sentry.captureException(error)
     }
+    events.emit("failed")
     throw error
   } finally {
     if (sentry) {
       await sentry.close(5000)
     }
     logger.error(error)
+    events.emit("finish")
     process.exit(exitCode)
   }
 }

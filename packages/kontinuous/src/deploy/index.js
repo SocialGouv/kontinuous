@@ -101,48 +101,32 @@ module.exports = async (options) => {
 
     const { dryRun } = options
 
-    const runContext = {
-      eventsBucket: eventsBucket(),
-    }
-
+    ctx.set("eventsBucket", eventsBucket())
     const deployContext = {
       manifestsFile,
       manifestsYaml: manifests,
       manifests: allManifests,
-      runContext,
       dryRun,
     }
 
+    let deploysPromise
+    let sidecarsPromise
     if (!config.disableStep.includes("deploy")) {
       logger.info("🌀 [LIFECYCLE]: deploy")
       logger.info(`🚀 deploying ${repositoryName} ${namespacesLabel}`)
       if (!config.disableStep.includes("deploy-with")) {
         logger.info("🌀 [LIFECYCLE]: deploy-with")
-        const { stopDeploys, deploysPromise } = await deployWith(deployContext)
-        runContext.stopDeploys = stopDeploys
-        runContext.deploysPromise = deploysPromise
+        deploysPromise = deployWith(deployContext)
       }
 
       if (!config.disableStep.includes("deploy-sidecars")) {
         logger.info("🌀 [LIFECYCLE]: deploy-sidecars")
-        const { stopSidecars, sidecarsPromise } = await deploySidecars(
-          deployContext
-        )
-        runContext.stopSidecars = stopSidecars
-        runContext.sidecarsPromise = sidecarsPromise
+        sidecarsPromise = deploySidecars(deployContext)
       }
     }
 
-    const results = await promiseAll([
-      runContext.deploysPromise,
-      runContext.sidecarsPromise,
-    ])
-    if (runContext.stopSidecars) {
-      runContext.stopSidecars()
-    }
-    if (runContext.stopDeploys) {
-      runContext.stopDeploys()
-    }
+    const results = await promiseAll([deploysPromise, sidecarsPromise])
+
     const errors = results
       .filter((result) => result?.errors)
       .flatMap((result) => result.errors)

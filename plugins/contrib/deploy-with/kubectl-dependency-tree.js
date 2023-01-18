@@ -2,23 +2,14 @@ const async = require("async")
 
 const getDeps = require("../lib/get-needs-deps")
 
-const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
-
 const handledKinds = ["Deployment", "StatefulSet", "Job"]
 
 const isNotDefined = (val) => val === undefined || val === null || val === ""
 const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
 
-module.exports = async (deploys, options, context) => {
-  const {
-    config,
-    utils,
-    manifests,
-    dryRun,
-    runContext,
-    kubectl,
-    rolloutStatus,
-  } = context
+module.exports = async (options, context) => {
+  const { config, utils, manifests, dryRun, kubectl, rolloutStatus, ctx } =
+    context
 
   const {
     yaml,
@@ -32,6 +23,8 @@ module.exports = async (deploys, options, context) => {
   const { kubeconfigContext, kubeconfig } = config
 
   const { serverSide = true } = options
+
+  const abortSignal = ctx.require("abortSignal")
 
   const defaultOptions = {
     validate: true,
@@ -117,7 +110,7 @@ module.exports = async (deploys, options, context) => {
     })
   }
 
-  const { eventsBucket } = runContext
+  const eventsBucket = ctx.require("eventsBucket")
 
   const forceApply = async (manifest) => {
     await kubectlDeleteManifest(manifest, kubectlDeleteManifestOptions)
@@ -240,8 +233,7 @@ module.exports = async (deploys, options, context) => {
   eventsBucket.trigger("initDeployment", { countAllRunnable })
 
   const { deploymentLabelKey } = config
-  const rolloutStatusProcesses = {}
-  const interceptor = { stop: false }
+
   const rolloutStatusManifest = async (manifest) => {
     const { kind } = manifest
     if (!handledKinds.includes(kind)) {
@@ -272,8 +264,7 @@ module.exports = async (deploys, options, context) => {
           namespace,
           selector,
           kindFilter: kind,
-          interceptor,
-          rolloutStatusProcesses,
+          abortSignal,
           kubeconfig,
           kubecontext: kubeconfigContext,
           surviveOnBrokenCluster,
@@ -323,50 +314,9 @@ module.exports = async (deploys, options, context) => {
 
   const applyPromise = !dryRun ? applyAll() : null
 
-  const stopRolloutStatus = () => {
-    interceptor.stop = true
-    for (const p of Object.values(rolloutStatusProcesses)) {
-      try {
-        process.kill(p.pid, "SIGKILL")
-      } catch (_err) {
-        // do nothing
-      }
-    }
+  if (!dryRun) {
+    await applyPromise
   }
-
-  for (const signal of signals) {
-    process.on(signal, () => {
-      for (const kubectlProc of kubectlProcesses) {
-        kubectlProc.kill(signal)
-      }
-      stopRolloutStatus()
-      // process.exit(0)
-    })
-  }
-
-  const promise = new Promise(async (resolve, reject) => {
-    try {
-      if (!dryRun) {
-        await applyPromise
-      }
-      resolve(true)
-    } catch (err) {
-      reject(err)
-    }
-  })
-
-  const stopDeploy = async () => {
-    try {
-      for (const kubectlProc of kubectlProcesses) {
-        process.kill(kubectlProc.pid, "SIGKILL")
-      }
-    } catch (_err) {
-      // do nothing
-    }
-    stopRolloutStatus()
-  }
-
-  deploys.push({ promise, stopDeploy })
 }
 
 /*

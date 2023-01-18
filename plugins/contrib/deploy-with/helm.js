@@ -1,8 +1,6 @@
 const { spawn } = require("child_process")
 const fs = require("fs-extra")
 
-const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
-
 const openCurly = "{{"
 const closeCurly = "}}"
 const escapeCurlyGoTemplate = (str) => `{{ "${str}" }}`
@@ -12,7 +10,6 @@ const escapeCurlyGo = {
 }
 
 module.exports = async (
-  deploys,
   options,
   { config, logger, needBin, utils, manifestsYaml, dryRun }
 ) => {
@@ -68,12 +65,6 @@ module.exports = async (
     },
   })
 
-  for (const signal of signals) {
-    process.on(signal, () => {
-      proc.kill(signal)
-    })
-  }
-
   proc.stdout.on("data", (data) => {
     process.stdout.write(data.toString())
   })
@@ -81,7 +72,7 @@ module.exports = async (
     logger.warn(data.toString())
   })
 
-  const promise = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     proc.on("close", (code) => {
       if (code === 0) {
         resolve()
@@ -90,6 +81,4 @@ module.exports = async (
       }
     })
   })
-
-  deploys.push({ promise, process: proc })
 }
