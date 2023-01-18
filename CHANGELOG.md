@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.118.0](https://github.com/socialgouv/kontinuous/compare/v1.117.2...v1.118.0) (2023-01-18)
+
+
+### Features
+
+* configMeta reload overrided default config ([306651c](https://github.com/socialgouv/kontinuous/commit/306651cd7b7a1f4df6508e5bb16fcaf4268963ec))
+
+
+### Bug Fixes
+
+* capture git env var in sentry ([cd6237a](https://github.com/socialgouv/kontinuous/commit/cd6237a54ee549bd07477ebe70fb89843827b3e6))
+* pre-cache external charts in docker ([99d8115](https://github.com/socialgouv/kontinuous/commit/99d8115dfc31b2bb1c071273d7af06a606f623c1))
+* setConfigMeta ([143368b](https://github.com/socialgouv/kontinuous/commit/143368b731f406b7904a77cd9b4ef4cf51159249))
+* unsilent fatal errors ([eafcc37](https://github.com/socialgouv/kontinuous/commit/eafcc37b751bfd81b1b71b27e53683151906e427))
+* use specific error to improve sentry debug ([7ac342d](https://github.com/socialgouv/kontinuous/commit/7ac342d599f170942dc1819fca1c7213d1270f35))
+
 ### [1.117.2](https://github.com/socialgouv/kontinuous/compare/v1.117.1...v1.117.2) (2023-01-18)
 
 
