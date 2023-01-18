@@ -29,7 +29,6 @@ module.exports = async (_options = {}) => {
     })
   }
 
-  logger.info("🌀 [LIFECYCLE]: dependencies")
   const { values, valuesDump } = await loadDependencies(config, logger)
 
   logger.trace(`Values: \n${valuesDump}`)

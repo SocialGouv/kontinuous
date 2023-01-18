@@ -91,7 +91,7 @@ RUN \
   cd /app/plugins/fabrique && yarn workspaces focus --production && \
   yarn cache clean
 
-FROM node as cli
+FROM node as program
 
 RUN groupadd -g 1001 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1001 ubuntu
 RUN mkdir -p /opt && chown 1001:1001 /opt
@@ -140,3 +140,12 @@ COPY --chown=1001:1001 packages/kontinuous/ ./packages/kontinuous/
 COPY --chown=1001:1001 packages/common/ ./packages/common/
 
 WORKDIR /workspace
+
+
+FROM program as plugins-charts
+# pre-cache plugin's external charts
+RUN KS_INLINE_CONFIG_SET="${KS_INLINE_CONFIG_SET},debug=true,buildPath=/tmp/ks-build-cache,dependencies.fabrique.import=socialgouv/kontinuous/plugins/fabrique" /opt/kontinuous/packages/kontinuous/bin/kontinuous load-deps && \
+  rm -rf /tmp/ks-build-cache
+
+FROM program as cli
+COPY --from=plugins-charts /home/ubuntu/.kontinuous/cache/ /home/ubuntu/.kontinuous/cache/

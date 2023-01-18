@@ -16,6 +16,7 @@ const addCommands = [
   require("./commands/config"),
   require("./commands/init"),
   require("./commands/slugify"),
+  require("./commands/load-deps"),
   require("./commands/logs"),
   require("./commands/diff"),
   require("./commands/clean"),
