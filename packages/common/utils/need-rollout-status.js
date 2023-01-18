@@ -5,7 +5,7 @@ const fs = require("fs-extra")
 const needBin = require("./need-bin")
 const downloadFile = require("./download-file")
 
-const rolloutStatusVersion = process.env.ROLLOUT_STATUS_VERSION || "v1.13.3"
+const rolloutStatusVersion = process.env.ROLLOUT_STATUS_VERSION || "v1.13.4"
 
 const download = async (options) => {
   const { logger } = options
