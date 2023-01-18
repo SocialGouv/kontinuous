@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.119.2](https://github.com/socialgouv/kontinuous/compare/v1.119.1...v1.119.2) (2023-01-18)
+
+
+### Bug Fixes
+
+* clean failed default sts ([7f613d6](https://github.com/socialgouv/kontinuous/commit/7f613d62282f416763a27df6d5f0d79c8d5010d8))
+* rename clean-failed ([0210ab3](https://github.com/socialgouv/kontinuous/commit/0210ab3d72eee5d9f84fc66bc49f5a2fd27dcc0f))
+* rename clean-failed ([27a7d47](https://github.com/socialgouv/kontinuous/commit/27a7d4754df487e9d464ee8f82f57f6608cff37d))
+
 ### [1.119.1](https://github.com/socialgouv/kontinuous/compare/v1.119.0...v1.119.1) (2023-01-18)
 
 
