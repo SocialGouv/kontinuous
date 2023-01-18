@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.117.1](https://github.com/socialgouv/kontinuous/compare/v1.117.0...v1.117.1) (2023-01-18)
+
+
+### Bug Fixes
+
+* configSet ([3970c38](https://github.com/socialgouv/kontinuous/commit/3970c3865879ff6b4471665f4ce1898709c777e9))
+* remove webhook url secret ([c38316e](https://github.com/socialgouv/kontinuous/commit/c38316e727a1c0c415708fb989dd571ca1b49590))
+
 ## [1.117.0](https://github.com/socialgouv/kontinuous/compare/v1.116.3...v1.117.0) (2023-01-17)
 
 
