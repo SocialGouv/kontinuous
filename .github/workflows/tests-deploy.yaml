@@ -2,7 +2,7 @@ name: Tests deploy
 
 on:
   workflow_run:
-    workflows: ["Build Docker Images"]
+    workflows: ["Build Docker Image Kontinuous"]
     types:
       - completed
 
