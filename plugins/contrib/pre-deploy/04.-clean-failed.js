@@ -3,7 +3,7 @@ const handledKinds = ["Deployment", "StatefulSet", "Job"]
 module.exports = async (
   manifests,
   options,
-  { utils, config, logger, kubectl, rolloutStatus }
+  { utils, config, logger, kubectl, rolloutStatus, ctx }
 ) => {
   const { refLabelKey, kubeconfig, kubeconfigContext: kubecontext } = config
 
@@ -27,10 +27,13 @@ module.exports = async (
       labelSelectors.push(`${refLabelKey}=${ref}`)
     }
     const selector = labelSelectors.join(",")
+
+    const abortSignal = ctx.require("abortSignal")
     promises.push(
       new Promise(async (resolve, reject) => {
         try {
           const status = await rolloutStatus({
+            abortSignal,
             kubeconfig,
             kubecontext,
             namespace,

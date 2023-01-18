@@ -14,6 +14,7 @@ const kubectlRun = async (kubectlArgs, options = {}) => {
     ignoreErrors = [],
     stdin,
     collectProcesses,
+    abortSignal,
   } = options
 
   if (Array.isArray(kubectlArgs)) {
@@ -32,6 +33,7 @@ const kubectlRun = async (kubectlArgs, options = {}) => {
       env: {
         ...process.env,
         ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
+        signal: abortSignal,
       },
     })
 
@@ -58,7 +60,7 @@ const kubectlRun = async (kubectlArgs, options = {}) => {
     })
 
     proc.on("close", (code) => {
-      if (code === 0 || ignoreError) {
+      if (code === 0 || code == null || ignoreError) {
         resolve(output.join(""))
       } else {
         reject(

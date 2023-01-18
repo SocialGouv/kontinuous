@@ -1,10 +1,8 @@
-const { setTimeout } = require("timers/promises")
 const { spawn } = require("child_process")
 
 const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
 
 module.exports = async (
-  deploys,
   options,
   { config, logger, needBin, utils, manifestsFile, dryRun }
 ) => {
@@ -69,7 +67,7 @@ module.exports = async (
     logger.warn(data.toString())
   })
 
-  const promise = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     proc.on("close", (code) => {
       if (code === 0) {
         resolve()
@@ -78,17 +76,4 @@ module.exports = async (
       }
     })
   })
-
-  const stopDeploy = async () => {
-    const kappTerminationTolerationPeriod = 2000
-    try {
-      process.kill(proc.pid, "SIGTERM")
-      await setTimeout(kappTerminationTolerationPeriod)
-      process.kill(proc.pid, "SIGKILL")
-    } catch (_err) {
-      // do nothing
-    }
-  }
-
-  deploys.push({ promise, stopDeploy })
 }

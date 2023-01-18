@@ -2,12 +2,10 @@ const async = require("async")
 
 const rolloutStatusManifest = require("../lib/rollout-status-manifests")
 
-const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
-
 const isNotDefined = (val) => val === undefined || val === null || val === ""
 const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
 
-module.exports = async (deploys, options, context) => {
+module.exports = async (options, context) => {
   const { config, utils, manifests, dryRun, kubectl } = context
 
   const { yaml, logger, kubectlDeleteManifest, kindIsRunnable } = utils
@@ -139,8 +137,8 @@ module.exports = async (deploys, options, context) => {
     return result
   }
 
-  const { runContext } = context
-  const { eventsBucket } = runContext
+  const { ctx } = context
+  const eventsBucket = ctx.require("eventsBucket")
   const countAllRunnable = manifests.filter((manifest) =>
     kindIsRunnable(manifest.kind)
   ).length
@@ -150,48 +148,10 @@ module.exports = async (deploys, options, context) => {
     ? async.mapLimit(manifests, applyConcurrencyLimit, applyManifest)
     : null
 
-  let stopRolloutStatus
-
-  for (const signal of signals) {
-    process.on(signal, () => {
-      for (const kubectlProc of kubectlProcesses) {
-        kubectlProc.kill(signal)
-      }
-      if (stopRolloutStatus) {
-        stopRolloutStatus()
-      }
-    })
+  if (!dryRun) {
+    await applyPromise
+    await rolloutStatusManifest(context)
   }
-
-  const promise = new Promise(async (resolve, reject) => {
-    try {
-      if (!dryRun) {
-        await applyPromise
-        const { stop, promise: rolloutStatusPromise } =
-          await rolloutStatusManifest(context)
-        stopRolloutStatus = stop
-        await rolloutStatusPromise
-      }
-      resolve(true)
-    } catch (err) {
-      reject(err)
-    }
-  })
-
-  const stopDeploy = async () => {
-    try {
-      for (const kubectlProc of kubectlProcesses) {
-        process.kill(kubectlProc.pid, "SIGKILL")
-      }
-    } catch (_err) {
-      // do nothing
-    }
-    if (stopRolloutStatus) {
-      stopRolloutStatus()
-    }
-  }
-
-  deploys.push({ promise, stopDeploy })
 }
 
 /*

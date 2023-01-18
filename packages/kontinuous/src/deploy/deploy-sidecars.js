@@ -6,53 +6,26 @@ const promiseGetAll = require("~common/utils/promise-get-all")
 const createContext = require("~/plugins/context")
 const pluginFunction = require("~/plugins/context/function")
 
-module.exports = async ({ manifests, runContext, dryRun }) => {
+module.exports = async ({ manifests, dryRun }) => {
   const config = ctx.require("config")
   const type = `deploy-sidecars`
-  const { deploysPromise } = runContext
   const context = createContext({
     type,
-    runContext,
     manifests,
     dryRun,
-    deploysPromise,
   })
   const { buildProjectPath } = config
   const requirePath = `${buildProjectPath}/${type}`
   let sidecars = []
   if (await fs.pathExists(requirePath)) {
-    sidecars = await pluginFunction(requirePath)(sidecars, {}, context)
+    sidecars = pluginFunction(requirePath, true)({}, context)
   }
 
-  const sidecarPromises = []
-  const sidecarStoppers = []
-  for (const sidecar of sidecars) {
-    const { promise, stopSidecar } = await sidecar
-    sidecarPromises.push(promise)
-    sidecarStoppers.push(stopSidecar)
-  }
-  const stopSidecars = () => {
-    sidecarStoppers.forEach((stop) => {
-      stop()
-    })
-  }
-
-  const sidecarsPromise = new Promise(async (resolve, reject) => {
-    try {
-      const { values, errors } = await promiseGetAll(sidecarPromises)
-      errors.push(
-        ...values
-          .filter((result) => result?.errors)
-          .flatMap((result) => result.errors)
-      )
-      resolve({ errors })
-    } catch (err) {
-      reject(err)
-    }
-  })
-
-  return {
-    stopSidecars,
-    sidecarsPromise,
-  }
+  const { values, errors } = await promiseGetAll([sidecars])
+  errors.push(
+    ...values
+      .filter((result) => result?.errors)
+      .flatMap((result) => result.errors)
+  )
+  return { errors }
 }

@@ -5,30 +5,11 @@ const handledKinds = ["Deployment", "StatefulSet", "Job"]
 const waitBeforeStopAllRolloutStatus = 5000 // try to collect more errors if there is any
 
 module.exports = async (context) => {
-  const { config, logger, rolloutStatus, utils, manifests, runContext } =
-    context
+  const { config, logger, rolloutStatus, utils, manifests, ctx } = context
 
-  const { eventsBucket } = runContext
+  const eventsBucket = ctx.require("eventsBucket")
 
   const { rolloutStatusWatch, promiseAll } = utils
-
-  const rolloutStatusProcesses = {}
-  const stopRolloutStatus = () => {
-    for (const p of Object.values(rolloutStatusProcesses)) {
-      try {
-        process.kill(p.pid, "SIGKILL")
-      } catch (_err) {
-        // do nothing
-      }
-    }
-  }
-
-  const interceptor = { stop: false }
-
-  const stop = () => {
-    interceptor.stop = true
-    stopRolloutStatus()
-  }
 
   let endAllTrigerred = false
   const endAll = async () => {
@@ -36,15 +17,7 @@ module.exports = async (context) => {
       return
     }
     endAllTrigerred = true
-    interceptor.stop = true
-
-    const stopDeployPromise = runContext.stopDeploys && runContext.stopDeploys()
-
     await setTimeout(waitBeforeStopAllRolloutStatus)
-
-    stopRolloutStatus()
-
-    await stopDeployPromise
   }
 
   const { deploymentLabelKey } = config
@@ -83,11 +56,11 @@ module.exports = async (context) => {
           )
           const eventParam = { namespace, resourceName, selector }
           eventsBucket.trigger("waiting", eventParam)
+          const abortSignal = ctx.require("abortSignal")
           const result = await rolloutStatusWatch({
             namespace,
             selector,
-            interceptor,
-            rolloutStatusProcesses,
+            abortSignal,
             kubeconfig,
             kubecontext,
             surviveOnBrokenCluster,
@@ -132,7 +105,7 @@ module.exports = async (context) => {
     err[field] ? `${field}: ${err[field]}` : ""
   const errorFields = ["code", "type", "message", "log"]
 
-  const promise = new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     try {
       const results = await promiseAll(promises)
       const errors = []
@@ -172,6 +145,4 @@ module.exports = async (context) => {
       reject(err)
     }
   })
-
-  return { stop, promise }
 }

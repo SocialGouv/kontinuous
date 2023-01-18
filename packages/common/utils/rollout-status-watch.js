@@ -8,8 +8,7 @@ module.exports = async ({
   selector,
   kubeconfig,
   kubecontext,
-  interceptor = {},
-  rolloutStatusProcesses = {},
+  abortSignal,
   checkForNewResourceInterval = 3000,
   watchingTimeout = 3600000, // 60 minutes
   surviveOnBrokenCluster = false,
@@ -22,17 +21,15 @@ module.exports = async ({
     timeoutReached = true
   }, watchingTimeout)
 
-  while (!interceptor.stop && !timeoutReached) {
+  while (!abortSignal?.aborted && !timeoutReached) {
     const status = await rolloutStatus({
+      abortSignal,
       kubeconfig,
       kubecontext,
       namespace,
       selector,
       kindFilter,
       surviveOnBrokenCluster,
-      setProcessRef: (rolloutStatusProcess) => {
-        rolloutStatusProcesses[selector] = rolloutStatusProcess
-      },
       logger,
     })
     const { success, error } = status

@@ -13,10 +13,10 @@ module.exports = async ({
   logger = defaultLogger,
   ignoreSecretNotFound = true,
   retryErrImagePull = true,
-  setProcessRef,
   kindFilter,
   surviveOnBrokenCluster,
   retries = 10,
+  abortSignal,
   sentry,
 }) => {
   let retryCount = 0
@@ -69,17 +69,16 @@ module.exports = async ({
       let status
       let error
       try {
-        const { promise, process } = rolloutStatusExec({
+        const { promise } = rolloutStatusExec({
           kubeconfig,
           kubecontext,
           namespace,
           selector,
           ignoreSecretNotFound,
           kindFilter,
+          abortSignal,
         })
-        if (setProcessRef) {
-          setProcessRef(process)
-        }
+
         status = await promise
         logger.debug(
           { namespace, selector },

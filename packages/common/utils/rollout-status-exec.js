@@ -8,6 +8,7 @@ module.exports = ({
   kindFilter,
   ignoreSecretNotFound,
   intervalSeconds,
+  abortSignal,
 }) => {
   const args = []
   if (kubeconfig) {
@@ -31,7 +32,10 @@ module.exports = ({
   if (kindFilter) {
     args.push(...["-kind-filter", kindFilter.toLowerCase()])
   }
-  const proc = spawn("rollout-status", args, { encoding: "utf-8" })
+  const proc = spawn("rollout-status", args, {
+    encoding: "utf-8",
+    signal: abortSignal,
+  })
   proc.on("error", () => {}) // avoid crash on not found executable
 
   const out = []

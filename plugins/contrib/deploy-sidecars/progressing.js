@@ -3,11 +3,7 @@ const getEventUniqKey = (param) => {
   return `${namespace}/${resourceName}`
 }
 
-module.exports = async (
-  sidecars,
-  options,
-  { logger, utils, dryRun, deploysPromise, runContext }
-) => {
+module.exports = async (options, { logger, utils, dryRun, ctx }) => {
   if (dryRun) {
     return
   }
@@ -42,7 +38,7 @@ module.exports = async (
   const intervalsMap = {}
 
   let ended = false
-  const stopSidecar = () => {
+  const cleanUp = () => {
     for (const i of Object.values(intervalsMap)) {
       clearInterval(i)
     }
@@ -53,7 +49,7 @@ module.exports = async (
     }
   }
 
-  const { eventsBucket } = runContext
+  const eventsBucket = ctx.require("eventsBucket")
 
   let countTotal
   eventsBucket.on("initDeployment", ({ countAllRunnable }) => {
@@ -119,18 +115,19 @@ module.exports = async (
     clearInterval(intervalsMap[key])
   })
 
-  const promise = new Promise(async (resolve, reject) => {
-    await Promise.allSettled([deploysPromise])
-    ended = true
-    stopSidecar()
-    try {
-      const results = await promiseAll(Object.values(promisesMap))
-      const errors = results.filter((result) => result instanceof Error)
-      resolve({ errors })
-    } catch (err) {
-      reject(err)
-    }
-  })
+  const events = ctx.require("events")
 
-  sidecars.push({ stopSidecar, promise })
+  return new Promise((resolve, reject) => {
+    events.on("deploy-with:finish", async () => {
+      try {
+        ended = true
+        cleanUp()
+        const results = await promiseAll(Object.values(promisesMap))
+        const errors = results.filter((result) => result instanceof Error)
+        resolve({ errors })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  })
 }
