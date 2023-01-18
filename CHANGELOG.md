@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.119.0 (2023-01-18)
+
+
+### Features
+
+* refactor signal ([#131](https://github.com/socialgouv/kontinuous/issues/131)) ([f7cc4f1](https://github.com/socialgouv/kontinuous/commit/f7cc4f1d34b9f53f365a91f7a4a7ed983aff8b53))
+
 ## [1.118.0](https://github.com/socialgouv/kontinuous/compare/v1.117.2...v1.118.0) (2023-01-18)
 
 
