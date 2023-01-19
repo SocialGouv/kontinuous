@@ -3,6 +3,8 @@ const { EventEmitter } = require("node:events")
 const ctx = require("~common/ctx")
 const logger = require("~common/utils/logger")
 
+const flattenAggregateError = require("~common/utils/flatten-aggregate-error")
+
 const ExitError = require("~/errors/exit-error")
 
 const createProgram = require("./program")
@@ -87,6 +89,16 @@ module.exports = async (args = process.argv) => {
       exitCode = 1
     }
     if (Sentry) {
+      if (error instanceof AggregateError) {
+        /* 
+          sentry doesn't support AggregateError at now,
+          so if we want full details we have to flatten it,
+          see
+            https://github.com/getsentry/sentry-javascript/issues/5469
+            https://github.com/getsentry/sentry/issues/37716
+        */
+        error = flattenAggregateError(error)
+      }
       Sentry.captureException(error)
     }
     events.emit("failed")
