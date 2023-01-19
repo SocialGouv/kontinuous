@@ -16,6 +16,7 @@
     "cli-highlight": "^2.1.11",
     "commander": "^9.1.0",
     "decompress": "^4.2.1",
+    "direct-logger": "^2.5.3",
     "dotenv": "^16.0.0",
     "dree": "^3.4.2",
     "enquirer": "^2.3.6",

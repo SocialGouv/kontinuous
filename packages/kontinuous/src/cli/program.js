@@ -25,7 +25,7 @@ module.exports = () => {
 
       const loggerOverride = ctx.get("loggerOverride")
       let logger = createLogger({
-        sync: false,
+        sync: true,
         secrets: [...(config.webhookToken ? [config.webhookToken] : [])],
       })
       if (loggerOverride) {

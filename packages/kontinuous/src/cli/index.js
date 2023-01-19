@@ -108,7 +108,9 @@ module.exports = async (args = process.argv) => {
     if (Sentry) {
       await Sentry.close(5000)
     }
-    logger.error(error)
+    if (error) {
+      logger.error(error)
+    }
     eventsBucket.emit("finish")
     process.exit(exitCode)
   }
