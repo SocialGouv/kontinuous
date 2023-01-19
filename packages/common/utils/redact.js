@@ -5,9 +5,10 @@ module.exports = (
     hideCharsCount = false,
     stringSubstition = "***",
     repeatCharSubstition = "*",
+    skipNotString = true,
   }
 ) => {
-  if (!message) {
+  if (skipNotString && !(typeof message === "string")) {
     return message
   }
   for (const secret of secrets) {
