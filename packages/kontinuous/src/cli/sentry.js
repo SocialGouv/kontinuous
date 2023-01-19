@@ -55,6 +55,7 @@ const preActionFactory = (Sentry) => async (_thisCommand, actionCommand) => {
   const sentryEventOptionsDefault = {
     // denyUrls: [],
     release: packageDef.version,
+    normalizeDepth: 3,
   }
 
   const config = ctx.require("config")
@@ -95,12 +96,17 @@ const preActionFactory = (Sentry) => async (_thisCommand, actionCommand) => {
   // setContext
   Sentry.setContext(
     "config",
-    omit(config, [
-      "sentryDSN",
-      "sentryKontinuousConfig",
-      "sentryEventOptions",
-      "webhookToken",
-    ])
+    Object.entries(
+      omit(config, [
+        "sentryDSN",
+        "sentryKontinuousConfig",
+        "sentryEventOptions",
+        "webhookToken",
+      ])
+    ).reduce((acc, [key, value]) => {
+      acc[key] = redactSecrets(value)
+      return acc
+    }, {})
   )
 
   const commandName = actionCommand.name()
