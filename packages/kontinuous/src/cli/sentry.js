@@ -93,7 +93,7 @@ const preActionFactory = (Sentry) => async (_thisCommand, actionCommand) => {
   })
 
   // setContext
-  Sentry.setContext("config", omit(config, ["webhookToken", "SentryDSN"]))
+  Sentry.setContext("config", omit(config, ["webhookToken", "sentryDSN"]))
 
   const commandName = actionCommand.name()
   const opts = actionCommand.optsWithGlobals()
