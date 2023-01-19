@@ -6,6 +6,7 @@ module.exports = ({
   namespace,
   selector,
   kindFilter,
+  pendingDeadLineSeconds,
   ignoreSecretNotFound,
   intervalSeconds,
   abortSignal,
@@ -28,6 +29,9 @@ module.exports = ({
   }
   if (intervalSeconds) {
     args.push(...["-interval", `${intervalSeconds}s`])
+  }
+  if (pendingDeadLineSeconds) {
+    args.push(...["-pending-deadline", `${pendingDeadLineSeconds}`])
   }
   if (kindFilter) {
     args.push(...["-kind-filter", kindFilter.toLowerCase()])

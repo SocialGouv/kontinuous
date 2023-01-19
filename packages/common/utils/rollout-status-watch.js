@@ -12,6 +12,7 @@ module.exports = async ({
   checkForNewResourceInterval = 3000,
   watchingTimeout = 3600000, // 60 minutes
   surviveOnBrokenCluster = false,
+  pendingDeadLineSeconds = 300,
   kindFilter,
   logger = defaultLogger,
   rolloutStatus = defaultRolloutStatus,
@@ -28,6 +29,7 @@ module.exports = async ({
       kubecontext,
       namespace,
       selector,
+      pendingDeadLineSeconds,
       kindFilter,
       surviveOnBrokenCluster,
       logger,

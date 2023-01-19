@@ -14,6 +14,7 @@ module.exports = async ({
   ignoreSecretNotFound = true,
   retryErrImagePull = true,
   kindFilter,
+  pendingDeadLineSeconds,
   surviveOnBrokenCluster,
   retries = 10,
   abortSignal,
@@ -76,6 +77,7 @@ module.exports = async ({
           selector,
           ignoreSecretNotFound,
           kindFilter,
+          pendingDeadLineSeconds,
           abortSignal,
         })
 
