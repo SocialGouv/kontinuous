@@ -55,7 +55,7 @@ module.exports = async (context) => {
             `watching resource: ${resourceName}`
           )
           const eventParam = { namespace, resourceName, selector }
-          eventsBucket.trigger("waiting", eventParam)
+          eventsBucket.emit("resource:waiting", eventParam)
           const abortSignal = ctx.require("abortSignal")
           const result = await rolloutStatusWatch({
             namespace,
@@ -73,7 +73,7 @@ module.exports = async (context) => {
               { namespace, selector },
               `resource "${resourceName}" ready`
             )
-            eventsBucket.trigger("ready", eventParam)
+            eventsBucket.emit("resource:ready", eventParam)
           } else if (result.error?.code || result.error?.reason) {
             logger.error(
               {
@@ -83,10 +83,10 @@ module.exports = async (context) => {
               },
               `resource "${resourceName}" failed`
             )
-            eventsBucket.trigger("failed", eventParam)
+            eventsBucket.emit("resource:failed", eventParam)
             endAll()
           } else {
-            eventsBucket.trigger("closed", eventParam)
+            eventsBucket.emit("resource:closed", eventParam)
           }
 
           resolve({

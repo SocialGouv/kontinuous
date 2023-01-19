@@ -52,9 +52,12 @@ module.exports = async (options, { logger, utils, dryRun, ctx }) => {
   const eventsBucket = ctx.require("eventsBucket")
 
   let countTotal
-  eventsBucket.on("initDeployment", ({ countAllRunnable }) => {
-    countTotal = countAllRunnable
-  })
+  eventsBucket.on(
+    "deploy-with:plugin:initDeployment",
+    ({ countAllRunnable }) => {
+      countTotal = countAllRunnable
+    }
+  )
 
   const globalProgressing = () => {
     elapsedMap[".global"] = new Date()
@@ -82,7 +85,7 @@ module.exports = async (options, { logger, utils, dryRun, ctx }) => {
     globalProgressing()
   }, globalProgressingInitialDelay * 1000)
 
-  eventsBucket.on("waiting", (param) => {
+  eventsBucket.on("resource:waiting", (param) => {
     const key = getEventUniqKey(param)
     let i = 0
     elapsedMap[key] = new Date()
@@ -95,13 +98,13 @@ module.exports = async (options, { logger, utils, dryRun, ctx }) => {
     intervalsMap[key] = intvl
     promisesMap[key] = publicPromise()
   })
-  eventsBucket.on("ready", (param) => {
+  eventsBucket.on("resource:ready", (param) => {
     const key = getEventUniqKey(param)
     promisesMap[key].resolve(true)
     clearInterval(intervalsMap[key])
     logState("✔ ready", param)
   })
-  eventsBucket.on("failed", (param) => {
+  eventsBucket.on("resource:failed", (param) => {
     const key = getEventUniqKey(param)
     const msg = "❌ failed"
     const err = new Error(getStateMsg(msg, param))
@@ -109,16 +112,14 @@ module.exports = async (options, { logger, utils, dryRun, ctx }) => {
     clearInterval(intervalsMap[key])
     logState(msg, param)
   })
-  eventsBucket.on("closed", (param) => {
+  eventsBucket.on("resource:closed", (param) => {
     const key = getEventUniqKey(param)
     promisesMap[key].resolve(null)
     clearInterval(intervalsMap[key])
   })
 
-  const events = ctx.require("events")
-
   return new Promise((resolve, reject) => {
-    events.on("deploy-with:finish", async () => {
+    eventsBucket.on("deploy-with:finish", async () => {
       try {
         ended = true
         cleanUp()

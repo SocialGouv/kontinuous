@@ -117,9 +117,8 @@ module.exports = async (
   }
 
   const eventsBucket = ctx.require("eventsBucket")
-  const events = ctx.require("events")
 
-  eventsBucket.on("ready", ({ namespace, resourceName }) => {
+  eventsBucket.on("resource:ready", ({ namespace, resourceName }) => {
     const key = `${namespace}/${resourceName}`
     if (sternProcesses[key]) {
       try {
@@ -130,7 +129,7 @@ module.exports = async (
     }
   })
 
-  events.on("deploy-with:finish", () => {
+  eventsBucket.on("deploy-with:finish", () => {
     stopSidecar()
   })
 

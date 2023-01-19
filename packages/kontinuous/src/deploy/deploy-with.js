@@ -23,7 +23,7 @@ module.exports = async ({ manifestsFile, manifests, dryRun }) => {
     deploys = pluginFunction(requirePath, true)({}, context)
   }
 
-  const events = ctx.require("events")
+  const eventsBucket = ctx.require("eventsBucket")
 
   const { values, errors } = await promiseGetAll([deploys])
   errors.push(
@@ -33,11 +33,11 @@ module.exports = async ({ manifestsFile, manifests, dryRun }) => {
   )
 
   if (errors.length > 0) {
-    events.emit("deploy-with:fail", { errors })
+    eventsBucket.emit("deploy-with:fail", { errors })
   } else {
-    events.emit("deploy-with:success")
+    eventsBucket.emit("deploy-with:success")
   }
-  events.emit("deploy-with:finish", { errors })
+  eventsBucket.emit("deploy-with:finish", { errors })
 
   return { errors }
 }

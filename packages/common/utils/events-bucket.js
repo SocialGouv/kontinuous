@@ -46,7 +46,7 @@ const createEventsBucket = () => {
 
   const buckets = {}
 
-  const trigger = async (name, param) => {
+  const emit = async (name, param) => {
     if (!buckets[name]) {
       buckets[name] = createBucket()
     }
@@ -60,7 +60,7 @@ const createEventsBucket = () => {
     buckets[name].register(callback)
   }
 
-  return { on, trigger }
+  return { on, emit }
 }
 
 module.exports = createEventsBucket
@@ -69,22 +69,22 @@ module.exports = createEventsBucket
 ;(async function () {
   const evts = createEventsBucket()
 
-  evts.trigger("num", "1")
-  evts.trigger("num", "2")
-  evts.trigger("num", "3")
-  evts.trigger("let", "A")
-  evts.trigger("let", "B")
-  evts.trigger("num", "4")
-  evts.trigger("let", "C")
-  evts.trigger("let", "D")
+  evts.emit("num", "1")
+  evts.emit("num", "2")
+  evts.emit("num", "3")
+  evts.emit("let", "A")
+  evts.emit("let", "B")
+  evts.emit("num", "4")
+  evts.emit("let", "C")
+  evts.emit("let", "D")
 
   evts.on("num", (n) => console.log(n))
   evts.on("num", (n) => console.log(`num2:${n}`))
   evts.on("let", (n) => console.log(n))
 
   setInterval(() => {
-    evts.trigger("num", Date.now())
-    evts.trigger("let", `${Date.now()}AAAAAAA`)
+    evts.emit("num", Date.now())
+    evts.emit("let", `${Date.now()}AAAAAAA`)
   }, 1000)
 })()
 */

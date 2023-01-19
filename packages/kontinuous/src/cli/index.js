@@ -1,7 +1,6 @@
-const { EventEmitter } = require("node:events")
-
 const ctx = require("~common/ctx")
 const logger = require("~common/utils/logger")
+const createEventsBucket = require("~common/utils/events-bucket")
 
 const flattenAggregateError = require("~common/utils/flatten-aggregate-error")
 
@@ -33,8 +32,10 @@ module.exports = async (args = process.argv) => {
   ctx.provide()
 
   const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
-  const events = new EventEmitter()
-  ctx.set("events", events)
+
+  const eventsBucket = createEventsBucket()
+  ctx.set("eventsBucket", eventsBucket)
+
   const abortController = new AbortController()
   ctx.set("abortController", abortController)
   ctx.set("abortSignal", abortController.signal)
@@ -47,7 +48,7 @@ module.exports = async (args = process.argv) => {
         }
         return
       }
-      events.emit("stop")
+      eventsBucket.emit("stop")
       logger.info(
         {
           gracefullShutdownTimeoutMs,
@@ -61,7 +62,7 @@ module.exports = async (args = process.argv) => {
         })
         process.exit(1)
       }, gracefullShutdownTimeoutMs)
-      events.on("finish", () => {
+      eventsBucket.on("finish", () => {
         clearTimeout(shutdownTimeout)
       })
     })
@@ -79,7 +80,7 @@ module.exports = async (args = process.argv) => {
   let error
   try {
     await program.parseAsync(args)
-    events.emit("success")
+    eventsBucket.emit("success")
   } catch (err) {
     error = err
     if (error instanceof ExitError) {
@@ -101,14 +102,14 @@ module.exports = async (args = process.argv) => {
       }
       Sentry.captureException(error)
     }
-    events.emit("failed")
+    eventsBucket.emit("failed")
     throw error
   } finally {
     if (Sentry) {
       await Sentry.close(5000)
     }
     logger.error(error)
-    events.emit("finish")
+    eventsBucket.emit("finish")
     process.exit(exitCode)
   }
 }

@@ -208,14 +208,14 @@ module.exports = async (options, context) => {
       dependencies.map(async (dependency) => {
         await new Promise((resolve, reject) => {
           const dependencyKey = `${dependency.namespace}/${dependency.resourceName}`
-          eventsBucket.on("ready", ({ resourceName, namespace }) => {
+          eventsBucket.on("resource:ready", ({ resourceName, namespace }) => {
             const key = `${namespace}/${resourceName}`
             if (key !== dependencyKey) {
               return
             }
             resolve()
           })
-          eventsBucket.on("failed", ({ resourceName, namespace }) => {
+          eventsBucket.on("resource:failed", ({ resourceName, namespace }) => {
             const key = `${namespace}/${resourceName}`
             if (key !== dependencyKey) {
               return
@@ -230,7 +230,7 @@ module.exports = async (options, context) => {
   const countAllRunnable = manifests.filter((manifest) =>
     kindIsRunnable(manifest.kind)
   ).length
-  eventsBucket.trigger("initDeployment", { countAllRunnable })
+  eventsBucket.emit("deploy-with:plugin:initDeployment", { countAllRunnable })
 
   const { deploymentLabelKey } = config
 
@@ -259,7 +259,7 @@ module.exports = async (options, context) => {
           { namespace, selector },
           `watching resource: ${resourceName}`
         )
-        eventsBucket.trigger("waiting", eventParam)
+        eventsBucket.emit("resource:waiting", eventParam)
         const result = await rolloutStatusWatch({
           namespace,
           selector,
@@ -277,11 +277,11 @@ module.exports = async (options, context) => {
             { namespace, selector },
             `resource "${resourceName}" ready`
           )
-          eventsBucket.trigger("ready", eventParam)
+          eventsBucket.emit("resource:ready", eventParam)
           resolve()
         } else if (result.error?.code === null) {
           // killed
-          eventsBucket.trigger("closed", eventParam)
+          eventsBucket.emit("resource:closed", eventParam)
           resolve()
         } else {
           const errMsg = `resource "${resourceName}" failed`
@@ -293,11 +293,11 @@ module.exports = async (options, context) => {
             },
             errMsg
           )
-          eventsBucket.trigger("failed", eventParam)
+          eventsBucket.emit("resource:failed", eventParam)
           throw new Error(errMsg)
         }
       } catch (err) {
-        eventsBucket.trigger("failed", eventParam)
+        eventsBucket.emit("resource:failed", eventParam)
         reject(err)
       }
     })

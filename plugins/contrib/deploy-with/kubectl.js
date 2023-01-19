@@ -142,7 +142,7 @@ module.exports = async (options, context) => {
   const countAllRunnable = manifests.filter((manifest) =>
     kindIsRunnable(manifest.kind)
   ).length
-  eventsBucket.trigger("initDeployment", { countAllRunnable })
+  eventsBucket.emit("deploy-with:plugin:initDeployment", { countAllRunnable })
 
   const applyPromise = !dryRun
     ? async.mapLimit(manifests, applyConcurrencyLimit, applyManifest)
