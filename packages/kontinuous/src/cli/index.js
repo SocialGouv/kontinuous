@@ -79,21 +79,23 @@ module.exports = async (args = process.argv) => {
     if (sentry) {
       ctx.set("sentry", sentry)
       sentry.setContext("config", omit(config, ["webhookToken", "sentryDSN"]))
+
+      const includeEnvVarPrefix = ["KS_", "GIT"]
+      const omitEnvVarsEq = ["KS_SENTRY_DSN", "KS_NOTIFY_WEBHOOK_URL"]
+      const omitEnvVarsContains = ["TOKEN"]
+
       sentry.setContext("command", {
         name: commandName,
         opts,
         argv: process.argv,
         env: Object.entries(process.env).reduce((acc, [key, value]) => {
           if (
-            !key.startsWith("KS_") ||
-            !key.startsWith("GIT") || // git, github, gitlab
-            key.includes("TOKEN") ||
-            key === "KS_SENTRY_DSN" ||
-            key === "KS_NOTIFY_WEBHOOK_URL"
+            includeEnvVarPrefix.some((val) => key.startsWith(val)) &&
+            !omitEnvVarsContains.some((val) => key.includes(val)) &&
+            !omitEnvVarsEq.includes(key)
           ) {
-            return acc
+            acc[key] = value
           }
-          acc[key] = value
           return acc
         }, {}),
       })
