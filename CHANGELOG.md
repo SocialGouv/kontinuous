@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.120.0](https://github.com/socialgouv/kontinuous/compare/v1.119.2...v1.120.0) (2023-01-19)
+
+
+### Features
+
+* improve docker support ([1591b2c](https://github.com/socialgouv/kontinuous/commit/1591b2ce7fa6e88d53f3a7b43c36a3441efaa480))
+* redact enhanced + improve sentry ([33ae32f](https://github.com/socialgouv/kontinuous/commit/33ae32f9e7b294061dd7026cb784621585b6a81a))
+
+
+### Bug Fixes
+
+* empty message var ([ab3d511](https://github.com/socialgouv/kontinuous/commit/ab3d511ed1bff1124da1d44bc2587177bebdfae8))
+* env var sentry ([d8cba78](https://github.com/socialgouv/kontinuous/commit/d8cba7826ca60c9dce8ad455006edb10a392fdea))
+* improve debug ([17c99b9](https://github.com/socialgouv/kontinuous/commit/17c99b9446d1f2a2d24ca0b1de37863f7eebb013))
+* improve error return ([38895f0](https://github.com/socialgouv/kontinuous/commit/38895f064fcc9d967f7761cbb0f7d2bf9c3dfc4c))
+* improve sentry ([02efaa4](https://github.com/socialgouv/kontinuous/commit/02efaa4f4aad106243412987b9022e807c869f76))
+* key ([5250531](https://github.com/socialgouv/kontinuous/commit/5250531f56b4dc1eb5ac66a58e5373b98e5278d2))
+* redact skipNotString ([a8302d7](https://github.com/socialgouv/kontinuous/commit/a8302d7889fdf7f6b0c0688b9d71c0b0f02980c5))
+* refactor to use eventBucket ([a9d5443](https://github.com/socialgouv/kontinuous/commit/a9d544374e138f23b9ecc5024880abac89ee318b))
+* sentry flatten aggregate error ([0663704](https://github.com/socialgouv/kontinuous/commit/066370494df20578f54c56f9d0aeb74c6eefa317))
+* sentry ignore sentry config keys ([41fa480](https://github.com/socialgouv/kontinuous/commit/41fa480c13b2e160adffe80a822486a3f23c919c))
+* sentry redact config + increase normalizeDepth ([25eb7e7](https://github.com/socialgouv/kontinuous/commit/25eb7e791131dba989bb26919e143df072b4a1c4))
+* test deploy ([adfbccd](https://github.com/socialgouv/kontinuous/commit/adfbccd30da57b57edb54e15e68e2d67d0762a83))
+* up pending-deadline to 300 ([85d0796](https://github.com/socialgouv/kontinuous/commit/85d07965b5efb5c974da5f51217a5d220d53bc1f))
+
 ### [1.119.2](https://github.com/socialgouv/kontinuous/compare/v1.119.1...v1.119.2) (2023-01-18)
 
 
