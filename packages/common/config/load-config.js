@@ -723,6 +723,16 @@ const loadConfig = async (
       env: "KS_SENTRY_ENABLED",
       defaultFunction: (config) => !!config.sentryDSN,
     },
+    sentryKontinuousConfig: {
+      env: "KS_SENTRY_KONTINUOUS_CONFIG",
+      envParser: envParserYaml,
+      default: {},
+    },
+    sentryEventOptions: {
+      env: "KS_SENTRY_EVENT_OPTIONS",
+      envParser: envParserYaml,
+      default: {},
+    },
   }
 
   rootConfig = await loadStructuredConfig({

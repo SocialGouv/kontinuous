@@ -8906,6 +8906,7 @@ __metadata:
     launch-editor: "npm:^2.4.0"
     link-module-alias: "npm:^1.2.0"
     lodash.camelcase: "npm:^4.3.0"
+    lodash.defaults: "npm:^4.2.0"
     lodash.defaultsdeep: "npm:^4.6.1"
     lodash.get: "npm:^4.4.2"
     lodash.mergewith: "npm:^4.6.2"
@@ -9179,6 +9180,13 @@ __metadata:
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
   checksum: 960a803d892fc09976e7b559c36407000c3beb136cf20e88ae6a694b5d7cf64e31dde516079140a945ba695b7d5e5699444d61fd13a70ff7de409bbae7604005
+  languageName: node
+  linkType: hard
+
+"lodash.defaults@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "lodash.defaults@npm:4.2.0"
+  checksum: 6ef1b158c3b00b1885abc4dbc4266863dcf4b978a433b7512191243a4ad029d44d9da2ef2c0cc08dc735b6091ff73434023877f8abc39882bd748ab4bda7e692
   languageName: node
   linkType: hard
 

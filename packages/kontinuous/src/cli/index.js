@@ -1,7 +1,5 @@
 const { EventEmitter } = require("node:events")
 
-const omit = require("lodash.omit")
-
 const ctx = require("~common/ctx")
 const logger = require("~common/utils/logger")
 
@@ -9,7 +7,7 @@ const ExitError = require("~/errors/exit-error")
 
 const createProgram = require("./program")
 
-const Sentry = require("./sentry")
+const sentry = require("./sentry")
 
 const addCommands = [
   require("./commands/build"),
@@ -70,37 +68,10 @@ module.exports = async (args = process.argv) => {
   const program = createProgram()
   addCommands.forEach((addCommand) => addCommand(program))
 
-  const sentry = Sentry.init()
-
-  program.hook("preAction", async (_thisCommand, actionCommand) => {
-    const commandName = actionCommand.name()
-    const config = ctx.require("config")
-    const opts = actionCommand.optsWithGlobals()
-    if (sentry) {
-      ctx.set("sentry", sentry)
-      sentry.setContext("config", omit(config, ["webhookToken", "sentryDSN"]))
-
-      const includeEnvVarPrefix = ["KS_", "GIT"]
-      const omitEnvVarsEq = ["KS_SENTRY_DSN", "KS_NOTIFY_WEBHOOK_URL"]
-      const omitEnvVarsContains = ["TOKEN"]
-
-      sentry.setContext("command", {
-        name: commandName,
-        opts,
-        argv: process.argv,
-        env: Object.entries(process.env).reduce((acc, [key, value]) => {
-          if (
-            includeEnvVarPrefix.some((val) => key.startsWith(val)) &&
-            !omitEnvVarsContains.some((val) => key.includes(val)) &&
-            !omitEnvVarsEq.includes(key)
-          ) {
-            acc[key] = value
-          }
-          return acc
-        }, {}),
-      })
-    }
-  })
+  const Sentry = sentry.init()
+  if (Sentry) {
+    program.hook("preAction", sentry.preActionFactory(Sentry))
+  }
 
   let exitCode = 0
   let error
@@ -115,14 +86,14 @@ module.exports = async (args = process.argv) => {
     } else {
       exitCode = 1
     }
-    if (sentry) {
-      sentry.captureException(error)
+    if (Sentry) {
+      Sentry.captureException(error)
     }
     events.emit("failed")
     throw error
   } finally {
-    if (sentry) {
-      await sentry.close(5000)
+    if (Sentry) {
+      await Sentry.close(5000)
     }
     logger.error(error)
     events.emit("finish")
