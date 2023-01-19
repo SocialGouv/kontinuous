@@ -85,11 +85,22 @@ RUN node -e " \
 
 FROM node as plugins
 # pre-cache yarn package for official local plugins optimization
-COPY --chown=1001:1001 plugins/ /app/plugins/
+COPY --chown=1001:1001 \
+  plugins/contrib/package.json plugins/contrib/yarn.lock plugins/contrib/.yarnrc.yml \
+  /app/plugins/contrib/
+COPY --chown=1001:1001 plugins/contrib/.yarn/ /app/plugins/contrib/.yarn/
+
+COPY --chown=1001:1001 \
+  plugins/fabrique/package.json plugins/fabrique/yarn.lock plugins/fabrique/.yarnrc.yml \
+  /app/plugins/fabrique/
+COPY --chown=1001:1001 plugins/fabrique/.yarn/ /app/plugins/fabrique/.yarn/
+
 RUN \
   cd /app/plugins/contrib && yarn workspaces focus --production  && \
   cd /app/plugins/fabrique && yarn workspaces focus --production && \
   yarn cache clean
+
+COPY --chown=1001:1001 plugins/ /app/plugins/
 
 FROM node as program
 
@@ -144,8 +155,17 @@ WORKDIR /workspace
 
 FROM program as plugins-charts
 # pre-cache plugin's external charts
-RUN KS_INLINE_CONFIG_SET="${KS_INLINE_CONFIG_SET},debug=true,buildPath=/tmp/ks-build-cache,dependencies.fabrique.import=socialgouv/kontinuous/plugins/fabrique" /opt/kontinuous/packages/kontinuous/bin/kontinuous load-deps && \
+RUN KS_DEBUG=true \
+  KS_GIT=false \
+  KS_GIT_DISABLE_WARNING=true \
+  KS_BUILD_PATH=/tmp/ks-build-cache \
+  KS_INLINE_CONFIG_SET="${KS_INLINE_CONFIG_SET},dependencies.fabrique.import=socialgouv/kontinuous/plugins/fabrique" \
+  /opt/kontinuous/packages/kontinuous/bin/kontinuous load-deps && \
   rm -rf /tmp/ks-build-cache
 
 FROM program as cli
-COPY --from=plugins-charts /home/ubuntu/.kontinuous/cache/ /home/ubuntu/.kontinuous/cache/
+COPY --from=plugins-charts --chown=1001:1001 /home/ubuntu/.kontinuous/cache/ /home/ubuntu/.kontinuous/cache/
+USER 0
+RUN chmod -R a+rwX /home/ubuntu/.kontinuous
+USER 1001
+

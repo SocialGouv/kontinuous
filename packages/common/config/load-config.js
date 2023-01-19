@@ -103,6 +103,11 @@ const loadConfig = async (
         }
       },
     },
+    gitDisableWarning: {
+      env: "KS_GIT_DISABLE_WARNING",
+      envParser: envParserYaml,
+      default: false,
+    },
     gitRequired: {
       env: "KS_GIT_REQUIRED",
       envParser: envParserYaml,
@@ -129,9 +134,11 @@ const loadConfig = async (
             }
           }
         }
-        logger.warn(
-          `no git repository url defined and can't be inferred, default to ""`
-        )
+        if (!config.gitDisableWarning && !isReloadingConfig) {
+          logger.warn(
+            `no git repository url defined and can't be inferred, default to ""`
+          )
+        }
         return ""
       },
     },
@@ -148,9 +155,11 @@ const loadConfig = async (
           }
         }
         const dirname = path.basename(config.workspacePath)
-        logger.warn(
-          `no git repository url defined, repository will default to dirname "${dirname}"`
-        )
+        if (!config.gitDisableWarning && !isReloadingConfig) {
+          logger.warn(
+            `no git repository url defined, repository will default to dirname "${dirname}"`
+          )
+        }
         return dirname
       },
     },

@@ -145,9 +145,10 @@ cd ~/repos/my-project
 
 docker run \
   -t \
-  -u $UID \
+  -u $UID:1001 \
   -v $PWD:/workspace \
-  -v $HOME/.kube:/home/ubuntu/.kube \
+  -v $(dirname $KUBECONFIG):/home/ubuntu/.kube \
+  -e KUBECONFIG=/home/ubuntu/.kube/$(basename $KUBECONFIG) \
   kontinuous \
   --help
 ```
