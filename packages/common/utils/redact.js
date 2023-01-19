@@ -7,6 +7,9 @@ module.exports = (
     repeatCharSubstition = "*",
   }
 ) => {
+  if (!message) {
+    return message
+  }
   for (const secret of secrets) {
     message = message.replaceAll(
       secret,
