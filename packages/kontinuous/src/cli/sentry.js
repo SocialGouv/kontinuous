@@ -24,13 +24,26 @@ const getConfig = () => {
   }
 }
 
-const init = (options = {}) => {
+const beforeBreadcrumbRefDefault = {
+  callback: (breadcrumb) => breadcrumb,
+}
+
+const init = ({
+  beforeBreadcrumbRef = beforeBreadcrumbRefDefault,
+  ...options
+} = {}) => {
   const { sentryEnabled, sentryDSN, Sentry } = getConfig()
+
   if (!sentryEnabled) {
     return
   }
+
   Sentry.init({
     dsn: sentryDSN,
+    normalizeDepth: 10,
+    release: packageDef.version,
+    beforeBreadcrumb: (breadcrumb, hint) =>
+      beforeBreadcrumbRef.callback(breadcrumb, hint),
     ...options,
   })
   return Sentry
@@ -52,19 +65,12 @@ const preActionFactory = (Sentry) => async (_thisCommand, actionCommand) => {
     secretsFromEnvVarsRegex: [["KS_NOTIFY_WEBHOOK_URL", /\bhooks\/([^-]+)/]],
   }
 
-  const sentryEventOptionsDefault = {
-    // denyUrls: [],
-    release: packageDef.version,
-    normalizeDepth: 3,
-  }
-
   const config = ctx.require("config")
   const processEnv = ctx.get("env") || process.env
 
-  const { sentryKontinuousConfig, sentryEventOptions } = config
+  const { sentryKontinuousConfig } = config
 
   defaults(sentryKontinuousConfig, sentryKontinuousConfigDefault)
-  defaults(sentryEventOptions, sentryEventOptionsDefault)
 
   const { includeEnvVarPrefix, omitEnvVarsEq, omitEnvVarsContains } =
     sentryKontinuousConfigDefault
@@ -79,30 +85,34 @@ const preActionFactory = (Sentry) => async (_thisCommand, actionCommand) => {
     repeatCharSubstition: sentryKontinuousConfig.secretsRepeatCharSubstition,
   })
 
-  // configure event (set options after init)
-  Sentry.configureScope((scope) => {
-    scope.addEventProcessor((event) => {
-      Object.assign(event, sentryEventOptions)
-      event.beforeBreadcrumb = (breadcrumb) => {
-        if (breadcrumb.category === "xhr") {
-          breadcrumb.data.url = redactSecrets(breadcrumb.data.url)
-        }
-        return breadcrumb
+  beforeBreadcrumbRefDefault.callback = (breadcrumb, _hint) => {
+    if (breadcrumb.category === "http") {
+      const redactedUrl = redactSecrets(breadcrumb.data.url)
+      if (redactedUrl !== breadcrumb.data.url) {
+        Sentry.addBreadcrumb({
+          ...breadcrumb,
+          data: {
+            ...breadcrumb.data,
+            url: redactedUrl,
+          },
+        })
+        return null
       }
-      return event
+    }
+    return breadcrumb
+  }
+
+  if (processEnv.GITHUB_RUN_ID) {
+    Sentry.setContext("github", {
+      jobUrl: `${processEnv.GITHUB_SERVER_URL}/${processEnv.GITHUB_REPOSITORY}/actions/runs/${processEnv.GITHUB_RUN_ID}`,
     })
-  })
+  }
 
   // setContext
   Sentry.setContext(
     "config",
     Object.entries(
-      omit(config, [
-        "sentryDSN",
-        "sentryKontinuousConfig",
-        "sentryEventOptions",
-        "webhookToken",
-      ])
+      omit(config, ["sentryDSN", "sentryKontinuousConfig", "webhookToken"])
     ).reduce((acc, [key, value]) => {
       acc[key] = redactSecrets(value)
       return acc
