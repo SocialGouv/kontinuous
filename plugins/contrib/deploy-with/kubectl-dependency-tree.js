@@ -279,7 +279,7 @@ module.exports = async (options, context) => {
           )
           eventsBucket.emit("resource:ready", eventParam)
           resolve()
-        } else if (result.error?.code === null) {
+        } else if (result.error?.code === null || result.error === undefined) {
           // killed
           eventsBucket.emit("resource:closed", eventParam)
           resolve()
@@ -293,7 +293,6 @@ module.exports = async (options, context) => {
             },
             errMsg
           )
-          eventsBucket.emit("resource:failed", eventParam)
           throw new Error(errMsg)
         }
       } catch (err) {

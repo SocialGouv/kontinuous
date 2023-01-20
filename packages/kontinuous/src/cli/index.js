@@ -26,8 +26,6 @@ const addCommands = [
   require("./commands/test"),
 ]
 
-const gracefullShutdownTimeoutMs = 2000
-
 module.exports = async (args = process.argv) => {
   ctx.provide()
 
@@ -39,13 +37,19 @@ module.exports = async (args = process.argv) => {
   ctx.set("eventsBucket", eventsBucket)
 
   const abortController = new AbortController()
+  ctx.set("abortConfig", {
+    gracefullShutdownTimeoutSeconds:
+      parseInt(process.env.KS_GRACEFULL_SHUTDOWN_TIMEOUT_SECONDS, 10) || 2,
+  })
+
   ctx.set("abortController", abortController)
   ctx.set("abortSignal", abortController.signal)
   signals.forEach((signal) => {
     process.on(signal, () => {
+      const { gracefullShutdownTimeoutSeconds } = ctx.require("abortConfig")
       if (abortController.signal.aborted) {
         if (signal === "SIGINT") {
-          logger.info(`${signal} received twice, killing now`)
+          logger.info(`🔫 ${signal} received twice, killing now`)
           process.exit(1)
         }
         return
@@ -53,17 +57,17 @@ module.exports = async (args = process.argv) => {
       eventsBucket.emit("stop")
       logger.info(
         {
-          gracefullShutdownTimeoutMs,
+          gracefullShutdownTimeoutSeconds,
         },
-        `${signal} received, aborting...`
+        `⏹️  ${signal} received, aborting...`
       )
       abortController.abort() // if we pass argument, we can't detect AbortError anymore, so we have to let it empty
       const shutdownTimeout = setTimeout(() => {
         logger.info(`shutdown timeout reached, killing now`, {
-          gracefullShutdownTimeoutMs,
+          gracefullShutdownTimeoutSeconds,
         })
         process.exit(1)
-      }, gracefullShutdownTimeoutMs)
+      }, gracefullShutdownTimeoutSeconds * 1000)
       eventsBucket.on("finish", () => {
         clearTimeout(shutdownTimeout)
       })

@@ -737,6 +737,15 @@ const loadConfig = async (
       envParser: envParserYaml,
       default: {},
     },
+    gracefullShutdownTimeoutSeconds: {
+      env: "KS_GRACEFULL_SHUTDOWN_TIMEOUT_SECONDS",
+      envParser: envParserYaml,
+      default: 2,
+      sideEffect: (value) => {
+        const abortConfig = ctx.require("abortConfig")
+        abortConfig.gracefullShutdownTimeoutSeconds = value
+      },
+    },
   }
 
   rootConfig = await loadStructuredConfig({
