@@ -2,54 +2,11 @@ const omit = require("lodash.omit")
 const defaults = require("lodash.defaults")
 
 const ctx = require("~common/ctx")
-
 const redactEnhancedFactory = require("~common/utils/redact-enhanced-factory")
 
-const packageDef = require("../../package.json")
+const beforeBreadcrumbRefDefault = require("./before-breadcrumb-ref-default")
 
-const getConfig = () => {
-  const { env } = process
-  const sentryDSN = env.KS_SENTRY_DSN
-  const sentryEnabled =
-    env.KS_SENTRY_ENABLED !== undefined
-      ? env.KS_SENTRY_ENABLED && env.KS_SENTRY_ENABLED !== "false"
-      : !!sentryDSN
-
-  const Sentry = sentryEnabled ? require("@sentry/node") : null
-
-  return {
-    sentryDSN,
-    sentryEnabled,
-    Sentry,
-  }
-}
-
-const beforeBreadcrumbRefDefault = {
-  callback: (breadcrumb) => breadcrumb,
-}
-
-const init = ({
-  beforeBreadcrumbRef = beforeBreadcrumbRefDefault,
-  ...options
-} = {}) => {
-  const { sentryEnabled, sentryDSN, Sentry } = getConfig()
-
-  if (!sentryEnabled) {
-    return
-  }
-
-  Sentry.init({
-    dsn: sentryDSN,
-    normalizeDepth: 10,
-    release: packageDef.version,
-    beforeBreadcrumb: (breadcrumb, hint) =>
-      beforeBreadcrumbRef.callback(breadcrumb, hint),
-    ...options,
-  })
-  return Sentry
-}
-
-const preActionFactory = (Sentry) => async (_thisCommand, actionCommand) => {
+module.exports = (Sentry) => async (_thisCommand, actionCommand) => {
   ctx.set("sentry", Sentry)
 
   // config
@@ -140,5 +97,3 @@ const preActionFactory = (Sentry) => async (_thisCommand, actionCommand) => {
     }, {}),
   })
 }
-
-module.exports = { init, getConfig, preActionFactory }

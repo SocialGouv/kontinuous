@@ -1,12 +1,14 @@
 const { Logger } = require("direct-logger")
 
 module.exports = (opts = {}) => {
+  const { streams = process.stderr } = opts
+
   const logger = Logger({
     formatter: "cli",
     formatterOptions: {
       displayLevel: false,
     },
-    streams: Logger.levels.map((_level, _i) => process.stderr),
+    streams,
     ...opts,
   })
 

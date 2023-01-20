@@ -2,13 +2,13 @@ const ctx = require("~common/ctx")
 
 const createEventsBucket = require("~common/utils/events-bucket")
 const flattenAggregateError = require("~common/utils/flatten-aggregate-error")
-const createLogger = require("~common/utils/direct-logger-factory")
 
 const ExitError = require("~/errors/exit-error")
 
-const createProgram = require("./program")
+const createLogger = require("~/lib/logger")
 
-const sentry = require("./sentry")
+const sentry = require("~/sentry")
+const createProgram = require("./program")
 
 const addCommands = [
   require("./commands/build"),
