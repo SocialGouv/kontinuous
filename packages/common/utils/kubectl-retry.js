@@ -164,7 +164,10 @@ module.exports = async (kubectlArgs, options = {}) => {
       }
     }, retryOptions)
     if (logInfo) {
-      logger.info(result.trim())
+      const msg = result.trim()
+      if (msg) {
+        logger.info(`☸️  ${msg}`)
+      }
     }
   } catch (err) {
     if (logError) {

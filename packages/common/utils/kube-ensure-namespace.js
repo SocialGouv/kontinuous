@@ -39,9 +39,9 @@ module.exports = async ({
     namespace,
   }
 
-  logger.info(`ensure namespace "${namespace}" is active`)
+  logger.info(`♉ ensure namespace "${namespace}" is active`)
   if (await checkNamespaceIsAvailable(checkNamespaceIsAvailableOptions)) {
-    logger.info({ namespace }, "apply namespace")
+    logger.info({ namespace }, "♉ apply namespace")
     await ensureNamespace(["apply"])
     return
   }
@@ -57,7 +57,7 @@ module.exports = async ({
           check,
         }))
       ) {
-        throw Error(`namespace "${namespace}" is not available`)
+        throw Error(`♉ namespace "${namespace}" is not available`)
       }
     },
     {

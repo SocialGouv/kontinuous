@@ -76,7 +76,10 @@ module.exports = async (options) => {
       await setStatus({ url: statusUrl, token, status: "loading", ok: null })
     }
 
-    logger.info({ kubeconfig, kubeconfigContext }, "let's deploy on kubernetes")
+    logger.info(
+      { kubeconfig, kubeconfigContext },
+      "🐳 let's deploy on kubernetes"
+    )
 
     const allManifests = yaml.loadAll(manifests)
 
