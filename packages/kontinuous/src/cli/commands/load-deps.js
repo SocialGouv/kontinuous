@@ -22,5 +22,5 @@ module.exports = (program) =>
       const config = ctx.require("config")
       const logger = ctx.require("logger")
       await dependencies(config, logger)
-      logger.info("OK")
+      logger.info("✔️  dependencies loaded")
     })

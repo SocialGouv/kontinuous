@@ -43,7 +43,7 @@ const download = async (options) => {
 
   if (!(await fs.pathExists(zfile))) {
     const downloadUrl = `https://github.com/stern/stern/releases/download/v${sternVersion}/${fileName}`
-    logger.info(`download ${downloadUrl}`)
+    logger.info(`⬇️  downloading ${downloadUrl}`)
     await downloadFile(downloadUrl, zfile, logger)
   }
 

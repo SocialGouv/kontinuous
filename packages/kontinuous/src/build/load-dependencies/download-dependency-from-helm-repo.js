@@ -22,7 +22,9 @@ module.exports = async (dependency, target, config, logger) => {
       const chartRepository = `${repository}/index.yaml`
       let repositoryIndex
       try {
-        logger.debug(`download chart repository index ${chartRepository}`)
+        logger.debug(
+          `⬇️  downloading chart repository index ${chartRepository}`
+        )
         repositoryIndex = await axios.get(chartRepository)
       } catch (e) {
         handleAxiosError(e, logger)
@@ -38,7 +40,7 @@ module.exports = async (dependency, target, config, logger) => {
         throw new Error(`version ${version} not found for ${dependency.name}`)
       }
       const url = versionEntry.urls[0]
-      logger.debug(`download chart ${url}`)
+      logger.debug(`⬇️  downloading chart ${url}`)
       await downloadFile(url, zfile, logger)
     }
   }

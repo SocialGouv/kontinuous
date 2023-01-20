@@ -11,7 +11,7 @@ const copyFilter = require("./copy-filter")
 const recurseDependency = require("./recurse-dependencies")
 
 module.exports = async (config, logger) => {
-  logger.debug("Load dependencies")
+  logger.debug("🔻 load dependencies")
   await recurseDependency({
     config,
     beforeChildren: async ({ target, definition, scope, name }) => {
@@ -31,7 +31,7 @@ module.exports = async (config, logger) => {
           const [linkKey, linkPath] = matchLink
           const from = linkPath + importTarget.substr(linkKey.length)
           await fs.ensureDir(target)
-          logger.debug({ scope }, `copy ${name} from "${from}"`)
+          logger.debug({ scope }, `➡️  copy ${name} from "${from}"`)
           await fs.copy(from, target, { filter: copyFilter })
         } else {
           await degitImproved(importTarget, target, {

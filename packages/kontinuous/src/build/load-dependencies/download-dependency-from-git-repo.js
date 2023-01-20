@@ -12,7 +12,7 @@ module.exports = async (dependency, target, _config, logger) => {
     )
   }
   const chartName = dependency.alias || dependency.name
-  logger.debug(`download chart ${degitUri}`)
+  logger.debug(`⬇️  downloading chart ${degitUri}`)
   await degitImproved(degitUri, `${target}/charts/${chartName}`, {
     logger: logger.child({
       dependency,

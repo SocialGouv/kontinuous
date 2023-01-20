@@ -34,7 +34,7 @@ const download = async (options) => {
   const { addPath } = options
 
   const downloadUrl = `https://github.com/vmware-tanzu/carvel-kapp/releases/download/${kappVersion}/kapp-${platform}-${arch}${ext}`
-  logger.info(`download ${downloadUrl}`)
+  logger.info(`⬇️  downloading ${downloadUrl}`)
   const dest = `${addPath}/kapp`
   await downloadFile(downloadUrl, dest, logger)
   await fs.chmod(dest, 0o755)
