@@ -1,2 +1,2 @@
-require("./server")()
-require("./daemon")()
+setImmediate(require("./server"))
+setImmediate(require("./daemon"))
