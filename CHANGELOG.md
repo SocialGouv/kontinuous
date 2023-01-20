@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.122.0](https://github.com/socialgouv/kontinuous/compare/v1.121.1...v1.122.0) (2023-01-20)
+
+
+### Features
+
+* sentry direct-logger breadcrumb integration ([576f499](https://github.com/socialgouv/kontinuous/commit/576f499fef610424484ecfff3e917444ac229711))
+
+
+### Bug Fixes
+
+* add emoji in message ([6937c1a](https://github.com/socialgouv/kontinuous/commit/6937c1ab927f62f6d9ca2c7a38148c830b9b5cc9))
+* add ProgramError class ([0155ea4](https://github.com/socialgouv/kontinuous/commit/0155ea43d5d5ad4da50458a35455b7e79b395944))
+* clean pino deps ([2cf5404](https://github.com/socialgouv/kontinuous/commit/2cf540472dc686ed454e12f0f54c7a8f98476a28))
+* improve interruption ([f6cf0ff](https://github.com/socialgouv/kontinuous/commit/f6cf0ffbe142b57d355b9c12cb918aed7750589a))
+* tiny improvements on logs output ([8d27957](https://github.com/socialgouv/kontinuous/commit/8d27957ee6ab77aaabf1be6df5aa7b61df8bc67a))
+
 ### [1.121.1](https://github.com/socialgouv/kontinuous/compare/v1.121.0...v1.121.1) (2023-01-20)
 
 
