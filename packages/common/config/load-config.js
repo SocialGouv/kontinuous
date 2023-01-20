@@ -777,12 +777,17 @@ const loadConfig = async (
   })
 
   // override config
+  configMeta.__reloadDependencies = false
   if (config.inlineConfig) {
     const inlineConfig = yaml.load(config.inlineConfig)
     deepmerge(config, inlineConfig)
 
     for (const rootKey of Object.keys(inlineConfig)) {
       setConfigMeta(rootKey, "isDefault", true)
+    }
+
+    if (inlineConfig.dependencies) {
+      configMeta.__reloadDependencies = true
     }
   }
   const { configSet } = config
@@ -791,6 +796,9 @@ const loadConfig = async (
 
     const [rootKey] = key.split(".")
     setConfigMeta(rootKey, "isDefault", true)
+  }
+  if (configSet.dependencies) {
+    configMeta.__reloadDependencies = true
   }
 
   // reload overrided config defaults
@@ -824,7 +832,10 @@ const loadConfig = async (
     logger.info(`📂 buildPath: file://${config.buildPath}`)
   }
 
-  if (loadConfigOptions.loadDependencies !== false) {
+  if (
+    loadConfigOptions.loadDependencies !== false &&
+    (!isReloadingConfig || configMeta.__reloadDependencies)
+  ) {
     await loadDependencies(config, logger)
   }
 
