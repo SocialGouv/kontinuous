@@ -64,7 +64,7 @@ const loadConfig = async (
 
   const rootConfigOverride = {
     debug: {
-      options: "D",
+      option: "D",
       env: ["KS_DEBUG", "DEBUG"],
       envParser: envParserYaml,
       default: false,
