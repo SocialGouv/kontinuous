@@ -20,7 +20,7 @@ module.exports = async (manifests, options, { config, logger, kubectl }) => {
 
   if (!ciNamespace) {
     logger.warn(
-      `missing rancher projectId not provided, unable to retrieve it as ci-namespace is not defined`
+      `♉ missing rancher projectId not provided, unable to retrieve it as ci-namespace is not defined`
     )
     return
   }
@@ -34,7 +34,7 @@ module.exports = async (manifests, options, { config, logger, kubectl }) => {
     rancherProjectId = process.env.RANCHER_PROJECT_ID
   } else {
     logger.info(
-      `missing rancher projectId, getting from cluster using ci-namespace "${ciNamespace}"`
+      `♉ missing rancher projectId, getting from cluster using ci-namespace "${ciNamespace}"`
     )
     try {
       const json = await kubectl(
@@ -52,7 +52,7 @@ module.exports = async (manifests, options, { config, logger, kubectl }) => {
     } catch (error) {
       logger.warn(
         { error },
-        "unable to retrieve optional missing rancher projectId from cluster"
+        "♉ unable to retrieve optional missing rancher projectId from cluster"
       )
     }
   }
