@@ -2,6 +2,7 @@ const { spawn } = require("child_process")
 
 const getLogger = require("./get-logger")
 const parseCommand = require("./parse-command")
+const ProgramError = require("./program-error.class")
 
 const promiseFromChildProcess = (child, callback, logger, extraOptions) => {
   const { ignoreErrors = [] } = extraOptions
@@ -28,8 +29,10 @@ const promiseFromChildProcess = (child, callback, logger, extraOptions) => {
         }
         resolve(Buffer.concat(out).toString())
       } else {
-        const error = new Error(err.join() || Buffer.concat(out).toString())
-        error.code = code
+        const error = new ProgramError(
+          err.join() || Buffer.concat(out).toString(),
+          code
+        )
         logger.trace("error running command")
         reject(error)
       }
