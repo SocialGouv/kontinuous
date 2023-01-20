@@ -65,5 +65,13 @@ module.exports = async (manifests, _options, context) => {
 }`)
     proc.stdin.end()
   })
-  logger.debug(`\n${result}`)
+
+  logger.debug(`🌳 dependencies tree:`)
+
+  const log = logger.child({}, { indentation: 3 })
+  log.fields = {}
+
+  result.split("\n").forEach((line) => {
+    log.debug(line)
+  })
 }

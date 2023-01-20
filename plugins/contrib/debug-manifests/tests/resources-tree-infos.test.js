@@ -19,10 +19,10 @@ samples.forEach((sample) => {
     )
     const manifests = utils.yaml.loadAll(rawYaml)
     ctx.provide()
-    const { logger } = utils
+    const { logger, removeAllAnsiColors } = utils
     logger.minLevel("debug")
     ctx.set("logger", logger)
-    const spy = jest.spyOn(logger, "debug")
+    const spy = jest.spyOn(process.stderr, "write")
     resourceTreeInfos(
       manifests,
       {},
@@ -31,6 +31,8 @@ samples.forEach((sample) => {
         utils,
       }
     )
-    expect(spy.mock.calls[0][0]).toMatchSnapshot()
+    expect(
+      removeAllAnsiColors(spy.mock.calls.map((c) => c[0]).join(""))
+    ).toMatchSnapshot()
   })
 })

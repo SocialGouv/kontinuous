@@ -233,5 +233,13 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
   ]
 
   const treeStr = utils.logTree(tree)
-  logger.debug(`resources summary:\n${treeStr}`)
+
+  logger.debug(`📝 resources summary:`)
+
+  const log = logger.child({})
+  log.fields = {}
+
+  treeStr.split("\n").forEach((line) => {
+    log.debug(line)
+  })
 }

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`egapro 1`] = `
-"resources summary:
+"📝 resources summary:
 ├── resources
 │   ├── api
 │   │   ├── Deployment
@@ -153,11 +153,12 @@ exports[`egapro 1`] = `
         │   └── https://egapro-preprod.dev.fabrique.social.gouv.fr
         └── hosts
             └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+
 "
 `;
 
 exports[`template 1`] = `
-"resources summary:
+"📝 resources summary:
 ├── resources
 │   ├── api
 │   │   ├── Deployment
@@ -309,11 +310,107 @@ exports[`template 1`] = `
         │   └── https://egapro-preprod.dev.fabrique.social.gouv.fr
         └── hosts
             └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+
+📝 resources summary:
+├── resources
+│   ├── app
+│   │   ├── Deployment
+│   │   │   └── app
+│   │   │       ├── image: ghcr.io/socialgouv/template/app:sha-2c7b0f670155424e5be5cf5a3f8f3012688f5f18
+│   │   │       └── port: 3000
+│   │   ├── Service
+│   │   │   └── port: http=80:3000
+│   │   └── Ingress
+│   │       └── hosts
+│   │           └── https://template-k-mvp-mig-9.dev.fabrique.social.gouv.fr
+│   └── hasura
+│       ├── Deployment
+│       │   └── hasura
+│       │       ├── image: ghcr.io/socialgouv/template/hasura:sha-2c7b0f670155424e5be5cf5a3f8f3012688f5f18
+│       │       └── port: 8080
+│       ├── Service
+│       │   └── port: http=80:8080
+│       └── Ingress
+│           └── hosts
+│               └── https://hasura-template-k-mvp-mig-9.dev.fabrique.social.gouv.fr
+└── globals
+    ├── Namespace
+    │   └── name: template-k-mvp-mig-9
+    ├── NetworkPolicy
+    │   └── name: netpol-ingress
+    ├── ServiceAccount
+    │   └── name: default
+    ├── ConfigMap
+    │   ├── name: app
+    │   └── name: keycloak-realm
+    ├── SealedSecret
+    │   ├── name: app
+    │   ├── name: franceconnect
+    │   ├── name: hasura
+    │   ├── name: keycloak-secrets
+    │   └── name: smtp
+    ├── Job
+    │   ├── job
+    │   │   ├── image: ghcr.io/socialgouv/docker/psql:6.70.0
+    │   │   └── command: /bin/bash -c set -e /action/ensure-db.sh
+    │   ├── kontinuous-wait-needs (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.122.0
+    │   ├── degit-action (init)
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+    │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
+    │   ├── job
+    │   │   ├── image: bitnami/kubectl:latest
+    │   │   └── command: /bin/bash -c set -e /action/create-secret.sh
+    │   ├── degit-action (init)
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+    │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
+    │   ├── job
+    │   │   ├── image: ghcr.io/socialgouv/docker/psql:6.70.0
+    │   │   └── command: /bin/bash -c set -e /action/ensure-db.sh
+    │   ├── kontinuous-wait-needs (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.122.0
+    │   ├── degit-action (init)
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+    │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
+    │   ├── job
+    │   │   ├── image: bitnami/kubectl:latest
+    │   │   └── command: /bin/bash -c set -e /action/create-secret.sh
+    │   ├── degit-action (init)
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+    │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
+    │   ├── job
+    │   │   ├── image: bitnami/kubectl:latest
+    │   │   └── command: /bin/bash -c set -e /action/import-secret.sh
+    │   ├── kontinuous-wait-needs (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.122.0
+    │   ├── degit-action (init)
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+    │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
+    │   ├── job
+    │   │   ├── image: ghcr.io/socialgouv/docker/psql:7.0.0
+    │   │   └── command: /bin/bash -c set -e /action/seed-db.sh
+    │   ├── kontinuous-wait-needs (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.122.0
+    │   ├── degit-repository (init)
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+    │   │   └── command: sh -c  degit SocialGouv/template#k-mvp-mig-9 \\   /...
+    │   └── degit-action (init)
+    │       ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+    │       └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
+    ├── Service
+    │   ├── port: http=8080:http
+    │   └── ports: http=8080:http,https=8443:https
+    ├── StatefulSet
+    │   └── name: keycloakx
+    └── Ingress
+        └── hosts
+            └── https://keycloak-template-k-mvp-mig-9.dev.fabrique.social.gouv.fr
+
 "
 `;
 
 exports[`www 1`] = `
-"resources summary:
+"📝 resources summary:
 ├── resources
 │   ├── api
 │   │   ├── Deployment
@@ -465,5 +562,130 @@ exports[`www 1`] = `
         │   └── https://egapro-preprod.dev.fabrique.social.gouv.fr
         └── hosts
             └── https://egapro-preprod.dev.fabrique.social.gouv.fr
+
+📝 resources summary:
+├── resources
+│   ├── app
+│   │   ├── Deployment
+│   │   │   └── app
+│   │   │       ├── image: ghcr.io/socialgouv/template/app:sha-2c7b0f670155424e5be5cf5a3f8f3012688f5f18
+│   │   │       └── port: 3000
+│   │   ├── Service
+│   │   │   └── port: http=80:3000
+│   │   └── Ingress
+│   │       └── hosts
+│   │           └── https://template-k-mvp-mig-9.dev.fabrique.social.gouv.fr
+│   └── hasura
+│       ├── Deployment
+│       │   └── hasura
+│       │       ├── image: ghcr.io/socialgouv/template/hasura:sha-2c7b0f670155424e5be5cf5a3f8f3012688f5f18
+│       │       └── port: 8080
+│       ├── Service
+│       │   └── port: http=80:8080
+│       └── Ingress
+│           └── hosts
+│               └── https://hasura-template-k-mvp-mig-9.dev.fabrique.social.gouv.fr
+└── globals
+    ├── Namespace
+    │   └── name: template-k-mvp-mig-9
+    ├── NetworkPolicy
+    │   └── name: netpol-ingress
+    ├── ServiceAccount
+    │   └── name: default
+    ├── ConfigMap
+    │   ├── name: app
+    │   └── name: keycloak-realm
+    ├── SealedSecret
+    │   ├── name: app
+    │   ├── name: franceconnect
+    │   ├── name: hasura
+    │   ├── name: keycloak-secrets
+    │   └── name: smtp
+    ├── Job
+    │   ├── job
+    │   │   ├── image: ghcr.io/socialgouv/docker/psql:6.70.0
+    │   │   └── command: /bin/bash -c set -e /action/ensure-db.sh
+    │   ├── kontinuous-wait-needs (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.122.0
+    │   ├── degit-action (init)
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+    │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
+    │   ├── job
+    │   │   ├── image: bitnami/kubectl:latest
+    │   │   └── command: /bin/bash -c set -e /action/create-secret.sh
+    │   ├── degit-action (init)
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+    │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
+    │   ├── job
+    │   │   ├── image: ghcr.io/socialgouv/docker/psql:6.70.0
+    │   │   └── command: /bin/bash -c set -e /action/ensure-db.sh
+    │   ├── kontinuous-wait-needs (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.122.0
+    │   ├── degit-action (init)
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+    │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
+    │   ├── job
+    │   │   ├── image: bitnami/kubectl:latest
+    │   │   └── command: /bin/bash -c set -e /action/create-secret.sh
+    │   ├── degit-action (init)
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+    │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
+    │   ├── job
+    │   │   ├── image: bitnami/kubectl:latest
+    │   │   └── command: /bin/bash -c set -e /action/import-secret.sh
+    │   ├── kontinuous-wait-needs (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.122.0
+    │   ├── degit-action (init)
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+    │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
+    │   ├── job
+    │   │   ├── image: ghcr.io/socialgouv/docker/psql:7.0.0
+    │   │   └── command: /bin/bash -c set -e /action/seed-db.sh
+    │   ├── kontinuous-wait-needs (init)
+    │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.122.0
+    │   ├── degit-repository (init)
+    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+    │   │   └── command: sh -c  degit SocialGouv/template#k-mvp-mig-9 \\   /...
+    │   └── degit-action (init)
+    │       ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+    │       └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
+    ├── Service
+    │   ├── port: http=8080:http
+    │   └── ports: http=8080:http,https=8443:https
+    ├── StatefulSet
+    │   └── name: keycloakx
+    └── Ingress
+        └── hosts
+            └── https://keycloak-template-k-mvp-mig-9.dev.fabrique.social.gouv.fr
+
+📝 resources summary:
+├── resources
+│   └── app
+│       ├── Deployment
+│       │   ├── app
+│       │   │   ├── image: ghcr.io/socialgouv/www/app:sha-1ca3107affe6e436280896ab63b912d536790cfe
+│       │   │   └── port: 8080
+│       │   └── kontinuous-wait-needs (init)
+│       │       └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.122.0
+│       ├── Service
+│       │   └── port: http=80:8080
+│       └── Ingress
+│           └── hosts
+│               └── https://www-kontinuous-ac.dev.fabrique.social.gouv.fr
+└── globals
+    ├── Namespace
+    │   └── name: www-kontinuous-ac
+    ├── NetworkPolicy
+    │   └── name: netpol-ingress
+    ├── ServiceAccount
+    │   └── name: default
+    └── Job
+        ├── job
+        │   ├── image: moby/buildkit:v0.10.5-rootless
+        │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
+        └── degit-repository (init)
+            ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.122.0
+            └── command: sh -c  degit SocialGouv/www#kontinuous-ac \\   /wor...
+
 "
 `;
