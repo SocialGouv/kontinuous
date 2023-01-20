@@ -2,9 +2,6 @@
   "name": "wait-needs",
   "packageManager": "yarn@4.0.0-rc.15",
   "dependencies": {
-    "pino": "^8.6.1",
-    "pino-bfuscate": "^1.0.0",
-    "pino-pretty": "^9.1.1",
     "~common": "workspace:^"
   },
   "bin": "./bin/wait-needs",

@@ -8925,9 +8925,6 @@ __metadata:
     lodash.set: "npm:^4.3.2"
     nctx: "npm:^1.7.1"
     nowtest: "npm:^1.1.1"
-    pino: "npm:^8.3.1"
-    pino-bfuscate: "npm:^1.0.0"
-    pino-pretty: "npm:^8.1.0"
     pretty-ms: "npm:^7.0.1"
     qs: "npm:^6.10.5"
     slugify: "npm:^1.6.5"
@@ -10712,30 +10709,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino-pretty@npm:^9.1.1":
-  version: 9.1.1
-  resolution: "pino-pretty@npm:9.1.1"
-  dependencies:
-    colorette: "npm:^2.0.7"
-    dateformat: "npm:^4.6.3"
-    fast-copy: "npm:^3.0.0"
-    fast-safe-stringify: "npm:^2.1.1"
-    help-me: "npm:^4.0.1"
-    joycon: "npm:^3.1.1"
-    minimist: "npm:^1.2.6"
-    on-exit-leak-free: "npm:^2.1.0"
-    pino-abstract-transport: "npm:^1.0.0"
-    pump: "npm:^3.0.0"
-    readable-stream: "npm:^4.0.0"
-    secure-json-parse: "npm:^2.4.0"
-    sonic-boom: "npm:^3.0.0"
-    strip-json-comments: "npm:^3.1.1"
-  bin:
-    pino-pretty: bin.js
-  checksum: 1822e0ca3b711e34c279373ff168dcde092765f1f317a1255b7dbc11621a815791c168c1f0d51bbd23c3565b50dfeb776480c178d37a6f3aa92f9fe89eec710b
-  languageName: node
-  linkType: hard
-
 "pino-std-serializers@npm:^3.1.0":
   version: 3.2.0
   resolution: "pino-std-serializers@npm:3.2.0"
@@ -10813,27 +10786,6 @@ __metadata:
   bin:
     pino: bin.js
   checksum: af440debc07072b03798aadecc1c22221a5b4503df9de3e68e3c822f99ea4031125d2bd3add6a8f5039c63c1190acf58e45f41a147d166b238b88e3ef0766c5a
-  languageName: node
-  linkType: hard
-
-"pino@npm:^8.6.1":
-  version: 8.6.1
-  resolution: "pino@npm:8.6.1"
-  dependencies:
-    atomic-sleep: "npm:^1.0.0"
-    fast-redact: "npm:^3.1.1"
-    on-exit-leak-free: "npm:^2.1.0"
-    pino-abstract-transport: "npm:v1.0.0"
-    pino-std-serializers: "npm:^6.0.0"
-    process-warning: "npm:^2.0.0"
-    quick-format-unescaped: "npm:^4.0.3"
-    real-require: "npm:^0.2.0"
-    safe-stable-stringify: "npm:^2.3.1"
-    sonic-boom: "npm:^3.1.0"
-    thread-stream: "npm:^2.0.0"
-  bin:
-    pino: bin.js
-  checksum: f54b69b99ca4eec6ee74ffdbe46a2ee6855f277ee2c10a6c0dc97effca3ba4ff2d2c111504ce9e1da8a22e1d60fd42066d45b6295b2063fade5f7f168521ea7f
   languageName: node
   linkType: hard
 
@@ -13190,9 +13142,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "wait-needs@workspace:packages/wait-needs"
   dependencies:
-    pino: "npm:^8.6.1"
-    pino-bfuscate: "npm:^1.0.0"
-    pino-pretty: "npm:^9.1.1"
     ~common: "workspace:^"
   bin:
     wait-needs: ./bin/wait-needs
