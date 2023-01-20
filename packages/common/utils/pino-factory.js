@@ -1,6 +1,6 @@
-const pino = require("pino")
-
 module.exports = (opts = {}) => {
+  const pino = require("pino") // require here to make lib optional in cli
+
   const { prettyOptions = {}, ...mergeOptions } = opts
   const options = {
     pretty: true,
