@@ -2,8 +2,6 @@ const { Command } = require("commander")
 
 const loadConfig = require("~common/config/load-config")
 const ctx = require("~common/ctx")
-const createLogger = require("~common/utils/logger-factory")
-const globalLogger = require("~common/utils/logger")
 
 const options = require("./options")
 
@@ -23,18 +21,12 @@ module.exports = () => {
       const config = await loadConfig(opts)
       ctx.set("config", config)
 
-      const loggerOverride = ctx.get("loggerOverride")
-      let logger = createLogger({
-        sync: true,
-        secrets: [...(config.webhookToken ? [config.webhookToken] : [])],
-      })
-      if (loggerOverride) {
-        logger = loggerOverride(logger, config)
+      const logger = ctx.get("logger")
+      const secrets = [...(config.webhookToken ? [config.webhookToken] : [])]
+      secrets.forEach(logger.addSecret)
+      if (config.debug) {
+        logger.minLevel("debug")
       }
-      ctx.set("logger", logger)
-
-      logger.configureDebug(opts.D)
-      globalLogger.configureDebug(opts.D)
     })
 
   return program

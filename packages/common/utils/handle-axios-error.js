@@ -1,6 +1,6 @@
-const globalLogger = require("./logger")
+const getLogger = require("./get-logger")
 
-module.exports = (error, logger = globalLogger) => {
+module.exports = (error, logger = getLogger()) => {
   const url = error.request?.res?.responseUrl
   if (error.response) {
     logger.error(

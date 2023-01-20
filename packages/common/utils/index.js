@@ -6,4 +6,7 @@ module.exports = {
   }),
   degit: require("tiged"),
   fs: require("fs-extra"),
+  get logger() {
+    return require("./get-logger")()
+  },
 }

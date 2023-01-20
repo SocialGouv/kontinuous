@@ -9,14 +9,9 @@ const dotenv = require("dotenv")
 
 const slug = require("~common/utils/slug")
 
-const legacyLoggerFactory = require("~common/utils/logger-factory")
-
-jest.doMock("~common/utils/logger-factory", () => (options = {}) => {
-  options.sync = true
-  return legacyLoggerFactory(options)
-})
-
 const getDirectoriesSync = require("~common/utils/get-directories-sync")
+const createLogger = require("~common/utils/direct-logger-factory")
+const removePrefix = require("~common/utils/remove-prefix")
 
 const ctx = require("~common/ctx")
 
@@ -106,12 +101,13 @@ describe("test build manifests with snapshots", () => {
     ctx.provide()
     ctx.set("env", env)
 
-    ctx.set("loggerOverride", (logger, config) =>
-      logger.child({
-        workspacePath: config.workspacePath,
-        buildPath: config.buildPath,
-      })
-    )
+    const logger = createLogger({
+      fields: {
+        workspacePath: removePrefix(testdirPath, `${process.cwd()}/`),
+        buildPath,
+      },
+    })
+    ctx.set("logger", logger)
 
     try {
       await cli([...process.argv.slice(0, 2), "build"])

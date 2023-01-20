@@ -6,14 +6,14 @@ const degit = require("tiged")
 
 const degitTagHasChanged = require("./degit-tag-has-changed")
 
-const defaultLogger = require("./logger")
+const getLogger = require("./get-logger")
 
 const subgroupRe = /[^{}]+(?=})/g
 
 module.exports = async (
   uri,
   target,
-  { logger = defaultLogger, cacheCheck = true, force, ignoreNotEmpty = true }
+  { logger = getLogger(), cacheCheck = true, force, ignoreNotEmpty = true }
 ) => {
   await retry(
     async (bail) => {

@@ -1,4 +1,3 @@
-const pino = require("pino")
 const fs = require("fs-extra")
 const nctx = require("nctx")
 const nowtest = require("nowtest")
@@ -66,7 +65,7 @@ module.exports = async (opts) => {
             ctx.set("config", ctxConfig)
 
             const loggerChild = logger.child({})
-            loggerChild.level = pino.levels.values.error
+            loggerChild.setLevel("error")
             ctx.set("logger", loggerChild)
             const { manifests } = await build(opts)
             const snapshotName = `manifests.${environment}.yaml`

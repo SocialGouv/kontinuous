@@ -3,14 +3,14 @@ const retry = require("async-retry")
 const rolloutStatusExec = require("./rollout-status-exec")
 const retriableOnBrokenCluster = require("./retriable-on-broken-cluster")
 
-const defaultLogger = require("./logger")
+const getLogger = require("./get-logger")
 
 module.exports = async ({
   kubeconfig,
   kubecontext,
   namespace,
   selector,
-  logger = defaultLogger,
+  logger = getLogger(),
   ignoreSecretNotFound = true,
   retryErrImagePull = true,
   kindFilter,

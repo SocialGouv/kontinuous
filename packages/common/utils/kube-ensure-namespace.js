@@ -2,13 +2,13 @@ const retry = require("async-retry")
 
 const kubectlRetry = require("./kubectl-retry")
 const checkNamespaceIsAvailable = require("./check-namespace-is-available")
-const defaultLogger = require("./logger")
+const getLogger = require("./get-logger")
 
 module.exports = async ({
   kubeconfig,
   kubeconfigContext,
   manifest,
-  logger = defaultLogger,
+  logger = getLogger(),
   check,
   surviveOnBrokenCluster,
   kubectlRetryOptions,

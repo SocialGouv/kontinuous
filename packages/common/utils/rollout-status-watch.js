@@ -1,7 +1,7 @@
 const { setTimeout: sleep } = require("timers/promises")
 
 const defaultRolloutStatus = require("./rollout-status")
-const defaultLogger = require("./logger")
+const getLogger = require("./get-logger")
 
 module.exports = async ({
   namespace,
@@ -14,7 +14,7 @@ module.exports = async ({
   surviveOnBrokenCluster = false,
   pendingDeadLineSeconds = 300,
   kindFilter,
-  logger = defaultLogger,
+  logger = getLogger(),
   rolloutStatus = defaultRolloutStatus,
 }) => {
   let timeoutReached = false

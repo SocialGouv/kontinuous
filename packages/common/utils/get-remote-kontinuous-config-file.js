@@ -2,12 +2,12 @@ const yaml = require("js-yaml")
 
 const getRepositoryFile = require("./get-repository-file")
 
-const defaultLogger = require("./logger")
+const getLogger = require("./get-logger")
 
 module.exports = async (
   repositoryUrl,
   ref,
-  { logger = defaultLogger, deployKey } = {}
+  { logger = getLogger(), deployKey } = {}
 ) => {
   const data = await getRepositoryFile({
     repositoryUrl,

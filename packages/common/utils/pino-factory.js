@@ -1,5 +1,4 @@
 const pino = require("pino")
-const { default: bfuscate } = require("pino-bfuscate")
 
 module.exports = (opts = {}) => {
   const { prettyOptions = {}, ...mergeOptions } = opts
@@ -18,21 +17,16 @@ module.exports = (opts = {}) => {
     secrets: mergeOptions.secrets || [],
     ...mergeOptions,
   }
-  let logger
-  if (opts.sync) {
-    logger = pino(bfuscate(options))
-  } else {
-    logger = pino({
-      transport: {
-        pipeline: [
-          {
-            target: "pino-bfuscate",
-            options,
-          },
-        ],
-      },
-    })
-  }
+  let logger = pino({
+    transport: {
+      pipeline: [
+        {
+          target: "pino-bfuscate",
+          options,
+        },
+      ],
+    },
+  })
 
   const configureDebug = (debug) => {
     if (

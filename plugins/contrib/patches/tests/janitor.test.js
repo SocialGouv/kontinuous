@@ -12,9 +12,10 @@ const runJanitor = (config, values) => {
   const utils = require("~common/utils")
 
   const manifests = utils.yaml.loadAll(rawNs)
-  utils.logger.configureDebug(true)
+  const { logger } = utils
+  logger.minLevel("debug")
   ctx.provide()
-  ctx.set("logger", utils.logger)
+  ctx.set("logger", logger)
   return janitor(
     manifests,
     {},

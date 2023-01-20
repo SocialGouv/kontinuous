@@ -5,7 +5,7 @@ const { mkdtemp } = require("fs/promises")
 const fs = require("fs-extra")
 
 const normalizeRepositoryUrl = require("./normalize-repository-url")
-const defaultLogger = require("./logger")
+const getLogger = require("./get-logger")
 const asyncShell = require("./async-shell")
 const gitEnv = require("./git-env")
 
@@ -13,7 +13,7 @@ module.exports = async ({
   ref,
   file,
   repositoryUrl,
-  logger = defaultLogger,
+  logger = getLogger(),
   deployKey,
 }) => {
   const protocol = deployKey ? "ssh" : "https"

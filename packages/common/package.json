@@ -19,7 +19,7 @@
     "lodash.kebabcase": "^4.1.1",
     "lodash.set": "^4.3.2",
     "micromatch": "^4.0.5",
-    "nctx": "^1.6.2",
+    "nctx": "^1.7.1",
     "parse-github-url": "^1.0.2",
     "qs": "^6.11.0",
     "sonic-boom": "^3.0.0",

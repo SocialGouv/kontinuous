@@ -5,7 +5,7 @@ const fs = require("fs-extra")
 
 const which = require("which")
 
-const globalLogger = require("./logger")
+const getLogger = require("./get-logger")
 
 const findableBin = async (bin, envPath) => {
   try {
@@ -18,7 +18,7 @@ const findableBin = async (bin, envPath) => {
 
 module.exports = async (bin, downloadFunc, options = {}) => {
   if (!options.logger) {
-    options.logger = globalLogger
+    options.logger = getLogger()
   }
   if (!options.addPath) {
     options.addPath = `${os.homedir()}/.node-need-bin`

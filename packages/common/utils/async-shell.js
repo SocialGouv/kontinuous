@@ -1,6 +1,6 @@
 const { spawn } = require("child_process")
 
-const globalLogger = require("./logger")
+const getLogger = require("./get-logger")
 const parseCommand = require("./parse-command")
 
 const promiseFromChildProcess = (child, callback, logger, extraOptions) => {
@@ -41,7 +41,7 @@ module.exports = (
   arg,
   options = {},
   callback = null,
-  logger = globalLogger,
+  logger = getLogger(),
   extraOptions = {}
 ) => {
   const [cmd, args] = parseCommand(arg)

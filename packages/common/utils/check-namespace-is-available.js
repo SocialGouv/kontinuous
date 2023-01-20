@@ -1,12 +1,12 @@
 const kubectlRetry = require("./kubectl-retry")
 
-const defaultLogger = require("./logger")
+const getLogger = require("./get-logger")
 
 module.exports = async ({
   kubeconfig,
   kubeconfigContext,
   namespace,
-  logger = defaultLogger,
+  logger = getLogger(),
   check,
   bail,
   surviveOnBrokenCluster,

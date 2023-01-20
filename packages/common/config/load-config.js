@@ -6,7 +6,6 @@ const fs = require("fs-extra")
 const set = require("lodash.set")
 const defaultsDeep = require("lodash.defaultsdeep")
 const qs = require("qs")
-const pino = require("pino")
 
 const configDependencyKey = require("~common/utils/config-dependency-key")
 
@@ -23,7 +22,6 @@ const cleanGitRef = require("../utils/clean-git-ref")
 const yaml = require("../utils/yaml")
 const asyncShell = require("../utils/async-shell")
 const deepmerge = require("../utils/deepmerge")
-const defaultLogger = require("../utils/logger")
 const refEnv = require("../utils/ref-env")
 const slug = require("../utils/slug")
 const normalizeRepositoryUrl = require("../utils/normalize-repository-url")
@@ -59,16 +57,18 @@ const loadConfig = async (
     configMeta[configKey][key] = value
   }
 
-  const logger = defaultLogger.child({})
+  const logger = ctx.require("logger").child({})
   if (loadConfigOptions.logLevel) {
-    let { logLevel } = loadConfigOptions
-    if (typeof logLevel === "string") {
-      logLevel = pino.levels.values[loadConfigOptions.logLevel]
-    }
-    logger.level = logLevel
+    logger.setLevel(loadConfigOptions.logLevel)
   }
 
   const rootConfigOverride = {
+    debug: {
+      options: "D",
+      env: ["KS_DEBUG", "DEBUG"],
+      envParser: envParserYaml,
+      default: false,
+    },
     kontinuousHomeDir: {
       env: "KS_HOMEDIR",
       defaultFunction: () => {
@@ -816,7 +816,7 @@ const loadConfig = async (
   }
 
   if (loadConfigOptions.loadDependencies !== false) {
-    await loadDependencies(config)
+    await loadDependencies(config, logger)
   }
 
   await recurseDependency({

@@ -18,10 +18,11 @@ samples.forEach((sample) => {
       }
     )
     const manifests = utils.yaml.loadAll(rawYaml)
-    utils.logger.configureDebug(true)
     ctx.provide()
-    ctx.set("logger", utils.logger)
-    const spy = jest.spyOn(utils.logger, "debug")
+    const { logger } = utils
+    logger.minLevel("debug")
+    ctx.set("logger", logger)
+    const spy = jest.spyOn(logger, "debug")
     resourceTreeInfos(
       manifests,
       {},

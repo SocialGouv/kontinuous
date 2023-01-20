@@ -1,8 +1,8 @@
 const ctx = require("~common/ctx")
-const logger = require("~common/utils/logger")
-const createEventsBucket = require("~common/utils/events-bucket")
 
+const createEventsBucket = require("~common/utils/events-bucket")
 const flattenAggregateError = require("~common/utils/flatten-aggregate-error")
+const createLogger = require("~common/utils/direct-logger-factory")
 
 const ExitError = require("~/errors/exit-error")
 
@@ -30,6 +30,8 @@ const gracefullShutdownTimeoutMs = 2000
 
 module.exports = async (args = process.argv) => {
   ctx.provide()
+
+  const logger = ctx.get("logger") || ctx.set("logger", createLogger())
 
   const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
 

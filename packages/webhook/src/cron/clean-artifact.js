@@ -2,11 +2,12 @@ const path = require("path")
 const fs = require("fs-extra")
 const rimraf = require("rimraf")
 
-const logger = require("~common/utils/logger")
+const getLogger = require("~common/utils/get-logger")
 
 const ttl = 48 * 3600
 
 module.exports = async () => {
+  const logger = getLogger()
   const uploadsDir = "/artifacts"
   const files = await fs.readdir(uploadsDir)
   await Promise.allSettled(

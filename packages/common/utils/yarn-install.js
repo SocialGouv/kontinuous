@@ -2,9 +2,9 @@ const fs = require("fs-extra")
 const { compare } = require("compare-versions")
 
 const asyncShell = require("./async-shell")
-const logger = require("./logger")
+const getLogger = require("./get-logger")
 
-module.exports = async (target) => {
+module.exports = async (target, { logger = getLogger() } = {}) => {
   if (
     ((await fs.pathExists(`${target}/node_modules`)) &&
       (await fs.readdir(`${target}/node_modules`)).length > 0) ||

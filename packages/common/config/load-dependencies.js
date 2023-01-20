@@ -3,7 +3,6 @@ const kebabCase = require("lodash.kebabcase")
 
 const yaml = require("../utils/yaml")
 const deepmerge = require("../utils/deepmerge")
-const globalLogger = require("../utils/logger")
 const degitImproved = require("../utils/degit-improved")
 const normalizeDegitUri = require("../utils/normalize-degit-uri")
 
@@ -11,7 +10,7 @@ const copyFilter = require("./copy-filter")
 
 const recurseDependency = require("./recurse-dependencies")
 
-module.exports = async (config, logger = globalLogger) => {
+module.exports = async (config, logger) => {
   logger.debug("Load dependencies")
   await recurseDependency({
     config,

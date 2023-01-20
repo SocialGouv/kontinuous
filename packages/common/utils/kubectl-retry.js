@@ -3,7 +3,7 @@ const { spawn } = require("child_process")
 const retry = require("async-retry")
 
 const parseCommand = require("./parse-command")
-const defaultLogger = require("./logger")
+const getLogger = require("./get-logger")
 const retriableOnBrokenCluster = require("./retriable-on-broken-cluster")
 const retriableNetwork = require("./retriable-network")
 
@@ -81,7 +81,7 @@ const kubectlRun = async (kubectlArgs, options = {}) => {
 
 module.exports = async (kubectlArgs, options = {}) => {
   const {
-    logger = defaultLogger,
+    logger = getLogger(),
     logError = true,
     logInfo = true,
     collectProcesses = [],
@@ -164,7 +164,7 @@ module.exports = async (kubectlArgs, options = {}) => {
       }
     }, retryOptions)
     if (logInfo) {
-      logger.info(result)
+      logger.info(result.trim())
     }
   } catch (err) {
     if (logError) {

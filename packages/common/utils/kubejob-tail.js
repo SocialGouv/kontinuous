@@ -5,7 +5,7 @@ const retry = require("async-retry")
 const kubectlRetry = require("./kubectl-retry")
 const retriableNetwork = require("./retriable-network")
 const retriableOnBrokenCluster = require("./retriable-on-broken-cluster")
-const defaultLogger = require("./logger")
+const getLogger = require("./get-logger")
 
 // this adress this issue https://github.com/kubernetes/kubernetes/issues/28369
 
@@ -19,7 +19,7 @@ module.exports = async (jobName, options = {}) => {
     kubectlRetryOptions,
     surviveOnBrokenCluster,
     retrySince = "20s",
-    logger = defaultLogger,
+    logger = getLogger(),
     retryErrorsConfig = {},
     kubectl = kubectlRetry,
   } = options

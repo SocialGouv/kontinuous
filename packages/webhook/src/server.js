@@ -23,6 +23,11 @@ module.exports = async (options = {}) => {
       express: {
         dependencies: ["sentry"],
       },
+      oa: {
+        context: (ctx) => {
+          commonCtx.set("logger", ctx.require("logger"))
+        },
+      },
     },
     dependencies: {
       oapi: {

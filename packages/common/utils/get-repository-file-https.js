@@ -1,15 +1,10 @@
 const axios = require("./axios-retry")
 
 const normalizeRepositoryUrl = require("./normalize-repository-url")
-const defaultLogger = require("./logger")
+const getLogger = require("./get-logger")
 const handleAxiosError = require("./handle-axios-error")
 
-module.exports = async ({
-  ref,
-  file,
-  repositoryUrl,
-  logger = defaultLogger,
-}) => {
+module.exports = async ({ ref, file, repositoryUrl, logger = getLogger() }) => {
   const repoUrl = normalizeRepositoryUrl(repositoryUrl)
   const rawUrlParts = [repoUrl, "raw", ref, file]
   const rawUrl = rawUrlParts.join("/")

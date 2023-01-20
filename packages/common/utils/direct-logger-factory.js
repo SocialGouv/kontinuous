@@ -10,20 +10,15 @@ module.exports = (opts = {}) => {
     ...opts,
   })
 
-  if (process.env.F10S_LOG_LEVEL) {
-    const level = process.env.F10S_LOG_LEVEL
+  if (process.env.KS_LOG_LEVEL) {
+    const level = process.env.KS_LOG_LEVEL
     logger.setLevel(level)
   }
 
-  const configureDebug = (debug) => {
-    if (debug && debug !== "0" && debug !== "false") {
-      logger.minLevel("debug")
-    }
+  const debug = process.env.KS_DEBUG || process.env.DEBUG
+  if (debug && debug !== "0" && debug !== "false") {
+    logger.minLevel("debug")
   }
-
-  configureDebug(process.env.F10S_DEBUG || process.env.DEBUG)
-
-  logger.configureDebug = configureDebug
 
   return logger
 }
