@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.121.1](https://github.com/socialgouv/kontinuous/compare/v1.121.0...v1.121.1) (2023-01-20)
+
+
+### Bug Fixes
+
+* async context isolation ([955242b](https://github.com/socialgouv/kontinuous/commit/955242b843d8125cb694aa4ff0c64e092556b214))
+* refactor logger + remove singleton ([7347d0a](https://github.com/socialgouv/kontinuous/commit/7347d0aad2d5ce259c0b35e945433c18c7712a0c))
+
 ## [1.121.0](https://github.com/socialgouv/kontinuous/compare/v1.120.0...v1.121.0) (2023-01-19)
 
 
