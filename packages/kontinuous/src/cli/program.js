@@ -18,10 +18,14 @@ module.exports = () => {
     .hook("preAction", async (_thisCommand, actionCommand) => {
       const opts = actionCommand.optsWithGlobals()
 
+      const logger = ctx.get("logger")
+      if (opts.D) {
+        logger.minLevel("debug")
+      }
+
       const config = await loadConfig(opts)
       ctx.set("config", config)
 
-      const logger = ctx.get("logger")
       const secrets = [...(config.webhookToken ? [config.webhookToken] : [])]
       secrets.forEach(logger.addSecret)
       if (config.debug) {
