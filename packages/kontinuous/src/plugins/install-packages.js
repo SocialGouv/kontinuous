@@ -1,13 +1,13 @@
 const fs = require("fs-extra")
 
-const recurseDependency = require("~common/config/recurse-dependencies")
+const recurseDependencies = require("helm-tree/dependencies/recurse")
 const yarnInstall = require("~common/utils/yarn-install")
 const fileHash = require("~common/utils/file-hash")
 const ctx = require("~common/ctx")
 
 module.exports = async (config) => {
   const logger = ctx.require("logger")
-  await recurseDependency({
+  await recurseDependencies({
     config,
     afterChildren: async ({ target }) => {
       if (await fs.pathExists(`${target}/node_modules`)) {

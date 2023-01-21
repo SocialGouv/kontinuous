@@ -10,6 +10,7 @@ on:
     paths:
       - packages/kontinuous/**
       - packages/common/**
+      - packages/helm-tree/**
       - plugins/**
       - .github/actions/**
       - yarn.lock

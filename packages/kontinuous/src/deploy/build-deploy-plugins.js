@@ -1,4 +1,4 @@
-const recurseDependency = require("~common/config/recurse-dependencies")
+const recurseDependencies = require("helm-tree/dependencies/recurse")
 
 const ctx = require("~common/ctx")
 const buildJsFile = require("~/plugins/build-js-file")
@@ -6,7 +6,7 @@ const installPackages = require("~/plugins/install-packages")
 
 module.exports = async () => {
   const config = ctx.require("config")
-  await recurseDependency({
+  await recurseDependencies({
     config,
     afterChildren: async ({ target, definition }) => {
       await buildJsFile(target, "pre-deploy", definition)

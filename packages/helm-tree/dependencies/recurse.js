@@ -6,6 +6,7 @@ const recurseDependency = async (param = {}) => {
   const {
     name = "project",
     config,
+    logger,
     definition = config,
     beforeChildren = () => {},
     afterChildren = () => {},
@@ -33,6 +34,7 @@ const recurseDependency = async (param = {}) => {
     definition,
     scope,
     config,
+    logger,
     target,
   }
 

@@ -1,7 +1,7 @@
-const degitImproved = require("~common/utils/degit-improved")
+const fs = require("fs-extra")
+const downloadGitChart = require("./download-git-chart")
 
-module.exports = async (dependency, target, _config, logger) => {
-  const { degit: degitUri } = dependency
+module.exports = async ({ dependency, target, cachePath, logger }) => {
   if (dependency.repository) {
     throw new Error(
       `repository and degit variable are mutually exclusive for chart dependency: ${JSON.stringify(
@@ -11,13 +11,12 @@ module.exports = async (dependency, target, _config, logger) => {
       )}`
     )
   }
+  const cacheDir = await downloadGitChart({ dependency, cachePath, logger })
+
   const chartName = dependency.alias || dependency.name
-  logger.debug(`⬇️  downloading chart ${degitUri}`)
-  await degitImproved(degitUri, `${target}/charts/${chartName}`, {
-    logger: logger.child({
-      dependency,
-    }),
-  })
+
+  await fs.copy(cacheDir, `${target}/charts/${chartName}`)
+
   dependency.repository = `file://./charts/${chartName}`
   delete dependency.degit
 }

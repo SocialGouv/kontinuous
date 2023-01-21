@@ -2,7 +2,7 @@ const fs = require("fs-extra")
 const yaml = require("~common/utils/yaml")
 const configDependencyKey = require("~common/utils/config-dependency-key")
 
-const chartTools = require("./chart-tools")
+const chartTools = require("./index")
 
 module.exports = async (chart, chartsDirName, target, definition = {}) => {
   const chartsDir = `${target}/${chartsDirName}`

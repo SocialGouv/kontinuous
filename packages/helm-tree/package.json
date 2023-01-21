@@ -1,0 +1,14 @@
+{
+  "name": "helm-tree",
+  "version": "1.122.2",
+  "description": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "decompress": "^4.2.1",
+    "fs-extra": "^11.1.0",
+    "~common": "workspace:^"
+  }
+}

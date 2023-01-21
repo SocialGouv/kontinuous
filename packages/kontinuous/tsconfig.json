@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"],
-      "~common/*": ["../common/*"]
+      "~common/*": ["../common/*"],
+      "helm-tree/*": ["../helm-tree/*"]
     }
   },
   "exclude":[

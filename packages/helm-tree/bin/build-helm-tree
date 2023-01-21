@@ -1,0 +1,69 @@
+#!/usr/bin/env -S node --no-warnings
+const os = require("os")
+const path = require("path")
+const fs = require("fs-extra")
+
+const getLogger = require("~common/utils/get-logger")
+const yaml = require("~common/utils/yaml")
+const normalizeDegitUri = require("~common/utils/normalize-degit-uri")
+
+const downloadHelmChart = require("helm-tree/dependencies/download-helm-chart")
+const downloadGitChart = require("helm-tree/dependencies/download-git-chart")
+
+const homeOrTmpDir = os.homedir() || os.tmpdir()
+
+const readchartRecursive = async (dir) => {
+  const files = await fs.readdir(dir, { withFileTypes: true })
+  const paths = files.map(async (file) => {
+    const p = path.join(dir, file.name)
+    if (
+      file.isDirectory() &&
+      (file.name === "charts" || path.basename(dir) === "charts")
+    ) {
+      return readchartRecursive(p)
+    }
+    return p
+  })
+  return (await Promise.all(paths))
+    .flat(Infinity)
+    .filter(
+      (p) =>
+        path.basename(path.dirname(p)) !== "charts" &&
+        path.basename(p) === "Chart.yaml"
+    )
+}
+
+const main = async ({
+  target = process.cwd(),
+  cachePath = `${homeOrTmpDir}/.kontinuous/cache/charts`,
+  logger = getLogger(),
+} = {}) => {
+  const chartFiles = await readchartRecursive(target)
+  for (const chartFile of chartFiles) {
+    const chart = yaml.load(await fs.readFile(chartFile))
+    const { dependencies = [] } = chart
+    for (const dependency of dependencies) {
+      let { degit: degitUri } = dependency
+      if (degitUri) {
+        degitUri = normalizeDegitUri(degitUri)
+      }
+      const { repository } = dependency
+      if (degitUri) {
+        await downloadGitChart({
+          dependency,
+          cachePath,
+          logger,
+        })
+      } else if (repository && !repository.startsWith("file://")) {
+        await downloadHelmChart({
+          dependency,
+          target,
+          cachePath,
+          logger,
+        })
+      }
+    }
+  }
+}
+
+main()

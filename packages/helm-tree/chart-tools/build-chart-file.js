@@ -3,7 +3,7 @@ const yaml = require("~common/utils/yaml")
 const createChart = require("~common/utils/create-chart")
 const configDependencyKey = require("~common/utils/config-dependency-key")
 
-const chartTools = require("./chart-tools")
+const chartTools = require("./index")
 
 module.exports = async (target, name, definition = {}) => {
   const chartFile = `${target}/Chart.yaml`

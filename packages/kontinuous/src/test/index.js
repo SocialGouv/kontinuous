@@ -108,6 +108,6 @@ module.exports = async (opts) => {
   const results = await test.run()
   reporter(results)
   if (results.errors.length > 0) {
-    throw ExitError("tests failed with errors", 1)
+    throw new ExitError("tests failed with errors", 1)
   }
 }
