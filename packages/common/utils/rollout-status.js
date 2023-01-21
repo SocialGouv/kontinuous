@@ -84,7 +84,7 @@ module.exports = async ({
         status = await promise
         logger.debug(
           { namespace, selector },
-          `🐍 rollout-status result: ${JSON.stringify(status)}`
+          `🦆 rollout-status result: ${JSON.stringify(status)}`
         )
         if (status.error?.code === "") {
           throw new Error(status.error.message)
@@ -93,9 +93,11 @@ module.exports = async ({
         throwRetriableError(err)
         error = err
       }
+      const errorMessage = status?.error?.message
       if (
         retryErrImagePull &&
-        status?.error?.message?.includes("ErrImagePull")
+        (errorMessage?.includes("ErrImagePull") ||
+          errorMessage?.includes("ImagePullBackOff"))
       ) {
         throwErrorToRetry({
           error: new Error(status.error.message),
