@@ -35,7 +35,7 @@ module.exports = async (manifests, options, context) => {
           try {
             logger.debug(
               { endpoint, namespace, secretName },
-              `kubeseal verifying "${secretName}"`
+              `🔑 kubeseal verifying "${secretName}"`
             )
             await axios.post(endpoint, content)
             logger.debug(
@@ -46,7 +46,7 @@ module.exports = async (manifests, options, context) => {
             if (err.response?.status === 429) {
               logger.debug(
                 { endpoint },
-                `kubeseal verify endpoint rate limit exceeded, retrying`
+                `🐍 kubeseal verify endpoint rate limit exceeded, retrying`
               )
               throw new KontinuousPluginError("rate limit exceeded")
             }
@@ -67,7 +67,7 @@ module.exports = async (manifests, options, context) => {
         status = false
         logger.error(
           { endpoint, namespace },
-          `${manifest.metadata.name} is not sealed properly`
+          `☠️  ${manifest.metadata.name} is not sealed properly`
         )
         handleAxiosError(error, logger)
       } else {

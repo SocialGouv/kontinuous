@@ -5,6 +5,7 @@ const fs = require("fs-extra")
 const asyncShell = require("./async-shell")
 
 const normalizeRepositoryUrl = require("./normalize-repository-url")
+const getLogger = require("./get-logger")
 
 const supported = {
   github: ".com",
@@ -45,7 +46,7 @@ function parse(src) {
   return { site: siteName, user, name, ref, url, ssh, subdir, mode }
 }
 
-module.exports = async (target) => {
+module.exports = async (target, logger = getLogger()) => {
   const base = path.join(os.homedir(), ".degit")
   const repo = parse(target)
   const dir = path.join(base, repo.site, repo.user, repo.name)
@@ -59,6 +60,10 @@ module.exports = async (target) => {
   if (!hash) {
     return true
   }
+
+  logger.debug(
+    `🍒 checking if last ref has changed for ${repo.url}#${repo.ref}`
+  )
   const lsRemote = await asyncShell(
     `git ls-remote ${normalizeRepositoryUrl(repo.url)} ${repo.ref}`
   )

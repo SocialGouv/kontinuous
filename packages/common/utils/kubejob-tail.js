@@ -72,13 +72,16 @@ module.exports = async (jobName, options = {}) => {
         } catch (err) {
           const retriableNetworkError = retriableNetwork(err)
           if (retriableNetworkError.retry) {
-            logger.debug(`${retriableNetworkError.message}, retrying...`)
+            logger.debug(`🌐 ${retriableNetworkError.message}, retrying...`)
             throw err
           }
           if (surviveOnBrokenCluster) {
             const retriable = retriableOnBrokenCluster(err)
             if (retriable.retry) {
-              logger.debug({ error: err }, `${retriable.message}, retrying...`)
+              logger.debug(
+                { error: err },
+                `💣 ${retriable.message}, retrying...`
+              )
               await sleep(3000)
               throw err
             }

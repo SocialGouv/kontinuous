@@ -119,7 +119,7 @@ module.exports = async (kubectlArgs, options = {}) => {
           if (willRetry) {
             logger.debug(
               { retryCount, kubectlArgs },
-              `${retriableNetworkError.message}, retrying...`
+              `🌐 ${retriableNetworkError.message}, retrying...`
             )
           }
           if (sentry) {
@@ -143,7 +143,7 @@ module.exports = async (kubectlArgs, options = {}) => {
             if (willRetry) {
               logger.debug(
                 { error: err, from: "kubectl", retryCount, kubectlArgs },
-                `${retriable.message}, retrying...`
+                `💣 ${retriable.message}, retrying...`
               )
             }
             if (sentry) {

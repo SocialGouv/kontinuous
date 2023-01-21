@@ -127,7 +127,7 @@ module.exports = async (options) => {
           return
         }
         if (!finished) {
-          logger.warn("stream interrupted, retrying...")
+          logger.warn("🌐 stream interrupted, retrying...")
           throw Error("not true finish, retry")
         }
       },

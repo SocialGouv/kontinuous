@@ -48,7 +48,7 @@ module.exports = async ({
     if (err.message?.includes("net/http: TLS handshake timeout")) {
       throwErrorToRetry({
         error: err,
-        message: `rollout-status network error(net/http: TLS handshake timeout): retrying...`,
+        message: `🌐 rollout-status network error(net/http: TLS handshake timeout): retrying...`,
         type: "network",
       })
     }
@@ -57,7 +57,7 @@ module.exports = async ({
       if (retriable.retry) {
         throwErrorToRetry({
           error: err,
-          message: `${retriable.message}, retrying...`,
+          message: `💣 ${retriable.message}, retrying...`,
           type: "cluster",
         })
         throw err
@@ -84,7 +84,7 @@ module.exports = async ({
         status = await promise
         logger.debug(
           { namespace, selector },
-          `rollout-status result: ${JSON.stringify(status)}`
+          `🐍 rollout-status result: ${JSON.stringify(status)}`
         )
         if (status.error?.code === "") {
           throw new Error(status.error.message)
@@ -99,14 +99,14 @@ module.exports = async ({
       ) {
         throwErrorToRetry({
           error: new Error(status.error.message),
-          message: `rollout-status registry error(ErrImagePull): retrying...`,
+          message: `🐍 rollout-status registry error(ErrImagePull): retrying...`,
           type: "err-image-pull",
         })
       }
       if (status?.error?.type === "program") {
         throwErrorToRetry({
           error: new Error(status.error.message),
-          message: `rollout-status program error: ${status.error.message}: retrying...`,
+          message: `🐍 rollout-status program error: ${status.error.message}: retrying...`,
           type: "rollout-status-program",
         })
       }
