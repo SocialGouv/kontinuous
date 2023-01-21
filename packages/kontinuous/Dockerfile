@@ -189,4 +189,5 @@ COPY --from=plugins --chown=1001:1001 /home/ubuntu/.kontinuous/cache/ /home/ubun
 USER 0
 RUN chmod -R a+rwX /home/ubuntu/.kontinuous
 RUN chmod -R a+rwX /home/ubuntu/.yarn
+ENV KS_HOMEDIR=/home/ubuntu/.kontinuous
 USER 1001
