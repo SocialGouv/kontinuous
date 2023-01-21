@@ -23,7 +23,10 @@ module.exports = () => {
         logger.minLevel("debug")
       }
 
-      const config = await loadConfig(opts)
+      const config = await loadConfig({
+        ...opts,
+        actionCommandName: actionCommand.name(),
+      })
       ctx.set("config", config)
 
       logger.setSecrets([...(config.webhookToken ? [config.webhookToken] : [])])

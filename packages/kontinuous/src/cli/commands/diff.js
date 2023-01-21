@@ -10,7 +10,7 @@ module.exports = (program) =>
     .action(async (_opts, _command) => {
       const config = ctx.require("config")
       const logger = ctx.require("logger")
-      const { diffBranch, commits } = config
-      logger.info(`diff branch: ${diffBranch}`)
-      process.stdout.write(JSON.stringify(commits, null, 2))
+      const { gitDiffBranch, gitDiffCommits } = config
+      logger.info(`diff branch: ${gitDiffBranch}`)
+      process.stdout.write(JSON.stringify(gitDiffCommits, null, 2))
     })

@@ -142,3 +142,8 @@ module.exports.noValidate = new Option(
   "--no-validate",
   "disable validation of manifests"
 )
+
+module.exports.gitDiffEnabled = new Option(
+  "--git-diff-enabled",
+  "enable git diff"
+)

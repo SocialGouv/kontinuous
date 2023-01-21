@@ -63,6 +63,9 @@ const loadConfig = async (
   }
 
   const rootConfigOverride = {
+    actionCommandName: {
+      option: "actionCommandName",
+    },
     debug: {
       option: "D",
       env: ["KS_DEBUG", "DEBUG"],
@@ -583,15 +586,23 @@ const loadConfig = async (
       env: "KS_DEPLOY_KEY_SECRET_NAME",
       default: null,
     },
-    disableDiff: {
-      env: "KS_DISABLE_DIFF",
-    },
-    diffBranch: {
-      defaultFunction: async (config) => {
-        if (!config.git || config.disableDiff || !config.gitRepositoryUrl) {
-          return
+    gitDiffEnabled: {
+      option: "gitDiffEnabled",
+      env: "KS_GIT_DIFF_ENABLED",
+      defaultFunction: (config) => {
+        if (config.actionCommandName === "diff") {
+          return true
         }
-        const { gitBranch, gitRepositoryUrl, workspacePath } = config
+        return false
+      },
+    },
+    gitDiffBranch: {
+      defaultFunction: async (config) => {
+        const { gitBranch } = config
+        if (!config.gitDiffEnabled) {
+          return gitBranch
+        }
+        const { gitRepositoryUrl, workspacePath } = config
         let localRemoteExists
         if (
           await fs.pathExists(
@@ -624,18 +635,18 @@ const loadConfig = async (
           }
         }
 
-        let diffBranch
+        let gitDiffBranch
         if (localRemoteExists) {
-          diffBranch = gitBranch
+          gitDiffBranch = gitBranch
         } else {
-          diffBranch = "HEAD"
+          gitDiffBranch = "HEAD"
         }
 
-        return diffBranch
+        return gitDiffBranch
       },
     },
-    commits: {
-      env: "KS_COMMITS",
+    gitDiffCommits: {
+      env: "KS_GIT_DIFF_COMMITS",
       envParser: envParserYaml,
       defaultFunction: async (config) => {
         const commits = {
@@ -643,16 +654,16 @@ const loadConfig = async (
           modified: [],
           removed: [],
         }
-        if (!config.git || config.disableDiff || !config.gitRepositoryUrl) {
+        if (!config.gitDiffEnabled) {
           return commits
         }
         const { gitBranch } = config
         const procEnv = gitEnv({ deployKey: config.deployKeyFile })
         try {
-          const { diffBranch } = config
+          const { gitDiffBranch } = config
 
           const diffOutput = await asyncShell(
-            `git diff --name-status remotes/origin/${diffBranch}..${gitBranch}`,
+            `git diff --name-status remotes/origin/${gitDiffBranch}..${gitBranch}`,
             { env: procEnv }
           )
           const diff = diffOutput.split("\n").map((line) => {
@@ -688,8 +699,8 @@ const loadConfig = async (
     },
     changedPaths: {
       defaultFunction: (config) => {
-        const { commits } = config
-        return Object.values(commits).flatMap((files) => files)
+        const { gitDiffCommits } = config
+        return Object.values(gitDiffCommits).flatMap((files) => files)
       },
     },
     event: {
