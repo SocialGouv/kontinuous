@@ -56,4 +56,4 @@ See [kontinuous configuration](/advanced/configuration)
 
 – Are you kidding me ? Roll up your sleeves and find it, you developer !
 
-[![rabbit-thug](../images/rabbit-thug.png)](https://github.com/SocialGouv/kontinuous/blob/master/packages/kontinuous/src/cli/commands/test.js)
+[![rabbit-thug](./images/rabbit-thug.png)](https://github.com/SocialGouv/kontinuous/blob/master/packages/kontinuous/src/cli/commands/test.js)
