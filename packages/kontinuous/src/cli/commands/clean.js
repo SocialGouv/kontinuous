@@ -25,7 +25,7 @@ module.exports = (program) =>
         await fs.remove(buildRootPath)
       } catch (error) {
         logger.error(error)
-        throw ExitError(error, 1)
+        throw new ExitError(error, 1)
       }
 
       const homeOrTmpDir = os.homedir() || os.tmpdir()
@@ -43,7 +43,7 @@ module.exports = (program) =>
           )
         } catch (error) {
           logger.error(error)
-          throw ExitError(error, 1)
+          throw new ExitError(error, 1)
         }
       }
 
