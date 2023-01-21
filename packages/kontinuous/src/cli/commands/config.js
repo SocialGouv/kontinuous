@@ -77,10 +77,14 @@ module.exports = (program) =>
 
       let outputValue
       if (typeof value === "object") {
-        if (opts.format === "json") {
-          outputValue = JSON.stringify(value)
-        } else {
-          outputValue = yaml.dump(value)
+        outputValue = JSON.stringify(value, (_key, val) => {
+          if (val instanceof RegExp) {
+            return val.toString()
+          }
+          return val
+        })
+        if (opts.format !== "json") {
+          outputValue = yaml.dump(JSON.parse(outputValue))
         }
       } else {
         outputValue = value || ""
