@@ -237,7 +237,7 @@ module.exports = async (manifests, _options, { ctx, utils }) => {
   logger.debug(`📝 resources summary:`)
 
   const log = logger.child({})
-  log.fields = {}
+  log.setFields({})
 
   treeStr.split("\n").forEach((line) => {
     log.debug(line)

@@ -69,7 +69,7 @@ module.exports = async (manifests, _options, context) => {
   logger.debug(`🌳 dependencies tree:`)
 
   const log = logger.child({}, { indentation: 3 })
-  log.fields = {}
+  log.setFields({})
 
   result.split("\n").forEach((line) => {
     log.debug(line)

@@ -17,7 +17,7 @@ module.exports = async (manifests, _options, { logger, utils }) => {
   logger.debug("🐞 debug links:")
 
   const log = logger.child({}, { indentation: 2 })
-  log.fields = {}
+  log.setFields({})
 
   result.split("\n").forEach((line) => {
     if (!line.trim()) {
