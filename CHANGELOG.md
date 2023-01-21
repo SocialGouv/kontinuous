@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.123.0 (2023-01-21)
+
+
+### Features
+
+* helm-tree charts pre-loader ([#132](https://github.com/socialgouv/kontinuous/issues/132)) ([0b281e4](https://github.com/socialgouv/kontinuous/commit/0b281e470ead7d97557223bcaaad13ad95825efe))
+
 ### [1.122.2](https://github.com/socialgouv/kontinuous/compare/v1.122.1...v1.122.2) (2023-01-20)
 
 
