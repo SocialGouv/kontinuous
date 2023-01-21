@@ -61,13 +61,22 @@ RUN apt-get update && \
     && apt-get install nodejs \
     && npm install -g yarn \
     && rm -rf /var/lib/apt/lists/*
+
+RUN groupadd -g 1001 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1001 ubuntu
+
 WORKDIR /app
+
+RUN chown 1001:1001 /app
+
+USER 1001
+
 
 FROM node as packages
 COPY --chown=1001:1001 package.json yarn.lock .yarnrc.yml ./
 COPY --chown=1001:1001 .yarn .yarn
 COPY --chown=1001:1001 packages/kontinuous/package.json ./packages/kontinuous/package.json
 COPY --chown=1001:1001 packages/common/package.json ./packages/common/package.json
+COPY --chown=1001:1001 packages/helm-tree/package.json ./packages/helm-tree/package.json
 
 # Keep yarn install cache when bumping version and dependencies still the sames
 RUN node -e " \
@@ -82,9 +91,23 @@ RUN node -e " \
   const package = JSON.parse(fs.readFileSync('packages/common/package.json')); \
   const packageZero = { ...package, version: '0.0.0' };  \
   fs.writeFileSync('packages/common/package.json', JSON.stringify(packageZero));"
+RUN node -e " \
+  const package = JSON.parse(fs.readFileSync('packages/helm-tree/package.json')); \
+  const packageZero = { ...package, version: '0.0.0' };  \
+  fs.writeFileSync('packages/helm-tree/package.json', JSON.stringify(packageZero));"
 
 FROM node as plugins
 # pre-cache yarn package for official local plugins optimization
+
+COPY --from=packages --chown=1001:1001 /app/package.json ./package.json
+COPY --from=packages --chown=1001:1001 /app/yarn.lock ./yarn.lock
+COPY --from=packages --chown=1001:1001 /app/.yarnrc.yml ./.yarnrc.yml
+COPY --from=packages --chown=1001:1001 /app/.yarn ./.yarn
+COPY --from=packages --chown=1001:1001 /app/packages/common/package.json /app/packages/common/package.json
+COPY --from=packages --chown=1001:1001 /app/packages/helm-tree/package.json /app/packages/helm-tree/package.json
+
+RUN yarn workspaces focus helm-tree --production && yarn cache clean
+
 COPY --chown=1001:1001 \
   plugins/contrib/package.json plugins/contrib/yarn.lock plugins/contrib/.yarnrc.yml \
   /app/plugins/contrib/
@@ -95,16 +118,22 @@ COPY --chown=1001:1001 \
   /app/plugins/fabrique/
 COPY --chown=1001:1001 plugins/fabrique/.yarn/ /app/plugins/fabrique/.yarn/
 
+
 RUN \
-  cd /app/plugins/contrib && yarn workspaces focus --production  && \
+  cd /app/plugins/contrib && yarn workspaces focus --production && \
   cd /app/plugins/fabrique && yarn workspaces focus --production && \
   yarn cache clean
 
+COPY --chown=1001:1001 packages/helm-tree/ /app/packages/helm-tree/
+COPY --chown=1001:1001 packages/common/ /app/packages/common/
+
 COPY --chown=1001:1001 plugins/ /app/plugins/
 
-FROM node as program
+RUN cd /app/plugins/contrib && /app/packages/helm-tree/bin/build-helm-tree
+RUN cd /app/plugins/fabrique && /app/packages/helm-tree/bin/build-helm-tree
 
-RUN groupadd -g 1001 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1001 ubuntu
+FROM node as program
+USER 0
 RUN mkdir -p /opt && chown 1001:1001 /opt
 
 RUN mkdir -p /workspace && chown 1001:1001 /workspace
@@ -135,13 +164,16 @@ COPY --from=stern /usr/local/bin/stern /usr/local/bin/stern
 
 WORKDIR /opt/kontinuous
 
-RUN mkdir -p packages/kontinuous/src && mkdir -p packages/kontinuous/common
+RUN mkdir -p packages/kontinuous/src \
+  && mkdir -p packages/kontinuous/common \
+  && mkdir -p packages/kontinuous/helm-tree
 COPY --from=packages --chown=1001:1001 /app/package.json ./package.json
 COPY --from=packages --chown=1001:1001 /app/yarn.lock ./yarn.lock
 COPY --from=packages --chown=1001:1001 /app/.yarnrc.yml ./.yarnrc.yml
 COPY --from=packages --chown=1001:1001 /app/.yarn ./.yarn
 COPY --from=packages --chown=1001:1001 /app/packages/kontinuous/package.json ./packages/kontinuous/package.json
 COPY --from=packages --chown=1001:1001 /app/packages/common/package.json ./packages/common/package.json
+COPY --from=packages --chown=1001:1001 /app/packages/helm-tree/package.json ./packages/helm-tree/package.json
 
 RUN yarn workspaces focus kontinuous --production && yarn cache clean
 
@@ -149,23 +181,12 @@ COPY --from=plugins --chown=1001:1001 /app/plugins/ ./plugins/
 
 COPY --chown=1001:1001 packages/kontinuous/ ./packages/kontinuous/
 COPY --chown=1001:1001 packages/common/ ./packages/common/
+COPY --chown=1001:1001 packages/helm-tree/ ./packages/helm-tree/
 
 WORKDIR /workspace
 
-
-FROM program as plugins-charts
-# pre-cache plugin's external charts
-RUN KS_DEBUG=true \
-  KS_GIT=false \
-  KS_GIT_DISABLE_WARNING=true \
-  KS_BUILD_PATH=/tmp/ks-build-cache \
-  KS_INLINE_CONFIG_SET="${KS_INLINE_CONFIG_SET},dependencies.fabrique.import=socialgouv/kontinuous/plugins/fabrique" \
-  /opt/kontinuous/packages/kontinuous/bin/kontinuous load-deps && \
-  rm -rf /tmp/ks-build-cache
-
-FROM program as cli
-COPY --from=plugins-charts --chown=1001:1001 /home/ubuntu/.kontinuous/cache/ /home/ubuntu/.kontinuous/cache/
+COPY --from=plugins --chown=1001:1001 /home/ubuntu/.kontinuous/cache/ /home/ubuntu/.kontinuous/cache/
 USER 0
 RUN chmod -R a+rwX /home/ubuntu/.kontinuous
+RUN chmod -R a+rwX /home/ubuntu/.yarn
 USER 1001
-

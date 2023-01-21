@@ -35,8 +35,10 @@ WORKDIR /app
 FROM base as preparation
 COPY packages/webhook/package.json /app/packages/webhook/
 COPY packages/common/package.json /app/packages/common/
+COPY packages/helm-tree/package.json /app/packages/helm-tree/
 RUN node -e "fs.writeFileSync('/app/packages/webhook/package.json', JSON.stringify({ ...JSON.parse(fs.readFileSync('/app/packages/webhook/package.json')), version: '0.0.0' }));"
 RUN node -e "fs.writeFileSync('/app/packages/common/package.json', JSON.stringify({ ...JSON.parse(fs.readFileSync('/app/packages/common/package.json')), version: '0.0.0' }));"
+RUN node -e "fs.writeFileSync('/app/packages/helm-tree/package.json', JSON.stringify({ ...JSON.parse(fs.readFileSync('/app/packages/helm-tree/package.json')), version: '0.0.0' }));"
 
 ## BUILD ENVIRONMENTS
 FROM base as builder
@@ -46,20 +48,26 @@ ENV NODE_ENV=$NODE_ENV
 ### INSTALL (node modules)
 COPY --from=preparation /app/packages/webhook/package.json /app/packages/webhook/
 COPY --from=preparation /app/packages/common/package.json /app/packages/common/
+COPY --from=preparation /app/packages/helm-tree/package.json /app/packages/helm-tree/
 COPY package.json yarn.lock .yarnrc.yml /app/
 COPY .yarn .yarn
 
 #### YARN INSTALL
-RUN mkdir -p packages/webhook/src && mkdir -p packages/webhook/common
+RUN mkdir -p packages/webhook/src \
+  && mkdir -p packages/webhook/common \
+  && mkdir -p packages/webhook/helm-tree
 RUN yarn workspaces focus ~webhook --production \
   && yarn cache clean
-RUN rm -rf packages/webhook/src && rm -rf packages/webhook/common
+RUN rm -rf packages/webhook/src \
+  && rm -rf packages/webhook/common \
+  && rm -rf packages/webhook/helm-tree
 
 ### COPY (package sources)
 COPY packages/webhook /app/packages/webhook/
 
 ### CUSTOMS COPY (before build)
 COPY packages/common /app/packages/common/
+COPY packages/helm-tree /app/packages/helm-tree/
 
 #### CUSTOMS ARG and ENV
 # ARG FOO

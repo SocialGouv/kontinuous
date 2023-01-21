@@ -3,11 +3,16 @@ const fs = require("fs-extra")
 const yaml = require("~common/utils/yaml")
 const normalizeDegitUri = require("~common/utils/normalize-degit-uri")
 
+const chartTools = require("helm-tree/chart-tools")
 const downloadDependencyFromHelmRepo = require("./download-dependency-from-helm-repo")
-const chartTools = require("./chart-tools")
 const downloadDependencyFromGitRepo = require("./download-dependency-from-git-repo")
 
-const downloadRemoteRepository = async (target, definition, config, logger) => {
+const downloadRemoteRepository = async ({
+  target,
+  definition,
+  cachePath,
+  logger,
+}) => {
   const chartFile = `${target}/Chart.yaml`
   const chart = yaml.load(await fs.readFile(chartFile))
   const { dependencies = [] } = chart
@@ -20,7 +25,12 @@ const downloadRemoteRepository = async (target, definition, config, logger) => {
     const { repository } = dependency
 
     if (degitUri) {
-      await downloadDependencyFromGitRepo(dependency, target, config, logger)
+      await downloadDependencyFromGitRepo({
+        dependency,
+        target,
+        cachePath,
+        logger,
+      })
       touched = true
     } else if (repository.startsWith("file://../")) {
       const { name } = dependency
@@ -33,7 +43,12 @@ const downloadRemoteRepository = async (target, definition, config, logger) => {
       dependency.repository = `file://./charts/${name}`
       touched = true
     } else if (!repository.startsWith("file://")) {
-      await downloadDependencyFromHelmRepo(dependency, target, config, logger)
+      await downloadDependencyFromHelmRepo({
+        dependency,
+        target,
+        cachePath,
+        logger,
+      })
       touched = true
     }
   }
@@ -47,7 +62,12 @@ const downloadRemoteRepository = async (target, definition, config, logger) => {
     const subchartDir = `${target}/charts/${dependency.name}`
     const subDefinition = definition[name] || {}
     await chartTools.buildChartFile(subchartDir, name, subDefinition)
-    await downloadRemoteRepository(subchartDir, subDefinition, config, logger)
+    await downloadRemoteRepository({
+      target: subchartDir,
+      definition: subDefinition,
+      cachePath,
+      logger,
+    })
   }
 }
 

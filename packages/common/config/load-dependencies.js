@@ -1,6 +1,7 @@
 const fs = require("fs-extra")
 const kebabCase = require("lodash.kebabcase")
 
+const recurseDependencies = require("helm-tree/dependencies/recurse")
 const yaml = require("../utils/yaml")
 const deepmerge = require("../utils/deepmerge")
 const degitImproved = require("../utils/degit-improved")
@@ -8,11 +9,9 @@ const normalizeDegitUri = require("../utils/normalize-degit-uri")
 
 const copyFilter = require("./copy-filter")
 
-const recurseDependency = require("./recurse-dependencies")
-
 module.exports = async (config, logger) => {
   logger.debug("🔻 load dependencies")
-  await recurseDependency({
+  await recurseDependencies({
     config,
     beforeChildren: async ({ target, definition, scope, name }) => {
       const { links = {} } = config

@@ -1,5 +1,4 @@
 const fs = require("fs-extra")
-const decompress = require("decompress")
 
 const axios = require("~common/utils/axios-retry")
 const yaml = require("~common/utils/yaml")
@@ -7,18 +6,17 @@ const downloadFile = require("~common/utils/download-file")
 const slug = require("~common/utils/slug")
 const handleAxiosError = require("~common/utils/handle-axios-error")
 
-module.exports = async (dependency, target, config, logger) => {
+module.exports = async ({ dependency, target, cachePath, logger }) => {
   const { repository, version } = dependency
   const localArchive = `${target}/charts/${dependency.name}-${version}.tgz`
   let zfile
   if (await fs.pathExists(localArchive)) {
     zfile = localArchive
   } else {
-    const cacheDir = `${config.kontinuousHomeDir}/cache/charts`
     const archiveSlug = slug([dependency.name, version, repository])
-    zfile = `${cacheDir}/${archiveSlug}.tgz`
+    zfile = `${cachePath}/${archiveSlug}.tgz`
     if (!(await fs.pathExists(zfile))) {
-      await fs.ensureDir(cacheDir)
+      await fs.ensureDir(cachePath)
       const chartRepository = `${repository}/index.yaml`
       let repositoryIndex
       try {
@@ -44,17 +42,5 @@ module.exports = async (dependency, target, config, logger) => {
       await downloadFile(url, zfile, logger)
     }
   }
-
-  await decompress(zfile, `${target}/charts`)
-
-  let chartName = dependency.name
-  if (dependency.alias) {
-    chartName = dependency.alias
-    await fs.rename(
-      `${target}/charts/${dependency.name}`,
-      `${target}/charts/${dependency.alias}`
-    )
-  }
-
-  dependency.repository = `file://./charts/${chartName}`
+  return zfile
 }

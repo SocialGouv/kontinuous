@@ -10,6 +10,7 @@ on:
     paths:
       - packages/webhook/**
       - packages/common/**
+      - packages/helm-tree/**
       - yarn.lock
       - .yarnrc.yml
 

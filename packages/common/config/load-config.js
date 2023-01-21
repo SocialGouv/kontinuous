@@ -7,6 +7,7 @@ const set = require("lodash.set")
 const defaultsDeep = require("lodash.defaultsdeep")
 const qs = require("qs")
 
+const recurseDependencies = require("helm-tree/dependencies/recurse")
 const configDependencyKey = require("~common/utils/config-dependency-key")
 
 const lowerKeys = require("~common/utils/lower-keys")
@@ -29,7 +30,6 @@ const normalizeRepositoryUrl = require("../utils/normalize-repository-url")
 const gitEnv = require("../utils/git-env")
 
 const loadDependencies = require("./load-dependencies")
-const recurseDependency = require("./recurse-dependencies")
 
 const envParserYaml = require("./env-parsers/yaml")
 const envParserCastArray = require("./env-parsers/cast-array")
@@ -839,7 +839,7 @@ const loadConfig = async (
     await loadDependencies(config, logger)
   }
 
-  await recurseDependency({
+  await recurseDependencies({
     config,
     beforeChildren: async ({ definition }) => {
       const { config: extendsConfig } = definition
@@ -854,7 +854,7 @@ const loadConfig = async (
     },
   })
 
-  await recurseDependency({
+  await recurseDependencies({
     config,
     beforeChildren: async ({ definition, target }) => {
       const deployWithDir = `${target}/deploy-with`

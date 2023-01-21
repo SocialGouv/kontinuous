@@ -2,7 +2,8 @@ const fs = require("fs-extra")
 
 const yaml = require("~common/utils/yaml")
 
-const chartTools = require("./chart-tools")
+const chartTools = require("helm-tree/chart-tools")
+
 const dependencies = require("./dependencies")
 const mergeEnvTemplates = require("./merge-env-templates")
 const compileValues = require("./compile-values")

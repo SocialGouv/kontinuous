@@ -3,7 +3,7 @@ const fs = require("fs-extra")
 const yaml = require("~common/utils/yaml")
 
 // see https://github.com/helm/helm/issues/7093#issuecomment-814003563
-const setRelativeLinkVersions = async (target, definition, config, logger) => {
+const setRelativeLinkVersions = async ({ target, definition, logger }) => {
   const chartFile = `${target}/Chart.yaml`
   const chart = yaml.load(await fs.readFile(chartFile))
   const { dependencies = [] } = chart
@@ -30,7 +30,11 @@ const setRelativeLinkVersions = async (target, definition, config, logger) => {
     const name = dependency.alias || dependency.name
     const subchartDir = `${target}/charts/${dependency.name}`
     const subDefinition = definition[name] || {}
-    await setRelativeLinkVersions(subchartDir, subDefinition, config, logger)
+    await setRelativeLinkVersions({
+      target: subchartDir,
+      definition: subDefinition,
+      logger,
+    })
   }
 }
 module.exports = setRelativeLinkVersions

@@ -10,6 +10,7 @@ on:
     paths:
       - packages/wait-needs/**
       - packages/common/**
+      - packages/helm-tree/**
       - yarn.lock
       - .yarnrc.yml
 

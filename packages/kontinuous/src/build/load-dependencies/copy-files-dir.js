@@ -1,6 +1,6 @@
 const fs = require("fs-extra")
 
-const recurseDependency = require("~common/config/recurse-dependencies")
+const recurseDependencies = require("helm-tree/dependencies/recurse")
 const copyFilter = require("~common/config/copy-filter")
 
 module.exports = async (config) => {
@@ -13,7 +13,7 @@ module.exports = async (config) => {
     dereference: true,
     filter: copyFilter,
   })
-  await recurseDependency({
+  await recurseDependencies({
     config,
     afterChildren: async ({ target }) => {
       const chartsDir = `${target}/charts`
