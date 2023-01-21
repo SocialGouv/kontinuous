@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.123.3](https://github.com/socialgouv/kontinuous/compare/v1.123.2...v1.123.3) (2023-01-21)
+
+
+### Bug Fixes
+
+* rollout-status ImagePullBackOff retry ([baeb818](https://github.com/socialgouv/kontinuous/commit/baeb818d42830531c483cab581ea4ea1ed1540fb))
+
 ### [1.123.2](https://github.com/socialgouv/kontinuous/compare/v1.123.1...v1.123.2) (2023-01-21)
 
 
