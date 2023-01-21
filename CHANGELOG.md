@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.123.1](https://github.com/socialgouv/kontinuous/compare/v1.123.0...v1.123.1) (2023-01-21)
+
+
+### Bug Fixes
+
+* KS_HOMEDIR ([b3d9dff](https://github.com/socialgouv/kontinuous/commit/b3d9dff1e095cdd66258c86745a92240659dfaff))
+
 ## 1.123.0 (2023-01-21)
 
 
