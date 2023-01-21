@@ -23,8 +23,9 @@ In your `.kontinuous/config.yaml` :
 ```yaml
 dependencies:
   fabrique:
-    somPlugin:
-      enabled: false
+    somePluginType:
+      somePluginName:
+        enabled: false
 ```
 
 See [kontinuous configuration](/advanced/configuration)
