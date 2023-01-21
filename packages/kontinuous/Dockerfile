@@ -190,20 +190,3 @@ USER 0
 RUN chmod -R a+rwX /home/ubuntu/.kontinuous
 RUN chmod -R a+rwX /home/ubuntu/.yarn
 USER 1001
-
-# FROM program as plugins-charts
-# # pre-cache plugin's external charts
-# RUN KS_DEBUG=true \
-#   KS_GIT=false \
-#   KS_GIT_DISABLE_WARNING=true \
-#   KS_BUILD_PATH=/tmp/ks-build-cache \
-#   KS_INLINE_CONFIG_SET="${KS_INLINE_CONFIG_SET},dependencies.fabrique.import=socialgouv/kontinuous/plugins/fabrique" \
-#   /opt/kontinuous/packages/kontinuous/bin/kontinuous load-deps && \
-#   rm -rf /tmp/ks-build-cache
-
-# FROM program as cli
-# COPY --from=plugins-charts --chown=1001:1001 /home/ubuntu/.kontinuous/cache/ /home/ubuntu/.kontinuous/cache/
-# USER 0
-# RUN chmod -R a+rwX /home/ubuntu/.kontinuous
-# USER 1001
-
