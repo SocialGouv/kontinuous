@@ -257,7 +257,7 @@ module.exports = async (options, context) => {
       try {
         logger.debug(
           { namespace, selector },
-          `watching resource: ${resourceName}`
+          `👁️‍🗨️ watching resource: ${resourceName}`
         )
         eventsBucket.emit("resource:waiting", eventParam)
         const result = await rolloutStatusWatch({
