@@ -5,9 +5,39 @@
 - 📦 Define applications resources definitions and their dependencies in GIT
 - 🚧 Use builtin jobs for common use cases : docker builds, database creation/seed...
 - 🌍 Deploy on many environments : review-branches, preprod, prod...
-- 🔐 Use GitHub, GitLab or your own machine to build and deploy; no vendor-lockin
+- 🔐 Deploy with GitHub actions, GitLab CI or your CLI; no vendor-lockin
 
-kontinuous is built ontop of [HELM](https://helm.sh/), it's modular and plugin-based so you can extend it at will.
+kontinuous is built on top of [HELM](https://helm.sh/), it's modular and plugin-based so you can extend it at will.
+
+here's an example `.kontinuous/values.yaml` file :
+
+```yaml
+app:
+  # deploy "app" when `build-app` is successful
+  ~needs: [build-app]
+  # pass some environment variables
+  env:
+    - name: NGINX_URL
+      value: "nginx-{{ .Values.global.host }}"
+
+# deploy a nginx instance
+nginx:
+  image: nginx:1.23
+  host: "nginx-{{ .Values.global.host }}"
+  containerPort: 1080
+
+jobs:
+  runs:
+    # build and register the root `Dockerfile` as a kube Job
+    build-app:
+      use: build
+      # docker image name for the registry
+      imagePackage: app
+      # optional build args to customize the docker build
+      with:
+        buildArgs:
+          GIT_SHA: "{{ $.Values.global.sha }}"
+```
 
 ## kontinuous CLI
 
