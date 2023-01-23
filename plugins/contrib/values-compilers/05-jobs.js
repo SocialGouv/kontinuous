@@ -219,11 +219,11 @@ const compileRun = async (key, run, compileCommon) => {
 
   run.jobName = slug([
     "job",
-    [environment, 4],
-    [repositoryName, 10],
-    [gitBranch, 16],
-    [chartJobsKey, 16],
-    currentScope.join("--"),
+    [environment, 8],
+    [repositoryName, 8],
+    [gitBranch, 12],
+    [[...currentScope].reverse().join("-"), 11],
+    [chartJobsKey, 4],
   ])
   run.needsNames = [slug([[chartJobsKey, 16]]), ...scopes]
 
