@@ -190,5 +190,20 @@ module.exports = async (opts) => {
 
   await fs.writeFile(configFile, yaml.dump(projectConfig))
 
+  if (await fs.pathExists(".dockerignore")) {
+    const dockerignore = await fs.readFile(".dockerignore", {
+      encoding: "utf-8",
+    })
+    const lines = dockerignore.split("\n")
+    if (lines.includes(".kontinuous")) {
+      logger.info(".kontinuous already ignored in .dockerignore")
+    } else {
+      lines.push(".kontinuous")
+      const updatedDockerignore = lines.join("\n")
+      await fs.writeFile(".dockerignore", updatedDockerignore)
+      logger.info(".kontinuous added in .dockerignore")
+    }
+  }
+
   logger.info("done")
 }
