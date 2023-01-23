@@ -50,8 +50,6 @@ module.exports = async (values, options, { config, utils, ctx }) => {
   const ciNamespace =
     config.ciNamespace || `${projectName || repositoryName}-ci`
 
-  const imageProject = projectName || ""
-
   const replicas = isProd ? 2 : 1
 
   let hasRancher
@@ -77,7 +75,6 @@ module.exports = async (values, options, { config, utils, ctx }) => {
       rancherProjectId,
       registry,
       replicas,
-      imageProject,
       imageRepository,
       imageTag,
       branchSlug,
