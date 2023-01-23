@@ -86,7 +86,7 @@ automountServiceAccountToken: false
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-dev-test-jobs-build-feature-branch-1-jobs-dev-con-2yey4qeq
+  name: job-dev-test-jobs-build-feature-branch-1-create-db-db-2vvwr03j
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: db.create-db
@@ -97,20 +97,20 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs-dev/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-jobs-dev-con-2yey4qeq
+      project.fabrique.contrib.jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-create-db-db-2vvwr03j
     kontinuous/depname.chartResource: >-
-      jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-jobs-dev-con-2yey4qeq
+      jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-create-db-db-2vvwr03j
     kontinuous/depname.chartName: jobs-dev
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs-dev
-    kontinuous/depname.resourcePath: job.job-dev-test-jobs-build-feature-branch-1-jobs-dev-con-2yey4qeq
-    kontinuous/depname.resourceName: job-dev-test-jobs-build-feature-branch-1-jobs-dev-con-2yey4qeq
+    kontinuous/depname.resourcePath: job.job-dev-test-jobs-build-feature-branch-1-create-db-db-2vvwr03j
+    kontinuous/depname.resourceName: job-dev-test-jobs-build-feature-branch-1-create-db-db-2vvwr03j
   labels:
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/deployment.env: test-jobs-build-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-jobs-dev-5j4ypwv0
+    kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-create-d-5hog9gt0
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -129,7 +129,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-jobs-dev-5j4ypwv0
+        kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-create-d-5hog9gt0
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
@@ -225,7 +225,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-dev-test-jobs-build-feature-branch-1-jobs-dev-con-1p2zxo6o
+  name: job-dev-test-jobs-build-feature-branch-1-create-secre-3cm1pcsk
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: db.create-secret
@@ -235,20 +235,20 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs-dev/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-jobs-dev-con-1p2zxo6o
+      project.fabrique.contrib.jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-create-secre-3cm1pcsk
     kontinuous/depname.chartResource: >-
-      jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-jobs-dev-con-1p2zxo6o
+      jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-create-secre-3cm1pcsk
     kontinuous/depname.chartName: jobs-dev
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs-dev
-    kontinuous/depname.resourcePath: job.job-dev-test-jobs-build-feature-branch-1-jobs-dev-con-1p2zxo6o
-    kontinuous/depname.resourceName: job-dev-test-jobs-build-feature-branch-1-jobs-dev-con-1p2zxo6o
+    kontinuous/depname.resourcePath: job.job-dev-test-jobs-build-feature-branch-1-create-secre-3cm1pcsk
+    kontinuous/depname.resourceName: job-dev-test-jobs-build-feature-branch-1-create-secre-3cm1pcsk
   labels:
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/deployment.env: test-jobs-build-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-jobs-dev-1v02bv48
+    kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-create-s-rt7loo6y
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -267,7 +267,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-jobs-dev-1v02bv48
+        kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-create-s-rt7loo6y
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
@@ -359,7 +359,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-dev-test-jobs-build-feature-branch-1-jobs-contrib-132oa53k
+  name: job-dev-test-jobs-build-feature-branch-1-buildkit-bui-4tecghd4
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: build-app.buildkit
@@ -369,19 +369,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-build-feature-branch-1-jobs-contrib-132oa53k
-    kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-build-feature-branch-1-jobs-contrib-132oa53k
+      project.fabrique.contrib.jobs.job.job-dev-test-jobs-build-feature-branch-1-buildkit-bui-4tecghd4
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-build-feature-branch-1-buildkit-bui-4tecghd4
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-dev-test-jobs-build-feature-branch-1-jobs-contrib-132oa53k
-    kontinuous/depname.resourceName: job-dev-test-jobs-build-feature-branch-1-jobs-contrib-132oa53k
+    kontinuous/depname.resourcePath: job.job-dev-test-jobs-build-feature-branch-1-buildkit-bui-4tecghd4
+    kontinuous/depname.resourceName: job-dev-test-jobs-build-feature-branch-1-buildkit-bui-4tecghd4
   labels:
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/deployment.env: test-jobs-build-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-jobs-con-4pbkwvu1
+    kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-buildkit-1dv9ul3p
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -403,7 +403,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-jobs-con-4pbkwvu1
+        kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-buildkit-1dv9ul3p
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
     spec:
@@ -500,7 +500,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-dev-test-jobs-build-feature-branch-1-jobs-contrib-67toogqv
+  name: job-dev-test-jobs-build-feature-branch-1-buildkit-bui-pm3nb2vb
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: build-hasura.buildkit
@@ -510,19 +510,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-build-feature-branch-1-jobs-contrib-67toogqv
-    kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-build-feature-branch-1-jobs-contrib-67toogqv
+      project.fabrique.contrib.jobs.job.job-dev-test-jobs-build-feature-branch-1-buildkit-bui-pm3nb2vb
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-build-feature-branch-1-buildkit-bui-pm3nb2vb
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-dev-test-jobs-build-feature-branch-1-jobs-contrib-67toogqv
-    kontinuous/depname.resourceName: job-dev-test-jobs-build-feature-branch-1-jobs-contrib-67toogqv
+    kontinuous/depname.resourcePath: job.job-dev-test-jobs-build-feature-branch-1-buildkit-bui-pm3nb2vb
+    kontinuous/depname.resourceName: job-dev-test-jobs-build-feature-branch-1-buildkit-bui-pm3nb2vb
   labels:
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/deployment.env: test-jobs-build-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-jobs-con-258lj886
+    kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-buildkit-4wehvcwh
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -544,7 +544,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-jobs-con-258lj886
+        kontinuous/resourceName: job-job-dev-test-jobs-build-feature-branch-1-buildkit-4wehvcwh
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
     spec:

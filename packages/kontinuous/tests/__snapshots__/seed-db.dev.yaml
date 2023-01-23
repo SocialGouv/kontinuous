@@ -86,7 +86,7 @@ automountServiceAccountToken: false
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-dev-test-seed-db-feature-branch-1-jobs-contrib-fa-23vg1bzw
+  name: job-dev-test-seed-db-feature-branch-1-seed-jobs-contr-1rx9rykk
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: seed
@@ -96,19 +96,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-seed-db-feature-branch-1-jobs-contrib-fa-23vg1bzw
-    kontinuous/depname.chartResource: jobs.job.job-dev-test-seed-db-feature-branch-1-jobs-contrib-fa-23vg1bzw
+      project.fabrique.contrib.jobs.job.job-dev-test-seed-db-feature-branch-1-seed-jobs-contr-1rx9rykk
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-seed-db-feature-branch-1-seed-jobs-contr-1rx9rykk
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-dev-test-seed-db-feature-branch-1-jobs-contrib-fa-23vg1bzw
-    kontinuous/depname.resourceName: job-dev-test-seed-db-feature-branch-1-jobs-contrib-fa-23vg1bzw
+    kontinuous/depname.resourcePath: job.job-dev-test-seed-db-feature-branch-1-seed-jobs-contr-1rx9rykk
+    kontinuous/depname.resourceName: job-dev-test-seed-db-feature-branch-1-seed-jobs-contr-1rx9rykk
   labels:
     kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     kontinuous/deployment.env: test-seed-db-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-dev-test-seed-db-feature-branch-1-jobs-contri-68njhvv4
+    kontinuous/resourceName: job-job-dev-test-seed-db-feature-branch-1-seed-jobs-c-2g9shlnj
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -127,7 +127,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-dev-test-seed-db-feature-branch-1-jobs-contri-68njhvv4
+        kontinuous/resourceName: job-job-dev-test-seed-db-feature-branch-1-seed-jobs-c-2g9shlnj
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:

@@ -120,7 +120,7 @@ data:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-2uacvo5u
+  name: job-preprod-test-r-feature-branch-1-buildkit-build-ba-kl444n9n
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: build-backend.buildkit
@@ -130,19 +130,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-2uacvo5u
-    kontinuous/depname.chartResource: jobs.job.job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-2uacvo5u
+      project.fabrique.contrib.jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-ba-kl444n9n
+    kontinuous/depname.chartResource: jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-ba-kl444n9n
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-2uacvo5u
-    kontinuous/depname.resourceName: job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-2uacvo5u
+    kontinuous/depname.resourcePath: job.job-preprod-test-r-feature-branch-1-buildkit-build-ba-kl444n9n
+    kontinuous/depname.resourceName: job-preprod-test-r-feature-branch-1-buildkit-build-ba-kl444n9n
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-preprod-test-rep-feature-branch-1-jobs-contri-25p6boo8
+    kontinuous/resourceName: job-job-preprod-test-r-feature-branch-1-buildkit-buil-1e0w7uug
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -164,7 +164,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-preprod-test-rep-feature-branch-1-jobs-contri-25p6boo8
+        kontinuous/resourceName: job-job-preprod-test-r-feature-branch-1-buildkit-buil-1e0w7uug
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
     spec:
@@ -262,7 +262,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-nehrzgek
+  name: job-preprod-test-r-feature-branch-1-buildkit-build-fr-1rxzb3us
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: build-frontend.buildkit
@@ -272,19 +272,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-nehrzgek
-    kontinuous/depname.chartResource: jobs.job.job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-nehrzgek
+      project.fabrique.contrib.jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-fr-1rxzb3us
+    kontinuous/depname.chartResource: jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-fr-1rxzb3us
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-nehrzgek
-    kontinuous/depname.resourceName: job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-nehrzgek
+    kontinuous/depname.resourcePath: job.job-preprod-test-r-feature-branch-1-buildkit-build-fr-1rxzb3us
+    kontinuous/depname.resourceName: job-preprod-test-r-feature-branch-1-buildkit-build-fr-1rxzb3us
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-preprod-test-rep-feature-branch-1-jobs-contri-1022pa59
+    kontinuous/resourceName: job-job-preprod-test-r-feature-branch-1-buildkit-buil-226k04s6
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -306,7 +306,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-preprod-test-rep-feature-branch-1-jobs-contri-1022pa59
+        kontinuous/resourceName: job-job-preprod-test-r-feature-branch-1-buildkit-buil-226k04s6
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
     spec:
@@ -409,7 +409,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-3g8o5kvc
+  name: job-preprod-test-r-feature-branch-1-buildkit-build-po-we06ji0b
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: build-portail-admins.buildkit
@@ -420,19 +420,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-3g8o5kvc
-    kontinuous/depname.chartResource: jobs.job.job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-3g8o5kvc
+      project.fabrique.contrib.jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-po-we06ji0b
+    kontinuous/depname.chartResource: jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-po-we06ji0b
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-3g8o5kvc
-    kontinuous/depname.resourceName: job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-3g8o5kvc
+    kontinuous/depname.resourcePath: job.job-preprod-test-r-feature-branch-1-buildkit-build-po-we06ji0b
+    kontinuous/depname.resourceName: job-preprod-test-r-feature-branch-1-buildkit-build-po-we06ji0b
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-preprod-test-rep-feature-branch-1-jobs-contri-4nixkjv9
+    kontinuous/resourceName: job-job-preprod-test-r-feature-branch-1-buildkit-buil-1fn1ax41
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -454,7 +454,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-preprod-test-rep-feature-branch-1-jobs-contri-4nixkjv9
+        kontinuous/resourceName: job-job-preprod-test-r-feature-branch-1-buildkit-buil-1fn1ax41
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
     spec:
@@ -554,7 +554,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-4fd57epk
+  name: job-preprod-test-r-feature-branch-1-buildkit-build-po-3bcuzmr1
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: build-portail-usagers.buildkit
@@ -565,19 +565,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-4fd57epk
-    kontinuous/depname.chartResource: jobs.job.job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-4fd57epk
+      project.fabrique.contrib.jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-po-3bcuzmr1
+    kontinuous/depname.chartResource: jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-po-3bcuzmr1
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-4fd57epk
-    kontinuous/depname.resourceName: job-preprod-test-rep-feature-branch-1-jobs-contrib-fa-4fd57epk
+    kontinuous/depname.resourcePath: job.job-preprod-test-r-feature-branch-1-buildkit-build-po-3bcuzmr1
+    kontinuous/depname.resourceName: job-preprod-test-r-feature-branch-1-buildkit-build-po-3bcuzmr1
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-preprod-test-rep-feature-branch-1-jobs-contri-2a4nzph1
+    kontinuous/resourceName: job-job-preprod-test-r-feature-branch-1-buildkit-buil-1y7ivf0u
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -599,7 +599,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-preprod-test-rep-feature-branch-1-jobs-contri-2a4nzph1
+        kontinuous/resourceName: job-job-preprod-test-r-feature-branch-1-buildkit-buil-1y7ivf0u
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
     spec:

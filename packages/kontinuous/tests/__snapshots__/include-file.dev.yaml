@@ -85,7 +85,7 @@ automountServiceAccountToken: false
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-dev-test-include-file-feature-branch-1-jobs-contr-14ix9p69
+  name: job-dev-test-include-file-feature-branch-1-say-hello-1m1qjriv
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: say-hello
@@ -95,19 +95,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-include-file-feature-branch-1-jobs-contr-14ix9p69
-    kontinuous/depname.chartResource: jobs.job.job-dev-test-include-file-feature-branch-1-jobs-contr-14ix9p69
+      project.fabrique.contrib.jobs.job.job-dev-test-include-file-feature-branch-1-say-hello-1m1qjriv
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-include-file-feature-branch-1-say-hello-1m1qjriv
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-dev-test-include-file-feature-branch-1-jobs-contr-14ix9p69
-    kontinuous/depname.resourceName: job-dev-test-include-file-feature-branch-1-jobs-contr-14ix9p69
+    kontinuous/depname.resourcePath: job.job-dev-test-include-file-feature-branch-1-say-hello-1m1qjriv
+    kontinuous/depname.resourceName: job-dev-test-include-file-feature-branch-1-say-hello-1m1qjriv
   labels:
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv
     kontinuous/deployment.env: test-include-file-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-dev-test-include-file-feature-branch-1-jobs-c-3php8ftx
+    kontinuous/resourceName: job-job-dev-test-include-file-feature-branch-1-say-he-3xmqevgp
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -126,7 +126,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-dev-test-include-file-feature-branch-1-jobs-c-3php8ftx
+        kontinuous/resourceName: job-job-dev-test-include-file-feature-branch-1-say-he-3xmqevgp
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:

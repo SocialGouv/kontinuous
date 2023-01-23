@@ -86,7 +86,7 @@ automountServiceAccountToken: false
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-dev-test-jobs-seed-command-feature-branch-1-jobs-5s7x9fgp
+  name: job-dev-test-jobs-seed-command-feature-branch-1-creat-3u59166k
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: db.create-db
@@ -97,19 +97,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-seed-command-feature-branch-1-jobs-5s7x9fgp
-    kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-seed-command-feature-branch-1-jobs-5s7x9fgp
+      project.fabrique.contrib.jobs.job.job-dev-test-jobs-seed-command-feature-branch-1-creat-3u59166k
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-seed-command-feature-branch-1-creat-3u59166k
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-command-feature-branch-1-jobs-5s7x9fgp
-    kontinuous/depname.resourceName: job-dev-test-jobs-seed-command-feature-branch-1-jobs-5s7x9fgp
+    kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-command-feature-branch-1-creat-3u59166k
+    kontinuous/depname.resourceName: job-dev-test-jobs-seed-command-feature-branch-1-creat-3u59166k
   labels:
     kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k
     kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-dev-test-jobs-seed-command-feature-branch-1-j-5t5fz7af
+    kontinuous/resourceName: job-job-dev-test-jobs-seed-command-feature-branch-1-c-3r11o3wl
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -128,7 +128,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-dev-test-jobs-seed-command-feature-branch-1-j-5t5fz7af
+        kontinuous/resourceName: job-job-dev-test-jobs-seed-command-feature-branch-1-c-3r11o3wl
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
@@ -224,7 +224,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-dev-test-jobs-seed-command-feature-branch-1-jobs-1r5zlen2
+  name: job-dev-test-jobs-seed-command-feature-branch-1-creat-481uhp5z
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: db.create-secret
@@ -234,19 +234,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-seed-command-feature-branch-1-jobs-1r5zlen2
-    kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-seed-command-feature-branch-1-jobs-1r5zlen2
+      project.fabrique.contrib.jobs.job.job-dev-test-jobs-seed-command-feature-branch-1-creat-481uhp5z
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-seed-command-feature-branch-1-creat-481uhp5z
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-command-feature-branch-1-jobs-1r5zlen2
-    kontinuous/depname.resourceName: job-dev-test-jobs-seed-command-feature-branch-1-jobs-1r5zlen2
+    kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-command-feature-branch-1-creat-481uhp5z
+    kontinuous/depname.resourceName: job-dev-test-jobs-seed-command-feature-branch-1-creat-481uhp5z
   labels:
     kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k
     kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-dev-test-jobs-seed-command-feature-branch-1-j-3dhdw0zu
+    kontinuous/resourceName: job-job-dev-test-jobs-seed-command-feature-branch-1-c-5yr60sjp
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -265,7 +265,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-dev-test-jobs-seed-command-feature-branch-1-j-3dhdw0zu
+        kontinuous/resourceName: job-job-dev-test-jobs-seed-command-feature-branch-1-c-5yr60sjp
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
@@ -357,7 +357,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-dev-test-jobs-seed-command-feature-branch-1-jobs-464drmn7
+  name: job-dev-test-jobs-seed-command-feature-branch-1-seed-4tzvwc3y
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: seed
@@ -368,19 +368,19 @@ metadata:
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-seed-command-feature-branch-1-jobs-464drmn7
-    kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-seed-command-feature-branch-1-jobs-464drmn7
+      project.fabrique.contrib.jobs.job.job-dev-test-jobs-seed-command-feature-branch-1-seed-4tzvwc3y
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-seed-command-feature-branch-1-seed-4tzvwc3y
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-command-feature-branch-1-jobs-464drmn7
-    kontinuous/depname.resourceName: job-dev-test-jobs-seed-command-feature-branch-1-jobs-464drmn7
+    kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-command-feature-branch-1-seed-4tzvwc3y
+    kontinuous/depname.resourceName: job-dev-test-jobs-seed-command-feature-branch-1-seed-4tzvwc3y
   labels:
     kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k
     kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-dev-test-jobs-seed-command-feature-branch-1-j-1vle5k7j
+    kontinuous/resourceName: job-job-dev-test-jobs-seed-command-feature-branch-1-s-3lq11ies
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -399,7 +399,7 @@ spec:
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-dev-test-jobs-seed-command-feature-branch-1-j-1vle5k7j
+        kontinuous/resourceName: job-job-dev-test-jobs-seed-command-feature-branch-1-s-3lq11ies
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
