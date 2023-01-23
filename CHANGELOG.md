@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.124.0](https://github.com/socialgouv/kontinuous/compare/v1.123.8...v1.124.0) (2023-01-23)
+
+
+### Features
+
+* init add .kontinuous to .dockerignore ([4f21b64](https://github.com/socialgouv/kontinuous/commit/4f21b64eaf121d4f2a48778a4f4b1cc2cf865548))
+
+
+### Bug Fixes
+
+* add emoji ([1baacf0](https://github.com/socialgouv/kontinuous/commit/1baacf0cffb61603f65509219cb3293b30a09ce2))
+* improve job slug readbility ([dad2088](https://github.com/socialgouv/kontinuous/commit/dad2088d20f48a54b977bfd96e7f212246b17636))
+* test-deploy ([b928d63](https://github.com/socialgouv/kontinuous/commit/b928d6307e7a1d3b67aee815c0582a4c4fc927f1))
+
 ### [1.123.8](https://github.com/socialgouv/kontinuous/compare/v1.123.7...v1.123.8) (2023-01-23)
 
 
