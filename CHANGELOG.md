@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.123.8](https://github.com/socialgouv/kontinuous/compare/v1.123.7...v1.123.8) (2023-01-23)
+
+
+### Bug Fixes
+
+* registry param ([4a7113b](https://github.com/socialgouv/kontinuous/commit/4a7113b0fbe4c439823cf1a39fe90def23246b70))
+
 ### [1.123.7](https://github.com/socialgouv/kontinuous/compare/v1.123.6...v1.123.7) (2023-01-23)
 
 
