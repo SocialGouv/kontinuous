@@ -3,7 +3,7 @@ const MAX_DNS_LENGTH = 63
 module.exports = async (values, options, { config, utils }) => {
   const { slug, deepmerge } = utils
 
-  const { environment, gitBranch, projectName, registry } = config
+  const { environment, gitBranch, projectName } = config
 
   const branchSlug = slug(gitBranch)
 
@@ -13,11 +13,11 @@ module.exports = async (values, options, { config, utils }) => {
   const isPreProd = env === "preprod"
   const isDev = !(isProd || isPreProd)
 
+  const { domain: defaultRootDomain, registry } = options
+
   const imageProject = registry === "ghcr.io" ? "socialgouv" : projectName || ""
 
   const { repositoryName } = config
-
-  const { domain: defaultRootDomain } = options
 
   const globalHostMaxLength =
     MAX_DNS_LENGTH - Math.max(...Object.keys(values).map((key) => key.length))
