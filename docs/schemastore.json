@@ -1,0 +1,373 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/socialgouv/kontinuous/xxx",
+  "title": "schema for .kontinuous/values.yaml",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "jobs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "~chart": {
+          "description": "??",
+          "type": "string",
+          "pattern": "jobs"
+        },
+        "runs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties": {},
+            "properties": {
+              "use": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string"
+              },
+              "entrypoint": {
+                "description": "Docker image entrypoint arguments",
+                "examples": ["['sh', '-c', 'echo 42']"],
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "checkout": {
+                "description": "Should the repo be checked-out to build. defaults to true",
+                "type": "boolean"
+              },
+              "memoryLimit": {
+                "description": "Kubernetes max memory for the Job before OOMKill",
+                "type": "string"
+              },
+              "memoryRequest": {
+                "description": "Kubernetes memory reservation for the Job",
+                "type": "string"
+              },
+              "cpuLimit": {
+                "description": "Kubernetes max cpu for the Job before capping",
+                "type": "string"
+              },
+              "cpuRequest": {
+                "description": "Kubernetes cpu reservation for the Job",
+                "type": "string"
+              },
+              "with": { "type": "object", "additionalProperties": true }
+            },
+            "required": ["use"],
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "use": {
+                      "const": "build",
+                      "description": "Build and register docker image"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "with": {
+                      "$ref": "#/definitions/job-build"
+                    }
+                  },
+                  "required": ["with"]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "use": {
+                      "const": "create-db",
+                      "description": "Create a Postgres Database"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "with": {
+                      "$ref": "#/definitions/job-create-db"
+                    }
+                  },
+                  "required": ["with"]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "use": {
+                      "const": "deactivate",
+                      "description": "Destroy namespace and databasees"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "with": {
+                      "$ref": "#/definitions/job-deactivate"
+                    }
+                  },
+                  "required": ["with"]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "use": {
+                      "const": "drop-db",
+                      "description": "Destroy the databasee"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "with": {
+                      "$ref": "#/definitions/job-drop-db"
+                    }
+                  },
+                  "required": ["with"]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "use": {
+                      "const": "pg-restore",
+                      "description": "Restore the database from a backup storage"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "with": {
+                      "$ref": "#/definitions/job-pg-restore"
+                    }
+                  },
+                  "required": ["with"]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "use": {
+                      "const": "psql",
+                      "description": "Execute psql commands on the database"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "with": {
+                      "$ref": "#/definitions/job-psql"
+                    }
+                  },
+                  "required": ["with"]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "use": {
+                      "const": "seed-db",
+                      "description": "Execute a repository .sql on the database"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "with": {
+                      "$ref": "#/definitions/job-seed-db"
+                    }
+                  },
+                  "required": ["with"]
+                }
+              }
+            ]
+          },
+          "properties": {}
+        }
+      },
+      "required": ["~chart", "runs"]
+    }
+  },
+  "required": [],
+  "definitions": {
+    "build-args": {
+      "description": "Build args to customize the docker build",
+      "type": "object",
+      "additionalProperties": true
+    },
+    "job-build": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "imagePackage": {
+          "description": "Name of the dockerfile on the registry",
+          "type": "string"
+        },
+        "dockerfile": {
+          "description": "Path to the Dockerfile on the repository. Defaults to /Dockerfile",
+          "type": "string"
+        },
+        "context": {
+          "description": "Docker context (cwd) when building the image. Defaults to .",
+          "type": "string"
+        },
+        "registrySecretRefName": {
+          "description": "Name of the registry secret if you have a custom docker registry. Should contain CI_REGISTRY_USER, CI_REGISTRY_PASSWORD",
+          "type": "string"
+        },
+        "registry": {
+          "description": "Url of your custom docker registry",
+          "type": "string"
+        },
+        "imageProject": {
+          "description": "Optional project name in the docker registry",
+          "type": "string"
+        },
+        "imageRepository": {
+          "description": "Optional sub repository for the docker image",
+          "type": "string"
+        },
+        "buildArgs": {
+          "$ref": "#/definitions/build-args"
+        },
+        "target": {
+          "description": "??",
+          "type": "string"
+        }
+      },
+      "required": ["imagePackage"]
+    },
+    "job-create-db": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pgAdminSecretRefName": {
+          "description": "Secret with admin credentials to the database server",
+          "type": "string"
+        },
+        "pgSecretName": {
+          "description": "Name of the kubernetes user secret to create. Defaults to pg-user",
+          "type": "string"
+        },
+        "database": {
+          "description": "Name of the Postgres database to create. Defaults to environment",
+          "type": "string"
+        },
+        "pgUser": {
+          "description": "Name of the Postgres user to create",
+          "type": "string"
+        },
+        "extensions": {
+          "description": "List of Postgres extensions to create in the new database. Defaults to `hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent`",
+          "type": "string"
+        },
+        "useAzureFlex": {
+          "description": "Use an Azure Flex database. defaults to false",
+          "type": "boolean"
+        }
+      },
+      "required": ["database", "pgUser"]
+    },
+    "job-deactivate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pgAdminSecretRefName": {
+          "description": "Secret with admin credentials to the database server",
+          "type": "string"
+        },
+        "database": {
+          "description": "Name of the Postgres database to destroy. Defaults to environment",
+          "type": "string"
+        },
+        "db": {
+          "description": "Name of the Postgres database to destroy. Defaults to environment",
+          "type": "string"
+        }
+      },
+      "required": ["database", "db"]
+    },
+    "job-drop-db": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pgAdminSecretRefName": {
+          "description": "Secret with admin credentials to the database server",
+          "type": "string"
+        },
+        "database": {
+          "description": "Name of the Postgres database to destroy.",
+          "type": "string"
+        },
+        "databaseUser": {
+          "description": "Name of the Postgres user to destroy.",
+          "type": "string"
+        }
+      },
+      "required": ["database", "databaseUser"]
+    },
+    "job-pg-restore": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pgAdminSecretRefName": {
+          "description": "Secret with admin credentials to the database server",
+          "type": "string"
+        },
+        "restorePath": {
+          "description": "Path to .sql file in the repo",
+          "type": "string"
+        },
+        "mountPath": {
+          "description": "Path to the backup storage mount",
+          "type": "string"
+        },
+        "owner": {
+          "description": "Change restored database owner",
+          "type": "string"
+        },
+        "database": {
+          "description": "Name of the Postgres database to restore to",
+          "type": "string"
+        }
+      },
+      "required": ["restorePath", "databaseUser"]
+    },
+    "job-psql": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pgSecretRefName": {
+          "description": "Secret with Postgresql credentials to execute the script",
+          "type": "string"
+        },
+        "sqlFile": {
+          "description": "Path to .sql file in the repo",
+          "examples": ["./scripts/restore.sql"],
+          "type": "string"
+        }
+      },
+      "required": ["pgSecretRefName", "sqlFile"]
+    },
+    "job-seed-db": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pgSecretRefName ": {
+          "description": "Secret with Postgresql credentials to execute the script",
+          "type": "string"
+        },
+        "seedPath": {
+          "description": "Path to .sql file in the repo",
+          "type": "string"
+        }
+      },
+      "required": ["pgSecretRefName", "seedPath"]
+    }
+  }
+}
