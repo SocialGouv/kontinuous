@@ -840,7 +840,7 @@ const loadConfig = async (
     }, {})
 
   if (!isReloadingConfig) {
-    logger.info(`📂 buildPath: file://${config.buildPath}`)
+    logger.info(`📂 buildPath: file://${config.buildPath} `)
   }
 
   if (
