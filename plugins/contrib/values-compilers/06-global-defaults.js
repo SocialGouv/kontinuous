@@ -90,6 +90,7 @@ module.exports = async (values, options, { config, utils, ctx }) => {
         hasRancher && enableDefaultCharts && values.global.kontinuous.hasAll,
       securityPoliciesEnabled:
         enableDefaultCharts && values.global.kontinuous.hasAll,
+      outputVolumeEnabled: values.global.kontinuous.hasOutput,
       ingress: {
         annotations: {},
       },

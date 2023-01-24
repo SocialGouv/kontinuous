@@ -157,6 +157,28 @@ const runsArrayToMap = (runs) => {
   }, {})
 }
 
+const compileRunOutputs = async (run, compileCommon) => {
+  const { context } = compileCommon
+  const { values } = context
+  if (run.enabled === false) {
+    return
+  }
+  if (!(run.output || run.inputs)) {
+    return
+  }
+  if (!values.global.kontinuous) {
+    values.global.kontinuous = {}
+  }
+  values.global.kontinuous.hasOutput = true
+
+  if (run.output) {
+    // TODO
+  }
+  if (run.inputs) {
+    // TODO
+  }
+}
+
 const compileRun = async (key, run, compileCommon) => {
   const { context, chartScope, parentScope, parentWith, newRuns } =
     compileCommon
@@ -296,6 +318,8 @@ const compileRun = async (key, run, compileCommon) => {
       newRuns[subKey] = newRun
     }
   }
+
+  await compileRunOutputs(run, compileCommon)
 }
 
 async function compile(
@@ -312,6 +336,7 @@ async function compile(
     parentScope,
     parentWith,
     newRuns,
+    values,
   }
 
   values.runs = runsArrayToMap(values.runs)
@@ -434,7 +459,7 @@ const compileValues = async (values, context, chartScope = []) => {
 }
 
 module.exports = async (values, options, context, _scope) => {
-  context = { ...context, downloadingPromises: {}, options }
+  context = { ...context, downloadingPromises: {}, options, values }
   await compileValues(values, context)
   return values
 }

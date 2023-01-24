@@ -1,0 +1,13 @@
+jobs:
+  ~chart: jobs
+  runs:
+    a:
+      output: true
+      run: |
+        echo earth>$KONTINUOUS_OUTPUT/WORLD
+    b:
+      inputs:
+        PLANET: jos.a.WORLD
+      run: |
+        PLANET=$(cat $KONTINUOUS_INPUT/PLANET)
+        echo "Hello $PLANET !"

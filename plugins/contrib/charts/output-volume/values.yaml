@@ -1,0 +1,6 @@
+enabled: 
+name: kontinuous-jobs-output
+namespace:
+storage:
+  size: 10Mi
+  className:
