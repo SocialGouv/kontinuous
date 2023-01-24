@@ -3,8 +3,6 @@ dependencies:
     preDeploy:
       rancherNamespaces:
         enabled: false
-      needsKubeconfig:
-        enabled: false
       nspleaseNamespaces:
         enabled: true
 options:

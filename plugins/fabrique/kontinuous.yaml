@@ -43,6 +43,24 @@ dependencies:
         enabled: true
 
     preDeploy:
+      importSecrets:
+        options:
+          secrets:
+            kubeconfig:
+            harbor:
+            pg-admin-user:
+              from:
+                - azure-pg-admin-user
+                - pg-scaleway
+            # secret-name:
+              # enabled: true
+              # reload: false
+              # required: false
+              # fromNamespace: <$projectName-ci>
+              # toNamespace: true
+              # toAllNamespace: false
+              # to: azure-pg-admin-user
+              # from: [azure-pg-admin-user]
       rancherNamespaces:
         enabled: true
       cleanFailed:

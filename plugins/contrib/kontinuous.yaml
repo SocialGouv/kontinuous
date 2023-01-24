@@ -40,8 +40,6 @@ preDeploy:
     enabled: false
   rancherNamespaces:
     enabled: false
-  needsKubeconfig:
-    enabled: false
   clear:
     enabled: false
   cleanFailed:
