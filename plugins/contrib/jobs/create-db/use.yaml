@@ -11,7 +11,7 @@ runs:
     vars:
       DB_SECRET_NAME: "{{ tpl (or $.with.pgSecretName $.Values.global.pgSecretName) . }}"
       NAMESPACE: "{{ $.Values.global.namespace }}"
-      JOB_NAMESPACE: "{{ $.Values.global.ciNamespace }}"
+      JOB_NAMESPACE: "{{ $.Values.global.namespace }}"
       PGDATABASE: "{{ tpl (or $.with.database $.Values.global.pgDatabase) . }}"
       PGUSER: "{{ tpl (or $.with.pgUser $.Values.global.pgUser) . }}"
       SECRET_TTL: '{{ tpl (or $.with.secretTTL "24h") . }}'
