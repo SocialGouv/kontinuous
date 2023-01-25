@@ -5,7 +5,7 @@ exports[`test build manifests with snapshots deactivate.dev 1`] = `
 kind: Job
 metadata:
   name: job-dev-test-deactivate-feature-branch-1-delete-names-6cnriaba
-  namespace: test-deactivate-feature-branch-1
+  namespace: awesome-ci
   annotations:
     kontinuous/needsName: deactivate.delete-namespace
     kontinuous/needsNames: >-
