@@ -7,7 +7,7 @@ runs:
     kubernetes: true
     envFrom:
       - secretRef:
-          name: "{{ tpl (or $.with.pgAdminSecretRefName $.parentWith.pgAdminSecretRefName \"pg-admin-user\") . }}"
+          name: "{{ tpl (or $.with.pgAdminSecretRefName $.parentWith.pgAdminSecretRefName `pg-admin-user`) . }}"
     vars:
       DB_SECRET_NAME: "{{ tpl (or $.with.pgSecretName $.Values.global.pgSecretName) . }}"
       NAMESPACE: "{{ $.Values.global.namespace }}"
@@ -27,7 +27,7 @@ runs:
     image: ghcr.io/socialgouv/docker/psql:6.70.0
     envFrom:
       - secretRef:
-          name: "{{ tpl (or $.with.pgAdminSecretRefName $.parentWith.pgAdminSecretRefName \"pg-admin-user\") . }}"
+          name: "{{ tpl (or $.with.pgAdminSecretRefName $.parentWith.pgAdminSecretRefName `pg-admin-user`) . }}"
     env:
       - name: NEW_DB_NAME
         value: "{{ tpl (or $.with.database $.Values.global.pgDatabase) .  }}"

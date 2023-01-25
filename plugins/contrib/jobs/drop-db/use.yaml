@@ -4,7 +4,7 @@ runs:
     image: ghcr.io/socialgouv/docker/psql:7.0.0
     envFrom:
       - secretRef:
-          name: "{{ or $.with.pgAdminSecretRefName $.Values.global.pgSecretName \"pg-admin-user\"}}"
+          name: "{{ or $.with.pgAdminSecretRefName $.Values.global.pgSecretName `pg-admin-user` }}"
     env:
       - name: DATABASE
         value: "{{ tpl (or $.with.database $.Values.global.pgDatabase) .  }}"
