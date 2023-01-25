@@ -5,7 +5,7 @@ module.exports = async (values, options, { config, utils }) => {
 
   const { environment, gitBranch, projectName } = config
 
-  const branchSlug = slug(gitBranch)
+  // const branchSlug = slug(gitBranch)
 
   const env = environment
 
@@ -36,11 +36,7 @@ module.exports = async (values, options, { config, utils }) => {
 
   const host = `${subdomain}.${domain}`
 
-  const pgSecretName = isProd
-    ? "pg-user"
-    : isPreProd
-    ? "pg-user"
-    : `pg-user-${branchSlug}`
+  const pgSecretName = "pg-user"
 
   const productionDatabase = repositoryName
 
