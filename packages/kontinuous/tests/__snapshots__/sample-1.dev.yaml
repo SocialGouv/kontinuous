@@ -246,7 +246,7 @@ spec:
               memory: 121Mi
           envFrom:
             - secretRef:
-                name: pg-user-feature-branch-1
+                name: pg-user
             - secretRef:
                 name: app-sealed-secret
             - configMapRef:
@@ -364,7 +364,7 @@ spec:
               memory: 121Mi
           envFrom:
             - secretRef:
-                name: pg-user-feature-branch-1
+                name: pg-user
             - secretRef:
                 name: app-sealed-secret
             - configMapRef:
@@ -465,7 +465,7 @@ spec:
           env: []
           envFrom:
             - secretRef:
-                name: pg-user-feature-branch-1
+                name: pg-user
             - secretRef:
                 name: hasura-sealed-secret
             - configMapRef:
@@ -530,7 +530,7 @@ spec:
               value: '24'
           envFrom:
             - secretRef:
-                name: pg-user-feature-branch-1
+                name: pg-user
           resources:
             limits:
               cpu: 20m
@@ -543,7 +543,7 @@ spec:
           name: pgweb
           envFrom:
             - secretRef:
-                name: pg-user-feature-branch-1
+                name: pg-user
           ports:
             - containerPort: 8081
               name: http

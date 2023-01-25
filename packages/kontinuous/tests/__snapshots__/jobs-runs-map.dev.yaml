@@ -168,27 +168,27 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: PGUSER
-                  name: pg-user-feature-branch-1
+                  name: pg-user
             - name: NEW_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: PGPASSWORD
-                  name: pg-user-feature-branch-1
+                  name: pg-user
             - name: PGHOST
               valueFrom:
                 secretKeyRef:
                   key: PGHOST
-                  name: pg-user-feature-branch-1
+                  name: pg-user
             - name: PGPORT
               valueFrom:
                 secretKeyRef:
                   key: PGPORT
-                  name: pg-user-feature-branch-1
+                  name: pg-user
             - name: PGSSLMODE
               valueFrom:
                 secretKeyRef:
                   key: PGSSLMODE
-                  name: pg-user-feature-branch-1
+                  name: pg-user
             - name: NEW_DB_EXTENSIONS
               value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
           command:
@@ -302,7 +302,7 @@ spec:
             - name: USE_AZURE_FLEX
               value: 'false'
             - name: DB_SECRET_NAME
-              value: pg-user-feature-branch-1
+              value: pg-user
             - name: JOB_NAMESPACE
               value: test-jobs-runs-map-feature-branch-1
             - name: NAMESPACE

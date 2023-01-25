@@ -332,7 +332,7 @@ spec:
               memory: 121Mi
           envFrom:
             - secretRef:
-                name: pg-user-feature-branch-1
+                name: pg-user
             - secretRef:
                 name: app-sealed-secret
             - configMapRef:
