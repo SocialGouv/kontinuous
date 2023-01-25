@@ -3,14 +3,40 @@
   "$id": "https://github.com/socialgouv/kontinuous/xxx",
   "title": "schema for .kontinuous/values.yaml",
   "type": "object",
-  "additionalProperties": false,
+  "additionalProperties": {
+    "type": "object",
+    "description": "Custom component",
+    "additionalProperties": true,
+    "properties": {
+      "~chart": { "type": "string" }
+    },
+    "if": {
+      "properties": {
+        "~chart": {
+          "const": "app"
+        }
+      }
+    },
+    "then": {
+      "description": "Deployment + service + ingress triad",
+      "$ref": "#/definitions/chart-app"
+    }
+  },
+
   "properties": {
+    "global": {
+      "description": "Global variables",
+      "type": "object",
+      "additionalProperties": true
+    },
+    "project": { "type": "object", "additionalProperties": true },
     "jobs": {
+      "description": "Kubernetes jobs definitions",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "~chart": {
-          "description": "??",
+          "description": "Chart to use. defaults to jobs",
           "type": "string",
           "pattern": "jobs"
         },
@@ -19,7 +45,6 @@
           "additionalProperties": {
             "type": "object",
             "additionalProperties": false,
-            "patternProperties": {},
             "properties": {
               "use": {
                 "type": "string"
@@ -204,10 +229,6 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "imagePackage": {
-          "description": "Name of the dockerfile on the registry",
-          "type": "string"
-        },
         "dockerfile": {
           "description": "Path to the Dockerfile on the repository. Defaults to /Dockerfile",
           "type": "string"
@@ -222,6 +243,10 @@
         },
         "registry": {
           "description": "Url of your custom docker registry",
+          "type": "string"
+        },
+        "imagePackage": {
+          "description": "Name of the dockerfile on the registry",
           "type": "string"
         },
         "imageProject": {
@@ -368,6 +393,160 @@
         }
       },
       "required": ["pgSecretRefName", "seedPath"]
+    },
+    "chart-app": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^\\.": { "type": ["string", "number", "boolean"] }
+      },
+      "properties": {
+        "~chart": {
+          "description": "Base HELM Chart for this component",
+          "type": "string",
+          "examples": ["app", "maildev"]
+        },
+        "~needs": {
+          "description": "Job or deployment dependencies",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "examples": ["[build-app]"]
+        },
+        "imagePackage": {
+          "description": "Name of the dockerfile on the registry",
+          "type": "string"
+        },
+        "imageProject": {
+          "description": "Optional project name in the docker registry",
+          "type": "string"
+        },
+        "imageRepository": {
+          "description": "Optional sub repository for the docker image",
+          "type": "string"
+        },
+        "probesPath": {
+          "description": "Path to application health probe. Defaults to /healthz",
+          "type": "string",
+          "examples": ["/healthz"]
+        },
+        "probesPort": {
+          "description": "Port for probes calls",
+          "type": ["string", "number"]
+        },
+        "containerPort": {
+          "description": "Container port, defaults to 3000",
+          "type": ["string", "number"]
+        },
+        "host": {
+          "description": "Hostname for the deployment",
+          "type": "string"
+        },
+        "ingress": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "description": "URL path to map the ingress to",
+              "type": "string",
+              "examples": ["/"]
+            },
+            "annotations": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "certSecretName": {
+          "description": "Name of existing SSL cert secret if any.",
+          "type": "string"
+        },
+        "env": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "value": { "type": "string" }
+            }
+          }
+        },
+        "envFrom": {
+          "description": "List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated.",
+          "items": {
+            "description": "EnvFromSource represents the source of a set of ConfigMaps",
+            "properties": {
+              "configMapRef": {
+                "description": "ConfigMapEnvSource selects a ConfigMap to populate the environment variables with.\n\nThe contents of the target ConfigMap's Data field will represent the key-value pairs as environment variables.",
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
+                    "type": ["string", "null"]
+                  },
+                  "optional": {
+                    "description": "Specify whether the ConfigMap must be defined",
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              },
+              "prefix": {
+                "description": "An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.",
+                "type": ["string", "null"]
+              },
+              "secretRef": {
+                "description": "SecretEnvSource selects a Secret to populate the environment variables with.\n\nThe contents of the target Secret's Data field will represent the key-value pairs as environment variables.",
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
+                    "type": ["string", "null"]
+                  },
+                  "optional": {
+                    "description": "Specify whether the Secret must be defined",
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": ["array", "null"]
+        },
+        "vars": { "type": "object", "additionalProperties": true },
+        "volumes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "persistentVolumeClaim": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": { "claimName": { "type": "string" } }
+              }
+            }
+          }
+        },
+        "volumeMounts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "mountPath": {
+                "type": "string",
+                "description": "Mount path on the container"
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
