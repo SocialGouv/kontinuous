@@ -13,7 +13,7 @@ jobs:
     name: Create release using standard-version
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
 
