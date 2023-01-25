@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.127.0](https://github.com/socialgouv/kontinuous/compare/v1.126.0...v1.127.0) (2023-01-25)
+
+
+### Features
+
+* same db secret ([eb6969c](https://github.com/socialgouv/kontinuous/commit/eb6969c5689f22c5a03ee980347ba3d20b5e5498))
+
+
+### Bug Fixes
+
+* up snapshots ([6fa86b0](https://github.com/socialgouv/kontinuous/commit/6fa86b009a5083e3bb938be6f11ed1e5fec3b60e))
+
 ## 1.126.0 (2023-01-25)
 
 
