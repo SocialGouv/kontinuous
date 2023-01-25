@@ -415,6 +415,11 @@
           },
           "examples": ["[build-app]"]
         },
+        "image": {
+          "description": "Full path to docker image",
+          "examples": ["ghcr.io/socialgouv/docker/nginx:7.0.1"],
+          "type": "string"
+        },
         "imagePackage": {
           "description": "Name of the dockerfile on the registry",
           "type": "string"
@@ -446,11 +451,17 @@
         },
         "ingress": {
           "type": "object",
+          "additionalProperties": false,
           "properties": {
             "path": {
               "description": "URL path to map the ingress to",
               "type": "string",
               "examples": ["/"]
+            },
+            "rewriteTarget": {
+              "description": "Redirect path on the service",
+              "type": "string",
+              "examples": ["/$1"]
             },
             "annotations": {
               "type": "object",
@@ -526,26 +537,59 @@
             "properties": {
               "name": { "type": "string" },
               "persistentVolumeClaim": {
-                "type": "object",
+                "description": "PersistentVolumeClaimVolumeSource references the user's PVC in the same namespace. This volume finds the bound PV and mounts that volume for the pod. A PersistentVolumeClaimVolumeSource is, essentially, a wrapper around another type of volume that is owned by someone else (the system).",
                 "additionalProperties": false,
-                "properties": { "claimName": { "type": "string" } }
+                "properties": {
+                  "claimName": {
+                    "description": "ClaimName is the name of a PersistentVolumeClaim in the same namespace as the pod using this volume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims",
+                    "type": "string"
+                  },
+                  "readOnly": {
+                    "description": "Will force the ReadOnly setting in VolumeMounts. Default false.",
+                    "type": "boolean"
+                  }
+                },
+                "required": ["claimName"],
+                "type": "object"
               }
             }
           }
         },
         "volumeMounts": {
-          "type": "array",
+          "description": "Pod volumes to mount into the container's filesystem. Cannot be updated.",
           "items": {
-            "type": "object",
+            "description": "VolumeMount describes a mounting of a Volume within a container.",
             "additionalProperties": false,
             "properties": {
-              "name": { "type": "string" },
               "mountPath": {
-                "type": "string",
-                "description": "Mount path on the container"
+                "description": "Path within the container at which the volume should be mounted.  Must not contain ':'.",
+                "type": "string"
+              },
+              "mountPropagation": {
+                "description": "mountPropagation determines how mounts are propagated from the host to container and the other way around. When not set, MountPropagationNone is used. This field is beta in 1.10.",
+                "type": ["string", "null"]
+              },
+              "name": {
+                "description": "This must match the Name of a Volume.",
+                "type": "string"
+              },
+              "readOnly": {
+                "description": "Mounted read-only if true, read-write otherwise (false or unspecified). Defaults to false.",
+                "type": "boolean"
+              },
+              "subPath": {
+                "description": "Path within the volume from which the container's volume should be mounted. Defaults to \"\" (volume's root).",
+                "type": ["string", "null"]
+              },
+              "subPathExpr": {
+                "description": "Expanded path within the volume from which the container's volume should be mounted. Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded using the container's environment. Defaults to \"\" (volume's root). SubPathExpr and SubPath are mutually exclusive. This field is alpha in 1.14.",
+                "type": ["string", "null"]
               }
-            }
-          }
+            },
+            "required": ["name", "mountPath"],
+            "type": "object"
+          },
+          "type": ["array", "null"]
         }
       }
     }
