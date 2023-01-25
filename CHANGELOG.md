@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.125.0](https://github.com/socialgouv/kontinuous/compare/v1.124.0...v1.125.0) (2023-01-25)
+
+
+### Features
+
+* slug-subdomain ([c76a7cd](https://github.com/socialgouv/kontinuous/commit/c76a7cd40f95a4300a9b6a8f1007200e77596595))
+
+
+### Bug Fixes
+
+* add space to allow clickable link in terminal ([606ed91](https://github.com/socialgouv/kontinuous/commit/606ed91315419d184e8ab683521d7b01a0261ef1))
+* rename tpl to yaml ([84700c2](https://github.com/socialgouv/kontinuous/commit/84700c275e0f1f5f45aa4bc942300b28dd06cc82))
+* up minimum node version ([aa31280](https://github.com/socialgouv/kontinuous/commit/aa31280059e40aa1c545a77f94a5cbc8c3ccff3a))
+
 ## [1.124.0](https://github.com/socialgouv/kontinuous/compare/v1.123.8...v1.124.0) (2023-01-23)
 
 
