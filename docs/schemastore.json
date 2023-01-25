@@ -216,7 +216,7 @@
           "properties": {}
         }
       },
-      "required": ["~chart", "runs"]
+      "required": ["runs"]
     }
   },
   "required": [],
