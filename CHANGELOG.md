@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.126.0 (2023-01-25)
+
+
+### Features
+
+* unified ns ([#137](https://github.com/socialgouv/kontinuous/issues/137)) ([13bebae](https://github.com/socialgouv/kontinuous/commit/13bebaebfd4a48afbd7fd903013679bc9f6c94ba))
+
 ## [1.125.0](https://github.com/socialgouv/kontinuous/compare/v1.124.0...v1.125.0) (2023-01-25)
 
 
