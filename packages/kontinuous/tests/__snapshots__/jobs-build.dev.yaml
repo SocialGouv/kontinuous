@@ -162,7 +162,7 @@ spec:
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
-                name: pg-scaleway
+                name: pg-admin-user
           env:
             - name: NEW_DB_NAME
               value: autodevops_feature-branch-1
@@ -300,7 +300,7 @@ spec:
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
-                name: pg-scaleway
+                name: pg-admin-user
           env:
             - name: USE_AZURE_FLEX
               value: 'false'

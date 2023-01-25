@@ -781,7 +781,7 @@ spec:
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
-                name: azure-pg-admin-user
+                name: pg-admin-user
           env:
             - name: NEW_DB_NAME
               value: autodevops_feature-branch-1
@@ -919,7 +919,7 @@ spec:
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
-                name: azure-pg-admin-user
+                name: pg-admin-user
           env:
             - name: USE_AZURE_FLEX
               value: 'false'
@@ -1052,7 +1052,7 @@ spec:
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
-                name: azure-pg-admin-user
+                name: pg-user-feature-branch-1
           env:
             - name: DATABASE
               value: autodevops_feature-branch-1
