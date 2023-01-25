@@ -4,7 +4,7 @@ runs:
     use: socialgouv/kontinuous/plugins/contrib/jobs/drop-db
     if: "{{ or $.with.db $.with.pgAdminSecretRefName $.with.database }}"
     with:
-      pgAdminSecretRefName: "{{ $.with.pgAdminSecretRefName }}"
+      pgAdminSecretRefName: "{{ or $.with.pgAdminSecretRefName \"pg-admin-user\" }}"
       database: "{{ $.with.database }}"
 
   delete-namespace:
