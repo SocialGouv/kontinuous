@@ -7,10 +7,8 @@
     "type": "object",
     "description": "Custom component",
     "additionalProperties": true,
-    "properties": {
-      "~chart": { "type": "string" }
-    },
     "if": {
+      "required": ["~chart"],
       "properties": {
         "~chart": {
           "const": "app"
@@ -20,9 +18,9 @@
     "then": {
       "description": "Deployment + service + ingress triad",
       "$ref": "#/definitions/chart-app"
-    }
+    },
+    "else": { "type": "object", "additionalProperties": true }
   },
-
   "properties": {
     "global": {
       "description": "Global variables",
