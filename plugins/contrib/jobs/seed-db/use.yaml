@@ -1,7 +1,6 @@
 runs:
   - name: seed-db
     retry: 3
-    needs: [import-secret]
     checkout: true
     image: ghcr.io/socialgouv/docker/psql:7.0.0
     envFrom:
