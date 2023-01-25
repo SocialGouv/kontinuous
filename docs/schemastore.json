@@ -7,19 +7,22 @@
     "type": "object",
     "description": "Custom component",
     "additionalProperties": true,
-    "if": {
-      "required": ["~chart"],
-      "properties": {
-        "~chart": {
-          "const": "app"
+    "allOf": [
+      {
+        "if": {
+          "required": ["~chart"],
+          "properties": {
+            "~chart": {
+              "const": "app"
+            }
+          }
+        },
+        "then": {
+          "description": "Deployment + service + ingress triad",
+          "$ref": "#/definitions/chart-app"
         }
       }
-    },
-    "then": {
-      "description": "Deployment + service + ingress triad",
-      "$ref": "#/definitions/chart-app"
-    },
-    "else": { "type": "object", "additionalProperties": true }
+    ]
   },
   "properties": {
     "global": {
