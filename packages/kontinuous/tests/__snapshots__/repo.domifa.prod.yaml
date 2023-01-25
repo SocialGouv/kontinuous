@@ -176,7 +176,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-prod-test-r-feature-branch-1-buildkit-build-backe-4vuvjsyc
-  namespace: awesome-ci
+  namespace: test-repo.domifa
   annotations:
     kontinuous/needsName: build-backend.buildkit
     kontinuous/needsNames: '[\\"build-backend\\",\\"build-backend.buildkit\\",\\"build-backend..buildkit\\"]'
@@ -321,7 +321,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-prod-test-r-feature-branch-1-buildkit-build-front-4npicdqn
-  namespace: awesome-ci
+  namespace: test-repo.domifa
   annotations:
     kontinuous/needsName: build-frontend.buildkit
     kontinuous/needsNames: '[\\"build-frontend\\",\\"build-frontend.buildkit\\",\\"build-frontend..buildkit\\"]'
@@ -468,7 +468,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-prod-test-r-feature-branch-1-buildkit-build-porta-1twnas1s
-  namespace: awesome-ci
+  namespace: test-repo.domifa
   annotations:
     kontinuous/needsName: build-portail-admins.buildkit
     kontinuous/needsNames: >-
@@ -614,7 +614,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-prod-test-r-feature-branch-1-buildkit-build-porta-2ln9pb3d
-  namespace: awesome-ci
+  namespace: test-repo.domifa
   annotations:
     kontinuous/needsName: build-portail-usagers.buildkit
     kontinuous/needsNames: >-

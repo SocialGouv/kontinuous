@@ -86,7 +86,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-include-file-feature-branch-1-say-hello-1m1qjriv
-  namespace: awesome-ci
+  namespace: test-include-file-feature-branch-1
   annotations:
     kontinuous/needsName: say-hello
     kontinuous/needsNames: '[\\"say-hello\\"]'

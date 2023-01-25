@@ -121,7 +121,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-preprod-test-r-feature-branch-1-buildkit-build-ba-kl444n9n
-  namespace: awesome-ci
+  namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/needsName: build-backend.buildkit
     kontinuous/needsNames: '[\\"build-backend\\",\\"build-backend.buildkit\\",\\"build-backend..buildkit\\"]'
@@ -263,7 +263,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-preprod-test-r-feature-branch-1-buildkit-build-fr-1rxzb3us
-  namespace: awesome-ci
+  namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/needsName: build-frontend.buildkit
     kontinuous/needsNames: '[\\"build-frontend\\",\\"build-frontend.buildkit\\",\\"build-frontend..buildkit\\"]'
@@ -410,7 +410,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-preprod-test-r-feature-branch-1-buildkit-build-po-we06ji0b
-  namespace: awesome-ci
+  namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/needsName: build-portail-admins.buildkit
     kontinuous/needsNames: >-
@@ -555,7 +555,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-preprod-test-r-feature-branch-1-buildkit-build-po-3bcuzmr1
-  namespace: awesome-ci
+  namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/needsName: build-portail-usagers.buildkit
     kontinuous/needsNames: >-

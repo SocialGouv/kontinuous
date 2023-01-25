@@ -86,7 +86,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-jobs-uses-relative-feature-branch-1-crea-5k4sf6ye
-  namespace: awesome-ci
+  namespace: test-jobs-uses-relative-feature-branch-1
   annotations:
     kontinuous/needsName: db.create-db
     kontinuous/needsNames: '[\\"db\\",\\"db.create-db\\",\\"db..create-db\\"]'
@@ -224,7 +224,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-jobs-uses-relative-feature-branch-1-crea-3ywgjgc6
-  namespace: awesome-ci
+  namespace: test-jobs-uses-relative-feature-branch-1
   annotations:
     kontinuous/needsName: db.create-secret
     kontinuous/needsNames: '[\\"db\\",\\"db.create-secret\\",\\"db..create-secret\\"]'
@@ -304,7 +304,7 @@ spec:
             - name: DB_SECRET_NAME
               value: pg-user-feature-branch-1
             - name: JOB_NAMESPACE
-              value: awesome-ci
+              value: test-jobs-uses-relative-feature-branch-1
             - name: NAMESPACE
               value: test-jobs-uses-relative-feature-branch-1
             - name: PGDATABASE
