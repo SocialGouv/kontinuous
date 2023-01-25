@@ -3,7 +3,6 @@ jobs:
     db:
       use: create-db
       with:
-        pgAdminSecretRefName: pg-scaleway
         # pgSecretName: "hasura-db-{{ .Values.global.branchSlug32 }}"
         # database: "hasura_{{ .Values.global.branchSlug32 }}"
         # pgUser: "hasura_{{ .Values.global.branchSlug32 }}"
@@ -14,9 +13,8 @@ deactivate:
     runs:
       deactivate:
         with:
-          pgAdminSecretRefName: pg-scaleway
+          db: true
       # drop-db2:
       #   use: drop-db
       #   with:
-      #     pgAdminSecretRefName: pg-scaleway
       #     database: "hasura_{{ .Values.global.branchSlug32 }}"
