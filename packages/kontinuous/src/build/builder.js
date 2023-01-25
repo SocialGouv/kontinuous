@@ -68,7 +68,7 @@ module.exports = async (_options = {}) => {
   const manifestsFile = `${buildPath}/manifests.yaml`
   await fs.writeFile(manifestsFile, manifestsDump)
 
-  logger.debug(`🏗️ built manifests: file://${manifestsFile} `)
+  logger.debug(`🏗️  built manifests: file://${manifestsFile} `)
 
   await validateManifests(manifests)
 
