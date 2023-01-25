@@ -6,6 +6,3 @@ dependencies:
     patches:
       needsUsingInitcontainers:
         enabled: false
-    preDeploy:
-      needsKubeconfig:
-        enabled: false

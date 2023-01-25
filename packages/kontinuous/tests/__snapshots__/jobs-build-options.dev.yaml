@@ -87,7 +87,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-jobs-build-options-feature-branch-1-buil-42yehrg5
-  namespace: awesome-ci
+  namespace: test-jobs-build-options-feature-branch-1
   annotations:
     kontinuous/needsName: build-app.buildkit
     kontinuous/needsNames: '[\\"build-app\\",\\"build-app.buildkit\\",\\"build-app..buildkit\\"]'

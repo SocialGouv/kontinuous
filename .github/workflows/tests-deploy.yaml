@@ -14,12 +14,12 @@ jobs:
   test-standalone-charts:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: write .kontinuous/config.yaml
         shell: bash
         run: ./.github/scripts/write-kontinuous-config-yaml.sh
       - name: Kubernetes KinD Cluster
-        uses: helm/kind-action@v1.2.0
+        uses: helm/kind-action@v1.4.0
       - run: kubectl cluster-info
       - run: kubectl version
       - run: kubectl get pods -n kube-system
@@ -34,18 +34,17 @@ jobs:
           inlineSet: |
             global.antiAffinity.enabled: false
           cwd: .github/e2e/standalone-charts
-          kubeconfigContext: kind-chart-testing
       - run: kubectl get jobs -n test-project-ci
       - run: kubectl get jobs -n test-project-ci --field-selector status.successful=1 | grep "extra-job" # additionnal grep to exit 1 on error
   test-values-js:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: write .kontinuous/config.yaml
         shell: bash
         run: ./.github/scripts/write-kontinuous-config-yaml.sh
       - name: Kubernetes KinD Cluster
-        uses: helm/kind-action@v1.2.0
+        uses: helm/kind-action@v1.4.0
       - run: kubectl cluster-info
       - run: kubectl version
       - run: kubectl get pods -n kube-system
@@ -60,7 +59,6 @@ jobs:
           inlineSet: |
             global.antiAffinity.enabled: false
           cwd: .github/e2e/values-js
-          kubeconfigContext: kind-chart-testing
       - run: kubectl get pods -n test-namespace
       - name: pod is running
         run: kubectl get pods -n test-namespace --field-selector=status.phase=Running | grep "app"
@@ -69,12 +67,12 @@ jobs:
   app-review:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: write .kontinuous/config.yaml
         shell: bash
         run: ./.github/scripts/write-kontinuous-config-yaml.sh
       - name: Kubernetes KinD Cluster
-        uses: helm/kind-action@v1.2.0
+        uses: helm/kind-action@v1.4.0
       - run: kubectl create ns test-project-ci
       - name: test app-simple
         uses: "./.github/actions/deploy-via-github"
@@ -86,7 +84,6 @@ jobs:
           inlineSet: |
             global.antiAffinity.enabled: false
           cwd: .github/e2e/app-simple
-          kubeconfigContext: kind-chart-testing
           inlineValues: |
             app:
               image: nginx
@@ -96,12 +93,12 @@ jobs:
   app-tag:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: write .kontinuous/config.yaml
         shell: bash
         run: ./.github/scripts/write-kontinuous-config-yaml.sh
       - name: Kubernetes KinD Cluster
-        uses: helm/kind-action@v1.2.0
+        uses: helm/kind-action@v1.4.0
       - run: kubectl create ns test-project-ci
       - name: test app-simple
         uses: "./.github/actions/deploy-via-github"
@@ -113,7 +110,6 @@ jobs:
           inlineSet: |
             global.antiAffinity.enabled: false
           cwd: .github/e2e/app-simple
-          kubeconfigContext: kind-chart-testing
           inlineValues: |
             global:
               imageRepository: ""

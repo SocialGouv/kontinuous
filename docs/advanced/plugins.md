@@ -254,8 +254,6 @@ Official plugins are here [plugins/contrib/](https://github.com/socialgouv/konti
           # use: ./.kontinous/jobs/create-db # local job, defined in project repository
           # use: https://github.com/socialgouv/kontinuous/plugins/contrib/jobs/create-db # degit full url
           use: socialgouv/kontinuous/plugins/contrib/jobs/create-db # degit implicit github
-          with:
-            pgAdminSecretRefName: pg-scaleway
         seed:
           needs: [hasura]
           use: socialgouv/kontinuous/plugins/contrib/jobs/seed-db

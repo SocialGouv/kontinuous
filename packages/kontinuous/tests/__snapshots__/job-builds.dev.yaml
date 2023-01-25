@@ -86,7 +86,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-job-builds-feature-branch-1-buildkit-bui-3ttx7dsa
-  namespace: awesome-ci
+  namespace: test-job-builds-feature-branch-1
   annotations:
     kontinuous/needsName: build-app.buildkit
     kontinuous/needsNames: '[\\"build-app\\",\\"build-app.buildkit\\",\\"build-app..buildkit\\"]'
@@ -229,7 +229,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-job-builds-feature-branch-1-buildkit-bui-vmr373ho
-  namespace: awesome-ci
+  namespace: test-job-builds-feature-branch-1
   annotations:
     kontinuous/needsName: build-hasura.buildkit
     kontinuous/needsNames: '[\\"build-hasura\\",\\"build-hasura.buildkit\\",\\"build-hasura..buildkit\\"]'

@@ -1,6 +1,7 @@
 enabled: false
 jobs-deactivate:
   enabled: true
+  namespace: "{{ .Values.global.ciNamespace }}"
   runs:
     deactivate:
       use: socialgouv/kontinuous/plugins/contrib/jobs/deactivate

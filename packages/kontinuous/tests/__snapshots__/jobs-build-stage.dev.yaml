@@ -87,7 +87,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-jobs-build-stage-feature-branch-1-create-3os2f2bf
-  namespace: awesome-ci
+  namespace: test-jobs-build-stage-feature-branch-1
   annotations:
     kontinuous/needsName: db.create-db
     kontinuous/needsNames: '[\\"db\\",\\"db.create-db\\",\\"db..create-db\\"]'
@@ -162,7 +162,7 @@ spec:
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
-                name: pg-scaleway
+                name: pg-admin-user
           env:
             - name: NEW_DB_NAME
               value: autodevops_feature-branch-1
@@ -226,7 +226,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-jobs-build-stage-feature-branch-1-create-18tyvhbw
-  namespace: awesome-ci
+  namespace: test-jobs-build-stage-feature-branch-1
   annotations:
     kontinuous/needsName: db.create-secret
     kontinuous/needsNames: '[\\"db\\",\\"db.create-secret\\",\\"db..create-secret\\"]'
@@ -300,14 +300,14 @@ spec:
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
-                name: pg-scaleway
+                name: pg-admin-user
           env:
             - name: USE_AZURE_FLEX
               value: 'false'
             - name: DB_SECRET_NAME
               value: pg-user-feature-branch-1
             - name: JOB_NAMESPACE
-              value: awesome-ci
+              value: test-jobs-build-stage-feature-branch-1
             - name: NAMESPACE
               value: test-jobs-build-stage-feature-branch-1
             - name: PGDATABASE
@@ -360,7 +360,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-jobs-build-stage-feature-branch-1-buildk-5up3vvbw
-  namespace: awesome-ci
+  namespace: test-jobs-build-stage-feature-branch-1
   annotations:
     kontinuous/needsName: build-app.buildkit
     kontinuous/plugin.stage: build
@@ -502,7 +502,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-jobs-build-stage-feature-branch-1-buildk-34b7p2n7
-  namespace: awesome-ci
+  namespace: test-jobs-build-stage-feature-branch-1
   annotations:
     kontinuous/needsName: build-hasura.buildkit
     kontinuous/plugin.stage: build

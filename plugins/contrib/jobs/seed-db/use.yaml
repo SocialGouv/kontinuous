@@ -1,19 +1,6 @@
 runs:
-  - name: import-secret
-    retry: 6
-    checkout: false
-    image: bitnami/kubectl:latest
-    user: 1001
-    kubernetes: true
-    vars:
-      DB_SECRET_NAME: "{{ tpl (or $.with.pgSecretName $.Values.global.pgSecretName) . }}"
-      NAMESPACE: "{{ $.Values.global.namespace }}"
-      JOB_NAMESPACE: "{{ $.Values.global.ciNamespace }}"
-    run: /action/import-secret.sh
-
   - name: seed-db
     retry: 3
-    needs: [import-secret]
     checkout: true
     image: ghcr.io/socialgouv/docker/psql:7.0.0
     envFrom:

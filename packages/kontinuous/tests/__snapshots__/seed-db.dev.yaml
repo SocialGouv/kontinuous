@@ -87,7 +87,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-seed-db-feature-branch-1-seed-jobs-contr-1rx9rykk
-  namespace: awesome-ci
+  namespace: test-seed-db-feature-branch-1
   annotations:
     kontinuous/needsName: seed
     kontinuous/needsNames: '[\\"seed\\"]'

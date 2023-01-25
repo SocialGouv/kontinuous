@@ -87,7 +87,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-jobs-seed-sql-feature-branch-1-create-db-5739hj0d
-  namespace: awesome-ci
+  namespace: test-jobs-seed-sql-feature-branch-1
   annotations:
     kontinuous/needsName: db.create-db
     kontinuous/needsNames: '[\\"db\\",\\"db.create-db\\",\\"db..create-db\\"]'
@@ -161,7 +161,7 @@ spec:
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
-                name: azure-pg-admin-user
+                name: pg-admin-user
           env:
             - name: NEW_DB_NAME
               value: autodevops_feature-branch-1
@@ -225,7 +225,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-jobs-seed-sql-feature-branch-1-create-se-1kyq6uvj
-  namespace: awesome-ci
+  namespace: test-jobs-seed-sql-feature-branch-1
   annotations:
     kontinuous/needsName: db.create-secret
     kontinuous/needsNames: '[\\"db\\",\\"db.create-secret\\",\\"db..create-secret\\"]'
@@ -298,14 +298,14 @@ spec:
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
-                name: azure-pg-admin-user
+                name: pg-admin-user
           env:
             - name: USE_AZURE_FLEX
               value: 'false'
             - name: DB_SECRET_NAME
               value: pg-user-feature-branch-1
             - name: JOB_NAMESPACE
-              value: awesome-ci
+              value: test-jobs-seed-sql-feature-branch-1
             - name: NAMESPACE
               value: test-jobs-seed-sql-feature-branch-1
             - name: PGDATABASE
@@ -357,135 +357,12 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-dev-test-jobs-seed-sql-feature-branch-1-import-se-5y5x12a7
-  namespace: awesome-ci
-  annotations:
-    kontinuous/needsName: seed.import-secret
-    kontinuous/needsNames: '[\\"seed\\",\\"seed.import-secret\\",\\"seed..import-secret\\"]'
-    kontinuous/plugin.needs: '[\\"db\\"]'
-    janitor/ttl: 7d
-    kontinuous/chartPath: project.fabrique.contrib.jobs
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
-    kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-seed-sql-feature-branch-1-import-se-5y5x12a7
-    kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-seed-sql-feature-branch-1-import-se-5y5x12a7
-    kontinuous/depname.chartName: jobs
-    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-sql-feature-branch-1-import-se-5y5x12a7
-    kontinuous/depname.resourceName: job-dev-test-jobs-seed-sql-feature-branch-1-import-se-5y5x12a7
-  labels:
-    kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
-    kontinuous/deployment.env: test-jobs-seed-sql-feature-branch-1
-    kontinuous/ref: feature-branch-1
-    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-dev-test-jobs-seed-sql-feature-branch-1-impor-4a76eqy5
-    app.kubernetes.io/manifest-managed-by: kontinuous
-    app.kubernetes.io/manifest-created-by: kontinuous
-spec:
-  backoffLimit: 6
-  activeDeadlineSeconds: 3600
-  ttlSecondsAfterFinished: 1800
-  template:
-    metadata:
-      labels:
-        environment: dev
-        ref: feature-branch-1
-        repository: test-jobs-seed-sql
-        runName: seed-db
-        kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
-        kontinuous/deployment.env: test-jobs-seed-sql-feature-branch-1
-        kontinuous/ref: feature-branch-1
-        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-dev-test-jobs-seed-sql-feature-branch-1-impor-4a76eqy5
-        app.kubernetes.io/manifest-managed-by: kontinuous
-        app.kubernetes.io/manifest-created-by: kontinuous
-      annotations:
-        kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
-    spec:
-      restartPolicy: Never
-      initContainers:
-        - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.125.0
-          command:
-            - sh
-            - '-c'
-            - degit socialgouv/kontinuous/plugins/contrib/jobs/seed-db /action
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-          volumeMounts:
-            - name: action
-              mountPath: /action
-          resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
-            requests:
-              cpu: '0'
-              memory: '0'
-      containers:
-        - name: job
-          image: bitnami/kubectl:latest
-          imagePullPolicy: IfNotPresent
-          env:
-            - name: DB_SECRET_NAME
-              value: pg-user-feature-branch-1
-            - name: JOB_NAMESPACE
-              value: awesome-ci
-            - name: NAMESPACE
-              value: test-jobs-seed-sql-feature-branch-1
-            - name: KUBECONFIG
-              value: /secrets/k8s/kubeconfig
-          command:
-            - /bin/bash
-            - '-c'
-            - |
-              set -e
-              /action/import-secret.sh
-          resources:
-            limits:
-              cpu: '1'
-              memory: 512Mi
-            requests:
-              cpu: '0.041'
-              memory: 121Mi
-          securityContext:
-            runAsUser: 1001
-            runAsGroup: 1001
-          volumeMounts:
-            - name: workspace
-              mountPath: /workspace
-            - name: action
-              mountPath: /action
-            - name: kubeconfig
-              mountPath: /secrets/k8s
-              readOnly: true
-      securityContext:
-        fsGroup: 1001
-      volumes:
-        - name: workspace
-          emptyDir: {}
-        - name: action
-          emptyDir: {}
-        - name: kubeconfig
-          secret:
-            secretName: kubeconfig
-            items:
-              - key: KUBECONFIG
-                path: kubeconfig
----
-apiVersion: batch/v1
-kind: Job
-metadata:
   name: job-dev-test-jobs-seed-sql-feature-branch-1-seed-db-s-1jedkjdw
-  namespace: awesome-ci
+  namespace: test-jobs-seed-sql-feature-branch-1
   annotations:
     kontinuous/needsName: seed.seed-db
     kontinuous/needsNames: '[\\"seed\\",\\"seed.seed-db\\",\\"seed..seed-db\\"]'
-    kontinuous/plugin.needs: '[\\"seed..import-secret\\",\\"db\\"]'
+    kontinuous/plugin.needs: '[\\"db\\"]'
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
