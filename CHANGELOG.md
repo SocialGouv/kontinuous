@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.2](https://github.com/socialgouv/kontinuous/compare/v1.128.1...v1.128.2) (2023-01-26)
+
+
+### Bug Fixes
+
+* add more emojis to logs output ([f645586](https://github.com/socialgouv/kontinuous/commit/f6455869688ccc22265c74ae76341a5cb8949dc9))
+* import secret cleaner ([5ceba21](https://github.com/socialgouv/kontinuous/commit/5ceba21e7db832b91e827225acba07d76719c81a))
+* jobs that needs db admin perms by default ([5a4b5fb](https://github.com/socialgouv/kontinuous/commit/5a4b5fb1cfe39facf9bad58723254388349889b7))
+
 ### [1.128.1](https://github.com/socialgouv/kontinuous/compare/v1.128.0...v1.128.1) (2023-01-26)
 
 
