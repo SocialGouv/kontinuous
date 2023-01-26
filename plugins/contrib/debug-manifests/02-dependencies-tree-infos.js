@@ -32,12 +32,14 @@ module.exports = async (manifests, _options, context) => {
       continue
     }
 
+    const dependantName = getDepName(manifest)
+
+    umlSet.add(`${dependantName};`)
+
     if (!jsonNeeds) {
       continue
     }
     const needs = JSON.parse(jsonNeeds)
-
-    const dependantName = getDepName(manifest)
 
     for (const need of needs) {
       const matchingDeps = deps[need]
