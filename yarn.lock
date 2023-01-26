@@ -4773,10 +4773,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookiejar@npm:^2.1.3":
-  version: 2.1.3
-  resolution: "cookiejar@npm:2.1.3"
-  checksum: a726cabc18dd57d8a7fe165a55bfc72380e06cb452b83052905806d0fc900880e00ea0fe439d34699633f80a0ca2994a304c9ab627e8e694110377c06ce252f5
+"cookiejar@npm:^2.1.4":
+  version: 2.1.4
+  resolution: "cookiejar@npm:2.1.4"
+  checksum: 61b09ec3009c2e499e91328e5c72986f0131030863b56cfc51546607f265ed976d118380f94cf88ffd322e4b5f658811c157214ec204e04ec40b7d4bb826a295
   languageName: node
   linkType: hard
 
@@ -6107,10 +6107,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-copy@npm:2.1.3":
-  version: 2.1.3
-  resolution: "fast-copy@npm:2.1.3"
-  checksum: 5a009604905a1abe22de0c59708976627e097d30c3687c57cc8eb25534f101785c246607996aa7a97cff1fcf50c642ae64087c5353a2c59b195a8eb1adb8296e
+"fast-copy@npm:^2.1.3":
+  version: 2.1.7
+  resolution: "fast-copy@npm:2.1.7"
+  checksum: 873d6bb93244a8c86e55949101e8c87dd9a3f2123d7d09558f75480906d12ac839993a629775413da54bdfbc2b0cdfa6ab6e1c793e01bd2c3ebabc4a2a91e477
   languageName: node
   linkType: hard
 
@@ -8846,12 +8846,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json5@npm:2.2.2":
-  version: 2.2.2
-  resolution: "json5@npm:2.2.2"
+"json5@npm:^2.2.2":
+  version: 2.2.3
+  resolution: "json5@npm:2.2.3"
   bin:
     json5: lib/cli.js
-  checksum: da81dfa146a0285c3f76b361abdc89d697f732b4374a3fe4e5768011c56fdaac8c2e1746fb37efbd9161e06cbab09f9185c4b7106603c2b91c60d76a8ffea517
+  checksum: e298f92c92197e956eb7a93304f74b5b80b4c3fe412f44a1f3d4c966e5ddf2e8ef2ac7ce0b0c40c78735bf2901c29257a653e1da684dae8e7835932e4904d6a0
   languageName: node
   linkType: hard
 
@@ -11030,10 +11030,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:6.9.7":
-  version: 6.9.7
-  resolution: "qs@npm:6.9.7"
-  checksum: 93f75cd622be38fc3da0e7d922ffdd93e4e7a5a7fad009f8007c13e76e1d5ce996e33e3d090b34598084241850534dfd29700577be91e459b9d6cca20887d1c1
+"qs@npm:^6.9.7":
+  version: 6.11.0
+  resolution: "qs@npm:6.11.0"
+  dependencies:
+    side-channel: "npm:^1.0.4"
+  checksum: 337966e2e957a7d2a69821c528f3d18a8b346ddb0f16cc08d11c6206aed3b6624927781ff437aa3909e54ad32ebdee2c5396ad4094b1c722760774f7082f6124
   languageName: node
   linkType: hard
 
