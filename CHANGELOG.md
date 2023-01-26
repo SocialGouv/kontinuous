@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.3](https://github.com/socialgouv/kontinuous/compare/v1.128.2...v1.128.3) (2023-01-26)
+
+
+### Bug Fixes
+
+* allow copy on same ns if name if neq ([cdcecc3](https://github.com/socialgouv/kontinuous/commit/cdcecc3eeadb12d1876afc71eee6229b90156770))
+
 ### [1.128.2](https://github.com/socialgouv/kontinuous/compare/v1.128.1...v1.128.2) (2023-01-26)
 
 
