@@ -555,12 +555,33 @@ const loadConfig = async (
         if (!links["socialgouv/kontinuous"]) {
           const real = await fs.realpath(process.argv[1])
           if (real.endsWith("packages/kontinuous/bin/kontinuous")) {
+            // local kontinuous git repository
             links["socialgouv/kontinuous"] = path.resolve(
               `${path.dirname(real)}/../../..`
             )
           }
         }
         return links
+      },
+    },
+    remoteLinks: {
+      transform: async (remoteLinks = {}) => {
+        remoteLinks = lowerKeys(remoteLinks)
+        if (!remoteLinks["socialgouv/kontinuous"]) {
+          const real = await fs.realpath(process.argv[1])
+          if (real.endsWith("node_modules/kontinuous/bin/kontinuous")) {
+            // npx or packages.json/dependencies
+            const packageFile = `${path.dirname(real)}/../package.json`
+            const packageJSON = await fs.readFile(packageFile, {
+              encoding: "utf-8",
+            })
+            const package = JSON.parse(packageJSON)
+            remoteLinks[
+              "socialgouv/kontinuous"
+            ] = `socialgouv/kontinuous@v${package.version}`
+          }
+        }
+        return remoteLinks
       },
     },
     private: {

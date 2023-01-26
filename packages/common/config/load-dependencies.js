@@ -6,6 +6,7 @@ const yaml = require("../utils/yaml")
 const deepmerge = require("../utils/deepmerge")
 const degitImproved = require("../utils/degit-improved")
 const normalizeDegitUri = require("../utils/normalize-degit-uri")
+const removePrefix = require("../utils/remove-prefix")
 
 const copyFilter = require("./copy-filter")
 
@@ -14,17 +15,32 @@ module.exports = async (config, logger) => {
   await recurseDependencies({
     config,
     beforeChildren: async ({ target, definition, scope, name }) => {
-      const { links = {} } = config
+      const { links = {}, remoteLinks = {} } = config
 
       let { import: importTarget } = definition
       if (importTarget && !(await fs.pathExists(target))) {
         importTarget = normalizeDegitUri(importTarget)
         const lowerImportTarget = importTarget.toLowerCase()
+        const hasAbsoluteRef = !(
+          importTarget.includes("@") || importTarget.includes("#")
+        )
         const matchLink =
-          !(importTarget.includes("@") || importTarget.includes("#")) &&
+          hasAbsoluteRef &&
           Object.entries(links).find(([key]) =>
             lowerImportTarget.startsWith(key)
           )
+
+        const matchRemoteLink =
+          hasAbsoluteRef &&
+          Object.entries(remoteLinks).find(([key]) =>
+            lowerImportTarget.startsWith(key)
+          )
+
+        if (matchLink && matchRemoteLink) {
+          logger.warn(
+            `entry "${lowerImportTarget}" is in links (${matchLink[1]}) and remoteLinks (${matchRemoteLink[1]}), theses options are mutually exclusives when using same key(s) links will take precedence`
+          )
+        }
 
         if (matchLink) {
           const [linkKey, linkPath] = matchLink
@@ -32,6 +48,19 @@ module.exports = async (config, logger) => {
           await fs.ensureDir(target)
           logger.debug({ scope }, `➡️  copy ${name} from "${from}"`)
           await fs.copy(from, target, { filter: copyFilter })
+        } else if (matchRemoteLink) {
+          const matchRemoteLinkNormalized = matchRemoteLink[1].replace("@", "#")
+          const [prefix, ref] = matchRemoteLinkNormalized.split("#")
+          const degitNewUri =
+            prefix +
+            removePrefix(lowerImportTarget, prefix) +
+            (ref ? `#${ref}` : "")
+          await degitImproved(degitNewUri, target, {
+            logger: logger.child({
+              scope,
+              name,
+            }),
+          })
         } else {
           await degitImproved(importTarget, target, {
             logger: logger.child({
