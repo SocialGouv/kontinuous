@@ -4,7 +4,7 @@ module.exports = async (manifests, options, context) => {
   const { utils, config, logger, kubectl } = context
   const { KontinuousPluginError } = utils
 
-  const { kubeconfig, kubeconfigContext, ciNamespace } = config
+  const { kubeconfig, kubeconfigContext, ciNamespace, environment } = config
 
   const { surviveOnBrokenCluster = false, applyConcurrencyLimit = 1 } = options
 
@@ -31,7 +31,16 @@ module.exports = async (manifests, options, context) => {
     if (!enabled) {
       return
     }
-    let { fromNamespace, toNamespace, to, from } = secret
+    let { fromNamespace, toNamespace, to, from, env } = secret
+
+    if (env) {
+      if (!Array.isArray(env)) {
+        env = [env]
+      }
+      if (!env.includes(environment)) {
+        return
+      }
+    }
 
     if (!to) {
       to = key
