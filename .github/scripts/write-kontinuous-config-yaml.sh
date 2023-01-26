@@ -9,3 +9,5 @@ links:
 
 echo "KUBECONFIG=$KUBECONFIG"
 echo "KUBECONFIG_B64=$(cat ~/.kube/config | base64 -w 0)" >> $GITHUB_ENV
+
+docker network connect kind $(cat /etc/hostname)

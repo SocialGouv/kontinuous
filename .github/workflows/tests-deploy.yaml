@@ -42,6 +42,7 @@ jobs:
           cwd: .github/e2e/standalone-charts
       - run: kubectl get jobs -n test-project-ci
       - run: kubectl get jobs -n test-project-ci --field-selector status.successful=1 | grep "extra-job" # additionnal grep to exit 1 on error
+
   test-values-js:
     runs-on: ubuntu-latest
     steps:
@@ -72,6 +73,7 @@ jobs:
         run: kubectl get pods -n test-namespace --field-selector=status.phase=Running | grep "app"
       - name: ingress
         run: kubectl get ingress -n test-namespace --field-selector metadata.name=app -o=jsonpath='{.items[0].spec.rules[0].host}' | grep "test.demo.net"
+
   app-review:
     runs-on: ubuntu-latest
     steps:
@@ -100,6 +102,7 @@ jobs:
               containerPort: 80
       - run: kubectl get pods -n kontinuous
       - run: kubectl get pods -n kontinuous --field-selector=status.phase=Running | grep "app"
+
   app-tag:
     runs-on: ubuntu-latest
     steps:
