@@ -21,13 +21,16 @@ spec:
         {{- include "contrib-helpers.ingress-host" . | nindent 8 }}
       http:
         paths:
+          {{ range $val := (or .Values.ingress.paths (list .Values.ingress.path)) }}
           - backend:
               service:
-                name: {{ (or .Values.component .Chart.Name) | lower }}
+                name: {{ (or $.Values.component $.Chart.Name) | lower }}
                 port:
                   name: http
-            path: {{ .Values.ingress.path }}
+            path: {{ $val | quote }}
             pathType: Prefix
+          {{ end }}
+
   tls:
     - hosts:
         - >-

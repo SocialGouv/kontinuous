@@ -46,6 +46,7 @@ ingress:
   enabled: true
   annotations: {}
   path: /
+  paths:
   rewriteTarget:
 entrypoint:
 args: []
