@@ -57,7 +57,12 @@ module.exports = async (manifests, options, context) => {
     }
 
     if (toAllNamespace) {
-      toNamespace = allNamespaces.filter((ns) => ns !== fromNamespace)
+      toNamespace = allNamespaces.filter((ns) => {
+        if (from === to) {
+          return ns !== fromNamespace
+        }
+        return true
+      })
     }
 
     if (!Array.isArray(toNamespace)) {
