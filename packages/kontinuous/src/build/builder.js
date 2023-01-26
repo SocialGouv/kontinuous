@@ -54,7 +54,7 @@ module.exports = async (_options = {}) => {
     throw err
   }
 
-  logger.debug("Load manifests")
+  logger.debug("📖 loading manifests")
   try {
     manifests = await loadManifests(manifests, config)
   } catch (err) {
