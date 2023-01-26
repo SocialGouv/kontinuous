@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.129.0 (2023-01-26)
+
+
+### Features
+
+* **chart:app:** Add ingress option for multiple paths ([#139](https://github.com/socialgouv/kontinuous/issues/139)) ([99b5a21](https://github.com/socialgouv/kontinuous/commit/99b5a21030fc4317301e4a1c1f9dfd6f3fda9985))
+
 ### 1.128.5 (2023-01-26)
 
 
