@@ -21,13 +21,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.4.0
-      - name: write .kontinuous/config.yaml
+      - name: prepare kontinuous
         shell: bash
-        run: ./.github/scripts/write-kontinuous-config-yaml.sh
-      - run: kubectl cluster-info
-      - run: kubectl version
-      - run: kubectl get pods -n kube-system
-      - run: kubectl create ns test-project-ci
+        run: ./.github/scripts/test-deploy/prepare-kontinuous.sh
       - name: test standalone-charts
         uses: "./.github/actions/deploy-via-github"
         env:
@@ -49,13 +45,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.4.0
-      - name: write .kontinuous/config.yaml
+      - name: prepare kontinuous
         shell: bash
-        run: ./.github/scripts/write-kontinuous-config-yaml.sh
-      - run: kubectl cluster-info
-      - run: kubectl version
-      - run: kubectl get pods -n kube-system
-      - run: kubectl create ns test-project-ci
+        run: ./.github/scripts/test-deploy/prepare-kontinuous.sh
       - name: test values-js
         uses: "./.github/actions/deploy-via-github"
         env:
@@ -80,10 +72,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.4.0
-      - name: write .kontinuous/config.yaml
+      - name: prepare kontinuous
         shell: bash
-        run: ./.github/scripts/write-kontinuous-config-yaml.sh
-      - run: kubectl create ns test-project-ci
+        run: ./.github/scripts/test-deploy/prepare-kontinuous.sh
       - name: test app-simple
         uses: "./.github/actions/deploy-via-github"
         env:
@@ -109,10 +100,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.4.0
-      - name: write .kontinuous/config.yaml
+      - name: prepare kontinuous
         shell: bash
-        run: ./.github/scripts/write-kontinuous-config-yaml.sh
-      - run: kubectl create ns test-project-ci
+        run: ./.github/scripts/test-deploy/prepare-kontinuous.sh
       - name: test app-simple
         uses: "./.github/actions/deploy-via-github"
         env:

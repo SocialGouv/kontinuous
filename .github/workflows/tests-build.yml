@@ -22,7 +22,12 @@ jobs:
 
       - name: write .kontinuous/config.yaml
         shell: bash
-        run: ./.github/scripts/write-kontinuous-config-yaml.sh
+        run: |
+          mkdir -p $HOME/.kontinuous
+          echo "
+          links:
+            socialgouv/kontinuous: ${GITHUB_WORKSPACE}
+          " > $HOME/.kontinuous/config.yaml
 
       - name: Install dependencies
         run: yarn --immutable
