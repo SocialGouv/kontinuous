@@ -19,11 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Kubernetes KinD Cluster
+        uses: helm/kind-action@v1.4.0
       - name: write .kontinuous/config.yaml
         shell: bash
         run: ./.github/scripts/write-kontinuous-config-yaml.sh
-      - name: Kubernetes KinD Cluster
-        uses: helm/kind-action@v1.4.0
       - run: kubectl cluster-info
       - run: kubectl version
       - run: kubectl get pods -n kube-system
@@ -45,11 +45,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Kubernetes KinD Cluster
+        uses: helm/kind-action@v1.4.0
       - name: write .kontinuous/config.yaml
         shell: bash
         run: ./.github/scripts/write-kontinuous-config-yaml.sh
-      - name: Kubernetes KinD Cluster
-        uses: helm/kind-action@v1.4.0
       - run: kubectl cluster-info
       - run: kubectl version
       - run: kubectl get pods -n kube-system
@@ -74,11 +74,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Kubernetes KinD Cluster
+        uses: helm/kind-action@v1.4.0
       - name: write .kontinuous/config.yaml
         shell: bash
         run: ./.github/scripts/write-kontinuous-config-yaml.sh
-      - name: Kubernetes KinD Cluster
-        uses: helm/kind-action@v1.4.0
       - run: kubectl create ns test-project-ci
       - name: test app-simple
         uses: "./.github/actions/deploy-via-github"
