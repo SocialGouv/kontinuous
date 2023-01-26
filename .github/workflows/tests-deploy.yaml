@@ -1,6 +1,10 @@
 name: Tests deploy
 
 on:
+  push:
+    branches:
+      - '**'
+
   workflow_run:
     workflows: ["Build Docker Image Kontinuous"]
     types:
@@ -30,6 +34,7 @@ jobs:
           KS_CI_NAMESPACE: "test-project-ci"
           RANCHER_PROJECT_ID: "cluster:project"
         with:
+          kubeconfig: ${{ env.KUBECONFIG_B64 }}
           environment: prod
           inlineSet: |
             global.antiAffinity.enabled: false
@@ -55,6 +60,7 @@ jobs:
           KS_CI_NAMESPACE: "test-project-ci"
           RANCHER_PROJECT_ID: "cluster:project"
         with:
+          kubeconfig: ${{ env.KUBECONFIG_B64 }}
           environment: prod
           inlineSet: |
             global.antiAffinity.enabled: false
@@ -80,6 +86,7 @@ jobs:
           KS_CI_NAMESPACE: "test-project-ci"
           RANCHER_PROJECT_ID: "cluster:project"
         with:
+          kubeconfig: ${{ env.KUBECONFIG_B64 }}
           environment: prod
           inlineSet: |
             global.antiAffinity.enabled: false
@@ -106,6 +113,7 @@ jobs:
           KS_CI_NAMESPACE: "test-project-ci"
           RANCHER_PROJECT_ID: "cluster:project"
         with:
+          kubeconfig: ${{ env.KUBECONFIG_B64 }}
           environment: prod
           inlineSet: |
             global.antiAffinity.enabled: false
