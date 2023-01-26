@@ -4,7 +4,7 @@ runs:
     image: ghcr.io/socialgouv/docker/psql:7.0.0
     envFrom:
       - secretRef:
-          name: "{{ or $.with.pgAdminUserSecretRefName $.Values.global.pgSecretName `pg-admin-user` }}"
+          name: "{{ or $.with.pgAdminUserSecretRefName `pg-admin-user` }}"
           
     env:
       - name: RESTORE_PATH
