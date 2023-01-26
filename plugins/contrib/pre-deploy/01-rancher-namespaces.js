@@ -20,7 +20,7 @@ module.exports = async (
     (manifest) => manifest.metadata.name
   )
 
-  logger.debug({ namespaces }, "ensure rancher namespaces are availables")
+  logger.debug({ namespaces }, "🟦 ensure rancher namespaces are availables")
 
   await Promise.all(
     rancherNamespacesManifests.map((manifest) =>
