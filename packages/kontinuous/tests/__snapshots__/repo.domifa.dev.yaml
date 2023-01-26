@@ -1052,7 +1052,7 @@ spec:
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
-                name: pg-user
+                name: pg-admin-user
           env:
             - name: DATABASE
               value: autodevops_feature-branch-1
