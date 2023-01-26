@@ -284,7 +284,7 @@ const loadConfig = async (
       ),
     },
     version: {
-      default: version,
+      generate: () => version,
     },
     chart: {
       env: "KS_CHART",
@@ -840,6 +840,7 @@ const loadConfig = async (
     }, {})
 
   if (!isReloadingConfig) {
+    logger.info(`🥷  kontinuous v${config.version}`)
     logger.info(`📂 buildPath: file://${config.buildPath} `)
   }
 
