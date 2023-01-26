@@ -119,6 +119,7 @@ module.exports = async (manifests, options, context) => {
     delete metadata.resourceVersion
     delete metadata.uid
     delete metadata.creationTimestamp
+    delete metadata.ownerReferences
     metadata.name = to
 
     await Promise.all(
