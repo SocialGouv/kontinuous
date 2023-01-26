@@ -101,6 +101,9 @@ module.exports = async (manifests, options, context) => {
           `get -n ${fromNamespace} secret ${fromSecretName} -ojson`,
           { ...kubectlOptions, logInfo: false, logError: false }
         )
+        if (kubeconfigSecretJSON) {
+          break
+        }
       } catch (_err) {
         // do nothing
       }
