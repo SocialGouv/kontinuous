@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.4](https://github.com/socialgouv/kontinuous/compare/v1.128.3...v1.128.4) (2023-01-26)
+
+
+### Bug Fixes
+
+* add more emojis to logs output ([b92eebd](https://github.com/socialgouv/kontinuous/commit/b92eebd63d5998d6d39d8e9c50462c4bf27b6487))
+* secrets order ([1b110c3](https://github.com/socialgouv/kontinuous/commit/1b110c35d1dc073abb077a7574ed4f91abf6798e))
+
 ### [1.128.3](https://github.com/socialgouv/kontinuous/compare/v1.128.2...v1.128.3) (2023-01-26)
 
 
