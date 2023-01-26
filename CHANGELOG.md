@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.128.1](https://github.com/socialgouv/kontinuous/compare/v1.128.0...v1.128.1) (2023-01-26)
+
+
+### Bug Fixes
+
+* add error retry ([16c276c](https://github.com/socialgouv/kontinuous/commit/16c276c167a65656eede44359926d05fc9a62b4b))
+
 ## [1.128.0](https://github.com/socialgouv/kontinuous/compare/v1.127.1...v1.128.0) (2023-01-26)
 
 
