@@ -578,7 +578,7 @@ const loadConfig = async (
             const package = JSON.parse(packageJSON)
             remoteLinks[
               "socialgouv/kontinuous"
-            ] = `socialgouv/kontinuous@v${package.version}`
+            ] = `socialgouv/kontinuous@v1.130.0${package.version}`
           }
         }
         return remoteLinks

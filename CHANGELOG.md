@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.130.0](https://github.com/socialgouv/kontinuous/compare/v1.129.0...v1.130.0) (2023-01-26)
+
+
+### Features
+
+* remoteLinks lock degit version on npx ([e77b7c2](https://github.com/socialgouv/kontinuous/commit/e77b7c231550b1969780e7860c136e0f23891b5e))
+
+
+### Bug Fixes
+
+* deps tree display not dependents resources ([fac4429](https://github.com/socialgouv/kontinuous/commit/fac44297dca0d9eb2a03f2917bf2e5ad52acfcf7))
+* secu resolution ([d1becc2](https://github.com/socialgouv/kontinuous/commit/d1becc2a3efc62677fb31d6069fc90b980d94b36))
+
 ## 1.129.0 (2023-01-26)
 
 
