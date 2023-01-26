@@ -10,6 +10,10 @@ const errorsMapping = [
     message: `server error(connection refused)`,
   },
   {
+    includes: "dial tcp: lookup",
+    message: `server error(i/o timeout)`,
+  },
+  {
     includes: "InternalError",
     message: `server error(InternalError)`,
   },
