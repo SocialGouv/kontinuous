@@ -8,4 +8,4 @@ links:
 " > $HOME/.kontinuous/config.yaml
 
 echo "KUBECONFIG=$KUBECONFIG"
-echo "KUBECONFIG_B64=$(cat ~/.kube/config | base64)" >> $GITHUB_ENV
+echo "KUBECONFIG_B64=$(cat ~/.kube/config | base64 -w 0)" >> $GITHUB_ENV
