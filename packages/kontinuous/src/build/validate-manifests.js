@@ -6,6 +6,9 @@ const pluginFunction = require("~/plugins/context/function")
 const ValidationError = require("./validation-error")
 
 module.exports = async (manifests) => {
+  const abortSignal = ctx.require("abortSignal")
+  abortSignal.throwIfAborted()
+
   const config = ctx.require("config")
   if (config.noValidate || config.disableStep.includes("validators")) {
     return

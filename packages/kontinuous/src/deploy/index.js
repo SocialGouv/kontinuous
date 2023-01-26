@@ -83,6 +83,9 @@ module.exports = async (options) => {
 
     const allManifests = yaml.loadAll(manifests)
 
+    const abortSignal = ctx.require("abortSignal")
+
+    abortSignal.throwIfAborted()
     if (!config.disableStep.includes("pre-deploy")) {
       logger.info("🌀 [LIFECYCLE]: pre-deploy")
       await deployHooks(allManifests, "pre")
@@ -110,6 +113,8 @@ module.exports = async (options) => {
       dryRun,
     }
 
+    abortSignal.throwIfAborted()
+
     let deploysPromise
     let sidecarsPromise
     if (!config.disableStep.includes("deploy")) {
@@ -133,6 +138,9 @@ module.exports = async (options) => {
       .flatMap((result) => result.errors)
 
     const success = errors.length === 0
+
+    abortSignal.throwIfAborted()
+
     if (!config.disableStep.includes("post-deploy")) {
       logger.info("🌀 [LIFECYCLE]: post-deploy")
       await deployHooks(allManifests, "post", { errors, success })

@@ -2,6 +2,7 @@ const ctx = require("~common/ctx")
 
 const createEventsBucket = require("~common/utils/events-bucket")
 const flattenAggregateError = require("~common/utils/flatten-aggregate-error")
+const isAbortError = require("~common/utils/is-abort-error")
 
 const ExitError = require("~/errors/exit-error")
 
@@ -64,7 +65,7 @@ module.exports = async (args = process.argv) => {
       )
       abortController.abort() // if we pass argument, we can't detect AbortError anymore, so we have to let it empty
       const shutdownTimeout = setTimeout(() => {
-        logger.info(`shutdown timeout reached, killing now`, {
+        logger.info(`🔫 shutdown timeout reached, killing now`, {
           gracefullShutdownTimeoutSeconds,
         })
         process.exit(1)
@@ -116,7 +117,11 @@ module.exports = async (args = process.argv) => {
       await Sentry.close(5000)
     }
     if (error) {
-      logger.error(error)
+      if (isAbortError(error)) {
+        logger.warn("🔨 operation cancelled gracefully")
+      } else {
+        logger.error(error)
+      }
     }
     eventsBucket.emit("finish")
     process.exit(exitCode)

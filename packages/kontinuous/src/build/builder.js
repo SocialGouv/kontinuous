@@ -37,6 +37,9 @@ module.exports = async (_options = {}) => {
 
   let manifests
 
+  const abortSignal = ctx.require("abortSignal")
+  abortSignal.throwIfAborted()
+
   logger.info("🌀 [LIFECYCLE]: helm template")
   try {
     manifests = await asyncShell(

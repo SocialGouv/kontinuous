@@ -4,6 +4,9 @@ const createContext = require("~/plugins/context")
 const pluginFunction = require("~/plugins/context/function")
 
 module.exports = async (manifests, values) => {
+  const abortSignal = ctx.require("abortSignal")
+  abortSignal.throwIfAborted()
+
   const config = ctx.require("config")
 
   if (config.disableStep.includes("debug-manifests")) {

@@ -1,6 +1,7 @@
 const fs = require("fs-extra")
 
 const getYamlPath = require("~common/utils/get-yaml-path")
+const ctx = require("~common/ctx")
 
 const createContext = require("~/plugins/context")
 const pluginFunction = require("~/plugins/context/function")
@@ -15,6 +16,9 @@ const valuesOverride = require("./values-override")
 const mergeValuesFromDir = require("./merge-values-from-dir")
 
 module.exports = async (config, logger) => {
+  const abortSignal = ctx.require("abortSignal")
+  abortSignal.throwIfAborted()
+
   logger.info("🌀 [LIFECYCLE]: values-compilers")
 
   let values = {}

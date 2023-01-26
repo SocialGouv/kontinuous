@@ -5,6 +5,9 @@ const asyncShell = require("~common/utils/async-shell")
 const ctx = require("~common/ctx")
 
 module.exports = async (manifests) => {
+  const abortSignal = ctx.require("abortSignal")
+  abortSignal.throwIfAborted()
+
   const config = ctx.require("config")
 
   if (config.disableStep.includes("post-renderer")) {
