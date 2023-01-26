@@ -21,8 +21,8 @@ jobs:
         include:
           - cwd: .github/e2e/standalone-charts
             testScript: |
-              kubectl get jobs -n test-namespace
-              kubectl get jobs -n test-namespace --field-selector status.successful=1 | grep "extra-job" # additionnal grep to exit 1 on error
+              kubectl get jobs -n test-project-ci
+              kubectl get jobs -n test-project-ci --field-selector status.successful=1 | grep "extra-job" # additionnal grep to exit 1 on error
 
           - cwd: .github/e2e/values-js
             testScript: |
