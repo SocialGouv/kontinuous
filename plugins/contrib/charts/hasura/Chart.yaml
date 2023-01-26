@@ -1,3 +1,3 @@
 apiVersion: v2
 name: hasura
-version: 1.127.0
+version: 1.127.1
