@@ -60,21 +60,33 @@ jobs:
         uses: helm/kind-action@v1.4.0
       - name: prepare kontinuous
         shell: bash
-        run: ./.github/scripts/test-deploy/prepare-kontinuous.sh
+        run: |
+          mkdir -p $HOME/.kontinuous
+          
+          echo "
+          links:
+            socialgouv/kontinuous: ${GITHUB_WORKSPACE}
+          " > $HOME/.kontinuous/config.yaml
+
+          kubectl cluster-info
+          kubectl version
+          kubectl get pods -n kube-system
+          kubectl create ns test-project-ci
+
       - name: test deploy-via-github
-        uses: "./.github/actions/deploy-via-github/entrypoint.sh"
+        shell: bash
         env:
           KS_KUBECONFIG_CONTEXT: "kind-chart-testing"
           KS_CI_NAMESPACE: "test-project-ci"
           RANCHER_PROJECT_ID: "cluster:project"
-        with:
-          kubeconfig: ${{ env.KUBECONFIG_B64 }}
-          environment: prod
-          inlineSet: |
+          KS_ENVIRONMENT: prod
+          KS_INLINE_SET: |
             global.antiAffinity.enabled: false
-          inlineValues: |
+          KS_INLINE_VALUES: |
             ${{ matrix.inlineValues || '' }}
-          cwd: ${{ matrix.cwd }}
+          KS_WORKSPACE_PATH: ${{ matrix.cwd }}
+        run: ./.github/actions/deploy-via-github/entrypoint.sh
+      
       - name: run test script
         shell: bash
         run: |
