@@ -56,6 +56,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+      
+      - name: Yarn install
+        run: |
+          yarn workspaces focus kontinuous --production
+
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.4.0
       - name: prepare kontinuous
@@ -76,8 +86,9 @@ jobs:
       - name: test deploy-via-github
         shell: bash
         env:
-          KS_KUBECONFIG_CONTEXT: "kind-chart-testing"
-          KS_CI_NAMESPACE: "test-project-ci"
+          KS_DEBUG: "true"
+          KS_KUBECONFIG_CONTEXT: kind-chart-testing
+          KS_CI_NAMESPACE: test-project-ci
           RANCHER_PROJECT_ID: "cluster:project"
           KS_ENVIRONMENT: prod
           KS_INLINE_SET: |
@@ -85,7 +96,7 @@ jobs:
           KS_INLINE_VALUES: |
             ${{ matrix.inlineValues || '' }}
           KS_WORKSPACE_PATH: ${{ matrix.cwd }}
-        run: ./.github/actions/deploy-via-github/entrypoint.sh
+        run: ./kontinuous deploy
       
       - name: run test script
         shell: bash
