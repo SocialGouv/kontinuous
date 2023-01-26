@@ -19,8 +19,6 @@ networking:
   apiServerPort: 6443
 " > $HOME/kind-config.yaml
 
-export KIND_EXPERIMENTAL_DOCKER_NETWORK=${{ job.container.network }}
-
 kind create cluster \
   --kubeconfig $KUBECONFIG \
   --config=$HOME/kind-config.yaml
