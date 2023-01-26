@@ -3,50 +3,66 @@ name: Tests deploy
 on:
   push:
     branches:
-      - '**'
-
-  workflow_run:
-    workflows: ["Build Docker Image Kontinuous"]
-    types:
-      - completed
+      - "**"
+      - "!v*"
+    tags-ignore:
+      - "**"
 
 concurrency:
   cancel-in-progress: true
   group: tests-deploy-${{ github.ref_name }}
 
 jobs:
-  test-standalone-charts:
+  test-kind-deployment:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - cwd: .github/e2e/standalone-charts
+            testScript: |
+              kubectl get jobs -n test-namespace
+              kubectl get jobs -n test-namespace --field-selector status.successful=1 | grep "extra-job" # additionnal grep to exit 1 on error
+
+          - cwd: .github/e2e/values-js
+            testScript: |
+              kubectl get pods -n test-namespace
+              kubectl get pods -n test-namespace --field-selector=status.phase=Running | grep "app"
+              kubectl get ingress -n test-namespace --field-selector metadata.name=app -o=jsonpath='{.items[0].spec.rules[0].host}' | grep "test.demo.net"
+
+          - cwd: .github/e2e/app-simple
+            inlineValues: |
+              app:
+                image: nginx
+                containerPort: 80
+            testScript: |
+              kubectl get pods -n kontinuous
+              kubectl get pods -n kontinuous --field-selector=status.phase=Running | grep "app"
+
+          - cwd: .github/e2e/app-simple
+            inlineValues: |
+              global:
+                imageRepository: ""
+              app:
+                imagePackage: nginx
+                imageRepository: ""
+                registry: docker.io
+                containerPort: 80
+                imageTag: 1.21.6
+            testScript: |
+              kubectl get pods -n kontinuous
+              kubectl get pods -n kontinuous --field-selector=status.phase=Running | grep "app"
+              kubectl get pods -n kontinuous --field-selector=status.phase=Running -o jsonpath="{.items[*].spec.containers[*].image}" | grep "docker.io/nginx:1.21.6"
+
     steps:
       - uses: actions/checkout@v3
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.4.0
       - name: prepare kontinuous
         shell: bash
-        run: |
-          export KUBECONFIG=$HOME/.kube/config # if not already set 
-          export KIND_EXPERIMENTAL_DOCKER_NETWORK=${{ job.container.network }}
-
-          echo "kind: Cluster
-          apiVersion: kind.x-k8s.io/v1alpha4
-          networking:
-            apiServerAddress: '127.0.0.1'
-            apiServerPort: 6443
-          " > $HOME/kind-config.yaml
-
-
-          kind create cluster \
-            --kubeconfig $KUBECONFIG \
-            --config=$HOME/kind-config.yaml
-
-          kubectl config set-cluster kind-kind --server=https://kind-control-plane:6443 
-          
-          docker network connect kind $(cat /etc/hostname)
-          
-          ./.github/scripts/test-deploy/prepare-kontinuous.sh
-
-      - name: test standalone-charts
-        uses: "./.github/actions/deploy-via-github"
+        run: ./.github/scripts/test-deploy/prepare-kontinuous.sh
+      - name: test deploy-via-github
+        uses: "./.github/actions/deploy-via-github/entrypoint.sh"
         env:
           KS_KUBECONFIG_CONTEXT: "kind-chart-testing"
           KS_CI_NAMESPACE: "test-project-ci"
@@ -56,97 +72,11 @@ jobs:
           environment: prod
           inlineSet: |
             global.antiAffinity.enabled: false
-          cwd: .github/e2e/standalone-charts
-      - run: kubectl get jobs -n test-project-ci
-      - run: kubectl get jobs -n test-project-ci --field-selector status.successful=1 | grep "extra-job" # additionnal grep to exit 1 on error
-
-  # test-values-js:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Kubernetes KinD Cluster
-  #       uses: helm/kind-action@v1.4.0
-  #     - name: prepare kontinuous
-  #       shell: bash
-  #       run: ./.github/scripts/test-deploy/prepare-kontinuous.sh
-  #     - name: test values-js
-  #       uses: "./.github/actions/deploy-via-github"
-  #       env:
-  #         KS_KUBECONFIG_CONTEXT: "kind-chart-testing"
-  #         KS_CI_NAMESPACE: "test-project-ci"
-  #         RANCHER_PROJECT_ID: "cluster:project"
-  #       with:
-  #         kubeconfig: ${{ env.KUBECONFIG_B64 }}
-  #         environment: prod
-  #         inlineSet: |
-  #           global.antiAffinity.enabled: false
-  #         cwd: .github/e2e/values-js
-  #     - run: kubectl get pods -n test-namespace
-  #     - name: pod is running
-  #       run: kubectl get pods -n test-namespace --field-selector=status.phase=Running | grep "app"
-  #     - name: ingress
-  #       run: kubectl get ingress -n test-namespace --field-selector metadata.name=app -o=jsonpath='{.items[0].spec.rules[0].host}' | grep "test.demo.net"
-
-  # app-review:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Kubernetes KinD Cluster
-  #       uses: helm/kind-action@v1.4.0
-  #     - name: prepare kontinuous
-  #       shell: bash
-  #       run: ./.github/scripts/test-deploy/prepare-kontinuous.sh
-  #     - name: test app-simple
-  #       uses: "./.github/actions/deploy-via-github"
-  #       env:
-  #         KS_KUBECONFIG_CONTEXT: "kind-chart-testing"
-  #         KS_CI_NAMESPACE: "test-project-ci"
-  #         RANCHER_PROJECT_ID: "cluster:project"
-  #       with:
-  #         kubeconfig: ${{ env.KUBECONFIG_B64 }}
-  #         environment: prod
-  #         inlineSet: |
-  #           global.antiAffinity.enabled: false
-  #         cwd: .github/e2e/app-simple
-  #         inlineValues: |
-  #           app:
-  #             image: nginx
-  #             containerPort: 80
-  #     - run: kubectl get pods -n kontinuous
-  #     - run: kubectl get pods -n kontinuous --field-selector=status.phase=Running | grep "app"
-
-  # app-tag:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Kubernetes KinD Cluster
-  #       uses: helm/kind-action@v1.4.0
-  #     - name: prepare kontinuous
-  #       shell: bash
-  #       run: ./.github/scripts/test-deploy/prepare-kontinuous.sh
-  #     - name: test app-simple
-  #       uses: "./.github/actions/deploy-via-github"
-  #       env:
-  #         KS_KUBECONFIG_CONTEXT: "kind-chart-testing"
-  #         KS_CI_NAMESPACE: "test-project-ci"
-  #         RANCHER_PROJECT_ID: "cluster:project"
-  #       with:
-  #         kubeconfig: ${{ env.KUBECONFIG_B64 }}
-  #         environment: prod
-  #         inlineSet: |
-  #           global.antiAffinity.enabled: false
-  #         cwd: .github/e2e/app-simple
-  #         inlineValues: |
-  #           global:
-  #             imageRepository: ""
-  #           app:
-  #             imagePackage: nginx
-  #             imageRepository: ""
-  #             registry: docker.io
-  #             containerPort: 80
-  #             imageTag: 1.21.6
-  #     - run: kubectl get pods -n kontinuous
-  #     - run: kubectl get pods -n kontinuous --field-selector=status.phase=Running | grep "app"
-  #     - name: "use tagged image"
-  #       run:
-  #         kubectl get pods -n kontinuous --field-selector=status.phase=Running -o jsonpath="{.items[*].spec.containers[*].image}" | grep "docker.io/nginx:1.21.6" 
+          inlineValues: |
+            ${{ matrix.inlineValues || '' }}
+          cwd: ${{ matrix.cwd }}
+      - name: run test script
+        shell: bash
+        run: |
+          set -e
+          ${{ matrix.testScript }}
