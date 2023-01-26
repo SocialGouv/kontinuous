@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.128.0](https://github.com/socialgouv/kontinuous/compare/v1.127.1...v1.128.0) (2023-01-26)
+
+
+### Features
+
+* import-secret filter env ([e0dbed5](https://github.com/socialgouv/kontinuous/commit/e0dbed52dff692d4475524fd37691e960ea93ed9))
+
+
+### Bug Fixes
+
+* add log version info ([05c7424](https://github.com/socialgouv/kontinuous/commit/05c742425a44ac688c877623ebb7255c15331c91))
+* improve cancel ([fec6f1f](https://github.com/socialgouv/kontinuous/commit/fec6f1f6e8fb70e9782d7bf2edda61743cf7f075))
+
 ### [1.127.1](https://github.com/socialgouv/kontinuous/compare/v1.127.0...v1.127.1) (2023-01-26)
 
 
