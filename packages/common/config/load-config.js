@@ -549,14 +549,19 @@ const loadConfig = async (
         }
       },
     },
+    linksSelfLocation: {
+      default: "socialgouv/kontinuous",
+    },
     links: {
-      transform: async (links = {}) => {
+      default: {},
+      transform: async (links, config) => {
+        const { linksSelfLocation } = config
         links = lowerKeys(links)
-        if (!links["socialgouv/kontinuous"]) {
+        if (!links[linksSelfLocation]) {
           const real = await fs.realpath(process.argv[1])
           if (real.endsWith("packages/kontinuous/bin/kontinuous")) {
             // local kontinuous git repository
-            links["socialgouv/kontinuous"] = path.resolve(
+            links[linksSelfLocation] = path.resolve(
               `${path.dirname(real)}/../../..`
             )
           }
@@ -565,9 +570,11 @@ const loadConfig = async (
       },
     },
     remoteLinks: {
-      transform: async (remoteLinks = {}) => {
+      default: {},
+      transform: async (remoteLinks, config) => {
         remoteLinks = lowerKeys(remoteLinks)
-        if (!remoteLinks["socialgouv/kontinuous"]) {
+        const { linksSelfLocation } = config
+        if (!remoteLinks[linksSelfLocation]) {
           const real = await fs.realpath(process.argv[1])
           if (real.endsWith("node_modules/kontinuous/bin/kontinuous")) {
             // npx or packages.json/dependencies
@@ -577,8 +584,8 @@ const loadConfig = async (
             })
             const package = JSON.parse(packageJSON)
             remoteLinks[
-              "socialgouv/kontinuous"
-            ] = `socialgouv/kontinuous@v1.130.0${package.version}`
+              linksSelfLocation
+            ] = `${linksSelfLocation}@v${package.version}`
           }
         }
         return remoteLinks
