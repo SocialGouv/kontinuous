@@ -24,8 +24,19 @@ jobs:
       - name: prepare kontinuous
         shell: bash
         run: |
+          export KUBECONFIG=$HOME/.kube/config # if not already set 
           export KIND_EXPERIMENTAL_DOCKER_NETWORK=${{ job.container.network }}
+
+          kind create cluster \
+            --kubeconfig $KUBECONFIG \
+            --config=./kind-config.yaml
+
+          kubectl config set-cluster kind-kind --server=https://kind-control-plane:6443 
+          
+          docker network connect kind $(cat /etc/hostname)
+          
           ./.github/scripts/test-deploy/prepare-kontinuous.sh
+
       - name: test standalone-charts
         uses: "./.github/actions/deploy-via-github"
         env:
