@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.1](https://github.com/socialgouv/kontinuous/compare/v1.130.0...v1.130.1) (2023-01-26)
+
+
+### Bug Fixes
+
+* e2e remoteLinks collision ([3fde528](https://github.com/socialgouv/kontinuous/commit/3fde528d13704dd5a038afa79187111b32221307))
+
 ## [1.130.0](https://github.com/socialgouv/kontinuous/compare/v1.129.0...v1.130.0) (2023-01-26)
 
 
