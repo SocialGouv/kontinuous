@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.131.0](https://github.com/socialgouv/kontinuous/compare/v1.130.2...v1.131.0) (2023-01-27)
+
+
+### Features
+
+* action env ([6820dda](https://github.com/socialgouv/kontinuous/commit/6820ddaa79a4df5a2598863df0a8b744635b2110))
+
 ### [1.130.2](https://github.com/socialgouv/kontinuous/compare/v1.130.1...v1.130.2) (2023-01-27)
 
 
