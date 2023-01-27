@@ -1,17 +1,17 @@
 const { execSync } = require("child_process")
 
-const package = require("../package.json")
+const packageDef = require("../package.json")
 
 const versionE2eConfig = require("./version-e2e-config")
 
 module.exports = {
-  readVersion: (_contents) => package.version,
+  readVersion: (_contents) => packageDef.version,
   writeVersion: (contents, version) => {
     for (const replacer of versionE2eConfig.replacers) {
       contents = execSync(
         `yarn \
             workspace \
-            ${package.name} \
+            ${packageDef.name} \
             run \
             replace \
             '${replacer.regex}' \

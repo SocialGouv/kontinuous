@@ -10,7 +10,7 @@ const handleWorkspaceDep = async ({
   workspaceDir,
   depWorkspaceName,
   depWorkspaceDir,
-  package,
+  packageDef,
 }) => {
   await fs.cp(
     `${cwd}/${depWorkspaceDir}`,
@@ -29,26 +29,26 @@ const handleWorkspaceDep = async ({
   const commonPackage = JSON.parse(
     await fs.readFile(`${cwd}/${workspaceDir}/${depWorkspaceName}/package.json`)
   )
-  package.dependencies = {
+  packageDef.dependencies = {
     ...(commonPackage.dependencies || {}),
-    ...(package.dependencies || {}),
+    ...(packageDef.dependencies || {}),
   }
-  package.devDependencies = {
+  packageDef.devDependencies = {
     ...(commonPackage.devDependencies || {}),
-    ...(package.devDependencies || {}),
+    ...(packageDef.devDependencies || {}),
   }
 
-  package._moduleAliases = {
-    ...package._moduleAliases,
+  packageDef._moduleAliases = {
+    ...packageDef._moduleAliases,
     [depWorkspaceName]: depWorkspaceName,
   }
 
-  delete package.dependencies[depWorkspaceName]
+  delete packageDef.dependencies[depWorkspaceName]
 }
 
 const handleDependencies = async (
   deps,
-  { cwd, workspaces, workspaceDir, package }
+  { cwd, workspaces, workspaceDir, packageDef }
 ) => {
   for (const [depWorkspaceName, version] of Object.entries(deps)) {
     if (version === "workspace:^") {
@@ -61,7 +61,7 @@ const handleDependencies = async (
         depWorkspaceName,
         depWorkspaceDir,
         workspaceDir,
-        package,
+        packageDef,
       })
     }
   }
@@ -114,15 +114,15 @@ module.exports = async (workspaceName, options = {}) => {
   }
 
   const workspacePackageFile = `${cwd}/${workspaceDir}/package.json`
-  const package = JSON.parse(await fs.readFile(workspacePackageFile))
+  const packageDef = JSON.parse(await fs.readFile(workspacePackageFile))
   const config = {
     cwd,
     workspaces,
     workspaceDir,
-    package,
+    packageDef,
   }
-  await handleDependencies(package.dependencies, config)
-  await handleDependencies(package.devDependencies, config)
+  await handleDependencies(packageDef.dependencies, config)
+  await handleDependencies(packageDef.devDependencies, config)
 
   if (copyREADME) {
     await copyFromToIfNotExists(
@@ -138,7 +138,7 @@ module.exports = async (workspaceName, options = {}) => {
     )
   }
 
-  await fs.writeFile(workspacePackageFile, JSON.stringify(package))
+  await fs.writeFile(workspacePackageFile, JSON.stringify(packageDef))
 
   process.stdout.write("workspace package ready to be released on npm\n")
 }

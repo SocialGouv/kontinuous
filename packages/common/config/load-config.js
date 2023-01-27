@@ -582,10 +582,10 @@ const loadConfig = async (
             const packageJSON = await fs.readFile(packageFile, {
               encoding: "utf-8",
             })
-            const package = JSON.parse(packageJSON)
+            const packageDef = JSON.parse(packageJSON)
             remoteLinks[
               linksSelfLocation
-            ] = `${linksSelfLocation}@v${package.version}`
+            ] = `${linksSelfLocation}@v${packageDef.version}`
           }
         }
         return remoteLinks
