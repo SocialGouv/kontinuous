@@ -243,7 +243,7 @@ metadata:
 spec:
   rules:
     - host: >-
-        app-api-test-long-branch-host-a-very-very-very-47z9um9b.dev.fabrique.social.gouv.fr
+        app-api-test-long-branch-host-a-very-very-very-long-b-4php810x.dev.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -256,7 +256,7 @@ spec:
   tls:
     - hosts:
         - >-
-          app-api-test-long-branch-host-a-very-very-very-47z9um9b.dev.fabrique.social.gouv.fr
+          app-api-test-long-branch-host-a-very-very-very-long-b-4php810x.dev.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

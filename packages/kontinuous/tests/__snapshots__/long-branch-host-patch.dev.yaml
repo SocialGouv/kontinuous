@@ -241,7 +241,7 @@ metadata:
 spec:
   rules:
     - host: >-
-        some-long-prefix-name-test-long-branch-host-patch-a-v-4d235lbu.dev.fabrique.social.gouv.fr
+        some-long-prefix-name-test-long-branch-host-patch-a-v-6vwodrjq.dev.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -254,7 +254,7 @@ spec:
   tls:
     - hosts:
         - >-
-          some-long-prefix-name-test-long-branch-host-patch-a-v-4d235lbu.dev.fabrique.social.gouv.fr
+          some-long-prefix-name-test-long-branch-host-patch-a-v-6vwodrjq.dev.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;
