@@ -10,13 +10,13 @@ RUN apt-get update && \
   && rm -rf /var/lib/apt/lists/*
 
 FROM downloader as kubectl
-ARG KUBECTL_VERSION=v1.25.0
+ARG KUBECTL_VERSION=v1.26.1
 ENV KUBECTL_VERSION=$KUBECTL_VERSION
 RUN curl --fail -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl
 
 FROM downloader as helm
-ARG HELM_VERSION=v3.9.3
+ARG HELM_VERSION=v3.11.0
 ENV HELM_VERSION=$HELM_VERSION
 RUN curl --fail -sL https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar xz -C /tmp/ \
   && mv /tmp/linux-amd64/helm /usr/local/bin/helm \

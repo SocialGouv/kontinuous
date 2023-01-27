@@ -6,7 +6,7 @@ const decompress = require("decompress")
 const needBin = require("./need-bin")
 const downloadFile = require("./download-file")
 
-const helmVersion = process.env.HELM_VERSION || "v3.9.3"
+const helmVersion = process.env.HELM_VERSION || "v3.11.0"
 
 const download = async (options) => {
   const { logger } = options

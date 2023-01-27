@@ -15,7 +15,7 @@ RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/downlo
   && chmod +x /usr/local/bin/rollout-status
 
 FROM downloader as kubectl
-ARG KUBECTL_VERSION=v1.25.0
+ARG KUBECTL_VERSION=v1.26.1
 ENV KUBECTL_VERSION=$KUBECTL_VERSION
 RUN curl --fail -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl
