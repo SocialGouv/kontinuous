@@ -163,7 +163,7 @@ const compileRunOutputs = async (run, compileCommon) => {
   if (run.enabled === false) {
     return
   }
-  if (!(run.output || run.inputs)) {
+  if (!(run.output || run.input)) {
     return
   }
   if (!values.global.kontinuous) {
@@ -171,12 +171,10 @@ const compileRunOutputs = async (run, compileCommon) => {
   }
   values.global.kontinuous.hasOutput = true
 
-  if (run.output) {
-    // TODO
-  }
-  if (run.inputs) {
-    // TODO
-  }
+  // if (run.output) {
+  // }
+  // if (run.input) {
+  // }
 }
 
 const compileRun = async (key, run, compileCommon) => {

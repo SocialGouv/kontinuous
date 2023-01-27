@@ -172,6 +172,10 @@ spec:
             - name: "KUBECONFIG"
               value: "/secrets/k8s/kubeconfig"
             {{- end }}
+            - name: "KONTINUOUS_OUTPUT"
+              value: "/kontinuous-output"
+            - name: "KONTINUOUS_INPUT"
+              value: "/kontinuous-input"
 
           {{- if or $run.entrypoint $run.run $run.action }}
           command:
@@ -222,11 +226,16 @@ spec:
               mountPath: /secrets/k8s
               readOnly: true
             {{ end }}
-            {{/*
-            - name: workflow
-              mountPath: /workflow
-              subPath: {{ $val.global.branchSlug }}/{{ $val.global.sha }}
-            */}}
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: {{ $val.global.pipelineId }}/{{ or .Values.component .Chart.Name }}.{{ $run.name }}
+            {{ if $run.input }}
+            {{- range $key, $target := $run.input }}
+            - name: kontinuous-io
+              mountPath: /kontinuous-input/{{ $key }}
+              subPath: {{ $val.global.pipelineId }}/{{ regexReplaceAll `(.*)\.(\S*)$` $target "$1" }}/{{ regexReplaceAll `(?:.*\.)(\S*)|\S*$` $target "$1" }}
+            {{- end }}
+            {{- end }}
             {{- if $run.volumeMounts }}
             {{- tpl ($run.volumeMounts | toYaml) . | nindent 12 }}
             {{- end }}
@@ -265,13 +274,13 @@ spec:
               - key: {{ .Values.kubeconfig.secretRefKey }}
                 path: kubeconfig
         {{ end }}
-        {{/*
-        {{ if and .Values.global.extra.jobs.sharedStorage.enabled }}
-        - name: workflow
+        - name: kontinuous-io
+          {{- if or $run.output $run.input }}
           persistentVolumeClaim:
-            claimName: jobs-shared-storage
-        {{- end }}
-        */}}
+            claimName: kontinuous-io
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
         {{- if $run.volumes }}
           {{- tpl ($run.volumes | toYaml) $ | nindent 8 }}
         {{- end }}

@@ -1,6 +1,6 @@
 enabled: 
-name: kontinuous-jobs-output
+name: kontinuous-io
 namespace:
 storage:
-  size: 10Mi
+  size: 20Mi
   className:

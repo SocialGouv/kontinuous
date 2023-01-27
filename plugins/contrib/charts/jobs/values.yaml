@@ -11,10 +11,6 @@ degitImage: ghcr.io/socialgouv/kontinuous/degit:v1.131.0
 degitImagePullPolicy: IfNotPresent
 
 # degitImage: harbor.fabrique.social.gouv.fr/sre/kontinuous/degit:v1
-# extra:
-#   jobs:
-#     sharedStorage:
-#       enabled:
 priorityClassName: ""
 serviceAccountName: ""
 resources:

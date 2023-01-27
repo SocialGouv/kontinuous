@@ -5,6 +5,8 @@ const order = [
   "configmap",
   "secret",
   "sealedsecret",
+  "persistentvolume",
+  "persistentvolumeclaim",
   "job",
   "deployment",
   "statefullset",

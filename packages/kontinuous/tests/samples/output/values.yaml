@@ -6,8 +6,10 @@ jobs:
       run: |
         echo earth>$KONTINUOUS_OUTPUT/WORLD
     b:
-      inputs:
-        PLANET: jos.a.WORLD
+      ~needs: [a]
+      input:
+        PLANET: jobs.a.WORLD
       run: |
         PLANET=$(cat $KONTINUOUS_INPUT/PLANET)
         echo "Hello $PLANET !"
+        sleep 10
