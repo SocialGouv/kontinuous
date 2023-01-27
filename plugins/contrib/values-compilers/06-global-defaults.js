@@ -5,8 +5,14 @@ module.exports = async (values, options, { config, utils, ctx }) => {
 
   const { RANCHER_PROJECT_ID: rancherProjectId } = processEnv
 
-  const { environment, gitRepository, gitBranch, gitSha, workspacePath } =
-    config
+  const {
+    environment,
+    gitRepository,
+    gitBranch,
+    gitSha,
+    workspacePath,
+    pipelineId,
+  } = config
 
   const branchSlug = slug(gitBranch)
 
@@ -90,24 +96,17 @@ module.exports = async (values, options, { config, utils, ctx }) => {
         hasRancher && enableDefaultCharts && values.global.kontinuous.hasAll,
       securityPoliciesEnabled:
         enableDefaultCharts && values.global.kontinuous.hasAll,
+      outputVolumeEnabled: values.global.kontinuous.hasOutput,
       ingress: {
         annotations: {},
       },
       workspacePath,
       antiAffinity: { enabled: true },
+      pipelineId,
       jobsConfig: {
         // serviceAccountName: "job-account",
         // priorityClassName: "ci-jobs-priority",
       },
-      // extra: {
-      //   jobs: {
-      //     sharedStorage: {
-      //       enabled: true,
-      //       size: "2Gi",
-      //       className: "azurefile",
-      //     },
-      //   },
-      // },
     },
   }
 

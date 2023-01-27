@@ -35,9 +35,11 @@ NEW_USER_BASE=${NEW_USER%%@*}
 
 if psql -abe "$PG_URL_ADMIN" -c "\c ${NEW_DB_NAME}"; then
   echo "Database already exist, skip creation"
+  echo "false" >$KONTINUOUS_OUTPUT/CREATED
 else
   echo "Creating database ${NEW_DB_NAME} on ${PGHOST}"
   psql -abe "$PG_URL_ADMIN" -c "CREATE DATABASE \"$NEW_DB_NAME\";"
+  echo "true" >$KONTINUOUS_OUTPUT/CREATED
 fi
 
 echo "Creating database extensions ${NEW_DB_NAME}"

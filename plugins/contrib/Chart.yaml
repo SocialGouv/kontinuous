@@ -14,6 +14,10 @@ dependencies:
     repository: file://./charts/security-policies
     version: 1.131.0
     condition: global.securityPoliciesEnabled,security-policies.enabled
+  - name: output-volume
+    repository: file://./charts/output-volume
+    version: 1.124.0
+    condition: global.outputVolumeEnabled,output-volume.enabled
   - name: contrib-helpers
     repository: file://./charts/contrib-helpers
     version: 1.131.0

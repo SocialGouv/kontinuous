@@ -193,6 +193,10 @@ spec:
                   name: pg-user
             - name: NEW_DB_EXTENSIONS
               value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
           command:
             - /bin/bash
             - '-c'
@@ -214,12 +218,18 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                test-jobs-build-stage-feature-branch-1-ffac537e6cbbf9-6bjy8r03/jobs-dev.db.create-db
       securityContext:
         fsGroup: 1000
       volumes:
         - name: workspace
           emptyDir: {}
         - name: action
+          emptyDir: {}
+        - name: kontinuous-io
           emptyDir: {}
 ---
 apiVersion: batch/v1
@@ -318,6 +328,10 @@ spec:
               value: 24h
             - name: KUBECONFIG
               value: /secrets/k8s/kubeconfig
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
           command:
             - /bin/bash
             - '-c'
@@ -342,6 +356,10 @@ spec:
             - name: kubeconfig
               mountPath: /secrets/k8s
               readOnly: true
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                test-jobs-build-stage-feature-branch-1-ffac537e6cbbf9-6bjy8r03/jobs-dev.db.create-secret
       securityContext:
         fsGroup: 1001
       volumes:
@@ -355,6 +373,8 @@ spec:
             items:
               - key: KUBECONFIG
                 path: kubeconfig
+        - name: kontinuous-io
+          emptyDir: {}
 ---
 apiVersion: batch/v1
 kind: Job
@@ -443,6 +463,10 @@ spec:
           env:
             - name: BUILDKITD_FLAGS
               value: '--oci-worker-no-process-sandbox'
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
           command:
             - /bin/sh
             - '-c'
@@ -470,7 +494,7 @@ spec:
                 --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
-                
+                echo \\"$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
               cpu: '2'
@@ -486,6 +510,10 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                test-jobs-build-stage-feature-branch-1-ffac537e6cbbf9-6bjy8r03/jobs.build-app.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
       securityContext:
@@ -494,6 +522,8 @@ spec:
         - name: workspace
           emptyDir: {}
         - name: action
+          emptyDir: {}
+        - name: kontinuous-io
           emptyDir: {}
         - emptyDir: {}
           name: buildkitd
@@ -585,6 +615,10 @@ spec:
           env:
             - name: BUILDKITD_FLAGS
               value: '--oci-worker-no-process-sandbox'
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
           command:
             - /bin/sh
             - '-c'
@@ -612,7 +646,7 @@ spec:
                 --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
-                
+                echo \\"$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
               cpu: '2'
@@ -628,6 +662,10 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                test-jobs-build-stage-feature-branch-1-ffac537e6cbbf9-6bjy8r03/jobs.build-hasura.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
       securityContext:
@@ -636,6 +674,8 @@ spec:
         - name: workspace
           emptyDir: {}
         - name: action
+          emptyDir: {}
+        - name: kontinuous-io
           emptyDir: {}
         - emptyDir: {}
           name: buildkitd

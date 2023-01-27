@@ -1,0 +1,6 @@
+enabled: 
+name: kontinuous-io
+namespace:
+storage:
+  size: 20Mi
+  className:

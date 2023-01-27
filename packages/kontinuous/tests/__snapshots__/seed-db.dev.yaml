@@ -163,6 +163,11 @@ spec:
           image: >-
             harbor.fabrique.social.gouv.fr/test-seed-db/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           imagePullPolicy: IfNotPresent
+          env:
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
           command:
             - /bin/bash
             - '-c'
@@ -184,12 +189,18 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha/jobs.seed
       securityContext:
         fsGroup: 1000
       volumes:
         - name: workspace
           emptyDir: {}
         - name: action
+          emptyDir: {}
+        - name: kontinuous-io
           emptyDir: {}
 ---
 apiVersion: apps/v1

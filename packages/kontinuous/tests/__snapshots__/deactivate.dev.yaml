@@ -86,6 +86,10 @@ spec:
               value: test-deactivate-feature-branch-1
             - name: KUBECONFIG
               value: /secrets/k8s/kubeconfig
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
           command:
             - /bin/bash
             - '-c'
@@ -112,6 +116,10 @@ spec:
             - name: kubeconfig
               mountPath: /secrets/k8s
               readOnly: true
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                test-deactivate-feature-branch-1-ffac537e6cbbf934b087-43cki7aw/jobs-deactivate.deactivate.delete-namespace
       securityContext:
         fsGroup: 1001
       volumes:
@@ -125,5 +133,7 @@ spec:
             items:
               - key: KUBECONFIG
                 path: kubeconfig
+        - name: kontinuous-io
+          emptyDir: {}
 "
 `;

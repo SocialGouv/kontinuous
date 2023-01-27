@@ -192,6 +192,10 @@ spec:
                   name: pg-user
             - name: NEW_DB_EXTENSIONS
               value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
           command:
             - /bin/bash
             - '-c'
@@ -213,12 +217,18 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k/jobs.db.create-db
       securityContext:
         fsGroup: 1000
       volumes:
         - name: workspace
           emptyDir: {}
         - name: action
+          emptyDir: {}
+        - name: kontinuous-io
           emptyDir: {}
 ---
 apiVersion: batch/v1
@@ -316,6 +326,10 @@ spec:
               value: 24h
             - name: KUBECONFIG
               value: /secrets/k8s/kubeconfig
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
           command:
             - /bin/bash
             - '-c'
@@ -340,6 +354,10 @@ spec:
             - name: kubeconfig
               mountPath: /secrets/k8s
               readOnly: true
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k/jobs.db.create-secret
       securityContext:
         fsGroup: 1001
       volumes:
@@ -353,6 +371,8 @@ spec:
             items:
               - key: KUBECONFIG
                 path: kubeconfig
+        - name: kontinuous-io
+          emptyDir: {}
 ---
 apiVersion: batch/v1
 kind: Job
@@ -414,6 +434,11 @@ spec:
           envFrom:
             - secretRef:
                 name: pg-user-feature-branch-1
+          env:
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
           command:
             - /bin/sh
             - '-c'
@@ -435,12 +460,18 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k/jobs.seed
       securityContext:
         fsGroup: 1000
       volumes:
         - name: workspace
           emptyDir: {}
         - name: action
+          emptyDir: {}
+        - name: kontinuous-io
           emptyDir: {}
 ---
 apiVersion: apps/v1

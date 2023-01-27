@@ -162,6 +162,11 @@ spec:
           image: debian:stable
           imagePullPolicy: IfNotPresent
           workingDir: /workspace
+          env:
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
           command:
             - /bin/bash
             - '-c'
@@ -183,12 +188,18 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv/jobs.say-hello
       securityContext:
         fsGroup: 1000
       volumes:
         - name: workspace
           emptyDir: {}
         - name: action
+          emptyDir: {}
+        - name: kontinuous-io
           emptyDir: {}
 "
 `;

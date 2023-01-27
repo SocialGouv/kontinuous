@@ -254,7 +254,7 @@ const loadConfig = async (
       env: "KS_FORCE_NEW_DEPLOY",
       envParser: envParserYaml,
     },
-    deploymentLabelValue: {
+    pipelineId: {
       defaultFunction: (config) => {
         const {
           repositoryName,
@@ -274,6 +274,9 @@ const loadConfig = async (
         }
         return slug(slugParts.join("-"))
       },
+    },
+    deploymentLabelValue: {
+      defaultFunction: (config) => config.pipelineId,
     },
   }
   const configOverride = {

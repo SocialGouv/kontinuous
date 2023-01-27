@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test build manifests with snapshots jobs-runs-map.dev 1`] = `
+exports[`test build manifests with snapshots output.dev 1`] = `
 "apiVersion: v1
 kind: Namespace
 metadata:
@@ -12,33 +12,33 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
-    kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq
+    kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
     janitor/ttl: 7d
   labels:
-    application: test-jobs-runs-map
-    kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq
-    kontinuous/deployment.env: test-jobs-runs-map-feature-branch-1
+    application: test-output
+    kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
+    kontinuous/deployment.env: test-output-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: namespace-test-jobs-runs-map-feature-branch-1-12xtq6um
+    kontinuous/resourceName: namespace-test-output-feature-branch-1-57pab5jm
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  name: test-jobs-runs-map-feature-branch-1
+  name: test-output-feature-branch-1
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: netpol-ingress
-  namespace: test-jobs-runs-map-feature-branch-1
+  namespace: test-output-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
-    kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq
+    kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
   labels:
-    kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq
-    kontinuous/deployment.env: test-jobs-runs-map-feature-branch-1
+    kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
+    kontinuous/deployment.env: test-output-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -69,50 +69,76 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
-    kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq
+    kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
   labels:
-    kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq
-    kontinuous/deployment.env: test-jobs-runs-map-feature-branch-1
+    kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
+    kontinuous/deployment.env: test-output-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: serviceaccount-default-2g5dmk74
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  namespace: test-jobs-runs-map-feature-branch-1
+  namespace: test-output-feature-branch-1
 automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kontinuous-io
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.output-volume
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/output-volume/templates/jobs-output.pvc.yaml
+    kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
+  labels:
+    kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
+    kontinuous/deployment.env: test-output-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: persistentvolumeclaim-kontinuous-io-1izhs2s2
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-output-feature-branch-1
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Mi
+  storageClassName: azurefile
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-dev-test-jobs-runs-map-feature-branch-1-create-db-1wgy26kx
-  namespace: test-jobs-runs-map-feature-branch-1
+  name: job-dev-test-output-feature-branch-1-a-jobs-contrib-f-ztbkw0lv
+  namespace: test-output-feature-branch-1
   annotations:
-    kontinuous/needsName: db.create-db
-    kontinuous/needsNames: '[\\"db\\",\\"db.create-db\\",\\"db..create-db\\"]'
-    kontinuous/plugin.needs: '[\\"db..create-secret\\"]'
+    kontinuous/needsName: a
+    kontinuous/needsNames: '[\\"a\\"]'
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
-    kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq
+    kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-runs-map-feature-branch-1-create-db-1wgy26kx
-    kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-runs-map-feature-branch-1-create-db-1wgy26kx
+      project.fabrique.contrib.jobs.job.job-dev-test-output-feature-branch-1-a-jobs-contrib-f-ztbkw0lv
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-output-feature-branch-1-a-jobs-contrib-f-ztbkw0lv
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-dev-test-jobs-runs-map-feature-branch-1-create-db-1wgy26kx
-    kontinuous/depname.resourceName: job-dev-test-jobs-runs-map-feature-branch-1-create-db-1wgy26kx
+    kontinuous/depname.resourcePath: job.job-dev-test-output-feature-branch-1-a-jobs-contrib-f-ztbkw0lv
+    kontinuous/depname.resourceName: job-dev-test-output-feature-branch-1-a-jobs-contrib-f-ztbkw0lv
   labels:
-    kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq
-    kontinuous/deployment.env: test-jobs-runs-map-feature-branch-1
+    kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
+    kontinuous/deployment.env: test-output-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-dev-test-jobs-runs-map-feature-branch-1-creat-2zpn5kes
+    kontinuous/resourceName: job-job-dev-test-output-feature-branch-1-a-jobs-contr-4wbeaufy
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
-  backoffLimit: 3
+  backoffLimit: 1
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
@@ -120,33 +146,37 @@ spec:
       labels:
         environment: dev
         ref: feature-branch-1
-        repository: test-jobs-runs-map
-        runName: create-db
-        kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq
-        kontinuous/deployment.env: test-jobs-runs-map-feature-branch-1
+        repository: test-output
+        runName: custom
+        kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
+        kontinuous/deployment.env: test-output-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-dev-test-jobs-runs-map-feature-branch-1-creat-2zpn5kes
+        kontinuous/resourceName: job-job-dev-test-output-feature-branch-1-a-jobs-contr-4wbeaufy
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq
+        kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
     spec:
       restartPolicy: Never
       initContainers:
-        - name: degit-action
+        - name: degit-repository
           image: ghcr.io/socialgouv/kontinuous/degit:v1.131.0
+          imagePullPolicy: IfNotPresent
           command:
             - sh
             - '-c'
-            - degit socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
+            - |
+
+              degit kontinuous/test-output#feature-branch-1 \\\\
+                /workspace
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
           volumeMounts:
-            - name: action
-              mountPath: /action
+            - name: workspace
+              mountPath: /workspace
           resources:
             limits:
               cpu: 100m
@@ -156,41 +186,10 @@ spec:
               memory: '0'
       containers:
         - name: job
-          image: ghcr.io/socialgouv/docker/psql:6.70.0
+          image: debian:stable
           imagePullPolicy: IfNotPresent
-          envFrom:
-            - secretRef:
-                name: pg-admin-user
+          workingDir: /workspace
           env:
-            - name: NEW_DB_NAME
-              value: autodevops_feature-branch-1
-            - name: NEW_USER
-              valueFrom:
-                secretKeyRef:
-                  key: PGUSER
-                  name: pg-user
-            - name: NEW_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: PGPASSWORD
-                  name: pg-user
-            - name: PGHOST
-              valueFrom:
-                secretKeyRef:
-                  key: PGHOST
-                  name: pg-user
-            - name: PGPORT
-              valueFrom:
-                secretKeyRef:
-                  key: PGPORT
-                  name: pg-user
-            - name: PGSSLMODE
-              valueFrom:
-                secretKeyRef:
-                  key: PGSSLMODE
-                  name: pg-user
-            - name: NEW_DB_EXTENSIONS
-              value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
             - name: KONTINUOUS_OUTPUT
               value: /kontinuous-output
             - name: KONTINUOUS_INPUT
@@ -200,7 +199,7 @@ spec:
             - '-c'
             - |
               set -e
-              /action/ensure-db.sh
+              echo earth>$KONTINUOUS_OUTPUT/WORLD
           resources:
             limits:
               cpu: '1'
@@ -219,7 +218,7 @@ spec:
             - name: kontinuous-io
               mountPath: /kontinuous-output
               subPath: >-
-                test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq/jobs.db.create-db
+                test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea/jobs.a
       securityContext:
         fsGroup: 1000
       volumes:
@@ -228,38 +227,40 @@ spec:
         - name: action
           emptyDir: {}
         - name: kontinuous-io
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: kontinuous-io
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-dev-test-jobs-runs-map-feature-branch-1-create-se-3etk0k61
-  namespace: test-jobs-runs-map-feature-branch-1
+  name: job-dev-test-output-feature-branch-1-b-jobs-contrib-f-51wxewmg
+  namespace: test-output-feature-branch-1
   annotations:
-    kontinuous/needsName: db.create-secret
-    kontinuous/needsNames: '[\\"db\\",\\"db.create-secret\\",\\"db..create-secret\\"]'
+    kontinuous/needsName: b
+    kontinuous/needsNames: '[\\"b\\"]'
+    kontinuous/plugin.needs: '[\\"a\\"]'
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
-    kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq
+    kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
     kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-runs-map-feature-branch-1-create-se-3etk0k61
-    kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-runs-map-feature-branch-1-create-se-3etk0k61
+      project.fabrique.contrib.jobs.job.job-dev-test-output-feature-branch-1-b-jobs-contrib-f-51wxewmg
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-output-feature-branch-1-b-jobs-contrib-f-51wxewmg
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
-    kontinuous/depname.resourcePath: job.job-dev-test-jobs-runs-map-feature-branch-1-create-se-3etk0k61
-    kontinuous/depname.resourceName: job-dev-test-jobs-runs-map-feature-branch-1-create-se-3etk0k61
+    kontinuous/depname.resourcePath: job.job-dev-test-output-feature-branch-1-b-jobs-contrib-f-51wxewmg
+    kontinuous/depname.resourceName: job-dev-test-output-feature-branch-1-b-jobs-contrib-f-51wxewmg
   labels:
-    kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq
-    kontinuous/deployment.env: test-jobs-runs-map-feature-branch-1
+    kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
+    kontinuous/deployment.env: test-output-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-dev-test-jobs-runs-map-feature-branch-1-creat-4oa4as2j
+    kontinuous/resourceName: job-job-dev-test-output-feature-branch-1-b-jobs-contr-4jjwg6wx
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
-  backoffLimit: 6
+  backoffLimit: 1
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
@@ -267,33 +268,37 @@ spec:
       labels:
         environment: dev
         ref: feature-branch-1
-        repository: test-jobs-runs-map
-        runName: create-db
-        kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq
-        kontinuous/deployment.env: test-jobs-runs-map-feature-branch-1
+        repository: test-output
+        runName: custom
+        kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
+        kontinuous/deployment.env: test-output-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-dev-test-jobs-runs-map-feature-branch-1-creat-4oa4as2j
+        kontinuous/resourceName: job-job-dev-test-output-feature-branch-1-b-jobs-contr-4jjwg6wx
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq
+        kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
     spec:
       restartPolicy: Never
       initContainers:
-        - name: degit-action
+        - name: degit-repository
           image: ghcr.io/socialgouv/kontinuous/degit:v1.131.0
+          imagePullPolicy: IfNotPresent
           command:
             - sh
             - '-c'
-            - degit socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
+            - |
+
+              degit kontinuous/test-output#feature-branch-1 \\\\
+                /workspace
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
           volumeMounts:
-            - name: action
-              mountPath: /action
+            - name: workspace
+              mountPath: /workspace
           resources:
             limits:
               cpu: 100m
@@ -303,28 +308,10 @@ spec:
               memory: '0'
       containers:
         - name: job
-          image: bitnami/kubectl:latest
+          image: debian:stable
           imagePullPolicy: IfNotPresent
-          envFrom:
-            - secretRef:
-                name: pg-admin-user
+          workingDir: /workspace
           env:
-            - name: USE_AZURE_FLEX
-              value: 'false'
-            - name: DB_SECRET_NAME
-              value: pg-user
-            - name: JOB_NAMESPACE
-              value: test-jobs-runs-map-feature-branch-1
-            - name: NAMESPACE
-              value: test-jobs-runs-map-feature-branch-1
-            - name: PGDATABASE
-              value: autodevops_feature-branch-1
-            - name: PGUSER
-              value: user_feature-branch-1
-            - name: SECRET_TTL
-              value: 24h
-            - name: KUBECONFIG
-              value: /secrets/k8s/kubeconfig
             - name: KONTINUOUS_OUTPUT
               value: /kontinuous-output
             - name: KONTINUOUS_INPUT
@@ -334,7 +321,9 @@ spec:
             - '-c'
             - |
               set -e
-              /action/create-secret.sh
+              PLANET=$(cat $KONTINUOUS_INPUT/PLANET)
+              echo \\"Hello $PLANET !\\"
+              sleep 10
           resources:
             limits:
               cpu: '1'
@@ -343,34 +332,30 @@ spec:
               cpu: '0.041'
               memory: 121Mi
           securityContext:
-            runAsUser: 1001
-            runAsGroup: 1001
+            runAsUser: 1000
+            runAsGroup: 1000
           volumeMounts:
             - name: workspace
               mountPath: /workspace
             - name: action
               mountPath: /action
-            - name: kubeconfig
-              mountPath: /secrets/k8s
-              readOnly: true
             - name: kontinuous-io
               mountPath: /kontinuous-output
               subPath: >-
-                test-jobs-runs-map-feature-branch-1-ffac537e6cbbf934b-4ym7izxq/jobs.db.create-secret
+                test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea/jobs.b
+            - name: kontinuous-io
+              mountPath: /kontinuous-input/PLANET
+              subPath: >-
+                test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea/jobs.a/WORLD
       securityContext:
-        fsGroup: 1001
+        fsGroup: 1000
       volumes:
         - name: workspace
           emptyDir: {}
         - name: action
           emptyDir: {}
-        - name: kubeconfig
-          secret:
-            secretName: kubeconfig
-            items:
-              - key: KUBECONFIG
-                path: kubeconfig
         - name: kontinuous-io
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: kontinuous-io
 "
 `;

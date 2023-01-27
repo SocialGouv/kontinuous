@@ -52,3 +52,5 @@ runs:
         {{ if $.with.target -}}
         --target="{{ $.with.target }}" \
         {{ end -}}  
+      
+      echo "$IMAGE_PATH:{{ or $.with.imageTag $.Values.global.imageTag }}" >$KONTINUOUS_OUTPUT/IMAGE
