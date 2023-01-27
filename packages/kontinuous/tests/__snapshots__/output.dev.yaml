@@ -113,7 +113,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-output-feature-branch-1-a-jobs-contrib-f-ztbkw0lv
-  namespace: awesome-ci
+  namespace: test-output-feature-branch-1
   annotations:
     kontinuous/needsName: a
     kontinuous/needsNames: '[\\"a\\"]'
@@ -162,7 +162,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.124.0
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.131.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -222,7 +222,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-output-feature-branch-1-b-jobs-contrib-f-51wxewmg
-  namespace: awesome-ci
+  namespace: test-output-feature-branch-1
   annotations:
     kontinuous/needsName: b
     kontinuous/needsNames: '[\\"b\\"]'
@@ -271,7 +271,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.124.0
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.131.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
