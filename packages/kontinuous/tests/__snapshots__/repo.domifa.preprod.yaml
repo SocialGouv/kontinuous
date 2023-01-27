@@ -203,6 +203,10 @@ spec:
           env:
             - name: BUILDKITD_FLAGS
               value: '--oci-worker-no-process-sandbox'
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
           command:
             - /bin/sh
             - '-c'
@@ -231,7 +235,7 @@ spec:
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 --opt build-arg:\\"DOMIFA_ENV_ID=preprod\\" \\\\
-                
+                echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
               cpu: '2'
@@ -247,6 +251,10 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-backend.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
       securityContext:
@@ -255,6 +263,8 @@ spec:
         - name: workspace
           emptyDir: {}
         - name: action
+          emptyDir: {}
+        - name: kontinuous-io
           emptyDir: {}
         - emptyDir: {}
           name: buildkitd
@@ -345,6 +355,10 @@ spec:
           env:
             - name: BUILDKITD_FLAGS
               value: '--oci-worker-no-process-sandbox'
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
           command:
             - /bin/sh
             - '-c'
@@ -378,7 +392,7 @@ spec:
                 --opt build-arg:\\"DOMIFA_PORTAIL_ADMINS_URL=https://admin-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
                 --opt build-arg:\\"DOMIFA_PORTAIL_USAGERS_URL=https://mon-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
                 --opt build-arg:\\"DOMIFA_SENTRY_DSN_FRONTEND=https://***@sentry.fabrique.social.gouv.fr/31\\" \\\\
-                
+                echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
               cpu: '2'
@@ -394,6 +408,10 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-frontend.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
       securityContext:
@@ -402,6 +420,8 @@ spec:
         - name: workspace
           emptyDir: {}
         - name: action
+          emptyDir: {}
+        - name: kontinuous-io
           emptyDir: {}
         - emptyDir: {}
           name: buildkitd
@@ -493,6 +513,10 @@ spec:
           env:
             - name: BUILDKITD_FLAGS
               value: '--oci-worker-no-process-sandbox'
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
           command:
             - /bin/sh
             - '-c'
@@ -523,7 +547,7 @@ spec:
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
                 --opt build-arg:\\"DOMIFA_ENV_ID=preprod\\" \\\\
-                
+                echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
               cpu: '2'
@@ -539,6 +563,10 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-portail-admins.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
       securityContext:
@@ -547,6 +575,8 @@ spec:
         - name: workspace
           emptyDir: {}
         - name: action
+          emptyDir: {}
+        - name: kontinuous-io
           emptyDir: {}
         - emptyDir: {}
           name: buildkitd
@@ -638,6 +668,10 @@ spec:
           env:
             - name: BUILDKITD_FLAGS
               value: '--oci-worker-no-process-sandbox'
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
           command:
             - /bin/sh
             - '-c'
@@ -669,7 +703,7 @@ spec:
                 --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
                 --opt build-arg:\\"DOMIFA_ENV_ID=preprod\\" \\\\
                 --opt build-arg:\\"DOMIFA_SENTRY_DSN_PORTAIL=https://***@sentry.fabrique.social.gouv.fr/58\\" \\\\
-                
+                echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
               cpu: '2'
@@ -685,6 +719,10 @@ spec:
               mountPath: /workspace
             - name: action
               mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-portail-usagers.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
       securityContext:
@@ -693,6 +731,8 @@ spec:
         - name: workspace
           emptyDir: {}
         - name: action
+          emptyDir: {}
+        - name: kontinuous-io
           emptyDir: {}
         - emptyDir: {}
           name: buildkitd
