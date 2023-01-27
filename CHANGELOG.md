@@ -1,6 +1,14 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [1.132.2](https://github.com/socialgouv/kontinuous/compare/v1.132.1...v1.132.2) (2023-01-27)
+
+
+### Bug Fixes
+
+* up to commit-and-tag-version ([a9415ed](https://github.com/socialgouv/kontinuous/commit/a9415ed1a9ff39db5456411a4cc36774e5d7eafb))
+* upgrade helm and kubectl version ([12b6900](https://github.com/socialgouv/kontinuous/commit/12b6900559ac2a4096d4e3e9d80b37cbc7ecf26d))
 
 ### [1.132.1](https://github.com/socialgouv/kontinuous/compare/v1.132.0...v1.132.1) (2023-01-27)
 
