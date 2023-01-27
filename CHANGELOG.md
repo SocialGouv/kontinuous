@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.132.1](https://github.com/socialgouv/kontinuous/compare/v1.132.0...v1.132.1) (2023-01-27)
+
+
+### Bug Fixes
+
+* global default host invariant ([98a31f5](https://github.com/socialgouv/kontinuous/commit/98a31f5cd1d4f07aa4dde2dccdff42621bdbcc25))
+
 ## 1.132.0 (2023-01-27)
 
 
