@@ -1,0 +1,19 @@
+name: "Kontinuous env vars 🍿"
+description: "Load kontinuous environment variables"
+inputs:
+  branch:
+    description: "override branch"
+  repositoryName:
+    description: "override repository-name"
+  subdomain:
+    description: "subdomain list, comma separated"
+
+runs:
+  using: docker
+  # image: Dockerfile
+  image: docker://ghcr.io/socialgouv/kontinuous/env:v1.130.2
+  env:
+    KS_GIT_BRANCH: ${{ inputs.branch }}
+    KSENV_REPOSITORY_NAME: ${{ inputs.repositoryName }}
+    KSENV_SUBDOMAIN: ${{ inputs.subdomain }}
+    
