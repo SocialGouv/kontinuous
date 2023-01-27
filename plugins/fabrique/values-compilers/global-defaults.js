@@ -1,5 +1,3 @@
-const MAX_DNS_LENGTH = 63
-
 module.exports = async (values, options, { config, utils }) => {
   const { slug, deepmerge } = utils
 
@@ -19,14 +17,11 @@ module.exports = async (values, options, { config, utils }) => {
 
   const { repositoryName } = config
 
-  const globalHostMaxLength =
-    MAX_DNS_LENGTH - Math.max(...Object.keys(values).map((key) => key.length))
-
   const subdomain = isProd
     ? repositoryName
     : isPreProd
     ? `${repositoryName}-preprod`
-    : slug(`${repositoryName}-${gitBranch}`, { maxLength: globalHostMaxLength })
+    : slug(`${repositoryName}-${gitBranch}`)
 
   const isRenovate = gitBranch.startsWith("renovate")
 
