@@ -10,7 +10,7 @@ concurrency:
 jobs:
   yarn-release:
     runs-on: ubuntu-latest
-    name: Create release using standard-version
+    name: Create release using commit-and-tag-version
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

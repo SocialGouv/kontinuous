@@ -4395,6 +4395,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commit-and-tag-version@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "commit-and-tag-version@npm:11.0.0"
+  dependencies:
+    chalk: "npm:^2.4.2"
+    conventional-changelog: "npm:3.1.25"
+    conventional-changelog-config-spec: "npm:2.1.0"
+    conventional-changelog-conventionalcommits: "npm:5.0.0"
+    conventional-recommended-bump: "npm:6.1.0"
+    detect-indent: "npm:^6.0.0"
+    detect-newline: "npm:^3.1.0"
+    dotgitignore: "npm:^2.1.0"
+    figures: "npm:^3.1.0"
+    find-up: "npm:^5.0.0"
+    git-semver-tags: "npm:^4.0.0"
+    semver: "npm:^7.1.1"
+    stringify-package: "npm:^1.0.1"
+    yargs: "npm:^17.0.0"
+  bin:
+    commit-and-tag-version: bin/cli.js
+  checksum: dba6cbf270205b559ec5acd651915558fa29fda9d3296d14555ee6d6704a52595abc09c799c12d23f452cf23f56195bcbe600f4a5206b235f08ad80ccb44e713
+  languageName: node
+  linkType: hard
+
 "compare-func@npm:^2.0.0":
   version: 2.0.0
   resolution: "compare-func@npm:2.0.0"
@@ -4565,7 +4589,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-changelog-conventionalcommits@npm:4.6.3, conventional-changelog-conventionalcommits@npm:^4.5.0":
+"conventional-changelog-conventionalcommits@npm:5.0.0":
+  version: 5.0.0
+  resolution: "conventional-changelog-conventionalcommits@npm:5.0.0"
+  dependencies:
+    compare-func: "npm:^2.0.0"
+    lodash: "npm:^4.17.15"
+    q: "npm:^1.5.1"
+  checksum: cd39e90a9637925b99c425197436f6cec1257f3ae82b437edeb93390d4cea90702cff31c06ab4d9dde71ea243cf64f7665eafa019bbfd7735ce2e4d30b9362bf
+  languageName: node
+  linkType: hard
+
+"conventional-changelog-conventionalcommits@npm:^4.5.0":
   version: 4.6.3
   resolution: "conventional-changelog-conventionalcommits@npm:4.6.3"
   dependencies:
@@ -12068,30 +12103,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"standard-version@npm:^9.3.2":
-  version: 9.5.0
-  resolution: "standard-version@npm:9.5.0"
-  dependencies:
-    chalk: "npm:^2.4.2"
-    conventional-changelog: "npm:3.1.25"
-    conventional-changelog-config-spec: "npm:2.1.0"
-    conventional-changelog-conventionalcommits: "npm:4.6.3"
-    conventional-recommended-bump: "npm:6.1.0"
-    detect-indent: "npm:^6.0.0"
-    detect-newline: "npm:^3.1.0"
-    dotgitignore: "npm:^2.1.0"
-    figures: "npm:^3.1.0"
-    find-up: "npm:^5.0.0"
-    git-semver-tags: "npm:^4.0.0"
-    semver: "npm:^7.1.1"
-    stringify-package: "npm:^1.0.1"
-    yargs: "npm:^16.0.0"
-  bin:
-    standard-version: bin/cli.js
-  checksum: 06d7bdb6115e3760ef6530310c0b63a7091f11f6e2aa81fd53d7cfee490fa4d8cfd2db32b09d386a1e6da44a87b343e79f0c8227118dc61ba23027e2f66d33d2
-  languageName: node
-  linkType: hard
-
 "statuses@npm:2.0.1":
   version: 2.0.1
   resolution: "statuses@npm:2.0.1"
@@ -13499,6 +13510,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"yargs-parser@npm:^21.1.1":
+  version: 21.1.1
+  resolution: "yargs-parser@npm:21.1.1"
+  checksum: fc4457cf1e4d7d41e5b3a1d62e86b3934af704dd8777979a3c4c573e08eea437801444622cd68607c0266d53b90d84e8e79fd4f5ff170d1be8860064111bbad6
+  languageName: node
+  linkType: hard
+
 "yargs@npm:^15.3.0, yargs@npm:^15.3.1":
   version: 15.4.1
   resolution: "yargs@npm:15.4.1"
@@ -13530,6 +13548,21 @@ __metadata:
     y18n: "npm:^5.0.5"
     yargs-parser: "npm:^20.2.2"
   checksum: be4564db8f818c7eeda96653331a62829522ab2a8a773da079ebf3870ab5b875177c397c57f06d6c9238d613567ebe69d4cbac35dbef1cc9928183df7ba8d479
+  languageName: node
+  linkType: hard
+
+"yargs@npm:^17.0.0":
+  version: 17.6.2
+  resolution: "yargs@npm:17.6.2"
+  dependencies:
+    cliui: "npm:^8.0.1"
+    escalade: "npm:^3.1.1"
+    get-caller-file: "npm:^2.0.5"
+    require-directory: "npm:^2.1.1"
+    string-width: "npm:^4.2.3"
+    y18n: "npm:^5.0.5"
+    yargs-parser: "npm:^21.1.1"
+  checksum: 31c667c5c38d1738ac4ecb6f5228eb94f53d0555db4e4091bd55bc7864d96f3e58e1b8126e1b19bfa056f4f1aeb7643723c3a8309267df36e30afb91e796a3fc
   languageName: node
   linkType: hard
 
@@ -13659,6 +13692,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "~dev@workspace:."
   dependencies:
+    commit-and-tag-version: "npm:^11.0.0"
     docsify-cli: "npm:^4.4.4"
     eslint: "npm:^8.26.0"
     eslint-config-airbnb-base: "npm:^15.0.0"
@@ -13672,7 +13706,6 @@ __metadata:
     js-yaml: "npm:^4.1.0"
     lint-staged: "npm:^12.3.7"
     prettier: "npm:^2.6.2"
-    standard-version: "npm:^9.3.2"
   languageName: unknown
   linkType: soft
 
