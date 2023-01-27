@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.130.2](https://github.com/socialgouv/kontinuous/compare/v1.130.1...v1.130.2) (2023-01-27)
+
+
+### Bug Fixes
+
+* package future reserved keyworkd ([ea88fa5](https://github.com/socialgouv/kontinuous/commit/ea88fa5914d15c69aee7912baf00f645d95bd0f1))
+
 ### [1.130.1](https://github.com/socialgouv/kontinuous/compare/v1.130.0...v1.130.1) (2023-01-26)
 
 
