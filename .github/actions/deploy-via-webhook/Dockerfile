@@ -22,7 +22,7 @@ RUN curl --fail -sL https://github.com/stedolan/jq/releases/download/jq-${JQ_VER
 
 FROM base as yq
 # renovate: datasource=github-releases depName=mikefarah/yq
-ARG YQ_VERSION=4.20.2
+ARG YQ_VERSION=4.30.8
 ENV YQ_VERSION=$YQ_VERSION
 RUN wget https://github.com/mikefarah/yq/releases/download/v$YQ_VERSION/yq_linux_amd64.tar.gz -O - | tar xz && mv yq_linux_amd64 /usr/local/bin/yq
 
