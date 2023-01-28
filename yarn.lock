@@ -9796,17 +9796,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"http-cache-semantics@npm:^4.0.0":
+"http-cache-semantics@npm:^4.0.0, http-cache-semantics@npm:^4.1.0":
   version: 4.1.1
   resolution: "http-cache-semantics@npm:4.1.1"
   checksum: 7b4d86f99fb3f07b6a49219420ebdffa077ee99bc5fe1df1f353b84c3d321c767a083a48291afb2fc34a627661b6d54c80a927639a7be9e0c43e8c4f921816bd
-  languageName: node
-  linkType: hard
-
-"http-cache-semantics@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "http-cache-semantics@npm:4.1.0"
-  checksum: ccfe23dd2729bc564ab419330e0c4646a1247e8dd728a4a6b3ab427b5243d2e0afea0c6fe690ff9ead43d02bd84cc5240e996543c4c87866f272e26e40540acd
   languageName: node
   linkType: hard
 
@@ -9904,12 +9897,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:^7.0.4":
-  version: 7.0.4
-  resolution: "husky@npm:7.0.4"
+"husky@npm:^8.0.0":
+  version: 8.0.3
+  resolution: "husky@npm:8.0.3"
   bin:
     husky: lib/bin.js
-  checksum: 1d6dd7e973e7fab4316f767f3f8d76591a9857b3ad4fea2b371834afe2122d6567965b6c5a027040b403363c328d35871113d7f64586d7149b4b417c90554237
+  checksum: 016ab53f21f39af1b2387559faa9cb6e2bbbe6d3cccd64c186efe204ca4634fc11dca369da9aabe7cde4293573abe12f9b7251f20bef39ea33d8e1e8f0847550
   languageName: node
   linkType: hard
 
@@ -17635,7 +17628,7 @@ __metadata:
     eslint-plugin-jest: "npm:^27.0.0"
     eslint-plugin-prettier: "npm:^4.0.0"
     fs-extra: "npm:^11.1.0"
-    husky: "npm:^7.0.4"
+    husky: "npm:^8.0.0"
     js-yaml: "npm:^4.1.0"
     lint-staged: "npm:^12.3.7"
     prettier: "npm:^2.6.2"
