@@ -56,7 +56,7 @@
     {
       "fileMatch": ["versions.js"],
       "matchStrings": [
-        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?( extractVersion=(?<extractVersion>.*?))?\\n.*?: \"(?<currentValue>.*)\"\\n"
+        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?( extractVersion=(?<extractVersion>.*?))?\\n.*?: \"(?<currentValue>.*)\",\\n"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?${{/if}}",
       "extractVersionTemplate": "{{#if extractVersion}}{{{extractVersion}}}{{else}}^v?(?<version>.+)${{/if}}"
