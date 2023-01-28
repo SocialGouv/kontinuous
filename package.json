@@ -46,9 +46,10 @@
     "cookiejar": "^2.1.4"
   },
   "scripts": {
-    "renovate": "LOG_LEVEL=debug yarn run renovate:github",
+    "renovate": "yarn run renovate:github",
     "renovate:github": "RENOVATE_PLATFORM=github RENOVATE_TOKEN=$GITHUB_TOKEN renovate socialgouv/kontinuous",
     "renovate:dry-run": "yarn renovate --dry-run",
+    "renovate:debug": "LOG_LEVEL=debug yarn run renovate:dry-run",
     "precommit": "lint-staged",
     "postinstall": "[ -d '.husky' ] && husky install || true && yarn install:plugins",
     "install:plugins": "yarn install:plugin:contrib && yarn install:plugin:fabrique",
