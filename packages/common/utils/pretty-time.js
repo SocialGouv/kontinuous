@@ -1,6 +1,3 @@
-const prettyMilliseconds = require("pretty-ms")
+const ms = require("ms")
 
-module.exports = (time) =>
-  prettyMilliseconds(time, {
-    secondsDecimalDigits: 0,
-  })
+module.exports = (time) => ms(time)
