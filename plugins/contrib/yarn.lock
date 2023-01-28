@@ -2449,12 +2449,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json5@npm:2.2.2":
-  version: 2.2.2
-  resolution: "json5@npm:2.2.2"
+"json5@npm:2.2.3":
+  version: 2.2.3
+  resolution: "json5@npm:2.2.3"
   bin:
     json5: lib/cli.js
-  checksum: da81dfa146a0285c3f76b361abdc89d697f732b4374a3fe4e5768011c56fdaac8c2e1746fb37efbd9161e06cbab09f9185c4b7106603c2b91c60d76a8ffea517
+  checksum: e298f92c92197e956eb7a93304f74b5b80b4c3fe412f44a1f3d4c966e5ddf2e8ef2ac7ce0b0c40c78735bf2901c29257a653e1da684dae8e7835932e4904d6a0
   languageName: node
   linkType: hard
 
