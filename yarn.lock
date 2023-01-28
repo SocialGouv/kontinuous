@@ -8542,10 +8542,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-copy@npm:^2.1.3":
-  version: 2.1.7
-  resolution: "fast-copy@npm:2.1.7"
-  checksum: 873d6bb93244a8c86e55949101e8c87dd9a3f2123d7d09558f75480906d12ac839993a629775413da54bdfbc2b0cdfa6ab6e1c793e01bd2c3ebabc4a2a91e477
+"fast-copy@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "fast-copy@npm:3.0.0"
+  checksum: f03630cf09ef5236d44340875a7e51d0521f42b25147763e6b9056c57f5ccec278d099ef23885dc4eeae2cb9963296ec2f43eaa91b1b8ae9db3ace9c666c69ba
   languageName: node
   linkType: hard
 
