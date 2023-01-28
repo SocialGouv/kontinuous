@@ -191,6 +191,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-prod-test-r-feature-branch-1-buildkit-build-backe-4vuvjsyc
     kontinuous/depname.resourceName: job-prod-test-r-feature-branch-1-buildkit-build-backe-4vuvjsyc
+    kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
@@ -346,6 +347,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-prod-test-r-feature-branch-1-buildkit-build-front-4npicdqn
     kontinuous/depname.resourceName: job-prod-test-r-feature-branch-1-buildkit-build-front-4npicdqn
+    kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
@@ -504,6 +506,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-prod-test-r-feature-branch-1-buildkit-build-porta-1twnas1s
     kontinuous/depname.resourceName: job-prod-test-r-feature-branch-1-buildkit-build-porta-1twnas1s
+    kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
@@ -660,6 +663,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-prod-test-r-feature-branch-1-buildkit-build-porta-2ln9pb3d
     kontinuous/depname.resourceName: job-prod-test-r-feature-branch-1-buildkit-build-porta-2ln9pb3d
+    kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
@@ -825,6 +829,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.backend-cron
     kontinuous/depname.resourcePath: deployment.backend-cron
     kontinuous/depname.resourceName: backend-cron
+    kontinuous/plugin.log: 'true'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 2
@@ -968,6 +973,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.backend
     kontinuous/depname.resourcePath: deployment.backend
     kontinuous/depname.resourceName: backend
+    kontinuous/plugin.log: 'true'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 2
@@ -1111,6 +1117,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.frontend
     kontinuous/depname.resourcePath: deployment.frontend
     kontinuous/depname.resourceName: frontend
+    kontinuous/plugin.log: 'true'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 2
@@ -1215,6 +1222,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.portail-admins
     kontinuous/depname.resourcePath: deployment.portail-admins
     kontinuous/depname.resourceName: portail-admins
+    kontinuous/plugin.log: 'true'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 2
@@ -1320,6 +1328,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.portail-usagers
     kontinuous/depname.resourcePath: deployment.portail-usagers
     kontinuous/depname.resourceName: portail-usagers
+    kontinuous/plugin.log: 'true'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 2

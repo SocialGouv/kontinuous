@@ -102,6 +102,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-build-options-feature-branch-1-buil-42yehrg5
     kontinuous/depname.resourceName: job-dev-test-jobs-build-options-feature-branch-1-buil-42yehrg5
+    kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbb-63jpvbjn
     kontinuous/deployment.env: test-jobs-build-options-feature-branch-1
@@ -264,6 +265,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
+    kontinuous/plugin.log: 'true'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1

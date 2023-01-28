@@ -109,6 +109,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.redis
     kontinuous/depname.resourcePath: deployment.redis
     kontinuous/depname.resourceName: redis
+    kontinuous/plugin.log: 'true'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1

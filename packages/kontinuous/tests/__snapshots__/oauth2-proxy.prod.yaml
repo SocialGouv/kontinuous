@@ -108,6 +108,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.oauth2-proxy
     kontinuous/depname.resourcePath: deployment.oauth2-proxy
     kontinuous/depname.resourceName: oauth2-proxy
+    kontinuous/plugin.log: 'true'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1

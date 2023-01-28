@@ -128,6 +128,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-output-feature-branch-1-a-jobs-contrib-f-ztbkw0lv
     kontinuous/depname.resourceName: job-dev-test-output-feature-branch-1-a-jobs-contrib-f-ztbkw0lv
+    kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
     kontinuous/deployment.env: test-output-feature-branch-1
@@ -250,6 +251,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-output-feature-branch-1-b-jobs-contrib-f-51wxewmg
     kontinuous/depname.resourceName: job-dev-test-output-feature-branch-1-b-jobs-contrib-f-51wxewmg
+    kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
     kontinuous/deployment.env: test-output-feature-branch-1

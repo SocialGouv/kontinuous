@@ -29,6 +29,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.api1
     kontinuous/depname.resourcePath: deployment.api1
     kontinuous/depname.resourceName: api1
+    kontinuous/plugin.log: 'true'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
@@ -134,6 +135,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.api2
     kontinuous/depname.resourcePath: deployment.api2
     kontinuous/depname.resourceName: api2
+    kontinuous/plugin.log: 'true'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1

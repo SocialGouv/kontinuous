@@ -103,6 +103,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-command-feature-branch-1-creat-3u59166k
     kontinuous/depname.resourceName: job-dev-test-jobs-seed-command-feature-branch-1-creat-3u59166k
+    kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k
     kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
@@ -250,6 +251,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-command-feature-branch-1-creat-481uhp5z
     kontinuous/depname.resourceName: job-dev-test-jobs-seed-command-feature-branch-1-creat-481uhp5z
+    kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k
     kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
@@ -394,6 +396,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-command-feature-branch-1-seed-4tzvwc3y
     kontinuous/depname.resourceName: job-dev-test-jobs-seed-command-feature-branch-1-seed-4tzvwc3y
+    kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k
     kontinuous/deployment.env: test-jobs-seed-command-feature-branch-1
@@ -502,6 +505,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
+    kontinuous/plugin.log: 'true'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1

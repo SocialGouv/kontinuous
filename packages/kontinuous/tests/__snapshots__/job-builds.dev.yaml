@@ -102,6 +102,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.build-app
     kontinuous/depname.resourcePath: job.job-dev-test-job-builds-feature-branch-1-buildkit-bui-3ttx7dsa
     kontinuous/depname.resourceName: job-dev-test-job-builds-feature-branch-1-buildkit-bui-3ttx7dsa
+    kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-job-builds-feature-branch-1-ffac537e6cbbf934b087-5o9wuk2u
     kontinuous/deployment.env: test-job-builds-feature-branch-1
@@ -256,6 +257,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.build-hasura
     kontinuous/depname.resourcePath: job.job-dev-test-job-builds-feature-branch-1-buildkit-bui-vmr373ho
     kontinuous/depname.resourceName: job-dev-test-job-builds-feature-branch-1-buildkit-bui-vmr373ho
+    kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-job-builds-feature-branch-1-ffac537e6cbbf934b087-5o9wuk2u
     kontinuous/deployment.env: test-job-builds-feature-branch-1

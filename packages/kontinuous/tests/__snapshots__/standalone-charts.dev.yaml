@@ -18,6 +18,7 @@ metadata:
     kontinuous/depname.chartPath: project.extra-job
     kontinuous/depname.resourcePath: job.extra-job
     kontinuous/depname.resourceName: extra-job
+    kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf-6atwtfds
     kontinuous/deployment.env: test-standalone-charts-feature-branch-1-extra-job

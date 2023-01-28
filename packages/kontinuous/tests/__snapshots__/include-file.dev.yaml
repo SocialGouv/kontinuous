@@ -101,6 +101,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-include-file-feature-branch-1-say-hello-1m1qjriv
     kontinuous/depname.resourceName: job-dev-test-include-file-feature-branch-1-say-hello-1m1qjriv
+    kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv
     kontinuous/deployment.env: test-include-file-feature-branch-1
