@@ -1,8 +1,10 @@
-name: 🎉 Release Commit on Merge ↩️
+name: 🎉 Release Commit
 
 on: 
+  workflow_dispatch:
   pull_request:
     types: [closed]
+    
     
 concurrency:
   cancel-in-progress: true
@@ -10,7 +12,7 @@ concurrency:
 
 jobs:
   yarn-release:
-    if: github.event.pull_request.merged == true
+    if:  github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     name: Create release using commit-and-tag-version
     steps:
@@ -20,7 +22,7 @@ jobs:
           token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
 
       - name: Install dependencies
-        run: yarn workspaces focus ~dev
+        run: yarn --immutable
 
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v5
