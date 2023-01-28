@@ -13,6 +13,7 @@ RUN apt-get update && \
 
 # renovate: datasource=node depName=node
 ARG NODE_VERSION=18
+
 ENV NODE_VERSION=$NODE_VERSION
 RUN wget -qO- https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
   && apt-get install nodejs \
