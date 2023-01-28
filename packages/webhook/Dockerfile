@@ -1,5 +1,5 @@
 ARG NODE_ENV=production
-# renovate: datasource=docker depName=ubuntu versioning=docker
+# renovate: datasource=docker depName=ubuntu versioning=ubuntu
 ARG UBUNTU_VERSION=22.04
 FROM ubuntu:$UBUNTU_VERSION as base
 
@@ -10,7 +10,7 @@ RUN apt-get update && \
     git \
   && rm -rf /var/lib/apt/lists/*
 
-# renovate: datasource=node depName=node
+# renovate: datasource=node depName=node versioning=node
 ARG NODE_VERSION=18
 ENV NODE_VERSION=$NODE_VERSION
 RUN wget -qO- https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \

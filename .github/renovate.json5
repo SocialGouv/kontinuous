@@ -45,6 +45,7 @@
   "regexManagers": [
     // https://docs.renovatebot.com/modules/manager/regex/
     // https://docs.renovatebot.com/modules/datasource/
+    // https://docs.renovatebot.com/modules/versioning/
     {
       "fileMatch": ["Dockerfile"],
       "matchStrings": [

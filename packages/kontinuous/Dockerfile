@@ -1,4 +1,4 @@
-# renovate: datasource=docker depName=ubuntu versioning=docker
+# renovate: datasource=docker depName=ubuntu versioning=ubuntu
 ARG UBUNTU_VERSION=22.04
 
 FROM ubuntu:$UBUNTU_VERSION as downloader
@@ -52,7 +52,7 @@ RUN curl --fail -sL https://github.com/stern/stern/releases/download/v${STERN_VE
   && rm -r /tmp/*
 
 FROM ubuntu:$UBUNTU_VERSION as node
-# renovate: datasource=node depName=node
+# renovate: datasource=node depName=node versioning=node
 ARG NODE_VERSION=18
 ENV NODE_VERSION=$NODE_VERSION
 RUN apt-get update && \

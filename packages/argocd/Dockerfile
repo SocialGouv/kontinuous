@@ -11,7 +11,7 @@ RUN apt-get update && \
     git \
   && rm -rf /var/lib/apt/lists/*
 
-# renovate: datasource=node depName=node
+# renovate: datasource=node depName=node versioning=node
 ARG NODE_VERSION=18
 
 ENV NODE_VERSION=$NODE_VERSION
