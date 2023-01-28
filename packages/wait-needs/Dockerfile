@@ -1,4 +1,4 @@
-# renovate: datasource=node depName=node versioning=node
+# renovate: datasource=node depName=node
 ARG NODE_VERSION=18
 
 FROM node:$NODE_VERSION as downloader

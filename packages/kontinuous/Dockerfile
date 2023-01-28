@@ -52,7 +52,7 @@ RUN curl --fail -sL https://github.com/stern/stern/releases/download/v${STERN_VE
   && rm -r /tmp/*
 
 FROM ubuntu:$UBUNTU_VERSION as node
-# renovate: datasource=node depName=node versioning=node
+# renovate: datasource=node depName=node
 ARG NODE_VERSION=18
 ENV NODE_VERSION=$NODE_VERSION
 RUN apt-get update && \
