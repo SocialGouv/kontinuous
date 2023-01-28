@@ -1,6 +1,6 @@
 ARG NODE_ENV=production
 # renovate: datasource=docker depName=ubuntu versioning=docker
-ARG UBUNTU_VERSION=22.04
+ARG UBUNTU_VERSION=22.10
 FROM ubuntu:$UBUNTU_VERSION as base
 
 RUN apt-get update && \
