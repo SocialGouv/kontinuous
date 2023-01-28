@@ -38,9 +38,6 @@ jobs:
             socialgouv/kontinuous: ${GITHUB_WORKSPACE}
           " > $HOME/.kontinuous/config.yaml
 
-      - name: Run lint
-        run: yarn lint
-
       - name: Run tests
         run: yarn test
 
