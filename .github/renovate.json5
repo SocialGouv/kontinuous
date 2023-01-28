@@ -47,28 +47,15 @@
     // https://docs.renovatebot.com/modules/datasource/
     {
       "fileMatch": ["^Dockerfile$"],
-      "matchStrings": ["ENV NODE_VERSION=(?<currentValue>.*?)\\n"],
-      "depNameTemplate": "node",
-      "datasourceTemplate": "node"
-    },
-    {
-      "fileMatch": ["^Dockerfile$"],
-      "matchStrings": ["ENV KAPP_VERSION=(?<currentValue>.*?)\\n"],
-      "depNameTemplate": "github-release",
-      "versioningTemplate": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$",
-      "datasourceTemplate": "docker"
-    },
-    {
-      "fileMatch": ["^Dockerfile$"],
       "matchStrings": [
-        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sARG .*?_VERSION=(?<currentValue>.*)\\s"
+        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sARG .*?_VERSION=(?<currentValue>.*)\\n"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?${{/if}}"
     },
     {
       "fileMatch": ["^versions.js$"],
       "matchStrings": [
-        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s.*?: \"(?<currentValue>.*)\"\\s"
+        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s.*?: \"(?<currentValue>.*)\"\\n"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?{{/if}}"
     }
