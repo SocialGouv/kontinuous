@@ -55,7 +55,8 @@
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": ["ENV KAPP_VERSION=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "github-release",
-      "versioningTemplate": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$"
+      "versioningTemplate": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$",
+      "datasourceTemplate": "docker"
     },
     {
       "fileMatch": ["^Dockerfile$"],
