@@ -43,7 +43,7 @@
     },
     {
       "packagePatterns": ["*"],
-      "excludePackagePatterns": ["ghcr.io/socialgouv/kontinuous.*"],
+      "excludePackagePatterns": ["^ghcr.io\/socialgouv\/kontinuous"],
       "enabled": false
     },
   ],
