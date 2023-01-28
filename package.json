@@ -43,7 +43,7 @@
     "qs": "^6.9.7",
     "json5": "^2.2.2",
     "cookiejar": "^2.1.4",
-    "got": "^12.0.0"
+    "got": "^11.8.5"
   },
   "scripts": {
     "renovate": "yarn run renovate:github",
