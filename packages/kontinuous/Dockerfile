@@ -11,7 +11,7 @@ RUN apt-get update && \
   && rm -rf /var/lib/apt/lists/*
 
 FROM downloader as kubectl
-# renovate: datasource=github-tags depName=kubectl lookupName=kubernetes/kubectl extractVersion=^kubernetes-(?<version>.+)$
+# renovate: datasource=github-tags depName=kubernetes/kubectl extractVersion=^kubernetes-(?<version>.+)$
 ARG KUBECTL_VERSION=1.26.1
 ENV KUBECTL_VERSION=$KUBECTL_VERSION
 RUN curl --fail -sL https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
