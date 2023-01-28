@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.132.10 (2023-01-28)
+
+
+### Bug Fixes
+
+* socialgroovybot signed commit ([82242d6](https://github.com/socialgouv/kontinuous/commit/82242d6324523ea87930b6bb503b58741da7e27b))
+
 ## [1.132.9](https://github.com/socialgouv/kontinuous/compare/v1.132.8...v1.132.9) (2023-01-28)
 
 
