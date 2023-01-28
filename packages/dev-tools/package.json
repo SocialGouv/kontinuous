@@ -1,6 +1,6 @@
 {
   "name": "dev-tools",
-  "version": "1.132.6",
+  "version": "1.132.7",
   "dependencies": {
     "replace": "^1.2.2"
   }
