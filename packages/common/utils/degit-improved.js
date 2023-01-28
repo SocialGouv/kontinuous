@@ -24,7 +24,7 @@ module.exports = async (
           const tagHasChanged = await degitTagHasChanged(uri)
           cache = !tagHasChanged
           if (tagHasChanged) {
-            logger.debug({ degit: uri }, `♻️ tag has changed, renew cache`)
+            logger.debug({ degit: uri }, `♻️  tag has changed, renew cache`)
           }
         }
         let subgroup
