@@ -1,0 +1,10 @@
+app:
+  ~chart: app
+  ~log: false
+jobs:
+  ~chart: jobs
+  ~log: true
+  runs:
+    a:
+      ~log: false
+    b: {}

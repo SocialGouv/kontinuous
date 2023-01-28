@@ -14,6 +14,9 @@ module.exports = async (
     defaultExcludeContainer = ["kontinuous-wait-needs"],
     excludeContainer = [],
   } = options
+
+  const { defaultLogEnabled = true } = options
+
   if (!Array.isArray(defaultExcludeContainer)) {
     defaultExcludeContainer = defaultExcludeContainer.split(",")
   }
@@ -53,6 +56,15 @@ module.exports = async (
   const promises = []
 
   for (const manifest of manifests) {
+    let pluginLogEnabled =
+      manifest.metadata?.annotations?.["kontinuous/plugin.log"]
+    if (pluginLogEnabled === undefined) {
+      pluginLogEnabled = defaultLogEnabled
+    }
+    if (!pluginLogEnabled || pluginLogEnabled === "false") {
+      continue
+    }
+
     const { kind } = manifest
     if (!handledKinds.includes(kind)) {
       continue
@@ -60,9 +72,11 @@ module.exports = async (
     const resourceName = manifest.metadata.labels?.["kontinuous/resourceName"]
     const deploymentLabelValue = manifest.metadata?.labels?.[deploymentLabelKey]
     const namespace = manifest.metadata?.namespace
+
     if (!resourceName) {
       continue
     }
+
     const labelSelectors = []
     labelSelectors.push(`kontinuous/resourceName=${resourceName}`)
     if (deploymentLabelValue) {

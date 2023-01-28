@@ -46,6 +46,9 @@ metadata:
     {{- if $run.needs }}
     kontinuous/plugin.needs: {{ $run.needs | toJson | quote }}
     {{- end }}
+    {{- if not (kindIs "invalid" $run.log) }}
+    kontinuous/plugin.log: {{ $run.log | quote }}
+    {{- end }}
     janitor/ttl: "7d"
     {{- if $run.onChangedPaths }}
     kontinuous/onChangedPaths: |

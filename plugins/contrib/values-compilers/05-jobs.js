@@ -52,6 +52,10 @@ const remapValues = (run, context) => {
     run.needs = run["~needs"]
     delete run["~needs"]
   }
+  if (run["~log"] !== undefined) {
+    run.log = run["~log"]
+    delete run["~log"]
+  }
 
   const { kubernetesMethod = "kubeconfig" } = options
   run.kubernetesMethod = kubernetesMethod
