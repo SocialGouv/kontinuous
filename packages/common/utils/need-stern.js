@@ -3,10 +3,12 @@ const os = require("os")
 const fs = require("fs-extra")
 const decompress = require("decompress")
 
+const versions = require("../versions")
+
 const needBin = require("./need-bin")
 const downloadFile = require("./download-file")
 
-const sternVersion = process.env.STERN_VERSION || "1.22.0"
+const sternVersion = process.env.STERN_VERSION || versions.stern
 
 const download = async (options) => {
   const { logger } = options
