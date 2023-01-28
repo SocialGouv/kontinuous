@@ -46,14 +46,14 @@
     // https://docs.renovatebot.com/modules/manager/regex/
     // https://docs.renovatebot.com/modules/datasource/
     {
-      "fileMatch": ["^Dockerfile$"],
+      "fileMatch": ["Dockerfile"],
       "matchStrings": [
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\nARG .*?_VERSION=(?<currentValue>.*)\\n"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?${{/if}}"
     },
     {
-      "fileMatch": ["^versions.js$"],
+      "fileMatch": ["versions.js"],
       "matchStrings": [
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\n.*?: \"(?<currentValue>.*)\"\\n"
       ],
