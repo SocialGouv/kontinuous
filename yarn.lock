@@ -4930,14 +4930,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/ncc@npm:^0.33.3":
-  version: 0.33.4
-  resolution: "@vercel/ncc@npm:0.33.4"
+"@vercel/ncc@npm:^0.36.0":
+  version: 0.36.1
+  resolution: "@vercel/ncc@npm:0.36.1"
   dependencies:
     node-gyp: "npm:latest"
   bin:
     ncc: dist/ncc/cli.js
-  checksum: 0a40ed4366b0caf1ec250dd42212a2f8a9b7fcfa286371394657ca2cd22a9bf57acee16b0769343cfeb0c15e7f130f95af197796dfc6528eed63228ed6d76c1d
+  checksum: 2ef9eac89db7f6c9cd93364089488cd049b95aac360d6f996b45175faa6ddb0333452942cf0c6ae04bffbad07583265bc28b33c33df2c60bd565af10173d154a
   languageName: node
   linkType: hard
 
@@ -16059,9 +16059,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tiged@npm:2.11.3":
-  version: 2.11.3
-  resolution: "tiged@npm:2.11.3"
+"tiged@npm:2.12.3":
+  version: 2.12.3
+  resolution: "tiged@npm:2.12.3"
   dependencies:
     colorette: "npm:1.2.1"
     enquirer: "npm:2.3.6"
@@ -16074,7 +16074,8 @@ __metadata:
     tiny-glob: "npm:0.2.8"
   bin:
     degit: bin.js
-  checksum: d2c692208e8865f20515769d64fe1c05750d5b83f4bdc8ef1a3a6a2b6b4eb5c95dc8eb47ae5bd76aa88661eaa5cb1446d818513f7a4d01f1d4c97266906149c2
+    tiged: bin.js
+  checksum: 7e6ebabe0ad52a6c0749000ea69452243462ed5eacb2bd911e1aea8823901d40d3c75ada67b57b0e20320d89acec7108c2c5d8bb52777417bb6be575dfba5b63
   languageName: node
   linkType: hard
 
@@ -17399,7 +17400,7 @@ __metadata:
     qs: "npm:^6.11.0"
     slugify: "npm:^1.6.5"
     sonic-boom: "npm:^3.0.0"
-    tiged: "npm:2.11.3"
+    tiged: "npm:2.12.3"
     which: "npm:^2.0.2"
     yaml: "npm:^2.0.1"
     zx: "npm:^7.1.1"
@@ -17436,7 +17437,7 @@ __metadata:
     "@modjo-plugins/express": "npm:^1.0.14"
     "@modjo-plugins/microservice-oapi": "npm:^1.0.5"
     "@modjo-plugins/sentry": "npm:^1.2.0"
-    "@vercel/ncc": "npm:^0.33.3"
+    "@vercel/ncc": "npm:^0.36.0"
     async-retry: "npm:^1.3.3"
     chokidar: "npm:^3.5.3"
     fs-extra: "npm:^10.0.1"
