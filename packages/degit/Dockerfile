@@ -1,3 +1,3 @@
-FROM node:18
+FROM node:19
 RUN npm i -g tiged
 USER 1000

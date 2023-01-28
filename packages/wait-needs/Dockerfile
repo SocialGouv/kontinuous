@@ -1,5 +1,5 @@
 # renovate: datasource=node depName=node
-ARG NODE_VERSION=18
+ARG NODE_VERSION=19
 
 FROM node:$NODE_VERSION as downloader
 RUN apt-get update && \
