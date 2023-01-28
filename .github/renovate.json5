@@ -40,7 +40,12 @@
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "all non-major dev dependencies",
       "groupSlug": "all-devdependencies-minor-patch"
-    }
+    },
+    {
+      "packagePatterns": ["*"],
+      "excludePackagePatterns": ["ghcr.io/socialgouv/kontinuous*"],
+      "enabled": false
+    },
   ],
   "regexManagers": [
     // https://docs.renovatebot.com/modules/manager/regex/
