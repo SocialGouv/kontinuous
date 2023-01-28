@@ -12,5 +12,5 @@ module.exports = {
   stern: "1.22.0",
 
   // renovate: datasource=github-releases depName=carvel-dev/kapp
-  kapp: "0.52.0",
+  kapp: "0.54.2",
 }
