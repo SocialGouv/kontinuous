@@ -20,6 +20,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+      
+      - name: Yarn install
+        run: |
+          yarn workspaces focus kontinuous --production
+
       - name: write .kontinuous/config.yaml
         shell: bash
         run: |
@@ -28,9 +37,6 @@ jobs:
           links:
             socialgouv/kontinuous: ${GITHUB_WORKSPACE}
           " > $HOME/.kontinuous/config.yaml
-
-      - name: Install dependencies
-        run: yarn --immutable
 
       - name: Run lint
         run: yarn lint
