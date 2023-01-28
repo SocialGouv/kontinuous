@@ -48,7 +48,7 @@
     {
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": [
-        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\nARG .*?_VERSION=(?<currentValue>.*)\\n"
+        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\nARG .*?_VERSION=(?<currentValue>.*)\n"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?${{/if}}"
     },
