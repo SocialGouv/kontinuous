@@ -33,7 +33,7 @@ module.exports = async (
     } else {
       namespace = metadata.namespace
     }
-    logger.debug({ kind, name, namespace }, "clean resource")
+    logger.debug({ kind, name, namespace }, "🔥 cleaning resource")
 
     promises.push(kubectlDeleteManifest(manifest, kubectlDeleteManifestOptions))
   }
@@ -43,5 +43,5 @@ module.exports = async (
   }
 
   await Promise.all(promises)
-  logger.debug("resources cleaned")
+  logger.debug("🔥 resources cleaned")
 }
