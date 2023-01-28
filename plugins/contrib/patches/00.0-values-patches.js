@@ -49,11 +49,12 @@ module.exports = (manifests, _options, { values }) => {
       if (key.startsWith("~.")) {
         set(manifest, key.slice(2), jval)
       } else if (!specialFlags.includes(flag)) {
-        set(
-          manifest,
-          `metadata.annotations.["kontinuous/plugin.${flag}"]`,
-          jval
-        )
+        const pluginKey = `kontinuous/plugin.${flag}`
+        if (manifest.metadata?.annotations?.[pluginKey]) {
+          continue
+        }
+
+        set(manifest, `metadata.annotations.["${pluginKey}"]`, jval)
       }
     }
   }
