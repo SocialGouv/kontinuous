@@ -16988,6 +16988,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uuid@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "uuid@npm:9.0.0"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: e1f76aff372e430bb129157360fd4cd3b393411b245604ea78e178a822ab7874ec2ebecec03ce94422b0b80bbd24733c6fa1df166c9cbad5086ef4b4843140bb
+  languageName: node
+  linkType: hard
+
 "v8-compile-cache-lib@npm:^3.0.1":
   version: 3.0.1
   resolution: "v8-compile-cache-lib@npm:3.0.1"
@@ -17659,6 +17668,7 @@ __metadata:
     pino-bfuscate: "npm:^1.0.0"
     rimraf: "npm:^4.1.2"
     supertest: "npm:^6.2.2"
+    uuid: "npm:^9.0.0"
     ~common: "workspace:^"
   languageName: unknown
   linkType: soft

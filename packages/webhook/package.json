@@ -30,6 +30,7 @@
     "pino": "^8.3.1",
     "pino-bfuscate": "^1.0.0",
     "rimraf": "^4.1.2",
+    "uuid": "^9.0.0",
     "~common": "workspace:^"
   },
   "devDependencies": {
