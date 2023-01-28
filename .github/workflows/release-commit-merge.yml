@@ -1,4 +1,4 @@
-name: ➡️ Trigger Release on Merge ↩️
+name: 🎉 Release Commit on Merge ↩️
 
 on: 
   pull_request:
@@ -6,7 +6,7 @@ on:
     
 concurrency:
   cancel-in-progress: true
-  group: trigger-release-${{ github.ref_name }}
+  group: ${{ github.workflow }}-${{ github.ref_name }}
 
 jobs:
   yarn-release:
@@ -21,6 +21,16 @@ jobs:
 
       - name: Install dependencies
         run: yarn --immutable
+
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v5
+        with:
+          gpg_private_key: ${{ secrets.SOCIALGROOVYBOT_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SOCIALGROOVYBOT_GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+          git_push_gpgsign: false
+          git_tag_gpgsign: true
 
       - name: Run release
         env:
