@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.132.11 (2023-01-28)
+
+
+### Bug Fixes
+
+* release commit workflow ([7aebc62](https://github.com/socialgouv/kontinuous/commit/7aebc6244be44cfcc68372f81e0f937191b50756))
+
 ## 1.132.10 (2023-01-28)
 
 
