@@ -1,5 +1,5 @@
 # renovate: datasource=docker depName=ubuntu versioning=docker
-ARG UBUNTU_VERSION=22.04
+ARG UBUNTU_VERSION=23.04
 
 FROM ubuntu:$UBUNTU_VERSION as downloader
 RUN apt-get update && \
