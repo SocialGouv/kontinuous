@@ -10,6 +10,17 @@
     ":semanticCommits",
     ":timezone(Europe/Paris)"
   ],
+  "enabledManagers": [
+    "regex",
+    "npm",
+    "nvm",
+    "helm-values",
+    "helmv3",
+    "dockerfile",
+    "docker-compose",
+    "github-actions",
+    "gitlabci",
+  ],
   "dependencyDashboardAutoclose": true,
   "postUpdateOptions": ["yarnDedupeHighest"],
   "rangeStrategy": "bump",
