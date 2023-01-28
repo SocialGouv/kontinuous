@@ -17,6 +17,7 @@
     "helm-values",
     "helmv3",
     "docker-compose",
+    "dockerfile",
     "github-actions",
     "gitlabci",
   ],
@@ -44,6 +45,18 @@
   "regexManagers": [
     // https://docs.renovatebot.com/modules/manager/regex/
     // https://docs.renovatebot.com/modules/datasource/
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ENV NODE_VERSION=(?<currentValue>.*?)\\n"],
+      "depNameTemplate": "node",
+      "datasourceTemplate": "node"
+    },
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ENV KAPP_VERSION=(?<currentValue>.*?)\\n"],
+      "depNameTemplate": "github-release",
+      "versioningTemplate": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$"
+    },
     {
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": [
