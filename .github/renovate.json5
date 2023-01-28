@@ -26,6 +26,11 @@
   "rangeStrategy": "bump",
   "ignorePresets": ["group:allNonMajor"],
   "labels": ["dependencies"],
+  "ignoreDeps": [
+    "ghcr.io/socialgouv/kontinuous",
+    "ghcr.io/socialgouv/kontinuous/webhook",
+    "ghcr.io/socialgouv/kontinuous/degit",
+  ],
   "packageRules": [
     {
       "matchPackagePatterns": ["*"],
@@ -41,11 +46,11 @@
       "groupName": "all non-major dev dependencies",
       "groupSlug": "all-devdependencies-minor-patch"
     },
-    {
-      "packagePatterns": ["*"],
-      "excludePackagePatterns": ["^ghcr.io\/socialgouv\/kontinuous"],
-      "enabled": false
-    },
+    // {
+    //   "packagePatterns": ["*"],
+    //   "excludePackagePatterns": ["^ghcr.io\/socialgouv\/kontinuous.*?"],
+    //   "enabled": false
+    // },
   ],
   "regexManagers": [
     // https://docs.renovatebot.com/modules/manager/regex/
