@@ -36,7 +36,7 @@ const download = async (options) => {
       platform = "linux"
   }
 
-  const fileName = `helm-${helmVersion}-${platform}-${arch}.tar.gz`
+  const fileName = `helm-v${helmVersion}-${platform}-${arch}.tar.gz`
 
   const cachePath = `${cacheDir}/bin`
   await fs.ensureDir(cachePath)

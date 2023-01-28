@@ -35,7 +35,7 @@ const download = async (options) => {
 
   const { addPath } = options
 
-  const downloadUrl = `https://dl.k8s.io/release/${kubectlVersion}/bin/${platform}/${arch}/kubectl${ext}`
+  const downloadUrl = `https://dl.k8s.io/release/v${kubectlVersion}/bin/${platform}/${arch}/kubectl${ext}`
   logger.info(`⬇️  downloading ${downloadUrl}`)
   const dest = `${addPath}/kubectl`
   await downloadFile(downloadUrl, dest, logger)

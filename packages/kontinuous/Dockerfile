@@ -12,16 +12,16 @@ RUN apt-get update && \
 
 FROM downloader as kubectl
 # renovate: datasource=github-tags depName=kubectl lookupName=kubernetes/kubectl extractVersion=^kubernetes-(?<version>.+)$
-ARG KUBECTL_VERSION=v1.26.1
+ARG KUBECTL_VERSION=1.26.1
 ENV KUBECTL_VERSION=$KUBECTL_VERSION
-RUN curl --fail -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
+RUN curl --fail -sL https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl
 
 FROM downloader as helm
 # renovate: datasource=github-releases depName=helm/helm
-ARG HELM_VERSION=v3.11.0
+ARG HELM_VERSION=3.11.0
 ENV HELM_VERSION=$HELM_VERSION
-RUN curl --fail -sL https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar xz -C /tmp/ \
+RUN curl --fail -sL https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz | tar xz -C /tmp/ \
   && mv /tmp/linux-amd64/helm /usr/local/bin/helm \
   && chmod +x /usr/local/bin/helm \
   && rm -r /tmp/linux-amd64
@@ -30,20 +30,20 @@ FROM downloader as kapp
 # renovate: datasource=github-releases depName=carvel-dev/kapp
 ARG KAPP_VERSION=0.54.2
 ENV KAPP_VERSION=$KAPP_VERSION
-RUN curl --fail -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/${KAPP_VERSION}/kapp-linux-amd64 > /tmp/kapp \
+RUN curl --fail -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/v${KAPP_VERSION}/kapp-linux-amd64 > /tmp/kapp \
   && mv /tmp/kapp /usr/local/bin/kapp \
   && chmod +x /usr/local/bin/kapp
 
 FROM downloader as rollout-status
 # renovate: datasource=github-releases depName=socialgouv/rollout-status
-ARG ROLLOUT_STATUS_VERSION=v1.13.4
+ARG ROLLOUT_STATUS_VERSION=1.13.4
 ENV ROLLOUT_STATUS_VERSION=$ROLLOUT_STATUS_VERSION
-RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/download/${ROLLOUT_STATUS_VERSION}/rollout-status-${ROLLOUT_STATUS_VERSION}-linux-amd64 > /tmp/rollout-status \
+RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/download/v${ROLLOUT_STATUS_VERSION}/rollout-status-v${ROLLOUT_STATUS_VERSION}-linux-amd64 > /tmp/rollout-status \
   && mv /tmp/rollout-status /usr/local/bin/rollout-status \
   && chmod +x /usr/local/bin/rollout-status
 
 FROM downloader as stern
-# renovate: datasource=github-releases depName=stern/stern extractVersion=^v(?<version>.+)$
+# renovate: datasource=github-releases depName=stern/stern
 ARG STERN_VERSION=1.22.0
 ENV STERN_VERSION=$STERN_VERSION
 RUN curl --fail -sL https://github.com/stern/stern/releases/download/v${STERN_VERSION}/stern_${STERN_VERSION}_linux_amd64.tar.gz | tar xz -C /tmp/ \

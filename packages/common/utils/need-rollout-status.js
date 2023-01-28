@@ -36,7 +36,7 @@ const download = async (options) => {
 
   const { addPath } = options
 
-  const downloadUrl = `https://github.com/socialgouv/rollout-status/releases/download/${rolloutStatusVersion}/rollout-status-${rolloutStatusVersion}-${platform}-${arch}${ext}`
+  const downloadUrl = `https://github.com/socialgouv/rollout-status/releases/download/v${rolloutStatusVersion}/rollout-status-v${rolloutStatusVersion}-${platform}-${arch}${ext}`
   logger.info(`⬇️  downloading ${downloadUrl}`)
   const dest = `${addPath}/rollout-status`
   await downloadFile(downloadUrl, dest, logger)
