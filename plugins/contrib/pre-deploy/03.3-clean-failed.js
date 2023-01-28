@@ -33,7 +33,7 @@ module.exports = async (
 
   const { refLabelKey, kubeconfig, kubeconfigContext: kubecontext } = config
 
-  logger.debug("♻️ check for failed resources to clean")
+  logger.debug("♻️  check for failed resources to clean")
 
   const promises = []
   for (const manifest of manifests) {
@@ -73,7 +73,7 @@ module.exports = async (
             } else {
               logger.debug(
                 { status },
-                "♻️ failed resource identified, will clean it before next deploy"
+                "♻️  failed resource identified, will clean it before next deploy"
               )
               resolve(manifest)
             }
@@ -91,7 +91,7 @@ module.exports = async (
   const manifestsToClean = (await Promise.all(promises)).filter((m) => !!m)
 
   if (manifestsToClean.length === 0) {
-    logger.debug("♻️ no resources to clean")
+    logger.debug("♻️  no resources to clean")
     return
   }
 
@@ -108,9 +108,9 @@ module.exports = async (
     kubectl,
   }
 
-  logger.debug("♻️ cleaning failed resources")
+  logger.debug("♻️  cleaning failed resources")
 
   await kubectlDeleteManifest(manifestsToClean, kubectlDeleteManifestOptions)
 
-  logger.debug({ resourceNames }, "♻️ failed resources cleaned")
+  logger.debug({ resourceNames }, "♻️  failed resources cleaned")
 }

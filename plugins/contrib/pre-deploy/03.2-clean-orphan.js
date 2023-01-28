@@ -18,7 +18,7 @@ module.exports = async (
   const { kubeconfig, kubeconfigContext } = config
   const { kubectlGetApiResource } = utils
 
-  logger.debug("♻️ check for orphan resources to clean")
+  logger.debug("♻️  check for orphan resources to clean")
 
   const { deploymentEnvLabelKey, deploymentEnvLabelValue } = config
 
@@ -78,7 +78,7 @@ module.exports = async (
   )
 
   if (manifestsToClean.length === 0) {
-    logger.debug("♻️ no resources to clean")
+    logger.debug("♻️  no resources to clean")
     return
   }
 
@@ -97,9 +97,9 @@ module.exports = async (
     kubectl,
   }
 
-  logger.debug("♻️ cleaning orphan resources")
+  logger.debug("♻️  cleaning orphan resources")
 
   await kubectlDeleteManifest(manifestsToClean, kubectlDeleteManifestOptions)
 
-  logger.debug({ resourceNames }, "♻️ orphan resources cleaned")
+  logger.debug({ resourceNames }, "♻️  orphan resources cleaned")
 }
