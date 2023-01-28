@@ -27,7 +27,7 @@ jobs:
       
       - name: Yarn install
         run: |
-          yarn workspaces focus kontinuous --production
+          yarn --immutable
 
       - name: write .kontinuous/config.yaml
         shell: bash
