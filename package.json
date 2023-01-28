@@ -22,7 +22,8 @@
     "js-yaml": "^4.1.0",
     "lint-staged": "^13.0.0",
     "prettier": "^2.6.2",
-    "renovate": "^34.115.1"
+    "renovate": "^34.115.1",
+    "~dev-tools": "workspace:^"
   },
   "resolutions": {
     "@modjo-plugins/http-server": "latest",

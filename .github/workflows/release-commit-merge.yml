@@ -20,7 +20,7 @@ jobs:
           token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
 
       - name: Install dependencies
-        run: yarn --immutable
+        run: yarn workspaces focus ~dev
 
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v5

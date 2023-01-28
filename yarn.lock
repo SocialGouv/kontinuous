@@ -7153,14 +7153,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dev-tools@workspace:packages/dev-tools":
-  version: 0.0.0-use.local
-  resolution: "dev-tools@workspace:packages/dev-tools"
-  dependencies:
-    replace: "npm:^1.2.2"
-  languageName: unknown
-  linkType: soft
-
 "dezalgo@npm:1.0.3":
   version: 1.0.3
   resolution: "dezalgo@npm:1.0.3"
@@ -16344,6 +16336,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"~dev-tools@workspace:^, ~dev-tools@workspace:packages/dev-tools":
+  version: 0.0.0-use.local
+  resolution: "~dev-tools@workspace:packages/dev-tools"
+  dependencies:
+    replace: "npm:^1.2.2"
+    ~common: "workspace:^"
+  languageName: unknown
+  linkType: soft
+
 "~dev@workspace:.":
   version: 0.0.0-use.local
   resolution: "~dev@workspace:."
@@ -16363,6 +16364,7 @@ __metadata:
     lint-staged: "npm:^13.0.0"
     prettier: "npm:^2.6.2"
     renovate: "npm:^34.115.1"
+    ~dev-tools: "workspace:^"
   languageName: unknown
   linkType: soft
 
