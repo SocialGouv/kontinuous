@@ -23,7 +23,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'npm'
+          cache: 'yarn'
+
+      - name: Yarn install
+        run: |
+          yarn --immutable
 
       - name: Run lint
-        run: npx eslint .
+        run: yarn lint
