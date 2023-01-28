@@ -1,4 +1,4 @@
-name: Build Docker Image Wait-needs
+name: 📦 Build Docker Image Wait-needs ⌛
 
 on:
   push:

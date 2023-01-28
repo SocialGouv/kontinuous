@@ -1,4 +1,4 @@
-name: Trigger Release Manual
+name: ➡️ Trigger Release Manual 👈
 
 on: 
   workflow_dispatch:

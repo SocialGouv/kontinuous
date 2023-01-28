@@ -1,4 +1,4 @@
-name: Build Docker Image Kontinuous
+name: 📦 Build Docker Image Kontinuous 🥷
 
 on:
   push:

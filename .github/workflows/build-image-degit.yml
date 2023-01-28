@@ -1,4 +1,4 @@
-name: Build Docker Image Degit
+name: 📦 Build Docker Image Degit 📁
 
 on:
   push:

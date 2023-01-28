@@ -1,4 +1,4 @@
-name: Trigger Release on Merge
+name: ➡️ Trigger Release on Merge ↩️
 
 on: 
   pull_request:

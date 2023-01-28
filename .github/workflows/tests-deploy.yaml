@@ -1,4 +1,4 @@
-name: Tests deploy
+name: ✅ Tests deploy 🚀
 
 on:
   push:

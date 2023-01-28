@@ -1,4 +1,4 @@
-name: Tests build
+name: ✅ Tests build 📃
 
 on:
   push:
