@@ -1,3 +1,4 @@
+# renovate: datasource=node depName=node versioning=node
 ARG NODE_VERSION=18
 
 FROM node:$NODE_VERSION as downloader
@@ -8,6 +9,7 @@ RUN apt-get update && \
   && rm -rf /var/lib/apt/lists/*
 
 FROM downloader as rollout-status
+# renovate: datasource=github-releases depName=socialgouv/rollout-status
 ARG ROLLOUT_STATUS_VERSION=v1.13.4
 ENV ROLLOUT_STATUS_VERSION=$ROLLOUT_STATUS_VERSION
 RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/download/${ROLLOUT_STATUS_VERSION}/rollout-status-${ROLLOUT_STATUS_VERSION}-linux-amd64 > /tmp/rollout-status \
@@ -15,6 +17,7 @@ RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/downlo
   && chmod +x /usr/local/bin/rollout-status
 
 FROM downloader as kubectl
+# renovate: datasource=github-tags depName=kubectl lookupName=kubernetes/kubectl extractVersion=^kubernetes-(?<version>.+)$
 ARG KUBECTL_VERSION=v1.26.1
 ENV KUBECTL_VERSION=$KUBECTL_VERSION
 RUN curl --fail -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \

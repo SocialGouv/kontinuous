@@ -1,3 +1,4 @@
+# renovate: datasource=docker depName=ubuntu versioning=docker
 ARG UBUNTU_VERSION=22.04
 
 FROM ubuntu:$UBUNTU_VERSION as downloader
@@ -10,12 +11,14 @@ RUN apt-get update && \
   && rm -rf /var/lib/apt/lists/*
 
 FROM downloader as kubectl
+# renovate: datasource=github-tags depName=kubectl lookupName=kubernetes/kubectl extractVersion=^kubernetes-(?<version>.+)$
 ARG KUBECTL_VERSION=v1.26.1
 ENV KUBECTL_VERSION=$KUBECTL_VERSION
 RUN curl --fail -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl
 
 FROM downloader as helm
+# renovate: datasource=github-releases depName=helm/helm
 ARG HELM_VERSION=v3.11.0
 ENV HELM_VERSION=$HELM_VERSION
 RUN curl --fail -sL https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar xz -C /tmp/ \
@@ -24,6 +27,7 @@ RUN curl --fail -sL https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz 
   && rm -r /tmp/linux-amd64
 
 FROM downloader as kapp
+# renovate: datasource=github-releases depName=carvel-dev/kapp
 ARG KAPP_VERSION=v0.52.0
 ENV KAPP_VERSION=$KAPP_VERSION
 RUN curl --fail -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/${KAPP_VERSION}/kapp-linux-amd64 > /tmp/kapp \
@@ -31,6 +35,7 @@ RUN curl --fail -sL https://github.com/vmware-tanzu/carvel-kapp/releases/downloa
   && chmod +x /usr/local/bin/kapp
 
 FROM downloader as rollout-status
+# renovate: datasource=github-releases depName=socialgouv/rollout-status
 ARG ROLLOUT_STATUS_VERSION=v1.13.4
 ENV ROLLOUT_STATUS_VERSION=$ROLLOUT_STATUS_VERSION
 RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/download/${ROLLOUT_STATUS_VERSION}/rollout-status-${ROLLOUT_STATUS_VERSION}-linux-amd64 > /tmp/rollout-status \
@@ -38,6 +43,7 @@ RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/downlo
   && chmod +x /usr/local/bin/rollout-status
 
 FROM downloader as stern
+# renovate: datasource=github-releases depName=stern/stern extractVersion=^v(?<version>.+)$
 ARG STERN_VERSION=1.22.0
 ENV STERN_VERSION=$STERN_VERSION
 RUN curl --fail -sL https://github.com/stern/stern/releases/download/v${STERN_VERSION}/stern_${STERN_VERSION}_linux_amd64.tar.gz | tar xz -C /tmp/ \
@@ -46,6 +52,7 @@ RUN curl --fail -sL https://github.com/stern/stern/releases/download/v${STERN_VE
   && rm -r /tmp/*
 
 FROM ubuntu:$UBUNTU_VERSION as node
+# renovate: datasource=node depName=node versioning=node
 ARG NODE_VERSION=18
 ENV NODE_VERSION=$NODE_VERSION
 RUN apt-get update && \

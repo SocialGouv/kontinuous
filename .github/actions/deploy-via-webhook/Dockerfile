@@ -12,6 +12,7 @@ RUN apt-get update && \
   && rm -rf /var/lib/apt/lists/*
 
 FROM base as jq
+# renovate: datasource=github-releases depName=stedolan/jq
 ARG JQ_VERSION=1.6
 ENV JQ_VERSION=$JQ_VERSION
 RUN curl --fail -sL https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64 > /tmp/jq \
@@ -20,6 +21,7 @@ RUN curl --fail -sL https://github.com/stedolan/jq/releases/download/jq-${JQ_VER
 
 
 FROM base as yq
+# renovate: datasource=github-releases depName=mikefarah/yq
 ARG YQ_VERSION=4.20.2
 ENV YQ_VERSION=$YQ_VERSION
 RUN wget https://github.com/mikefarah/yq/releases/download/v$YQ_VERSION/yq_linux_amd64.tar.gz -O - | tar xz && mv yq_linux_amd64 /usr/local/bin/yq

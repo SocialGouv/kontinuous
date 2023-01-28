@@ -1,4 +1,5 @@
 ARG NODE_ENV=production
+# renovate: datasource=docker depName=ubuntu versioning=docker
 ARG UBUNTU_VERSION=22.04
 FROM ubuntu:$UBUNTU_VERSION as base
 
@@ -9,6 +10,7 @@ RUN apt-get update && \
     git \
   && rm -rf /var/lib/apt/lists/*
 
+# renovate: datasource=node depName=node versioning=node
 ARG NODE_VERSION=18
 ENV NODE_VERSION=$NODE_VERSION
 RUN wget -qO- https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
@@ -16,11 +18,13 @@ RUN wget -qO- https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
   && npm install -g yarn \
   && rm -rf /var/lib/apt/lists/*
 
+# renovate: datasource=github-tags depName=kubectl lookupName=kubernetes/kubectl extractVersion=^kubernetes-(?<version>.+)$
 ARG KUBECTL_VERSION=v1.26.1
 ENV KUBECTL_VERSION=$KUBECTL_VERSION
 RUN curl --fail -sL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl
 
+# renovate: datasource=github-releases depName=socialgouv/rollout-status
 ARG ROLLOUT_STATUS_VERSION=v1.13.4
 ENV ROLLOUT_STATUS_VERSION=$ROLLOUT_STATUS_VERSION
 RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/download/${ROLLOUT_STATUS_VERSION}/rollout-status-${ROLLOUT_STATUS_VERSION}-linux-amd64 > /tmp/rollout-status \

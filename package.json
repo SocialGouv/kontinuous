@@ -46,7 +46,7 @@
     "cookiejar": "^2.1.4"
   },
   "scripts": {
-    "renovate": "RENOVATE_PLATFORM=github RENOVATE_TOKEN=$GH_TOKEN renovate socialgouv/kontinuous",
+    "renovate:github": "RENOVATE_PLATFORM=github RENOVATE_TOKEN=$GITHUB_TOKEN renovate socialgouv/kontinuous",
     "precommit": "lint-staged",
     "postinstall": "[ -d '.husky' ] && husky install || true && yarn install:plugins",
     "install:plugins": "yarn install:plugin:contrib && yarn install:plugin:fabrique",
