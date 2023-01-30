@@ -9,7 +9,7 @@ module.exports = {
   rolloutStatus: "1.13.4",
 
   // renovate: datasource=github-releases depName=stern/stern
-  stern: "1.22.0",
+  stern: "1.23.0",
 
   // renovate: datasource=github-releases depName=carvel-dev/kapp
   kapp: "0.54.2",
