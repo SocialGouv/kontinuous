@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.133.0](https://github.com/socialgouv/kontinuous/compare/v1.132.11...v1.133.0) (2023-01-31)
+
+
+### Features
+
+* add git-org feature to autodevops ([e899715](https://github.com/socialgouv/kontinuous/commit/e89971587fabec0c908f2f40d5f768503d10f7c1))
+
+
+### Bug Fixes
+
+* docs search-engine ([2ef62a1](https://github.com/socialgouv/kontinuous/commit/2ef62a17406ec4112c26fea8b69911d8ec5c7319))
+* log emoji spaces ([85fe4b1](https://github.com/socialgouv/kontinuous/commit/85fe4b124b91879a0973d98adab10151f77a5aef))
+* **redis:** add security context ([#180](https://github.com/socialgouv/kontinuous/issues/180)) ([2325339](https://github.com/socialgouv/kontinuous/commit/232533904eeb2a625da2a8bb4b7c8c3e3dce2646))
+
 ## 1.132.12 (2023-01-31)
 
 

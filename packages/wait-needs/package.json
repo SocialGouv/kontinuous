@@ -5,5 +5,5 @@
     "~common": "workspace:^"
   },
   "bin": "./bin/wait-needs",
-  "version": "1.132.12"
+  "version": "1.133.0"
 }
