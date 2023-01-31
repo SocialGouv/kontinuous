@@ -26,7 +26,6 @@ module.exports = async ({
 
   try {
     const tmpdir = await mkdtemp(path.join(os.tmpdir(), "gitclone-"))
-
     await asyncShell(
       `
         git clone

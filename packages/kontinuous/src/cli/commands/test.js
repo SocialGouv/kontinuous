@@ -13,6 +13,7 @@ module.exports = (program) => {
     .addOption(options.ignoreProjectTemplates)
     .addOption(options.env)
     .addOption(options.debug)
+    .addOption(options.gitOrg)
     .option("--update, -u", "update snapshots")
     .action(async (_opts, command) => {
       const opts = command.optsWithGlobals()

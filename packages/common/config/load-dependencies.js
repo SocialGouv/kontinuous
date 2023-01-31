@@ -9,9 +9,13 @@ const normalizeDegitUri = require("../utils/normalize-degit-uri")
 const removePrefix = require("../utils/remove-prefix")
 
 const copyFilter = require("./copy-filter")
+const loadGitOrgConfig = require("./load-git-org-config")
 
-module.exports = async (config, logger) => {
+module.exports = async (config, logger, reloadConfig) => {
   logger.debug("🔻 load dependencies")
+
+  config = await loadGitOrgConfig(config, reloadConfig)
+
   await recurseDependencies({
     config,
     beforeChildren: async ({ target, definition, scope, name }) => {
@@ -104,4 +108,6 @@ module.exports = async (config, logger) => {
       Object.assign(definition, mergeDefinition)
     },
   })
+
+  return config
 }

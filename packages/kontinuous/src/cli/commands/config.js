@@ -19,6 +19,7 @@ module.exports = (program) =>
     .addOption(options.private)
     .addOption(options.deployKey)
     .addOption(options.gitDiffEnabled)
+    .addOption(options.gitOrg)
     .option(
       "--remote",
       "select config using kontinuous config from remote repo"

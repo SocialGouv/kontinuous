@@ -788,6 +788,27 @@ const loadConfig = async (
         abortConfig.gracefullShutdownTimeoutSeconds = value
       },
     },
+    gitOrg: {
+      env: "KS_GIT_ORG",
+      option: "git-org",
+      default: false,
+      envParser: envParserYaml,
+    },
+    gitOrgRepository: {
+      env: "KS_GIT_ORG_REPOSITORY",
+      default: ".kontinuous",
+    },
+    gitOrgOverride: {
+      env: "KS_GIT_ORG_OVERRIDE",
+    },
+    gitOrgRequired: {
+      env: "KS_GIT_ORG_REQUIRED",
+      envParser: envParserYaml,
+      default: false,
+    },
+    gitOrgRef: {
+      env: "KS_GIT_ORG_REF",
+    },
   }
 
   rootConfig = await loadStructuredConfig({
@@ -843,11 +864,7 @@ const loadConfig = async (
     configMeta.__reloadDependencies = true
   }
 
-  // reload overrided config defaults
-  if (
-    !isReloadingConfig &&
-    (Object.keys(configSet).length > 0 || config.inlineConfig)
-  ) {
+  const reloadConfig = async () => {
     config = await loadConfig(
       opts,
       inlineConfigs,
@@ -856,6 +873,14 @@ const loadConfig = async (
       configMeta,
       true
     )
+    return config
+  }
+  // reload overrided config defaults
+  if (
+    !isReloadingConfig &&
+    (Object.keys(configSet).length > 0 || config.inlineConfig)
+  ) {
+    config = await reloadConfig()
   }
 
   let { dependencies } = config
@@ -879,7 +904,7 @@ const loadConfig = async (
     loadConfigOptions.loadDependencies !== false &&
     (!isReloadingConfig || configMeta.__reloadDependencies)
   ) {
-    await loadDependencies(config, logger)
+    config = await loadDependencies(config, logger, reloadConfig)
   }
 
   await recurseDependencies({

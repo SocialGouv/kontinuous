@@ -31,6 +31,7 @@ module.exports = (program) =>
     .addOption(options.disablePlugin)
     .addOption(options.disableStep)
     .addOption(options.gitDiffEnabled)
+    .addOption(options.gitOrg)
     .option("--output, -o", "enable direct output of manifests")
     .option("--open", "open manifests file with default application")
     .option(

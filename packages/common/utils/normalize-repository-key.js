@@ -1,4 +1,4 @@
-const parseGitUrl = require("parse-github-url")
+const parseGitUrl = require("~common/utils/parse-git-url")
 
 module.exports = (repositoryUrl) => {
   const url = parseGitUrl(repositoryUrl)

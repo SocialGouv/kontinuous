@@ -28,6 +28,7 @@ module.exports = (program) =>
     .addOption(options.disablePlugin)
     .addOption(options.noValidate)
     .addOption(options.gitDiffEnabled)
+    .addOption(options.gitOrg)
     .option(
       "--on-webhook, -w",
       "trigger built manifests deploying via webhook endpoint"
