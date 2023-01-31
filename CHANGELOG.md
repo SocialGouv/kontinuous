@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.132.12 (2023-01-31)
+
+
+### Bug Fixes
+
+* **redis:** add security context ([#180](https://github.com/socialgouv/kontinuous/issues/180)) ([2325339](https://github.com/socialgouv/kontinuous/commit/232533904eeb2a625da2a8bb4b7c8c3e3dce2646))
+
 ## 1.132.11 (2023-01-28)
 
 
