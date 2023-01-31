@@ -17,8 +17,13 @@ spec:
       labels:
         component: {{ (or .Values.component .Chart.Name) | lower }}
     spec:
+      securityContext:
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
+        runAsNonRoot: true
       containers:
-        - image: redis:6.2.5-alpine3.14
+        - image: {{ .Values.image }}
           name: redis
           env:
             {{- if gt (len .Values.env) 0 }}
@@ -67,3 +72,6 @@ spec:
             requests:
               cpu: 300m
               memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+      

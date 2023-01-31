@@ -2,4 +2,4 @@ enabled:
 namespace:
 env: []
 envFrom: []
-
+image: redis:6.2.5-alpine3.14
