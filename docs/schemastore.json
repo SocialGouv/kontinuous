@@ -502,151 +502,22 @@
           }
         },
         "envFrom": {
-          "description": "List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated.",
-          "items": {
-            "description": "EnvFromSource represents the source of a set of ConfigMaps",
-            "properties": {
-              "configMapRef": {
-                "description": "ConfigMapEnvSource selects a ConfigMap to populate the environment variables with.\n\nThe contents of the target ConfigMap's Data field will represent the key-value pairs as environment variables.",
-                "additionalProperties": false,
-                "properties": {
-                  "name": {
-                    "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
-                    "type": ["string", "null"]
-                  },
-                  "optional": {
-                    "description": "Specify whether the ConfigMap must be defined",
-                    "type": "boolean"
-                  }
-                },
-                "type": "object"
-              },
-              "prefix": {
-                "description": "An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.",
-                "type": ["string", "null"]
-              },
-              "secretRef": {
-                "description": "SecretEnvSource selects a Secret to populate the environment variables with.\n\nThe contents of the target Secret's Data field will represent the key-value pairs as environment variables.",
-                "additionalProperties": false,
-                "properties": {
-                  "name": {
-                    "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
-                    "type": ["string", "null"]
-                  },
-                  "optional": {
-                    "description": "Specify whether the Secret must be defined",
-                    "type": "boolean"
-                  }
-                },
-                "type": "object"
-              }
-            },
-            "type": "object"
-          },
-          "type": ["array", "null"]
+          "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/envFrom"
         },
         "vars": { "type": "object", "additionalProperties": true },
         "volumes": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "name": { "type": "string" },
-              "persistentVolumeClaim": {
-                "description": "PersistentVolumeClaimVolumeSource references the user's PVC in the same namespace. This volume finds the bound PV and mounts that volume for the pod. A PersistentVolumeClaimVolumeSource is, essentially, a wrapper around another type of volume that is owned by someone else (the system).",
-                "additionalProperties": false,
-                "properties": {
-                  "claimName": {
-                    "description": "ClaimName is the name of a PersistentVolumeClaim in the same namespace as the pod using this volume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims",
-                    "type": "string"
-                  },
-                  "readOnly": {
-                    "description": "Will force the ReadOnly setting in VolumeMounts. Default false.",
-                    "type": "boolean"
-                  }
-                },
-                "required": ["claimName"],
-                "type": "object"
-              }
-            }
-          }
+          "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.PodSpec/properties/volumes"
         },
         "volumeMounts": {
-          "description": "Pod volumes to mount into the container's filesystem. Cannot be updated.",
-          "items": {
-            "description": "VolumeMount describes a mounting of a Volume within a container.",
-            "additionalProperties": false,
-            "properties": {
-              "mountPath": {
-                "description": "Path within the container at which the volume should be mounted.  Must not contain ':'.",
-                "type": "string"
-              },
-              "mountPropagation": {
-                "description": "mountPropagation determines how mounts are propagated from the host to container and the other way around. When not set, MountPropagationNone is used. This field is beta in 1.10.",
-                "type": ["string", "null"]
-              },
-              "name": {
-                "description": "This must match the Name of a Volume.",
-                "type": "string"
-              },
-              "readOnly": {
-                "description": "Mounted read-only if true, read-write otherwise (false or unspecified). Defaults to false.",
-                "type": "boolean"
-              },
-              "subPath": {
-                "description": "Path within the volume from which the container's volume should be mounted. Defaults to \"\" (volume's root).",
-                "type": ["string", "null"]
-              },
-              "subPathExpr": {
-                "description": "Expanded path within the volume from which the container's volume should be mounted. Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded using the container's environment. Defaults to \"\" (volume's root). SubPathExpr and SubPath are mutually exclusive. This field is alpha in 1.14.",
-                "type": ["string", "null"]
-              }
-            },
-            "required": ["name", "mountPath"],
-            "type": "object"
-          },
-          "type": ["array", "null"]
+          "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/volumeMounts"
         },
         "replicas": {
-          "description": "Number of desired pods. This is a pointer to distinguish between explicit zero and not specified. Defaults to 1.",
-          "format": "int32",
-          "type": "integer"
+          "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.apps.v1.DeploymentSpec/properties/replicas"
         },
         "resources": {
-          "$ref": "#/definitions/io.k8s.api.core.v1.ResourceRequirements"
+          "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.ResourceRequirements"
         }
       }
-    },
-    "io.k8s.api.core.v1.ResourceRequirements": {
-      "description": "ResourceRequirements describes the compute resource requirements.",
-      "properties": {
-        "limits": {
-          "additionalProperties": {
-            "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
-          },
-          "description": "Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "object"
-        },
-        "requests": {
-          "additionalProperties": {
-            "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
-          },
-          "description": "Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "io.k8s.apimachinery.pkg.api.resource.Quantity": {
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "number"
-        }
-      ]
     }
   }
 }
