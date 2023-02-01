@@ -18,7 +18,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
+        nodeVersion: [16.17, 18]
+        testParams:
           - cwd: .github/e2e/standalone-charts
             testScript: |
               kubectl get jobs -n test-project-ci
@@ -59,7 +60,7 @@ jobs:
       
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: ${{ matrix.nodeVersion }}
           cache: 'yarn'
       
       - name: Yarn install
@@ -94,12 +95,12 @@ jobs:
           KS_INLINE_SET: |
             global.antiAffinity.enabled: false
           KS_INLINE_VALUES: |
-            ${{ matrix.inlineValues || '' }}
-          KS_WORKSPACE_PATH: ${{ matrix.cwd }}
+            ${{ matrix.testParams.inlineValues || '' }}
+          KS_WORKSPACE_PATH: ${{ matrix.testParams.cwd }}
         run: ./kontinuous deploy
       
       - name: run test script
         shell: bash
         run: |
           set -e
-          ${{ matrix.testScript }}
+          ${{ matrix.testParams.testScript }}
