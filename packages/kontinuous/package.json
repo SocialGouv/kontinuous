@@ -44,7 +44,7 @@
     "jest-specific-snapshot": "^7.0.0"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.17"
   },
   "scripts": {
     "lint": "eslint .",
