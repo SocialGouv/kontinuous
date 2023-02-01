@@ -453,6 +453,10 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
+            "enabled": {
+              "description": "Ingress enable. default to true",
+              "type": "boolean"
+            },
             "path": {
               "description": "URL path to map the ingress to",
               "type": "string",
@@ -590,8 +594,46 @@
             "type": "object"
           },
           "type": ["array", "null"]
+        },
+        "replicas": {
+          "description": "Number of desired pods. This is a pointer to distinguish between explicit zero and not specified. Defaults to 1.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "resources": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.ResourceRequirements"
         }
       }
+    },
+    "io.k8s.api.core.v1.ResourceRequirements": {
+      "description": "ResourceRequirements describes the compute resource requirements.",
+      "properties": {
+        "limits": {
+          "additionalProperties": {
+            "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
+          },
+          "description": "Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "object"
+        },
+        "requests": {
+          "additionalProperties": {
+            "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
+          },
+          "description": "Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "io.k8s.apimachinery.pkg.api.resource.Quantity": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        }
+      ]
     }
   }
 }
