@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.133.1](https://github.com/socialgouv/kontinuous/compare/v1.133.0...v1.133.1) (2023-02-01)
+
+
+### Bug Fixes
+
+* update node requirement (16.17 for throwIfAborted) ([6c044b3](https://github.com/socialgouv/kontinuous/commit/6c044b3c2532f059c9bfac2152f347f67624ace4))
+
 ## [1.133.0](https://github.com/socialgouv/kontinuous/compare/v1.132.11...v1.133.0) (2023-01-31)
 
 
