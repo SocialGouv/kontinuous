@@ -16,13 +16,20 @@ jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - nodeVersion: 16.17  # minimum requirement
+          - nodeVersion: 18
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: ${{ matrix.nodeVersion }}
           cache: 'yarn'
       
       - name: Yarn install
