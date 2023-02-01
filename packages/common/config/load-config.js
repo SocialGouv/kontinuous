@@ -2,6 +2,7 @@ const os = require("os")
 const path = require("path")
 const { mkdtemp } = require("fs/promises")
 
+const { satisfies } = require("compare-versions")
 const fs = require("fs-extra")
 const set = require("lodash.set")
 const defaultsDeep = require("lodash.defaultsdeep")
@@ -34,7 +35,10 @@ const loadDependencies = require("./load-dependencies")
 const envParserYaml = require("./env-parsers/yaml")
 const envParserCastArray = require("./env-parsers/cast-array")
 
-const { version } = require(`${__dirname}/../package.json`)
+const {
+  version,
+  engines: { node: nodeRequirement },
+} = require(`${__dirname}/../package.json`)
 
 const mergeProjectsAndOrganizations = require("./merge-projects-and-organizations")
 
@@ -895,8 +899,14 @@ const loadConfig = async (
       return acc
     }, {})
 
+  if (!satisfies(process.version, nodeRequirement)) {
+    throw new Error(
+      `Your current node version ${process.version} is not compatible with requirement: ${nodeRequirement}`
+    )
+  }
+
   if (!isReloadingConfig) {
-    logger.info(`🥷  kontinuous v${config.version}`)
+    logger.info(`🥷  kontinuous v${config.version} on node ${process.version}`)
     logger.info(`📂 buildPath: file://${config.buildPath} `)
   }
 
