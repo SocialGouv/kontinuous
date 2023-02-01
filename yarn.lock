@@ -12631,15 +12631,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse-github-url@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "parse-github-url@npm:1.0.2"
-  bin:
-    parse-github-url: ./cli.js
-  checksum: 54025f822bf8d7a616f7deb361f795d6f83c257905159c371c7ac02a2eb5c3b8407f83d1271ff51148b035ee6465c2af996784bfc681ea1c3c2018d8995637f1
-  languageName: node
-  linkType: hard
-
 "parse-json@npm:^4.0.0":
   version: 4.0.0
   resolution: "parse-json@npm:4.0.0"
@@ -16325,7 +16316,6 @@ __metadata:
     micromatch: "npm:^4.0.5"
     ms: "npm:^2.1.3"
     nctx: "npm:^1.7.1"
-    parse-github-url: "npm:^1.0.2"
     qs: "npm:^6.11.0"
     slugify: "npm:^1.6.5"
     sonic-boom: "npm:^3.0.0"
