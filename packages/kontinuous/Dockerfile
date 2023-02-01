@@ -28,7 +28,7 @@ RUN curl --fail -sL https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz
 
 FROM downloader as kapp
 # renovate: datasource=github-releases depName=carvel-dev/kapp
-ARG KAPP_VERSION=0.54.2
+ARG KAPP_VERSION=0.54.3
 ENV KAPP_VERSION=$KAPP_VERSION
 RUN curl --fail -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/v${KAPP_VERSION}/kapp-linux-amd64 > /tmp/kapp \
   && mv /tmp/kapp /usr/local/bin/kapp \
