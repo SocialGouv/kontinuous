@@ -281,7 +281,7 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "pgAdminSecretRefName": {
+        "pgAdminUserSecretRefName": {
           "description": "Secret with admin credentials to the database server",
           "type": "string"
         },
@@ -312,7 +312,7 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "pgAdminSecretRefName": {
+        "pgAdminUserSecretRefName": {
           "description": "Secret with admin credentials to the database server",
           "type": "string"
         },
@@ -321,17 +321,17 @@
           "type": "string"
         },
         "db": {
-          "description": "Name of the Postgres database to destroy. Defaults to environment",
-          "type": "string"
+          "description": "Has a database, and use default database, true by default if `database` filled",
+          "type": "boolean"
         }
       },
-      "required": ["database", "db"]
+      "required": []
     },
     "job-drop-db": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "pgAdminSecretRefName": {
+        "pgAdminUserSecretRefName": {
           "description": "Secret with admin credentials to the database server",
           "type": "string"
         },
@@ -350,7 +350,7 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "pgAdminSecretRefName": {
+        "pgAdminUserSecretRefName": {
           "description": "Secret with admin credentials to the database server",
           "type": "string"
         },
