@@ -1,13 +1,15 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/socialgouv/kontinuous/xxx",
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://socialgouv.github.com/kontinuous/values.schema.json",
   "title": "schema for .kontinuous/values.yaml",
   "type": "object",
   "additionalProperties": {
     "type": "object",
     "description": "Custom component",
-    "additionalProperties": true,
-    "allOf": [
+    "anyOf": [
+      {
+        "$ref": "#"
+      },
       {
         "if": {
           "required": ["~chart"]
@@ -414,9 +416,10 @@
       "required": ["pgSecretRefName", "seedPath"]
     },
     "chart": {
+      "type": "object",
       "properties": {
         "~chart": {
-          "description": "Base HELM Chart for this component",
+          "description": "Base Helm Chart for this component",
           "type": "string",
           "examples": ["app", "maildev"]
         },
@@ -432,11 +435,26 @@
     },
     "chart-app": {
       "type": "object",
-      "additionalProperties": false,
+      "additionalProperties": {
+        "$ref": "#"
+      },
       "patternProperties": {
         "^\\.": { "type": ["string", "number", "boolean"] }
       },
       "properties": {
+        "~chart": {
+          "description": "Base Helm Chart for this component",
+          "type": "string",
+          "examples": ["app", "maildev"]
+        },
+        "~needs": {
+          "description": "Job or deployment dependencies",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "examples": ["[build-app]"]
+        },
         "image": {
           "description": "Full path to docker image",
           "examples": ["ghcr.io/socialgouv/docker/nginx:7.0.1"],
