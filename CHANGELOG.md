@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.133.6](https://github.com/socialgouv/kontinuous/compare/v1.133.5...v1.133.6) (2023-02-02)
+
+
+### Bug Fixes
+
+* link-module-alias clean ([cacc102](https://github.com/socialgouv/kontinuous/commit/cacc1024fffdaec6c9204a16db39c9ef5c012052))
+
 ## [1.133.5](https://github.com/socialgouv/kontinuous/compare/v1.133.3...v1.133.5) (2023-02-02)
 
 
