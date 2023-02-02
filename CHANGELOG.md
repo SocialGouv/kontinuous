@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.133.7](https://github.com/socialgouv/kontinuous/compare/v1.133.6...v1.133.7) (2023-02-02)
+
+
+### Bug Fixes
+
+* unfold-chart priority ([0fc2f03](https://github.com/socialgouv/kontinuous/commit/0fc2f03f520bebe059a0e98d4a2bdc5b6d1477f9))
+
 ## [1.133.6](https://github.com/socialgouv/kontinuous/compare/v1.133.5...v1.133.6) (2023-02-02)
 
 
