@@ -3,7 +3,7 @@ const retriableMatch = require("./retriable-match")
 const errorsMapping = [
   {
     includes: "no matches for kind",
-    message: `server error(no matches for kind)`,
+    message: ({ error }) => `server error(no matches for kind): ${error}`,
   },
   {
     includes: "dial tcp 10.0.0.1:443: connect: connection refused",

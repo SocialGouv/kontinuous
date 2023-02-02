@@ -119,6 +119,8 @@ module.exports = async (args = process.argv) => {
     if (error) {
       if (isAbortError(error)) {
         logger.warn("🔨 operation cancelled gracefully")
+      } else if (error instanceof AggregateError) {
+        logger.error(flattenAggregateError(error))
       } else {
         logger.error(error)
       }
