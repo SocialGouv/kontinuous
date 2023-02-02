@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.133.9](https://github.com/socialgouv/kontinuous/compare/v1.133.7...v1.133.9) (2023-02-02)
+
+
+### Bug Fixes
+
+* remove dash-instances ([66f4f6e](https://github.com/socialgouv/kontinuous/commit/66f4f6e2dd6a8a4fb9531f05455887bc2ea8d9e3))
+
 ## 1.133.8 (2023-02-02)
 
 ## [1.133.7](https://github.com/socialgouv/kontinuous/compare/v1.133.6...v1.133.7) (2023-02-02)
