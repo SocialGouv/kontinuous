@@ -9,17 +9,16 @@ const findAliasOf = async (
     searchingSubkeys = search.split(".")
     search = searchingSubkeys.shift()
   }
-  for (const k of Object.keys(values)) {
-    const isChartValues = values[k]?._isChartValues
-    if (!isChartValues) {
-      continue
-    }
+  const entries = Object.entries(values).filter(
+    ([_, value]) => !!value?._isChartValues
+  )
+  for (const [k, value] of entries) {
     if (k === search || (searchByKey && search.startsWith(`${k}-`))) {
       const foundScope = [...scope, k]
       if (searchingSubkeys.length > 0) {
         return findAliasOf(
           searchingSubkeys.shift(),
-          values[k],
+          value,
           searchByKey,
           foundScope,
           searchingSubkeys
@@ -27,9 +26,11 @@ const findAliasOf = async (
       }
       return foundScope
     }
+  }
+  for (const [k, value] of entries) {
     const found = await findAliasOf(
       search,
-      values[k],
+      value,
       searchByKey,
       [...scope, k],
       searchingSubkeys
