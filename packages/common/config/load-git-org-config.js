@@ -12,6 +12,7 @@ module.exports = async (config, reloadConfig) => {
     gitOrg,
     gitOrgOverride,
     gitOrgRepository,
+    gitOrgPath,
     gitOrgRequired,
     gitOrgRef,
   } = config
@@ -51,7 +52,11 @@ module.exports = async (config, reloadConfig) => {
 
   const ref = gitOrgRef || defaultRef
 
-  const orgaConfig = await downloadGitOrgConfig(gitRepositoryUrl, ref)
+  const orgaConfig = await downloadGitOrgConfig(
+    gitRepositoryUrl,
+    gitOrgPath,
+    ref
+  )
 
   defaultsDeep(config, orgaConfig)
 
