@@ -3,6 +3,7 @@
   "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/charts/app/kontinuous.values.schema.json",
   "title": "schema for helm chart app",
   "type": "object",
+  "additionalProperties": false,
   "patternProperties": {
     "^\\.": { "type": ["string", "number", "boolean"] }
   },
