@@ -107,15 +107,19 @@ See [Deployment docs](./advanced/deploy.md) for all available options
 
 ## Requirements
 
-[TODO]: on the cluster
-
 Minimal dependencies:
 
-- Git repository (public or private)
-- Kubernetes
-  - giving the kubeconfig to kontinuous to access the project scope
-  - a dedicated ci namespace per project and per cluster containing all needed secrets (optional)
-  - [kube-janitor](https://codeberg.org/hjacobs/kube-janitor) is recommended for automatic resources cleaning
+- **git**: The code to be deployed must be available in a git repository (if the repository is private: TODO describe needed additionnal configuration).
+- **kubernetes**: you must have a correct kubernetes context configured in the shell (either via default kubeconfig or via environnement variable `KUBECONFIG`).
+
+Recommended (optional) dependencies:
+
+- If using **rancher**: either define a `RANCHER_PROJECT` variable or have a dedicated ci namespace per project and per cluster with the projectId specified in an annotation.
+- A namespace containing all the needed secrets to be imported from to the destination namespace (where the kontinuous jobs and deployments will be run).
+- [kube-janitor](https://codeberg.org/hjacobs/kube-janitor) is recommended for automatic resources cleaning.
+- [Sealed secrets](https://github.com/bitnami-labs/sealed-secrets) with [reloader](https://github.com/stakater/Reloader).
+
+If you want to configure kontinuous in webhook mode, see [specific webhook documentation](./advanced/webhook.md).
 
 ## Advanced
 
