@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.133.10 (2023-02-06)
+
+
+### Bug Fixes
+
+* git-org enabled by default ([#190](https://github.com/socialgouv/kontinuous/issues/190)) ([8b76d3c](https://github.com/socialgouv/kontinuous/commit/8b76d3c6c1d94e58351a1d9ee41b94e03151c9be))
+
 ## [1.133.9](https://github.com/socialgouv/kontinuous/compare/v1.133.7...v1.133.9) (2023-02-02)
 
 
