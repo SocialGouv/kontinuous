@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/create-db/use.schema.json",
+  "title": "schema for create-db job usage",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["database", "pgUser"],
+  "properties": {
+    "pgAdminUserSecretRefName": {
+      "description": "Secret with admin credentials to the database server",
+      "type": "string"
+    },
+    "pgSecretName": {
+      "description": "Name of the kubernetes user secret to create. Defaults to pg-user",
+      "type": "string"
+    },
+    "database": {
+      "description": "Name of the Postgres database to create. Defaults to environment",
+      "type": "string"
+    },
+    "pgUser": {
+      "description": "Name of the Postgres user to create",
+      "type": "string"
+    },
+    "extensions": {
+      "description": "List of Postgres extensions to create in the new database. Defaults to `hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent`",
+      "type": "string"
+    },
+    "useAzureFlex": {
+      "description": "Use an Azure Flex database. defaults to false",
+      "type": "boolean"
+    }
+  }
+}

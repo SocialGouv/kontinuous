@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/charts/jobs/values.schema.json",
+  "title": "schema for helm chart jobs",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["runs"],
+  "properties": {
+    "~chart": {
+      "description": "Chart to use. defaults to jobs",
+      "type": "string",
+      "pattern": "jobs"
+    },
+    "runs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "use": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "entrypoint": {
+            "description": "Docker image entrypoint arguments",
+            "examples": ["['sh', '-c', 'echo 42']"],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "checkout": {
+            "description": "Should the repo be checked-out to build. defaults to true",
+            "type": "boolean"
+          },
+          "memoryLimit": {
+            "description": "Kubernetes max memory for the Job before OOMKill",
+            "type": "string"
+          },
+          "memoryRequest": {
+            "description": "Kubernetes memory reservation for the Job",
+            "type": "string"
+          },
+          "cpuLimit": {
+            "description": "Kubernetes max cpu for the Job before capping",
+            "type": "string"
+          },
+          "cpuRequest": {
+            "description": "Kubernetes cpu reservation for the Job",
+            "type": "string"
+          },
+          "with": { "type": "object", "additionalProperties": true }
+        },
+        "required": ["use"],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "use": {
+                  "const": "build",
+                  "description": "Build and register docker image"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "with": {
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/build/use.schema.json#"
+                }
+              },
+              "required": ["with"]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "use": {
+                  "const": "create-db",
+                  "description": "Create a Postgres Database"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "with": {
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/create-db/use.schema.json#"
+                }
+              },
+              "required": ["with"]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "use": {
+                  "const": "deactivate",
+                  "description": "Destroy namespace and databasees"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "with": {
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/deactivate/use.schema.json#"
+                }
+              },
+              "required": ["with"]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "use": {
+                  "const": "drop-db",
+                  "description": "Destroy the databasee"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "with": {
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/drop-db/use.schema.json#"
+                }
+              },
+              "required": ["with"]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "use": {
+                  "const": "pg-restore",
+                  "description": "Restore the database from a backup storage"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "with": {
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/pg-restore/use.schema.json#"
+                }
+              },
+              "required": ["with"]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "use": {
+                  "const": "psql",
+                  "description": "Execute psql commands on the database"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "with": {
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/psql/use.schema.json#"
+                }
+              },
+              "required": ["with"]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "use": {
+                  "const": "seed-db",
+                  "description": "Execute a repository .sql on the database"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "with": {
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/seed-db/use.schema.json#"
+                }
+              },
+              "required": ["with"]
+            }
+          }
+        ]
+      },
+      "properties": {}
+    }
+  }
+}

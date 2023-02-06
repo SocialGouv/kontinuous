@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/deactivate/use.schema.json",
+  "title": "schema for deactivate job usage",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "pgAdminUserSecretRefName": {
+      "description": "Secret with admin credentials to the database server",
+      "type": "string"
+    },
+    "database": {
+      "description": "Name of the Postgres database to destroy. Defaults to environment",
+      "type": "string"
+    },
+    "db": {
+      "description": "Has a database, and use default database, true by default if `database` filled",
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/pg-restore/use.schema.json",
+  "title": "schema for pg-restore job usage",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["restorePath", "databaseUser"],
+  "properties": {
+    "pgAdminUserSecretRefName": {
+      "description": "Secret with admin credentials to the database server",
+      "type": "string"
+    },
+    "restorePath": {
+      "description": "Path to .sql file in the repo",
+      "type": "string"
+    },
+    "mountPath": {
+      "description": "Path to the backup storage mount",
+      "type": "string"
+    },
+    "owner": {
+      "description": "Change restored database owner",
+      "type": "string"
+    },
+    "database": {
+      "description": "Name of the Postgres database to restore to",
+      "type": "string"
+    }
+  }
+}
