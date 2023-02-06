@@ -17,6 +17,8 @@ patches:
     enabled: false
   needsUsingKapp:
     enabled: false
+  embedSecrets:
+    enabled: false
   filterDisableKapp:
     enabled: true
   helm:

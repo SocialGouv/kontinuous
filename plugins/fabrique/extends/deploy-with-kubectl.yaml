@@ -3,22 +3,9 @@ config:
   
 dependencies:
   contrib:
-    preDeploy:
-      cleanFailed:
-        enabled: false
-    deploySidecars:
-      failfast:
-        enabled: false
-      stern:
-        enabled: true
-      progressing:
-        enabled: true
     patches:
       needsUsingInitcontainers:
         enabled: true
-      needsUsingKapp:
-        enabled: false
-      filterDisableKapp:
+      embedSecrets:
         enabled: true
-      reloader:
-        enabled: true
+      
