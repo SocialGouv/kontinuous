@@ -795,7 +795,7 @@ const loadConfig = async (
     gitOrg: {
       env: "KS_GIT_ORG",
       option: "git-org",
-      default: false,
+      default: true,
       envParser: envParserYaml,
     },
     gitOrgRepository: {
