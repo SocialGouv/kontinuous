@@ -11,6 +11,9 @@ module.exports = {
   // renovate: datasource=github-releases depName=stern/stern
   stern: "1.22.0",
 
+  // renovate: datasource=github-releases depName=bitnami-labs/sealed-secrets extractVersion=^sealed-secrets-(?<version>.+)$
+  kubeseal: "0.19.4",
+
   // renovate: datasource=github-releases depName=carvel-dev/kapp
   kapp: "0.54.2",
 }
