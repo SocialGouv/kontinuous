@@ -29,7 +29,7 @@
           }
         },
         "then": {
-          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/charts/app/values.schema.json#"
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/charts/app/kontinuous.values.schema.json#"
         }
       }
     ]
@@ -42,7 +42,7 @@
     },
     "project": { "type": "object", "additionalProperties": true },
     "jobs": {
-      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/charts/app/values.schema.json#",
+      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/charts/app/kontinuous.values.schema.json#",
     }
   },
   "required": [],
