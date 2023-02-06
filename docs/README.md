@@ -114,7 +114,7 @@ Minimal dependencies:
 
 Recommended (optional) dependencies:
 
-- If using **rancher**: either define a `RANCHER_PROJECT` variable or have a dedicated ci namespace per project and per cluster with the projectId specified in an annotation.
+- If using **rancher**: either define a `RANCHER_PROJECT_ID` variable or have a dedicated ci namespace per project and per cluster with the projectId specified in an annotation.
 - A namespace containing all the needed secrets to be imported from to the destination namespace (where the kontinuous jobs and deployments will be run).
 - [kube-janitor](https://codeberg.org/hjacobs/kube-janitor) is recommended for automatic resources cleaning.
 - [Sealed secrets](https://github.com/bitnami-labs/sealed-secrets) with [reloader](https://github.com/stakater/Reloader).
