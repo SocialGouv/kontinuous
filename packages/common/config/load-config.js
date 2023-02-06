@@ -802,6 +802,10 @@ const loadConfig = async (
       env: "KS_GIT_ORG_REPOSITORY",
       default: ".kontinuous",
     },
+    gitOrgPath: {
+      env: "KS_GIT_ORG_PATH",
+      default: "config.yaml",
+    },
     gitOrgOverride: {
       env: "KS_GIT_ORG_OVERRIDE",
     },
