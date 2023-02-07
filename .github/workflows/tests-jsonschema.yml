@@ -28,9 +28,6 @@ jobs:
 
       - name: install
         run: |
-          sudo apt-get update -y
-          sudo apt-get install yq
-
           # fetch kube json-schema locally
           curl https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json > kube.json
 
