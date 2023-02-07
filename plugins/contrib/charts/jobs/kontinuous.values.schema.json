@@ -1,16 +1,11 @@
 {
-  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/charts/jobs/kontinuous.values.schema.json",
   "title": "schema for helm chart jobs",
   "type": "object",
   "additionalProperties": false,
   "required": ["runs"],
   "properties": {
-    "~chart": {
-      "description": "Chart to use. defaults to jobs",
-      "type": "string",
-      "pattern": "jobs"
-    },
     "runs": {
       "type": "object",
       "additionalProperties": {
@@ -18,7 +13,17 @@
         "additionalProperties": false,
         "properties": {
           "use": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "build",
+              "build-kaniko",
+              "create-db",
+              "deactivate",
+              "drop-db",
+              "pg-restore",
+              "psql",
+              "seed-db"
+            ]
           },
           "image": {
             "type": "string"
@@ -54,13 +59,13 @@
           "with": { "type": "object", "additionalProperties": true }
         },
         "required": ["use"],
-        "allOf": [
+        "oneOf": [
           {
             "if": {
               "properties": {
                 "use": {
                   "const": "build",
-                  "description": "Build and register docker image"
+                  "description": "Build and register docker image with buildkit"
                 }
               }
             },
@@ -68,6 +73,24 @@
               "properties": {
                 "with": {
                   "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/build/use.schema.json#"
+                }
+              },
+              "required": ["with"]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "use": {
+                  "const": "build-kaniko",
+                  "description": "Build and register docker image with kaniko"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "with": {
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/build-kaniko/use.schema.json#"
                 }
               },
               "required": ["with"]

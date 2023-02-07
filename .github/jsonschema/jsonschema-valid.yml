@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../docs/values.schema.json
+
+global:
+  something: 42
+
+unknown:
+  hello: world
+
+some-chart:
+  ~chart: pouet
+  hello: world
+
+some-app:
+  ~chart: app
+  containerPort: 3002
+
+some-app2:
+  ~chart: app
+  resources:
+    limits:
+      cpu: 42
+      memory: 42
+
+jobs:
+  runs:
+    build1:
+      use: build
+      cpuRequest: "42"
+      with:
+        imagePackage: app
+        buildArgs:
+          SHA: 42
+    build3:
+      use: build-kaniko
+      with:
+        imagePackage: app
+        noPush: true
+        buildArgs:
+          SHA: 42

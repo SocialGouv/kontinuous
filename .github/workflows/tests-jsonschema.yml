@@ -1,0 +1,49 @@
+name: ✅ Tests JSON schema 🔲
+
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      - "**/values.schema.json"
+      - "**/*.values.schema.json"
+      - ".github/jsonschema/**"
+
+concurrency:
+  cancel-in-progress: true
+  group: tests-jsonschema-${{ github.ref_name }}
+
+jobs:
+  tests:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "yarn"
+
+      - name: install
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install yq
+
+          # fetch kube json-schema locally
+          curl https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json > kube.json
+
+      - name: test valid schema
+        run: |
+          AJV_PARAMS="--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r kube.json"
+
+          echo "jsonschema-valid.yaml should have no error"
+          cat .github/jsonschema/jsonschema-valid.yaml | yq -j > jsonschema-valid.json
+          npx ajv-cli validate -s ./docs/values.schema.json $AJV_PARAMS -d jsonschema-valid.json --valid 2>&1 | tail --lines=+2 > valid-result.json
+          cat valid-result.json | jq -e "length == 0"
+
+          echo "jsonschema-invalid.yaml should have 28 errors"
+          cat .github/jsonschema/jsonschema-invalid.yaml | yq -j > jsonschema-invalid.json
+          npx ajv-cli validate -s ./docs/values.schema.json $AJV_PARAMS -d jsonschema-invalid.json --invalid 2>&1 | tail --lines=+2 > invalid-result.json
+          cat invalid-result.json | jq -e "length == 28"

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/build/use.schema.json",
-  "title": "schema for build job usage",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/build-kaniko/use.schema.json",
+  "title": "schema for build-kaniko job usage",
   "type": "object",
   "additionalProperties": false,
   "required": ["imagePackage"],
@@ -16,10 +16,6 @@
     },
     "registrySecretRefName": {
       "description": "Name of the registry secret if you have a custom docker registry. Should contain CI_REGISTRY_USER, CI_REGISTRY_PASSWORD",
-      "type": "string"
-    },
-    "registry": {
-      "description": "Url of your custom docker registry",
       "type": "string"
     },
     "imagePackage": {
@@ -37,6 +33,10 @@
     "buildArgs": {
       "$ref": "#/definitions/build-args"
     },
+    "skipExisting": {
+      "description": "Skip build if image already registerd",
+      "type": "boolean"
+    },
     "buildOptions": {
       "description": "Build options",
       "type": "string",
@@ -45,6 +45,10 @@
     "target": {
       "description": "Set the target build stage to build.",
       "type": "string"
+    },
+    "noPush": {
+      "description": "Disable registry push, just build",
+      "type": "boolean"
     }
   },
   "definitions": {

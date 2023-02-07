@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/seed-db/use.schema.json",
   "title": "schema for seed-db job usage",
   "type": "object",

@@ -1,15 +1,12 @@
 {
-  "$schema": "https://json-schema.org/draft-07/schema#",
-  "$id": "https://socialgouv.github.com/kontinuous/values.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/docs/values.schema.json",
   "title": "schema for .kontinuous/values.yaml",
   "type": "object",
   "additionalProperties": {
     "type": "object",
-    "description": "Custom component",
-    "anyOf": [
-      {
-        "$ref": "#"
-      },
+    "description": "Kontinuous component",
+    "allOf": [
       {
         "if": {
           "required": ["~chart"]
@@ -55,21 +52,18 @@
     },
     "project": { "type": "object", "additionalProperties": true },
     "jobs": {
-      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/charts/jobs/kontinuous.values.schema.json#",
+      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/charts/jobs/kontinuous.values.schema.json#"
     }
   },
   "required": [],
   "definitions": {
     "chart": {
       "type": "object",
-      "additionalProperties": {
-        "$ref": "#"
-      },
       "properties": {
         "~chart": {
-          "description": "Base Helm Chart for this component",
+          "description": "Kontinuous Chart for this component. see https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/charts",
           "type": "string",
-          "examples": ["app", "maildev"]
+          "examples": ["app", "maildev", "hasura", "metabase"]
         },
         "~needs": {
           "description": "Job or deployment dependencies",
@@ -79,7 +73,8 @@
           },
           "examples": ["[build-app]"]
         }
-      }
+      },
+      "required": ["~chart"]
     }
   }
 }
