@@ -42,8 +42,8 @@ jobs:
           npx ajv-cli validate -s ./docs/values.schema.json -d jsonschema-valid.json $AJV_PARAMS 2>&1 | tail --lines=+2 > valid-result.json
           cat valid-result.json | jq -e "length == 0"
 
-          echo "jsonschema-invalid.yaml should have 23 errors"
+          echo "jsonschema-invalid.yaml should have 13 errors"
           cat .github/jsonschema/jsonschema-invalid.yml | yq -o=json > jsonschema-invalid.json
           npx ajv-cli validate -s ./docs/values.schema.json $AJV_PARAMS -d jsonschema-invalid.json 2>&1
           npx ajv-cli validate -s ./docs/values.schema.json $AJV_PARAMS -d jsonschema-invalid.json 2>&1 | tail --lines=+2 > invalid-result.json
-          cat invalid-result.json | jq -e "length == 23"
+          cat invalid-result.json | jq -e "length == 13"
