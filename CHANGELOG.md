@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.133.11](https://github.com/socialgouv/kontinuous/compare/v1.133.10...v1.133.11) (2023-02-07)
+
+
+### Bug Fixes
+
+* add root subdomain on env action ([89c3dd1](https://github.com/socialgouv/kontinuous/commit/89c3dd1f85705f01b4cbbfd8c68041858e5e2d85))
+
 ## 1.133.10 (2023-02-06)
 
 
