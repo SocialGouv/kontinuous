@@ -37,11 +37,12 @@ jobs:
           AJV_PARAMS="--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r kube.json"
 
           echo "jsonschema-valid.yaml should have no error"
-          cat .github/jsonschema/jsonschema-valid.yml | yq -j > jsonschema-valid.json
+          cat .github/jsonschema/jsonschema-valid.yml | yq -o=json > jsonschema-valid.json
+          cat jsonschema-valid.json
           npx ajv-cli validate -s ./docs/values.schema.json $AJV_PARAMS -d jsonschema-valid.json --valid 2>&1 | tail --lines=+2 > valid-result.json
           cat valid-result.json | jq -e "length == 0"
 
           echo "jsonschema-invalid.yaml should have 28 errors"
-          cat .github/jsonschema/jsonschema-invalid.yml | yq -j > jsonschema-invalid.json
+          cat .github/jsonschema/jsonschema-invalid.yml | yq -o=json > jsonschema-invalid.json
           npx ajv-cli validate -s ./docs/values.schema.json $AJV_PARAMS -d jsonschema-invalid.json --invalid 2>&1 | tail --lines=+2 > invalid-result.json
           cat invalid-result.json | jq -e "length == 28"
