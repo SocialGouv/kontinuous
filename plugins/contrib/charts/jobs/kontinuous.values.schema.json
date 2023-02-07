@@ -59,7 +59,7 @@
           "with": { "type": "object", "additionalProperties": true }
         },
         "required": ["use"],
-        "oneOf": [
+        "anyOf": [
           {
             "if": {
               "properties": {
