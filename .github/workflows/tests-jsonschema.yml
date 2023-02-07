@@ -36,6 +36,8 @@ jobs:
         run: |
           AJV_PARAMS="--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r kube.json"
 
+          head kube.json
+
           echo "jsonschema-valid.yaml should have no error"
           cat .github/jsonschema/jsonschema-valid.yml | yq -o=json > jsonschema-valid.json
           cat jsonschema-valid.json
