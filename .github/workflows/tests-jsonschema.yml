@@ -37,8 +37,7 @@ jobs:
           AJV_PARAMS="--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r kube.json"
           echo "jsonschema-valid.yaml should have no error"
           cat .github/jsonschema/jsonschema-valid.yml | yq -o=json > jsonschema-valid.json
-          #npx ajv-cli validate -s ./docs/values.schema.json -d jsonschema-valid.json $AJV_PARAMS 2>&1
-          RES=$(npx ajv-cli validate -s ./docs/values.schema.json -d jsonschema-valid.json $AJV_PARAMS 2>&1)
+          RES=$(npx ajv-cli validate -s ./docs/values.schema.json -d jsonschema-valid.json $AJV_PARAMS)
           if [ "$RES" == "jsonschema-valid.json valid" ]; then
             echo "Valid schema"
           else
