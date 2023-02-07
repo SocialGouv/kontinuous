@@ -38,7 +38,7 @@ jobs:
 
           echo "jsonschema-valid.yaml should have no error"
           cat .github/jsonschema/jsonschema-valid.yml | yq -o=json > jsonschema-valid.json
-          npx ajv-cli validate -s ./docs/values.schema.json -d jsonschema-valid.json
+          npx ajv-cli validate -s ./docs/values.schema.json -d jsonschema-valid.json -r "plugins/**/*.schema.json" -r kube.json
           npx ajv-cli validate -s ./docs/values.schema.json $AJV_PARAMS -d jsonschema-valid.json 2>&1 | tail --lines=+2 > valid-result.json
           cat valid-result.json | jq -e "length == 0"
 
