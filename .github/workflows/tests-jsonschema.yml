@@ -8,6 +8,7 @@ on:
       - "**/values.schema.json"
       - "**/*.values.schema.json"
       - ".github/jsonschema/**"
+      - ".github/workflows/tests-jsonschema.yml"
 
 concurrency:
   cancel-in-progress: true
