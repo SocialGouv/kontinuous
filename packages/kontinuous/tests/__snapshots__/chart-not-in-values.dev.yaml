@@ -28,7 +28,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    kontinuous/plugin.log: 'true'
+    kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1

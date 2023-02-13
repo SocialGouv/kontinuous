@@ -96,7 +96,7 @@ metadata:
     kontinuous/depname.chartPath: project
     kontinuous/depname.resourcePath: deployment.project
     kontinuous/depname.resourceName: project
-    kontinuous/plugin.log: 'true'
+    kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
   labels:
     kontinuous/deployment: test-multi-containers-feature-branch-1-ffac537e6cbbf9-66ono92u
