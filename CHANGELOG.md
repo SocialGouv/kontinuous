@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.133.21](https://github.com/socialgouv/kontinuous/compare/v1.133.20...v1.133.21) (2023-02-14)
+
+
+### Bug Fixes
+
+* req error ([dce62fa](https://github.com/socialgouv/kontinuous/commit/dce62fab69087de2baa805d440564ecf0d1427b6))
+
 ## [1.133.20](https://github.com/socialgouv/kontinuous/compare/v1.133.19...v1.133.20) (2023-02-14)
 
 
