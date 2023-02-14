@@ -8,10 +8,12 @@ const options = require("./options")
 module.exports = () => {
   const program = new Command()
 
+  const { version } = require(`${__dirname}/../../package.json`)
+
   program
     .name("kontinuous")
-    .description("CI/CD for Kubernetes 🚀")
-    .version(require(`${__dirname}/../../package.json`).version)
+    .description(`Kontinuous CI/CD for Kubernetes 🥷 - v${version}`)
+    .version(version)
     .addOption(options.debug)
     .addOption(options.inlineConfig)
     .addOption(options.configSet)
