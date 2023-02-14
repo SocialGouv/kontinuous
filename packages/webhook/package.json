@@ -27,8 +27,6 @@
     "lodash.mergewith": "^4.6.2",
     "nctx": "^1.7.1",
     "node-cron": "^3.0.0",
-    "pino": "^8.3.1",
-    "pino-bfuscate": "^1.0.0",
     "rimraf": "^4.1.2",
     "uuid": "^9.0.0",
     "~common": "workspace:^"
