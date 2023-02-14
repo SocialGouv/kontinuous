@@ -12,7 +12,7 @@ module.exports = (error, logger = getLogger()) => {
       "request error"
     )
     if (error.response.data.msg) {
-      logger.error(error.response.data.msg)
+      logger.error({ errorMessage: error.response.data.msg }, "request error")
     }
   } else {
     logger.error({ errorMessage: error.message, url }, "request error")
