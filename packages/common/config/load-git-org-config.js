@@ -43,7 +43,7 @@ module.exports = async (config, reloadConfig) => {
 
   const gitRepository = `${protocol}//${host}/${orga}/${gitOrgRepository}`
 
-  const gitOrgRepositoryUrl = normalizeRepositoryUrl(gitRepository, "ssh")
+  const gitOrgRepositoryUrl = normalizeRepositoryUrl(gitRepository, "https")
 
   let exists
   let defaultRef
