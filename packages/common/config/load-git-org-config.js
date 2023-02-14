@@ -20,7 +20,15 @@ module.exports = async (config, reloadConfig) => {
     return config
   }
 
-  const gitUrl = await getGitUrl()
+  let gitUrl
+  try {
+    gitUrl = await getGitUrl()
+  } catch (error) {
+    if (gitOrgRequired) {
+      throw error
+    }
+    return config
+  }
 
   let orga
   if (gitOrgOverride) {
