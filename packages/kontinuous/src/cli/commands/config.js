@@ -92,5 +92,5 @@ module.exports = (program) =>
         outputValue = value || ""
       }
 
-      process.stdout.write(outputValue)
+      process.stdout.write(outputValue.toString())
     })
