@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.133.14](https://github.com/socialgouv/kontinuous/compare/v1.133.13...v1.133.14) (2023-02-14)
+
+
+### Bug Fixes
+
+* docker-compose var webhook sentry-dsn ([3d59509](https://github.com/socialgouv/kontinuous/commit/3d595091d1d0ddbdfde1a380ff6b4944b0e879e5))
+* docker-compose var webhook sentry-dsn ([0700a7e](https://github.com/socialgouv/kontinuous/commit/0700a7e514b4f7d4c97604dfd115fe19be8fe6df))
+* webhook remove pino ([a3464e8](https://github.com/socialgouv/kontinuous/commit/a3464e8e7966168bdc1f89e22e07f42d3cb42981))
+
 ## 1.133.13 (2023-02-14)
 
 ## 1.133.12 (2023-02-14)
