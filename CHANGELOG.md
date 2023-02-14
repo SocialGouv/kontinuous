@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.133.22](https://github.com/socialgouv/kontinuous/compare/v1.133.21...v1.133.22) (2023-02-14)
+
+
+### Bug Fixes
+
+* reload and derive config from extends dep ([643378a](https://github.com/socialgouv/kontinuous/commit/643378a78ebd394663f588455fad72b5d4877a9c))
+* tests disable gitOrg ([fe3bd5f](https://github.com/socialgouv/kontinuous/commit/fe3bd5f2753b006180196a49a464ece64ba9ae2b))
+* up direct-logger ([0168e9a](https://github.com/socialgouv/kontinuous/commit/0168e9a88313563ad27899274241de655ed4c00c))
+
 ## [1.133.21](https://github.com/socialgouv/kontinuous/compare/v1.133.20...v1.133.21) (2023-02-14)
 
 
