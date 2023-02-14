@@ -886,6 +886,7 @@ const loadConfig = async (
     )
     return config
   }
+
   // reload overrided config defaults
   if (
     !isReloadingConfig &&
@@ -924,20 +925,39 @@ const loadConfig = async (
     config = await loadDependencies(config, logger, reloadConfig)
   }
 
-  await recurseDependencies({
-    config,
-    beforeChildren: async ({ definition }) => {
-      const { config: extendsConfig } = definition
-      if (!extendsConfig) {
-        return
-      }
-      defaultsDeep(config, extendsConfig)
-      if (extendsConfig.deployWithPlugin && config.deployWithPluginIsDefault) {
-        config.deployWithPlugin = extendsConfig.deployWithPlugin
-        config.deployWithPluginIsDefault = false
-      }
-    },
-  })
+  let hasExtendsConfigInDependencies = false
+  if (!configMeta.__reloadExtendsConfigInDependencies) {
+    await recurseDependencies({
+      config,
+      beforeChildren: async ({ definition }) => {
+        const { config: extendsConfig } = definition
+        if (!extendsConfig) {
+          return
+        }
+
+        hasExtendsConfigInDependencies = true
+
+        defaultsDeep(config, extendsConfig)
+
+        for (const extendKey of Object.keys(extendsConfig)) {
+          configMeta[extendKey].isDefault = false
+        }
+
+        if (
+          extendsConfig.deployWithPlugin &&
+          config.deployWithPluginIsDefault
+        ) {
+          config.deployWithPlugin = extendsConfig.deployWithPlugin
+          config.deployWithPluginIsDefault = false
+        }
+      },
+    })
+  }
+
+  if (hasExtendsConfigInDependencies) {
+    configMeta.__reloadExtendsConfigInDependencies = true
+    config = await reloadConfig()
+  }
 
   await recurseDependencies({
     config,
