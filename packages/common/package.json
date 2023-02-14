@@ -13,7 +13,7 @@
     "axios-retry": "^3.3.1",
     "compare-versions": "^5.0.1",
     "decompress": "^4.2.1",
-    "direct-logger": "^2.7.2",
+    "direct-logger": "^2.7.3",
     "dotenv": "^16.0.2",
     "fs-extra": "^11.1.0",
     "jest-diff": "^29.0.0",
