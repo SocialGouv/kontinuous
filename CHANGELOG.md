@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.133.12 (2023-02-14)
+
+
+### Bug Fixes
+
+* disable logs by default for depl and sts ([#199](https://github.com/socialgouv/kontinuous/issues/199)) ([e456ebd](https://github.com/socialgouv/kontinuous/commit/e456ebd8b9c863f405a04309b0316757ea1b210d))
+
 ## [1.133.11](https://github.com/socialgouv/kontinuous/compare/v1.133.10...v1.133.11) (2023-02-07)
 
 
