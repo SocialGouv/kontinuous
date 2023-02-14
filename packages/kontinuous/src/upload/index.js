@@ -14,8 +14,6 @@ module.exports = async ({ name, file }) => {
 
   const dest = name || "manifests"
 
-  logger.info(`uploading "${file}" as artifact "${dest}"`)
-
   let { uploadUrl } = config
 
   const { webhookToken: token } = config
