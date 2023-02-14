@@ -347,6 +347,7 @@ const loadConfig = async (
     buildRootPath: {
       env: "KS_BUILD_ROOT_PATH",
       defaultFunction: () => path.join(os.tmpdir(), "kontinuous"),
+      keepDefault: true,
     },
     buildPath: {
       env: "KS_BUILD_PATH",
@@ -359,6 +360,7 @@ const loadConfig = async (
         await fs.ensureDir(buildPath)
         return buildPath
       },
+      keepDefault: true,
     },
     buildProjectPath: {
       defaultFunction: (config) =>
@@ -456,10 +458,7 @@ const loadConfig = async (
     deployWithPlugin: {
       env: "KS_DEPLOY_WITH",
       option: "deploy-with",
-      defaultFunction: (config) => {
-        config.deployWithPluginIsDefault = true
-        return "kubectlDependencyTree"
-      },
+      default: "kubectlDependencyTree",
     },
     statusUrl: {
       env: "KS_DEPLOY_STATUS_URL",
@@ -918,6 +917,10 @@ const loadConfig = async (
     logger.info(`📂 buildPath: file://${config.buildPath} `)
   }
 
+  if (!isReloadingConfig) {
+    config = await reloadConfig()
+  }
+
   if (
     loadConfigOptions.loadDependencies !== false &&
     (!isReloadingConfig || configMeta.__reloadDependencies)
@@ -926,36 +929,32 @@ const loadConfig = async (
   }
 
   let hasExtendsConfigInDependencies = false
-  if (!configMeta.__reloadExtendsConfigInDependencies) {
-    await recurseDependencies({
-      config,
-      beforeChildren: async ({ definition }) => {
-        const { config: extendsConfig } = definition
-        if (!extendsConfig) {
-          return
-        }
+  await recurseDependencies({
+    config,
+    beforeChildren: async ({ definition }) => {
+      const { config: extendsConfig } = definition
+      if (!extendsConfig) {
+        return
+      }
 
-        hasExtendsConfigInDependencies = true
+      hasExtendsConfigInDependencies = true
 
-        defaultsDeep(config, extendsConfig)
-
-        for (const extendKey of Object.keys(extendsConfig)) {
-          configMeta[extendKey].isDefault = false
-        }
-
+      for (const [extendKey, extendValue] of Object.entries(extendsConfig)) {
         if (
-          extendsConfig.deployWithPlugin &&
-          config.deployWithPluginIsDefault
+          config[extendKey] !== undefined &&
+          !configMeta[extendKey].isDefault
         ) {
-          config.deployWithPlugin = extendsConfig.deployWithPlugin
-          config.deployWithPluginIsDefault = false
+          continue
         }
-      },
-    })
-  }
+        if (typeof extendValue === "object" && extendValue !== null) {
+          defaultsDeep(config[extendKey], extendValue)
+        }
+        configMeta[extendKey].isDefault = false
+      }
+    },
+  })
 
-  if (hasExtendsConfigInDependencies) {
-    configMeta.__reloadExtendsConfigInDependencies = true
+  if (hasExtendsConfigInDependencies && !isReloadingConfig) {
     config = await reloadConfig()
   }
 

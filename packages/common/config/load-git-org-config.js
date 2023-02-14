@@ -36,8 +36,8 @@ module.exports = async (config, reloadConfig) => {
     orga = gitOrgOverride
   } else {
     const url = parseGitUrl(gitRepositoryUrl)
+    protocol = url.protocol || "https:"
     orga = url.owner
-    protocol = url.protocol
     host = url.host
   }
 
