@@ -171,7 +171,7 @@ module.exports = ({
                   value: project,
                 },
                 {
-                  name: "KS_GIT_REPOSITORY_URL",
+                  name: "KS_GIT_REPOSITORY",
                   value: repositoryUrl,
                 },
                 ...(env

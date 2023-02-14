@@ -58,6 +58,7 @@ module.exports = async ({
       transform,
       generate,
       sideEffect,
+      keepDefault = false,
     } = def
 
     const optionKey =
@@ -93,14 +94,14 @@ module.exports = async ({
     }
     if (
       defaultFunction &&
-      (isUndefined(config[key]) || configMeta[key].isDefault)
+      (isUndefined(config[key]) || (configMeta[key].isDefault && !keepDefault))
     ) {
       config[key] = await defaultFunction(config, { options, env })
       configMeta[key].isDefault = true
     }
     if (
       defaultValue &&
-      (isUndefined(config[key]) || configMeta[key].isDefault)
+      (isUndefined(config[key]) || (configMeta[key].isDefault && !keepDefault))
     ) {
       config[key] = defaultValue
       configMeta[key].isDefault = true
