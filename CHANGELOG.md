@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.133.24](https://github.com/socialgouv/kontinuous/compare/v1.133.23...v1.133.24) (2023-02-14)
+
+
+### Bug Fixes
+
+* extendsConfig scalar value ([9d37fdd](https://github.com/socialgouv/kontinuous/commit/9d37fddd9d1a1bfee86aa56503d12d817d70747d))
+
 ## [1.133.23](https://github.com/socialgouv/kontinuous/compare/v1.133.22...v1.133.23) (2023-02-14)
 
 
