@@ -788,8 +788,11 @@ const loadConfig = async (
       envParser: envParserYaml,
       default: 2,
       sideEffect: (value) => {
-        const abortConfig = ctx.require("abortConfig")
-        abortConfig.gracefullShutdownTimeoutSeconds = value
+        const abortConfig = ctx.get("abortConfig")
+        if (abortConfig) {
+          // only exists in the cli
+          abortConfig.gracefullShutdownTimeoutSeconds = value
+        }
       },
     },
     gitOrg: {
