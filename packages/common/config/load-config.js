@@ -948,6 +948,8 @@ const loadConfig = async (
         }
         if (typeof extendValue === "object" && extendValue !== null) {
           defaultsDeep(config[extendKey], extendValue)
+        } else {
+          config[extendKey] = extendValue
         }
         configMeta[extendKey].isDefault = false
       }
