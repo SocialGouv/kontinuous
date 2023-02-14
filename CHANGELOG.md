@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.133.15](https://github.com/socialgouv/kontinuous/compare/v1.133.14...v1.133.15) (2023-02-14)
+
+
+### Bug Fixes
+
+* webhook missing abortConfig ([9f9e065](https://github.com/socialgouv/kontinuous/commit/9f9e06536cdab3ae2721b26835f0983aaf2dafe1))
+
 ## [1.133.14](https://github.com/socialgouv/kontinuous/compare/v1.133.13...v1.133.14) (2023-02-14)
 
 
