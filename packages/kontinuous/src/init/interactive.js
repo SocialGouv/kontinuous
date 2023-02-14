@@ -138,7 +138,7 @@ module.exports = async (opts) => {
     `${nativePluginPrefix}/contrib`,
   ]
   if (!plugin && plugin !== "false") {
-    let autofocus = 1
+    let autofocus = 0
     const firstPlugin = Object.values(projectConfig.dependencies || {})[0]
       ?.import
     if (firstPlugin && nativePurposedPlugins.includes(firstPlugin)) {
@@ -149,6 +149,10 @@ module.exports = async (opts) => {
       message: "Choose a kontinuous umbrella plugin",
       autofocus,
       choices: [
+        {
+          name: "false",
+          message: "no plugin (or autoloaded at git organization level)",
+        },
         ...nativePurposedPlugins.map((pluginName) => ({
           name: pluginName,
           message: pluginName,
@@ -156,10 +160,6 @@ module.exports = async (opts) => {
         {
           name: "other",
           message: "other 🛸 ",
-        },
-        {
-          name: "false",
-          message: "no plugin",
         },
       ],
     })
