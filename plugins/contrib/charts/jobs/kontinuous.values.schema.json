@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/charts/jobs/kontinuous.values.schema.json",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json",
   "title": "schema for helm chart jobs",
   "type": "object",
   "additionalProperties": false,
@@ -72,7 +72,7 @@
             "then": {
               "properties": {
                 "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/build/use.schema.json#"
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/build/use.schema.json#"
                 }
               },
               "required": ["with"]
@@ -90,7 +90,7 @@
             "then": {
               "properties": {
                 "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/build-kaniko/use.schema.json#"
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/build-kaniko/use.schema.json#"
                 }
               },
               "required": ["with"]
@@ -108,7 +108,7 @@
             "then": {
               "properties": {
                 "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/create-db/use.schema.json#"
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/create-db/use.schema.json#"
                 }
               },
               "required": ["with"]
@@ -126,7 +126,7 @@
             "then": {
               "properties": {
                 "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/deactivate/use.schema.json#"
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/deactivate/use.schema.json#"
                 }
               },
               "required": ["with"]
@@ -144,7 +144,7 @@
             "then": {
               "properties": {
                 "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/drop-db/use.schema.json#"
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/drop-db/use.schema.json#"
                 }
               },
               "required": ["with"]
@@ -162,7 +162,7 @@
             "then": {
               "properties": {
                 "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/pg-restore/use.schema.json#"
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/pg-restore/use.schema.json#"
                 }
               },
               "required": ["with"]
@@ -180,7 +180,7 @@
             "then": {
               "properties": {
                 "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/psql/use.schema.json#"
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/psql/use.schema.json#"
                 }
               },
               "required": ["with"]
@@ -198,7 +198,7 @@
             "then": {
               "properties": {
                 "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/seed-db/use.schema.json#"
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/seed-db/use.schema.json#"
                 }
               },
               "required": ["with"]

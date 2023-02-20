@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/docs/values.schema.json",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/docs/values.schema.json",
   "title": "schema for .kontinuous/values.yaml",
   "type": "object",
   "additionalProperties": {
@@ -26,7 +26,7 @@
           }
         },
         "then": {
-          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/charts/app/kontinuous.values.schema.json#"
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json#"
         }
       },
       {
@@ -39,7 +39,7 @@
           }
         },
         "then": {
-          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/charts/jobs/kontinuous.values.schema.json#"
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json#"
         }
       }
     ]
@@ -52,7 +52,7 @@
     },
     "project": { "type": "object", "additionalProperties": true },
     "jobs": {
-      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/charts/jobs/kontinuous.values.schema.json#"
+      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json#"
     }
   },
   "required": [],

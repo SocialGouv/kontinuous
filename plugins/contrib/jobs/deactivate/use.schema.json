@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/schemastore/plugins/contrib/jobs/deactivate/use.schema.json",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/deactivate/use.schema.json",
   "title": "schema for deactivate job usage",
   "type": "object",
   "additionalProperties": false,
