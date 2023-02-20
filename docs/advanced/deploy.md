@@ -33,6 +33,8 @@ dependencies:
 
 Be aware that using init containers might cause more network traffic that with default kontinuous mode, and that your init containers should never fail (otherwise they will be restarted indefinitely).
 
+You'll need a `kubeconfig` secret in you destination namespace if you use `needs` or `jobs`.
+
 ## with kontinuous CLI
 
 Run `npx kontinuous deploy` from your project repository
