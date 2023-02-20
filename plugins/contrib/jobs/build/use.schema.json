@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/build/use.schema.json",
+  "title": "schema for build job usage",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["imagePackage"],
+  "properties": {
+    "dockerfile": {
+      "description": "Path to the Dockerfile on the repository. Defaults to /Dockerfile",
+      "type": "string"
+    },
+    "context": {
+      "description": "Docker context (cwd) when building the image. Defaults to .",
+      "type": "string"
+    },
+    "registrySecretRefName": {
+      "description": "Name of the registry secret if you have a custom docker registry. Should contain CI_REGISTRY_USER, CI_REGISTRY_PASSWORD",
+      "type": "string"
+    },
+    "registry": {
+      "description": "Url of your custom docker registry",
+      "type": "string"
+    },
+    "imagePackage": {
+      "description": "Name of the dockerfile on the registry",
+      "type": "string"
+    },
+    "imageProject": {
+      "description": "Optional project name in the docker registry",
+      "type": "string"
+    },
+    "imageRepository": {
+      "description": "Optional sub repository for the docker image",
+      "type": "string"
+    },
+    "buildArgs": {
+      "$ref": "#/definitions/build-args"
+    },
+    "buildOptions": {
+      "description": "Build options",
+      "type": "string",
+      "examples": ["-single-snapshot --ignore-path=/product_uuid"]
+    },
+    "target": {
+      "description": "Set the target build stage to build.",
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "build-args": {
+      "description": "Build args to customize the docker build",
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/docs/values.schema.json",
+  "title": "schema for .kontinuous/values.yaml",
+  "type": "object",
+  "additionalProperties": {
+    "type": "object",
+    "description": "Kontinuous component",
+    "allOf": [
+      {
+        "if": {
+          "required": ["~chart"]
+        },
+        "then": {
+          "description": "Common to all charts",
+          "$ref": "#/definitions/chart"
+        }
+      },
+      {
+        "if": {
+          "required": ["~chart"],
+          "properties": {
+            "~chart": {
+              "const": "app"
+            }
+          }
+        },
+        "then": {
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json#"
+        }
+      },
+      {
+        "if": {
+          "required": ["~chart"],
+          "properties": {
+            "~chart": {
+              "const": "jobs"
+            }
+          }
+        },
+        "then": {
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json#"
+        }
+      }
+    ]
+  },
+  "properties": {
+    "global": {
+      "description": "Global variables",
+      "type": "object",
+      "additionalProperties": true
+    },
+    "project": { "type": "object", "additionalProperties": true },
+    "jobs": {
+      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json#"
+    }
+  },
+  "required": [],
+  "definitions": {
+    "chart": {
+      "type": "object",
+      "properties": {
+        "~chart": {
+          "description": "Kontinuous Chart for this component. see https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/charts",
+          "type": "string",
+          "examples": ["app", "maildev", "hasura", "metabase"]
+        },
+        "~needs": {
+          "description": "Job or deployment dependencies",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "examples": ["[build-app]"]
+        }
+      },
+      "required": ["~chart"]
+    }
+  }
+}

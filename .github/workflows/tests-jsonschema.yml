@@ -1,0 +1,54 @@
+name: ✅ Tests JSON schema 🔲
+
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      - "**/values.schema.json"
+      - "**/*.values.schema.json"
+      - ".github/jsonschema/**"
+      - ".github/workflows/tests-jsonschema.yml"
+
+concurrency:
+  cancel-in-progress: true
+  group: tests-jsonschema-${{ github.ref_name }}
+
+jobs:
+  tests:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "yarn"
+
+      - name: install
+        run: |
+          # fetch kube json-schema locally and add $id for schema resolution
+          curl https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json | jq '. + {"$id": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json"}' > kube.json
+
+      - name: test valid schema
+        run: |
+          AJV_PARAMS="--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r kube.json"
+          echo "jsonschema-valid.yaml should have no error"
+          cat .github/jsonschema/jsonschema-valid.yml | yq -o=json > jsonschema-valid.json
+          RES=$(npx ajv-cli validate -s ./docs/values.schema.json -d jsonschema-valid.json $AJV_PARAMS)
+          if [ "$RES" == "jsonschema-valid.json valid" ]; then
+            echo "Valid schema"
+          else
+            echo "Invalid schema"
+            exit 1
+          fi
+
+      - name: test invalid schema
+        run: |
+          AJV_PARAMS="--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r kube.json"
+          echo "jsonschema-invalid.yaml should have 23 errors"
+          cat .github/jsonschema/jsonschema-invalid.yml | yq -o=json > jsonschema-invalid.json
+          npx ajv-cli validate -s ./docs/values.schema.json $AJV_PARAMS -d jsonschema-invalid.json 2>&1 | tail --lines=+2 > invalid-result.json
+          cat invalid-result.json | jq -e "length == 23"
