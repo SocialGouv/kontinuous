@@ -7750,6 +7750,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-es@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "eslint-plugin-es@npm:3.0.1"
+  dependencies:
+    eslint-utils: "npm:^2.0.0"
+    regexpp: "npm:^3.0.0"
+  peerDependencies:
+    eslint: ">=4.19.1"
+  checksum: d7d0595c08d4d336f6600f7ef3a8a7cda928f3aea55aabee76878ee0a02acdafbe50c53067bdc4443206169a184e045bf9daf57cdd608f5ddf1994a37e67061c
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-import@npm:^2.26.0":
   version: 2.26.0
   resolution: "eslint-plugin-import@npm:2.26.0"
@@ -7790,6 +7802,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-node@npm:^11.1.0":
+  version: 11.1.0
+  resolution: "eslint-plugin-node@npm:11.1.0"
+  dependencies:
+    eslint-plugin-es: "npm:^3.0.0"
+    eslint-utils: "npm:^2.0.0"
+    ignore: "npm:^5.1.1"
+    minimatch: "npm:^3.0.4"
+    resolve: "npm:^1.10.1"
+    semver: "npm:^6.1.0"
+  peerDependencies:
+    eslint: ">=5.16.0"
+  checksum: 047afd44b9a3581df90ffc67aabbf583b02688824b671de32a787c5a17bdfd58f3e3e9b296ef24a1e602c91494e45a185c11bd9cda3943e800da45fbd9a70af3
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-prettier@npm:^4.0.0":
   version: 4.0.0
   resolution: "eslint-plugin-prettier@npm:4.0.0"
@@ -7825,6 +7853,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-utils@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "eslint-utils@npm:2.1.0"
+  dependencies:
+    eslint-visitor-keys: "npm:^1.1.0"
+  checksum: 8174e9532226b6e236d8d8024c7097118b4c25a55f103e10acb8f29d5d24e0fb1866b3a5d97b82096affe0dd98d2919127236bedde572e15f6658a6daca05e06
+  languageName: node
+  linkType: hard
+
 "eslint-utils@npm:^3.0.0":
   version: 3.0.0
   resolution: "eslint-utils@npm:3.0.0"
@@ -7833,6 +7870,13 @@ __metadata:
   peerDependencies:
     eslint: ">=5"
   checksum: c7941cb26c5a1dea52fd7588e2e7ca2c12f28a6769119b3697074170f8e9d32a820dbaf822d30361dc54949eb95e8da3509f76fae77dbf8d53499932a828cb65
+  languageName: node
+  linkType: hard
+
+"eslint-visitor-keys@npm:^1.1.0":
+  version: 1.3.0
+  resolution: "eslint-visitor-keys@npm:1.3.0"
+  checksum: 402ccb0043a067646507ab8481b4d4ba6ce668d7e6201294c2326ca9f8e20577385903aeb24894f816c53f052b926dd67f76fb7826138109aac8176cfd8b4e73
   languageName: node
   linkType: hard
 
@@ -9438,7 +9482,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore@npm:5.2.4, ignore@npm:^5.2.0":
+"ignore@npm:5.2.4, ignore@npm:^5.1.1, ignore@npm:^5.2.0":
   version: 5.2.4
   resolution: "ignore@npm:5.2.4"
   checksum: 55c58d848bb753a2b7e0b4a19352f9212eae2e4a05e4a12753e90b921108a6caa140adf958a5084b144bedd886b44e3bc93f6b4839e5aba1fb4a72c6625da4c1
@@ -13448,7 +13492,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regexpp@npm:^3.2.0":
+"regexpp@npm:^3.0.0, regexpp@npm:^3.2.0":
   version: 3.2.0
   resolution: "regexpp@npm:3.2.0"
   checksum: b171774d3380c053d3bd4af6b4f60f2e28c837dd4daeafb183d656e2f439dc606ee428bb44f14cbaa5a715524d2e8d88d168817445b4156d1ea06337f29eb405
@@ -13759,7 +13803,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@npm:^1.10.0, resolve@npm:^1.14.2, resolve@npm:^1.20.0, resolve@npm:^1.22.0, resolve@npm:^1.22.1":
+"resolve@npm:^1.10.0, resolve@npm:^1.10.1, resolve@npm:^1.14.2, resolve@npm:^1.20.0, resolve@npm:^1.22.0, resolve@npm:^1.22.1":
   version: 1.22.1
   resolution: "resolve@npm:1.22.1"
   dependencies:
@@ -13772,7 +13816,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@npm%3A^1.10.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.14.2#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.20.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.1#optional!builtin<compat/resolve>":
+"resolve@patch:resolve@npm%3A^1.10.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.10.1#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.14.2#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.20.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.1#optional!builtin<compat/resolve>":
   version: 1.22.1
   resolution: "resolve@patch:resolve@npm%3A1.22.1#optional!builtin<compat/resolve>::version=1.22.1&hash=c3c19d"
   dependencies:
@@ -14068,7 +14112,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^6.0.0, semver@npm:^6.1.1, semver@npm:^6.1.2, semver@npm:^6.2.0, semver@npm:^6.3.0":
+"semver@npm:^6.0.0, semver@npm:^6.1.0, semver@npm:^6.1.1, semver@npm:^6.1.2, semver@npm:^6.2.0, semver@npm:^6.3.0":
   version: 6.3.0
   resolution: "semver@npm:6.3.0"
   bin:
@@ -16228,6 +16272,7 @@ __metadata:
     eslint-import-resolver-alias: "npm:^1.1.2"
     eslint-plugin-import: "npm:^2.26.0"
     eslint-plugin-jest: "npm:^27.0.0"
+    eslint-plugin-node: "npm:^11.1.0"
     eslint-plugin-prettier: "npm:^4.0.0"
     fs-extra: "npm:^11.1.0"
     husky: "npm:^8.0.0"

@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const releaseWorkspaceToNpx = require("../lib/release-workspace-to-npx")
 
 releaseWorkspaceToNpx(process.argv[2])

@@ -53,7 +53,7 @@ function parse(str) {
   }
 
   // parse the URL
-  const obj = url.parse(str)
+  const obj = new url.URL(str)
   if (
     typeof obj.path !== "string" ||
     !obj.path.length ||
@@ -65,7 +65,8 @@ function parse(str) {
 
   if (!obj.host && /^git@/.test(str) === true) {
     // return the correct host for git@ URLs
-    obj.host = url.parse(`http://${str}`).host
+    const urlObject = new url.URL(`http://${str}`)
+    obj.host = urlObject.host
   }
 
   obj.path = trimSlash(obj.path)

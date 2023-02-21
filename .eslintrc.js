@@ -29,16 +29,27 @@ const noExtraneousRule = [
 ]
 
 module.exports = {
-  ignorePatterns: ["packages/webhook/build/*", "!.versionrc.js"],
+  ignorePatterns: [
+    "packages/webhook/build/*",
+    "!.versionrc.js",
+    "!.eslintrc.js",
+  ],
   settings: {
     "import/resolver": {
       alias: true,
     },
   },
-  extends: ["airbnb-base", "prettier", "plugin:jest/recommended"],
+  extends: [
+    "airbnb-base",
+    "prettier",
+    "plugin:jest/recommended",
+    "plugin:node/recommended",
+  ],
   plugins: ["prettier", "import", "jest"],
   rules: {
     "node/no-extraneous-require": [0],
+    "no-process-exit": [0],
+    "node/no-unsupported-features/es-syntax": [0],
     "import/no-commonjs": [0],
     "import/no-dynamic-require": [0],
     "import/no-extraneous-dependencies": noExtraneousRule,

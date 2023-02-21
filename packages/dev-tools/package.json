@@ -4,5 +4,8 @@
   "dependencies": {
     "replace": "^1.2.2",
     "~common": "workspace:^"
+  },
+  "engines": {
+    "node": "^16.17 || ^18"
   }
 }

@@ -1,0 +1,4 @@
+overrides:
+- files:
+  - bin/release-workspace-to-npx
+  - bin/version-e2e-set

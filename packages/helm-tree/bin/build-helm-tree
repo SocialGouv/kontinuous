@@ -1,4 +1,3 @@
-#!/usr/bin/env -S node --no-warnings
 const os = require("os")
 const path = require("path")
 const fs = require("fs-extra")

@@ -37,7 +37,7 @@
     "supertest": "^6.2.2"
   },
   "engines": {
-    "node": ">=16.17"
+    "node": "^16.17 || ^18"
   },
   "_moduleAliases": {
     "~": "src"

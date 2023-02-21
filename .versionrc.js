@@ -1,3 +1,4 @@
+/* eslint-disable node/no-unpublished-require */
 const fs = require("fs-extra")
 
 // package.json

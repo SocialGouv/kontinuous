@@ -16,6 +16,7 @@
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^27.0.0",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "fs-extra": "^11.1.0",
     "husky": "^8.0.0",
@@ -56,13 +57,13 @@
     "install:plugins": "yarn install:plugin:contrib && yarn install:plugin:fabrique",
     "install:plugin:contrib": "cd plugins/contrib && yarn",
     "install:plugin:fabrique": "cd plugins/fabrique && yarn",
-    "lint": "eslint . packages/*/bin/*",
+    "lint": "eslint .",
     "release": "commit-and-tag-version",
     "push": "git push -f --follow-tags origin master",
     "delivery": "git push && yarn release && yarn push",
-    "version-major-branch:up": "packages/dev-tools/bin/version-major-branch",
-    "version-major-branch:push": "packages/dev-tools/bin/version-major-branch-push",
-    "version-e2e:commit": "packages/dev-tools/bin/version-e2e-commit",
+    "version-major-branch:up": "packages/dev-tools/bin/version-major-branch.sh",
+    "version-major-branch:push": "packages/dev-tools/bin/version-major-branch-push.sh",
+    "version-e2e:commit": "packages/dev-tools/bin/version-e2e-commit.sh",
     "version-e2e:set": "node packages/dev-tools/bin/version-e2e-set",
     "version-e2e": "yarn version-e2e:set",
     "test": "yarn workspaces foreach --no-private --parallel run test",
@@ -90,7 +91,7 @@
     }
   },
   "engines": {
-    "node": ">=16.17"
+    "node": "^16.17 || ^18"
   },
   "packageManager": "yarn@4.0.0-rc.36"
 }
