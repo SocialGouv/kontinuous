@@ -8,6 +8,7 @@ on:
     tags:
       - '**'
     paths:
+      - .github/kontinuousVersion
       - packages/degit
 
 concurrency:

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const rolloutStatusWatch = require("~common/utils/rollout-status-watch")
-const logger = require("~common/utils/logger")
+const getLogger = require("~common/utils/get-logger")
 const kubectlRetry = require("~common/utils/kubectl-retry")
 
 const runWaitNeeds = async ({
@@ -11,6 +11,7 @@ const runWaitNeeds = async ({
   surviveOnBrokenCluster,
   timeout = 900,
   kubectl = kubectlRetry,
+  logger = getLogger(),
 }) => {
   const abortController = new AbortController()
 
