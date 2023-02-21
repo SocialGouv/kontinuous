@@ -5,9 +5,6 @@
  * Released under the MIT License.
  * + https://github.com/jonschlinkert/parse-github-url/pull/32
  */
-
-const url = require("url")
-
 const cache = {}
 
 function trimSlash(path) {
@@ -53,7 +50,7 @@ function parse(str) {
   }
 
   // parse the URL
-  const obj = new url.URL(str)
+  const obj = new URL(str)
   if (
     typeof obj.path !== "string" ||
     !obj.path.length ||
@@ -65,7 +62,7 @@ function parse(str) {
 
   if (!obj.host && /^git@/.test(str) === true) {
     // return the correct host for git@ URLs
-    const urlObject = new url.URL(`http://${str}`)
+    const urlObject = new URL(`http://${str}`)
     obj.host = urlObject.host
   }
 
