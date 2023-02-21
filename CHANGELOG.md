@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.134.0 (2023-02-21)
+
+
+### Features
+
+* add debug show stern commands ([#211](https://github.com/socialgouv/kontinuous/issues/211)) ([0e84696](https://github.com/socialgouv/kontinuous/commit/0e846964f2cf49270c64ec3cc93ffb5dce775328))
+
 ## 1.133.28 (2023-02-21)
 
 
