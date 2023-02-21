@@ -1,4 +1,4 @@
-FROM ghcr.io/socialgouv/kontinuous:v1.133.27
+FROM ghcr.io/socialgouv/kontinuous:dev-fix-initcontainers
 
 COPY entrypoint.sh /entrypoint.sh
 
