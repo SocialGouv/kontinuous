@@ -93,5 +93,5 @@
   "engines": {
     "node": "^16.17 || ^18"
   },
-  "packageManager": "yarn@4.0.0-rc.36"
+  "packageManager": "yarn@4.0.0-rc.39"
 }
