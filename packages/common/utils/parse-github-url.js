@@ -1,12 +1,3 @@
-/*!
- * parse-github-url <https://github.com/jonschlinkert/parse-github-url>
- *
- * Copyright (c) 2015-2017, Jon Schlinkert.
- * Released under the MIT License.
- * + https://github.com/jonschlinkert/parse-github-url/pull/32
- */
-const cache = {}
-
 function trimSlash(path) {
   return path.charAt(0) === "/" ? path.slice(1) : path
 }
@@ -40,7 +31,7 @@ function owner(str) {
   return str
 }
 
-function parse(str) {
+module.exports = (str) => {
   if (typeof str !== "string" || !str.length) {
     return null
   }
@@ -51,12 +42,9 @@ function parse(str) {
 
   // parse the URL
   const obj = new URL(str)
-  if (
-    typeof obj.path !== "string" ||
-    !obj.path.length ||
-    typeof obj.pathname !== "string" ||
-    !obj.pathname.length
-  ) {
+  // console.log("parse",require("url").parse(str))
+  // console.log("URL",obj)
+  if (typeof obj.pathname !== "string" || !obj.pathname.length) {
     return null
   }
 
@@ -66,13 +54,9 @@ function parse(str) {
     obj.host = urlObject.host
   }
 
-  obj.path = trimSlash(obj.path)
   obj.pathname = trimSlash(obj.pathname)
+  obj.path = obj.pathname
   obj.filepath = null
-
-  if (obj.path.indexOf("repos") === 0) {
-    obj.path = obj.path.slice(6)
-  }
 
   const seg = obj.path.split("/").filter(Boolean)
   const hasBlob = seg[2] === "blob"
@@ -137,11 +121,4 @@ function parse(str) {
   obj.name = obj.name || null
   obj.repository = obj.repo
   return obj
-}
-
-module.exports = function parseGithubUrl(str) {
-  if (!cache[str]) {
-    cache[str] = parse(str)
-  }
-  return cache[str]
 }
