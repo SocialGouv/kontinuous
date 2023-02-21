@@ -56,7 +56,7 @@
     "install:plugins": "yarn install:plugin:contrib && yarn install:plugin:fabrique",
     "install:plugin:contrib": "cd plugins/contrib && yarn",
     "install:plugin:fabrique": "cd plugins/fabrique && yarn",
-    "lint": "eslint .",
+    "lint": "eslint . packages/*/bin/*",
     "release": "commit-and-tag-version",
     "push": "git push -f --follow-tags origin master",
     "delivery": "git push && yarn release && yarn push",
