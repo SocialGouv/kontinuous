@@ -11,6 +11,7 @@ on:
       - packages/wait-needs/**
       - packages/common/**
       - packages/helm-tree/**
+      - .github/actions/**
       - yarn.lock
       - .yarnrc.yml
 
