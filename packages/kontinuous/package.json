@@ -47,7 +47,6 @@
     "node": ">=16.17"
   },
   "scripts": {
-    "lint": "eslint .",
     "test": "NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" jest tests",
     "test:debug": "DEBUG=1 yarn test",
     "test:update-snapshots": "yarn test -u",
