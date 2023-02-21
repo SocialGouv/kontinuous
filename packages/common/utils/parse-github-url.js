@@ -1,3 +1,5 @@
+const parseUrl = require("parse-url")
+
 function trimSlash(path) {
   return path.charAt(0) === "/" ? path.slice(1) : path
 }
@@ -41,16 +43,14 @@ module.exports = (str) => {
   }
 
   // parse the URL
-  const obj = new URL(str)
-  // console.log("parse",require("url").parse(str))
-  // console.log("URL",obj)
+  const obj = parseUrl(str)
   if (typeof obj.pathname !== "string" || !obj.pathname.length) {
     return null
   }
 
   if (!obj.host && /^git@/.test(str) === true) {
     // return the correct host for git@ URLs
-    const urlObject = new URL(`http://${str}`)
+    const urlObject = parseUrl(`http://${str}`)
     obj.host = urlObject.host
   }
 

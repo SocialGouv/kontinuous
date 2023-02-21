@@ -16241,6 +16241,7 @@ __metadata:
     micromatch: "npm:^4.0.5"
     ms: "npm:^2.1.3"
     nctx: "npm:^1.7.1"
+    parse-url: "npm:^8.1.0"
     qs: "npm:^6.11.0"
     slugify: "npm:^1.6.5"
     sonic-boom: "npm:^3.0.0"
