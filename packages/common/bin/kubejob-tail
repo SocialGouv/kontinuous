@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const kubejobTail = require("../utils/kubejob-tail")
 
 // eslint-disable-next-line prettier/prettier
