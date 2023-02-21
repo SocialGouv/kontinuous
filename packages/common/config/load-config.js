@@ -906,7 +906,12 @@ const loadConfig = async (
       return acc
     }, {})
 
-  if (!satisfies(process.version, nodeRequirement)) {
+  // see https://github.com/omichelsen/compare-versions/issues/63
+  const rangeArray = nodeRequirement.split("||").map((range) => range.trim())
+  const doesSatisfy = rangeArray.some((range) =>
+    satisfies(process.version, range)
+  )
+  if (!doesSatisfy) {
     throw new Error(
       `Your current node version ${process.version} is not compatible with requirement: ${nodeRequirement}`
     )
