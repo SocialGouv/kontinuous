@@ -1,4 +1,4 @@
-FROM ghcr.io/socialgouv/kontinuous:dev-fix-initcontainers as base
+FROM ghcr.io/socialgouv/kontinuous:v1.133.27 as base
 
 USER 0
 
