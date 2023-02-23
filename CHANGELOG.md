@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.134.1 (2023-02-23)
+
+
+### Bug Fixes
+
+* up rimraf version usage ([#217](https://github.com/socialgouv/kontinuous/issues/217)) ([192d532](https://github.com/socialgouv/kontinuous/commit/192d5328872bc65185979e17b196800b22996266))
+
 ## 1.134.0 (2023-02-21)
 
 
