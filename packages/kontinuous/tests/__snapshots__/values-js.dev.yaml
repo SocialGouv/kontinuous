@@ -183,8 +183,8 @@ spec:
               cpu: 500m
               memory: 512Mi
             requests:
-              cpu: '0.041'
-              memory: 121Mi
+              cpu: 100m
+              memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
