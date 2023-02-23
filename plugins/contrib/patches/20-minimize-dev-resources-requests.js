@@ -112,8 +112,14 @@ module.exports = (manifests, options, { config, logger }) => {
           container.resources = {}
         }
         container.resources.requests = {
-          cpu: cpuByContainer.toString(),
-          memory: memoryByContainer.toString(),
+          cpu:
+            (container.resources.requests &&
+              container.resources.requests.cpu) ||
+            cpuByContainer.toString(),
+          memory:
+            (container.resources.requests &&
+              container.resources.requests.memory) ||
+            memoryByContainer.toString(),
         }
       }
     }

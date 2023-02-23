@@ -53,6 +53,44 @@ const samples = [
     expected: {
       containers: [
         {
+          cpu: 0.5,
+          memory: "64Mi",
+        },
+      ],
+    },
+  },
+  {
+    title: "with avoidOutOfpods and no requests",
+    options: {
+      avoidOutOfpods: true,
+      nodeConfig: {
+        cpu: "7820m",
+        memory: "24505448Ki",
+      },
+    },
+    manifests: [
+      {
+        kind: "Deployment",
+        metadata: {
+          annotations: {},
+        },
+        spec: {
+          template: {
+            spec: {
+              containers: [
+                {
+                  name: "container1",
+                  resources: { requests: {} },
+                },
+              ],
+            },
+          },
+        },
+      },
+    ],
+    expected: {
+      containers: [
+        {
           cpu: "0.071",
           memory: "218Mi",
         },
@@ -95,6 +133,73 @@ const samples = [
                 {
                   name: "initcontainer2",
                   resources: { requests: { cpu: 1, memory: "128Mi" } },
+                },
+              ],
+            },
+          },
+        },
+      },
+    ],
+    expected: {
+      containers: [
+        {
+          cpu: 0.5,
+          memory: "64Mi",
+        },
+        {
+          cpu: 1,
+          memory: "128Mi",
+        },
+      ],
+      initContainers: [
+        {
+          cpu: "0",
+          memory: "0",
+        },
+        {
+          cpu: "0",
+          memory: "0",
+        },
+      ],
+    },
+  },
+  {
+    title:
+      "with avoidOutOfpods, multiple containers and initcontainers, no requests",
+    options: {
+      avoidOutOfpods: true,
+      nodeConfig: {
+        cpu: "7820m",
+        memory: "24505448Ki",
+      },
+    },
+    manifests: [
+      {
+        kind: "Deployment",
+        metadata: {
+          annotations: {},
+        },
+        spec: {
+          template: {
+            spec: {
+              containers: [
+                {
+                  name: "container1",
+                  resources: { requests: {} },
+                },
+                {
+                  name: "container2",
+                  resources: { requests: {} },
+                },
+              ],
+              initContainers: [
+                {
+                  name: "initcontainer1",
+                  resources: { requests: {} },
+                },
+                {
+                  name: "initcontainer2",
+                  resources: { requests: {} },
                 },
               ],
             },

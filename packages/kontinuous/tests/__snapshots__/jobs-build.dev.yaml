@@ -209,8 +209,8 @@ spec:
               cpu: '1'
               memory: 512Mi
             requests:
-              cpu: '0.041'
-              memory: 121Mi
+              cpu: 100m
+              memory: 128Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -345,8 +345,8 @@ spec:
               cpu: '1'
               memory: 512Mi
             requests:
-              cpu: '0.041'
-              memory: 121Mi
+              cpu: 100m
+              memory: 128Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -502,8 +502,8 @@ spec:
               cpu: '2'
               memory: 4Gi
             requests:
-              cpu: '0.041'
-              memory: 121Mi
+              cpu: 500m
+              memory: 1Gi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -654,8 +654,8 @@ spec:
               cpu: '2'
               memory: 4Gi
             requests:
-              cpu: '0.041'
-              memory: 121Mi
+              cpu: 500m
+              memory: 1Gi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -785,8 +785,8 @@ spec:
               cpu: 500m
               memory: 512Mi
             requests:
-              cpu: '0.041'
-              memory: 121Mi
+              cpu: 100m
+              memory: 128Mi
           envFrom:
             - secretRef:
                 name: pg-user
@@ -875,8 +875,8 @@ spec:
               cpu: 500m
               memory: 1280Mi
             requests:
-              cpu: '0.041'
-              memory: 121Mi
+              cpu: 50m
+              memory: 128Mi
           startupProbe:
             failureThreshold: 30
             httpGet:
@@ -997,8 +997,8 @@ spec:
               cpu: 500m
               memory: 256Mi
             requests:
-              cpu: '0.041'
-              memory: 121Mi
+              cpu: 100m
+              memory: 64Mi
 ---
 apiVersion: v1
 kind: Service
