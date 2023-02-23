@@ -1,0 +1,277 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/docs/config.schema.json",
+  "title": "schema for .kontinuous/values.yaml",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "projectName": {
+      "description": "Webhook or rancher project name (will be used for naming namespaces)",
+      "type": "string"
+    },
+    "dependencies": {
+      "$ref": "#/definitions/dependencies"
+    }
+  },
+  "required": [],
+  "definitions": {
+    "dependencies": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/plugins",
+        "required": ["import"]
+      },
+      "properties": {
+        "fabrique": {
+          "description": "Specific plugins for fabrique.social.gouv.fr",
+          "$ref": "#/definitions/plugins-fabrique"
+        },
+        "contrib": {
+          "description": "Common plugins",
+          "$ref": "#/definitions/plugins-contrib"
+        }
+      },
+      "required": []
+    },
+    "plugins-contrib": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "import": {
+          "description": "Where to get plugins from. ex: socialgouv/kontinuous/plugins/contrib",
+          "examples": ["socialgouv/kontinuous/plugins/contrib"],
+          "type": "string"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/dependencies"
+        },
+        "valuesCompilers": {
+          "description": "Compile values for HELM",
+          "$ref": "#/definitions/plugins-contrib-valuesCompilers"
+        },
+        "patches": {
+          "description": "Patch HELM template",
+          "$ref": "#/definitions/plugins-contrib-patches"
+        },
+        "validators": {
+          "description": "Validate manifests",
+          "$ref": "#/definitions/plugins-contrib-validators"
+        },
+        "preDeploy": {
+          "description": "Commands to execute before any deployment",
+          "$ref": "#/definitions/plugins-contrib-preDeploy"
+        },
+        "postDeploy": {
+          "description": "Commands to execute after any deployment",
+          "$ref": "#/definitions/plugins-contrib-postDeploy"
+        },
+        "deploySidecars": {
+          "description": "??",
+          "$ref": "#/definitions/plugins-contrib-deploySidecars"
+        }
+      },
+      "required": []
+    },
+    "plugins-fabrique": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "import": {
+          "description": "Where to get plugins from. ex: socialgouv/kontinuous/plugins/fabrique",
+          "examples": ["socialgouv/kontinuous/plugins/fabrique"],
+          "type": "string"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/dependencies"
+        },
+        "valuesCompilers": {
+          "description": "Compile values for HELM",
+          "$ref": "#/definitions/plugins-fabrique-valuesCompilers"
+        },
+        "patches": {
+          "description": "Patch HELM template",
+          "$ref": "#/definitions/plugins-fabrique-patches"
+        },
+        "validators": {
+          "description": "Validate manifests",
+          "$ref": "#/definitions/plugins-fabrique-validators"
+        },
+        "preDeploy": {
+          "description": "Commands to execute before any deployment",
+          "$ref": "#/definitions/plugins-fabrique-preDeploy"
+        },
+        "postDeploy": {
+          "description": "Commands to execute after any deployment",
+          "$ref": "#/definitions/plugins-fabrique-postDeploy"
+        },
+        "deploySidecars": {
+          "description": "??",
+          "$ref": "#/definitions/plugins-fabrique-deploySidecars"
+        }
+      },
+      "required": []
+    },
+    "plugins": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "import": {
+          "description": "Where to get plugins from. ex: socialgouv/kontinuous/plugins/contrib",
+          "examples": ["socialgouv/kontinuous/plugins/contrib"],
+          "type": "string"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/dependencies"
+        },
+        "valuesCompilers": {
+          "description": "Compile values for HELM",
+          "$ref": "#/definitions/plugins-config"
+        },
+        "patches": {
+          "description": "Patch HELM template",
+          "$ref": "#/definitions/plugins-config"
+        },
+        "validators": {
+          "description": "Validate manifests",
+          "$ref": "#/definitions/plugins-config"
+        },
+        "preDeploy": {
+          "description": "Commands to execute before any deployment",
+          "$ref": "#/definitions/plugins-config"
+        },
+        "postDeploy": {
+          "description": "Commands to execute after any deployment",
+          "$ref": "#/definitions/plugins-config"
+        },
+        "deploySidecars": {
+          "description": "??",
+          "$ref": "#/definitions/plugins-config"
+        }
+      },
+      "required": []
+    },
+    "plugins-fabrique-valuesCompilers": {},
+    "plugins-fabrique-patches": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "setUndefinedStorageClassname": {
+          "description": "??",
+          "$ref": "#/definitions/plugin-config"
+        }
+      }
+    },
+    "plugins-fabrique-validators": {},
+    "plugins-fabrique-preDeploy": {},
+    "plugins-fabrique-postDeploy": {},
+    "plugins-fabrique-deploySidecars": {},
+    "plugins-contrib-valuesCompilers": {},
+    "plugins-contrib-patches": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reloader": {
+          "description": "Add Reloader annotations to your deployments",
+          "$ref": "#/definitions/plugin-config"
+        },
+        "log": {
+          "description": "??",
+          "$ref": "#/definitions/plugin-config"
+        },
+        "certs": {
+          "description": "??",
+          "$ref": "#/definitions/plugin-config"
+        },
+        "rancherProjectId": {
+          "description": "Add rancher-project ID annotations on namespaces",
+          "$ref": "#/definitions/plugin-config"
+        }
+      }
+    },
+    "plugins-contrib-validators": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "dnsLimit": {
+          "description": "Ensure valid DNS names according to RFC1035",
+          "$ref": "#/definitions/plugin-config"
+        },
+        "needsKapp": {
+          "description": "??",
+          "$ref": "#/definitions/plugin-config"
+        },
+        "needsRequire": {
+          "description": "??",
+          "$ref": "#/definitions/plugin-config"
+        },
+        "noPlainSecrets": {
+          "description": "Ensure no plain secrets are embed in the manifests output",
+          "$ref": "#/definitions/plugin-config"
+        },
+        "rancherProjectId": {
+          "description": "Ensure rancher project id annotations are positionned",
+          "$ref": "#/definitions/plugin-config"
+        },
+        "resourcesUniqness": {
+          "description": "Ensure resources uniqueness",
+          "$ref": "#/definitions/plugin-config"
+        },
+        "sealedSecrets": {
+          "description": "Ensure sealed-secrets are sealed correctly",
+          "$ref": "#/definitions/plugin-config"
+        }
+      }
+    },
+    "plugins-contrib-preDeploy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    },
+    "plugins-contrib-postDeploy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "notifyMattermost": {
+          "description": "Send mattermost notification on deployment",
+          "$ref": "#/definitions/plugin-config"
+        }
+      }
+    },
+    "plugins-contrib-deploySidecars": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "failfast": {
+          "description": "??",
+          "$ref": "#/definitions/plugin-config"
+        },
+        "progressing": {
+          "description": "??",
+          "$ref": "#/definitions/plugin-config"
+        },
+        "stern": {
+          "description": "??",
+          "$ref": "#/definitions/plugin-config"
+        }
+      }
+    },
+    "plugins-config": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/plugin-config"
+      }
+    },
+    "plugin-config": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}
