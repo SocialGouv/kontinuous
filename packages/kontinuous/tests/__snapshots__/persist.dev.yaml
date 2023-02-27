@@ -1,0 +1,257 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test build manifests with snapshots persist.dev 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: '1234'
+    kontinuous/gitBranch: my-env/persist
+    kontinuous/mainNamespace: 'true'
+    kapp.k14s.io/exists: ''
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+  labels:
+    application: test-persist
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+    kontinuous/deployment.env: test-persist-my-env-persist-4c70122w
+    kontinuous/ref: my-env-persist-2d8nkxkq
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: namespace-test-persist-my-env-persist-4c70122w-4k1xdfy2
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+    cert: wildcard
+  name: test-persist-my-env-persist-4c70122w
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-persist-my-env-persist-4c70122w
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+  labels:
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+    kontinuous/deployment.env: test-persist-my-env-persist-4c70122w
+    kontinuous/ref: my-env-persist-2d8nkxkq
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+  labels:
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+    kontinuous/deployment.env: test-persist-my-env-persist-4c70122w
+    kontinuous/ref: my-env-persist-2d8nkxkq
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-persist-my-env-persist-4c70122w
+automountServiceAccountToken: false
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app
+    application: test-persist
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+    kontinuous/deployment.env: test-persist-my-env-persist-4c70122w
+    kontinuous/ref: my-env-persist-2d8nkxkq
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-app-55fzcjih
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-persist-my-env-persist-4c70122w
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
+    kontinuous/depname.chartName: app
+    kontinuous/depname.chartPath: project.fabrique.contrib.app
+    kontinuous/depname.resourcePath: deployment.app
+    kontinuous/depname.resourceName: app
+    kontinuous/plugin.log: 'false'
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  template:
+    metadata:
+      labels:
+        component: app
+        application: test-persist
+        namespace: test-persist-my-env-persist-4c70122w
+        kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+        kontinuous/deployment.env: test-persist-my-env-persist-4c70122w
+        kontinuous/ref: my-env-persist-2d8nkxkq
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-app-55fzcjih
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-persist-my-env-persist-4c70122w
+                    - key: component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            harbor.fabrique.social.gouv.fr/test-persist/app:persist-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: '0.041'
+              memory: 121Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: test-persist
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+    kontinuous/deployment.env: test-persist-my-env-persist-4c70122w
+    kontinuous/ref: my-env-persist-2d8nkxkq
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-app-46z2o1vv
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-persist-my-env-persist-4c70122w
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+  labels:
+    component: app
+    application: test-persist
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+    kontinuous/deployment.env: test-persist-my-env-persist-4c70122w
+    kontinuous/ref: my-env-persist-2d8nkxkq
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-app-b4kcj2bx
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-persist-my-env-persist-4c70122w
+spec:
+  rules:
+    - host: test-persist-my-env-persist-4c70122w.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - test-persist-my-env-persist-4c70122w.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+"
+`;
