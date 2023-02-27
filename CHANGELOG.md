@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.134.2](https://github.com/socialgouv/kontinuous/compare/v1.134.1...v1.134.2) (2023-02-27)
+
+
+### Bug Fixes
+
+* webhook config load url with only path error ([73a77de](https://github.com/socialgouv/kontinuous/commit/73a77dea69c05a097fb32b68dc928e7c49cdbbaf))
+
 ## 1.134.1 (2023-02-23)
 
 
