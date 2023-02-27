@@ -43,7 +43,12 @@ module.exports = (str) => {
   }
 
   // parse the URL
-  const obj = parseUrl(str)
+  let obj
+  if (str.includes(":")) {
+    obj = parseUrl(str)
+  } else {
+    obj = { pathname: str }
+  }
   if (typeof obj.pathname !== "string" || !obj.pathname.length) {
     return null
   }
