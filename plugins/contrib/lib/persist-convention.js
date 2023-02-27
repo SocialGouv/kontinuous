@@ -1,4 +1,11 @@
-const persistPatterns = ["**/persist", "persist/**", "persist-**", "**-persist"]
+const persistPatterns = [
+  "**/persist",
+  "persist/**",
+  "**/persist/**",
+  "persist-**",
+  "**-persist",
+  "**-persist-**",
+]
 module.exports = {
   persistPatterns,
 }
