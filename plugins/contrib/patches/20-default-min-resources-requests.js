@@ -70,10 +70,6 @@ module.exports = (manifests, options, { logger }) => {
     }
   }
 
-  const initContainersResourcesRequests = {
-    cpu: "0",
-    memory: "0",
-  }
   for (const manifest of manifests) {
     const { kind } = manifest
 
@@ -119,25 +115,39 @@ module.exports = (manifests, options, { logger }) => {
           }
         }
 
-        container.resources.requests = {
-          cpu:
-            (container.resources.requests &&
-              container.resources.requests.cpu) ||
-            cpuByContainer.toString(),
-          memory:
-            (container.resources.requests &&
-              container.resources.requests.memory) ||
-            memoryByContainer.toString(),
+        if (!container.resources.requests) {
+          container.resources.requests = {}
+        }
+        const definedCpu = container.resources.requests?.cpu
+        if (definedCpu === undefined || definedCpu === null) {
+          container.resources.requests.cpu = cpuByContainer.toString()
+        }
+        const definedMemory = container.resources.requests?.memory
+        if (definedMemory === undefined || definedMemory === null) {
+          container.resources.requests.memory = memoryByContainer.toString()
         }
       }
     }
 
     const initContainers = manifest.spec?.template?.spec?.initContainers || []
+    const { initContainersResourcesRequests = {} } = options
     for (const container of initContainers) {
       if (!container.resources) {
         container.resources = {}
       }
-      container.resources.requests = { ...initContainersResourcesRequests }
+      if (!container.resources.requests) {
+        container.resources.requests = {}
+      }
+      const definedCpu = container.resources.requests?.cpu
+      if (definedCpu === undefined || definedCpu === null) {
+        container.resources.requests.cpu =
+          initContainersResourcesRequests.cpu || "0"
+      }
+      const definedMemory = container.resources.requests?.memory
+      if (definedMemory === undefined || definedMemory === null) {
+        container.resources.requests.memory =
+          initContainersResourcesRequests.memory || "0"
+      }
     }
   }
 
