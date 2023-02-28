@@ -111,6 +111,29 @@ module.exports = (manifests, options, { config, logger }) => {
         if (!container.resources) {
           container.resources = {}
         }
+
+        // if limits are specified and are lower than request we adjust request up
+        const cpuLimit = container.resources?.limits?.cpu
+        if (cpuLimit) {
+          const cpuLimitNumber = getCpuAsNum(cpuLimit)
+          let cpuByContainerNumber = getCpuAsNum(cpuByContainer)
+          if (cpuLimitNumber < cpuByContainerNumber) {
+            cpuByContainerNumber = cpuLimitNumber
+            cpuByContainer = Math.round(cpuByContainerNumber * 1000) / 1000
+          }
+        }
+        const memoryLimit = container.resources?.limits?.memory
+        if (memoryLimit) {
+          const memoryLimitNumber = getMemoryAsNum(memoryLimit)
+          let memoryByContainerNumber = getCpuAsNum(cpuByContainer)
+          if (memoryLimitNumber < memoryByContainerNumber) {
+            memoryByContainerNumber = memoryLimitNumber
+            memoryByContainer = `${Math.round(
+              memoryByContainerNumber / 1024 ** 2
+            ).toString()}Mi`
+          }
+        }
+
         container.resources.requests = {
           cpu: cpuByContainer.toString(),
           memory: memoryByContainer.toString(),
