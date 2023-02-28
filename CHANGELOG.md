@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.135.5 (2023-02-28)
+
+
+### Bug Fixes
+
+* **deps:** lock file maintenance ([#182](https://github.com/socialgouv/kontinuous/issues/182)) ([2f4eaa3](https://github.com/socialgouv/kontinuous/commit/2f4eaa3f1ca95c4bfe71e3451ab83d098e87dc98))
+
 ## 1.135.4 (2023-02-28)
 
 ## 1.135.3 (2023-02-28)
