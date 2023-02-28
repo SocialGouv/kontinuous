@@ -29,13 +29,21 @@ const runJanitor = (config, values) => {
 }
 
 test(`add janitor annotation in dev`, async () => {
-  const result = runJanitor({ environment: "dev" })
+  const result = runJanitor({ environment: "dev", gitBranch: "test-branch" })
   expect(result[0].metadata.annotations["janitor/ttl"]).toEqual("7d")
 })
 
 test(`add custom janitor annotation in dev`, async () => {
-  const result = runJanitor({ environment: "dev" }, { ttl: "24h" })
+  const result = runJanitor(
+    { environment: "dev", gitBranch: "test-branch" },
+    { ttl: "24h" }
+  )
   expect(result[0].metadata.annotations["janitor/ttl"]).toEqual("24h")
+})
+
+test(`DONT add janitor in persist env`, async () => {
+  const result = runJanitor({ environment: "dev", gitBranch: "test/persist" })
+  expect(() => result[0].metadata.annotations["janitor/ttl"]).toThrow()
 })
 
 test(`DONT add janitor annotation in preprod`, async () => {
