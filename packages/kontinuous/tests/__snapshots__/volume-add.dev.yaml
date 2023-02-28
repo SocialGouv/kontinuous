@@ -185,12 +185,10 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 500m
-              memory: 512Mi
+            limits: {}
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: '0.041'
+              memory: 121Mi
           volumeMounts:
             - name: docs
               mountPath: /mnt/docs

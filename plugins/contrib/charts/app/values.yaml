@@ -24,11 +24,11 @@ readinessProbe:
 startupProbe:
 resources:
   limits:
-    cpu: 500m
-    memory: 512Mi
+    cpu: 
+    memory:
   requests:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 
+    memory: 
 autoscale:
   enabled: false
   minReplicas: 2

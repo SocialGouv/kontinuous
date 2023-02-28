@@ -153,9 +153,7 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
+            limits: {}
             requests:
               cpu: '0'
               memory: '0'
@@ -176,12 +174,10 @@ spec:
               set -e
               yarn seed
           resources:
-            limits:
-              cpu: '1'
-              memory: 512Mi
+            limits: {}
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: '0.041'
+              memory: 121Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -303,12 +299,10 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 500m
-              memory: 512Mi
+            limits: {}
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: '0.041'
+              memory: 121Mi
 ---
 apiVersion: v1
 kind: Service

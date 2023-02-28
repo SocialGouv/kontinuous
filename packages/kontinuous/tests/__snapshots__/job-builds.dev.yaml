@@ -154,9 +154,7 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
+            limits: {}
             requests:
               cpu: '0'
               memory: '0'
@@ -309,9 +307,7 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
+            limits: {}
             requests:
               cpu: '0'
               memory: '0'
