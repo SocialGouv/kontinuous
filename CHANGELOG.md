@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.135.0 (2023-02-28)
+
+
+### Features
+
+* implement persist convention ([#218](https://github.com/socialgouv/kontinuous/issues/218)) ([8ba9428](https://github.com/socialgouv/kontinuous/commit/8ba942840f04d27db568283fb494244499020430))
+
 ## 1.134.3 (2023-02-28)
 
 
