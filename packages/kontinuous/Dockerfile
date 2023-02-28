@@ -19,7 +19,7 @@ RUN curl --fail -sL https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd6
 
 FROM downloader as helm
 # renovate: datasource=github-releases depName=helm/helm
-ARG HELM_VERSION=3.11.0
+ARG HELM_VERSION=3.11.1
 ENV HELM_VERSION=$HELM_VERSION
 RUN curl --fail -sL https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz | tar xz -C /tmp/ \
   && mv /tmp/linux-amd64/helm /usr/local/bin/helm \
