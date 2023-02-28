@@ -20,11 +20,11 @@ probesPath: /healthz
 probesPort: 
 resources:
   limits:
-    cpu: 500m
-    memory: 1280Mi
+    cpu: 
+    memory: 
   requests:
-    cpu: 50m
-    memory: 128Mi
+    cpu: 
+    memory: 
 autoscale:
   enabled: false
   minReplicas: 2
