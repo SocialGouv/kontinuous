@@ -174,7 +174,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.132.12
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.135.3
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -331,7 +331,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.132.12
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.135.3
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -490,7 +490,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.132.12
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.135.3
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -646,7 +646,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.132.12
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.135.3
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -802,7 +802,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.132.12
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.135.3
           command:
             - sh
             - '-c'
@@ -951,7 +951,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.132.12
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.135.3
           command:
             - sh
             - '-c'
@@ -1095,7 +1095,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.132.12
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.135.3
           command:
             - sh
             - '-c'
@@ -1219,7 +1219,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.132.12
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.135.3
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -1242,7 +1242,7 @@ spec:
               cpu: '0'
               memory: '0'
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.132.12
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.135.3
           command:
             - sh
             - '-c'
@@ -1338,7 +1338,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.backend-cron
     kontinuous/depname.resourcePath: deployment.backend-cron
     kontinuous/depname.resourceName: backend-cron
-    kontinuous/plugin.log: 'true'
+    kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
@@ -1478,7 +1478,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.backend
     kontinuous/depname.resourcePath: deployment.backend
     kontinuous/depname.resourceName: backend
-    kontinuous/plugin.log: 'true'
+    kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
@@ -1622,7 +1622,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.frontend
     kontinuous/depname.resourcePath: deployment.frontend
     kontinuous/depname.resourceName: frontend
-    kontinuous/plugin.log: 'true'
+    kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
@@ -1728,7 +1728,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.portail-admins
     kontinuous/depname.resourcePath: deployment.portail-admins
     kontinuous/depname.resourceName: portail-admins
-    kontinuous/plugin.log: 'true'
+    kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1
@@ -1834,7 +1834,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.portail-usagers
     kontinuous/depname.resourcePath: deployment.portail-usagers
     kontinuous/depname.resourceName: portail-usagers
-    kontinuous/plugin.log: 'true'
+    kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1

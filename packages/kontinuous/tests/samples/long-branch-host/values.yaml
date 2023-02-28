@@ -1,1 +1,2 @@
-app-api: {}
+app-api:
+  ~chart: app

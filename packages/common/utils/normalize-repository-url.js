@@ -1,4 +1,4 @@
-const parseGitUrl = require("parse-github-url")
+const parseGitUrl = require("~common/utils/parse-git-url")
 
 module.exports = (repositoryUrl, protocol = "https") => {
   const url = parseGitUrl(repositoryUrl)
@@ -6,7 +6,7 @@ module.exports = (repositoryUrl, protocol = "https") => {
   const port = url.port ? `:${url.port}` : ""
   const separator = protocol === "git" ? ":" : "/"
   const repoUrl = `${protocol}://${auth}${
-    url.hostname || "github.com"
+    url.host || "github.com"
   }${port}${separator}${url.repo}`
   return repoUrl
 }

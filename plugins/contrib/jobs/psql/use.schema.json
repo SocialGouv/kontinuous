@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/psql/use.schema.json",
+  "title": "schema for psql job usage",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["pgSecretRefName", "sqlFile"],
+  "properties": {
+    "pgSecretRefName": {
+      "description": "Secret with Postgresql credentials to execute the script",
+      "type": "string"
+    },
+    "sqlFile": {
+      "description": "Path to .sql file in the repo",
+      "examples": ["./scripts/restore.sql"],
+      "type": "string"
+    }
+  }
+}

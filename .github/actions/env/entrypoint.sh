@@ -17,6 +17,8 @@ fi
 
 echo "branch=$(kontinuous config gitBranch)">>$GITHUB_OUTPUT
 
+echo "subdomain=$(kontinuous slug-subdomain --repository-name=$KSENV_REPOSITORY_NAME)">>$GITHUB_OUTPUT
+
 IFS=',' read -r -a subdomain_array <<< "$KSENV_SUBDOMAIN"
 for subdomain in ${subdomain_array[@]}; do
   echo "subdomain_${subdomain}=$(kontinuous slug-subdomain --repository-name=$KSENV_REPOSITORY_NAME $subdomain)">>$GITHUB_OUTPUT

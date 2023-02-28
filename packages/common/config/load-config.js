@@ -2,6 +2,7 @@ const os = require("os")
 const path = require("path")
 const { mkdtemp } = require("fs/promises")
 
+const { satisfies } = require("compare-versions")
 const fs = require("fs-extra")
 const set = require("lodash.set")
 const defaultsDeep = require("lodash.defaultsdeep")
@@ -34,7 +35,10 @@ const loadDependencies = require("./load-dependencies")
 const envParserYaml = require("./env-parsers/yaml")
 const envParserCastArray = require("./env-parsers/cast-array")
 
-const { version } = require(`${__dirname}/../package.json`)
+const {
+  version,
+  engines: { node: nodeRequirement },
+} = require(`${__dirname}/../package.json`)
 
 const mergeProjectsAndOrganizations = require("./merge-projects-and-organizations")
 
@@ -343,6 +347,7 @@ const loadConfig = async (
     buildRootPath: {
       env: "KS_BUILD_ROOT_PATH",
       defaultFunction: () => path.join(os.tmpdir(), "kontinuous"),
+      keepDefault: true,
     },
     buildPath: {
       env: "KS_BUILD_PATH",
@@ -355,6 +360,7 @@ const loadConfig = async (
         await fs.ensureDir(buildPath)
         return buildPath
       },
+      keepDefault: true,
     },
     buildProjectPath: {
       defaultFunction: (config) =>
@@ -452,10 +458,7 @@ const loadConfig = async (
     deployWithPlugin: {
       env: "KS_DEPLOY_WITH",
       option: "deploy-with",
-      defaultFunction: (config) => {
-        config.deployWithPluginIsDefault = true
-        return "kubectlDependencyTree"
-      },
+      default: "kubectlDependencyTree",
     },
     statusUrl: {
       env: "KS_DEPLOY_STATUS_URL",
@@ -784,9 +787,37 @@ const loadConfig = async (
       envParser: envParserYaml,
       default: 2,
       sideEffect: (value) => {
-        const abortConfig = ctx.require("abortConfig")
-        abortConfig.gracefullShutdownTimeoutSeconds = value
+        const abortConfig = ctx.get("abortConfig")
+        if (abortConfig) {
+          // only exists in the cli
+          abortConfig.gracefullShutdownTimeoutSeconds = value
+        }
       },
+    },
+    gitOrg: {
+      env: "KS_GIT_ORG",
+      option: "git-org",
+      default: true,
+      envParser: envParserYaml,
+    },
+    gitOrgRepository: {
+      env: "KS_GIT_ORG_REPOSITORY",
+      default: ".kontinuous",
+    },
+    gitOrgPath: {
+      env: "KS_GIT_ORG_PATH",
+      default: "config.yaml",
+    },
+    gitOrgOverride: {
+      env: "KS_GIT_ORG_OVERRIDE",
+    },
+    gitOrgRequired: {
+      env: "KS_GIT_ORG_REQUIRED",
+      envParser: envParserYaml,
+      default: false,
+    },
+    gitOrgRef: {
+      env: "KS_GIT_ORG_REF",
     },
   }
 
@@ -843,11 +874,7 @@ const loadConfig = async (
     configMeta.__reloadDependencies = true
   }
 
-  // reload overrided config defaults
-  if (
-    !isReloadingConfig &&
-    (Object.keys(configSet).length > 0 || config.inlineConfig)
-  ) {
+  const reloadConfig = async () => {
     config = await loadConfig(
       opts,
       inlineConfigs,
@@ -856,6 +883,15 @@ const loadConfig = async (
       configMeta,
       true
     )
+    return config
+  }
+
+  // reload overrided config defaults
+  if (
+    !isReloadingConfig &&
+    (Object.keys(configSet).length > 0 || config.inlineConfig)
+  ) {
+    config = await reloadConfig()
   }
 
   let { dependencies } = config
@@ -870,18 +906,34 @@ const loadConfig = async (
       return acc
     }, {})
 
+  // see https://github.com/omichelsen/compare-versions/issues/63
+  const rangeArray = nodeRequirement.split("||").map((range) => range.trim())
+  const doesSatisfy = rangeArray.some((range) =>
+    satisfies(process.version, range)
+  )
+  if (!doesSatisfy) {
+    throw new Error(
+      `Your current node version ${process.version} is not compatible with requirement: ${nodeRequirement}`
+    )
+  }
+
   if (!isReloadingConfig) {
-    logger.info(`🥷  kontinuous v${config.version}`)
+    logger.info(`🥷  kontinuous v${config.version} on node ${process.version}`)
     logger.info(`📂 buildPath: file://${config.buildPath} `)
+  }
+
+  if (!isReloadingConfig) {
+    config = await reloadConfig()
   }
 
   if (
     loadConfigOptions.loadDependencies !== false &&
     (!isReloadingConfig || configMeta.__reloadDependencies)
   ) {
-    await loadDependencies(config, logger)
+    config = await loadDependencies(config, logger, reloadConfig)
   }
 
+  let hasExtendsConfigInDependencies = false
   await recurseDependencies({
     config,
     beforeChildren: async ({ definition }) => {
@@ -889,13 +941,29 @@ const loadConfig = async (
       if (!extendsConfig) {
         return
       }
-      defaultsDeep(config, extendsConfig)
-      if (extendsConfig.deployWithPlugin && config.deployWithPluginIsDefault) {
-        config.deployWithPlugin = extendsConfig.deployWithPlugin
-        config.deployWithPluginIsDefault = false
+
+      hasExtendsConfigInDependencies = true
+
+      for (const [extendKey, extendValue] of Object.entries(extendsConfig)) {
+        if (
+          config[extendKey] !== undefined &&
+          !configMeta[extendKey].isDefault
+        ) {
+          continue
+        }
+        if (typeof extendValue === "object" && extendValue !== null) {
+          defaultsDeep(config[extendKey], extendValue)
+        } else {
+          config[extendKey] = extendValue
+        }
+        configMeta[extendKey].isDefault = false
       }
     },
   })
+
+  if (hasExtendsConfigInDependencies && !isReloadingConfig) {
+    config = await reloadConfig()
+  }
 
   await recurseDependencies({
     config,

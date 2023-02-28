@@ -1,7 +1,6 @@
 const findAliasOf = async (
   search,
   values,
-  searchByKey = false,
   scope = ["project"],
   searchingSubkeys = []
 ) => {
@@ -9,28 +8,27 @@ const findAliasOf = async (
     searchingSubkeys = search.split(".")
     search = searchingSubkeys.shift()
   }
-  for (const k of Object.keys(values)) {
-    const isChartValues = values[k]?._isChartValues
-    if (!isChartValues) {
-      continue
-    }
-    if (k === search || (searchByKey && search.startsWith(`${k}-`))) {
+  const entries = Object.entries(values).filter(
+    ([_, value]) => !!value?._isChartValues
+  )
+  for (const [k, value] of entries) {
+    if (k === search) {
       const foundScope = [...scope, k]
       if (searchingSubkeys.length > 0) {
         return findAliasOf(
           searchingSubkeys.shift(),
-          values[k],
-          searchByKey,
+          value,
           foundScope,
           searchingSubkeys
         )
       }
       return foundScope
     }
+  }
+  for (const [k, value] of entries) {
     const found = await findAliasOf(
       search,
-      values[k],
-      searchByKey,
+      value,
       [...scope, k],
       searchingSubkeys
     )
@@ -46,18 +44,15 @@ module.exports = async (values, _options, _context) => {
       continue
     }
     let search
-    let searchByKey
     if (val["~chart"]) {
       if (val["~chart"].slice(0, 1) === ".") {
         continue
       }
       search = val["~chart"]
-      searchByKey = false
     } else {
       search = key
-      searchByKey = true
     }
-    const scope = await findAliasOf(search, values.project, searchByKey)
+    const scope = await findAliasOf(search, values.project)
     if (scope) {
       val["~chart"] = scope.join(".")
     }

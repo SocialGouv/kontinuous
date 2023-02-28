@@ -137,7 +137,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.132.12
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.135.3
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -232,7 +232,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    kontinuous/plugin.log: 'true'
+    kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1

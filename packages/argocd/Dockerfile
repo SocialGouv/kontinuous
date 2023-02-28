@@ -1,4 +1,4 @@
-FROM argoproj/argocd:v2.5.9
+FROM argoproj/argocd:v2.6.3
 
 # Switch to root for the ability to perform install
 USER root
@@ -25,8 +25,8 @@ RUN chown 1001:1001 /workspace
 RUN git config --global --add safe.directory /workspace
 
 
-COPY --from=ghcr.io/socialgouv/kontinuous:v1.132.12 /usr/local/bin /usr/local/bin/
-COPY --from=ghcr.io/socialgouv/kontinuous:v1.132.12 --chown=999:999 /opt/kontinuous /opt/kontinuous/
+COPY --from=ghcr.io/socialgouv/kontinuous:v1.135.3 /usr/local/bin /usr/local/bin/
+COPY --from=ghcr.io/socialgouv/kontinuous:v1.135.3 --chown=999:999 /opt/kontinuous /opt/kontinuous/
 
 # Switch back to non-root user
 USER 999

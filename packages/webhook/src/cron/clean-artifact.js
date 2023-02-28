@@ -19,17 +19,12 @@ module.exports = async () => {
         const endTime = new Date(stat.ctime).getTime() + ttl * 1000
         if (now > endTime) {
           const filepath = path.join(uploadsDir, file)
-          await new Promise((resolve, reject) => {
-            rimraf(filepath, (err) => {
-              if (err) {
-                logger.error(err)
-                reject(err)
-                return
-              }
-              logger.info(`successfully deleted ${filepath}`)
-              resolve()
-            })
-          })
+          try {
+            await rimraf(filepath)
+            logger.info(`successfully deleted ${filepath}`)
+          } catch (err) {
+            logger.error(err)
+          }
         }
       } catch (err) {
         logger.warn(err)

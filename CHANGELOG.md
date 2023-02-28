@@ -2,6 +2,235 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.135.3 (2023-02-28)
+
+## 1.135.2 (2023-02-28)
+
+## 1.135.1 (2023-02-28)
+
+## 1.135.0 (2023-02-28)
+
+
+### Features
+
+* implement persist convention ([#218](https://github.com/socialgouv/kontinuous/issues/218)) ([8ba9428](https://github.com/socialgouv/kontinuous/commit/8ba942840f04d27db568283fb494244499020430))
+
+## 1.134.3 (2023-02-28)
+
+
+### Bug Fixes
+
+* limit lower than request ([#219](https://github.com/socialgouv/kontinuous/issues/219)) ([4855c80](https://github.com/socialgouv/kontinuous/commit/4855c806921fe1e883ffb872c8cdbd8e7f8d6f63))
+
+## [1.134.2](https://github.com/socialgouv/kontinuous/compare/v1.134.1...v1.134.2) (2023-02-27)
+
+
+### Bug Fixes
+
+* webhook config load url with only path error ([73a77de](https://github.com/socialgouv/kontinuous/commit/73a77dea69c05a097fb32b68dc928e7c49cdbbaf))
+
+## 1.134.1 (2023-02-23)
+
+
+### Bug Fixes
+
+* up rimraf version usage ([#217](https://github.com/socialgouv/kontinuous/issues/217)) ([192d532](https://github.com/socialgouv/kontinuous/commit/192d5328872bc65185979e17b196800b22996266))
+
+## 1.134.0 (2023-02-21)
+
+
+### Features
+
+* add debug show stern commands ([#211](https://github.com/socialgouv/kontinuous/issues/211)) ([0e84696](https://github.com/socialgouv/kontinuous/commit/0e846964f2cf49270c64ec3cc93ffb5dce775328))
+
+## 1.133.28 (2023-02-21)
+
+
+### Bug Fixes
+
+* initcontainers ([#210](https://github.com/socialgouv/kontinuous/issues/210)) ([73a7ee1](https://github.com/socialgouv/kontinuous/commit/73a7ee1854803626dd9113be49bb028704160104))
+
+## 1.133.27 (2023-02-21)
+
+## 1.133.26 (2023-02-20)
+
+## 1.133.25 (2023-02-20)
+
+## [1.133.24](https://github.com/socialgouv/kontinuous/compare/v1.133.23...v1.133.24) (2023-02-14)
+
+
+### Bug Fixes
+
+* extendsConfig scalar value ([9d37fdd](https://github.com/socialgouv/kontinuous/commit/9d37fddd9d1a1bfee86aa56503d12d817d70747d))
+
+## [1.133.23](https://github.com/socialgouv/kontinuous/compare/v1.133.22...v1.133.23) (2023-02-14)
+
+
+### Bug Fixes
+
+* broken config ([da046cf](https://github.com/socialgouv/kontinuous/commit/da046cfd44564c1c2258b3a056a8546163ff83e4))
+
+## [1.133.22](https://github.com/socialgouv/kontinuous/compare/v1.133.21...v1.133.22) (2023-02-14)
+
+
+### Bug Fixes
+
+* reload and derive config from extends dep ([643378a](https://github.com/socialgouv/kontinuous/commit/643378a78ebd394663f588455fad72b5d4877a9c))
+* tests disable gitOrg ([fe3bd5f](https://github.com/socialgouv/kontinuous/commit/fe3bd5f2753b006180196a49a464ece64ba9ae2b))
+* up direct-logger ([0168e9a](https://github.com/socialgouv/kontinuous/commit/0168e9a88313563ad27899274241de655ed4c00c))
+
+## [1.133.21](https://github.com/socialgouv/kontinuous/compare/v1.133.20...v1.133.21) (2023-02-14)
+
+
+### Bug Fixes
+
+* req error ([dce62fa](https://github.com/socialgouv/kontinuous/commit/dce62fab69087de2baa805d440564ecf0d1427b6))
+
+## [1.133.20](https://github.com/socialgouv/kontinuous/compare/v1.133.19...v1.133.20) (2023-02-14)
+
+
+### Bug Fixes
+
+* no plugin by default ([df619bf](https://github.com/socialgouv/kontinuous/commit/df619bf3c7528a454b6eee63d1243920f1650cb9))
+
+## [1.133.19](https://github.com/socialgouv/kontinuous/compare/v1.133.18...v1.133.19) (2023-02-14)
+
+
+### Bug Fixes
+
+* add version on cli help ([a50ef7d](https://github.com/socialgouv/kontinuous/commit/a50ef7d2792d71c0b8bcc8633615b4482023001a))
+* config output value cast string ([4316c58](https://github.com/socialgouv/kontinuous/commit/4316c5803bbb11466bff1040dc5704049a79a8f9))
+* gitOrg protocol ([1d2a5e5](https://github.com/socialgouv/kontinuous/commit/1d2a5e567e3345cdbc5510a862c7ffcdc5caba8b))
+
+## [1.133.18](https://github.com/socialgouv/kontinuous/compare/v1.133.17...v1.133.18) (2023-02-14)
+
+
+### Bug Fixes
+
+* gitOrg ([e6a7e66](https://github.com/socialgouv/kontinuous/commit/e6a7e668165bc2eb7ede7c1c7619ba191567a0fe))
+* up direct-logger ([4ba0285](https://github.com/socialgouv/kontinuous/commit/4ba0285652fe46a09afdda99c3b4316b3f93eea8))
+
+## [1.133.17](https://github.com/socialgouv/kontinuous/compare/v1.133.16...v1.133.17) (2023-02-14)
+
+
+### Bug Fixes
+
+* test cmd expected received semantic ([365c6da](https://github.com/socialgouv/kontinuous/commit/365c6da49720281e0df9d46eafe7f636fec1b571))
+
+## [1.133.16](https://github.com/socialgouv/kontinuous/compare/v1.133.15...v1.133.16) (2023-02-14)
+
+
+### Bug Fixes
+
+* git-org ([588174f](https://github.com/socialgouv/kontinuous/commit/588174f927706bcd9b18a5e9085ebe19e3267a34))
+* remove .git requirement of gitOrg ([b0c7377](https://github.com/socialgouv/kontinuous/commit/b0c7377967ca0463e405603600307a55f03223f6))
+
+## [1.133.15](https://github.com/socialgouv/kontinuous/compare/v1.133.14...v1.133.15) (2023-02-14)
+
+
+### Bug Fixes
+
+* webhook missing abortConfig ([9f9e065](https://github.com/socialgouv/kontinuous/commit/9f9e06536cdab3ae2721b26835f0983aaf2dafe1))
+
+## [1.133.14](https://github.com/socialgouv/kontinuous/compare/v1.133.13...v1.133.14) (2023-02-14)
+
+
+### Bug Fixes
+
+* docker-compose var webhook sentry-dsn ([3d59509](https://github.com/socialgouv/kontinuous/commit/3d595091d1d0ddbdfde1a380ff6b4944b0e879e5))
+* docker-compose var webhook sentry-dsn ([0700a7e](https://github.com/socialgouv/kontinuous/commit/0700a7e514b4f7d4c97604dfd115fe19be8fe6df))
+* webhook remove pino ([a3464e8](https://github.com/socialgouv/kontinuous/commit/a3464e8e7966168bdc1f89e22e07f42d3cb42981))
+
+## 1.133.13 (2023-02-14)
+
+## 1.133.12 (2023-02-14)
+
+
+### Bug Fixes
+
+* disable logs by default for depl and sts ([#199](https://github.com/socialgouv/kontinuous/issues/199)) ([e456ebd](https://github.com/socialgouv/kontinuous/commit/e456ebd8b9c863f405a04309b0316757ea1b210d))
+
+## [1.133.11](https://github.com/socialgouv/kontinuous/compare/v1.133.10...v1.133.11) (2023-02-07)
+
+
+### Bug Fixes
+
+* add root subdomain on env action ([89c3dd1](https://github.com/socialgouv/kontinuous/commit/89c3dd1f85705f01b4cbbfd8c68041858e5e2d85))
+
+## 1.133.10 (2023-02-06)
+
+
+### Bug Fixes
+
+* git-org enabled by default ([#190](https://github.com/socialgouv/kontinuous/issues/190)) ([8b76d3c](https://github.com/socialgouv/kontinuous/commit/8b76d3c6c1d94e58351a1d9ee41b94e03151c9be))
+
+## [1.133.9](https://github.com/socialgouv/kontinuous/compare/v1.133.7...v1.133.9) (2023-02-02)
+
+
+### Bug Fixes
+
+* remove dash-instances ([66f4f6e](https://github.com/socialgouv/kontinuous/commit/66f4f6e2dd6a8a4fb9531f05455887bc2ea8d9e3))
+
+## 1.133.8 (2023-02-02)
+
+## [1.133.7](https://github.com/socialgouv/kontinuous/compare/v1.133.6...v1.133.7) (2023-02-02)
+
+
+### Bug Fixes
+
+* unfold-chart priority ([0fc2f03](https://github.com/socialgouv/kontinuous/commit/0fc2f03f520bebe059a0e98d4a2bdc5b6d1477f9))
+
+## [1.133.6](https://github.com/socialgouv/kontinuous/compare/v1.133.5...v1.133.6) (2023-02-02)
+
+
+### Bug Fixes
+
+* link-module-alias clean ([cacc102](https://github.com/socialgouv/kontinuous/commit/cacc1024fffdaec6c9204a16db39c9ef5c012052))
+
+## [1.133.5](https://github.com/socialgouv/kontinuous/compare/v1.133.3...v1.133.5) (2023-02-02)
+
+
+### Bug Fixes
+
+* link-module-alias prepare ([2160efa](https://github.com/socialgouv/kontinuous/commit/2160efac3f52d42754d7614ffc13f06039a1bb39))
+
+## [1.133.4](https://github.com/socialgouv/kontinuous/compare/v1.133.3...v1.133.4) (2023-02-02)
+
+
+### Bug Fixes
+
+* link-module-alias prepare ([2160efa](https://github.com/socialgouv/kontinuous/commit/2160efac3f52d42754d7614ffc13f06039a1bb39))
+
+## [1.133.3](https://github.com/socialgouv/kontinuous/compare/v1.133.2...v1.133.3) (2023-02-02)
+
+
+### Bug Fixes
+
+* link-module-alias preinstall ([b3b903d](https://github.com/socialgouv/kontinuous/commit/b3b903d5b2908e3e5d5b2e1024c9b85ee1bd5353))
+
+## 1.133.2 (2023-02-01)
+
+## [1.133.1](https://github.com/socialgouv/kontinuous/compare/v1.133.0...v1.133.1) (2023-02-01)
+
+
+### Bug Fixes
+
+* update node requirement (16.17 for throwIfAborted) ([6c044b3](https://github.com/socialgouv/kontinuous/commit/6c044b3c2532f059c9bfac2152f347f67624ace4))
+
+## [1.133.0](https://github.com/socialgouv/kontinuous/compare/v1.132.11...v1.133.0) (2023-01-31)
+
+
+### Features
+
+* add git-org feature to autodevops ([e899715](https://github.com/socialgouv/kontinuous/commit/e89971587fabec0c908f2f40d5f768503d10f7c1))
+
+
+### Bug Fixes
+
+* docs search-engine ([2ef62a1](https://github.com/socialgouv/kontinuous/commit/2ef62a17406ec4112c26fea8b69911d8ec5c7319))
+* log emoji spaces ([85fe4b1](https://github.com/socialgouv/kontinuous/commit/85fe4b124b91879a0973d98adab10151f77a5aef))
+* **redis:** add security context ([#180](https://github.com/socialgouv/kontinuous/issues/180)) ([2325339](https://github.com/socialgouv/kontinuous/commit/232533904eeb2a625da2a8bb4b7c8c3e3dce2646))
+
 ## 1.132.12 (2023-01-31)
 
 

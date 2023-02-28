@@ -18,7 +18,7 @@ module.exports = async (stdout, name, snapConfig) => {
   if (stdout !== existingSnap) {
     if (existingSnap) {
       if (!update) {
-        result.diff = diffStringsUnified(stdout, existingSnap, {
+        result.diff = diffStringsUnified(existingSnap, stdout, {
           includeChangeCounts: true,
           contextLines: 2,
           expand: false,

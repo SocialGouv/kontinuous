@@ -147,3 +147,8 @@ module.exports.gitDiffEnabled = new Option(
   "--git-diff-enabled",
   "enable git diff"
 )
+
+module.exports.gitOrg = new Option(
+  "--git-org",
+  "load .kontinuous dir at root of git org"
+)
