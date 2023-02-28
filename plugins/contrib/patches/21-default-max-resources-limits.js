@@ -31,9 +31,7 @@ module.exports = (manifests, options, { logger }) => {
       if (!container.resources) {
         container.resources = {}
       }
-      const {
-        resources: { limits },
-      } = container
+      const { resources: { limits = {} } = {} } = container
       if (limits.cpu === undefined || limits.cpu === null) {
         logger.warn(
           `defaulting cpu limit: ${namespace}/${kind}/${name} container ${container.name} does not have cpu limits defaulting to ${cpu}`
