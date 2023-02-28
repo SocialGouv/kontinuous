@@ -190,9 +190,7 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
+            limits: {}
             requests:
               cpu: '0'
               memory: '0'
@@ -347,9 +345,7 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
+            limits: {}
             requests:
               cpu: '0'
               memory: '0'
@@ -506,9 +502,7 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
+            limits: {}
             requests:
               cpu: '0'
               memory: '0'
@@ -662,9 +656,7 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
+            limits: {}
             requests:
               cpu: '0'
               memory: '0'
@@ -814,9 +806,7 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
+            limits: {}
             requests:
               cpu: '0'
               memory: '0'
@@ -868,12 +858,10 @@ spec:
               set -e
               /action/ensure-db.sh
           resources:
-            limits:
-              cpu: '1'
-              memory: 512Mi
+            limits: {}
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: '0.041'
+              memory: 121Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -963,9 +951,7 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
+            limits: {}
             requests:
               cpu: '0'
               memory: '0'
@@ -1004,12 +990,10 @@ spec:
               set -e
               /action/create-secret.sh
           resources:
-            limits:
-              cpu: '1'
-              memory: 512Mi
+            limits: {}
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: '0.041'
+              memory: 121Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -1107,9 +1091,7 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
+            limits: {}
             requests:
               cpu: '0'
               memory: '0'
@@ -1136,12 +1118,10 @@ spec:
               set -e
               /action/drop-db.sh
           resources:
-            limits:
-              cpu: '1'
-              memory: 512Mi
+            limits: {}
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: '0.041'
+              memory: 121Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -1235,9 +1215,7 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
+            limits: {}
             requests:
               cpu: '0'
               memory: '0'
@@ -1254,9 +1232,7 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
+            limits: {}
             requests:
               cpu: '0'
               memory: '0'
@@ -1282,12 +1258,10 @@ spec:
               set -e
               /action/seed-db.sh
           resources:
-            limits:
-              cpu: '1'
-              memory: 512Mi
+            limits: {}
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: '0.041'
+              memory: 121Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -1799,12 +1773,10 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 500m
-              memory: 512Mi
+            limits: {}
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: '0.041'
+              memory: 121Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -1905,12 +1877,10 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 500m
-              memory: 512Mi
+            limits: {}
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: '0.041'
+              memory: 121Mi
 ---
 apiVersion: v1
 kind: Service

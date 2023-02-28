@@ -238,12 +238,8 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 500m
-              memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
+            limits: {}
+            requests: {}
           envFrom:
             - secretRef:
                 name: pg-user
@@ -350,12 +346,8 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 500m
-              memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
+            limits: {}
+            requests: {}
           envFrom:
             - secretRef:
                 name: pg-user
@@ -439,12 +431,8 @@ spec:
             successThreshold: 1
             timeoutSeconds: 1
           resources:
-            limits:
-              cpu: 500m
-              memory: 1280Mi
-            requests:
-              cpu: 50m
-              memory: 128Mi
+            limits: {}
+            requests: {}
           startupProbe:
             failureThreshold: 30
             httpGet:

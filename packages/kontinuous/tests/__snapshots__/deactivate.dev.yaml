@@ -72,9 +72,7 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
+            limits: {}
             requests:
               cpu: '0'
               memory: '0'
@@ -100,12 +98,10 @@ spec:
                 kubectl delete namespace \\"$NAMESPACE\\" --now=true --wait=false
               fi
           resources:
-            limits:
-              cpu: '1'
-              memory: 512Mi
+            limits: {}
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: '0.041'
+              memory: 121Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
