@@ -2,27 +2,6 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
-## 1.134.3 (2023-02-28)
-
-
-### Bug Fixes
-
-* limit lower than request ([#219](https://github.com/socialgouv/kontinuous/issues/219)) ([4855c80](https://github.com/socialgouv/kontinuous/commit/4855c806921fe1e883ffb872c8cdbd8e7f8d6f63))
-
-## [1.134.2](https://github.com/socialgouv/kontinuous/compare/v1.134.1...v1.134.2) (2023-02-27)
-
-
-### Bug Fixes
-
-* webhook config load url with only path error ([73a77de](https://github.com/socialgouv/kontinuous/commit/73a77dea69c05a097fb32b68dc928e7c49cdbbaf))
-
-## 1.134.1 (2023-02-23)
-
-
-### Bug Fixes
-
-* up rimraf version usage ([#217](https://github.com/socialgouv/kontinuous/issues/217)) ([192d532](https://github.com/socialgouv/kontinuous/commit/192d5328872bc65185979e17b196800b22996266))
-
 ## 1.134.0 (2023-02-21)
 
 
