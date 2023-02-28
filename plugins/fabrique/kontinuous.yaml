@@ -23,7 +23,7 @@ dependencies:
         enabled: false
       filterDisableKapp:
         enabled: true
-      minimizeDevResourcesRequests:
+      defaultMinResourcesRequests:
         options:
           avoidOutOfpods: true
           avoidOutOfpodsMargin:
@@ -33,6 +33,9 @@ dependencies:
             maxPods: 250
             cpu: 7820m
             memory: 27717Mi
+      defaultMaxResourcesLimits:
+        cpu: 3
+        memory: 8Gi
 
     validators:
       rancherProjectId:

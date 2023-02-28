@@ -1,4 +1,4 @@
-const minimizeDevRequests = require("../20-minimize-dev-resources-requests")
+const minimizeDevRequests = require("../20-default-min-resources-requests")
 
 const samples = [
   {
