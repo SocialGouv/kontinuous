@@ -190,7 +190,9 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
+            limits:
+              cpu: '2'
+              memory: 4096Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -345,7 +347,9 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
+            limits:
+              cpu: '2'
+              memory: 4096Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -502,7 +506,9 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
+            limits:
+              cpu: '2'
+              memory: 4096Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -656,7 +662,9 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
+            limits:
+              cpu: '2'
+              memory: 4096Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -806,7 +814,9 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits: {}
+            limits:
+              cpu: '3'
+              memory: 8192Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -858,7 +868,9 @@ spec:
               set -e
               /action/ensure-db.sh
           resources:
-            limits: {}
+            limits:
+              cpu: 3
+              memory: 8Gi
             requests:
               cpu: '0.041'
               memory: 121Mi
@@ -951,7 +963,9 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits: {}
+            limits:
+              cpu: '3'
+              memory: 8192Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -990,7 +1004,9 @@ spec:
               set -e
               /action/create-secret.sh
           resources:
-            limits: {}
+            limits:
+              cpu: 3
+              memory: 8Gi
             requests:
               cpu: '0.041'
               memory: 121Mi
@@ -1091,7 +1107,9 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits: {}
+            limits:
+              cpu: '3'
+              memory: 8192Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -1118,7 +1136,9 @@ spec:
               set -e
               /action/drop-db.sh
           resources:
-            limits: {}
+            limits:
+              cpu: 3
+              memory: 8Gi
             requests:
               cpu: '0.041'
               memory: 121Mi
@@ -1215,7 +1235,9 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
+            limits:
+              cpu: '3'
+              memory: 8192Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -1232,7 +1254,9 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits: {}
+            limits:
+              cpu: '3'
+              memory: 8192Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -1258,7 +1282,9 @@ spec:
               set -e
               /action/seed-db.sh
           resources:
-            limits: {}
+            limits:
+              cpu: 3
+              memory: 8Gi
             requests:
               cpu: '0.041'
               memory: 121Mi
@@ -1773,7 +1799,9 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits: {}
+            limits:
+              cpu: 3
+              memory: 8Gi
             requests:
               cpu: '0.041'
               memory: 121Mi
@@ -1877,7 +1905,9 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits: {}
+            limits:
+              cpu: 3
+              memory: 8Gi
             requests:
               cpu: '0.041'
               memory: 121Mi

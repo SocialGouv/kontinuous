@@ -243,8 +243,12 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: '2'
+              memory: 4096Mi
+            requests:
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -395,8 +399,12 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: '2'
+              memory: 4096Mi
+            requests:
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -550,8 +558,12 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: '2'
+              memory: 4096Mi
+            requests:
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -703,8 +715,12 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: '2'
+              memory: 4096Mi
+            requests:
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -1277,8 +1293,12 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: 3
+              memory: 8Gi
+            requests:
+              cpu: '0.041'
+              memory: 121Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -1379,8 +1399,12 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: 3
+              memory: 8Gi
+            requests:
+              cpu: '0.041'
+              memory: 121Mi
 ---
 apiVersion: v1
 kind: Service

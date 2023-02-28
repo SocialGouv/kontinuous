@@ -153,7 +153,9 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
+            limits:
+              cpu: '3'
+              memory: 8192Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -174,7 +176,9 @@ spec:
               set -e
               yarn seed
           resources:
-            limits: {}
+            limits:
+              cpu: 3
+              memory: 8Gi
             requests:
               cpu: '0.041'
               memory: 121Mi
@@ -299,7 +303,9 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits: {}
+            limits:
+              cpu: 3
+              memory: 8Gi
             requests:
               cpu: '0.041'
               memory: 121Mi
