@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "jest": "^29.0.0",
-    "jest-specific-snapshot": "^7.0.0"
+    "jest-specific-snapshot": "^8.0.0"
   },
   "engines": {
     "node": "^16.17 || ^18"
