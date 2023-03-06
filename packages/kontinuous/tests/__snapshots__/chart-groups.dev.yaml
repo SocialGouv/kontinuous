@@ -101,10 +101,10 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: '0.041'
+              cpu: 41m
               memory: 121Mi
 ---
 apiVersion: apps/v1
@@ -207,10 +207,10 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: '0.041'
+              cpu: 41m
               memory: 121Mi
 ---
 apiVersion: v1

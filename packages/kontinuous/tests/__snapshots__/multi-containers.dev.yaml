@@ -135,8 +135,8 @@ spec:
               cpu: 2
               memory: 20Mi
             requests:
-              cpu: '0.021'
-              memory: 61Mi
+              cpu: 1
+              memory: 10Mi
         - name: b
           image: debian:stable
           resources:
@@ -144,7 +144,7 @@ spec:
               cpu: 2
               memory: 20Mi
             requests:
-              cpu: '0.021'
-              memory: 61Mi
+              cpu: 1
+              memory: 10Mi
 "
 `;

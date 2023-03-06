@@ -150,8 +150,8 @@ spec:
               mountPath: /action
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 3000m
+              memory: 8192Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -204,10 +204,10 @@ spec:
               /action/ensure-db.sh
           resources:
             limits:
-              cpu: '1'
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: '0.041'
+              cpu: 41m
               memory: 121Mi
           securityContext:
             runAsUser: 1000
@@ -298,8 +298,8 @@ spec:
               mountPath: /action
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 3000m
+              memory: 8192Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -339,10 +339,10 @@ spec:
               /action/create-secret.sh
           resources:
             limits:
-              cpu: '1'
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: '0.041'
+              cpu: 41m
               memory: 121Mi
           securityContext:
             runAsUser: 1001

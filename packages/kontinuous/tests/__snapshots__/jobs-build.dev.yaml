@@ -152,8 +152,8 @@ spec:
               mountPath: /action
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 3000m
+              memory: 8192Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -206,10 +206,10 @@ spec:
               /action/ensure-db.sh
           resources:
             limits:
-              cpu: '1'
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: '0.041'
+              cpu: 41m
               memory: 121Mi
           securityContext:
             runAsUser: 1000
@@ -301,8 +301,8 @@ spec:
               mountPath: /action
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 3000m
+              memory: 8192Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -342,10 +342,10 @@ spec:
               /action/create-secret.sh
           resources:
             limits:
-              cpu: '1'
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: '0.041'
+              cpu: 41m
               memory: 121Mi
           securityContext:
             runAsUser: 1001
@@ -450,8 +450,8 @@ spec:
               mountPath: /workspace
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 2000m
+              memory: 4096Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -502,8 +502,8 @@ spec:
               cpu: '2'
               memory: 4Gi
             requests:
-              cpu: '0.041'
-              memory: 121Mi
+              cpu: 500m
+              memory: 1Gi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -602,8 +602,8 @@ spec:
               mountPath: /workspace
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 2000m
+              memory: 4096Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -654,8 +654,8 @@ spec:
               cpu: '2'
               memory: 4Gi
             requests:
-              cpu: '0.041'
-              memory: 121Mi
+              cpu: 500m
+              memory: 1Gi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -782,10 +782,10 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: '0.041'
+              cpu: 41m
               memory: 121Mi
           envFrom:
             - secretRef:
@@ -872,10 +872,10 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 500m
-              memory: 1280Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: '0.041'
+              cpu: 41m
               memory: 121Mi
           startupProbe:
             failureThreshold: 30
@@ -958,8 +958,8 @@ spec:
               cpu: 20m
               memory: 32Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: 5m
+              memory: 16Mi
       containers:
         - image: sosedoff/pgweb:0.11.8
           name: pgweb
@@ -997,8 +997,8 @@ spec:
               cpu: 500m
               memory: 256Mi
             requests:
-              cpu: '0.041'
-              memory: 121Mi
+              cpu: 100m
+              memory: 64Mi
 ---
 apiVersion: v1
 kind: Service
