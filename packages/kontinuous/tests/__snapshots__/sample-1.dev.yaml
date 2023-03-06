@@ -240,11 +240,11 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 41m
+              memory: 121Mi
           envFrom:
             - secretRef:
                 name: pg-user
@@ -359,11 +359,11 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 41m
+              memory: 121Mi
           envFrom:
             - secretRef:
                 name: pg-user
@@ -454,11 +454,11 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 500m
-              memory: 1280Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: 50m
-              memory: 128Mi
+              cpu: 41m
+              memory: 121Mi
           startupProbe:
             failureThreshold: 30
             httpGet:
@@ -540,8 +540,8 @@ spec:
               cpu: 20m
               memory: 32Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: 5m
+              memory: 16Mi
       containers:
         - image: sosedoff/pgweb:0.11.8
           name: pgweb

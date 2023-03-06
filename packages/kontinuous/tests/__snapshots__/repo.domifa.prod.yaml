@@ -244,11 +244,11 @@ spec:
               mountPath: /workspace
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 2000m
+              memory: 4096Mi
             requests:
-              cpu: 10m
-              memory: 64Mi
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -400,11 +400,11 @@ spec:
               mountPath: /workspace
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 2000m
+              memory: 4096Mi
             requests:
-              cpu: 10m
-              memory: 64Mi
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -559,11 +559,11 @@ spec:
               mountPath: /workspace
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 2000m
+              memory: 4096Mi
             requests:
-              cpu: 10m
-              memory: 64Mi
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -716,11 +716,11 @@ spec:
               mountPath: /workspace
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 2000m
+              memory: 4096Mi
             requests:
-              cpu: 10m
-              memory: 64Mi
+              cpu: '0'
+              memory: '0'
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -1294,11 +1294,11 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 41m
+              memory: 121Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -1400,11 +1400,11 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 41m
+              memory: 121Mi
 ---
 apiVersion: v1
 kind: Service

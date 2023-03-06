@@ -155,8 +155,8 @@ spec:
               mountPath: /workspace
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 2000m
+              memory: 4096Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -337,11 +337,11 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 41m
+              memory: 121Mi
           envFrom:
             - secretRef:
                 name: pg-user

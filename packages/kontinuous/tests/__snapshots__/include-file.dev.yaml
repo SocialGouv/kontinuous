@@ -153,8 +153,8 @@ spec:
               mountPath: /workspace
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 3000m
+              memory: 8192Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -176,11 +176,11 @@ spec:
               Hello World !
           resources:
             limits:
-              cpu: '1'
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 41m
+              memory: 121Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

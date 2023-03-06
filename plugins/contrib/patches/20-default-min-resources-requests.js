@@ -1,16 +1,13 @@
-const { cpuParser, memoryParser } = require("kubernetes-resource-parser")
-
 const runnableKinds = ["Deployment", "Job", "StatefulSet", "DaemonSet"]
 
-const getCpuAsNum = (cpu) => (typeof cpu === "number" ? cpu : cpuParser(cpu))
-const getMemoryAsNum = (memory) =>
-  typeof memory === "number" ? memory : memoryParser(memory)
+const {
+  getCpuAsNum,
+  getMemoryAsNum,
+  getCpuAsString,
+  getMemoryAsString,
+} = require("../lib/kubernetes-resource-helpers")
 
-module.exports = (manifests, options, { config, logger }) => {
-  if (config.environment !== "dev") {
-    return manifests
-  }
-
+module.exports = (manifests, options, { logger }) => {
   const {
     requests = {},
     avoidOutOfpods = false,
@@ -42,14 +39,14 @@ module.exports = (manifests, options, { config, logger }) => {
       const cpuMarginAsNum = getCpuAsNum(cpuAvoidOutOfpodsMargin)
 
       const minimumCpuNumber = cpuNodeAsNum / maxPods + cpuMarginAsNum
-      cpu = Math.round(minimumCpuNumber * 1000) / 1000
+      cpu = getCpuAsString(minimumCpuNumber)
       logger.trace(
         `calculated min cpu: ${cpuNodeConfig}/${maxPods}${
           cpuMarginAsNum ? ` + ${cpuAvoidOutOfpodsMargin}` : ""
         } = ${cpu}`
       )
     } else {
-      cpu = 0
+      cpu = "0"
     }
   }
   if (memory === undefined || memory === null) {
@@ -62,7 +59,7 @@ module.exports = (manifests, options, { config, logger }) => {
       const memoryNodeAsNum = getMemoryAsNum(memoryNodeConfig)
       const memoryMarginAsNum = getMemoryAsNum(memoryAvoidOutOfpodsMargin)
       const minimumMemoryNumber = memoryNodeAsNum / maxPods + memoryMarginAsNum
-      memory = `${Math.ceil(minimumMemoryNumber / 1024 ** 2).toString()}Mi`
+      memory = getMemoryAsString(minimumMemoryNumber)
       logger.trace(
         `calculated min memory: ${memoryNodeConfig}/${maxPods}${
           memoryMarginAsNum ? ` + ${memoryAvoidOutOfpodsMargin}` : ""
@@ -73,22 +70,10 @@ module.exports = (manifests, options, { config, logger }) => {
     }
   }
 
-  const initContainersResourcesRequests = {
-    cpu: "0",
-    memory: "0",
-  }
   for (const manifest of manifests) {
     const { kind } = manifest
 
     if (!runnableKinds.includes(kind)) {
-      continue
-    }
-
-    if (
-      manifest.metadata?.annotations?.[
-        "patches.kontinuous/minimize-dev-resources-requests-disable"
-      ]
-    ) {
       continue
     }
 
@@ -102,10 +87,8 @@ module.exports = (manifests, options, { config, logger }) => {
         const memoryByContainerNumber = Math.ceil(
           getMemoryAsNum(memory) / containers.length
         )
-        cpuByContainer = Math.round(cpuByContainerNumber * 1000) / 1000
-        memoryByContainer = `${Math.round(
-          memoryByContainerNumber / 1024 ** 2
-        ).toString()}Mi`
+        cpuByContainer = getCpuAsString(cpuByContainerNumber)
+        memoryByContainer = getMemoryAsString(memoryByContainerNumber)
       }
       for (const container of containers) {
         if (!container.resources) {
@@ -119,7 +102,7 @@ module.exports = (manifests, options, { config, logger }) => {
           let cpuByContainerNumber = getCpuAsNum(cpuByContainer)
           if (cpuLimitNumber < cpuByContainerNumber) {
             cpuByContainerNumber = cpuLimitNumber
-            cpuByContainer = Math.round(cpuByContainerNumber * 1000) / 1000
+            cpuByContainer = getCpuAsString(cpuByContainerNumber)
           }
         }
         const memoryLimit = container.resources?.limits?.memory
@@ -128,31 +111,43 @@ module.exports = (manifests, options, { config, logger }) => {
           let memoryByContainerNumber = getCpuAsNum(cpuByContainer)
           if (memoryLimitNumber < memoryByContainerNumber) {
             memoryByContainerNumber = memoryLimitNumber
-            memoryByContainer = `${Math.round(
-              memoryByContainerNumber / 1024 ** 2
-            ).toString()}Mi`
+            memoryByContainer = getMemoryAsString(memoryByContainerNumber)
           }
         }
 
-        container.resources.requests = {
-          cpu:
-            (container.resources.requests &&
-              container.resources.requests.cpu) ||
-            cpuByContainer.toString(),
-          memory:
-            (container.resources.requests &&
-              container.resources.requests.memory) ||
-            memoryByContainer.toString(),
+        if (!container.resources.requests) {
+          container.resources.requests = {}
+        }
+        const definedCpu = container.resources.requests?.cpu
+        if (definedCpu === undefined || definedCpu === null) {
+          container.resources.requests.cpu = cpuByContainer.toString()
+        }
+        const definedMemory = container.resources.requests?.memory
+        if (definedMemory === undefined || definedMemory === null) {
+          container.resources.requests.memory = memoryByContainer.toString()
         }
       }
     }
 
     const initContainers = manifest.spec?.template?.spec?.initContainers || []
+    const { initContainersResourcesRequests = {} } = options
     for (const container of initContainers) {
       if (!container.resources) {
         container.resources = {}
       }
-      container.resources.requests = { ...initContainersResourcesRequests }
+      if (!container.resources.requests) {
+        container.resources.requests = {}
+      }
+      const definedCpu = container.resources.requests?.cpu
+      if (definedCpu === undefined || definedCpu === null) {
+        container.resources.requests.cpu =
+          initContainersResourcesRequests.cpu || "0"
+      }
+      const definedMemory = container.resources.requests?.memory
+      if (definedMemory === undefined || definedMemory === null) {
+        container.resources.requests.memory =
+          initContainersResourcesRequests.memory || "0"
+      }
     }
   }
 

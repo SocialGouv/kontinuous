@@ -151,8 +151,8 @@ spec:
               mountPath: /action
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 3000m
+              memory: 8192Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -205,11 +205,11 @@ spec:
               /action/ensure-db.sh
           resources:
             limits:
-              cpu: '1'
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 41m
+              memory: 121Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -299,8 +299,8 @@ spec:
               mountPath: /action
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 3000m
+              memory: 8192Mi
             requests:
               cpu: '0'
               memory: '0'
@@ -340,11 +340,11 @@ spec:
               /action/create-secret.sh
           resources:
             limits:
-              cpu: '1'
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 41m
+              memory: 121Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -450,11 +450,11 @@ spec:
               yarn db:init
           resources:
             limits:
-              cpu: '1'
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 41m
+              memory: 121Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -577,11 +577,11 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 3
+              memory: 8Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 41m
+              memory: 121Mi
 ---
 apiVersion: v1
 kind: Service
