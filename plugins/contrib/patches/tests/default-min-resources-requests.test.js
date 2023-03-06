@@ -91,7 +91,7 @@ const samples = [
     expected: {
       containers: [
         {
-          cpu: "0.071",
+          cpu: "71m",
           memory: "218Mi",
         },
       ],
@@ -210,11 +210,11 @@ const samples = [
     expected: {
       containers: [
         {
-          cpu: "0.036",
+          cpu: "36m",
           memory: "109Mi",
         },
         {
-          cpu: "0.036",
+          cpu: "36m",
           memory: "109Mi",
         },
       ],
