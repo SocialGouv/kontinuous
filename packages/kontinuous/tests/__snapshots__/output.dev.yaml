@@ -180,7 +180,7 @@ spec:
               mountPath: /workspace
           resources:
             limits:
-              cpu: '3'
+              cpu: 3000m
               memory: 8192Mi
             requests:
               cpu: '0'
@@ -206,8 +206,8 @@ spec:
               cpu: 3
               memory: 8Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 41m
+              memory: 121Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -303,7 +303,7 @@ spec:
               mountPath: /workspace
           resources:
             limits:
-              cpu: '3'
+              cpu: 3000m
               memory: 8192Mi
             requests:
               cpu: '0'
@@ -331,8 +331,8 @@ spec:
               cpu: 3
               memory: 8Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 41m
+              memory: 121Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

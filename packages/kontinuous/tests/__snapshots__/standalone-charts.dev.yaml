@@ -59,7 +59,7 @@ spec:
               echo Hello World
           resources:
             requests:
-              cpu: '0.041'
+              cpu: 41m
               memory: 121Mi
 "
 `;

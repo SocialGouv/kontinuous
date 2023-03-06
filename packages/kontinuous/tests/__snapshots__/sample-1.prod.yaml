@@ -237,7 +237,7 @@ spec:
               cpu: 3
               memory: 8Gi
             requests:
-              cpu: '0.041'
+              cpu: 41m
               memory: 121Mi
           envFrom:
             - secretRef:
@@ -348,7 +348,7 @@ spec:
               cpu: 3
               memory: 8Gi
             requests:
-              cpu: '0.041'
+              cpu: 41m
               memory: 121Mi
           envFrom:
             - secretRef:
@@ -436,7 +436,7 @@ spec:
               cpu: 3
               memory: 8Gi
             requests:
-              cpu: '0.041'
+              cpu: 41m
               memory: 121Mi
           startupProbe:
             failureThreshold: 30
