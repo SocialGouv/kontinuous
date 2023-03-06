@@ -1,63 +1,63 @@
 apiVersion: v2
 name: fabrique
-version: 1.135.5
+version: 1.136.1
 dependencies:
   - name: rancher-namespace
     repository: file://./charts/rancher-namespace
-    version: 1.135.5
+    version: 1.136.1
     condition: global.rancherNamespaceEnabled,rancher-namespace.enabled
   - name: namespace
     repository: file://./charts/namespace
-    version: 1.135.5
+    version: 1.136.1
     condition: global.namespaceEnabled,namespace.enabled
   - name: security-policies
     repository: file://./charts/security-policies
-    version: 1.135.5
+    version: 1.136.1
     condition: global.securityPoliciesEnabled,security-policies.enabled
   - name: output-volume
     repository: file://./charts/output-volume
-    version: 1.135.5
+    version: 1.136.1
     condition: global.outputVolumeEnabled,output-volume.enabled
   - name: contrib-helpers
     repository: file://./charts/contrib-helpers
-    version: 1.135.5
+    version: 1.136.1
   - name: app
     repository: file://./charts/app
-    version: 1.135.5
+    version: 1.136.1
     condition: app.enabled
   - name: deactivate
     repository: file://./charts/deactivate
-    version: 1.135.5
+    version: 1.136.1
     condition: deactivate.enabled
   - name: hasura
     repository: file://./charts/hasura
-    version: 1.135.5
+    version: 1.136.1
     condition: hasura.enabled
   - name: jobs
     repository: file://./charts/jobs
-    version: 1.135.5
+    version: 1.136.1
     condition: jobs.enabled
   - name: job
     repository: file://./charts/job
-    version: 1.135.5
+    version: 1.136.1
     condition: job.enabled
   - name: maildev
     repository: file://./charts/maildev
-    version: 1.135.5
+    version: 1.136.1
     condition: maildev.enabled
   - name: metabase
     repository: file://./charts/metabase
-    version: 1.135.5
+    version: 1.136.1
     condition: metabase.enabled
   - name: oauth2-proxy
     repository: file://./charts/oauth2-proxy
-    version: 1.135.5
+    version: 1.136.1
     condition: oauth2-proxy.enabled
   - name: pgweb
     repository: file://./charts/pgweb
-    version: 1.135.5
+    version: 1.136.1
     condition: pgweb.enabled
   - name: redis
     repository: file://./charts/redis
-    version: 1.135.5
+    version: 1.136.1
     condition: redis.enabled

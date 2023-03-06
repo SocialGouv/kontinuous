@@ -24,16 +24,19 @@ inputs:
     description: "Set file to tee output of kontinuous deploy command"
     default: ""
   sentryDSN:
-      description: "Sentry DSN for error reporting"
-      default: ""
+    description: "Sentry DSN for error reporting"
+    default: ""
   notifyWebhookUrl:
-      description: "Notify webhook url secret targeting mattermost or slack channel"
-      default: ""
+    description: "Notify webhook url secret targeting mattermost or slack channel"
+    default: ""
+  ciNamespace:
+    description: "CI namespace name for kontinuous"
+    default: ""
 
 runs:
   using: docker
   # image: Dockerfile
-  image: docker://ghcr.io/socialgouv/kontinuous/deploy-via-github:v1.135.5
+  image: docker://ghcr.io/socialgouv/kontinuous/deploy-via-github:v1.136.1
   env:
     KS_ENVIRONMENT: ${{ inputs.environment }}
     KS_CHART: ${{ inputs.chart }}
@@ -47,3 +50,4 @@ runs:
     KS_DEPLOY_WRITE_OUTPUT_FILE: ${{ inputs.deployWriteOutputFile }}
     KS_NOTIFY_WEBHOOK_URL: ${{ inputs.notifyWebhookUrl }}
     KS_SENTRY_DSN: ${{ inputs.sentryDSN }}
+    KS_CI_NAMESPACE: ${{ inputs.ciNamespace }}
