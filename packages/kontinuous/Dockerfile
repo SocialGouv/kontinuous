@@ -19,7 +19,7 @@ RUN curl --fail -sL https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd6
 
 FROM downloader as helm
 # renovate: datasource=github-releases depName=helm/helm
-ARG HELM_VERSION=3.11.0
+ARG HELM_VERSION=3.11.1
 ENV HELM_VERSION=$HELM_VERSION
 RUN curl --fail -sL https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz | tar xz -C /tmp/ \
   && mv /tmp/linux-amd64/helm /usr/local/bin/helm \
@@ -28,7 +28,7 @@ RUN curl --fail -sL https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz
 
 FROM downloader as kapp
 # renovate: datasource=github-releases depName=carvel-dev/kapp
-ARG KAPP_VERSION=0.54.2
+ARG KAPP_VERSION=0.54.3
 ENV KAPP_VERSION=$KAPP_VERSION
 RUN curl --fail -sL https://github.com/vmware-tanzu/carvel-kapp/releases/download/v${KAPP_VERSION}/kapp-linux-amd64 > /tmp/kapp \
   && mv /tmp/kapp /usr/local/bin/kapp \
@@ -44,7 +44,7 @@ RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/downlo
 
 FROM downloader as stern
 # renovate: datasource=github-releases depName=stern/stern
-ARG STERN_VERSION=1.22.0
+ARG STERN_VERSION=1.23.0
 ENV STERN_VERSION=$STERN_VERSION
 RUN curl --fail -sL https://github.com/stern/stern/releases/download/v${STERN_VERSION}/stern_${STERN_VERSION}_linux_amd64.tar.gz | tar xz -C /tmp/ \
   && mv /tmp/stern /usr/local/bin/stern \

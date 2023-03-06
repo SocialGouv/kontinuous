@@ -1,46 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test build manifests with snapshots volume-add.dev 1`] = `
+exports[`test build manifests with snapshots persist.dev 1`] = `
 "apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
     field.cattle.io/projectId: '1234'
-    kontinuous/gitBranch: feature-branch-1
+    kontinuous/gitBranch: my-env/persist
     kontinuous/mainNamespace: 'true'
     kapp.k14s.io/exists: ''
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
-    kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
-    janitor/ttl: 7d
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
   labels:
-    application: test-volume-add
-    kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
-    kontinuous/deployment.env: test-volume-add-feature-branch-1
-    kontinuous/ref: feature-branch-1
+    application: test-persist
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+    kontinuous/deployment.env: test-persist-my-env-persist-4c70122w
+    kontinuous/ref: my-env-persist-2d8nkxkq
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: namespace-test-volume-add-feature-branch-1-40oke3sp
+    kontinuous/resourceName: namespace-test-persist-my-env-persist-4c70122w-4k1xdfy2
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
     cert: wildcard
-  name: test-volume-add-feature-branch-1
+  name: test-persist-my-env-persist-4c70122w
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: netpol-ingress
-  namespace: test-volume-add-feature-branch-1
+  namespace: test-persist-my-env-persist-4c70122w
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
-    kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
   labels:
-    kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
-    kontinuous/deployment.env: test-volume-add-feature-branch-1
-    kontinuous/ref: feature-branch-1
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+    kontinuous/deployment.env: test-persist-my-env-persist-4c70122w
+    kontinuous/ref: my-env-persist-2d8nkxkq
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
@@ -70,17 +69,17 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
-    kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
   labels:
-    kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
-    kontinuous/deployment.env: test-volume-add-feature-branch-1
-    kontinuous/ref: feature-branch-1
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+    kontinuous/deployment.env: test-persist-my-env-persist-4c70122w
+    kontinuous/ref: my-env-persist-2d8nkxkq
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: serviceaccount-default-2g5dmk74
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  namespace: test-volume-add-feature-branch-1
+  namespace: test-persist-my-env-persist-4c70122w
 automountServiceAccountToken: false
 ---
 apiVersion: apps/v1
@@ -88,22 +87,22 @@ kind: Deployment
 metadata:
   labels:
     component: app
-    application: test-volume-add
-    kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
-    kontinuous/deployment.env: test-volume-add-feature-branch-1
-    kontinuous/ref: feature-branch-1
+    application: test-persist
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+    kontinuous/deployment.env: test-persist-my-env-persist-4c70122w
+    kontinuous/ref: my-env-persist-2d8nkxkq
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: deployment-app-55fzcjih
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
-  namespace: test-volume-add-feature-branch-1
+  namespace: test-persist-my-env-persist-4c70122w
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
-    kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
     kontinuous/depname.chartResource: app.deployment.app
     kontinuous/depname.chartName: app
@@ -121,18 +120,18 @@ spec:
     metadata:
       labels:
         component: app
-        application: test-volume-add
-        namespace: test-volume-add-feature-branch-1
-        kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
-        kontinuous/deployment.env: test-volume-add-feature-branch-1
-        kontinuous/ref: feature-branch-1
+        application: test-persist
+        namespace: test-persist-my-env-persist-4c70122w
+        kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+        kontinuous/deployment.env: test-persist-my-env-persist-4c70122w
+        kontinuous/ref: my-env-persist-2d8nkxkq
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/resourceName: deployment-app-55fzcjih
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
+        kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
     spec:
       affinity:
         podAntiAffinity:
@@ -144,19 +143,15 @@ spec:
                     - key: namespace
                       operator: In
                       values:
-                        - test-volume-add-feature-branch-1
+                        - test-persist-my-env-persist-4c70122w
                     - key: component
                       operator: In
                       values:
                         - app
                 topologyKey: kubernetes.io/hostname
-      volumes:
-        - name: docs
-          persistentVolumeClaim:
-            claimName: docs
       containers:
         - image: >-
-            harbor.fabrique.social.gouv.fr/test-volume-add/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+            harbor.fabrique.social.gouv.fr/test-persist/app:persist-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 3000
@@ -186,35 +181,32 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: 3
-              memory: 8Gi
+              cpu: 500m
+              memory: 512Mi
             requests:
               cpu: 100m
               memory: 128Mi
-          volumeMounts:
-            - name: docs
-              mountPath: /mnt/docs
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
     component: app
-    application: test-volume-add
-    kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
-    kontinuous/deployment.env: test-volume-add-feature-branch-1
-    kontinuous/ref: feature-branch-1
+    application: test-persist
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+    kontinuous/deployment.env: test-persist-my-env-persist-4c70122w
+    kontinuous/ref: my-env-persist-2d8nkxkq
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: service-app-46z2o1vv
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
-  namespace: test-volume-add-feature-branch-1
+  namespace: test-persist-my-env-persist-4c70122w
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
-    kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
 spec:
   ports:
     - name: http
@@ -231,23 +223,23 @@ metadata:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
   labels:
     component: app
-    application: test-volume-add
-    kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
-    kontinuous/deployment.env: test-volume-add-feature-branch-1
-    kontinuous/ref: feature-branch-1
+    application: test-persist
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
+    kontinuous/deployment.env: test-persist-my-env-persist-4c70122w
+    kontinuous/ref: my-env-persist-2d8nkxkq
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: ingress-app-b4kcj2bx
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
-  namespace: test-volume-add-feature-branch-1
+  namespace: test-persist-my-env-persist-4c70122w
 spec:
   rules:
-    - host: test-volume-add-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: test-persist-my-env-persist-4c70122w.dev.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -259,7 +251,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - test-volume-add-feature-branch-1.dev.fabrique.social.gouv.fr
+        - test-persist-my-env-persist-4c70122w.dev.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

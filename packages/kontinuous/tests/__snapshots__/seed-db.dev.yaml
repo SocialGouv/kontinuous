@@ -137,7 +137,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.134.3
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.135.5
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -180,8 +180,8 @@ spec:
               cpu: 3
               memory: 8Gi
             requests:
-              cpu: '0.041'
-              memory: 121Mi
+              cpu: 100m
+              memory: 128Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -307,8 +307,8 @@ spec:
               cpu: 3
               memory: 8Gi
             requests:
-              cpu: '0.041'
-              memory: 121Mi
+              cpu: 100m
+              memory: 128Mi
 ---
 apiVersion: v1
 kind: Service

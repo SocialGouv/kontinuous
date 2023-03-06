@@ -1,6 +1,6 @@
 {
   "name": "kontinuous",
-  "version": "1.134.3",
+  "version": "1.135.5",
   "repository": "https://github.com/socialgouv/kontinuous.git",
   "homepage": "https://socialgouv.github.io/kontinuous/",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "commander": "^10.0.0",
     "decompress": "^4.2.1",
     "dotenv": "^16.0.0",
-    "dree": "^3.4.2",
+    "dree": "^4.0.0",
     "enquirer": "^2.3.6",
     "form-data": "^4.0.0",
     "fs-extra": "^11.1.0",

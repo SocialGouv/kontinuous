@@ -1,13 +1,23 @@
-module.exports = (manifests, options, { config, values }) => {
+const { persistPatterns } = require("../lib/persist-convention")
+
+module.exports = (manifests, options, { config, values, utils }) => {
   if (config.environment !== "dev") {
     return manifests
   }
 
   const {
-    permanentDevEnvironmentBranches = ["master", "main", "dev", "develop"],
+    permanentDevEnvironmentBranches = [
+      "master",
+      "main",
+      "dev",
+      "develop",
+      ...persistPatterns,
+    ],
   } = options
 
-  if (permanentDevEnvironmentBranches.includes(config.gitBranch)) {
+  const { patternMatch } = utils
+
+  if (patternMatch(config.gitBranch, permanentDevEnvironmentBranches)) {
     return
   }
 

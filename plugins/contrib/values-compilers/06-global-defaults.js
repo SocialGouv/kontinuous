@@ -1,5 +1,7 @@
+const { persistPatterns } = require("../lib/persist-convention")
+
 module.exports = async (values, options, { config, utils, ctx }) => {
-  const { isVersionTag, slug, deepmerge } = utils
+  const { isVersionTag, slug, deepmerge, patternMatch } = utils
 
   const processEnv = ctx.get("env") || process.env
 
@@ -43,6 +45,8 @@ module.exports = async (values, options, { config, utils, ctx }) => {
     } else {
       imageTag = "prod"
     }
+  } else if (patternMatch(gitBranch, persistPatterns)) {
+    imageTag = `persist-${sha}`
   } else {
     imageTag = `sha-${sha}`
   }

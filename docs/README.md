@@ -99,6 +99,16 @@ When no explicit env is provided, kontinuous use the GIT head to select the corr
 | v\*.\*         | prod          |
 | \*             | dev           |
 
+### Persistent environment
+
+Using branch named following the persistency convention you can have persistent environments (docker images will be named persist-*, janitor will be disabled). Here is the convention for branches naming:
+- `**/persist`
+- `persist/**`
+- `**/persist/**`
+- `persist-**`
+- `**-persist`
+- `**-persist-**`
+
 ## CI/CD
 
 You can deploy from GitHub, GitLab, or your own computer.
