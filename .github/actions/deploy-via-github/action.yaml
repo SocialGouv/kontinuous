@@ -50,4 +50,4 @@ runs:
     KS_DEPLOY_WRITE_OUTPUT_FILE: ${{ inputs.deployWriteOutputFile }}
     KS_NOTIFY_WEBHOOK_URL: ${{ inputs.notifyWebhookUrl }}
     KS_SENTRY_DSN: ${{ inputs.sentryDSN }}
-    KS_CI_NAMESPACE: ${{ inputs.ciNamespace || env.KS_CI_NAMESPACE }}
+    KS_CI_NAMESPACE: ${{ inputs.ciNamespace }}
