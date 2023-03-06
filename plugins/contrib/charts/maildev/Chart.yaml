@@ -1,4 +1,4 @@
 apiVersion: v2
 description: A Helm chart for maildev
 name: maildev
-version: 1.135.5
+version: 1.136.0

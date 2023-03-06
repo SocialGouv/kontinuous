@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.136.0 (2023-03-06)
+
+
+### Features
+
+* ci ns option for gh action + fix indent ([#231](https://github.com/socialgouv/kontinuous/issues/231)) ([6fd7dd6](https://github.com/socialgouv/kontinuous/commit/6fd7dd68216cd455508c1b5a92cf075be6193339))
+
 ## 1.135.5 (2023-02-28)
 
 
