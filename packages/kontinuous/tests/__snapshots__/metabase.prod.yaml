@@ -300,7 +300,7 @@ spec:
         fsGroup: 1000
         runAsNonRoot: true
       containers:
-        - image: metabase/metabase:v0.45.1
+        - image: metabase/metabase:v0.45.3
           name: metabase
           securityContext:
             allowPrivilegeEscalation: false
@@ -403,7 +403,7 @@ spec:
         fsGroup: 1000
         runAsNonRoot: true
       containers:
-        - image: metabase/metabase:v0.45.1
+        - image: metabase/metabase:v0.45.3
           name: metabase
           securityContext:
             allowPrivilegeEscalation: false
