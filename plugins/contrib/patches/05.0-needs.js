@@ -1,6 +1,7 @@
 const kindIsWaitable = require("../lib/kind-is-waitable")
+const getChartNameTopParts = require("../lib/get-chart-name-top-parts")
 
-module.exports = async (manifests, options) => {
+module.exports = async (manifests, options, { config }) => {
   for (const manifest of manifests) {
     const { kind, metadata } = manifest
     const annotations = metadata?.annotations
@@ -21,6 +22,12 @@ module.exports = async (manifests, options) => {
     annotations["kontinuous/depname.chartPath"] = chartPath
     annotations["kontinuous/depname.resourcePath"] = `${lowerKind}.${name}`
     annotations["kontinuous/depname.resourceName"] = name
+
+    const parts = getChartNameTopParts(chartPath, config.dependencies)
+    if (parts.length > 0) {
+      annotations["kontinuous/depname.chartNameTopFull"] = parts.join(".")
+      ;[annotations["kontinuous/depname.chartNameTop"]] = parts
+    }
   }
 
   return manifests

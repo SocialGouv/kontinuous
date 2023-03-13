@@ -157,7 +157,7 @@ module.exports = async (options, context) => {
 
   const applyManifest = async (manifest) => q.pushAsync(manifest)
 
-  const deps = getDeps(manifests, context)
+  const deps = getDeps(manifests, options, context)
 
   const getManifestDependencies = (manifest) => {
     const { metadata, kind } = manifest

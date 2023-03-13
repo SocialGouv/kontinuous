@@ -12,7 +12,7 @@ module.exports = async (manifests, options, context) => {
   const { serviceAccountName = "kontinuous-sa" } = options
   const { surviveOnBrokenCluster } = options
 
-  const deps = getDeps(manifests, context)
+  const deps = getDeps(manifests, options, context)
 
   for (const manifest of manifests) {
     const { metadata, kind } = manifest

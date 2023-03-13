@@ -10,7 +10,7 @@ const kindIsWaitable = require("../lib/kind-is-waitable")
 module.exports = async (manifests, options, context) => {
   const { utils } = context
   const { slug } = utils
-  const deps = getDeps(manifests, context)
+  const deps = getDeps(manifests, options, context)
 
   const annotationChangeGroupPrefixLength = changeGroupPrefix.length + 1
   const slugDepAnnotationKey = (key) =>

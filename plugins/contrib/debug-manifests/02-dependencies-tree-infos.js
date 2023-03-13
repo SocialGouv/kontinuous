@@ -14,7 +14,7 @@ module.exports = async (manifests, options, context) => {
     return
   }
 
-  const deps = getDeps(manifests, context)
+  const deps = getDeps(manifests, options, context)
 
   const umlSet = new Set()
 

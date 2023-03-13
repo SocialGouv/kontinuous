@@ -6,7 +6,7 @@ module.exports = (manifests, options, context) => {
   const { utils } = context
 
   const { KontinuousPluginError } = utils
-  const deps = getDeps(manifests, context)
+  const deps = getDeps(manifests, options, context)
   for (const manifest of manifests) {
     const { metadata, kind } = manifest
     const annotations = metadata?.annotations
