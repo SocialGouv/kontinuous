@@ -1,0 +1,7 @@
+apiVersion: v2
+name: pg
+version: 1.136.3
+dependencies:
+  - name: cnpg-cluster
+    degit: socialgouv/helm-charts/charts/cnpg-cluster@v1
+    version: "1"
