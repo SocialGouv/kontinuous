@@ -1,7 +1,7 @@
 const kindIsWaitable = require("../lib/kind-is-waitable")
 
 module.exports = async (manifests, options) => {
-  const { enabled: enabledDefault } = options
+  const { enabled: enabledDefault = false } = options
 
   const enabledByKind = {
     Statefulset: false,
