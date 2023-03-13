@@ -1,4 +1,6 @@
 cnpg-cluster:
+  fullnameOverride: cnpg-cluster
+  nameOverride: cnpg-cluster
   ~tpl~instances: "{{ if (or .Values.isProd .Values.isPreprod) }}3{{else}}1{{end}}"
   postgresqlParameter:
     timezone: "Europe/Paris"
