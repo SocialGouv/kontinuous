@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.136.3 (2023-03-13)
+
+
+### Bug Fixes
+
+* decouple maildev chart ([#232](https://github.com/socialgouv/kontinuous/issues/232)) ([5335abc](https://github.com/socialgouv/kontinuous/commit/5335abc739bbd6c0c546bd90ca1f3c2f408f88f5))
+
 ## 1.136.2 (2023-03-06)
 
 
