@@ -16,6 +16,8 @@ runs:
     group: 1000
     annotations:
       container.apparmor.security.beta.kubernetes.io/job: unconfined
+    seccompProfile:
+      type: Unconfined
     envFrom:
       - secretRef:
           name: "{{ or $.with.registrySecretRefName $.Values.global.registrySecretRefName }}"
