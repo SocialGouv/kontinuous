@@ -1,0 +1,31 @@
+cnpg-cluster:
+  enabled: true
+  ~tpl~instances: "{{ if (or .Values.isProd .Values.isPreprod) }}3{{else}}1{{end}}"
+  postgresqlParameter:
+    timezone: "Europe/Paris"
+  extensions:
+    - postgis
+    - postgis_topology
+    - fuzzystrmatch
+    - postgis_tiger_geocoder
+    - uuid-ossp
+    - citext
+    - pgcrypto
+    - hstore
+  monitoring:
+    ~tpl~enablePodMonitor: "{{ or .Values.isProd .Values.isPreprod }}"
+  persistence:
+    storageClass: "managed-csi"
+    size: 8Gi
+  image:
+    repository: "ghcr.io/cloudnative-pg/postgis"
+    tag: "14"
+  poolers:
+    main:
+      ~tpl~instances: "{{ if (or .Values.isProd .Values.isPreprod) }}3{{else}}1{{end}}"
+      type: rw
+      pgbouncer:
+        poolMode: session
+        parameters:
+          max_client_conn: "1000"
+          # default_pool_size: "10"
