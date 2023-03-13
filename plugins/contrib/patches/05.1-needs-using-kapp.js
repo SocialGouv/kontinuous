@@ -7,7 +7,7 @@ const changeRuleValuePrefix = `upsert after upserting ${changeGroupValuePrefix}`
 
 const kindIsWaitable = require("../lib/kind-is-waitable")
 
-module.exports = async (manifests, _options, context) => {
+module.exports = async (manifests, options, context) => {
   const { utils } = context
   const { slug } = utils
   const deps = getDeps(manifests, context)
@@ -39,7 +39,7 @@ module.exports = async (manifests, _options, context) => {
     //   delete annotations["kontinuous/plugin.needs"]
     // }
 
-    if (!kindIsWaitable(manifest.kind)) {
+    if (!kindIsWaitable(manifest.kind, options.customWaitableKinds)) {
       continue
     }
 

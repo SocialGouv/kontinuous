@@ -141,7 +141,7 @@ module.exports = async (options, context) => {
   const { ctx } = context
   const eventsBucket = ctx.require("eventsBucket")
   const countAllRunnable = manifests.filter((manifest) =>
-    kindIsWaitable(manifest.kind)
+    kindIsWaitable(manifest.kind, options.customWaitableKinds)
   ).length
   eventsBucket.emit("deploy-with:plugin:initDeployment", { countAllRunnable })
 
@@ -151,7 +151,7 @@ module.exports = async (options, context) => {
 
   if (!dryRun) {
     await applyPromise
-    await rolloutStatusManifest(context)
+    await rolloutStatusManifest(context, options.customWaitableKinds)
   }
 }
 

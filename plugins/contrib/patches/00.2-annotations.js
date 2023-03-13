@@ -1,7 +1,10 @@
-const templateLabelKinds = ["Job", "Deployment", "StatefulSet", "DaemonSet"]
-
-module.exports = (manifests, _options, { config }) => {
+module.exports = (manifests, options, { config, utils }) => {
   const { deploymentLabelKey, deploymentLabelValue } = config
+
+  const templateLabelKinds = [
+    ...utils.rolloutStatusHandledKinds,
+    ...(options.customWaitableKinds || []),
+  ]
 
   for (const manifest of manifests) {
     const { kind, apiVersion } = manifest

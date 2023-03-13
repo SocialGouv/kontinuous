@@ -14,7 +14,7 @@ module.exports = async (manifests, options) => {
     const pluginLog = manifest.metadata?.annotations?.["kontinuous/plugin.log"]
 
     const { kind } = manifest
-    if (!kindIsWaitable(kind)) {
+    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
       if (pluginLog !== undefined) {
         delete manifest.metadata.annotations["kontinuous/plugin.log"]
       }

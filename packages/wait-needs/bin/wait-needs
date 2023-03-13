@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const rolloutStatusWatch = require("~common/utils/rollout-status-watch")
+const waitForResource = require("~common/utils/wait-for-resource")
 const getLogger = require("~common/utils/get-logger")
 const kubectlRetry = require("~common/utils/kubectl-retry")
 
@@ -72,8 +72,10 @@ const runWaitNeeds = async ({
       new Promise(async (resolve, reject) => {
         try {
           logger.info({ namespace, selector }, `watching`)
-          const result = await rolloutStatusWatch({
+          const result = await waitForResource({
+            kind: selfRefKind,
             namespace,
+            kubectl,
             selector,
             abortSignal: abortController.signal,
             // kubeconfig,

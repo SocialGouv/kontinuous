@@ -1,3 +1,4 @@
-const kindsRunnable = ["Deployment", "StatefulSet", "DaemonSet", "Job"]
+const rolloutStatusHandledKinds = ["Deployment", "StatefulSet", "Job"]
 
-module.exports = (kind) => kindsRunnable.includes(kind)
+module.exports = (kind, customWaitableKinds = []) =>
+  rolloutStatusHandledKinds.includes(kind) || customWaitableKinds.includes(kind)

@@ -26,7 +26,7 @@ module.exports = async (manifests, options, context) => {
     //   delete annotations["kontinuous/plugin.needs"]
     // }
 
-    if (!kindIsWaitable(kind)) {
+    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
       continue
     }
 

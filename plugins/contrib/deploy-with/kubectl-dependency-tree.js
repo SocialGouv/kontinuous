@@ -16,7 +16,7 @@ module.exports = async (options, context) => {
     logger,
     kubectlDeleteManifest,
     KontinuousPluginError,
-    rolloutStatusWatch,
+    waitForResource,
   } = utils
 
   const { kubeconfigContext, kubeconfig } = config
@@ -168,7 +168,7 @@ module.exports = async (options, context) => {
 
     const jsonNeeds = annotations["kontinuous/plugin.needs"]
 
-    if (!kindIsWaitable(kind)) {
+    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
       return
     }
     if (!jsonNeeds) {
@@ -227,7 +227,7 @@ module.exports = async (options, context) => {
   }
 
   const countAllRunnable = manifests.filter((manifest) =>
-    kindIsWaitable(manifest.kind)
+    kindIsWaitable(manifest.kind, options.customWaitableKinds)
   ).length
   eventsBucket.emit("deploy-with:plugin:initDeployment", { countAllRunnable })
 
@@ -235,7 +235,7 @@ module.exports = async (options, context) => {
 
   const rolloutStatusManifest = async (manifest) => {
     const { kind } = manifest
-    if (!kindIsWaitable(kind)) {
+    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
       return
     }
     const resourceName = manifest.metadata.labels?.["kontinuous/resourceName"]
@@ -259,10 +259,11 @@ module.exports = async (options, context) => {
           `👁️‍🗨️ watching resource: ${resourceName}`
         )
         eventsBucket.emit("resource:waiting", eventParam)
-        const result = await rolloutStatusWatch({
+        const result = await waitForResource({
           namespace,
           selector,
-          kindFilter: kind,
+          kubectl,
+          kind,
           abortSignal,
           kubeconfig,
           kubecontext: kubeconfigContext,

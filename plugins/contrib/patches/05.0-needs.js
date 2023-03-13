@@ -1,10 +1,10 @@
 const kindIsWaitable = require("../lib/kind-is-waitable")
 
-module.exports = async (manifests, _options) => {
+module.exports = async (manifests, options) => {
   for (const manifest of manifests) {
     const { kind, metadata } = manifest
     const annotations = metadata?.annotations
-    if (!annotations || !kindIsWaitable(kind)) {
+    if (!annotations || !kindIsWaitable(kind, options.customWaitableKinds)) {
       continue
     }
 

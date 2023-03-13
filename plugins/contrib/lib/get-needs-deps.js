@@ -1,11 +1,11 @@
 const kindIsWaitable = require("./kind-is-waitable")
 
-module.exports = (manifests) => {
+module.exports = (manifests, options) => {
   const deps = {}
   for (const manifest of manifests) {
     const { kind, metadata } = manifest
     const annotations = metadata?.annotations
-    if (!annotations || !kindIsWaitable(kind)) {
+    if (!annotations || !kindIsWaitable(kind, options.customWaitableKinds)) {
       continue
     }
     const lowerKind = kind.toLowerCase()
