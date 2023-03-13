@@ -2,10 +2,11 @@ const kontinuousNeedsImage = "ghcr.io/socialgouv/kontinuous/wait-needs:v1.136.3"
 // const kontinuousNeedsImage = "harbor.fabrique.social.gouv.fr/sre/kontinuous/wait-needs:v1"
 
 const getDeps = require("../lib/get-needs-deps")
+const kindIsWaitable = require("../lib/kind-is-waitable")
 
 module.exports = async (manifests, options, context) => {
   const { utils, logger } = context
-  const { kindIsRunnable, KontinuousPluginError } = utils
+  const { KontinuousPluginError } = utils
 
   const { kubernetesMethod = "kubeconfig" } = options
   const { serviceAccountName = "kontinuous-sa" } = options
@@ -25,7 +26,7 @@ module.exports = async (manifests, options, context) => {
     //   delete annotations["kontinuous/plugin.needs"]
     // }
 
-    if (!kindIsRunnable(kind)) {
+    if (!kindIsWaitable(kind)) {
       continue
     }
 

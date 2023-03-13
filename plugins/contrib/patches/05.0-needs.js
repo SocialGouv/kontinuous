@@ -1,10 +1,10 @@
-module.exports = async (manifests, _options, context) => {
-  const { utils } = context
-  const { kindIsRunnable } = utils
+const kindIsWaitable = require("../lib/kind-is-waitable")
+
+module.exports = async (manifests, _options) => {
   for (const manifest of manifests) {
     const { kind, metadata } = manifest
     const annotations = metadata?.annotations
-    if (!annotations || !kindIsRunnable(kind)) {
+    if (!annotations || !kindIsWaitable(kind)) {
       continue
     }
 

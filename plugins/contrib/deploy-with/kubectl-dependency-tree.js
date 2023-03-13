@@ -2,7 +2,7 @@ const async = require("async")
 
 const getDeps = require("../lib/get-needs-deps")
 
-const handledKinds = ["Deployment", "StatefulSet", "Job"]
+const kindIsWaitable = require("../lib/kind-is-waitable")
 
 const isNotDefined = (val) => val === undefined || val === null || val === ""
 const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
@@ -15,7 +15,6 @@ module.exports = async (options, context) => {
     yaml,
     logger,
     kubectlDeleteManifest,
-    kindIsRunnable,
     KontinuousPluginError,
     rolloutStatusWatch,
   } = utils
@@ -169,7 +168,7 @@ module.exports = async (options, context) => {
 
     const jsonNeeds = annotations["kontinuous/plugin.needs"]
 
-    if (!kindIsRunnable(kind)) {
+    if (!kindIsWaitable(kind)) {
       return
     }
     if (!jsonNeeds) {
@@ -228,7 +227,7 @@ module.exports = async (options, context) => {
   }
 
   const countAllRunnable = manifests.filter((manifest) =>
-    kindIsRunnable(manifest.kind)
+    kindIsWaitable(manifest.kind)
   ).length
   eventsBucket.emit("deploy-with:plugin:initDeployment", { countAllRunnable })
 
@@ -236,7 +235,7 @@ module.exports = async (options, context) => {
 
   const rolloutStatusManifest = async (manifest) => {
     const { kind } = manifest
-    if (!handledKinds.includes(kind)) {
+    if (!kindIsWaitable(kind)) {
       return
     }
     const resourceName = manifest.metadata.labels?.["kontinuous/resourceName"]

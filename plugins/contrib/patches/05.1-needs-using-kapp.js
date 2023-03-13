@@ -5,9 +5,11 @@ const changeGroupPrefix = "kapp.k14s.io/change-group"
 const changeGroupValuePrefix = "kontinuous/"
 const changeRuleValuePrefix = `upsert after upserting ${changeGroupValuePrefix}`
 
+const kindIsWaitable = require("../lib/kind-is-waitable")
+
 module.exports = async (manifests, _options, context) => {
   const { utils } = context
-  const { kindIsRunnable, slug } = utils
+  const { slug } = utils
   const deps = getDeps(manifests, context)
 
   const annotationChangeGroupPrefixLength = changeGroupPrefix.length + 1
@@ -37,7 +39,7 @@ module.exports = async (manifests, _options, context) => {
     //   delete annotations["kontinuous/plugin.needs"]
     // }
 
-    if (!kindIsRunnable(manifest.kind)) {
+    if (!kindIsWaitable(manifest.kind)) {
       continue
     }
 

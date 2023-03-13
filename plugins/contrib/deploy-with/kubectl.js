@@ -1,6 +1,7 @@
 const async = require("async")
 
 const rolloutStatusManifest = require("../lib/rollout-status-manifests")
+const kindIsWaitable = require("../lib/kind-is-waitable")
 
 const isNotDefined = (val) => val === undefined || val === null || val === ""
 const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
@@ -8,7 +9,7 @@ const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
 module.exports = async (options, context) => {
   const { config, utils, manifests, dryRun, kubectl } = context
 
-  const { yaml, logger, kubectlDeleteManifest, kindIsRunnable } = utils
+  const { yaml, logger, kubectlDeleteManifest } = utils
 
   const { kubeconfigContext, kubeconfig } = config
 
@@ -140,7 +141,7 @@ module.exports = async (options, context) => {
   const { ctx } = context
   const eventsBucket = ctx.require("eventsBucket")
   const countAllRunnable = manifests.filter((manifest) =>
-    kindIsRunnable(manifest.kind)
+    kindIsWaitable(manifest.kind)
   ).length
   eventsBucket.emit("deploy-with:plugin:initDeployment", { countAllRunnable })
 

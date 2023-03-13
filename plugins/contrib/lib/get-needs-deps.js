@@ -1,12 +1,11 @@
-module.exports = (manifests, context) => {
-  const { utils } = context
-  const { kindIsRunnable } = utils
+const kindIsWaitable = require("./kind-is-waitable")
 
+module.exports = (manifests) => {
   const deps = {}
   for (const manifest of manifests) {
     const { kind, metadata } = manifest
     const annotations = metadata?.annotations
-    if (!annotations || !kindIsRunnable(kind)) {
+    if (!annotations || !kindIsWaitable(kind)) {
       continue
     }
     const lowerKind = kind.toLowerCase()
