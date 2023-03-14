@@ -337,7 +337,7 @@ metadata:
 spec:
   cluster:
     name: cnpg-cluster
-  instances: '1'
+  instances: 1
   pgbouncer:
     parameters:
       max_client_conn: '1000'
