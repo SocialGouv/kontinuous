@@ -55,6 +55,9 @@ module.exports = async (values, _options, _context) => {
     const scope = await findAliasOf(search, values.project)
     if (scope) {
       val["~chart"] = scope.join(".")
+      if (val.enabled !== false) {
+        val.enabled = true
+      }
     }
   }
   return values
