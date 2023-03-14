@@ -4,6 +4,7 @@ const waitAppear = require("./wait-appear")
 
 module.exports = async (options) => {
   const {
+    kind,
     namespace,
     selector,
     kubeconfig,
@@ -37,7 +38,7 @@ module.exports = async (options) => {
       await kubectl(
         `${
           namespace ? `-n ${namespace}` : ""
-        } wait --for=condition=Ready -l ${selector}`,
+        } wait --for=condition=Ready ${kind} -l ${selector}`,
         {
           abortSignal,
           kubeconfig,
