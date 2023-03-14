@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test build manifests with snapshots project-chart-implicit-enabled.dev 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: '1234'
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: 'true'
+    kapp.k14s.io/exists: ''
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-project-chart-implicit-enabled-feature-branch-1-4798dszb
+    janitor/ttl: 7d
+  labels:
+    application: test-project-chart-implicit-enabled
+    kontinuous/deployment: test-project-chart-implicit-enabled-feature-branch-1-4798dszb
+    kontinuous/deployment.env: test-project-chart-implicit-enabled-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: namespace-test-project-chart-implicit-enabled-feature-13eurwds
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: test-project-chart-implicit-enabled-feature-branch-1
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-project-chart-implicit-enabled-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-project-chart-implicit-enabled-feature-branch-1-4798dszb
+  labels:
+    kontinuous/deployment: test-project-chart-implicit-enabled-feature-branch-1-4798dszb
+    kontinuous/deployment.env: test-project-chart-implicit-enabled-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-project-chart-implicit-enabled-feature-branch-1-4798dszb
+  labels:
+    kontinuous/deployment: test-project-chart-implicit-enabled-feature-branch-1-4798dszb
+    kontinuous/deployment.env: test-project-chart-implicit-enabled-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-project-chart-implicit-enabled-feature-branch-1
+automountServiceAccountToken: false
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+    kontinuous/deployment: test-project-chart-implicit-enabled-feature-branch-1-4798dszb
+    kontinuous/deployment.env: test-project-chart-implicit-enabled-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-nginx-deployment-1zyz81q1
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.test
+    kontinuous/source: project/charts/test/templates/deployment.yaml
+    kontinuous/deployment: test-project-chart-implicit-enabled-feature-branch-1-4798dszb
+    kontinuous/depname.full: project.test.deployment.nginx-deployment
+    kontinuous/depname.chartResource: test.deployment.nginx-deployment
+    kontinuous/depname.chartName: test
+    kontinuous/depname.chartPath: project.test
+    kontinuous/depname.resourcePath: deployment.nginx-deployment
+    kontinuous/depname.resourceName: nginx-deployment
+    kontinuous/depname.chartNameTopFull: test
+    kontinuous/depname.chartNameTop: test
+    kontinuous/plugin.log: 'false'
+    reloader.stakater.com/auto: 'true'
+  namespace: test-project-chart-implicit-enabled-feature-branch-1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+        kontinuous/deployment: test-project-chart-implicit-enabled-feature-branch-1-4798dszb
+        kontinuous/deployment.env: test-project-chart-implicit-enabled-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-nginx-deployment-1zyz81q1
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-project-chart-implicit-enabled-feature-branch-1-4798dszb
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.14.2
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 41m
+              memory: 121Mi
+"
+`;
