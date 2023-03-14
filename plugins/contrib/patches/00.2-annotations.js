@@ -1,10 +1,7 @@
-module.exports = (manifests, options, { config, utils }) => {
+module.exports = (manifests, _options, { config, utils }) => {
   const { deploymentLabelKey, deploymentLabelValue } = config
 
-  const templateLabelKinds = [
-    ...utils.rolloutStatusHandledKinds,
-    ...(options.customWaitableKinds || []),
-  ]
+  const templateLabelKinds = utils.rolloutStatusHandledKinds
 
   for (const manifest of manifests) {
     const { kind, apiVersion } = manifest
