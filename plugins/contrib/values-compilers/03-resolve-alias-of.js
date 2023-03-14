@@ -42,7 +42,7 @@ const resolveAliasOf = (values, context, rootValues = values, scope = []) => {
       const nestedVal = get(rootValues, dotKey) || {}
       set(rootValues, dotKey, def)
       deepmerge(def, nestedVal, val)
-      if (def[`~enabled`] === true && defaultValues?.["~enabled"] !== false) {
+      if (def[`~enabled`] === true && nestedVal?.["~enabled"] !== false) {
         def.enabled = true
       }
       if (def[`~enabled`] !== undefined) {
