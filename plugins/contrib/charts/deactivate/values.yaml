@@ -1,4 +1,4 @@
-enabled: false
+~enabled: false
 jobs-deactivate:
   enabled: true
   namespace: "{{ .Values.global.ciNamespace }}"
