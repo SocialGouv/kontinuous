@@ -110,6 +110,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app-api
     kontinuous/depname.resourcePath: deployment.app-api
     kontinuous/depname.resourceName: app-api
+    kontinuous/depname.chartNameTopFull: app-api
+    kontinuous/depname.chartNameTop: app-api
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
