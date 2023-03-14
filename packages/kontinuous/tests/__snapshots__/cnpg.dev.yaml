@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test build manifests with snapshots pg.dev 1`] = `
+exports[`test build manifests with snapshots cnpg.dev 1`] = `
 "apiVersion: v1
 kind: Namespace
 metadata:
@@ -12,34 +12,34 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
     janitor/ttl: 7d
   labels:
-    application: test-pg
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-    kontinuous/deployment.env: test-pg-feature-branch-1
+    application: test-cnpg
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: namespace-test-pg-feature-branch-1-48t4vxle
+    kontinuous/resourceName: namespace-test-cnpg-feature-branch-1-2cfl45mk
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
     cert: wildcard
-  name: test-pg-feature-branch-1
+  name: test-cnpg-feature-branch-1
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: netpol-ingress
-  namespace: test-pg-feature-branch-1
+  namespace: test-cnpg-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
   labels:
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-    kontinuous/deployment.env: test-pg-feature-branch-1
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -70,17 +70,17 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
   labels:
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-    kontinuous/deployment.env: test-pg-feature-branch-1
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: serviceaccount-default-2g5dmk74
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  namespace: test-pg-feature-branch-1
+  namespace: test-cnpg-feature-branch-1
 automountServiceAccountToken: false
 ---
 apiVersion: apps/v1
@@ -88,9 +88,9 @@ kind: Deployment
 metadata:
   labels:
     component: hasura
-    application: test-pg
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-    kontinuous/deployment.env: test-pg-feature-branch-1
+    application: test-cnpg
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -98,13 +98,13 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: hasura
-  namespace: test-pg-feature-branch-1
+  namespace: test-cnpg-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.hasura
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
-    kontinuous/plugin.needs: '[\\"pg\\"]'
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/plugin.needs: '[\\"cnpg\\"]'
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
     kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
     kontinuous/depname.chartResource: hasura.deployment.hasura
     kontinuous/depname.chartName: hasura
@@ -124,9 +124,9 @@ spec:
     metadata:
       labels:
         component: hasura
-        application: test-pg
-        kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-        kontinuous/deployment.env: test-pg-feature-branch-1
+        application: test-cnpg
+        kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+        kontinuous/deployment.env: test-cnpg-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -134,11 +134,11 @@ spec:
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+        kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
     spec:
       containers:
         - image: >-
-            harbor.fabrique.social.gouv.fr/test-pg/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
+            harbor.fabrique.social.gouv.fr/test-cnpg/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
           livenessProbe:
             failureThreshold: 15
             httpGet:
@@ -178,7 +178,7 @@ spec:
             - secretRef:
                 name: hasura
             - secretRef:
-                name: pg-user
+                name: cnpg-cluster-db
             - configMapRef:
                 name: hasura-configmap
 ---
@@ -187,9 +187,9 @@ kind: Service
 metadata:
   labels:
     component: hasura
-    application: test-pg
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-    kontinuous/deployment.env: test-pg-feature-branch-1
+    application: test-cnpg
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -197,13 +197,13 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: hasura
-  namespace: test-pg-feature-branch-1
+  namespace: test-cnpg-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.hasura
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
-    kontinuous/plugin.needs: '[\\"pg\\"]'
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/plugin.needs: '[\\"cnpg\\"]'
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
 spec:
   ports:
     - name: http
@@ -221,13 +221,13 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.hasura
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"pg\\"]'
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/plugin.needs: '[\\"cnpg\\"]'
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
   labels:
     component: hasura
-    application: test-pg
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-    kontinuous/deployment.env: test-pg-feature-branch-1
+    application: test-cnpg
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -235,10 +235,10 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: hasura
-  namespace: test-pg-feature-branch-1
+  namespace: test-cnpg-feature-branch-1
 spec:
   rules:
-    - host: hasura-test-pg-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: hasura-test-cnpg-feature-branch-1.dev.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -250,7 +250,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - hasura-test-pg-feature-branch-1.dev.fabrique.social.gouv.fr
+        - hasura-test-cnpg-feature-branch-1.dev.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: postgresql.cnpg.io/v1
@@ -258,13 +258,13 @@ kind: Cluster
 metadata:
   name: cnpg-cluster
   labels:
-    helm.sh/chart: cnpg-cluster-1.4.1
+    helm.sh/chart: cnpg-cluster-1.4.2
     app.kubernetes.io/name: cnpg-cluster
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: 14.5-6
     app.kubernetes.io/managed-by: Helm
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-    kontinuous/deployment.env: test-pg-feature-branch-1
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -272,20 +272,19 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   annotations:
-    kontinuous/chartPath: project.fabrique.pg.cnpg-cluster
-    kontinuous/source: >-
-      project/charts/fabrique/charts/pg/charts/cnpg-cluster/templates/cluster.cnpg.yaml
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-    kontinuous/depname.full: project.fabrique.pg.cnpg-cluster.cluster.cnpg-cluster
+    kontinuous/chartPath: project.cnpg.cnpg-cluster
+    kontinuous/source: project/charts/cnpg/charts/cnpg-cluster/templates/cluster.cnpg.yaml
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/depname.full: project.cnpg.cnpg-cluster.cluster.cnpg-cluster
     kontinuous/depname.chartResource: cnpg-cluster.cluster.cnpg-cluster
     kontinuous/depname.chartName: cnpg-cluster
-    kontinuous/depname.chartPath: project.fabrique.pg.cnpg-cluster
+    kontinuous/depname.chartPath: project.cnpg.cnpg-cluster
     kontinuous/depname.resourcePath: cluster.cnpg-cluster
     kontinuous/depname.resourceName: cnpg-cluster
-    kontinuous/depname.chartNameTopFull: pg.cnpg-cluster
-    kontinuous/depname.chartNameTop: pg
+    kontinuous/depname.chartNameTopFull: cnpg.cnpg-cluster
+    kontinuous/depname.chartNameTop: cnpg
     kontinuous/plugin.log: 'false'
-  namespace: test-pg-feature-branch-1
+  namespace: test-cnpg-feature-branch-1
 spec:
   instances: 1
   imageName: ghcr.io/cloudnative-pg/postgis:14
@@ -302,8 +301,6 @@ spec:
     initdb:
       database: app
       owner: app
-      secret:
-        name: cnpg-cluster-db
       postInitTemplateSQL:
         - CREATE EXTENSION IF NOT EXISTS \\"postgis\\";
         - CREATE EXTENSION IF NOT EXISTS \\"postgis_topology\\";
@@ -319,13 +316,13 @@ kind: Pooler
 metadata:
   name: cnpg-cluster-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.4.1
+    helm.sh/chart: cnpg-cluster-1.4.2
     app.kubernetes.io/name: cnpg-cluster
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: 14.5-6
     app.kubernetes.io/managed-by: Helm
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-    kontinuous/deployment.env: test-pg-feature-branch-1
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -333,11 +330,10 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   annotations:
-    kontinuous/chartPath: project.fabrique.pg.cnpg-cluster
-    kontinuous/source: >-
-      project/charts/fabrique/charts/pg/charts/cnpg-cluster/templates/pooler.cnpg.yaml
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-  namespace: test-pg-feature-branch-1
+    kontinuous/chartPath: project.cnpg.cnpg-cluster
+    kontinuous/source: project/charts/cnpg/charts/cnpg-cluster/templates/pooler.cnpg.yaml
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+  namespace: test-cnpg-feature-branch-1
 spec:
   cluster:
     name: cnpg-cluster
