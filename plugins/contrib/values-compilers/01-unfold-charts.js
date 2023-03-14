@@ -56,7 +56,7 @@ module.exports = async (values, _options, _context) => {
     if (scope) {
       val["~chart"] = scope.join(".")
       if (val.enabled !== false) {
-        val.enabled = true
+        val[`~enabled`] = true
       }
     }
   }

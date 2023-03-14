@@ -34,14 +34,20 @@ const resolveAliasOf = (values, context, rootValues = values, scope = []) => {
       if (dotKey === aliasOf && !defaultValuesCache[aliasOf]) {
         defaultValuesCache[aliasOf] = cloneDeep(get(rootValues, aliasOf))
       }
+      let defaultValues
       if (dotKey !== aliasOf) {
-        const defaultValues =
-          defaultValuesCache[aliasOf] || get(rootValues, aliasOf)
+        defaultValues = defaultValuesCache[aliasOf] || get(rootValues, aliasOf)
         deepmerge(def, cloneDeep(defaultValues))
       }
       const nestedVal = get(rootValues, dotKey) || {}
       set(rootValues, dotKey, def)
       deepmerge(def, nestedVal, val)
+      if (def[`~enabled`] === true && defaultValues?.["~enabled"] !== false) {
+        def.enabled = true
+      }
+      if (def[`~enabled`] !== undefined) {
+        delete def[`~enabled`]
+      }
       delete values[key]
     } else {
       resolveAliasOf(values[key], context, rootValues, [...scope, key])
