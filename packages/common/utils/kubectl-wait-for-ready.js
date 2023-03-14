@@ -2,9 +2,12 @@ const kubectlRetry = require("./kubectl-retry")
 const getLogger = require("./get-logger")
 const waitAppear = require("./wait-appear")
 
+const defaultWaitRulesForKind = require("./wait-rules-for-kind")
+const defaultWaitRulesForKindDefault = require("./wait-rules-for-kind-default")
+
 module.exports = async (options) => {
   const {
-    // kind,
+    kind,
     namespace,
     selector,
     kubeconfig,
@@ -13,42 +16,33 @@ module.exports = async (options) => {
     surviveOnBrokenCluster = false,
     logger = getLogger(),
     kubectl = kubectlRetry,
+    waitRulesForKind = defaultWaitRulesForKind,
   } = options
+
+  const kindRule =
+    waitRulesForKind[kind] ||
+    waitRulesForKind._Default ||
+    defaultWaitRulesForKindDefault
+
   return waitAppear(options, async () => {
     try {
-      // await kubectl(
-      //   `${
-      //     namespace ? `-n ${namespace}` : ""
-      //   } wait --for=condition=Ready ${kind} -l ${selector}`,
-      //   {
-      //     abortSignal,
-      //     kubeconfig,
-      //     kubeconfigContext: kubecontext,
-      //     surviveOnBrokenCluster,
-      //     logger,
-      //   }
-      // )
       const json = await kubectl(
-        `${namespace ? `-n ${namespace}` : ""} get -l ${selector} -o json`,
+        `${
+          namespace ? `-n ${namespace}` : ""
+        } get ${kind} -l ${selector} -o json`,
         {
           abortSignal,
           kubeconfig,
           kubeconfigContext: kubecontext,
           surviveOnBrokenCluster,
           logger,
+          logInfo: false,
         }
       )
       const manifests = JSON.parse(json)
-      const conditions = manifests.items.reduce((acc, item) => {
-        const statusConditions = item.status.conditions
-        const status = statusConditions.reduce((o, condition) => {
-          o[condition.type] = condition.status
-          return o
-        }, {})
-        acc.push(status)
-        return acc
-      }, [])
-      if (conditions.every((condition) => condition.Ready === "True")) {
+      const ok = manifests.items.every(kindRule)
+
+      if (ok) {
         return { success: true }
       }
     } catch (error) {
