@@ -4,7 +4,7 @@ const waitAppear = require("./wait-appear")
 
 module.exports = async (options) => {
   const {
-    kind,
+    // kind,
     namespace,
     selector,
     kubeconfig,
@@ -15,30 +15,21 @@ module.exports = async (options) => {
     kubectl = kubectlRetry,
   } = options
   return waitAppear(options, async () => {
-    /*
-    const jsonStatusConditions = await kubectl(
-      `${
-        namespace ? `-n ${namespace}` : ""
-      } get -l ${selector} -o jsonpath={.status.conditions}`,
-      {
-        abortSignal,
-        kubeconfig,
-        kubeconfigContext: kubecontext,
-        surviveOnBrokenCluster,
-        logger,
-      }
-      )
-      const statusConditions = JSON.parse(jsonStatusConditions)
-    const status = statusConditions.reduce((acc, condition)=>{
-      acc[condition.type] = condition.status
-      return acc
-    }, {})
-    */
     try {
-      await kubectl(
-        `${
-          namespace ? `-n ${namespace}` : ""
-        } wait --for=condition=Ready ${kind} -l ${selector}`,
+      // await kubectl(
+      //   `${
+      //     namespace ? `-n ${namespace}` : ""
+      //   } wait --for=condition=Ready ${kind} -l ${selector}`,
+      //   {
+      //     abortSignal,
+      //     kubeconfig,
+      //     kubeconfigContext: kubecontext,
+      //     surviveOnBrokenCluster,
+      //     logger,
+      //   }
+      // )
+      const json = await kubectl(
+        `${namespace ? `-n ${namespace}` : ""} get -l ${selector} -o json`,
         {
           abortSignal,
           kubeconfig,
@@ -47,7 +38,19 @@ module.exports = async (options) => {
           logger,
         }
       )
-      return { success: true }
+      const manifests = JSON.parse(json)
+      const conditions = manifests.items.reduce((acc, item) => {
+        const statusConditions = item.status.conditions
+        const status = statusConditions.reduce((o, condition) => {
+          o[condition.type] = condition.status
+          return o
+        }, {})
+        acc.push(status)
+        return acc
+      }, [])
+      if (conditions.every((condition) => condition.Ready === "True")) {
+        return { success: true }
+      }
     } catch (error) {
       if (error.message.includes("not found")) {
         return
