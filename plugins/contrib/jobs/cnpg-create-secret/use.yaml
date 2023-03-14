@@ -1,0 +1,22 @@
+runs:
+  - name: create-secret
+    retry: 6
+    checkout: false
+    image: bitnami/kubectl:latest
+    user: 1001
+    kubernetes: true
+    envFrom:
+      - secretRef:
+          name: "{{ tpl (or $.with.pgAdminUserSecretRefName $.parentWith.pgAdminUserSecretRefName `pg-admin-user`) . }}"
+    vars:
+      APP_DB_SECRET_NAME: "{{ tpl (or $.with.pgSecretName $.Values.global.pgSecretName) . }}"
+      CNPG_DB_SECRET_NAME: "{{ tpl (or $.with.cnpgDbSecretName `cnpg-cluster-app`) . }}"
+      NAMESPACE: "{{ $.Values.global.namespace }}"
+      PGDATABASE: "{{ tpl (or $.with.database $.Values.global.pgDatabase) . }}"
+      PGUSER: "{{ tpl (or $.with.pgUser $.Values.global.pgUser) . }}"
+      PGHOST: "{{ tpl (or $.with.pgHost `cnpg-cluster-rw`) . }}"
+      PGPORT: "{{ tpl (or $.with.pgPort `5432`) . }}"
+      HBA_HOST: "{{ tpl (or $.with.hbaHost $.with.pgHost `*:5432`) . }}"
+      HBA_DATABASE: "{{ tpl (or $.with.hbaDatabase `*`) . }}"
+      HBA_USER: "{{ tpl (or $.with.hbaUser `*`) . }}"
+    run: /action/create-secret.sh
