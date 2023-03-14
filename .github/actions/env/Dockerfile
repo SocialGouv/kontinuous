@@ -1,4 +1,4 @@
-FROM ghcr.io/socialgouv/kontinuous:v1.136.6
+FROM ghcr.io/socialgouv/kontinuous:dev-cnpg-crd-needs
 
 COPY entrypoint.sh /entrypoint.sh
 

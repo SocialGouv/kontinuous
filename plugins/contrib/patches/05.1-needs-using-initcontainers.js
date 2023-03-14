@@ -1,4 +1,5 @@
-const kontinuousNeedsImage = "ghcr.io/socialgouv/kontinuous/wait-needs:v1.136.6"
+const kontinuousNeedsImage =
+  "ghcr.io/socialgouv/kontinuous/wait-needs:dev-cnpg-crd-needs"
 // const kontinuousNeedsImage = "harbor.fabrique.social.gouv.fr/sre/kontinuous/wait-needs:v1"
 
 const getDeps = require("../lib/get-needs-deps")
