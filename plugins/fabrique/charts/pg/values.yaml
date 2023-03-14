@@ -40,5 +40,4 @@ jobs-pg:
   enabled: true
   runs:
     create-secrets:
-      # use: cnpg-create-secrets
-      use: socialgouv/kontinuous/plugins/contrib/jobs/cnpg-create-secrets@dev-cnpg-crd-needs
+      use: cnpg-create-secrets
