@@ -1,5 +1,3 @@
-const templateLabelKinds = ["Job", "Deployment", "StatefulSet", "DaemonSet"]
-
 module.exports = (manifests, _options, { config, utils }) => {
   const {
     refLabelKey,
@@ -9,6 +7,8 @@ module.exports = (manifests, _options, { config, utils }) => {
     deploymentEnvLabelKey,
     deploymentEnvLabelValue,
   } = config
+
+  const templateLabelKinds = utils.rolloutStatusHandledKinds
 
   const { slug, isVersionTag, sanitizeLabel } = utils
 

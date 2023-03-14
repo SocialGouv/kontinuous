@@ -103,6 +103,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-command-feature-branch-1-creat-3u59166k
     kontinuous/depname.resourceName: job-dev-test-jobs-seed-command-feature-branch-1-creat-3u59166k
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
     kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k
@@ -251,6 +253,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-command-feature-branch-1-creat-481uhp5z
     kontinuous/depname.resourceName: job-dev-test-jobs-seed-command-feature-branch-1-creat-481uhp5z
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
     kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k
@@ -396,6 +400,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-command-feature-branch-1-seed-4tzvwc3y
     kontinuous/depname.resourceName: job-dev-test-jobs-seed-command-feature-branch-1-seed-4tzvwc3y
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
     kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-jobs-seed-command-feature-branch-1-ffac537e6cbbf-64g1rb5k
@@ -505,6 +511,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
+    kontinuous/depname.chartNameTopFull: app
+    kontinuous/depname.chartNameTop: app
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:

@@ -142,6 +142,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.metabase
     kontinuous/depname.resourcePath: deployment.metabase
     kontinuous/depname.resourceName: metabase
+    kontinuous/depname.chartNameTopFull: metabase
+    kontinuous/depname.chartNameTop: metabase
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
@@ -241,6 +243,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.oauth2-proxy
     kontinuous/depname.resourcePath: deployment.oauth2-proxy
     kontinuous/depname.resourceName: oauth2-proxy
+    kontinuous/depname.chartNameTopFull: oauth2-proxy
+    kontinuous/depname.chartNameTop: oauth2-proxy
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:

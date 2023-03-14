@@ -1,5 +1,7 @@
-module.exports = async (manifests, options, { utils }) => {
-  const { enabled: enabledDefault } = options
+const kindIsWaitable = require("../lib/kind-is-waitable")
+
+module.exports = async (manifests, options) => {
+  const { enabled: enabledDefault = false } = options
 
   const enabledByKind = {
     Statefulset: false,
@@ -8,13 +10,11 @@ module.exports = async (manifests, options, { utils }) => {
     ...(options.enabledByKind || {}),
   }
 
-  const { kindIsRunnable } = utils
-
   for (const manifest of manifests) {
     const pluginLog = manifest.metadata?.annotations?.["kontinuous/plugin.log"]
 
     const { kind } = manifest
-    if (!kindIsRunnable(kind)) {
+    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
       if (pluginLog !== undefined) {
         delete manifest.metadata.annotations["kontinuous/plugin.log"]
       }

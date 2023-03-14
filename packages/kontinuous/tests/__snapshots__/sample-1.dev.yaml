@@ -168,6 +168,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app-2nd-instance
     kontinuous/depname.resourcePath: deployment.app-2nd-instance
     kontinuous/depname.resourceName: app-2nd-instance
+    kontinuous/depname.chartNameTopFull: app-2nd-instance
+    kontinuous/depname.chartNameTop: app-2nd-instance
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
@@ -280,6 +282,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
+    kontinuous/depname.chartNameTopFull: app
+    kontinuous/depname.chartNameTop: app
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
@@ -405,6 +409,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.hasura
     kontinuous/depname.resourcePath: deployment.hasura
     kontinuous/depname.resourceName: hasura
+    kontinuous/depname.chartNameTopFull: hasura
+    kontinuous/depname.chartNameTop: hasura
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
@@ -502,6 +508,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.pgweb
     kontinuous/depname.resourcePath: deployment.pgweb
     kontinuous/depname.resourceName: pgweb
+    kontinuous/depname.chartNameTopFull: pgweb
+    kontinuous/depname.chartNameTop: pgweb
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:

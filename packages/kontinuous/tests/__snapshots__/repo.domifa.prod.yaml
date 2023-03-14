@@ -191,6 +191,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-prod-test-r-feature-branch-1-buildkit-build-backe-4vuvjsyc
     kontinuous/depname.resourceName: job-prod-test-r-feature-branch-1-buildkit-build-backe-4vuvjsyc
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
     kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -347,6 +349,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-prod-test-r-feature-branch-1-buildkit-build-front-4npicdqn
     kontinuous/depname.resourceName: job-prod-test-r-feature-branch-1-buildkit-build-front-4npicdqn
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
     kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -506,6 +510,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-prod-test-r-feature-branch-1-buildkit-build-porta-1twnas1s
     kontinuous/depname.resourceName: job-prod-test-r-feature-branch-1-buildkit-build-porta-1twnas1s
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
     kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -663,6 +669,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-prod-test-r-feature-branch-1-buildkit-build-porta-2ln9pb3d
     kontinuous/depname.resourceName: job-prod-test-r-feature-branch-1-buildkit-build-porta-2ln9pb3d
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
     kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -829,6 +837,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.backend-cron
     kontinuous/depname.resourcePath: deployment.backend-cron
     kontinuous/depname.resourceName: backend-cron
+    kontinuous/depname.chartNameTopFull: backend-cron
+    kontinuous/depname.chartNameTop: backend-cron
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
@@ -973,6 +983,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.backend
     kontinuous/depname.resourcePath: deployment.backend
     kontinuous/depname.resourceName: backend
+    kontinuous/depname.chartNameTopFull: backend
+    kontinuous/depname.chartNameTop: backend
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
@@ -1117,6 +1129,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.frontend
     kontinuous/depname.resourcePath: deployment.frontend
     kontinuous/depname.resourceName: frontend
+    kontinuous/depname.chartNameTopFull: frontend
+    kontinuous/depname.chartNameTop: frontend
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
@@ -1222,6 +1236,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.portail-admins
     kontinuous/depname.resourcePath: deployment.portail-admins
     kontinuous/depname.resourceName: portail-admins
+    kontinuous/depname.chartNameTopFull: portail-admins
+    kontinuous/depname.chartNameTop: portail-admins
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
@@ -1328,6 +1344,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.portail-usagers
     kontinuous/depname.resourcePath: deployment.portail-usagers
     kontinuous/depname.resourceName: portail-usagers
+    kontinuous/depname.chartNameTopFull: portail-usagers
+    kontinuous/depname.chartNameTop: portail-usagers
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:

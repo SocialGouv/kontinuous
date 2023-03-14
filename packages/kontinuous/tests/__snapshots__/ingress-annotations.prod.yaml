@@ -142,6 +142,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.metabase
     kontinuous/depname.resourcePath: deployment.metabase
     kontinuous/depname.resourceName: metabase
+    kontinuous/depname.chartNameTopFull: metabase
+    kontinuous/depname.chartNameTop: metabase
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:
