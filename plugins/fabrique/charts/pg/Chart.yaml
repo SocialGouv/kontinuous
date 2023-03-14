@@ -5,3 +5,4 @@ dependencies:
   - name: cnpg-cluster
     degit: socialgouv/helm-charts/charts/cnpg-cluster@v1
     version: "1"
+    condition: cnpg-cluster.enabled

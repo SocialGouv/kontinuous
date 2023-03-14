@@ -1,0 +1,15 @@
+global:
+  pgSecretName: cnpg-cluster-db
+
+hasura:
+  ~needs: [pg]
+  envFrom:
+    - secretRef:
+        name: hasura
+    - secretRef:
+        name: pg-user
+    - configMapRef:
+        name: hasura-configmap
+
+pg:
+  ~chart: pg

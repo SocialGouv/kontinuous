@@ -1,4 +1,5 @@
 cnpg-cluster:
+  enabled: true
   fullnameOverride: cnpg-cluster
   nameOverride: cnpg-cluster
   ~tpl~instances: "{{ if (or .Values.isProd .Values.isPreprod) }}3{{else}}1{{end}}"
@@ -22,7 +23,8 @@ cnpg-cluster:
     repository: "ghcr.io/cloudnative-pg/postgis"
     tag: "14"
   poolers:
-    main:
+    rw:
+      ~tpl~instances: "{{ if (or .Values.isProd .Values.isPreprod) }}9{{else}}1{{end}}"
       type: rw
       pgbouncer:
         poolMode: session
