@@ -1,0 +1,5 @@
+dependencies:
+  - name: test
+    repository: file://./charts/test
+    version: 1.0.0
+    condition: test.enabled
