@@ -1,10 +1,10 @@
 apiVersion: v2
 name: fabrique
-version: 1.136.4
+version: 1.136.5
 dependencies:
   - name: contrib
     repository: file://./charts/contrib
-    version: 1.136.4
+    version: 1.136.5
     condition: contrib.enabled
   - name: pg
     repository: file://./charts/pg

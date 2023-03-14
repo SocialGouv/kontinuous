@@ -1,0 +1,6 @@
+deactivate:
+  jobs-deactivate:
+    runs:
+      deactivate:
+        with:
+          db: true
