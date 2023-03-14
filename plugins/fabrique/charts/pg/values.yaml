@@ -3,6 +3,7 @@ cnpg-cluster:
   fullnameOverride: cnpg-cluster
   nameOverride: cnpg-cluster
   dbSecretName: cnpg-cluster-app
+  ~needs: [jobs-pg]
   ~tpl~dbOwner: "{{ .Values.global.pgUser }}"
   ~tpl~dbName: "{{ .Values.global.pgDatabase }}
   ~tpl~instances: "{{ if (or .Values.isProd .Values.isPreprod) }}3{{else}}1{{end}}"
@@ -34,3 +35,9 @@ cnpg-cluster:
         parameters:
           max_client_conn: "1000"
           # default_pool_size: "10"
+
+jobs-pg:
+  enabled: true
+  runs:
+    create-secrets:
+      use: socialgouv/kontinuous/plugins/contrib/jobs/cnpg-create-secrets@feat/default4cnpg
