@@ -5,7 +5,3 @@ dependencies:
   - name: contrib-helpers
     repository: file://../contrib-helpers
     version: 1.136.6
-  - name: rancher-namespace
-    repository: file://../rancher-namespace
-    version: 1.136.6
-    condition: createRancherNamespace
