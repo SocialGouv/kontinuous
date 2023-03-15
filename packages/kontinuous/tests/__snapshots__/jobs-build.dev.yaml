@@ -513,6 +513,7 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+            type: Unconfined
           volumeMounts:
             - name: workspace
               mountPath: /workspace
@@ -667,6 +668,7 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+            type: Unconfined
           volumeMounts:
             - name: workspace
               mountPath: /workspace
