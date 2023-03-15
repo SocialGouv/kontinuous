@@ -216,7 +216,8 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            type: Unconfined
+            seccompProfile:
+              type: Unconfined
           volumeMounts:
             - name: workspace
               mountPath: /workspace

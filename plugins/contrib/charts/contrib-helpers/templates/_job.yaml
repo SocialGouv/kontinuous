@@ -215,7 +215,8 @@ spec:
             runAsUser: {{ $user }}
             runAsGroup: {{ $group }}
             {{ if $run.seccompProfile }}
-            {{- tpl ($run.seccompProfile | toYaml) . | nindent 12 }}
+            seccompProfile:
+              {{- tpl ($run.seccompProfile | toYaml) . | nindent 14 }}
             {{ end }}
           volumeMounts:
             - name: workspace
