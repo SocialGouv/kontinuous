@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.137.2](https://github.com/socialgouv/kontinuous/compare/v1.137.1...v1.137.2) (2023-03-15)
+
+
+### Bug Fixes
+
+* job seccompProfile missing nesed key ([29f6767](https://github.com/socialgouv/kontinuous/commit/29f6767b19bff7d309472c9d483eff142d4b235f))
+
 ## 1.137.1 (2023-03-15)
 
 
