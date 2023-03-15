@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.137.0 (2023-03-15)
+
+
+### Features
+
+* cnpg + crd needs + fix of deep charts linking ([#245](https://github.com/socialgouv/kontinuous/issues/245)) ([187fe4c](https://github.com/socialgouv/kontinuous/commit/187fe4c45d22f52f86a3caa18d3d80495ce783c4))
+
 ## [1.136.6](https://github.com/socialgouv/kontinuous/compare/v1.136.5...v1.136.6) (2023-03-14)
 
 
