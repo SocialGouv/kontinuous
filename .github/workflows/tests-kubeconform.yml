@@ -14,7 +14,7 @@ on:
 
 concurrency:
   cancel-in-progress: true
-  group: tests-webhook-${{ github.ref_name }}
+  group: tests-kubeconform-${{ github.ref_name }}
 
 jobs:
   tests-kubeconform:
