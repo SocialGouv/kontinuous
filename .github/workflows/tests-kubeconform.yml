@@ -27,8 +27,8 @@ jobs:
       - name: install kubeconform
         shell: bash
         run: |
-          apt-get update
-          apt-get install -y wget
+          sudo apt-get update
+          sudo apt-get install -y wget
           wget https://github.com/yannh/kubeconform/releases/download/v0.6.1/kubeconform-linux-amd64.tar.gz -O kubeconform-linux-amd64.tar.gz
           tar -xzvf kubeconform-linux-amd64.tar.gz
           ./kubeconform -v
