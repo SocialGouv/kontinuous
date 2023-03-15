@@ -1,3 +1,7 @@
+options:
+  customWaitableKinds:
+    - Cluster # cnpg
+
 valuesCompilers:
   globalDefaults:
     enabled: true

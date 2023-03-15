@@ -102,6 +102,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-uses-relative-feature-branch-1-crea-5k4sf6ye
     kontinuous/depname.resourceName: job-dev-test-jobs-uses-relative-feature-branch-1-crea-5k4sf6ye
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
     kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn
@@ -250,6 +252,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-uses-relative-feature-branch-1-crea-3ywgjgc6
     kontinuous/depname.resourceName: job-dev-test-jobs-uses-relative-feature-branch-1-crea-3ywgjgc6
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
     kontinuous/plugin.log: 'true'
   labels:
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn

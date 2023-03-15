@@ -108,6 +108,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.hasura
     kontinuous/depname.resourcePath: deployment.hasura
     kontinuous/depname.resourceName: hasura
+    kontinuous/depname.chartNameTopFull: hasura
+    kontinuous/depname.chartNameTop: hasura
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
 spec:

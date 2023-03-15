@@ -103,6 +103,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-meta-log-feature-branch-1-a-jobs-contrib-3c2j8vfj
     kontinuous/depname.resourceName: job-dev-test-meta-log-feature-branch-1-a-jobs-contrib-3c2j8vfj
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
   labels:
     kontinuous/deployment: test-meta-log-feature-branch-1-ffac537e6cbbf934b08745-66eu3lo2
     kontinuous/deployment.env: test-meta-log-feature-branch-1
@@ -218,6 +220,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-meta-log-feature-branch-1-b-jobs-contrib-1ku11fw9
     kontinuous/depname.resourceName: job-dev-test-meta-log-feature-branch-1-b-jobs-contrib-1ku11fw9
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
   labels:
     kontinuous/deployment: test-meta-log-feature-branch-1-ffac537e6cbbf934b08745-66eu3lo2
     kontinuous/deployment.env: test-meta-log-feature-branch-1
@@ -341,6 +345,8 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
+    kontinuous/depname.chartNameTopFull: app
+    kontinuous/depname.chartNameTop: app
     reloader.stakater.com/auto: 'true'
 spec:
   replicas: 1

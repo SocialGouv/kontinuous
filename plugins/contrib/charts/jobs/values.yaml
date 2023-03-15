@@ -1,5 +1,4 @@
 enabled:
-createRancherNamespace: false
 namespace: 
 repository: 
 gitBranch: 
