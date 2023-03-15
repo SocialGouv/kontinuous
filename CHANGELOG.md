@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.137.1 (2023-03-15)
+
+
+### Bug Fixes
+
+* deprecated seccomp kube1-25 ([#241](https://github.com/socialgouv/kontinuous/issues/241)) ([eaa2e73](https://github.com/socialgouv/kontinuous/commit/eaa2e73b2ac6d0ab0bb81fc4be90e533cc621d9f))
+
 ## 1.137.0 (2023-03-15)
 
 
