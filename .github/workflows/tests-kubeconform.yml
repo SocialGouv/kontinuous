@@ -10,6 +10,7 @@ on:
       - "**"
     paths:
       - "./packages/kontinuous/tests/**"
+      - ".github/workflows/tests-kubeconform.yml"
 
 concurrency:
   cancel-in-progress: true
