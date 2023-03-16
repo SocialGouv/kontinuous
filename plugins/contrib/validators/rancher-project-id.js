@@ -3,7 +3,8 @@ module.exports = async (
   options,
   { config, logger, ValidationError }
 ) => {
-  const defaultRequired = !config.isLocal
+  // should fail only in CI environments ?
+  const defaultRequired = !!process.env.CI
 
   const { required = defaultRequired } = options
   const rancherNsMissingProjectId = []
