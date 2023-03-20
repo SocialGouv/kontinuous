@@ -106,6 +106,8 @@ metadata:
     kontinuous/depname.chartPath: project.test
     kontinuous/depname.resourcePath: deployment.nginx-deployment
     kontinuous/depname.resourceName: nginx-deployment
+    kontinuous/depname.chartNameTopFull: test
+    kontinuous/depname.chartNameTop: test
     kontinuous/plugin.log: 'false'
     reloader.stakater.com/auto: 'true'
   namespace: test-project-chart-implicit-enabled-feature-branch-1
