@@ -44,6 +44,7 @@ module.exports = async (manifests, options, { config, logger, kubectl }) => {
         {
           kubeconfig,
           logInfo: false,
+          logError: false,
           surviveOnBrokenCluster,
         }
       )

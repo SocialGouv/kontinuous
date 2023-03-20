@@ -487,7 +487,7 @@ const loadConfig = async (
     },
     isLocal: {
       env: "KS_ISLOCAL",
-      default: false,
+      default: process.stdout.isTTY,
     },
     clusterEnvironments: {
       transform: (value) => ({
