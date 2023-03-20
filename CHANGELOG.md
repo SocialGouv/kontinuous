@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.137.3 (2023-03-20)
+
+
+### Bug Fixes
+
+* **probes:** fix helm merge ([#249](https://github.com/socialgouv/kontinuous/issues/249)) ([2ba9c24](https://github.com/socialgouv/kontinuous/commit/2ba9c24b467e14a4d108d1a6b7a641bc8b4cef11))
+
 ## [1.137.2](https://github.com/socialgouv/kontinuous/compare/v1.137.1...v1.137.2) (2023-03-15)
 
 
