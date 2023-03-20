@@ -172,7 +172,7 @@ spec:
         fsGroup: 1000
         runAsNonRoot: true
       containers:
-        - image: metabase/metabase:v0.45.1
+        - image: metabase/metabase:v0.45.3
           name: metabase
           securityContext:
             allowPrivilegeEscalation: false
@@ -269,7 +269,7 @@ spec:
         kontinuous/deployment: test-oauth2-proxy-metabase-feature-branch-1-ffac537e6-1pmmy816
     spec:
       containers:
-        - image: quay.io/oauth2-proxy/oauth2-proxy:v7.2.1
+        - image: quay.io/oauth2-proxy/oauth2-proxy:v7.4.0
           args:
             - '--upstream'
             - http://metabase
