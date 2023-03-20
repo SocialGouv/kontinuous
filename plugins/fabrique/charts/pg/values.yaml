@@ -23,6 +23,8 @@ cnpg-cluster:
   persistence:
     storageClass: "managed-csi"
     size: 8Gi
+    pvcTemplate:
+      ~tpl~persistentVolumeReclaimPolicy: "{{ if (or .Values.isProd .Values.isPreprod) }}Retain{{else}}Delete{{end}}"
   image:
     repository: "ghcr.io/cloudnative-pg/postgis"
     tag: "14"
