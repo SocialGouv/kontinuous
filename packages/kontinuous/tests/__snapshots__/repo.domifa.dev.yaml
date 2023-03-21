@@ -230,13 +230,19 @@ spec:
 
               export IMAGE_PATH=$CI_REGISTRY/domifa/test-repo.domifa/backend
 
+              export LATEST_TAG=\\"\\"
+
+              if [ \\"false\\" = \\"true\\"]; then
+                export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
+              fi
+
               buildctl-daemonless.sh \\\\
                 build \\\\
                 --frontend dockerfile.v0 \\\\
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./packages/backend/Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
@@ -391,13 +397,19 @@ spec:
 
               export IMAGE_PATH=$CI_REGISTRY/domifa/test-repo.domifa/frontend
 
+              export LATEST_TAG=\\"\\"
+
+              if [ \\"false\\" = \\"true\\"]; then
+                export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
+              fi
+
               buildctl-daemonless.sh \\\\
                 build \\\\
                 --frontend dockerfile.v0 \\\\
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./packages/frontend/Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
@@ -555,13 +567,19 @@ spec:
               export
               IMAGE_PATH=$CI_REGISTRY/domifa/test-repo.domifa/portail-admins
 
+              export LATEST_TAG=\\"\\"
+
+              if [ \\"false\\" = \\"true\\"]; then
+                export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
+              fi
+
               buildctl-daemonless.sh \\\\
                 build \\\\
                 --frontend dockerfile.v0 \\\\
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./packages/portail-admins/Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
@@ -715,13 +733,19 @@ spec:
               export
               IMAGE_PATH=$CI_REGISTRY/domifa/test-repo.domifa/portail-usagers
 
+              export LATEST_TAG=\\"\\"
+
+              if [ \\"false\\" = \\"true\\"]; then
+                export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
+              fi
+
               buildctl-daemonless.sh \\\\
                 build \\\\
                 --frontend dockerfile.v0 \\\\
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./packages/portail-usagers/Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
