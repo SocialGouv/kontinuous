@@ -1,5 +1,5 @@
 # renovate: datasource=node depName=node versioning=node
-ARG NODE_VERSION=18-alpine
+ARG NODE_VERSION=18
 
 FROM node:$NODE_VERSION as downloader
 RUN apt-get update && \
@@ -23,7 +23,7 @@ ENV KUBECTL_VERSION=$KUBECTL_VERSION
 RUN curl --fail -sL https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl
 
-FROM node:$NODE_VERSION
+FROM node:$NODE_VERSION-alpine
 
 RUN groupadd -g 1001 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1001 ubuntu
 RUN mkdir -p /opt/wait-needs && chown -R 1001:1001 /opt
