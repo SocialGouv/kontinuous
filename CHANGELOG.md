@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.137.7 (2023-03-21)
+
+
+### Bug Fixes
+
+* isLocal and optional rancher project id ([#251](https://github.com/socialgouv/kontinuous/issues/251)) ([1a4baec](https://github.com/socialgouv/kontinuous/commit/1a4baecbdefb3bd191682bb265a7b0fc31674626))
+
 ## 1.137.6 (2023-03-21)
 
 
