@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.137.5 (2023-03-21)
+
+
+### Bug Fixes
+
+* cnpg persistentVolumeReclaimPolicy ([#250](https://github.com/socialgouv/kontinuous/issues/250)) ([640c7f2](https://github.com/socialgouv/kontinuous/commit/640c7f2e1d96a181d0fc2bd118ca1ed719a74a62))
+
 ## 1.137.4 (2023-03-20)
 
 ## 1.137.3 (2023-03-20)
