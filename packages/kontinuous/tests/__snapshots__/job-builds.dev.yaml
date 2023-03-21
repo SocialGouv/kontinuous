@@ -194,13 +194,19 @@ spec:
 
               export IMAGE_PATH=$CI_REGISTRY/test-job-builds/app
 
+              export LATEST_TAG=\\"\\"
+
+              if [ \\"false\\" = \\"true\\"]; then
+                export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
+              fi
+
               buildctl-daemonless.sh \\\\
                 build \\\\
                 --frontend dockerfile.v0 \\\\
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 --opt build-arg:\\"NEXT_PUBLIC_HASURA_URL=https://hasura-test-job-builds-feature-branch-1.dev.fabrique.social.gouv.fr/v1/graphql\\" \\\\
@@ -353,13 +359,19 @@ spec:
 
               export IMAGE_PATH=$CI_REGISTRY/test-job-builds/hasura
 
+              export LATEST_TAG=\\"\\"
+
+              if [ \\"false\\" = \\"true\\"]; then
+                export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
+              fi
+
               buildctl-daemonless.sh \\\\
                 build \\\\
                 --frontend dockerfile.v0 \\\\
                 --local context=/workspace//packages/hasura \\\\
                 --local dockerfile=/workspace/packages/hasura \\\\
                 --opt filename=./Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 echo \\"$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
