@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.137.6 (2023-03-21)
+
+
+### Bug Fixes
+
+* **jsonschema:** fix app.probes and jobs.use ([#252](https://github.com/socialgouv/kontinuous/issues/252)) ([0fbe229](https://github.com/socialgouv/kontinuous/commit/0fbe2297eece9cfd48d9253d6bbfd19e672d403b))
+
 ## 1.137.5 (2023-03-21)
 
 
