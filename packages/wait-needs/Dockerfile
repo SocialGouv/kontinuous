@@ -25,20 +25,19 @@ RUN curl --fail -sL https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd6
 
 FROM node:$NODE_VERSION-alpine
 
-RUN groupadd -g 1001 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1001 ubuntu
-RUN mkdir -p /opt/wait-needs && chown -R 1001:1001 /opt
+RUN mkdir -p /opt/wait-needs && chown -R 1000:1000 /opt
 
-USER 1001
+USER 1000
 
 COPY --from=rollout-status /usr/local/bin/rollout-status /usr/local/bin/rollout-status
 COPY --from=kubectl /usr/local/bin/kubectl /usr/local/bin/kubectl
 
 WORKDIR /opt/wait-needs
 
-COPY --chown=1001:1001 package.json yarn.lock .yarnrc.yml ./
-COPY --chown=1001:1001 .yarn .yarn
-COPY --chown=1001:1001 packages/wait-needs/package.json ./packages/wait-needs/package.json
-COPY --chown=1001:1001 packages/common/package.json ./packages/common/package.json
+COPY --chown=1000:1000 package.json yarn.lock .yarnrc.yml ./
+COPY --chown=1000:1000 .yarn .yarn
+COPY --chown=1000:1000 packages/wait-needs/package.json ./packages/wait-needs/package.json
+COPY --chown=1000:1000 packages/common/package.json ./packages/common/package.json
 
 RUN yarn workspaces focus wait-needs && yarn cache clean
 
