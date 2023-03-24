@@ -40,6 +40,14 @@
             "description": "Should the repo be checked-out to build. defaults to true",
             "type": "boolean"
           },
+          "needs": {
+            "description": "List of kontinuous dependencies",
+            "examples": ["['create-db', 'import-sql', 'anonymize']"],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "memoryLimit": {
             "description": "Kubernetes max memory for the Job before OOMKill",
             "type": "string"
