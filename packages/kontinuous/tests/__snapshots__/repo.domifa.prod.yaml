@@ -285,7 +285,7 @@ spec:
 
               export LATEST_TAG=\\"\\"
 
-              if [ \\"true\\" = \\"true\\"]; then
+              if [ \\"true\\" = \\"true\\" ]; then
                 export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
               fi
 
@@ -451,7 +451,7 @@ spec:
 
               export LATEST_TAG=\\"\\"
 
-              if [ \\"true\\" = \\"true\\"]; then
+              if [ \\"true\\" = \\"true\\" ]; then
                 export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
               fi
 
@@ -621,7 +621,7 @@ spec:
 
               export LATEST_TAG=\\"\\"
 
-              if [ \\"true\\" = \\"true\\"]; then
+              if [ \\"true\\" = \\"true\\" ]; then
                 export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
               fi
 
@@ -788,7 +788,7 @@ spec:
 
               export LATEST_TAG=\\"\\"
 
-              if [ \\"true\\" = \\"true\\"]; then
+              if [ \\"true\\" = \\"true\\" ]; then
                 export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
               fi
 
