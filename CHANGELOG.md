@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.137.9](https://github.com/socialgouv/kontinuous/compare/v1.137.8...v1.137.9) (2023-03-27)
+
+
+### Bug Fixes
+
+* job build latest tag bash syntax typo ([ad2cfec](https://github.com/socialgouv/kontinuous/commit/ad2cfecaa5871085ea3e18514f719dd8b625d242))
+
 ## 1.137.8 (2023-03-21)
 
 ## 1.137.7 (2023-03-21)
