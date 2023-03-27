@@ -38,7 +38,7 @@ runs:
       echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /home/user/.docker/config.json
       export IMAGE_PATH=$CI_REGISTRY{{ if (or $.with.imageProject $.Values.global.imageProject) }}{{ (print "/" (or $.with.imageProject $.Values.global.imageProject)) }}{{ end }}/{{ or $.with.imageRepository $.Values.global.imageRepository }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}{{ if $.with.target }}{{ (print "-" $.with.target) }}{{ end }}
       export LATEST_TAG=""
-      if [ "{{ $.Values.global.isProd }}" = "true"]; then
+      if [ "{{ $.Values.global.isProd }}" = "true" ]; then
         export LATEST_TAG=",$IMAGE_PATH:latest"
       fi
       buildctl-daemonless.sh \
