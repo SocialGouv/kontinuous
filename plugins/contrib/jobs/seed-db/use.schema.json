@@ -4,9 +4,9 @@
   "title": "schema for seed-db job usage",
   "type": "object",
   "additionalProperties": false,
-  "required": ["pgSecretRefName", "seedPath"],
+  "required": ["seedPath"],
   "properties": {
-    "pgSecretRefName ": {
+    "pgSecretName ": {
       "description": "Secret with Postgresql credentials to execute the script",
       "type": "string"
     },
