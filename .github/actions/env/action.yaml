@@ -11,7 +11,7 @@ inputs:
 runs:
   using: docker
   # image: Dockerfile
-  image: docker://ghcr.io/socialgouv/kontinuous/env:v1.137.9
+  image: docker://ghcr.io/socialgouv/kontinuous/env:v1.137.10
   env:
     KS_GIT_BRANCH: ${{ inputs.branch }}
     KSENV_REPOSITORY_NAME: ${{ inputs.repositoryName }}
