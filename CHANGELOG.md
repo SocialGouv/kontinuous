@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.138.0 (2023-03-30)
+
+
+### Features
+
+* ci-detect + fix isLocal default ([#258](https://github.com/socialgouv/kontinuous/issues/258)) ([8f09a37](https://github.com/socialgouv/kontinuous/commit/8f09a37708c1a5bf2948f8207cf04403b9654da0))
+
 ## 1.137.10 (2023-03-29)
 
 
