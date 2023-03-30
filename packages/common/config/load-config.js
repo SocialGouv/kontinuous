@@ -487,6 +487,7 @@ const loadConfig = async (
           : undefined,
     },
     ci: {
+      env: "KS_CI",
       defaultFunction: () => ciDetect(),
     },
     isLocal: {
