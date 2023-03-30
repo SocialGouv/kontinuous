@@ -3490,6 +3490,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@npmcli/ci-detect@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@npmcli/ci-detect@npm:3.0.2"
+  checksum: 7cf7eee90abf115ac3ac86afc2030a92a605edf44dece0db6034dcf5340b177db691dcb5a7522a8cf82aad35590420176ed6edcd33b700f9d4b9cbaf05ba4748
+  languageName: node
+  linkType: hard
+
 "@npmcli/fs@npm:^2.1.0":
   version: 2.1.2
   resolution: "@npmcli/fs@npm:2.1.2"
@@ -16340,6 +16347,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "~common@workspace:packages/common"
   dependencies:
+    "@npmcli/ci-detect": "npm:^3.0.2"
     "@sentry/node": "npm:^7.20.1"
     async-retry: "npm:^1.3.3"
     axios: "npm:^1.2.5"

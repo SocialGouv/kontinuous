@@ -155,6 +155,10 @@ module.exports = ({
                   value: "/workspace",
                 },
                 {
+                  name: "KS_CI",
+                  value: "kontinuous-webhook",
+                },
+                {
                   name: "KS_CI_NAMESPACE",
                   value: namespace,
                 },

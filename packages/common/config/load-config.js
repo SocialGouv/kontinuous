@@ -7,6 +7,7 @@ const fs = require("fs-extra")
 const set = require("lodash.set")
 const defaultsDeep = require("lodash.defaultsdeep")
 const qs = require("qs")
+const ciDetect = require("@npmcli/ci-detect")
 
 const recurseDependencies = require("helm-tree/dependencies/recurse")
 const configDependencyKey = require("~common/utils/config-dependency-key")
@@ -485,9 +486,13 @@ const loadConfig = async (
           ? `${config.projectName || config.repositoryName}-ci`
           : undefined,
     },
+    ci: {
+      env: "KS_CI",
+      defaultFunction: () => ciDetect(),
+    },
     isLocal: {
       env: "KS_ISLOCAL",
-      default: process.stdout.isTTY,
+      defaultFunction: (config) => !config.ci,
     },
     clusterEnvironments: {
       transform: (value) => ({
