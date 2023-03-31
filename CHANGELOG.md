@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.138.3 (2023-03-31)
+
+
+### Bug Fixes
+
+* **redis:** add values volumes options ([#262](https://github.com/socialgouv/kontinuous/issues/262)) ([7b9ffb7](https://github.com/socialgouv/kontinuous/commit/7b9ffb79f2570347584d4c5d5dac985bb0d4002f))
+
 ## 1.138.2 (2023-03-31)
 
 
