@@ -97,16 +97,26 @@ module.exports = async (options, context) => {
       --wait
       --timeout=${applyTimeout}
   `
-    return kubectl(kubectlDeployCommand, {
-      kubeconfig,
-      kubeconfigContext,
-      stdin: yamlManifest,
-      collectProcesses: kubectlProcesses,
-      logInfo: true,
-      logError: false,
-      retryOptions: kubectlRetryOptions,
-      surviveOnBrokenCluster,
-    })
+    try {
+      const result = await kubectl(kubectlDeployCommand, {
+        kubeconfig,
+        kubeconfigContext,
+        stdin: yamlManifest,
+        collectProcesses: kubectlProcesses,
+        logInfo: true,
+        logError: false,
+        retryOptions: kubectlRetryOptions,
+        surviveOnBrokenCluster,
+      })
+      return result
+    } catch (error) {
+      logger.error(
+        `unable to apply ${manifest.kind}/${
+          manifest.metadata.namespace || ""
+        }/${manifest.metadata.name}`
+      )
+      throw error
+    }
   }
 
   const eventsBucket = ctx.require("eventsBucket")
