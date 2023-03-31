@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots jobs-uses-relative.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn
     janitor/ttl: 7d
   labels:
@@ -33,8 +32,7 @@ metadata:
   namespace: test-jobs-uses-relative-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn
   labels:
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn
@@ -67,8 +65,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn
   labels:
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn
@@ -95,8 +92,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-uses-relative-feature-branch-1-crea-5k4sf6ye
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-jobs-uses-relative-feature-branch-1-crea-5k4sf6ye
     kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-uses-relative-feature-branch-1-crea-5k4sf6ye
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
@@ -104,7 +100,7 @@ metadata:
     kontinuous/depname.resourceName: job-dev-test-jobs-uses-relative-feature-branch-1-crea-5k4sf6ye
     kontinuous/depname.chartNameTopFull: jobs
     kontinuous/depname.chartNameTop: jobs
-    kontinuous/plugin.log: 'true'
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn
     kontinuous/deployment.env: test-jobs-uses-relative-feature-branch-1
@@ -142,7 +138,7 @@ spec:
           image: ghcr.io/socialgouv/kontinuous/degit:v1.138.0
           command:
             - sh
-            - '-c'
+            - -c
             - degit socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
           securityContext:
             runAsUser: 1000
@@ -155,8 +151,8 @@ spec:
               cpu: 3000m
               memory: 8192Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:6.70.0
@@ -200,7 +196,7 @@ spec:
               value: /kontinuous-input
           command:
             - /bin/bash
-            - '-c'
+            - -c
             - |
               set -e
               /action/ensure-db.sh
@@ -221,8 +217,7 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn/jobs.db.create-db
+              subPath: test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn/jobs.db.create-db
       securityContext:
         fsGroup: 1000
       volumes:
@@ -245,8 +240,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-uses-relative-feature-branch-1-crea-3ywgjgc6
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-jobs-uses-relative-feature-branch-1-crea-3ywgjgc6
     kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-uses-relative-feature-branch-1-crea-3ywgjgc6
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
@@ -254,7 +248,7 @@ metadata:
     kontinuous/depname.resourceName: job-dev-test-jobs-uses-relative-feature-branch-1-crea-3ywgjgc6
     kontinuous/depname.chartNameTopFull: jobs
     kontinuous/depname.chartNameTop: jobs
-    kontinuous/plugin.log: 'true'
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn
     kontinuous/deployment.env: test-jobs-uses-relative-feature-branch-1
@@ -292,7 +286,7 @@ spec:
           image: ghcr.io/socialgouv/kontinuous/degit:v1.138.0
           command:
             - sh
-            - '-c'
+            - -c
             - degit socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
           securityContext:
             runAsUser: 1000
@@ -305,8 +299,8 @@ spec:
               cpu: 3000m
               memory: 8192Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -316,7 +310,7 @@ spec:
                 name: pg-admin-user
           env:
             - name: USE_AZURE_FLEX
-              value: 'false'
+              value: \\"false\\"
             - name: DB_SECRET_NAME
               value: pg-user
             - name: JOB_NAMESPACE
@@ -337,7 +331,7 @@ spec:
               value: /kontinuous-input
           command:
             - /bin/bash
-            - '-c'
+            - -c
             - |
               set -e
               /action/create-secret.sh
@@ -361,8 +355,7 @@ spec:
               readOnly: true
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn/jobs.db.create-secret
+              subPath: test-jobs-uses-relative-feature-branch-1-ffac537e6cbb-4qagagqn/jobs.db.create-secret
       securityContext:
         fsGroup: 1001
       volumes:

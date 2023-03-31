@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots oauth2-proxy-metabase.prod 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-oauth2-proxy-metabase-feature-branch-1-ffac537e6-1pmmy816
   labels:
     application: test-oauth2-proxy-metabase
@@ -32,8 +31,7 @@ metadata:
   namespace: test-oauth2-proxy-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-oauth2-proxy-metabase-feature-branch-1-ffac537e6-1pmmy816
   labels:
     kontinuous/deployment: test-oauth2-proxy-metabase-feature-branch-1-ffac537e6-1pmmy816
@@ -66,8 +64,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-oauth2-proxy-metabase-feature-branch-1-ffac537e6-1pmmy816
   labels:
     kontinuous/deployment: test-oauth2-proxy-metabase-feature-branch-1-ffac537e6-1pmmy816
@@ -99,18 +96,17 @@ metadata:
   namespace: test-oauth2-proxy-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase/templates/configmap.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/configmap.yaml
     kontinuous/deployment: test-oauth2-proxy-metabase-feature-branch-1-ffac537e6-1pmmy816
 data:
   MB_APPLICATION_NAME: metabase
   MB_DB_TYPE: postgres
   MB_ADMIN_EMAIL: admin@fabrique.social.gouv.fr
-  MB_ANON_TRACKING_ENABLED: 'false'
+  MB_ANON_TRACKING_ENABLED: \\"false\\"
   MB_APPLICATION_LOGO_URL: https://socialgouv.github.io/support/_media/marianne.jpeg
   MB_EMAIL_FROM_ADDRESS: contact@fabrique.social.gouv.fr
-  MB_ENABLE_EMBEDDING: 'true'
-  MB_ENABLE_PUBLIC_SHARING: 'true'
+  MB_ENABLE_EMBEDDING: \\"true\\"
+  MB_ENABLE_PUBLIC_SHARING: \\"true\\"
   MB_SITE_LOCALE: fr
   MB_SITE_NAME: Fabrique des ministères sociaux
   MB_SITE_URL: https://metabase-test-oauth2-proxy-metabase.fabrique.social.gouv.fr
@@ -133,8 +129,7 @@ metadata:
   namespace: test-oauth2-proxy-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/deployment.yaml
     kontinuous/deployment: test-oauth2-proxy-metabase-feature-branch-1-ffac537e6-1pmmy816
     kontinuous/depname.full: project.fabrique.contrib.metabase.deployment.metabase
     kontinuous/depname.chartResource: metabase.deployment.metabase
@@ -144,8 +139,8 @@ metadata:
     kontinuous/depname.resourceName: metabase
     kontinuous/depname.chartNameTopFull: metabase
     kontinuous/depname.chartNameTop: metabase
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -234,8 +229,7 @@ metadata:
   namespace: test-oauth2-proxy-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.oauth2-proxy
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/deployment.yaml
     kontinuous/deployment: test-oauth2-proxy-metabase-feature-branch-1-ffac537e6-1pmmy816
     kontinuous/depname.full: project.fabrique.contrib.oauth2-proxy.deployment.oauth2-proxy
     kontinuous/depname.chartResource: oauth2-proxy.deployment.oauth2-proxy
@@ -245,8 +239,8 @@ metadata:
     kontinuous/depname.resourceName: oauth2-proxy
     kontinuous/depname.chartNameTopFull: oauth2-proxy
     kontinuous/depname.chartNameTop: oauth2-proxy
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -271,7 +265,7 @@ spec:
       containers:
         - image: quay.io/oauth2-proxy/oauth2-proxy:v7.4.0
           args:
-            - '--upstream'
+            - --upstream
             - http://metabase
           name: app
           ports:
@@ -309,8 +303,7 @@ spec:
             initialDelaySeconds: 30
           env:
             - name: OAUTH2_PROXY_REDIRECT_URL
-              value: >-
-                https://test-oauth2-proxy-metabase.fabrique.social.gouv.fr/oauth2/callback
+              value: https://test-oauth2-proxy-metabase.fabrique.social.gouv.fr/oauth2/callback
             - name: SOME_ENV
               value: some value
           envFrom:
@@ -335,8 +328,7 @@ metadata:
   namespace: test-oauth2-proxy-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/service.yaml
     kontinuous/deployment: test-oauth2-proxy-metabase-feature-branch-1-ffac537e6-1pmmy816
 spec:
   ports:
@@ -365,8 +357,7 @@ metadata:
   namespace: test-oauth2-proxy-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.oauth2-proxy
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/service.yaml
     kontinuous/deployment: test-oauth2-proxy-metabase-feature-branch-1-ffac537e6-1pmmy816
 spec:
   ports:
@@ -383,12 +374,11 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.oauth2-proxy
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/ingress.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/oauth2-proxy/templates/ingress.yaml
     kontinuous/deployment: test-oauth2-proxy-metabase-feature-branch-1-ffac537e6-1pmmy816
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: 'true'
+    kubernetes.io/tls-acme: \\"true\\"
   labels:
     component: oauth2-proxy
     application: test-oauth2-proxy-metabase

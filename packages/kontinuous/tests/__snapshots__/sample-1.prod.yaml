@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots sample-1.prod 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   labels:
     application: test-sample-1
@@ -32,8 +31,7 @@ metadata:
   namespace: test-sample-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   labels:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
@@ -66,8 +64,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   labels:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
@@ -103,7 +100,7 @@ data:
   NODE_ENV: production
   GRAPHQL_ENDPOINT: http://hasura/v1/graphql
   ACCOUNT_MAIL_SENDER: contact@fabrique.social.gouv.fr
-  PRODUCTION: 'true'
+  PRODUCTION: \\"true\\"
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -125,12 +122,9 @@ metadata:
   namespace: test-sample-1
 spec:
   encryptedData:
-    ACCOUNT_EMAIL_SECRET: >-
-      AgBc+UqJhU2ZBfuplyiI3pPekRjm36i62WYR1lVpM9PIwK636R78mpfckIeGU09qKAxWGYBqtYtvNP3lTG8OwEUqKLnUxZPZKbtwc78GwzEzaPpnWmM+j78uBDxqHDiW+jKwnD/6XiWxsfyd1ZU/qS0LDEJBnVRoDyUI0NxzFWLxG8ylr6oK3q+oD3338D588TimklZGOvRm/hI95d5uwKsYPz0zYOj28pgHzNMVycreOXi9l562agyg2hdb8AkFD41utLEURxJOomJUl2xZIjv6FX++R9OJQzRsX6WsCAkLZPO7VEi1cvG6QzPf/uchwystfQfW5c+5ofVJer5mLJJjFcO8OfNbsg/JYlndv4F90cjH2dojSHv/qH/ddpObPgkDpVzCljdTvrir5bl3z3KeqLb20ja1hLJlwOue4zHDCQ6Fwza8VN6BjbHZLYhOO5qlYfWezjwt+B6RdFVzD8wu2JbuWsJo5w2HhMl2Nckar1B8CPxzgRXnFwc/QsFTDXOXX+rtxnC4FJfffZ/2frV745c642AhOArDxk8OGDFkrexr5OMv0iJcY15cl6K9dfZWOKfFd5mxfWFhDWUSAoUZJsz4uVxpTCCoSJBe8Nf1aKk7PkZ+bXtV5bpuktySoPh0hG1M1dUg0WsSC2i6zp75AUxVW6c4GG7d9FMsTHIwyD7fEbV3TMRanSRFYNPOmft/oI7Q3oNGOGg26KCtX414FG02EnpmrttHQguY7cnHGG7i7s8mnyGv
-    HASURA_GRAPHQL_ADMIN_SECRET: >-
-      AgAQ9npiVSZcI8IA6kHHQ9tMaKYahCPmiYh9PoEmKIvisGCM4hQ2Q+UUoUvA2N3Id/GCxNZh3hqmTjLp+mHPy0e8rr9+/WVB5jrrqWO/oX2R1kXq0dbITF27UOjmTaUkZefPf7diHKpCXKGamkP6YbVuZa+1BBmBBfkIDJsraKO1CS/EO0QZAb0fHJiOkNy30j4pTTlg16JdugEj3kXdXXXZD/F8OyvlLBY1jivC/uFMGppNh1eRivgi4Y+krCDCuLphAa5YVslLMf7bboDD5Tk1b2HOCNYxQ96dxvkqCVtNd2rxXfDsYy9vMbQfYnsBjsIT7VZhk3GaMpVmPTRjp89XQDvj86+PrPtuFlgmfLrNvbvcqJ30y5lkD46c4Bd9zgwN4FeeVuY/oCKgfrN1qdCOT+ZYchkVQuCbKT+qK0gfOkYRt+B5feL5MtaEXX2MyhPS8wCvNLyAEth6NbmYxdXOPBXQrfGNcZYg/qjeB/muAzkd4wEPsR9ExoY5envlJ8Mx8LUQ/7A2tRp1jd+uy8s1hdb94BgOhcCqgzdqRkIVp40GiVHzVkFWQEkMEoX1Mw4iifs0QtAZu8qPyFWYORf9fty8zG/WX0RStdYbTuahCLb+Vqs2A5UEbg8nRdfl16aZJ3RY2fIoF1kYNG7XiZmp+bltOOqvYcOBnAr3Dy/y1PV1NrBMCULxibM57+nRyXrJe6TYLrJWPnp7meLLKppKPN3tgvx21s1/8bpbxC0xgshPZFgXQXgB
-    HASURA_GRAPHQL_JWT_SECRET: >-
-      AgAyuiPLqj0UMvhEkyEGF04LOp8al2O59/YGOei4hfkqcEw83rmJnb/o3nz96oLYG4gX/JlMT8grhUmR8wPG+Ah5UDuGK9POP75YYyNDQ05FrMDPCjQtEXNslqNp+oVS91ONUwJ7ARUr47vfQdxRoK03cFCboY0wEF8HMZzRjn5fXccttyT21kJV75Y0MtCif5jNCj+gtX2DIP9dNfvAJKCvOCzNJDALLmhv4tY71ZquGAiXf/+mJVP5ugRjFL0wYoKThAr3vph5cOPUo44swVilESu54gAoRlPNxFgOBXHS5Uu0VWryzTJyQGOElkYCxyBC45YzFZGMB3RWxaZtuForw76bD0RYWTVNsI+N/KmZdbYZO5Cs6HdqE2nptb3QAgpH0JOeWnzZGxTmkSOpEwCUGCJG+7ApPB5obIaVMZG39lWvZc/VTBZkTr7ufvOyIvwtYc9eh+AiNSy02gUXMzIkxK/eyWmKXowJcqXYK8K9iIgkLfMclUdWFQtHCN0h4OEyenRreP9qX8E34eeZ1ZwiDgJGOki8Ys4bphaFjSXZd82KRwuHDTIamAEGCUm7rLW9yOGE77AJpBTdqt2Qz9SUCXWbJewukbvtZwVtAEpEI/O+/KKNinObH0Lmhj8bRLn01rLgt9WsB972vEjboyzkT2gC7/G2Nx8O3IFiiJ9Ki5/hko5A4oorXdkCfuP7UfiKFR/pkXKqCOMrqi7uD7N0/qNtZ2j3satfeInOEldn1M6h7mz2IiRdszxq/RTsdFEO6h3X3lZLELXcDjgkZqCMXaPToAPRS2EKi6Ihs151VepGAerGOeq+DL+NU1aOwenivXe91vqDm9O0Cc3K756VBkUZA7ufFp3RKujk5fWygk0N8w0Zd9qU/tL7NqE/5n8xIdknzBI+qoHCrrOTnyMUpUEPuYbxY2lYkhb/4Afzte2nyM0K50I/4imEYWVsC+vNQ59OeYCoYcJBe19D+dm2rfxvYgy/H7scFjsl9rwCe23aPWQOJBJvcEnmgKOMRkG0cw6gvhBPVZ2w8gvIAfffLsj+zsag1izfgzcaajrfRr/kkxYk6R6Gz5tdjYSUz6P1Xk8LyCyB6st9IE433qlel4bwxjwh1CYz3pGUvAwj+TKsAF4xeiFd/LN3nitE74yGAOerbB/MrQqCcGbD6Anz2DWaFkhRxYKlJQsyy1rsxPzfo2wr8W/zpX7Jf17fHXJ96OG/WV2uZvudw7EjVdvxLhauabodjh3eC1/Kn9yvxJ5GTQLjJ04C/o7QgiIz+vNyxSqfvWf6zAsPJrAoHZXXoPbOaZVG2Sx1eWrhEIi8eV2z1x54SKLM0yy8lRTc2170AhLxqf4PaDTMR4ZTkhaIwPONeAIdHGnk3DVgYa/97WNO3j48ZnXwjKvp8mcKoe2Q9Y3WYuu4XafZg9UdDLbtePJiBlSF42uUbZsS4/oEU8ErRyodcOQPUYEM5SGuxceTvyxi6v7zhgYv3TiwWGgkoxznvFZ9H8m3SN0hCY4TINo9bnBAm2XRzZrhmGRpoKTOvQbkIXKoOzKeoQRgopjUdWW5X4EcKOW76X7B20x+2sPVkqwN/u5KFX3+HY3z1ui1+nIIKlbjUCY17QwxuVDP7yMU6xeBhtwUz0FkFGyHuSbrk+NhpA==
+    ACCOUNT_EMAIL_SECRET: AgBc+UqJhU2ZBfuplyiI3pPekRjm36i62WYR1lVpM9PIwK636R78mpfckIeGU09qKAxWGYBqtYtvNP3lTG8OwEUqKLnUxZPZKbtwc78GwzEzaPpnWmM+j78uBDxqHDiW+jKwnD/6XiWxsfyd1ZU/qS0LDEJBnVRoDyUI0NxzFWLxG8ylr6oK3q+oD3338D588TimklZGOvRm/hI95d5uwKsYPz0zYOj28pgHzNMVycreOXi9l562agyg2hdb8AkFD41utLEURxJOomJUl2xZIjv6FX++R9OJQzRsX6WsCAkLZPO7VEi1cvG6QzPf/uchwystfQfW5c+5ofVJer5mLJJjFcO8OfNbsg/JYlndv4F90cjH2dojSHv/qH/ddpObPgkDpVzCljdTvrir5bl3z3KeqLb20ja1hLJlwOue4zHDCQ6Fwza8VN6BjbHZLYhOO5qlYfWezjwt+B6RdFVzD8wu2JbuWsJo5w2HhMl2Nckar1B8CPxzgRXnFwc/QsFTDXOXX+rtxnC4FJfffZ/2frV745c642AhOArDxk8OGDFkrexr5OMv0iJcY15cl6K9dfZWOKfFd5mxfWFhDWUSAoUZJsz4uVxpTCCoSJBe8Nf1aKk7PkZ+bXtV5bpuktySoPh0hG1M1dUg0WsSC2i6zp75AUxVW6c4GG7d9FMsTHIwyD7fEbV3TMRanSRFYNPOmft/oI7Q3oNGOGg26KCtX414FG02EnpmrttHQguY7cnHGG7i7s8mnyGv
+    HASURA_GRAPHQL_ADMIN_SECRET: AgAQ9npiVSZcI8IA6kHHQ9tMaKYahCPmiYh9PoEmKIvisGCM4hQ2Q+UUoUvA2N3Id/GCxNZh3hqmTjLp+mHPy0e8rr9+/WVB5jrrqWO/oX2R1kXq0dbITF27UOjmTaUkZefPf7diHKpCXKGamkP6YbVuZa+1BBmBBfkIDJsraKO1CS/EO0QZAb0fHJiOkNy30j4pTTlg16JdugEj3kXdXXXZD/F8OyvlLBY1jivC/uFMGppNh1eRivgi4Y+krCDCuLphAa5YVslLMf7bboDD5Tk1b2HOCNYxQ96dxvkqCVtNd2rxXfDsYy9vMbQfYnsBjsIT7VZhk3GaMpVmPTRjp89XQDvj86+PrPtuFlgmfLrNvbvcqJ30y5lkD46c4Bd9zgwN4FeeVuY/oCKgfrN1qdCOT+ZYchkVQuCbKT+qK0gfOkYRt+B5feL5MtaEXX2MyhPS8wCvNLyAEth6NbmYxdXOPBXQrfGNcZYg/qjeB/muAzkd4wEPsR9ExoY5envlJ8Mx8LUQ/7A2tRp1jd+uy8s1hdb94BgOhcCqgzdqRkIVp40GiVHzVkFWQEkMEoX1Mw4iifs0QtAZu8qPyFWYORf9fty8zG/WX0RStdYbTuahCLb+Vqs2A5UEbg8nRdfl16aZJ3RY2fIoF1kYNG7XiZmp+bltOOqvYcOBnAr3Dy/y1PV1NrBMCULxibM57+nRyXrJe6TYLrJWPnp7meLLKppKPN3tgvx21s1/8bpbxC0xgshPZFgXQXgB
+    HASURA_GRAPHQL_JWT_SECRET: AgAyuiPLqj0UMvhEkyEGF04LOp8al2O59/YGOei4hfkqcEw83rmJnb/o3nz96oLYG4gX/JlMT8grhUmR8wPG+Ah5UDuGK9POP75YYyNDQ05FrMDPCjQtEXNslqNp+oVS91ONUwJ7ARUr47vfQdxRoK03cFCboY0wEF8HMZzRjn5fXccttyT21kJV75Y0MtCif5jNCj+gtX2DIP9dNfvAJKCvOCzNJDALLmhv4tY71ZquGAiXf/+mJVP5ugRjFL0wYoKThAr3vph5cOPUo44swVilESu54gAoRlPNxFgOBXHS5Uu0VWryzTJyQGOElkYCxyBC45YzFZGMB3RWxaZtuForw76bD0RYWTVNsI+N/KmZdbYZO5Cs6HdqE2nptb3QAgpH0JOeWnzZGxTmkSOpEwCUGCJG+7ApPB5obIaVMZG39lWvZc/VTBZkTr7ufvOyIvwtYc9eh+AiNSy02gUXMzIkxK/eyWmKXowJcqXYK8K9iIgkLfMclUdWFQtHCN0h4OEyenRreP9qX8E34eeZ1ZwiDgJGOki8Ys4bphaFjSXZd82KRwuHDTIamAEGCUm7rLW9yOGE77AJpBTdqt2Qz9SUCXWbJewukbvtZwVtAEpEI/O+/KKNinObH0Lmhj8bRLn01rLgt9WsB972vEjboyzkT2gC7/G2Nx8O3IFiiJ9Ki5/hko5A4oorXdkCfuP7UfiKFR/pkXKqCOMrqi7uD7N0/qNtZ2j3satfeInOEldn1M6h7mz2IiRdszxq/RTsdFEO6h3X3lZLELXcDjgkZqCMXaPToAPRS2EKi6Ihs151VepGAerGOeq+DL+NU1aOwenivXe91vqDm9O0Cc3K756VBkUZA7ufFp3RKujk5fWygk0N8w0Zd9qU/tL7NqE/5n8xIdknzBI+qoHCrrOTnyMUpUEPuYbxY2lYkhb/4Afzte2nyM0K50I/4imEYWVsC+vNQ59OeYCoYcJBe19D+dm2rfxvYgy/H7scFjsl9rwCe23aPWQOJBJvcEnmgKOMRkG0cw6gvhBPVZ2w8gvIAfffLsj+zsag1izfgzcaajrfRr/kkxYk6R6Gz5tdjYSUz6P1Xk8LyCyB6st9IE433qlel4bwxjwh1CYz3pGUvAwj+TKsAF4xeiFd/LN3nitE74yGAOerbB/MrQqCcGbD6Anz2DWaFkhRxYKlJQsyy1rsxPzfo2wr8W/zpX7Jf17fHXJ96OG/WV2uZvudw7EjVdvxLhauabodjh3eC1/Kn9yvxJ5GTQLjJ04C/o7QgiIz+vNyxSqfvWf6zAsPJrAoHZXXoPbOaZVG2Sx1eWrhEIi8eV2z1x54SKLM0yy8lRTc2170AhLxqf4PaDTMR4ZTkhaIwPONeAIdHGnk3DVgYa/97WNO3j48ZnXwjKvp8mcKoe2Q9Y3WYuu4XafZg9UdDLbtePJiBlSF42uUbZsS4/oEU8ErRyodcOQPUYEM5SGuxceTvyxi6v7zhgYv3TiwWGgkoxznvFZ9H8m3SN0hCY4TINo9bnBAm2XRzZrhmGRpoKTOvQbkIXKoOzKeoQRgopjUdWW5X4EcKOW76X7B20x+2sPVkqwN/u5KFX3+HY3z1ui1+nIIKlbjUCY17QwxuVDP7yMU6xeBhtwUz0FkFGyHuSbrk+NhpA==
   template:
     metadata:
       name: hasura-sealed-secret
@@ -154,8 +148,7 @@ metadata:
   namespace: test-sample-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app-2nd-instance
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/deployment.yaml
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/depname.full: project.fabrique.contrib.app-2nd-instance.deployment.app-2nd-instance
     kontinuous/depname.chartResource: app-2nd-instance.deployment.app-2nd-instance
@@ -165,8 +158,8 @@ metadata:
     kontinuous/depname.resourceName: app-2nd-instance
     kontinuous/depname.chartNameTopFull: app-2nd-instance
     kontinuous/depname.chartNameTop: app-2nd-instance
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 2
   selector:
@@ -267,8 +260,7 @@ metadata:
   namespace: test-sample-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
     kontinuous/depname.chartResource: app.deployment.app
@@ -278,8 +270,8 @@ metadata:
     kontinuous/depname.resourceName: app
     kontinuous/depname.chartNameTopFull: app
     kontinuous/depname.chartNameTop: app
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 2
   selector:
@@ -380,8 +372,7 @@ metadata:
   namespace: test-sample-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
     kontinuous/depname.chartResource: hasura.deployment.hasura
@@ -391,8 +382,8 @@ metadata:
     kontinuous/depname.resourceName: hasura
     kontinuous/depname.chartNameTopFull: hasura
     kontinuous/depname.chartNameTop: hasura
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -477,8 +468,7 @@ metadata:
   namespace: test-sample-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.pgweb
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/pgweb/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/pgweb/templates/deployment.yaml
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/depname.full: project.fabrique.contrib.pgweb.deployment.pgweb
     kontinuous/depname.chartResource: pgweb.deployment.pgweb
@@ -488,8 +478,8 @@ metadata:
     kontinuous/depname.resourceName: pgweb
     kontinuous/depname.chartNameTopFull: pgweb
     kontinuous/depname.chartNameTop: pgweb
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -517,7 +507,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: WAIT_FOR_RETRIES
-              value: '24'
+              value: \\"24\\"
           envFrom:
             - secretRef:
                 name: pg-user
@@ -586,8 +576,7 @@ metadata:
   namespace: test-sample-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app-2nd-instance
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/service.yaml
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
 spec:
   ports:
@@ -645,8 +634,7 @@ metadata:
   namespace: test-sample-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
 spec:
   ports:
@@ -692,12 +680,11 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.app-2nd-instance
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/ingress.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/ingress.yaml
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: 'true'
+    kubernetes.io/tls-acme: \\"true\\"
   labels:
     component: app-2nd-instance
     application: test-sample-1
@@ -734,10 +721,11 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/configuration-snippet: >
-      more_set_headers \\"Content-Security-Policy: default-src 'none'; connect-src
-      'self' https://*.gouv.fr; font-src 'self'; img-src 'self'; prefetch-src
-      'self' https://*.gouv.fr; script-src 'self' https://*.gouv.fr; frame-src
-      'self' https://*.gouv.fr; style-src 'self' 'unsafe-inline'\\";
+      more_set_headers
+      \\"Content-Security-Policy: default-src 'none'; connect-src 'self'
+      https://*.gouv.fr; font-src 'self'; img-src 'self'; prefetch-src 'self'
+      https://*.gouv.fr; script-src 'self' https://*.gouv.fr; frame-src 'self'
+      https://*.gouv.fr; style-src 'self' 'unsafe-inline'\\";
 
       more_set_headers \\"X-Frame-Options: deny\\";
 
@@ -749,7 +737,7 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: 'true'
+    kubernetes.io/tls-acme: \\"true\\"
   labels:
     component: app
     application: test-sample-1
@@ -786,12 +774,11 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: 'true'
+    kubernetes.io/tls-acme: \\"true\\"
   labels:
     component: hasura
     application: test-sample-1
@@ -832,7 +819,7 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: 'true'
+    kubernetes.io/tls-acme: \\"true\\"
   labels:
     component: pgweb
     application: test-sample-1

@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots seed-db.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     janitor/ttl: 7d
   labels:
@@ -34,8 +33,7 @@ metadata:
   namespace: test-seed-db-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
   labels:
     kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
@@ -68,8 +66,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
   labels:
     kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
@@ -95,8 +92,7 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-seed-db-feature-branch-1-seed-jobs-contr-1rx9rykk
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-seed-db-feature-branch-1-seed-jobs-contr-1rx9rykk
     kontinuous/depname.chartResource: jobs.job.job-dev-test-seed-db-feature-branch-1-seed-jobs-contr-1rx9rykk
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
@@ -104,7 +100,7 @@ metadata:
     kontinuous/depname.resourceName: job-dev-test-seed-db-feature-branch-1-seed-jobs-contr-1rx9rykk
     kontinuous/depname.chartNameTopFull: jobs
     kontinuous/depname.chartNameTop: jobs
-    kontinuous/plugin.log: 'true'
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     kontinuous/deployment.env: test-seed-db-feature-branch-1
@@ -143,9 +139,9 @@ spec:
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - -c
             - |
-
+              
               degit kontinuous/test-seed-db#feature-branch-1 \\\\
                 /workspace
           securityContext:
@@ -159,12 +155,11 @@ spec:
               cpu: 3000m
               memory: 8192Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
-          image: >-
-            harbor.fabrique.social.gouv.fr/test-seed-db/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          image: harbor.fabrique.social.gouv.fr/test-seed-db/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           imagePullPolicy: IfNotPresent
           env:
             - name: KONTINUOUS_OUTPUT
@@ -173,7 +168,7 @@ spec:
               value: /kontinuous-input
           command:
             - /bin/bash
-            - '-c'
+            - -c
             - |
               set -e
               yarn seed
@@ -194,8 +189,7 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha/jobs.seed
+              subPath: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha/jobs.seed
       securityContext:
         fsGroup: 1000
       volumes:
@@ -224,8 +218,7 @@ metadata:
   namespace: test-seed-db-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"seed\\"]'
     kontinuous/deployment: test-seed-db-feature-branch-1-ffac537e6cbbf934b08745a-24qzpeha
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
@@ -236,8 +229,8 @@ metadata:
     kontinuous/depname.resourceName: app
     kontinuous/depname.chartNameTopFull: app
     kontinuous/depname.chartNameTop: app
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -277,8 +270,7 @@ spec:
                         - app
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/test-seed-db/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/test-seed-db/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 3000

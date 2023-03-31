@@ -19,8 +19,7 @@ metadata:
   namespace: test-chart-group-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.api1
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/api1/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/api1/templates/deployment.yaml
     kontinuous/plugin.chart-group: the-group
     kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b08-3jqtwmx7
     kontinuous/depname.full: project.fabrique.contrib.api1.deployment.api1
@@ -31,8 +30,8 @@ metadata:
     kontinuous/depname.resourceName: api1
     kontinuous/depname.chartNameTopFull: api1
     kontinuous/depname.chartNameTop: api1
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -72,8 +71,7 @@ spec:
                         - api1
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/test-chart-group/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/test-chart-group/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 3000
@@ -127,8 +125,7 @@ metadata:
   namespace: test-chart-group-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.api2
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/api2/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/api2/templates/deployment.yaml
     kontinuous/plugin.chart-group: the-group
     kontinuous/deployment: test-chart-group-feature-branch-1-ffac537e6cbbf934b08-3jqtwmx7
     kontinuous/depname.full: project.fabrique.contrib.api2.deployment.api2
@@ -139,8 +136,8 @@ metadata:
     kontinuous/depname.resourceName: api2
     kontinuous/depname.chartNameTopFull: api2
     kontinuous/depname.chartNameTop: api2
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -180,8 +177,7 @@ spec:
                         - api2
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/test-chart-group/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/test-chart-group/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 3000

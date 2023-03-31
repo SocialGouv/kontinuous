@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots cnpg.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
     janitor/ttl: 7d
   labels:
@@ -34,8 +33,7 @@ metadata:
   namespace: test-cnpg-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
   labels:
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
@@ -68,8 +66,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
   labels:
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
@@ -101,8 +98,7 @@ metadata:
   namespace: test-cnpg-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"cnpg\\"]'
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
     kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
@@ -113,8 +109,8 @@ metadata:
     kontinuous/depname.resourceName: hasura
     kontinuous/depname.chartNameTopFull: hasura
     kontinuous/depname.chartNameTop: hasura
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -137,8 +133,7 @@ spec:
         kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
     spec:
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/test-cnpg/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/test-cnpg/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
           livenessProbe:
             failureThreshold: 15
             httpGet:
@@ -200,8 +195,7 @@ metadata:
   namespace: test-cnpg-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
     kontinuous/plugin.needs: '[\\"cnpg\\"]'
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
 spec:
@@ -219,8 +213,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
     kontinuous/plugin.needs: '[\\"cnpg\\"]'
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
   labels:
@@ -283,7 +276,7 @@ metadata:
     kontinuous/depname.resourceName: cnpg-cluster
     kontinuous/depname.chartNameTopFull: cnpg.cnpg-cluster
     kontinuous/depname.chartNameTop: cnpg
-    kontinuous/plugin.log: 'false'
+    kontinuous/plugin.log: \\"false\\"
   namespace: test-cnpg-feature-branch-1
 spec:
   instances: 1
@@ -340,7 +333,7 @@ spec:
   instances: 1
   pgbouncer:
     parameters:
-      max_client_conn: '1000'
+      max_client_conn: \\"1000\\"
     poolMode: session
   type: rw
 "

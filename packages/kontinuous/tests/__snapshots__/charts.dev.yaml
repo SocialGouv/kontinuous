@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots charts.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-charts-feature-branch-1-ffac537e6cbbf934b08745a3-4f4nbjh7
     janitor/ttl: 7d
   labels:
@@ -33,8 +32,7 @@ metadata:
   namespace: test-charts-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-charts-feature-branch-1-ffac537e6cbbf934b08745a3-4f4nbjh7
   labels:
     kontinuous/deployment: test-charts-feature-branch-1-ffac537e6cbbf934b08745a3-4f4nbjh7
@@ -87,8 +85,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-charts-feature-branch-1-ffac537e6cbbf934b08745a3-4f4nbjh7
   labels:
     kontinuous/deployment: test-charts-feature-branch-1-ffac537e6cbbf934b08745a3-4f4nbjh7
@@ -108,7 +105,7 @@ metadata:
   name: extra-job
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
+    kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/chartPath: project.extra-job
     kontinuous/source: project/charts/extra-job/templates/my-job.yaml
@@ -121,7 +118,7 @@ metadata:
     kontinuous/depname.resourceName: extra-job
     kontinuous/depname.chartNameTopFull: extra-job
     kontinuous/depname.chartNameTop: extra-job
-    kontinuous/plugin.log: 'true'
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-charts-feature-branch-1-ffac537e6cbbf934b08745a3-4f4nbjh7
     kontinuous/deployment.env: test-charts-feature-branch-1
@@ -156,7 +153,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command:
             - /bin/bash
-            - '-c'
+            - -c
             - |
               set -e
               echo Hello World
