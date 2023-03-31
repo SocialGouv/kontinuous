@@ -102,15 +102,15 @@ paths:
             default: manifests
           required: false
       responses:
-        '200':
+        \\"200\\":
           content:
             text/x-yaml:
               schema:
                 type: string
                 format: binary
-          description: 'Default description: Success results getOneArtifactsDownload'
+          description: \\"Default description: Success results getOneArtifactsDownload\\"
       operationId: getOneArtifactsDownload
-      description: 'Default description: Query: getOneArtifactsDownload'
+      description: \\"Default description: Query: getOneArtifactsDownload\\"
       summary: getOneArtifactsDownload
     parameters: []
     description: /artifacts/download
@@ -148,7 +148,7 @@ paths:
             format: sha1
           required: true
       responses:
-        '200':
+        \\"200\\":
           content:
             application/json:
               schema:
@@ -163,8 +163,8 @@ paths:
                   ok:
                     type: boolean
                     nullable: true
-          description: 'Default description: Success results getOneArtifactsStatus'
-        '404':
+          description: \\"Default description: Success results getOneArtifactsStatus\\"
+        \\"404\\":
           content:
             application/json:
               schema:
@@ -172,9 +172,9 @@ paths:
                 properties:
                   message:
                     type: string
-          description: 'Default description: HTTP 404 for getOneArtifactsStatus'
+          description: \\"Default description: HTTP 404 for getOneArtifactsStatus\\"
       operationId: getOneArtifactsStatus
-      description: 'Default description: Query: getOneArtifactsStatus'
+      description: \\"Default description: Query: getOneArtifactsStatus\\"
       summary: getOneArtifactsStatus
     post:
       security:
@@ -227,7 +227,7 @@ paths:
                   type: boolean
                   nullable: true
       responses:
-        '200':
+        \\"200\\":
           content:
             application/json:
               schema:
@@ -235,9 +235,9 @@ paths:
                 properties:
                   message:
                     type: string
-          description: 'Default description: Success results addOneArtifactsStatus'
+          description: \\"Default description: Success results addOneArtifactsStatus\\"
       operationId: addOneArtifactsStatus
-      description: 'Default description: Insert mutation: addOneArtifactsStatus'
+      description: \\"Default description: Insert mutation: addOneArtifactsStatus\\"
       summary: addOneArtifactsStatus
     parameters: []
     description: /artifacts/status
@@ -298,7 +298,7 @@ paths:
               manifests:
                 contentType: text/x-yaml, text/yaml, application/x-yaml, application/yaml
       responses:
-        '201':
+        \\"201\\":
           content:
             application/json:
               schema:
@@ -306,9 +306,9 @@ paths:
                 properties:
                   message:
                     type: string
-          description: 'Default description: HTTP 201 for addOneArtifactsUpload'
+          description: \\"Default description: HTTP 201 for addOneArtifactsUpload\\"
       operationId: addOneArtifactsUpload
-      description: 'Default description: Insert mutation: addOneArtifactsUpload'
+      description: \\"Default description: Insert mutation: addOneArtifactsUpload\\"
       summary: addOneArtifactsUpload
     parameters: []
     description: /artifacts/upload
@@ -394,7 +394,7 @@ paths:
               manifests:
                 contentType: text/x-yaml, text/yaml, application/x-yaml, application/yaml
       responses:
-        '202':
+        \\"202\\":
           content:
             application/json:
               schema:
@@ -402,8 +402,8 @@ paths:
                 properties:
                   message:
                     type: string
-          description: 'Default description: HTTP 202 for addOneHooksCustom'
-        '204':
+          description: \\"Default description: HTTP 202 for addOneHooksCustom\\"
+        \\"204\\":
           content:
             application/json:
               schema:
@@ -411,9 +411,9 @@ paths:
                 properties:
                   message:
                     type: string
-          description: 'Default description: HTTP 204 for addOneHooksCustom'
+          description: \\"Default description: HTTP 204 for addOneHooksCustom\\"
       operationId: addOneHooksCustom
-      description: 'Default description: Insert mutation: addOneHooksCustom'
+      description: \\"Default description: Insert mutation: addOneHooksCustom\\"
       summary: addOneHooksCustom
     parameters: []
     description: /hooks/custom
@@ -524,7 +524,7 @@ paths:
                       type: string
                       example: https://github.com/socialgouv/sample-next-app.git
       responses:
-        '202':
+        \\"202\\":
           content:
             application/json:
               schema:
@@ -532,8 +532,8 @@ paths:
                 properties:
                   message:
                     type: string
-          description: 'Default description: HTTP 202 for addOneHooksGithub'
-        '204':
+          description: \\"Default description: HTTP 202 for addOneHooksGithub\\"
+        \\"204\\":
           content:
             application/json:
               schema:
@@ -541,9 +541,9 @@ paths:
                 properties:
                   message:
                     type: string
-          description: 'Default description: HTTP 204 for addOneHooksGithub'
+          description: \\"Default description: HTTP 204 for addOneHooksGithub\\"
       operationId: addOneHooksGithub
-      description: 'Default description: Insert mutation: addOneHooksGithub'
+      description: \\"Default description: Insert mutation: addOneHooksGithub\\"
       summary: addOneHooksGithub
     parameters: []
     description: /hooks/github
@@ -633,7 +633,7 @@ paths:
                       type: string
                       example: http://example.com/gitlabhq/gitlab-test.git
       responses:
-        '202':
+        \\"202\\":
           content:
             application/json:
               schema:
@@ -641,8 +641,8 @@ paths:
                 properties:
                   message:
                     type: string
-          description: 'Default description: HTTP 202 for addOneHooksGitlab'
-        '204':
+          description: \\"Default description: HTTP 202 for addOneHooksGitlab\\"
+        \\"204\\":
           content:
             application/json:
               schema:
@@ -650,9 +650,9 @@ paths:
                 properties:
                   message:
                     type: string
-          description: 'Default description: HTTP 204 for addOneHooksGitlab'
+          description: \\"Default description: HTTP 204 for addOneHooksGitlab\\"
       operationId: addOneHooksGitlab
-      description: 'Default description: Insert mutation: addOneHooksGitlab'
+      description: \\"Default description: Insert mutation: addOneHooksGitlab\\"
       summary: addOneHooksGitlab
     parameters: []
     description: /hooks/gitlab
@@ -760,7 +760,7 @@ paths:
                 - ref
                 - repositoryUrl
       responses:
-        '202':
+        \\"202\\":
           content:
             application/json:
               schema:
@@ -768,8 +768,8 @@ paths:
                 properties:
                   message:
                     type: string
-          description: 'Default description: HTTP 202 for addOneHooksUser'
-        '204':
+          description: \\"Default description: HTTP 202 for addOneHooksUser\\"
+        \\"204\\":
           content:
             application/json:
               schema:
@@ -777,9 +777,9 @@ paths:
                 properties:
                   message:
                     type: string
-          description: 'Default description: HTTP 204 for addOneHooksUser'
+          description: \\"Default description: HTTP 204 for addOneHooksUser\\"
       operationId: addOneHooksUser
-      description: 'Default description: Insert mutation: addOneHooksUser'
+      description: \\"Default description: Insert mutation: addOneHooksUser\\"
       summary: addOneHooksUser
     parameters: []
     description: /hooks/user
@@ -852,22 +852,22 @@ paths:
           schema:
             type: string
             format: humanDuration
-            description: 'human duration format, eg: 24h'
+            description: \\"human duration format, eg: 24h\\"
       responses:
-        '200':
+        \\"200\\":
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/textStream'
-          description: 'Default description: Success results getOneLogsPipeline'
-        '204':
+                $ref: \\"#/components/schemas/textStream\\"
+          description: \\"Default description: Success results getOneLogsPipeline\\"
+        \\"204\\":
           content:
             text/plain:
               schema:
                 type: string
-          description: 'Default description: HTTP 204 for getOneLogsPipeline'
+          description: \\"Default description: HTTP 204 for getOneLogsPipeline\\"
       operationId: getOneLogsPipeline
-      description: 'Default description: Query: getOneLogsPipeline'
+      description: \\"Default description: Query: getOneLogsPipeline\\"
       summary: getOneLogsPipeline
     parameters: []
     description: /logs/pipeline
@@ -886,7 +886,7 @@ paths:
             format: clusterName
           required: true
       responses:
-        '200':
+        \\"200\\":
           content:
             application/json:
               schema:
@@ -896,9 +896,9 @@ paths:
                     type: array
                     items:
                       type: string
-          description: 'Default description: Success results getManySupportNamespace'
+          description: \\"Default description: Success results getManySupportNamespace\\"
       operationId: getManySupportNamespace
-      description: 'Default description: Query: getManySupportNamespace'
+      description: \\"Default description: Query: getManySupportNamespace\\"
       summary: getManySupportNamespace
     parameters: []
     description: /support/namespace/
@@ -911,7 +911,7 @@ paths:
             - webhook
       parameters: []
       responses:
-        '500':
+        \\"500\\":
           content:
             application/json:
               schema:
@@ -923,9 +923,9 @@ paths:
                     type: string
                   sentry:
                     type: string
-          description: 'Default description: HTTP 500 for getOneSupportDebugSentry'
+          description: \\"Default description: HTTP 500 for getOneSupportDebugSentry\\"
       operationId: getOneSupportDebugSentry
-      description: 'Default description: Query: getOneSupportDebugSentry'
+      description: \\"Default description: Query: getOneSupportDebugSentry\\"
       summary: getOneSupportDebugSentry
     parameters: []
     description: /support/debug-sentry
@@ -950,7 +950,7 @@ paths:
             format: namespace
           required: true
       responses:
-        '200':
+        \\"200\\":
           content:
             application/json:
               schema:
@@ -970,9 +970,9 @@ paths:
                             type: string
                           type:
                             type: string
-          description: 'Default description: Success results getOneSupportRolloutStatus'
+          description: \\"Default description: Success results getOneSupportRolloutStatus\\"
       operationId: getOneSupportRolloutStatus
-      description: 'Default description: Query: getOneSupportRolloutStatus'
+      description: \\"Default description: Query: getOneSupportRolloutStatus\\"
       summary: getOneSupportRolloutStatus
     parameters: []
     description: /support/rollout-status

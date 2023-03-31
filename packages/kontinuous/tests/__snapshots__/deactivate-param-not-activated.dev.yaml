@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots deactivate-param-not-activated.dev 
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-deactivate-param-not-activated-feature-branch-1-qes6b147
     janitor/ttl: 7d
   labels:
@@ -33,8 +32,7 @@ metadata:
   namespace: test-deactivate-param-not-activated-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-deactivate-param-not-activated-feature-branch-1-qes6b147
   labels:
     kontinuous/deployment: test-deactivate-param-not-activated-feature-branch-1-qes6b147
@@ -67,8 +65,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-deactivate-param-not-activated-feature-branch-1-qes6b147
   labels:
     kontinuous/deployment: test-deactivate-param-not-activated-feature-branch-1-qes6b147

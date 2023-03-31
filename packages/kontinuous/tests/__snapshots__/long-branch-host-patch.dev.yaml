@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots long-branch-host-patch.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: a-very-very-very-long-branch-name-to-test-host-truncation
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-bra-2prquyml
     janitor/ttl: 7d
   labels:
@@ -34,8 +33,7 @@ metadata:
   namespace: test-long-branch-host-patch-a-very-very-very-long-bra-2h9265rk
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-bra-2prquyml
   labels:
     kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-bra-2prquyml
@@ -68,8 +66,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-bra-2prquyml
   labels:
     kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-bra-2prquyml
@@ -101,8 +98,7 @@ metadata:
   namespace: test-long-branch-host-patch-a-very-very-very-long-bra-2h9265rk
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-bra-2prquyml
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
     kontinuous/depname.chartResource: app.deployment.app
@@ -112,8 +108,8 @@ metadata:
     kontinuous/depname.resourceName: app
     kontinuous/depname.chartNameTopFull: app
     kontinuous/depname.chartNameTop: app
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -146,16 +142,14 @@ spec:
                     - key: namespace
                       operator: In
                       values:
-                        - >-
-                          test-long-branch-host-patch-a-very-very-very-long-bra-2h9265rk
+                        - test-long-branch-host-patch-a-very-very-very-long-bra-2h9265rk
                     - key: component
                       operator: In
                       values:
                         - app
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/test-long-branch-host-patch/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/test-long-branch-host-patch/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 3000
@@ -243,8 +237,7 @@ metadata:
   namespace: test-long-branch-host-patch-a-very-very-very-long-bra-2h9265rk
 spec:
   rules:
-    - host: >-
-        some-long-prefix-name-test-long-branch-host-patch-a-v-6vwodrjq.dev.fabrique.social.gouv.fr
+    - host: some-long-prefix-name-test-long-branch-host-patch-a-v-6vwodrjq.dev.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -256,8 +249,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - >-
-          some-long-prefix-name-test-long-branch-host-patch-a-v-6vwodrjq.dev.fabrique.social.gouv.fr
+        - some-long-prefix-name-test-long-branch-host-patch-a-v-6vwodrjq.dev.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

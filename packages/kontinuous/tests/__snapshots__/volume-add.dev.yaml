@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots volume-add.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
     janitor/ttl: 7d
   labels:
@@ -34,8 +33,7 @@ metadata:
   namespace: test-volume-add-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
   labels:
     kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
@@ -68,8 +66,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
   labels:
     kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
@@ -101,8 +98,7 @@ metadata:
   namespace: test-volume-add-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/deployment: test-volume-add-feature-branch-1-ffac537e6cbbf934b087-45mpchzb
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
     kontinuous/depname.chartResource: app.deployment.app
@@ -112,8 +108,8 @@ metadata:
     kontinuous/depname.resourceName: app
     kontinuous/depname.chartNameTopFull: app
     kontinuous/depname.chartNameTop: app
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -157,8 +153,7 @@ spec:
           persistentVolumeClaim:
             claimName: docs
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/test-volume-add/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/test-volume-add/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 3000

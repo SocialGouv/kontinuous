@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots metabase.prod 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
   labels:
     application: test-metabase
@@ -32,8 +31,7 @@ metadata:
   namespace: test-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
   labels:
     kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
@@ -66,8 +64,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
   labels:
     kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
@@ -99,18 +96,17 @@ metadata:
   namespace: test-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase-app1
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/configmap.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/configmap.yaml
     kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
 data:
   MB_APPLICATION_NAME: metabase-app1
   MB_DB_TYPE: postgres
   MB_ADMIN_EMAIL: admin@fabrique.social.gouv.fr
-  MB_ANON_TRACKING_ENABLED: 'false'
+  MB_ANON_TRACKING_ENABLED: \\"false\\"
   MB_APPLICATION_LOGO_URL: https://socialgouv.github.io/support/_media/marianne.jpeg
   MB_EMAIL_FROM_ADDRESS: contact@fabrique.social.gouv.fr
-  MB_ENABLE_EMBEDDING: 'true'
-  MB_ENABLE_PUBLIC_SHARING: 'true'
+  MB_ENABLE_EMBEDDING: \\"true\\"
+  MB_ENABLE_PUBLIC_SHARING: \\"true\\"
   MB_SITE_LOCALE: fr
   MB_SITE_NAME: Fabrique des ministères sociaux
   MB_SITE_URL: https://metabase-app1-test-metabase.fabrique.social.gouv.fr
@@ -133,18 +129,17 @@ metadata:
   namespace: test-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase-app2
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/configmap.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/configmap.yaml
     kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
 data:
   MB_APPLICATION_NAME: metabase-app2
   MB_DB_TYPE: postgres
   MB_ADMIN_EMAIL: admin@fabrique.social.gouv.fr
-  MB_ANON_TRACKING_ENABLED: 'false'
+  MB_ANON_TRACKING_ENABLED: \\"false\\"
   MB_APPLICATION_LOGO_URL: https://socialgouv.github.io/support/_media/marianne.jpeg
   MB_EMAIL_FROM_ADDRESS: contact@fabrique.social.gouv.fr
-  MB_ENABLE_EMBEDDING: 'true'
-  MB_ENABLE_PUBLIC_SHARING: 'true'
+  MB_ENABLE_EMBEDDING: \\"true\\"
+  MB_ENABLE_PUBLIC_SHARING: \\"true\\"
   MB_SITE_LOCALE: fr
   MB_SITE_NAME: Fabrique des ministères sociaux
   MB_SITE_URL: https://metabase-app2-test-metabase.fabrique.social.gouv.fr
@@ -211,8 +206,7 @@ metadata:
   namespace: test-metabase
 spec:
   encryptedData:
-    METABASE_SECRET: >-
-      AgBc+UqJhU2ZBfuplyiI3pPekRjm36i62WYR1lVpM9PIwK636R78mpfckIeGU09qKAxWGYBqtYtvNP3lTG8OwEUqKLnUxZPZKbtwc78GwzEzaPpnWmM+j78uBDxqHDiW+jKwnD/6XiWxsfyd1ZU/qS0LDEJBnVRoDyUI0NxzFWLxG8ylr6oK3q+oD3338D588TimklZGOvRm/hI95d5uwKsYPz0zYOj28pgHzNMVycreOXi9l562agyg2hdb8AkFD41utLEURxJOomJUl2xZIjv6FX++R9OJQzRsX6WsCAkLZPO7VEi1cvG6QzPf/uchwystfQfW5c+5ofVJer5mLJJjFcO8OfNbsg/JYlndv4F90cjH2dojSHv/qH/ddpObPgkDpVzCljdTvrir5bl3z3KeqLb20ja1hLJlwOue4zHDCQ6Fwza8VN6BjbHZLYhOO5qlYfWezjwt+B6RdFVzD8wu2JbuWsJo5w2HhMl2Nckar1B8CPxzgRXnFwc/QsFTDXOXX+rtxnC4FJfffZ/2frV745c642AhOArDxk8OGDFkrexr5OMv0iJcY15cl6K9dfZWOKfFd5mxfWFhDWUSAoUZJsz4uVxpTCCoSJBe8Nf1aKk7PkZ+bXtV5bpuktySoPh0hG1M1dUg0WsSC2i6zp75AUxVW6c4GG7d9FMsTHIwyD7fEbV3TMRanSRFYNPOmft/oI7Q3oNGOGg26KCtX414FG02EnpmrttHQguY7cnHGG7i7s8mnyGv
+    METABASE_SECRET: AgBc+UqJhU2ZBfuplyiI3pPekRjm36i62WYR1lVpM9PIwK636R78mpfckIeGU09qKAxWGYBqtYtvNP3lTG8OwEUqKLnUxZPZKbtwc78GwzEzaPpnWmM+j78uBDxqHDiW+jKwnD/6XiWxsfyd1ZU/qS0LDEJBnVRoDyUI0NxzFWLxG8ylr6oK3q+oD3338D588TimklZGOvRm/hI95d5uwKsYPz0zYOj28pgHzNMVycreOXi9l562agyg2hdb8AkFD41utLEURxJOomJUl2xZIjv6FX++R9OJQzRsX6WsCAkLZPO7VEi1cvG6QzPf/uchwystfQfW5c+5ofVJer5mLJJjFcO8OfNbsg/JYlndv4F90cjH2dojSHv/qH/ddpObPgkDpVzCljdTvrir5bl3z3KeqLb20ja1hLJlwOue4zHDCQ6Fwza8VN6BjbHZLYhOO5qlYfWezjwt+B6RdFVzD8wu2JbuWsJo5w2HhMl2Nckar1B8CPxzgRXnFwc/QsFTDXOXX+rtxnC4FJfffZ/2frV745c642AhOArDxk8OGDFkrexr5OMv0iJcY15cl6K9dfZWOKfFd5mxfWFhDWUSAoUZJsz4uVxpTCCoSJBe8Nf1aKk7PkZ+bXtV5bpuktySoPh0hG1M1dUg0WsSC2i6zp75AUxVW6c4GG7d9FMsTHIwyD7fEbV3TMRanSRFYNPOmft/oI7Q3oNGOGg26KCtX414FG02EnpmrttHQguY7cnHGG7i7s8mnyGv
   template:
     metadata:
       name: metabase1-sealed-secret
@@ -238,8 +232,7 @@ metadata:
   namespace: test-metabase
 spec:
   encryptedData:
-    METABASE_SECRET: >-
-      AgBc+UqJhU2ZBfuplyiI3pPekRjm36i62WYR1lVpM9PIwK636R78mpfckIeGU09qKAxWGYBqtYtvNP3lTG8OwEUqKLnUxZPZKbtwc78GwzEzaPpnWmM+j78uBDxqHDiW+jKwnD/6XiWxsfyd1ZU/qS0LDEJBnVRoDyUI0NxzFWLxG8ylr6oK3q+oD3338D588TimklZGOvRm/hI95d5uwKsYPz0zYOj28pgHzNMVycreOXi9l562agyg2hdb8AkFD41utLEURxJOomJUl2xZIjv6FX++R9OJQzRsX6WsCAkLZPO7VEi1cvG6QzPf/uchwystfQfW5c+5ofVJer5mLJJjFcO8OfNbsg/JYlndv4F90cjH2dojSHv/qH/ddpObPgkDpVzCljdTvrir5bl3z3KeqLb20ja1hLJlwOue4zHDCQ6Fwza8VN6BjbHZLYhOO5qlYfWezjwt+B6RdFVzD8wu2JbuWsJo5w2HhMl2Nckar1B8CPxzgRXnFwc/QsFTDXOXX+rtxnC4FJfffZ/2frV745c642AhOArDxk8OGDFkrexr5OMv0iJcY15cl6K9dfZWOKfFd5mxfWFhDWUSAoUZJsz4uVxpTCCoSJBe8Nf1aKk7PkZ+bXtV5bpuktySoPh0hG1M1dUg0WsSC2i6zp75AUxVW6c4GG7d9FMsTHIwyD7fEbV3TMRanSRFYNPOmft/oI7Q3oNGOGg26KCtX414FG02EnpmrttHQguY7cnHGG7i7s8mnyGv
+    METABASE_SECRET: AgBc+UqJhU2ZBfuplyiI3pPekRjm36i62WYR1lVpM9PIwK636R78mpfckIeGU09qKAxWGYBqtYtvNP3lTG8OwEUqKLnUxZPZKbtwc78GwzEzaPpnWmM+j78uBDxqHDiW+jKwnD/6XiWxsfyd1ZU/qS0LDEJBnVRoDyUI0NxzFWLxG8ylr6oK3q+oD3338D588TimklZGOvRm/hI95d5uwKsYPz0zYOj28pgHzNMVycreOXi9l562agyg2hdb8AkFD41utLEURxJOomJUl2xZIjv6FX++R9OJQzRsX6WsCAkLZPO7VEi1cvG6QzPf/uchwystfQfW5c+5ofVJer5mLJJjFcO8OfNbsg/JYlndv4F90cjH2dojSHv/qH/ddpObPgkDpVzCljdTvrir5bl3z3KeqLb20ja1hLJlwOue4zHDCQ6Fwza8VN6BjbHZLYhOO5qlYfWezjwt+B6RdFVzD8wu2JbuWsJo5w2HhMl2Nckar1B8CPxzgRXnFwc/QsFTDXOXX+rtxnC4FJfffZ/2frV745c642AhOArDxk8OGDFkrexr5OMv0iJcY15cl6K9dfZWOKfFd5mxfWFhDWUSAoUZJsz4uVxpTCCoSJBe8Nf1aKk7PkZ+bXtV5bpuktySoPh0hG1M1dUg0WsSC2i6zp75AUxVW6c4GG7d9FMsTHIwyD7fEbV3TMRanSRFYNPOmft/oI7Q3oNGOGg26KCtX414FG02EnpmrttHQguY7cnHGG7i7s8mnyGv
   template:
     metadata:
       name: metabase2-sealed-secret
@@ -263,8 +256,7 @@ metadata:
   namespace: test-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase-app1
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/deployment.yaml
     kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
     kontinuous/depname.full: project.fabrique.contrib.metabase-app1.deployment.metabase-app1
     kontinuous/depname.chartResource: metabase-app1.deployment.metabase-app1
@@ -274,8 +266,8 @@ metadata:
     kontinuous/depname.resourceName: metabase-app1
     kontinuous/depname.chartNameTopFull: metabase-app1
     kontinuous/depname.chartNameTop: metabase-app1
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -368,8 +360,7 @@ metadata:
   namespace: test-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase-app2
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/deployment.yaml
     kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
     kontinuous/depname.full: project.fabrique.contrib.metabase-app2.deployment.metabase-app2
     kontinuous/depname.chartResource: metabase-app2.deployment.metabase-app2
@@ -379,8 +370,8 @@ metadata:
     kontinuous/depname.resourceName: metabase-app2
     kontinuous/depname.chartNameTopFull: metabase-app2
     kontinuous/depname.chartNameTop: metabase-app2
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -473,8 +464,7 @@ metadata:
   namespace: test-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase-app1
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/service.yaml
     kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
 spec:
   ports:
@@ -503,8 +493,7 @@ metadata:
   namespace: test-metabase
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase-app2
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/service.yaml
     kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
 spec:
   ports:
@@ -521,12 +510,11 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.metabase-app1
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/ingress.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase-app1/templates/ingress.yaml
     kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: 'true'
+    kubernetes.io/tls-acme: \\"true\\"
   labels:
     component: metabase-app1
     application: test-metabase
@@ -563,12 +551,11 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.metabase-app2
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/ingress.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/ingress.yaml
     kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: 'true'
+    kubernetes.io/tls-acme: \\"true\\"
   labels:
     component: metabase-app2
     application: test-metabase

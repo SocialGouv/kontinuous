@@ -7,7 +7,7 @@ metadata:
   name: extra-job
   namespace: awesome-ci
   annotations:
-    kapp.k14s.io/nonce: ''
+    kapp.k14s.io/nonce: \\"\\"
     kapp.k14s.io/update-strategy: fallback-on-replace
     kontinuous/chartPath: project.extra-job
     kontinuous/source: project/charts/extra-job/templates/my-job.yaml
@@ -20,7 +20,7 @@ metadata:
     kontinuous/depname.resourceName: extra-job
     kontinuous/depname.chartNameTopFull: extra-job
     kontinuous/depname.chartNameTop: extra-job
-    kontinuous/plugin.log: 'true'
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-standalone-charts-feature-branch-1-ffac537e6cbbf-6atwtfds
     kontinuous/deployment.env: test-standalone-charts-feature-branch-1-extra-job
@@ -55,7 +55,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command:
             - /bin/bash
-            - '-c'
+            - -c
             - |
               set -e
               echo Hello World
