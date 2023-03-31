@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.138.2 (2023-03-31)
+
+
+### Bug Fixes
+
+* decrease default limits ([#257](https://github.com/socialgouv/kontinuous/issues/257)) ([f1c6a7d](https://github.com/socialgouv/kontinuous/commit/f1c6a7d6279f118a16072c3dc3632f39ccf1a7af))
+
 ## 1.138.1 (2023-03-31)
 
 
