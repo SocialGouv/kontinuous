@@ -221,9 +221,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
     kontinuous/deployment: test-values-js-feature-branch-1-ffac537e6cbbf934b0874-6cv8lfvm
-    cert-manager.io: cluster-issuer
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: \\"true\\"
   labels:
     component: app
     application: test-values-js
