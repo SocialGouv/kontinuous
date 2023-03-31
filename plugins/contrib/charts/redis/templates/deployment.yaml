@@ -22,6 +22,15 @@ spec:
         runAsGroup: 999
         fsGroup: 999
         runAsNonRoot: true
+      volumes:
+        {{- if gt (len .Values.volumes) 0 }}
+        {{- tpl (.Values.volumes | toYaml) . | nindent 8 }}
+        {{- end }}
+        {{- range $volumeName := .Values.addVolumes }}
+        - name: "{{ tpl $volumeName $ }}"
+          persistentVolumeClaim:
+            claimName: "{{ tpl $volumeName $ }}"
+        {{- end }}
       containers:
         - image: {{ .Values.image }}
           name: redis
@@ -32,6 +41,14 @@ spec:
           envFrom:
             {{- if gt (len .Values.envFrom) 0 }}
             {{- tpl (.Values.envFrom | toYaml) . | nindent 12 }}
+            {{- end }}
+          volumeMounts:
+            {{- if gt (len .Values.volumeMounts) 0 }}
+            {{- tpl (.Values.volumeMounts | toYaml) . | nindent 12 }}
+            {{- end }}
+            {{- range $volumeName := .Values.addVolumes }}
+            - name: "{{ tpl $volumeName $ }}"
+              mountPath: "/mnt/{{ tpl $volumeName $ }}"
             {{- end }}
           ports:
             - containerPort: 6379

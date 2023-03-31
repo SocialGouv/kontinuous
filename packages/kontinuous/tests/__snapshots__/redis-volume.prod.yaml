@@ -1,0 +1,219 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test build manifests with snapshots redis-volume.prod 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: \\"1234\\"
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+  labels:
+    application: test-redis-volume
+    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+    kontinuous/deployment.env: test-redis-volume-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: namespace-test-redis-volume-632bbhqu
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: test-redis-volume
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-redis-volume
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+  labels:
+    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+    kontinuous/deployment.env: test-redis-volume-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+  labels:
+    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+    kontinuous/deployment.env: test-redis-volume-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-redis-volume
+automountServiceAccountToken: false
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: redis
+    application: test-redis-volume
+    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+    kontinuous/deployment.env: test-redis-volume-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-redis-511p43mf
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: redis
+  namespace: test-redis-volume
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.redis
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/redis/templates/deployment.yaml
+    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+    kontinuous/depname.full: project.fabrique.contrib.redis.deployment.redis
+    kontinuous/depname.chartResource: redis.deployment.redis
+    kontinuous/depname.chartName: redis
+    kontinuous/depname.chartPath: project.fabrique.contrib.redis
+    kontinuous/depname.resourcePath: deployment.redis
+    kontinuous/depname.resourceName: redis
+    kontinuous/depname.chartNameTopFull: redis
+    kontinuous/depname.chartNameTop: redis
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: redis
+  template:
+    metadata:
+      labels:
+        component: redis
+        kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+        kontinuous/deployment.env: test-redis-volume-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-redis-511p43mf
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+    spec:
+      securityContext:
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
+        runAsNonRoot: true
+      volumes:
+        - name: redis
+          persistentVolumeClaim:
+            claimName: redis
+      containers:
+        - image: redis:6.2.6-alpine3.14
+          name: redis
+          volumeMounts:
+            - mountPath: /data
+              name: redis
+            - name: redis
+              mountPath: /mnt/redis
+          ports:
+            - containerPort: 6379
+              name: http
+          livenessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+            exec:
+              command:
+                - sh
+                - -c
+                - redis-cli ping
+          readinessProbe:
+            failureThreshold: 15
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+            exec:
+              command:
+                - sh
+                - -c
+                - redis-cli ping
+          startupProbe:
+            failureThreshold: 12
+            periodSeconds: 5
+            exec:
+              command:
+                - sh
+                - -c
+                - redis-cli ping
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+            requests:
+              cpu: 300m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: redis
+    application: test-redis-volume
+    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+    kontinuous/deployment.env: test-redis-volume-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-redis-21v4gntm
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: redis
+  namespace: test-redis-volume
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.redis
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/redis/templates/service.yaml
+    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 6379
+  selector:
+    component: redis
+  type: ClusterIP
+"
+`;
