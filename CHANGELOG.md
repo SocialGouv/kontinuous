@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.139.1 (2023-04-03)
+
+
+### Bug Fixes
+
+* decouple fabrique config from contrib ([#266](https://github.com/socialgouv/kontinuous/issues/266)) ([f50bc74](https://github.com/socialgouv/kontinuous/commit/f50bc7445f40d56e35a0794e4c86866752f514f0))
+
 ## 1.139.0 (2023-04-03)
 
 
