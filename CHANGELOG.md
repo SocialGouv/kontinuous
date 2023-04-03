@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.139.0 (2023-04-03)
+
+
+### Features
+
+* forceRestart optout meta-value patch ([#267](https://github.com/socialgouv/kontinuous/issues/267)) ([bd1e947](https://github.com/socialgouv/kontinuous/commit/bd1e94799e3f1d0f592813291a93918c592ca079))
+
 ## 1.138.5 (2023-04-03)
 
 
