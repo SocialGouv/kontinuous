@@ -1,10 +1,6 @@
-const hasWildcard = (host) => host.endsWith(".dev.fabrique.social.gouv.fr")
-const isInternalHost = (host) => host.endsWith(".fabrique.social.gouv.fr")
-
-module.exports = (manifests, _options, { _config }) => {
-  // const { environment } = config
-
-  // const isProd = environment === "prod"
+module.exports = (manifests, options) => {
+  const hasWildcard = (host) => host.endsWith(options.wildcardHost)
+  const isInternalHost = (host) => host.endsWith(options.internalHost)
 
   const wildcardNamespaces = new Set()
 

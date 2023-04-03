@@ -11,6 +11,9 @@ dependencies:
     patches:
       certs:
         enabled: true
+        options:
+          wildcardHost: ".dev.fabrique.social.gouv.fr"
+          internalHost: ".fabrique.social.gouv.fr"
       rancherProjectId:
         enabled: true
       reloader:
