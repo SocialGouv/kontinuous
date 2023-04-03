@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.138.5 (2023-04-03)
+
+
+### Bug Fixes
+
+* **jsonschema:** fix app chart definitions ([#259](https://github.com/socialgouv/kontinuous/issues/259)) ([30fea62](https://github.com/socialgouv/kontinuous/commit/30fea62c3ecf3eb59f6de9a2ab3695398e52d09b))
+
 ## 1.138.4 (2023-04-03)
 
 ## 1.138.3 (2023-03-31)

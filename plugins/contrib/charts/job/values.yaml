@@ -6,7 +6,7 @@ gitBranch:
 runs: {}
 defaults:
   image: "debian:stable"
-  degitImage: ghcr.io/socialgouv/kontinuous/degit:v1.138.4
+  degitImage: ghcr.io/socialgouv/kontinuous/degit:v1.138.5
   # degitImagePullPolicy: Always
   degitImagePullPolicy: IfNotPresent
 
