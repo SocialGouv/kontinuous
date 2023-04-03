@@ -1,4 +1,5 @@
 const hasWildcard = (host) => host.endsWith(".dev.fabrique.social.gouv.fr")
+const isInternalHost = (host) => host.endsWith(".fabrique.social.gouv.fr")
 
 module.exports = (manifests, _options, { _config }) => {
   // const { environment } = config
@@ -18,7 +19,9 @@ module.exports = (manifests, _options, { _config }) => {
         }
         tlsEntry.secretName = "wildcard-crt"
       }
-      if (!hosts.every(hasWildcard)) {
+
+      // apply cert-manager annotations only for internal, non-wildcard hosts
+      if (!hosts.every(hasWildcard) && hosts.every(isInternalHost)) {
         if (!manifest.metadata) {
           manifest.metadata = {}
         }
