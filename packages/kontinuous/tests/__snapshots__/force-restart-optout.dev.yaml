@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test build manifests with snapshots redis-volume.prod 1`] = `
+exports[`test build manifests with snapshots force-restart-optout.dev 1`] = `
 "apiVersion: v1
 kind: Namespace
 metadata:
@@ -11,31 +11,32 @@ metadata:
     kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
-    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+    kontinuous/deployment: test-force-restart-optout-feature-branch-1-ffac537e6c-392utzlw
+    janitor/ttl: 7d
   labels:
-    application: test-redis-volume
-    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
-    kontinuous/deployment.env: test-redis-volume-feature-branch-1
+    application: test-force-restart-optout
+    kontinuous/deployment: test-force-restart-optout-feature-branch-1-ffac537e6c-392utzlw
+    kontinuous/deployment.env: test-force-restart-optout-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: namespace-test-redis-volume-632bbhqu
+    kontinuous/resourceName: namespace-test-force-restart-optout-feature-branch-1-39o9khwl
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  name: test-redis-volume
+  name: test-force-restart-optout-feature-branch-1
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: netpol-ingress
-  namespace: test-redis-volume
+  namespace: test-force-restart-optout-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
-    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+    kontinuous/deployment: test-force-restart-optout-feature-branch-1-ffac537e6c-392utzlw
   labels:
-    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
-    kontinuous/deployment.env: test-redis-volume-feature-branch-1
+    kontinuous/deployment: test-force-restart-optout-feature-branch-1-ffac537e6c-392utzlw
+    kontinuous/deployment.env: test-force-restart-optout-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -65,17 +66,17 @@ metadata:
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
-    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+    kontinuous/deployment: test-force-restart-optout-feature-branch-1-ffac537e6c-392utzlw
   labels:
-    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
-    kontinuous/deployment.env: test-redis-volume-feature-branch-1
+    kontinuous/deployment: test-force-restart-optout-feature-branch-1-ffac537e6c-392utzlw
+    kontinuous/deployment.env: test-force-restart-optout-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: serviceaccount-default-2g5dmk74
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  namespace: test-redis-volume
+  namespace: test-force-restart-optout-feature-branch-1
 automountServiceAccountToken: false
 ---
 apiVersion: apps/v1
@@ -83,9 +84,9 @@ kind: Deployment
 metadata:
   labels:
     component: redis
-    application: test-redis-volume
-    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
-    kontinuous/deployment.env: test-redis-volume-feature-branch-1
+    application: test-force-restart-optout
+    kontinuous/deployment: test-force-restart-optout-feature-branch-1-ffac537e6c-392utzlw
+    kontinuous/deployment.env: test-force-restart-optout-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -93,12 +94,12 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: redis
-  namespace: test-redis-volume
+  namespace: test-force-restart-optout-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.redis
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/redis/templates/deployment.yaml
     kontinuous/plugin.forceRestart: \\"false\\"
-    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+    kontinuous/deployment: test-force-restart-optout-feature-branch-1-ffac537e6c-392utzlw
     kontinuous/depname.full: project.fabrique.contrib.redis.deployment.redis
     kontinuous/depname.chartResource: redis.deployment.redis
     kontinuous/depname.chartName: redis
@@ -118,7 +119,7 @@ spec:
     metadata:
       labels:
         component: redis
-        kontinuous/deployment.env: test-redis-volume-feature-branch-1
+        kontinuous/deployment.env: test-force-restart-optout-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -132,18 +133,9 @@ spec:
         runAsGroup: 999
         fsGroup: 999
         runAsNonRoot: true
-      volumes:
-        - name: redis
-          persistentVolumeClaim:
-            claimName: redis
       containers:
         - image: redis:6.2.6-alpine3.14
           name: redis
-          volumeMounts:
-            - mountPath: /data
-              name: redis
-            - name: redis
-              mountPath: /mnt/redis
           ports:
             - containerPort: 6379
               name: http
@@ -191,9 +183,9 @@ kind: Service
 metadata:
   labels:
     component: redis
-    application: test-redis-volume
-    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
-    kontinuous/deployment.env: test-redis-volume-feature-branch-1
+    application: test-force-restart-optout
+    kontinuous/deployment: test-force-restart-optout-feature-branch-1-ffac537e6c-392utzlw
+    kontinuous/deployment.env: test-force-restart-optout-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -201,12 +193,12 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: redis
-  namespace: test-redis-volume
+  namespace: test-force-restart-optout-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.redis
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/redis/templates/service.yaml
     kontinuous/plugin.forceRestart: \\"false\\"
-    kontinuous/deployment: test-redis-volume-feature-branch-1-ffac537e6cbbf934b0-26qkpd0c
+    kontinuous/deployment: test-force-restart-optout-feature-branch-1-ffac537e6c-392utzlw
 spec:
   ports:
     - name: http
