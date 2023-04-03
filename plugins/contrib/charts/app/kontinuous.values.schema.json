@@ -83,16 +83,16 @@
       "description": "Name of existing SSL cert secret if any.",
       "type": "string"
     },
-    "env": {
+    "addVolumes": {
+      "description": "List of PVC claimNames to add to the deployment",
       "type": "array",
       "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "name": { "type": "string" },
-          "value": { "type": "string" }
-        }
-      }
+        "type": "string"
+      },
+      "examples": ["[uploads]"]
+    },
+    "env": {
+      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/env"
     },
     "envFrom": {
       "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/envFrom"
