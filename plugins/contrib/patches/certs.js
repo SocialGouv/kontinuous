@@ -2,6 +2,13 @@ module.exports = (manifests, options) => {
   const hasWildcard = (host) => host.endsWith(options.wildcardHost)
   const isInternalHost = (host) => host.endsWith(options.internalHost)
 
+  const {
+    secretName = "wildcard-crt",
+    clusterIssuer = "letsencrypt-prod",
+    namespaceLabels = {
+      cert: "wildcard",
+    },
+  } = options
   const wildcardNamespaces = new Set()
 
   for (const manifest of manifests) {
@@ -13,7 +20,7 @@ module.exports = (manifests, options) => {
         if (namespace) {
           wildcardNamespaces.add(namespace)
         }
-        tlsEntry.secretName = "wildcard-crt"
+        tlsEntry.secretName = secretName
       }
 
       // apply cert-manager annotations only for internal, non-wildcard hosts
@@ -24,10 +31,6 @@ module.exports = (manifests, options) => {
         if (!manifest.metadata.annotations) {
           manifest.metadata.annotations = {}
         }
-        // const clusterIssuer = isProd
-        //   ? "letsencrypt-prod"
-        //   : "letsencrypt-staging"
-        const clusterIssuer = "letsencrypt-prod"
         Object.assign(manifest.metadata.annotations, {
           "cert-manager.io": "cluster-issuer",
           "cert-manager.io/cluster-issuer": clusterIssuer,
@@ -52,9 +55,7 @@ module.exports = (manifests, options) => {
     if (!ns.metadata.labels) {
       ns.metadata.labels = {}
     }
-    Object.assign(ns.metadata.labels, {
-      cert: "wildcard",
-    })
+    Object.assign(ns.metadata.labels, namespaceLabels)
   }
 
   return manifests
