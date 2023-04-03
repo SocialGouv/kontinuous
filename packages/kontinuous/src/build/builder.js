@@ -29,11 +29,11 @@ module.exports = async (_options = {}) => {
     })
   }
 
+  await needBin(needHelm)
+
   const { values, valuesDump } = await loadDependencies(config, logger)
 
   logger.trace(`Values: \n${valuesDump}`)
-
-  await needBin(needHelm)
 
   let manifests
 
