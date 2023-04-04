@@ -2,8 +2,7 @@ const retriableMatch = require("./retriable-match")
 
 const errorsMapping = [
   {
-    includes:
-      "Unable to connect to the server: net/http: TLS handshake timeout",
+    includes: "net/http: TLS handshake timeout",
     message: `kubectl network error(net/http: TLS handshake timeout)`,
   },
   {
