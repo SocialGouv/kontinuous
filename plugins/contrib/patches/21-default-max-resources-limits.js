@@ -54,7 +54,7 @@ module.exports = (manifests, options, { logger }) => {
         initContainer.resources = {}
       }
       const {
-        resources: { limits },
+        resources: { limits = {} },
       } = initContainer
       if (limits.cpu === undefined || limits.cpu === null) {
         limits.cpu = getCpuAsString(sumOfContainersCpuLimit)
