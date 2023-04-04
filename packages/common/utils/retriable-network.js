@@ -22,5 +22,9 @@ const errorsMapping = [
     includes: "INTERNAL_ERROR; received from peer",
     message: `kubectl network error(received from peer)`,
   },
+  {
+    includes: "error trying to reach service: EOF",
+    message: `kubectl network error(error trying to reach service: EOF)`,
+  },
 ]
 module.exports = (err) => retriableMatch(err, errorsMapping)
