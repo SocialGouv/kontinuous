@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.140.0 (2023-04-05)
+
+
+### Features
+
+* x-* yaml anchor ([#269](https://github.com/socialgouv/kontinuous/issues/269)) ([1a44b6d](https://github.com/socialgouv/kontinuous/commit/1a44b6d6a43da45b6ef4e1ae7f5efe5a44c54d9c))
+
 ## 1.139.3 (2023-04-05)
 
 
