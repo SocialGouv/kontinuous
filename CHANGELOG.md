@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.139.3 (2023-04-05)
+
+
+### Bug Fixes
+
+* add network error ([#271](https://github.com/socialgouv/kontinuous/issues/271)) ([0e3bfc2](https://github.com/socialgouv/kontinuous/commit/0e3bfc2da7e3285469ada049d6f84b1d1d672f65))
+
 ## [1.139.2](https://github.com/socialgouv/kontinuous/compare/v1.139.1...v1.139.2) (2023-04-04)
 
 
