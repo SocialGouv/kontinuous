@@ -23,7 +23,6 @@ module.exports = (program) =>
     .addOption(options.deployWith)
     .addOption(options.ignoreProjectTemplates)
     .addOption(options.kubeconfigContext)
-    .addOption(options.kubeconfigContextNoDetect)
     .addOption(options.disableStep)
     .addOption(options.disablePlugin)
     .addOption(options.noValidate)

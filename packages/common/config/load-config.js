@@ -531,34 +531,9 @@ const loadConfig = async (
         }
       },
     },
-    kubeconfigContextEnvironments: {
-      defaultFunction: (config) => config.clusterEnvironments,
-    },
-    kubeconfigContextNoDetect: {
-      option: "kubeconfigContextNoDetect",
-      env: "KS_KUBECONFIG_CONTEXT_NO_DETECT",
-    },
     kubeconfigContext: {
       option: "kubeconfigContext",
       env: "KS_KUBECONFIG_CONTEXT",
-      defaultFunction: (config) => {
-        const {
-          isLocal,
-          kubeconfigContextNoDetect,
-          environment,
-          kubeconfigContextEnvironments,
-        } = config
-        if (!isLocal || kubeconfigContextNoDetect || !environment) {
-          return
-        }
-        for (const [context, envPatterns] of Object.entries(
-          kubeconfigContextEnvironments
-        )) {
-          if (envPatterns && patternMatch(environment, envPatterns)) {
-            return context
-          }
-        }
-      },
     },
     linksSelfLocation: {
       default: "socialgouv/kontinuous",
