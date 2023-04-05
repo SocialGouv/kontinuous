@@ -233,27 +233,6 @@ const loadConfig = async (
     repositoryName: {
       defaultFunction: (config) => config.gitRepositoryName,
     },
-    refLabelKey: {
-      default: "kontinuous/ref",
-    },
-    refLabelValue: {
-      defaultFunction: (config) => slug(config.gitBranch),
-    },
-    deploymentEnvLabelKey: {
-      default: "kontinuous/deployment.env",
-    },
-    deploymentEnvLabelValue: {
-      defaultFunction: (config) => {
-        const { repositoryName, chart, gitBranch } = config
-        const charts = chart?.join(",")
-        return slug(
-          `${repositoryName}-${gitBranch}${charts ? `-${charts}` : ""}`
-        )
-      },
-    },
-    deploymentLabelKey: {
-      default: "kontinuous/deployment",
-    },
     deploymentLabelForceNewDeploy: {
       default: true,
       env: "KS_FORCE_NEW_DEPLOY",
@@ -385,6 +364,27 @@ const loadConfig = async (
     },
     projectName: {
       env: "KS_PROJECT_NAME",
+    },
+    refLabelKey: {
+      default: "kontinuous/ref",
+    },
+    refLabelValue: {
+      defaultFunction: (config) => slug(config.gitBranch),
+    },
+    deploymentEnvLabelKey: {
+      default: "kontinuous/deployment.env",
+    },
+    deploymentEnvLabelValue: {
+      defaultFunction: (config) => {
+        const { repositoryName, chart, gitBranch } = config
+        const charts = chart?.join(",")
+        const { environment } = config
+        const envName = environment === "dev" ? gitBranch : environment
+        return slug(`${repositoryName}-${envName}${charts ? `-${charts}` : ""}`)
+      },
+    },
+    deploymentLabelKey: {
+      default: "kontinuous/deployment",
     },
     webhookToken: {
       option: "webhook-token",

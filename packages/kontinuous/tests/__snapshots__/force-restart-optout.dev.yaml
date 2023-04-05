@@ -120,9 +120,6 @@ spec:
       labels:
         component: redis
         kontinuous/deployment.env: test-force-restart-optout-feature-branch-1
-        kontinuous/ref: feature-branch-1
-        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/resourceName: deployment-redis-511p43mf
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous

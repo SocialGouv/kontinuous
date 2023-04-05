@@ -15,7 +15,7 @@ metadata:
   labels:
     application: test-oauth2-proxy
     kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
-    kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
+    kontinuous/deployment.env: test-oauth2-proxy-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -35,7 +35,7 @@ metadata:
     kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
   labels:
     kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
-    kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
+    kontinuous/deployment.env: test-oauth2-proxy-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -68,7 +68,7 @@ metadata:
     kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
   labels:
     kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
-    kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
+    kontinuous/deployment.env: test-oauth2-proxy-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -85,7 +85,7 @@ metadata:
     component: oauth2-proxy
     application: test-oauth2-proxy
     kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
-    kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
+    kontinuous/deployment.env: test-oauth2-proxy-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -119,7 +119,7 @@ spec:
         component: oauth2-proxy
         application: test-oauth2-proxy
         kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
-        kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
+        kontinuous/deployment.env: test-oauth2-proxy-prod
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -184,7 +184,7 @@ metadata:
     component: oauth2-proxy
     application: test-oauth2-proxy
     kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
-    kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
+    kontinuous/deployment.env: test-oauth2-proxy-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -221,7 +221,7 @@ metadata:
     component: oauth2-proxy
     application: test-oauth2-proxy
     kontinuous/deployment: test-oauth2-proxy-feature-branch-1-ffac537e6cbbf934b0-1ed5fy08
-    kontinuous/deployment.env: test-oauth2-proxy-feature-branch-1
+    kontinuous/deployment.env: test-oauth2-proxy-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
