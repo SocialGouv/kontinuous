@@ -15,7 +15,7 @@ metadata:
   labels:
     application: test-redirect
     kontinuous/deployment: test-redirect-feature-branch-1-ffac537e6cbbf934b08745-5gn1hkye
-    kontinuous/deployment.env: test-redirect-feature-branch-1
+    kontinuous/deployment.env: test-redirect-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -35,7 +35,7 @@ metadata:
     kontinuous/deployment: test-redirect-feature-branch-1-ffac537e6cbbf934b08745-5gn1hkye
   labels:
     kontinuous/deployment: test-redirect-feature-branch-1-ffac537e6cbbf934b08745-5gn1hkye
-    kontinuous/deployment.env: test-redirect-feature-branch-1
+    kontinuous/deployment.env: test-redirect-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -68,7 +68,7 @@ metadata:
     kontinuous/deployment: test-redirect-feature-branch-1-ffac537e6cbbf934b08745-5gn1hkye
   labels:
     kontinuous/deployment: test-redirect-feature-branch-1-ffac537e6cbbf934b08745-5gn1hkye
-    kontinuous/deployment.env: test-redirect-feature-branch-1
+    kontinuous/deployment.env: test-redirect-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -85,7 +85,7 @@ metadata:
     component: app
     application: test-redirect
     kontinuous/deployment: test-redirect-feature-branch-1-ffac537e6cbbf934b08745-5gn1hkye
-    kontinuous/deployment.env: test-redirect-feature-branch-1
+    kontinuous/deployment.env: test-redirect-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -120,7 +120,7 @@ spec:
         application: test-redirect
         namespace: test-redirect
         kontinuous/deployment: test-redirect-feature-branch-1-ffac537e6cbbf934b08745-5gn1hkye
-        kontinuous/deployment.env: test-redirect-feature-branch-1
+        kontinuous/deployment.env: test-redirect-prod
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -190,7 +190,7 @@ metadata:
     component: app
     application: test-redirect
     kontinuous/deployment: test-redirect-feature-branch-1-ffac537e6cbbf934b08745-5gn1hkye
-    kontinuous/deployment.env: test-redirect-feature-branch-1
+    kontinuous/deployment.env: test-redirect-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -224,7 +224,7 @@ metadata:
     component: app
     application: test-redirect
     kontinuous/deployment: test-redirect-feature-branch-1-ffac537e6cbbf934b08745-5gn1hkye
-    kontinuous/deployment.env: test-redirect-feature-branch-1
+    kontinuous/deployment.env: test-redirect-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -265,7 +265,7 @@ metadata:
     kubernetes.io/tls-acme: \\"true\\"
   labels:
     kontinuous/deployment: test-redirect-feature-branch-1-ffac537e6cbbf934b08745-5gn1hkye
-    kontinuous/deployment.env: test-redirect-feature-branch-1
+    kontinuous/deployment.env: test-redirect-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53

@@ -15,7 +15,7 @@ metadata:
   labels:
     application: test-hasura-no-ing
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
-    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
+    kontinuous/deployment.env: test-hasura-no-ing-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -35,7 +35,7 @@ metadata:
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
   labels:
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
-    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
+    kontinuous/deployment.env: test-hasura-no-ing-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -68,7 +68,7 @@ metadata:
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
   labels:
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
-    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
+    kontinuous/deployment.env: test-hasura-no-ing-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -85,7 +85,7 @@ metadata:
     component: hasura
     application: test-hasura-no-ing
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
-    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
+    kontinuous/deployment.env: test-hasura-no-ing-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -119,7 +119,7 @@ spec:
         component: hasura
         application: test-hasura-no-ing
         kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
-        kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
+        kontinuous/deployment.env: test-hasura-no-ing-prod
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -175,7 +175,7 @@ metadata:
     component: hasura
     application: test-hasura-no-ing
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
-    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
+    kontinuous/deployment.env: test-hasura-no-ing-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53

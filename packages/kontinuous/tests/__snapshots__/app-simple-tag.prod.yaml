@@ -15,7 +15,7 @@ metadata:
   labels:
     application: test-app-simple-tag
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/deployment.env: test-app-simple-tag-prod
     kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
@@ -35,7 +35,7 @@ metadata:
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
   labels:
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/deployment.env: test-app-simple-tag-prod
     kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
@@ -68,7 +68,7 @@ metadata:
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
   labels:
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/deployment.env: test-app-simple-tag-prod
     kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
@@ -85,7 +85,7 @@ metadata:
     component: app
     application: test-app-simple-tag
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/deployment.env: test-app-simple-tag-prod
     kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
@@ -120,7 +120,7 @@ spec:
         application: test-app-simple-tag
         namespace: test-app-simple-tag
         kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
-        kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+        kontinuous/deployment.env: test-app-simple-tag-prod
         kontinuous/ref: v1-2-3-5oe0cjpa
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: v1.2.3
@@ -190,7 +190,7 @@ metadata:
     component: app
     application: test-app-simple-tag
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/deployment.env: test-app-simple-tag-prod
     kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
@@ -227,7 +227,7 @@ metadata:
     component: app
     application: test-app-simple-tag
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/deployment.env: test-app-simple-tag-prod
     kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3

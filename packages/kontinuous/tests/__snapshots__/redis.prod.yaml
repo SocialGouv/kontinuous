@@ -15,7 +15,7 @@ metadata:
   labels:
     application: test-redis
     kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a37-2pk9j6u6
-    kontinuous/deployment.env: test-redis-feature-branch-1
+    kontinuous/deployment.env: test-redis-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -35,7 +35,7 @@ metadata:
     kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a37-2pk9j6u6
   labels:
     kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a37-2pk9j6u6
-    kontinuous/deployment.env: test-redis-feature-branch-1
+    kontinuous/deployment.env: test-redis-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -68,7 +68,7 @@ metadata:
     kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a37-2pk9j6u6
   labels:
     kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a37-2pk9j6u6
-    kontinuous/deployment.env: test-redis-feature-branch-1
+    kontinuous/deployment.env: test-redis-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -85,7 +85,7 @@ metadata:
     component: redis
     application: test-redis
     kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a37-2pk9j6u6
-    kontinuous/deployment.env: test-redis-feature-branch-1
+    kontinuous/deployment.env: test-redis-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -118,10 +118,7 @@ spec:
     metadata:
       labels:
         component: redis
-        kontinuous/deployment.env: test-redis-feature-branch-1
-        kontinuous/ref: feature-branch-1
-        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/deployment.env: test-redis-prod
         kontinuous/resourceName: deployment-redis-511p43mf
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
@@ -184,7 +181,7 @@ metadata:
     component: redis
     application: test-redis
     kontinuous/deployment: test-redis-feature-branch-1-ffac537e6cbbf934b08745a37-2pk9j6u6
-    kontinuous/deployment.env: test-redis-feature-branch-1
+    kontinuous/deployment.env: test-redis-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53

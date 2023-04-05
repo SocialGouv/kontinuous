@@ -15,7 +15,7 @@ metadata:
   labels:
     application: test-sample-1
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -36,7 +36,7 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   labels:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -69,7 +69,7 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   labels:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -89,7 +89,7 @@ metadata:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   labels:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -114,7 +114,7 @@ metadata:
   name: hasura-sealed-secret
   labels:
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -141,7 +141,7 @@ metadata:
     component: app-2nd-instance
     application: test-sample-1
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -176,7 +176,7 @@ spec:
         application: test-sample-1
         namespace: test-sample-1-preprod
         kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-        kontinuous/deployment.env: test-sample-1-feature-branch-1
+        kontinuous/deployment.env: test-sample-1-preprod
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -253,7 +253,7 @@ metadata:
     component: app
     application: test-sample-1
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -288,7 +288,7 @@ spec:
         application: test-sample-1
         namespace: test-sample-1-preprod
         kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-        kontinuous/deployment.env: test-sample-1-feature-branch-1
+        kontinuous/deployment.env: test-sample-1-preprod
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -365,7 +365,7 @@ metadata:
     component: hasura
     application: test-sample-1
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -399,7 +399,7 @@ spec:
         component: hasura
         application: test-sample-1
         kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-        kontinuous/deployment.env: test-sample-1-feature-branch-1
+        kontinuous/deployment.env: test-sample-1-preprod
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -461,7 +461,7 @@ metadata:
     component: pgweb
     application: test-sample-1
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -495,7 +495,7 @@ spec:
         component: pgweb
         application: test-sample-1
         kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-        kontinuous/deployment.env: test-sample-1-feature-branch-1
+        kontinuous/deployment.env: test-sample-1-preprod
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -569,7 +569,7 @@ metadata:
     component: app-2nd-instance
     application: test-sample-1
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -598,7 +598,7 @@ metadata:
     component: app
     application: test-sample-1
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -627,7 +627,7 @@ metadata:
     component: hasura
     application: test-sample-1
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -656,7 +656,7 @@ metadata:
     component: pgweb
     application: test-sample-1
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -690,7 +690,7 @@ metadata:
     component: app-2nd-instance
     application: test-sample-1
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -740,7 +740,7 @@ metadata:
     component: app
     application: test-sample-1
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -778,7 +778,7 @@ metadata:
     component: hasura
     application: test-sample-1
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -816,7 +816,7 @@ metadata:
     component: pgweb
     application: test-sample-1
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/deployment.env: test-sample-1-feature-branch-1
+    kontinuous/deployment.env: test-sample-1-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
