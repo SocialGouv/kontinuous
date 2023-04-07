@@ -16,6 +16,7 @@ dependencies:
           internalHosts:
             - ".fabrique.social.gouv.fr"
             - ".beta.gouv.fr"
+            - ".travail.gouv.fr"
       rancherProjectId:
         enabled: true
       reloader:
