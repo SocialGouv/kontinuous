@@ -1,0 +1,3 @@
+metabase:
+  enabled: true
+  host: some.external.host
