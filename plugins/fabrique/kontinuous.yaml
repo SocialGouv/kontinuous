@@ -1,7 +1,7 @@
 dependencies:
   contrib:
     import: socialgouv/kontinuous/plugins/contrib
-    
+
     valuesCompilers:
       globalDefaults:
         enabled: true
@@ -13,7 +13,10 @@ dependencies:
         enabled: true
         options:
           wildcardHost: ".dev.fabrique.social.gouv.fr"
-          internalHost: ".fabrique.social.gouv.fr"
+          internalHosts:
+            - ".fabrique.social.gouv.fr"
+            - ".beta.gouv.fr"
+            - ".travail.gouv.fr"
       rancherProjectId:
         enabled: true
       reloader:
@@ -59,14 +62,14 @@ dependencies:
                 - azure-pg-admin-user
                 - pg-scaleway
             # secret-name:
-              # enabled: true
-              # reload: false
-              # required: false
-              # fromNamespace: <$projectName-ci>
-              # toNamespace: true
-              # toAllNamespace: false
-              # to: azure-pg-admin-user
-              # from: [azure-pg-admin-user]
+            # enabled: true
+            # reload: false
+            # required: false
+            # fromNamespace: <$projectName-ci>
+            # toNamespace: true
+            # toAllNamespace: false
+            # to: azure-pg-admin-user
+            # from: [azure-pg-admin-user]
       rancherNamespaces:
         enabled: true
       cleanFailed:
@@ -86,13 +89,12 @@ dependencies:
           crdApiResources:
             - sealedsecrets
 
-
     postDeploy:
       notifyMattermost:
         enabled: true
         options:
           notifyWebhookUrlVarName: KS_NOTIFY_WEBHOOK_URL
-    
+
     deploySidecars:
       failfast:
         enabled: false
@@ -108,7 +110,6 @@ dependencies:
           kubeApiBurst: 1000
           waitCheckInterval: 1s
           logsAll: true
-
 
 config:
   webhookUri: https://kontinuous.fabrique.social.gouv.fr

@@ -1,6 +1,7 @@
 module.exports = (manifests, options) => {
   const hasWildcard = (host) => host.endsWith(options.wildcardHost)
-  const isInternalHost = (host) => host.endsWith(options.internalHost)
+  const isInternalHost = (host) =>
+    options.internalHosts.some((internalHost) => host.endsWith(internalHost))
 
   const {
     secretName = "wildcard-crt",

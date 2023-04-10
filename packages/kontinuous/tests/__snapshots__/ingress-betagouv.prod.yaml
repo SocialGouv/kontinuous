@@ -1,0 +1,284 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test build manifests with snapshots ingress-betagouv.prod 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: \\"1234\\"
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+  labels:
+    application: test-ingress-betagouv
+    kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+    kontinuous/deployment.env: test-ingress-betagouv-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: namespace-test-ingress-betagouv-2w4zjtae
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: test-ingress-betagouv
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-ingress-betagouv
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+  labels:
+    kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+    kontinuous/deployment.env: test-ingress-betagouv-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+  labels:
+    kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+    kontinuous/deployment.env: test-ingress-betagouv-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-ingress-betagouv
+automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    component: metabase
+    application: test-ingress-betagouv
+    kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+    kontinuous/deployment.env: test-ingress-betagouv-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: configmap-metabase-1tfah3wb
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: metabase
+  namespace: test-ingress-betagouv
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.metabase
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/configmap.yaml
+    kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+data:
+  MB_APPLICATION_NAME: metabase
+  MB_DB_TYPE: postgres
+  MB_ADMIN_EMAIL: admin@fabrique.social.gouv.fr
+  MB_ANON_TRACKING_ENABLED: \\"false\\"
+  MB_APPLICATION_LOGO_URL: https://socialgouv.github.io/support/_media/marianne.jpeg
+  MB_EMAIL_FROM_ADDRESS: contact@fabrique.social.gouv.fr
+  MB_ENABLE_EMBEDDING: \\"true\\"
+  MB_ENABLE_PUBLIC_SHARING: \\"true\\"
+  MB_SITE_LOCALE: fr
+  MB_SITE_NAME: Fabrique des ministères sociaux
+  MB_SITE_URL: https://some.beta.gouv.fr
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: metabase
+    application: test-ingress-betagouv
+    kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+    kontinuous/deployment.env: test-ingress-betagouv-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-metabase-5wn3odrk
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: metabase
+  namespace: test-ingress-betagouv
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.metabase
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/deployment.yaml
+    kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+    kontinuous/depname.full: project.fabrique.contrib.metabase.deployment.metabase
+    kontinuous/depname.chartResource: metabase.deployment.metabase
+    kontinuous/depname.chartName: metabase
+    kontinuous/depname.chartPath: project.fabrique.contrib.metabase
+    kontinuous/depname.resourcePath: deployment.metabase
+    kontinuous/depname.resourceName: metabase
+    kontinuous/depname.chartNameTopFull: metabase
+    kontinuous/depname.chartNameTop: metabase
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: metabase
+  template:
+    metadata:
+      labels:
+        component: metabase
+        kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+        kontinuous/deployment.env: test-ingress-betagouv-prod
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-metabase-5wn3odrk
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
+      containers:
+        - image: metabase/metabase:v0.45.3
+          name: metabase
+          securityContext:
+            allowPrivilegeEscalation: false
+          envFrom:
+            - configMapRef:
+                name: metabase
+          ports:
+            - containerPort: 3000
+              name: http
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 10
+            initialDelaySeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 10
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: metabase
+    application: test-ingress-betagouv
+    kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+    kontinuous/deployment.env: test-ingress-betagouv-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-metabase-5idimw41
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: metabase
+  namespace: test-ingress-betagouv
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.metabase
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/service.yaml
+    kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: metabase
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.metabase
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/ingress.yaml
+    kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+    cert-manager.io: cluster-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: \\"true\\"
+  labels:
+    component: metabase
+    application: test-ingress-betagouv
+    kontinuous/deployment: test-ingress-betagouv-feature-branch-1-ffac537e6cbbf9-kk9zkm6i
+    kontinuous/deployment.env: test-ingress-betagouv-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-metabase-5ybj4te8
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: metabase
+  namespace: test-ingress-betagouv
+spec:
+  rules:
+    - host: some.beta.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: metabase
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - some.beta.gouv.fr
+      secretName: metabase-crt
+"
+`;
