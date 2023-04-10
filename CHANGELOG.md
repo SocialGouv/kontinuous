@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.140.2 (2023-04-10)
+
+
+### Bug Fixes
+
+* **patches:** allow other hosts as cert-manager hosts ([#275](https://github.com/socialgouv/kontinuous/issues/275)) ([fde0ab5](https://github.com/socialgouv/kontinuous/commit/fde0ab5d4c4a4cdfa788c4f45b7fd2b5eb546cef))
+
 ## 1.140.1 (2023-04-05)
 
 ## 1.140.0 (2023-04-05)
