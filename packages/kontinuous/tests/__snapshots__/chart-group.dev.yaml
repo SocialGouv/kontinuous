@@ -37,6 +37,8 @@ spec:
   selector:
     matchLabels:
       component: api1
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -143,6 +145,8 @@ spec:
   selector:
     matchLabels:
       component: api2
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:

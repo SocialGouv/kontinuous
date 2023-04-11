@@ -169,6 +169,8 @@ spec:
   selector:
     matchLabels:
       component: app-2nd-instance
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -281,6 +283,8 @@ spec:
   selector:
     matchLabels:
       component: app
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
