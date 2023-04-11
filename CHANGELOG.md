@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.141.1 (2023-04-11)
+
+
+### Bug Fixes
+
+* enable clean orphan ([#278](https://github.com/socialgouv/kontinuous/issues/278)) ([b9330a1](https://github.com/socialgouv/kontinuous/commit/b9330a16de9892f27049c94adeaceded7f75a39a))
+
 ## 1.141.0 (2023-04-11)
 
 
