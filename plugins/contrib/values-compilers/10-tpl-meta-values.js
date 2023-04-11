@@ -17,7 +17,7 @@ const renderTplRecurse = async (values, context, rootValues = values) => {
         dir: `${buildPath}/tpl`,
         values: rootValues,
       })
-      value = yaml.load(value)
+      value = yaml.loadValue(value)
       if (isTplCast) {
         const cast = prefix.slice(1, -1).split(":").slice(1)
         switch (cast) {
