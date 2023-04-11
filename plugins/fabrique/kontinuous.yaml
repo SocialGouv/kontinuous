@@ -75,7 +75,7 @@ dependencies:
       cleanFailed:
         enabled: true
       cleanOrphan:
-        enabled: false
+        enabled: true
         options:
           nativeApiResources:
             - configmaps
