@@ -1,4 +1,5 @@
 module.exports = (manifests, options) => {
+
   const {
     annotationEnableKey = "kontinuous/use-cert-manager",
     defaultEnabled = true,

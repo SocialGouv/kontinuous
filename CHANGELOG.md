@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.141.0 (2023-04-11)
+
+
+### Features
+
+* chart app strategy option ([#279](https://github.com/socialgouv/kontinuous/issues/279)) ([c7cb43a](https://github.com/socialgouv/kontinuous/commit/c7cb43a84836d1a19e753a4373c1189e8d09e548))
+
+## 1.140.3 (2023-04-11)
+
+
+### Bug Fixes
+
+* hotfix for tpl yaml parser ([#277](https://github.com/socialgouv/kontinuous/issues/277)) ([c751628](https://github.com/socialgouv/kontinuous/commit/c7516287987e6fa7591dc58c5eec2b9f03f7d97a))
+
+## 1.140.2 (2023-04-10)
+
+
+### Bug Fixes
+
+* **patches:** allow other hosts as cert-manager hosts ([#275](https://github.com/socialgouv/kontinuous/issues/275)) ([fde0ab5](https://github.com/socialgouv/kontinuous/commit/fde0ab5d4c4a4cdfa788c4f45b7fd2b5eb546cef))
+
 ## 1.140.1 (2023-04-05)
 
 ## 1.140.0 (2023-04-05)

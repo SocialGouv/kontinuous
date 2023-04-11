@@ -135,7 +135,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.140.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.141.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -236,6 +236,8 @@ spec:
   selector:
     matchLabels:
       component: app
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:

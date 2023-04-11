@@ -170,7 +170,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.140.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.141.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -329,7 +329,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.140.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.141.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -493,7 +493,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.140.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.141.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -653,7 +653,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.140.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.141.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -794,6 +794,8 @@ spec:
   selector:
     matchLabels:
       component: backend-cron
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -930,6 +932,8 @@ spec:
   selector:
     matchLabels:
       component: backend
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -1073,6 +1077,8 @@ spec:
   selector:
     matchLabels:
       component: frontend
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -1179,6 +1185,8 @@ spec:
   selector:
     matchLabels:
       component: portail-admins
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -1285,6 +1293,8 @@ spec:
   selector:
     matchLabels:
       component: portail-usagers
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:

@@ -115,6 +115,8 @@ spec:
   selector:
     matchLabels:
       component: app-api
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
