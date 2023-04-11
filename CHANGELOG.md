@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.140.3 (2023-04-11)
+
+
+### Bug Fixes
+
+* hotfix for tpl yaml parser ([#277](https://github.com/socialgouv/kontinuous/issues/277)) ([c751628](https://github.com/socialgouv/kontinuous/commit/c7516287987e6fa7591dc58c5eec2b9f03f7d97a))
+
 ## 1.140.2 (2023-04-10)
 
 
