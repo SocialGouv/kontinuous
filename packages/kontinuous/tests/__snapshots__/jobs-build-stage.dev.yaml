@@ -727,6 +727,8 @@ spec:
   selector:
     matchLabels:
       component: app
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
