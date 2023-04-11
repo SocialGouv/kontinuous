@@ -12,6 +12,8 @@ spec:
   selector:
     matchLabels:
       component: {{ (or .Values.component .Chart.Name) | lower }}
+  strategy:
+    type: {{ .Values.strategyType }}
   template:
     metadata:
       labels:
