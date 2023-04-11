@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.141.0 (2023-04-11)
+
+
+### Features
+
+* chart app strategy option ([#279](https://github.com/socialgouv/kontinuous/issues/279)) ([c7cb43a](https://github.com/socialgouv/kontinuous/commit/c7cb43a84836d1a19e753a4373c1189e8d09e548))
+
 ## 1.140.3 (2023-04-11)
 
 
