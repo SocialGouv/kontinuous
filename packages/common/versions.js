@@ -3,7 +3,7 @@ module.exports = {
   helm: "3.11.1",
 
   // renovate: datasource=github-tags depName=kubernetes/kubectl extractVersion=^kubernetes-(?<version>.+)$
-  kubectl: "1.26.1",
+  kubectl: "1.27.1",
 
   // renovate: datasource=github-releases depName=socialgouv/rollout-status
   rolloutStatus: "1.13.4",
