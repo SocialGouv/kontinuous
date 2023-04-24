@@ -15,12 +15,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
       
+      - name: yarn install
+        shell: bash
+        run: yarn --immutable
+
+      - name: build with ncc
+        shell: bash
+        run: yarn workspace kontinuous build
+
       - name: prepublish
         shell: bash
         run: |
           cp LICENSE README.md packages/kontinuous/
-          yarn workspace kontinuous build
+          cat <<< $(jq "del(.dependencies, .devDependencies)" packages/kontinuous/package.json) > packages/kontinuous/package.json
 
       - id: publish-kontinuous
         uses: JS-DevTools/npm-publish@v1
