@@ -36,15 +36,6 @@ jobs:
         run: |
           yarn workspaces focus kontinuous
 
-      - name: write .kontinuous/config.yaml
-        shell: bash
-        run: |
-          mkdir -p $HOME/.kontinuous
-          echo "
-          links:
-            socialgouv/kontinuous: ${GITHUB_WORKSPACE}
-          " > $HOME/.kontinuous/config.yaml
-
       - name: Run tests
         run: yarn workspace kontinuous test
 

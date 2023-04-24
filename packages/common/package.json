@@ -13,6 +13,7 @@
     "axios": "^1.2.5",
     "axios-retry": "^3.3.1",
     "compare-versions": "^5.0.1",
+    "cross-process-lock": "^2.1.0",
     "decompress": "^4.2.1",
     "direct-logger": "^2.7.3",
     "dotenv": "^16.0.2",
@@ -29,7 +30,7 @@
     "qs": "^6.11.0",
     "slugify": "^1.6.5",
     "sonic-boom": "^3.0.0",
-    "tiged": "2.12.3",
+    "tiged": "2.12.4",
     "which": "^3.0.0",
     "yaml": "^2.0.1",
     "zx": "^7.1.1"
