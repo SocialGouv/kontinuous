@@ -40,6 +40,7 @@
     "~common": "workspace:^"
   },
   "devDependencies": {
+    "@vercel/ncc": "^0.36.1",
     "jest": "^29.0.0",
     "jest-specific-snapshot": "^7.0.0"
   },
@@ -50,17 +51,20 @@
     "test": "NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" jest tests",
     "test:debug": "DEBUG=1 yarn test",
     "test:update-snapshots": "yarn test -u",
-    "postinstall": "link-module-alias"
+    "postinstall": "link-module-alias",
+    "build": "yarn build:clean && yarn build:ncc && yarn build:symlink",
+    "build:clean": "rm -rf ./dist",
+    "build:ncc": "ncc build bin/kontinuous --source-map --v8-cache",
+    "build:symlink": "[ -f ../../kontinuous-dist ] || ln -s packages/kontinuous/dist/index.js ../../kontinuous-dist"
   },
   "_moduleAliases": {
     "~": "src"
   },
-  "bin": "./bin/kontinuous",
+  "bin": {
+    "kontinuous": "./dist/index.js"
+  },
   "files": [
-    "bin",
-    "~common",
-    "helm-tree",
-    "src",
+    "dist",
     "package.json",
     "README.md",
     "LICENSE",

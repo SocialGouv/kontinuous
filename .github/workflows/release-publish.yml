@@ -18,7 +18,9 @@ jobs:
       
       - name: prepublish
         shell: bash
-        run: packages/dev-tools/bin/release-workspace-to-npx kontinuous
+        run: |
+          cp LICENSE README.md packages/kontinuous/
+          yarn workspace kontinuous build
 
       - id: publish-kontinuous
         uses: JS-DevTools/npm-publish@v1
