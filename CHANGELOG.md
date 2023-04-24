@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.141.4 (2023-04-24)
+
+
+### Bug Fixes
+
+* chart renew cache on same ref ([#285](https://github.com/socialgouv/kontinuous/issues/285)) ([26efb98](https://github.com/socialgouv/kontinuous/commit/26efb981f56d215c0d1455dc37c6e82ad4e93cca))
+
 ## 1.141.3 (2023-04-24)
 
 
