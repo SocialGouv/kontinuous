@@ -177,6 +177,14 @@ arbitrary-chart-instance-name:
 
 `project` is a always the root chart name, matching repository level, `fabrique` is a kontinuous umbrella plugin that you can import, and `contrib` is a plugin that is imported by `fabrique`, `app` is the chart name.
 
+### meta-values extends
+
+meta-value `~extends` is used to allow values factorisation between environment by targeting a specific yaml file relative to current file location (you can use symlink to share a values yaml file between environment).
+
+```yaml
+~extends: [values.staging.yaml]
+```
+
 ### meta-values set
 
 ```
