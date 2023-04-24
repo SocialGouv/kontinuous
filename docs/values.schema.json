@@ -48,9 +48,91 @@
     "global": {
       "description": "Global variables",
       "type": "object",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "properties": {
+        "repositoryName": {
+          "description": "Application name, default to GIT repository name",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "Default namespace",
+          "type": "string"
+        },
+        "registry": {
+          "description": "Default docker registry URL, it is recommended tu use .kontinuous/config.yaml file to setup registry instead of using values",
+          "type": "string",
+          "examples": ["harbor.somewhere.io"]
+        },
+        "rancherProjectId": {
+          "description": "Rancher project ID to put on the",
+          "type": "string",
+          "examples": ["1234:5678"]
+        },
+        "imageProject": {
+          "description": "Default docker project name. ex registry/[imageProject]/image:tag",
+          "type": "string",
+          "default": "",
+          "examples": ["project-x"]
+        },
+        "imageRepository": {
+          "description": "Default docker image repository name. ex registry/project/[imageRepository]image:tag",
+          "type": "string",
+          "default": "",
+          "examples": ["application-x"]
+        },
+        "imageTag": {
+          "description": "Default docker image repository name. ex registry/project/[imageRepository]image:tag",
+          "type": "string",
+          "default": "",
+          "examples": ["v2.3.1"]
+        },
+        "ttl": {
+          "description": "Dev environments janitor namespaces time-to-live. see https://codeberg.org/hjacobs/kube-janitor",
+          "type": "string",
+          "default": "7d",
+          "examples": ["7d"]
+        },
+        "replicas": {
+          "description": "Default number of deployment replicas",
+          "type": "number",
+          "default": 1,
+          "examples": [3]
+        },
+        "host": {
+          "description": "Default host name",
+          "type": "string",
+          "default": "",
+          "examples": ["app.somewhere.io"]
+        },
+        "pgDatabase": {
+          "description": "Default PG database name, defaults to `application-branch`",
+          "type": "string",
+          "default": "",
+          "examples": ["db-demo"]
+        },
+        "pgSecretName": {
+          "description": "Default PG secret name, defaults to `pg-user-branch`",
+          "type": "string",
+          "default": "",
+          "examples": ["pg-demo"]
+        },
+        "pgUser": {
+          "description": "Default PG user name, defaults to `user-branch`",
+          "type": "string",
+          "default": "",
+          "examples": ["user-demo"]
+        },
+        "registrySecretRefName": {
+          "description": "Secret name that hold the docker registry to push images to",
+          "type": "string",
+          "default": "",
+          "examples": ["user-demo"]
+        }
+      }
     },
+
     "project": { "type": "object", "additionalProperties": true },
+
     "jobs": {
       "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json#"
     }
