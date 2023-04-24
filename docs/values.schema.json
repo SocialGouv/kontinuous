@@ -59,7 +59,7 @@
           "type": "string"
         },
         "registry": {
-          "description": "Default docker registry URL",
+          "description": "Default docker registry URL, it is recommended tu use .kontinuous/config.yaml file to setup registry instead of using values",
           "type": "string",
           "examples": ["harbor.somewhere.io"]
         },
