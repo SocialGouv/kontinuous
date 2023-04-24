@@ -10920,7 +10920,7 @@ __metadata:
     typescript: "npm:^4.7.4"
     ~common: "workspace:^"
   bin:
-    kontinuous: ./bin/kontinuous
+    kontinuous: ./dist/index.js
   languageName: unknown
   linkType: soft
 
