@@ -6852,6 +6852,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cross-process-lock@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "cross-process-lock@npm:2.1.0"
+  dependencies:
+    debug: "npm:^4.3.4"
+    tslib: "npm:^2.5.0"
+  checksum: 4e511eda40c1bdc8f63ce34d85d18122b0a79c0ec1cdc0e1f358ff47da9e947706d547745dc020ac49f2a577f0b2f4349acf5b8192f459af3587452c31339799
+  languageName: node
+  linkType: hard
+
 "cross-spawn@npm:7.0.3, cross-spawn@npm:^7.0.2, cross-spawn@npm:^7.0.3":
   version: 7.0.3
   resolution: "cross-spawn@npm:7.0.3"
@@ -15126,9 +15136,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tiged@npm:2.12.3":
-  version: 2.12.3
-  resolution: "tiged@npm:2.12.3"
+"tiged@npm:2.12.4":
+  version: 2.12.4
+  resolution: "tiged@npm:2.12.4"
   dependencies:
     colorette: "npm:1.2.1"
     enquirer: "npm:2.3.6"
@@ -15142,7 +15152,7 @@ __metadata:
   bin:
     degit: bin.js
     tiged: bin.js
-  checksum: 7e6ebabe0ad52a6c0749000ea69452243462ed5eacb2bd911e1aea8823901d40d3c75ada67b57b0e20320d89acec7108c2c5d8bb52777417bb6be575dfba5b63
+  checksum: 804964a90287126357d3153d3f1570a4209264ad4c2e4fefec902705220ece7ec962455c0303f200b9eab7724da697a1a88a8f5b81e5935b58a9c02082e4e8a5
   languageName: node
   linkType: hard
 
@@ -16353,6 +16363,7 @@ __metadata:
     axios: "npm:^1.2.5"
     axios-retry: "npm:^3.3.1"
     compare-versions: "npm:^5.0.1"
+    cross-process-lock: "npm:^2.1.0"
     decompress: "npm:^4.2.1"
     direct-logger: "npm:^2.7.3"
     dotenv: "npm:^16.0.2"
@@ -16369,7 +16380,7 @@ __metadata:
     qs: "npm:^6.11.0"
     slugify: "npm:^1.6.5"
     sonic-boom: "npm:^3.0.0"
-    tiged: "npm:2.12.3"
+    tiged: "npm:2.12.4"
     which: "npm:^3.0.0"
     yaml: "npm:^2.0.1"
     zx: "npm:^7.1.1"
