@@ -12,13 +12,14 @@ module.exports = async ({ dependency, cachePath, logger }) => {
 
   const archiveSlug = slug([dependency.name, version, degitUri])
   const cacheDir = `${cachePath}/${archiveSlug}.git`
-  if (!(await fs.pathExists(cacheDir))) {
-    logger.debug(`⬇️  downloading chart ${degitUri}`)
-    await degitImproved(degitUri, cacheDir, {
-      logger: logger.child({
-        dependency,
-      }),
-    })
+  if (await fs.pathExists(cacheDir)) {
+    await fs.remove(cacheDir)
   }
+  logger.debug(`⬇️  downloading chart ${degitUri}`)
+  await degitImproved(degitUri, cacheDir, {
+    logger: logger.child({
+      dependency,
+    }),
+  })
   return cacheDir
 }
