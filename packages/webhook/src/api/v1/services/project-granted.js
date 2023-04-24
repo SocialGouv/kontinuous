@@ -1,5 +1,5 @@
-const { reqCtx } = require("@modjo-plugins/express/ctx")
-const { ctx } = require("@modjo-plugins/core")
+const { reqCtx } = require("@modjo/express/ctx")
+const { ctx } = require("@modjo/core")
 
 module.exports = ({ services: { getProject } }) => {
   const config = ctx.require("config")

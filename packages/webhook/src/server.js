@@ -1,4 +1,4 @@
-const modjo = require("@modjo-plugins/core")
+const modjo = require("@modjo/core")
 const defaultsDeep = require("lodash.defaultsdeep")
 
 const customConfig = require(`~/config`)
