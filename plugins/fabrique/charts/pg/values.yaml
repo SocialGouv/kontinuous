@@ -26,7 +26,7 @@ cnpg-cluster:
     # pvcTemplate:
   image:
     repository: "ghcr.io/cloudnative-pg/postgis"
-    tag: "14"
+    tag: "15"
   poolers:
     rw:
       ~tpl~instances: "{{ if (or .Values.isProd .Values.isPreprod) }}3{{else}}1{{end}}"
