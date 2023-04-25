@@ -33,13 +33,27 @@ jobs:
         shell: bash
         run: |
           cp LICENSE README.md packages/kontinuous/
-          cat <<< $(jq "del(.dependencies, .devDependencies, .postinstall)" packages/kontinuous/package.json) > packages/kontinuous/package.json
+          cat <<< $(jq "del(.dependencies, .devDependencies, .scripts)" packages/kontinuous/package.json) > packages/kontinuous/package.json
+      
+      - name: extract npm tag
+        id: npm-tag
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF" == *"alpha"* ]]; then
+            npm_tag="alpha"
+          elif [[ "$GITHUB_REF" == *"beta"* ]]; then
+            npm_tag="beta"
+          else
+            npm_tag="latest"
+          fi
+          echo "tag=$npm_tag" >> $GITHUB_OUTPUT
 
       - id: publish-kontinuous
         uses: JS-DevTools/npm-publish@v2
         with:
           token: ${{ secrets.SOCIALGROOVYBOT_NPM_TOKEN }}
           package: packages/kontinuous/package.json
+          tag: ${{ steps.npm-tag.outputs.tag }}
       
       - if: steps.publish-kontinuous.outputs.type
         run: |
