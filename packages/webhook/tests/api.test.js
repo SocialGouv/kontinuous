@@ -1,6 +1,6 @@
 require("jest-specific-snapshot")
 
-const modjo = require("@modjo-plugins/core")
+const modjo = require("@modjo/core")
 
 const request = require("supertest")
 const yaml = require("~common/utils/yaml")

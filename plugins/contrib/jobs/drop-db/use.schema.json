@@ -4,7 +4,7 @@
   "title": "schema for drop-db job usage",
   "type": "object",
   "additionalProperties": false,
-  "required": ["database", "databaseUser"],
+  "required": [],
   "properties": {
     "pgAdminUserSecretRefName": {
       "description": "Secret with admin credentials to the database server",

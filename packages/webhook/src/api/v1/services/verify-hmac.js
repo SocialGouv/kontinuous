@@ -1,5 +1,5 @@
-// const { ctx } = require("@modjo-plugins/core")
-// const { reqCtx } = require("@modjo-plugins/express/ctx")
+// const { ctx } = require("@modjo/core")
+// const { reqCtx } = require("@modjo/express/ctx")
 const crypto = require("crypto")
 
 module.exports = function () {

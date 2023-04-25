@@ -1,4 +1,4 @@
-const { ctx } = require("@modjo-plugins/core")
+const { ctx } = require("@modjo/core")
 
 const rolloutStatus = require("~/k8s/utils/rollout-status")
 
