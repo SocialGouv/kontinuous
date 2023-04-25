@@ -15,16 +15,45 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
       
+      - name: yarn install
+        shell: bash
+        run: yarn --immutable
+
+      - name: build with ncc
+        shell: bash
+        run: yarn workspace kontinuous build
+
       - name: prepublish
         shell: bash
-        run: packages/dev-tools/bin/release-workspace-to-npx kontinuous
+        run: |
+          cp LICENSE README.md packages/kontinuous/
+          cat <<< $(jq "del(.dependencies, .devDependencies, .scripts, .main)" packages/kontinuous/package.json) > packages/kontinuous/package.json
+      
+      - name: extract npm tag
+        id: npm-tag
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF" == *"alpha"* ]]; then
+            npm_tag="alpha"
+          elif [[ "$GITHUB_REF" == *"beta"* ]]; then
+            npm_tag="beta"
+          else
+            npm_tag="latest"
+          fi
+          echo "tag=$npm_tag" >> $GITHUB_OUTPUT
 
       - id: publish-kontinuous
         uses: JS-DevTools/npm-publish@v2
         with:
           token: ${{ secrets.SOCIALGROOVYBOT_NPM_TOKEN }}
           package: packages/kontinuous/package.json
+          tag: ${{ steps.npm-tag.outputs.tag }}
       
       - if: steps.publish-kontinuous.outputs.type
         run: |

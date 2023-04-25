@@ -25,3 +25,4 @@ docker-compose.yaml
 docker-compose.*.yaml
 .nvmrc
 .versionrc.js
+dist
