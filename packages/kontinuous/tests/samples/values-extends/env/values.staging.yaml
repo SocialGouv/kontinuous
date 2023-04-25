@@ -1,0 +1,8 @@
+app:
+  ~needs: [seed]
+
+jobs:
+  runs:
+    seed:
+      image: "{{ .Values.global.registry }}/{{ .Values.global.imageRepository }}/app:{{ .Values.global.imageTag }}"
+      run: "yarn seed"
