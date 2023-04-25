@@ -33,7 +33,7 @@ jobs:
         shell: bash
         run: |
           cp LICENSE README.md packages/kontinuous/
-          cat <<< $(jq ".main='dist/index.js' | del(.dependencies, .devDependencies, .scripts)" packages/kontinuous/package.json) > packages/kontinuous/package.json
+          cat <<< $(jq "del(.dependencies, .devDependencies, .scripts, .main)" packages/kontinuous/package.json) > packages/kontinuous/package.json
       
       - name: extract npm tag
         id: npm-tag
