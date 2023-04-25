@@ -1,4 +1,4 @@
-const { ctx } = require("@modjo-plugins/core")
+const { ctx } = require("@modjo/core")
 
 async function createApiSpecV1(options = {}) {
   const uri = ctx.require("config.project.oas.uri")

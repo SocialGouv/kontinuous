@@ -30,6 +30,7 @@ const noExtraneousRule = [
 
 module.exports = {
   ignorePatterns: [
+    "packages/kontinuous/dist/*",
     "packages/webhook/build/*",
     "!.versionrc.js",
     "!.eslintrc.js",

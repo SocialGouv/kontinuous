@@ -28,15 +28,8 @@
     },
     "useAzureFlex": {
       "description": "Use an Azure Flex database. defaults to false",
-      "anyOf": [
-        {
-          "type": "boolean"
-        },
-        {
-          "type": "string",
-          "enum": ["true", "false"]
-        }
-      ]
+      "type": "string",
+      "enum": ["true", "false"]
     }
   }
 }

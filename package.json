@@ -1,6 +1,6 @@
 {
   "name": "~dev",
-  "version": "1.141.4",
+  "version": "1.143.0",
   "repository": "git@github.com:socialgouv/kontinuous.git",
   "license": "MIT",
   "private": true,
@@ -23,22 +23,22 @@
     "js-yaml": "^4.1.0",
     "lint-staged": "^13.0.0",
     "prettier": "^2.6.2",
-    "renovate": "^34.115.1",
+    "renovate": "^35.0.0",
     "~dev-tools": "workspace:^"
   },
   "resolutions": {
-    "@modjo-plugins/http-server": "latest",
-    "@modjo-plugins/core": "latest",
-    "@modjo-plugins/config": "latest",
-    "@modjo-plugins/express": "latest",
-    "@modjo-plugins/express-monitor": "latest",
-    "@modjo-plugins/http-logger": "latest",
-    "@modjo-plugins/lightship": "latest",
-    "@modjo-plugins/logger": "latest",
-    "@modjo-plugins/microservice-oapi": "latest",
-    "@modjo-plugins/oa": "latest",
-    "@modjo-plugins/shutdown-handlers": "latest",
-    "@modjo-plugins/sentry": "latest",
+    "@modjo/http-server": "latest",
+    "@modjo/core": "latest",
+    "@modjo/config": "latest",
+    "@modjo/express": "latest",
+    "@modjo/express-monitor": "latest",
+    "@modjo/http-logger": "latest",
+    "@modjo/lightship": "latest",
+    "@modjo/logger": "latest",
+    "@modjo/microservice-oapi": "latest",
+    "@modjo/oa": "latest",
+    "@modjo/shutdown-handlers": "latest",
+    "@modjo/sentry": "latest",
     "tar": "^6.1.9",
     "multer": "^1.4.4-lts.1",
     "fast-copy": "^3.0.0",
@@ -77,7 +77,7 @@
     "docker:kontinuous:run": "docker run -it -u $UID:1001 -v $PWD:/workspace -v $(dirname $KUBECONFIG):/home/ubuntu/.kube -e KUBECONFIG=/home/ubuntu/.kube/$(basename $KUBECONFIG) kontinuous",
     "docker:kontinuous": "yarn docker:kontinuous:build && yarn docker:kontinuous:run",
     "logs:remote-webhook": "kubectl --context prod -n kontinuous-webhook logs -f --all-containers -l component=kontinuous-webhook",
-    "upgrade:modjo": "yarn up -R \"@modjo-plugins/*\""
+    "upgrade:modjo": "yarn up -R \"@modjo/*\""
   },
   "lint-staged": {
     "*.js": [
