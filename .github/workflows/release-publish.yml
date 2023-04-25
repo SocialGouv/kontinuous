@@ -33,7 +33,7 @@ jobs:
         shell: bash
         run: |
           cp LICENSE README.md packages/kontinuous/
-          cat <<< $(jq "del(.dependencies, .devDependencies)" packages/kontinuous/package.json) > packages/kontinuous/package.json
+          cat <<< $(jq "del(.dependencies, .devDependencies, .postinstall)" packages/kontinuous/package.json) > packages/kontinuous/package.json
 
       - id: publish-kontinuous
         uses: JS-DevTools/npm-publish@v2
