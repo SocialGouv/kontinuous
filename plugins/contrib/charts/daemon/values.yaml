@@ -1,0 +1,35 @@
+enabled:
+registry:
+imagePath:
+imageProject:
+imageRepository:
+imagePackage: daemon
+imageTag:
+image:
+ttl:
+replicas: 
+env: []
+vars: {}
+envFrom: []
+resources:
+  limits:
+    cpu: 
+    memory:
+  requests:
+    cpu: 
+    memory: 
+autoscale:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 10
+  averageUtilization:
+    cpu: 70
+    memory: 80
+addVolumes: []
+volumes: []
+volumeMounts: []
+entrypoint:
+args: []
+antiAffinity:
+  enabled: 
+strategyType: RollingUpdate
