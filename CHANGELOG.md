@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.142.0 (2023-04-25)
+
+
+### Features
+
+* kubeconform + fix asyncShell ([#290](https://github.com/socialgouv/kontinuous/issues/290)) ([d10c7f1](https://github.com/socialgouv/kontinuous/commit/d10c7f1a4718d508ee76fb3badecb169be122e00))
+
+## 1.141.5 (2023-04-24)
+
+## 1.141.4 (2023-04-24)
+
+
+### Bug Fixes
+
+* chart renew cache on same ref ([#285](https://github.com/socialgouv/kontinuous/issues/285)) ([26efb98](https://github.com/socialgouv/kontinuous/commit/26efb981f56d215c0d1455dc37c6e82ad4e93cca))
+
+## 1.141.3 (2023-04-24)
+
+
+### Bug Fixes
+
+* need bin rollout-status ([#286](https://github.com/socialgouv/kontinuous/issues/286)) ([aedda8e](https://github.com/socialgouv/kontinuous/commit/aedda8ebaa073833e9ff67e9e1a6569132dd1053))
+
 ## 1.141.2 (2023-04-11)
 
 

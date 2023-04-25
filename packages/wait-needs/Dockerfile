@@ -18,7 +18,7 @@ RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/downlo
 
 FROM downloader as kubectl
 # renovate: datasource=github-tags depName=kubernetes/kubectl extractVersion=^kubernetes-(?<version>.+)$
-ARG KUBECTL_VERSION=1.26.1
+ARG KUBECTL_VERSION=1.27.1
 ENV KUBECTL_VERSION=$KUBECTL_VERSION
 RUN curl --fail -sL https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl
