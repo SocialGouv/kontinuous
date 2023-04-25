@@ -1,4 +1,4 @@
-const { ctx } = require("@modjo-plugins/core")
+const { ctx } = require("@modjo/core")
 
 const gitSshCommand = require("~common/utils/git-ssh-command")
 const castArray = require("~common/utils/cast-array")

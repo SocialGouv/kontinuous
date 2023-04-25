@@ -114,4 +114,5 @@ module.exports = {
   waitRulesForKindDefault: require("./wait-rules-for-kind-default"),
   yaml: require("./yaml"),
   yarnInstall: require("./yarn-install"),
+  needKubeconform: require("./need-kubeconform"),
 }

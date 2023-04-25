@@ -1,4 +1,4 @@
-const { ctx } = require("@modjo-plugins/core")
+const { ctx } = require("@modjo/core")
 
 const kubectl = require("~/k8s/utils/kubectl")
 
