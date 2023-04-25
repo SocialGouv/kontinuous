@@ -13,4 +13,7 @@ module.exports = {
 
   // renovate: datasource=github-releases depName=carvel-dev/kapp
   kapp: "0.54.3",
+
+  // renovate: datasource=github-releases depName=yannh/kubeconform
+  kubeconform: "0.6.1",
 }

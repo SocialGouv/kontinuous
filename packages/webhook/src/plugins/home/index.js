@@ -1,4 +1,4 @@
-const { ctx } = require("@modjo-plugins/core")
+const { ctx } = require("@modjo/core")
 
 module.exports = async () => {
   const app = ctx.require("express")

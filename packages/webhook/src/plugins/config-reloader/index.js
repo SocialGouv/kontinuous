@@ -2,7 +2,7 @@ const chokidar = require("chokidar")
 
 const fs = require("fs-extra")
 
-const { ctx } = require("@modjo-plugins/core")
+const { ctx } = require("@modjo/core")
 
 const loadFinalConfig = require("~/config/load-final-config")
 
