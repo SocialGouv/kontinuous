@@ -7,6 +7,7 @@ const fs = require("fs-extra")
 const set = require("lodash.set")
 const defaultsDeep = require("lodash.defaultsdeep")
 const qs = require("qs")
+const ciDetect = require("@npmcli/ci-detect")
 
 const recurseDependencies = require("helm-tree/dependencies/recurse")
 const configDependencyKey = require("~common/utils/config-dependency-key")
@@ -232,27 +233,6 @@ const loadConfig = async (
     repositoryName: {
       defaultFunction: (config) => config.gitRepositoryName,
     },
-    refLabelKey: {
-      default: "kontinuous/ref",
-    },
-    refLabelValue: {
-      defaultFunction: (config) => slug(config.gitBranch),
-    },
-    deploymentEnvLabelKey: {
-      default: "kontinuous/deployment.env",
-    },
-    deploymentEnvLabelValue: {
-      defaultFunction: (config) => {
-        const { repositoryName, chart, gitBranch } = config
-        const charts = chart?.join(",")
-        return slug(
-          `${repositoryName}-${gitBranch}${charts ? `-${charts}` : ""}`
-        )
-      },
-    },
-    deploymentLabelKey: {
-      default: "kontinuous/deployment",
-    },
     deploymentLabelForceNewDeploy: {
       default: true,
       env: "KS_FORCE_NEW_DEPLOY",
@@ -385,6 +365,27 @@ const loadConfig = async (
     projectName: {
       env: "KS_PROJECT_NAME",
     },
+    refLabelKey: {
+      default: "kontinuous/ref",
+    },
+    refLabelValue: {
+      defaultFunction: (config) => slug(config.gitBranch),
+    },
+    deploymentEnvLabelKey: {
+      default: "kontinuous/deployment.env",
+    },
+    deploymentEnvLabelValue: {
+      defaultFunction: (config) => {
+        const { repositoryName, chart, gitBranch } = config
+        const charts = chart?.join(",")
+        const { environment } = config
+        const envName = environment === "dev" ? gitBranch : environment
+        return slug(`${repositoryName}-${envName}${charts ? `-${charts}` : ""}`)
+      },
+    },
+    deploymentLabelKey: {
+      default: "kontinuous/deployment",
+    },
     webhookToken: {
       option: "webhook-token",
       env: "KS_WEBHOOK_TOKEN",
@@ -485,9 +486,13 @@ const loadConfig = async (
           ? `${config.projectName || config.repositoryName}-ci`
           : undefined,
     },
+    ci: {
+      env: "KS_CI",
+      defaultFunction: () => ciDetect(),
+    },
     isLocal: {
       env: "KS_ISLOCAL",
-      default: false,
+      defaultFunction: (config) => !config.ci,
     },
     clusterEnvironments: {
       transform: (value) => ({
@@ -526,34 +531,9 @@ const loadConfig = async (
         }
       },
     },
-    kubeconfigContextEnvironments: {
-      defaultFunction: (config) => config.clusterEnvironments,
-    },
-    kubeconfigContextNoDetect: {
-      option: "kubeconfigContextNoDetect",
-      env: "KS_KUBECONFIG_CONTEXT_NO_DETECT",
-    },
     kubeconfigContext: {
       option: "kubeconfigContext",
       env: "KS_KUBECONFIG_CONTEXT",
-      defaultFunction: (config) => {
-        const {
-          isLocal,
-          kubeconfigContextNoDetect,
-          environment,
-          kubeconfigContextEnvironments,
-        } = config
-        if (!isLocal || kubeconfigContextNoDetect || !environment) {
-          return
-        }
-        for (const [context, envPatterns] of Object.entries(
-          kubeconfigContextEnvironments
-        )) {
-          if (envPatterns && patternMatch(environment, envPatterns)) {
-            return context
-          }
-        }
-      },
     },
     linksSelfLocation: {
       default: "socialgouv/kontinuous",

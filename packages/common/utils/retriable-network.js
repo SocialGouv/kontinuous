@@ -2,9 +2,12 @@ const retriableMatch = require("./retriable-match")
 
 const errorsMapping = [
   {
-    includes:
-      "Unable to connect to the server: net/http: TLS handshake timeout",
+    includes: "net/http: TLS handshake timeout",
     message: `kubectl network error(net/http: TLS handshake timeout)`,
+  },
+  {
+    includes: "net/http: request canceled",
+    message: `kubectl network error(net/http: request canceled)`,
   },
   {
     // includes: "timeout",
@@ -18,6 +21,10 @@ const errorsMapping = [
   {
     includes: "INTERNAL_ERROR; received from peer",
     message: `kubectl network error(received from peer)`,
+  },
+  {
+    includes: "error trying to reach service: EOF",
+    message: `kubectl network error(error trying to reach service: EOF)`,
   },
 ]
 module.exports = (err) => retriableMatch(err, errorsMapping)

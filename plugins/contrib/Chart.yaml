@@ -1,5 +1,5 @@
 apiVersion: v2
-name: fabrique
+name: contrib
 version: 1.136.2
 dependencies:
   - name: rancher-namespace
@@ -42,8 +42,8 @@ dependencies:
     version: 1.136.2
     condition: job.enabled
   - name: maildev
-    repository: file://./charts/maildev
-    version: 1.136.2
+    degit: SocialGouv/helm-charts/charts/maildev@v1
+    version: "1"
     condition: maildev.enabled
   - name: metabase
     repository: file://./charts/metabase

@@ -5,18 +5,17 @@ exports[`test build manifests with snapshots ingress-annotations.prod 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
   labels:
     application: test-ingress-annotations
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
+    kontinuous/deployment.env: test-ingress-annotations-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -32,12 +31,11 @@ metadata:
   namespace: test-ingress-annotations
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
   labels:
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
+    kontinuous/deployment.env: test-ingress-annotations-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -66,12 +64,11 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
   labels:
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
+    kontinuous/deployment.env: test-ingress-annotations-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -88,7 +85,7 @@ metadata:
     component: metabase
     application: test-ingress-annotations
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
+    kontinuous/deployment.env: test-ingress-annotations-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -99,18 +96,17 @@ metadata:
   namespace: test-ingress-annotations
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase/templates/configmap.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/configmap.yaml
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
 data:
   MB_APPLICATION_NAME: metabase
   MB_DB_TYPE: postgres
   MB_ADMIN_EMAIL: admin@fabrique.social.gouv.fr
-  MB_ANON_TRACKING_ENABLED: 'false'
+  MB_ANON_TRACKING_ENABLED: \\"false\\"
   MB_APPLICATION_LOGO_URL: https://socialgouv.github.io/support/_media/marianne.jpeg
   MB_EMAIL_FROM_ADDRESS: contact@fabrique.social.gouv.fr
-  MB_ENABLE_EMBEDDING: 'true'
-  MB_ENABLE_PUBLIC_SHARING: 'true'
+  MB_ENABLE_EMBEDDING: \\"true\\"
+  MB_ENABLE_PUBLIC_SHARING: \\"true\\"
   MB_SITE_LOCALE: fr
   MB_SITE_NAME: Fabrique des ministères sociaux
   MB_SITE_URL: https://metabase-test-ingress-annotations.fabrique.social.gouv.fr
@@ -122,7 +118,7 @@ metadata:
     component: metabase
     application: test-ingress-annotations
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
+    kontinuous/deployment.env: test-ingress-annotations-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -133,8 +129,7 @@ metadata:
   namespace: test-ingress-annotations
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/deployment.yaml
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
     kontinuous/depname.full: project.fabrique.contrib.metabase.deployment.metabase
     kontinuous/depname.chartResource: metabase.deployment.metabase
@@ -142,8 +137,10 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.metabase
     kontinuous/depname.resourcePath: deployment.metabase
     kontinuous/depname.resourceName: metabase
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/depname.chartNameTopFull: metabase
+    kontinuous/depname.chartNameTop: metabase
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -154,7 +151,7 @@ spec:
       labels:
         component: metabase
         kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-        kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
+        kontinuous/deployment.env: test-ingress-annotations-prod
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -170,7 +167,7 @@ spec:
         fsGroup: 1000
         runAsNonRoot: true
       containers:
-        - image: metabase/metabase:v0.45.1
+        - image: metabase/metabase:v0.45.3
           name: metabase
           securityContext:
             allowPrivilegeEscalation: false
@@ -221,7 +218,7 @@ metadata:
     component: metabase
     application: test-ingress-annotations
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
+    kontinuous/deployment.env: test-ingress-annotations-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -232,8 +229,7 @@ metadata:
   namespace: test-ingress-annotations
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/service.yaml
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
 spec:
   ports:
@@ -251,17 +247,16 @@ metadata:
     kubernetes.io/ingress.class: nginx
     some: annotation
     kontinuous/chartPath: project.fabrique.contrib.metabase
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/metabase/templates/ingress.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/ingress.yaml
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: 'true'
+    kubernetes.io/tls-acme: \\"true\\"
   labels:
     component: metabase
     application: test-ingress-annotations
     kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    kontinuous/deployment.env: test-ingress-annotations-feature-branch-1
+    kontinuous/deployment.env: test-ingress-annotations-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53

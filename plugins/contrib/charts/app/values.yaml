@@ -55,3 +55,4 @@ antiAffinity:
 onChangedPaths: 
 onChangedAnnotate: 
 onChangedNeeds: 
+strategyType: RollingUpdate

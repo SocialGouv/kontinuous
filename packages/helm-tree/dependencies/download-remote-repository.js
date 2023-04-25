@@ -7,12 +7,10 @@ const chartTools = require("helm-tree/chart-tools")
 const downloadDependencyFromHelmRepo = require("./download-dependency-from-helm-repo")
 const downloadDependencyFromGitRepo = require("./download-dependency-from-git-repo")
 
-const downloadRemoteRepository = async ({
-  target,
-  definition,
-  cachePath,
-  logger,
-}) => {
+const downloadRemoteRepository = async (
+  { target, definition, cachePath, logger },
+  deferredCopy
+) => {
   const chartFile = `${target}/Chart.yaml`
   const chart = yaml.load(await fs.readFile(chartFile))
   const { dependencies = [] } = chart
@@ -39,6 +37,7 @@ const downloadRemoteRepository = async ({
       const subchartPath = `${chartDir}/${name}`
       if (!(await fs.pathExists(subchartPath))) {
         await fs.symlink(`../${repository.slice(7)}`, subchartPath)
+        deferredCopy.push(subchartPath)
       }
       dependency.repository = `file://./charts/${name}`
       touched = true
@@ -62,13 +61,25 @@ const downloadRemoteRepository = async ({
     const subchartDir = `${target}/charts/${dependency.name}`
     const subDefinition = definition[name] || {}
     await chartTools.buildChartFile(subchartDir, name, subDefinition)
-    await downloadRemoteRepository({
-      target: subchartDir,
-      definition: subDefinition,
-      cachePath,
-      logger,
-    })
+    await downloadRemoteRepository(
+      {
+        target: subchartDir,
+        definition: subDefinition,
+        cachePath,
+        logger,
+      },
+      deferredCopy
+    )
   }
 }
 
-module.exports = downloadRemoteRepository
+module.exports = async (options) => {
+  const deferredCopy = []
+  await downloadRemoteRepository(options, deferredCopy)
+  for (const to of deferredCopy) {
+    const tmp = `${to}.tmp`
+    await fs.copy(to, tmp, { dereference: true })
+    await fs.remove(to)
+    await fs.move(tmp, to)
+  }
+}

@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots output.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
     janitor/ttl: 7d
   labels:
@@ -33,8 +32,7 @@ metadata:
   namespace: test-output-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
   labels:
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
@@ -67,8 +65,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
   labels:
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
@@ -88,8 +85,7 @@ metadata:
   name: kontinuous-io
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.output-volume
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/output-volume/templates/jobs-output.pvc.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/output-volume/templates/jobs-output.pvc.yaml
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
   labels:
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
@@ -121,14 +117,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-output-feature-branch-1-a-jobs-contrib-f-ztbkw0lv
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-output-feature-branch-1-a-jobs-contrib-f-ztbkw0lv
     kontinuous/depname.chartResource: jobs.job.job-dev-test-output-feature-branch-1-a-jobs-contrib-f-ztbkw0lv
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-output-feature-branch-1-a-jobs-contrib-f-ztbkw0lv
     kontinuous/depname.resourceName: job-dev-test-output-feature-branch-1-a-jobs-contrib-f-ztbkw0lv
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
     kontinuous/deployment.env: test-output-feature-branch-1
@@ -163,13 +160,13 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - -c
             - |
-
+              
               degit kontinuous/test-output#feature-branch-1 \\\\
                 /workspace
           securityContext:
@@ -183,8 +180,8 @@ spec:
               cpu: 3000m
               memory: 8192Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: debian:stable
@@ -197,7 +194,7 @@ spec:
               value: /kontinuous-input
           command:
             - /bin/bash
-            - '-c'
+            - -c
             - |
               set -e
               echo earth>$KONTINUOUS_OUTPUT/WORLD
@@ -218,8 +215,7 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea/jobs.a
+              subPath: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea/jobs.a
       securityContext:
         fsGroup: 1000
       volumes:
@@ -244,14 +240,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-output-feature-branch-1-b-jobs-contrib-f-51wxewmg
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-output-feature-branch-1-b-jobs-contrib-f-51wxewmg
     kontinuous/depname.chartResource: jobs.job.job-dev-test-output-feature-branch-1-b-jobs-contrib-f-51wxewmg
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-output-feature-branch-1-b-jobs-contrib-f-51wxewmg
     kontinuous/depname.resourceName: job-dev-test-output-feature-branch-1-b-jobs-contrib-f-51wxewmg
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
     kontinuous/deployment.env: test-output-feature-branch-1
@@ -286,13 +283,13 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - -c
             - |
-
+              
               degit kontinuous/test-output#feature-branch-1 \\\\
                 /workspace
           securityContext:
@@ -306,8 +303,8 @@ spec:
               cpu: 3000m
               memory: 8192Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: debian:stable
@@ -320,7 +317,7 @@ spec:
               value: /kontinuous-input
           command:
             - /bin/bash
-            - '-c'
+            - -c
             - |
               set -e
               PLANET=$(cat $KONTINUOUS_INPUT/PLANET)
@@ -343,12 +340,10 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea/jobs.b
+              subPath: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea/jobs.b
             - name: kontinuous-io
               mountPath: /kontinuous-input/PLANET
-              subPath: >-
-                test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea/jobs.a/WORLD
+              subPath: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea/jobs.a/WORLD
       securityContext:
         fsGroup: 1000
       volumes:

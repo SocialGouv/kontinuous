@@ -6,15 +6,14 @@ kind: Namespace
 metadata:
   annotations:
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
+    kontinuous/mainNamespace: \\"true\\"
     kontinuous/chartPath: project.fabrique.contrib.namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/namespace/templates/namespace.yaml
     kontinuous/deployment: test-if-env-feature-branch-1-ffac537e6cbbf934b08745a3-2idnplgr
   labels:
     application: test-if-env
     kontinuous/deployment: test-if-env-feature-branch-1-ffac537e6cbbf934b08745a3-2idnplgr
-    kontinuous/deployment.env: test-if-env-feature-branch-1
+    kontinuous/deployment.env: test-if-env-local
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -30,12 +29,11 @@ metadata:
   namespace: test-if-env-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-if-env-feature-branch-1-ffac537e6cbbf934b08745a3-2idnplgr
   labels:
     kontinuous/deployment: test-if-env-feature-branch-1-ffac537e6cbbf934b08745a3-2idnplgr
-    kontinuous/deployment.env: test-if-env-feature-branch-1
+    kontinuous/deployment.env: test-if-env-local
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -64,12 +62,11 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-if-env-feature-branch-1-ffac537e6cbbf934b08745a3-2idnplgr
   labels:
     kontinuous/deployment: test-if-env-feature-branch-1-ffac537e6cbbf934b08745a3-2idnplgr
-    kontinuous/deployment.env: test-if-env-feature-branch-1
+    kontinuous/deployment.env: test-if-env-local
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -86,7 +83,7 @@ metadata:
     component: app
     application: test-if-env
     kontinuous/deployment: test-if-env-feature-branch-1-ffac537e6cbbf934b08745a3-2idnplgr
-    kontinuous/deployment.env: test-if-env-feature-branch-1
+    kontinuous/deployment.env: test-if-env-local
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -97,8 +94,7 @@ metadata:
   namespace: test-if-env-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/deployment: test-if-env-feature-branch-1-ffac537e6cbbf934b08745a3-2idnplgr
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
     kontinuous/depname.chartResource: app.deployment.app
@@ -106,13 +102,17 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/depname.chartNameTopFull: app
+    kontinuous/depname.chartNameTop: app
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
     matchLabels:
       component: app
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -120,7 +120,7 @@ spec:
         application: test-if-env
         namespace: test-if-env-feature-branch-1
         kontinuous/deployment: test-if-env-feature-branch-1-ffac537e6cbbf934b08745a3-2idnplgr
-        kontinuous/deployment.env: test-if-env-feature-branch-1
+        kontinuous/deployment.env: test-if-env-local
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -147,8 +147,7 @@ spec:
                         - app
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/test-if-env/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/test-if-env/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 3000
@@ -191,7 +190,7 @@ metadata:
     component: app
     application: test-if-env
     kontinuous/deployment: test-if-env-feature-branch-1-ffac537e6cbbf934b08745a3-2idnplgr
-    kontinuous/deployment.env: test-if-env-feature-branch-1
+    kontinuous/deployment.env: test-if-env-local
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -225,7 +224,7 @@ metadata:
     component: app
     application: test-if-env
     kontinuous/deployment: test-if-env-feature-branch-1-ffac537e6cbbf934b08745a3-2idnplgr
-    kontinuous/deployment.env: test-if-env-feature-branch-1
+    kontinuous/deployment.env: test-if-env-local
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53

@@ -9,4 +9,5 @@ module.exports = {
   get logger() {
     return require("./get-logger")()
   },
+  needKubeconform: require("./need-kubeconform"),
 }

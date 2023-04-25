@@ -5,18 +5,17 @@ exports[`test build manifests with snapshots hasura-no-ing.prod 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
   labels:
     application: test-hasura-no-ing
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
-    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
+    kontinuous/deployment.env: test-hasura-no-ing-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -32,12 +31,11 @@ metadata:
   namespace: test-hasura-no-ing
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
   labels:
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
-    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
+    kontinuous/deployment.env: test-hasura-no-ing-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -66,12 +64,11 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
   labels:
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
-    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
+    kontinuous/deployment.env: test-hasura-no-ing-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -88,7 +85,7 @@ metadata:
     component: hasura
     application: test-hasura-no-ing
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
-    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
+    kontinuous/deployment.env: test-hasura-no-ing-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -99,8 +96,7 @@ metadata:
   namespace: test-hasura-no-ing
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
     kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
     kontinuous/depname.chartResource: hasura.deployment.hasura
@@ -108,8 +104,10 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.hasura
     kontinuous/depname.resourcePath: deployment.hasura
     kontinuous/depname.resourceName: hasura
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/depname.chartNameTopFull: hasura
+    kontinuous/depname.chartNameTop: hasura
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -121,7 +119,7 @@ spec:
         component: hasura
         application: test-hasura-no-ing
         kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
-        kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
+        kontinuous/deployment.env: test-hasura-no-ing-prod
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -177,7 +175,7 @@ metadata:
     component: hasura
     application: test-hasura-no-ing
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
-    kontinuous/deployment.env: test-hasura-no-ing-feature-branch-1
+    kontinuous/deployment.env: test-hasura-no-ing-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -188,8 +186,7 @@ metadata:
   namespace: test-hasura-no-ing
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
     kontinuous/deployment: test-hasura-no-ing-feature-branch-1-ffac537e6cbbf934b-4sslo35s
 spec:
   ports:

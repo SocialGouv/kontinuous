@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots include-file.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv
     janitor/ttl: 7d
   labels:
@@ -33,8 +32,7 @@ metadata:
   namespace: test-include-file-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv
   labels:
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv
@@ -67,8 +65,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv
   labels:
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv
@@ -94,14 +91,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-include-file-feature-branch-1-say-hello-1m1qjriv
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-include-file-feature-branch-1-say-hello-1m1qjriv
     kontinuous/depname.chartResource: jobs.job.job-dev-test-include-file-feature-branch-1-say-hello-1m1qjriv
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-include-file-feature-branch-1-say-hello-1m1qjriv
     kontinuous/depname.resourceName: job-dev-test-include-file-feature-branch-1-say-hello-1m1qjriv
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv
     kontinuous/deployment.env: test-include-file-feature-branch-1
@@ -136,13 +134,13 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - -c
             - |
-
+              
               degit kontinuous/test-include-file#feature-branch-1 \\\\
                 /workspace
           securityContext:
@@ -156,8 +154,8 @@ spec:
               cpu: 3000m
               memory: 8192Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: debian:stable
@@ -170,7 +168,7 @@ spec:
               value: /kontinuous-input
           command:
             - /bin/bash
-            - '-c'
+            - -c
             - |
               set -e
               Hello World !
@@ -191,8 +189,7 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv/jobs.say-hello
+              subPath: test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv/jobs.say-hello
       securityContext:
         fsGroup: 1000
       volumes:

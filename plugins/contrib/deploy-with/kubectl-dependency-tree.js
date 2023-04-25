@@ -2,7 +2,7 @@ const async = require("async")
 
 const getDeps = require("../lib/get-needs-deps")
 
-const handledKinds = ["Deployment", "StatefulSet", "Job"]
+const kindIsWaitable = require("../lib/kind-is-waitable")
 
 const isNotDefined = (val) => val === undefined || val === null || val === ""
 const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
@@ -15,9 +15,8 @@ module.exports = async (options, context) => {
     yaml,
     logger,
     kubectlDeleteManifest,
-    kindIsRunnable,
     KontinuousPluginError,
-    rolloutStatusWatch,
+    waitForResource,
   } = utils
 
   const { kubeconfigContext, kubeconfig } = config
@@ -98,16 +97,26 @@ module.exports = async (options, context) => {
       --wait
       --timeout=${applyTimeout}
   `
-    return kubectl(kubectlDeployCommand, {
-      kubeconfig,
-      kubeconfigContext,
-      stdin: yamlManifest,
-      collectProcesses: kubectlProcesses,
-      logInfo: true,
-      logError: false,
-      retryOptions: kubectlRetryOptions,
-      surviveOnBrokenCluster,
-    })
+    try {
+      const result = await kubectl(kubectlDeployCommand, {
+        kubeconfig,
+        kubeconfigContext,
+        stdin: yamlManifest,
+        collectProcesses: kubectlProcesses,
+        logInfo: true,
+        logError: false,
+        retryOptions: kubectlRetryOptions,
+        surviveOnBrokenCluster,
+      })
+      return result
+    } catch (error) {
+      logger.error(
+        `unable to apply ${manifest.kind}/${
+          manifest.metadata.namespace || ""
+        }/${manifest.metadata.name}`
+      )
+      throw error
+    }
   }
 
   const eventsBucket = ctx.require("eventsBucket")
@@ -158,7 +167,7 @@ module.exports = async (options, context) => {
 
   const applyManifest = async (manifest) => q.pushAsync(manifest)
 
-  const deps = getDeps(manifests, context)
+  const deps = getDeps(manifests, options, context)
 
   const getManifestDependencies = (manifest) => {
     const { metadata, kind } = manifest
@@ -169,7 +178,7 @@ module.exports = async (options, context) => {
 
     const jsonNeeds = annotations["kontinuous/plugin.needs"]
 
-    if (!kindIsRunnable(kind)) {
+    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
       return
     }
     if (!jsonNeeds) {
@@ -228,7 +237,7 @@ module.exports = async (options, context) => {
   }
 
   const countAllRunnable = manifests.filter((manifest) =>
-    kindIsRunnable(manifest.kind)
+    kindIsWaitable(manifest.kind, options.customWaitableKinds)
   ).length
   eventsBucket.emit("deploy-with:plugin:initDeployment", { countAllRunnable })
 
@@ -236,7 +245,7 @@ module.exports = async (options, context) => {
 
   const rolloutStatusManifest = async (manifest) => {
     const { kind } = manifest
-    if (!handledKinds.includes(kind)) {
+    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
       return
     }
     const resourceName = manifest.metadata.labels?.["kontinuous/resourceName"]
@@ -260,10 +269,11 @@ module.exports = async (options, context) => {
           `👁️‍🗨️ watching resource: ${resourceName}`
         )
         eventsBucket.emit("resource:waiting", eventParam)
-        const result = await rolloutStatusWatch({
+        const result = await waitForResource({
           namespace,
           selector,
-          kindFilter: kind,
+          kubectl,
+          kind,
           abortSignal,
           kubeconfig,
           kubecontext: kubeconfigContext,

@@ -214,6 +214,10 @@ spec:
           securityContext:
             runAsUser: {{ $user }}
             runAsGroup: {{ $group }}
+            {{ if $run.seccompProfile }}
+            seccompProfile:
+              {{- tpl ($run.seccompProfile | toYaml) . | nindent 14 }}
+            {{ end }}
           volumeMounts:
             - name: workspace
               mountPath: /workspace

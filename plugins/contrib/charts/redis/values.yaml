@@ -3,3 +3,7 @@ namespace:
 env: []
 envFrom: []
 image: redis:6.2.6-alpine3.14
+addVolumes: []
+volumes: []
+volumeMounts: []
+~forceRestart: false

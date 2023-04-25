@@ -40,6 +40,14 @@
             "description": "Should the repo be checked-out to build. defaults to true",
             "type": "boolean"
           },
+          "~needs": {
+            "description": "List of kontinuous dependencies",
+            "examples": ["['create-db', 'import-sql', 'anonymize']"],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "memoryLimit": {
             "description": "Kubernetes max memory for the Job before OOMKill",
             "type": "string"
@@ -59,152 +67,173 @@
           "with": { "type": "object", "additionalProperties": true }
         },
         "required": ["use"],
-        "anyOf": [
-          {
+        "if": {
+          "properties": {
+            "use": {
+              "const": "build"
+            }
+          }
+        },
+        "then": {
+          "description": "Build and register docker image with buildkit",
+          "properties": {
+            "use": {
+              "description": "Build and register docker image with buildkit"
+            },
+            "with": {
+              "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/build/use.schema.json#"
+            }
+          },
+          "required": ["with"]
+        },
+        "else": {
+          "if": {
+            "properties": {
+              "use": {
+                "const": "build-kaniko"
+              }
+            }
+          },
+          "then": {
+            "description": "Build and register docker image with kaniko",
+            "properties": {
+              "use": {
+                "description": "Build and register docker image with kaniko"
+              },
+              "with": {
+                "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/build-kaniko/use.schema.json#"
+              }
+            },
+            "required": ["with"]
+          },
+          "else": {
             "if": {
               "properties": {
                 "use": {
-                  "const": "build",
-                  "description": "Build and register docker image with buildkit"
+                  "const": "create-db"
                 }
               }
             },
             "then": {
-              "properties": {
-                "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/build/use.schema.json#"
-                }
-              },
-              "required": ["with"]
-            }
-          },
-          {
-            "if": {
+              "description": "Create a Postgres Database",
               "properties": {
                 "use": {
-                  "const": "build-kaniko",
-                  "description": "Build and register docker image with kaniko"
-                }
-              }
-            },
-            "then": {
-              "properties": {
-                "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/build-kaniko/use.schema.json#"
-                }
-              },
-              "required": ["with"]
-            }
-          },
-          {
-            "if": {
-              "properties": {
-                "use": {
-                  "const": "create-db",
                   "description": "Create a Postgres Database"
-                }
-              }
-            },
-            "then": {
-              "properties": {
+                },
                 "with": {
                   "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/create-db/use.schema.json#"
                 }
               },
               "required": ["with"]
-            }
-          },
-          {
-            "if": {
-              "properties": {
-                "use": {
-                  "const": "deactivate",
-                  "description": "Destroy namespace and databasees"
-                }
-              }
             },
-            "then": {
-              "properties": {
-                "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/deactivate/use.schema.json#"
+            "else": {
+              "if": {
+                "properties": {
+                  "use": {
+                    "const": "deactivate"
+                  }
                 }
               },
-              "required": ["with"]
-            }
-          },
-          {
-            "if": {
-              "properties": {
-                "use": {
-                  "const": "drop-db",
-                  "description": "Destroy the databasee"
+              "then": {
+                "description": "Destroy namespace and databases",
+                "properties": {
+                  "use": {
+                    "description": "Destroy namespace and databases"
+                  },
+                  "with": {
+                    "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/deactivate/use.schema.json#"
+                  }
+                },
+                "required": ["with"]
+              },
+              "else": {
+                "if": {
+                  "properties": {
+                    "use": {
+                      "const": "drop-db"
+                    }
+                  }
+                },
+                "then": {
+                  "description": "Destroy the database",
+                  "properties": {
+                    "use": {
+                      "description": "Destroy the database"
+                    },
+                    "with": {
+                      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/drop-db/use.schema.json#"
+                    }
+                  },
+                  "required": ["with"]
+                },
+                "else": {
+                  "if": {
+                    "properties": {
+                      "use": {
+                        "const": "pg-restore"
+                      }
+                    }
+                  },
+                  "then": {
+                    "description": "Restore the database from a backup storage",
+                    "properties": {
+                      "use": {
+                        "description": "Restore the database from a backup storage"
+                      },
+                      "with": {
+                        "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/pg-restore/use.schema.json#"
+                      }
+                    },
+                    "required": ["with"]
+                  },
+                  "else": {
+                    "if": {
+                      "properties": {
+                        "use": {
+                          "const": "psql"
+                        }
+                      }
+                    },
+                    "then": {
+                      "description": "Execute psql commands on the database",
+                      "properties": {
+                        "use": {
+                          "description": "Execute psql commands on the database"
+                        },
+                        "with": {
+                          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/psql/use.schema.json#"
+                        }
+                      },
+                      "required": ["with"]
+                    },
+                    "else": {
+                      "if": {
+                        "properties": {
+                          "use": {
+                            "const": "seed-db"
+                          }
+                        }
+                      },
+                      "then": {
+                        "description": "Execute a repository .sql on the database",
+                        "properties": {
+                          "use": {
+                            "description": "Execute a repository .sql on the database"
+                          },
+                          "with": {
+                            "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/seed-db/use.schema.json#"
+                          }
+                        },
+                        "required": ["with"]
+                      },
+                      "else": {}
+                    }
+                  }
                 }
               }
-            },
-            "then": {
-              "properties": {
-                "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/drop-db/use.schema.json#"
-                }
-              },
-              "required": ["with"]
-            }
-          },
-          {
-            "if": {
-              "properties": {
-                "use": {
-                  "const": "pg-restore",
-                  "description": "Restore the database from a backup storage"
-                }
-              }
-            },
-            "then": {
-              "properties": {
-                "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/pg-restore/use.schema.json#"
-                }
-              },
-              "required": ["with"]
-            }
-          },
-          {
-            "if": {
-              "properties": {
-                "use": {
-                  "const": "psql",
-                  "description": "Execute psql commands on the database"
-                }
-              }
-            },
-            "then": {
-              "properties": {
-                "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/psql/use.schema.json#"
-                }
-              },
-              "required": ["with"]
-            }
-          },
-          {
-            "if": {
-              "properties": {
-                "use": {
-                  "const": "seed-db",
-                  "description": "Execute a repository .sql on the database"
-                }
-              }
-            },
-            "then": {
-              "properties": {
-                "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/seed-db/use.schema.json#"
-                }
-              },
-              "required": ["with"]
             }
           }
-        ]
+        }
       },
       "properties": {}
     }

@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots jobs-seed-sql.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
     janitor/ttl: 7d
   labels:
@@ -34,8 +33,7 @@ metadata:
   namespace: test-jobs-seed-sql-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
   labels:
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
@@ -68,8 +66,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
   labels:
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
@@ -96,14 +93,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-seed-sql-feature-branch-1-create-db-5739hj0d
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-jobs-seed-sql-feature-branch-1-create-db-5739hj0d
     kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-seed-sql-feature-branch-1-create-db-5739hj0d
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-sql-feature-branch-1-create-db-5739hj0d
     kontinuous/depname.resourceName: job-dev-test-jobs-seed-sql-feature-branch-1-create-db-5739hj0d
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
     kontinuous/deployment.env: test-jobs-seed-sql-feature-branch-1
@@ -138,10 +136,10 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           command:
             - sh
-            - '-c'
+            - -c
             - degit socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
           securityContext:
             runAsUser: 1000
@@ -154,8 +152,8 @@ spec:
               cpu: 3000m
               memory: 8192Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:6.70.0
@@ -199,7 +197,7 @@ spec:
               value: /kontinuous-input
           command:
             - /bin/bash
-            - '-c'
+            - -c
             - |
               set -e
               /action/ensure-db.sh
@@ -220,8 +218,7 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5/jobs.db.create-db
+              subPath: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5/jobs.db.create-db
       securityContext:
         fsGroup: 1000
       volumes:
@@ -244,14 +241,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-seed-sql-feature-branch-1-create-se-1kyq6uvj
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-jobs-seed-sql-feature-branch-1-create-se-1kyq6uvj
     kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-seed-sql-feature-branch-1-create-se-1kyq6uvj
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-sql-feature-branch-1-create-se-1kyq6uvj
     kontinuous/depname.resourceName: job-dev-test-jobs-seed-sql-feature-branch-1-create-se-1kyq6uvj
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
     kontinuous/deployment.env: test-jobs-seed-sql-feature-branch-1
@@ -286,10 +284,10 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           command:
             - sh
-            - '-c'
+            - -c
             - degit socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
           securityContext:
             runAsUser: 1000
@@ -302,8 +300,8 @@ spec:
               cpu: 3000m
               memory: 8192Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -313,7 +311,7 @@ spec:
                 name: pg-admin-user
           env:
             - name: USE_AZURE_FLEX
-              value: 'false'
+              value: \\"false\\"
             - name: DB_SECRET_NAME
               value: pg-user
             - name: JOB_NAMESPACE
@@ -334,7 +332,7 @@ spec:
               value: /kontinuous-input
           command:
             - /bin/bash
-            - '-c'
+            - -c
             - |
               set -e
               /action/create-secret.sh
@@ -358,8 +356,7 @@ spec:
               readOnly: true
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5/jobs.db.create-secret
+              subPath: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5/jobs.db.create-secret
       securityContext:
         fsGroup: 1001
       volumes:
@@ -389,14 +386,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-seed-sql-feature-branch-1-seed-db-s-1jedkjdw
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-jobs-seed-sql-feature-branch-1-seed-db-s-1jedkjdw
     kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-seed-sql-feature-branch-1-seed-db-s-1jedkjdw
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-seed-sql-feature-branch-1-seed-db-s-1jedkjdw
     kontinuous/depname.resourceName: job-dev-test-jobs-seed-sql-feature-branch-1-seed-db-s-1jedkjdw
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
     kontinuous/deployment.env: test-jobs-seed-sql-feature-branch-1
@@ -431,13 +429,13 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - -c
             - |
-
+              
               degit kontinuous/test-jobs-seed-sql#feature-branch-1 \\\\
                 /workspace
           securityContext:
@@ -451,13 +449,13 @@ spec:
               cpu: 3000m
               memory: 8192Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           command:
             - sh
-            - '-c'
+            - -c
             - degit socialgouv/kontinuous/plugins/contrib/jobs/seed-db /action
           securityContext:
             runAsUser: 1000
@@ -470,8 +468,8 @@ spec:
               cpu: 3000m
               memory: 8192Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:7.0.0
@@ -488,7 +486,7 @@ spec:
               value: /kontinuous-input
           command:
             - /bin/bash
-            - '-c'
+            - -c
             - |
               set -e
               /action/seed-db.sh
@@ -509,8 +507,7 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5/jobs.seed.seed-db
+              subPath: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5/jobs.seed.seed-db
       securityContext:
         fsGroup: 1000
       volumes:
@@ -539,8 +536,7 @@ metadata:
   namespace: test-jobs-seed-sql-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"seed\\"]'
     kontinuous/deployment: test-jobs-seed-sql-feature-branch-1-ffac537e6cbbf934b-c29nbtj5
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
@@ -549,13 +545,17 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/depname.chartNameTopFull: app
+    kontinuous/depname.chartNameTop: app
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
     matchLabels:
       component: app
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -590,8 +590,7 @@ spec:
                         - app
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/test-jobs-seed-sql/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/test-jobs-seed-sql/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 3000

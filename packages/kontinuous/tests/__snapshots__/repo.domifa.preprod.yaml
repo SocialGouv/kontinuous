@@ -5,18 +5,17 @@ exports[`test build manifests with snapshots repo.domifa.preprod 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
   labels:
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -33,12 +32,11 @@ metadata:
   namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -67,12 +65,11 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -92,7 +89,7 @@ metadata:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -105,17 +102,17 @@ data:
   DOMIFA_ENV_PRESET: dist.preset.env
   PGSSLMODE: require
   NODE_ENV: production
-  DOMIFA_PRINT_CONFIG: 'true'
-  DOMIFA_TYPEORM_CREATE_DATABASE: 'true'
-  DOMIFA_EMAILS_ENABLE: 'true'
-  DOMIFA_SMS_ENABLED: 'true'
-  POSTGRES_POOL_MAX_CONNEXIONS: '50'
+  DOMIFA_PRINT_CONFIG: \\"true\\"
+  DOMIFA_TYPEORM_CREATE_DATABASE: \\"true\\"
+  DOMIFA_EMAILS_ENABLE: \\"true\\"
+  DOMIFA_SMS_ENABLED: \\"true\\"
+  POSTGRES_POOL_MAX_CONNEXIONS: \\"50\\"
   DOMIFA_FRONTEND_META_ROBOTS: noindex,nofollow
   ELASTIC_APM_SERVICE_NAME: domifa-backend-preprod
   CRON_ELASTIC_APM_SERVICE_NAME: domifa-backend-cron-preprod
-  ELASTIC_APM_ACTIVE: 'true'
-  DOMIFA_LOG_HTTP_REQUESTS: 'true'
-  DOMIFA_LOG_SQL_REQUESTS: 'true'
+  ELASTIC_APM_ACTIVE: \\"true\\"
+  DOMIFA_LOG_HTTP_REQUESTS: \\"true\\"
+  DOMIFA_LOG_SQL_REQUESTS: \\"true\\"
 ---
 apiVersion: batch/v1
 kind: Job
@@ -129,17 +126,18 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-ba-kl444n9n
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-ba-kl444n9n
     kontinuous/depname.chartResource: jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-ba-kl444n9n
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-preprod-test-r-feature-branch-1-buildkit-build-ba-kl444n9n
     kontinuous/depname.resourceName: job-preprod-test-r-feature-branch-1-buildkit-build-ba-kl444n9n
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -161,7 +159,7 @@ spec:
         repository: test-repo.domifa
         runName: build
         kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-        kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+        kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -172,13 +170,13 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - -c
             - |
-
+              
               degit kontinuous/test-repo.domifa#feature-branch-1 \\\\
                 /workspace
           securityContext:
@@ -192,8 +190,8 @@ spec:
               cpu: 2000m
               memory: 4096Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -203,14 +201,14 @@ spec:
                 name: harbor
           env:
             - name: BUILDKITD_FLAGS
-              value: '--oci-worker-no-process-sandbox'
+              value: --oci-worker-no-process-sandbox
             - name: KONTINUOUS_OUTPUT
               value: /kontinuous-output
             - name: KONTINUOUS_INPUT
               value: /kontinuous-input
           command:
             - /bin/sh
-            - '-c'
+            - -c
             - >
               set -e
 
@@ -220,11 +218,15 @@ spec:
 
               mkdir -p /home/user/.docker
 
-              echo
-              \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\"
-              > /home/user/.docker/config.json
+              echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
 
               export IMAGE_PATH=$CI_REGISTRY/domifa/test-repo.domifa/backend
+
+              export LATEST_TAG=\\"\\"
+
+              if [ \\"false\\" = \\"true\\" ]; then
+                export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
+              fi
 
               buildctl-daemonless.sh \\\\
                 build \\\\
@@ -232,14 +234,14 @@ spec:
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./packages/backend/Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 --opt build-arg:\\"DOMIFA_ENV_ID=preprod\\" \\\\
                 echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
-              cpu: '2'
+              cpu: \\"2\\"
               memory: 4Gi
             requests:
               cpu: 500m
@@ -247,6 +249,8 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+            seccompProfile:
+              type: Unconfined
           volumeMounts:
             - name: workspace
               mountPath: /workspace
@@ -254,8 +258,7 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-backend.buildkit
+              subPath: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-backend.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
       securityContext:
@@ -282,17 +285,18 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-fr-1rxzb3us
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-fr-1rxzb3us
     kontinuous/depname.chartResource: jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-fr-1rxzb3us
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-preprod-test-r-feature-branch-1-buildkit-build-fr-1rxzb3us
     kontinuous/depname.resourceName: job-preprod-test-r-feature-branch-1-buildkit-build-fr-1rxzb3us
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -314,7 +318,7 @@ spec:
         repository: test-repo.domifa
         runName: build
         kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-        kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+        kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -325,13 +329,13 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - -c
             - |
-
+              
               degit kontinuous/test-repo.domifa#feature-branch-1 \\\\
                 /workspace
           securityContext:
@@ -345,8 +349,8 @@ spec:
               cpu: 2000m
               memory: 4096Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -356,14 +360,14 @@ spec:
                 name: harbor
           env:
             - name: BUILDKITD_FLAGS
-              value: '--oci-worker-no-process-sandbox'
+              value: --oci-worker-no-process-sandbox
             - name: KONTINUOUS_OUTPUT
               value: /kontinuous-output
             - name: KONTINUOUS_INPUT
               value: /kontinuous-input
           command:
             - /bin/sh
-            - '-c'
+            - -c
             - >
               set -e
 
@@ -373,11 +377,15 @@ spec:
 
               mkdir -p /home/user/.docker
 
-              echo
-              \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\"
-              > /home/user/.docker/config.json
+              echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
 
               export IMAGE_PATH=$CI_REGISTRY/domifa/test-repo.domifa/frontend
+
+              export LATEST_TAG=\\"\\"
+
+              if [ \\"false\\" = \\"true\\" ]; then
+                export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
+              fi
 
               buildctl-daemonless.sh \\\\
                 build \\\\
@@ -385,7 +393,7 @@ spec:
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./packages/frontend/Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
@@ -397,7 +405,7 @@ spec:
                 echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
-              cpu: '2'
+              cpu: \\"2\\"
               memory: 4Gi
             requests:
               cpu: 500m
@@ -405,6 +413,8 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+            seccompProfile:
+              type: Unconfined
           volumeMounts:
             - name: workspace
               mountPath: /workspace
@@ -412,8 +422,7 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-frontend.buildkit
+              subPath: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-frontend.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
       securityContext:
@@ -435,23 +444,23 @@ metadata:
   namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/needsName: build-portail-admins.buildkit
-    kontinuous/needsNames: >-
-      [\\"build-portail-admins\\",\\"build-portail-admins.buildkit\\",\\"build-portail-admins..buildkit\\"]
+    kontinuous/needsNames: '[\\"build-portail-admins\\",\\"build-portail-admins.buildkit\\",\\"build-portail-admins..buildkit\\"]'
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-po-we06ji0b
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-po-we06ji0b
     kontinuous/depname.chartResource: jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-po-we06ji0b
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-preprod-test-r-feature-branch-1-buildkit-build-po-we06ji0b
     kontinuous/depname.resourceName: job-preprod-test-r-feature-branch-1-buildkit-build-po-we06ji0b
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -473,7 +482,7 @@ spec:
         repository: test-repo.domifa
         runName: build
         kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-        kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+        kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -484,13 +493,13 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - -c
             - |
-
+              
               degit kontinuous/test-repo.domifa#feature-branch-1 \\\\
                 /workspace
           securityContext:
@@ -504,8 +513,8 @@ spec:
               cpu: 2000m
               memory: 4096Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -515,14 +524,14 @@ spec:
                 name: harbor
           env:
             - name: BUILDKITD_FLAGS
-              value: '--oci-worker-no-process-sandbox'
+              value: --oci-worker-no-process-sandbox
             - name: KONTINUOUS_OUTPUT
               value: /kontinuous-output
             - name: KONTINUOUS_INPUT
               value: /kontinuous-input
           command:
             - /bin/sh
-            - '-c'
+            - -c
             - >
               set -e
 
@@ -532,12 +541,15 @@ spec:
 
               mkdir -p /home/user/.docker
 
-              echo
-              \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\"
-              > /home/user/.docker/config.json
+              echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
 
-              export
-              IMAGE_PATH=$CI_REGISTRY/domifa/test-repo.domifa/portail-admins
+              export IMAGE_PATH=$CI_REGISTRY/domifa/test-repo.domifa/portail-admins
+
+              export LATEST_TAG=\\"\\"
+
+              if [ \\"false\\" = \\"true\\" ]; then
+                export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
+              fi
 
               buildctl-daemonless.sh \\\\
                 build \\\\
@@ -545,7 +557,7 @@ spec:
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./packages/portail-admins/Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
@@ -553,7 +565,7 @@ spec:
                 echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
-              cpu: '2'
+              cpu: \\"2\\"
               memory: 4Gi
             requests:
               cpu: 500m
@@ -561,6 +573,8 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+            seccompProfile:
+              type: Unconfined
           volumeMounts:
             - name: workspace
               mountPath: /workspace
@@ -568,8 +582,7 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-portail-admins.buildkit
+              subPath: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-portail-admins.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
       securityContext:
@@ -591,23 +604,23 @@ metadata:
   namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/needsName: build-portail-usagers.buildkit
-    kontinuous/needsNames: >-
-      [\\"build-portail-usagers\\",\\"build-portail-usagers.buildkit\\",\\"build-portail-usagers..buildkit\\"]
+    kontinuous/needsNames: '[\\"build-portail-usagers\\",\\"build-portail-usagers.buildkit\\",\\"build-portail-usagers..buildkit\\"]'
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-po-3bcuzmr1
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-po-3bcuzmr1
     kontinuous/depname.chartResource: jobs.job.job-preprod-test-r-feature-branch-1-buildkit-build-po-3bcuzmr1
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-preprod-test-r-feature-branch-1-buildkit-build-po-3bcuzmr1
     kontinuous/depname.resourceName: job-preprod-test-r-feature-branch-1-buildkit-build-po-3bcuzmr1
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -629,7 +642,7 @@ spec:
         repository: test-repo.domifa
         runName: build
         kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-        kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+        kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -640,13 +653,13 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - -c
             - |
-
+              
               degit kontinuous/test-repo.domifa#feature-branch-1 \\\\
                 /workspace
           securityContext:
@@ -660,8 +673,8 @@ spec:
               cpu: 2000m
               memory: 4096Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -671,14 +684,14 @@ spec:
                 name: harbor
           env:
             - name: BUILDKITD_FLAGS
-              value: '--oci-worker-no-process-sandbox'
+              value: --oci-worker-no-process-sandbox
             - name: KONTINUOUS_OUTPUT
               value: /kontinuous-output
             - name: KONTINUOUS_INPUT
               value: /kontinuous-input
           command:
             - /bin/sh
-            - '-c'
+            - -c
             - >
               set -e
 
@@ -688,12 +701,15 @@ spec:
 
               mkdir -p /home/user/.docker
 
-              echo
-              \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\"
-              > /home/user/.docker/config.json
+              echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
 
-              export
-              IMAGE_PATH=$CI_REGISTRY/domifa/test-repo.domifa/portail-usagers
+              export IMAGE_PATH=$CI_REGISTRY/domifa/test-repo.domifa/portail-usagers
+
+              export LATEST_TAG=\\"\\"
+
+              if [ \\"false\\" = \\"true\\" ]; then
+                export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
+              fi
 
               buildctl-daemonless.sh \\\\
                 build \\\\
@@ -701,7 +717,7 @@ spec:
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./packages/portail-usagers/Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
@@ -710,7 +726,7 @@ spec:
                 echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
-              cpu: '2'
+              cpu: \\"2\\"
               memory: 4Gi
             requests:
               cpu: 500m
@@ -718,6 +734,8 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+            seccompProfile:
+              type: Unconfined
           volumeMounts:
             - name: workspace
               mountPath: /workspace
@@ -725,8 +743,7 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-portail-usagers.buildkit
+              subPath: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-portail-usagers.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
       securityContext:
@@ -748,7 +765,7 @@ metadata:
     component: backend-cron
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -759,8 +776,7 @@ metadata:
   namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.backend-cron
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/backend-cron/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/backend-cron/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"build-backend\\"]'
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/depname.full: project.fabrique.contrib.backend-cron.deployment.backend-cron
@@ -769,13 +785,17 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.backend-cron
     kontinuous/depname.resourcePath: deployment.backend-cron
     kontinuous/depname.resourceName: backend-cron
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/depname.chartNameTopFull: backend-cron
+    kontinuous/depname.chartNameTop: backend-cron
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
     matchLabels:
       component: backend-cron
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -783,7 +803,7 @@ spec:
         application: test-repo.domifa
         namespace: test-repo.domifa-preprod
         kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-        kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+        kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -810,8 +830,7 @@ spec:
                         - backend-cron
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/domifa/test-repo.domifa/backend:preprod-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/domifa/test-repo.domifa/backend:preprod-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 3000
@@ -841,10 +860,10 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: '1.5'
+              cpu: \\"1.5\\"
               memory: 2Gi
             requests:
-              cpu: '0.2'
+              cpu: \\"0.2\\"
               memory: 256Mi
           env:
             - name: TZ
@@ -858,18 +877,15 @@ spec:
             - name: POSTGRES_DATABASE
               value: $(PGDATABASE)
             - name: DOMIFA_BACKEND_URL
-              value: >-
-                https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/
+              value: https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/
             - name: DOMIFA_FRONTEND_URL
               value: https://test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/
             - name: DOMIFA_PORTAIL_USAGERS_URL
-              value: >-
-                https://mon-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/
+              value: https://mon-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/
             - name: DOMIFA_PORTAIL_ADMINS_URL
-              value: >-
-                https://admin-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/
+              value: https://admin-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/
             - name: DOMIFA_CRON_ENABLED
-              value: 'true'
+              value: \\"true\\"
             - name: ELASTIC_APM_SERVICE_NAME
               value: $(CRON_ELASTIC_APM_SERVICE_NAME)
           envFrom:
@@ -887,7 +903,7 @@ metadata:
     component: backend
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -898,8 +914,7 @@ metadata:
   namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.backend
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/backend/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/backend/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"build-backend\\"]'
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/depname.full: project.fabrique.contrib.backend.deployment.backend
@@ -908,13 +923,17 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.backend
     kontinuous/depname.resourcePath: deployment.backend
     kontinuous/depname.resourceName: backend
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/depname.chartNameTopFull: backend
+    kontinuous/depname.chartNameTop: backend
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
     matchLabels:
       component: backend
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -922,7 +941,7 @@ spec:
         application: test-repo.domifa
         namespace: test-repo.domifa-preprod
         kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-        kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+        kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -953,8 +972,7 @@ spec:
           persistentVolumeClaim:
             claimName: files
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/domifa/test-repo.domifa/backend:preprod-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/domifa/test-repo.domifa/backend:preprod-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 3000
@@ -984,10 +1002,10 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: '1.5'
+              cpu: \\"1.5\\"
               memory: 2Gi
             requests:
-              cpu: '0.2'
+              cpu: \\"0.2\\"
               memory: 256Mi
           env:
             - name: TZ
@@ -1001,18 +1019,15 @@ spec:
             - name: POSTGRES_DATABASE
               value: $(PGDATABASE)
             - name: DOMIFA_BACKEND_URL
-              value: >-
-                https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/
+              value: https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/
             - name: DOMIFA_FRONTEND_URL
               value: https://test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/
             - name: DOMIFA_PORTAIL_USAGERS_URL
-              value: >-
-                https://mon-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/
+              value: https://mon-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/
             - name: DOMIFA_PORTAIL_ADMINS_URL
-              value: >-
-                https://admin-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/
+              value: https://admin-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/
             - name: DOMIFA_CRON_ENABLED
-              value: 'false'
+              value: \\"false\\"
           envFrom:
             - secretRef:
                 name: pg-user
@@ -1033,7 +1048,7 @@ metadata:
     component: frontend
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -1044,8 +1059,7 @@ metadata:
   namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.frontend
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/frontend/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/frontend/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"build-frontend\\"]'
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/depname.full: project.fabrique.contrib.frontend.deployment.frontend
@@ -1054,13 +1068,17 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.frontend
     kontinuous/depname.resourcePath: deployment.frontend
     kontinuous/depname.resourceName: frontend
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/depname.chartNameTopFull: frontend
+    kontinuous/depname.chartNameTop: frontend
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
     matchLabels:
       component: frontend
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -1068,7 +1086,7 @@ spec:
         application: test-repo.domifa
         namespace: test-repo.domifa-preprod
         kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-        kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+        kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -1095,8 +1113,7 @@ spec:
                         - frontend
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/domifa/test-repo.domifa/frontend:preprod-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/domifa/test-repo.domifa/frontend:preprod-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 8080
@@ -1126,10 +1143,10 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: '1'
+              cpu: \\"1\\"
               memory: 1Gi
             requests:
-              cpu: '0.2'
+              cpu: \\"0.2\\"
               memory: 256Mi
 ---
 apiVersion: apps/v1
@@ -1139,7 +1156,7 @@ metadata:
     component: portail-admins
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -1150,8 +1167,7 @@ metadata:
   namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.portail-admins
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/portail-admins/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/portail-admins/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"build-portail-admins\\"]'
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/depname.full: project.fabrique.contrib.portail-admins.deployment.portail-admins
@@ -1160,13 +1176,17 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.portail-admins
     kontinuous/depname.resourcePath: deployment.portail-admins
     kontinuous/depname.resourceName: portail-admins
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/depname.chartNameTopFull: portail-admins
+    kontinuous/depname.chartNameTop: portail-admins
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
     matchLabels:
       component: portail-admins
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -1174,7 +1194,7 @@ spec:
         application: test-repo.domifa
         namespace: test-repo.domifa-preprod
         kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-        kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+        kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -1201,8 +1221,7 @@ spec:
                         - portail-admins
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/domifa/test-repo.domifa/portail-admins:preprod-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/domifa/test-repo.domifa/portail-admins:preprod-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 8080
@@ -1245,7 +1264,7 @@ metadata:
     component: portail-usagers
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -1256,8 +1275,7 @@ metadata:
   namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.portail-usagers
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/portail-usagers/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/portail-usagers/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"build-portail-usagers\\"]'
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
     kontinuous/depname.full: project.fabrique.contrib.portail-usagers.deployment.portail-usagers
@@ -1266,13 +1284,17 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.portail-usagers
     kontinuous/depname.resourcePath: deployment.portail-usagers
     kontinuous/depname.resourceName: portail-usagers
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/depname.chartNameTopFull: portail-usagers
+    kontinuous/depname.chartNameTop: portail-usagers
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
     matchLabels:
       component: portail-usagers
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -1280,7 +1302,7 @@ spec:
         application: test-repo.domifa
         namespace: test-repo.domifa-preprod
         kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-        kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+        kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -1307,8 +1329,7 @@ spec:
                         - portail-usagers
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/domifa/test-repo.domifa/portail-usagers:preprod-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/domifa/test-repo.domifa/portail-usagers:preprod-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 8080
@@ -1351,7 +1372,7 @@ metadata:
     component: backend-cron
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -1362,8 +1383,7 @@ metadata:
   namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.backend-cron
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/backend-cron/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/backend-cron/templates/service.yaml
     kontinuous/plugin.needs: '[\\"build-backend\\"]'
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
 spec:
@@ -1382,7 +1402,7 @@ metadata:
     component: backend
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -1393,8 +1413,7 @@ metadata:
   namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.backend
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/backend/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/backend/templates/service.yaml
     kontinuous/plugin.needs: '[\\"build-backend\\"]'
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
 spec:
@@ -1413,7 +1432,7 @@ metadata:
     component: frontend
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -1424,8 +1443,7 @@ metadata:
   namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.frontend
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/frontend/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/frontend/templates/service.yaml
     kontinuous/plugin.needs: '[\\"build-frontend\\"]'
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
 spec:
@@ -1444,7 +1462,7 @@ metadata:
     component: portail-admins
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -1455,8 +1473,7 @@ metadata:
   namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.portail-admins
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/portail-admins/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/portail-admins/templates/service.yaml
     kontinuous/plugin.needs: '[\\"build-portail-admins\\"]'
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
 spec:
@@ -1475,7 +1492,7 @@ metadata:
     component: portail-usagers
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -1486,8 +1503,7 @@ metadata:
   namespace: test-repo.domifa-preprod
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.portail-usagers
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/portail-usagers/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/portail-usagers/templates/service.yaml
     kontinuous/plugin.needs: '[\\"build-portail-usagers\\"]'
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
 spec:
@@ -1505,15 +1521,14 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.backend
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/backend/templates/ingress.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/backend/templates/ingress.yaml
     kontinuous/plugin.needs: '[\\"build-backend\\"]'
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
   labels:
     component: backend
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -1545,15 +1560,14 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.frontend
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/frontend/templates/ingress.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/frontend/templates/ingress.yaml
     kontinuous/plugin.needs: '[\\"build-frontend\\"]'
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
   labels:
     component: frontend
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -1585,15 +1599,14 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.portail-admins
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/portail-admins/templates/ingress.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/portail-admins/templates/ingress.yaml
     kontinuous/plugin.needs: '[\\"build-portail-admins\\"]'
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
   labels:
     component: portail-admins
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -1625,15 +1638,14 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.portail-usagers
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/portail-usagers/templates/ingress.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/portail-usagers/templates/ingress.yaml
     kontinuous/plugin.needs: '[\\"build-portail-usagers\\"]'
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
   labels:
     component: portail-usagers
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    kontinuous/deployment.env: test-repo-domifa-feature-branch-1-o91f7v1i
+    kontinuous/deployment.env: test-repo-domifa-preprod-gsr6yfuq
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53

@@ -1,15 +1,15 @@
 const { setTimeout } = require("timers/promises")
-
-const handledKinds = ["Deployment", "StatefulSet", "Job"]
+const kindIsWaitable = require("./kind-is-waitable")
 
 const waitBeforeStopAllRolloutStatus = 5000 // try to collect more errors if there is any
 
-module.exports = async (context) => {
-  const { config, logger, rolloutStatus, utils, manifests, ctx } = context
+module.exports = async (context, { customWaitableKinds }) => {
+  const { config, logger, rolloutStatus, utils, manifests, ctx, kubectl } =
+    context
 
   const eventsBucket = ctx.require("eventsBucket")
 
-  const { rolloutStatusWatch, promiseAll } = utils
+  const { waitForResource, promiseAll } = utils
 
   let endAllTrigerred = false
   const endAll = async () => {
@@ -31,7 +31,7 @@ module.exports = async (context) => {
   const promises = []
   for (const manifest of manifests) {
     const { kind } = manifest
-    if (!handledKinds.includes(kind)) {
+    if (!kindIsWaitable(kind, customWaitableKinds)) {
       continue
     }
     const resourceName = manifest.metadata.labels?.["kontinuous/resourceName"]
@@ -57,8 +57,10 @@ module.exports = async (context) => {
           const eventParam = { namespace, resourceName, selector }
           eventsBucket.emit("resource:waiting", eventParam)
           const abortSignal = ctx.require("abortSignal")
-          const result = await rolloutStatusWatch({
+          const result = await waitForResource({
             namespace,
+            kind,
+            kubectl,
             selector,
             abortSignal,
             kubeconfig,

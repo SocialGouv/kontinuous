@@ -1,7 +1,8 @@
 const getDeps = require("../lib/get-needs-deps")
 const getDepName = require("../lib/get-needs-dep-name")
+const kindIsWaitable = require("../lib/kind-is-waitable")
 
-module.exports = async (manifests, _options, context) => {
+module.exports = async (manifests, options, context) => {
   const { ctx, utils } = context
 
   const logger = ctx.require("logger")
@@ -13,9 +14,7 @@ module.exports = async (manifests, _options, context) => {
     return
   }
 
-  const { kindIsRunnable } = utils
-
-  const deps = getDeps(manifests, context)
+  const deps = getDeps(manifests, options, context)
 
   const umlSet = new Set()
 
@@ -28,7 +27,7 @@ module.exports = async (manifests, _options, context) => {
 
     const jsonNeeds = annotations["kontinuous/plugin.needs"]
 
-    if (!kindIsRunnable(kind)) {
+    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
       continue
     }
 

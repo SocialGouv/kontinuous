@@ -1,7 +1,5 @@
 const { spawn } = require("child_process")
 
-const handledKinds = ["Deployment", "StatefulSet", "Job", "DaemonSet"]
-
 module.exports = async (
   options,
   { config, logger, utils, needBin, manifests, dryRun, ctx }
@@ -9,6 +7,11 @@ module.exports = async (
   if (dryRun) {
     return
   }
+  const { customWaitableKinds = [] } = options
+  const handledKinds = [
+    ...utils.rolloutStatusHandledKinds,
+    ...customWaitableKinds,
+  ]
 
   let {
     defaultExcludeContainer = ["kontinuous-wait-needs"],

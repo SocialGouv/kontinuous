@@ -1,9 +1,9 @@
-module.exports = async (manifests, _options, context) => {
-  const { ctx, utils, config } = context
+const kindIsWaitable = require("../lib/kind-is-waitable")
+
+module.exports = async (manifests, options, context) => {
+  const { ctx, config } = context
 
   const logger = ctx.require("logger")
-
-  const { kindIsRunnable } = utils
 
   const { deploymentLabelKey, deploymentLabelValue } = config
 
@@ -16,7 +16,7 @@ module.exports = async (manifests, _options, context) => {
   const selectorsByNs = []
   for (const manifest of manifests) {
     const { kind } = manifest
-    if (!kindIsRunnable(kind)) {
+    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
       continue
     }
     const resourceName = manifest.metadata.labels?.["kontinuous/resourceName"]

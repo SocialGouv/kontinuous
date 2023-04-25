@@ -8,22 +8,20 @@ metadata:
   namespace: awesome-ci
   annotations:
     kontinuous/needsName: deactivate.delete-namespace
-    kontinuous/needsNames: >-
-      [\\"deactivate\\",\\"deactivate.delete-namespace\\",\\"deactivate..delete-namespace\\"]
+    kontinuous/needsNames: '[\\"deactivate\\",\\"deactivate.delete-namespace\\",\\"deactivate..delete-namespace\\"]'
     janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.deactivate.jobs-deactivate
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/deactivate/charts/jobs-deactivate/templates/jobs.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/deactivate/charts/jobs-deactivate/templates/jobs.yaml
     kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b087-43cki7aw
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.deactivate.jobs-deactivate.job.job-dev-test-deactivate-feature-branch-1-delete-names-6cnriaba
-    kontinuous/depname.chartResource: >-
-      jobs-deactivate.job.job-dev-test-deactivate-feature-branch-1-delete-names-6cnriaba
+    kontinuous/depname.full: project.fabrique.contrib.deactivate.jobs-deactivate.job.job-dev-test-deactivate-feature-branch-1-delete-names-6cnriaba
+    kontinuous/depname.chartResource: jobs-deactivate.job.job-dev-test-deactivate-feature-branch-1-delete-names-6cnriaba
     kontinuous/depname.chartName: jobs-deactivate
     kontinuous/depname.chartPath: project.fabrique.contrib.deactivate.jobs-deactivate
     kontinuous/depname.resourcePath: job.job-dev-test-deactivate-feature-branch-1-delete-names-6cnriaba
     kontinuous/depname.resourceName: job-dev-test-deactivate-feature-branch-1-delete-names-6cnriaba
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: deactivate.jobs-deactivate
+    kontinuous/depname.chartNameTop: deactivate
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b087-43cki7aw
     kontinuous/deployment.env: test-deactivate-feature-branch-1-deactivate
@@ -58,13 +56,11 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           command:
             - sh
-            - '-c'
-            - >-
-              degit socialgouv/kontinuous/plugins/contrib/jobs/deactivate
-              /action
+            - -c
+            - degit socialgouv/kontinuous/plugins/contrib/jobs/deactivate /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -76,8 +72,8 @@ spec:
               cpu: 3000m
               memory: 8192Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -93,7 +89,7 @@ spec:
               value: /kontinuous-input
           command:
             - /bin/bash
-            - '-c'
+            - -c
             - |
               set -e
               if kubectl get namespace \\"$NAMESPACE\\">/dev/null 2>&1; then
@@ -119,8 +115,7 @@ spec:
               readOnly: true
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-deactivate-feature-branch-1-ffac537e6cbbf934b087-43cki7aw/jobs-deactivate.deactivate.delete-namespace
+              subPath: test-deactivate-feature-branch-1-ffac537e6cbbf934b087-43cki7aw/jobs-deactivate.deactivate.delete-namespace
       securityContext:
         fsGroup: 1001
       volumes:

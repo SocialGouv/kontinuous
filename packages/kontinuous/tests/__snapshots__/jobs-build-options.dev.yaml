@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots jobs-build-options.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbb-63jpvbjn
     janitor/ttl: 7d
   labels:
@@ -34,8 +33,7 @@ metadata:
   namespace: test-jobs-build-options-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbb-63jpvbjn
   labels:
     kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbb-63jpvbjn
@@ -68,8 +66,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbb-63jpvbjn
   labels:
     kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbb-63jpvbjn
@@ -95,14 +92,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbb-63jpvbjn
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-build-options-feature-branch-1-buil-42yehrg5
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-jobs-build-options-feature-branch-1-buil-42yehrg5
     kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-build-options-feature-branch-1-buil-42yehrg5
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-build-options-feature-branch-1-buil-42yehrg5
     kontinuous/depname.resourceName: job-dev-test-jobs-build-options-feature-branch-1-buil-42yehrg5
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbb-63jpvbjn
     kontinuous/deployment.env: test-jobs-build-options-feature-branch-1
@@ -138,13 +136,13 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - -c
             - |
-
+              
               degit kontinuous/test-jobs-build-options#feature-branch-1 \\\\
                 /workspace
           securityContext:
@@ -158,8 +156,8 @@ spec:
               cpu: 2000m
               memory: 4096Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -169,14 +167,14 @@ spec:
                 name: harbor
           env:
             - name: BUILDKITD_FLAGS
-              value: '--oci-worker-no-process-sandbox'
+              value: --oci-worker-no-process-sandbox
             - name: KONTINUOUS_OUTPUT
               value: /kontinuous-output
             - name: KONTINUOUS_INPUT
               value: /kontinuous-input
           command:
             - /bin/sh
-            - '-c'
+            - -c
             - >
               set -e
 
@@ -186,11 +184,15 @@ spec:
 
               mkdir -p /home/user/.docker
 
-              echo
-              \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\"
-              > /home/user/.docker/config.json
+              echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
 
               export IMAGE_PATH=$CI_REGISTRY/test-jobs-build-options/app
+
+              export LATEST_TAG=\\"\\"
+
+              if [ \\"false\\" = \\"true\\" ]; then
+                export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
+              fi
 
               buildctl-daemonless.sh \\\\
                 build \\\\
@@ -198,7 +200,7 @@ spec:
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 --opt build-arg:\\"arg1=value1\\" \\\\
@@ -206,7 +208,7 @@ spec:
                 echo \\"$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
-              cpu: '2'
+              cpu: \\"2\\"
               memory: 4Gi
             requests:
               cpu: 500m
@@ -214,6 +216,8 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+            seccompProfile:
+              type: Unconfined
           volumeMounts:
             - name: workspace
               mountPath: /workspace
@@ -221,8 +225,7 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-jobs-build-options-feature-branch-1-ffac537e6cbb-63jpvbjn/jobs.build-app.buildkit
+              subPath: test-jobs-build-options-feature-branch-1-ffac537e6cbb-63jpvbjn/jobs.build-app.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
       securityContext:
@@ -255,8 +258,7 @@ metadata:
   namespace: test-jobs-build-options-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"build-app\\"]'
     kontinuous/deployment: test-jobs-build-options-feature-branch-1-ffac537e6cbb-63jpvbjn
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
@@ -265,13 +267,17 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/depname.chartNameTopFull: app
+    kontinuous/depname.chartNameTop: app
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
     matchLabels:
       component: app
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -306,8 +312,7 @@ spec:
                         - app
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/test-jobs-build-options/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/test-jobs-build-options/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 3000

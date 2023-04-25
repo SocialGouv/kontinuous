@@ -5,18 +5,17 @@ exports[`test build manifests with snapshots app-simple-tag.prod 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: v1.2.3
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
   labels:
     application: test-app-simple-tag
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/deployment.env: test-app-simple-tag-prod
     kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
@@ -32,12 +31,11 @@ metadata:
   namespace: test-app-simple-tag
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
   labels:
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/deployment.env: test-app-simple-tag-prod
     kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
@@ -66,12 +64,11 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
   labels:
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/deployment.env: test-app-simple-tag-prod
     kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
@@ -88,7 +85,7 @@ metadata:
     component: app
     application: test-app-simple-tag
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/deployment.env: test-app-simple-tag-prod
     kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
@@ -99,8 +96,7 @@ metadata:
   namespace: test-app-simple-tag
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
     kontinuous/depname.chartResource: app.deployment.app
@@ -108,13 +104,17 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/depname.chartNameTopFull: app
+    kontinuous/depname.chartNameTop: app
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 2
   selector:
     matchLabels:
       component: app
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -122,7 +122,7 @@ spec:
         application: test-app-simple-tag
         namespace: test-app-simple-tag
         kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
-        kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+        kontinuous/deployment.env: test-app-simple-tag-prod
         kontinuous/ref: v1-2-3-5oe0cjpa
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: v1.2.3
@@ -192,7 +192,7 @@ metadata:
     component: app
     application: test-app-simple-tag
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/deployment.env: test-app-simple-tag-prod
     kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3
@@ -224,12 +224,12 @@ metadata:
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
     cert-manager.io: cluster-issuer
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: 'true'
+    kubernetes.io/tls-acme: \\"true\\"
   labels:
     component: app
     application: test-app-simple-tag
     kontinuous/deployment: test-app-simple-tag-v1-2-3-ffac537e6cbbf934b08745a378-1b28a4ea
-    kontinuous/deployment.env: test-app-simple-tag-v1-2-3-3sg4dnik
+    kontinuous/deployment.env: test-app-simple-tag-prod
     kontinuous/ref: v1-2-3-5oe0cjpa
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: v1.2.3

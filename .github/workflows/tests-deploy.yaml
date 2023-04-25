@@ -97,6 +97,8 @@ jobs:
           KS_INLINE_VALUES: |
             ${{ matrix.testParams.inlineValues || '' }}
           KS_WORKSPACE_PATH: ${{ matrix.testParams.cwd }}
+          KS_INLINE_CONFIG_SET: |
+            dependencies.fabrique.dependencies.contrib.preDeploy.cleanOrphan.options.crdApiResources: []
         run: ./kontinuous deploy
       
       - name: run test script

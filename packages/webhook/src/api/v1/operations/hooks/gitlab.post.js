@@ -1,4 +1,4 @@
-const { reqCtx } = require("@modjo-plugins/express/ctx")
+const { reqCtx } = require("@modjo/express/ctx")
 
 const getEventName = (req) => {
   if (

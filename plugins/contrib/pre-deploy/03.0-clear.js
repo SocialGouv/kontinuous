@@ -1,13 +1,15 @@
-const defaultOptions = {
-  kind: ["Deployment", "StatefulSet", "DaemonSet", "Job"],
-  env: ["dev"],
-}
-
 module.exports = async (
   manifests,
   options,
   { utils, config, logger, kubectl }
 ) => {
+  const defaultOptions = {
+    kind: [
+      ...utils.rolloutStatusHandledKinds,
+      ...(options.customWaitableKinds || []),
+    ],
+    env: ["dev"],
+  }
   const opts = { ...defaultOptions, ...options }
 
   let { env: envMatch } = opts

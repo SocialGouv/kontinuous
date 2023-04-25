@@ -1,4 +1,4 @@
-const { ctx } = require("@modjo-plugins/core")
+const { ctx } = require("@modjo/core")
 
 const gitSshCommand = require("~common/utils/git-ssh-command")
 const castArray = require("~common/utils/cast-array")
@@ -153,6 +153,10 @@ module.exports = ({
                 {
                   name: "KS_WORKSPACE_PATH",
                   value: "/workspace",
+                },
+                {
+                  name: "KS_CI",
+                  value: "kontinuous-webhook",
                 },
                 {
                   name: "KS_CI_NAMESPACE",

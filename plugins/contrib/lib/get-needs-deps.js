@@ -1,12 +1,12 @@
-module.exports = (manifests, context) => {
-  const { utils } = context
-  const { kindIsRunnable } = utils
+const kindIsWaitable = require("./kind-is-waitable")
+const getChartNameTopParts = require("./get-chart-name-top-parts")
 
+module.exports = (manifests, options, { config }) => {
   const deps = {}
   for (const manifest of manifests) {
     const { kind, metadata } = manifest
     const annotations = metadata?.annotations
-    if (!annotations || !kindIsRunnable(kind)) {
+    if (!annotations || !kindIsWaitable(kind, options.customWaitableKinds)) {
       continue
     }
     const lowerKind = kind.toLowerCase()
@@ -43,6 +43,13 @@ module.exports = (manifests, context) => {
           `${lowerKind}.${n}`,
           n
         )
+        const parts = getChartNameTopParts(chartPath, config.dependencies)
+        if (parts.length > 0) {
+          keys.push(parts[0])
+          if (parts.length > 1) {
+            keys.push(parts.join("."))
+          }
+        }
       }
     }
 

@@ -4,7 +4,7 @@
   "title": "schema for create-db job usage",
   "type": "object",
   "additionalProperties": false,
-  "required": ["database", "pgUser"],
+  "required": [],
   "properties": {
     "pgAdminUserSecretRefName": {
       "description": "Secret with admin credentials to the database server",
@@ -28,7 +28,8 @@
     },
     "useAzureFlex": {
       "description": "Use an Azure Flex database. defaults to false",
-      "type": "boolean"
+      "type": "string",
+      "enum": ["true", "false"]
     }
   }
 }

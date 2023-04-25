@@ -1,2 +1,31 @@
 contrib-helpers:
   enabled: true
+
+maildev:
+  enabled: false
+pgweb:
+  enabled: false
+app:
+  enabled: false
+deactivate:
+  enabled: false
+hasura:
+  enabled: false
+job:
+  enabled: false
+jobs:
+  enabled: false
+metabase:
+  enabled: false
+namespace:
+  enabled: false
+oauth2-proxy:
+  enabled: false
+output-volume:
+  enabled: false
+rancher-namespace:
+  enabled: false
+redis:
+  enabled: false
+security-policies:
+  enabled: false

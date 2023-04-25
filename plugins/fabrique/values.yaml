@@ -1,3 +1,7 @@
+pg:
+  enabled: false
+keycloakx:
+  enabled: false
 contrib:
   contrib-helpers:
     enabled: true

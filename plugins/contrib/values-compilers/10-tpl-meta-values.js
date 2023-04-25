@@ -3,18 +3,42 @@ const renderTplRecurse = async (values, context, rootValues = values) => {
     return
   }
   const { config, utils } = context
-  const { renderTpl } = utils
+  const { renderTpl, yaml } = utils
   const { buildPath } = config
 
   for (const key of Object.keys(values)) {
-    if (key.startsWith("~tpl~")) {
+    const isTplCast = key.startsWith("~tpl:")
+    if (key.startsWith("~tpl~") || isTplCast) {
       const tpl = values[key]
       delete values[key]
-      const newKey = key.slice(5)
-      values[newKey] = await renderTpl(tpl, {
+      const prefix = isTplCast ? `~${key.split("~").slice(1, 2)}~` : "~tpl~"
+      const newKey = key.slice(prefix.length)
+      let value = await renderTpl(tpl, {
         dir: `${buildPath}/tpl`,
         values: rootValues,
       })
+      value = yaml.loadValue(value)
+      if (isTplCast) {
+        const cast = prefix.slice(1, -1).split(":").slice(1)
+        switch (cast) {
+          case ("int", "integer"): {
+            value = parseInt(value, 10)
+            break
+          }
+          case ("bool", "boolean", "yaml", "json"): {
+            value = yaml.load(value)
+            break
+          }
+          case "string": {
+            value = value.toString()
+            break
+          }
+          default: {
+            throw new Error(`Invalid type cast ${cast}`)
+          }
+        }
+      }
+      values[newKey] = value
     } else {
       await renderTplRecurse(values[key], context, rootValues)
     }

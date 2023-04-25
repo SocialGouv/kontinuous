@@ -1,11 +1,12 @@
 const getDeps = require("../lib/get-needs-deps")
 const getDepName = require("../lib/get-needs-dep-name")
+const kindIsWaitable = require("../lib/kind-is-waitable")
 
-module.exports = (manifests, _options, context) => {
+module.exports = (manifests, options, context) => {
   const { utils } = context
 
-  const { KontinuousPluginError, kindIsRunnable } = utils
-  const deps = getDeps(manifests, context)
+  const { KontinuousPluginError } = utils
+  const deps = getDeps(manifests, options, context)
   for (const manifest of manifests) {
     const { metadata, kind } = manifest
     const annotations = metadata?.annotations
@@ -13,7 +14,7 @@ module.exports = (manifests, _options, context) => {
       continue
     }
     const jsonNeeds = annotations["kontinuous/plugin.needs"]
-    if (!kindIsRunnable(kind)) {
+    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
       continue
     }
     if (!jsonNeeds) {

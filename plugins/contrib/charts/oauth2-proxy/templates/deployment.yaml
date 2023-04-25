@@ -19,7 +19,8 @@ spec:
         application: {{ .Values.global.repositoryName }}
     spec:
       containers:
-        - image: quay.io/oauth2-proxy/oauth2-proxy:v7.2.1
+        # renovate: datasource=docker depName=quay.io/oauth2-proxy/oauth2-proxy versioning=v7.4.0
+        - image: quay.io/oauth2-proxy/oauth2-proxy:v7.4.0
           args:
             - --upstream
             - {{ .Values.upstream }}

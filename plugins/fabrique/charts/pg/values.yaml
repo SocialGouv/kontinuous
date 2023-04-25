@@ -1,0 +1,44 @@
+cnpg-cluster:
+  enabled: true
+  fullnameOverride: cnpg-cluster
+  nameOverride: cnpg-cluster
+  dbSecretName: cnpg-cluster-app
+  ~needs: [jobs-pg]
+  ~tpl~dbOwner: "{{ .Values.global.pgUser }}"
+  ~tpl~dbName: "{{ .Values.global.pgDatabase }}"
+  ~tpl~instances: "{{ if (or .Values.isProd .Values.isPreprod) }}3{{else}}1{{end}}"
+  postgresqlParameter:
+    timezone: "Europe/Paris"
+  extensions:
+    - postgis
+    - postgis_topology
+    - fuzzystrmatch
+    - postgis_tiger_geocoder
+    - uuid-ossp
+    - citext
+    - pgcrypto
+    - hstore
+  monitoring:
+    ~tpl~enablePodMonitor: "{{ if (or .Values.isProd .Values.isPreprod) }}true{{else}}false{{end}}"
+  persistence:
+    storageClass: "managed-csi"
+    size: 8Gi
+    # pvcTemplate:
+  image:
+    repository: "ghcr.io/cloudnative-pg/postgis"
+    tag: "14"
+  poolers:
+    rw:
+      ~tpl~instances: "{{ if (or .Values.isProd .Values.isPreprod) }}3{{else}}1{{end}}"
+      type: rw
+      pgbouncer:
+        poolMode: session
+        parameters:
+          max_client_conn: "1000"
+          # default_pool_size: "10"
+
+jobs-pg:
+  enabled: true
+  runs:
+    create-secrets:
+      use: cnpg-create-secrets

@@ -1,0 +1,340 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test build manifests with snapshots cnpg.dev 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: \\"1234\\"
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    janitor/ttl: 7d
+  labels:
+    application: test-cnpg
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: namespace-test-cnpg-feature-branch-1-2cfl45mk
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+    cert: wildcard
+  name: test-cnpg-feature-branch-1
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-cnpg-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+  labels:
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+  labels:
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-cnpg-feature-branch-1
+automountServiceAccountToken: false
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: hasura
+    application: test-cnpg
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-hasura-3fivxu5u
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: hasura
+  namespace: test-cnpg-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
+    kontinuous/plugin.needs: '[\\"cnpg\\"]'
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
+    kontinuous/depname.chartResource: hasura.deployment.hasura
+    kontinuous/depname.chartName: hasura
+    kontinuous/depname.chartPath: project.fabrique.contrib.hasura
+    kontinuous/depname.resourcePath: deployment.hasura
+    kontinuous/depname.resourceName: hasura
+    kontinuous/depname.chartNameTopFull: hasura
+    kontinuous/depname.chartNameTop: hasura
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: hasura
+  template:
+    metadata:
+      labels:
+        component: hasura
+        application: test-cnpg
+        kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+        kontinuous/deployment.env: test-cnpg-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-hasura-3fivxu5u
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    spec:
+      containers:
+        - image: harbor.fabrique.social.gouv.fr/test-cnpg/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: hasura
+          ports:
+            - containerPort: 8080
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 3
+              memory: 8Gi
+            requests:
+              cpu: 41m
+              memory: 121Mi
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 5
+          env: []
+          envFrom:
+            - secretRef:
+                name: hasura
+            - secretRef:
+                name: cnpg-cluster-db
+            - configMapRef:
+                name: hasura-configmap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: hasura
+    application: test-cnpg
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-hasura-2b56e0cf
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: hasura
+  namespace: test-cnpg-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
+    kontinuous/plugin.needs: '[\\"cnpg\\"]'
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    component: hasura
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"cnpg\\"]'
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+  labels:
+    component: hasura
+    application: test-cnpg
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-hasura-2784v1wj
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: hasura
+  namespace: test-cnpg-feature-branch-1
+spec:
+  rules:
+    - host: hasura-test-cnpg-feature-branch-1.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: hasura
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - hasura-test-cnpg-feature-branch-1.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cnpg-cluster
+  labels:
+    helm.sh/chart: cnpg-cluster-1.4.2
+    app.kubernetes.io/name: cnpg-cluster
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: 14.5-6
+    app.kubernetes.io/managed-by: Helm
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: cluster-cnpg-cluster-3ucigx9f
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.cnpg.cnpg-cluster
+    kontinuous/source: project/charts/cnpg/charts/cnpg-cluster/templates/cluster.cnpg.yaml
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/depname.full: project.cnpg.cnpg-cluster.cluster.cnpg-cluster
+    kontinuous/depname.chartResource: cnpg-cluster.cluster.cnpg-cluster
+    kontinuous/depname.chartName: cnpg-cluster
+    kontinuous/depname.chartPath: project.cnpg.cnpg-cluster
+    kontinuous/depname.resourcePath: cluster.cnpg-cluster
+    kontinuous/depname.resourceName: cnpg-cluster
+    kontinuous/depname.chartNameTopFull: cnpg.cnpg-cluster
+    kontinuous/depname.chartNameTop: cnpg
+    kontinuous/plugin.log: \\"false\\"
+  namespace: test-cnpg-feature-branch-1
+spec:
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgis:14
+  imagePullPolicy: IfNotPresent
+  storage:
+    size: 8Gi
+    storageClass: managed-csi
+  minSyncReplicas: 0
+  maxSyncReplicas: 0
+  postgresql: {}
+  monitoring:
+    enablePodMonitor: false
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
+      postInitTemplateSQL:
+        - CREATE EXTENSION IF NOT EXISTS \\"postgis\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"postgis_topology\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"fuzzystrmatch\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"postgis_tiger_geocoder\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"uuid-ossp\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"citext\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"pgcrypto\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"hstore\\";
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Pooler
+metadata:
+  name: cnpg-cluster-rw
+  labels:
+    helm.sh/chart: cnpg-cluster-1.4.2
+    app.kubernetes.io/name: cnpg-cluster
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: 14.5-6
+    app.kubernetes.io/managed-by: Helm
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: pooler-cnpg-cluster-rw-t5d0s6ee
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.cnpg.cnpg-cluster
+    kontinuous/source: project/charts/cnpg/charts/cnpg-cluster/templates/pooler.cnpg.yaml
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+  namespace: test-cnpg-feature-branch-1
+spec:
+  cluster:
+    name: cnpg-cluster
+  instances: 1
+  pgbouncer:
+    parameters:
+      max_client_conn: \\"1000\\"
+    poolMode: session
+  type: rw
+"
+`;

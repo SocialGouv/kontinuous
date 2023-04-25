@@ -5,6 +5,8 @@ const yaml = require("~common/utils/yaml")
 const timeLogger = require("~common/utils/time-logger")
 const promiseAll = require("~common/utils/promise-all")
 
+const needRolloutStatus = require("~common/utils/need-rollout-status")
+const needBin = require("~/lib/need-bin")
 const build = require("~/build")
 const { setStatus } = require("~/status")
 
@@ -71,6 +73,8 @@ module.exports = async (options) => {
       })
       return
     }
+
+    await needBin(needRolloutStatus)
 
     if (statusUrl) {
       await setStatus({ url: statusUrl, token, status: "loading", ok: null })

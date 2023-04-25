@@ -1,0 +1,7 @@
+redis:
+  enabled: true
+  addVolumes:
+    - redis
+  volumeMounts:
+    - name: redis
+      mountPath: /data

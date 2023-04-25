@@ -1,4 +1,4 @@
-const { ctx } = require("@modjo-plugins/core")
+const { ctx } = require("@modjo/core")
 
 module.exports = () => (cluster) => {
   const rootKubeconfigs = ctx.require("config.project.secrets.rootKubeconfigs")

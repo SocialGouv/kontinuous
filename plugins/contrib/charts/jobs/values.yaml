@@ -1,12 +1,11 @@
 enabled:
-createRancherNamespace: false
 namespace: 
 repository: 
 gitBranch: 
 runs: {}
 image: "debian:stable"
 
-degitImage: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+degitImage: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
 # degitImagePullPolicy: Always
 degitImagePullPolicy: IfNotPresent
 

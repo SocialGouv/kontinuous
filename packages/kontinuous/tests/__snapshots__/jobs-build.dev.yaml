@@ -5,13 +5,12 @@ exports[`test build manifests with snapshots jobs-build.dev 1`] = `
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/projectId: '1234'
+    field.cattle.io/projectId: \\"1234\\"
     kontinuous/gitBranch: feature-branch-1
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     janitor/ttl: 7d
   labels:
@@ -34,8 +33,7 @@ metadata:
   namespace: test-jobs-build-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
   labels:
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
@@ -68,8 +66,7 @@ metadata:
   name: default
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
   labels:
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
@@ -96,15 +93,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs-dev
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs-dev/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-create-db-db-2vvwr03j
-    kontinuous/depname.chartResource: >-
-      jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-create-db-db-2vvwr03j
+    kontinuous/depname.full: project.fabrique.contrib.jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-create-db-db-2vvwr03j
+    kontinuous/depname.chartResource: jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-create-db-db-2vvwr03j
     kontinuous/depname.chartName: jobs-dev
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs-dev
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-build-feature-branch-1-create-db-db-2vvwr03j
     kontinuous/depname.resourceName: job-dev-test-jobs-build-feature-branch-1-create-db-db-2vvwr03j
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs-dev
+    kontinuous/depname.chartNameTop: jobs-dev
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/deployment.env: test-jobs-build-feature-branch-1
@@ -139,10 +136,10 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           command:
             - sh
-            - '-c'
+            - -c
             - degit socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
           securityContext:
             runAsUser: 1000
@@ -155,8 +152,8 @@ spec:
               cpu: 3000m
               memory: 8192Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:6.70.0
@@ -200,7 +197,7 @@ spec:
               value: /kontinuous-input
           command:
             - /bin/bash
-            - '-c'
+            - -c
             - |
               set -e
               /action/ensure-db.sh
@@ -221,8 +218,7 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c/jobs-dev.db.create-db
+              subPath: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c/jobs-dev.db.create-db
       securityContext:
         fsGroup: 1000
       volumes:
@@ -245,15 +241,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs-dev
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs-dev/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-create-secre-3cm1pcsk
-    kontinuous/depname.chartResource: >-
-      jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-create-secre-3cm1pcsk
+    kontinuous/depname.full: project.fabrique.contrib.jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-create-secre-3cm1pcsk
+    kontinuous/depname.chartResource: jobs-dev.job.job-dev-test-jobs-build-feature-branch-1-create-secre-3cm1pcsk
     kontinuous/depname.chartName: jobs-dev
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs-dev
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-build-feature-branch-1-create-secre-3cm1pcsk
     kontinuous/depname.resourceName: job-dev-test-jobs-build-feature-branch-1-create-secre-3cm1pcsk
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs-dev
+    kontinuous/depname.chartNameTop: jobs-dev
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/deployment.env: test-jobs-build-feature-branch-1
@@ -288,10 +284,10 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           command:
             - sh
-            - '-c'
+            - -c
             - degit socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
           securityContext:
             runAsUser: 1000
@@ -304,8 +300,8 @@ spec:
               cpu: 3000m
               memory: 8192Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -315,7 +311,7 @@ spec:
                 name: pg-admin-user
           env:
             - name: USE_AZURE_FLEX
-              value: 'false'
+              value: \\"false\\"
             - name: DB_SECRET_NAME
               value: pg-user
             - name: JOB_NAMESPACE
@@ -336,7 +332,7 @@ spec:
               value: /kontinuous-input
           command:
             - /bin/bash
-            - '-c'
+            - -c
             - |
               set -e
               /action/create-secret.sh
@@ -360,8 +356,7 @@ spec:
               readOnly: true
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c/jobs-dev.db.create-secret
+              subPath: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c/jobs-dev.db.create-secret
       securityContext:
         fsGroup: 1001
       volumes:
@@ -390,14 +385,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-build-feature-branch-1-buildkit-bui-4tecghd4
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-jobs-build-feature-branch-1-buildkit-bui-4tecghd4
     kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-build-feature-branch-1-buildkit-bui-4tecghd4
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-build-feature-branch-1-buildkit-bui-4tecghd4
     kontinuous/depname.resourceName: job-dev-test-jobs-build-feature-branch-1-buildkit-bui-4tecghd4
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/deployment.env: test-jobs-build-feature-branch-1
@@ -433,13 +429,13 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - -c
             - |
-
+              
               degit kontinuous/test-jobs-build#feature-branch-1 \\\\
                 /workspace
           securityContext:
@@ -453,8 +449,8 @@ spec:
               cpu: 2000m
               memory: 4096Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -464,14 +460,14 @@ spec:
                 name: harbor
           env:
             - name: BUILDKITD_FLAGS
-              value: '--oci-worker-no-process-sandbox'
+              value: --oci-worker-no-process-sandbox
             - name: KONTINUOUS_OUTPUT
               value: /kontinuous-output
             - name: KONTINUOUS_INPUT
               value: /kontinuous-input
           command:
             - /bin/sh
-            - '-c'
+            - -c
             - >
               set -e
 
@@ -481,11 +477,15 @@ spec:
 
               mkdir -p /home/user/.docker
 
-              echo
-              \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\"
-              > /home/user/.docker/config.json
+              echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
 
               export IMAGE_PATH=$CI_REGISTRY/test-jobs-build/app
+
+              export LATEST_TAG=\\"\\"
+
+              if [ \\"false\\" = \\"true\\" ]; then
+                export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
+              fi
 
               buildctl-daemonless.sh \\\\
                 build \\\\
@@ -493,13 +493,13 @@ spec:
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 echo \\"$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
-              cpu: '2'
+              cpu: \\"2\\"
               memory: 4Gi
             requests:
               cpu: 500m
@@ -507,6 +507,8 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+            seccompProfile:
+              type: Unconfined
           volumeMounts:
             - name: workspace
               mountPath: /workspace
@@ -514,8 +516,7 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c/jobs.build-app.buildkit
+              subPath: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c/jobs.build-app.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
       securityContext:
@@ -542,14 +543,15 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
-    kontinuous/depname.full: >-
-      project.fabrique.contrib.jobs.job.job-dev-test-jobs-build-feature-branch-1-buildkit-bui-pm3nb2vb
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-jobs-build-feature-branch-1-buildkit-bui-pm3nb2vb
     kontinuous/depname.chartResource: jobs.job.job-dev-test-jobs-build-feature-branch-1-buildkit-bui-pm3nb2vb
     kontinuous/depname.chartName: jobs
     kontinuous/depname.chartPath: project.fabrique.contrib.jobs
     kontinuous/depname.resourcePath: job.job-dev-test-jobs-build-feature-branch-1-buildkit-bui-pm3nb2vb
     kontinuous/depname.resourceName: job-dev-test-jobs-build-feature-branch-1-buildkit-bui-pm3nb2vb
-    kontinuous/plugin.log: 'true'
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
   labels:
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/deployment.env: test-jobs-build-feature-branch-1
@@ -585,13 +587,13 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.136.2
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.142.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - -c
             - |
-
+              
               degit kontinuous/test-jobs-build#feature-branch-1 \\\\
                 /workspace
           securityContext:
@@ -605,8 +607,8 @@ spec:
               cpu: 2000m
               memory: 4096Mi
             requests:
-              cpu: '0'
-              memory: '0'
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
         - name: job
           image: moby/buildkit:v0.10.5-rootless
@@ -616,14 +618,14 @@ spec:
                 name: harbor
           env:
             - name: BUILDKITD_FLAGS
-              value: '--oci-worker-no-process-sandbox'
+              value: --oci-worker-no-process-sandbox
             - name: KONTINUOUS_OUTPUT
               value: /kontinuous-output
             - name: KONTINUOUS_INPUT
               value: /kontinuous-input
           command:
             - /bin/sh
-            - '-c'
+            - -c
             - >
               set -e
 
@@ -633,11 +635,15 @@ spec:
 
               mkdir -p /home/user/.docker
 
-              echo
-              \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\"
-              > /home/user/.docker/config.json
+              echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
 
               export IMAGE_PATH=$CI_REGISTRY/test-jobs-build/hasura
+
+              export LATEST_TAG=\\"\\"
+
+              if [ \\"false\\" = \\"true\\" ]; then
+                export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
+              fi
 
               buildctl-daemonless.sh \\\\
                 build \\\\
@@ -645,13 +651,13 @@ spec:
                 --local context=/workspace//hasura \\\\
                 --local dockerfile=/workspace/hasura \\\\
                 --opt filename=./Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1\\\\\\",push=true \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                 --export-cache type=inline \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 echo \\"$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
-              cpu: '2'
+              cpu: \\"2\\"
               memory: 4Gi
             requests:
               cpu: 500m
@@ -659,6 +665,8 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+            seccompProfile:
+              type: Unconfined
           volumeMounts:
             - name: workspace
               mountPath: /workspace
@@ -666,8 +674,7 @@ spec:
               mountPath: /action
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: >-
-                test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c/jobs.build-hasura.buildkit
+              subPath: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c/jobs.build-hasura.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
       securityContext:
@@ -700,8 +707,7 @@ metadata:
   namespace: test-jobs-build-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"build-app\\"]'
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
@@ -710,13 +716,17 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/depname.chartNameTopFull: app
+    kontinuous/depname.chartNameTop: app
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
     matchLabels:
       component: app
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -751,8 +761,7 @@ spec:
                         - app
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/test-jobs-build/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/test-jobs-build/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           ports:
             - containerPort: 3000
@@ -813,8 +822,7 @@ metadata:
   namespace: test-jobs-build-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"jobs.build-hasura\\",\\"jobs-dev.db\\"]'
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
@@ -823,8 +831,10 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.hasura
     kontinuous/depname.resourcePath: deployment.hasura
     kontinuous/depname.resourceName: hasura
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/depname.chartNameTopFull: hasura
+    kontinuous/depname.chartNameTop: hasura
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -847,8 +857,7 @@ spec:
         kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     spec:
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/test-jobs-build/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/test-jobs-build/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
           livenessProbe:
             failureThreshold: 15
             httpGet:
@@ -910,8 +919,7 @@ metadata:
   namespace: test-jobs-build-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.pgweb
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/pgweb/templates/deployment.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/pgweb/templates/deployment.yaml
     kontinuous/plugin.needs: '[\\"db\\"]'
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
     kontinuous/depname.full: project.fabrique.contrib.pgweb.deployment.pgweb
@@ -920,8 +928,10 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.pgweb
     kontinuous/depname.resourcePath: deployment.pgweb
     kontinuous/depname.resourceName: pgweb
-    kontinuous/plugin.log: 'false'
-    reloader.stakater.com/auto: 'true'
+    kontinuous/depname.chartNameTopFull: pgweb
+    kontinuous/depname.chartNameTop: pgweb
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
   selector:
@@ -949,7 +959,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: WAIT_FOR_RETRIES
-              value: '24'
+              value: \\"24\\"
           envFrom:
             - secretRef:
                 name: pg-user
@@ -1048,8 +1058,7 @@ metadata:
   namespace: test-jobs-build-feature-branch-1
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
     kontinuous/plugin.needs: '[\\"jobs.build-hasura\\",\\"jobs-dev.db\\"]'
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
 spec:
@@ -1136,8 +1145,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: >-
-      project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
     kontinuous/plugin.needs: '[\\"jobs.build-hasura\\",\\"jobs-dev.db\\"]'
     kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
   labels:

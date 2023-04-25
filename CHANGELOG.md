@@ -2,6 +2,233 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.142.0 (2023-04-25)
+
+
+### Features
+
+* kubeconform + fix asyncShell ([#290](https://github.com/socialgouv/kontinuous/issues/290)) ([d10c7f1](https://github.com/socialgouv/kontinuous/commit/d10c7f1a4718d508ee76fb3badecb169be122e00))
+
+## 1.141.5 (2023-04-24)
+
+## 1.141.4 (2023-04-24)
+
+
+### Bug Fixes
+
+* chart renew cache on same ref ([#285](https://github.com/socialgouv/kontinuous/issues/285)) ([26efb98](https://github.com/socialgouv/kontinuous/commit/26efb981f56d215c0d1455dc37c6e82ad4e93cca))
+
+## 1.141.3 (2023-04-24)
+
+
+### Bug Fixes
+
+* need bin rollout-status ([#286](https://github.com/socialgouv/kontinuous/issues/286)) ([aedda8e](https://github.com/socialgouv/kontinuous/commit/aedda8ebaa073833e9ff67e9e1a6569132dd1053))
+
+## 1.141.2 (2023-04-11)
+
+
+### Bug Fixes
+
+* pvc-spec ([#280](https://github.com/socialgouv/kontinuous/issues/280)) ([17fe6df](https://github.com/socialgouv/kontinuous/commit/17fe6dfb89ea006d33ab3dd289d538157bf49546))
+
+## 1.141.1 (2023-04-11)
+
+
+### Bug Fixes
+
+* enable clean orphan ([#278](https://github.com/socialgouv/kontinuous/issues/278)) ([b9330a1](https://github.com/socialgouv/kontinuous/commit/b9330a16de9892f27049c94adeaceded7f75a39a))
+
+## 1.141.0 (2023-04-11)
+
+
+### Features
+
+* chart app strategy option ([#279](https://github.com/socialgouv/kontinuous/issues/279)) ([c7cb43a](https://github.com/socialgouv/kontinuous/commit/c7cb43a84836d1a19e753a4373c1189e8d09e548))
+
+## 1.140.3 (2023-04-11)
+
+
+### Bug Fixes
+
+* hotfix for tpl yaml parser ([#277](https://github.com/socialgouv/kontinuous/issues/277)) ([c751628](https://github.com/socialgouv/kontinuous/commit/c7516287987e6fa7591dc58c5eec2b9f03f7d97a))
+
+## 1.140.2 (2023-04-10)
+
+
+### Bug Fixes
+
+* **patches:** allow other hosts as cert-manager hosts ([#275](https://github.com/socialgouv/kontinuous/issues/275)) ([fde0ab5](https://github.com/socialgouv/kontinuous/commit/fde0ab5d4c4a4cdfa788c4f45b7fd2b5eb546cef))
+
+## 1.140.1 (2023-04-05)
+
+## 1.140.0 (2023-04-05)
+
+
+### Features
+
+* x-* yaml anchor ([#269](https://github.com/socialgouv/kontinuous/issues/269)) ([1a44b6d](https://github.com/socialgouv/kontinuous/commit/1a44b6d6a43da45b6ef4e1ae7f5efe5a44c54d9c))
+
+## 1.139.3 (2023-04-05)
+
+
+### Bug Fixes
+
+* add network error ([#271](https://github.com/socialgouv/kontinuous/issues/271)) ([0e3bfc2](https://github.com/socialgouv/kontinuous/commit/0e3bfc2da7e3285469ada049d6f84b1d1d672f65))
+
+## [1.139.2](https://github.com/socialgouv/kontinuous/compare/v1.139.1...v1.139.2) (2023-04-04)
+
+
+### Bug Fixes
+
+* hotfix ([ed327cb](https://github.com/socialgouv/kontinuous/commit/ed327cb423c98223802600994300ce293102bf89))
+
+## 1.139.1 (2023-04-03)
+
+
+### Bug Fixes
+
+* decouple fabrique config from contrib ([#266](https://github.com/socialgouv/kontinuous/issues/266)) ([f50bc74](https://github.com/socialgouv/kontinuous/commit/f50bc7445f40d56e35a0794e4c86866752f514f0))
+
+## 1.139.0 (2023-04-03)
+
+
+### Features
+
+* forceRestart optout meta-value patch ([#267](https://github.com/socialgouv/kontinuous/issues/267)) ([bd1e947](https://github.com/socialgouv/kontinuous/commit/bd1e94799e3f1d0f592813291a93918c592ca079))
+
+## 1.138.5 (2023-04-03)
+
+
+### Bug Fixes
+
+* **jsonschema:** fix app chart definitions ([#259](https://github.com/socialgouv/kontinuous/issues/259)) ([30fea62](https://github.com/socialgouv/kontinuous/commit/30fea62c3ecf3eb59f6de9a2ab3695398e52d09b))
+
+## 1.138.4 (2023-04-03)
+
+## 1.138.3 (2023-03-31)
+
+
+### Bug Fixes
+
+* **redis:** add values volumes options ([#262](https://github.com/socialgouv/kontinuous/issues/262)) ([7b9ffb7](https://github.com/socialgouv/kontinuous/commit/7b9ffb79f2570347584d4c5d5dac985bb0d4002f))
+
+## 1.138.2 (2023-03-31)
+
+
+### Bug Fixes
+
+* decrease default limits ([#257](https://github.com/socialgouv/kontinuous/issues/257)) ([f1c6a7d](https://github.com/socialgouv/kontinuous/commit/f1c6a7d6279f118a16072c3dc3632f39ccf1a7af))
+
+## 1.138.1 (2023-03-31)
+
+
+### Bug Fixes
+
+* improve debug on apply ([#260](https://github.com/socialgouv/kontinuous/issues/260)) ([a8b4ad2](https://github.com/socialgouv/kontinuous/commit/a8b4ad28e4f109ee521c836315e7a05da5786d4a))
+
+## 1.138.0 (2023-03-30)
+
+
+### Features
+
+* ci-detect + fix isLocal default ([#258](https://github.com/socialgouv/kontinuous/issues/258)) ([8f09a37](https://github.com/socialgouv/kontinuous/commit/8f09a37708c1a5bf2948f8207cf04403b9654da0))
+
+## 1.137.10 (2023-03-29)
+
+
+### Bug Fixes
+
+* **jsonschema:** minor fixes ([#256](https://github.com/socialgouv/kontinuous/issues/256)) ([fb6993d](https://github.com/socialgouv/kontinuous/commit/fb6993d50a9957e2a057472c1a7f762555e97c9e))
+
+## [1.137.9](https://github.com/socialgouv/kontinuous/compare/v1.137.8...v1.137.9) (2023-03-27)
+
+
+### Bug Fixes
+
+* job build latest tag bash syntax typo ([ad2cfec](https://github.com/socialgouv/kontinuous/commit/ad2cfecaa5871085ea3e18514f719dd8b625d242))
+
+## 1.137.8 (2023-03-21)
+
+## 1.137.7 (2023-03-21)
+
+
+### Bug Fixes
+
+* isLocal and optional rancher project id ([#251](https://github.com/socialgouv/kontinuous/issues/251)) ([1a4baec](https://github.com/socialgouv/kontinuous/commit/1a4baecbdefb3bd191682bb265a7b0fc31674626))
+
+## 1.137.6 (2023-03-21)
+
+
+### Bug Fixes
+
+* **jsonschema:** fix app.probes and jobs.use ([#252](https://github.com/socialgouv/kontinuous/issues/252)) ([0fbe229](https://github.com/socialgouv/kontinuous/commit/0fbe2297eece9cfd48d9253d6bbfd19e672d403b))
+
+## 1.137.5 (2023-03-21)
+
+
+### Bug Fixes
+
+* cnpg persistentVolumeReclaimPolicy ([#250](https://github.com/socialgouv/kontinuous/issues/250)) ([640c7f2](https://github.com/socialgouv/kontinuous/commit/640c7f2e1d96a181d0fc2bd118ca1ed719a74a62))
+
+## 1.137.4 (2023-03-20)
+
+## 1.137.3 (2023-03-20)
+
+
+### Bug Fixes
+
+* **probes:** fix helm merge ([#249](https://github.com/socialgouv/kontinuous/issues/249)) ([2ba9c24](https://github.com/socialgouv/kontinuous/commit/2ba9c24b467e14a4d108d1a6b7a641bc8b4cef11))
+
+## [1.137.2](https://github.com/socialgouv/kontinuous/compare/v1.137.1...v1.137.2) (2023-03-15)
+
+
+### Bug Fixes
+
+* job seccompProfile missing nesed key ([29f6767](https://github.com/socialgouv/kontinuous/commit/29f6767b19bff7d309472c9d483eff142d4b235f))
+
+## 1.137.1 (2023-03-15)
+
+
+### Bug Fixes
+
+* deprecated seccomp kube1-25 ([#241](https://github.com/socialgouv/kontinuous/issues/241)) ([eaa2e73](https://github.com/socialgouv/kontinuous/commit/eaa2e73b2ac6d0ab0bb81fc4be90e533cc621d9f))
+
+## 1.137.0 (2023-03-15)
+
+
+### Features
+
+* cnpg + crd needs + fix of deep charts linking ([#245](https://github.com/socialgouv/kontinuous/issues/245)) ([187fe4c](https://github.com/socialgouv/kontinuous/commit/187fe4c45d22f52f86a3caa18d3d80495ce783c4))
+
+## [1.136.6](https://github.com/socialgouv/kontinuous/compare/v1.136.5...v1.136.6) (2023-03-14)
+
+
+### Bug Fixes
+
+* implicit enabled not deactivate + tests ([d93a02d](https://github.com/socialgouv/kontinuous/commit/d93a02d74491090a85bd0cbc83b0c90182479b94))
+
+## [1.136.5](https://github.com/socialgouv/kontinuous/compare/v1.136.4...v1.136.5) (2023-03-14)
+
+
+### Bug Fixes
+
+* implicit enabled not deactivate + tests ([8345fd2](https://github.com/socialgouv/kontinuous/commit/8345fd20fcc7cf11eec8fbc651513db1a3f8f8be))
+
+## 1.136.4 (2023-03-14)
+
+
+### Bug Fixes
+
+* implicit enabled ([#243](https://github.com/socialgouv/kontinuous/issues/243)) ([7d8604d](https://github.com/socialgouv/kontinuous/commit/7d8604d3fbd4567a9bda9f4477a4c7de76ede2a1))
+
+## 1.136.3 (2023-03-13)
+
+
+### Bug Fixes
+
+* decouple maildev chart ([#232](https://github.com/socialgouv/kontinuous/issues/232)) ([5335abc](https://github.com/socialgouv/kontinuous/commit/5335abc739bbd6c0c546bd90ca1f3c2f408f88f5))
+
 ## 1.136.2 (2023-03-06)
 
 
