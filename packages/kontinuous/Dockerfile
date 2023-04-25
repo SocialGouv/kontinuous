@@ -12,14 +12,14 @@ RUN apt-get update && \
 
 FROM downloader as kubectl
 # renovate: datasource=github-tags depName=kubernetes/kubectl extractVersion=^kubernetes-(?<version>.+)$
-ARG KUBECTL_VERSION=1.26.1
+ARG KUBECTL_VERSION=1.27.1
 ENV KUBECTL_VERSION=$KUBECTL_VERSION
 RUN curl --fail -sL https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl
 
 FROM downloader as helm
 # renovate: datasource=github-releases depName=helm/helm
-ARG HELM_VERSION=3.11.1
+ARG HELM_VERSION=3.11.3
 ENV HELM_VERSION=$HELM_VERSION
 RUN curl --fail -sL https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz | tar xz -C /tmp/ \
   && mv /tmp/linux-amd64/helm /usr/local/bin/helm \
@@ -44,7 +44,7 @@ RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/downlo
 
 FROM downloader as stern
 # renovate: datasource=github-releases depName=stern/stern
-ARG STERN_VERSION=1.23.0
+ARG STERN_VERSION=1.25.0
 ENV STERN_VERSION=$STERN_VERSION
 RUN curl --fail -sL https://github.com/stern/stern/releases/download/v${STERN_VERSION}/stern_${STERN_VERSION}_linux_amd64.tar.gz | tar xz -C /tmp/ \
   && mv /tmp/stern /usr/local/bin/stern \

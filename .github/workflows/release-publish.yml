@@ -36,12 +36,12 @@ jobs:
           cat <<< $(jq "del(.dependencies, .devDependencies)" packages/kontinuous/package.json) > packages/kontinuous/package.json
 
       - id: publish-kontinuous
-        uses: JS-DevTools/npm-publish@v1
+        uses: JS-DevTools/npm-publish@v2
         with:
           token: ${{ secrets.SOCIALGROOVYBOT_NPM_TOKEN }}
           package: packages/kontinuous/package.json
       
-      - if: steps.publish-kontinuous.outputs.type != 'none'
+      - if: steps.publish-kontinuous.outputs.type
         run: |
           echo "Version changed: ${{ steps.publish-kontinuous.outputs.old-version }} => ${{ steps.publish-kontinuous.outputs.version }}"
       
