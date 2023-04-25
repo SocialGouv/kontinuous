@@ -25,6 +25,10 @@ dependencies:
     repository: file://./charts/app
     version: 1.136.2
     condition: app.enabled
+  - name: daemon
+    repository: file://./charts/daemon
+    version: 1.136.2
+    condition: daemon.enabled
   - name: deactivate
     repository: file://./charts/deactivate
     version: 1.136.2
