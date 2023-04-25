@@ -1,6 +1,6 @@
 const retry = require("async-retry")
-const { ctx } = require("@modjo-plugins/core")
-const { reqCtx } = require("@modjo-plugins/express/ctx")
+const { ctx } = require("@modjo/core")
+const { reqCtx } = require("@modjo/express/ctx")
 
 const cleanGitRef = require("~common/utils/clean-git-ref")
 const repositoryFromGitUrl = require("~common/utils/repository-from-git-url")
