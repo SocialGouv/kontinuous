@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.144.0 (2023-04-25)
+
+
+### Features
+
+* daemon chart ([#298](https://github.com/socialgouv/kontinuous/issues/298)) ([18c9b76](https://github.com/socialgouv/kontinuous/commit/18c9b76efe247a2b07ecda70780cbc07ad780610))
+
 ## 1.143.0 (2023-04-25)
 
 

@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: {{ (or .Values.component .Chart.Name) | lower }}
+    application: {{ .Values.global.repositoryName }}
+  name: {{ (or .Values.component .Chart.Name) | lower }}
+  namespace: {{ or .Values.namespace .Values.global.namespace }}
+  annotations: {}
+spec:
+  replicas: {{ or .Values.replicas .Values.global.replicas 1 }}
+  selector:
+    matchLabels:
+      component: {{ (or .Values.component .Chart.Name) | lower }}
+  strategy:
+    type: {{ .Values.strategyType }}
+  template:
+    metadata:
+      labels:
+        component: {{ (or .Values.component .Chart.Name) | lower }}
+        application: {{ .Values.global.repositoryName }}
+        namespace: {{ or .Values.namespace .Values.global.namespace }}
+    spec:
+      affinity:
+        {{- include "contrib-helpers.anti-affinity" . | nindent 8}}
+      initContainers:
+      volumes:
+        {{- if gt (len .Values.volumes) 0 }}
+        {{- tpl (.Values.volumes | toYaml) . | nindent 8 }}
+        {{- end }}
+        {{- range $volumeName := .Values.addVolumes }}
+        - name: "{{ tpl $volumeName $ }}"
+          persistentVolumeClaim:
+            claimName: "{{ tpl $volumeName $ }}"
+        {{- end }}
+      containers:
+        - {{- if .Values.image }}
+          image: "{{ .Values.image }}"
+          {{- else }}
+          image: "{{ or .Values.registry .Values.global.registry }}{{ if (or .Values.imageProject .Values.global.imageProject) }}{{ (print "/" (or .Values.imageProject .Values.global.imageProject)) }}{{ end }}{{ if (or .Values.imageRepository .Values.global.imageRepository) }}{{ (print "/" (or .Values.imageRepository .Values.global.imageRepository)) }}{{ end }}{{ if .Values.imagePackage }}{{ (print "/" .Values.imagePackage) }}{{ end }}:{{ or .Values.imageTag .Values.global.imageTag }}"
+          {{- end }}
+          {{- if .Values.entrypoint }}
+          command: |
+            {{- tpl (.Values.entrypoint | toYaml) $ | nindent 12 }}
+          {{- end }}
+          {{- if .Values.cmd }}
+          args:
+          {{- range $arg := .Values.args }}
+            - "{{ tpl $arg $ }}"
+          {{- end }}
+          {{- end }}
+          name: app
+          {{ if .Values.livenessProbe }}
+          livenessProbe:
+            {{ .Values.livenessProbe | toYaml | nindent 12 }}
+          {{- end }}
+          {{ if .Values.readinessProbe }}
+          readinessProbe:
+            {{ .Values.readinessProbe | toYaml | nindent 12 }}
+          {{- end }}
+          {{ if .Values.startupProbe }}
+          startupProbe:
+            {{ .Values.startupProbe | toYaml | nindent 12 }}
+          {{- end }}
+          resources:
+            limits:
+              cpu: {{ .Values.resources.limits.cpu | quote }}
+              memory: {{ .Values.resources.limits.memory | quote }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu | quote }}
+              memory: {{ .Values.resources.requests.memory | quote }}
+          env:
+            {{- if gt (len .Values.env) 0 }}
+            {{- tpl (.Values.env | toYaml) . | nindent 12 }}
+            {{- end }}
+            {{- range $name, $value := .Values.vars }}
+            - name: "{{ $name }}"
+              value: "{{ tpl $value $ }}"
+            {{- end }}
+          envFrom:
+            {{- if gt (len .Values.envFrom) 0 }}
+            {{- tpl (.Values.envFrom | toYaml) . | nindent 12 }}
+            {{- end }}
+          volumeMounts:
+            {{- if gt (len .Values.volumeMounts) 0 }}
+            {{- tpl (.Values.volumeMounts | toYaml) . | nindent 12 }}
+            {{- end }}
+            {{- range $volumeName := .Values.addVolumes }}
+            - name: "{{ tpl $volumeName $ }}"
+              mountPath: "/mnt/{{ tpl $volumeName $ }}"
+            {{- end }}
