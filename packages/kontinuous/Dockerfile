@@ -44,7 +44,7 @@ RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/downlo
 
 FROM downloader as stern
 # renovate: datasource=github-releases depName=stern/stern
-ARG STERN_VERSION=1.23.0
+ARG STERN_VERSION=1.25.0
 ENV STERN_VERSION=$STERN_VERSION
 RUN curl --fail -sL https://github.com/stern/stern/releases/download/v${STERN_VERSION}/stern_${STERN_VERSION}_linux_amd64.tar.gz | tar xz -C /tmp/ \
   && mv /tmp/stern /usr/local/bin/stern \
