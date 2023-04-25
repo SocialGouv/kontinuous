@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.142.0 (2023-04-25)
+
+
+### Features
+
+* kubeconform + fix asyncShell ([#290](https://github.com/socialgouv/kontinuous/issues/290)) ([d10c7f1](https://github.com/socialgouv/kontinuous/commit/d10c7f1a4718d508ee76fb3badecb169be122e00))
+
 ## 1.141.5 (2023-04-24)
 
 ## 1.141.4 (2023-04-24)
