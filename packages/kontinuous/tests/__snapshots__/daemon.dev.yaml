@@ -150,7 +150,7 @@ spec:
                         - daemon
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: harbor.fabrique.social.gouv.fr/test-daemon/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+        - image: harbor.fabrique.social.gouv.fr/test-daemon/daemon:sha-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           resources:
             limits:

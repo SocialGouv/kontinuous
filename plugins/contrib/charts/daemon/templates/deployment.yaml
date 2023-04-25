@@ -24,9 +24,6 @@ spec:
       affinity:
         {{- include "contrib-helpers.anti-affinity" . | nindent 8}}
       initContainers:
-      {{- if .Values.waitForPostgres }}
-        {{- include "contrib-helpers.init-containers.wait-for-postgres" . | nindent 8 }}
-      {{- end }}
       volumes:
         {{- if gt (len .Values.volumes) 0 }}
         {{- tpl (.Values.volumes | toYaml) . | nindent 8 }}
