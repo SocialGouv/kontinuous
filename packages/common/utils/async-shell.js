@@ -49,7 +49,11 @@ module.exports = (
 ) => {
   const [cmd, args] = parseCommand(arg)
   const defaultOptions = { encoding: "utf-8" }
-  const childProcess = spawn(cmd, args, { ...defaultOptions, ...options })
+  const childProcess = spawn(cmd, args, {
+    ...defaultOptions,
+    ...options,
+    env: { ...process.env, ...(options.env || {}) },
+  })
   return promiseFromChildProcess(
     childProcess,
     callback,
