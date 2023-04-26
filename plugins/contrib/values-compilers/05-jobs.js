@@ -101,7 +101,7 @@ const requireUse = async (
 
   if (!downloadingPromises[useSlug]) {
     downloadingPromises[useSlug] = (async () => {
-      const matchRemoteLink = matchLinkRemap(use, remoteLinks)
+      const matchRemoteLink = matchLinkRemap(use, remoteLinks, true)
       if (matchRemoteLink) {
         use = matchRemoteLink
       }

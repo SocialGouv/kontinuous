@@ -13,7 +13,7 @@ module.exports = async ({ dependency, cachePath, logger }) => {
 
   const { links = {}, remoteLinks = {} } = config
 
-  const matchRemoteLink = matchLinkRemap(degitUri, remoteLinks)
+  const matchRemoteLink = matchLinkRemap(degitUri, remoteLinks, true)
   if (matchRemoteLink) {
     degitUri = matchRemoteLink
   }

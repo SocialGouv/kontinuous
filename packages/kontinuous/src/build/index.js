@@ -1,4 +1,6 @@
+const childProcess = require("child_process")
 const launch = require("launch-editor")
+
 const { highlight, fromJson: themeFromJson } = require("cli-highlight")
 
 const ctx = require("~common/ctx")
@@ -37,7 +39,33 @@ module.exports = async (options) => {
   }
 
   if (options.open) {
-    launch(manifestsFile, config.editor)
+    const launchSupportedEditors = [
+      // without all terminal editors that doesn't really work
+      "appcode",
+      "atom",
+      "atom-beta",
+      "brackets",
+      "clion",
+      "code",
+      "code-insiders",
+      "codium",
+      "idea",
+      "notepad++",
+      "pycharm",
+      "phpstorm",
+      "rubymine",
+      "sublime",
+      "visualstudio",
+      "webstorm",
+    ]
+
+    if (!config.editor || launchSupportedEditors.includes(config.editor)) {
+      launch(manifestsFile, config.editor)
+    } else {
+      childProcess.spawnSync(config.editor, [manifestsFile], {
+        stdio: "inherit",
+      })
+    }
   }
 
   return result
