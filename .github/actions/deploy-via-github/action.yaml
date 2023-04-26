@@ -36,7 +36,7 @@ inputs:
 runs:
   using: docker
   # image: Dockerfile
-  image: docker://ghcr.io/socialgouv/kontinuous/deploy-via-github:v1.146.1
+  image: docker://ghcr.io/socialgouv/kontinuous/deploy-via-github:v1.146.2
   env:
     KS_ENVIRONMENT: ${{ inputs.environment }}
     KS_CHART: ${{ inputs.chart }}
