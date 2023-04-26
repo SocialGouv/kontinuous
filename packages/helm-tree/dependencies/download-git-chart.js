@@ -5,7 +5,7 @@ const matchLinkRemap = require("~common/utils/match-link-remap")
 const ctx = require("~common/ctx")
 
 module.exports = async ({ dependency, cachePath, logger }) => {
-  const config = ctx.require("config")
+  const config = ctx.getDefault("config") || {}
 
   const { version } = dependency
   let { degit: degitUri } = dependency

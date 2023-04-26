@@ -538,23 +538,6 @@ const loadConfig = async (
     linksSelfLocation: {
       default: "socialgouv/kontinuous",
     },
-    links: {
-      default: {},
-      transform: async (links, config) => {
-        const { linksSelfLocation } = config
-        links = lowerKeys(links)
-        if (!links[linksSelfLocation]) {
-          const real = await fs.realpath(process.argv[1])
-          if (real.endsWith("packages/kontinuous/bin/kontinuous")) {
-            // local kontinuous git repository
-            links[linksSelfLocation] = path.resolve(
-              `${path.dirname(real)}/../../..`
-            )
-          }
-        }
-        return links
-      },
-    },
     remoteLinks: {
       default: {},
       transform: async (remoteLinks, config) => {
@@ -575,6 +558,23 @@ const loadConfig = async (
           }
         }
         return remoteLinks
+      },
+    },
+    links: {
+      default: {},
+      transform: async (links, config) => {
+        const { linksSelfLocation } = config
+        links = lowerKeys(links)
+        if (!links[linksSelfLocation]) {
+          const real = await fs.realpath(process.argv[1])
+          if (real.endsWith("packages/kontinuous/bin/kontinuous")) {
+            // local kontinuous git repository
+            links[linksSelfLocation] = path.resolve(
+              `${path.dirname(real)}/../../..`
+            )
+          }
+        }
+        return links
       },
     },
     private: {
