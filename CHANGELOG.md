@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.146.0 (2023-04-26)
+
+
+### Features
+
+* use yarn fetch plugin ([#292](https://github.com/socialgouv/kontinuous/issues/292)) ([74de25f](https://github.com/socialgouv/kontinuous/commit/74de25ffcdc50400c0d3a3623414ab24d44efbb6))
+
 ## 1.145.0 (2023-04-26)
 
 
