@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.145.0 (2023-04-26)
+
+
+### Features
+
+* **links:** absolute override + charts degit + fix consistency ([#300](https://github.com/socialgouv/kontinuous/issues/300)) ([8147eb4](https://github.com/socialgouv/kontinuous/commit/8147eb4161ef4367c94cec00db6301e2924a8896))
+
 ## 1.144.1 (2023-04-26)
 
 
