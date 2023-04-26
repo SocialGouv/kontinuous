@@ -87,6 +87,7 @@ const requireUse = async (
     degitImproved,
     ignoreYarnState,
     normalizeDegitUri,
+    matchLinkRemap,
     KontinuousPluginError,
   } = utils
 
@@ -96,12 +97,16 @@ const requireUse = async (
   use = normalizeDegitUri(use)
 
   let target = `${buildPath}/uses/${useSlug}`
-  const { links = {} } = config
-
-  const lowerUse = use.toLowerCase()
+  const { links = {}, remoteLinks = {} } = config
 
   if (!downloadingPromises[useSlug]) {
     downloadingPromises[useSlug] = (async () => {
+      const matchRemoteLink = matchLinkRemap(use, remoteLinks)
+      if (matchRemoteLink) {
+        use = matchRemoteLink
+      }
+      const matchLink = matchLinkRemap(use, links)
+
       if (use.startsWith(".") || use.startsWith("/")) {
         const src = `${workspacePath}/${use}`
         logger.debug(`🗂️  use project job: ${src}`)
@@ -121,16 +126,9 @@ const requireUse = async (
         })
         use = found.use
         run.use = use
-      } else if (
-        !use.includes("#") &&
-        Object.keys(links).some((key) => lowerUse.startsWith(key))
-      ) {
-        const [linkKey, linkPath] = Object.entries(links).find(([key]) =>
-          lowerUse.startsWith(key)
-        )
-        const from = linkPath + use.substr(linkKey.length)
+      } else if (matchLink) {
         logger.debug(`🗂️  use linked job: ${use}`)
-        await fs.copy(from, target, {
+        await fs.copy(matchLink, target, {
           filter: ignoreYarnState,
         })
       } else {

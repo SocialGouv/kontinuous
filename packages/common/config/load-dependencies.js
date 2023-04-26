@@ -6,7 +6,7 @@ const yaml = require("../utils/yaml")
 const deepmerge = require("../utils/deepmerge")
 const degitImproved = require("../utils/degit-improved")
 const normalizeDegitUri = require("../utils/normalize-degit-uri")
-const removePrefix = require("../utils/remove-prefix")
+const matchLinkRemap = require("../utils/match-link-remap")
 
 const copyFilter = require("./copy-filter")
 const loadGitOrgConfig = require("./load-git-org-config")
@@ -24,47 +24,17 @@ module.exports = async (config, logger, reloadConfig) => {
       let { import: importTarget } = definition
       if (importTarget && !(await fs.pathExists(target))) {
         importTarget = normalizeDegitUri(importTarget)
-        const lowerImportTarget = importTarget.toLowerCase()
-        const hasAbsoluteRef = !(
-          importTarget.includes("@") || importTarget.includes("#")
-        )
-        const matchLink =
-          hasAbsoluteRef &&
-          Object.entries(links).find(([key]) =>
-            lowerImportTarget.startsWith(key)
-          )
 
-        const matchRemoteLink =
-          hasAbsoluteRef &&
-          Object.entries(remoteLinks).find(([key]) =>
-            lowerImportTarget.startsWith(key)
-          )
-
-        if (matchLink && matchRemoteLink) {
-          logger.warn(
-            `entry "${lowerImportTarget}" is in links (${matchLink[1]}) and remoteLinks (${matchRemoteLink[1]}), theses options are mutually exclusives when using same key(s) links will take precedence`
-          )
+        const matchRemoteLink = matchLinkRemap(importTarget, remoteLinks)
+        if (matchRemoteLink) {
+          importTarget = matchRemoteLink
         }
+        const matchLink = matchLinkRemap(importTarget, links)
 
         if (matchLink) {
-          const [linkKey, linkPath] = matchLink
-          const from = linkPath + importTarget.substr(linkKey.length)
           await fs.ensureDir(target)
-          logger.debug({ scope }, `➡️  copy ${name} from "${from}"`)
-          await fs.copy(from, target, { filter: copyFilter })
-        } else if (matchRemoteLink) {
-          const matchRemoteLinkNormalized = matchRemoteLink[1].replace("@", "#")
-          const [prefix, ref] = matchRemoteLinkNormalized.split("#")
-          const degitNewUri =
-            prefix +
-            removePrefix(lowerImportTarget, prefix) +
-            (ref ? `#${ref}` : "")
-          await degitImproved(degitNewUri, target, {
-            logger: logger.child({
-              scope,
-              name,
-            }),
-          })
+          logger.debug({ scope }, `➡️  copy ${name} from "${matchLink}"`)
+          await fs.copy(matchLink, target, { filter: copyFilter })
         } else {
           await degitImproved(importTarget, target, {
             logger: logger.child({
