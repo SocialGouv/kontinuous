@@ -1,4 +1,10 @@
-const normalizeLink = (link) => link.replaceAll("@", "#").toLowerCase()
+const normalizeLink = (link, remote = false) => {
+  link = link.replaceAll("@", "#")
+  if (remote) {
+    link = link.toLowerCase()
+  }
+  return link
+}
 
 const rewriteAbsoluteLink = (_uri, _key, link) => link
 
@@ -11,12 +17,12 @@ const rewriteVersionLink = (uri, key, link) => {
   )
 }
 
-module.exports = (uri, links) => {
+module.exports = (uri, links, remote = false) => {
   uri = normalizeLink(uri)
   const uriIsAbsolute = uri.includes("#")
   for (let [key, link] of Object.entries(links)) {
     key = normalizeLink(key)
-    link = normalizeLink(link)
+    link = normalizeLink(link, remote)
     if (key === uri) {
       return rewriteAbsoluteLink(uri, key, link)
     }

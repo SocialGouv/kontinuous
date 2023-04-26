@@ -25,7 +25,7 @@ module.exports = async (config, logger, reloadConfig) => {
       if (importTarget && !(await fs.pathExists(target))) {
         importTarget = normalizeDegitUri(importTarget)
 
-        const matchRemoteLink = matchLinkRemap(importTarget, remoteLinks)
+        const matchRemoteLink = matchLinkRemap(importTarget, remoteLinks, true)
         if (matchRemoteLink) {
           importTarget = matchRemoteLink
         }
