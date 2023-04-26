@@ -40,8 +40,9 @@ dependencies:
             cpu: 7820m
             memory: 27717Mi
       defaultMaxResourcesLimits:
-        cpu: 1
-        memory: 1Gi
+        options:
+          cpu: 1
+          memory: 1Gi
 
     validators:
       rancherProjectId:

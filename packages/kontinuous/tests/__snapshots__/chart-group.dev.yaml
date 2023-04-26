@@ -103,8 +103,8 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: 3
-              memory: 8Gi
+              cpu: 1
+              memory: 1Gi
             requests:
               cpu: 41m
               memory: 121Mi
@@ -211,8 +211,8 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              cpu: 3
-              memory: 8Gi
+              cpu: 1
+              memory: 1Gi
             requests:
               cpu: 41m
               memory: 121Mi
