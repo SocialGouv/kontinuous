@@ -454,7 +454,7 @@ const loadConfig = async (
     },
     editor: {
       env: "KS_EDITOR",
-      options: "editor",
+      option: "editor",
     },
     deployWithPlugin: {
       env: "KS_DEPLOY_WITH",
