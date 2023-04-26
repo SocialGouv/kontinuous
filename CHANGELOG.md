@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.146.1](https://github.com/socialgouv/kontinuous/compare/v1.146.0...v1.146.1) (2023-04-26)
+
+
+### Bug Fixes
+
+* no lowercase when no remote ([7329ff3](https://github.com/socialgouv/kontinuous/commit/7329ff3e01f47acdf0c13fc9703e16bb59fd4927))
+
 ## 1.146.0 (2023-04-26)
 
 
