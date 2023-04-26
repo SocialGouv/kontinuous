@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.146.2 (2023-04-26)
+
+
+### Bug Fixes
+
+* typo ([#302](https://github.com/socialgouv/kontinuous/issues/302)) ([3065359](https://github.com/socialgouv/kontinuous/commit/30653592a3c756ad6cbc6edd580185c540090eb6))
+
 ## [1.146.1](https://github.com/socialgouv/kontinuous/compare/v1.146.0...v1.146.1) (2023-04-26)
 
 
