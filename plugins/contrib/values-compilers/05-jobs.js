@@ -96,7 +96,7 @@ const requireUse = async (
   use = normalizeDegitUri(use)
 
   let target = `${buildPath}/uses/${useSlug}`
-  const { links = {} } = config
+  const { links = {}, remoteLinks = {} } = config
 
   const lowerUse = use.toLowerCase()
 
@@ -122,17 +122,32 @@ const requireUse = async (
         use = found.use
         run.use = use
       } else if (
-        !use.includes("#") &&
-        Object.keys(links).some((key) => lowerUse.startsWith(key))
+        Object.keys(links).some(
+          (key) =>
+            lowerUse === key || (!use.includes("#") && lowerUse.startsWith(key))
+        )
       ) {
-        const [linkKey, linkPath] = Object.entries(links).find(([key]) =>
-          lowerUse.startsWith(key)
+        const [linkKey, linkPath] = Object.entries(links).find(
+          ([key]) =>
+            lowerUse === key || (!use.includes("#") && lowerUse.startsWith(key))
         )
         const from = linkPath + use.substr(linkKey.length)
         logger.debug(`🗂️  use linked job: ${use}`)
         await fs.copy(from, target, {
           filter: ignoreYarnState,
         })
+      } else if (
+        Object.keys(remoteLinks).some(
+          (key) =>
+            lowerUse === key || (!use.includes("#") && lowerUse.startsWith(key))
+        )
+      ) {
+        const [, remoteLinkUri] = Object.entries(remoteLinks).find(
+          ([key]) =>
+            lowerUse === key || (!use.includes("#") && lowerUse.startsWith(key))
+        )
+        logger.debug(`🗂️  degit job: ${remoteLinkUri}`)
+        await degitImproved(remoteLinkUri, target, { logger, force: true })
       } else {
         logger.debug(`🗂️  degit job: ${use}`)
         await degitImproved(use, target, { logger, force: true })

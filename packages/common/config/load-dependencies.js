@@ -25,19 +25,21 @@ module.exports = async (config, logger, reloadConfig) => {
       if (importTarget && !(await fs.pathExists(target))) {
         importTarget = normalizeDegitUri(importTarget)
         const lowerImportTarget = importTarget.toLowerCase()
-        const hasAbsoluteRef = !(
+        const hasAbsoluteRef =
           importTarget.includes("@") || importTarget.includes("#")
+
+        const matchLink = Object.entries(links).find(
+          ([key]) =>
+            key === lowerImportTarget ||
+            (!hasAbsoluteRef && lowerImportTarget.startsWith(key))
         )
-        const matchLink =
-          hasAbsoluteRef &&
-          Object.entries(links).find(([key]) =>
-            lowerImportTarget.startsWith(key)
-          )
 
         const matchRemoteLink =
-          hasAbsoluteRef &&
-          Object.entries(remoteLinks).find(([key]) =>
-            lowerImportTarget.startsWith(key)
+          !hasAbsoluteRef &&
+          Object.entries(remoteLinks).find(
+            ([key]) =>
+              key === lowerImportTarget ||
+              (!hasAbsoluteRef && lowerImportTarget.startsWith(key))
           )
 
         if (matchLink && matchRemoteLink) {
