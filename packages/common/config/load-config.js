@@ -562,15 +562,15 @@ const loadConfig = async (
         const { linksSelfLocation } = config
         if (!remoteLinks[linksSelfLocation]) {
           const real = await fs.realpath(process.argv[1])
-          if (real.endsWith("node_modules/kontinuous/bin/kontinuous")) {
-            // npx or packages.json/dependencies
+          if (real.endsWith("node_modules/kontinuous/dist/index.js")) {
+            // npx
             const packageFile = `${path.dirname(real)}/../package.json`
             const packageJSON = await fs.readFile(packageFile, {
               encoding: "utf-8",
             })
             const packageDef = JSON.parse(packageJSON)
             remoteLinks[
-              linksSelfLocation
+              `${linksSelfLocation}@*`
             ] = `${linksSelfLocation}@v${packageDef.version}`
           }
         }

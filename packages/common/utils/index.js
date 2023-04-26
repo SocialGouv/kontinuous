@@ -115,4 +115,5 @@ module.exports = {
   yaml: require("./yaml"),
   yarnInstall: require("./yarn-install"),
   needKubeconform: require("./need-kubeconform"),
+  matchLinkRemap: require("./match-link-remap"),
 }

@@ -87,6 +87,7 @@ const requireUse = async (
     degitImproved,
     ignoreYarnState,
     normalizeDegitUri,
+    matchLinkRemap,
     KontinuousPluginError,
   } = utils
 
@@ -98,10 +99,14 @@ const requireUse = async (
   let target = `${buildPath}/uses/${useSlug}`
   const { links = {}, remoteLinks = {} } = config
 
-  const lowerUse = use.toLowerCase()
-
   if (!downloadingPromises[useSlug]) {
     downloadingPromises[useSlug] = (async () => {
+      const matchRemoteLink = matchLinkRemap(use, remoteLinks)
+      if (matchRemoteLink) {
+        use = matchRemoteLink
+      }
+      const matchLink = matchLinkRemap(use, links)
+
       if (use.startsWith(".") || use.startsWith("/")) {
         const src = `${workspacePath}/${use}`
         logger.debug(`🗂️  use project job: ${src}`)
@@ -121,33 +126,11 @@ const requireUse = async (
         })
         use = found.use
         run.use = use
-      } else if (
-        Object.keys(links).some(
-          (key) =>
-            lowerUse === key || (!use.includes("#") && lowerUse.startsWith(key))
-        )
-      ) {
-        const [linkKey, linkPath] = Object.entries(links).find(
-          ([key]) =>
-            lowerUse === key || (!use.includes("#") && lowerUse.startsWith(key))
-        )
-        const from = linkPath + use.substr(linkKey.length)
+      } else if (matchLink) {
         logger.debug(`🗂️  use linked job: ${use}`)
-        await fs.copy(from, target, {
+        await fs.copy(matchLink, target, {
           filter: ignoreYarnState,
         })
-      } else if (
-        Object.keys(remoteLinks).some(
-          (key) =>
-            lowerUse === key || (!use.includes("#") && lowerUse.startsWith(key))
-        )
-      ) {
-        const [, remoteLinkUri] = Object.entries(remoteLinks).find(
-          ([key]) =>
-            lowerUse === key || (!use.includes("#") && lowerUse.startsWith(key))
-        )
-        logger.debug(`🗂️  degit job: ${remoteLinkUri}`)
-        await degitImproved(remoteLinkUri, target, { logger, force: true })
       } else {
         logger.debug(`🗂️  degit job: ${use}`)
         await degitImproved(use, target, { logger, force: true })

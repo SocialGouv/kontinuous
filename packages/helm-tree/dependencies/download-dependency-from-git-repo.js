@@ -11,11 +11,11 @@ module.exports = async ({ dependency, target, cachePath, logger }) => {
       )}`
     )
   }
-  const cacheDir = await downloadGitChart({ dependency, cachePath, logger })
+  const copySource = await downloadGitChart({ dependency, cachePath, logger })
 
   const chartName = dependency.alias || dependency.name
 
-  await fs.copy(cacheDir, `${target}/charts/${chartName}`)
+  await fs.copy(copySource, `${target}/charts/${chartName}`)
 
   dependency.repository = `file://./charts/${chartName}`
   delete dependency.degit
