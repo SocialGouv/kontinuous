@@ -34,13 +34,13 @@ COPY --from=kubectl /usr/local/bin/kubectl /usr/local/bin/kubectl
 
 WORKDIR /opt/wait-needs
 
-COPY --chown=1000:1000 package.json yarn.lock .yarnrc.yml ./
+COPY --chown=1000:1000 yarn.lock .yarnrc.yml ./
 COPY --chown=1000:1000 .yarn .yarn
-COPY --chown=1000:1000 packages/wait-needs/package.json ./packages/wait-needs/package.json
-COPY --chown=1000:1000 packages/common/package.json ./packages/common/package.json
 
-RUN yarn workspaces focus wait-needs && yarn cache clean
+RUN yarn fetch workspaces focus wait-needs && yarn cache clean
 
 CMD ["packages/wait-needs/bin/wait-needs"]
 COPY packages/wait-needs/ packages/wait-needs/
 COPY packages/common/ packages/common/
+
+RUN yarn workspaces foreach -t run postinstall

@@ -78,42 +78,13 @@ RUN chown 1001:1001 /app
 USER 1001
 
 
-FROM node as packages
-COPY --chown=1001:1001 package.json yarn.lock .yarnrc.yml ./
-COPY --chown=1001:1001 .yarn .yarn
-COPY --chown=1001:1001 packages/kontinuous/package.json ./packages/kontinuous/package.json
-COPY --chown=1001:1001 packages/common/package.json ./packages/common/package.json
-COPY --chown=1001:1001 packages/helm-tree/package.json ./packages/helm-tree/package.json
-
-# Keep yarn install cache when bumping version and dependencies still the sames
-RUN node -e " \
-  const package = JSON.parse(fs.readFileSync('package.json')); \
-  const packageZero = { ...package, version: '0.0.0' };  \
-  fs.writeFileSync('package.json', JSON.stringify(packageZero));"
-RUN node -e " \
-  const package = JSON.parse(fs.readFileSync('packages/kontinuous/package.json')); \
-  const packageZero = { ...package, version: '0.0.0' };  \
-  fs.writeFileSync('packages/kontinuous/package.json', JSON.stringify(packageZero));"
-RUN node -e " \
-  const package = JSON.parse(fs.readFileSync('packages/common/package.json')); \
-  const packageZero = { ...package, version: '0.0.0' };  \
-  fs.writeFileSync('packages/common/package.json', JSON.stringify(packageZero));"
-RUN node -e " \
-  const package = JSON.parse(fs.readFileSync('packages/helm-tree/package.json')); \
-  const packageZero = { ...package, version: '0.0.0' };  \
-  fs.writeFileSync('packages/helm-tree/package.json', JSON.stringify(packageZero));"
-
 FROM node as plugins
 # pre-cache yarn package for official local plugins optimization
 
-COPY --from=packages --chown=1001:1001 /app/package.json ./package.json
-COPY --from=packages --chown=1001:1001 /app/yarn.lock ./yarn.lock
-COPY --from=packages --chown=1001:1001 /app/.yarnrc.yml ./.yarnrc.yml
-COPY --from=packages --chown=1001:1001 /app/.yarn ./.yarn
-COPY --from=packages --chown=1001:1001 /app/packages/common/package.json /app/packages/common/package.json
-COPY --from=packages --chown=1001:1001 /app/packages/helm-tree/package.json /app/packages/helm-tree/package.json
+COPY --chown=1001:1001 yarn.lock .yarnrc.yml ./
+COPY --chown=1001:1001 .yarn .yarn
 
-RUN yarn workspaces focus helm-tree --production && yarn cache clean
+RUN yarn fetch workspaces focus helm-tree --production && yarn cache clean
 
 COPY --chown=1001:1001 \
   plugins/contrib/package.json plugins/contrib/yarn.lock plugins/contrib/.yarnrc.yml \
@@ -138,6 +109,8 @@ COPY --chown=1001:1001 plugins/ /app/plugins/
 
 RUN cd /app/plugins/contrib && /app/packages/helm-tree/bin/build-helm-tree
 RUN cd /app/plugins/fabrique && /app/packages/helm-tree/bin/build-helm-tree
+
+RUN yarn workspaces foreach -t run postinstall
 
 FROM node as program
 USER 0
@@ -171,24 +144,20 @@ COPY --from=stern /usr/local/bin/stern /usr/local/bin/stern
 
 WORKDIR /opt/kontinuous
 
-RUN mkdir -p packages/kontinuous/src \
-  && mkdir -p packages/kontinuous/common \
-  && mkdir -p packages/kontinuous/helm-tree
-COPY --from=packages --chown=1001:1001 /app/package.json ./package.json
-COPY --from=packages --chown=1001:1001 /app/yarn.lock ./yarn.lock
-COPY --from=packages --chown=1001:1001 /app/.yarnrc.yml ./.yarnrc.yml
-COPY --from=packages --chown=1001:1001 /app/.yarn ./.yarn
-COPY --from=packages --chown=1001:1001 /app/packages/kontinuous/package.json ./packages/kontinuous/package.json
-COPY --from=packages --chown=1001:1001 /app/packages/common/package.json ./packages/common/package.json
-COPY --from=packages --chown=1001:1001 /app/packages/helm-tree/package.json ./packages/helm-tree/package.json
+RUN mkdir -p packages/kontinuous/src
 
-RUN yarn workspaces focus kontinuous --production && yarn cache clean
+COPY --chown=1001:1001 yarn.lock .yarnrc.yml ./
+COPY --chown=1001:1001 .yarn .yarn
+
+RUN yarn fetch workspaces focus kontinuous --production && yarn cache clean
 
 COPY --from=plugins --chown=1001:1001 /app/plugins/ ./plugins/
 
 COPY --chown=1001:1001 packages/kontinuous/ ./packages/kontinuous/
 COPY --chown=1001:1001 packages/common/ ./packages/common/
 COPY --chown=1001:1001 packages/helm-tree/ ./packages/helm-tree/
+
+RUN yarn workspaces foreach -t run postinstall
 
 WORKDIR /workspace
 
