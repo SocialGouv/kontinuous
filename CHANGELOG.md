@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.144.1 (2023-04-26)
+
+
+### Bug Fixes
+
+* missing options key ([#299](https://github.com/socialgouv/kontinuous/issues/299)) ([43346c9](https://github.com/socialgouv/kontinuous/commit/43346c9523bb3576b7205ad7a3b50e6c4965e5e8))
+
 ## 1.144.0 (2023-04-25)
 
 
