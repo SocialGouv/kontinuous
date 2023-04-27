@@ -13,6 +13,11 @@
       "type": "string",
       "examples": ["app", "hasura", "maildev"]
     },
+    "~forceRestart": {
+      "description": "Force restart on every deployment. default true",
+      "type": "boolean",
+      "default": true
+    },
     "~needs": {
       "description": "Job or deployment dependencies",
       "type": "array",
