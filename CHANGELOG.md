@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.146.5 (2023-05-02)
+
+
+### Bug Fixes
+
+* cnpg-status-undefined ([#307](https://github.com/socialgouv/kontinuous/issues/307)) ([e59ede3](https://github.com/socialgouv/kontinuous/commit/e59ede35f2447a7ed2113a21608b93aaee4c7e1a))
+
 ## 1.146.4 (2023-05-02)
 
 ## 1.146.3 (2023-04-26)
