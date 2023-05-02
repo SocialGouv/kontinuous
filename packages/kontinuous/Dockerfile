@@ -4,7 +4,7 @@ ARG UBUNTU_VERSION=22.04
 # renovate: datasource=node depName=node versioning=node
 ARG NODE_VERSION=18.14.0
 
-FROM ubuntu:$UBUNTU_VERSION as downloader
+FROM ubuntu:$UBUNTU_VERSION as base
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
   curl \
@@ -12,6 +12,8 @@ RUN apt-get update && \
   wget \
   git \
   && rm -rf /var/lib/apt/lists/*
+
+FROM base as downloader
 
 FROM downloader as kubectl
 # renovate: datasource=github-tags depName=kubernetes/kubectl extractVersion=^kubernetes-(?<version>.+)$
@@ -64,13 +66,7 @@ RUN curl --fail -sL https://github.com/yannh/kubeconform/releases/download/v${KU
   && rm -r /tmp/*
 
 
-FROM ubuntu:$UBUNTU_VERSION as node
-RUN apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-  ca-certificates \
-  curl \
-  && rm -rf /var/lib/apt/lists/*
-
+FROM base as node
 ARG NODE_VERSION
 ARG NODE_PACKAGE=node-v$NODE_VERSION-linux-x64
 ARG NODE_HOME=/opt/$NODE_PACKAGE
@@ -79,13 +75,24 @@ ENV NODE_PATH $NODE_HOME/lib/node_modules
 ENV PATH $NODE_HOME/bin:$PATH
 
 RUN curl https://nodejs.org/dist/v$NODE_VERSION/$NODE_PACKAGE.tar.gz | tar -xzC /opt/
+
 RUN npm i -g yarn
+RUN mkdir /yarn
+RUN chown 1001:1001 /yarn
+ENV YARN_CACHE_FOLDER /yarn
 
 RUN groupadd -g 1001 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1001 ubuntu
+ENV HOME=/home/ubuntu
+RUN chmod 0777 /home/ubuntu
 
-FROM node as plugins
+RUN mkdir -p /workspace && chown 1001:1001 /workspace
+
 USER 1001
 WORKDIR /app
+
+RUN git config --global --add safe.directory /workspace
+
+FROM node as plugins
 # pre-cache yarn package for official local plugins optimization
 
 COPY --chown=1001:1001 yarn.lock .yarnrc.yml ./
@@ -119,8 +126,6 @@ RUN cd /app/plugins/fabrique && /app/packages/helm-tree/bin/build-helm-tree
 RUN yarn workspaces foreach -t run postinstall
 
 FROM node as build
-USER 1001
-WORKDIR /app
 
 COPY --chown=1001:1001 yarn.lock .yarnrc.yml ./
 COPY --chown=1001:1001 .yarn .yarn
@@ -137,10 +142,10 @@ RUN yarn workspaces foreach -t run postinstall
 RUN yarn workspace kontinuous build
 
 FROM node as program
+USER 0
 
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-  git \
   libgraph-easy-perl \
   && rm -rf /var/lib/apt/lists/*
 
@@ -150,16 +155,8 @@ RUN chown 1001:1001 /app
 
 RUN mkdir -p /opt && chown 1001:1001 /opt
 
-RUN mkdir -p /workspace && chown 1001:1001 /workspace
 RUN mkdir -p /opt/kontinuous && chown 1001:1001 /opt/kontinuous
 
-RUN mkdir /yarn
-RUN chown 1001:1001 /yarn
-ENV YARN_CACHE_FOLDER /yarn
-
-ENV HOME=/home/ubuntu
-RUN chmod a+rw $HOME
-RUN git config --global --add safe.directory /workspace
 RUN mkdir $HOME/.kube
 
 ENV KS_INLINE_CONFIG_SET "links.socialgouv/kontinuous=/opt/kontinuous"

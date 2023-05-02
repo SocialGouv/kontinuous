@@ -15099,7 +15099,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tiged@npm:2.12.4":
+"tiged@npm:^2.12.4":
   version: 2.12.4
   resolution: "tiged@npm:2.12.4"
   dependencies:
@@ -16350,7 +16350,7 @@ __metadata:
     qs: "npm:^6.11.0"
     slugify: "npm:^1.6.5"
     sonic-boom: "npm:^3.0.0"
-    tiged: "npm:2.12.4"
+    tiged: "npm:^2.12.4"
     which: "npm:^3.0.0"
     yaml: "npm:^2.2.2"
     zx: "npm:^7.1.1"
