@@ -1,8 +1,10 @@
-# renovate: datasource=node depName=node versioning=node
-ARG NODE_VERSION=18.14.0
+# renovate: datasource=docker depName=ubuntu versioning=ubuntu
 ARG UBUNTU_VERSION=22.04
 
-FROM node:$NODE_VERSION as downloader
+# renovate: datasource=node depName=node versioning=node
+ARG NODE_VERSION=18.14.0
+
+FROM ubuntu:$UBUNTU_VERSION as downloader
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
   curl \
@@ -61,67 +63,12 @@ RUN curl --fail -sL https://github.com/yannh/kubeconform/releases/download/v${KU
   && chmod +x /usr/local/bin/kubeconform \
   && rm -r /tmp/*
 
-FROM node:$NODE_VERSION as plugins
-USER 1000
-WORKDIR /app
-# pre-cache yarn package for official local plugins optimization
 
-COPY --chown=1000:1000 yarn.lock .yarnrc.yml ./
-COPY --chown=1000:1000 .yarn .yarn
-
-RUN yarn fetch workspaces focus helm-tree --production && yarn cache clean
-
-COPY --chown=1000:1000 \
-  plugins/contrib/package.json plugins/contrib/yarn.lock plugins/contrib/.yarnrc.yml \
-  /app/plugins/contrib/
-COPY --chown=1000:1000 plugins/contrib/.yarn/ /app/plugins/contrib/.yarn/
-
-COPY --chown=1000:1000 \
-  plugins/fabrique/package.json plugins/fabrique/yarn.lock plugins/fabrique/.yarnrc.yml \
-  /app/plugins/fabrique/
-COPY --chown=1000:1000 plugins/fabrique/.yarn/ /app/plugins/fabrique/.yarn/
-
-RUN \
-  cd /app/plugins/contrib && yarn workspaces focus --production && \
-  cd /app/plugins/fabrique && yarn workspaces focus --production && \
-  yarn cache clean
-
-COPY --chown=1000:1000 packages/helm-tree/ /app/packages/helm-tree/
-COPY --chown=1000:1000 packages/common/ /app/packages/common/
-
-COPY --chown=1000:1000 plugins/ /app/plugins/
-
-RUN cd /app/plugins/contrib && /app/packages/helm-tree/bin/build-helm-tree
-RUN cd /app/plugins/fabrique && /app/packages/helm-tree/bin/build-helm-tree
-
-RUN yarn workspaces foreach -t run postinstall
-
-FROM node:${NODE_VERSION} as build
-USER 1000
-WORKDIR /app
-
-COPY --chown=1000:1000 yarn.lock .yarnrc.yml ./
-COPY --chown=1000:1000 .yarn .yarn
-
-RUN yarn fetch workspaces focus kontinuous && yarn cache clean
-
-COPY --chown=1000:1000 packages/kontinuous/ ./packages/kontinuous/
-COPY --chown=1000:1000 packages/common/ ./packages/common/
-COPY --chown=1000:1000 packages/helm-tree/ ./packages/helm-tree/
-
-RUN mkdir -p packages/kontinuous/src
-
-RUN yarn workspaces foreach -t run postinstall
-RUN yarn workspace kontinuous build
-
-FROM ubuntu:$UBUNTU_VERSION as program
-
+FROM ubuntu:$UBUNTU_VERSION as node
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
   ca-certificates \
   curl \
-  git \
-  libgraph-easy-perl \
   && rm -rf /var/lib/apt/lists/*
 
 ARG NODE_VERSION
@@ -134,9 +81,70 @@ ENV PATH $NODE_HOME/bin:$PATH
 RUN curl https://nodejs.org/dist/v$NODE_VERSION/$NODE_PACKAGE.tar.gz | tar -xzC /opt/
 RUN npm i -g yarn
 
+RUN groupadd -g 1001 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1001 ubuntu
+
+FROM node as plugins
+USER 1001
+WORKDIR /app
+# pre-cache yarn package for official local plugins optimization
+
+COPY --chown=1001:1001 yarn.lock .yarnrc.yml ./
+COPY --chown=1001:1001 .yarn .yarn
+
+RUN yarn fetch workspaces focus helm-tree --production && yarn cache clean
+
+COPY --chown=1001:1001 \
+  plugins/contrib/package.json plugins/contrib/yarn.lock plugins/contrib/.yarnrc.yml \
+  /app/plugins/contrib/
+COPY --chown=1001:1001 plugins/contrib/.yarn/ /app/plugins/contrib/.yarn/
+
+COPY --chown=1001:1001 \
+  plugins/fabrique/package.json plugins/fabrique/yarn.lock plugins/fabrique/.yarnrc.yml \
+  /app/plugins/fabrique/
+COPY --chown=1001:1001 plugins/fabrique/.yarn/ /app/plugins/fabrique/.yarn/
+
+RUN \
+  cd /app/plugins/contrib && yarn workspaces focus --production && \
+  cd /app/plugins/fabrique && yarn workspaces focus --production && \
+  yarn cache clean
+
+COPY --chown=1001:1001 packages/helm-tree/ /app/packages/helm-tree/
+COPY --chown=1001:1001 packages/common/ /app/packages/common/
+
+COPY --chown=1001:1001 plugins/ /app/plugins/
+
+RUN cd /app/plugins/contrib && /app/packages/helm-tree/bin/build-helm-tree
+RUN cd /app/plugins/fabrique && /app/packages/helm-tree/bin/build-helm-tree
+
+RUN yarn workspaces foreach -t run postinstall
+
+FROM node as build
+USER 1001
 WORKDIR /app
 
-RUN groupadd -g 1001 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1001 ubuntu
+COPY --chown=1001:1001 yarn.lock .yarnrc.yml ./
+COPY --chown=1001:1001 .yarn .yarn
+
+RUN yarn fetch workspaces focus kontinuous && yarn cache clean
+
+COPY --chown=1001:1001 packages/kontinuous/ ./packages/kontinuous/
+COPY --chown=1001:1001 packages/common/ ./packages/common/
+COPY --chown=1001:1001 packages/helm-tree/ ./packages/helm-tree/
+
+RUN mkdir -p packages/kontinuous/src
+
+RUN yarn workspaces foreach -t run postinstall
+RUN yarn workspace kontinuous build
+
+FROM node as program
+
+RUN apt-get update && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
+  git \
+  libgraph-easy-perl \
+  && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
 
 RUN chown 1001:1001 /app
 
@@ -173,7 +181,7 @@ ENTRYPOINT ["kontinuous"]
 CMD ["help"]
 
 COPY --from=plugins --chown=1001:1001 /app/plugins/ ./plugins/
-COPY --from=plugins --chown=1001:1001 /home/node/.kontinuous/cache/ /home/ubuntu/.kontinuous/cache/
+COPY --from=plugins --chown=1001:1001 /home/ubuntu/.kontinuous/cache/ /home/ubuntu/.kontinuous/cache/
 
 WORKDIR /workspace
 USER 1001
