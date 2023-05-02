@@ -6,15 +6,11 @@ chmod go-r ~/.kube/config
 echo $KUBECONFIG_B64 | base64 -d > ~/.kube/config
 export KUBECONFIG=~/.kube/config
 
-set -x
-
 export KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
 
 export KS_BUILD_PATH=/tmp/kontinuous-deploy-via-github
 
 export KS_WORKSPACE_PATH=${KS_WORKSPACE_PATH:-"$GITHUB_WORKSPACE"}
-
-ls -al $KS_WORKSPACE_PATH
 
 GH_EVENT_JSON_CONFIG=$(node -e "process.stdout.write(fs.readFileSync('$GITHUB_EVENT_PATH',{encoding:'utf-8'}))")
 GH_ACTION=$(node -e "process.stdout.write(($GH_EVENT_JSON_CONFIG).action || '')")
