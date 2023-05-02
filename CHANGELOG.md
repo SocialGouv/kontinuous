@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.147.6 (2023-05-02)
+
+
+### Bug Fixes
+
+* reduce image size ([#301](https://github.com/socialgouv/kontinuous/issues/301)) ([4f765bb](https://github.com/socialgouv/kontinuous/commit/4f765bb3f33fa7671feb5dd1256471574f6e0466))
+
 ## 1.147.5 (2023-05-02)
 
 
