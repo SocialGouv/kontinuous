@@ -11,5 +11,5 @@ const filterManifestDefRecurse = (def) => {
   }
 }
 
-module.exports = async (manifests, _options, context) =>
-  filterManifestDefRecurse(manifests, context)
+module.exports = async (manifests, _options, _context) =>
+  filterManifestDefRecurse(manifests)
