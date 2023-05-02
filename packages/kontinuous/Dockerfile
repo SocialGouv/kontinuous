@@ -149,7 +149,7 @@ RUN mkdir /yarn
 RUN chown 1000:1000 /yarn
 ENV YARN_CACHE_FOLDER /yarn
 
-ENV HOME=/home/node
+ENV HOME=/home/ubuntu
 RUN mkdir $HOME
 RUN chmod a+rw $HOME
 RUN git config --global --add safe.directory /workspace
@@ -157,7 +157,7 @@ RUN mkdir $HOME/.kube
 
 ENV KS_INLINE_CONFIG_SET "links.socialgouv/kontinuous=/opt/kontinuous"
 ENV KS_EXTERNAL_BIN_FORCE_DOWNLOAD "false"
-ENV KS_HOMEDIR=/home/node/.kontinuous
+ENV KS_HOMEDIR=/home/ubuntu/.kontinuous
 
 COPY --from=kubectl /usr/local/bin/kubectl /usr/local/bin/kubectl
 COPY --from=helm /usr/local/bin/helm /usr/local/bin/helm
@@ -174,7 +174,7 @@ ENTRYPOINT ["kontinuous"]
 CMD ["help"]
 
 COPY --from=plugins --chown=1000:1000 /app/plugins/ ./plugins/
-COPY --from=plugins --chown=1000:1000 /home/node/.kontinuous/cache/ /home/node/.kontinuous/cache/
+COPY --from=plugins --chown=1000:1000 /home/ubuntu/.kontinuous/cache/ /home/ubuntu/.kontinuous/cache/
 
 WORKDIR /workspace
 USER 1000
