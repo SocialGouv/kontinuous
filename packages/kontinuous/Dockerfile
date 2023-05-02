@@ -113,7 +113,8 @@ RUN mkdir -p packages/kontinuous/src
 RUN yarn workspaces foreach -t run postinstall
 RUN yarn workspace kontinuous build
 
-FROM node:${NODE_VERSION}-slim as program
+# FROM node:${NODE_VERSION}-slim as program
+FROM node:${NODE_VERSION} as program
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
   ca-certificates \
