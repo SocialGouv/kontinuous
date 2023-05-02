@@ -143,6 +143,7 @@ RUN yarn workspace kontinuous build
 
 FROM node as program
 USER 0
+RUN git config --global --add safe.directory /workspace
 
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
