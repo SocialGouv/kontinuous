@@ -1,5 +1,6 @@
 # renovate: datasource=node depName=node versioning=node
 ARG NODE_VERSION=18.14.0
+ARG UBUNTU_VERSION=22.04
 
 FROM node:$NODE_VERSION as downloader
 RUN apt-get update && \
@@ -113,7 +114,8 @@ RUN mkdir -p packages/kontinuous/src
 RUN yarn workspaces foreach -t run postinstall
 RUN yarn workspace kontinuous build
 
-FROM ubuntu:22.04 as program
+FROM ubuntu:$UBUNTU_VERSION as program
+
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
   ca-certificates \
@@ -133,6 +135,8 @@ RUN curl https://nodejs.org/dist/v$NODE_VERSION/$NODE_PACKAGE.tar.gz | tar -xzC 
 RUN npm i -g yarn
 
 WORKDIR /app
+
+RUN groupadd -g 1000 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1000 ubuntu
 
 RUN chown 1000:1000 /app
 
