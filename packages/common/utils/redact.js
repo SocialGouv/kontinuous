@@ -8,7 +8,7 @@ module.exports = (
     skipNotString = true,
   }
 ) => {
-  if (skipNotString && !(typeof message === "string")) {
+  if (skipNotString && typeof message !== "string") {
     return message
   }
   for (const secret of secrets) {
