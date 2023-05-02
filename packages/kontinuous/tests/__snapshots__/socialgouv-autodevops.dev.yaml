@@ -1,0 +1,418 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test build manifests with snapshots socialgouv-autodevops.dev 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: \\"1234\\"
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+    janitor/ttl: 7d
+  labels:
+    application: test-socialgouv-autodevops
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+    kontinuous/deployment.env: test-socialgouv-autodevops-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: namespace-test-socialgouv-autodevops-feature-branch-1-52r2k5st
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+    cert: wildcard
+  name: test-socialgouv-autodevops-feature-branch-1
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-socialgouv-autodevops-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+  labels:
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+    kontinuous/deployment.env: test-socialgouv-autodevops-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+  labels:
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+    kontinuous/deployment.env: test-socialgouv-autodevops-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-socialgouv-autodevops-feature-branch-1
+automountServiceAccountToken: false
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-dev-test-socialgouv-autodevops-feature-branch-1-b-2v8rlfmq
+  namespace: test-socialgouv-autodevops-feature-branch-1
+  annotations:
+    kontinuous/needsName: build-app.buildkit
+    kontinuous/needsNames: '[\\"build-app\\",\\"build-app.buildkit\\",\\"build-app..buildkit\\"]'
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-socialgouv-autodevops-feature-branch-1-b-2v8rlfmq
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-socialgouv-autodevops-feature-branch-1-b-2v8rlfmq
+    kontinuous/depname.chartName: jobs
+    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
+    kontinuous/depname.resourcePath: job.job-dev-test-socialgouv-autodevops-feature-branch-1-b-2v8rlfmq
+    kontinuous/depname.resourceName: job-dev-test-socialgouv-autodevops-feature-branch-1-b-2v8rlfmq
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
+  labels:
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+    kontinuous/deployment.env: test-socialgouv-autodevops-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: job-job-dev-test-socialgouv-autodevops-feature-branch-1ptkh8g0
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/job: unconfined
+        kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+      labels:
+        environment: dev
+        ref: feature-branch-1
+        repository: test-socialgouv-autodevops
+        runName: build
+        kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+        kontinuous/deployment.env: test-socialgouv-autodevops-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: job-job-dev-test-socialgouv-autodevops-feature-branch-1ptkh8g0
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-repository
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.146.4
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              
+              degit kontinuous/test-socialgouv-autodevops#feature-branch-1 \\\\
+                /workspace
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 4096Mi
+            requests:
+              cpu: \\"0\\"
+              memory: \\"0\\"
+      containers:
+        - name: job
+          image: moby/buildkit:v0.10.5-rootless
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: harbor
+          env:
+            - name: BUILDKITD_FLAGS
+              value: --oci-worker-no-process-sandbox
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
+          command:
+            - /bin/sh
+            - -c
+            - >
+              set -e
+
+              if [ \\"\\" != \\"\\" ]; then
+                export CI_REGISTRY=\\"\\"
+              fi
+
+              mkdir -p /home/user/.docker
+
+              echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
+
+              export IMAGE_PATH=$CI_REGISTRY/test-socialgouv-autodevops/app
+
+              export LATEST_TAG=\\"\\"
+
+              if [ \\"false\\" = \\"true\\" ]; then
+                export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
+              fi
+
+              buildctl-daemonless.sh \\\\
+                build \\\\
+                --frontend dockerfile.v0 \\\\
+                --local context=/workspace/ \\\\
+                --local dockerfile=/workspace \\\\
+                --opt filename=./Dockerfile \\\\
+                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
+                --export-cache type=inline \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                echo \\"$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
+          resources:
+            limits:
+              cpu: \\"2\\"
+              memory: 4Gi
+            requests:
+              cpu: 500m
+              memory: 1Gi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            seccompProfile:
+              type: Unconfined
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu/jobs.build-app.buildkit
+            - mountPath: /home/user/.local/share/buildkit
+              name: buildkitd
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - name: kontinuous-io
+          emptyDir: {}
+        - emptyDir: {}
+          name: buildkitd
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app
+    application: test-socialgouv-autodevops
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+    kontinuous/deployment.env: test-socialgouv-autodevops-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-app-55fzcjih
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-socialgouv-autodevops-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/plugin.needs: '[\\"build-app\\"]'
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
+    kontinuous/depname.chartName: app
+    kontinuous/depname.chartPath: project.fabrique.contrib.app
+    kontinuous/depname.resourcePath: deployment.app
+    kontinuous/depname.resourceName: app
+    kontinuous/depname.chartNameTopFull: app
+    kontinuous/depname.chartNameTop: app
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        component: app
+        application: test-socialgouv-autodevops
+        namespace: test-socialgouv-autodevops-feature-branch-1
+        kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+        kontinuous/deployment.env: test-socialgouv-autodevops-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-app-55fzcjih
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-socialgouv-autodevops-feature-branch-1
+                    - key: component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: harbor.fabrique.social.gouv.fr/test-socialgouv-autodevops/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 8080
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 41m
+              memory: 121Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: test-socialgouv-autodevops
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+    kontinuous/deployment.env: test-socialgouv-autodevops-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-app-46z2o1vv
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-socialgouv-autodevops-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
+    kontinuous/plugin.needs: '[\\"build-app\\"]'
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    component: app
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"build-app\\"]'
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+  labels:
+    component: app
+    application: test-socialgouv-autodevops
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
+    kontinuous/deployment.env: test-socialgouv-autodevops-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-app-b4kcj2bx
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-socialgouv-autodevops-feature-branch-1
+spec:
+  rules:
+    - host: test-socialgouv-autodevops-feature-branch-1.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - test-socialgouv-autodevops-feature-branch-1.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+"
+`;
