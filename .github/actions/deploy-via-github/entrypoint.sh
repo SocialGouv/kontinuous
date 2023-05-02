@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export HOME=/home/node
-
 mkdir -p ~/.kube
 touch ~/.kube/config
 chmod go-r ~/.kube/config
@@ -10,7 +8,7 @@ export KUBECONFIG=~/.kube/config
 
 export KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
 
-export PATH=$PATH:/opt/kontinuous/packages/kontinuous/bin
+alias kontinuous="/opt/kontinuous/dist/index.js"
 
 export KS_BUILD_PATH=/tmp/kontinuous-deploy-via-github
 
