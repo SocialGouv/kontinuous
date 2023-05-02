@@ -8,8 +8,6 @@ export KUBECONFIG=~/.kube/config
 
 export KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
 
-alias kontinuous="/opt/kontinuous/dist/index.js"
-
 export KS_BUILD_PATH=/tmp/kontinuous-deploy-via-github
 
 export KS_WORKSPACE_PATH=${KS_WORKSPACE_PATH:-"$GITHUB_WORKSPACE"}

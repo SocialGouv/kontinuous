@@ -2,8 +2,6 @@
 
 set -e
 
-alias kontinuous="/opt/kontinuous/dist/index.js"
-
 export TRIGGER_WEBHOOK=${TRIGGER_WEBHOOK:-"true"}
 
 KS_GIT=false

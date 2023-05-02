@@ -34,6 +34,7 @@ COPY --from=yq /usr/local/bin/yq /usr/local/bin/yq
 # ENV NPM_CONFIG_PREFIX=/home/ubuntu/.npm-global
 
 COPY entrypoint.sh /entrypoint.sh
+COPY kontinuous.sh /usr/local/bin/kontinuous
 COPY kontinuousVersion /kontinuousVersion
 
 ENTRYPOINT ["/entrypoint.sh"]
