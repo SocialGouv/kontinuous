@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.146.3 (2023-04-26)
+
+
+### Bug Fixes
+
+* terminal editor ([#303](https://github.com/socialgouv/kontinuous/issues/303)) ([e8ffaf4](https://github.com/socialgouv/kontinuous/commit/e8ffaf4c0f089c25f488ec9cb8471f1625a47102))
+
 ## 1.146.2 (2023-04-26)
 
 
