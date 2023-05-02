@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.147.17](https://github.com/socialgouv/kontinuous/compare/v1.147.16...v1.147.17) (2023-05-02)
+
+
+### Bug Fixes
+
+* Revert "fix: reduce image size ([#301](https://github.com/socialgouv/kontinuous/issues/301))" ([a278e88](https://github.com/socialgouv/kontinuous/commit/a278e88103697f1d8ce37db7dd4d03ae37c12c17))
+
 ## [1.147.16](https://github.com/socialgouv/kontinuous/compare/v1.147.15...v1.147.16) (2023-05-02)
 
 
