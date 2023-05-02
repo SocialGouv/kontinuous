@@ -173,7 +173,7 @@ ENTRYPOINT ["kontinuous"]
 CMD ["help"]
 
 COPY --from=plugins --chown=1000:1000 /app/plugins/ ./plugins/
-COPY --from=plugins --chown=1000:1000 /home/ubuntu/.kontinuous/cache/ /home/ubuntu/.kontinuous/cache/
+COPY --from=plugins --chown=1000:1000 /home/node/.kontinuous/cache/ /home/ubuntu/.kontinuous/cache/
 
 WORKDIR /workspace
 USER 1000
