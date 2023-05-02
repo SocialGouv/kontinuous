@@ -5,7 +5,7 @@
     "~common": "workspace:^"
   },
   "bin": "./bin/wait-needs",
-  "version": "1.147.10",
+  "version": "1.147.11",
   "engines": {
     "node": "^16.17 || ^18"
   }
