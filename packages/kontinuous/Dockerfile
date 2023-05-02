@@ -1,5 +1,5 @@
 # renovate: datasource=node depName=node versioning=node
-ARG NODE_VERSION=18
+ARG NODE_VERSION=18.14.0
 
 FROM node:$NODE_VERSION as downloader
 RUN apt-get update && \
@@ -117,9 +117,19 @@ FROM ubuntu:22.04 as program
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
   ca-certificates \
+  curl \
   git \
   libgraph-easy-perl \
   && rm -rf /var/lib/apt/lists/*
+
+ARG NODE_VERSION
+ARG NODE_PACKAGE=node-v$NODE_VERSION-linux-x64
+ARG NODE_HOME=/opt/$NODE_PACKAGE
+
+ENV NODE_PATH $NODE_HOME/lib/node_modules
+ENV PATH $NODE_HOME/bin:$PATH
+
+RUN curl https://nodejs.org/dist/v$NODE_VERSION/$NODE_PACKAGE.tar.gz | tar -xzC /opt/
 
 WORKDIR /app
 
@@ -154,7 +164,8 @@ COPY --from=kubeconform /usr/local/bin/kubeconform /usr/local/bin/kubeconform
 WORKDIR /opt/kontinuous
 
 COPY --from=build /app/packages/kontinuous/dist/ ./dist
-ENTRYPOINT ["/opt/kontinuous/dist/index.js"]
+RUN ln -s /opt/kontinuous/dist/index.js /usr/local/bin/kontinuous
+ENTRYPOINT ["kontinuous"]
 CMD ["help"]
 
 
