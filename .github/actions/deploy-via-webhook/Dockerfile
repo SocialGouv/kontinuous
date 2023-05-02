@@ -1,4 +1,4 @@
-FROM ghcr.io/socialgouv/kontinuous:v1.147.2 as base
+FROM ghcr.io/socialgouv/kontinuous:v1.147.3 as base
 
 USER 0
 
