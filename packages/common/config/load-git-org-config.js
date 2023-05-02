@@ -29,19 +29,18 @@ module.exports = async (config, reloadConfig) => {
     return config
   }
 
-  let orga
-  let host
-  let protocol
+  let gitRepository
   if (gitOrgOverride) {
-    orga = gitOrgOverride
+    gitRepository = normalizeRepositoryUrl(
+      `${gitOrgOverride}/${gitOrgRepository}`
+    )
   } else {
     const url = parseGitUrl(gitRepositoryUrl)
-    protocol = url.protocol || "https"
-    orga = url.owner
-    host = url.host
+    const protocol = url.protocol || "https"
+    const orga = url.owner
+    const { host } = url
+    gitRepository = `${protocol}://${host}/${orga}/${gitOrgRepository}`
   }
-
-  const gitRepository = `${protocol}://${host}/${orga}/${gitOrgRepository}`
 
   const gitOrgRepositoryUrl = normalizeRepositoryUrl(gitRepository, "https")
 
