@@ -31,11 +31,12 @@ FROM base as final
 COPY --from=jq /usr/local/bin/jq /usr/local/bin/jq
 COPY --from=yq /usr/local/bin/yq /usr/local/bin/yq
 
-USER 1001
-
 # ENV NPM_CONFIG_PREFIX=/home/ubuntu/.npm-global
 
 COPY entrypoint.sh /entrypoint.sh
 COPY kontinuousVersion /kontinuousVersion
 
 ENTRYPOINT ["/entrypoint.sh"]
+
+# see https://docs.github.com/en/actions/creating-actions/dockerfile-support-for-github-actions#user
+USER 0
