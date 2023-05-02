@@ -74,7 +74,7 @@
     "dev:docs": "docsify serve docs",
     "docker:webhook": "DOCKER_BUILDKIT=1 docker-compose -f docker-compose.built.yaml up --build webhook",
     "docker:kontinuous:build": "DOCKER_BUILDKIT=1 docker build --progress=plain -f packages/kontinuous/Dockerfile -t kontinuous .",
-    "docker:kontinuous:run": "docker run -it -u ${UID:-1000}:1001 -v $PWD:/workspace -v $(dirname $KUBECONFIG):/home/ubuntu/.kube -e KUBECONFIG=/home/ubuntu/.kube/$(basename $KUBECONFIG) kontinuous",
+    "docker:kontinuous:run": "docker run -it -v $PWD:/workspace -v $(dirname $KUBECONFIG):/home/node/.kube -e KUBECONFIG=/home/node/.kube/$(basename $KUBECONFIG) kontinuous",
     "docker:kontinuous": "yarn docker:kontinuous:build && yarn docker:kontinuous:run",
     "logs:remote-webhook": "kubectl --context prod -n kontinuous-webhook logs -f --all-containers -l component=kontinuous-webhook",
     "upgrade:modjo": "yarn up -R \"@modjo/*\""
