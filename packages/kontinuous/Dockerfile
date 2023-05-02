@@ -150,7 +150,6 @@ RUN chown 1000:1000 /yarn
 ENV YARN_CACHE_FOLDER /yarn
 
 ENV HOME=/home/ubuntu
-RUN mkdir $HOME
 RUN chmod a+rw $HOME
 RUN git config --global --add safe.directory /workspace
 RUN mkdir $HOME/.kube
