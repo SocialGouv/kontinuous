@@ -16,6 +16,9 @@ inputs:
   deployWriteOutputFile:
     description: "Set file to tee output of kontinuous logs command"
     default: ""
+  projectName:
+    description: "projectName for kontinuous, usually the rancher project name"
+    default: ""
 
 runs:
   using: docker
@@ -29,3 +32,4 @@ runs:
     KS_CHART: ${{ inputs.chart }}
     KS_IGNORE_PROJECT_TEMPLATES: ${{ inputs.ignoreProjectTemplates }}
     KS_DEPLOY_WRITE_OUTPUT_FILE: ${{ inputs.deployWriteOutputFile }}
+    KS_PROJECT_NAME: ${{ inputs.projectName }}

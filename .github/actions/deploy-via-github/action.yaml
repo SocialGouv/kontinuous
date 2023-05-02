@@ -32,6 +32,9 @@ inputs:
   ciNamespace:
     description: "CI namespace name for kontinuous"
     default: ""
+  projectName:
+    description: "projectName for kontinuous, usually the rancher project name"
+    default: ""
 
 runs:
   using: docker
@@ -51,3 +54,4 @@ runs:
     KS_NOTIFY_WEBHOOK_URL: ${{ inputs.notifyWebhookUrl }}
     KS_SENTRY_DSN: ${{ inputs.sentryDSN }}
     KS_CI_NAMESPACE: ${{ inputs.ciNamespace }}
+    KS_PROJECT_NAME: ${{ inputs.projectName }}
