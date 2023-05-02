@@ -136,17 +136,17 @@ RUN npm i -g yarn
 
 WORKDIR /app
 
-RUN groupadd -g 1000 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1000 ubuntu
+RUN groupadd -g 1001 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1001 ubuntu
 
-RUN chown 1000:1000 /app
+RUN chown 1001:1001 /app
 
-RUN mkdir -p /opt && chown 1000:1000 /opt
+RUN mkdir -p /opt && chown 1001:1001 /opt
 
-RUN mkdir -p /workspace && chown 1000:1000 /workspace
-RUN mkdir -p /opt/kontinuous && chown 1000:1000 /opt/kontinuous
+RUN mkdir -p /workspace && chown 1001:1001 /workspace
+RUN mkdir -p /opt/kontinuous && chown 1001:1001 /opt/kontinuous
 
 RUN mkdir /yarn
-RUN chown 1000:1000 /yarn
+RUN chown 1001:1001 /yarn
 ENV YARN_CACHE_FOLDER /yarn
 
 ENV HOME=/home/ubuntu
@@ -172,8 +172,8 @@ RUN ln -s /opt/kontinuous/dist/index.js /usr/local/bin/kontinuous
 ENTRYPOINT ["kontinuous"]
 CMD ["help"]
 
-COPY --from=plugins --chown=1000:1000 /app/plugins/ ./plugins/
-COPY --from=plugins --chown=1000:1000 /home/node/.kontinuous/cache/ /home/ubuntu/.kontinuous/cache/
+COPY --from=plugins --chown=1001:1001 /app/plugins/ ./plugins/
+COPY --from=plugins --chown=1001:1001 /home/node/.kontinuous/cache/ /home/ubuntu/.kontinuous/cache/
 
 WORKDIR /workspace
-USER 1000
+USER 1001
