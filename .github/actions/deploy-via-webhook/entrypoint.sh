@@ -2,6 +2,8 @@
 
 set -e
 
+git config --global --add safe.directory $GITHUB_WORKSPACE
+
 export TRIGGER_WEBHOOK=${TRIGGER_WEBHOOK:-"true"}
 
 KS_GIT=false

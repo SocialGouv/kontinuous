@@ -6,6 +6,8 @@ chmod go-r ~/.kube/config
 echo $KUBECONFIG_B64 | base64 -d > ~/.kube/config
 export KUBECONFIG=~/.kube/config
 
+git config --global --add safe.directory $GITHUB_WORKSPACE
+
 export KS_GIT_REPOSITORY=$GITHUB_REPOSITORY
 
 export KS_BUILD_PATH=/tmp/kontinuous-deploy-via-github
