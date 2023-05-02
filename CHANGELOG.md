@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.147.1 (2023-05-02)
+
+
+### Bug Fixes
+
+* sonarcloud bugs ([#308](https://github.com/socialgouv/kontinuous/issues/308)) ([9622313](https://github.com/socialgouv/kontinuous/commit/962231386a6db360fb49a9dd82ea9d8f969b3075))
+
 ## 1.147.0 (2023-05-02)
 
 
