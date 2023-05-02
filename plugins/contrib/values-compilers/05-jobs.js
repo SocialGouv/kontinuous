@@ -205,7 +205,6 @@ const compileRun = async (key, run, compileCommon) => {
     repository: repositoryName,
     ref: slug(gitBranch),
     environment,
-    ...(run.use ? {} : {}),
   })
   run.labels.runName = run.use
     ? slug(
