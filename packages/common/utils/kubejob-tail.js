@@ -119,8 +119,7 @@ module.exports = async (jobName, options = {}) => {
       }
     )
     const status = JSON.parse(jsonStatus)
-    ended =
-      !(status.active === 1) || status.succeeded === 1 || status.failed === 1
+    ended = status.active !== 1 || status.succeeded === 1 || status.failed === 1
     countIterations++
   }
 }
