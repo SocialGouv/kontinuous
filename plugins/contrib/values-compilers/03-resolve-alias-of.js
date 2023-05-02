@@ -6,52 +6,55 @@ const resolveAliasOf = (values, context, rootValues = values, scope = []) => {
   const { utils, chartsAliasMap, defaultValuesCache } = context
   const { deepmerge } = utils
   for (const [key, val] of Object.entries(values)) {
-    if (typeof val !== "object" || val === null) {
+    if (typeof val !== "object" || val === null || val["~chart"]) {
       continue
     }
-    if (val["~chart"]) {
-      const parentDotKey = [...scope, key].join(".")
-
-      let aliasOf = val["~chart"]
-      if (aliasOf.startsWith(".")) {
-        aliasOf = `${scope.join(".")}${parentDotKey}`
-      }
-
-      const aliasScope = aliasOf.split(".")
-      const adjacentChartAlias = aliasScope.pop()
-      if (adjacentChartAlias !== key) {
-        let aliasMap = chartsAliasMap.get(aliasScope)
-        if (!aliasMap) {
-          aliasMap = {}
-          chartsAliasMap.set(aliasScope, aliasMap)
-        }
-        aliasMap[key] = adjacentChartAlias
-      }
-
-      const dotKey = `${aliasScope.join(".")}.${key}`
-
-      const def = {}
-      if (dotKey === aliasOf && !defaultValuesCache[aliasOf]) {
-        defaultValuesCache[aliasOf] = cloneDeep(get(rootValues, aliasOf))
-      }
-      let defaultValues
-      if (dotKey !== aliasOf) {
-        defaultValues = defaultValuesCache[aliasOf] || get(rootValues, aliasOf)
-        deepmerge(def, cloneDeep(defaultValues))
-      }
-      const nestedVal = get(rootValues, dotKey) || {}
-      set(rootValues, dotKey, def)
-      deepmerge(def, nestedVal, val)
-      if (def[`~enabled`] === true && nestedVal?.["~enabled"] !== false) {
-        def.enabled = true
-      }
-      if (def[`~enabled`] !== undefined) {
-        delete def[`~enabled`]
-      }
-      delete values[key]
-    } else {
-      resolveAliasOf(values[key], context, rootValues, [...scope, key])
+    resolveAliasOf(values[key], context, rootValues, [...scope, key])
+  }
+  for (const [key, val] of Object.entries(values)) {
+    if (typeof val !== "object" || val === null || !val["~chart"]) {
+      continue
     }
+
+    const parentDotKey = [...scope, key].join(".")
+
+    let aliasOf = val["~chart"]
+    if (aliasOf.startsWith(".")) {
+      aliasOf = `${scope.join(".")}${parentDotKey}`
+    }
+
+    const aliasScope = aliasOf.split(".")
+    const adjacentChartAlias = aliasScope.pop()
+    if (adjacentChartAlias !== key) {
+      let aliasMap = chartsAliasMap.get(aliasScope)
+      if (!aliasMap) {
+        aliasMap = {}
+        chartsAliasMap.set(aliasScope, aliasMap)
+      }
+      aliasMap[key] = adjacentChartAlias
+    }
+
+    const dotKey = `${aliasScope.join(".")}.${key}`
+
+    const def = {}
+    if (dotKey === aliasOf && !defaultValuesCache[aliasOf]) {
+      defaultValuesCache[aliasOf] = cloneDeep(get(rootValues, aliasOf))
+    }
+    let defaultValues
+    if (dotKey !== aliasOf) {
+      defaultValues = defaultValuesCache[aliasOf] || get(rootValues, aliasOf)
+      deepmerge(def, cloneDeep(defaultValues))
+    }
+    const nestedVal = get(rootValues, dotKey) || {}
+    set(rootValues, dotKey, def)
+    deepmerge(def, nestedVal, val)
+    if (def[`~enabled`] === true && nestedVal?.["~enabled"] !== false) {
+      def.enabled = true
+    }
+    if (def[`~enabled`] !== undefined) {
+      delete def[`~enabled`]
+    }
+    delete values[key]
   }
 }
 
