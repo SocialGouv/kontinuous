@@ -39,4 +39,4 @@ COPY kontinuousVersion /kontinuousVersion
 ENTRYPOINT ["/entrypoint.sh"]
 
 # see https://docs.github.com/en/actions/creating-actions/dockerfile-support-for-github-actions#user
-# USER 0
+USER 0
