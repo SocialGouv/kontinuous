@@ -140,7 +140,7 @@ module.exports = async (options, context) => {
       { err },
       `💥 delete resource "${resourceName}" before recreate to force immutable field conflict`
     )
-    return forceApply(manifest, err)
+    return forceApply(manifest)
   }
 
   const applyManifestExec = async (manifest) => {
