@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export HOME=/home/node
+
 mkdir -p ~/.kube
 touch ~/.kube/config
 chmod go-r ~/.kube/config
