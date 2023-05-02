@@ -130,6 +130,7 @@ ENV NODE_PATH $NODE_HOME/lib/node_modules
 ENV PATH $NODE_HOME/bin:$PATH
 
 RUN curl https://nodejs.org/dist/v$NODE_VERSION/$NODE_PACKAGE.tar.gz | tar -xzC /opt/
+RUN npm i -g yarn
 
 WORKDIR /app
 
@@ -167,7 +168,6 @@ COPY --from=build /app/packages/kontinuous/dist/ ./dist
 RUN ln -s /opt/kontinuous/dist/index.js /usr/local/bin/kontinuous
 ENTRYPOINT ["kontinuous"]
 CMD ["help"]
-
 
 COPY --from=plugins --chown=1000:1000 /app/plugins/ ./plugins/
 COPY --from=plugins --chown=1000:1000 /home/node/.kontinuous/cache/ /home/node/.kontinuous/cache/
