@@ -1,2 +1,2 @@
 #!/bin/sh
-exec /opt/kontinuous/dist/index.js
+exec /opt/kontinuous/dist/index.js $@
