@@ -20,16 +20,19 @@ const renderTplRecurse = async (values, context, rootValues = values) => {
       value = yaml.loadValue(value)
       if (isTplCast) {
         const cast = prefix.slice(1, -1).split(":").slice(1)
-        switch (cast) {
-          case ("int", "integer"): {
+        switch (true) {
+          case cast === "int" || cast === "integer": {
             value = parseInt(value, 10)
             break
           }
-          case ("bool", "boolean", "yaml", "json"): {
+          case cast === "bool" ||
+            cast === "boolean" ||
+            cast === "yaml" ||
+            cast === "json": {
             value = yaml.load(value)
             break
           }
-          case "string": {
+          case cast === "string": {
             value = value.toString()
             break
           }
