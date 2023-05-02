@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.147.0 (2023-05-02)
+
+
+### Features
+
+* **autodevops:** first draft ([#306](https://github.com/socialgouv/kontinuous/issues/306)) ([baa405e](https://github.com/socialgouv/kontinuous/commit/baa405ea2bb6b0ff8c2620d51da434f5c2e56100))
+
 ## 1.146.5 (2023-05-02)
 
 
