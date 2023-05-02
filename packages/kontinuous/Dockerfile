@@ -113,7 +113,7 @@ RUN mkdir -p packages/kontinuous/src
 RUN yarn workspaces foreach -t run postinstall
 RUN yarn workspace kontinuous build
 
-FROM node:${NODE_VERSION}-slim as program
+FROM ubuntu:22.04 as program
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
   ca-certificates \
@@ -135,6 +135,7 @@ RUN chown 1000:1000 /yarn
 ENV YARN_CACHE_FOLDER /yarn
 
 ENV HOME=/home/node
+RUN mkdir $HOME
 RUN chmod a+rw $HOME
 RUN git config --global --add safe.directory /workspace
 RUN mkdir $HOME/.kube
@@ -155,6 +156,7 @@ WORKDIR /opt/kontinuous
 COPY --from=build /app/packages/kontinuous/dist/ ./dist
 ENTRYPOINT ["/opt/kontinuous/dist/index.js"]
 CMD ["help"]
+
 
 COPY --from=plugins --chown=1000:1000 /app/plugins/ ./plugins/
 COPY --from=plugins --chown=1000:1000 /home/node/.kontinuous/cache/ /home/node/.kontinuous/cache/
