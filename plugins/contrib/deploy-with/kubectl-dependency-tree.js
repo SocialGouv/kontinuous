@@ -193,7 +193,7 @@ module.exports = async (options, context) => {
         logger.error({ need }, msg)
         throw new KontinuousPluginError(msg)
       }
-      needsManifests.add(...matchingDeps)
+      matchingDeps.forEach((d) => needsManifests.add(d))
     }
 
     const dependencies = [...needsManifests].map((m) => {

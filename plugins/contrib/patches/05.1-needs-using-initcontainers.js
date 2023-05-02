@@ -42,7 +42,7 @@ module.exports = async (manifests, options, context) => {
         logger.error({ need }, msg)
         throw new KontinuousPluginError(msg)
       }
-      needsManifests.add(...matchingDeps)
+      matchingDeps.forEach((d) => needsManifests.add(d))
     }
 
     const { spec } = manifest.spec.template
