@@ -20,7 +20,7 @@
     "dree": "^4.0.0",
     "enquirer": "^2.3.6",
     "form-data": "^4.0.0",
-    "fs-extra": "^11.1.0",
+    "fs-extra": "^11.1.1",
     "helm-tree": "workspace:^",
     "launch-editor": "^2.4.0",
     "link-module-alias": "^1.2.0",
