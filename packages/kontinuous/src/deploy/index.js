@@ -174,7 +174,7 @@ const deploy = async (options) => {
 }
 
 module.exports = async (options) => {
-  ctx.provide(async () => {
+  await ctx.provide(async () => {
     await deploy(options)
   })
 }
