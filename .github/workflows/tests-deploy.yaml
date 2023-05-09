@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        nodeVersion: [16.17, 18]
+        nodeVersion: [16.17, 18, 20]
         testParams:
           - cwd: .github/e2e/standalone-charts
             testScript: |

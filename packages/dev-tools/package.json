@@ -6,6 +6,6 @@
     "~common": "workspace:^"
   },
   "engines": {
-    "node": "^16.17 || ^18"
+    "node": "^16.17 || ^18 || ^20"
   }
 }
