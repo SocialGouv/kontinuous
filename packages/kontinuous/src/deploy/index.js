@@ -21,9 +21,7 @@ const buildDeployPlugins = require("./build-deploy-plugins")
 const deploySidecars = require("./deploy-sidecars")
 const deployWith = require("./deploy-with")
 
-module.exports = async (options) => {
-  ctx.provide()
-
+const deploy = async (options) => {
   await buildDeployPlugins()
 
   const config = ctx.require("config")
@@ -173,4 +171,10 @@ module.exports = async (options) => {
     }
     throw new ExitError(err)
   }
+}
+
+module.exports = async (options) => {
+  ctx.provide(async () => {
+    await deploy(options)
+  })
 }

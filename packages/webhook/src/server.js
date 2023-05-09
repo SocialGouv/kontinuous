@@ -41,6 +41,7 @@ module.exports = async (options = {}) => {
       },
     },
   })
-  commonCtx.provide()
-  await modjo(options)
+  await commonCtx.provide(async () => {
+    await modjo(options)
+  })
 }

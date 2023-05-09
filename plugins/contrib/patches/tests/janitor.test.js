@@ -14,18 +14,19 @@ const runJanitor = (config, values) => {
   const manifests = utils.yaml.loadAll(rawNs)
   const { logger } = utils
   logger.minLevel("debug")
-  ctx.provide()
-  ctx.set("logger", logger)
-  return janitor(
-    manifests,
-    {},
-    {
-      config,
-      values,
-      ctx,
-      utils,
-    }
-  )
+  return ctx.provide(async () => {
+    ctx.set("logger", logger)
+    return janitor(
+      manifests,
+      {},
+      {
+        config,
+        values,
+        ctx,
+        utils,
+      }
+    )
+  })
 }
 
 test(`add janitor annotation in dev`, async () => {

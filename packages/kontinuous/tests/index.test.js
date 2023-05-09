@@ -99,29 +99,30 @@ describe("test build manifests with snapshots", () => {
       )
       Object.assign(env, dotenvConfig)
     }
-    ctx.provide()
-    ctx.set("env", env)
+    await ctx.provide(async () => {
+      ctx.set("env", env)
 
-    const logger = createLogger({
-      fields: {
-        workspacePath: removePrefix(testdirPath, `${process.cwd()}/`),
-        buildPath,
-      },
-    })
-    ctx.set("logger", logger)
+      const logger = createLogger({
+        fields: {
+          workspacePath: removePrefix(testdirPath, `${process.cwd()}/`),
+          buildPath,
+        },
+      })
+      ctx.set("logger", logger)
 
-    try {
-      await cli([...process.argv.slice(0, 2), "build"])
-    } catch (error) {
-      if (!(error instanceof MockExit && error.exitCode === 0)) {
-        throw error
+      try {
+        await cli([...process.argv.slice(0, 2), "build"])
+      } catch (error) {
+        if (!(error instanceof MockExit && error.exitCode === 0)) {
+          throw error
+        }
       }
-    }
 
-    const result = ctx.require("result")
-    const { manifests } = result
-    expect(manifests).toMatchSpecificSnapshot(
-      `./__snapshots__/${testdir}.${environment}.yaml`
-    )
+      const result = ctx.require("result")
+      const { manifests } = result
+      expect(manifests).toMatchSpecificSnapshot(
+        `./__snapshots__/${testdir}.${environment}.yaml`
+      )
+    })
   })
 })
