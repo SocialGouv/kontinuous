@@ -7,7 +7,7 @@ const degit = require("tiged")
 const { lock } = require("cross-process-lock")
 
 const degitTagHasChanged = require("./degit-tag-has-changed")
-const normalizeDegitUri = require("./normalize-degit-uri")
+// const normalizeDegitUri = require("./normalize-degit-uri")
 
 const getLogger = require("./get-logger")
 
@@ -25,7 +25,7 @@ module.exports = async (
   })
 
   const pre = uri
-  uri = normalizeDegitUri(uri)
+  // uri = normalizeDegitUri(uri)
   console.log({ pre, uri, "pre===uri": pre === uri })
 
   try {
