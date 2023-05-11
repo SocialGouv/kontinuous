@@ -24,7 +24,9 @@ module.exports = async (
     lockTimeout: 120000,
   })
 
+  const pre = uri
   uri = normalizeDegitUri(uri)
+  console.log({ pre, uri, "pre===uri": pre === uri })
 
   try {
     await retry(
@@ -59,6 +61,7 @@ module.exports = async (
             )
           }
 
+          console.log({ uri, subgroup, subDirectory })
           await degit(uri, {
             cache,
             force,
