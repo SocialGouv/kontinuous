@@ -7,7 +7,7 @@ const degit = require("tiged")
 const { lock } = require("cross-process-lock")
 
 const degitTagHasChanged = require("./degit-tag-has-changed")
-// const normalizeDegitUri = require("./normalize-degit-uri")
+const normalizeDegitUri = require("./normalize-degit-uri")
 
 const getLogger = require("./get-logger")
 
@@ -24,7 +24,7 @@ module.exports = async (
     lockTimeout: 120000,
   })
 
-  // uri = normalizeDegitUri(uri)
+  uri = normalizeDegitUri(uri)
 
   try {
     await retry(
