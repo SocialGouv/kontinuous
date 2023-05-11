@@ -42,14 +42,16 @@ const recurseDependency = async (param = {}) => {
 
   const { dependencies } = definition
   if (dependencies) {
-    for (const [childName, childDefinition] of Object.entries(dependencies)) {
-      await recurseDependency({
-        ...param,
-        name: childName,
-        definition: childDefinition,
-        scope,
-      })
-    }
+    await Promise.all(
+      Object.entries(dependencies).map(([childName, childDefinition]) =>
+        recurseDependency({
+          ...param,
+          name: childName,
+          definition: childDefinition,
+          scope,
+        })
+      )
+    )
   }
 
   await afterChildren(callbackParam)

@@ -59,6 +59,8 @@ module.exports = async (
             )
           }
 
+          cache = false
+
           await degit(uri, {
             cache,
             force,
