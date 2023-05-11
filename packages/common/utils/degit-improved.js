@@ -28,11 +28,11 @@ module.exports = async (
     await retry(
       async (bail) => {
         try {
-          let cache
+          let disableCache
           logger.debug(`🗂️  degit "${uri}"`)
           if (cacheCheck) {
             const tagHasChanged = await degitTagHasChanged(uri)
-            cache = !tagHasChanged
+            disableCache = tagHasChanged
             if (tagHasChanged) {
               logger.debug({ degit: uri }, `♻️  tag has changed, renew cache`)
             }
@@ -58,7 +58,7 @@ module.exports = async (
           }
 
           await degit(uri, {
-            disableCache: !cache,
+            disableCache,
             force,
             subgroup,
             verbose: true,
