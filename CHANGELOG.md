@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.147.32 (2023-05-11)
+
+
+### Bug Fixes
+
+* normalize degit uri lowercase orga ([#318](https://github.com/socialgouv/kontinuous/issues/318)) ([9d52754](https://github.com/socialgouv/kontinuous/commit/9d527549fab13ffdb1fd5d180798c797facba1e4))
+
 ## 1.147.31 (2023-05-11)
 
 
