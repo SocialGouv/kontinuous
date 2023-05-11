@@ -7,6 +7,7 @@ const degit = require("tiged")
 const { lock } = require("cross-process-lock")
 
 const degitTagHasChanged = require("./degit-tag-has-changed")
+const normalizeDegitUri = require("./normalize-degit-uri")
 
 const getLogger = require("./get-logger")
 
@@ -19,19 +20,19 @@ module.exports = async (
 ) => {
   const degitDir = path.join(os.homedir(), ".degit")
   await fs.ensureDir(degitDir)
-  const unlock = await lock(`${degitDir}/`, {
-    lockTimeout: 120000,
-  })
+  const unlock = await lock(`${degitDir}/`)
+
+  uri = normalizeDegitUri(uri)
 
   try {
     await retry(
       async (bail) => {
         try {
-          let cache
+          let disableCache
           logger.debug(`🗂️  degit "${uri}"`)
           if (cacheCheck) {
             const tagHasChanged = await degitTagHasChanged(uri)
-            cache = !tagHasChanged
+            disableCache = tagHasChanged
             if (tagHasChanged) {
               logger.debug({ degit: uri }, `♻️  tag has changed, renew cache`)
             }
@@ -57,7 +58,7 @@ module.exports = async (
           }
 
           await degit(uri, {
-            cache,
+            disableCache,
             force,
             subgroup,
             verbose: true,
