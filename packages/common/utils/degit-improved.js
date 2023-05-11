@@ -20,9 +20,7 @@ module.exports = async (
 ) => {
   const degitDir = path.join(os.homedir(), ".degit")
   await fs.ensureDir(degitDir)
-  const unlock = await lock(`${degitDir}/`, {
-    lockTimeout: 120000,
-  })
+  const unlock = await lock(`${degitDir}/`)
 
   uri = normalizeDegitUri(uri)
 
@@ -59,10 +57,8 @@ module.exports = async (
             )
           }
 
-          cache = false
-
           await degit(uri, {
-            cache,
+            disableCache: !cache,
             force,
             subgroup,
             verbose: true,
