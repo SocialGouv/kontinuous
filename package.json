@@ -18,7 +18,7 @@
     "eslint-plugin-jest": "^27.0.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "fs-extra": "^11.1.0",
+    "fs-extra": "^11.1.1",
     "husky": "^8.0.0",
     "js-yaml": "^4.1.0",
     "lint-staged": "^13.0.0",
@@ -27,18 +27,6 @@
     "~dev-tools": "workspace:^"
   },
   "resolutions": {
-    "@modjo/http-server": "latest",
-    "@modjo/core": "latest",
-    "@modjo/config": "latest",
-    "@modjo/express": "latest",
-    "@modjo/express-monitor": "latest",
-    "@modjo/http-logger": "latest",
-    "@modjo/lightship": "latest",
-    "@modjo/logger": "latest",
-    "@modjo/microservice-oapi": "latest",
-    "@modjo/oa": "latest",
-    "@modjo/shutdown-handlers": "latest",
-    "@modjo/sentry": "latest",
     "tar": "^6.1.9",
     "multer": "^1.4.4-lts.1",
     "fast-copy": "^3.0.0",
@@ -76,8 +64,7 @@
     "docker:kontinuous:build": "DOCKER_BUILDKIT=1 docker build --progress=plain -f packages/kontinuous/Dockerfile -t kontinuous .",
     "docker:kontinuous:run": "docker run -it -v $PWD:/workspace -v $(dirname $KUBECONFIG):/home/node/.kube -e KUBECONFIG=/home/node/.kube/$(basename $KUBECONFIG) kontinuous",
     "docker:kontinuous": "yarn docker:kontinuous:build && yarn docker:kontinuous:run",
-    "logs:remote-webhook": "kubectl --context prod -n kontinuous-webhook logs -f --all-containers -l component=kontinuous-webhook",
-    "upgrade:modjo": "yarn up -R \"@modjo/*\""
+    "logs:remote-webhook": "kubectl --context prod -n kontinuous-webhook logs -f --all-containers -l component=kontinuous-webhook"
   },
   "lint-staged": {
     "*.js": [

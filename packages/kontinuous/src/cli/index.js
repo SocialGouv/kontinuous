@@ -28,9 +28,7 @@ const addCommands = [
   require("./commands/test"),
 ]
 
-module.exports = async (args = process.argv) => {
-  ctx.provide()
-
+const cli = async (args) => {
   const logger = ctx.get("logger") || ctx.set("logger", createLogger())
 
   const signals = ["SIGTERM", "SIGHUP", "SIGINT"]
@@ -128,4 +126,10 @@ module.exports = async (args = process.argv) => {
     eventsBucket.emit("finish")
     process.exit(exitCode)
   }
+}
+
+module.exports = async (args = process.argv) => {
+  await ctx.provide(async () => {
+    await cli(args)
+  })
 }

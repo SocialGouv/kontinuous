@@ -9,8 +9,8 @@ module.exports = async () => {
     return
   }
 
-  ctx.provide()
-
-  // at minute 0 past every 6th hour. see https://crontab.guru/
-  cron.schedule("0 */6 * * *", cleanArtifact)
+  await ctx.provide(async () => {
+    // at minute 0 past every 6th hour. see https://crontab.guru/
+    cron.schedule("0 */6 * * *", cleanArtifact)
+  })
 }
