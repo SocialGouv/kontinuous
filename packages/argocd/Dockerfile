@@ -12,7 +12,7 @@ RUN apt-get update && \
   && rm -rf /var/lib/apt/lists/*
 
 # renovate: datasource=node depName=node versioning=node
-ARG NODE_VERSION=18
+ARG NODE_VERSION=20
 
 ENV NODE_VERSION=$NODE_VERSION
 RUN wget -qO- https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \

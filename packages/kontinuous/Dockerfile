@@ -2,7 +2,7 @@
 ARG UBUNTU_VERSION=22.04
 
 # renovate: datasource=node depName=node versioning=node
-ARG NODE_VERSION=18.14.0
+ARG NODE_VERSION=20.1.0
 
 FROM ubuntu:$UBUNTU_VERSION as base
 RUN apt-get update && \

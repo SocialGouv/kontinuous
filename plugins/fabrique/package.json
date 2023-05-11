@@ -7,6 +7,6 @@
   "private": true,
   "packageManager": "yarn@4.0.0-rc.39",
   "engines": {
-    "node": "^16.17 || ^18"
+    "node": "^16.17 || ^18 || ^20"
   }
 }

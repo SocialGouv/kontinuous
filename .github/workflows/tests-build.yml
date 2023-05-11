@@ -22,6 +22,7 @@ jobs:
         include:
           - nodeVersion: 16.17  # minimum requirement
           - nodeVersion: 18
+          - nodeVersion: 20
 
     steps:
       - name: Checkout repository
