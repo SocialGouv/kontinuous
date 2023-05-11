@@ -1,5 +1,7 @@
 const degitImproved = require("~common/utils/degit-improved")
 
+const normalizeDegitUri = require("~common/utils/normalize-degit-uri")
+
 const slug = require("~common/utils/slug")
 const matchLinkRemap = require("~common/utils/match-link-remap")
 const ctx = require("~common/ctx")
@@ -10,6 +12,8 @@ module.exports = async ({ dependency, cachePath, logger }) => {
   const { version } = dependency
   let { degit: degitUri } = dependency
   degitUri = degitUri.replaceAll("@", "#")
+
+  degitUri = normalizeDegitUri(degitUri)
 
   const { links = {}, remoteLinks = {} } = config
 
