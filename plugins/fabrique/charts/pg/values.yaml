@@ -6,7 +6,7 @@ cnpg-cluster:
   ~needs: [jobs-pg]
   ~tpl~dbOwner: "{{ .Values.global.pgUser }}"
   ~tpl~dbName: "{{ .Values.global.pgDatabase }}"
-  ~tpl~instances: "{{ if (or .Values.isProd .Values.isPreprod) }}3{{else}}1{{end}}"
+  ~tpl~instances: "{{ if (or .Values.global.isProd .Values.global.isPreprod) }}3{{else}}1{{end}}"
   postgresqlParameter:
     timezone: "Europe/Paris"
   extensions:
@@ -19,7 +19,7 @@ cnpg-cluster:
     - pgcrypto
     - hstore
   monitoring:
-    ~tpl~enablePodMonitor: "{{ if (or .Values.isProd .Values.isPreprod) }}true{{else}}false{{end}}"
+    ~tpl~enablePodMonitor: "{{ if (or .Values.global.isProd .Values.global.isPreprod) }}true{{else}}false{{end}}"
   persistence:
     storageClass: "managed-csi"
     size: 8Gi
@@ -29,7 +29,7 @@ cnpg-cluster:
     tag: "14"
   poolers:
     rw:
-      ~tpl~instances: "{{ if (or .Values.isProd .Values.isPreprod) }}3{{else}}1{{end}}"
+      ~tpl~instances: "{{ if (or .Values.global.isProd .Values.global.isPreprod) }}3{{else}}1{{end}}"
       type: rw
       pgbouncer:
         poolMode: session
