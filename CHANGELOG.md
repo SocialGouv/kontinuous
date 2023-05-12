@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.147.33 (2023-05-12)
+
+
+### Bug Fixes
+
+* chart pg global values ([#319](https://github.com/socialgouv/kontinuous/issues/319)) ([4b93acf](https://github.com/socialgouv/kontinuous/commit/4b93acfedbe1f75fe9f13e89d8d6da5a11380383))
+
 ## 1.147.32 (2023-05-11)
 
 
