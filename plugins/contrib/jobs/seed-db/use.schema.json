@@ -6,7 +6,7 @@
   "additionalProperties": false,
   "required": ["seedPath"],
   "properties": {
-    "pgSecretName ": {
+    "pgSecretName": {
       "description": "Secret with Postgresql credentials to execute the script",
       "type": "string"
     },
