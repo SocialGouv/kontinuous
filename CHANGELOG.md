@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.147.36](https://github.com/socialgouv/kontinuous/compare/v1.147.35...v1.147.36) (2023-05-23)
+
+
+### Bug Fixes
+
+* upgrade rollout-status ([eb1abc8](https://github.com/socialgouv/kontinuous/commit/eb1abc8a7c84edb9a0235cb51309c844e34b926d))
+
 ## 1.147.35 (2023-05-23)
 
 
