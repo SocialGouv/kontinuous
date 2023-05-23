@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.147.35 (2023-05-23)
+
+
+### Bug Fixes
+
+* **debug:** better manifest tree ([#321](https://github.com/socialgouv/kontinuous/issues/321)) ([d545c2a](https://github.com/socialgouv/kontinuous/commit/d545c2a2d2855f2a3ca18227d900c11d722613ae))
+
 ## 1.147.34 (2023-05-22)
 
 ## 1.147.33 (2023-05-12)
