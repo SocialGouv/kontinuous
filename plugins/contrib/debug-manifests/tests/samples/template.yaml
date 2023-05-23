@@ -5,8 +5,8 @@ metadata:
     janitor/ttl: 7d
     field.cattle.io/projectId: c-gjtkk:p-qxn46
     kontinuous/gitBranch: k-mvp-mig-9
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: "true"
+    kapp.k14s.io/exists: ""
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
@@ -99,7 +99,7 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   namespace: template-k-mvp-mig-9
 data:
-  NEXT_TELEMETRY_DISABLED: '1'
+  NEXT_TELEMETRY_DISABLED: "1"
   KEYCLOAK_URL: >-
     https://keycloak-template-k-mvp-mig-9.dev.fabrique.social.gouv.fr/realms/app-realm
   NEXTAUTH_URL: https://template-k-mvp-mig-9.dev.fabrique.social.gouv.fr
@@ -2517,7 +2517,7 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   annotations:
-    sealedsecrets.bitnami.com/cluster-wide: 'true'
+    sealedsecrets.bitnami.com/cluster-wide: "true"
     kontinuous/chartPath: project
     kontinuous/source: project/templates/app.sealed.secret.yaml
     kontinuous/deployment: template-k-mvp-mig-9-1670002715
@@ -2543,7 +2543,7 @@ spec:
   template:
     metadata:
       annotations:
-        sealedsecrets.bitnami.com/cluster-wide: 'true'
+        sealedsecrets.bitnami.com/cluster-wide: "true"
       name: app
     type: Opaque
 ---
@@ -2551,7 +2551,7 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   annotations:
-    sealedsecrets.bitnami.com/cluster-wide: 'true'
+    sealedsecrets.bitnami.com/cluster-wide: "true"
     kontinuous/chartPath: project
     kontinuous/source: project/templates/franceconnect.sealed.secret.yaml
     kontinuous/deployment: template-k-mvp-mig-9-1670002715
@@ -2575,7 +2575,7 @@ spec:
   template:
     metadata:
       annotations:
-        sealedsecrets.bitnami.com/cluster-wide: 'true'
+        sealedsecrets.bitnami.com/cluster-wide: "true"
       name: franceconnect
     type: Opaque
 ---
@@ -2583,7 +2583,7 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   annotations:
-    sealedsecrets.bitnami.com/cluster-wide: 'true'
+    sealedsecrets.bitnami.com/cluster-wide: "true"
     kontinuous/chartPath: project
     kontinuous/source: project/templates/hasura.sealed.secret.yaml
     kontinuous/deployment: template-k-mvp-mig-9-1670002715
@@ -2605,7 +2605,7 @@ spec:
   template:
     metadata:
       annotations:
-        sealedsecrets.bitnami.com/cluster-wide: 'true'
+        sealedsecrets.bitnami.com/cluster-wide: "true"
       name: hasura
     type: Opaque
 ---
@@ -2613,7 +2613,7 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   annotations:
-    sealedsecrets.bitnami.com/cluster-wide: 'true'
+    sealedsecrets.bitnami.com/cluster-wide: "true"
     kontinuous/chartPath: project
     kontinuous/source: project/templates/keycloak.sealed.secret.yaml
     kontinuous/deployment: template-k-mvp-mig-9-1670002715
@@ -2637,7 +2637,7 @@ spec:
   template:
     metadata:
       annotations:
-        sealedsecrets.bitnami.com/cluster-wide: 'true'
+        sealedsecrets.bitnami.com/cluster-wide: "true"
       name: keycloak-secrets
     type: Opaque
 ---
@@ -2645,7 +2645,7 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   annotations:
-    sealedsecrets.bitnami.com/cluster-wide: 'true'
+    sealedsecrets.bitnami.com/cluster-wide: "true"
     kontinuous/chartPath: project
     kontinuous/source: project/templates/smtp.sealed.secret.yaml
     kontinuous/deployment: template-k-mvp-mig-9-1670002715
@@ -2677,7 +2677,7 @@ spec:
   template:
     metadata:
       annotations:
-        sealedsecrets.bitnami.com/cluster-wide: 'true'
+        sealedsecrets.bitnami.com/cluster-wide: "true"
       name: smtp
     type: Opaque
 ---
@@ -2746,20 +2746,20 @@ spec:
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
+              value: "true"
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
         - name: degit-action
           image: ghcr.io/socialgouv/kontinuous/degit:v1.147.34
           command:
             - sh
-            - '-c'
+            - "-c"
             - >-
               degit SocialGouv/kontinuous/plugins/contrib/jobs/create-db#v1
               /action
@@ -2774,7 +2774,7 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
       containers:
         - name: job
@@ -2815,16 +2815,16 @@ spec:
               value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
           command:
             - /bin/bash
-            - '-c'
+            - "-c"
             - |
               set -e
               /action/ensure-db.sh
           resources:
             limits:
-              cpu: '1'
+              cpu: "1"
               memory: 512Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
           securityContext:
             runAsUser: 1000
@@ -2904,7 +2904,7 @@ spec:
           image: ghcr.io/socialgouv/kontinuous/degit:v1.147.34
           command:
             - sh
-            - '-c'
+            - "-c"
             - >-
               degit SocialGouv/kontinuous/plugins/contrib/jobs/create-db#v1
               /action
@@ -2919,7 +2919,7 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
       containers:
         - name: job
@@ -2930,7 +2930,7 @@ spec:
                 name: pg-scaleway
           env:
             - name: USE_AZURE_FLEX
-              value: 'false'
+              value: "false"
             - name: DB_SECRET_NAME
               value: hasura-db-k-mvp-mig-9
             - name: JOB_NAMESPACE
@@ -2947,16 +2947,16 @@ spec:
               value: /secrets/k8s/kubeconfig
           command:
             - /bin/bash
-            - '-c'
+            - "-c"
             - |
               set -e
               /action/create-secret.sh
           resources:
             limits:
-              cpu: '1'
+              cpu: "1"
               memory: 512Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
           securityContext:
             runAsUser: 1001
@@ -3048,20 +3048,20 @@ spec:
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
+              value: "true"
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
         - name: degit-action
           image: ghcr.io/socialgouv/kontinuous/degit:v1.147.34
           command:
             - sh
-            - '-c'
+            - "-c"
             - >-
               degit SocialGouv/kontinuous/plugins/contrib/jobs/create-db#v1
               /action
@@ -3076,7 +3076,7 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
       containers:
         - name: job
@@ -3117,16 +3117,16 @@ spec:
               value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
           command:
             - /bin/bash
-            - '-c'
+            - "-c"
             - |
               set -e
               /action/ensure-db.sh
           resources:
             limits:
-              cpu: '1'
+              cpu: "1"
               memory: 512Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
           securityContext:
             runAsUser: 1000
@@ -3206,7 +3206,7 @@ spec:
           image: ghcr.io/socialgouv/kontinuous/degit:v1.147.34
           command:
             - sh
-            - '-c'
+            - "-c"
             - >-
               degit SocialGouv/kontinuous/plugins/contrib/jobs/create-db#v1
               /action
@@ -3221,7 +3221,7 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
       containers:
         - name: job
@@ -3232,7 +3232,7 @@ spec:
                 name: pg-scaleway
           env:
             - name: USE_AZURE_FLEX
-              value: 'false'
+              value: "false"
             - name: DB_SECRET_NAME
               value: keycloak-db-k-mvp-mig-9
             - name: JOB_NAMESPACE
@@ -3249,16 +3249,16 @@ spec:
               value: /secrets/k8s/kubeconfig
           command:
             - /bin/bash
-            - '-c'
+            - "-c"
             - |
               set -e
               /action/create-secret.sh
           resources:
             limits:
-              cpu: '1'
+              cpu: "1"
               memory: 512Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
           securityContext:
             runAsUser: 1001
@@ -3350,20 +3350,20 @@ spec:
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
+              value: "true"
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
         - name: degit-action
           image: ghcr.io/socialgouv/kontinuous/degit:v1.147.34
           command:
             - sh
-            - '-c'
+            - "-c"
             - >-
               degit SocialGouv/kontinuous/plugins/contrib/jobs/seed-db#v1
               /action
@@ -3378,7 +3378,7 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
       containers:
         - name: job
@@ -3395,16 +3395,16 @@ spec:
               value: /secrets/k8s/kubeconfig
           command:
             - /bin/bash
-            - '-c'
+            - "-c"
             - |
               set -e
               /action/import-secret.sh
           resources:
             limits:
-              cpu: '1'
+              cpu: "1"
               memory: 512Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
           securityContext:
             runAsUser: 1001
@@ -3502,21 +3502,21 @@ spec:
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
+              value: "true"
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
         - name: degit-repository
           image: ghcr.io/socialgouv/kontinuous/degit:v1.147.34
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - "-c"
             - |
 
               degit SocialGouv/template#k-mvp-mig-9 \
@@ -3532,13 +3532,13 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
         - name: degit-action
           image: ghcr.io/socialgouv/kontinuous/degit:v1.147.34
           command:
             - sh
-            - '-c'
+            - "-c"
             - >-
               degit SocialGouv/kontinuous/plugins/contrib/jobs/seed-db#v1
               /action
@@ -3553,7 +3553,7 @@ spec:
               cpu: 100m
               memory: 256Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
       containers:
         - name: job
@@ -3567,16 +3567,16 @@ spec:
               value: hasura/seeds/default/books.sql
           command:
             - /bin/bash
-            - '-c'
+            - "-c"
             - |
               set -e
               /action/seed-db.sh
           resources:
             limits:
-              cpu: '1'
+              cpu: "1"
               memory: 512Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
           securityContext:
             runAsUser: 1000
@@ -3627,7 +3627,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    reloader.stakater.com/auto: 'true'
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
@@ -3701,7 +3701,7 @@ spec:
               cpu: 500m
               memory: 512Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
           envFrom:
             - configMapRef:
@@ -3736,7 +3736,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.hasura
     kontinuous/depname.resourcePath: deployment.hasura
     kontinuous/depname.resourceName: hasura
-    reloader.stakater.com/auto: 'true'
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
@@ -3787,7 +3787,7 @@ spec:
               cpu: 500m
               memory: 1280Mi
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
           startupProbe:
             failureThreshold: 30
@@ -3797,9 +3797,9 @@ spec:
             periodSeconds: 5
           env:
             - name: HASURA_GRAPHQL_ENABLE_CONSOLE
-              value: 'false'
+              value: "false"
             - name: HASURA_GRAPHQL_DEV_MODE
-              value: 'true'
+              value: "true"
             - name: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
               value: anonymous
             - name: HASURA_GRAPHQL_JWT_SECRET
@@ -4025,11 +4025,11 @@ spec:
           command:
             - sh
           args:
-            - '-c'
+            - "-c"
             - cat /realm-tpl/realm.json.envtpl | gomplate > /realm/realm.json
           resources:
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
         - name: fetch-keycloak-providers
           image: curlimages/curl
@@ -4037,7 +4037,7 @@ spec:
           command:
             - sh
           args:
-            - '-c'
+            - "-c"
             - >-
               curl -L -f -S -o /providers/keycloak-dsfr-latest.jar
               https://github.com/SocialGouv/keycloak-dsfr/releases/latest/download/keycloak-theme.jar
@@ -4048,7 +4048,7 @@ spec:
               mountPath: /providers
           resources:
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
       containers:
         - name: keycloak
@@ -4060,11 +4060,11 @@ spec:
           command:
             - /opt/keycloak/bin/kc.sh
             - start
-            - '--http-enabled=true'
-            - '--http-port=8080'
-            - '--hostname-strict=true'
-            - '--hostname-strict-https=true'
-            - '--import-realm'
+            - "--http-enabled=true"
+            - "--http-port=8080"
+            - "--hostname-strict=true"
+            - "--hostname-strict-https=true"
+            - "--import-realm"
           args: []
           env:
             - name: KC_HTTP_RELATIVE_PATH
@@ -4074,7 +4074,7 @@ spec:
             - name: KC_DB
               value: postgres
             - name: KC_METRICS_ENABLED
-              value: 'true'
+              value: "true"
             - name: KC_DB_URL_HOST
               value: $(PGHOST)
             - name: KC_DB_URL_PORT
@@ -4123,7 +4123,7 @@ spec:
             periodSeconds: 5
           resources:
             requests:
-              cpu: '0.081'
+              cpu: "0.081"
               memory: 227.555Mi
           volumeMounts:
             - name: keycloak-realm

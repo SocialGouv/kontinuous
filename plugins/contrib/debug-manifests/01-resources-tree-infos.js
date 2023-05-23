@@ -43,6 +43,19 @@ const getContainerTree = (container, label) => {
   }
 }
 
+const getPodTree = (name, podSpec) => {
+  const { initContainers, containers } = podSpec
+  return {
+    name,
+    children: [
+      ...(initContainers
+        ? initContainers.map((container) => getContainerTree(container, "init"))
+        : []),
+      ...(containers ? containers.map(getContainerTree) : []),
+    ],
+  }
+}
+
 const getTreeInfos = {}
 
 getTreeInfos.default = (resource) => {
@@ -87,12 +100,8 @@ getTreeInfos.Ingress = (resource) => {
 
 getTreeInfos.Deployment = (resource) => {
   const { manifest } = resource
-  const containers = manifest.spec?.template?.spec?.containers || []
-  const initContainers = manifest.spec?.template?.spec?.initContainers || []
-  return [
-    ...containers.map(getContainerTree),
-    ...initContainers.map((container) => getContainerTree(container, "init")),
-  ]
+  return getPodTree(manifest.metadata.name, manifest.spec?.template?.spec)
+    .children
 }
 
 getTreeInfos.Service = (resource) => {
@@ -123,30 +132,20 @@ getTreeInfos.SealedSecret = (resource) => {
 
 getTreeInfos.Job = (resource) => {
   const { manifest } = resource
-  const containers = manifest.spec?.template?.spec?.containers
-  const initContainers = manifest.spec?.template?.spec?.initContainers
-  return [
-    ...(containers ? containers.map(getContainerTree) : []),
-    ...(initContainers
-      ? initContainers.map((container) => getContainerTree(container, "init"))
-      : []),
-  ]
+  return [getPodTree(manifest.metadata.name, manifest.spec?.template?.spec)]
 }
 
 getTreeInfos.CronJob = (resource) => {
   const { manifest } = resource
-  const containers =
-    manifest.spec?.jobTemplate?.spec?.template?.spec?.containers
-  const initContainers =
-    manifest.spec?.jobTemplate?.spec?.template?.spec?.initContainers
+  const { children } = getPodTree(
+    manifest.metadata.name,
+    manifest.spec?.jobTemplate?.spec?.template?.spec
+  )
   return [
-    { name: `schedule: ${manifest.spec.schedule}` },
-    ...(containers
-      ? containers.map((container) => getContainerTree(container))
-      : []),
-    ...(initContainers
-      ? initContainers.map((container) => getContainerTree(container, "init"))
-      : []),
+    {
+      name: manifest.metadata.name,
+      children: [{ name: `schedule: ${manifest.spec.schedule}` }, ...children],
+    },
   ]
 }
 
