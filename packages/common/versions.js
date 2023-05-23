@@ -6,7 +6,7 @@ module.exports = {
   kubectl: "1.27.1",
 
   // renovate: datasource=github-releases depName=socialgouv/rollout-status
-  rolloutStatus: "1.13.4",
+  rolloutStatus: "1.13.5",
 
   // renovate: datasource=github-releases depName=stern/stern
   stern: "1.25.0",

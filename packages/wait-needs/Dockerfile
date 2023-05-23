@@ -10,7 +10,7 @@ RUN apt-get update && \
 
 FROM downloader as rollout-status
 # renovate: datasource=github-releases depName=socialgouv/rollout-status
-ARG ROLLOUT_STATUS_VERSION=1.13.4
+ARG ROLLOUT_STATUS_VERSION=1.13.5
 ENV ROLLOUT_STATUS_VERSION=$ROLLOUT_STATUS_VERSION
 RUN curl --fail -sL https://github.com/socialgouv/rollout-status/releases/download/v${ROLLOUT_STATUS_VERSION}/rollout-status-v${ROLLOUT_STATUS_VERSION}-linux-amd64 > /tmp/rollout-status \
   && mv /tmp/rollout-status /usr/local/bin/rollout-status \
