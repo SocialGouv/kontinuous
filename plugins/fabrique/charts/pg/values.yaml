@@ -3,7 +3,8 @@ cnpg-cluster:
   fullnameOverride: cnpg-cluster
   nameOverride: cnpg-cluster
   dbSecretName: cnpg-cluster-app
-  ~needs: [jobs-pg]
+  ~tpl~~needs: |
+    - {{ .Values.kontinuous.parentChart }}.jobs-pg
   ~tpl~dbOwner: "{{ .Values.global.pgUser }}"
   ~tpl~dbName: "{{ .Values.global.pgDatabase }}"
   ~tpl~instances: "{{ if (or .Values.global.isProd .Values.global.isPreprod) }}3{{else}}1{{end}}"
