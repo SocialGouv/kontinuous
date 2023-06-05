@@ -45,7 +45,7 @@ module.exports = async (opts) => {
           continue
         }
         test(`generate manifests for env: ${environment}`, async (end) => {
-          await nctx.fork(async () => {
+          await nctx.fork([ctx], async () => {
             const rootConfig = {
               environment,
               gitBranch: "master",
@@ -89,7 +89,7 @@ module.exports = async (opts) => {
             } catch (err) {
               end(err)
             }
-          }, [ctx])
+          })
         })
       }
     })
