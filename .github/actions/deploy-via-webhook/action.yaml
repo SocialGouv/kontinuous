@@ -19,6 +19,12 @@ inputs:
   projectName:
     description: "projectName for kontinuous, usually the rancher project name"
     default: ""
+  inlineConfig:
+    description: "Set config values using yaml format"
+    default: ""
+  configSet:
+    description: "Set config values using dot notation. eg: my.config.key=value,another.config.key=value2"
+    default: ""
 
 runs:
   using: docker
@@ -33,3 +39,5 @@ runs:
     KS_IGNORE_PROJECT_TEMPLATES: ${{ inputs.ignoreProjectTemplates }}
     KS_DEPLOY_WRITE_OUTPUT_FILE: ${{ inputs.deployWriteOutputFile }}
     KS_PROJECT_NAME: ${{ inputs.projectName }}
+    KS_INLINE_CONFIG: ${{ inputs.inlineConfig }}
+    KS_INLINE_CONFIG_SET: ${{ inputs.configSet }}
