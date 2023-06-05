@@ -13,14 +13,15 @@ module.exports = (manifests, options, context) => {
     if (!annotations) {
       continue
     }
-    const jsonNeeds = annotations["kontinuous/plugin.needs"]
+    const yamlNeeds = annotations["kontinuous/plugin.needs"]
     if (!kindIsWaitable(kind, options.customWaitableKinds)) {
       continue
     }
-    if (!jsonNeeds) {
+    if (!yamlNeeds) {
       continue
     }
-    const needs = JSON.parse(jsonNeeds)
+    const { yaml } = utils
+    const needs = yaml.load(yamlNeeds)
     const dependantName = getDepName(manifest)
     for (const need of needs) {
       const matchingDeps = deps[need]

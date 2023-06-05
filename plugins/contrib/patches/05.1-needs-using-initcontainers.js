@@ -21,7 +21,7 @@ module.exports = async (manifests, options, context) => {
       continue
     }
 
-    const jsonNeeds = annotations["kontinuous/plugin.needs"]
+    const yamlNeeds = annotations["kontinuous/plugin.needs"]
     // if (annotations["kontinuous/plugin.needs"]) {
     //   delete annotations["kontinuous/plugin.needs"]
     // }
@@ -30,10 +30,11 @@ module.exports = async (manifests, options, context) => {
       continue
     }
 
-    if (!jsonNeeds) {
+    if (!yamlNeeds) {
       continue
     }
-    const needs = JSON.parse(jsonNeeds)
+    const { yaml } = utils
+    const needs = yaml.load(yamlNeeds)
     const needsManifests = new Set()
     for (const need of needs) {
       const matchingDeps = deps[need]
