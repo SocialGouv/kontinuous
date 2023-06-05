@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.148.0](https://github.com/socialgouv/kontinuous/compare/v1.147.36...v1.148.0) (2023-06-05)
+
+
+### Features
+
+* override inline config in gh actions ([4241ccd](https://github.com/socialgouv/kontinuous/commit/4241ccd7786c96e93bd82efc5c5c53a58982705d))
+
 ## [1.147.36](https://github.com/socialgouv/kontinuous/compare/v1.147.35...v1.147.36) (2023-05-23)
 
 
