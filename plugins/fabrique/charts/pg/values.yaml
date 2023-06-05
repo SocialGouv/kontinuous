@@ -1,8 +1,10 @@
+instanceName:
+
 cnpg-cluster:
   enabled: true
-  fullnameOverride: cnpg-cluster
-  nameOverride: cnpg-cluster
-  dbSecretName: cnpg-cluster-app
+  ~tpl~fullnameOverride: "{{ or .Values.instanceName (index .Values.kontinuous.chartContext 2) }}"
+  ~tpl~nameOverride: "{{ or .Values.instanceName (index .Values.kontinuous.chartContext 2) }}"
+  dbSecretName: "{{ or .Values.instanceName (index .Values.kontinuous.chartContext 2) }}-app"
   ~tpl~~needs: |
     - {{ .Values.kontinuous.parentChart }}.jobs-pg
   ~tpl~dbOwner: "{{ .Values.global.pgUser }}"
@@ -43,3 +45,6 @@ jobs-pg:
   runs:
     create-secrets:
       use: cnpg-create-secrets
+      with:
+        ~tpl~pgSecretName: "{{ or .Values.instanceName (index .Values.kontinuous.chartContext 2) }}-app"
+        ~tpl~cnpgDbSecretName: "{{ or .Values.instanceName (index .Values.kontinuous.chartContext 2) }}-db"
