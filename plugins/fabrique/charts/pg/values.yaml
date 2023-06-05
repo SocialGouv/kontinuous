@@ -2,9 +2,10 @@ instanceName:
 
 cnpg-cluster:
   enabled: true
+  fullnameOverride: test-cluster
   ~tpl~fullnameOverride: "{{ or .Values.instanceName (index .Values.kontinuous.chartContext 2) }}"
   ~tpl~nameOverride: "{{ or .Values.instanceName (index .Values.kontinuous.chartContext 2) }}"
-  dbSecretName: "{{ or .Values.instanceName (index .Values.kontinuous.chartContext 2) }}-app"
+  ~tpl~dbSecretName: "{{ or .Values.instanceName (index .Values.kontinuous.chartContext 2) }}-app"
   ~tpl~~needs: |
     - {{ .Values.kontinuous.parentChart }}.jobs-pg
   ~tpl~dbOwner: "{{ .Values.global.pgUser }}"
