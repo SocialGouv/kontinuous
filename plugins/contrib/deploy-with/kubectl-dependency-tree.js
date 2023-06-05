@@ -176,15 +176,15 @@ module.exports = async (options, context) => {
       return
     }
 
-    const jsonNeeds = annotations["kontinuous/plugin.needs"]
+    const yamlNeeds = annotations["kontinuous/plugin.needs"]
 
     if (!kindIsWaitable(kind, options.customWaitableKinds)) {
       return
     }
-    if (!jsonNeeds) {
+    if (!yamlNeeds) {
       return
     }
-    const needs = JSON.parse(jsonNeeds)
+    const needs = yaml.load(yamlNeeds)
     const needsManifests = new Set()
     for (const need of needs) {
       const matchingDeps = deps[need]
