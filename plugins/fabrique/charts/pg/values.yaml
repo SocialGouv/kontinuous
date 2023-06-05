@@ -1,11 +1,9 @@
-instanceName:
-
 cnpg-cluster:
   enabled: true
   fullnameOverride: test-cluster
-  ~tpl~fullnameOverride: "{{ or .Values.instanceName (index .Values.kontinuous.chartContext 2) }}"
-  ~tpl~nameOverride: "{{ or .Values.instanceName (index .Values.kontinuous.chartContext 2) }}"
-  ~tpl~dbSecretName: "{{ or .Values.instanceName (index .Values.kontinuous.chartContext 2) }}-app"
+  ~tpl~fullnameOverride: "{{ index .Values.kontinuous.chartContext 2 }}"
+  ~tpl~nameOverride: "{{ index .Values.kontinuous.chartContext 2 }}"
+  ~tpl~dbSecretName: "{{ index .Values.kontinuous.chartContext 2 }}-app"
   ~tpl~~needs: |
     - {{ .Values.kontinuous.parentChart }}.jobs-pg
   ~tpl~dbOwner: "{{ .Values.global.pgUser }}"
@@ -47,5 +45,5 @@ jobs-pg:
     create-secrets:
       use: cnpg-create-secrets
       with:
-        ~tpl~pgSecretName: "{{ or .Values.instanceName (index .Values.kontinuous.chartContext 2) }}-app"
-        ~tpl~cnpgDbSecretName: "{{ or .Values.instanceName (index .Values.kontinuous.chartContext 2) }}-db"
+        ~tpl~pgSecretName: "{{ index .Values.kontinuous.chartContext 2 }}-app"
+        ~tpl~cnpgDbSecretName: "{{ index .Values.kontinuous.chartContext 2 }}-db"
