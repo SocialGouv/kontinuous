@@ -24,15 +24,7 @@ runs:
     env:
       - name: BUILDKITD_FLAGS
         value: --oci-worker-no-process-sandbox
-      {{ if $.with.secrets -}}
-      {{- range $id, $val := $.with.secrets -}}
-      - name: SECRET_{{ (or $val.src ($id | upper )) | quote }}
-        valueFrom:
-          secretKeyRef:
-            key: {{ (or $val.secretKey ($id | upper)) | quote }}
-            name: {{ $val.secretName | quote }}
-      {{ end -}}
-      {{ end -}}
+    secrets: "{{ $.with.secrets | toJson }}"
     volumes:
       - name: buildkitd
         emptyDir: {}
@@ -66,7 +58,7 @@ runs:
         {{ end -}}
         {{ if $.with.secrets -}}
         {{- range $id, $val := $.with.secrets -}}
-        --secret id={{ or ($val.id $id) }},src=$SECRET_{{ or $val.src ($id | upper) }},env={{ or $val.env ($id | upper) }} \
+        --secret id={{ or $val.id $id }},src=$SECRET_{{ or $val.src ($id | upper) }},env={{ or $val.env ($id | upper) }} \
         {{ end -}}
         {{ end -}}
         {{ if $.with.target -}}
