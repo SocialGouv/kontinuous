@@ -181,7 +181,7 @@ spec:
               value: "/kontinuous-input"
             {{ if $run.secrets }}
             {{ range $id, $val := ((tpl $run.secrets $) | fromJson) }}
-            - name: "SECRET_{{ or $val.src ($id | upper) }}"
+            - name: "SECRET_{{ $id | upper }}"
               valueFrom:
                 secretKeyRef:
                   name: {{ $val.secretName | quote }}

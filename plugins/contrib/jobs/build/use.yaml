@@ -58,7 +58,7 @@ runs:
         {{ end -}}
         {{ if $.with.secrets -}}
         {{- range $id, $val := $.with.secrets -}}
-        --secret id={{ or $val.id $id }},src=$SECRET_{{ or $val.src ($id | upper) }},env={{ or $val.env ($id | upper) }} \
+        --secret id={{ or $val.id $id }},env=SECRET_{{ id | upper }} \
         {{ end -}}
         {{ end -}}
         {{ if $.with.target -}}
