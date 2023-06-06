@@ -166,7 +166,7 @@ spec:
             - name: HBA_DATABASE
               value: \\"*\\"
             - name: HBA_HOST
-              value: \\"*:5432\\"
+              value: cluster-app1-rw
             - name: HBA_USER
               value: \\"*\\"
             - name: NAMESPACE
@@ -174,7 +174,7 @@ spec:
             - name: PGDATABASE
               value: autodevops_feature-branch-1
             - name: PGHOST
-              value: cnpg-cluster-rw
+              value: cluster-app1-rw
             - name: PGPORT
               value: \\"5432\\"
             - name: PGUSER
@@ -315,7 +315,7 @@ spec:
             - name: HBA_DATABASE
               value: \\"*\\"
             - name: HBA_HOST
-              value: \\"*:5432\\"
+              value: cluster-app2-rw
             - name: HBA_USER
               value: \\"*\\"
             - name: NAMESPACE
@@ -323,7 +323,7 @@ spec:
             - name: PGDATABASE
               value: autodevops_feature-branch-1
             - name: PGHOST
-              value: cnpg-cluster-rw
+              value: cluster-app2-rw
             - name: PGPORT
               value: \\"5432\\"
             - name: PGUSER
