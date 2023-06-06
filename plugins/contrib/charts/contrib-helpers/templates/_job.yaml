@@ -179,6 +179,15 @@ spec:
               value: "/kontinuous-output"
             - name: "KONTINUOUS_INPUT"
               value: "/kontinuous-input"
+            {{ if $run.secrets }}
+            {{ range $id, $val := ((tpl $run.secrets $) | fromJson) }}
+            - name: "SECRET_{{ or $val.src ($id | upper) }}"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $val.secretName | quote }}
+                  key: {{ (or $val.secretKey ($id | upper)) | quote }}
+            {{ end }}
+            {{ end }}
 
           {{- if or $run.entrypoint $run.run $run.action }}
           command:

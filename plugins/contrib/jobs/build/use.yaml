@@ -24,6 +24,7 @@ runs:
     env:
       - name: BUILDKITD_FLAGS
         value: --oci-worker-no-process-sandbox
+    secrets: "{{ $.with.secrets | toJson }}"
     volumes:
       - name: buildkitd
         emptyDir: {}
@@ -55,8 +56,13 @@ runs:
         --opt build-arg:"{{ tpl $key $ }}={{ tpl (print $val) $ }}" \
         {{ end -}}
         {{ end -}}
+        {{ if $.with.secrets -}}
+        {{- range $id, $val := $.with.secrets -}}
+        --secret id={{ or $val.id $id }},src=$SECRET_{{ or $val.src ($id | upper) }},env={{ or $val.env ($id | upper) }} \
+        {{ end -}}
+        {{ end -}}
         {{ if $.with.target -}}
         --target="{{ $.with.target }}" \
-        {{ end -}}  
+        {{ end -}}
       
       echo "$IMAGE_PATH:{{ or $.with.imageTag $.Values.global.imageTag }}" >$KONTINUOUS_OUTPUT/IMAGE
