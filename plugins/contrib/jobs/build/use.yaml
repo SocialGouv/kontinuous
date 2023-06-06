@@ -24,6 +24,15 @@ runs:
     env:
       - name: BUILDKITD_FLAGS
         value: --oci-worker-no-process-sandbox
+      {{ if $.with.secrets -}}
+      {{- range $id, $val := $.with.secrets -}}
+      - name: {{ (or $val.src ($id | upper )) | quote }}
+        valueFrom:
+          secretKeyRef:
+            key: {{ (or $val.secretKey ($id | upper)) | quote }}
+            name: {{ $val.secretName | quote }}
+      {{ end -}}
+      {{ end -}}
     volumes:
       - name: buildkitd
         emptyDir: {}
@@ -55,8 +64,13 @@ runs:
         --opt build-arg:"{{ tpl $key $ }}={{ tpl (print $val) $ }}" \
         {{ end -}}
         {{ end -}}
+        {{ if $.with.secrets -}}
+        {{- range $id, $val := $.with.secrets -}}
+        --secret id={{ $id }},src={{ or $val.src ($id | upper) }},env={{ or $val.env ($id | upper) }} \
+        {{ end -}}
+        {{ end -}}
         {{ if $.with.target -}}
         --target="{{ $.with.target }}" \
-        {{ end -}}  
+        {{ end -}}
       
       echo "$IMAGE_PATH:{{ or $.with.imageTag $.Values.global.imageTag }}" >$KONTINUOUS_OUTPUT/IMAGE
