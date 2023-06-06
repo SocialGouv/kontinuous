@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.150.0 (2023-06-06)
+
+
+### Features
+
+* build using secret ([#324](https://github.com/socialgouv/kontinuous/issues/324)) ([fbfed4a](https://github.com/socialgouv/kontinuous/commit/fbfed4ab9591edd57b1e4a6318a9b04757959e3f))
+
 ## 1.149.0 (2023-06-05)
 
 
