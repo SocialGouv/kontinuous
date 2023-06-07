@@ -44,6 +44,7 @@ module.exports = {
   gitEnv: require("./git-env"),
   gitSshCommand: require("./git-ssh-command"),
   graphEasyExists: require("./graph-easy-exists"),
+  handleAxiosError: require("./handle-axios-error"),
   ignoreYarnState: require("./ignore-yarn-state"),
   indent: require("./indent"),
   isAbortError: require("./is-abort-error"),
