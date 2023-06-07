@@ -10,7 +10,7 @@ else
   kubectl -n $NAMESPACE create secret generic $CNPG_DB_SECRET_NAME \
     --from-literal="username=$PGUSER" \
     --from-literal="password=$PGPASSWORD" \
-    --from-literal="pgpass=*:*:$HBA_DATABASE:$HBA_USER:*"
+    --from-literal="pgpass=$HBA_HOST:*:$HBA_DATABASE:$HBA_USER:*"
 fi
 
 if [ -n "$(kubectl -n $NAMESPACE get secret $APP_DB_SECRET_NAME 2>/dev/null)" ]; then
