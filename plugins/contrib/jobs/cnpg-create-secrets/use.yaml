@@ -13,7 +13,7 @@ runs:
       PGUSER: "{{ tpl (or $.with.pgUser $.Values.global.pgUser) . }}"
       PGHOST: "{{ tpl (or $.with.pgHost `cnpg-cluster-rw`) . }}"
       PGPORT: "{{ tpl (or $.with.pgPort `5432`) . }}"
-      HBA_HOST: "{{ tpl (or $.with.hbaHost $.with.pgHost `*:5432`) . }}"
+      HBA_HOST: "{{ tpl (or $.with.hbaHost $.with.pgHost `*`) . }}"
       HBA_DATABASE: "{{ tpl (or $.with.hbaDatabase `*`) . }}"
       HBA_USER: "{{ tpl (or $.with.hbaUser `*`) . }}"
     run: /action/create-secrets.sh
