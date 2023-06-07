@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.151.0 (2023-06-07)
+
+
+### Features
+
+* pg multi instances abstract ([#323](https://github.com/socialgouv/kontinuous/issues/323)) ([e6ee3a4](https://github.com/socialgouv/kontinuous/commit/e6ee3a456dd826789045e604366596846731f7bc))
+
 ## [1.150.2](https://github.com/socialgouv/kontinuous/compare/v1.150.1...v1.150.2) (2023-06-06)
 
 
