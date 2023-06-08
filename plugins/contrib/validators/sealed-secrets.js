@@ -13,6 +13,7 @@ module.exports = async (manifests, options, context) => {
       ;({ kubesealEndpoint } = cluster)
     }
   }
+
   if (!kubesealEndpoint) {
     throw new KontinuousPluginError(
       `missing "kubesealEndpoint" required option`
@@ -37,7 +38,9 @@ module.exports = async (manifests, options, context) => {
               { endpoint, namespace, secretName },
               `🔑 kubeseal verifying "${secretName}"`
             )
-            await axios.post(endpoint, content)
+            await axios.post(endpoint, content, {
+              headers: { "Content-Type": "application/json" },
+            })
             logger.debug(
               { endpoint, namespace },
               `🔐 ${manifest.metadata.name} is sealed properly`
