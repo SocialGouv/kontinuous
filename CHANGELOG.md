@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.151.1 (2023-06-08)
+
+
+### Bug Fixes
+
+* **pg:** fix dbSecretName ([#328](https://github.com/socialgouv/kontinuous/issues/328)) ([44aea1c](https://github.com/socialgouv/kontinuous/commit/44aea1ca50d06793117d34de1aef6bfe354e6b60))
+
 ## 1.151.0 (2023-06-07)
 
 
