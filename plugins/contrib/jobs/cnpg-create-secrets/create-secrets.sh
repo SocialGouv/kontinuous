@@ -2,6 +2,9 @@
 
 set -e
 
+# create default CNPG database password
+# https://www.postgresql.org/docs/15/libpq-pgpass.html
+# hostname:port:database:username:password
 if [ -n "$(kubectl -n $NAMESPACE get secret $CNPG_DB_SECRET_NAME 2>/dev/null)" ]; then
   echo "cnpg db secret secret named '$CNPG_DB_SECRET_NAME' already exists in namespace '$NAMESPACE'"
 else
@@ -10,9 +13,10 @@ else
   kubectl -n $NAMESPACE create secret generic $CNPG_DB_SECRET_NAME \
     --from-literal="username=$PGUSER" \
     --from-literal="password=$PGPASSWORD" \
-    --from-literal="pgpass=$HBA_HOST:$HBA_DATABASE:$HBA_USER:*"
+    --from-literal="pgpass=$HBA_HOST:*:$HBA_DATABASE:$HBA_USER:*"
 fi
 
+# create standard secret for the application
 if [ -n "$(kubectl -n $NAMESPACE get secret $APP_DB_SECRET_NAME 2>/dev/null)" ]; then
   echo "app db secret named '$APP_DB_SECRET_NAME' already exists in namespace '$NAMESPACE'"
 else
