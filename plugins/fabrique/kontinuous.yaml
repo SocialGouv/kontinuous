@@ -1,4 +1,7 @@
 patches:
+  setUndefinedStorageClassname:
+    options:
+      defaultStorageClassName: "azurefile"
   setUndefinedStorageClassnameCnpg:
     options:
       defaultStorageClassName: "azurefile"
