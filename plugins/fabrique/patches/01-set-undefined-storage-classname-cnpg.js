@@ -3,16 +3,14 @@ module.exports = (manifests, options) => {
   if (!defaultStorageClassName) {
     return
   }
-  const pvcManifests = manifests.filter(
-    (m) => m.kind === "PersistentVolumeClaim"
-  )
-  const undefinedStorageClassPvcManifests = pvcManifests.filter(
+  const clusterManifests = manifests.filter((m) => m.kind === "Cluster")
+  const undefinedStorageClassManifests = clusterManifests.filter(
     (m) =>
-      m.spec.storageClassName === undefined ||
-      m.spec.storageClassName === null ||
-      m.spec.storageClassName === ""
+      m.spec.storage?.storageClass === undefined ||
+      m.spec.storage?.storageClass === null ||
+      m.spec.storage?.storageClass === ""
   )
-  for (const manifest of undefinedStorageClassPvcManifests) {
-    manifest.spec.storageClassName = defaultStorageClassName
+  for (const manifest of undefinedStorageClassManifests) {
+    manifest.spec.storage.storageClass = defaultStorageClassName
   }
 }
