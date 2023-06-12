@@ -1,26 +1,24 @@
-dependencies:
-  fabrique:
-    valuesCompilers:
-      globalDefaults:
-        options:
-          devDomain: ovh.fabrique.social.gouv.fr
-    patches:
-      setUndefinedStorageClassname:
-        options:
-          defaultStorageClassName: ""
-      setUndefinedStorageClassnameCnpg:
-        options:
-          defaultStorageClassName: csi-cinder-high-speed
+valuesCompilers:
+  globalDefaults:
+    options:
+      devDomain: ovh.fabrique.social.gouv.fr
+patches:
+  setUndefinedStorageClassname:
+    options:
+      defaultStorageClassName: ""
+  setUndefinedStorageClassnameCnpg:
+    options:
+      defaultStorageClassName: csi-cinder-high-speed
 
-    dependencies:
-      contrib:
-        validators:
-          sealedSecrets:
-            options:
-              clusters:
-                dev:
-                  kubesealEndpoint: "https://kubeseal.ovh.fabrique.social.gouv.fr"
-        patches:
-          certs:
-            options:
-              wildcardHost: ".ovh.fabrique.social.gouv.fr"
+dependencies:
+  contrib:
+    validators:
+      sealedSecrets:
+        options:
+          clusters:
+            dev:
+              kubesealEndpoint: "https://kubeseal.ovh.fabrique.social.gouv.fr"
+    patches:
+      certs:
+        options:
+          wildcardHost: ".ovh.fabrique.social.gouv.fr"
