@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.152.0 (2023-06-12)
+
+
+### Features
+
+* **valueCompilers:** add devDomain ([#330](https://github.com/socialgouv/kontinuous/issues/330)) ([f32f17f](https://github.com/socialgouv/kontinuous/commit/f32f17fa257ee3057796d692adda9724ec740e85))
+
 ## 1.151.1 (2023-06-08)
 
 
