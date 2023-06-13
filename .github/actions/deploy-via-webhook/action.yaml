@@ -29,7 +29,7 @@ inputs:
 runs:
   using: docker
   # image: Dockerfile
-  image: docker://ghcr.io/socialgouv/kontinuous/deploy-via-webhook:v1.153.1
+  image: docker://ghcr.io/socialgouv/kontinuous/deploy-via-webhook:v1.153.2
   env:
     KS_WEBHOOK_TOKEN: ${{ inputs.webhookToken }}
     KS_WEBHOOK_URI: ${{ inputs.webhookUri }}

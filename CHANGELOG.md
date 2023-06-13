@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.153.2](https://github.com/socialgouv/kontinuous/compare/v1.153.1...v1.153.2) (2023-06-13)
+
+
+### Bug Fixes
+
+* hotfix degit user ([df33667](https://github.com/socialgouv/kontinuous/commit/df3366744cdfb749f625f4006ff661f4eadde2fa))
+
 ## 1.153.1 (2023-06-13)
 
 
