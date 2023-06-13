@@ -4,7 +4,7 @@ patches:
       defaultStorageClassName: "azurefile"
   setUndefinedStorageClassnameCnpg:
     options:
-      defaultStorageClassName: "azurefile"
+      defaultStorageClassName: "managed-csi"
 
 dependencies:
   contrib:
