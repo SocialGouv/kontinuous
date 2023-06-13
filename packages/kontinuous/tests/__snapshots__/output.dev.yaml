@@ -167,7 +167,7 @@ spec:
             - -c
             - |
               
-              degit kontinuous/test-output#feature-branch-1 \\\\
+              degit --disable-cache kontinuous/test-output#feature-branch-1 \\\\
                 /workspace
           securityContext:
             runAsUser: 1000
@@ -290,7 +290,7 @@ spec:
             - -c
             - |
               
-              degit kontinuous/test-output#feature-branch-1 \\\\
+              degit --disable-cache kontinuous/test-output#feature-branch-1 \\\\
                 /workspace
           securityContext:
             runAsUser: 1000

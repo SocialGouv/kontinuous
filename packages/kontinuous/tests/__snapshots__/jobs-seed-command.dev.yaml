@@ -140,7 +140,8 @@ spec:
           command:
             - sh
             - -c
-            - degit socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
+            - degit --disable-cache
+              socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -288,7 +289,8 @@ spec:
           command:
             - sh
             - -c
-            - degit socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
+            - degit --disable-cache
+              socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

@@ -139,9 +139,9 @@ spec:
           command:
             - sh
             - -c
-            - |
+            - >
               
-              degit kontinuous/test-include-file#feature-branch-1 \\\\
+              degit --disable-cache kontinuous/test-include-file#feature-branch-1 \\\\
                 /workspace
           securityContext:
             runAsUser: 1000

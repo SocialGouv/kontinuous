@@ -140,9 +140,9 @@ spec:
           command:
             - sh
             - -c
-            - |
+            - >
               
-              degit kontinuous/test-values-extends#feature-branch-1 \\\\
+              degit --disable-cache kontinuous/test-values-extends#feature-branch-1 \\\\
                 /workspace
           securityContext:
             runAsUser: 1000

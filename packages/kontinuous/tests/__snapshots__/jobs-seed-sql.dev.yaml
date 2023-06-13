@@ -140,7 +140,8 @@ spec:
           command:
             - sh
             - -c
-            - degit socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
+            - degit --disable-cache
+              socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -288,7 +289,8 @@ spec:
           command:
             - sh
             - -c
-            - degit socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
+            - degit --disable-cache
+              socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -434,9 +436,9 @@ spec:
           command:
             - sh
             - -c
-            - |
+            - >
               
-              degit kontinuous/test-jobs-seed-sql#feature-branch-1 \\\\
+              degit --disable-cache kontinuous/test-jobs-seed-sql#feature-branch-1 \\\\
                 /workspace
           securityContext:
             runAsUser: 1000
@@ -456,7 +458,8 @@ spec:
           command:
             - sh
             - -c
-            - degit socialgouv/kontinuous/plugins/contrib/jobs/seed-db /action
+            - degit --disable-cache
+              socialgouv/kontinuous/plugins/contrib/jobs/seed-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

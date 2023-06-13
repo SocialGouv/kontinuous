@@ -103,10 +103,10 @@ spec:
             - |
               {{ if .Values.deployKey.enabled }}
               export GIT_SSH_COMMAND="ssh -i /secrets/ssh/deploy-key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-              degit --verbose --mode=git {{ or $val.repository $val.global.repository }}#{{ or $val.gitBranch $val.global.gitBranch }} \
+              degit --disable-cache --verbose --mode=git {{ or $val.repository $val.global.repository }}#{{ or $val.gitBranch $val.global.gitBranch }} \
                 /workspace
               {{ else }}
-              degit {{ or $val.repository $val.global.repository }}#{{ or $val.gitBranch $val.global.gitBranch }} \
+              degit --disable-cache {{ or $val.repository $val.global.repository }}#{{ or $val.gitBranch $val.global.gitBranch }} \
                 /workspace
               {{ end }}
           securityContext:
@@ -134,7 +134,7 @@ spec:
           command:
             - sh
             - -c
-            - degit {{ $run.action | replace "@" "#" }} /action
+            - degit --disable-cache {{ $run.action | replace "@" "#" }} /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

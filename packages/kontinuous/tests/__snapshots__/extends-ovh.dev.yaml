@@ -138,7 +138,7 @@ spec:
           command:
             - sh
             - -c
-            - degit
+            - degit --disable-cache
               socialgouv/kontinuous/plugins/contrib/jobs/cnpg-create-secrets
               /action
           securityContext:
@@ -287,7 +287,7 @@ spec:
           command:
             - sh
             - -c
-            - degit
+            - degit --disable-cache
               socialgouv/kontinuous/plugins/contrib/jobs/cnpg-create-secrets
               /action
           securityContext:
