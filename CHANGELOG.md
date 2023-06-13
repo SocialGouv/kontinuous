@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.153.1 (2023-06-13)
+
+
+### Bug Fixes
+
+* opti tiged image ([#333](https://github.com/socialgouv/kontinuous/issues/333)) ([f9cbd3d](https://github.com/socialgouv/kontinuous/commit/f9cbd3d6b9f47fce4da1af5fb6f4ba7b41e9c626))
+
 ## 1.153.0 (2023-06-13)
 
 
