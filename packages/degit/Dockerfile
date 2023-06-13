@@ -2,7 +2,7 @@
 ARG UBUNTU_VERSION=22.04
 FROM ubuntu:$UBUNTU_VERSION as base
 
-RUN groupadd -g 1001 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1001 ubuntu
+RUN groupadd -g 1000 ubuntu && useradd -rm -d /home/ubuntu -s /bin/bash -g ubuntu -G sudo -u 1000 ubuntu
 
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
@@ -21,4 +21,4 @@ RUN curl https://nodejs.org/dist/v$NODE_VERSION/$NODE_PACKAGE.tar.gz | tar -xzC 
 
 RUN npm i -g tiged
 
-USER 1001
+USER 1000
