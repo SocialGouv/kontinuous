@@ -1,5 +1,8 @@
 module.exports = (manifests, options) => {
-  const { defaultStorageClassName = "azurefile" } = options
+  const { defaultStorageClassName } = options
+  if (!defaultStorageClassName) {
+    return
+  }
   const pvcManifests = manifests.filter(
     (m) => m.kind === "PersistentVolumeClaim"
   )

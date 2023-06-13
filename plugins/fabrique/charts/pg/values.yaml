@@ -23,7 +23,6 @@ cnpg-cluster:
   monitoring:
     ~tpl~enablePodMonitor: "{{ if (or .Values.global.isProd .Values.global.isPreprod) }}true{{else}}false{{end}}"
   persistence:
-    storageClass: "managed-csi"
     size: 8Gi
     # pvcTemplate:
   image:

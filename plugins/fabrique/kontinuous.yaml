@@ -1,3 +1,11 @@
+patches:
+  setUndefinedStorageClassname:
+    options:
+      defaultStorageClassName: "azurefile"
+  setUndefinedStorageClassnameCnpg:
+    options:
+      defaultStorageClassName: "managed-csi"
+
 dependencies:
   contrib:
     import: socialgouv/kontinuous/plugins/contrib
