@@ -11,7 +11,11 @@ module.exports = async (values, options, { config, utils }) => {
   const isPreProd = env === "preprod"
   const isDev = !(isProd || isPreProd)
 
-  const { domain: defaultRootDomain, registry } = options
+  const {
+    domain: defaultRootDomain,
+    devDomain: defaultDevDomain,
+    registry,
+  } = options
 
   const imageProject = registry === "ghcr.io" ? "socialgouv" : projectName || ""
 
@@ -27,7 +31,9 @@ module.exports = async (values, options, { config, utils }) => {
 
   const ttl = isDev ? (isRenovate ? "1d" : "7d") : ""
 
-  const domain = isProd ? defaultRootDomain : `dev.${defaultRootDomain}`
+  const domain = isProd
+    ? defaultRootDomain
+    : defaultDevDomain || `dev.${defaultRootDomain}`
 
   const host = `${subdomain}.${domain}`
 

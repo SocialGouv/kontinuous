@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.152.0 (2023-06-12)
+
+
+### Features
+
+* **valueCompilers:** add devDomain ([#330](https://github.com/socialgouv/kontinuous/issues/330)) ([f32f17f](https://github.com/socialgouv/kontinuous/commit/f32f17fa257ee3057796d692adda9724ec740e85))
+
+## 1.151.1 (2023-06-08)
+
+
+### Bug Fixes
+
+* **pg:** fix dbSecretName ([#328](https://github.com/socialgouv/kontinuous/issues/328)) ([44aea1c](https://github.com/socialgouv/kontinuous/commit/44aea1ca50d06793117d34de1aef6bfe354e6b60))
+
+## 1.151.0 (2023-06-07)
+
+
+### Features
+
+* pg multi instances abstract ([#323](https://github.com/socialgouv/kontinuous/issues/323)) ([e6ee3a4](https://github.com/socialgouv/kontinuous/commit/e6ee3a456dd826789045e604366596846731f7bc))
+
 ## [1.150.2](https://github.com/socialgouv/kontinuous/compare/v1.150.1...v1.150.2) (2023-06-06)
 
 

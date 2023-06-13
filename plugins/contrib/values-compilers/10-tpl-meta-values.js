@@ -23,6 +23,7 @@ const renderTplRecurse = async (
         kontinuous: {
           chart: recursiveContext.join("."),
           parentChart: recursiveContext.slice(0, -1).join("."),
+          chartContext: recursiveContext,
         },
       }
 
