@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.153.0 (2023-06-13)
+
+
+### Features
+
+* extends-ovh ([#331](https://github.com/socialgouv/kontinuous/issues/331)) ([82d29ab](https://github.com/socialgouv/kontinuous/commit/82d29ab02709d44df4ef244eb80c9bd18206a8f9))
+
 ## 1.152.0 (2023-06-12)
 
 

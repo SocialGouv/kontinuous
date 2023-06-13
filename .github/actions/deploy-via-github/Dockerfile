@@ -1,4 +1,4 @@
-FROM ghcr.io/socialgouv/kontinuous:v1.152.0
+FROM ghcr.io/socialgouv/kontinuous:v1.153.0
 
 COPY entrypoint.sh /entrypoint.sh
 
