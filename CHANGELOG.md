@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.153.3 (2023-06-13)
+
+
+### Bug Fixes
+
+* upgrade yaml (dependabot issue) ([#336](https://github.com/socialgouv/kontinuous/issues/336)) ([e9468f0](https://github.com/socialgouv/kontinuous/commit/e9468f0089ed42d6fe7258840cc8129781171529))
+
 ## [1.153.2](https://github.com/socialgouv/kontinuous/compare/v1.153.1...v1.153.2) (2023-06-13)
 
 
