@@ -19,6 +19,8 @@ ENV NODE_PATH $NODE_HOME/lib/node_modules
 ENV PATH $NODE_HOME/bin:$PATH
 RUN curl https://nodejs.org/dist/v$NODE_VERSION/$NODE_PACKAGE.tar.gz | tar -xzC /opt/
 
-RUN npm i -g tiged
+# RUN npm i -g tiged
+# until https://github.com/tiged/tiged/issues/79 fixed
+RUN npm i -g tiged2
 
 USER 1000
