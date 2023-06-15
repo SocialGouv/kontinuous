@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.153.4 (2023-06-15)
+
+
+### Bug Fixes
+
+* hotfix tiged2 ([#338](https://github.com/socialgouv/kontinuous/issues/338)) ([667cec3](https://github.com/socialgouv/kontinuous/commit/667cec30fb446dde98c00285fe8aafc05ade5bed))
+
 ## 1.153.3 (2023-06-13)
 
 
