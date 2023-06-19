@@ -196,8 +196,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -345,8 +345,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
