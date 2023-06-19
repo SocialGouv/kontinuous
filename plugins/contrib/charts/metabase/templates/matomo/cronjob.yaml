@@ -31,10 +31,8 @@ spec:
               image: node:14-alpine
               securityContext:
                 allowPrivilegeEscalation: false
-              command:
-                - sh
-                - "-c"
-                - npx @socialgouv/matomo-postgres
+              command: 
+                {{- .Values.matomo.cronjob.command | toYaml | nindent 16 }}
               envFrom:
                 - secretRef:
                     name: {{ (or .Values.component .Chart.Name) | lower }}-cronjob

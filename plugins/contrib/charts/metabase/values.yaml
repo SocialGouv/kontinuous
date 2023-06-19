@@ -11,5 +11,9 @@ ingress:
 matomo:
   cronjob:
     enabled: false
+    command:
+      - sh
+      - "-c"
+      - npx @socialgouv/matomo-postgres
     inlineSealedSecret:
 inlineMetabaseSealedSecret:
