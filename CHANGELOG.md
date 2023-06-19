@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.153.5 (2023-06-19)
+
+
+### Bug Fixes
+
+* **ovh:** custom maxPods ([#339](https://github.com/socialgouv/kontinuous/issues/339)) ([82e4ba8](https://github.com/socialgouv/kontinuous/commit/82e4ba88218a9bcce2223ea22ed70e883c4e7767))
+
 ## 1.153.4 (2023-06-15)
 
 
