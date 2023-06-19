@@ -22,3 +22,14 @@ dependencies:
       certs:
         options:
           wildcardHost: ".ovh.fabrique.social.gouv.fr"
+
+      defaultMinResourcesRequests:
+        options:
+          avoidOutOfpods: true
+          avoidOutOfpodsMargin:
+            cpu: 10m
+            memory: 10Mi
+          nodeConfig:
+            maxPods: 110
+            cpu: 7820m
+            memory: 27717Mi
