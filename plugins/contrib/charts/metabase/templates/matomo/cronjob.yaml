@@ -31,8 +31,10 @@ spec:
               image: node:14-alpine
               securityContext:
                 allowPrivilegeEscalation: false
+              {{- if .Values.matomo.cronjob.command }}
               command: 
                 {{- .Values.matomo.cronjob.command | toYaml | nindent 16 }}
+              {{- end }}
               envFrom:
                 - secretRef:
                     name: {{ (or .Values.component .Chart.Name) | lower }}-cronjob
