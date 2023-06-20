@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.154.0 (2023-06-20)
+
+
+### Features
+
+* extends conditional by env ([#340](https://github.com/socialgouv/kontinuous/issues/340)) ([ddf7248](https://github.com/socialgouv/kontinuous/commit/ddf72480012dca3120ec245bb06d902da3579b92))
+
 ## 1.153.5 (2023-06-19)
 
 
