@@ -7,6 +7,7 @@ const deepmerge = require("../utils/deepmerge")
 const degitImproved = require("../utils/degit-improved")
 const normalizeDegitUri = require("../utils/normalize-degit-uri")
 const matchLinkRemap = require("../utils/match-link-remap")
+const patternMatch = require("../utils/pattern-match")
 
 const copyFilter = require("./copy-filter")
 const loadGitOrgConfig = require("./load-git-org-config")
@@ -53,12 +54,25 @@ module.exports = async (config, logger, reloadConfig) => {
         if (!Array.isArray(extendsPlugins)) {
           extendsPlugins = [extendsPlugins]
         }
-        for (const extendsPlugin of extendsPlugins) {
-          const extendsFileBasename = kebabCase(extendsPlugin)
+        for (let extendsPlugin of extendsPlugins) {
+          if (extendsPlugin === "string") {
+            extendsPlugin = { name: extendsPlugin }
+          }
+          let { ifEnv } = extendsPlugin
+          if (ifEnv) {
+            if (!Array.isArray(ifEnv)) {
+              ifEnv = [ifEnv]
+            }
+            if (!patternMatch(config.environment, ifEnv)) {
+              continue
+            }
+          }
+
+          const extendsFileBasename = kebabCase(extendsPlugin.name)
           const extendsFile = `${target}/extends/${extendsFileBasename}.yaml`
           if (!(await fs.pathExists(extendsFile))) {
             throw new Error(
-              `extends ̂file ${extendsFile} not found as expected for specified extends ${extendsPlugin}`
+              `extends ̂file ${extendsFile} not found as expected for specified extends ${extendsPlugin.name}`
             )
           }
           const yamlExtends = await fs.readFile(extendsFile, {

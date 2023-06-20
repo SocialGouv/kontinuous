@@ -1,4 +1,6 @@
 dependencies:
   fabrique:
     import: socialgouv/kontinuous/plugins/fabrique
-    extends: ovh
+    extends:
+      - name: ovh
+        ifEnv: [dev]
