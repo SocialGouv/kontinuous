@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/trigger-cronjob/use.schema.json",
+  "title": "schema for trigger-cronjob job usage",
+  "type": "object",
+  "required": [
+    "cronJobName"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "cronJobName": {
+      "description": "The cronjob name",
+      "type": "string"
+    }
+  }
+}
