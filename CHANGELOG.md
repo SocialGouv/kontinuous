@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.155.1 (2023-06-27)
+
+
+### Bug Fixes
+
+* cronjob order ([#343](https://github.com/socialgouv/kontinuous/issues/343)) ([17aa4e7](https://github.com/socialgouv/kontinuous/commit/17aa4e762649ccad80ba06a52a8e8f0463d0c447))
+
 ## 1.155.0 (2023-06-27)
 
 
