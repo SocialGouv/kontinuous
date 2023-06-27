@@ -11,6 +11,8 @@ runs:
         value: "{{ $.with.restorePath }}"
       - name: MOUNT_PATH
         value: "{{ $.with.mountPath }}"
+      - name: FILTER_PATH
+        value: "{{ or $.with.filterPath `.*` }}"
       - name: OWNER
         value: "{{ or $.with.owner $.Values.global.pgUser }}"
       - name: INPUT_PGDATABASE
