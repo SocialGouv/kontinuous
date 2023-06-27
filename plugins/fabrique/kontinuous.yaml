@@ -75,6 +75,7 @@ dependencies:
           secrets:
             kubeconfig:
             harbor:
+            buildkit-client-certs:
             pg-admin-user:
               from:
                 - azure-pg-admin-user
