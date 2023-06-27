@@ -30,8 +30,7 @@ runs:
       - name: certs
         secret:
           secretName: "{{ or $.with.buildkitServiceClientCertsSecretName `buildkit-client-certs` }}"
-          # optional: true
-          optional: false
+          optional: true
     volumeMounts:
       - mountPath: /home/user/.local/share/buildkit
         name: buildkitd
