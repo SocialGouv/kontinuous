@@ -14,6 +14,10 @@
       "description": "Path to .sql file in the repo",
       "type": "string"
     },
+    "filterPath": {
+      "description": "filter for the latest file lookup",
+      "type": "string"
+    },
     "mountPath": {
       "description": "Path to the backup storage mount",
       "type": "string"

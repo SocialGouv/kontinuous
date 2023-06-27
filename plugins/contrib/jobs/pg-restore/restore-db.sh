@@ -18,7 +18,8 @@ PGPORT=${PGPORT:-5432}
 
 MOUNT_PATH=${MOUNT_PATH:-""}
 if [ -n "$MOUNT_PATH" ]; then
-  export LATEST=$(ls -1Fr $MOUNT_PATH | head -n 1);
+  FILTER_PATH=${FILTER_PATH:-".*"}
+  export LATEST=$(ls -1FR | grep -E "[0-9]{4}_[0-9]{2}_[0-9]{2}_${FILTER_PATH}" | sort -r | head -n 1);
   if [[ ${MOUNT_PATH:length-1:1} != "/" ]]; then
     export MOUNT_PATH="$MOUNT_PATH/"
   fi
