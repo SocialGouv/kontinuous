@@ -196,7 +196,7 @@ spec:
               memory: \\"0\\"
       containers:
         - name: job
-          image: moby/buildkit:v0.10.5-rootless
+          image: moby/buildkit:v0.11.6-rootless
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -218,6 +218,30 @@ spec:
                 export CI_REGISTRY=\\"\\"
               fi
 
+              buildctl_options_cache=\\"\\"
+
+              buildctl_options_mtls=\\"\\"
+
+
+              if [ \\"\\" != \\"\\" ]; then
+                buildctl_cmd=\\"buildctl \\\\
+                  --addr tcp://buildkit-service.buildkit-service.svc:1234 \\\\
+                \\"
+                if [ -f /buildkit-certs/cert.pem ]; then
+                  buildctl_options_mtls=\\"\\\\
+                    --tlscacert /buildkit-certs/ca.pem \\\\
+                    --tlscert /buildkit-certs/cert.pem \\\\
+                    --tlskey /buildkit-certs/key.pem \\\\
+                  \\"
+                fi
+              else
+                buildctl_cmd=buildctl-daemonless.sh
+                buildctl_options_cache=\\"\\\\
+                  --export-cache type=inline \\\\
+                  --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                \\"
+              fi
+
               mkdir -p /home/user/.docker
 
               echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
@@ -230,15 +254,15 @@ spec:
                 export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
               fi
 
-              buildctl-daemonless.sh \\\\
+              $buildctl_cmd \\\\
+                $buildctl_options_mtls \\\\
                 build \\\\
                 --frontend dockerfile.v0 \\\\
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./packages/backend/Dockerfile \\\\
                 --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
-                --export-cache type=inline \\\\
-                --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                $buildctl_options_cache \\\\
                 --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
                 --opt build-arg:\\"DOMIFA_ENV_ID=dev\\" \\\\
                 --opt build-arg:\\"DOMIFA_FRONTEND_URL=https://test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
@@ -267,6 +291,9 @@ spec:
               subPath: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-backend.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
+            - mountPath: /buildkit-certs
+              name: certs
+              readOnly: true
       securityContext:
         fsGroup: 1000
       volumes:
@@ -278,6 +305,10 @@ spec:
           emptyDir: {}
         - emptyDir: {}
           name: buildkitd
+        - name: certs
+          secret:
+            optional: false
+            secretName: buildkit-client-certs
 ---
 apiVersion: batch/v1
 kind: Job
@@ -359,7 +390,7 @@ spec:
               memory: \\"0\\"
       containers:
         - name: job
-          image: moby/buildkit:v0.10.5-rootless
+          image: moby/buildkit:v0.11.6-rootless
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -381,6 +412,30 @@ spec:
                 export CI_REGISTRY=\\"\\"
               fi
 
+              buildctl_options_cache=\\"\\"
+
+              buildctl_options_mtls=\\"\\"
+
+
+              if [ \\"\\" != \\"\\" ]; then
+                buildctl_cmd=\\"buildctl \\\\
+                  --addr tcp://buildkit-service.buildkit-service.svc:1234 \\\\
+                \\"
+                if [ -f /buildkit-certs/cert.pem ]; then
+                  buildctl_options_mtls=\\"\\\\
+                    --tlscacert /buildkit-certs/ca.pem \\\\
+                    --tlscert /buildkit-certs/cert.pem \\\\
+                    --tlskey /buildkit-certs/key.pem \\\\
+                  \\"
+                fi
+              else
+                buildctl_cmd=buildctl-daemonless.sh
+                buildctl_options_cache=\\"\\\\
+                  --export-cache type=inline \\\\
+                  --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                \\"
+              fi
+
               mkdir -p /home/user/.docker
 
               echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
@@ -393,15 +448,15 @@ spec:
                 export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
               fi
 
-              buildctl-daemonless.sh \\\\
+              $buildctl_cmd \\\\
+                $buildctl_options_mtls \\\\
                 build \\\\
                 --frontend dockerfile.v0 \\\\
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./packages/frontend/Dockerfile \\\\
                 --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
-                --export-cache type=inline \\\\
-                --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                $buildctl_options_cache \\\\
                 --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
                 --opt build-arg:\\"DOMIFA_ENV_ID=dev\\" \\\\
                 --opt build-arg:\\"DOMIFA_FRONTEND_META_ROBOTS=noindex,nofollow\\" \\\\
@@ -431,6 +486,9 @@ spec:
               subPath: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-frontend.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
+            - mountPath: /buildkit-certs
+              name: certs
+              readOnly: true
       securityContext:
         fsGroup: 1000
       volumes:
@@ -442,6 +500,10 @@ spec:
           emptyDir: {}
         - emptyDir: {}
           name: buildkitd
+        - name: certs
+          secret:
+            optional: false
+            secretName: buildkit-client-certs
 ---
 apiVersion: batch/v1
 kind: Job
@@ -523,7 +585,7 @@ spec:
               memory: \\"0\\"
       containers:
         - name: job
-          image: moby/buildkit:v0.10.5-rootless
+          image: moby/buildkit:v0.11.6-rootless
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -545,6 +607,30 @@ spec:
                 export CI_REGISTRY=\\"\\"
               fi
 
+              buildctl_options_cache=\\"\\"
+
+              buildctl_options_mtls=\\"\\"
+
+
+              if [ \\"\\" != \\"\\" ]; then
+                buildctl_cmd=\\"buildctl \\\\
+                  --addr tcp://buildkit-service.buildkit-service.svc:1234 \\\\
+                \\"
+                if [ -f /buildkit-certs/cert.pem ]; then
+                  buildctl_options_mtls=\\"\\\\
+                    --tlscacert /buildkit-certs/ca.pem \\\\
+                    --tlscert /buildkit-certs/cert.pem \\\\
+                    --tlskey /buildkit-certs/key.pem \\\\
+                  \\"
+                fi
+              else
+                buildctl_cmd=buildctl-daemonless.sh
+                buildctl_options_cache=\\"\\\\
+                  --export-cache type=inline \\\\
+                  --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                \\"
+              fi
+
               mkdir -p /home/user/.docker
 
               echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
@@ -557,15 +643,15 @@ spec:
                 export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
               fi
 
-              buildctl-daemonless.sh \\\\
+              $buildctl_cmd \\\\
+                $buildctl_options_mtls \\\\
                 build \\\\
                 --frontend dockerfile.v0 \\\\
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./packages/portail-admins/Dockerfile \\\\
                 --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
-                --export-cache type=inline \\\\
-                --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                $buildctl_options_cache \\\\
                 --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
                 --opt build-arg:\\"DOMIFA_ENV_ID=dev\\" \\\\
                 echo \\"$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
@@ -591,6 +677,9 @@ spec:
               subPath: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-portail-admins.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
+            - mountPath: /buildkit-certs
+              name: certs
+              readOnly: true
       securityContext:
         fsGroup: 1000
       volumes:
@@ -602,6 +691,10 @@ spec:
           emptyDir: {}
         - emptyDir: {}
           name: buildkitd
+        - name: certs
+          secret:
+            optional: false
+            secretName: buildkit-client-certs
 ---
 apiVersion: batch/v1
 kind: Job
@@ -683,7 +776,7 @@ spec:
               memory: \\"0\\"
       containers:
         - name: job
-          image: moby/buildkit:v0.10.5-rootless
+          image: moby/buildkit:v0.11.6-rootless
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -705,6 +798,30 @@ spec:
                 export CI_REGISTRY=\\"\\"
               fi
 
+              buildctl_options_cache=\\"\\"
+
+              buildctl_options_mtls=\\"\\"
+
+
+              if [ \\"\\" != \\"\\" ]; then
+                buildctl_cmd=\\"buildctl \\\\
+                  --addr tcp://buildkit-service.buildkit-service.svc:1234 \\\\
+                \\"
+                if [ -f /buildkit-certs/cert.pem ]; then
+                  buildctl_options_mtls=\\"\\\\
+                    --tlscacert /buildkit-certs/ca.pem \\\\
+                    --tlscert /buildkit-certs/cert.pem \\\\
+                    --tlskey /buildkit-certs/key.pem \\\\
+                  \\"
+                fi
+              else
+                buildctl_cmd=buildctl-daemonless.sh
+                buildctl_options_cache=\\"\\\\
+                  --export-cache type=inline \\\\
+                  --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                \\"
+              fi
+
               mkdir -p /home/user/.docker
 
               echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
@@ -717,15 +834,15 @@ spec:
                 export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
               fi
 
-              buildctl-daemonless.sh \\\\
+              $buildctl_cmd \\\\
+                $buildctl_options_mtls \\\\
                 build \\\\
                 --frontend dockerfile.v0 \\\\
                 --local context=/workspace/ \\\\
                 --local dockerfile=/workspace \\\\
                 --opt filename=./packages/portail-usagers/Dockerfile \\\\
                 --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
-                --export-cache type=inline \\\\
-                --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                $buildctl_options_cache \\\\
                 --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
                 --opt build-arg:\\"DOMIFA_ENV_ID=dev\\" \\\\
                 --opt build-arg:\\"DOMIFA_SENTRY_DSN_PORTAIL=https://***@sentry.fabrique.social.gouv.fr/58\\" \\\\
@@ -752,6 +869,9 @@ spec:
               subPath: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak/jobs.build-portail-usagers.buildkit
             - mountPath: /home/user/.local/share/buildkit
               name: buildkitd
+            - mountPath: /buildkit-certs
+              name: certs
+              readOnly: true
       securityContext:
         fsGroup: 1000
       volumes:
@@ -763,6 +883,10 @@ spec:
           emptyDir: {}
         - emptyDir: {}
           name: buildkitd
+        - name: certs
+          secret:
+            optional: false
+            secretName: buildkit-client-certs
 ---
 apiVersion: batch/v1
 kind: Job
