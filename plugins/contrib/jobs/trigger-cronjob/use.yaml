@@ -11,6 +11,6 @@ runs:
     run: |
       current_date=$(date +%s)
       kubectl create job --from=cronjob/$CRONJOB_NAME $CRONJOB_NAME-manual-$current_date --namespace={{.Values.global.namespace}}
-      rollout-status -kind=job -namespace={{.Values.global.namespace}} -selector=job-name=$CRONJOB_NAME-manual-$current_date
+      rollout-status -kind-filter=job -namespace={{.Values.global.namespace}} -selector=job-name=$CRONJOB_NAME-manual-$current_date
 
     
