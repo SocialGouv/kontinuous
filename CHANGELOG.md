@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.155.0 (2023-06-27)
+
+
+### Features
+
+* restore-db-optional-filter ([#342](https://github.com/socialgouv/kontinuous/issues/342)) ([bae78e2](https://github.com/socialgouv/kontinuous/commit/bae78e24c8d6a74fc12c579f8e33d24e817b7e12))
+
 ## 1.154.0 (2023-06-20)
 
 
