@@ -7,11 +7,11 @@ const order = [
   "sealedsecret",
   "persistentvolume",
   "persistentvolumeclaim",
+  "cronjob",
   "job",
   "deployment",
   "statefullset",
   "daemonset",
-  "cronjob",
   "service",
 ]
 module.exports = async (manifests, _options, _context) =>
