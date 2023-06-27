@@ -3,9 +3,8 @@ runs:
   - name: buildkit
     checkout: true
     action: false
-    # image: moby/buildkit:v0.8.1-rootless
     # image: moby/buildkit:master-rootless
-    image: moby/buildkit:v0.10.5-rootless
+    image: moby/buildkit:v0.11.6-rootless
     # serviceAccountName: buildkit
     cpuLimit: "2"
     cpuRequest: 500m
@@ -28,12 +27,40 @@ runs:
     volumes:
       - name: buildkitd
         emptyDir: {}
+      - name: certs
+        secret:
+          secretName: "{{ or $.with.buildkitServiceClientCertsSecretName `buildkit-client-certs` }}"
+          optional: true
     volumeMounts:
       - mountPath: /home/user/.local/share/buildkit
         name: buildkitd
+      - mountPath: /buildkit-certs
+        name: certs
+        readOnly: true
     run: |
       if [ "{{ $.with.registry }}" != "" ]; then
         export CI_REGISTRY="{{ $.with.registry }}"
+      fi
+      buildctl_options_cache=""
+      buildctl_options_mtls=""
+
+      if [ "{{ $.with.buildkitServiceEnabled }}" != "" ]; then
+        buildctl_cmd="buildctl \
+          --addr {{ or $.with.buildkitServiceAddr "tcp://buildkit-service.buildkit-service.svc:1234" }} \
+        "
+        if [ -f /buildkit-certs/cert.pem ]; then
+          buildctl_options_mtls="\
+            --tlscacert /buildkit-certs/ca.pem \
+            --tlscert /buildkit-certs/cert.pem \
+            --tlskey /buildkit-certs/key.pem \
+          "
+        fi
+      else
+        buildctl_cmd=buildctl-daemonless.sh
+        buildctl_options_cache="\
+          --export-cache type=inline \
+          --import-cache type=registry,ref=$IMAGE_PATH:{{ $.Values.global.branchSlug32 }} \
+        "
       fi
       mkdir -p /home/user/.docker
       echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /home/user/.docker/config.json
@@ -42,15 +69,15 @@ runs:
       if [ "{{ $.Values.global.isProd }}" = "true" ]; then
         export LATEST_TAG=",$IMAGE_PATH:latest"
       fi
-      buildctl-daemonless.sh \
+      $buildctl_cmd \
+        $buildctl_options_mtls \
         build \
         --frontend dockerfile.v0 \
         --local context=/workspace/{{ if $.with.context }}/{{ $.with.context }}{{ end }} \
         --local dockerfile=/workspace{{ if $.with.context }}/{{ $.with.context }}{{ end }} \
         --opt filename=./{{ or $.with.dockerfile "Dockerfile" }} \
         --output type=image,\"name=$IMAGE_PATH:{{ or $.with.imageTag $.Values.global.imageTag }},$IMAGE_PATH:{{ $.Values.global.branchSlug32 }}$LATEST_TAG\",push=true \
-        --export-cache type=inline \
-        --import-cache type=registry,ref=$IMAGE_PATH:{{ $.Values.global.branchSlug32 }} \
+        $buildctl_options_cache \
         {{ if $.with.buildArgs -}}
         {{- range $key, $val := $.with.buildArgs -}}
         --opt build-arg:"{{ tpl $key $ }}={{ tpl (print $val) $ }}" \
