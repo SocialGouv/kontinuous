@@ -238,6 +238,62 @@ spec:
       name: metabase2-sealed-secret
     type: Opaque
 ---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  labels:
+    component: metabase-app2
+    application: metabase-app2
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
+    kontinuous/deployment.env: test-metabase-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: cronjob-metabase-app2-2oao4nx9
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: metabase-app2
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.metabase-app2
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/matomo/cronjob.yaml
+    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
+  namespace: test-metabase
+spec:
+  schedule: 0 * * * *
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            component: metabase-app2
+            application: metabase-app2
+          name: metabase-app2
+        spec:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            runAsNonRoot: true
+          restartPolicy: OnFailure
+          containers:
+            - name: metabase-app2-container
+              image: node:14-alpine
+              securityContext:
+                allowPrivilegeEscalation: false
+              command:
+                - sh
+                - -c
+                - cowsay hello
+              envFrom:
+                - secretRef:
+                    name: metabase-app2-cronjob
+              env:
+                - name: STARTDATE
+                  value: \\"2019-01-01\\"
+                - name: DEBUG
+                  value: \\"*\\"
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -445,62 +501,6 @@ spec:
             requests:
               cpu: 500m
               memory: 512Mi
----
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  labels:
-    component: metabase-app2
-    application: metabase-app2
-    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
-    kontinuous/deployment.env: test-metabase-prod
-    kontinuous/ref: feature-branch-1
-    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: cronjob-metabase-app2-2oao4nx9
-    app.kubernetes.io/manifest-managed-by: kontinuous
-    app.kubernetes.io/manifest-created-by: kontinuous
-  name: metabase-app2
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.metabase-app2
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase-app2/templates/matomo/cronjob.yaml
-    kontinuous/deployment: test-metabase-feature-branch-1-ffac537e6cbbf934b08745-4mp1mz1x
-  namespace: test-metabase
-spec:
-  schedule: 0 * * * *
-  concurrencyPolicy: Forbid
-  jobTemplate:
-    spec:
-      template:
-        metadata:
-          labels:
-            component: metabase-app2
-            application: metabase-app2
-          name: metabase-app2
-        spec:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-            runAsNonRoot: true
-          restartPolicy: OnFailure
-          containers:
-            - name: metabase-app2-container
-              image: node:14-alpine
-              securityContext:
-                allowPrivilegeEscalation: false
-              command:
-                - sh
-                - -c
-                - cowsay hello
-              envFrom:
-                - secretRef:
-                    name: metabase-app2-cronjob
-              env:
-                - name: STARTDATE
-                  value: \\"2019-01-01\\"
-                - name: DEBUG
-                  value: \\"*\\"
 ---
 apiVersion: v1
 kind: Service
