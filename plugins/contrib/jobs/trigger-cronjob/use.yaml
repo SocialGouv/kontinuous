@@ -1,0 +1,16 @@
+runs:
+  - name: trigger-cronjob
+    checkout: false
+    action: false
+    kubernetes: true
+    image: ghcr.io/socialgouv/kontinuous:v1
+    user: 1001
+    env:
+      - name: CRONJOB_NAME
+        value: "{{ $.with.cronJobName }}"
+    run: |
+      current_date=$(date +%s)
+      kubectl create job --from=cronjob/$CRONJOB_NAME $CRONJOB_NAME-manual-$current_date --namespace={{.Values.global.namespace}}
+      rollout-status -kind=job -namespace={{.Values.global.namespace}} -selector=job-name=$CRONJOB_NAME-manual-$current_date
+
+    
