@@ -562,7 +562,7 @@ spec:
           name: buildkitd
         - name: certs
           secret:
-            optional: false
+            optional: true
             secretName: buildkit-client-certs
 ---
 apiVersion: batch/v1
@@ -752,7 +752,7 @@ spec:
           name: buildkitd
         - name: certs
           secret:
-            optional: false
+            optional: true
             secretName: buildkit-client-certs
 ---
 apiVersion: apps/v1

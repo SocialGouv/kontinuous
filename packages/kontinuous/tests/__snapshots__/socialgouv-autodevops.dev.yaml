@@ -266,7 +266,7 @@ spec:
           name: buildkitd
         - name: certs
           secret:
-            optional: false
+            optional: true
             secretName: buildkit-client-certs
 ---
 apiVersion: apps/v1
