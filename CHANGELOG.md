@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.156.0 (2023-06-27)
+
+
+### Features
+
+* buildkit-service optional feature ([#345](https://github.com/socialgouv/kontinuous/issues/345)) ([3e395ff](https://github.com/socialgouv/kontinuous/commit/3e395ff7d0c81be0404b382ba2ea13e1b6d5c27d))
+
 ## 1.155.2 (2023-06-27)
 
 ## 1.155.1 (2023-06-27)
