@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.156.1 (2023-07-05)
+
+
+### Bug Fixes
+
+* drop-db encode token ([#346](https://github.com/socialgouv/kontinuous/issues/346)) ([84e9a44](https://github.com/socialgouv/kontinuous/commit/84e9a4434bf778694ce0030f24535ee78fc50e6e))
+
 ## 1.156.0 (2023-06-27)
 
 
