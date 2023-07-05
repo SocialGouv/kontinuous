@@ -381,7 +381,7 @@ kind: Cluster
 metadata:
   name: pg-hasura
   labels:
-    helm.sh/chart: cnpg-cluster-1.5.7
+    helm.sh/chart: cnpg-cluster-1.7.3
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: 14.5-6
@@ -443,7 +443,7 @@ kind: Cluster
 metadata:
   name: pg-keycloak
   labels:
-    helm.sh/chart: cnpg-cluster-1.5.7
+    helm.sh/chart: cnpg-cluster-1.7.3
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: 14.5-6
@@ -500,12 +500,66 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS \\"pgcrypto\\";
         - CREATE EXTENSION IF NOT EXISTS \\"hstore\\";
 ---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: pg-hasura-rw
+  annotations:
+    kontinuous/chartPath: project.fabrique.pg-hasura.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/pg-hasura/charts/cnpg-cluster/templates/pooler.cnpg.yaml
+    kontinuous/plugin.needs: |
+      - project.fabrique.pg-hasura.jobs-pg
+    kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
+  labels:
+    kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
+    kontinuous/deployment.env: test-extends-ovh-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: podmonitor-pg-hasura-rw-3z1pzpct
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-extends-ovh
+spec:
+  selector:
+    matchLabels:
+      cnpg.io/poolerName: pg-hasura-rw
+  podMetricsEndpoints:
+    - port: metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: pg-keycloak-rw
+  annotations:
+    kontinuous/chartPath: project.fabrique.pg-keycloak.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/pg-keycloak/charts/cnpg-cluster/templates/pooler.cnpg.yaml
+    kontinuous/plugin.needs: |
+      - project.fabrique.pg-keycloak.jobs-pg
+    kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
+  labels:
+    kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
+    kontinuous/deployment.env: test-extends-ovh-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: podmonitor-pg-keycloak-rw-3n20ht4i
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-extends-ovh
+spec:
+  selector:
+    matchLabels:
+      cnpg.io/poolerName: pg-keycloak-rw
+  podMetricsEndpoints:
+    - port: metrics
+---
 apiVersion: postgresql.cnpg.io/v1
 kind: Pooler
 metadata:
   name: pg-hasura-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.5.7
+    helm.sh/chart: cnpg-cluster-1.7.3
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: 14.5-6
@@ -540,7 +594,7 @@ kind: Pooler
 metadata:
   name: pg-keycloak-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.5.7
+    helm.sh/chart: cnpg-cluster-1.7.3
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: 14.5-6
