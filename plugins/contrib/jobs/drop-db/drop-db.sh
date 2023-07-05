@@ -11,9 +11,10 @@ for VAR in $MANDATORY_VARS; do
 done
 
 PGPORT=${PGPORT:-5432}
+PGPASSWORD_URLENCODED=$(printf %s "$PGPASSWORD" | jq -sRr @uri)
 
 # arobase replacement
-PG_URL_ADMIN="postgresql://${PGUSER/@/%40}:${PGPASSWORD}@${PGHOST}:${PGPORT}/postgres"
+PG_URL_ADMIN="postgresql://${PGUSER/@/%40}:${PGPASSWORD_URLENCODED}@${PGHOST}:${PGPORT}/postgres"
 DROP_USER_BASE=${DATABASE_USER%%@*}
 
 echo
