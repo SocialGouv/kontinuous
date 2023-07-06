@@ -68,6 +68,7 @@ dependencies:
             - postgresql.cnpg.io/v1/Cluster
             - postgresql.cnpg.io/v1/ScheduledBackup
             - bitnami.com/v1alpha1/SealedSecret
+            - monitoring.coreos.com/v1/PodMonitor
 
     preDeploy:
       importSecrets:
