@@ -45,6 +45,13 @@
     "target": {
       "description": "Set the target build stage to build.",
       "type": "string"
+    },
+    "secrets": {
+      "description": "Use secrets securely at build time that will not be exposed in the image layers, keys are secrets ids, `secretName` and `secretKey` properties can be used to target the kubernetes secret",
+      "type": "object",
+      "properties": {
+        "additionalProperties": true
+      }
     }
   },
   "definitions": {
