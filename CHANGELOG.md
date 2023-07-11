@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.157.0 (2023-07-11)
+
+
+### Features
+
+* kubeconform detect kubernetes version ([#353](https://github.com/socialgouv/kontinuous/issues/353)) ([b491cca](https://github.com/socialgouv/kontinuous/commit/b491cca71045b59258412ee0f1d8d3f650a51a84))
+
 ## 1.156.5 (2023-07-11)
 
 ## 1.156.4 (2023-07-11)
