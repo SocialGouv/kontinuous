@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.158.0 (2023-07-11)
+
+
+### Features
+
+* kubeconfig context by env ([#354](https://github.com/socialgouv/kontinuous/issues/354)) ([73996ba](https://github.com/socialgouv/kontinuous/commit/73996ba61df0efbb68b61d9ec8f57d2f0c908bfb))
+
 ## 1.157.0 (2023-07-11)
 
 
