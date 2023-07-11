@@ -117,4 +117,5 @@ module.exports = {
   yarnInstall: require("./yarn-install"),
   needKubeconform: require("./need-kubeconform"),
   matchLinkRemap: require("./match-link-remap"),
+  detectKubeVersion: require("./detect-kube-version"),
 }
