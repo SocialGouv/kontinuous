@@ -534,6 +534,15 @@ const loadConfig = async (
     kubeconfigContext: {
       option: "kubeconfigContext",
       env: "KS_KUBECONFIG_CONTEXT",
+      transform: async (kubeconfigContext, config) => {
+        if (
+          typeof kubeconfigContext !== "object" ||
+          kubeconfigContext === null
+        ) {
+          return kubeconfigContext
+        }
+        return kubeconfigContext[config.environment]
+      },
     },
     linksSelfLocation: {
       default: "socialgouv/kontinuous",
