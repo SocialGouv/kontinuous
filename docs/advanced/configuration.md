@@ -44,6 +44,20 @@ dependencies:
 
 it must match the projectName defined at webhook level for scoping kubeconfig (and associated rights bindings) usually it match also the rancher project
 
+## Git organization config
+
+You can share a configuration at organization level of the git platform you're using (github, gitlab, codeberg, bitbucket, or any other git service...).
+Just create a repository called `.kontinuous` in your organization and put a `config.yaml` file in it. This config will be loaded automatically at init time each time you use kontinuous.
+
+You can also customize the configuration of gitOrg feature:
+
+- `gitOrg`: to enable the feature (default: true)
+- `gitOrgRepository`: the name of the repository (default: `.kontinuous`)
+- `gitOrgOverride`: the name of the organization (default: loaded from git url)
+- `gitOrgPath`: the config file path (default: `config.yaml`)
+- `gitOrgRequired`: fail if the organization configuration is missing (default: false)
+- `gitOrgRef`: the git ref to use in the configuration repository (default: HEAD branch)
+
 ## Global config
 
 The global config file path is `~/.kontinuous/config.yaml` where `~` is your `$HOME` path. You can configure specific environment for your workstation. This file can contain sensitive data as webhook token for projects.
