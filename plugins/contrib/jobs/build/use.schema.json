@@ -52,7 +52,20 @@
       "properties": {
         "additionalProperties": true
       }
-    }
+    },
+    "buildkitServiceClientCertsSecretName": {
+      "description": "Use a specific secret for build kit service client cert. default to `buildkit-client-certs`",
+      "type": "string"
+    },
+    "buildkitServiceEnabled": {
+      "description": "Enable buildkit remote service. set to `true` to activate.",
+      "type": "string"
+    },
+    "buildkitServiceAddr": {
+      "description": "Adress of the buildkit service. defaults to `tcp://buildkit-service.buildkit-service.svc:1234`",
+      "type": "string",
+      "examples": ["tcp://buildkit-service.buildkit-service.svc:1234"]
+    }    
   },
   "definitions": {
     "build-args": {
