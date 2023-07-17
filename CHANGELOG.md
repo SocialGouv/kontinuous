@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.158.1 (2023-07-17)
+
+
+### Bug Fixes
+
+* extends ovh kubeconfigContext ([#355](https://github.com/socialgouv/kontinuous/issues/355)) ([dc9ffcd](https://github.com/socialgouv/kontinuous/commit/dc9ffcd8101995ac5ec66ffaacf68b8b2df3e880))
+
 ## 1.158.0 (2023-07-11)
 
 
