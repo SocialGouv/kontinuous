@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.159.0 (2023-07-18)
+
+
+### Features
+
+* global buildkit service ([#357](https://github.com/socialgouv/kontinuous/issues/357)) ([ebafbd6](https://github.com/socialgouv/kontinuous/commit/ebafbd6cfe408b84ac7a2d78f8391c2ab7bcf606))
+
 ## 1.158.2 (2023-07-17)
 
 ## 1.158.1 (2023-07-17)
