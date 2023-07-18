@@ -24,7 +24,7 @@ module.exports = async (values, options, { config, utils, ctx }) => {
 
   const { repositoryName } = config
 
-  const { registry, enableDefaultCharts = false } = options
+  const { registry, enableDefaultCharts = false, mergeValues = {} } = options
 
   const namespace = isProd
     ? repositoryName
@@ -114,7 +114,7 @@ module.exports = async (values, options, { config, utils, ctx }) => {
     },
   }
 
-  values = deepmerge({}, defaultValues, values)
+  values = deepmerge({}, defaultValues, values, { global: mergeValues })
 
   return values
 }

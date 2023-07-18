@@ -44,24 +44,25 @@ runs:
       buildctl_options_cache=""
       buildctl_options_mtls=""
 
-      if [ "{{ $.with.buildkitServiceEnabled }}" != "" ]; then
-        buildctl_cmd="buildctl \
-          --addr {{ or $.with.buildkitServiceAddr "tcp://buildkit-service.buildkit-service.svc:1234" }} \
-        "
-        if [ -f /buildkit-certs/cert.pem ]; then
-          buildctl_options_mtls="\
-            --tlscacert /buildkit-certs/ca.pem \
-            --tlscert /buildkit-certs/cert.pem \
-            --tlskey /buildkit-certs/key.pem \
-          "
-        fi
-      else
-        buildctl_cmd=buildctl-daemonless.sh
-        buildctl_options_cache="\
-          --export-cache type=inline \
-          --import-cache type=registry,ref=$IMAGE_PATH:{{ $.Values.global.branchSlug32 }} \
+      {{ if (or $.with.buildkitServiceEnabled $.Values.global.buildkitServiceEnabled) }}
+      buildctl_cmd="buildctl \
+        --addr {{ or $.with.buildkitServiceAddr "tcp://buildkit-service.buildkit-service.svc:1234" }} \
+      "
+      if [ -f /buildkit-certs/cert.pem ]; then
+        buildctl_options_mtls="\
+          --tlscacert /buildkit-certs/ca.pem \
+          --tlscert /buildkit-certs/cert.pem \
+          --tlskey /buildkit-certs/key.pem \
         "
       fi
+      {{ else }}
+      buildctl_cmd=buildctl-daemonless.sh
+      buildctl_options_cache="\
+        --export-cache type=inline \
+        --import-cache type=registry,ref=$IMAGE_PATH:{{ $.Values.global.branchSlug32 }} \
+        "
+      {{ end }}
+
       mkdir -p /home/user/.docker
       echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /home/user/.docker/config.json
       export IMAGE_PATH=$CI_REGISTRY{{ if (or $.with.imageProject $.Values.global.imageProject) }}{{ (print "/" (or $.with.imageProject $.Values.global.imageProject)) }}{{ end }}/{{ or $.with.imageRepository $.Values.global.imageRepository }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}{{ if $.with.target }}{{ (print "-" $.with.target) }}{{ end }}
