@@ -1,0 +1,7 @@
+dependencies:
+  contrib:
+    valuesCompilers:
+      globalDefaults:
+        options:
+          mergeValues:
+            buildkitServiceEnabled: true
