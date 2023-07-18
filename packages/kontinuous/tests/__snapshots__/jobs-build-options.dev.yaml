@@ -187,24 +187,14 @@ spec:
               buildctl_options_mtls=\\"\\"
 
 
-              if [ \\"\\" != \\"\\" ]; then
-                buildctl_cmd=\\"buildctl \\\\
-                  --addr tcp://buildkit-service.buildkit-service.svc:1234 \\\\
+
+              buildctl_cmd=buildctl-daemonless.sh
+
+              buildctl_options_cache=\\"\\\\
+                --export-cache type=inline \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 \\"
-                if [ -f /buildkit-certs/cert.pem ]; then
-                  buildctl_options_mtls=\\"\\\\
-                    --tlscacert /buildkit-certs/ca.pem \\\\
-                    --tlscert /buildkit-certs/cert.pem \\\\
-                    --tlskey /buildkit-certs/key.pem \\\\
-                  \\"
-                fi
-              else
-                buildctl_cmd=buildctl-daemonless.sh
-                buildctl_options_cache=\\"\\\\
-                  --export-cache type=inline \\\\
-                  --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
-                \\"
-              fi
+
 
               mkdir -p /home/user/.docker
 
