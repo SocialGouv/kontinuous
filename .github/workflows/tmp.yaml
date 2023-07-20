@@ -9,7 +9,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'npm'
       - shell: bash
         run: |
           ls -la
