@@ -49,7 +49,7 @@ module.exports = async (manifests, options, context) => {
       new AggregateError(errors, "errors encountered during deployment").message
     )
     // if we're running through GitHub actions
-    if (process.env.GITHUB_JOB) {
+    if (process.env.GITHUB_RUN_ID) {
       deploymentMessage.push(
         `🔎 ${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
       )
