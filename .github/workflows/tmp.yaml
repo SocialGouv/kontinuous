@@ -13,4 +13,4 @@ jobs:
         run: |
           ls -la
           node -v
-          node -e "console.log(\`🔎 \${process.env.GITHUB_SERVER_URL}/\${process.env.GITHUB_REPOSITORY}/actions/runs/\${process.env.GITHUB_RUN_ID}/jobs/\${process.env.GITHUB_JOB}\`)"
+          node -e "console.log(\`🔎 \${process.env.GITHUB_SERVER_URL}/\${process.env.GITHUB_REPOSITORY}/actions/runs/\${process.env.GITHUB_RUN_ID}\`)"
