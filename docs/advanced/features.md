@@ -52,5 +52,5 @@ See [Plugins details](./advanced/plugins.md)
   - on demand resource cleaner
   - ...
 - post-deploy plugins
-  - notify mattermost (coming soon)
+  - notify mattermost/slack
   - ...
