@@ -1,0 +1,17 @@
+on:
+  push:
+    branches: "*"
+    
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - shell: bash
+        run: |
+          ls -la
+          node -v
+          node -e "console.log(\`🔎 \${process.env.GITHUB_SERVER_URL}/\${process.env.GITHUB_REPOSITORY}/actions/runs/\${process.env.GITHUB_RUN_ID}/jobs/\${process.env.GITHUB_JOB}\`)"
