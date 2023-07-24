@@ -582,7 +582,7 @@ const loadConfig = async (
             )
           }
         }
-        for (const [key, value] of Object.entries(config.links)) {
+        for (const [key, value] of Object.entries(config.links || {})) {
           if (value.startsWith("./")) {
             links[key] = path.join(config.workspaceKsPath, value)
           }
