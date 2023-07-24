@@ -558,7 +558,7 @@ kind: Cluster
 metadata:
   name: pg-hasura
   labels:
-    helm.sh/chart: cnpg-cluster-1.7.3
+    helm.sh/chart: cnpg-cluster-1.8.0
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: 14.5-6
@@ -620,7 +620,7 @@ kind: Cluster
 metadata:
   name: pg-keycloak
   labels:
-    helm.sh/chart: cnpg-cluster-1.7.3
+    helm.sh/chart: cnpg-cluster-1.8.0
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: 14.5-6
@@ -736,7 +736,7 @@ kind: Pooler
 metadata:
   name: pg-hasura-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.7.3
+    helm.sh/chart: cnpg-cluster-1.8.0
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: 14.5-6
@@ -771,7 +771,7 @@ kind: Pooler
 metadata:
   name: pg-keycloak-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.7.3
+    helm.sh/chart: cnpg-cluster-1.8.0
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: 14.5-6
