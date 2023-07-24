@@ -570,8 +570,7 @@ const loadConfig = async (
       },
     },
     links: {
-      default: {},
-      transform: async (links, config) => {
+      transform: async (links = {}, config = {}) => {
         const { linksSelfLocation } = config
         links = lowerKeys(links)
         if (!links[linksSelfLocation]) {
@@ -581,6 +580,11 @@ const loadConfig = async (
             links[linksSelfLocation] = path.resolve(
               `${path.dirname(real)}/../../..`
             )
+          }
+        }
+        for (const [key, value] of Object.entries(config.links)) {
+          if (value.startsWith("./")) {
+            links[key] = path.join(config.workspaceKsPath, value)
           }
         }
         return links
@@ -809,7 +813,6 @@ const loadConfig = async (
       env: "KS_GIT_ORG_REF",
     },
   }
-
   rootConfig = await loadStructuredConfig({
     rootConfig,
     inlineConfigs,
@@ -853,6 +856,7 @@ const loadConfig = async (
     }
   }
   const { configSet } = config
+
   for (const [key, val] of Object.entries(configSet)) {
     set(config, key, val)
 
