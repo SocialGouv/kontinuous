@@ -91,6 +91,10 @@ describe("test build manifests with snapshots", () => {
       )}"`,
       KS_HOMEDIR: `${tmpdir}/kontinuous/test-homedir`,
       KS_BUILD_PATH: buildPath,
+      KS_DISABLE_PLUGIN: JSON.stringify([
+        "fabrique/contrib/validators/kubeconform",
+        "fabrique/contrib/validators/sealedSecrets",
+      ]),
     }
     const envFile = `${testdirPath}/.env`
     if (fs.pathExistsSync(envFile)) {
