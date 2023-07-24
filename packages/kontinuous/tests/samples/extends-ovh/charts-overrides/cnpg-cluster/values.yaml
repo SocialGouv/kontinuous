@@ -175,3 +175,6 @@ recovery:
   enabled: false
   # the name of the source cluster in the backups
   # externalClusterName: source-cluster-name
+
+# List of SQL queries to be executed as a superuser in the application database right after is created - to be used with extreme care (by default empty)
+postInitApplicationSQL: ""

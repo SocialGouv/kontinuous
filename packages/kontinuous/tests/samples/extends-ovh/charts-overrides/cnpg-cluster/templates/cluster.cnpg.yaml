@@ -186,6 +186,10 @@ spec:
         {{- range $name := .Values.extensions }}
           - CREATE EXTENSION IF NOT EXISTS "{{ $name }}";
         {{- end }}
+      {{ if .Values.postInitApplicationSQL }}
+      postInitApplicationSQL:
+        {{- toYaml .Values.postInitApplicationSQL | nindent 8 }}
+      {{ end }}
     {{- end }}
 
   {{- if .Values.recovery.enabled }}
