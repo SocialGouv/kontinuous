@@ -23,7 +23,6 @@ metadata:
     kontinuous/resourceName: namespace-test-cnpg-feature-branch-1-2cfl45mk
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-    cert: wildcard
   name: test-cnpg-feature-branch-1
 ---
 apiVersion: networking.k8s.io/v1
@@ -80,81 +79,118 @@ metadata:
   namespace: test-cnpg-feature-branch-1
 automountServiceAccountToken: false
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
+  name: job-dev-test-cnpg-feature-branch-1-create-secrets-cre-4clmg3fe
+  namespace: test-cnpg-feature-branch-1
+  annotations:
+    kontinuous/needsName: create-secrets.create-secrets
+    kontinuous/needsNames: '[\\"create-secrets\\",\\"create-secrets.create-secrets\\",\\"create-secrets..create-secrets\\"]'
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.pg-hasura.jobs-pg
+    kontinuous/source: project/charts/fabrique/charts/pg-hasura/charts/jobs-pg/templates/jobs.yaml
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/depname.full: project.fabrique.pg-hasura.jobs-pg.job.job-dev-test-cnpg-feature-branch-1-create-secrets-cre-4clmg3fe
+    kontinuous/depname.chartResource: jobs-pg.job.job-dev-test-cnpg-feature-branch-1-create-secrets-cre-4clmg3fe
+    kontinuous/depname.chartName: jobs-pg
+    kontinuous/depname.chartPath: project.fabrique.pg-hasura.jobs-pg
+    kontinuous/depname.resourcePath: job.job-dev-test-cnpg-feature-branch-1-create-secrets-cre-4clmg3fe
+    kontinuous/depname.resourceName: job-dev-test-cnpg-feature-branch-1-create-secrets-cre-4clmg3fe
+    kontinuous/depname.chartNameTopFull: pg-hasura.jobs-pg
+    kontinuous/depname.chartNameTop: pg-hasura
+    kontinuous/plugin.log: \\"true\\"
   labels:
-    component: hasura
-    application: test-cnpg
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
     kontinuous/deployment.env: test-cnpg-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: deployment-hasura-3fivxu5u
+    kontinuous/resourceName: job-job-dev-test-cnpg-feature-branch-1-create-secrets-1p3zd538
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  name: hasura
-  namespace: test-cnpg-feature-branch-1
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
-    kontinuous/plugin.needs: '[\\"cnpg\\"]'
-    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
-    kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
-    kontinuous/depname.chartResource: hasura.deployment.hasura
-    kontinuous/depname.chartName: hasura
-    kontinuous/depname.chartPath: project.fabrique.contrib.hasura
-    kontinuous/depname.resourcePath: deployment.hasura
-    kontinuous/depname.resourceName: hasura
-    kontinuous/depname.chartNameTopFull: hasura
-    kontinuous/depname.chartNameTop: hasura
-    kontinuous/plugin.log: \\"false\\"
-    reloader.stakater.com/auto: \\"true\\"
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      component: hasura
+  backoffLimit: 6
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
   template:
     metadata:
       labels:
-        component: hasura
-        application: test-cnpg
+        environment: dev
+        ref: feature-branch-1
+        repository: test-cnpg
+        runName: cnpg-create-secrets
         kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
         kontinuous/deployment.env: test-cnpg-feature-branch-1
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: deployment-hasura-3fivxu5u
+        kontinuous/resourceName: job-job-dev-test-cnpg-feature-branch-1-create-secrets-1p3zd538
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
         kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
     spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-action
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.159.3
+          command:
+            - sh
+            - -c
+            - degit --disable-cache
+              socialgouv/kontinuous/plugins/contrib/jobs/cnpg-create-secrets
+              /action
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: action
+              mountPath: /action
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
+            requests:
+              cpu: \\"0\\"
+              memory: \\"0\\"
       containers:
-        - image: harbor.fabrique.social.gouv.fr/test-cnpg/hasura:sha-ffac537e6cbbf934b08745a378932722df287a53
-          livenessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /healthz
-              port: http
-            initialDelaySeconds: 30
-            periodSeconds: 5
-            timeoutSeconds: 5
-          name: hasura
-          ports:
-            - containerPort: 8080
-              name: http
-          readinessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /healthz
-              port: http
-            initialDelaySeconds: 30
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
+        - name: job
+          image: bitnami/kubectl:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: APP_DB_SECRET_NAME
+              value: pg-hasura-app
+            - name: CNPG_DB_SECRET_NAME
+              value: pg-hasura-db
+            - name: HBA_DATABASE
+              value: \\"*\\"
+            - name: HBA_HOST
+              value: pg-hasura-rw
+            - name: HBA_USER
+              value: \\"*\\"
+            - name: NAMESPACE
+              value: test-cnpg-feature-branch-1
+            - name: PGDATABASE
+              value: autodevops_feature-branch-1
+            - name: PGHOST
+              value: pg-hasura-rw
+            - name: PGPORT
+              value: \\"5432\\"
+            - name: PGUSER
+              value: user_feature-branch-1
+            - name: KUBECONFIG
+              value: /secrets/k8s/kubeconfig
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              /action/create-secrets.sh
           resources:
             limits:
               cpu: 1
@@ -162,97 +198,192 @@ spec:
             requests:
               cpu: 41m
               memory: 121Mi
-          startupProbe:
-            failureThreshold: 30
-            httpGet:
-              path: /healthz
-              port: http
-            periodSeconds: 5
-          env: []
-          envFrom:
-            - secretRef:
-                name: hasura
-            - secretRef:
-                name: cnpg-cluster-db
-            - configMapRef:
-                name: hasura-configmap
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: 1001
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - name: kubeconfig
+              mountPath: /secrets/k8s
+              readOnly: true
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8/jobs-pg.create-secrets.create-secrets
+      securityContext:
+        fsGroup: 1001
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - name: kubeconfig
+          secret:
+            secretName: kubeconfig
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
+        - name: kontinuous-io
+          emptyDir: {}
 ---
-apiVersion: v1
-kind: Service
+apiVersion: batch/v1
+kind: Job
 metadata:
+  name: job-dev-test-cnpg-feature-branch-1-create-secrets-cre-3w8cw5d5
+  namespace: test-cnpg-feature-branch-1
+  annotations:
+    kontinuous/needsName: create-secrets.create-secrets
+    kontinuous/needsNames: '[\\"create-secrets\\",\\"create-secrets.create-secrets\\",\\"create-secrets..create-secrets\\"]'
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.pg-keycloak.jobs-pg
+    kontinuous/source: project/charts/fabrique/charts/pg-keycloak/charts/jobs-pg/templates/jobs.yaml
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/depname.full: project.fabrique.pg-keycloak.jobs-pg.job.job-dev-test-cnpg-feature-branch-1-create-secrets-cre-3w8cw5d5
+    kontinuous/depname.chartResource: jobs-pg.job.job-dev-test-cnpg-feature-branch-1-create-secrets-cre-3w8cw5d5
+    kontinuous/depname.chartName: jobs-pg
+    kontinuous/depname.chartPath: project.fabrique.pg-keycloak.jobs-pg
+    kontinuous/depname.resourcePath: job.job-dev-test-cnpg-feature-branch-1-create-secrets-cre-3w8cw5d5
+    kontinuous/depname.resourceName: job-dev-test-cnpg-feature-branch-1-create-secrets-cre-3w8cw5d5
+    kontinuous/depname.chartNameTopFull: pg-keycloak.jobs-pg
+    kontinuous/depname.chartNameTop: pg-keycloak
+    kontinuous/plugin.log: \\"true\\"
   labels:
-    component: hasura
-    application: test-cnpg
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
     kontinuous/deployment.env: test-cnpg-feature-branch-1
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: service-hasura-2b56e0cf
+    kontinuous/resourceName: job-job-dev-test-cnpg-feature-branch-1-create-secrets-478zxs78
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  name: hasura
-  namespace: test-cnpg-feature-branch-1
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
-    kontinuous/plugin.needs: '[\\"cnpg\\"]'
-    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
 spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 8080
-  selector:
-    component: hasura
-  type: ClusterIP
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"cnpg\\"]'
-    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
-  labels:
-    component: hasura
-    application: test-cnpg
-    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
-    kontinuous/deployment.env: test-cnpg-feature-branch-1
-    kontinuous/ref: feature-branch-1
-    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: ingress-hasura-2784v1wj
-    app.kubernetes.io/manifest-managed-by: kontinuous
-    app.kubernetes.io/manifest-created-by: kontinuous
-  name: hasura
-  namespace: test-cnpg-feature-branch-1
-spec:
-  rules:
-    - host: hasura-test-cnpg-feature-branch-1.dev.fabrique.social.gouv.fr
-      http:
-        paths:
-          - backend:
-              service:
-                name: hasura
-                port:
-                  name: http
-            path: /
-            pathType: Prefix
-  tls:
-    - hosts:
-        - hasura-test-cnpg-feature-branch-1.dev.fabrique.social.gouv.fr
-      secretName: wildcard-crt
+  backoffLimit: 6
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      labels:
+        environment: dev
+        ref: feature-branch-1
+        repository: test-cnpg
+        runName: cnpg-create-secrets
+        kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+        kontinuous/deployment.env: test-cnpg-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: job-job-dev-test-cnpg-feature-branch-1-create-secrets-478zxs78
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-action
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.159.3
+          command:
+            - sh
+            - -c
+            - degit --disable-cache
+              socialgouv/kontinuous/plugins/contrib/jobs/cnpg-create-secrets
+              /action
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: action
+              mountPath: /action
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
+            requests:
+              cpu: \\"0\\"
+              memory: \\"0\\"
+      containers:
+        - name: job
+          image: bitnami/kubectl:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: APP_DB_SECRET_NAME
+              value: pg-keycloak-app
+            - name: CNPG_DB_SECRET_NAME
+              value: pg-keycloak-db
+            - name: HBA_DATABASE
+              value: \\"*\\"
+            - name: HBA_HOST
+              value: pg-keycloak-rw
+            - name: HBA_USER
+              value: \\"*\\"
+            - name: NAMESPACE
+              value: test-cnpg-feature-branch-1
+            - name: PGDATABASE
+              value: autodevops_feature-branch-1
+            - name: PGHOST
+              value: pg-keycloak-rw
+            - name: PGPORT
+              value: \\"5432\\"
+            - name: PGUSER
+              value: user_feature-branch-1
+            - name: KUBECONFIG
+              value: /secrets/k8s/kubeconfig
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              /action/create-secrets.sh
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 41m
+              memory: 121Mi
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: 1001
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - name: kubeconfig
+              mountPath: /secrets/k8s
+              readOnly: true
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8/jobs-pg.create-secrets.create-secrets
+      securityContext:
+        fsGroup: 1001
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - name: kubeconfig
+          secret:
+            secretName: kubeconfig
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
+        - name: kontinuous-io
+          emptyDir: {}
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: cnpg-cluster
+  name: pg-hasura
   labels:
-    helm.sh/chart: cnpg-cluster-1.4.2
-    app.kubernetes.io/name: cnpg-cluster
+    helm.sh/chart: cnpg-cluster-1.8.0
+    app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: 14.5-6
     app.kubernetes.io/managed-by: Helm
@@ -261,21 +392,23 @@ metadata:
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: cluster-cnpg-cluster-3ucigx9f
+    kontinuous/resourceName: cluster-pg-hasura-3gpn0wln
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   annotations:
-    kontinuous/chartPath: project.cnpg.cnpg-cluster
-    kontinuous/source: project/charts/cnpg/charts/cnpg-cluster/templates/cluster.cnpg.yaml
+    kontinuous/chartPath: project.fabrique.pg-hasura.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/pg-hasura/charts/cnpg-cluster/templates/cluster.cnpg.yaml
+    kontinuous/plugin.needs: |
+      - project.fabrique.pg-hasura.jobs-pg
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
-    kontinuous/depname.full: project.cnpg.cnpg-cluster.cluster.cnpg-cluster
-    kontinuous/depname.chartResource: cnpg-cluster.cluster.cnpg-cluster
+    kontinuous/depname.full: project.fabrique.pg-hasura.cnpg-cluster.cluster.pg-hasura
+    kontinuous/depname.chartResource: cnpg-cluster.cluster.pg-hasura
     kontinuous/depname.chartName: cnpg-cluster
-    kontinuous/depname.chartPath: project.cnpg.cnpg-cluster
-    kontinuous/depname.resourcePath: cluster.cnpg-cluster
-    kontinuous/depname.resourceName: cnpg-cluster
-    kontinuous/depname.chartNameTopFull: cnpg.cnpg-cluster
-    kontinuous/depname.chartNameTop: cnpg
+    kontinuous/depname.chartPath: project.fabrique.pg-hasura.cnpg-cluster
+    kontinuous/depname.resourcePath: cluster.pg-hasura
+    kontinuous/depname.resourceName: pg-hasura
+    kontinuous/depname.chartNameTopFull: pg-hasura.cnpg-cluster
+    kontinuous/depname.chartNameTop: pg-hasura
     kontinuous/plugin.log: \\"false\\"
   namespace: test-cnpg-feature-branch-1
 spec:
@@ -292,8 +425,72 @@ spec:
     enablePodMonitor: false
   bootstrap:
     initdb:
-      database: app
-      owner: app
+      database: autodevops_feature-branch-1
+      owner: user_feature-branch-1
+      secret:
+        name: pg-hasura-db
+      postInitTemplateSQL:
+        - CREATE EXTENSION IF NOT EXISTS \\"postgis\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"postgis_topology\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"fuzzystrmatch\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"postgis_tiger_geocoder\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"uuid-ossp\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"citext\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"pgcrypto\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"hstore\\";
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: pg-keycloak
+  labels:
+    helm.sh/chart: cnpg-cluster-1.8.0
+    app.kubernetes.io/name: pg-keycloak
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: 14.5-6
+    app.kubernetes.io/managed-by: Helm
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: cluster-pg-keycloak-3np6zhd8
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.fabrique.pg-keycloak.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/pg-keycloak/charts/cnpg-cluster/templates/cluster.cnpg.yaml
+    kontinuous/plugin.needs: |
+      - project.fabrique.pg-keycloak.jobs-pg
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/depname.full: project.fabrique.pg-keycloak.cnpg-cluster.cluster.pg-keycloak
+    kontinuous/depname.chartResource: cnpg-cluster.cluster.pg-keycloak
+    kontinuous/depname.chartName: cnpg-cluster
+    kontinuous/depname.chartPath: project.fabrique.pg-keycloak.cnpg-cluster
+    kontinuous/depname.resourcePath: cluster.pg-keycloak
+    kontinuous/depname.resourceName: pg-keycloak
+    kontinuous/depname.chartNameTopFull: pg-keycloak.cnpg-cluster
+    kontinuous/depname.chartNameTop: pg-keycloak
+    kontinuous/plugin.log: \\"false\\"
+  namespace: test-cnpg-feature-branch-1
+spec:
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgis:14
+  imagePullPolicy: IfNotPresent
+  storage:
+    size: 8Gi
+    storageClass: managed-csi
+  minSyncReplicas: 0
+  maxSyncReplicas: 0
+  postgresql: {}
+  monitoring:
+    enablePodMonitor: false
+  bootstrap:
+    initdb:
+      database: autodevops_feature-branch-1
+      owner: user_feature-branch-1
+      secret:
+        name: pg-keycloak-db
       postInitTemplateSQL:
         - CREATE EXTENSION IF NOT EXISTS \\"postgis\\";
         - CREATE EXTENSION IF NOT EXISTS \\"postgis_topology\\";
@@ -307,10 +504,10 @@ spec:
 apiVersion: postgresql.cnpg.io/v1
 kind: Pooler
 metadata:
-  name: cnpg-cluster-rw
+  name: pg-hasura-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.4.2
-    app.kubernetes.io/name: cnpg-cluster
+    helm.sh/chart: cnpg-cluster-1.8.0
+    app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: 14.5-6
     app.kubernetes.io/managed-by: Helm
@@ -319,17 +516,54 @@ metadata:
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: pooler-cnpg-cluster-rw-t5d0s6ee
+    kontinuous/resourceName: pooler-pg-hasura-rw-qzqjyuru
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   annotations:
-    kontinuous/chartPath: project.cnpg.cnpg-cluster
-    kontinuous/source: project/charts/cnpg/charts/cnpg-cluster/templates/pooler.cnpg.yaml
+    kontinuous/chartPath: project.fabrique.pg-hasura.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/pg-hasura/charts/cnpg-cluster/templates/pooler.cnpg.yaml
+    kontinuous/plugin.needs: |
+      - project.fabrique.pg-hasura.jobs-pg
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
   namespace: test-cnpg-feature-branch-1
 spec:
   cluster:
-    name: cnpg-cluster
+    name: pg-hasura
+  instances: 1
+  pgbouncer:
+    parameters:
+      max_client_conn: \\"1000\\"
+    poolMode: session
+  type: rw
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Pooler
+metadata:
+  name: pg-keycloak-rw
+  labels:
+    helm.sh/chart: cnpg-cluster-1.8.0
+    app.kubernetes.io/name: pg-keycloak
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: 14.5-6
+    app.kubernetes.io/managed-by: Helm
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+    kontinuous/deployment.env: test-cnpg-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: pooler-pg-keycloak-rw-ljgr35td
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.fabrique.pg-keycloak.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/pg-keycloak/charts/cnpg-cluster/templates/pooler.cnpg.yaml
+    kontinuous/plugin.needs: |
+      - project.fabrique.pg-keycloak.jobs-pg
+    kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
+  namespace: test-cnpg-feature-branch-1
+spec:
+  cluster:
+    name: pg-keycloak
   instances: 1
   pgbouncer:
     parameters:
