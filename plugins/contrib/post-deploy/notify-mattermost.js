@@ -48,6 +48,12 @@ module.exports = async (manifests, options, context) => {
     deploymentMessage.push(
       new AggregateError(errors, "errors encountered during deployment").message
     )
+    // if we're running through GitHub actions
+    if (process.env.GITHUB_RUN_ID) {
+      deploymentMessage.push(
+        `🔎 ${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
+      )
+    }
   }
 
   await new Promise((resolve, reject) => {
