@@ -29,7 +29,7 @@ module.exports = (manifests, _options, { values }) => {
       if (!key.startsWith("~")) {
         continue
       }
-      let value = scopedValues[key]
+      let value
       let match
       if (
         typeof scopedValues[key] === "object" &&
