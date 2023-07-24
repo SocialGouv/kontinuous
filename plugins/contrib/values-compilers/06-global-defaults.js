@@ -57,8 +57,7 @@ module.exports = async (values, options, { config, utils, ctx }) => {
 
   const { projectName } = config
 
-  const ciNamespace =
-    config.ciNamespace || `${projectName || repositoryName}-ci`
+  const { ciNamespace } = config
 
   const replicas = isProd ? 2 : 1
 

@@ -76,7 +76,10 @@ module.exports.deployWith = new Option(
   "set deploy-with plugin to handle the deployment"
 )
 
-module.exports.ciNamespace = new Option("--ci-namespace <ns>", "ci namespace")
+module.exports.ciNamespace = new Option(
+  "--ci-namespace <ns...>",
+  "ci namespace"
+)
 
 module.exports.rancherProjectId = new Option(
   "--rancher-project-id <project-id>",
