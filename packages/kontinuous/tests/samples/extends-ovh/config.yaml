@@ -4,3 +4,6 @@ dependencies:
     extends:
       - name: ovh
         ifEnv: [dev]
+
+links:
+  socialgouv/helm-charts/charts/cnpg-cluster@v1: ./charts-overrides/cnpg-cluster

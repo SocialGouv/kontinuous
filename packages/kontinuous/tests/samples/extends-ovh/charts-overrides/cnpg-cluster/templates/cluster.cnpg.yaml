@@ -1,0 +1,204 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ include "cnpg-cluster.fullname" . }}
+  labels:
+    {{- include "cnpg-cluster.labels" . | nindent 4 }}
+spec:
+  instances: {{ .Values.replicaCount }}
+  {{- if .Values.image.repository }}
+  imageName: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+  {{- end }}
+  imagePullPolicy: {{ .Values.image.pullPolicy }}
+  {{- if or .Values.imagePullSecrets .Values.registryCredentials }}
+  imagePullSecrets:
+  {{- with .Values.imagePullSecrets }}
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
+  {{- range $name, $settings := .Values.registryCredentials }}
+    - name: "{{ include "cnpg-cluster.fullname" $ }}-{{ $name }}"
+  {{- end }}
+  {{- end }}
+
+  {{- if or .Values.nodeSelector .Values.tolerations .Values.extraAffinity }}
+  affinity:
+    {{- with .Values.nodeSelector }}
+    nodeSelector:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+    tolerations:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+    {{- with .Values.extraAffinity }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- end }}
+
+  storage:
+    size: {{ .Values.persistence.size | quote }}
+    {{- with .Values.persistence.resizeInUseVolumes }}
+    resizeInUseVolumes: {{ . | quote }}
+    {{- end }}
+    {{- if .Values.persistence.storageClass }}
+    {{- if (eq "-" .Values.persistence.storageClass) }}
+    storageClass: ""
+    {{- else }}
+    storageClass: "{{ .Values.persistence.storageClass }}"
+    {{- end }}
+    {{- end }}
+    {{- with .Values.persistence.pvcTemplate }}
+    pvcTemplate:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+
+{{- if .Values.backup.enabled }}
+  backup:
+    retentionPolicy: "{{ .Values.backup.retentionPolicy }}"
+    barmanObjectStore:
+    {{- with .Values.backup.endpointURL }}
+      endpointURL: "{{ . }}"
+    {{- end }}
+    {{- with .Values.backup.endpointCA }}
+      endpointCA: "{{ . }}"
+    {{- end }}
+      destinationPath: {{ .Values.backup.destinationPath }}
+    {{- with .Values.backup.serverName }}
+      serverName: "{{ . }}"
+    {{- end }}
+    {{- with .Values.backup.wal }}
+      wal:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.backup.data }}
+      data:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.backup.tags }}
+      tags:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.backup.historyTags }}
+      historyTags:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- if .Values.backup.s3Credentials }}
+      s3Credentials:
+        {{- with .Values.backup.s3Credentials.accessKeyId }}
+        accessKeyId:
+          name: {{ include "cnpg-cluster.backupSecretName" $ }}
+          key: "accessKeyId"
+        {{- end }}
+        {{- with .Values.backup.s3Credentials.secretAccessKey }}
+        secretAccessKey:
+          name: {{ include "cnpg-cluster.backupSecretName" $ }}
+          key: "secretAccessKey"
+        {{- end }}
+        {{- with .Values.backup.s3Credentials.region }}
+        region:
+          name: {{ include "cnpg-cluster.backupSecretName" $ }}
+          key: "region"
+        {{- end }}
+        {{- with .Values.backup.s3Credentials.sessionToken }}
+        sessionToken:
+          name: {{ include "cnpg-cluster.backupSecretName" $ }}
+          key: "sessionToken"
+        {{- end }}
+        {{- with .Values.backup.s3Credentials.inheritFromIAMRole }}
+        inheritFromIAMRole: {{ . }}
+        {{- end }}
+    {{- else if .Values.backup.googleCredentials }}
+      googleCredentials:
+        {{- with .Values.backup.googleCredentials.gkeEnvironment }}
+        gkeEnvironment: {{ . }}
+        {{- end }}
+        {{- with .Values.backup.googleCredentials.applicationCredentials }}
+        applicationCredentials:
+          name: {{ include "cnpg-cluster.backupSecretName" $ }}
+          key: "applicationCredentials"
+        {{- end }}
+    {{- else if .Values.backup.azureCredentials  }}
+      azureCredentials:
+        {{- with .Values.backup.azureCredentials.connectionString }}
+        connectionString:
+          name: {{ .name }}
+          key: {{ .key }}
+        {{- end }}
+        {{- with .Values.backup.azureCredentials.storageAccount }}
+        storageAccount:
+          name: {{ .name }}
+          key: {{ .key }}
+        {{- end }}
+        {{- with .Values.backup.azureCredentials.storageKey }}
+        storageKey:
+          name: {{ .name }}
+          key: {{ .key }}
+        {{- end }}
+        {{- with .Values.backup.azureCredentials.storageSasToken }}
+        storageSasToken:
+          name: {{ .name }}
+          key: {{ .key }}
+        {{- end }}
+        {{- with .Values.backup.azureCredentials.inheritFromAzureAD }}
+        inheritFromAzureAD: {{ . }}
+        {{- end }}
+    {{- else }}
+    {{- end }}
+{{- end }}
+  
+  minSyncReplicas: {{ .Values.minSyncReplicas }}
+  maxSyncReplicas: {{ .Values.maxSyncReplicas }}
+  postgresql:
+    parameters:
+      {{- with .Values.postgresqlParameters }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+  monitoring:
+    enablePodMonitor: {{ .Values.monitoring.enablePodMonitor }}
+
+  {{ if .Values.superuserSecretName }}
+  superuserSecret:
+    name: {{ .Values.superuserSecretName }}
+  {{ end}}
+
+  bootstrap:
+    {{- if .Values.recovery.enabled }}
+    recovery:
+      source: "{{ or .Values.recovery.externalClusterName "cnpg-cluster" }}"
+      {{- if .Values.recovery.targetTime }}
+      recoveryTarget:
+        targetTime: "{{ .Values.recovery.targetTime }}"
+      {{/* {{- else }} */}}
+      {{/* recoveryTarget: */}}
+      {{/*   targetTLI: "latest" */}}
+      {{- end }}
+    {{- else }}
+    initdb:
+      database: {{ .Values.dbName }}
+      owner: {{ .Values.dbOwner }}
+      {{ if .Values.dbSecretName }}
+      secret:
+        name: {{ .Values.dbSecretName }}
+      {{ end }}
+      # postgis configuration plugins
+      postInitTemplateSQL:
+        {{- range $name := .Values.extensions }}
+          - CREATE EXTENSION IF NOT EXISTS "{{ $name }}";
+        {{- end }}
+      {{ if .Values.postInitApplicationSQL }}
+      postInitApplicationSQL:
+        {{- toYaml .Values.postInitApplicationSQL | nindent 8 }}
+      {{ end }}
+    {{- end }}
+
+  {{- if .Values.recovery.enabled }}
+  externalClusters:
+    - name: "{{ or .Values.recovery.externalClusterName "cnpg-cluster" }}"
+      barmanObjectStore:
+        {{- toYaml .Values.recovery.backup | nindent 8 }}
+  {{- end }}
+
+{{- with .Values.clusterExtraSpec }}
+  {{- toYaml . | nindent 2 }}
+{{- end }}
