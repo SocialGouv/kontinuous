@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.161.0 (2023-07-25)
+
+
+### Features
+
+* needs using argocd sync waves ([#370](https://github.com/socialgouv/kontinuous/issues/370)) ([e546b47](https://github.com/socialgouv/kontinuous/commit/e546b4794a339584110aef309992cffd4fe09ed0))
+
 ## 1.160.0 (2023-07-25)
 
 
