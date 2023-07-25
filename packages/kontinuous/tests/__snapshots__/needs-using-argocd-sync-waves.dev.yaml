@@ -1,0 +1,1147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test build manifests with snapshots needs-using-argocd-sync-waves.dev 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: \\"1234\\"
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    janitor/ttl: 7d
+  labels:
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: namespace-test-needs-using-argocd-sync-waves-feature-1bi0yybk
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+    cert: wildcard
+  name: test-needs-using-argocd-sync-waves-feature-branch-1
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+  labels:
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+  labels:
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+automountServiceAccountToken: false
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app1
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-app1-57kffq1g
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app1
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app1
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app1/templates/deployment.yaml
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/depname.full: project.fabrique.contrib.app1.deployment.app1
+    kontinuous/depname.chartResource: app1.deployment.app1
+    kontinuous/depname.chartName: app1
+    kontinuous/depname.chartPath: project.fabrique.contrib.app1
+    kontinuous/depname.resourcePath: deployment.app1
+    kontinuous/depname.resourceName: app1
+    kontinuous/depname.chartNameTopFull: app1
+    kontinuous/depname.chartNameTop: app1
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        component: app1
+        application: test-needs-using-argocd-sync-waves
+        namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+        kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+        kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-app1-57kffq1g
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-needs-using-argocd-sync-waves-feature-branch-1
+                    - key: component
+                      operator: In
+                      values:
+                        - app1
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: harbor.fabrique.social.gouv.fr/test-needs-using-argocd-sync-waves/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 41m
+              memory: 121Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app2-bis
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-app2-bis-14iqc58u
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app2-bis
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app2-bis
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app2-bis/templates/deployment.yaml
+    kontinuous/plugin.needs: '[\\"app1\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/depname.full: project.fabrique.contrib.app2-bis.deployment.app2-bis
+    kontinuous/depname.chartResource: app2-bis.deployment.app2-bis
+    kontinuous/depname.chartName: app2-bis
+    kontinuous/depname.chartPath: project.fabrique.contrib.app2-bis
+    kontinuous/depname.resourcePath: deployment.app2-bis
+    kontinuous/depname.resourceName: app2-bis
+    kontinuous/depname.chartNameTopFull: app2-bis
+    kontinuous/depname.chartNameTop: app2-bis
+    argocd.argoproj.io/sync-wave: \\"1\\"
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app2-bis
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        component: app2-bis
+        application: test-needs-using-argocd-sync-waves
+        namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+        kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+        kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-app2-bis-14iqc58u
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-needs-using-argocd-sync-waves-feature-branch-1
+                    - key: component
+                      operator: In
+                      values:
+                        - app2-bis
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: harbor.fabrique.social.gouv.fr/test-needs-using-argocd-sync-waves/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 41m
+              memory: 121Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app2
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-app2-5llwgty4
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app2
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app2
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app2/templates/deployment.yaml
+    kontinuous/plugin.needs: '[\\"app1\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/depname.full: project.fabrique.contrib.app2.deployment.app2
+    kontinuous/depname.chartResource: app2.deployment.app2
+    kontinuous/depname.chartName: app2
+    kontinuous/depname.chartPath: project.fabrique.contrib.app2
+    kontinuous/depname.resourcePath: deployment.app2
+    kontinuous/depname.resourceName: app2
+    kontinuous/depname.chartNameTopFull: app2
+    kontinuous/depname.chartNameTop: app2
+    argocd.argoproj.io/sync-wave: \\"1\\"
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app2
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        component: app2
+        application: test-needs-using-argocd-sync-waves
+        namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+        kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+        kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-app2-5llwgty4
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-needs-using-argocd-sync-waves-feature-branch-1
+                    - key: component
+                      operator: In
+                      values:
+                        - app2
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: harbor.fabrique.social.gouv.fr/test-needs-using-argocd-sync-waves/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 41m
+              memory: 121Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app3
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-app3-1ovc902p
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app3
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app3
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app3/templates/deployment.yaml
+    kontinuous/plugin.needs: '[\\"app2\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/depname.full: project.fabrique.contrib.app3.deployment.app3
+    kontinuous/depname.chartResource: app3.deployment.app3
+    kontinuous/depname.chartName: app3
+    kontinuous/depname.chartPath: project.fabrique.contrib.app3
+    kontinuous/depname.resourcePath: deployment.app3
+    kontinuous/depname.resourceName: app3
+    kontinuous/depname.chartNameTopFull: app3
+    kontinuous/depname.chartNameTop: app3
+    argocd.argoproj.io/sync-wave: \\"2\\"
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app3
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        component: app3
+        application: test-needs-using-argocd-sync-waves
+        namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+        kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+        kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-app3-1ovc902p
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-needs-using-argocd-sync-waves-feature-branch-1
+                    - key: component
+                      operator: In
+                      values:
+                        - app3
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: harbor.fabrique.social.gouv.fr/test-needs-using-argocd-sync-waves/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 41m
+              memory: 121Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app4
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-app4-312ggbqa
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app4
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app4
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app4/templates/deployment.yaml
+    kontinuous/plugin.needs: '[\\"app3\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/depname.full: project.fabrique.contrib.app4.deployment.app4
+    kontinuous/depname.chartResource: app4.deployment.app4
+    kontinuous/depname.chartName: app4
+    kontinuous/depname.chartPath: project.fabrique.contrib.app4
+    kontinuous/depname.resourcePath: deployment.app4
+    kontinuous/depname.resourceName: app4
+    kontinuous/depname.chartNameTopFull: app4
+    kontinuous/depname.chartNameTop: app4
+    argocd.argoproj.io/sync-wave: \\"3\\"
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app4
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        component: app4
+        application: test-needs-using-argocd-sync-waves
+        namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+        kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+        kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-app4-312ggbqa
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-needs-using-argocd-sync-waves-feature-branch-1
+                    - key: component
+                      operator: In
+                      values:
+                        - app4
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: harbor.fabrique.social.gouv.fr/test-needs-using-argocd-sync-waves/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 41m
+              memory: 121Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app5
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-app5-2cjzo3x1
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app5
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app5
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app5/templates/deployment.yaml
+    kontinuous/plugin.needs: '[\\"app2\\",\\"app4\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/depname.full: project.fabrique.contrib.app5.deployment.app5
+    kontinuous/depname.chartResource: app5.deployment.app5
+    kontinuous/depname.chartName: app5
+    kontinuous/depname.chartPath: project.fabrique.contrib.app5
+    kontinuous/depname.resourcePath: deployment.app5
+    kontinuous/depname.resourceName: app5
+    kontinuous/depname.chartNameTopFull: app5
+    kontinuous/depname.chartNameTop: app5
+    argocd.argoproj.io/sync-wave: \\"4\\"
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app5
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        component: app5
+        application: test-needs-using-argocd-sync-waves
+        namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+        kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+        kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-app5-2cjzo3x1
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-needs-using-argocd-sync-waves-feature-branch-1
+                    - key: component
+                      operator: In
+                      values:
+                        - app5
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: harbor.fabrique.social.gouv.fr/test-needs-using-argocd-sync-waves/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 41m
+              memory: 121Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app1
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-app1-2d3191yp
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app1
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app1
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app1/templates/service.yaml
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app1
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app2-bis
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-app2-bis-3yebgi16
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app2-bis
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app2-bis
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app2-bis/templates/service.yaml
+    kontinuous/plugin.needs: '[\\"app1\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app2-bis
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app2
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-app2-4twbb7am
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app2
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app2
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app2/templates/service.yaml
+    kontinuous/plugin.needs: '[\\"app1\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app2
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app3
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-app3-4u36tjt7
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app3
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app3
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app3/templates/service.yaml
+    kontinuous/plugin.needs: '[\\"app2\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app3
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app4
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-app4-2ndphw9e
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app4
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app4
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app4/templates/service.yaml
+    kontinuous/plugin.needs: '[\\"app3\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app4
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app5
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-app5-43g6i8dg
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app5
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app5
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app5/templates/service.yaml
+    kontinuous/plugin.needs: '[\\"app2\\",\\"app4\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app5
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app1
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app1/templates/ingress.yaml
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+  labels:
+    component: app1
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-app1-37n4d2oo
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app1
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+spec:
+  rules:
+    - host: app1-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app1
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - app1-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app2-bis
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app2-bis/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"app1\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+  labels:
+    component: app2-bis
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-app2-bis-4bugk85o
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app2-bis
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+spec:
+  rules:
+    - host: app2-bis-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app2-bis
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - app2-bis-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app2
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app2/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"app1\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+  labels:
+    component: app2
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-app2-68o4ojuk
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app2
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+spec:
+  rules:
+    - host: app2-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app2
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - app2-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app3
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app3/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"app2\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+  labels:
+    component: app3
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-app3-4twdad0u
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app3
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+spec:
+  rules:
+    - host: app3-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app3
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - app3-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app4
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app4/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"app3\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+  labels:
+    component: app4
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-app4-565so375
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app4
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+spec:
+  rules:
+    - host: app4-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app4
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - app4-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app5
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app5/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"app2\\",\\"app4\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+  labels:
+    component: app5
+    application: test-needs-using-argocd-sync-waves
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
+    kontinuous/deployment.env: test-needs-using-argocd-sync-waves-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-app5-58ddpes2
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app5
+  namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+spec:
+  rules:
+    - host: app5-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app5
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - app5-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+"
+`;

@@ -1,0 +1,22 @@
+app1:
+  ~chart: app
+
+app2:
+  ~chart: app
+  ~needs: [app1]
+
+app3:
+  ~chart: app
+  ~needs: [app2]
+
+app4:
+  ~chart: app
+  ~needs: [app3]
+
+app2-bis:
+  ~chart: app
+  ~needs: [app1]
+
+app5:
+  ~chart: app
+  ~needs: [app2, app4]

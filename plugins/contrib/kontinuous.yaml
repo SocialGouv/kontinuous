@@ -17,6 +17,8 @@ patches:
     enabled: true
   needsUsingInitcontainers:
     enabled: false
+  needsUsingArgocdSyncWaves:
+    enabled: false
   kapp:
     enabled: false
   needsUsingKapp:
