@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.160.0 (2023-07-25)
+
+
+### Features
+
+* ci namespace fallback ([#368](https://github.com/socialgouv/kontinuous/issues/368)) ([cdc9caa](https://github.com/socialgouv/kontinuous/commit/cdc9caace30698dd9a4ef2af0442982281357870))
+
 ## 1.159.5 (2023-07-24)
 
 ## 1.159.4 (2023-07-24)
