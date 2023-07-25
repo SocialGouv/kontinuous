@@ -30,6 +30,7 @@ const slug = require("../utils/slug")
 const normalizeRepositoryUrl = require("../utils/normalize-repository-url")
 
 const gitEnv = require("../utils/git-env")
+const kubectl = require("../utils/kubectl-retry")
 
 const loadDependencies = require("./load-dependencies")
 
@@ -54,6 +55,8 @@ const loadConfig = async (
   isReloadingConfig = false
 ) => {
   const env = ctx.get("env") || process.env
+
+  configMeta.__cachedResults = configMeta.__cachedResults || {}
 
   const setConfigMeta = (configKey, key, value) => {
     if (!configMeta[configKey]) {
@@ -478,14 +481,6 @@ const loadConfig = async (
         return `${webhookUri}/api/v1/oas/artifacts/status?${query}`
       },
     },
-    ciNamespace: {
-      option: "ci-namespace",
-      env: "KS_CI_NAMESPACE",
-      defaultFunction: (config) =>
-        config.repositoryName
-          ? `${config.projectName || config.repositoryName}-ci`
-          : undefined,
-    },
     ci: {
       env: "KS_CI",
       defaultFunction: () => ciDetect(),
@@ -542,6 +537,61 @@ const loadConfig = async (
           return kubeconfigContext
         }
         return kubeconfigContext[config.environment]
+      },
+    },
+    ciNamespaceDefaultFallback: {
+      default: false,
+    },
+    ciNamespace: {
+      option: "ci-namespace",
+      env: "KS_CI_NAMESPACE",
+      envParser: envParserCastArray,
+      defaultFunction: (config) =>
+        config.ciNamespaceDefaultFallback
+          ? [
+              `ci-${config.projectName || config.repositoryName}`,
+              `${config.projectName || config.repositoryName}-ci`,
+            ]
+          : `${config.projectName || config.repositoryName}-ci`,
+      transform: async (value, config) => {
+        if (!Array.isArray(value)) {
+          return value
+        }
+        if (value.length <= 1) {
+          return value[0]
+        }
+
+        const cached = configMeta.__cachedResults
+        if (!cached.ciNamespaces) {
+          cached.ciNamespaces = {}
+        }
+        const cachedCiNs = cached.ciNamespaces
+
+        for (const ns of value) {
+          if (cachedCiNs[ns] !== undefined) {
+            if (cachedCiNs[ns]) {
+              return ns
+            }
+            continue
+          }
+          try {
+            await kubectl(`get ns ${ns}`, {
+              kubeconfig: config.kubeconfig,
+              kubeconfigContext: config.kubeconfigContext,
+              logInfo: false,
+              logError: false,
+              logger,
+            })
+            cachedCiNs[ns] = true
+            return ns
+          } catch (err) {
+            cachedCiNs[ns] = false
+            // do nothing
+          }
+        }
+        throw new Error(
+          `no matching ci namespace found, looked for: ${value.join(", ")}`
+        )
       },
     },
     linksSelfLocation: {
