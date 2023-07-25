@@ -588,7 +588,7 @@ metadata:
     kontinuous/plugin.log: \\"false\\"
   namespace: test-extends-ovh
 spec:
-  instances: 1
+  instances: 3
   imageName: ghcr.io/cloudnative-pg/postgis:14
   imagePullPolicy: IfNotPresent
   storage:
@@ -650,7 +650,7 @@ metadata:
     kontinuous/plugin.log: \\"false\\"
   namespace: test-extends-ovh
 spec:
-  instances: 1
+  instances: 3
   imageName: ghcr.io/cloudnative-pg/postgis:14
   imagePullPolicy: IfNotPresent
   storage:
