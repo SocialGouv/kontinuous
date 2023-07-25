@@ -1,0 +1,8 @@
+dependencies:
+  fabrique:
+    import: socialgouv/kontinuous/plugins/fabrique
+    dependencies:
+      contrib:
+        patches:
+          needsUsingArgocdSyncWaves:
+            enabled: true
