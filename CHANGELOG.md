@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.161.2 (2023-07-27)
+
 ## [1.161.1](https://github.com/socialgouv/kontinuous/compare/v1.161.0...v1.161.1) (2023-07-27)
 
 
