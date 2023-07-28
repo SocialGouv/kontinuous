@@ -248,6 +248,7 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    some: annotation
     kontinuous/chartPath: project.fabrique.contrib.metabase
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/ingress.yaml
     kontinuous/deployment: test-ingress-custom-annotations-feature-branch-1-ffac-361bby73

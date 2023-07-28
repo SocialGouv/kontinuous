@@ -5,7 +5,12 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     {{ if .Values.global.ingress.annotations }}
-    {{ range $key, $val := (merge dict .Values.global.ingress.annotations .Values.ingress.annotations) }}
+    {{ range $key, $val := (merge dict .Values.global.ingress.annotations) }}
+    "{{ $key }}": {{ $val | quote }}
+    {{ end }}
+    {{ end }}
+    {{ if .Values.ingress.annotations }}
+    {{ range $key, $val := (merge dict .Values.ingress.annotations) }}
     "{{ $key }}": {{ $val | quote }}
     {{ end }}
     {{ end }}
