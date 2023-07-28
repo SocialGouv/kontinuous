@@ -2,4 +2,5 @@ pgweb:
   enabled: true
   ~tpl~repositoryName: "{{ .Values.global.repositoryName }}"
   ingress:
+    enabled: true
     ~tpl~annotations: "{{ .Values.global.ingress.annotations | toJson }}"

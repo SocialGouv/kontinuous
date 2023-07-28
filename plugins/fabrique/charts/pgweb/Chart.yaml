@@ -3,6 +3,6 @@ name: pgweb
 version: 1.136.3
 dependencies:
   - name: pgweb
-    degit: socialgouv/helm-charts/charts/pgweb@v1
+    degit: socialgouv/helm-charts/charts/pgweb@pgweb
     condition: pgweb.enabled
     version: "1"
