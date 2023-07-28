@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.161.5 (2023-07-28)
+
+
+### Bug Fixes
+
+* up maildev chart ([#374](https://github.com/socialgouv/kontinuous/issues/374)) ([f345019](https://github.com/socialgouv/kontinuous/commit/f345019f404d5457322f9cbab77b0892b320ee13))
+
 ## 1.161.4 (2023-07-28)
 
 
