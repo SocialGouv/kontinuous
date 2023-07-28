@@ -10,6 +10,10 @@ dependencies:
     repository: file://./charts/pg
     version: 1.162.4
     condition: pg.enabled
+  - name: pgweb
+    repository: file://./charts/pgweb
+    version: 1.161.5
+    condition: pgweb.enabled
   - name: maildev
     repository: file://./charts/maildev
     version: 1.162.4
