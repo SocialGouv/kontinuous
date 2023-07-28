@@ -32,8 +32,9 @@ module.exports = async (
           logger.debug(`🗂️  degit "${uri}"`)
           if (cacheCheck) {
             const tagHasChanged = await degitTagHasChanged(uri)
-            disableCache = tagHasChanged
             if (tagHasChanged) {
+              disableCache = true
+              force = true
               logger.debug({ degit: uri }, `♻️  tag has changed, renew cache`)
             }
           }
