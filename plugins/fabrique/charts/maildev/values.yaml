@@ -5,6 +5,6 @@ maildev:
   ingress:
     ~tpl~annotations: "{{ .Values.global.ingress.annotations | toJson }}"
   persistence:
-    enabled: true
+    enabled: "{{ if (eq .Values.global.env `preprod`) }}true{{ else }}false{{ end }}"
   cron:
-    enabled: true
+    enabled: "{{ if (eq .Values.global.env `preprod`) }}true{{ else }}false{{ end }}"
