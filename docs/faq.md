@@ -87,7 +87,7 @@ app:
 
 This example build your Dockerfile, creates a PG cluster, seed the database then starts your application with secrets attached
 
-In your `.kontinuous/values.yaml` or ``.kontinuous/[env]/values.yaml`
+In your `.kontinuous/values.yaml` or `.kontinuous/[env]/values.yaml`
 
 ```yaml
 # create app database
