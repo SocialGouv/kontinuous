@@ -1,6 +1,6 @@
 # FAQ
 
-[Add your question](https://github.com/SocialGouv/kontinuous/issues/new?title=docs:%20add%20FAQ%20entry)
+[Add your question](https://github.com/SocialGouv/kontinuous/edit/master/docs/faq.md)
 
 ## Why another CI/CD ?
 
@@ -81,6 +81,40 @@ app:
   envFrom:
     - secretRef:
         name: pg-xxx-app
+```
+
+## Run a seed job
+
+This example build your Dockerfile, creates a PG cluster, seed the database then starts your application with secrets attached
+
+In your `.kontinuous/values.yaml` or `.kontinuous/[env]/values.yaml`
+
+```yaml
+# create app database
+pg:
+  ~chart: pg
+
+# run app after build and seed
+app:
+  ~chart: app
+  ~needs: [build-app, seed-db]
+  # use CNPG db created secret 
+  envFrom:
+    - secretRef:
+        name: pg-app
+
+jobs:
+  runs:
+    # builds Dockerfile
+    build-app:
+      use: build
+    # seed the database
+    seed-db:
+      use: seed-db
+      ~needs: [pg]
+      pgSecretName: pg-app
+      with:
+        seedPath: ./seeds.sql
 ```
 
 ## Add a custom HELM chart
