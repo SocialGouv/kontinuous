@@ -45,10 +45,6 @@ dependencies:
     repository: file://./charts/job
     version: 1.136.2
     condition: job.enabled
-  - name: maildev
-    degit: SocialGouv/helm-charts/charts/maildev@v1
-    version: "1"
-    condition: maildev.enabled
   - name: metabase
     repository: file://./charts/metabase
     version: 1.136.2
