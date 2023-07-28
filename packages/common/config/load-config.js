@@ -589,9 +589,17 @@ const loadConfig = async (
             // do nothing
           }
         }
-        throw new Error(
-          `no matching ci namespace found, looked for: ${value.join(", ")}`
-        )
+        const errMsg = `no matching ci namespace found, looked for: ${value.join(
+          ", "
+        )}`
+        if (
+          config.actionCommandName === "build" ||
+          config.actionCommandName === "deploy"
+        ) {
+          throw new Error(errMsg)
+        } else {
+          logger.warn(errMsg)
+        }
       },
     },
     linksSelfLocation: {
