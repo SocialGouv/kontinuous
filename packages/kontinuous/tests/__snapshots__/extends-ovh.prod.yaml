@@ -558,10 +558,10 @@ kind: Cluster
 metadata:
   name: pg-hasura
   labels:
-    helm.sh/chart: cnpg-cluster-1.8.4
+    helm.sh/chart: cnpg-cluster-1.8.0
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
-    app.kubernetes.io/version: \\"15\\"
+    app.kubernetes.io/version: 14.5-6
     app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
     kontinuous/deployment.env: test-extends-ovh-prod
@@ -572,7 +572,6 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   annotations:
-    app.kubernetes.io/managed-by: Helm
     kontinuous/chartPath: project.fabrique.pg-hasura.cnpg-cluster
     kontinuous/source: project/charts/fabrique/charts/pg-hasura/charts/cnpg-cluster/templates/cluster.cnpg.yaml
     kontinuous/plugin.needs: |
@@ -589,7 +588,7 @@ metadata:
     kontinuous/plugin.log: \\"false\\"
   namespace: test-extends-ovh
 spec:
-  instances: 3
+  instances: 1
   imageName: ghcr.io/cloudnative-pg/postgis:14
   imagePullPolicy: IfNotPresent
   storage:
@@ -621,10 +620,10 @@ kind: Cluster
 metadata:
   name: pg-keycloak
   labels:
-    helm.sh/chart: cnpg-cluster-1.8.4
+    helm.sh/chart: cnpg-cluster-1.8.0
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
-    app.kubernetes.io/version: \\"15\\"
+    app.kubernetes.io/version: 14.5-6
     app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
     kontinuous/deployment.env: test-extends-ovh-prod
@@ -635,7 +634,6 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   annotations:
-    app.kubernetes.io/managed-by: Helm
     kontinuous/chartPath: project.fabrique.pg-keycloak.cnpg-cluster
     kontinuous/source: project/charts/fabrique/charts/pg-keycloak/charts/cnpg-cluster/templates/cluster.cnpg.yaml
     kontinuous/plugin.needs: |
@@ -652,7 +650,7 @@ metadata:
     kontinuous/plugin.log: \\"false\\"
   namespace: test-extends-ovh
 spec:
-  instances: 3
+  instances: 1
   imageName: ghcr.io/cloudnative-pg/postgis:14
   imagePullPolicy: IfNotPresent
   storage:
@@ -738,10 +736,10 @@ kind: Pooler
 metadata:
   name: pg-hasura-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.8.4
+    helm.sh/chart: cnpg-cluster-1.8.0
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
-    app.kubernetes.io/version: \\"15\\"
+    app.kubernetes.io/version: 14.5-6
     app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
     kontinuous/deployment.env: test-extends-ovh-prod
@@ -773,10 +771,10 @@ kind: Pooler
 metadata:
   name: pg-keycloak-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.8.4
+    helm.sh/chart: cnpg-cluster-1.8.0
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
-    app.kubernetes.io/version: \\"15\\"
+    app.kubernetes.io/version: 14.5-6
     app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
     kontinuous/deployment.env: test-extends-ovh-prod
