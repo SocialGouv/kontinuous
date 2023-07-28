@@ -1,14 +1,14 @@
 apiVersion: v2
 name: fabrique
-version: 1.161.3
+version: 1.161.4
 dependencies:
   - name: contrib
     repository: file://./charts/contrib
-    version: 1.161.3
+    version: 1.161.4
     condition: contrib.enabled
   - name: pg
     repository: file://./charts/pg
-    version: 1.161.3
+    version: 1.161.4
     condition: pg.enabled
   - name: maildev
     repository: file://./charts/maildev
