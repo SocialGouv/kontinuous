@@ -14,7 +14,7 @@ app:
         name: app-configmap
 
 hasura:
-  ~needs: [jobs.build-hasura,jobs-dev.db]
+  ~needs: [jobs.build-hasura, jobs-dev.db]
   # waitForPostgres: true
   envFrom:
     - secretRef:
@@ -23,9 +23,6 @@ hasura:
         name: hasura-sealed-secret
     - configMapRef:
         name: hasura-configmap
-
-pgweb:
-  ~needs: [db]
 
 jobs:
   runs:
@@ -48,4 +45,3 @@ jobs-dev:
       use: socialgouv/kontinuous/plugins/contrib/jobs/create-db
       with:
         pgAdminSecretRefName: pg-scaleway
-
