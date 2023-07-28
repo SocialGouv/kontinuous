@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.161.3 (2023-07-28)
+
+
+### Bug Fixes
+
+* degit renew cache when changed ([#372](https://github.com/socialgouv/kontinuous/issues/372)) ([8d7ee0f](https://github.com/socialgouv/kontinuous/commit/8d7ee0fa9ccfd5730b48d35bb2e658096dcef47f))
+
 ## 1.161.2 (2023-07-27)
 
 ## [1.161.1](https://github.com/socialgouv/kontinuous/compare/v1.161.0...v1.161.1) (2023-07-27)
