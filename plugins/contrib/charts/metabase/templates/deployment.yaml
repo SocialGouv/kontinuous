@@ -6,7 +6,12 @@ metadata:
     application: {{ .Values.global.repositoryName }}
   name: {{ (or .Values.component .Chart.Name) | lower }}
   namespace: {{ or .Values.namespace .Values.global.namespace }}
-  annotations: {}
+  annotations:
+    {{ if .Values.annotations }}
+    {{ range $key, $val := .Values.annotations }}
+    "{{ $key }}": {{ $val | quote }}
+    {{ end }}
+    {{ end }}
 spec:
   replicas: 1
   selector:
@@ -23,7 +28,7 @@ spec:
         fsGroup: 1000
         runAsNonRoot: true
       containers:
-        # renovate: datasource=docker depName=metabase/metabase versioning=v0.45.3
+        # renovate: datasource=docker depName=metabase/metabase versioning=v0.46.6.1
         - image: metabase/metabase:v0.46.6.1
           name: metabase
           securityContext:
