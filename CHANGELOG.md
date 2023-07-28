@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.161.4 (2023-07-28)
+
+
+### Bug Fixes
+
+* ci ns detection optional according to commands ([#373](https://github.com/socialgouv/kontinuous/issues/373)) ([3f5b7c6](https://github.com/socialgouv/kontinuous/commit/3f5b7c6d2c5c15870cc542bb99368919a221b974))
+
 ## 1.161.3 (2023-07-28)
 
 
