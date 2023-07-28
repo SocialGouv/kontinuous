@@ -1,0 +1,8 @@
+apiVersion: v2
+name: maildev
+version: 1.136.3
+dependencies:
+  - name: maildev
+    degit: socialgouv/helm-charts/charts/maildev@v1
+    condition: maildev.enabled
+    version: "1"

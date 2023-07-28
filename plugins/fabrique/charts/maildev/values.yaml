@@ -1,0 +1,10 @@
+maildev:
+  enabled: true
+  ~tpl~host: '{{ tpl (or .Values.host (print (or .Values.component (index .Values.kontinuous.chartContext 2)) "-" (or .Values.global.host ""))) $ }}'
+  ~tpl~repositoryName: "{{ .Values.global.repositoryName }}"
+  ingress:
+    ~tpl~annotations: "{{ .Values.global.ingress.annotations | toJson }}"
+  persistence:
+    ~tpl~enabled: "{{ if (eq .Values.global.env `preprod`) }}true{{ else }}false{{ end }}"
+  cron:
+    ~tpl~enabled: "{{ if (eq .Values.global.env `preprod`) }}true{{ else }}false{{ end }}"

@@ -1,8 +1,5 @@
 contrib-helpers:
   enabled: true
-
-maildev:
-  enabled: false
 pgweb:
   enabled: false
 app:
