@@ -134,7 +134,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.159.3
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.161.5
           command:
             - sh
             - -c
@@ -283,7 +283,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.159.3
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.161.5
           command:
             - sh
             - -c
@@ -382,10 +382,10 @@ kind: Cluster
 metadata:
   name: pg-hasura
   labels:
-    helm.sh/chart: cnpg-cluster-1.8.0
+    helm.sh/chart: cnpg-cluster-1.8.4
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
-    app.kubernetes.io/version: 14.5-6
+    app.kubernetes.io/version: \\"15\\"
     app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
     kontinuous/deployment.env: test-cnpg-feature-branch-1
@@ -396,6 +396,7 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   annotations:
+    app.kubernetes.io/managed-by: Helm
     kontinuous/chartPath: project.fabrique.pg-hasura.cnpg-cluster
     kontinuous/source: project/charts/fabrique/charts/pg-hasura/charts/cnpg-cluster/templates/cluster.cnpg.yaml
     kontinuous/plugin.needs: |
@@ -444,10 +445,10 @@ kind: Cluster
 metadata:
   name: pg-keycloak
   labels:
-    helm.sh/chart: cnpg-cluster-1.8.0
+    helm.sh/chart: cnpg-cluster-1.8.4
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
-    app.kubernetes.io/version: 14.5-6
+    app.kubernetes.io/version: \\"15\\"
     app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
     kontinuous/deployment.env: test-cnpg-feature-branch-1
@@ -458,6 +459,7 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   annotations:
+    app.kubernetes.io/managed-by: Helm
     kontinuous/chartPath: project.fabrique.pg-keycloak.cnpg-cluster
     kontinuous/source: project/charts/fabrique/charts/pg-keycloak/charts/cnpg-cluster/templates/cluster.cnpg.yaml
     kontinuous/plugin.needs: |
@@ -506,10 +508,10 @@ kind: Pooler
 metadata:
   name: pg-hasura-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.8.0
+    helm.sh/chart: cnpg-cluster-1.8.4
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
-    app.kubernetes.io/version: 14.5-6
+    app.kubernetes.io/version: \\"15\\"
     app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
     kontinuous/deployment.env: test-cnpg-feature-branch-1
@@ -541,10 +543,10 @@ kind: Pooler
 metadata:
   name: pg-keycloak-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.8.0
+    helm.sh/chart: cnpg-cluster-1.8.4
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
-    app.kubernetes.io/version: 14.5-6
+    app.kubernetes.io/version: \\"15\\"
     app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-cnpg-feature-branch-1-ffac537e6cbbf934b08745a378-5k18ynv8
     kontinuous/deployment.env: test-cnpg-feature-branch-1
