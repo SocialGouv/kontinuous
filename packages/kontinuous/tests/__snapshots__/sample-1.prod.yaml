@@ -78,6 +78,29 @@ metadata:
   namespace: test-sample-1
 automountServiceAccountToken: false
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: release-name-pgweb
+  labels:
+    helm.sh/chart: pgweb-1.8.4
+    app.kubernetes.io/name: pgweb
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
+    kontinuous/deployment.env: test-sample-1-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: serviceaccount-release-name-pgweb-5yb2rcul
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.fabrique.pgweb.pgweb
+    kontinuous/source: project/charts/fabrique/charts/pgweb/charts/pgweb/templates/serviceaccount.yaml
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
+  namespace: test-sample-1
+---
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -457,110 +480,80 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: release-name-pgweb
   labels:
-    component: pgweb
-    application: test-sample-1
+    helm.sh/chart: pgweb-1.8.4
+    app.kubernetes.io/name: pgweb
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: deployment-pgweb-5afr2ikf
+    kontinuous/resourceName: deployment-release-name-pgweb-1ukht9xf
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  name: pgweb
-  namespace: test-sample-1
   annotations:
-    kontinuous/chartPath: project.fabrique.contrib.pgweb
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/pgweb/templates/deployment.yaml
+    kontinuous/chartPath: project.fabrique.pgweb.pgweb
+    kontinuous/source: project/charts/fabrique/charts/pgweb/charts/pgweb/templates/deployment.yaml
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    kontinuous/depname.full: project.fabrique.contrib.pgweb.deployment.pgweb
-    kontinuous/depname.chartResource: pgweb.deployment.pgweb
+    kontinuous/depname.full: project.fabrique.pgweb.pgweb.deployment.release-name-pgweb
+    kontinuous/depname.chartResource: pgweb.deployment.release-name-pgweb
     kontinuous/depname.chartName: pgweb
-    kontinuous/depname.chartPath: project.fabrique.contrib.pgweb
-    kontinuous/depname.resourcePath: deployment.pgweb
-    kontinuous/depname.resourceName: pgweb
-    kontinuous/depname.chartNameTopFull: pgweb
+    kontinuous/depname.chartPath: project.fabrique.pgweb.pgweb
+    kontinuous/depname.resourcePath: deployment.release-name-pgweb
+    kontinuous/depname.resourceName: release-name-pgweb
+    kontinuous/depname.chartNameTopFull: pgweb.pgweb
     kontinuous/depname.chartNameTop: pgweb
     kontinuous/plugin.log: \\"false\\"
     reloader.stakater.com/auto: \\"true\\"
+  namespace: test-sample-1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: pgweb
+      app.kubernetes.io/name: pgweb
+      app.kubernetes.io/instance: release-name
   template:
     metadata:
       labels:
-        component: pgweb
-        application: test-sample-1
+        app.kubernetes.io/name: pgweb
+        app.kubernetes.io/instance: release-name
         kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
         kontinuous/deployment.env: test-sample-1-prod
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: deployment-pgweb-5afr2ikf
+        kontinuous/resourceName: deployment-release-name-pgweb-1ukht9xf
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
         kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     spec:
-      initContainers:
-        - name: wait-for-postgres
-          image: ghcr.io/socialgouv/docker/wait-for-postgres:6.56.1
-          imagePullPolicy: Always
-          env:
-            - name: WAIT_FOR_RETRIES
-              value: \\"24\\"
-          envFrom:
-            - secretRef:
-                name: pg-user
-          resources:
-            limits:
-              cpu: 20m
-              memory: 32Mi
-            requests:
-              cpu: 5m
-              memory: 16Mi
+      serviceAccountName: release-name-pgweb
+      securityContext: {}
       containers:
-        - image: sosedoff/pgweb:0.11.8
-          name: pgweb
-          envFrom:
-            - secretRef:
-                name: pg-user
+        - name: pgweb
+          securityContext: {}
+          image: \\"sosedoff/pgweb:\\"
+          imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8081
-              name: http
+            - name: http
+              containerPort: 8081
+              protocol: TCP
           livenessProbe:
-            failureThreshold: 6
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 30
-            periodSeconds: 5
-            timeoutSeconds: 5
           readinessProbe:
-            failureThreshold: 15
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 1
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
-          startupProbe:
-            failureThreshold: 12
-            httpGet:
-              path: /
-              port: http
-            periodSeconds: 5
           resources:
-            limits:
-              cpu: 500m
-              memory: 256Mi
             requests:
-              cpu: 100m
-              memory: 64Mi
+              cpu: 41m
+              memory: 121Mi
 ---
 apiVersion: v1
 kind: Service
@@ -652,31 +645,35 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: release-name-pgweb
   labels:
-    component: pgweb
-    application: test-sample-1
+    helm.sh/chart: pgweb-1.8.4
+    app.kubernetes.io/name: pgweb
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: service-pgweb-2rlshjo0
+    kontinuous/resourceName: service-release-name-pgweb-uu5hs55j
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  name: pgweb
-  namespace: test-sample-1
   annotations:
-    kontinuous/chartPath: project.fabrique.contrib.pgweb
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/pgweb/templates/service.yaml
+    kontinuous/chartPath: project.fabrique.pgweb.pgweb
+    kontinuous/source: project/charts/fabrique/charts/pgweb/charts/pgweb/templates/service.yaml
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
+  namespace: test-sample-1
 spec:
-  ports:
-    - name: http
-      port: 8081
-      targetPort: 8081
-  selector:
-    component: pgweb
   type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: pgweb
+    app.kubernetes.io/instance: release-name
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -815,42 +812,36 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.pgweb
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/pgweb/templates/ingress.yaml
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    cert-manager.io: cluster-issuer
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: \\"true\\"
+  name: release-name-pgweb
   labels:
-    component: pgweb
-    application: test-sample-1
+    helm.sh/chart: pgweb-1.8.4
+    app.kubernetes.io/name: pgweb
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/deployment.env: test-sample-1-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: ingress-pgweb-2mnfw5rd
+    kontinuous/resourceName: ingress-release-name-pgweb-35bk0bml
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  name: pgweb
+  annotations:
+    kontinuous/chartPath: project.fabrique.pgweb.pgweb
+    kontinuous/source: project/charts/fabrique/charts/pgweb/charts/pgweb/templates/ingress.yaml
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   namespace: test-sample-1
 spec:
   rules:
-    - host: pgweb-test-sample-1.fabrique.social.gouv.fr
+    - host: chart-example.local
       http:
         paths:
-          - backend:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
               service:
-                name: pgweb
+                name: release-name-pgweb
                 port:
-                  name: http
-            path: /
-            pathType: Prefix
-  tls:
-    - hosts:
-        - pgweb-test-sample-1.fabrique.social.gouv.fr
-      secretName: pgweb-crt
+                  number: 80
 "
 `;
