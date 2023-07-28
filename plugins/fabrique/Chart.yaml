@@ -12,7 +12,7 @@ dependencies:
     condition: pg.enabled
   - name: maildev
     repository: file://./charts/maildev
-    version: 1.136.2
+    version: 1.136.3
     condition: maildev.enabled
   - name: keycloakx
     repository: https://codecentric.github.io/helm-charts
