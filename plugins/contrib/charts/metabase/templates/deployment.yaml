@@ -28,8 +28,8 @@ spec:
         fsGroup: 1000
         runAsNonRoot: true
       containers:
-        # renovate: datasource=docker depName=metabase/metabase versioning=v0.46.6.1
-        - image: metabase/metabase:v0.46.6.1
+        # renovate: datasource=docker depName=metabase/metabase versioning=v0.46.6.4
+        - image: metabase/metabase:v0.46.6.4
           name: metabase
           securityContext:
             allowPrivilegeEscalation: false
