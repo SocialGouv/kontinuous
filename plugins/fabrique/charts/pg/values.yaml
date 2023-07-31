@@ -53,7 +53,7 @@ cnpg-cluster:
           key: bucket_access_key
         secretAccessKey:
           ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
-          key: ovh_bucket_secret_key
+          key: bucket_secret_key
         region:
           ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
           key: ovh_bucket_region
