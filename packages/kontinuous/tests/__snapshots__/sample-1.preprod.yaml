@@ -84,7 +84,7 @@ kind: ServiceAccount
 metadata:
   name: release-name-pgweb
   labels:
-    helm.sh/chart: pgweb-1.8.4
+    helm.sh/chart: pgweb-1.9.1
     app.kubernetes.io/name: pgweb
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/managed-by: Helm
@@ -486,7 +486,7 @@ kind: Deployment
 metadata:
   name: release-name-pgweb
   labels:
-    helm.sh/chart: pgweb-1.8.4
+    helm.sh/chart: pgweb-1.9.1
     app.kubernetes.io/name: pgweb
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/managed-by: Helm
@@ -540,7 +540,7 @@ spec:
       containers:
         - name: pgweb
           securityContext: {}
-          image: \\"sosedoff/pgweb:\\"
+          image: sosedoff/pgweb:v0.14.1
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -651,7 +651,7 @@ kind: Service
 metadata:
   name: release-name-pgweb
   labels:
-    helm.sh/chart: pgweb-1.8.4
+    helm.sh/chart: pgweb-1.9.1
     app.kubernetes.io/name: pgweb
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/managed-by: Helm
@@ -809,7 +809,7 @@ kind: Ingress
 metadata:
   name: release-name-pgweb
   labels:
-    helm.sh/chart: pgweb-1.8.4
+    helm.sh/chart: pgweb-1.9.1
     app.kubernetes.io/name: pgweb
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/managed-by: Helm
