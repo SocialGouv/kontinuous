@@ -48,7 +48,7 @@
     "node": "^16.17 || ^18 || ^20"
   },
   "scripts": {
-    "test": "NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" jest tests --runInBand --detectOpenHandles --forceExit",
+    "test": "NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" jest tests --detectOpenHandles --forceExit",
     "test:debug": "DEBUG=1 yarn test",
     "test:update-snapshots": "yarn test -u",
     "postinstall": "link-module-alias",
