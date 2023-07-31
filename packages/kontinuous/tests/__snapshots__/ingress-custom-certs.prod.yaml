@@ -105,11 +105,14 @@ data:
   MB_ANON_TRACKING_ENABLED: \\"false\\"
   MB_APPLICATION_LOGO_URL: https://socialgouv.github.io/support/_media/marianne.jpeg
   MB_EMAIL_FROM_ADDRESS: contact@fabrique.social.gouv.fr
+  MB_EMAIL_FROM_NAME: Fabrique numérique des ministères sociaux
   MB_ENABLE_EMBEDDING: \\"true\\"
   MB_ENABLE_PUBLIC_SHARING: \\"true\\"
   MB_SITE_LOCALE: fr
-  MB_SITE_NAME: Fabrique des ministères sociaux
+  MB_START_OF_WEEK: monday
+  MB_SITE_NAME: Fabrique numérique des ministères sociaux
   MB_SITE_URL: https://some.external.host
+  MB_PASSWORD_COMPLEXITY: strong
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -167,7 +170,7 @@ spec:
         fsGroup: 1000
         runAsNonRoot: true
       containers:
-        - image: metabase/metabase:v0.46.6.1
+        - image: metabase/metabase:v0.46.6.4
           name: metabase
           securityContext:
             allowPrivilegeEscalation: false

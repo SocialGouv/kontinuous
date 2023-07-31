@@ -1,6 +1,6 @@
 # FAQ
 
-[Add your question](https://github.com/SocialGouv/kontinuous/issues/new?title=docs:%20add%20FAQ%20entry)
+[Add your question](https://github.com/SocialGouv/kontinuous/edit/master/docs/faq.md)
 
 ## Why another CI/CD ?
 
@@ -83,6 +83,40 @@ app:
         name: pg-xxx-app
 ```
 
+## Run a seed job
+
+This example build your Dockerfile, creates a PG cluster, seed the database then starts your application with secrets attached
+
+In your `.kontinuous/values.yaml` or `.kontinuous/[env]/values.yaml`
+
+```yaml
+# create app database
+pg:
+  ~chart: pg
+
+# run app after build and seed
+app:
+  ~chart: app
+  ~needs: [build-app, seed-db]
+  # use CNPG db created secret
+  envFrom:
+    - secretRef:
+        name: pg-app
+
+jobs:
+  runs:
+    # builds Dockerfile
+    build-app:
+      use: build
+    # seed the database
+    seed-db:
+      use: seed-db
+      ~needs: [pg]
+      pgSecretName: pg-app
+      with:
+        seedPath: ./seeds.sql
+```
+
 ## Add a custom HELM chart
 
 To add a custom HELM chart to your deployment :
@@ -135,6 +169,57 @@ jobs:
         imagePackage: api
         context: packages/api
 ```
+
+## Add an oauth2 proxy to protect some application
+
+You can delegate application authentication to [oauth2-proxy](https://oauth2-proxy.github.io/oauth2-proxy) that can connect to multiple identity providers like GitHub, Azure, AD, KeyCloak...
+
+This has many security advantages :
+
+- hides all your application from external users
+- delegates all security processes to state-of-the-art providers
+- application can receive verifiable user identity
+
+You'll have to disable the default application ingress and replace it with `oauth2-proxy` one then register your application, see [compatible providers](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider).
+
+```mermaid
+graph LR
+Internet["🌍" Internet]-->Proxy["🔒" Proxy]
+subgraph Cluster
+Proxy-->WebApp["🧑‍💼" WebApp]
+Proxy<-->IDP["🔑" Identity providers]
+end
+```
+
+In `.kontinuous/values.yaml` :
+
+```yaml
+# Application to protect
+metabase:
+  ingress:
+    enabled: false # disable ingress (internet exposition)
+  # metabase secrets and settings
+  envFrom:
+    - secretRef:
+        name: metabase
+
+oauth2-proxy:
+  # public URL that will show metabase once loggedin
+  host: "metabase.myapp.somewhere.fr"
+  # internal protected service URL
+  upstream: http://metabase
+  # oauth2-proxy secrets and settings
+  envFrom:
+    - secretRef:
+        name: oauth2-proxy
+  env:
+    - name: OAUTH2_PROXY_PROVIDER
+      value: github
+    - name: OAUTH2_PROXY_GITHUB_ORG
+      value: some-org
+```
+
+**NOTE** in this example, only users from `some-org` GitHub organisation can access the metabase, but they also have to login on the metabase separately.
 
 ## Define a custom docker registry
 
