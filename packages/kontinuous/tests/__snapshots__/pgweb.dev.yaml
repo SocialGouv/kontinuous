@@ -84,7 +84,7 @@ kind: ServiceAccount
 metadata:
   name: release-name-pgweb
   labels:
-    helm.sh/chart: pgweb-1.9.0
+    helm.sh/chart: pgweb-1.9.1
     app.kubernetes.io/name: pgweb
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/managed-by: Helm
@@ -107,7 +107,7 @@ kind: Deployment
 metadata:
   name: release-name-pgweb
   labels:
-    helm.sh/chart: pgweb-1.9.0
+    helm.sh/chart: pgweb-1.9.1
     app.kubernetes.io/name: pgweb
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/managed-by: Helm
@@ -185,7 +185,7 @@ kind: Service
 metadata:
   name: release-name-pgweb
   labels:
-    helm.sh/chart: pgweb-1.9.0
+    helm.sh/chart: pgweb-1.9.1
     app.kubernetes.io/name: pgweb
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/managed-by: Helm
@@ -218,7 +218,7 @@ kind: Ingress
 metadata:
   name: release-name-pgweb
   labels:
-    helm.sh/chart: pgweb-1.9.0
+    helm.sh/chart: pgweb-1.9.1
     app.kubernetes.io/name: pgweb
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/managed-by: Helm
