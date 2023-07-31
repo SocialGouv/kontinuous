@@ -204,7 +204,6 @@ metabase:
         name: metabase
 
 oauth2-proxy:
-  enabled: true
   # public URL that will show metabase once loggedin
   host: "metabase.myapp.somewhere.fr"
   # internal protected service URL
