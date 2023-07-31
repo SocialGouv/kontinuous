@@ -1,0 +1,4 @@
+pg:
+  ~chart: pg
+  backup:
+    enabled: true

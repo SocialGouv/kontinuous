@@ -1,0 +1,11 @@
+projectName: fabrique
+
+dependencies:
+  fabrique:
+    import: socialgouv/kontinuous/plugins/fabrique
+    extends:
+      - name: ovh
+        ifEnv: [dev]
+
+remoteLinks:
+  socialgouv/helm-charts/charts/cnpg-cluster@v1: socialgouv/helm-charts/charts/cnpg-cluster@v1.9.1

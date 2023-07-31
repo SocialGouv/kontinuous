@@ -1,3 +1,6 @@
+backup:
+  enabled: true
+
 cnpg-cluster:
   enabled: true
   fullnameOverride: test-cluster
@@ -38,7 +41,7 @@ cnpg-cluster:
           max_client_conn: "1000"
           # default_pool_size: "10"
   backup:
-    ~tpl~enabled: "{{ (or .Values.global.isProd .Values.global.isPreProd) | ternary `true` `false` }}"
+    ~tpl~enabled: "{{ (or .Values.Parent.backup.enabled (or .Values.global.isProd .Values.global.isPreProd)) | ternary `true` `false` }}"
     schedule: "0 0 0 * * *" # daily
     retentionPolicy: 60d
     barmanObjectStore:

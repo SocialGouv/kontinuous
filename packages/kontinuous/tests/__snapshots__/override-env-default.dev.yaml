@@ -1,0 +1,375 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test build manifests with snapshots override-env-default.dev 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: \\"1234\\"
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    janitor/ttl: 7d
+  labels:
+    application: test-override-env-default
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: namespace-test-override-env-default-feature-branch-1-23780fnk
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: test-override-env-default-feature-branch-1
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-override-env-default-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+  labels:
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+  labels:
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-override-env-default-feature-branch-1
+automountServiceAccountToken: false
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-dev-test-override-env-default-feature-branch-1-cr-2l6fzsi6
+  namespace: test-override-env-default-feature-branch-1
+  annotations:
+    kontinuous/needsName: create-secrets.create-secrets
+    kontinuous/needsNames: '[\\"create-secrets\\",\\"create-secrets.create-secrets\\",\\"create-secrets..create-secrets\\"]'
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.pg.jobs-pg
+    kontinuous/source: project/charts/fabrique/charts/pg/charts/jobs-pg/templates/jobs.yaml
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    kontinuous/depname.full: project.fabrique.pg.jobs-pg.job.job-dev-test-override-env-default-feature-branch-1-cr-2l6fzsi6
+    kontinuous/depname.chartResource: jobs-pg.job.job-dev-test-override-env-default-feature-branch-1-cr-2l6fzsi6
+    kontinuous/depname.chartName: jobs-pg
+    kontinuous/depname.chartPath: project.fabrique.pg.jobs-pg
+    kontinuous/depname.resourcePath: job.job-dev-test-override-env-default-feature-branch-1-cr-2l6fzsi6
+    kontinuous/depname.resourceName: job-dev-test-override-env-default-feature-branch-1-cr-2l6fzsi6
+    kontinuous/depname.chartNameTopFull: pg.jobs-pg
+    kontinuous/depname.chartNameTop: pg
+    kontinuous/plugin.log: \\"true\\"
+  labels:
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: job-job-dev-test-override-env-default-feature-branch-48ey1316
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  backoffLimit: 6
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      labels:
+        environment: dev
+        ref: feature-branch-1
+        repository: test-override-env-default
+        runName: cnpg-create-secrets
+        kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+        kontinuous/deployment.env: test-override-env-default-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: job-job-dev-test-override-env-default-feature-branch-48ey1316
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-action
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.161.9
+          command:
+            - sh
+            - -c
+            - degit --disable-cache
+              socialgouv/kontinuous/plugins/contrib/jobs/cnpg-create-secrets
+              /action
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: action
+              mountPath: /action
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
+            requests:
+              cpu: \\"0\\"
+              memory: \\"0\\"
+      containers:
+        - name: job
+          image: bitnami/kubectl:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: APP_DB_SECRET_NAME
+              value: pg-app
+            - name: CNPG_DB_SECRET_NAME
+              value: pg-db
+            - name: HBA_DATABASE
+              value: \\"*\\"
+            - name: HBA_HOST
+              value: pg-rw
+            - name: HBA_USER
+              value: \\"*\\"
+            - name: NAMESPACE
+              value: test-override-env-default-feature-branch-1
+            - name: PGDATABASE
+              value: autodevops_feature-branch-1
+            - name: PGHOST
+              value: pg-rw
+            - name: PGPORT
+              value: \\"5432\\"
+            - name: PGUSER
+              value: user_feature-branch-1
+            - name: KUBECONFIG
+              value: /secrets/k8s/kubeconfig
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              /action/create-secrets.sh
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 81m
+              memory: 262Mi
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: 1001
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - name: kubeconfig
+              mountPath: /secrets/k8s
+              readOnly: true
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy/jobs-pg.create-secrets.create-secrets
+      securityContext:
+        fsGroup: 1001
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - name: kubeconfig
+          secret:
+            secretName: kubeconfig
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
+        - name: kontinuous-io
+          emptyDir: {}
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: pg
+  labels:
+    helm.sh/chart: cnpg-cluster-1.9.1
+    app.kubernetes.io/name: pg
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: \\"15\\"
+    app.kubernetes.io/managed-by: Helm
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: cluster-pg-251tk6jn
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    app.kubernetes.io/managed-by: Helm
+    kontinuous/chartPath: project.fabrique.pg.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/pg/charts/cnpg-cluster/templates/cluster.cnpg.yaml
+    kontinuous/plugin.needs: |
+      - project.fabrique.pg.jobs-pg
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    kontinuous/depname.full: project.fabrique.pg.cnpg-cluster.cluster.pg
+    kontinuous/depname.chartResource: cnpg-cluster.cluster.pg
+    kontinuous/depname.chartName: cnpg-cluster
+    kontinuous/depname.chartPath: project.fabrique.pg.cnpg-cluster
+    kontinuous/depname.resourcePath: cluster.pg
+    kontinuous/depname.resourceName: pg
+    kontinuous/depname.chartNameTopFull: pg.cnpg-cluster
+    kontinuous/depname.chartNameTop: pg
+    kontinuous/plugin.log: \\"false\\"
+  namespace: test-override-env-default-feature-branch-1
+spec:
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgis:14
+  imagePullPolicy: IfNotPresent
+  storage:
+    size: 8Gi
+    storageClass: csi-cinder-high-speed
+  backup:
+    retentionPolicy: 60d
+    barmanObjectStore:
+      destinationPath: s3://fabrique-dev/test-override-env-default-feature-branch-1
+      endpointURL: https://s3.gra.io.cloud.ovh.net
+      s3Credentials:
+        accessKeyId:
+          key: ovh_bucket_access_key
+          name: fabrique-dev-backups-access-key
+        region:
+          key: ovh_bucket_region
+          name: fabrique-dev-backups-access-key
+        secretAccessKey:
+          key: ovh_bucket_secret_key
+          name: fabrique-dev-backups-access-key
+  minSyncReplicas: 0
+  maxSyncReplicas: 0
+  postgresql: {}
+  monitoring:
+    enablePodMonitor: false
+  bootstrap:
+    initdb:
+      database: autodevops_feature-branch-1
+      owner: user_feature-branch-1
+      secret:
+        name: pg-db
+      postInitTemplateSQL:
+        - CREATE EXTENSION IF NOT EXISTS \\"postgis\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"postgis_topology\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"fuzzystrmatch\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"postgis_tiger_geocoder\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"uuid-ossp\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"citext\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"pgcrypto\\";
+        - CREATE EXTENSION IF NOT EXISTS \\"hstore\\";
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Pooler
+metadata:
+  name: pg-rw
+  labels:
+    helm.sh/chart: cnpg-cluster-1.9.1
+    app.kubernetes.io/name: pg
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: \\"15\\"
+    app.kubernetes.io/managed-by: Helm
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: pooler-pg-rw-16g3zl77
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.fabrique.pg.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/pg/charts/cnpg-cluster/templates/pooler.cnpg.yaml
+    kontinuous/plugin.needs: |
+      - project.fabrique.pg.jobs-pg
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+  namespace: test-override-env-default-feature-branch-1
+spec:
+  cluster:
+    name: pg
+  instances: 1
+  pgbouncer:
+    parameters:
+      max_client_conn: \\"1000\\"
+    poolMode: session
+  type: rw
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: pg-scheduledbackup
+  labels:
+    helm.sh/chart: cnpg-cluster-1.9.1
+    app.kubernetes.io/name: pg
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: \\"15\\"
+    app.kubernetes.io/managed-by: Helm
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: scheduledbackup-pg-scheduledbackup-4p1q206g
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.fabrique.pg.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/pg/charts/cnpg-cluster/templates/scheduledbackup.cnpg.yaml
+    kontinuous/plugin.needs: |
+      - project.fabrique.pg.jobs-pg
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+  namespace: test-override-env-default-feature-branch-1
+spec:
+  backupOwnerReference: self
+  cluster:
+    name: pg
+  schedule: 0 0 0 * * *
+"
+`;

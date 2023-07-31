@@ -2,6 +2,8 @@ const renderTplRecurse = async (
   values,
   context,
   recursiveContext = [],
+  chartValues = values,
+  parentValues = values,
   rootValues = values
 ) => {
   if (typeof values !== "object" || values === null) {
@@ -11,6 +13,11 @@ const renderTplRecurse = async (
   const { renderTpl, yaml } = utils
   const { buildPath } = config
 
+  if (values._isChartValues) {
+    chartValues = values
+    parentValues = { ...values, Parent: parentValues }
+  }
+
   for (const key of Object.keys(values)) {
     const isTplCast = key.startsWith("~tpl:")
     if (key.startsWith("~tpl~") || isTplCast) {
@@ -19,21 +26,19 @@ const renderTplRecurse = async (
       const prefix = isTplCast ? `~${key.split("~").slice(1, 2)}~` : "~tpl~"
       const newKey = key.slice(prefix.length)
 
-      const extraValues = {
-        kontinuous: {
-          chart: recursiveContext.join("."),
-          parentChart: recursiveContext.slice(0, -1).join("."),
-          chartContext: recursiveContext,
-        },
-      }
-
       let value
       try {
         value = await renderTpl(tpl, {
           dir: `${buildPath}/tpl`,
           values: {
-            ...rootValues,
-            ...extraValues,
+            ...chartValues,
+            global: rootValues.global || {},
+            kontinuous: {
+              chart: recursiveContext.join("."),
+              parentChart: recursiveContext.slice(0, -1).join("."),
+              chartContext: recursiveContext,
+            },
+            Parent: parentValues.Parent,
           },
         })
       } catch (error) {
@@ -70,6 +75,8 @@ const renderTplRecurse = async (
         values[key],
         context,
         [...recursiveContext, key],
+        chartValues,
+        parentValues,
         rootValues
       )
     }
