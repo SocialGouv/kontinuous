@@ -447,7 +447,7 @@ spec:
                         - app
                 topologyKey: kubernetes.io/hostname
       containers:
-        - image: harbor.fabrique.social.gouv.fr/test-extends-ovh/app:prod
+        - image: harbor.fabrique.social.gouv.fr/fabrique/test-extends-ovh/app:prod
           name: app
           ports:
             - containerPort: 3000
@@ -558,10 +558,10 @@ kind: Cluster
 metadata:
   name: pg-hasura
   labels:
-    helm.sh/chart: cnpg-cluster-1.8.0
+    helm.sh/chart: cnpg-cluster-1.9.1
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
-    app.kubernetes.io/version: 14.5-6
+    app.kubernetes.io/version: \\"15\\"
     app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
     kontinuous/deployment.env: test-extends-ovh-prod
@@ -572,6 +572,7 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   annotations:
+    app.kubernetes.io/managed-by: Helm
     kontinuous/chartPath: project.fabrique.pg-hasura.cnpg-cluster
     kontinuous/source: project/charts/fabrique/charts/pg-hasura/charts/cnpg-cluster/templates/cluster.cnpg.yaml
     kontinuous/plugin.needs: |
@@ -588,12 +589,27 @@ metadata:
     kontinuous/plugin.log: \\"false\\"
   namespace: test-extends-ovh
 spec:
-  instances: 1
+  instances: 3
   imageName: ghcr.io/cloudnative-pg/postgis:14
   imagePullPolicy: IfNotPresent
   storage:
     size: 8Gi
     storageClass: managed-csi
+  backup:
+    retentionPolicy: 60d
+    barmanObjectStore:
+      destinationPath: s3://fabrique-prod/test-extends-ovh
+      endpointURL: https://s3.gra.io.cloud.ovh.net
+      s3Credentials:
+        accessKeyId:
+          key: bucket_access_key
+          name: fabrique-prod-backups-access-key
+        region:
+          key: bucket_region
+          name: fabrique-prod-backups-access-key
+        secretAccessKey:
+          key: bucket_secret_key
+          name: fabrique-prod-backups-access-key
   minSyncReplicas: 0
   maxSyncReplicas: 0
   postgresql: {}
@@ -620,10 +636,10 @@ kind: Cluster
 metadata:
   name: pg-keycloak
   labels:
-    helm.sh/chart: cnpg-cluster-1.8.0
+    helm.sh/chart: cnpg-cluster-1.9.1
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
-    app.kubernetes.io/version: 14.5-6
+    app.kubernetes.io/version: \\"15\\"
     app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
     kontinuous/deployment.env: test-extends-ovh-prod
@@ -634,6 +650,7 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   annotations:
+    app.kubernetes.io/managed-by: Helm
     kontinuous/chartPath: project.fabrique.pg-keycloak.cnpg-cluster
     kontinuous/source: project/charts/fabrique/charts/pg-keycloak/charts/cnpg-cluster/templates/cluster.cnpg.yaml
     kontinuous/plugin.needs: |
@@ -650,12 +667,27 @@ metadata:
     kontinuous/plugin.log: \\"false\\"
   namespace: test-extends-ovh
 spec:
-  instances: 1
+  instances: 3
   imageName: ghcr.io/cloudnative-pg/postgis:14
   imagePullPolicy: IfNotPresent
   storage:
     size: 8Gi
     storageClass: managed-csi
+  backup:
+    retentionPolicy: 60d
+    barmanObjectStore:
+      destinationPath: s3://fabrique-prod/test-extends-ovh
+      endpointURL: https://s3.gra.io.cloud.ovh.net
+      s3Credentials:
+        accessKeyId:
+          key: bucket_access_key
+          name: fabrique-prod-backups-access-key
+        region:
+          key: bucket_region
+          name: fabrique-prod-backups-access-key
+        secretAccessKey:
+          key: bucket_secret_key
+          name: fabrique-prod-backups-access-key
   minSyncReplicas: 0
   maxSyncReplicas: 0
   postgresql: {}
@@ -736,10 +768,10 @@ kind: Pooler
 metadata:
   name: pg-hasura-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.8.0
+    helm.sh/chart: cnpg-cluster-1.9.1
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
-    app.kubernetes.io/version: 14.5-6
+    app.kubernetes.io/version: \\"15\\"
     app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
     kontinuous/deployment.env: test-extends-ovh-prod
@@ -771,10 +803,10 @@ kind: Pooler
 metadata:
   name: pg-keycloak-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.8.0
+    helm.sh/chart: cnpg-cluster-1.9.1
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
-    app.kubernetes.io/version: 14.5-6
+    app.kubernetes.io/version: \\"15\\"
     app.kubernetes.io/managed-by: Helm
     kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
     kontinuous/deployment.env: test-extends-ovh-prod
@@ -800,5 +832,67 @@ spec:
       max_client_conn: \\"1000\\"
     poolMode: session
   type: rw
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: pg-hasura-scheduledbackup
+  labels:
+    helm.sh/chart: cnpg-cluster-1.9.1
+    app.kubernetes.io/name: pg-hasura
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: \\"15\\"
+    app.kubernetes.io/managed-by: Helm
+    kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
+    kontinuous/deployment.env: test-extends-ovh-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: scheduledbackup-pg-hasura-scheduledbackup-1vyq5go6
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.fabrique.pg-hasura.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/pg-hasura/charts/cnpg-cluster/templates/scheduledbackup.cnpg.yaml
+    kontinuous/plugin.needs: |
+      - project.fabrique.pg-hasura.jobs-pg
+    kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
+  namespace: test-extends-ovh
+spec:
+  backupOwnerReference: self
+  cluster:
+    name: pg-hasura
+  schedule: 0 0 0 * * *
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: pg-keycloak-scheduledbackup
+  labels:
+    helm.sh/chart: cnpg-cluster-1.9.1
+    app.kubernetes.io/name: pg-keycloak
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: \\"15\\"
+    app.kubernetes.io/managed-by: Helm
+    kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
+    kontinuous/deployment.env: test-extends-ovh-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: scheduledbackup-pg-keycloak-scheduledbackup-3iywftai
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.fabrique.pg-keycloak.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/pg-keycloak/charts/cnpg-cluster/templates/scheduledbackup.cnpg.yaml
+    kontinuous/plugin.needs: |
+      - project.fabrique.pg-keycloak.jobs-pg
+    kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
+  namespace: test-extends-ovh
+spec:
+  backupOwnerReference: self
+  cluster:
+    name: pg-keycloak
+  schedule: 0 0 0 * * *
 "
 `;

@@ -7,7 +7,5 @@ dependencies:
       - name: ovh
         ifEnv: [dev]
 
-# links:
-  # socialgouv/helm-charts/charts/cnpg-cluster@v1: ./charts-overrides/cnpg-cluster
 remoteLinks:
   socialgouv/helm-charts/charts/cnpg-cluster@v1: socialgouv/helm-charts/charts/cnpg-cluster@v1.9.1
