@@ -45,7 +45,7 @@ cnpg-cluster:
     schedule: "0 0 0 * * *" # daily
     retentionPolicy: 60d
     barmanObjectStore:
-      ~tpl~destinationPath: "s3://{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}/{{ .Values.global.namespace }}"
+      ~tpl~destinationPath: "s3://{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}/{{ .Values.global.namespace }}{{ .Values.recovery.targetTime | ternary (print `-` .Values.recovery.targetTime) `` }}"
       ~tpl~endpointURL: "{{ .Values.global.pgBackupEndpointURL }}"
       s3Credentials:
         accessKeyId:
