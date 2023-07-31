@@ -602,13 +602,13 @@ spec:
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:
         accessKeyId:
-          key: ovh_bucket_access_key
+          key: bucket_access_key
           name: fabrique-prod-backups-access-key
         region:
-          key: ovh_bucket_region
+          key: bucket_region
           name: fabrique-prod-backups-access-key
         secretAccessKey:
-          key: ovh_bucket_secret_key
+          key: bucket_secret_key
           name: fabrique-prod-backups-access-key
   minSyncReplicas: 0
   maxSyncReplicas: 0
@@ -680,13 +680,13 @@ spec:
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:
         accessKeyId:
-          key: ovh_bucket_access_key
+          key: bucket_access_key
           name: fabrique-prod-backups-access-key
         region:
-          key: ovh_bucket_region
+          key: bucket_region
           name: fabrique-prod-backups-access-key
         secretAccessKey:
-          key: ovh_bucket_secret_key
+          key: bucket_secret_key
           name: fabrique-prod-backups-access-key
   minSyncReplicas: 0
   maxSyncReplicas: 0
