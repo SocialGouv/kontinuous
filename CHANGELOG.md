@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.162.1 (2023-07-31)
+
+
+### Bug Fixes
+
+* s3 add backup name ([#380](https://github.com/socialgouv/kontinuous/issues/380)) ([d2b5b8c](https://github.com/socialgouv/kontinuous/commit/d2b5b8ca50af333eba58d93c7737809172c074df))
+
 ## 1.162.0 (2023-07-31)
 
 
