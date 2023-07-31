@@ -50,7 +50,7 @@ cnpg-cluster:
       s3Credentials:
         accessKeyId:
           ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
-          key: ovh_bucket_access_key
+          key: bucket_access_key
         secretAccessKey:
           ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
           key: ovh_bucket_secret_key
