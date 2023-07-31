@@ -196,7 +196,6 @@ In `.kontinuous/values.yaml` :
 ```yaml
 # Application to protect
 metabase:
-  enabled: true
   ingress:
     enabled: false # disable ingress (internet exposition)
   # metabase secrets and settings
