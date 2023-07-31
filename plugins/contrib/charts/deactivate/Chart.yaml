@@ -1,9 +1,9 @@
 apiVersion: v2
 name: deactivate
-version: 1.161.9
+version: 1.162.0
 dependencies:
   - name: jobs
     repository: file://../jobs
     condition: 'true'
     alias: jobs-deactivate
-    version: 1.161.9
+    version: 1.162.0

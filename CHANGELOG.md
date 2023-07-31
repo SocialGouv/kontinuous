@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.162.0 (2023-07-31)
+
+
+### Features
+
+* **cnpg:**  backup + default prod  +improve debug ([#379](https://github.com/socialgouv/kontinuous/issues/379)) ([a05cb2e](https://github.com/socialgouv/kontinuous/commit/a05cb2ee99274d17685d381d62a4ac9ada8ef179))
+
 ## 1.161.9 (2023-07-31)
 
 ## 1.161.8 (2023-07-31)
