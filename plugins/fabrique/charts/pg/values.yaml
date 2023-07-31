@@ -56,7 +56,7 @@ cnpg-cluster:
           key: bucket_secret_key
         region:
           ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
-          key: ovh_bucket_region
+          key: bucket_region
 
 jobs-pg:
   enabled: true
