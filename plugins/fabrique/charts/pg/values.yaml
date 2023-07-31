@@ -8,7 +8,7 @@ cnpg-cluster:
     - {{ .Values.kontinuous.parentChart }}.jobs-pg
   ~tpl~dbOwner: "{{ .Values.global.pgUser }}"
   ~tpl~dbName: "{{ .Values.global.pgDatabase }}"
-  ~tpl~instances: "{{ if (or .Values.global.isProd .Values.global.isPreprod) }}3{{else}}1{{end}}"
+  ~tpl~instances: "{{ (or .Values.global.isProd .Values.global.isPreProd) | ternary `3` `1` }}"
   postgresqlParameter:
     timezone: "Europe/Paris"
   extensions:
@@ -21,7 +21,7 @@ cnpg-cluster:
     - pgcrypto
     - hstore
   monitoring:
-    ~tpl~enablePodMonitor: "{{ if (or .Values.global.isProd .Values.global.isPreprod) }}true{{else}}false{{end}}"
+    ~tpl~enablePodMonitor: "{{ (or .Values.global.isProd .Values.global.isPreProd) | ternary `true` `false` }}"
   persistence:
     size: 8Gi
     # pvcTemplate:
@@ -30,13 +30,30 @@ cnpg-cluster:
     tag: "14"
   poolers:
     rw:
-      ~tpl~instances: "{{ if (or .Values.global.isProd .Values.global.isPreprod) }}3{{else}}1{{end}}"
+      ~tpl~instances: "{{ (or .Values.global.isProd .Values.global.isPreProd) | ternary `3` `1` }}"
       type: rw
       pgbouncer:
         poolMode: session
         parameters:
           max_client_conn: "1000"
           # default_pool_size: "10"
+    backup:
+      ~tpl~enabled: "{{ (or .Values.global.isProd .Values.global.isPreProd) | ternary `true` `false` }}"
+      schedule: "0 0 0 * * *" # daily
+      retentionPolicy: 60d
+      barmanObjectStore:
+        ~tpl~destinationPath: "s3://{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}/{{ .Values.global.namespace }}"
+        ~tpl~endpointURL: "{{ .Values.global.pgBackupEndpointURL }}"
+        s3Credentials:
+          accessKeyId:
+            ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
+            key: ovh_bucket_access_key
+          secretAccessKey:
+            ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
+            key: ovh_bucket_secret_key
+          region:
+            ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
+            key: ovh_bucket_region
 
 jobs-pg:
   enabled: true

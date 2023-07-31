@@ -7,7 +7,7 @@ const renderTplRecurse = async (
   if (typeof values !== "object" || values === null) {
     return
   }
-  const { config, utils } = context
+  const { config, utils, logger } = context
   const { renderTpl, yaml } = utils
   const { buildPath } = config
 
@@ -27,13 +27,19 @@ const renderTplRecurse = async (
         },
       }
 
-      let value = await renderTpl(tpl, {
-        dir: `${buildPath}/tpl`,
-        values: {
-          ...rootValues,
-          ...extraValues,
-        },
-      })
+      let value
+      try {
+        value = await renderTpl(tpl, {
+          dir: `${buildPath}/tpl`,
+          values: {
+            ...rootValues,
+            ...extraValues,
+          },
+        })
+      } catch (error) {
+        logger.warn(`failed to render tpl key "${key}", value is "${tpl}"`)
+        throw error
+      }
       value = yaml.loadValue(value)
       if (isTplCast) {
         const cast = prefix.slice(1, -1).split(":").slice(1)
