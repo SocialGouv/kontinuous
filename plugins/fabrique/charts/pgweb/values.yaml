@@ -1,9 +1,9 @@
 pgweb:
   enabled: true
+  ~tpl~repositoryName: "{{ .Values.global.repositoryName }}"
+  ~tpl~host: '{{ tpl (or .Values.host (print (or .Values.component (index .Values.kontinuous.chartContext 2)) "-" (or .Values.global.host ""))) $ }}'
   image:
     tag: v0.14.1
-  ~tpl~host: '{{ tpl (or .Values.host (print (or .Values.component (index .Values.kontinuous.chartContext 2)) "-" (or .Values.global.host ""))) $ }}'
-  ~tpl~repositoryName: "{{ .Values.global.repositoryName }}"
   ingress:
     enabled: true
     ~tpl~annotations: "{{ .Values.global.ingress.annotations | toJson }}"

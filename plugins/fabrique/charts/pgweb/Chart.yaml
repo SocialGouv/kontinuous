@@ -6,4 +6,3 @@ dependencies:
     degit: socialgouv/helm-charts/charts/pgweb@v1
     condition: pgweb.enabled
     version: "1"
-    appVersion: "0.14.1"
