@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.163.3 (2023-08-02)
+
+
+### Bug Fixes
+
+* snapshots test chart remoteLinks (again) ([#386](https://github.com/socialgouv/kontinuous/issues/386)) ([3c5ca19](https://github.com/socialgouv/kontinuous/commit/3c5ca1909e0b48f9066dcdb068ea137bff7c6c0a))
+
 ## 1.163.2 (2023-08-02)
 
 
