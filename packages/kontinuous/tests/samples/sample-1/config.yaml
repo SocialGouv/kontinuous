@@ -6,3 +6,6 @@ dependencies:
         validators:
           sealedSecrets:
             enabled: false
+
+remoteLinks:
+  socialgouv/helm-charts/charts/pgweb@v1: socialgouv/helm-charts/charts/pgweb@v1.9.5
