@@ -5,7 +5,7 @@ pgweb:
   ~tpl~envFrom: "{{ toYaml .Values.envFrom | nindent 2 }}"
   #env: "{{ toJson .Values.env }}"
   image:
-    tag: v0.14.1
+    tag: 0.14.1
   ingress:
     enabled: true
     ~tpl~annotations: "{{ .Values.global.ingress.annotations | toJson }}"
