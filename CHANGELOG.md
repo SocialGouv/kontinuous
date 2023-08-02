@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.163.4 (2023-08-02)
+
+
+### Bug Fixes
+
+* **pgweb:** fix incorrect version ([#387](https://github.com/socialgouv/kontinuous/issues/387)) ([119b14c](https://github.com/socialgouv/kontinuous/commit/119b14c325f70ed30c5a04bdff5cd609d461133b))
+
 ## 1.163.3 (2023-08-02)
 
 
