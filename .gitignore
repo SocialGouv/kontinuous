@@ -6,7 +6,8 @@ node_modules
 !.yarn/plugins
 !.yarn/releases
 !.yarn/sdks
-!.yarn/versions
+!.yarn/
+Chart.lock
 
 /.env
 /kontinuous-dist

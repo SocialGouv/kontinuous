@@ -1,5 +1,7 @@
 pg:
   enabled: false
+pgweb:
+  enabled: false
 maildev:
   enabled: false
 keycloakx:

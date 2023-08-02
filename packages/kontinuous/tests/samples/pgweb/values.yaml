@@ -1,0 +1,5 @@
+pgweb:
+  enabled: true
+  envFrom:
+    - secretRef:
+        name: some-db-secret

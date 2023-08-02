@@ -1,7 +1,5 @@
 contrib-helpers:
   enabled: true
-pgweb:
-  enabled: false
 app:
   enabled: false
 deactivate:

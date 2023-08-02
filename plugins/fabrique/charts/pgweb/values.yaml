@@ -1,0 +1,11 @@
+pgweb:
+  enabled: true
+  ~tpl~repositoryName: "{{ .Values.global.repositoryName }}"
+  ~tpl~host: '{{ tpl (or .Values.host (print (or .Values.component (index .Values.kontinuous.chartContext 2)) "-" (or .Values.global.host ""))) $ }}'
+  ~tpl~envFrom: "{{ toYaml .Values.envFrom | nindent 2 }}"
+  #env: "{{ toJson .Values.env }}"
+  image:
+    tag: v0.14.1
+  ingress:
+    enabled: true
+    ~tpl~annotations: "{{ .Values.global.ingress.annotations | toJson }}"
