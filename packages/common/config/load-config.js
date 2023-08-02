@@ -602,6 +602,11 @@ const loadConfig = async (
         }
       },
     },
+    inOfficialDockerImage: {
+      default: false,
+      env: "KS_IN_OFFICIAL_DOCKER_IMAGE",
+      envParser: envParserYaml,
+    },
     linksSelfLocation: {
       default: "socialgouv/kontinuous",
     },
@@ -644,6 +649,9 @@ const loadConfig = async (
           if (value.startsWith("./")) {
             links[key] = path.join(config.workspaceKsPath, value)
           }
+        }
+        if (config.inOfficialDockerImage) {
+          links["socialgouv/kontinuous"] = "/opt/kontinuous"
         }
         return links
       },
