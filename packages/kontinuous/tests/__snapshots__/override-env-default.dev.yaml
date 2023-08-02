@@ -80,6 +80,74 @@ metadata:
 automountServiceAccountToken: false
 ---
 apiVersion: batch/v1
+kind: CronJob
+metadata:
+  labels:
+    app: cnpg-backup-s3-client
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: cronjob-pg-backup-cron-5yup7xxm
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: pg-backup-cron
+  annotations:
+    kontinuous/chartPath: project.fabrique.pg.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/pg/charts/cnpg-cluster/templates/backup-cron.yaml
+    kontinuous/plugin.needs: |
+      - project.fabrique.pg.jobs-pg
+    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+  namespace: test-override-env-default-feature-branch-1
+spec:
+  schedule: 0 0 * * 0
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        metadata:
+          labels:
+            app: cnpg-backup-s3-client
+          name: backup-cron
+        spec:
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: 1001
+            fsGroup: 1001
+          restartPolicy: Never
+          containers:
+            - name: s3-client
+              image: ghcr.io/socialgouv/docker/s3-client:1
+              imagePullPolicy: IfNotPresent
+              securityContext:
+                allowPrivilegeEscalation: false
+              env:
+                - name: AWS_ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: fabrique-dev-backups-access-key
+                      key: bucket_access_key
+                - name: AWS_SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: fabrique-dev-backups-access-key
+                      key: bucket_secret_key
+                - name: AWS_DEFAULT_REGION
+                  valueFrom:
+                    secretKeyRef:
+                      name: fabrique-dev-backups-access-key
+                      key: bucket_region
+                - name: AWS_ENDPOINT_URL
+                  value: https://s3.gra.io.cloud.ovh.net
+                - name: DESTINATION_PATH
+                  value: s3://fabrique-dev-backups/test-override-env-default-feature-branch-1/dumps
+              envFrom:
+                - secretRef:
+                    name: pg-app
+---
+apiVersion: batch/v1
 kind: Job
 metadata:
   name: job-dev-test-override-env-default-feature-branch-1-cr-2l6fzsi6
@@ -233,7 +301,7 @@ kind: Cluster
 metadata:
   name: pg
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.1
+    helm.sh/chart: cnpg-cluster-1.9.10
     app.kubernetes.io/name: pg
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -273,7 +341,7 @@ spec:
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
-      destinationPath: s3://fabrique-dev/test-override-env-default-feature-branch-1
+      destinationPath: s3://fabrique-dev-backups/test-override-env-default-feature-branch-1
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:
         accessKeyId:
@@ -311,7 +379,7 @@ kind: Pooler
 metadata:
   name: pg-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.1
+    helm.sh/chart: cnpg-cluster-1.9.10
     app.kubernetes.io/name: pg
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -346,7 +414,7 @@ kind: ScheduledBackup
 metadata:
   name: pg-scheduledbackup
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.1
+    helm.sh/chart: cnpg-cluster-1.9.10
     app.kubernetes.io/name: pg
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
