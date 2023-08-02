@@ -536,7 +536,7 @@ spec:
       containers:
         - name: pgweb
           securityContext: {}
-          image: sosedoff/pgweb:v0.14.1
+          image: sosedoff/pgweb:0.14.1
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
