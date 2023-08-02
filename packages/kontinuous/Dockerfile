@@ -125,6 +125,9 @@ RUN cd /app/plugins/fabrique && /app/packages/helm-tree/bin/build-helm-tree
 
 RUN yarn workspaces foreach -t run postinstall
 
+RUN chown -R 1001:1001 /home/ubuntu/.kontinuous/cache && \
+  chmod -R 0775 /home/ubuntu/.kontinuous/cache
+
 FROM node as build
 
 COPY --chown=1001:1001 yarn.lock .yarnrc.yml ./
@@ -159,6 +162,9 @@ RUN mkdir -p /opt && chown 1001:1001 /opt
 RUN mkdir -p /opt/kontinuous && chown 1001:1001 /opt/kontinuous
 
 RUN mkdir $HOME/.kube
+RUN mkdir -p /home/ubuntu/.kontinuous \
+  && chown 1001:1001 /home/ubuntu/.kontinuous \
+  && chmod 0775 /home/ubuntu/.kontinuous
 
 ENV KS_INLINE_CONFIG_SET "links.socialgouv/kontinuous=/opt/kontinuous"
 ENV KS_EXTERNAL_BIN_FORCE_DOWNLOAD "false"
@@ -180,6 +186,8 @@ CMD ["help"]
 
 COPY --from=plugins --chown=1001:1001 /app/plugins/ ./plugins/
 COPY --from=plugins --chown=1001:1001 /home/ubuntu/.kontinuous/cache/ /home/ubuntu/.kontinuous/cache/
+
+RUN chmod 0775 /home/ubuntu/.kontinuous/cache
 
 WORKDIR /workspace
 USER 1001
