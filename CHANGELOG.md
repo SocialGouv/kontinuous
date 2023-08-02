@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.163.5 (2023-08-02)
+
+
+### Bug Fixes
+
+* give pg_dump secretRef ([#388](https://github.com/socialgouv/kontinuous/issues/388)) ([99f4f41](https://github.com/socialgouv/kontinuous/commit/99f4f41f2b60998d424cce25f5ddbea5aec23c7a))
+
 ## 1.163.4 (2023-08-02)
 
 
