@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.163.1 (2023-08-02)
+
+
+### Bug Fixes
+
+* docker image to run locally with group perms ([8d9151a](https://github.com/socialgouv/kontinuous/commit/8d9151abe1047c9bacf841a2beb17d6a7d209439))
+
 ## 1.163.0 (2023-08-02)
 
 
