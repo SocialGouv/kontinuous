@@ -1,3 +1,6 @@
 dependencies:
   fabrique:
     import: socialgouv/kontinuous/plugins/fabrique
+
+remoteLinks:
+  socialgouv/helm-charts/charts/pgweb@v1: socialgouv/helm-charts/charts/pgweb@v1.9.5
