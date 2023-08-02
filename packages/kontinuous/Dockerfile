@@ -166,7 +166,7 @@ RUN mkdir -p /home/ubuntu/.kontinuous \
   && chown 1001:1001 /home/ubuntu/.kontinuous \
   && chmod 0775 /home/ubuntu/.kontinuous
 
-ENV KS_INLINE_CONFIG_SET "links.socialgouv/kontinuous=/opt/kontinuous"
+ENV KS_IN_OFFICIAL_DOCKER_IMAGE "true"
 ENV KS_EXTERNAL_BIN_FORCE_DOWNLOAD "false"
 ENV KS_HOMEDIR=/home/ubuntu/.kontinuous
 
