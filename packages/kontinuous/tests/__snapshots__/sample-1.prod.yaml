@@ -81,7 +81,7 @@ automountServiceAccountToken: false
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: release-name-pgweb
+  name: pgweb
   labels:
     helm.sh/chart: pgweb-1.9.5
     app.kubernetes.io/name: pgweb
@@ -92,7 +92,7 @@ metadata:
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: serviceaccount-release-name-pgweb-5yb2rcul
+    kontinuous/resourceName: serviceaccount-pgweb-3b1nl9ny
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   annotations:
@@ -531,7 +531,7 @@ spec:
       annotations:
         kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     spec:
-      serviceAccountName: release-name-pgweb
+      serviceAccountName: pgweb
       securityContext: {}
       containers:
         - name: pgweb
