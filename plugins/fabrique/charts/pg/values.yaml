@@ -1,5 +1,6 @@
 backup:
   enabled: false
+  # to override the backup destination path (in case we need a new destination for a new cluster)
   name: ""
 
 cnpg-cluster:
