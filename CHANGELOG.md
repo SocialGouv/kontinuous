@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.163.10 (2023-08-03)
+
+
+### Bug Fixes
+
+* **cnpg:** use superuser secret for backups ([#396](https://github.com/socialgouv/kontinuous/issues/396)) ([aa0b424](https://github.com/socialgouv/kontinuous/commit/aa0b424cd01e1f53e93b5cc8f53ca3755fe65046))
+
 ## 1.163.9 (2023-08-03)
 
 
