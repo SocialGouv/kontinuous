@@ -1,0 +1,8 @@
+hasura:
+  ~needs: [cnpg]
+  envFrom:
+    - secretRef:
+        name: cnpg-app
+
+cnpg:
+  ~chart: pg

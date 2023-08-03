@@ -1,8 +1,0 @@
-apiVersion: v2
-name: pg
-version: 1.136.3
-dependencies:
-  - name: cnpg-cluster
-    repository: https://socialgouv.github.io/helm-charts
-    version: 1.4.2
-    condition: cnpg-cluster.enabled

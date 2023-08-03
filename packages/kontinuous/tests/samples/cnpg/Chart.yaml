@@ -1,5 +1,0 @@
-dependencies:
-  - name: cnpg
-    repository: file://./charts/cnpg
-    version: 1.4.2
-    condition: cnpg.enabled
