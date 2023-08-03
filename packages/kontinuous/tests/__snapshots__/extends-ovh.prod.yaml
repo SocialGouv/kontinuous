@@ -142,9 +142,20 @@ spec:
                   value: https://s3.gra.io.cloud.ovh.net
                 - name: DESTINATION_PATH
                   value: s3://fabrique-prod-backups/test-extends-ovh/pg-hasura/dumps
-              envFrom:
-                - secretRef:
-                    name: pg-hasura-app
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: pg-hasura-superuser
+                      key: password
+                - name: PGUSER
+                  valueFrom:
+                    secretKeyRef:
+                      name: pg-hasura-superuser
+                      key: username
+                - name: PGDATABASE
+                  value: test-extends-ovh
+                - name: PGHOST
+                  value: pg-hasura-r
 ---
 apiVersion: batch/v1
 kind: CronJob
@@ -210,9 +221,20 @@ spec:
                   value: https://s3.gra.io.cloud.ovh.net
                 - name: DESTINATION_PATH
                   value: s3://fabrique-prod-backups/test-extends-ovh/pg-keycloak/dumps
-              envFrom:
-                - secretRef:
-                    name: pg-keycloak-app
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: pg-keycloak-superuser
+                      key: password
+                - name: PGUSER
+                  valueFrom:
+                    secretKeyRef:
+                      name: pg-keycloak-superuser
+                      key: username
+                - name: PGDATABASE
+                  value: test-extends-ovh
+                - name: PGHOST
+                  value: pg-keycloak-r
 ---
 apiVersion: batch/v1
 kind: Job
@@ -694,7 +716,7 @@ kind: Cluster
 metadata:
   name: pg-hasura
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.10
+    helm.sh/chart: cnpg-cluster-1.9.12
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -734,7 +756,7 @@ spec:
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
-      destinationPath: s3://fabrique-prod-backups/test-extends-ovh/pg-hasura
+      destinationPath: s3://fabrique-prod-backups/test-extends-ovh
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:
         accessKeyId:
@@ -774,7 +796,7 @@ kind: Cluster
 metadata:
   name: pg-keycloak
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.10
+    helm.sh/chart: cnpg-cluster-1.9.12
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -814,7 +836,7 @@ spec:
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
-      destinationPath: s3://fabrique-prod-backups/test-extends-ovh/pg-keycloak
+      destinationPath: s3://fabrique-prod-backups/test-extends-ovh
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:
         accessKeyId:
@@ -908,7 +930,7 @@ kind: Pooler
 metadata:
   name: pg-hasura-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.10
+    helm.sh/chart: cnpg-cluster-1.9.12
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -943,7 +965,7 @@ kind: Pooler
 metadata:
   name: pg-keycloak-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.10
+    helm.sh/chart: cnpg-cluster-1.9.12
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -978,7 +1000,7 @@ kind: ScheduledBackup
 metadata:
   name: pg-hasura-scheduledbackup
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.10
+    helm.sh/chart: cnpg-cluster-1.9.12
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -1009,7 +1031,7 @@ kind: ScheduledBackup
 metadata:
   name: pg-keycloak-scheduledbackup
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.10
+    helm.sh/chart: cnpg-cluster-1.9.12
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"

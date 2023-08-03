@@ -142,9 +142,20 @@ spec:
                   value: https://s3.gra.io.cloud.ovh.net
                 - name: DESTINATION_PATH
                   value: s3://fabrique-prod-backups/test-pg/cnpg/dumps
-              envFrom:
-                - secretRef:
-                    name: cnpg-app
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: cnpg-superuser
+                      key: password
+                - name: PGUSER
+                  valueFrom:
+                    secretKeyRef:
+                      name: cnpg-superuser
+                      key: username
+                - name: PGDATABASE
+                  value: test-pg
+                - name: PGHOST
+                  value: cnpg-r
 ---
 apiVersion: batch/v1
 kind: Job
@@ -465,7 +476,7 @@ kind: Cluster
 metadata:
   name: cnpg
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.10
+    helm.sh/chart: cnpg-cluster-1.9.12
     app.kubernetes.io/name: cnpg
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -505,7 +516,7 @@ spec:
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
-      destinationPath: s3://fabrique-prod-backups/test-pg/cnpg
+      destinationPath: s3://fabrique-prod-backups/test-pg
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:
         accessKeyId:
@@ -572,7 +583,7 @@ kind: Pooler
 metadata:
   name: cnpg-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.10
+    helm.sh/chart: cnpg-cluster-1.9.12
     app.kubernetes.io/name: cnpg
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -607,7 +618,7 @@ kind: ScheduledBackup
 metadata:
   name: cnpg-scheduledbackup
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.10
+    helm.sh/chart: cnpg-cluster-1.9.12
     app.kubernetes.io/name: cnpg
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
