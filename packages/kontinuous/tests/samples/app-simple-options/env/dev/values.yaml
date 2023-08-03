@@ -1,0 +1,24 @@
+app:
+  ~needs: [seed, seed2]
+
+jobs:
+  runs:
+    db:
+      use: create-db
+      with:
+        pgAdminSecretRefName: "pg-user-{{ .Values.global.branchSlug }}"
+    seed:
+      ~needs: [db]
+      image: "{{ .Values.global.registry }}/{{ .Values.global.imageRepository }}/app:{{ .Values.global.imageTag }}"
+      run: "yarn seed"
+      envFrom:
+        - secretRef:
+            name: "pg-user-{{ .Values.global.branchSlug }}"
+    seed2:
+      ~needs: [seed]
+      use: seed-db
+      with:
+        seedPath: hasura/seeds/carnet_de_bord/seed-data.sql
+      envFrom:
+        - secretRef:
+            name: "pg-user-{{ .Values.global.branchSlug }}"
