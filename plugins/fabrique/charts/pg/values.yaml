@@ -46,9 +46,9 @@ cnpg-cluster:
     ~tpl~enabled: "{{ (or .Values.Parent.backup.enabled .Values.global.isProd .Values.global.isPreProd) | ternary `true` `false` }}"
     schedule: "0 0 0 * * *" # daily
     retentionPolicy: 60d
-    ~tpl~sqlDumpPgSecret: "{{ index .Values.kontinuous.chartContext 2 }}-app"
+    ~tpl~sqlDumpPgSecret: "{{ index .Values.kontinuous.chartContext 2 }}-superuser"
     barmanObjectStore:
-      ~tpl~destinationPath: "s3://{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups/{{ .Values.global.namespace }}/{{ index .Values.kontinuous.chartContext 2 }}{{ (ne .Values.Parent.backup.name ``) | ternary (print `-` .Values.Parent.backup.name) `` }}"
+      ~tpl~destinationPath: "s3://{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups/{{ .Values.global.namespace }}{{ (ne .Values.Parent.backup.name ``) | ternary (print `-` .Values.Parent.backup.name) `` }}"
       ~tpl~endpointURL: "{{ .Values.global.pgBackupEndpointURL }}"
       wal:
         compression: gzip

@@ -142,10 +142,10 @@ spec:
                 - name: AWS_ENDPOINT_URL
                   value: https://s3.gra.io.cloud.ovh.net
                 - name: DESTINATION_PATH
-                  value: s3://fabrique-dev-backups/test-override-env-default-feature-branch-1/pg/dumps
+                  value: s3://fabrique-dev-backups/test-override-env-default-feature-branch-1/dumps
               envFrom:
                 - secretRef:
-                    name: pg-app
+                    name: pg-superuser
 ---
 apiVersion: batch/v1
 kind: Job
@@ -341,7 +341,7 @@ spec:
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
-      destinationPath: s3://fabrique-dev-backups/test-override-env-default-feature-branch-1/pg
+      destinationPath: s3://fabrique-dev-backups/test-override-env-default-feature-branch-1
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:
         accessKeyId:

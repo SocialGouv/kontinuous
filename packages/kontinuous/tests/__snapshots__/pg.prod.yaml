@@ -141,10 +141,10 @@ spec:
                 - name: AWS_ENDPOINT_URL
                   value: https://s3.gra.io.cloud.ovh.net
                 - name: DESTINATION_PATH
-                  value: s3://fabrique-prod-backups/test-pg/cnpg/dumps
+                  value: s3://fabrique-prod-backups/test-pg/dumps
               envFrom:
                 - secretRef:
-                    name: cnpg-app
+                    name: cnpg-superuser
 ---
 apiVersion: batch/v1
 kind: Job
@@ -505,7 +505,7 @@ spec:
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
-      destinationPath: s3://fabrique-prod-backups/test-pg/cnpg
+      destinationPath: s3://fabrique-prod-backups/test-pg
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:
         accessKeyId:
