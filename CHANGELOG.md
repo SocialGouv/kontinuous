@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.163.8 (2023-08-03)
+
+
+### Bug Fixes
+
+* **pg:** add a subfolder for cnpg cluster cron backups ([#393](https://github.com/socialgouv/kontinuous/issues/393)) ([04433e5](https://github.com/socialgouv/kontinuous/commit/04433e5106789a48906f24e8ece97baa6c4cc4ab))
+
 ## 1.163.7 (2023-08-03)
 
 
