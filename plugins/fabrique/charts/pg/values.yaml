@@ -50,6 +50,8 @@ cnpg-cluster:
     barmanObjectStore:
       ~tpl~destinationPath: "s3://{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups/{{ .Values.global.namespace }}/{{ index .Values.kontinuous.chartContext 2 }}{{ (ne .Values.Parent.backup.name ``) | ternary (print `-` .Values.Parent.backup.name) `` }}"
       ~tpl~endpointURL: "{{ .Values.global.pgBackupEndpointURL }}"
+      wal:
+        compression: gzip
       s3Credentials:
         accessKeyId:
           ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
