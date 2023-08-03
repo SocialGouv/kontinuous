@@ -142,10 +142,21 @@ spec:
                 - name: AWS_ENDPOINT_URL
                   value: https://s3.gra.io.cloud.ovh.net
                 - name: DESTINATION_PATH
-                  value: s3://fabrique-dev-backups/test-override-env-default-feature-branch-1/dumps
-              envFrom:
-                - secretRef:
-                    name: pg-superuser
+                  value: s3://fabrique-dev-backups/test-override-env-default-feature-branch-1/pg/dumps
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: pg-superuser
+                      key: password
+                - name: PGUSER
+                  valueFrom:
+                    secretKeyRef:
+                      name: pg-superuser
+                      key: username
+                - name: PGDATABASE
+                  value: autodevops_feature-branch-1
+                - name: PGHOST
+                  value: pg-r
 ---
 apiVersion: batch/v1
 kind: Job
@@ -301,7 +312,7 @@ kind: Cluster
 metadata:
   name: pg
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.10
+    helm.sh/chart: cnpg-cluster-1.9.12
     app.kubernetes.io/name: pg
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -381,7 +392,7 @@ kind: Pooler
 metadata:
   name: pg-rw
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.10
+    helm.sh/chart: cnpg-cluster-1.9.12
     app.kubernetes.io/name: pg
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -416,7 +427,7 @@ kind: ScheduledBackup
 metadata:
   name: pg-scheduledbackup
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.10
+    helm.sh/chart: cnpg-cluster-1.9.12
     app.kubernetes.io/name: pg
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
