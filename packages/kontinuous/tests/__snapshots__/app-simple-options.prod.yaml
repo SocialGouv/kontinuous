@@ -184,11 +184,11 @@ spec:
             periodSeconds: 125
           resources:
             limits:
-              cpu: 1
-              memory: 1Gi
+              cpu: \\"2\\"
+              memory: 20Mi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: \\"1\\"
+              memory: 10Mi
           volumeMounts:
             - name: docs
               mountPath: /mnt/docs

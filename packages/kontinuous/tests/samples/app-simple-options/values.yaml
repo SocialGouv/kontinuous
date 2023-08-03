@@ -6,3 +6,10 @@ app:
     initialDelaySeconds: 123
     failureThreshold: 124
     periodSeconds: 125
+  resources:
+    limits:
+      cpu: 2
+      memory: 20Mi
+    requests:
+      cpu: 1
+      memory: 10Mi
