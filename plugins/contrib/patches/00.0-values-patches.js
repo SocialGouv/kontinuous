@@ -21,40 +21,45 @@ module.exports = (manifests, _options, { values }) => {
     if (!chartPath) {
       continue
     }
-    const scopedValues = get(values, chartPath)
-    if (!scopedValues) {
-      continue
-    }
-    for (const key of Object.keys(scopedValues)) {
-      if (!key.startsWith("~")) {
+    const chartPathParts = []
+    for (const chartPathPart of chartPath.split(".")) {
+      chartPathParts.push(chartPathPart)
+      const currentChartPath = chartPathParts.join(".")
+      const scopedValues = get(values, currentChartPath)
+      if (!scopedValues) {
         continue
       }
-      let value
-      let match
-      if (
-        typeof scopedValues[key] === "object" &&
-        scopedValues[key] !== null &&
-        !Array.isArray(scopedValues[key])
-      ) {
-        value = scopedValues[key].value
-        match = scopedValues[key].match
-      } else {
-        value = scopedValues[key]
-      }
-      if (!isMatching(manifest, match)) {
-        continue
-      }
-      const jval = typeof value === "string" ? value : JSON.stringify(value)
-      const flag = key.slice(1)
-      if (key.startsWith("~.")) {
-        set(manifest, key.slice(2), jval)
-      } else if (!specialFlags.includes(flag)) {
-        const pluginKey = `kontinuous/plugin.${flag}`
-        if (manifest.metadata?.annotations?.[pluginKey]) {
+      for (const key of Object.keys(scopedValues)) {
+        if (!key.startsWith("~")) {
           continue
         }
+        let value
+        let match
+        if (
+          typeof scopedValues[key] === "object" &&
+          scopedValues[key] !== null &&
+          !Array.isArray(scopedValues[key])
+        ) {
+          value = scopedValues[key].value
+          match = scopedValues[key].match
+        } else {
+          value = scopedValues[key]
+        }
+        if (!isMatching(manifest, match)) {
+          continue
+        }
+        const jval = typeof value === "string" ? value : JSON.stringify(value)
+        const flag = key.slice(1)
+        if (key.startsWith("~.")) {
+          set(manifest, key.slice(2), jval)
+        } else if (!specialFlags.includes(flag)) {
+          const pluginKey = `kontinuous/plugin.${flag}`
+          if (manifest.metadata?.annotations?.[pluginKey]) {
+            continue
+          }
 
-        set(manifest, `metadata.annotations.["${pluginKey}"]`, jval)
+          set(manifest, `metadata.annotations.["${pluginKey}"]`, jval)
+        }
       }
     }
   }

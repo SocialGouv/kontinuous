@@ -3,11 +3,18 @@ const getChartNameTopParts = require("../lib/get-chart-name-top-parts")
 
 module.exports = async (manifests, options, { config }) => {
   for (const manifest of manifests) {
-    const { kind, metadata } = manifest
-    const annotations = metadata?.annotations
-    if (!annotations || !kindIsWaitable(kind, options.customWaitableKinds)) {
+    const { kind } = manifest
+    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
       continue
     }
+    if (!manifest.metadata) {
+      manifest.metadata = {}
+    }
+    const { metadata } = manifest
+    if (!metadata.annotations) {
+      metadata.annotations = {}
+    }
+    const { annotations } = metadata
 
     const chartPath = annotations["kontinuous/chartPath"]
     const { name } = metadata
