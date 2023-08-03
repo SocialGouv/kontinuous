@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.163.6 (2023-08-03)
+
+
+### Bug Fixes
+
+* **pgweb:** allow multiple instances ([#389](https://github.com/socialgouv/kontinuous/issues/389)) ([3e85762](https://github.com/socialgouv/kontinuous/commit/3e8576295bdf3c4e1d5bf4b682bc928253d58e86))
+
 ## 1.163.5 (2023-08-02)
 
 
