@@ -517,6 +517,8 @@ spec:
         secretAccessKey:
           key: bucket_secret_key
           name: fabrique-prod-backups-access-key
+      wal:
+        compression: gzip
   minSyncReplicas: 0
   maxSyncReplicas: 0
   postgresql: {}
