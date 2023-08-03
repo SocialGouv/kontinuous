@@ -1,0 +1,299 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test build manifests with snapshots app-simple-options.prod 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: \\"1234\\"
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+  labels:
+    application: test-app-simple-options
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: namespace-test-app-simple-options-20bsl7gt
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: test-app-simple-options
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-app-simple-options
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+  labels:
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+  labels:
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-app-simple-options
+automountServiceAccountToken: false
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app
+    application: test-app-simple-options
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-app-55fzcjih
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-app-simple-options
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
+    kontinuous/depname.chartName: app
+    kontinuous/depname.chartPath: project.fabrique.contrib.app
+    kontinuous/depname.resourcePath: deployment.app
+    kontinuous/depname.resourceName: app
+    kontinuous/depname.chartNameTopFull: app
+    kontinuous/depname.chartNameTop: app
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: app
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        component: app
+        application: test-app-simple-options
+        namespace: test-app-simple-options
+        kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+        kontinuous/deployment.env: test-app-simple-options-prod
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-app-55fzcjih
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-app-simple-options
+                    - key: component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
+      volumes:
+        - name: docs
+          persistentVolumeClaim:
+            claimName: docs
+      containers:
+        - image: harbor.fabrique.social.gouv.fr/test-app-simple-options/app:prod
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 124
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 123
+            periodSeconds: 125
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 41m
+              memory: 121Mi
+          volumeMounts:
+            - name: docs
+              mountPath: /mnt/docs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: test-app-simple-options
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-app-46z2o1vv
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-app-simple-options
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    some: annotation
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    cert-manager.io: cluster-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: \\"true\\"
+  labels:
+    component: app
+    application: test-app-simple-options
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-app-b4kcj2bx
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-app-simple-options
+spec:
+  rules:
+    - host: some.beta.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - some.beta.gouv.fr
+      secretName: app-crt
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-redirect
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/permanent-redirect: https://some.beta.gouv.fr$request_uri
+    some: annotation
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/redirect.yaml
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    cert-manager.io: cluster-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: \\"true\\"
+  labels:
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-app-redirect-2kvey2of
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-app-simple-options
+spec:
+  rules:
+    - host: test-app-simple-options.fabrique.social.gouv.fr
+  tls:
+    - hosts:
+        - test-app-simple-options.fabrique.social.gouv.fr
+      secretName: app-redirect
+"
+`;
