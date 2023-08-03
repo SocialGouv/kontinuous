@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.163.7 (2023-08-03)
+
+
+### Bug Fixes
+
+* apply tilde plugins recursive (so, fix needs) ([#392](https://github.com/socialgouv/kontinuous/issues/392)) ([687bc83](https://github.com/socialgouv/kontinuous/commit/687bc832be6b2af8aa41430f4a273d3b488af829))
+
 ## 1.163.6 (2023-08-03)
 
 
