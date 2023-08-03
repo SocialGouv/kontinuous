@@ -100,6 +100,7 @@ metadata:
   annotations:
     kontinuous/chartPath: project.fabrique.pgweb.pgweb
     kontinuous/source: project/charts/fabrique/charts/pgweb/charts/pgweb/templates/serviceaccount.yaml
+    kontinuous/plugin.needs: \\"[]\\"
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   namespace: test-sample-1-feature-branch-1
 ---
@@ -515,6 +516,7 @@ metadata:
   annotations:
     kontinuous/chartPath: project.fabrique.pgweb.pgweb
     kontinuous/source: project/charts/fabrique/charts/pgweb/charts/pgweb/templates/deployment.yaml
+    kontinuous/plugin.needs: \\"[]\\"
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     kontinuous/depname.full: project.fabrique.pgweb.pgweb.deployment.pgweb
     kontinuous/depname.chartResource: pgweb.deployment.pgweb
@@ -679,6 +681,7 @@ metadata:
   annotations:
     kontinuous/chartPath: project.fabrique.pgweb.pgweb
     kontinuous/source: project/charts/fabrique/charts/pgweb/charts/pgweb/templates/service.yaml
+    kontinuous/plugin.needs: \\"[]\\"
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   namespace: test-sample-1-feature-branch-1
 spec:
@@ -834,6 +837,7 @@ metadata:
   annotations:
     kontinuous/chartPath: project.fabrique.pgweb.pgweb
     kontinuous/source: project/charts/fabrique/charts/pgweb/charts/pgweb/templates/ingress.yaml
+    kontinuous/plugin.needs: \\"[]\\"
     kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
   namespace: test-sample-1-feature-branch-1
 spec:
