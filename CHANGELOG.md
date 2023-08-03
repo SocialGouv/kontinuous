@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.163.9 (2023-08-03)
+
+
+### Bug Fixes
+
+* enable wal compression by default ([#394](https://github.com/socialgouv/kontinuous/issues/394)) ([5bb8712](https://github.com/socialgouv/kontinuous/commit/5bb871299efdc7651c5804e77e591ab93fbc5ac4))
+
 ## 1.163.8 (2023-08-03)
 
 
