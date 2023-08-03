@@ -141,7 +141,7 @@ spec:
                 - name: AWS_ENDPOINT_URL
                   value: https://s3.gra.io.cloud.ovh.net
                 - name: DESTINATION_PATH
-                  value: s3://fabrique-prod-backups/test-extends-ovh/dumps
+                  value: s3://fabrique-prod-backups/test-extends-ovh/pg-hasura/dumps
               envFrom:
                 - secretRef:
                     name: pg-hasura-app
@@ -209,7 +209,7 @@ spec:
                 - name: AWS_ENDPOINT_URL
                   value: https://s3.gra.io.cloud.ovh.net
                 - name: DESTINATION_PATH
-                  value: s3://fabrique-prod-backups/test-extends-ovh/dumps
+                  value: s3://fabrique-prod-backups/test-extends-ovh/pg-keycloak/dumps
               envFrom:
                 - secretRef:
                     name: pg-keycloak-app
@@ -734,7 +734,7 @@ spec:
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
-      destinationPath: s3://fabrique-prod-backups/test-extends-ovh
+      destinationPath: s3://fabrique-prod-backups/test-extends-ovh/pg-hasura
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:
         accessKeyId:
@@ -812,7 +812,7 @@ spec:
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
-      destinationPath: s3://fabrique-prod-backups/test-extends-ovh
+      destinationPath: s3://fabrique-prod-backups/test-extends-ovh/pg-keycloak
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:
         accessKeyId:
