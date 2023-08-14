@@ -1,6 +1,0 @@
-app:
-  enabled: true
-  startupProbe:
-    initialDelaySeconds: 123
-    failureThreshold: 124
-    periodSeconds: 125

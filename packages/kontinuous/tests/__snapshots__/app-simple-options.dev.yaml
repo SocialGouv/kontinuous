@@ -1,0 +1,833 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test build manifests with snapshots app-simple-options.dev 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: \\"1234\\"
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    janitor/ttl: 7d
+  labels:
+    application: test-app-simple-options
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: namespace-test-app-simple-options-feature-branch-1-3xg1whnz
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+    cert: wildcard
+  name: test-app-simple-options-feature-branch-1
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-app-simple-options-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+  labels:
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+  labels:
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-app-simple-options-feature-branch-1
+automountServiceAccountToken: false
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-dev-test-app-simple-options-feature-branch-1-crea-32w05t73
+  namespace: test-app-simple-options-feature-branch-1
+  annotations:
+    kontinuous/needsName: db.create-db
+    kontinuous/needsNames: '[\\"db\\",\\"db.create-db\\",\\"db..create-db\\"]'
+    kontinuous/plugin.needs: '[\\"db..create-secret\\"]'
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-app-simple-options-feature-branch-1-crea-32w05t73
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-app-simple-options-feature-branch-1-crea-32w05t73
+    kontinuous/depname.chartName: jobs
+    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
+    kontinuous/depname.resourcePath: job.job-dev-test-app-simple-options-feature-branch-1-crea-32w05t73
+    kontinuous/depname.resourceName: job-dev-test-app-simple-options-feature-branch-1-crea-32w05t73
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
+  labels:
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: job-job-dev-test-app-simple-options-feature-branch-1-1krl55d2
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  backoffLimit: 3
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      labels:
+        environment: dev
+        ref: feature-branch-1
+        repository: test-app-simple-options
+        runName: create-db
+        kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+        kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: job-job-dev-test-app-simple-options-feature-branch-1-1krl55d2
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-action
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.163.10
+          command:
+            - sh
+            - -c
+            - degit --disable-cache
+              socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: action
+              mountPath: /action
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
+            requests:
+              cpu: \\"0\\"
+              memory: \\"0\\"
+      containers:
+        - name: job
+          image: ghcr.io/socialgouv/docker/psql:6.70.0
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: pg-admin-user
+          env:
+            - name: NEW_DB_NAME
+              value: autodevops_feature-branch-1
+            - name: NEW_USER
+              valueFrom:
+                secretKeyRef:
+                  key: PGUSER
+                  name: pg-user
+            - name: NEW_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: PGPASSWORD
+                  name: pg-user
+            - name: PGHOST
+              valueFrom:
+                secretKeyRef:
+                  key: PGHOST
+                  name: pg-user
+            - name: PGPORT
+              valueFrom:
+                secretKeyRef:
+                  key: PGPORT
+                  name: pg-user
+            - name: PGSSLMODE
+              valueFrom:
+                secretKeyRef:
+                  key: PGSSLMODE
+                  name: pg-user
+            - name: NEW_DB_EXTENSIONS
+              value: hstore pgcrypto citext uuid-ossp postgis pg_trgm unaccent
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              /action/ensure-db.sh
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 41m
+              memory: 121Mi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6/jobs.db.create-db
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - name: kontinuous-io
+          emptyDir: {}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-dev-test-app-simple-options-feature-branch-1-crea-51d2eork
+  namespace: test-app-simple-options-feature-branch-1
+  annotations:
+    kontinuous/needsName: db.create-secret
+    kontinuous/needsNames: '[\\"db\\",\\"db.create-secret\\",\\"db..create-secret\\"]'
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-app-simple-options-feature-branch-1-crea-51d2eork
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-app-simple-options-feature-branch-1-crea-51d2eork
+    kontinuous/depname.chartName: jobs
+    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
+    kontinuous/depname.resourcePath: job.job-dev-test-app-simple-options-feature-branch-1-crea-51d2eork
+    kontinuous/depname.resourceName: job-dev-test-app-simple-options-feature-branch-1-crea-51d2eork
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
+  labels:
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: job-job-dev-test-app-simple-options-feature-branch-1-mcvevci5
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  backoffLimit: 6
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      labels:
+        environment: dev
+        ref: feature-branch-1
+        repository: test-app-simple-options
+        runName: create-db
+        kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+        kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: job-job-dev-test-app-simple-options-feature-branch-1-mcvevci5
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-action
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.163.10
+          command:
+            - sh
+            - -c
+            - degit --disable-cache
+              socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: action
+              mountPath: /action
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
+            requests:
+              cpu: \\"0\\"
+              memory: \\"0\\"
+      containers:
+        - name: job
+          image: bitnami/kubectl:latest
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: pg-admin-user
+          env:
+            - name: USE_AZURE_FLEX
+              value: \\"false\\"
+            - name: DB_SECRET_NAME
+              value: pg-user
+            - name: JOB_NAMESPACE
+              value: test-app-simple-options-feature-branch-1
+            - name: NAMESPACE
+              value: test-app-simple-options-feature-branch-1
+            - name: PGDATABASE
+              value: autodevops_feature-branch-1
+            - name: PGUSER
+              value: user_feature-branch-1
+            - name: SECRET_TTL
+              value: 24h
+            - name: KUBECONFIG
+              value: /secrets/k8s/kubeconfig
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              /action/create-secret.sh
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 41m
+              memory: 121Mi
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: 1001
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - name: kubeconfig
+              mountPath: /secrets/k8s
+              readOnly: true
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6/jobs.db.create-secret
+      securityContext:
+        fsGroup: 1001
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - name: kubeconfig
+          secret:
+            secretName: kubeconfig
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
+        - name: kontinuous-io
+          emptyDir: {}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-dev-test-app-simple-options-feature-branch-1-seed-41u6yrb1
+  namespace: test-app-simple-options-feature-branch-1
+  annotations:
+    kontinuous/needsName: seed
+    kontinuous/needsNames: '[\\"seed\\"]'
+    kontinuous/plugin.needs: '[\\"db\\"]'
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-app-simple-options-feature-branch-1-seed-41u6yrb1
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-app-simple-options-feature-branch-1-seed-41u6yrb1
+    kontinuous/depname.chartName: jobs
+    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
+    kontinuous/depname.resourcePath: job.job-dev-test-app-simple-options-feature-branch-1-seed-41u6yrb1
+    kontinuous/depname.resourceName: job-dev-test-app-simple-options-feature-branch-1-seed-41u6yrb1
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
+  labels:
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: job-job-dev-test-app-simple-options-feature-branch-1-5qf2rciw
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      labels:
+        environment: dev
+        ref: feature-branch-1
+        repository: test-app-simple-options
+        runName: custom
+        kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+        kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: job-job-dev-test-app-simple-options-feature-branch-1-5qf2rciw
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-repository
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.163.10
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - >
+              
+              degit --disable-cache kontinuous/test-app-simple-options#feature-branch-1 \\\\
+                /workspace
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
+            requests:
+              cpu: \\"0\\"
+              memory: \\"0\\"
+      containers:
+        - name: job
+          image: harbor.fabrique.social.gouv.fr/test-app-simple-options/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: pg-user-feature-branch-1
+          env:
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              yarn seed
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 41m
+              memory: 121Mi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6/jobs.seed
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - name: kontinuous-io
+          emptyDir: {}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-dev-test-app-simple-options-feature-branch-1-seed-2d2kdpq4
+  namespace: test-app-simple-options-feature-branch-1
+  annotations:
+    kontinuous/needsName: seed2.seed-db
+    kontinuous/needsNames: '[\\"seed2\\",\\"seed2.seed-db\\",\\"seed2..seed-db\\"]'
+    kontinuous/plugin.needs: '[\\"seed\\"]'
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/depname.full: project.fabrique.contrib.jobs.job.job-dev-test-app-simple-options-feature-branch-1-seed-2d2kdpq4
+    kontinuous/depname.chartResource: jobs.job.job-dev-test-app-simple-options-feature-branch-1-seed-2d2kdpq4
+    kontinuous/depname.chartName: jobs
+    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
+    kontinuous/depname.resourcePath: job.job-dev-test-app-simple-options-feature-branch-1-seed-2d2kdpq4
+    kontinuous/depname.resourceName: job-dev-test-app-simple-options-feature-branch-1-seed-2d2kdpq4
+    kontinuous/depname.chartNameTopFull: jobs
+    kontinuous/depname.chartNameTop: jobs
+    kontinuous/plugin.log: \\"true\\"
+  labels:
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: job-job-dev-test-app-simple-options-feature-branch-1-lizf9o09
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  backoffLimit: 3
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      labels:
+        environment: dev
+        ref: feature-branch-1
+        repository: test-app-simple-options
+        runName: seed-db
+        kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+        kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: job-job-dev-test-app-simple-options-feature-branch-1-lizf9o09
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: degit-repository
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.163.10
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - >
+              
+              degit --disable-cache kontinuous/test-app-simple-options#feature-branch-1 \\\\
+                /workspace
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
+            requests:
+              cpu: \\"0\\"
+              memory: \\"0\\"
+        - name: degit-action
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.163.10
+          command:
+            - sh
+            - -c
+            - degit --disable-cache
+              socialgouv/kontinuous/plugins/contrib/jobs/seed-db /action
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: action
+              mountPath: /action
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
+            requests:
+              cpu: \\"0\\"
+              memory: \\"0\\"
+      containers:
+        - name: job
+          image: ghcr.io/socialgouv/docker/psql:7.0.0
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: pg-user-feature-branch-1
+          env:
+            - name: SEED_PATH
+              value: hasura/seeds/carnet_de_bord/seed-data.sql
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              /action/seed-db.sh
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 41m
+              memory: 121Mi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6/jobs.seed2.seed-db
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: action
+          emptyDir: {}
+        - name: kontinuous-io
+          emptyDir: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app
+    application: test-app-simple-options
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-app-55fzcjih
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-app-simple-options-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/plugin.needs: '[\\"seed\\",\\"seed2\\"]'
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
+    kontinuous/depname.chartName: app
+    kontinuous/depname.chartPath: project.fabrique.contrib.app
+    kontinuous/depname.resourcePath: deployment.app
+    kontinuous/depname.resourceName: app
+    kontinuous/depname.chartNameTopFull: app
+    kontinuous/depname.chartNameTop: app
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        component: app
+        application: test-app-simple-options
+        namespace: test-app-simple-options-feature-branch-1
+        kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+        kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-app-55fzcjih
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-app-simple-options-feature-branch-1
+                    - key: component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
+      volumes:
+        - name: docs
+          persistentVolumeClaim:
+            claimName: docs
+      containers:
+        - image: harbor.fabrique.social.gouv.fr/test-app-simple-options/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 124
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 123
+            periodSeconds: 125
+          resources:
+            limits:
+              cpu: \\"2\\"
+              memory: 20Mi
+            requests:
+              cpu: \\"1\\"
+              memory: 10Mi
+          volumeMounts:
+            - name: docs
+              mountPath: /mnt/docs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: test-app-simple-options
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-app-46z2o1vv
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-app-simple-options-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
+    kontinuous/plugin.needs: '[\\"seed\\",\\"seed2\\"]'
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"seed\\",\\"seed2\\"]'
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+  labels:
+    component: app
+    application: test-app-simple-options
+    kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
+    kontinuous/deployment.env: test-app-simple-options-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-app-b4kcj2bx
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-app-simple-options-feature-branch-1
+spec:
+  rules:
+    - host: test-app-simple-options-feature-branch-1.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - test-app-simple-options-feature-branch-1.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+"
+`;

@@ -1,6 +1,7 @@
-metabase:
-  enabled: true
+app:
   host: some.beta.gouv.fr
+  redirectFrom:
+    - "{{ .Values.global.host }}"
   ingress:
     annotations:
       some: annotation

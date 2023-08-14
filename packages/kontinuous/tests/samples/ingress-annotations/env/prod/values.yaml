@@ -1,5 +1,0 @@
-metabase:
-  enabled: true
-  ingress:
-    annotations:
-      some: annotation

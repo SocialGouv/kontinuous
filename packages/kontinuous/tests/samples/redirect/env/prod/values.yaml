@@ -1,5 +1,0 @@
-app:
-  enabled: true
-  host: transco.travail-emploi.gouv.fr
-  redirectFrom:
-    - "{{ .Values.global.host }}"

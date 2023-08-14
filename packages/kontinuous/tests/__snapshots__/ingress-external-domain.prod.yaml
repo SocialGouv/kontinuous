@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test build manifests with snapshots ingress-annotations.prod 1`] = `
+exports[`test build manifests with snapshots ingress-external-domain.prod 1`] = `
 "apiVersion: v1
 kind: Namespace
 metadata:
@@ -11,31 +11,31 @@ metadata:
     kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
-    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
   labels:
-    application: test-ingress-annotations
-    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    kontinuous/deployment.env: test-ingress-annotations-prod
+    application: test-ingress-external-domain
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
+    kontinuous/deployment.env: test-ingress-external-domain-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: namespace-test-ingress-annotations-1bwsa4cs
+    kontinuous/resourceName: namespace-test-ingress-external-domain-a4aphtsk
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  name: test-ingress-annotations
+  name: test-ingress-external-domain
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: netpol-ingress
-  namespace: test-ingress-annotations
+  namespace: test-ingress-external-domain
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
-    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
   labels:
-    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    kontinuous/deployment.env: test-ingress-annotations-prod
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
+    kontinuous/deployment.env: test-ingress-external-domain-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -65,17 +65,17 @@ metadata:
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
-    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
   labels:
-    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    kontinuous/deployment.env: test-ingress-annotations-prod
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
+    kontinuous/deployment.env: test-ingress-external-domain-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: serviceaccount-default-2g5dmk74
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  namespace: test-ingress-annotations
+  namespace: test-ingress-external-domain
 automountServiceAccountToken: false
 ---
 apiVersion: v1
@@ -83,9 +83,9 @@ kind: ConfigMap
 metadata:
   labels:
     component: metabase
-    application: test-ingress-annotations
-    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    kontinuous/deployment.env: test-ingress-annotations-prod
+    application: test-ingress-external-domain
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
+    kontinuous/deployment.env: test-ingress-external-domain-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -93,11 +93,11 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: metabase
-  namespace: test-ingress-annotations
+  namespace: test-ingress-external-domain
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/configmap.yaml
-    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
 data:
   MB_APPLICATION_NAME: metabase
   MB_DB_TYPE: postgres
@@ -111,7 +111,7 @@ data:
   MB_SITE_LOCALE: fr
   MB_START_OF_WEEK: monday
   MB_SITE_NAME: Fabrique numérique des ministères sociaux
-  MB_SITE_URL: https://metabase-test-ingress-annotations.fabrique.social.gouv.fr
+  MB_SITE_URL: https://some.external.host
   MB_PASSWORD_COMPLEXITY: strong
 ---
 apiVersion: apps/v1
@@ -119,9 +119,9 @@ kind: Deployment
 metadata:
   labels:
     component: metabase
-    application: test-ingress-annotations
-    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    kontinuous/deployment.env: test-ingress-annotations-prod
+    application: test-ingress-external-domain
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
+    kontinuous/deployment.env: test-ingress-external-domain-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -129,11 +129,11 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: metabase
-  namespace: test-ingress-annotations
+  namespace: test-ingress-external-domain
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/deployment.yaml
-    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
     kontinuous/depname.full: project.fabrique.contrib.metabase.deployment.metabase
     kontinuous/depname.chartResource: metabase.deployment.metabase
     kontinuous/depname.chartName: metabase
@@ -153,8 +153,8 @@ spec:
     metadata:
       labels:
         component: metabase
-        kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-        kontinuous/deployment.env: test-ingress-annotations-prod
+        kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
+        kontinuous/deployment.env: test-ingress-external-domain-prod
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -162,7 +162,7 @@ spec:
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
+        kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
     spec:
       securityContext:
         runAsUser: 1000
@@ -219,9 +219,9 @@ kind: Service
 metadata:
   labels:
     component: metabase
-    application: test-ingress-annotations
-    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    kontinuous/deployment.env: test-ingress-annotations-prod
+    application: test-ingress-external-domain
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
+    kontinuous/deployment.env: test-ingress-external-domain-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -229,11 +229,11 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: metabase
-  namespace: test-ingress-annotations
+  namespace: test-ingress-external-domain
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.metabase
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/service.yaml
-    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
 spec:
   ports:
     - name: http
@@ -248,18 +248,14 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    some: annotation
     kontinuous/chartPath: project.fabrique.contrib.metabase
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/ingress.yaml
-    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    cert-manager.io: cluster-issuer
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: \\"true\\"
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
   labels:
     component: metabase
-    application: test-ingress-annotations
-    kontinuous/deployment: test-ingress-annotations-feature-branch-1-ffac537e6cb-2rmdjfgo
-    kontinuous/deployment.env: test-ingress-annotations-prod
+    application: test-ingress-external-domain
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
+    kontinuous/deployment.env: test-ingress-external-domain-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -267,10 +263,10 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   name: metabase
-  namespace: test-ingress-annotations
+  namespace: test-ingress-external-domain
 spec:
   rules:
-    - host: metabase-test-ingress-annotations.fabrique.social.gouv.fr
+    - host: some.external.host
       http:
         paths:
           - backend:
@@ -282,7 +278,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - metabase-test-ingress-annotations.fabrique.social.gouv.fr
+        - some.external.host
       secretName: metabase-crt
 "
 `;
