@@ -3,7 +3,7 @@ runs:
     checkout: false
     action: false
     kubernetes: true
-    image: ghcr.io/socialgouv/kontinuous:v1.163.10
+    image: ghcr.io/socialgouv/kontinuous:v1.163.11
     user: 1001
     env:
       - name: CRONJOB_NAME
