@@ -334,6 +334,8 @@ spec:
               value: pg-hasura-rw
             - name: PGPORT
               value: \\"5432\\"
+            - name: PGSSLMODE
+              value: disable
             - name: PGUSER
               value: test-extends-ovh
             - name: KUBECONFIG
@@ -483,6 +485,8 @@ spec:
               value: pg-keycloak-rw
             - name: PGPORT
               value: \\"5432\\"
+            - name: PGSSLMODE
+              value: disable
             - name: PGUSER
               value: test-extends-ovh
             - name: KUBECONFIG

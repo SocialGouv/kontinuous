@@ -255,6 +255,8 @@ spec:
               value: cnpg-rw
             - name: PGPORT
               value: \\"5432\\"
+            - name: PGSSLMODE
+              value: disable
             - name: PGUSER
               value: test-pg
             - name: KUBECONFIG
