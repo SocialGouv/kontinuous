@@ -71,3 +71,4 @@ jobs-pg:
         ~tpl~pgSecretName: "{{ index .Values.kontinuous.chartContext 2 }}-app"
         ~tpl~cnpgDbSecretName: "{{ index .Values.kontinuous.chartContext 2 }}-db"
         ~tpl~pgHost: "{{ index .Values.kontinuous.chartContext 2 }}-rw"
+        ~tpl~pgSSLMode: "disable"
