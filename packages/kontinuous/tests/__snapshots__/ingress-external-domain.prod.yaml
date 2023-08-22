@@ -170,7 +170,7 @@ spec:
         fsGroup: 1000
         runAsNonRoot: true
       containers:
-        - image: metabase/metabase:v0.46.6.4
+        - image: metabase/metabase:v0.47.0
           name: metabase
           securityContext:
             allowPrivilegeEscalation: false
