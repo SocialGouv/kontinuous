@@ -62,6 +62,10 @@ spec:
             {{- include "contrib-helpers.readinessProbe" . | nindent 12 }}
           startupProbe:
             {{- include "contrib-helpers.startupProbe" . | nindent 12 }}
+          {{ if .Values.lifecycle }}
+          lifecycle:
+            {{- tpl (.Values.lifecycle | toYaml) . | nindent 12 }}
+          {{ end }}
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu | quote }}
