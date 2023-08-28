@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.164.0 (2023-08-28)
+
+
+### Features
+
+* add lifecycle to chart app ([#399](https://github.com/socialgouv/kontinuous/issues/399)) ([3c26734](https://github.com/socialgouv/kontinuous/commit/3c26734e12f60a3d836e787e49319237053a2e98))
+
 ## 1.163.12 (2023-08-22)
 
 
