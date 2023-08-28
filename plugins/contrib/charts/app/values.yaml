@@ -22,6 +22,7 @@ probesPath: /index.html
 livenessProbe:
 readinessProbe:
 startupProbe:
+lifecycle: 
 resources:
   limits:
     cpu: 
