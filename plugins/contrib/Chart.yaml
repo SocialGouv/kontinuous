@@ -53,10 +53,6 @@ dependencies:
     repository: file://./charts/oauth2-proxy
     version: 1.164.1
     condition: oauth2-proxy.enabled
-  - name: pgweb
-    repository: file://./charts/pgweb
-    version: 1.164.1
-    condition: pgweb.enabled
   - name: redis
     repository: file://./charts/redis
     version: 1.164.1
