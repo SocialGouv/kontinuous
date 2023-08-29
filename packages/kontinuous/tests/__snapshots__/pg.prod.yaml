@@ -532,7 +532,9 @@ spec:
         compression: gzip
   minSyncReplicas: 0
   maxSyncReplicas: 0
-  postgresql: {}
+  postgresql:
+    parameters:
+      timezone: Europe/Paris
   monitoring:
     enablePodMonitor: true
   bootstrap:

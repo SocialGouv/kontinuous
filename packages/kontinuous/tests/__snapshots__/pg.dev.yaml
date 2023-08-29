@@ -439,7 +439,9 @@ spec:
     storageClass: managed-csi
   minSyncReplicas: 0
   maxSyncReplicas: 0
-  postgresql: {}
+  postgresql:
+    parameters:
+      timezone: Europe/Paris
   monitoring:
     enablePodMonitor: false
   bootstrap:
