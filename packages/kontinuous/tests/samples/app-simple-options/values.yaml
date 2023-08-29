@@ -13,3 +13,8 @@ app:
     requests:
       cpu: 1
       memory: 10Mi
+  securityContext:
+    fsGroup: 26
+    runAsGroup: 26
+    runAsNonRoot: true
+    runAsUser: 26
