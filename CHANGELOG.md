@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.164.2 (2023-08-29)
+
+
+### Bug Fixes
+
+* **pg:** typo postgresqlParameters ([#404](https://github.com/socialgouv/kontinuous/issues/404)) ([f94849e](https://github.com/socialgouv/kontinuous/commit/f94849eae2700eb8b79adc023dd5f4fe6ebcf4bd))
+
 ## 1.164.1 (2023-08-29)
 
 
