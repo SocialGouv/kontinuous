@@ -1,0 +1,70 @@
+enabled:
+namespace:
+host:
+registry:
+imagePath:
+imageProject:
+imageRepository:
+imagePackage: app
+imageTag:
+image:
+ttl:
+rancherProjectId:
+isProd: false
+isPreProd: false
+replicas: 
+containerPort: 8080
+servicePort: 80
+env: []
+vars: {}
+envFrom: []
+livenessProbe:
+  httpGet:
+    path: /live
+    port: 8080
+startupProbe:
+  httpGet:
+    path: /live
+    port: 8080
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 8080
+lifecycle:
+  preStop:
+    exec:
+      command: ["/pre-stop.sh"]
+resources:
+  limits:
+    cpu: 
+    memory:
+  requests:
+    cpu: 
+    memory: 
+autoscale:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 10
+  averageUtilization:
+    cpu: 70
+    memory: 80
+certSecretName:
+waitForPostgres: false
+addVolumes: []
+volumes: []
+volumeMounts: []
+redirectFrom: []
+ingress:
+  enabled: true
+  annotations: {}
+  path: /
+  paths:
+  rewriteTarget:
+entrypoint:
+args: []
+antiAffinity:
+  enabled: 
+onChangedPaths: 
+onChangedAnnotate: 
+onChangedNeeds: 
+strategyType: RollingUpdate

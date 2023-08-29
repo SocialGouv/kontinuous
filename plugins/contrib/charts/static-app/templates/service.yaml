@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: {{ (or .Values.component .Chart.Name) | lower }}
+    application: {{ .Values.global.repositoryName }}
+  name: {{ (or .Values.component .Chart.Name) | lower }}
+  namespace: {{ or .Values.namespace .Values.global.namespace }}
+  annotations: {}
+spec:
+  ports:
+    - name: http
+      port: {{ .Values.servicePort }}
+      targetPort: {{ .Values.containerPort }}
+  selector:
+    component: {{ (or .Values.component .Chart.Name) | lower }}
+  type: ClusterIP

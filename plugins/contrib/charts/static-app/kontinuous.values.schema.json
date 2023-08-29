@@ -1,0 +1,130 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json",
+  "title": "schema for helm chart static-app",
+  "type": "object",
+  "additionalProperties": false,
+  "patternProperties": {
+    "^\\.": { "type": ["string", "number", "boolean"] }
+  },
+  "properties": {
+    "~chart": {
+      "description": "Target this chart: static-app",
+      "type": "string"
+    },
+    "~forceRestart": {
+      "description": "Force restart on every deployment. default true",
+      "type": "boolean",
+      "default": true
+    },
+    "~needs": {
+      "description": "Job or deployment dependencies",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "examples": ["[build-app]"]
+    },
+    "image": {
+      "description": "Full path to docker image",
+      "examples": ["ghcr.io/socialgouv/docker/nginx:8.2.0"],
+      "type": "string"
+    },
+    "imagePackage": {
+      "description": "Name of the package on the registry",
+      "type": "string"
+    },
+    "imageProject": {
+      "description": "Project name in the docker registry, default to projectName on local registry as harbor, default to organization name on ghcr.io",
+      "type": "string"
+    },
+    "imageRepository": {
+      "description": "Repository for the docker image, default to git repository name",
+      "type": "string"
+    },
+    "probesPath": {
+      "description": "Path to application health probe. Defaults to /healthz",
+      "type": "string",
+      "examples": ["/healthz"]
+    },
+    "probesPort": {
+      "description": "Port for probes calls",
+      "type": ["string", "number"]
+    },
+    "containerPort": {
+      "description": "Container port, defaults to 3000",
+      "type": ["string", "number"]
+    },
+    "host": {
+      "description": "Hostname for the deployment",
+      "type": "string"
+    },
+    "ingress": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "description": "Ingress enable. default to true",
+          "type": "boolean"
+        },
+        "path": {
+          "description": "URL path to map the ingress to",
+          "type": "string",
+          "examples": ["/"]
+        },
+        "rewriteTarget": {
+          "description": "Redirect path on the service",
+          "type": "string",
+          "examples": ["/$1"]
+        },
+        "annotations": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "certSecretName": {
+      "description": "Name of existing SSL cert secret if any.",
+      "type": "string"
+    },
+    "addVolumes": {
+      "description": "List of PVC claimNames to add to the deployment",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "examples": ["[uploads]"]
+    },
+    "env": {
+      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/env"
+    },
+    "envFrom": {
+      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/envFrom"
+    },
+    "vars": { "type": "object", "additionalProperties": true },
+    "volumes": {
+      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.PodSpec/properties/volumes"
+    },
+    "volumeMounts": {
+      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/volumeMounts"
+    },
+    "replicas": {
+      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.apps.v1.DeploymentSpec/properties/replicas"
+    },
+    "resources": {
+      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.ResourceRequirements"
+    },
+    "livenessProbe": {
+      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Probe",
+      "description": "Periodic probe of container liveness. Container will be restarted if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
+    },
+    "readinessProbe": {
+      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Probe",
+      "description": "Periodic probe of container service readiness. Container will be removed from service endpoints if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
+    },
+    "startupProbe": {
+      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Probe",
+      "description": "StartupProbe indicates that the Pod has successfully initialized. If specified, no other probes are executed until this completes successfully. If this probe fails, the Pod will be restarted, just as if the livenessProbe failed. This can be used to provide different probe parameters at the beginning of a Pod's lifecycle, when it might take a long time to load data or warm a cache, than during steady-state operation. This cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
+    }
+  }
+}

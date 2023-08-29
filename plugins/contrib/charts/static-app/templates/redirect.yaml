@@ -1,0 +1,23 @@
+{{ if gt (len .Values.redirectFrom) 0 }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "{{ (or .Values.component .Chart.Name) | lower }}-redirect"
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/permanent-redirect: https://{{- include "contrib-helpers.ingress-host" . -}}$request_uri
+    {{- range $key, $val := (merge dict .Values.global.ingress.annotations .Values.ingress.annotations) }}
+    "{{ $key }}": {{ $val | quote }}
+    {{- end }}
+spec:
+  rules:
+  {{ range $host := .Values.redirectFrom }}
+    - host: "{{ tpl $host $ }}"
+  {{ end }}
+  tls:
+    - hosts:
+      {{ range $host := .Values.redirectFrom }}
+        - "{{ tpl $host $ }}"
+      {{ end }}
+      secretName: "{{ (or .Values.component .Chart.Name) | lower }}-redirect"
+{{ end }}
