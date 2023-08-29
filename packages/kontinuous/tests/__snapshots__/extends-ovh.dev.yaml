@@ -596,7 +596,9 @@ spec:
     storageClass: csi-cinder-high-speed
   minSyncReplicas: 0
   maxSyncReplicas: 0
-  postgresql: {}
+  postgresql:
+    parameters:
+      timezone: Europe/Paris
   monitoring:
     enablePodMonitor: false
   bootstrap:
@@ -659,7 +661,9 @@ spec:
     storageClass: csi-cinder-high-speed
   minSyncReplicas: 0
   maxSyncReplicas: 0
-  postgresql: {}
+  postgresql:
+    parameters:
+      timezone: Europe/Paris
   monitoring:
     enablePodMonitor: false
   bootstrap:
