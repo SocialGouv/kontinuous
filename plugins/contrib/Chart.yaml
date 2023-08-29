@@ -25,6 +25,10 @@ dependencies:
     repository: file://./charts/app
     version: 1.164.0
     condition: app.enabled
+  - name: static-app
+    repository: file://./charts/static-app
+    version: 1.164.0
+    condition: static-app.enabled
   - name: daemon
     repository: file://./charts/daemon
     version: 1.164.0
