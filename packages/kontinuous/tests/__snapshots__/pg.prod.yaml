@@ -212,7 +212,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.164.0
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.164.1
           command:
             - sh
             - -c
