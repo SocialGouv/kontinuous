@@ -6,7 +6,7 @@
   "required": [],
   "properties": {
     "cnpg-cluster": {
-      "$ref": "https://raw.githubusercontent.com/SocialGouv/helm-charts/charts/cnpg-cluster/values.schema.json"
+      "$ref": "https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/cnpg-cluster/values.schema.json"
     },
     "backup": {
       "type": "object",
