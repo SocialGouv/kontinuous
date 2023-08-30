@@ -136,7 +136,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.164.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.164.4
           command:
             - sh
             - -c
@@ -285,7 +285,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.164.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.164.4
           command:
             - sh
             - -c
@@ -431,7 +431,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.164.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.164.4
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -555,7 +555,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.164.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.164.4
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -578,7 +578,7 @@ spec:
               cpu: \\"0\\"
               memory: \\"0\\"
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.164.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.164.4
           command:
             - sh
             - -c
@@ -700,6 +700,11 @@ spec:
       annotations:
         kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
     spec:
+      securityContext:
+        fsGroup: 26
+        runAsGroup: 26
+        runAsNonRoot: true
+        runAsUser: 26
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -722,6 +727,8 @@ spec:
             claimName: docs
       containers:
         - image: harbor.fabrique.social.gouv.fr/test-app-simple-options/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          securityContext:
+            allowPrivilegeEscalation: false
           name: app
           ports:
             - containerPort: 3000
