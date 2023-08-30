@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "required": [],
+  "properties": {
+    "cnpg-cluster": {
+      "$ref": "https://raw.githubusercontent.com/SocialGouv/helm-charts/charts/cnpg-cluster/values.schema.json"
+    },
+    "backup": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable database backups. \\n\\nEnabled by default on preprod and prod environments",
+          "default": "false"
+        },
+        "name": {
+          "type": "string",
+          "description": "to override the backup destination path (in case we need a new destination for a new cluster)",
+          "default": ""
+        }
+      }
+    }
+  }
+}
