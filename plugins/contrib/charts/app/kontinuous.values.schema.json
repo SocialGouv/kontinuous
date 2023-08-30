@@ -79,6 +79,7 @@
           "examples": ["/$1"]
         },
         "annotations": {
+          "description": "NGINX ingress annotations, see https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/",
           "type": "object",
           "additionalProperties": true
         }
