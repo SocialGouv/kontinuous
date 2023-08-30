@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.164.5 (2023-08-30)
+
+
+### Bug Fixes
+
+* dns truncate ([#403](https://github.com/socialgouv/kontinuous/issues/403)) ([d7e9ffe](https://github.com/socialgouv/kontinuous/commit/d7e9ffe6b327124c645e14615ce8d18c7f246a78))
+
 ## 1.164.4 (2023-08-30)
 
 
