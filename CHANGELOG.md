@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.164.3 (2023-08-30)
+
+
+### Bug Fixes
+
+* **app:** allow to override securityContext ([#405](https://github.com/socialgouv/kontinuous/issues/405)) ([0fa7294](https://github.com/socialgouv/kontinuous/commit/0fa729426b0e8734a38c8bf4c41ca91938e48044))
+
 ## 1.164.2 (2023-08-29)
 
 
