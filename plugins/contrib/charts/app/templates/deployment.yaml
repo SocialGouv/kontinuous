@@ -21,6 +21,10 @@ spec:
         application: {{ .Values.global.repositoryName }}
         namespace: {{ or .Values.namespace .Values.global.namespace }}
     spec:
+      {{- if .Values.securityContext }}
+      securityContext:
+        {{- tpl (.Values.securityContext | toYaml) . | nindent 8 }}
+      {{- end }}
       affinity:
         {{- include "contrib-helpers.anti-affinity" . | nindent 8}}
       initContainers:
@@ -42,8 +46,12 @@ spec:
           {{- else }}
           image: "{{ or .Values.registry .Values.global.registry }}{{ if (or .Values.imageProject .Values.global.imageProject) }}{{ (print "/" (or .Values.imageProject .Values.global.imageProject)) }}{{ end }}{{ if (or .Values.imageRepository .Values.global.imageRepository) }}{{ (print "/" (or .Values.imageRepository .Values.global.imageRepository)) }}{{ end }}{{ if .Values.imagePackage }}{{ (print "/" .Values.imagePackage) }}{{ end }}:{{ or .Values.imageTag .Values.global.imageTag }}"
           {{- end }}
+          {{- if .Values.securityContext }}
+          securityContext:
+            allowPrivilegeEscalation: false
+          {{- end }}
           {{- if .Values.entrypoint }}
-          command: |
+          command:
             {{- tpl (.Values.entrypoint | toYaml) $ | nindent 12 }}
           {{- end }}
           {{- if .Values.cmd }}

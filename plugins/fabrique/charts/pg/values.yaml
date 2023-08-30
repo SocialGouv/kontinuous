@@ -14,7 +14,7 @@ cnpg-cluster:
   ~tpl~dbOwner: "{{ .Values.global.pgUser }}"
   ~tpl~dbName: "{{ .Values.global.pgDatabase }}"
   ~tpl~instances: "{{ (or .Values.global.isProd .Values.global.isPreProd) | ternary `3` `1` }}"
-  postgresqlParameter:
+  postgresqlParameters:
     timezone: "Europe/Paris"
   extensions:
     - postgis

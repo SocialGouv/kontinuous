@@ -12,7 +12,7 @@ ttl:
 rancherProjectId:
 isProd: false
 isPreProd: false
-replicas: 
+replicas:
 containerPort: 3000
 servicePort: 80
 env: []
@@ -22,14 +22,14 @@ probesPath: /index.html
 livenessProbe:
 readinessProbe:
 startupProbe:
-lifecycle: 
+lifecycle:
 resources:
   limits:
-    cpu: 
+    cpu:
     memory:
   requests:
-    cpu: 
-    memory: 
+    cpu:
+    memory:
 autoscale:
   enabled: false
   minReplicas: 2
@@ -52,8 +52,14 @@ ingress:
 entrypoint:
 args: []
 antiAffinity:
-  enabled: 
-onChangedPaths: 
-onChangedAnnotate: 
-onChangedNeeds: 
+  enabled:
+onChangedPaths:
+onChangedAnnotate:
+onChangedNeeds:
 strategyType: RollingUpdate
+# https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.17.2/_definitions.json#/definitions/io.k8s.api.core.v1.PodSecurityContext
+securityContext:
+#   fsGroup: 26
+#   runAsGroup: 26
+#   runAsNonRoot: true
+#   runAsUser: 26

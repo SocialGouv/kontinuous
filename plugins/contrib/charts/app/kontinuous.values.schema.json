@@ -79,6 +79,7 @@
           "examples": ["/$1"]
         },
         "annotations": {
+          "description": "NGINX ingress annotations, see https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/",
           "type": "object",
           "additionalProperties": true
         }
@@ -126,6 +127,10 @@
     "startupProbe": {
       "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Probe",
       "description": "StartupProbe indicates that the Pod has successfully initialized. If specified, no other probes are executed until this completes successfully. If this probe fails, the Pod will be restarted, just as if the livenessProbe failed. This can be used to provide different probe parameters at the beginning of a Pod's lifecycle, when it might take a long time to load data or warm a cache, than during steady-state operation. This cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
+    },
+    "securityContext": {
+      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.PodSecurityContext",
+      "description": "Setup your securityContext to reduce security risks, see https://kubernetes.io/docs/tasks/configure-pod-container/security-context/"
     }
   }
 }

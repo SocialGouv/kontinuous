@@ -212,7 +212,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.164.0
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.164.4
           command:
             - sh
             - -c
@@ -532,7 +532,9 @@ spec:
         compression: gzip
   minSyncReplicas: 0
   maxSyncReplicas: 0
-  postgresql: {}
+  postgresql:
+    parameters:
+      timezone: Europe/Paris
   monitoring:
     enablePodMonitor: true
   bootstrap:
