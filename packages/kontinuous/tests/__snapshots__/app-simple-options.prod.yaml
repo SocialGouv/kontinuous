@@ -132,6 +132,11 @@ spec:
       annotations:
         kontinuous/deployment: test-app-simple-options-feature-branch-1-ffac537e6cbb-ze31pkw6
     spec:
+      securityContext:
+        fsGroup: 26
+        runAsGroup: 26
+        runAsNonRoot: true
+        runAsUser: 26
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -154,6 +159,8 @@ spec:
             claimName: docs
       containers:
         - image: harbor.fabrique.social.gouv.fr/test-app-simple-options/app:prod
+          securityContext:
+            allowPrivilegeEscalation: false
           name: app
           ports:
             - containerPort: 3000
