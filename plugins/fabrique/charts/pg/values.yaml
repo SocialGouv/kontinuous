@@ -15,7 +15,7 @@ cnpg-cluster:
   ~tpl~dbName: "{{ .Values.global.pgDatabase }}"
   ~tpl~instances: "{{ (or .Values.global.isProd .Values.global.isPreProd) | ternary `3` `1` }}"
   postgresqlParameters:
-    timezone: "Europe/Paris"
+    TimeZone: "Europe/Paris"
   extensions:
     - postgis
     - postgis_topology

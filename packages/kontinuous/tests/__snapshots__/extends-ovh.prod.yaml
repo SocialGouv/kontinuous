@@ -774,7 +774,7 @@ spec:
   maxSyncReplicas: 0
   postgresql:
     parameters:
-      timezone: Europe/Paris
+      TimeZone: Europe/Paris
   monitoring:
     enablePodMonitor: true
   bootstrap:
@@ -856,7 +856,7 @@ spec:
   maxSyncReplicas: 0
   postgresql:
     parameters:
-      timezone: Europe/Paris
+      TimeZone: Europe/Paris
   monitoring:
     enablePodMonitor: true
   bootstrap:
