@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.164.8 (2023-08-31)
+
+
+### Bug Fixes
+
+* pg chart params ([#409](https://github.com/socialgouv/kontinuous/issues/409)) ([77610b9](https://github.com/socialgouv/kontinuous/commit/77610b966375bf3b392e18c4338d9be1cc74349a))
+
+## 1.164.7 (2023-08-30)
+
+
+### Bug Fixes
+
+* **pg:** json-schema ([#408](https://github.com/socialgouv/kontinuous/issues/408)) ([85e1fe7](https://github.com/socialgouv/kontinuous/commit/85e1fe767ca5383ac09c3ee6dacc59fef8321fc7))
+
+## 1.164.6 (2023-08-30)
+
 ## 1.164.5 (2023-08-30)
 
 
