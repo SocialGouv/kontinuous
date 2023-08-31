@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json",
-  "title": "schema for helm chart jobs",
+  "title": "Kontinuous jobs helm chart",
+  "markdownDescription": "The [jobs chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/jobs) provides a way to define de define tasks in your deployment pipeline\n\n💡 See [the jobs documentations](https://socialgouv.github.io/kontinuous/#/./advanced/build?id=meta-values-plugin-needs).",
   "type": "object",
   "additionalProperties": false,
   "required": ["runs"],

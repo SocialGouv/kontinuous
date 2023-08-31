@@ -5,17 +5,8 @@
   "type": "object",
   "additionalProperties": {
     "type": "object",
-    "description": "Kontinuous component",
+    "title": "Additional helm charts",
     "allOf": [
-      {
-        "if": {
-          "required": ["~chart"]
-        },
-        "then": {
-          "description": "Common to all charts",
-          "$ref": "#/definitions/chart"
-        }
-      },
       {
         "if": {
           "required": ["~chart"],
@@ -53,6 +44,14 @@
         },
         "then": {
           "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json#"
+        }
+      },
+      {
+        "if": {
+          "required": ["~chart"]
+        },
+        "then": {
+          "$ref": "#/definitions/chart"
         }
       }
     ]
@@ -158,7 +157,7 @@
         "~chart": {
           "description": "Kontinuous Chart for this component. see https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/charts",
           "type": "string",
-          "examples": ["app", "maildev", "hasura", "metabase"]
+          "examples": ["app", "maildev", "hasura", "metabase", "pg"]
         },
         "~needs": {
           "description": "Job or deployment dependencies",
