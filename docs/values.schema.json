@@ -155,17 +155,17 @@
       "type": "object",
       "properties": {
         "~chart": {
-          "description": "Kontinuous Chart for this component. see https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/charts",
+          "markdownDescription": "Kontinuous Chart for this component.\n\nThe meta-value `~chart` is used to create an instance of a specific chart\n\nsee [~chart documentation](https://socialgouv.github.io/kontinuous/#/./advanced/build?id=meta-values-chart)",
           "type": "string",
           "examples": ["app", "maildev", "hasura", "metabase", "pg"]
         },
         "~needs": {
-          "description": "Job or deployment dependencies",
+          "markdownDescription": "Job or deployment dependencies.\n\nThe meta-value `~needs`is used to define dependencies tree between charts and jobs.\n\nYou can target using simple charts or jobs name, or be more specific to avoid collision in more complex cases.\n\nsee [~needs documentation](https://socialgouv.github.io/kontinuous/#/./advanced/build?id=meta-values-plugin-needs)",
           "type": "array",
           "items": {
             "type": "string"
           },
-          "examples": ["[build-app]"]
+          "examples": ["[build-app]", "[pg, jobs.build-app]"]
         }
       },
       "required": ["~chart"]

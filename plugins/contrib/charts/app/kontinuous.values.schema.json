@@ -10,9 +10,7 @@
   },
   "properties": {
     "~chart": {
-      "description": "Base Helm Chart for this component",
-      "type": "string",
-      "examples": ["app", "hasura", "maildev"]
+      "type": "string"
     },
     "~forceRestart": {
       "description": "Force restart on every deployment. default true",
