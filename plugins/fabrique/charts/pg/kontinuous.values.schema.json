@@ -2,7 +2,7 @@
   "type": "object",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/fabrique/charts/pg/kontinuous.values.schema.json",
-  "markdownTitle": "Kontinuous pg helm chart",
+  "title": "Kontinuous pg helm chart",
   "markdownDescription": "The [pg chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/pg) is a wrapper around [cnpg-cluster helm chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/pg)",
   "required": [],
   "properties": {
