@@ -8,10 +8,14 @@
   "properties": {
     "dockerfile": {
       "description": "Path to the Dockerfile on the repository. Defaults to /Dockerfile",
+      "examples": ["./packages/api/custom.Dockerfile"],
+      "default": "./Dockerfile",
       "type": "string"
     },
     "context": {
       "description": "Docker context (cwd) when building the image. Defaults to .",
+      "examples": ["./packages/api"],
+      "default": ".",
       "type": "string"
     },
     "registrySecretRefName": {
@@ -20,14 +24,17 @@
     },
     "registry": {
       "description": "Url of your custom docker registry",
+      "examples": ["ghcr.io"],
       "type": "string"
     },
     "imagePackage": {
-      "description": "Name of the dockerfile on the registry",
+      "description": "Name of the docker image on the registry",
+      "examples": ["app"],
       "type": "string"
     },
     "imageProject": {
       "description": "Optional project name in the docker registry",
+      "examples": ["project"],
       "type": "string"
     },
     "imageRepository": {
@@ -62,14 +69,15 @@
       "type": "string"
     },
     "buildkitServiceAddr": {
-      "description": "Adress of the buildkit service. defaults to `tcp://buildkit-service.buildkit-service.svc:1234`",
+      "description": "Address of the buildkit service. defaults to `tcp://buildkit-service.buildkit-service.svc:1234`",
       "type": "string",
       "examples": ["tcp://buildkit-service.buildkit-service.svc:1234"]
-    }    
+    }
   },
   "definitions": {
     "build-args": {
-      "description": "Build args to customize the docker build",
+      "title": "Docker image build arguments",
+      "markdownDescription": "Build args to customize the docker, see [docker documentation](https://docs.docker.com/engine/reference/commandline/build/#build-arg)",
       "type": "object",
       "additionalProperties": true
     }
