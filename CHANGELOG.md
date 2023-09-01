@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.164.12 (2023-09-01)
+
+
+### Bug Fixes
+
+* add config.yaml json schemas ([#411](https://github.com/socialgouv/kontinuous/issues/411)) ([9ebbe9b](https://github.com/socialgouv/kontinuous/commit/9ebbe9bef9dcea0368a1143c77dfa94243bef230))
+
 ## 1.164.11 (2023-09-01)
 
 
