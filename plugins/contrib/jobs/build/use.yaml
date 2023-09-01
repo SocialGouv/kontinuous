@@ -10,7 +10,7 @@ runs:
     cpuRequest: 500m
     memoryLimit: 4Gi
     memoryRequest: 1Gi
-    entrypoint: ["/bin/sh","-c"]
+    entrypoint: ["/bin/sh", "-c"]
     user: 1000
     group: 1000
     annotations:
@@ -65,7 +65,7 @@ runs:
 
       mkdir -p /home/user/.docker
       echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /home/user/.docker/config.json
-      export IMAGE_PATH=$CI_REGISTRY{{ if (or $.with.imageProject $.Values.global.imageProject) }}{{ (print "/" (or $.with.imageProject $.Values.global.imageProject)) }}{{ end }}/{{ or $.with.imageRepository $.Values.global.imageRepository }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{ end }}{{ if $.with.target }}{{ (print "-" $.with.target) }}{{ end }}
+      export IMAGE_PATH=$CI_REGISTRY{{ if (or $.with.imageProject $.Values.global.imageProject) }}{{ (print "/" (or $.with.imageProject $.Values.global.imageProject)) }}{{ end }}/{{ or $.with.imageRepository $.Values.global.imageRepository }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{else}}/app{{ end }}{{ if $.with.target }}{{ (print "-" $.with.target) }}{{ end }}
       export LATEST_TAG=""
       if [ "{{ $.Values.global.isProd }}" = "true" ]; then
         export LATEST_TAG=",$IMAGE_PATH:latest"
@@ -92,5 +92,5 @@ runs:
         {{ if $.with.target -}}
         --target="{{ $.with.target }}" \
         {{ end -}}
-      
+
       echo "$IMAGE_PATH:{{ or $.with.imageTag $.Values.global.imageTag }}" >$KONTINUOUS_OUTPUT/IMAGE
