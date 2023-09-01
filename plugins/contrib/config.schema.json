@@ -1,0 +1,977 @@
+{
+  "type": "object",
+  "title": "kontinuous contrib plugin configuration.",
+  "markdownDescription": "See contrib plugin [default configuration](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/kontinuous.yaml)",
+  "properties": {
+    "patches": {
+      "type": "object",
+      "title": "patches",
+      "markdownDescription": "Options from the patches type.",
+      "properties": {
+        "valuesPatches": {
+          "type": "object",
+          "title": "valuesPatches",
+          "markdownDescription": "Configuration of the valuesPatches plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/00.0-values-patches.js)",
+          "properties": {
+            "enabled": {
+              "title": "valuesPatches.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "valuesPatches.options",
+              "markdownDescription": "Options of the valuesPatches plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/00.0-values-patches.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "labels": {
+          "type": "object",
+          "title": "labels",
+          "markdownDescription": "Configuration of the labels plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/00.1-labels.js)",
+          "properties": {
+            "enabled": {
+              "title": "labels.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "labels.options",
+              "markdownDescription": "Options of the labels plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/00.1-labels.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "annotations": {
+          "type": "object",
+          "title": "annotations",
+          "markdownDescription": "Configuration of the annotations plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/00.2-annotations.js)",
+          "properties": {
+            "enabled": {
+              "title": "annotations.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "annotations.options",
+              "markdownDescription": "Options of the annotations plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/00.2-annotations.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "forceRestartOptout": {
+          "type": "object",
+          "title": "forceRestartOptout",
+          "markdownDescription": "Configuration of the forceRestartOptout plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/00.3-force-restart-optout.js)",
+          "properties": {
+            "enabled": {
+              "title": "forceRestartOptout.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "forceRestartOptout.options",
+              "markdownDescription": "Options of the forceRestartOptout plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/00.3-force-restart-optout.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "namespace": {
+          "type": "object",
+          "title": "namespace",
+          "markdownDescription": "Configuration of the namespace plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/01-namespace.js)",
+          "properties": {
+            "enabled": {
+              "title": "namespace.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "namespace.options",
+              "markdownDescription": "Options of the namespace plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/01-namespace.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "kapp": {
+          "type": "object",
+          "title": "kapp",
+          "markdownDescription": "Configuration of the kapp plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/02-kapp.js)",
+          "properties": {
+            "enabled": {
+              "title": "kapp.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "kapp.options",
+              "markdownDescription": "Options of the kapp plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/02-kapp.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "dnsTruncate": {
+          "type": "object",
+          "title": "dnsTruncate",
+          "markdownDescription": "Configuration of the dnsTruncate plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/03-dns-truncate.js)",
+          "properties": {
+            "enabled": {
+              "title": "dnsTruncate.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "dnsTruncate.options",
+              "markdownDescription": "Options of the dnsTruncate plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/03-dns-truncate.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "onChanged": {
+          "type": "object",
+          "title": "onChanged",
+          "markdownDescription": "Configuration of the onChanged plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/04-on-changed.js)",
+          "properties": {
+            "enabled": {
+              "title": "onChanged.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "onChanged.options",
+              "markdownDescription": "Options of the onChanged plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/04-on-changed.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "needs": {
+          "type": "object",
+          "title": "needs",
+          "markdownDescription": "Configuration of the needs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/05.0-needs.js)",
+          "properties": {
+            "enabled": {
+              "title": "needs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "needs.options",
+              "markdownDescription": "Options of the needs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/05.0-needs.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "needsUsingArgocdSyncWaves": {
+          "type": "object",
+          "title": "needsUsingArgocdSyncWaves",
+          "markdownDescription": "Configuration of the needsUsingArgocdSyncWaves plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/05.1-needs-using-argocd-sync-waves.js)",
+          "properties": {
+            "enabled": {
+              "title": "needsUsingArgocdSyncWaves.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "needsUsingArgocdSyncWaves.options",
+              "markdownDescription": "Options of the needsUsingArgocdSyncWaves plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/05.1-needs-using-argocd-sync-waves.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "needsUsingInitcontainers": {
+          "type": "object",
+          "title": "needsUsingInitcontainers",
+          "markdownDescription": "Configuration of the needsUsingInitcontainers plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/05.1-needs-using-initcontainers.js)",
+          "properties": {
+            "enabled": {
+              "title": "needsUsingInitcontainers.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "needsUsingInitcontainers.options",
+              "markdownDescription": "Options of the needsUsingInitcontainers plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/05.1-needs-using-initcontainers.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "needsUsingKapp": {
+          "type": "object",
+          "title": "needsUsingKapp",
+          "markdownDescription": "Configuration of the needsUsingKapp plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/05.1-needs-using-kapp.js)",
+          "properties": {
+            "enabled": {
+              "title": "needsUsingKapp.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "needsUsingKapp.options",
+              "markdownDescription": "Options of the needsUsingKapp plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/05.1-needs-using-kapp.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "filterDisableKapp": {
+          "type": "object",
+          "title": "filterDisableKapp",
+          "markdownDescription": "Configuration of the filterDisableKapp plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/06-filter-disable-kapp.js)",
+          "properties": {
+            "enabled": {
+              "title": "filterDisableKapp.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "filterDisableKapp.options",
+              "markdownDescription": "Options of the filterDisableKapp plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/06-filter-disable-kapp.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "filterResidualMetaValues": {
+          "type": "object",
+          "title": "filterResidualMetaValues",
+          "markdownDescription": "Configuration of the filterResidualMetaValues plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/06-filter-residual-meta-values.js)",
+          "properties": {
+            "enabled": {
+              "title": "filterResidualMetaValues.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "filterResidualMetaValues.options",
+              "markdownDescription": "Options of the filterResidualMetaValues plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/06-filter-residual-meta-values.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "helm": {
+          "type": "object",
+          "title": "helm",
+          "markdownDescription": "Configuration of the helm plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/06-helm.js)",
+          "properties": {
+            "enabled": {
+              "title": "helm.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "helm.options",
+              "markdownDescription": "Options of the helm plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/06-helm.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "sort": {
+          "type": "object",
+          "title": "sort",
+          "markdownDescription": "Configuration of the sort plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/10-sort.js)",
+          "properties": {
+            "enabled": {
+              "title": "sort.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "sort.options",
+              "markdownDescription": "Options of the sort plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/10-sort.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "defaultMinResourcesRequests": {
+          "type": "object",
+          "title": "defaultMinResourcesRequests",
+          "markdownDescription": "Configuration of the defaultMinResourcesRequests plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/20-default-min-resources-requests.js)",
+          "properties": {
+            "enabled": {
+              "title": "defaultMinResourcesRequests.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "defaultMinResourcesRequests.options",
+              "markdownDescription": "Options of the defaultMinResourcesRequests plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/20-default-min-resources-requests.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "defaultMaxResourcesLimits": {
+          "type": "object",
+          "title": "defaultMaxResourcesLimits",
+          "markdownDescription": "Configuration of the defaultMaxResourcesLimits plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/21-default-max-resources-limits.js)",
+          "properties": {
+            "enabled": {
+              "title": "defaultMaxResourcesLimits.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "defaultMaxResourcesLimits.options",
+              "markdownDescription": "Options of the defaultMaxResourcesLimits plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/21-default-max-resources-limits.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "janitor": {
+          "type": "object",
+          "title": "janitor",
+          "markdownDescription": "Configuration of the janitor plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/30-janitor.js)",
+          "properties": {
+            "enabled": {
+              "title": "janitor.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "janitor.options",
+              "markdownDescription": "Options of the janitor plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/30-janitor.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "certsJs": {
+          "type": "object",
+          "title": "certsJs",
+          "markdownDescription": "Configuration of the certsJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/certs.js)",
+          "properties": {
+            "enabled": {
+              "title": "certsJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "certsJs.options",
+              "markdownDescription": "Options of the certsJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/certs.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "logJs": {
+          "type": "object",
+          "title": "logJs",
+          "markdownDescription": "Configuration of the logJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/log.js)",
+          "properties": {
+            "enabled": {
+              "title": "logJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "logJs.options",
+              "markdownDescription": "Options of the logJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/log.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "rancherProjectIdJs": {
+          "type": "object",
+          "title": "rancherProjectIdJs",
+          "markdownDescription": "Configuration of the rancherProjectIdJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/rancher-project-id.js)",
+          "properties": {
+            "enabled": {
+              "title": "rancherProjectIdJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "rancherProjectIdJs.options",
+              "markdownDescription": "Options of the rancherProjectIdJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/rancher-project-id.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "reloaderJs": {
+          "type": "object",
+          "title": "reloaderJs",
+          "markdownDescription": "Configuration of the reloaderJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/reloader.js)",
+          "properties": {
+            "enabled": {
+              "title": "reloaderJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "reloaderJs.options",
+              "markdownDescription": "Options of the reloaderJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/reloader.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "tests": {
+          "type": "object",
+          "title": "tests",
+          "markdownDescription": "Configuration of the tests plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/tests)",
+          "properties": {
+            "enabled": {
+              "title": "tests.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "tests.options",
+              "markdownDescription": "Options of the tests plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/tests)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        }
+      }
+    },
+    "post-deploy": {
+      "type": "object",
+      "title": "post-deploy",
+      "markdownDescription": "Options from the post-deploy type.",
+      "properties": {
+        "notifyMattermostJs": {
+          "type": "object",
+          "title": "notifyMattermostJs",
+          "markdownDescription": "Configuration of the notifyMattermostJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/post-deploy/notify-mattermost.js)",
+          "properties": {
+            "enabled": {
+              "title": "notifyMattermostJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "notifyMattermostJs.options",
+              "markdownDescription": "Options of the notifyMattermostJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/post-deploy/notify-mattermost.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        }
+      }
+    },
+    "pre-deploy": {
+      "type": "object",
+      "title": "pre-deploy",
+      "markdownDescription": "Options from the pre-deploy type.",
+      "properties": {
+        "namespaces": {
+          "type": "object",
+          "title": "namespaces",
+          "markdownDescription": "Configuration of the namespaces plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/01-namespaces.js)",
+          "properties": {
+            "enabled": {
+              "title": "namespaces.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "namespaces.options",
+              "markdownDescription": "Options of the namespaces plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/01-namespaces.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "nspleaseNamespaces": {
+          "type": "object",
+          "title": "nspleaseNamespaces",
+          "markdownDescription": "Configuration of the nspleaseNamespaces plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/01-nsplease-namespaces.js)",
+          "properties": {
+            "enabled": {
+              "title": "nspleaseNamespaces.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "nspleaseNamespaces.options",
+              "markdownDescription": "Options of the nspleaseNamespaces plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/01-nsplease-namespaces.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "rancherNamespaces": {
+          "type": "object",
+          "title": "rancherNamespaces",
+          "markdownDescription": "Configuration of the rancherNamespaces plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/01-rancher-namespaces.js)",
+          "properties": {
+            "enabled": {
+              "title": "rancherNamespaces.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "rancherNamespaces.options",
+              "markdownDescription": "Options of the rancherNamespaces plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/01-rancher-namespaces.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "importSecrets": {
+          "type": "object",
+          "title": "importSecrets",
+          "markdownDescription": "Configuration of the importSecrets plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/02-import-secrets.js)",
+          "properties": {
+            "enabled": {
+              "title": "importSecrets.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "importSecrets.options",
+              "markdownDescription": "Options of the importSecrets plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/02-import-secrets.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "clear": {
+          "type": "object",
+          "title": "clear",
+          "markdownDescription": "Configuration of the clear plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/03.0-clear.js)",
+          "properties": {
+            "enabled": {
+              "title": "clear.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "clear.options",
+              "markdownDescription": "Options of the clear plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/03.0-clear.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "cleaner": {
+          "type": "object",
+          "title": "cleaner",
+          "markdownDescription": "Configuration of the cleaner plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/03.1-cleaner.js)",
+          "properties": {
+            "enabled": {
+              "title": "cleaner.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "cleaner.options",
+              "markdownDescription": "Options of the cleaner plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/03.1-cleaner.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "cleanOrphan": {
+          "type": "object",
+          "title": "cleanOrphan",
+          "markdownDescription": "Configuration of the cleanOrphan plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/03.2-clean-orphan.js)",
+          "properties": {
+            "enabled": {
+              "title": "cleanOrphan.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "cleanOrphan.options",
+              "markdownDescription": "Options of the cleanOrphan plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/03.2-clean-orphan.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "cleanFailed": {
+          "type": "object",
+          "title": "cleanFailed",
+          "markdownDescription": "Configuration of the cleanFailed plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/03.3-clean-failed.js)",
+          "properties": {
+            "enabled": {
+              "title": "cleanFailed.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "cleanFailed.options",
+              "markdownDescription": "Options of the cleanFailed plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/pre-deploy/03.3-clean-failed.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        }
+      }
+    },
+    "validators": {
+      "type": "object",
+      "title": "validators",
+      "markdownDescription": "Options from the validators type.",
+      "properties": {
+        "dnsLimitJs": {
+          "type": "object",
+          "title": "dnsLimitJs",
+          "markdownDescription": "Configuration of the dnsLimitJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/dns-limit.js)",
+          "properties": {
+            "enabled": {
+              "title": "dnsLimitJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "dnsLimitJs.options",
+              "markdownDescription": "Options of the dnsLimitJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/dns-limit.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "kubeconformJs": {
+          "type": "object",
+          "title": "kubeconformJs",
+          "markdownDescription": "Configuration of the kubeconformJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/kubeconform.js)",
+          "properties": {
+            "enabled": {
+              "title": "kubeconformJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "kubeconformJs.options",
+              "markdownDescription": "Options of the kubeconformJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/kubeconform.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "needsKappJs": {
+          "type": "object",
+          "title": "needsKappJs",
+          "markdownDescription": "Configuration of the needsKappJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/needs-kapp.js)",
+          "properties": {
+            "enabled": {
+              "title": "needsKappJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "needsKappJs.options",
+              "markdownDescription": "Options of the needsKappJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/needs-kapp.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "needsRequireJs": {
+          "type": "object",
+          "title": "needsRequireJs",
+          "markdownDescription": "Configuration of the needsRequireJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/needs-require.js)",
+          "properties": {
+            "enabled": {
+              "title": "needsRequireJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "needsRequireJs.options",
+              "markdownDescription": "Options of the needsRequireJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/needs-require.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "noPlainSecretsJs": {
+          "type": "object",
+          "title": "noPlainSecretsJs",
+          "markdownDescription": "Configuration of the noPlainSecretsJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/no-plain-secrets.js)",
+          "properties": {
+            "enabled": {
+              "title": "noPlainSecretsJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "noPlainSecretsJs.options",
+              "markdownDescription": "Options of the noPlainSecretsJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/no-plain-secrets.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "qosJs": {
+          "type": "object",
+          "title": "qosJs",
+          "markdownDescription": "Configuration of the qosJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/qos.js)",
+          "properties": {
+            "enabled": {
+              "title": "qosJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "qosJs.options",
+              "markdownDescription": "Options of the qosJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/qos.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "rancherProjectIdJs": {
+          "type": "object",
+          "title": "rancherProjectIdJs",
+          "markdownDescription": "Configuration of the rancherProjectIdJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/rancher-project-id.js)",
+          "properties": {
+            "enabled": {
+              "title": "rancherProjectIdJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "rancherProjectIdJs.options",
+              "markdownDescription": "Options of the rancherProjectIdJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/rancher-project-id.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "resourcesUniqnessJs": {
+          "type": "object",
+          "title": "resourcesUniqnessJs",
+          "markdownDescription": "Configuration of the resourcesUniqnessJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/resources-uniqness.js)",
+          "properties": {
+            "enabled": {
+              "title": "resourcesUniqnessJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "resourcesUniqnessJs.options",
+              "markdownDescription": "Options of the resourcesUniqnessJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/resources-uniqness.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "sealedSecretsJs": {
+          "type": "object",
+          "title": "sealedSecretsJs",
+          "markdownDescription": "Configuration of the sealedSecretsJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/sealed-secrets.js)",
+          "properties": {
+            "enabled": {
+              "title": "sealedSecretsJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "sealedSecretsJs.options",
+              "markdownDescription": "Options of the sealedSecretsJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/validators/sealed-secrets.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        }
+      }
+    },
+    "values-compilers": {
+      "type": "object",
+      "title": "values-compilers",
+      "markdownDescription": "Options from the values-compilers type.",
+      "properties": {
+        "cleanXYamlAnchors": {
+          "type": "object",
+          "title": "cleanXYamlAnchors",
+          "markdownDescription": "Configuration of the cleanXYamlAnchors plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/00-clean-x-yaml-anchors.js)",
+          "properties": {
+            "enabled": {
+              "title": "cleanXYamlAnchors.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "cleanXYamlAnchors.options",
+              "markdownDescription": "Options of the cleanXYamlAnchors plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/00-clean-x-yaml-anchors.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "unfoldCharts": {
+          "type": "object",
+          "title": "unfoldCharts",
+          "markdownDescription": "Configuration of the unfoldCharts plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/01-unfold-charts.js)",
+          "properties": {
+            "enabled": {
+              "title": "unfoldCharts.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "unfoldCharts.options",
+              "markdownDescription": "Options of the unfoldCharts plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/01-unfold-charts.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "resolveAliasOf": {
+          "type": "object",
+          "title": "resolveAliasOf",
+          "markdownDescription": "Configuration of the resolveAliasOf plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/03-resolve-alias-of.js)",
+          "properties": {
+            "enabled": {
+              "title": "resolveAliasOf.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "resolveAliasOf.options",
+              "markdownDescription": "Options of the resolveAliasOf plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/03-resolve-alias-of.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "implicitEnabled": {
+          "type": "object",
+          "title": "implicitEnabled",
+          "markdownDescription": "Configuration of the implicitEnabled plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/04-implicit-enabled.js)",
+          "properties": {
+            "enabled": {
+              "title": "implicitEnabled.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "implicitEnabled.options",
+              "markdownDescription": "Options of the implicitEnabled plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/04-implicit-enabled.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "jobs": {
+          "type": "object",
+          "title": "jobs",
+          "markdownDescription": "Configuration of the jobs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/05-jobs.js)",
+          "properties": {
+            "enabled": {
+              "title": "jobs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "jobs.options",
+              "markdownDescription": "Options of the jobs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/05-jobs.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "globalDefaults": {
+          "type": "object",
+          "title": "globalDefaults",
+          "markdownDescription": "Configuration of the globalDefaults plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/06-global-defaults.js)",
+          "properties": {
+            "enabled": {
+              "title": "globalDefaults.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "globalDefaults.options",
+              "markdownDescription": "Options of the globalDefaults plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/06-global-defaults.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "tplMetaValues": {
+          "type": "object",
+          "title": "tplMetaValues",
+          "markdownDescription": "Configuration of the tplMetaValues plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/10-tpl-meta-values.js)",
+          "properties": {
+            "enabled": {
+              "title": "tplMetaValues.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "tplMetaValues.options",
+              "markdownDescription": "Options of the tplMetaValues plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/10-tpl-meta-values.js)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "outputsJsBak": {
+          "type": "object",
+          "title": "outputsJsBak",
+          "markdownDescription": "Configuration of the outputsJsBak plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/outputs.js.bak)",
+          "properties": {
+            "enabled": {
+              "title": "outputsJsBak.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "outputsJsBak.options",
+              "markdownDescription": "Options of the outputsJsBak plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/values-compilers/outputs.js.bak)",
+              "type": "object",
+              "properties": {}
+            }
+          }
+        }
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "properties": {
+        "fabrique": {
+          "$ref": "../../plugins/fabrique/config.schema.json"
+        },
+        "contrib": {
+          "$ref": "../../plugins/contrib/config.schema.json"
+        }
+      },
+      "required": []
+    },
+    "extends": {
+      "title": "Additional configs to extend from",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "ifEnv": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "dev",
+                "preprod",
+                "prod"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
