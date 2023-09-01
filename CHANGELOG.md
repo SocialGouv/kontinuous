@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.164.11 (2023-09-01)
+
+
+### Bug Fixes
+
+* **build:** default imagePackage to app ([#412](https://github.com/socialgouv/kontinuous/issues/412)) ([cc29e6d](https://github.com/socialgouv/kontinuous/commit/cc29e6df2b503bb94289d53a28aedc754cdabea3))
+
+## 1.164.10 (2023-09-01)
+
+## 1.164.9 (2023-09-01)
+
+
+### Bug Fixes
+
+* more jsonschema ([#410](https://github.com/socialgouv/kontinuous/issues/410)) ([c04b3cd](https://github.com/socialgouv/kontinuous/commit/c04b3cdaa0e6c656bc9a53b0fbda36441cf54907))
+
 ## 1.164.8 (2023-08-31)
 
 

@@ -1,13 +1,23 @@
-enabled:
+# yaml-language-server: $schema=./values.schema.json
+
+# @param {string,null} [namespace] resources namespace
 namespace:
+# @param {string,null} [host] ingress host
 host:
-rancherProjectId: my-cluser-id:my-project-id
-isProd: false
-isPreProd: false
+# @param {https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/env} [env]
 env: []
+# @param {https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/envFrom} [envFrom]
 envFrom: []
+
+# @param {object,null} [ingress] The greet NGINX ingress consoller : https://kubernetes.github.io/ingress-nginx/user-guide
 ingress:
+  # @param {boolean} [enabled] enable ingress
   enabled: true
+  # @param {https://raw.githubusercontent.com/SocialGouv/json-schemas/main/nginx/annotations.schema.json} [annotations] ingress annotations see https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations
   annotations: {}
-upstream: 
+
+# @param {string} upstream Upstream service to protect, example: http://my-app
+upstream:
+
+# @param {array} [additionalArgs] Additionnal oauth2-proxy arguments, see https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview#command-line-options
 additionalArgs: []

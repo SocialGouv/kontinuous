@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json",
-  "title": "schema for helm chart app",
+  "title": "Kontinuous app helm chart",
+  "markdownDescription": "The [app chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/app) provides all the resources to deploy a kubernetes application\n\n💡 You can use the [meta `~tpl~` prefix](https://socialgouv.github.io/kontinuous/#/./advanced/build?id=meta-values-plugin-tpl) to make any property a [go template](https://docs.gofiber.io/template/html/TEMPLATES_CHEATSHEET/#template-variables)",
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
@@ -9,9 +10,7 @@
   },
   "properties": {
     "~chart": {
-      "description": "Base Helm Chart for this component",
-      "type": "string",
-      "examples": ["app", "hasura", "maildev"]
+      "type": "string"
     },
     "~forceRestart": {
       "description": "Force restart on every deployment. default true",

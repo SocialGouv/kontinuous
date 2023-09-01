@@ -1,21 +1,12 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/docs/values.schema.json",
   "title": "schema for .kontinuous/values.yaml",
   "type": "object",
   "additionalProperties": {
     "type": "object",
-    "description": "Kontinuous component",
+    "title": "Additional helm chart",
     "allOf": [
-      {
-        "if": {
-          "required": ["~chart"]
-        },
-        "then": {
-          "description": "Common to all charts",
-          "$ref": "#/definitions/chart"
-        }
-      },
       {
         "if": {
           "required": ["~chart"],
@@ -53,6 +44,27 @@
         },
         "then": {
           "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json#"
+        }
+      },
+      {
+        "if": {
+          "required": ["~chart"],
+          "properties": {
+            "~chart": {
+              "const": "oauth2-proxy"
+            }
+          }
+        },
+        "then": {
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/oauth2-proxy/values.schema.json#"
+        }
+      },
+      {
+        "if": {
+          "required": ["~chart"]
+        },
+        "then": {
+          "$ref": "#/definitions/chart"
         }
       }
     ]
@@ -156,17 +168,27 @@
       "type": "object",
       "properties": {
         "~chart": {
-          "description": "Kontinuous Chart for this component. see https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/charts",
+          "description": "Kontinuous chart to use",
           "type": "string",
-          "examples": ["app", "maildev", "hasura", "metabase"]
+          "default": "app",
+          "examples": [
+            "app",
+            "pg",
+            "hasura",
+            "metabase",
+            "pgweb",
+            "maildev",
+            "oauth2-proxy",
+            "redis"
+          ]
         },
         "~needs": {
-          "description": "Job or deployment dependencies",
+          "markdownDescription": "Job or deployment dependencies.\n\nThe meta-value `~needs`is used to define dependencies tree between charts and jobs.\n\nYou can target using simple charts or jobs name, or be more specific to avoid collision in more complex cases.\n\nsee [~needs documentation](https://socialgouv.github.io/kontinuous/#https://raw.githubusercontent.com/socialgouv/kontinuous/v1/advanced/build?id=meta-values-plugin-needs)",
           "type": "array",
           "items": {
             "type": "string"
           },
-          "examples": ["[build-app]"]
+          "examples": ["[build-app]", "[pg, jobs.build-app]"]
         }
       },
       "required": ["~chart"]

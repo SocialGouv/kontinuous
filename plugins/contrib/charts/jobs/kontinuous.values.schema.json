@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json",
-  "title": "schema for helm chart jobs",
+  "title": "Kontinuous jobs helm chart",
+  "markdownDescription": "The [jobs chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/jobs) provides a way to define de define tasks in your deployment pipeline\n\n💡 See [the jobs documentations](https://socialgouv.github.io/kontinuous/#/./advanced/build?id=meta-values-plugin-needs).",
   "type": "object",
   "additionalProperties": false,
   "required": ["runs"],
@@ -75,10 +76,9 @@
           }
         },
         "then": {
-          "description": "Build and register docker image with buildkit",
           "properties": {
             "use": {
-              "description": "Build and register docker image with buildkit"
+              "markdownDescription": "Build and register docker image with buildkit.\n\nSee [build source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/build)"
             },
             "with": {
               "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/build/use.schema.json#"
@@ -95,10 +95,9 @@
             }
           },
           "then": {
-            "description": "Build and register docker image with kaniko",
             "properties": {
               "use": {
-                "description": "Build and register docker image with kaniko"
+                "markdownDescription": "Build and register docker image with kaniko.\n\nSee [build-kaniko source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/build-kaniko)"
               },
               "with": {
                 "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/build-kaniko/use.schema.json#"
@@ -115,10 +114,9 @@
               }
             },
             "then": {
-              "description": "Create a Postgres Database",
               "properties": {
                 "use": {
-                  "description": "Create a Postgres Database"
+                  "markdownDescription": "Create a Postgres Database\n\nSee [create-db source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/create-db)"
                 },
                 "with": {
                   "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/create-db/use.schema.json#"
@@ -135,10 +133,9 @@
                 }
               },
               "then": {
-                "description": "Destroy namespace and databases",
                 "properties": {
                   "use": {
-                    "description": "Destroy namespace and databases"
+                    "markdownDescription": "Destroy namespace and databases\n\nSee [deactivate source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/deactivate)"
                   },
                   "with": {
                     "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/deactivate/use.schema.json#"
@@ -155,10 +152,9 @@
                   }
                 },
                 "then": {
-                  "description": "Destroy the database",
                   "properties": {
                     "use": {
-                      "description": "Destroy the database"
+                      "markdownDescription": "Destroy the database\n\nSee [drop-db source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/drop-db)"
                     },
                     "with": {
                       "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/drop-db/use.schema.json#"
@@ -175,10 +171,9 @@
                     }
                   },
                   "then": {
-                    "description": "Restore the database from a backup storage",
                     "properties": {
                       "use": {
-                        "description": "Restore the database from a backup storage"
+                        "markdownDescription": "Restore the database from a backup storage\n\nSee [pg-restore source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/pg-restore)"
                       },
                       "with": {
                         "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/pg-restore/use.schema.json#"
@@ -195,10 +190,9 @@
                       }
                     },
                     "then": {
-                      "description": "Execute psql commands on the database",
                       "properties": {
                         "use": {
-                          "description": "Execute psql commands on the database"
+                          "markdownDescription": "Execute psql commands on the database\n\nSee [psql source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/psql)"
                         },
                         "with": {
                           "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/psql/use.schema.json#"
@@ -215,10 +209,9 @@
                         }
                       },
                       "then": {
-                        "description": "Execute a repository .sql on the database",
                         "properties": {
                           "use": {
-                            "description": "Execute a repository .sql on the database"
+                            "markdownDescription": "Execute a repository .sql on the database\n\nSee [seed-db source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/seed-db)"
                           },
                           "with": {
                             "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/seed-db/use.schema.json#"
