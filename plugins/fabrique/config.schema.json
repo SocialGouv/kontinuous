@@ -1,0 +1,191 @@
+{
+  "type": "object",
+  "title": "kontinuous fabrique plugin configuration.",
+  "markdownDescription": "See fabrique plugin [default configuration](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/kontinuous.yaml)",
+  "properties": {
+    "patches": {
+      "type": "object",
+      "title": "patches",
+      "markdownDescription": "Options from the patches type.",
+      "properties": {
+        "setUndefinedStorageClassnameCnpg": {
+          "type": "object",
+          "title": "setUndefinedStorageClassnameCnpg",
+          "markdownDescription": "Configuration of the setUndefinedStorageClassnameCnpg plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/patches/01-set-undefined-storage-classname-cnpg.js)",
+          "additionalProperties": true,
+          "properties": {
+            "enabled": {
+              "title": "setUndefinedStorageClassnameCnpg.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "setUndefinedStorageClassnameCnpg.options",
+              "markdownDescription": "Options of the setUndefinedStorageClassnameCnpg plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/patches/01-set-undefined-storage-classname-cnpg.js)",
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {}
+            }
+          }
+        },
+        "setUndefinedStorageClassname": {
+          "type": "object",
+          "title": "setUndefinedStorageClassname",
+          "markdownDescription": "Configuration of the setUndefinedStorageClassname plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/patches/02-set-undefined-storage-classname.js)",
+          "additionalProperties": true,
+          "properties": {
+            "enabled": {
+              "title": "setUndefinedStorageClassname.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "setUndefinedStorageClassname.options",
+              "markdownDescription": "Options of the setUndefinedStorageClassname plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/patches/02-set-undefined-storage-classname.js)",
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {}
+            }
+          }
+        }
+      }
+    },
+    "pre-deploy": {
+      "type": "object",
+      "title": "pre-deploy",
+      "markdownDescription": "Options from the pre-deploy type.",
+      "properties": {
+        "debugLinks": {
+          "type": "object",
+          "title": "debugLinks",
+          "markdownDescription": "Configuration of the debugLinks plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/pre-deploy/01-debug-links.js)",
+          "additionalProperties": true,
+          "properties": {
+            "enabled": {
+              "title": "debugLinks.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "debugLinks.options",
+              "markdownDescription": "Options of the debugLinks plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/pre-deploy/01-debug-links.js)",
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {}
+            }
+          }
+        }
+      }
+    },
+    "values-compilers": {
+      "type": "object",
+      "title": "values-compilers",
+      "markdownDescription": "Options from the values-compilers type.",
+      "properties": {
+        "globalDefaultsJs": {
+          "type": "object",
+          "title": "globalDefaultsJs",
+          "markdownDescription": "Configuration of the globalDefaultsJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/values-compilers/global-defaults.js)",
+          "additionalProperties": true,
+          "properties": {
+            "enabled": {
+              "title": "globalDefaultsJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "globalDefaultsJs.options",
+              "markdownDescription": "Options of the globalDefaultsJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/values-compilers/global-defaults.js)",
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {}
+            }
+          }
+        },
+        "indexJs": {
+          "type": "object",
+          "title": "indexJs",
+          "markdownDescription": "Configuration of the indexJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/values-compilers/index.js)",
+          "additionalProperties": true,
+          "properties": {
+            "enabled": {
+              "title": "indexJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "indexJs.options",
+              "markdownDescription": "Options of the indexJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/values-compilers/index.js)",
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {}
+            }
+          }
+        },
+        "socialgouvAutodevopsJs": {
+          "type": "object",
+          "title": "socialgouvAutodevopsJs",
+          "markdownDescription": "Configuration of the socialgouvAutodevopsJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/values-compilers/socialgouv-autodevops.js)",
+          "additionalProperties": true,
+          "properties": {
+            "enabled": {
+              "title": "socialgouvAutodevopsJs.enabled",
+              "description": "Enable or disable this plugin",
+              "type": "boolean"
+            },
+            "options": {
+              "title": "socialgouvAutodevopsJs.options",
+              "markdownDescription": "Options of the socialgouvAutodevopsJs plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/values-compilers/socialgouv-autodevops.js)",
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {}
+            }
+          }
+        }
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "properties": {
+        "fabrique": {
+          "$ref": "../../plugins/fabrique/config.schema.json"
+        },
+        "contrib": {
+          "$ref": "../../plugins/contrib/config.schema.json"
+        }
+      },
+      "required": []
+    },
+    "extends": {
+      "title": "Additional configs to extend from",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "buildkit-service",
+              "deploy-with-kapp",
+              "deploy-with-kubectl-dependency-tree",
+              "deploy-with-kubectl",
+              "nsplease",
+              "ovh"
+            ]
+          },
+          "ifEnv": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "dev",
+                "preprod",
+                "prod"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "kontinuous config.yaml JSON schema",
+  "markdownDescription": "See [config documentation](https://socialgouv.github.io/kontinuous/#/./advanced/configuration)",
+  "type": "object",
+  "properties": {
+    "projectName": {
+      "title": "Name of the rancher project. useful to guess the namespace rancher-project-id",
+      "type": "string"
+    },
+    "ciNamespace": {
+      "title": "Name of the CI namespace. useful to copy secrets",
+      "examples": [
+        "ci-myapp"
+      ],
+      "type": "string"
+    },
+    "config": {
+      "title": "project kontinuous configuration",
+      "markdownDescription": "see [documentation](https://socialgouv.github.io/kontinuous/#/./advanced/configuration)",
+      "type": "object"
+    },
+    "options": {
+      "title": "project kontinuous options",
+      "markdownDescription": "see [documentation](https://socialgouv.github.io/kontinuous/#/./advanced/configuration)",
+      "type": "object"
+    },
+    "dependencies": {
+      "type": "object",
+      "properties": {
+        "fabrique": {
+          "$ref": "../plugins/fabrique/config.schema.json"
+        },
+        "contrib": {
+          "$ref": "../plugins/contrib/config.schema.json"
+        }
+      },
+      "required": []
+    }
+  },
+  "required": []
+}
