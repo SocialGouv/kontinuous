@@ -495,7 +495,7 @@ spec:
 
               echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
 
-              export IMAGE_PATH=$CI_REGISTRY/test-jobs-build/app
+              export IMAGE_PATH=$CI_REGISTRY/test-jobs-build
 
               export LATEST_TAG=\\"\\"
 

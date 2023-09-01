@@ -30,7 +30,6 @@ jobs:
       use: socialgouv/kontinuous/plugins/contrib/jobs/build
       with:
         registrySecretRefName: harbor
-        imagePackage: app
     build-hasura:
       use: socialgouv/kontinuous/plugins/contrib/jobs/build
       with:
