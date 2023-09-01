@@ -45,7 +45,6 @@ const getPluginSchema = (plugin, dependencies) => {
           type: "object",
           title: file.id,
           markdownDescription: `Configuration of the ${file.id} plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/${plugin}/${folder}/${file.path})`,
-          additionalProperties: true,
           properties: {
             enabled: {
               title: `${file.id}.enabled`,
@@ -56,7 +55,6 @@ const getPluginSchema = (plugin, dependencies) => {
               title: `${file.id}.options`,
               markdownDescription: `Options of the ${file.id} plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/${plugin}/${folder}/${file.path})`,
               type: "object",
-              additionalProperties: true,
               properties: {},
             },
           },
