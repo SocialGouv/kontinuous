@@ -183,7 +183,8 @@
           ]
         },
         "~needs": {
-          "markdownDescription": "Job or deployment dependencies.\n\nThe meta-value `~needs`is used to define dependencies tree between charts and jobs.\n\nYou can target using simple charts or jobs name, or be more specific to avoid collision in more complex cases.\n\nsee [~needs documentation](https://socialgouv.github.io/kontinuous/#https://raw.githubusercontent.com/socialgouv/kontinuous/v1/advanced/build?id=meta-values-plugin-needs)",
+          "markdownDescription": "The meta-value `~needs`is used to define dependencies tree between charts and jobs.\n\nYou can target using simple charts or jobs name, or be more specific to avoid collision in more complex cases.\n\nsee [~needs documentation](https://socialgouv.github.io/kontinuous/#https://raw.githubusercontent.com/socialgouv/kontinuous/v1/advanced/build?id=meta-values-plugin-needs)",
+          "title": "Job or deployment dependencies",
           "type": "array",
           "items": {
             "type": "string"

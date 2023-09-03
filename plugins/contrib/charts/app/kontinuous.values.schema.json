@@ -9,22 +9,13 @@
     "^\\.": { "type": ["string", "number", "boolean"] }
   },
   "properties": {
-    "~chart": {
-      "type": "string"
-    },
+    "~chart": {},
     "~forceRestart": {
       "description": "Force restart on every deployment. default true",
       "type": "boolean",
       "default": true
     },
-    "~needs": {
-      "description": "Job or deployment dependencies",
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "examples": ["[build-app]"]
-    },
+    "~needs": {},
     "image": {
       "description": "Full path to docker image",
       "examples": ["ghcr.io/socialgouv/docker/nginx:7.0.1"],
