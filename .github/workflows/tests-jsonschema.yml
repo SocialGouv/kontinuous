@@ -33,10 +33,14 @@ jobs:
         run: |
           # fetch kube json-schema locally and add $id for schema resolution
           curl https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json | jq '. + {"$id": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json"}' > kube.json
+          mkdir external-schemas
+          curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/cnpg-cluster/values.schema.json > external-schemas/cnpg-cluster.schema.json
+          curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/pgweb/values.schema.json > external-schemas/pgweb.schema.json
+          curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/maildev/values.schema.json > external-schemas/maildev.schema.json
 
       - name: test valid schema
         run: |
-          AJV_PARAMS="--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r kube.json"
+          AJV_PARAMS="--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r "external-schemas/**/*.schema.json" -r kube.json"
           echo "jsonschema-valid.yaml should have no error"
           cat .github/jsonschema/jsonschema-valid.yml | yq -o=json > jsonschema-valid.json
           RES=$(npx ajv-cli validate -s ./docs/values.schema.json -d jsonschema-valid.json $AJV_PARAMS)
@@ -49,7 +53,7 @@ jobs:
 
       - name: test invalid schema
         run: |
-          AJV_PARAMS="--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r kube.json"
+          AJV_PARAMS="--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r "external-schemas/**/*.schema.json" -r kube.json"
           echo "jsonschema-invalid.yaml should have 23 errors"
           cat .github/jsonschema/jsonschema-invalid.yml | yq -o=json > jsonschema-invalid.json
           npx ajv-cli validate -s ./docs/values.schema.json $AJV_PARAMS -d jsonschema-invalid.json 2>&1 | tail --lines=+2 > invalid-result.json
