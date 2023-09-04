@@ -6,6 +6,8 @@ on:
       - "**"
     paths:
       - "**/values.schema.json"
+      - "**/config.schema.json"
+      - "**/kontinuous.schema.json"
       - "**/*.values.schema.json"
       - ".github/jsonschema/**"
       - ".github/workflows/tests-jsonschema.yml"
