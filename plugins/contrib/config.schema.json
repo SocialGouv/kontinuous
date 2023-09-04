@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/config.schema.json",
   "title": "kontinuous contrib plugin configuration.",
   "markdownDescription": "See contrib plugin [default configuration](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/kontinuous.yaml)",
   "properties": {
@@ -963,11 +964,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": [
-                "dev",
-                "preprod",
-                "prod"
-              ]
+              "enum": ["dev", "preprod", "prod"]
             }
           }
         }

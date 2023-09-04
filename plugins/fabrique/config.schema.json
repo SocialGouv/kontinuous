@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/fabrique/config.schema.json",
   "title": "kontinuous fabrique plugin configuration.",
   "markdownDescription": "See fabrique plugin [default configuration](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/kontinuous.yaml)",
   "properties": {
@@ -165,11 +166,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": [
-                "dev",
-                "preprod",
-                "prod"
-              ]
+              "enum": ["dev", "preprod", "prod"]
             }
           }
         }
