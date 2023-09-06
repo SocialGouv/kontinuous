@@ -39,6 +39,9 @@ jobs:
           curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/cnpg-cluster/values.schema.json > external-schemas/cnpg-cluster.schema.json
           curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/pgweb/values.schema.json > external-schemas/pgweb.schema.json
           curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/maildev/values.schema.json > external-schemas/maildev.schema.json
+          curl https://raw.githubusercontent.com/SocialGouv/json-schemas/main/postgres/parameters.json >  external-schemas/postgres-parameters.schema.json
+          curl https://raw.githubusercontent.com/SocialGouv/json-schemas/main/postgres/extensions.json >  external-schemas/postgres-extensions.schema.json
+          curl https://raw.githubusercontent.com/SocialGouv/json-schemas/main/nginx/annotations.schema.json >  external-schemas/nginx-annotations.schema.json
 
       - name: test valid schema
         run: |
