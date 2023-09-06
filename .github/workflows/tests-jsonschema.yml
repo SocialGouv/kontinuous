@@ -32,8 +32,12 @@ jobs:
       - name: install
         run: |
           # fetch kube json-schema locally and add $id for schema resolution
-          curl https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json | jq '. + {"$id": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json"}' > kube.json
+
           mkdir external-schemas
+          curl https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json | jq '. + {"$id": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json"}' > external-schemas/kube.json
+          curl https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json | jq '. + {"$id": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json"}' > kube.json
+
+          https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json
           curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/cnpg-cluster/values.schema.json > external-schemas/cnpg-cluster.schema.json
           curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/pgweb/values.schema.json > external-schemas/pgweb.schema.json
           curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/maildev/values.schema.json > external-schemas/maildev.schema.json
