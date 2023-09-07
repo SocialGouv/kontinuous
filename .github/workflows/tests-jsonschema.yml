@@ -34,7 +34,7 @@ jobs:
           # fetch kube json-schema locally and add $id for schema resolution
 
           mkdir external-schemas
-          curl https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json | jq '. + {"$id": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json"}' > kube.json
+          curl https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json | jq '. + {"$id": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json"}' > external-schemas/kube.json
 
           curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/cnpg-cluster/values.schema.json > external-schemas/cnpg-cluster.schema.json
           curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/pgweb/values.schema.json > external-schemas/pgweb.schema.json
@@ -45,7 +45,7 @@ jobs:
 
       - name: test valid schema
         run: |
-          AJV_PARAMS="--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r "external-schemas/**/*.schema.json" -r kube.json"
+          AJV_PARAMS="--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r "external-schemas/**/*.schema.json" "
           echo "jsonschema-valid.yaml should have no error"
           cat .github/jsonschema/jsonschema-valid.yml | yq -o=json > jsonschema-valid.json
           RES=$(npx ajv-cli validate -s ./docs/values.schema.json -d jsonschema-valid.json $AJV_PARAMS)
