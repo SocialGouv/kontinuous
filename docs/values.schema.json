@@ -17,7 +17,7 @@
           }
         },
         "then": {
-          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json#"
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json"
         }
       },
       {
@@ -30,7 +30,7 @@
           }
         },
         "then": {
-          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/fabrique/charts/pg/kontinuous.values.schema.json#"
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/fabrique/charts/pg/kontinuous.values.schema.json"
         }
       },
       {
@@ -43,7 +43,7 @@
           }
         },
         "then": {
-          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json#"
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json"
         }
       },
       {
@@ -56,7 +56,7 @@
           }
         },
         "then": {
-          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/oauth2-proxy/values.schema.json#"
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/oauth2-proxy/values.schema.json"
         }
       },
       {
@@ -159,7 +159,7 @@
     "project": { "type": "object", "additionalProperties": true },
 
     "jobs": {
-      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json#"
+      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json"
     }
   },
   "required": [],
