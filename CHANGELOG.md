@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.164.13 (2023-09-08)
+
+
+### Bug Fixes
+
+* **pgweb:** add default security context ([#415](https://github.com/socialgouv/kontinuous/issues/415)) ([3569d5d](https://github.com/socialgouv/kontinuous/commit/3569d5d0001478a357d946f44be1855fd5160676))
+
 ## 1.164.12 (2023-09-01)
 
 
