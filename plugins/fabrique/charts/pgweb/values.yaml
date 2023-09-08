@@ -9,3 +9,9 @@ pgweb:
   ingress:
     enabled: true
     ~tpl~annotations: "{{ .Values.global.ingress.annotations | toJson }}"
+  podSecurityContext:
+    fsGroup: 1000
+    runAsGroup: 1000
+    runAsUser: 1000
+  securityContext:
+    allowPrivilegeEscalation: false
