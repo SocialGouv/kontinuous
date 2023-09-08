@@ -532,10 +532,14 @@ spec:
         kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
     spec:
       serviceAccountName: pgweb
-      securityContext: {}
+      securityContext:
+        fsGroup: 1000
+        runAsGroup: 1000
+        runAsUser: 1000
       containers:
         - name: pgweb
-          securityContext: {}
+          securityContext:
+            allowPrivilegeEscalation: false
           image: sosedoff/pgweb:0.14.1
           imagePullPolicy: IfNotPresent
           ports:
