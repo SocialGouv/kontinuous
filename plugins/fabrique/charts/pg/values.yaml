@@ -13,7 +13,7 @@ cnpg-cluster:
     - {{ .Values.kontinuous.parentChart }}.jobs-pg
   ~tpl~dbOwner: "{{ .Values.global.pgUser }}"
   ~tpl~dbName: "{{ .Values.global.pgDatabase }}"
-  ~tpl~instances: "{{ or .Values.Parent.instances ((or .Values.global.isProd .Values.global.isPreProd) | ternary `3` `1`) }}"
+  ~tpl~instances: "{{ or .Values.instances ((or .Values.global.isProd .Values.global.isPreProd) | ternary `3` `1`) }}"
   postgresqlParameters:
     TimeZone: "Europe/Paris"
   extensions:
