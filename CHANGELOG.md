@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.164.16](https://github.com/socialgouv/kontinuous/compare/v1.164.15...v1.164.16) (2023-09-15)
+
+
+### Bug Fixes
+
+* cnpg instances value override ([1588292](https://github.com/socialgouv/kontinuous/commit/1588292a7869f6b45b6207fb7879e329864f066f))
+
 ## [1.164.15](https://github.com/socialgouv/kontinuous/compare/v1.164.14...v1.164.15) (2023-09-15)
 
 
