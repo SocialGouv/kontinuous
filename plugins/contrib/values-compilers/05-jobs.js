@@ -444,6 +444,9 @@ const compileValues = async (values, context, chartScope = []) => {
       ) {
         return
       }
+      if (key.startsWith("_")) {
+        return
+      }
       const childChartScope = [...chartScope, key]
       const isJob = subValues._pluginValuesCompilerContribJob
       const isJobs = subValues._pluginValuesCompilerContribJobs

@@ -12,6 +12,9 @@ const findAliasOf = async (
     ([_, value]) => !!value?._isChartValues
   )
   for (const [k, value] of entries) {
+    if (k.startsWith("_")) {
+      continue
+    }
     if (k === search) {
       const foundScope = [...scope, k]
       if (searchingSubkeys.length > 0) {
@@ -26,6 +29,9 @@ const findAliasOf = async (
     }
   }
   for (const [k, value] of entries) {
+    if (k.startsWith("_")) {
+      continue
+    }
     const found = await findAliasOf(
       search,
       value,

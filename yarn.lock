@@ -10798,6 +10798,7 @@ __metadata:
     launch-editor: "npm:^2.4.0"
     link-module-alias: "npm:^1.2.0"
     lodash.camelcase: "npm:^4.3.0"
+    lodash.clonedeep: "npm:^4.5.0"
     lodash.defaults: "npm:^4.2.0"
     lodash.defaultsdeep: "npm:^4.6.1"
     lodash.get: "npm:^4.4.2"

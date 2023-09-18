@@ -6,12 +6,18 @@ const resolveAliasOf = (values, context, rootValues = values, scope = []) => {
   const { utils, chartsAliasMap, defaultValuesCache } = context
   const { deepmerge } = utils
   for (const [key, val] of Object.entries(values)) {
+    if (key.startsWith("_")) {
+      continue
+    }
     if (typeof val !== "object" || val === null || val["~chart"]) {
       continue
     }
     resolveAliasOf(values[key], context, rootValues, [...scope, key])
   }
   for (const [key, val] of Object.entries(values)) {
+    if (key.startsWith("_")) {
+      continue
+    }
     if (typeof val !== "object" || val === null || !val["~chart"]) {
       continue
     }

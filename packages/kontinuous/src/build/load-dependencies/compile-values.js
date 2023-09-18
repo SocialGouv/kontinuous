@@ -8,7 +8,7 @@ const pluginFunction = require("~/plugins/context/function")
 
 const valuesEnableStandaloneCharts = require("./values-enable-standalone-charts")
 const beforeMergeProjectValues = require("./before-merge-project-values")
-const cleanMetaValues = require("./clean-meta-values")
+// const cleanMetaValues = require("./clean-meta-values")
 const removeNotEnabledValues = require("./remove-not-enabled-values")
 const mergeYamlFileValues = require("./merge-yaml-file-values")
 const writeChartsAlias = require("./write-charts-alias")
@@ -83,7 +83,7 @@ module.exports = async (config, logger) => {
 
   await writeChartsAlias(chartsAliasMap, config)
   removeNotEnabledValues(values)
-  cleanMetaValues(values)
+  // cleanMetaValues(values)
 
   const projectValuesFile = await getYamlPath(`${buildProjectPath}/values`)
   if (projectValuesFile) {
