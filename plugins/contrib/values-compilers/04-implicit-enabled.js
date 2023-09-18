@@ -8,6 +8,9 @@ const implicitEnabled = (values, scope = []) => {
     }
   }
   for (const key of Object.keys(values)) {
+    if (key.startsWith("_")) {
+      continue
+    }
     implicitEnabled(values[key], [...scope, key])
   }
 }

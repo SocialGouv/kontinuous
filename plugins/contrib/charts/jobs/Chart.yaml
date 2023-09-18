@@ -1,7 +1,7 @@
 apiVersion: v2
 name: jobs
-version: 1.164.16
+version: 1.165.0
 dependencies:
   - name: contrib-helpers
     repository: file://../contrib-helpers
-    version: 1.164.16
+    version: 1.165.0

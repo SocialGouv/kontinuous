@@ -1,6 +1,6 @@
 {
   "name": "kontinuous",
-  "version": "1.164.16",
+  "version": "1.165.0",
   "repository": "https://github.com/socialgouv/kontinuous.git",
   "homepage": "https://socialgouv.github.io/kontinuous/",
   "license": "MIT",
@@ -25,6 +25,7 @@
     "launch-editor": "^2.4.0",
     "link-module-alias": "^1.2.0",
     "lodash.camelcase": "^4.3.0",
+    "lodash.clonedeep": "^4.5.0",
     "lodash.defaults": "^4.2.0",
     "lodash.defaultsdeep": "^4.6.1",
     "lodash.get": "^4.4.2",
