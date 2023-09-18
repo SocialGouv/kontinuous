@@ -1,3 +1,4 @@
+const cloneDeep = require("lodash.clonedeep")
 const beforeMergeChartValues = require("./before-merge-chart-values")
 
 module.exports = (values) => {
@@ -10,5 +11,6 @@ module.exports = (values) => {
       continue
     }
     subValues._isProjectValues = true
+    subValues._ProjectValues = cloneDeep(subValues)
   }
 }

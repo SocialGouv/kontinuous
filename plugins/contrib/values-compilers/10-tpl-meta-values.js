@@ -19,6 +19,9 @@ const renderTplRecurse = async (
   }
 
   for (const key of Object.keys(values)) {
+    if (key.startsWith("_")) {
+      continue
+    }
     const isTplCast = key.startsWith("~tpl:")
     if (key.startsWith("~tpl~") || isTplCast) {
       const tpl = values[key]
