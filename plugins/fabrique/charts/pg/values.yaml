@@ -62,6 +62,23 @@ cnpg-cluster:
           ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
           key: bucket_region
 
+  recovery:
+    barmanObjectStore:
+      ~tpl~destinationPath: "s3://{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups/{{ .Values.global.namespace }}{{ (ne .Values.Parent.backup.name ``) | ternary (print `-` .Values.Parent.backup.name) `` }}"
+      ~tpl~endpointURL: "{{ .Values.global.pgBackupEndpointURL }}"
+      wal:
+        compression: gzip
+      s3Credentials:
+        accessKeyId:
+          ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
+          key: bucket_access_key
+        secretAccessKey:
+          ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
+          key: bucket_secret_key
+        region:
+          ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
+          key: bucket_region
+
 jobs-pg:
   enabled: true
   runs:
