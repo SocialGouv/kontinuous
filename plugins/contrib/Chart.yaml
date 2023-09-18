@@ -1,59 +1,59 @@
 apiVersion: v2
 name: contrib
-version: 1.164.16
+version: 1.165.0
 dependencies:
   - name: rancher-namespace
     repository: file://./charts/rancher-namespace
-    version: 1.164.16
+    version: 1.165.0
     condition: global.rancherNamespaceEnabled,rancher-namespace.enabled
   - name: namespace
     repository: file://./charts/namespace
-    version: 1.164.16
+    version: 1.165.0
     condition: global.namespaceEnabled,namespace.enabled
   - name: security-policies
     repository: file://./charts/security-policies
-    version: 1.164.16
+    version: 1.165.0
     condition: global.securityPoliciesEnabled,security-policies.enabled
   - name: output-volume
     repository: file://./charts/output-volume
-    version: 1.164.16
+    version: 1.165.0
     condition: global.outputVolumeEnabled,output-volume.enabled
   - name: contrib-helpers
     repository: file://./charts/contrib-helpers
-    version: 1.164.16
+    version: 1.165.0
   - name: app
     repository: file://./charts/app
-    version: 1.164.16
+    version: 1.165.0
     condition: app.enabled
   - name: daemon
     repository: file://./charts/daemon
-    version: 1.164.16
+    version: 1.165.0
     condition: daemon.enabled
   - name: deactivate
     repository: file://./charts/deactivate
-    version: 1.164.16
+    version: 1.165.0
     condition: deactivate.enabled
   - name: hasura
     repository: file://./charts/hasura
-    version: 1.164.16
+    version: 1.165.0
     condition: hasura.enabled
   - name: jobs
     repository: file://./charts/jobs
-    version: 1.164.16
+    version: 1.165.0
     condition: jobs.enabled
   - name: job
     repository: file://./charts/job
-    version: 1.164.16
+    version: 1.165.0
     condition: job.enabled
   - name: metabase
     repository: file://./charts/metabase
-    version: 1.164.16
+    version: 1.165.0
     condition: metabase.enabled
   - name: oauth2-proxy
     repository: file://./charts/oauth2-proxy
-    version: 1.164.16
+    version: 1.165.0
     condition: oauth2-proxy.enabled
   - name: redis
     repository: file://./charts/redis
-    version: 1.164.16
+    version: 1.165.0
     condition: redis.enabled

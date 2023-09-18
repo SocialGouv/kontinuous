@@ -1,6 +1,6 @@
 {
   "name": "~dev-tools",
-  "version": "1.164.16",
+  "version": "1.165.0",
   "dependencies": {
     "replace": "^1.2.2",
     "~common": "workspace:^"
