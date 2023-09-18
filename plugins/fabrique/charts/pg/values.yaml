@@ -4,7 +4,6 @@ backup:
   name: ""
 
 recovery:
-  enabled: false
   # to override the backup destination path (in case we need to target a cluster that was named)
   name: ""
   serverName: ""
