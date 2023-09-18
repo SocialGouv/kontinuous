@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.165.2 (2023-09-18)
+
+
+### Bug Fixes
+
+* cnpg recovery name ([#418](https://github.com/socialgouv/kontinuous/issues/418)) ([7f43129](https://github.com/socialgouv/kontinuous/commit/7f4312973dbb01fe42d4fc25caf9d9cce2d8ec9d))
+
 ## 1.165.1 (2023-09-18)
 
 
