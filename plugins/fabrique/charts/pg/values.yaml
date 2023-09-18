@@ -71,7 +71,7 @@ cnpg-cluster:
 
   recovery:
     barmanObjectStore:
-      ~tpl~serverName: "{{ (or .Values.serverName .Values.component .Chart.Name) | lower }}"
+      ~tpl~serverName: "{{ (or .Values.recovery.serverName .Values.component .Chart.Name) | lower }}"
       ~tpl~destinationPath: "s3://{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups/{{ .Values.global.namespace }}{{ (ne .Values.Parent.recovery.name ``) | ternary (print `-` .Values.Parent.recovery.name) `` }}"
       ~tpl~endpointURL: "{{ .Values.global.pgBackupEndpointURL }}"
       wal:
