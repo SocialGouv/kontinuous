@@ -3,6 +3,13 @@ backup:
   # to override the backup destination path (in case we need a new destination for a new cluster)
   name: ""
 
+recovery:
+  enabled: false
+  # to override the backup destination path (in case we need to target a cluster that was named)
+  name: ""
+  serverName: ""
+
+
 cnpg-cluster:
   enabled: true
   fullnameOverride: test-cluster
@@ -64,7 +71,8 @@ cnpg-cluster:
 
   recovery:
     barmanObjectStore:
-      ~tpl~destinationPath: "s3://{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups/{{ .Values.global.namespace }}{{ (ne .Values.Parent.backup.name ``) | ternary (print `-` .Values.Parent.backup.name) `` }}"
+      ~tpl~serverName: "{{ (or .Values.recovery.serverName .Values.component .Chart.Name) | lower }}"
+      ~tpl~destinationPath: "s3://{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups/{{ .Values.global.namespace }}{{ (ne .Values.Parent.recovery.name ``) | ternary (print `-` .Values.Parent.recovery.name) `` }}"
       ~tpl~endpointURL: "{{ .Values.global.pgBackupEndpointURL }}"
       wal:
         compression: gzip
