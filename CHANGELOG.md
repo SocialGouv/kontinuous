@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.165.1 (2023-09-18)
+
+
+### Bug Fixes
+
+* cnpg recovery barmanObjectStore ([#417](https://github.com/socialgouv/kontinuous/issues/417)) ([7e7e972](https://github.com/socialgouv/kontinuous/commit/7e7e972c995983d87284739e9cc3e74fa74b07b5))
+
 ## 1.165.0 (2023-09-18)
 
 
