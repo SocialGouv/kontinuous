@@ -33,6 +33,8 @@ jobs:
         run: |
           # fetch kube json-schema locally and add $id for schema resolution
 
+          apt-get update -y
+
           mkdir external-schemas
           curl https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json | jq '. + {"$id": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json"}' > external-schemas/kube.json
 
