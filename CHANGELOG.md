@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.165.4 (2023-09-19)
+
+
+### Bug Fixes
+
+* cnpg acid consistency compliance ([#419](https://github.com/socialgouv/kontinuous/issues/419)) ([dde9610](https://github.com/socialgouv/kontinuous/commit/dde9610341a78ed8570ca673ef7c51d97dac5605))
+
 ## 1.165.3 (2023-09-18)
 
 
