@@ -770,8 +770,8 @@ spec:
           name: fabrique-prod-backups-access-key
       wal:
         compression: gzip
-  minSyncReplicas: 0
-  maxSyncReplicas: 0
+  minSyncReplicas: 1
+  maxSyncReplicas: 1
   postgresql:
     parameters:
       TimeZone: Europe/Paris
@@ -852,8 +852,8 @@ spec:
           name: fabrique-prod-backups-access-key
       wal:
         compression: gzip
-  minSyncReplicas: 0
-  maxSyncReplicas: 0
+  minSyncReplicas: 1
+  maxSyncReplicas: 1
   postgresql:
     parameters:
       TimeZone: Europe/Paris
