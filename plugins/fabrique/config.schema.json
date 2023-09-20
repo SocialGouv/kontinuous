@@ -47,10 +47,10 @@
         }
       }
     },
-    "pre-deploy": {
+    "preDeploy": {
       "type": "object",
       "title": "pre-deploy",
-      "markdownDescription": "Options from the pre-deploy type.",
+      "markdownDescription": "Options from the preDeploy type.",
       "properties": {
         "debugLinks": {
           "type": "object",
@@ -72,10 +72,10 @@
         }
       }
     },
-    "values-compilers": {
+    "valuesCompilers": {
       "type": "object",
       "title": "values-compilers",
-      "markdownDescription": "Options from the values-compilers type.",
+      "markdownDescription": "Options from the valuesCompilers type.",
       "properties": {
         "globalDefaultsJs": {
           "type": "object",

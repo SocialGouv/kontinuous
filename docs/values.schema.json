@@ -3,6 +3,14 @@
   "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/docs/values.schema.json",
   "title": "schema for .kontinuous/values.yaml",
   "type": "object",
+  "patternProperties": {
+    "pg-*": {
+      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/fabrique/charts/pg/kontinuous.values.schema.json"
+    },
+    "app-*": {
+      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json"
+    }
+  },
   "additionalProperties": {
     "type": "object",
     "title": "Additional helm chart",
@@ -171,15 +179,39 @@
           "description": "Kontinuous chart to use",
           "type": "string",
           "default": "app",
-          "examples": [
-            "app",
-            "pg",
-            "hasura",
-            "metabase",
-            "pgweb",
-            "maildev",
-            "oauth2-proxy",
-            "redis"
+          "anyOf": [
+            {
+              "const": "app",
+              "markdownDescription": "The [app chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/app) provides all the resources to deploy a kubernetes application\n\n💡 You can use the [meta `~tpl~` prefix](https://socialgouv.github.io/kontinuous/#/./advanced/build?id=meta-values-plugin-tpl) to make any property a [go template](https://docs.gofiber.io/template/html/TEMPLATES_CHEATSHEET/#template-variables)"
+            },
+            {
+              "const": "pg",
+              "markdownDescription": "The [pg chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/pg) is a wrapper around [cnpg-cluster helm chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/pg)"
+            },
+            {
+              "const": "hasura",
+              "markdownDescription": "The [hasura chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/hasura) deploys an [hasura](https://hasura.io) instance"
+            },
+            {
+              "const": "metabase",
+              "markdownDescription": "The [metabase chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/metabase) deploys a [metabase](https://metabase.com) instance"
+            },
+            {
+              "const": "pgweb",
+              "markdownDescription": "The [pgweb chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/pgweb) deploys a [pgweb](https://github.com/sosedoff/pgweb) instance"
+            },
+            {
+              "const": "maildev",
+              "markdownDescription": "The [maildev chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/maildev) deploys a [maildev](https://github.com/maildev/maildev) instance"
+            },
+            {
+              "const": "oauth2-proxy",
+              "markdownDescription": "The [oauth2-proxy chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/oauth2-proxy) deploys an [oauth2-proxy](https://oauth2-proxy.github.io/oauth2-proxy/) instance"
+            },
+            {
+              "const": "redis",
+              "markdownDescription": "The [redis chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/redis) deploys an [redis](https://oauth2-proxy.github.io/redis/) instance"
+            }
           ]
         },
         "~needs": {

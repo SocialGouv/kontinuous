@@ -443,10 +443,10 @@
         }
       }
     },
-    "post-deploy": {
+    "postDeploy": {
       "type": "object",
       "title": "post-deploy",
-      "markdownDescription": "Options from the post-deploy type.",
+      "markdownDescription": "Options from the postDeploy type.",
       "properties": {
         "notifyMattermostJs": {
           "type": "object",
@@ -468,10 +468,10 @@
         }
       }
     },
-    "pre-deploy": {
+    "preDeploy": {
       "type": "object",
       "title": "pre-deploy",
-      "markdownDescription": "Options from the pre-deploy type.",
+      "markdownDescription": "Options from the preDeploy type.",
       "properties": {
         "namespaces": {
           "type": "object",
@@ -788,10 +788,10 @@
         }
       }
     },
-    "values-compilers": {
+    "valuesCompilers": {
       "type": "object",
       "title": "values-compilers",
-      "markdownDescription": "Options from the values-compilers type.",
+      "markdownDescription": "Options from the valuesCompilers type.",
       "properties": {
         "cleanXYamlAnchors": {
           "type": "object",
