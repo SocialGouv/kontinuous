@@ -1,14 +1,14 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/schema6/docs/values.schema.json",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/docs/values.schema.json",
   "title": "schema for .kontinuous/values.yaml",
   "type": "object",
   "patternProperties": {
     "pg-*": {
-      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schema6/plugins/fabrique/charts/pg/kontinuous.values.schema.json"
+      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/fabrique/charts/pg/kontinuous.values.schema.json"
     },
     "app-*": {
-      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schema6/plugins/contrib/charts/app/kontinuous.values.schema.json"
+      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json"
     }
   },
   "additionalProperties": {
@@ -25,7 +25,7 @@
           }
         },
         "then": {
-          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schema6/plugins/contrib/charts/app/kontinuous.values.schema.json"
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json"
         }
       },
       {
@@ -38,7 +38,7 @@
           }
         },
         "then": {
-          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schema6/plugins/fabrique/charts/pg/kontinuous.values.schema.json"
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/fabrique/charts/pg/kontinuous.values.schema.json"
         }
       },
       {
@@ -51,7 +51,7 @@
           }
         },
         "then": {
-          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schema6/plugins/contrib/charts/jobs/kontinuous.values.schema.json"
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json"
         }
       },
       {
@@ -64,7 +64,7 @@
           }
         },
         "then": {
-          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schema6/plugins/contrib/charts/oauth2-proxy/values.schema.json"
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/oauth2-proxy/values.schema.json"
         }
       },
       {
@@ -167,7 +167,7 @@
     "project": { "type": "object", "additionalProperties": true },
 
     "jobs": {
-      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/schema6/plugins/contrib/charts/jobs/kontinuous.values.schema.json"
+      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json"
     }
   },
   "required": [],
@@ -215,7 +215,7 @@
           ]
         },
         "~needs": {
-          "markdownDescription": "The meta-value `~needs`is used to define dependencies tree between charts and jobs.\n\nYou can target using simple charts or jobs name, or be more specific to avoid collision in more complex cases.\n\nsee [~needs documentation](https://socialgouv.github.io/kontinuous/#https://raw.githubusercontent.com/socialgouv/kontinuous/schema6/advanced/build?id=meta-values-plugin-needs)",
+          "markdownDescription": "The meta-value `~needs`is used to define dependencies tree between charts and jobs.\n\nYou can target using simple charts or jobs name, or be more specific to avoid collision in more complex cases.\n\nsee [~needs documentation](https://socialgouv.github.io/kontinuous/#https://raw.githubusercontent.com/socialgouv/kontinuous/v1/advanced/build?id=meta-values-plugin-needs)",
           "title": "Job or deployment dependencies",
           "type": "array",
           "items": {
