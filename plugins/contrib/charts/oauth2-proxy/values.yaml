@@ -4,9 +4,9 @@
 namespace:
 # @param {string,null} [host] ingress host
 host:
-# @param {https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/env} [env]
+# @param {https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/env} [env]
 env: []
-# @param {https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/envFrom} [envFrom]
+# @param {https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/envFrom} [envFrom]
 envFrom: []
 
 # @param {object,null} [ingress] The greet NGINX ingress consoller : https://kubernetes.github.io/ingress-nginx/user-guide

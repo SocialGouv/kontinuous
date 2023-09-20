@@ -9,7 +9,7 @@
     "cnpg-cluster": {
       "title": "Kontinuous cnpg-cluster helm-chart",
       "markdownDescription": "The [cnpg-cluster helm chart](https://github.com/SocialGouv/helm-charts/tree/main/charts/cnpg-cluster) based on [https://cloudnative-pg.io](https://https://cloudnative-pg.io)\n\n💡 You can use the [meta `~tpl~` prefix](https://socialgouv.github.io/kontinuous/#/./advanced/build?id=meta-values-plugin-tpl) to make it a template",
-      "$ref": "https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/cnpg-cluster/values.schema.json"
+      "$ref": "https://raw.githubusercontent.com/SocialGouv/helm-charts/main/charts/cnpg-cluster/values.schema.json"
     },
     "backup": {
       "type": "object",

@@ -49,7 +49,7 @@ jobs:
           echo "Validate against kube API 1.24.9"
           for f in ./tests_yaml/*.yaml; do
             echo "$f"
-            ./kubeconform -summary -kubernetes-version 1.24.9 -strict -skip monitoring.coreos.com/v1/PodMonitor,postgresql.cnpg.io/v1/Pooler,postgresql.cnpg.io/v1/Cluster,bitnami.com/v1alpha1/SealedSecret "$f"
+            ./kubeconform -summary -kubernetes-version 1.24.9 -strict -skip monitoring.coreos.com/v1/PodMonitor,postgresql.cnpg.io/v1/Pooler,postgresql.cnpg.io/v1/Cluster,postgresql.cnpg.io/v1/ScheduledBackup,bitnami.com/v1alpha1/SealedSecret "$f"
           done
 
       - name: Run kubeconform on kube@1.25.7
@@ -58,7 +58,7 @@ jobs:
           echo "Validate against kube API 1.25.7"
           for f in ./tests_yaml/*.yaml; do
             echo "$f"
-            ./kubeconform -summary -kubernetes-version 1.25.7 -skip monitoring.coreos.com/v1/PodMonitor,postgresql.cnpg.io/v1/Pooler,postgresql.cnpg.io/v1/Cluster,bitnami.com/v1alpha1/SealedSecret "$f"
+            ./kubeconform -summary -kubernetes-version 1.25.7 -skip monitoring.coreos.com/v1/PodMonitor,postgresql.cnpg.io/v1/Pooler,postgresql.cnpg.io/v1/Cluster,postgresql.cnpg.io/v1/ScheduledBackup,bitnami.com/v1alpha1/SealedSecret "$f"
           done
 
       - name: Run kubeconform on kube@1.26.2
@@ -67,5 +67,5 @@ jobs:
           echo "Validate against kube API 1.26.2"
           for f in ./tests_yaml/*.yaml; do
             echo "$f"
-            ./kubeconform -summary -kubernetes-version 1.26.2 -skip monitoring.coreos.com/v1/PodMonitor,postgresql.cnpg.io/v1/Pooler,postgresql.cnpg.io/v1/Cluster,bitnami.com/v1alpha1/SealedSecret "$f"
+            ./kubeconform -summary -kubernetes-version 1.26.2 -skip monitoring.coreos.com/v1/PodMonitor,postgresql.cnpg.io/v1/Pooler,postgresql.cnpg.io/v1/Cluster,postgresql.cnpg.io/v1/ScheduledBackup,bitnami.com/v1alpha1/SealedSecret "$f"
           done
