@@ -39,6 +39,7 @@ jobs:
           curl https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json | jq '. + {"$id": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json"}' > external-schemas/kube.json
 
           curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/cnpg-cluster/values.schema.json > external-schemas/cnpg-cluster.schema.json
+          curl https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json > external-schemas/app.schema.json
           curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/pgweb/values.schema.json > external-schemas/pgweb.schema.json
           curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/maildev/values.schema.json > external-schemas/maildev.schema.json
           curl https://raw.githubusercontent.com/SocialGouv/json-schemas/main/postgres/parameters.json >  external-schemas/postgres-parameters.schema.json
