@@ -33,7 +33,7 @@ jobs:
         run: |
           # fetch kube json-schema locally and add $id for schema resolution
 
-          apt-get update -y
+          sudo apt-get update -y
 
           mkdir external-schemas
           curl https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json | jq '. + {"$id": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json"}' > external-schemas/kube.json
@@ -60,7 +60,7 @@ jobs:
 
       - name: test invalid schema
         run: |
-          AJV_PARAMS="--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r "external-schemas/**/*.schema.json" -r kube.json"
+          AJV_PARAMS='--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r "./external-schemas/**.json"'
           echo "jsonschema-invalid.yaml should have 23 errors"
           cat .github/jsonschema/jsonschema-invalid.yml | yq -o=json > jsonschema-invalid.json
           npx ajv-cli validate -s ./docs/values.schema.json $AJV_PARAMS -d jsonschema-invalid.json 2>&1 | tail --lines=+2 > invalid-result.json
