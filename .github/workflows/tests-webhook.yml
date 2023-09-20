@@ -1,0 +1,50 @@
+name: ✅ Tests webhook 🌍
+
+on:
+  push:
+    branches:
+      - "**"
+      - "!v*"
+    tags-ignore:
+      - "**"
+
+concurrency:
+  cancel-in-progress: true
+  group: tests-webhook-${{ github.ref_name }}
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - nodeVersion: 16.17  # minimum requirement
+          - nodeVersion: 18
+          - nodeVersion: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.nodeVersion }}
+          cache: 'yarn'
+      
+      - name: Yarn install
+        run: |
+          yarn workspaces focus ~webhook
+
+      - name: write .kontinuous/config.yaml
+        shell: bash
+        run: |
+          mkdir -p $HOME/.kontinuous
+          echo "
+          links:
+            socialgouv/kontinuous: ${GITHUB_WORKSPACE}
+          " > $HOME/.kontinuous/config.yaml
+
+      - name: Run tests
+        run: yarn workspace ~webhook test

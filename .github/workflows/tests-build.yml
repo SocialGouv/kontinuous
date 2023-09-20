@@ -1,0 +1,46 @@
+name: ✅ Tests build 📃
+
+on:
+  push:
+    branches:
+      - "**"
+      - "!v*"
+    tags-ignore:
+      - "**"
+
+concurrency:
+  cancel-in-progress: true
+  group: tests-build-${{ github.ref_name }}
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - nodeVersion: 16.17  # minimum requirement
+          - nodeVersion: 18
+          - nodeVersion: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.nodeVersion }}
+          cache: 'yarn'
+      
+      - name: Yarn install
+        run: |
+          yarn workspaces focus kontinuous
+
+      - name: Run tests
+        run: yarn workspace kontinuous test
+
+      - name: Run plugins contrib
+        run: |
+          yarn --cwd plugins/contrib
+          yarn --cwd plugins/contrib test

@@ -1,0 +1,37 @@
+name: 📦 Build Docker Image Wait-needs ⌛
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!master'
+    tags:
+      - '**'
+    paths:
+      - .github/kontinuousVersion
+      - packages/wait-needs/**
+      - packages/common/**
+      - packages/helm-tree/**
+      - yarn.lock
+      - .yarnrc.yml
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.ref }}
+
+jobs:
+  build-base-images:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Build image
+        uses: ./.github/actions/build-images
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile: packages/wait-needs/Dockerfile
+          destination: /wait-needs
+  

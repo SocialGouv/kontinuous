@@ -1,0 +1,24 @@
+name: 🦊 Mirror and run GitLab CI
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Mirror + trigger CI
+      uses: socialgouv/gitlab-mirror-and-ci-action@v1
+      with:
+        args: "https://gitlab.fabrique.social.gouv.fr/SRE/kontinuous"
+      env:
+        GITLAB_HOSTNAME: "gitlab.fabrique.social.gouv.fr"
+        GITLAB_USERNAME: "oauth2"
+        GITLAB_PASSWORD: ${{ secrets.GITLAB_TOKEN }}
+        GITLAB_PROJECT_ID: "189"
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

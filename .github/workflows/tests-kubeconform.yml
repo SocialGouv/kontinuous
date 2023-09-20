@@ -1,0 +1,71 @@
+name: ✅ Tests kubeconform 📚
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "**"
+      - "!v*"
+    tags-ignore:
+      - "**"
+    paths:
+      - "./packages/kontinuous/tests/**"
+      - ".github/workflows/tests-kubeconform.yml"
+
+concurrency:
+  cancel-in-progress: true
+  group: tests-kubeconform-${{ github.ref_name }}
+
+jobs:
+  tests-kubeconform:
+    name: Tests-kubeconform
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: install kubeconform
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget https://github.com/yannh/kubeconform/releases/download/v0.6.1/kubeconform-linux-amd64.tar.gz -O kubeconform-linux-amd64.tar.gz
+          tar -xzvf kubeconform-linux-amd64.tar.gz
+          ./kubeconform -v
+
+      - name: extract YAML from snapshots
+        shell: bash
+        run: |
+          mkdir tests_yaml
+          for f in ./packages/kontinuous/tests/__snapshots__/*.yaml; do
+            echo "Processing $f file...";
+            BASENAME=$(basename "$f");
+            node -e "x=require(\"$f\"); console.log(Object.values(x)[0].trim().slice(1,-1))" > "./tests_yaml/$BASENAME"
+          done
+
+      - name: Run kubeconform on kube@1.24.9
+        shell: bash
+        run: |
+          echo "Validate against kube API 1.24.9"
+          for f in ./tests_yaml/*.yaml; do
+            echo "$f"
+            ./kubeconform -summary -kubernetes-version 1.24.9 -strict -skip monitoring.coreos.com/v1/PodMonitor,postgresql.cnpg.io/v1/Pooler,postgresql.cnpg.io/v1/Cluster,bitnami.com/v1alpha1/SealedSecret "$f"
+          done
+
+      - name: Run kubeconform on kube@1.25.7
+        shell: bash
+        run: |
+          echo "Validate against kube API 1.25.7"
+          for f in ./tests_yaml/*.yaml; do
+            echo "$f"
+            ./kubeconform -summary -kubernetes-version 1.25.7 -skip monitoring.coreos.com/v1/PodMonitor,postgresql.cnpg.io/v1/Pooler,postgresql.cnpg.io/v1/Cluster,bitnami.com/v1alpha1/SealedSecret "$f"
+          done
+
+      - name: Run kubeconform on kube@1.26.2
+        shell: bash
+        run: |
+          echo "Validate against kube API 1.26.2"
+          for f in ./tests_yaml/*.yaml; do
+            echo "$f"
+            ./kubeconform -summary -kubernetes-version 1.26.2 -skip monitoring.coreos.com/v1/PodMonitor,postgresql.cnpg.io/v1/Pooler,postgresql.cnpg.io/v1/Cluster,bitnami.com/v1alpha1/SealedSecret "$f"
+          done

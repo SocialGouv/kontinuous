@@ -1,0 +1,69 @@
+name: 📦 Build Docker Image Kontinuous 🥷
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!master'
+    tags:
+      - '**'
+    paths:
+      - .github/kontinuousVersion
+      - packages/kontinuous/**
+      - packages/common/**
+      - packages/helm-tree/**
+      - plugins/**
+      - .github/actions/**
+      - yarn.lock
+      - .yarnrc.yml
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.ref }}
+
+jobs:
+  build-base-images:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Build image
+        uses: ./.github/actions/build-images
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile: packages/kontinuous/Dockerfile
+          destination: ""
+  
+  build-actions:
+    needs: [build-base-images]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - destination: "/deploy-via-github"
+            dockerfile: .github/actions/deploy-via-github/Dockerfile
+            context: .github/actions/deploy-via-github
+          - destination: "/deploy-via-webhook"
+            dockerfile: .github/actions/deploy-via-webhook/Dockerfile
+            context: .github/actions/deploy-via-webhook
+          - destination: "/env"
+            dockerfile: .github/actions/env/Dockerfile
+            context: .github/actions/env
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Build image
+        uses: ./.github/actions/build-images
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          context: ${{ matrix.context }}
+          dockerfile: ${{ matrix.dockerfile }}
+          destination: ${{ matrix.destination }}
+    

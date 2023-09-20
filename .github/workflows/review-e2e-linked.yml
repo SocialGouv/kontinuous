@@ -1,0 +1,58 @@
+name: 🏗️ Review e2e linked
+
+on:
+  create
+      
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+
+jobs:
+  link-e2e:
+    name: Link e2e if match dev-**
+    runs-on: ubuntu-latest
+    steps:
+      - id: vars
+        name: Branch check convention
+        run: |
+          GIT_BRANCH=${GITHUB_REF#refs/heads/}
+          if [[ "$GIT_BRANCH" =~ ^dev-.* ]]; then
+            ok=yes
+          else
+            ok=no
+          fi
+          echo "branch=$GIT_BRANCH" >> $GITHUB_OUTPUT
+          echo "ok=$ok" >> $GITHUB_OUTPUT
+
+      - name: Checkout repository
+        if: steps.vars.outputs.ok == 'yes'
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
+          ref: ${{ steps.vars.output.branch }}
+      
+      - name: Install dependencies
+        if: steps.vars.outputs.ok == 'yes'
+        run: yarn --immutable
+      
+      - name: Run e2e link
+        if: steps.vars.outputs.ok == 'yes'
+        env:
+          GIT_AUTHOR_EMAIL: ${{ secrets.SOCIALGROOVYBOT_EMAIL }}
+          GIT_AUTHOR_NAME: ${{ secrets.SOCIALGROOVYBOT_NAME }}
+          GIT_COMMITTER_EMAIL: ${{ secrets.SOCIALGROOVYBOT_EMAIL }}
+          GIT_COMMITTER_NAME: ${{ secrets.SOCIALGROOVYBOT_NAME }}
+        shell: bash
+        run: |
+          yarn version-e2e:set
+          GIT_BRANCH=${GITHUB_REF#refs/heads/}
+          git commit -am "chore: link to branch $GIT_BRANCH"
+      
+      - name: Push e2e linked to current branch
+        if: steps.vars.outputs.ok == 'yes'
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git remote set-url --push origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git push
