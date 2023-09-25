@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.165.6 (2023-09-25)
+
+
+### Bug Fixes
+
+* **pg:** set default priorityClassName ([#422](https://github.com/socialgouv/kontinuous/issues/422)) ([b3f5bad](https://github.com/socialgouv/kontinuous/commit/b3f5bad55f57a42bdddd51629409c7081ab5b4aa))
+
 ## 1.165.5 (2023-09-20)
 
 
