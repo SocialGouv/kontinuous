@@ -87,6 +87,50 @@
       },
       "examples": ["[uploads]"]
     },
+    "redirectFrom": {
+      "description": "List of hostnames to redirect from",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "examples": ["previous.url.com"]
+    },
+    "autoscale": {
+      "description": "Horizontal pod autoscaling configuration",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Enable Horizontal pod autoscaling",
+          "type": "boolean",
+          "default": false
+        },
+        "minReplicas": {
+          "description": "Minimum number of replicas",
+          "type": "number",
+          "default": 2
+        },
+        "maxReplicas": {
+          "description": "Minimum number of replicas",
+          "type": "number",
+          "default": 10
+        },
+        "averageUtilization": {
+          "description": "Autoscaling averageUtilization tuning",
+          "type": "object",
+          "properties": {
+            "cpu": {
+              "type": "number",
+              "default": 70
+            },
+            "memory": {
+              "type": "number",
+              "default": 70
+            }
+          }
+        }
+      }
+    },
+
     "env": {
       "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/env"
     },
