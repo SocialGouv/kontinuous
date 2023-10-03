@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.166.0 (2023-10-03)
+
+
+### Features
+
+* **pg:** add pg_stats_statements ([#425](https://github.com/socialgouv/kontinuous/issues/425)) ([0f2302c](https://github.com/socialgouv/kontinuous/commit/0f2302c6efef190ad92b56a4cd34101323608a79))
+
 ## 1.165.6 (2023-09-25)
 
 
