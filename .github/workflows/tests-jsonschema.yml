@@ -37,4 +37,4 @@ jobs:
 
       - name: test invalid schema
         run: |
-          check-jsonschema .github/jsonschema/jsonschema-invalid.yml --schemafile ./docs/values.schema.json
+          ! check-jsonschema .github/jsonschema/jsonschema-invalid.yml --schemafile ./docs/values.schema.json
