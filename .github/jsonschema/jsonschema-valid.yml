@@ -7,7 +7,7 @@ unknown:
   hello: world
 
 some-chart:
-  ~chart: pouet
+  ~chart: xxx
   hello: world
 
 some-app:

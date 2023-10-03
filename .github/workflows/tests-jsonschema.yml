@@ -23,46 +23,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-python@v4
         with:
-          node-version: 20
-          cache: "yarn"
-
+          python-version: "3.10"
       - name: install
         run: |
-          # fetch kube json-schema locally and add $id for schema resolution
-
-          sudo apt-get update -y
-
-          mkdir external-schemas
-          curl https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json | jq '. + {"$id": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json"}' > external-schemas/kube.json
-
-          curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/cnpg-cluster/values.schema.json > external-schemas/cnpg-cluster.schema.json
-          curl https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json > external-schemas/app.schema.json
-          curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/pgweb/values.schema.json > external-schemas/pgweb.schema.json
-          curl https://raw.githubusercontent.com/socialgouv/helm-charts/v1/charts/maildev/values.schema.json > external-schemas/maildev.schema.json
-          curl https://raw.githubusercontent.com/SocialGouv/json-schemas/main/postgres/parameters.json >  external-schemas/postgres-parameters.schema.json
-          curl https://raw.githubusercontent.com/SocialGouv/json-schemas/main/postgres/extensions.json >  external-schemas/postgres-extensions.schema.json
-          curl https://raw.githubusercontent.com/SocialGouv/json-schemas/main/nginx/annotations.schema.json >  external-schemas/nginx-annotations.schema.json
+          pip install pipx
+          pipx install check-jsonschema
 
       - name: test valid schema
         run: |
-          AJV_PARAMS='--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r "./external-schemas/**.json"'
-          echo "jsonschema-valid.yaml should have no error"
-          cat .github/jsonschema/jsonschema-valid.yml | yq -o=json > jsonschema-valid.json
-          RES=$(npx ajv-cli validate -s ./docs/values.schema.json -d jsonschema-valid.json $AJV_PARAMS)
-          if [ "$RES" == "jsonschema-valid.json valid" ]; then
-            echo "Valid schema"
-          else
-            echo "Invalid schema"
-            exit 1
-          fi
+          check-jsonschema .github/jsonschema/jsonschema-valid.yml --schemafile ./docs/values.schema.json
 
       - name: test invalid schema
         run: |
-          AJV_PARAMS='--spec draft7 --allow-union-types --strict=false --all-errors --errors=json --validate-formats=false -r "plugins/**/*.schema.json" -r "./external-schemas/**.json"'
-          echo "jsonschema-invalid.yaml should have 23 errors"
-          cat .github/jsonschema/jsonschema-invalid.yml | yq -o=json > jsonschema-invalid.json
-          npx ajv-cli validate -s ./docs/values.schema.json $AJV_PARAMS -d jsonschema-invalid.json 2>&1 | tail --lines=+2 > invalid-result.json
-          cat invalid-result.json | jq -e "length == 10"
+          check-jsonschema .github/jsonschema/jsonschema-invalid.yml --schemafile ./docs/values.schema.json
