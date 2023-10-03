@@ -8,9 +8,10 @@ recovery:
   name: ""
   serverName: ""
 
-
 cnpg-cluster:
   enabled: true
+  ~tpl~minSyncReplicas: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).minSyncReplicas) ((or .Values.global.isProd .Values.global.isPreProd) | ternary `1` `0`) }}"
+  ~tpl~maxSyncReplicas: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).maxSyncReplicas) ((or .Values.global.isProd .Values.global.isPreProd) | ternary `1` `0`) }}"
   fullnameOverride: test-cluster
   ~tpl~fullnameOverride: "{{ index .Values.kontinuous.chartContext 2 }}"
   ~tpl~nameOverride: "{{ index .Values.kontinuous.chartContext 2 }}"
@@ -69,6 +70,8 @@ cnpg-cluster:
         region:
           ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
           key: bucket_region
+
+  priorityClassName: cnpg-high-priority
 
   recovery:
     barmanObjectStore:

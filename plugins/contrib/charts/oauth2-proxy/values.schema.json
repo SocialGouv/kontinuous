@@ -1,6 +1,7 @@
 {
   "type": "object",
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/oauth2-proxy/values.schema.json",
   "title": "Kontinuous oauth2-proxy helm chart",
   "markdownDescription": "The [oauth2-proxy chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/oauth2-proxy) provide a configured proxy to protect your application using the awesome [oauth2-proxy](https://oauth2-proxy.github.io/)\n\n💡 You can use the [meta `~tpl~` prefix](https://socialgouv.github.io/kontinuous/#/./advanced/build?id=meta-values-plugin-tpl) to make any property a [go template](https://docs.gofiber.io/template/html/TEMPLATES_CHEATSHEET/#template-variables)",
   "required": ["upstream"],
@@ -14,10 +15,10 @@
       "title": "ingress host"
     },
     "env": {
-      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/env"
+      "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/env"
     },
     "envFrom": {
-      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/envFrom"
+      "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/envFrom"
     },
     "ingress": {
       "type": "object",

@@ -41,10 +41,14 @@ const getPluginSchema = (plugin, dependencies) => {
     const folderProperties = getFilesFromPath(folderPath, true).reduce(
       (a, file) => ({
         ...a,
-        [file.id]: {
+        [camelCase(file.id)]: {
           type: "object",
-          title: file.id,
-          markdownDescription: `Configuration of the ${file.id} plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/${plugin}/${folder}/${file.path})`,
+          title: camelCase(file.id),
+          markdownDescription: `Configuration of the ${camelCase(
+            file.id
+          )} plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/${plugin}/${folder}/${
+            file.path
+          })`,
           properties: {
             enabled: {
               title: `${file.id}.enabled`,
@@ -53,7 +57,11 @@ const getPluginSchema = (plugin, dependencies) => {
             },
             options: {
               title: `${file.id}.options`,
-              markdownDescription: `Options of the ${file.id} plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/${plugin}/${folder}/${file.path})`,
+              markdownDescription: `Options of the ${camelCase(
+                file.id
+              )} plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/${plugin}/${folder}/${
+                file.path
+              })`,
               type: "object",
               properties: {},
             },
@@ -64,10 +72,10 @@ const getPluginSchema = (plugin, dependencies) => {
     )
     return {
       ...allFolders,
-      [folder]: {
+      [camelCase(folder)]: {
         type: "object",
         title: folder,
-        markdownDescription: `Options from the ${folder} type.`,
+        markdownDescription: `Options from the ${camelCase(folder)} type.`,
         properties: folderProperties,
       },
     }

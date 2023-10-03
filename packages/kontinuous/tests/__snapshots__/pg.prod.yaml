@@ -212,7 +212,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.165.3
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.165.6
           command:
             - sh
             - -c
@@ -530,8 +530,8 @@ spec:
           name: fabrique-prod-backups-access-key
       wal:
         compression: gzip
-  minSyncReplicas: 0
-  maxSyncReplicas: 0
+  minSyncReplicas: 1
+  maxSyncReplicas: 1
   postgresql:
     parameters:
       TimeZone: Europe/Paris
