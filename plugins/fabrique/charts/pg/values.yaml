@@ -23,6 +23,8 @@ cnpg-cluster:
   ~tpl~instances: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).instances) ((or .Values.global.isProd .Values.global.isPreProd) | ternary `3` `1`) }}"
   postgresqlParameters:
     TimeZone: "Europe/Paris"
+    pg_stat_statements.max: "10000"
+    pg_stat_statements.track: all
   extensions:
     - postgis
     - postgis_topology

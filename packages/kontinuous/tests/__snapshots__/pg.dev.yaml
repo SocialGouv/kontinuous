@@ -442,6 +442,8 @@ spec:
   postgresql:
     parameters:
       TimeZone: Europe/Paris
+      pg_stat_statements.max: \\"10000\\"
+      pg_stat_statements.track: all
   monitoring:
     enablePodMonitor: false
   bootstrap:
