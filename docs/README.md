@@ -39,6 +39,8 @@ jobs:
           GIT_SHA: "{{ $.Values.global.sha }}"
 ```
 
+?> 💡 You can add live documentation and validation for kontinuous files in your editor with a JSON-schema validation plugin like [YAML by Red Hat for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml). See [all supported editors](https://www.schemastore.org/json/#editors).
+
 ## kontinuous CLI
 
 The CLI is fully documented, you can consult help using `npx kontinuous --help` to known all available commands. Consult help and availables options using `--help` on each command.
@@ -101,7 +103,8 @@ When no explicit env is provided, kontinuous use the GIT head to select the corr
 
 ### Persistent environment
 
-Using branch named following the persistency convention you can have persistent environments (docker images will be named persist-*, janitor will be disabled). Here is the convention for branches naming:
+Using branch named following the persistency convention you can have persistent environments (docker images will be named persist-\*, janitor will be disabled). Here is the convention for branches naming:
+
 - `**/persist`
 - `persist/**`
 - `**/persist/**`
