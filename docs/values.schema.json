@@ -179,7 +179,7 @@
           "description": "Kontinuous chart to use",
           "type": "string",
           "default": "app",
-          "oneOf": [
+          "anyOf": [
             {
               "const": "app",
               "markdownDescription": "The [app chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/app) provides all the resources to deploy a kubernetes application\n\n💡 You can use the [meta `~tpl~` prefix](https://socialgouv.github.io/kontinuous/#/./advanced/build?id=meta-values-plugin-tpl) to make any property a [go template](https://docs.gofiber.io/template/html/TEMPLATES_CHEATSHEET/#template-variables)"
