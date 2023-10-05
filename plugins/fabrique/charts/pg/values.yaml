@@ -60,6 +60,8 @@ cnpg-cluster:
       ~tpl~endpointURL: "{{ .Values.global.pgBackupEndpointURL }}"
       wal:
         compression: gzip
+      data:
+        compression: gzip
       s3Credentials:
         accessKeyId:
           ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
@@ -79,6 +81,8 @@ cnpg-cluster:
       ~tpl~destinationPath: "s3://{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups/{{ .Values.global.namespace }}{{ (ne .Values.Parent.recovery.name ``) | ternary (print `-` .Values.Parent.recovery.name) `` }}"
       ~tpl~endpointURL: "{{ .Values.global.pgBackupEndpointURL }}"
       wal:
+        compression: gzip
+      data:
         compression: gzip
       s3Credentials:
         accessKeyId:
