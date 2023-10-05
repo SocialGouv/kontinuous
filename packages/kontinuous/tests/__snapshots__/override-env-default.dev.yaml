@@ -352,6 +352,8 @@ spec:
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
+      data:
+        compression: gzip
       destinationPath: s3://fabrique-dev-backups/test-override-env-default-feature-branch-1
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:

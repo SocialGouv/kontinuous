@@ -516,6 +516,8 @@ spec:
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
+      data:
+        compression: gzip
       destinationPath: s3://fabrique-prod-backups/test-pg
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:
