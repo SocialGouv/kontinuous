@@ -756,6 +756,8 @@ spec:
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
+      data:
+        compression: gzip
       destinationPath: s3://fabrique-prod-backups/test-extends-ovh
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:
@@ -840,6 +842,8 @@ spec:
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
+      data:
+        compression: gzip
       destinationPath: s3://fabrique-prod-backups/test-extends-ovh
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:
