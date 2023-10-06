@@ -9,22 +9,13 @@
     "^\\.": { "type": ["string", "number", "boolean"] }
   },
   "properties": {
-    "~chart": {
-      "type": "string"
-    },
+    "~chart": {},
     "~forceRestart": {
       "description": "Force restart on every deployment. default true",
       "type": "boolean",
       "default": true
     },
-    "~needs": {
-      "description": "Job or deployment dependencies",
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "examples": ["[build-app]"]
-    },
+    "~needs": {},
     "image": {
       "description": "Full path to docker image",
       "examples": ["ghcr.io/socialgouv/docker/nginx:7.0.1"],
@@ -61,6 +52,7 @@
     },
     "ingress": {
       "type": "object",
+      "description": "Ingress configuration",
       "additionalProperties": false,
       "properties": {
         "enabled": {
@@ -79,8 +71,7 @@
         },
         "annotations": {
           "description": "NGINX ingress annotations, see https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/",
-          "type": "object",
-          "additionalProperties": true
+          "$ref": "https://raw.githubusercontent.com/socialgouv/json-schemas/main/nginx/annotations.schema.json"
         }
       }
     },
@@ -97,38 +88,38 @@
       "examples": ["[uploads]"]
     },
     "env": {
-      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/env"
+      "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/env"
     },
     "envFrom": {
-      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/envFrom"
+      "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/envFrom"
     },
     "vars": { "type": "object", "additionalProperties": true },
     "volumes": {
-      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.PodSpec/properties/volumes"
+      "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.PodSpec/properties/volumes"
     },
     "volumeMounts": {
-      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/volumeMounts"
+      "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/volumeMounts"
     },
     "replicas": {
-      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.apps.v1.DeploymentSpec/properties/replicas"
+      "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.apps.v1.DeploymentSpec/properties/replicas"
     },
     "resources": {
-      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.ResourceRequirements"
+      "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.ResourceRequirements"
     },
     "livenessProbe": {
-      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Probe",
+      "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Probe",
       "description": "Periodic probe of container liveness. Container will be restarted if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
     },
     "readinessProbe": {
-      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Probe",
+      "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Probe",
       "description": "Periodic probe of container service readiness. Container will be removed from service endpoints if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
     },
     "startupProbe": {
-      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.Probe",
+      "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Probe",
       "description": "StartupProbe indicates that the Pod has successfully initialized. If specified, no other probes are executed until this completes successfully. If this probe fails, the Pod will be restarted, just as if the livenessProbe failed. This can be used to provide different probe parameters at the beginning of a Pod's lifecycle, when it might take a long time to load data or warm a cache, than during steady-state operation. This cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
     },
     "securityContext": {
-      "$ref": "https://raw.githubusercontent.com/ad-m/kubernetes-json-schema/master/master-standalone-strict/_definitions.json#/definitions/io.k8s.api.core.v1.PodSecurityContext",
+      "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.PodSecurityContext",
       "description": "Setup your securityContext to reduce security risks, see https://kubernetes.io/docs/tasks/configure-pod-container/security-context/"
     }
   }

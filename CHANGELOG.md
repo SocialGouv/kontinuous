@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.166.0 (2023-10-03)
+
+
+### Features
+
+* **pg:** add pg_stats_statements ([#425](https://github.com/socialgouv/kontinuous/issues/425)) ([0f2302c](https://github.com/socialgouv/kontinuous/commit/0f2302c6efef190ad92b56a4cd34101323608a79))
+
+## 1.165.6 (2023-09-25)
+
+
+### Bug Fixes
+
+* **pg:** set default priorityClassName ([#422](https://github.com/socialgouv/kontinuous/issues/422)) ([b3f5bad](https://github.com/socialgouv/kontinuous/commit/b3f5bad55f57a42bdddd51629409c7081ab5b4aa))
+
+## 1.165.5 (2023-09-20)
+
+
+### Bug Fixes
+
+* json schema fixes ([#414](https://github.com/socialgouv/kontinuous/issues/414)) ([b581f28](https://github.com/socialgouv/kontinuous/commit/b581f28d127231f12042bf7bc3568073df1108e0))
+
+## 1.165.4 (2023-09-19)
+
+
+### Bug Fixes
+
+* cnpg acid consistency compliance ([#419](https://github.com/socialgouv/kontinuous/issues/419)) ([dde9610](https://github.com/socialgouv/kontinuous/commit/dde9610341a78ed8570ca673ef7c51d97dac5605))
+
 ## 1.165.3 (2023-09-18)
 
 
