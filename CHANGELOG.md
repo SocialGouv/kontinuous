@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.166.1 (2023-10-06)
+
+
+### Bug Fixes
+
+* **jsonschema:** add app redirectFrom and autoscale ([#423](https://github.com/socialgouv/kontinuous/issues/423)) ([43c7a3b](https://github.com/socialgouv/kontinuous/commit/43c7a3b0aaa269cb3004e8d0b13ddeb496fe0152))
+
 ## 1.166.0 (2023-10-03)
 
 
