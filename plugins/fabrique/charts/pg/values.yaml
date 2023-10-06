@@ -53,9 +53,9 @@ cnpg-cluster:
           # default_pool_size: "10"
   resources:
     requests:
-      memory: 128Mb
+      ~tpl~memory: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.requests (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.requests.memory) `128Mb` }}"
     limits:
-      memory: 1Gb
+      ~tpl~memory: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.limits (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.limits.memory) `1Gb` }}"
   backup:
     ~tpl~enabled: "{{ (or .Values.Parent.backup.enabled .Values.global.isProd .Values.global.isPreProd) | ternary `true` `false` }}"
     schedule: "0 0 0 * * *" # daily
