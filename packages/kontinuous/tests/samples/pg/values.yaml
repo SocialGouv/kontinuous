@@ -6,3 +6,7 @@ hasura:
 
 cnpg:
   ~chart: pg
+  cnpg-cluster:
+    resources:
+      requests:
+        memory: 42Mb
