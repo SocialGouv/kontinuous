@@ -7,6 +7,10 @@
   "additionalProperties": false,
   "required": ["runs"],
   "properties": {
+    "~chart": {
+      "type": "string",
+      "const": "jobs"
+    },
     "runs": {
       "type": "object",
       "additionalProperties": {

@@ -4,11 +4,35 @@
   "title": "schema for .kontinuous/values.yaml",
   "type": "object",
   "patternProperties": {
-    "pg-*": {
-      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/fabrique/charts/pg/kontinuous.values.schema.json"
+    "pg-.*": {
+      "allOf": [
+        {
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/fabrique/charts/pg/kontinuous.values.schema.json"
+        },
+        {
+          "properties": {
+            "~chart": {
+              "type": "string",
+              "const": "pg"
+            }
+          }
+        }
+      ]
     },
-    "app-*": {
-      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json"
+    "app-.*": {
+      "allOf": [
+        {
+          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json"
+        },
+        {
+          "properties": {
+            "~chart": {
+              "type": "string",
+              "const": "app"
+            }
+          }
+        }
+      ]
     }
   },
   "additionalProperties": {
@@ -181,6 +205,10 @@
           "default": "app",
           "anyOf": [
             {
+              "type": "string",
+              "markdownDescription": "Bring your own helm chart. \n\nYou should have an entry with the same name in your `./Chart.yaml`.\n\nSee https://socialgouv.github.io/kontinuous/#/./faq?id=add-a-custom-helm-chart"
+            },
+            {
               "const": "app",
               "markdownDescription": "The [app chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/app) provides all the resources to deploy a kubernetes application\n\n💡 You can use the [meta `~tpl~` prefix](https://socialgouv.github.io/kontinuous/#/./advanced/build?id=meta-values-plugin-tpl) to make any property a [go template](https://docs.gofiber.io/template/html/TEMPLATES_CHEATSHEET/#template-variables)"
             },
@@ -211,6 +239,10 @@
             {
               "const": "redis",
               "markdownDescription": "The [redis chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/redis) deploys an [redis](https://oauth2-proxy.github.io/redis/) instance"
+            },
+            {
+              "const": "jobs",
+              "markdownDescription": "The [jobs chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/jobs) provides a way to define de define tasks in your deployment pipeline\n\n💡 See [the jobs documentations](https://socialgouv.github.io/kontinuous/#/./advanced/build?id=meta-values-plugin-needs)."
             }
           ]
         },
