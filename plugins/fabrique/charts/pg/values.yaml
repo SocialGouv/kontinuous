@@ -42,15 +42,6 @@ cnpg-cluster:
   image:
     repository: "ghcr.io/cloudnative-pg/postgis"
     tag: "14"
-  poolers:
-    rw:
-      ~tpl~instances: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).instances) ((or .Values.global.isProd .Values.global.isPreProd) | ternary `3` `1`) }}"
-      type: rw
-      pgbouncer:
-        poolMode: session
-        parameters:
-          max_client_conn: "1000"
-          # default_pool_size: "10"
   backup:
     ~tpl~enabled: "{{ (or .Values.Parent.backup.enabled .Values.global.isProd .Values.global.isPreProd) | ternary `true` `false` }}"
     schedule: "0 0 0 * * *" # daily
