@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.166.3 (2023-10-13)
+
+
+### Bug Fixes
+
+* **pg:** remove default cnpg pooler (currently never used) ([#430](https://github.com/socialgouv/kontinuous/issues/430)) ([9971ab3](https://github.com/socialgouv/kontinuous/commit/9971ab3b9e8f4b3cf86e997663af9ea3fecdfcda))
+
+## 1.166.2 (2023-10-06)
+
+
+### Bug Fixes
+
+* **pg:** add data.compression: gzip ([#426](https://github.com/socialgouv/kontinuous/issues/426)) ([5fdbd83](https://github.com/socialgouv/kontinuous/commit/5fdbd83f70884c2fe5d67f7302ec34588e83eb51))
+
 ## 1.166.1 (2023-10-06)
 
 

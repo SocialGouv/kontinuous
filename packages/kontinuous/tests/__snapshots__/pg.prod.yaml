@@ -212,7 +212,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.166.1
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.166.3
           command:
             - sh
             - -c
@@ -556,68 +556,6 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS \\"citext\\";
         - CREATE EXTENSION IF NOT EXISTS \\"pgcrypto\\";
         - CREATE EXTENSION IF NOT EXISTS \\"hstore\\";
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  name: cnpg-rw
-  annotations:
-    kontinuous/chartPath: project.fabrique.cnpg.cnpg-cluster
-    kontinuous/source: project/charts/fabrique/charts/cnpg/charts/cnpg-cluster/templates/pooler.cnpg.yaml
-    kontinuous/plugin.needs: |
-      - project.fabrique.cnpg.jobs-pg
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-  labels:
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-    kontinuous/deployment.env: test-pg-prod
-    kontinuous/ref: feature-branch-1
-    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: podmonitor-cnpg-rw-5q6ta7ib
-    app.kubernetes.io/manifest-managed-by: kontinuous
-    app.kubernetes.io/manifest-created-by: kontinuous
-  namespace: test-pg
-spec:
-  selector:
-    matchLabels:
-      cnpg.io/poolerName: cnpg-rw
-  podMetricsEndpoints:
-    - port: metrics
----
-apiVersion: postgresql.cnpg.io/v1
-kind: Pooler
-metadata:
-  name: cnpg-rw
-  labels:
-    helm.sh/chart: cnpg-cluster-1.9.12
-    app.kubernetes.io/name: cnpg
-    app.kubernetes.io/instance: release-name
-    app.kubernetes.io/version: \\"15\\"
-    app.kubernetes.io/managed-by: Helm
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-    kontinuous/deployment.env: test-pg-prod
-    kontinuous/ref: feature-branch-1
-    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: pooler-cnpg-rw-4k1jpapz
-    app.kubernetes.io/manifest-managed-by: kontinuous
-    app.kubernetes.io/manifest-created-by: kontinuous
-  annotations:
-    kontinuous/chartPath: project.fabrique.cnpg.cnpg-cluster
-    kontinuous/source: project/charts/fabrique/charts/cnpg/charts/cnpg-cluster/templates/pooler.cnpg.yaml
-    kontinuous/plugin.needs: |
-      - project.fabrique.cnpg.jobs-pg
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-  namespace: test-pg
-spec:
-  cluster:
-    name: cnpg
-  instances: 3
-  pgbouncer:
-    parameters:
-      max_client_conn: \\"1000\\"
-    poolMode: session
-  type: rw
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
