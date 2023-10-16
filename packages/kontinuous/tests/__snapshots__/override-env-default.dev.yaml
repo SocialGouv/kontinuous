@@ -101,7 +101,7 @@ metadata:
     kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
   namespace: test-override-env-default-feature-branch-1
 spec:
-  schedule: 0 0 * * 0
+  schedule: 0 0 * * *
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
@@ -119,7 +119,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: s3-client
-              image: ghcr.io/socialgouv/docker/s3-client:1
+              image: ghcr.io/socialgouv/docker/s3-client:1.2.0
               imagePullPolicy: IfNotPresent
               securityContext:
                 allowPrivilegeEscalation: false
@@ -157,6 +157,8 @@ spec:
                   value: autodevops_feature-branch-1
                 - name: PGHOST
                   value: pg-r
+                - name: RETENTION_DAYS
+                  value: 30
 ---
 apiVersion: batch/v1
 kind: Job
@@ -312,7 +314,7 @@ kind: Cluster
 metadata:
   name: pg
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.12
+    helm.sh/chart: cnpg-cluster-1.15.0
     app.kubernetes.io/name: pg
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -346,6 +348,11 @@ spec:
   instances: 1
   imageName: ghcr.io/cloudnative-pg/postgis:14
   imagePullPolicy: IfNotPresent
+  resources:
+    limits:
+      memory: 1Gb
+    requests:
+      memory: 128Mb
   storage:
     size: 8Gi
     storageClass: csi-cinder-high-speed
@@ -377,6 +384,7 @@ spec:
       pg_stat_statements.track: all
   monitoring:
     enablePodMonitor: false
+  priorityClassName: cnpg-high-priority
   bootstrap:
     initdb:
       database: autodevops_feature-branch-1
@@ -398,7 +406,7 @@ kind: ScheduledBackup
 metadata:
   name: pg-scheduledbackup
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.12
+    helm.sh/chart: cnpg-cluster-1.15.0
     app.kubernetes.io/name: pg
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -423,5 +431,6 @@ spec:
   cluster:
     name: pg
   schedule: 0 0 0 * * *
+  immediate: true
 "
 `;
