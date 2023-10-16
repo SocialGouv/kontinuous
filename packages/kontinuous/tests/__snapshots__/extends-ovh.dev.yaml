@@ -593,9 +593,9 @@ spec:
   imagePullPolicy: IfNotPresent
   resources:
     limits:
-      memory: 1Gb
+      memory: 1G
     requests:
-      memory: 128Mb
+      memory: 128M
   storage:
     size: 8Gi
     storageClass: csi-cinder-high-speed
@@ -666,9 +666,9 @@ spec:
   imagePullPolicy: IfNotPresent
   resources:
     limits:
-      memory: 1Gb
+      memory: 1G
     requests:
-      memory: 128Mb
+      memory: 128M
   storage:
     size: 8Gi
     storageClass: csi-cinder-high-speed
