@@ -557,7 +557,7 @@ kind: Cluster
 metadata:
   name: pg-hasura
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.12
+    helm.sh/chart: cnpg-cluster-1.15.0
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -591,6 +591,11 @@ spec:
   instances: 1
   imageName: ghcr.io/cloudnative-pg/postgis:14
   imagePullPolicy: IfNotPresent
+  resources:
+    limits:
+      memory: 1Gb
+    requests:
+      memory: 128Mb
   storage:
     size: 8Gi
     storageClass: csi-cinder-high-speed
@@ -603,6 +608,7 @@ spec:
       pg_stat_statements.track: all
   monitoring:
     enablePodMonitor: false
+  priorityClassName: cnpg-high-priority
   bootstrap:
     initdb:
       database: autodevops_feature-branch-1
@@ -624,7 +630,7 @@ kind: Cluster
 metadata:
   name: pg-keycloak
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.12
+    helm.sh/chart: cnpg-cluster-1.15.0
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -658,6 +664,11 @@ spec:
   instances: 1
   imageName: ghcr.io/cloudnative-pg/postgis:14
   imagePullPolicy: IfNotPresent
+  resources:
+    limits:
+      memory: 1Gb
+    requests:
+      memory: 128Mb
   storage:
     size: 8Gi
     storageClass: csi-cinder-high-speed
@@ -670,6 +681,7 @@ spec:
       pg_stat_statements.track: all
   monitoring:
     enablePodMonitor: false
+  priorityClassName: cnpg-high-priority
   bootstrap:
     initdb:
       database: autodevops_feature-branch-1

@@ -5,4 +5,4 @@ dependencies:
     import: socialgouv/kontinuous/plugins/fabrique
 
 remoteLinks:
-  socialgouv/helm-charts/charts/cnpg-cluster@v1: socialgouv/helm-charts/charts/cnpg-cluster@v1.9.12
+  socialgouv/helm-charts/charts/cnpg-cluster@v1: socialgouv/helm-charts/charts/cnpg-cluster@v1.15.0

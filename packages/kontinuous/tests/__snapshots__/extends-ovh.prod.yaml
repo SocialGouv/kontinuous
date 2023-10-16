@@ -100,7 +100,7 @@ metadata:
     kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
   namespace: test-extends-ovh
 spec:
-  schedule: 0 0 * * 0
+  schedule: 0 0 * * *
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
@@ -118,7 +118,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: s3-client
-              image: ghcr.io/socialgouv/docker/s3-client:1
+              image: ghcr.io/socialgouv/docker/s3-client:1.2.0
               imagePullPolicy: IfNotPresent
               securityContext:
                 allowPrivilegeEscalation: false
@@ -156,6 +156,8 @@ spec:
                   value: test-extends-ovh
                 - name: PGHOST
                   value: pg-hasura-r
+                - name: RETENTION_DAYS
+                  value: 30
 ---
 apiVersion: batch/v1
 kind: CronJob
@@ -179,7 +181,7 @@ metadata:
     kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
   namespace: test-extends-ovh
 spec:
-  schedule: 0 0 * * 0
+  schedule: 0 0 * * *
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
@@ -197,7 +199,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: s3-client
-              image: ghcr.io/socialgouv/docker/s3-client:1
+              image: ghcr.io/socialgouv/docker/s3-client:1.2.0
               imagePullPolicy: IfNotPresent
               securityContext:
                 allowPrivilegeEscalation: false
@@ -235,6 +237,8 @@ spec:
                   value: test-extends-ovh
                 - name: PGHOST
                   value: pg-keycloak-r
+                - name: RETENTION_DAYS
+                  value: 30
 ---
 apiVersion: batch/v1
 kind: Job
@@ -716,7 +720,7 @@ kind: Cluster
 metadata:
   name: pg-hasura
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.12
+    helm.sh/chart: cnpg-cluster-1.15.0
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -750,6 +754,11 @@ spec:
   instances: 3
   imageName: ghcr.io/cloudnative-pg/postgis:14
   imagePullPolicy: IfNotPresent
+  resources:
+    limits:
+      memory: 1Gb
+    requests:
+      memory: 128Mb
   storage:
     size: 8Gi
     storageClass: managed-csi
@@ -781,6 +790,7 @@ spec:
       pg_stat_statements.track: all
   monitoring:
     enablePodMonitor: true
+  priorityClassName: cnpg-high-priority
   bootstrap:
     initdb:
       database: test-extends-ovh
@@ -802,7 +812,7 @@ kind: Cluster
 metadata:
   name: pg-keycloak
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.12
+    helm.sh/chart: cnpg-cluster-1.15.0
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -836,6 +846,11 @@ spec:
   instances: 3
   imageName: ghcr.io/cloudnative-pg/postgis:14
   imagePullPolicy: IfNotPresent
+  resources:
+    limits:
+      memory: 1Gb
+    requests:
+      memory: 128Mb
   storage:
     size: 8Gi
     storageClass: managed-csi
@@ -867,6 +882,7 @@ spec:
       pg_stat_statements.track: all
   monitoring:
     enablePodMonitor: true
+  priorityClassName: cnpg-high-priority
   bootstrap:
     initdb:
       database: test-extends-ovh
@@ -888,7 +904,7 @@ kind: ScheduledBackup
 metadata:
   name: pg-hasura-scheduledbackup
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.12
+    helm.sh/chart: cnpg-cluster-1.15.0
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -913,13 +929,14 @@ spec:
   cluster:
     name: pg-hasura
   schedule: 0 0 0 * * *
+  immediate: true
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
   name: pg-keycloak-scheduledbackup
   labels:
-    helm.sh/chart: cnpg-cluster-1.9.12
+    helm.sh/chart: cnpg-cluster-1.15.0
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -944,5 +961,6 @@ spec:
   cluster:
     name: pg-keycloak
   schedule: 0 0 0 * * *
+  immediate: true
 "
 `;
