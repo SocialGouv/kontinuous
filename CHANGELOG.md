@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.166.5 (2023-10-16)
+
+
+### Bug Fixes
+
+* **pg:** default resources format ([#432](https://github.com/socialgouv/kontinuous/issues/432)) ([b376b25](https://github.com/socialgouv/kontinuous/commit/b376b258395e91a351336c04ed28eb9562bc030d))
+
 ## 1.166.4 (2023-10-16)
 
 
