@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.166.4 (2023-10-16)
+
+
+### Bug Fixes
+
+* **pg:** add default memory requests/limits ([#428](https://github.com/socialgouv/kontinuous/issues/428)) ([09761a1](https://github.com/socialgouv/kontinuous/commit/09761a17f0509ca9b8db86ff0a53c5f734ca9585))
+
 ## 1.166.3 (2023-10-13)
 
 
