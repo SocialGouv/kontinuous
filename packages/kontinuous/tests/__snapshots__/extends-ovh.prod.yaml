@@ -720,7 +720,7 @@ kind: Cluster
 metadata:
   name: pg-hasura
   labels:
-    helm.sh/chart: cnpg-cluster-1.15.0
+    helm.sh/chart: cnpg-cluster-1.15.1
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -812,7 +812,7 @@ kind: Cluster
 metadata:
   name: pg-keycloak
   labels:
-    helm.sh/chart: cnpg-cluster-1.15.0
+    helm.sh/chart: cnpg-cluster-1.15.1
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -904,7 +904,7 @@ kind: ScheduledBackup
 metadata:
   name: pg-hasura-scheduledbackup
   labels:
-    helm.sh/chart: cnpg-cluster-1.15.0
+    helm.sh/chart: cnpg-cluster-1.15.1
     app.kubernetes.io/name: pg-hasura
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -936,7 +936,7 @@ kind: ScheduledBackup
 metadata:
   name: pg-keycloak-scheduledbackup
   labels:
-    helm.sh/chart: cnpg-cluster-1.15.0
+    helm.sh/chart: cnpg-cluster-1.15.1
     app.kubernetes.io/name: pg-keycloak
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
