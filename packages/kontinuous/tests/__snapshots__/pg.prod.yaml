@@ -157,7 +157,7 @@ spec:
                 - name: PGHOST
                   value: cnpg-r
                 - name: RETENTION_DAYS
-                  value: 30
+                  value: "60"
 ---
 apiVersion: batch/v1
 kind: Job
