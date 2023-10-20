@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.167.0 (2023-10-20)
+
+
+### Features
+
+* **pg:** add default value for sqlDumpRetentionDays ([#431](https://github.com/socialgouv/kontinuous/issues/431)) ([44b0b5f](https://github.com/socialgouv/kontinuous/commit/44b0b5faf1edd5eac8b42930dba5bba64096f163))
+
 ## 1.166.5 (2023-10-16)
 
 
