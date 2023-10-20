@@ -157,7 +157,7 @@ spec:
                 - name: PGHOST
                   value: cnpg-r
                 - name: RETENTION_DAYS
-                  value: 30
+                  value: \\"60\\"
 ---
 apiVersion: batch/v1
 kind: Job
@@ -478,7 +478,7 @@ kind: Cluster
 metadata:
   name: cnpg
   labels:
-    helm.sh/chart: cnpg-cluster-1.15.0
+    helm.sh/chart: cnpg-cluster-1.15.1
     app.kubernetes.io/name: cnpg
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
@@ -570,7 +570,7 @@ kind: ScheduledBackup
 metadata:
   name: cnpg-scheduledbackup
   labels:
-    helm.sh/chart: cnpg-cluster-1.15.0
+    helm.sh/chart: cnpg-cluster-1.15.1
     app.kubernetes.io/name: cnpg
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
