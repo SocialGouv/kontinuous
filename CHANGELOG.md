@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.167.1 (2023-10-31)
+
+
+### Bug Fixes
+
+* **restore-db:** don't exclude audit schema by default ([#434](https://github.com/socialgouv/kontinuous/issues/434)) ([37f0343](https://github.com/socialgouv/kontinuous/commit/37f0343bb3088760bea56636f8967cf2a4270b02))
+
 ## 1.167.0 (2023-10-20)
 
 
