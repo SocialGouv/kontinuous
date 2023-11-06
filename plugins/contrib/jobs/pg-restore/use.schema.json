@@ -4,7 +4,7 @@
   "title": "schema for pg-restore job usage",
   "type": "object",
   "additionalProperties": false,
-  "required": ["restorePath", "databaseUser"],
+  "required": ["restorePath"],
   "properties": {
     "pgAdminUserSecretRefName": {
       "description": "Secret with admin credentials to the database server",
