@@ -64,6 +64,13 @@
           "type": "string",
           "examples": ["/"]
         },
+        "paths": {
+          "description": "List of URL paths to map the ingress to",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "rewriteTarget": {
           "description": "Redirect path on the service",
           "type": "string",
