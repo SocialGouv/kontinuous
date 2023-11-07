@@ -604,6 +604,8 @@ spec:
   postgresql:
     parameters:
       TimeZone: Europe/Paris
+      max_standby_archive_delay: 1d
+      max_standby_streaming_delay: 1d
       pg_stat_statements.max: \\"10000\\"
       pg_stat_statements.track: all
   monitoring:
@@ -677,6 +679,8 @@ spec:
   postgresql:
     parameters:
       TimeZone: Europe/Paris
+      max_standby_archive_delay: 1 day
+      max_standby_streaming_delay: 1 day
       pg_stat_statements.max: \\"10000\\"
       pg_stat_statements.track: all
   monitoring:
