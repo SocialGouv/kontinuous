@@ -25,6 +25,8 @@ cnpg-cluster:
     TimeZone: "Europe/Paris"
     pg_stat_statements.max: "10000"
     pg_stat_statements.track: all
+    max_standby_archive_delay: "1 day"
+    max_standby_streaming_delay: "1 day"
   extensions:
     - postgis
     - postgis_topology
