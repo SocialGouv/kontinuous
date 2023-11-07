@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.167.4](https://github.com/socialgouv/kontinuous/compare/v1.167.3...v1.167.4) (2023-11-07)
+
+
+### Bug Fixes
+
+* revert buggy fix ([b33ca64](https://github.com/socialgouv/kontinuous/commit/b33ca644fb041aeb42a47cbf3b713e3ae09c5fb5))
+
+## 1.167.3 (2023-11-07)
+
+
+### Bug Fixes
+
+* allow rootless readonly on build secret ([#437](https://github.com/socialgouv/kontinuous/issues/437)) ([887e2af](https://github.com/socialgouv/kontinuous/commit/887e2af7053edde4057d51ef17a2a1265787981f))
+
 ## 1.167.2 (2023-11-06)
 
 
