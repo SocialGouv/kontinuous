@@ -86,7 +86,7 @@ runs:
         {{ end -}}
         {{ if $.with.secrets -}}
         {{- range $id, $val := $.with.secrets -}}
-        --secret id={{ or $val.id $id }},mode=0444,env=SECRET_{{ $id | upper }} \
+        --secret id={{ or $val.id $id }},env=SECRET_{{ $id | upper }} \
         {{ end -}}
         {{ end -}}
         {{ if $.with.target -}}
