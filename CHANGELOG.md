@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.167.7 (2023-11-16)
+
+
+### Bug Fixes
+
+* **json-schema:** add chart.app.strategyType ([#442](https://github.com/socialgouv/kontinuous/issues/442)) ([4b89de4](https://github.com/socialgouv/kontinuous/commit/4b89de4b24a6e12763603c6af38c209b9739d7f9))
+
 ## 1.167.6 (2023-11-16)
 
 
