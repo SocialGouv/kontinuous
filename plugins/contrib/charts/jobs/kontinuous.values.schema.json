@@ -31,15 +31,10 @@
             ]
           },
           "image": {
-            "type": "string"
+            "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/image"
           },
           "entrypoint": {
-            "description": "Docker image entrypoint arguments",
-            "examples": ["['sh', '-c', 'echo 42']"],
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/command"
           },
           "checkout": {
             "description": "Should the repo be checked-out to build. defaults to true",
@@ -69,42 +64,51 @@
             "description": "Kubernetes cpu reservation for the Job",
             "type": "string"
           },
-          "with": { "type": "object", "additionalProperties": true }
+          "args": {
+            "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/args"
+          },
+          "envFrom": {
+            "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/envFrom"
+          },
+          "env": {
+            "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/env"
+          },
+          "volumeMounts": {
+            "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.Container/properties/volumeMounts"
+          },
+          "volumes": {
+            "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.PodSpec/properties/volumes"
+          },
+          "seccompProfile": {
+            "$ref": "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.0/_definitions.json#/definitions/io.k8s.api.core.v1.SeccompProfile"
+          }
         },
-        "required": ["use"],
         "if": {
           "properties": {
             "use": {
-              "const": "build"
+              "type": "null"
             }
           }
         },
         "then": {
-          "properties": {
-            "use": {
-              "markdownDescription": "Build and register docker image with buildkit.\n\nSee [build source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/build)"
-            },
-            "with": {
-              "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/build/use.schema.json#"
-            }
-          },
-          "required": ["with"]
+          "properties": {},
+          "required": []
         },
         "else": {
           "if": {
             "properties": {
               "use": {
-                "const": "build-kaniko"
+                "const": "build"
               }
             }
           },
           "then": {
             "properties": {
               "use": {
-                "markdownDescription": "Build and register docker image with kaniko.\n\nSee [build-kaniko source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/build-kaniko)"
+                "markdownDescription": "Build and register docker image with buildkit.\n\nSee [build source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/build)"
               },
               "with": {
-                "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/build-kaniko/use.schema.json#"
+                "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/build/use.schema.json#"
               }
             },
             "required": ["with"]
@@ -113,55 +117,55 @@
             "if": {
               "properties": {
                 "use": {
-                  "const": "create-db"
+                  "const": "build-kaniko"
                 }
               }
             },
             "then": {
               "properties": {
                 "use": {
-                  "markdownDescription": "Create a Postgres Database\n\nSee [create-db source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/create-db)"
+                  "markdownDescription": "Build and register docker image with kaniko.\n\nSee [build-kaniko source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/build-kaniko)"
                 },
                 "with": {
-                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/create-db/use.schema.json#"
+                  "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/build-kaniko/use.schema.json#"
                 }
               },
-              "required": []
+              "required": ["with"]
             },
             "else": {
               "if": {
                 "properties": {
                   "use": {
-                    "const": "deactivate"
+                    "const": "create-db"
                   }
                 }
               },
               "then": {
                 "properties": {
                   "use": {
-                    "markdownDescription": "Destroy namespace and databases\n\nSee [deactivate source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/deactivate)"
+                    "markdownDescription": "Create a Postgres Database\n\nSee [create-db source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/create-db)"
                   },
                   "with": {
-                    "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/deactivate/use.schema.json#"
+                    "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/create-db/use.schema.json#"
                   }
                 },
-                "required": ["with"]
+                "required": []
               },
               "else": {
                 "if": {
                   "properties": {
                     "use": {
-                      "const": "drop-db"
+                      "const": "deactivate"
                     }
                   }
                 },
                 "then": {
                   "properties": {
                     "use": {
-                      "markdownDescription": "Destroy the database\n\nSee [drop-db source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/drop-db)"
+                      "markdownDescription": "Destroy namespace and databases\n\nSee [deactivate source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/deactivate)"
                     },
                     "with": {
-                      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/drop-db/use.schema.json#"
+                      "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/deactivate/use.schema.json#"
                     }
                   },
                   "required": ["with"]
@@ -170,17 +174,17 @@
                   "if": {
                     "properties": {
                       "use": {
-                        "const": "pg-restore"
+                        "const": "drop-db"
                       }
                     }
                   },
                   "then": {
                     "properties": {
                       "use": {
-                        "markdownDescription": "Restore the database from a backup storage\n\nSee [pg-restore source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/pg-restore)"
+                        "markdownDescription": "Destroy the database\n\nSee [drop-db source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/drop-db)"
                       },
                       "with": {
-                        "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/pg-restore/use.schema.json#"
+                        "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/drop-db/use.schema.json#"
                       }
                     },
                     "required": ["with"]
@@ -189,17 +193,17 @@
                     "if": {
                       "properties": {
                         "use": {
-                          "const": "psql"
+                          "const": "pg-restore"
                         }
                       }
                     },
                     "then": {
                       "properties": {
                         "use": {
-                          "markdownDescription": "Execute psql commands on the database\n\nSee [psql source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/psql)"
+                          "markdownDescription": "Restore the database from a backup storage\n\nSee [pg-restore source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/pg-restore)"
                         },
                         "with": {
-                          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/psql/use.schema.json#"
+                          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/pg-restore/use.schema.json#"
                         }
                       },
                       "required": ["with"]
@@ -208,22 +212,42 @@
                       "if": {
                         "properties": {
                           "use": {
-                            "const": "seed-db"
+                            "const": "psql"
                           }
                         }
                       },
                       "then": {
                         "properties": {
                           "use": {
-                            "markdownDescription": "Execute a repository .sql on the database\n\nSee [seed-db source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/seed-db)"
+                            "markdownDescription": "Execute psql commands on the database\n\nSee [psql source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/psql)"
                           },
                           "with": {
-                            "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/seed-db/use.schema.json#"
+                            "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/psql/use.schema.json#"
                           }
                         },
                         "required": ["with"]
                       },
-                      "else": {}
+                      "else": {
+                        "if": {
+                          "properties": {
+                            "use": {
+                              "const": "seed-db"
+                            }
+                          }
+                        },
+                        "then": {
+                          "properties": {
+                            "use": {
+                              "markdownDescription": "Execute a repository .sql on the database\n\nSee [seed-db source](https://github.com/SocialGouv/kontinuous/tree/master/plugins/contrib/jobs/seed-db)"
+                            },
+                            "with": {
+                              "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/jobs/seed-db/use.schema.json#"
+                            }
+                          },
+                          "required": ["with"]
+                        },
+                        "else": {}
+                      }
                     }
                   }
                 }
