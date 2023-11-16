@@ -4,7 +4,7 @@
   "title": "schema for .kontinuous/values.yaml",
   "type": "object",
   "patternProperties": {
-    "pg-.*": {
+    "^pg-.*": {
       "allOf": [
         {
           "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/fabrique/charts/pg/kontinuous.values.schema.json"
@@ -19,7 +19,7 @@
         }
       ]
     },
-    "app-.*": {
+    "^app-.*": {
       "allOf": [
         {
           "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json"
