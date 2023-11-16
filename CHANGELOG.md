@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.167.6 (2023-11-16)
+
+
+### Bug Fixes
+
+* **pg:** add standby delay values ([#436](https://github.com/socialgouv/kontinuous/issues/436)) ([5aaaadc](https://github.com/socialgouv/kontinuous/commit/5aaaadc1866d0a6466aad503144ebc7af62cf856))
+
 ## 1.167.5 (2023-11-16)
 
 
