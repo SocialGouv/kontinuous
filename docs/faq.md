@@ -44,7 +44,7 @@ app:
         more_set_headers "X-XSS-Protection: 1; mode=block";
 ```
 
-## Add additionnal build-args on some environment
+## Add additionnal docker build-args on some environment
 
 For example in `.kontinuous/env/prod/values.yaml` :
 
@@ -61,7 +61,7 @@ jobs:
 
 ## Create some database
 
-This will create a postgres cluster with an `app` user `app` database. Database secrets will be provisionned in the `pg-xxx-app` secret.
+This will create a postgres cluster with an `app` user and an `app` database. Database secrets will be provisionned in the `pg-xxx-app` secret.
 
 ```yaml
 # .kontinuous/values.yaml
@@ -222,14 +222,6 @@ oauth2-proxy:
 **NOTE** in this example, only users from `some-org` GitHub organisation can access the metabase, but they also have to login on the metabase separately.
 
 ## Define a custom docker registry
-
-[TODO]
-
-## Local dev
-
-[TODO]
-
-## Local deployments
 
 [TODO]
 
