@@ -237,6 +237,14 @@ oauth2-proxy:
 
 [TODO]
 
+## Create on-demand workflows deployments
+
+If you want to define some specific deployments, you can use the `--chart` option to target a specific chart. This is useful for example for manually triggering some specific jobs er deployments.
+
+Example : 
+
+[TODO]
+
 ## 🐰 Easter egg
 
 – I heard about an easter egg hidden in the kontinuous cli, can you give me a clue ?
