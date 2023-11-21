@@ -268,9 +268,6 @@ prod-dump:
 ```
 - put in `.kontinuous/Chart.yaml`:
 ```yaml
-apiVersion: v2
-name: project
-version: 0.0.0
 dependencies:
   - name: prod-dump
     repository: file://./charts/prod-dump
