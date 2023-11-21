@@ -243,7 +243,64 @@ If you want to define some specific deployments, you can use the `--chart` optio
 
 Example : 
 
-[TODO]
+create a subchart of project, in `.kontinuous/charts/prod-dump/values.yaml` put:
+```yaml
+jobs-prod-dump:
+  ~chart: project.fabrique.contrib.jobs
+  enabled: true
+  runs:
+    anonymise:
+      ~needs: [pg-restore]
+      image: ghcr.io/socialgouv/docker/s3-client:1.2.0
+      entrypoint: ["/bin/bash"]
+      args:
+        - "-c"
+        - "echo 42"
+      envFrom:
+        - secretRef:
+            name: pg-restore-superuser
+```
+then, ensure it will not be triggered with the deployment:
+- put in `.kontinuous/values.yaml`:
+```yaml
+prod-dump:
+  enabled: false
+```
+- put in `.kontinuous/Chart.yaml`:
+```yaml
+apiVersion: v2
+name: project
+version: 0.0.0
+dependencies:
+  - name: prod-dump
+    repository: file://./charts/prod-dump
+    condition: prod-dump.enabled
+```
+
+then build your manifest:
+```sh
+kontinuous build --ignore-project-templates --chart prod-dump
+```
+
+or call via action:
+```yaml
+jobs:
+  deploy:
+    name: Custom Pipeline 🛸
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - uses: socialgouv/kontinuous/.github/actions/deploy-via-github@v1
+        with:
+          kubeconfig: ${{ inputs.kubeconfig || secrets.KUBECONFIG }}
+          chart: prod-dump
+          ignoreProjectTemplates: true
+```
+
+or use re-usable workflow like this one:
+- https://github.com/SocialGouv/workflows/blob/master/.github/workflows/use-ks-gh-custom.yaml
 
 ## 🐰 Easter egg
 
