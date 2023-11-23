@@ -367,6 +367,7 @@ const loadConfig = async (
     },
     projectName: {
       env: "KS_PROJECT_NAME",
+      defaultFunction: (config) => config.repositoryName,
     },
     refLabelKey: {
       default: "kontinuous/ref",
