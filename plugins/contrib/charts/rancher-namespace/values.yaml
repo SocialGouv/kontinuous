@@ -5,3 +5,4 @@ limitMax:
   cpu: 3
   memory: 8Gi
 kapp: false
+labels: {}
