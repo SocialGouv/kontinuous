@@ -345,7 +345,7 @@ metadata:
     kontinuous/plugin.log: \\"false\\"
   namespace: test-override-env-default-feature-branch-1
 spec:
-  instances: 1
+  instances: 2
   imageName: ghcr.io/cloudnative-pg/postgis:14
   imagePullPolicy: IfNotPresent
   resources:
