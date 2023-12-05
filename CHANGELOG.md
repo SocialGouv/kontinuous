@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.168.1 (2023-12-05)
+
+
+### Bug Fixes
+
+* **pg:** use 2 instances in dev ([#447](https://github.com/socialgouv/kontinuous/issues/447)) ([1e0f3e8](https://github.com/socialgouv/kontinuous/commit/1e0f3e86d248e4fcff69ac4e4bfda4a7983c1de7))
+
 ## 1.168.0 (2023-12-05)
 
 
