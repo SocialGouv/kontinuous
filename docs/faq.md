@@ -237,7 +237,7 @@ oauth2-proxy:
 
 [TODO]
 
-## Create on-demand workflows deployments
+## Trigger specific jobs or deployments
 
 If you want to define some specific deployments, you can use the `--chart` option to target a specific chart. This is useful for example for manually triggering some specific jobs or deployments.
 
