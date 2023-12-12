@@ -595,7 +595,7 @@ spec:
     limits:
       memory: 1G
     requests:
-      memory: 128M
+      memory: 512M
   storage:
     size: 8Gi
     storageClass: csi-cinder-high-speed
@@ -670,7 +670,7 @@ spec:
     limits:
       memory: 1G
     requests:
-      memory: 128M
+      memory: 512M
   storage:
     size: 8Gi
     storageClass: csi-cinder-high-speed
