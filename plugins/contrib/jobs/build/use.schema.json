@@ -4,7 +4,6 @@
   "title": "schema for build job usage",
   "type": "object",
   "additionalProperties": false,
-  "required": [],
   "properties": {
     "dockerfile": {
       "description": "Path to the Dockerfile on the repository. Defaults to /Dockerfile",
