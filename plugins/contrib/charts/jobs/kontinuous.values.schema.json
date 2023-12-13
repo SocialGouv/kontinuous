@@ -56,6 +56,18 @@
             "description": "Kubernetes memory reservation for the Job",
             "type": "string"
           },
+          "retry": {
+            "description": "Retry the job n times.",
+            "type": "number"
+          },
+          "run": {
+            "description": "Commands that will be passed to the job's image.",
+            "type": "string"
+          },
+          "kubernetes": {
+            "description": "Allow access to the Kubernetes API.",
+            "type": "boolean"
+          },
           "cpuLimit": {
             "description": "Kubernetes max cpu for the Job before capping",
             "type": "string"
