@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.168.3 (2023-12-13)
+
+
+### Bug Fixes
+
+* **jsonschema:** fix jobs.with ([#449](https://github.com/socialgouv/kontinuous/issues/449)) ([2643d56](https://github.com/socialgouv/kontinuous/commit/2643d56f72285431252dd91b3b0e6b2d8076856e))
+
 ## 1.168.2 (2023-12-09)
 
 ## 1.168.1 (2023-12-05)
