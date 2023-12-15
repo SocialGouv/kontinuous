@@ -3246,6 +3246,40 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@kubernetes-models/apimachinery@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@kubernetes-models/apimachinery@npm:1.2.1"
+  dependencies:
+    "@kubernetes-models/base": "npm:^4.0.3"
+    "@kubernetes-models/validate": "npm:^3.1.1"
+    tslib: "npm:^2.4.0"
+  checksum: 63fe0c66978bedae88bb2b9f96040dd99ec73c51c49dfa20b04f0468674b59192d24198fdecc0f9a7f356a805985eae93a87ecb29c749fe1566171710627d087
+  languageName: node
+  linkType: hard
+
+"@kubernetes-models/base@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "@kubernetes-models/base@npm:4.0.3"
+  dependencies:
+    "@kubernetes-models/validate": "npm:^3.1.1"
+    is-plain-object: "npm:^5.0.0"
+    tslib: "npm:^2.4.0"
+  checksum: c3059e03590c0c63c8e4af490266b8650178b145010f75ed7914b5e346e06fa9a6b0cfbc57b69223a4aeda52887e03c7ad49208fbd0db77450b1e326d7deb54b
+  languageName: node
+  linkType: hard
+
+"@kubernetes-models/validate@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "@kubernetes-models/validate@npm:3.1.1"
+  dependencies:
+    ajv: "npm:^8.12.0"
+    ajv-formats: "npm:^2.1.1"
+    ajv-formats-draft2019: "npm:^1.6.1"
+    tslib: "npm:^2.4.0"
+  checksum: 2455c2f31013029b7f8b1dd9720f95c49037c19b1c34d7e105e47dc366b82907704f4d85e32892e514dbbdfdca7c8955d454fd4d439d4acee94a8d650297c71a
+  languageName: node
+  linkType: hard
+
 "@kwsites/file-exists@npm:^1.1.1":
   version: 1.1.1
   resolution: "@kwsites/file-exists@npm:1.1.1"
@@ -4990,6 +5024,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ajv-formats-draft2019@npm:^1.6.1":
+  version: 1.6.1
+  resolution: "ajv-formats-draft2019@npm:1.6.1"
+  dependencies:
+    punycode: "npm:^2.1.1"
+    schemes: "npm:^1.4.0"
+    smtp-address-parser: "npm:^1.0.3"
+    uri-js: "npm:^4.4.1"
+  peerDependencies:
+    ajv: "*"
+  checksum: aaac64afe3b727b1bf945ef3bd72f0846b4ade9880928788cfce8561d50a1c4326e1172b477f62633fb1842945704a07af805c11a7b254751475fadfd6c171ce
+  languageName: node
+  linkType: hard
+
 "ajv-formats@npm:^2.0.2, ajv-formats@npm:^2.1.1":
   version: 2.1.1
   resolution: "ajv-formats@npm:2.1.1"
@@ -5016,7 +5064,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ajv@npm:^8.0.0, ajv@npm:^8.1.0, ajv@npm:^8.10.0, ajv@npm:^8.11.0":
+"ajv@npm:^8.0.0, ajv@npm:^8.1.0, ajv@npm:^8.10.0, ajv@npm:^8.11.0, ajv@npm:^8.12.0":
   version: 8.12.0
   resolution: "ajv@npm:8.12.0"
   dependencies:
@@ -6285,7 +6333,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^2.8.1":
+"commander@npm:^2.19.0, commander@npm:^2.8.1":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
   checksum: a6cb7ce73cc1db74a2da4bb6b4fc4f9a655ba35beb90f32bf5831d7d3be610dafc01dcc8a17f8204cf4e3f1f434d2115b7db56dfb0b827d42b10d1ba6ae8cbb4
@@ -7194,6 +7242,13 @@ __metadata:
   dependencies:
     chalk: "npm:^4.1.0"
   checksum: 8a310b31b119f8b0ac022ffe5d03b13228aad918f0e63cfe08fcb770ee36fb77557f5d06dee6d9abf1b7df4d48ef71f409f1bf9f947af6c490c370a7e87d17f0
+  languageName: node
+  linkType: hard
+
+"discontinuous-range@npm:1.0.0":
+  version: 1.0.0
+  resolution: "discontinuous-range@npm:1.0.0"
+  checksum: 85786395546622dae3111890803112c3dd8dc1981a8a5b9632374d49aa7707eac6d709a1fc5fd1d1ba96b9be9c53bdd14ee8143cdf406f2a7182d95b68ba56f9
   languageName: node
   linkType: hard
 
@@ -10817,6 +10872,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"kubernetes-models@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "kubernetes-models@npm:4.3.1"
+  dependencies:
+    "@kubernetes-models/apimachinery": "npm:^1.2.1"
+    "@kubernetes-models/base": "npm:^4.0.3"
+    "@kubernetes-models/validate": "npm:^3.1.1"
+    tslib: "npm:^2.4.0"
+  checksum: e1d3fa0db4d95faa18ddd46fba0a26ddfba1607c16e588d22359f000b699578b8e9b27ac06555234d7370187f8792e9ad2cb7bd65b9513face2ba0559c2fdcc5
+  languageName: node
+  linkType: hard
+
 "latest-version@npm:^5.0.0":
   version: 5.1.0
   resolution: "latest-version@npm:5.1.0"
@@ -11820,7 +11887,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"moo@npm:0.5.2":
+"moo@npm:0.5.2, moo@npm:^0.5.0":
   version: 0.5.2
   resolution: "moo@npm:0.5.2"
   checksum: 7e242e222112e74ce8e8d7eb879ba22966fcaf2b45884c71111287e600220101f5f8f55c606f36f6b8aed1080f9d05618f26f5e0c879a534dd3f803037b20702
@@ -11946,6 +12013,23 @@ __metadata:
   dependencies:
     lodash: "npm:^4.17.21"
   checksum: 3920f605b9ac814ed2ee0b6672ad37f58890243f59319dbb5571c450a73fb6957da6423713bec9b735274a1739d5667e4efde95f0c5a9de7e672c2698c346c91
+  languageName: node
+  linkType: hard
+
+"nearley@npm:^2.20.1":
+  version: 2.20.1
+  resolution: "nearley@npm:2.20.1"
+  dependencies:
+    commander: "npm:^2.19.0"
+    moo: "npm:^0.5.0"
+    railroad-diagrams: "npm:^1.0.0"
+    randexp: "npm:0.4.6"
+  bin:
+    nearley-railroad: bin/nearley-railroad.js
+    nearley-test: bin/nearley-test.js
+    nearley-unparse: bin/nearley-unparse.js
+    nearleyc: bin/nearleyc.js
+  checksum: 71aa9a1288329a575a7eeb0bba8e3f927357cb7edecd66c18fb6cbece09bf520bd93256eed7969225db10e3dc32aa9378555898639038cb5cc1793d624b5f907
   languageName: node
   linkType: hard
 
@@ -13179,6 +13263,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"punycode@npm:^2.1.1":
+  version: 2.3.1
+  resolution: "punycode@npm:2.3.1"
+  checksum: 860ab215e7c40a5cd5e8b4f7abe3c860832f26f2b1b3b95a24e45a3771403ef5d2f4248517380bd15aa3dce06fae3aae92080363cd48713f1230cb659d9f8b74
+  languageName: node
+  linkType: hard
+
 "pupa@npm:^2.0.1":
   version: 2.1.1
   resolution: "pupa@npm:2.1.1"
@@ -13229,6 +13320,23 @@ __metadata:
   version: 4.0.1
   resolution: "quick-lru@npm:4.0.1"
   checksum: f50ac7cc60a469163520971b17c9c1a69df99b2c575abbdf0d3ef0a409deac6b63381b30b5b7a92f2b79f77ddcae15b041d119d9f39dbff9f5ef4ae70a13bb89
+  languageName: node
+  linkType: hard
+
+"railroad-diagrams@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "railroad-diagrams@npm:1.0.0"
+  checksum: 9bc31c8ce428f2ae887430de4bafc7b78d552fd8795d5de51e7aeb38a18fb99918b378792eda2c3eb053431d9d618cfb425eacda251f11a5707b5da115dd5d93
+  languageName: node
+  linkType: hard
+
+"randexp@npm:0.4.6":
+  version: 0.4.6
+  resolution: "randexp@npm:0.4.6"
+  dependencies:
+    discontinuous-range: "npm:1.0.0"
+    ret: "npm:~0.1.10"
+  checksum: feacb1d577914ad13c672942e2f45699aa1ce0c06dd0efb22d7254ebb32c8eb7c31cc01b557003c0552e6455433f098b128a126e87326ef4c0c8a28f478ae74e
   languageName: node
   linkType: hard
 
@@ -13824,6 +13932,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ret@npm:~0.1.10":
+  version: 0.1.15
+  resolution: "ret@npm:0.1.15"
+  checksum: d65bd0cc83122e33a284e87ff9b51f553e5da3d05b0643740a0c07189f6025972a70856e794bdae3d8cdfb36bc8c05a3aad3935bdadbd20bdaa1789b70a21e8c
+  languageName: node
+  linkType: hard
+
 "ret@npm:~0.2.0":
   version: 0.2.2
   resolution: "ret@npm:0.2.2"
@@ -14009,6 +14124,15 @@ __metadata:
   version: 1.2.4
   resolution: "sax@npm:1.2.4"
   checksum: 2917c3ef3cab1307aa14036705b599c7fd1b51756189e67bd1f23193cdc5ceac9bd59104830542cfb6326febfd1dce73acc08fecfa615c4c920c94a9a6ccbda4
+  languageName: node
+  linkType: hard
+
+"schemes@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "schemes@npm:1.4.0"
+  dependencies:
+    extend: "npm:^3.0.0"
+  checksum: 3f544b51db85dee01f504e9a7d82868375d66a227dc9f951a8f37b2f9036a6730f29c03bf4ad4e5cd4d813d050dcba5e0b66bc73ddc3360bac06562dadb29a50
   languageName: node
   linkType: hard
 
@@ -14344,6 +14468,15 @@ __metadata:
   version: 4.2.0
   resolution: "smart-buffer@npm:4.2.0"
   checksum: 898a5ce4651108164625916aa54b6f7c13e86279a31dd321737d27c4b795cfaaeb1c30417f8809029d80d20710d8a5045998afd35e0f1080b32648f5670aa99b
+  languageName: node
+  linkType: hard
+
+"smtp-address-parser@npm:^1.0.3":
+  version: 1.0.10
+  resolution: "smtp-address-parser@npm:1.0.10"
+  dependencies:
+    nearley: "npm:^2.20.1"
+  checksum: 2bf31e34e29ab0091c76387a819069e5d86979071321a7cecdfe51f384b1c8e824c62a0cfefdaed831b97b6b7b9fdddf72a0ebb01eb56664abf68909ea2b5936
   languageName: node
   linkType: hard
 
@@ -15225,6 +15358,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tslib@npm:^2.4.0":
+  version: 2.6.2
+  resolution: "tslib@npm:2.6.2"
+  checksum: e5654691294dfbc49d7f37c8476b11a90ab8a0af4ad8cc968af1d013600e84ecfcd9a68e1cb89f5dcfe5c88872e3fbacea830d237cfa063498115a88f4bd2de6
+  languageName: node
+  linkType: hard
+
 "tsutils@npm:^3.21.0":
   version: 3.21.0
   resolution: "tsutils@npm:3.21.0"
@@ -15646,7 +15786,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uri-js@npm:^4.2.2":
+"uri-js@npm:^4.2.2, uri-js@npm:^4.4.1":
   version: 4.4.1
   resolution: "uri-js@npm:4.4.1"
   dependencies:
@@ -16285,6 +16425,7 @@ __metadata:
     fs-extra: "npm:^11.1.1"
     husky: "npm:^8.0.0"
     js-yaml: "npm:^4.1.0"
+    kubernetes-models: "npm:^4.3.1"
     lint-staged: "npm:^13.0.0"
     prettier: "npm:^2.6.2"
     renovate: "npm:^35.0.0"
