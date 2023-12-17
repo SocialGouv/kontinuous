@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "module": "es6",
-    "target": "es2015",
+    "module": "commonjs",
+    "target": "es2022",
     "checkJs": true,
     "allowJs": true,
     "resolveJsonModule": true,
@@ -10,12 +10,9 @@
     "allowSyntheticDefaultImports": true,
     "declaration": false,
     "noEmit": true,
-    "strict": false
+    "strict": true,
+    "noImplicitAny": true,
+    "alwaysStrict": true
   },
-  "include": [
-    "plugins/contrib/patches/*.js",
-    "packages/common/utils/**/*",
-    //"packages/common/utils/kind-is-runnable",
-    "index.d.ts"
-  ]
+  "include": ["values-compilers/*.js", "values-compilers/*.d.ts"]
 }
