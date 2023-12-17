@@ -1,6 +1,7 @@
 const { persistPatterns } = require("../lib/persist-convention")
 
 module.exports = async (values, options, { config, utils, ctx }) => {
+  console.log("GLOBAL")
   const { isVersionTag, slug, deepmerge, patternMatch } = utils
 
   const processEnv = ctx.get("env") || process.env
