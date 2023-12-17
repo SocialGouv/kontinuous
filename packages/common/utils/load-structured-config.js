@@ -15,7 +15,8 @@ const undefinedCheck = (val) => val === undefined
 const emptyAsUndefinedCheck = (val) =>
   val === undefined || val === "" || val === null
 
-module.exports = async ({
+/** @type {import("./load-structured-config") } */
+module.exports = /** @type {import("./load-structured-config") } */ async ({
   configBasename = "config",
   inlineConfigs = [],
   configDirs = [],

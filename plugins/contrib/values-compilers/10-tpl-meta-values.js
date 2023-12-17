@@ -50,7 +50,7 @@ const renderTplRecurse = async (
       }
       value = yaml.loadValue(value)
       if (isTplCast) {
-        const cast = prefix.slice(1, -1).split(":").slice(1)
+        const cast = prefix.slice(1, -1).split(":").slice(1).join("")
         switch (true) {
           case cast === "int" || cast === "integer": {
             value = parseInt(value, 10)

@@ -1,3 +1,4 @@
+// @ts-nocheck
 const prettyTime = require("./pretty-time")
 
 function TimeLogger({
@@ -11,6 +12,7 @@ function TimeLogger({
   this.label = label
   this.logLevel = logLevel
 }
+
 Object.assign(TimeLogger.prototype, {
   end(options = {}) {
     if (options.logger) {
@@ -23,7 +25,9 @@ Object.assign(TimeLogger.prototype, {
       this.logLevel = options.logLevel
     }
     this.logger[this.logLevel](
-      `${this.label}: ${prettyTime(new Date() - this.startTime)}`
+      `${this.label}: ${prettyTime(
+        new Date().getTime() - this.startTime.getTime()
+      )}`
     )
   },
 })

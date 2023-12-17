@@ -8,6 +8,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@types/jest": "^29.5.11",
     "@types/lodash.camelcase": "^4.3.7",
     "@types/lodash.clonedeep": "^4.5.7",
     "@types/lodash.defaults": "^4.2.7",
@@ -16,7 +17,7 @@
     "@types/lodash.pick": "^4.4.7",
     "@types/lodash.set": "^4.3.7",
     "@types/micromatch": "^4.0.2",
-    "@types/node": "^18.11.18",
+    "@types/node": "^20.10.5",
     "@types/pino": "^7.0.5",
     "commit-and-tag-version": "^11.0.0",
     "docsify-cli": "^4.4.4",

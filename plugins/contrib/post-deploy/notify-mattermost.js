@@ -46,6 +46,7 @@ module.exports = async (manifests, options, context) => {
     }
   } else {
     deploymentMessage.push(
+      // @ts-ignore
       new AggregateError(errors, "errors encountered during deployment").message
     )
     // if we're running through GitHub actions

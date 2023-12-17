@@ -12,6 +12,13 @@ const patternMatch = require("../utils/pattern-match")
 const copyFilter = require("./copy-filter")
 const loadGitOrgConfig = require("./load-git-org-config")
 
+/**
+ *
+ * @param {*} config
+ * @param {import("../utils")["logger"]} logger
+ * @param {*} reloadConfig
+ * @returns {Promise<object>}
+ */
 module.exports = async (config, logger, reloadConfig) => {
   logger.debug("🔻 load dependencies")
 

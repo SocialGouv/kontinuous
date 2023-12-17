@@ -11,8 +11,7 @@ type CronJob = import("kubernetes-models/batch/v1").ICronJob;
 type ConfigMap = import("kubernetes-models/v1").IConfigMap;
 type Secret = import("kubernetes-models/v1").ISecret;
 
-
-type Utils = import("./packages/common/utils").Utils;
+type Utils = typeof import("./packages/common/utils");
 
 // todo: use officiel model
 interface KappConfig {

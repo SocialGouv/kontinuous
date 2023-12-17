@@ -1,4 +1,4 @@
-module.exports = {
+const utils = {
   degit: require("tiged"),
   fs: require("fs-extra"),
   get logger() {
@@ -119,3 +119,5 @@ module.exports = {
   matchLinkRemap: require("./match-link-remap"),
   detectKubeVersion: require("./detect-kube-version"),
 }
+
+module.exports = utils

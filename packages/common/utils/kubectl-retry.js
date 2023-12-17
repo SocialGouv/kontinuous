@@ -99,6 +99,8 @@ const kubectlRun = async (kubectlArgs, options = {}) => {
  * @typedef {Object} KubectlRetryOptions
  * @prop {any} [logger]
  * @prop {any} [sentry]
+ * @prop {string} [kubeconfig]
+ * @prop {string} [kubeconfigContext]
  * @prop {Record<string, any>} [retryOptions]
  * @prop {boolean} [logError]
  * @prop {boolean} [logInfo]

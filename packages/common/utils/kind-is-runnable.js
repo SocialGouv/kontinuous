@@ -1,4 +1,4 @@
-const kindsRunnable = require("./kinds-runnable")
+const kindsRunnable = ["Deployment", "Job", "DaemonSet", "StatefulSet"]
 
 /**
  *

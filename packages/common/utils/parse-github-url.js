@@ -43,6 +43,7 @@ module.exports = (str) => {
   }
 
   // parse the URL
+  /** @type {Partial<ReturnType<import("parse-url")> & { host:string, repository: string, owner: string,name: string,repo: string,href: string,branch: string, blob:string, path:string, filepath:string}>} */
   let obj
   if (str.includes(":")) {
     obj = parseUrl(str)
@@ -56,6 +57,7 @@ module.exports = (str) => {
   if (!obj.host && /^git@/.test(str) === true) {
     // return the correct host for git@ URLs
     const urlObject = parseUrl(`http://${str}`)
+    // @ts-ignore waiting for update parse-url types... https://github.com/IonicaBizau/parse-url/issues/71
     obj.host = urlObject.host
   }
 

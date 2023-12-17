@@ -1,5 +1,12 @@
 const { persistPatterns } = require("../lib/persist-convention")
 
+/**
+ * Takes any object with a name prop and removes it
+ * @param {Kontinuous.Manifest[]} manifests
+ * @param {object} options
+ * @param {{config:object, values:object, utils:Utils}} param2
+ * @returns {Kontinuous.Manifest[]}
+ */
 module.exports = (manifests, options, { config, values, utils }) => {
   if (config.environment !== "dev") {
     return manifests

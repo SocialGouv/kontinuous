@@ -9,6 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "allowJs": true,
+    "checkJs": true,
     "noImplicitAny": false,
     "isolatedModules": false,
     "noEmit": true,
@@ -19,5 +20,6 @@
       "helm-tree/*": ["../helm-tree/*"]
     }
   },
-  "exclude": ["./node_modules"]
+  "exclude": ["./node_modules"],
+  "include": ["./packages/common/utils/**.js"]
 }
