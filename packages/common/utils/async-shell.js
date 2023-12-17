@@ -12,16 +12,6 @@ const ProgramError = require("./program-error.class")
  * @param {{ignoreErrors?: string[]}} extraOptions
  * @returns
  */
-
-/**
- *
- * @param {import("child_process").ChildProcessWithoutNullStreams} child
- * @param {null | ((child: import("child_process").ChildProcessWithoutNullStreams) => void)} callback
- * @param {Kontinuous.PatchContext["logger"]} logger
- * @param {{ignoreErrors?: string[]}} extraOptions
- * @returns
- */
-
 const promiseFromChildProcess = (child, callback, logger, extraOptions) => {
   const { ignoreErrors = [] } = extraOptions
   child.on("error", () => {}) // avoid crash on not found executable

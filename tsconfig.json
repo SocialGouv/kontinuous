@@ -12,10 +12,5 @@
     "noEmit": true,
     "strict": false
   },
-  "include": [
-    "plugins/contrib/patches/*.js",
-    "packages/common/utils/**/*",
-    //"packages/common/utils/kind-is-runnable",
-    "index.d.ts"
-  ]
+  "include": ["**.js", "**.d.ts"]
 }

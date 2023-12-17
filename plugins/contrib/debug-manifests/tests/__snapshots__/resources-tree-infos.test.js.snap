@@ -93,7 +93,6 @@ exports[`egapro 1`] = `
     │   ├── name: basic-auth
     │   └── name: staff
     ├── Job
-<<<<<<< HEAD
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-api-buildkit-4zg3ke
     │   │   ├── degit-repository (init)
     │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.168.9
@@ -129,38 +128,6 @@ exports[`egapro 1`] = `
     │       └── job
     │           ├── image: moby/buildkit:v0.10.5-rootless
     │           └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-=======
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   ├── degit-repository (init)
-    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   ├── degit-repository (init)
-    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   ├── degit-repository (init)
-    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   ├── degit-repository (init)
-    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   └── degit-repository (init)
-    │       ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │       └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
->>>>>>> f07f15398 (chore: fix snapshots)
     ├── CronJob
     │   ├── export-public-data
     │   │   ├── schedule: 0 0 * * *
@@ -294,7 +261,6 @@ exports[`template 1`] = `
     │   ├── name: basic-auth
     │   └── name: staff
     ├── Job
-<<<<<<< HEAD
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-api-buildkit-4zg3ke
     │   │   ├── degit-repository (init)
     │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.168.9
@@ -330,38 +296,6 @@ exports[`template 1`] = `
     │       └── job
     │           ├── image: moby/buildkit:v0.10.5-rootless
     │           └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-=======
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   ├── degit-repository (init)
-    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   ├── degit-repository (init)
-    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   ├── degit-repository (init)
-    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   ├── degit-repository (init)
-    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   └── degit-repository (init)
-    │       ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │       └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
->>>>>>> f07f15398 (chore: fix snapshots)
     ├── CronJob
     │   ├── export-public-data
     │   │   ├── schedule: 0 0 * * *
@@ -596,7 +530,6 @@ exports[`www 1`] = `
     │   ├── name: basic-auth
     │   └── name: staff
     ├── Job
-<<<<<<< HEAD
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-api-buildkit-4zg3ke
     │   │   ├── degit-repository (init)
     │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.168.9
@@ -632,38 +565,6 @@ exports[`www 1`] = `
     │       └── job
     │           ├── image: moby/buildkit:v0.10.5-rootless
     │           └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-=======
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   ├── degit-repository (init)
-    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   ├── degit-repository (init)
-    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   ├── degit-repository (init)
-    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   ├── degit-repository (init)
-    │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
-    │   ├── job
-    │   │   ├── image: moby/buildkit:v0.10.5-rootless
-    │   │   └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
-    │   └── degit-repository (init)
-    │       ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.115.0
-    │       └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
->>>>>>> f07f15398 (chore: fix snapshots)
     ├── CronJob
     │   ├── export-public-data
     │   │   ├── schedule: 0 0 * * *

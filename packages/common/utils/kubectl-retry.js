@@ -13,6 +13,7 @@ const retriableNetwork = require("./retriable-network")
  * @prop {string} [kubeconfigContext]
  * @prop {string[]} [ignoreErrors]
  * @prop {string} [stdin]
+ * @prop {string} [abortSignal]
  * @prop {import('child_process').ChildProcess[]} [collectProcesses]
  */
 
@@ -44,7 +45,7 @@ const kubectlRun = async (kubectlArgs, options = {}) => {
 
   return new Promise((resolve, reject) => {
     const proc = spawn(cmd, args, {
-      encoding: "utf-8",
+      // encoding: "utf-8",
       env: {
         ...process.env,
         ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),

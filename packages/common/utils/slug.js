@@ -32,7 +32,7 @@ const suffix = (name, len = SUFFIX_SHA_LENGTH) => {
  * @param {string} name
  * @param {number} len
  * @param {number} shalen
- * @param {slugSource} [string]
+ * @param {string} [slugSource]
  * @returns
  */
 const slugString = (name, len, shalen, slugSource = name) => {
@@ -59,7 +59,7 @@ const slugString = (name, len, shalen, slugSource = name) => {
 /**
  *
  * @param {string[]|string} mixed
- * @param {undefined | ({maxLength?:number, partMaxLength?:number, glue?:string})} options
+ * @param {undefined | ({shaLength?:number, maxLength?:number, partMaxLength?:number, glue?:string})} options
  * @returns string
  */
 const slug = (mixed, options = {}) => {
