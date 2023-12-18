@@ -5,6 +5,7 @@ const retriableOnBrokenCluster = require("./retriable-on-broken-cluster")
 
 const getLogger = require("./get-logger")
 
+/** @type {import(".").RolloutStatus} */
 module.exports = async ({
   kubeconfig,
   kubecontext,
@@ -67,6 +68,7 @@ module.exports = async ({
 
   return retry(
     async (bail) => {
+      /** @type {object} */
       let status
       let error
       try {
@@ -86,31 +88,35 @@ module.exports = async ({
           { namespace, selector },
           `🦆 rollout-status result: ${JSON.stringify(status)}`
         )
-        if (status.error?.code === "") {
-          throw new Error(status.error.message)
+        if ("error" in status) {
+          if (status.error?.code === "") {
+            throw new Error(status.error.message)
+          }
         }
       } catch (err) {
         throwRetriableError(err)
         error = err
       }
-      const errorMessage = status?.error?.message
-      if (
-        retryErrImagePull &&
-        (errorMessage?.includes("ErrImagePull") ||
-          errorMessage?.includes("ImagePullBackOff"))
-      ) {
-        throwErrorToRetry({
-          error: new Error(status.error.message),
-          message: `🐍 rollout-status registry error(ErrImagePull): retrying...`,
-          type: "err-image-pull",
-        })
-      }
-      if (status?.error?.type === "program") {
-        throwErrorToRetry({
-          error: new Error(status.error.message),
-          message: `🐍 rollout-status program error: ${status.error.message}: retrying...`,
-          type: "rollout-status-program",
-        })
+      if ("error" in status) {
+        const errorMessage = status.error?.message
+        if (
+          retryErrImagePull &&
+          (errorMessage?.includes("ErrImagePull") ||
+            errorMessage?.includes("ImagePullBackOff"))
+        ) {
+          throwErrorToRetry({
+            error: new Error(status.error.message),
+            message: `🐍 rollout-status registry error(ErrImagePull): retrying...`,
+            type: "err-image-pull",
+          })
+        }
+        if (status?.error?.type === "program") {
+          throwErrorToRetry({
+            error: new Error(status.error.message),
+            message: `🐍 rollout-status program error: ${status.error.message}: retrying...`,
+            type: "rollout-status-program",
+          })
+        }
       }
       if (error) {
         bail(error)

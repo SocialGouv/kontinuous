@@ -1,5 +1,6 @@
 const { spawn } = require("child_process")
 
+/** @type {import(".").RolloutStatusExec} */
 module.exports = ({
   kubeconfig,
   kubecontext,
@@ -8,7 +9,7 @@ module.exports = ({
   kindFilter,
   pendingDeadLineSeconds,
   ignoreSecretNotFound,
-  intervalSeconds,
+  intervalSeconds = null,
   abortSignal,
 }) => {
   const args = []
@@ -37,7 +38,6 @@ module.exports = ({
     args.push(...["-kind-filter", kindFilter.toLowerCase()])
   }
   const proc = spawn("rollout-status", args, {
-    encoding: "utf-8",
     signal: abortSignal,
   })
   proc.on("error", () => {}) // avoid crash on not found executable
@@ -57,6 +57,7 @@ module.exports = ({
       const resultStr = Buffer.concat(out).toString()
       let result
       try {
+        // todo: type rollout status json
         result = JSON.parse(resultStr)
         resolve(result)
       } catch (_err) {

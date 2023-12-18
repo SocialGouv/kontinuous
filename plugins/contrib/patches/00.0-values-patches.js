@@ -22,7 +22,7 @@ const isMatching = (manifest, match) => {
 
 const specialFlags = ["chart"]
 
-/** @type {Kontinuous.PatchFunction} */
+/** @type {Kontinuous.Patch.Function} */
 module.exports = (manifests, _options, { values }) => {
   for (const manifest of manifests) {
     const chartPath = manifest.metadata?.annotations?.["kontinuous/chartPath"]

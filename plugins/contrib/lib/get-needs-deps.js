@@ -4,7 +4,7 @@ const getChartNameTopParts = require("./get-chart-name-top-parts")
 /**
  *
  * @param {Kontinuous.Manifest[]} manifests
- * @param {Kontinuous.PatchContext} context
+ * @param {Kontinuous.Patch.Context} context
  * @returns
  */
 module.exports = (manifests, context) => {

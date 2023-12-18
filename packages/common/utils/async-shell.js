@@ -6,9 +6,9 @@ const ProgramError = require("./program-error.class")
 
 /**
  *
- * @param {import("child_process").ChildProcessWithoutNullStreams} child
+ * @param {import("child_process").ChildProcess} child
  * @param {null | ((child: import("child_process").ChildProcessWithoutNullStreams) => void)} callback
- * @param {Kontinuous.PatchContext["logger"]} logger
+ * @param {Kontinuous.Patch.Context["logger"]} logger
  * @param {{ignoreErrors?: string[]}} extraOptions
  * @returns
  */
@@ -53,8 +53,8 @@ const promiseFromChildProcess = (child, callback, logger, extraOptions) => {
  *
  * @param {string|string[]} arg
  * @param {Record<string, any>} options
- * @param {null | ((child: import("child_process").ChildProcessWithoutNullStreams) => void)} callback
- * @param {Kontinuous.PatchContext["logger"]} logger
+ * @param {((child: import("child_process").ChildProcess) => void)} [callback]
+ * @param {Kontinuous.Patch.Context["logger"]} logger
  * @param {{ignoreErrors?: string[]}} extraOptions
  * @returns
  */
@@ -66,7 +66,7 @@ module.exports = (
   extraOptions = {}
 ) => {
   const [cmd, args] = parseCommand(arg)
-  /** @type {Record<string, any>} */
+  logger.pouet(42)
   const defaultOptions = { encoding: "utf-8" }
   const childProcess = spawn(cmd, args, {
     ...defaultOptions,
