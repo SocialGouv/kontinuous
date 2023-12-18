@@ -12,6 +12,28 @@ We want a full portable and sef-hostable solution from repositories, to CI/CD.
 
 see [🐉 paradigm](./advanced/paradigm.md) for more detailed explanation.
 
+## Patch output manifests
+
+If you want full control over the manifests output, just add a `.kontinuous/paches/my-patch.js`
+
+```js
+/*
+Patch manifests
+*/
+module.exports = (manifests) => {
+  for (const manifest of manifests) {
+    const { kind } = manifest;
+    if (kind === "Ingress") {
+      manifest.metadata.labels = {
+        ...manifest.metadata.labels,
+        hello: "world",
+      };
+    }
+  }
+  return manifests;
+};
+```
+
 ## Disable some plugin
 
 In your `.kontinuous/config.yaml` :
