@@ -1,8 +1,7 @@
 const getChartNameTopParts = require("../lib/get-chart-name-top-parts")
 
-/** @type {Kontinuous.PatchFunction} */
-module.exports = async (manifests, options, context) => {
-  const { utils } = context
+/** @type {Kontinuous.Patch.Function} */
+module.exports = (manifests, options, { utils, config }) => {
   const { kindIsWaitable } = utils
   for (const manifest of manifests) {
     const { kind, metadata } = manifest

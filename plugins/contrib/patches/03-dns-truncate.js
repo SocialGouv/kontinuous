@@ -1,6 +1,6 @@
 const MAX_DNS_LENGTH = 63
 
-/** @type {Kontinuous.PatchFunction} */
+/** @type {Kontinuous.Patch.Function} */
 module.exports = (manifests, _options, context) => {
   const { utils } = context
   const { yaml, slug, logger } = utils

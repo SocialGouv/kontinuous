@@ -2,6 +2,20 @@ const kubectlRetry = require("./kubectl-retry")
 
 const getLogger = require("./get-logger")
 
+/**
+ *
+ * @param {object} param0
+ * @param {string} param0.kubeconfig
+ * @param {string} param0.kubeconfigContext
+ * @param {string} param0.namespace
+ * @param {Kontinuous.Patch.Context["logger"]} [param0.logger]
+ * @param {Function} [param0.check]
+ * @param {boolean} [param0.bail]
+ * @param {boolean} [param0.surviveOnBrokenCluster]
+ * @param {import("./kubectl-retry").KubectlRetryOptions} [param0.retryOptions]
+ * @param {Function} [param0.kubectl]
+ * @returns
+ */
 module.exports = async ({
   kubeconfig,
   kubeconfigContext,

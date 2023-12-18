@@ -1,4 +1,4 @@
-/** @type {Kontinuous.PatchFunction} */
+/** @type {Kontinuous.Patch.Function} */
 module.exports = (manifests, _options, { config, utils }) => {
   const { deploymentLabelKey, deploymentLabelValue } = config
 

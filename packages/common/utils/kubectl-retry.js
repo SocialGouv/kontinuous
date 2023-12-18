@@ -104,6 +104,7 @@ const kubectlRun = async (kubectlArgs, options = {}) => {
  * @prop {Record<string, any>} [retryOptions]
  * @prop {boolean} [logError]
  * @prop {boolean} [logInfo]
+ * @prop {string[]} [ignoreErrors]
  * @prop {import('child_process').ChildProcess[]} [collectProcesses]
  * @prop {boolean} [surviveOnBrokenCluster]
  */

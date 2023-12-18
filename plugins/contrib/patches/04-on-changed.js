@@ -89,8 +89,8 @@ const removeDependentsOf = (
   return removeManifests
 }
 
-/** @type {Kontinuous.PatchFunction} */
-module.exports = async (manifests, _options, context) => {
+/** @type {Kontinuous.Patch.Function} */
+module.exports = (manifests, _options, context) => {
   const { config, utils } = context
   const { yaml, KontinuousPluginError, patternMatch } = utils
   const { changedPaths } = config

@@ -3,8 +3,8 @@ const defaultOptions = {
 }
 
 /**
- * @type {Kontinuous.PatchFunction}
- * @param {Kontinuous.PatchNamespaceOptions} options
+ * @type {Kontinuous.Patch.Function}
+ * @param {Kontinuous.Patch.NamespaceOptions} options
  */
 module.exports = (manifests, options, { values }) => {
   const opts = { ...defaultOptions, ...options }

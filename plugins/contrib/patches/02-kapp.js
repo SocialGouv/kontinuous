@@ -43,7 +43,7 @@ const kindPatches = {
   },
 }
 
-/** @type {Kontinuous.PatchFunction} */
+/** @type {Kontinuous.Patch.Function} */
 module.exports = (manifests) => {
   for (const manifest of manifests) {
     const { kind, apiVersion } = manifest
