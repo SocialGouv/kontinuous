@@ -66,7 +66,6 @@ module.exports = (
   extraOptions = {}
 ) => {
   const [cmd, args] = parseCommand(arg)
-  logger.pouet(42)
   const defaultOptions = { encoding: "utf-8" }
   const childProcess = spawn(cmd, args, {
     ...defaultOptions,

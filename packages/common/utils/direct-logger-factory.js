@@ -1,4 +1,4 @@
-const Logger = require("direct-logger")
+const { Logger } = require("direct-logger")
 
 module.exports = (opts = {}) => {
   const { streams = process.stderr } = opts

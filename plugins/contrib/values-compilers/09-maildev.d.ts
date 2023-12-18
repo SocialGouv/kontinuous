@@ -42,6 +42,6 @@ export type MailDevValues = {
 
 export type MailDevParams = {
   config: any;
-  //utils: Kontinuous.Utils;
+  utils: keyof Kontinuous.Utils;
   ctx: any;
 };
