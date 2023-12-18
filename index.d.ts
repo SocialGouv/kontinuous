@@ -40,8 +40,10 @@ declare namespace Kontinuous {
 
   type Manifests = Manifest[];
 
+  //import
   // todo: should be extract from the JS
   type RunnableManifest = Deployment | StatefulSet | DaemonSet | Job;
+  type WaitableManifest = Deployment | StatefulSet | Job;
 
   type ManifestWithTemplate = RunnableManifest;
 
@@ -124,6 +126,7 @@ declare namespace Kontinuous {
       environment: "dev" | "preprod" | "prod" | "local";
       kubeconfig: string;
       kubeconfigContext: string;
+      dependencies: string[];
     };
   };
 
@@ -147,6 +150,6 @@ declare module "kubernetes-resource-parser" {
   export function memoryParser(input: string | number): number;
 }
 
-declare module "tiged";
+//declare module "tiged";
 
 declare module "slugify";

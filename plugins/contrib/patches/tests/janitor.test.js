@@ -11,7 +11,7 @@ const runJanitor = async (config, values) => {
   const ctx = require("~common/ctx")
 
   // warn: JSDOC weird cast notation
-  const utils = /** @type {import("~common/utils").Utils} */ (
+  const utils = /** @type {import("~common/utils")} */ (
     /** @type {unknown} */ (require("~common/utils"))
   )
   const manifests = utils.yaml.loadAll(rawNs)

@@ -10,7 +10,8 @@
     "allowSyntheticDefaultImports": true,
     "declaration": false,
     "noEmit": true,
-    "strict": false
+    "strict": false,
+    "noImplicitAny": false
   },
   "exclude": ["node_modules"],
   "include": [
