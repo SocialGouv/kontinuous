@@ -1,5 +1,5 @@
-/** @type {Kontinuous.PatchFunction} */
-module.exports = async (manifests, _options, context) => {
+/** @type {Kontinuous.Patch.Function} */
+module.exports = (manifests, _options, context) => {
   const { config, utils } = context
   const { slug } = utils
   const { repositoryName, ciNamespace } = config
