@@ -3,6 +3,12 @@ const kindIsWaitable = require("./kind-is-waitable")
 
 const waitBeforeStopAllRolloutStatus = 5000 // try to collect more errors if there is any
 
+/**
+ *
+ * @param {Kontinuous.Patch.Context} context
+ * @param {{customWaitableKinds: Kontinuous.Manifest["kind"][]}} arg1
+ * @returns
+ */
 module.exports = async (context, { customWaitableKinds }) => {
   const { config, logger, rolloutStatus, utils, manifests, ctx, kubectl } =
     context
