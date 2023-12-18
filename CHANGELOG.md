@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.168.5 (2023-12-18)
+
+
+### Bug Fixes
+
+* **deactivate:** dont drop DBs anymore ([#451](https://github.com/socialgouv/kontinuous/issues/451)) ([c85fc7d](https://github.com/socialgouv/kontinuous/commit/c85fc7dd9ec70e92f0e32e843e4c20764966fe7c))
+
 ## 1.168.4 (2023-12-13)
 
 
