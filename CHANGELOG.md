@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.168.7 (2023-12-18)
+
+
+### Bug Fixes
+
+* **pg:** use 512M as default memory request ([#448](https://github.com/socialgouv/kontinuous/issues/448)) ([2b07624](https://github.com/socialgouv/kontinuous/commit/2b07624c5f104e4f41eb1755ead99c3853bc9149))
+
 ## 1.168.6 (2023-12-18)
 
 ## 1.168.5 (2023-12-18)
