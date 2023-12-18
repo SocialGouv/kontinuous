@@ -14,7 +14,7 @@ see [🐉 paradigm](./advanced/paradigm.md) for more detailed explanation.
 
 ## Patch output manifests
 
-If you want full control over the manifests output, just add a `.kontinuous/paches/my-patch.js`
+If you want full control over the manifests output, just add a `.kontinuous/patches/my-patch.js`
 
 ```js
 /*
@@ -33,6 +33,8 @@ module.exports = (manifests) => {
   return manifests;
 };
 ```
+
+:warning: do not name your patch `index.js`
 
 ## Disable some plugin
 
