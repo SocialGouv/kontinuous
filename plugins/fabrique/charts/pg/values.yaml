@@ -47,7 +47,7 @@ cnpg-cluster:
 
   resources:
     requests:
-      ~tpl~memory: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).resources (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.requests (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.requests.memory) `512M` }}"
+      ~tpl~memory: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).resources (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.requests (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.requests.memory) (.Values.global.isProd | ternary `1G` `512M`) }}"
     limits:
       ~tpl~memory: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).resources (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.limits (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.limits.memory) `1G` }}"
 
