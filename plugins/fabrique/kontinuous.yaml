@@ -17,6 +17,7 @@ dependencies:
           enableDefaultCharts: true
           mergeValues:
             pgBackupEndpointURL: https://s3.gra.io.cloud.ovh.net
+            buildkitServiceEnabled: true
 
     patches:
       certs:
