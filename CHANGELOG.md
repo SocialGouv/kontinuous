@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.168.9 (2023-12-20)
+
+
+### Bug Fixes
+
+* use default memory requests=limits for prod cnpg ([#454](https://github.com/socialgouv/kontinuous/issues/454)) ([9c0ff8d](https://github.com/socialgouv/kontinuous/commit/9c0ff8d9f32af09ace8a1e8fc9d0d29b6b066a6d))
+
 ## 1.168.8 (2023-12-19)
 
 
