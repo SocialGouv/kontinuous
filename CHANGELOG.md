@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.169.0 (2024-01-15)
+
+
+### Features
+
+* improve cnpg ressource config ([#455](https://github.com/socialgouv/kontinuous/issues/455)) ([67ea16b](https://github.com/socialgouv/kontinuous/commit/67ea16b35cde8d6d4d51294c60c7eafc42585957))
+
 ## 1.168.9 (2023-12-20)
 
 
