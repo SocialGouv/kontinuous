@@ -57,3 +57,7 @@ dependencies:
     repository: file://./charts/redis
     version: 1.168.9
     condition: redis.enabled
+  - name: maildev
+    degit: socialgouv/helm-charts/charts/maildev@v1
+    condition: maildev.enabled
+    version: "1"
