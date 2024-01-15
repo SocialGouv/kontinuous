@@ -350,12 +350,14 @@ spec:
   imagePullPolicy: IfNotPresent
   resources:
     limits:
+      cpu: 4
       memory: 1G
     requests:
-      memory: 512M
+      cpu: 100m
+      memory: 1G
   storage:
     size: 8Gi
-    storageClass: csi-cinder-high-speed
+    storageClass: sc-hspeed-gen2-delete
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
@@ -386,7 +388,7 @@ spec:
       pg_stat_statements.track: all
   monitoring:
     enablePodMonitor: false
-  priorityClassName: cnpg-high-priority
+  priorityClassName: cnpg-high-priority-2
   bootstrap:
     initdb:
       database: autodevops_feature-branch-1
