@@ -14,6 +14,11 @@ slugify.extend({
 const KUBERNETS_MAX_NAME_LENGTH = 63
 const SUFFIX_SHA_LENGTH = 8
 
+/**
+ * @param {string} name
+ * @param {number} len
+ * @returns number
+ */
 const suffix = (name, len = SUFFIX_SHA_LENGTH) => {
   const hex = Buffer.from(
     createHash("sha256").update(name).digest("hex")
@@ -22,6 +27,14 @@ const suffix = (name, len = SUFFIX_SHA_LENGTH) => {
   return parseInt(hex, 16).toString(36).slice(0, len)
 }
 
+/**
+ *
+ * @param {string} name
+ * @param {number} len
+ * @param {number} shalen
+ * @param {string} [slugSource]
+ * @returns
+ */
 const slugString = (name, len, shalen, slugSource = name) => {
   let slugified = slugify(name, {
     lower: true,
@@ -43,6 +56,12 @@ const slugString = (name, len, shalen, slugSource = name) => {
   return slugified
 }
 
+/**
+ *
+ * @param {string[]|string} mixed
+ * @param {undefined | ({shaLength?:number, maxLength?:number, partMaxLength?:number, glue?:string})} options
+ * @returns string
+ */
 const slug = (mixed, options = {}) => {
   const {
     maxLength = KUBERNETS_MAX_NAME_LENGTH,

@@ -7,6 +7,22 @@ const getLogger = require("./get-logger")
 const retriableOnBrokenCluster = require("./retriable-on-broken-cluster")
 const retriableNetwork = require("./retriable-network")
 
+/**
+ * @typedef {Object} KubectlRunOptions
+ * @prop {string} [kubeconfig]
+ * @prop {string} [kubeconfigContext]
+ * @prop {string[]} [ignoreErrors]
+ * @prop {string} [stdin]
+ * @prop {string} [abortSignal]
+ * @prop {import('child_process').ChildProcess[]} [collectProcesses]
+ */
+
+/**
+ *
+ * @param {string|string[]} kubectlArgs
+ * @param {KubectlRunOptions} options
+ * @returns void
+ */
 const kubectlRun = async (kubectlArgs, options = {}) => {
   const {
     kubeconfig,
@@ -29,7 +45,7 @@ const kubectlRun = async (kubectlArgs, options = {}) => {
 
   return new Promise((resolve, reject) => {
     const proc = spawn(cmd, args, {
-      encoding: "utf-8",
+      // encoding: "utf-8",
       env: {
         ...process.env,
         ...(kubeconfig ? { KUBECONFIG: kubeconfig } : {}),
@@ -79,6 +95,26 @@ const kubectlRun = async (kubectlArgs, options = {}) => {
   })
 }
 
+/**
+ * @typedef {Object} KubectlRetryOptions
+ * @prop {any} [logger]
+ * @prop {any} [sentry]
+ * @prop {string} [kubeconfig]
+ * @prop {string} [kubeconfigContext]
+ * @prop {Record<string, any>} [retryOptions]
+ * @prop {boolean} [logError]
+ * @prop {boolean} [logInfo]
+ * @prop {string[]} [ignoreErrors]
+ * @prop {import('child_process').ChildProcess[]} [collectProcesses]
+ * @prop {boolean} [surviveOnBrokenCluster]
+ */
+
+/**
+ *
+ * @param {string|string[]} kubectlArgs
+ * @param {KubectlRetryOptions} options
+ * @returns string
+ */
 module.exports = async (kubectlArgs, options = {}) => {
   const {
     logger = getLogger(),

@@ -1,7 +1,8 @@
-module.exports = {
+const utils = {
   degit: require("tiged"),
   fs: require("fs-extra"),
   get logger() {
+    /** @type {Kontinuous.Patch.Context["logger"]} */
     return require("./get-logger")()
   },
   asyncShell: require("./async-shell"),
@@ -119,3 +120,5 @@ module.exports = {
   matchLinkRemap: require("./match-link-remap"),
   detectKubeVersion: require("./detect-kube-version"),
 }
+
+module.exports = utils

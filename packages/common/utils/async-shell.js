@@ -4,13 +4,23 @@ const getLogger = require("./get-logger")
 const parseCommand = require("./parse-command")
 const ProgramError = require("./program-error.class")
 
+/**
+ *
+ * @param {import("child_process").ChildProcess} child
+ * @param {null | ((child: import("child_process").ChildProcessWithoutNullStreams) => void)} callback
+ * @param {Kontinuous.Patch.Context["logger"]} logger
+ * @param {{ignoreErrors?: string[]}} extraOptions
+ * @returns
+ */
 const promiseFromChildProcess = (child, callback, logger, extraOptions) => {
   const { ignoreErrors = [] } = extraOptions
   child.on("error", () => {}) // avoid crash on not found executable
+  /** @type {Buffer[]} */
   const out = []
   child.stdout.on("data", (data) => {
     out.push(data)
   })
+  /** @type {Buffer[]} */
   const err = []
   child.stderr.on("data", (data) => {
     if (ignoreErrors.some((errCatch) => data.includes(errCatch))) {
@@ -39,7 +49,15 @@ const promiseFromChildProcess = (child, callback, logger, extraOptions) => {
     })
   })
 }
-
+/**
+ *
+ * @param {string|string[]} arg
+ * @param {Record<string, any>} options
+ * @param {((child: import("child_process").ChildProcess) => void)} [callback]
+ * @param {Kontinuous.Patch.Context["logger"]} logger
+ * @param {{ignoreErrors?: string[]}} extraOptions
+ * @returns
+ */
 module.exports = (
   arg,
   options = {},

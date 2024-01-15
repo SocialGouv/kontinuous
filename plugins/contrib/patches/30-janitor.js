@@ -1,9 +1,17 @@
 const { persistPatterns } = require("../lib/persist-convention")
 
-module.exports = (manifests, options, { config, values, utils }) => {
+/**
+ * Takes any object with a name prop and removes it
+ * @param {Kontinuous.Manifest[]} manifests
+ * @param {object} options
+ * @param {{config:object, values:object, utils:Utils, ctx?:object}} param2
+ * @returns {Kontinuous.Manifest[]}
+ */
+module.exports = (manifests, options, { config, values, utils, ctx }) => {
   if (config.environment !== "dev") {
     return manifests
   }
+  ctx.pou = "poue"
 
   const {
     permanentDevEnvironmentBranches = [

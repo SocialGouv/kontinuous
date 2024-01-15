@@ -1,8 +1,6 @@
 {
-  "compilerOptions": {                        
-    "lib": [
-      "ES2020"
-    ],
+  "compilerOptions": {
+    "lib": ["ES2020"],
     "module": "ES2020",
     "target": "ES2020",
     "strict": true,
@@ -11,8 +9,10 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "allowJs": true,
+    "checkJs": true,
     "noImplicitAny": false,
     "isolatedModules": false,
+    "noEmit": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"],
@@ -20,7 +20,6 @@
       "helm-tree/*": ["../helm-tree/*"]
     }
   },
-  "exclude":[
-    "./node_modules"
-  ]
+  "exclude": ["./node_modules"],
+  "include": ["./packages/common/utils/**.js"]
 }

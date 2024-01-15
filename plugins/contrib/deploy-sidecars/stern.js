@@ -1,5 +1,11 @@
 const { spawn } = require("child_process")
 
+/**
+ *
+ * @param {*} options
+ * @param {{utils: Utils}} param1
+ * @returns
+ */
 module.exports = async (
   options,
   { config, logger, utils, needBin, manifests, dryRun, ctx }

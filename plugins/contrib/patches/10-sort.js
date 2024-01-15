@@ -14,6 +14,8 @@ const order = [
   "daemonset",
   "service",
 ]
+
+/** @type {Kontinuous.PatchFunction} */
 module.exports = async (manifests, _options, _context) =>
   manifests.sort((a, b) => {
     const indexA = order.indexOf(a.kind.toLowerCase())

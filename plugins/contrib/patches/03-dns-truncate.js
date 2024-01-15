@@ -1,9 +1,9 @@
 const MAX_DNS_LENGTH = 63
 
+/** @type {Kontinuous.Patch.Function} */
 module.exports = (manifests, _options, context) => {
   const { utils } = context
   const { yaml, slug, logger } = utils
-
   let subdomainsToTruncate = []
   do {
     subdomainsToTruncate = []
@@ -13,6 +13,7 @@ module.exports = (manifests, _options, context) => {
       }
       const rules = manifest.spec?.rules || []
       for (const { host } of rules) {
+        console.log("host", host)
         const domainParts = host.split(".")
         for (const subdomain of domainParts) {
           if (subdomain.length > MAX_DNS_LENGTH) {

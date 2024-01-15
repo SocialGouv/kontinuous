@@ -3,9 +3,20 @@ const defaultsDeep = require("lodash.defaultsdeep")
 const normalizeRepositoryUrl = require("~common/utils/normalize-repository-url")
 
 const getGitRemoteDefaultBranch = require("~common/utils/get-git-remote-default-branch")
-const parseGitUrl = require("~common/utils/parse-git-url")
+
+const parseGitUrl =
+  /** @type {import("../utils/parse-git-url").ParseGithubUrl} */ (
+    /** @type {unknown} */ (require("~common/utils/parse-git-url"))
+  )
+
 const downloadGitOrgConfig = require("./download-git-org-config")
 
+/**
+ *
+ * @param {object} config
+ * @param {Function} reloadConfig
+ * @returns
+ */
 module.exports = async (config, reloadConfig) => {
   const {
     gitOrg,

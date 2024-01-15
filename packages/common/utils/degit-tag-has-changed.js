@@ -7,6 +7,7 @@ const asyncShell = require("./async-shell")
 const normalizeRepositoryUrl = require("./normalize-repository-url")
 const getLogger = require("./get-logger")
 
+/** @type {Record<string, string>} */
 const supported = {
   github: ".com",
   gitlab: ".com",
@@ -15,6 +16,11 @@ const supported = {
   "git.sr.ht": ".ht",
 }
 
+/**
+ *
+ * @param {string} src
+ * @returns {{site:string, user:string, name:string, ref:string, url:string, ssh:string, subdir:string, mode:string}}
+ */
 function parse(src) {
   const match =
     /^(?:(?:https:\/\/)?([^:/]+\.[^:/]+)\/|git@([^:/]+)[:/]|([^/]+):)?([^/\s]+)\/([^/\s#]+)(?:((?:\/[^/\s#]+)+))?(?:\/)?(?:#(.+))?/.exec(
@@ -46,6 +52,11 @@ function parse(src) {
   return { site: siteName, user, name, ref, url, ssh, subdir, mode }
 }
 
+/**
+ *
+ * @param {string} target
+ * @returns boolean
+ */
 module.exports = async (target, logger = getLogger()) => {
   const base = path.join(os.homedir(), ".degit")
   const repo = parse(target)

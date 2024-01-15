@@ -91,7 +91,7 @@ module.exports = {
     "no-param-reassign": [0],
     "no-continue": [0],
     "no-unused-vars": [
-      2,
+      1,
       {
         vars: "all",
         args: "after-used",

@@ -9,8 +9,11 @@ metadata:
 
 const runJanitor = async (config, values) => {
   const ctx = require("~common/ctx")
-  const utils = require("~common/utils")
 
+  // warn: JSDOC weird cast notation
+  const utils = /** @type {import("~common/utils")} */ (
+    /** @type {unknown} */ (require("~common/utils"))
+  )
   const manifests = utils.yaml.loadAll(rawNs)
   const { logger } = utils
   logger.minLevel("debug")

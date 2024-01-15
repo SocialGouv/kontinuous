@@ -7,6 +7,11 @@ const kindIsWaitable = require("../lib/kind-is-waitable")
 const isNotDefined = (val) => val === undefined || val === null || val === ""
 const defaultTo = (val, defaultVal) => (isNotDefined(val) ? defaultVal : val)
 
+/**
+ *
+ * @param {DependencyTreeOptions} options
+ * @param {DependencyTreeContext} context
+ */
 module.exports = async (options, context) => {
   const { config, utils, manifests, dryRun, kubectl, rolloutStatus, ctx } =
     context
@@ -178,7 +183,7 @@ module.exports = async (options, context) => {
 
     const yamlNeeds = annotations["kontinuous/plugin.needs"]
 
-    if (!kindIsWaitable(kind, options.customWaitableKinds)) {
+    if (!kindIsWaitable(manifest, options.customWaitableKinds)) {
       return
     }
     if (!yamlNeeds) {
@@ -237,7 +242,7 @@ module.exports = async (options, context) => {
   }
 
   const countAllRunnable = manifests.filter((manifest) =>
-    kindIsWaitable(manifest.kind, options.customWaitableKinds)
+    kindIsWaitable(manifest, options.customWaitableKinds)
   ).length
   eventsBucket.emit("deploy-with:plugin:initDeployment", { countAllRunnable })
 

@@ -1,3 +1,4 @@
+/** @type {Kontinuous.Patch.Function} */
 module.exports = (manifests, _options, { config, utils }) => {
   const {
     refLabelKey,
@@ -9,6 +10,14 @@ module.exports = (manifests, _options, { config, utils }) => {
   } = config
 
   const templateLabelKinds = utils.rolloutStatusHandledKinds
+
+  /**
+   * @param {Kontinuous.Manifest} manifest
+   * @returns {manifest is Kontinuous.ManifestWithTemplate} // typeguard to mark manifest
+   */
+  function hasTemplateKind(manifest) {
+    return templateLabelKinds.includes(manifest.kind)
+  }
 
   const { slug, isVersionTag, sanitizeLabel } = utils
 
@@ -45,9 +54,11 @@ module.exports = (manifests, _options, { config, utils }) => {
 
     Object.assign(manifest.metadata.labels, labels)
 
-    if (templateLabelKinds.includes(kind)) {
+    if (hasTemplateKind(manifest)) {
       if (!manifest.spec) {
-        manifest.spec = {}
+        manifest.spec = {
+          template: {},
+        }
       }
       if (!manifest.spec.template) {
         manifest.spec.template = {}
@@ -61,6 +72,5 @@ module.exports = (manifests, _options, { config, utils }) => {
       Object.assign(manifest.spec.template.metadata.labels, labels)
     }
   }
-
   return manifests
 }

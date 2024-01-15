@@ -1,3 +1,7 @@
+/**
+ * @type {Kontinuous.PatchFunction}
+ * @param {Kontinuous.PatchRancheProjectIdOptions} options
+ */
 module.exports = async (manifests, options, { config, logger, kubectl }) => {
   const { ciNamespace, kubeconfig, kubeconfigContext } = config
 
@@ -15,14 +19,14 @@ module.exports = async (manifests, options, { config, logger, kubectl }) => {
   }
 
   if (rancherNsMissingProjectId.length === 0) {
-    return
+    return manifests
   }
 
   if (!ciNamespace) {
     logger.warn(
       `♉ missing rancher projectId not provided, unable to retrieve it as ci-namespace is not defined`
     )
-    return
+    return manifests
   }
 
   const { surviveOnBrokenCluster = false } = options
@@ -59,7 +63,15 @@ module.exports = async (manifests, options, { config, logger, kubectl }) => {
   }
 
   for (const manifest of rancherNsMissingProjectId) {
+    if (!manifest.metadata) {
+      manifest.metadata = {}
+    }
+    if (!manifest.metadata?.annotations) {
+      manifest.metadata.annotations = {}
+    }
     manifest.metadata.annotations["field.cattle.io/projectId"] =
       rancherProjectId
   }
+
+  return manifests
 }

@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "es2022",
+    "target": "es2015",
+    "checkJs": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "noEmit": true,
+    "strict": false,
+    "noImplicitAny": false
+  },
+  "exclude": ["node_modules"],
+  "include": [
+    "types/index.d.ts",
+    "./types/*.d.ts",
+    "./plugins/**/*.js",
+    "./plugins/**/*.d.ts",
+    "./packages/common/**/*.js",
+    "./packages/common/**/*.d.ts",
+    "./packages/kontinuous/**/*.js",
+    "./packages/kontinuous/**/*.d.ts"
+  ]
+}

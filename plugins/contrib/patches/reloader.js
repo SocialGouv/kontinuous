@@ -1,5 +1,9 @@
 const deploymentModeEnum = [false, "auto", "search"]
 
+/**
+ * @type {Kontinuous.PatchFunction}
+ * @param {Kontinuous.PatchReloaderOptions} options
+ */
 module.exports = (manifests, options, { utils }) => {
   const { KontinuousPluginError } = utils
   const { deploymentMode = "auto" } = options

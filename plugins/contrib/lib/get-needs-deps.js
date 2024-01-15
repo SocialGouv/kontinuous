@@ -1,14 +1,25 @@
 const kindIsWaitable = require("./kind-is-waitable")
 const getChartNameTopParts = require("./get-chart-name-top-parts")
 
-module.exports = (manifests, options, { config }) => {
+/**
+ *
+ * @param {Kontinuous.Manifest[]} manifests
+ * @param {Kontinuous.Patch.Context} context
+ * @returns
+ */
+module.exports = (manifests, context) => {
+  const { config } = context
+
+  /** @type {Record<string, any>} */
   const deps = {}
   for (const manifest of manifests) {
     const { kind, metadata } = manifest
     const annotations = metadata?.annotations
-    if (!annotations || !kindIsWaitable(kind, options.customWaitableKinds)) {
+
+    if (!annotations || !kindIsWaitable(manifest)) {
       continue
     }
+
     const lowerKind = kind.toLowerCase()
     const chartPath = annotations["kontinuous/chartPath"]
 
@@ -25,6 +36,7 @@ module.exports = (manifests, options, { config }) => {
     }
 
     const chartName = chartPath.split(".").pop()
+    /** @type {string[]} */
     const keys = [chartName, chartPath]
 
     for (const nameItem of names) {

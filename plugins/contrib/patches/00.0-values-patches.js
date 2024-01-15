@@ -1,11 +1,18 @@
 const get = require("lodash.get")
 const set = require("lodash.set")
 
+/**
+ *
+ * @param {Kontinuous.Manifest} manifest
+ * @param {[string, any]} match
+ * @returns boolean
+ */
 const isMatching = (manifest, match) => {
   if (!match) {
     return true
   }
   for (const [key, value] of Object.entries(match)) {
+    // @ts-ignore
     if (manifest[key] !== value) {
       return false
     }
@@ -15,6 +22,7 @@ const isMatching = (manifest, match) => {
 
 const specialFlags = ["chart"]
 
+/** @type {Kontinuous.Patch.Function} */
 module.exports = (manifests, _options, { values }) => {
   for (const manifest of manifests) {
     const chartPath = manifest.metadata?.annotations?.["kontinuous/chartPath"]

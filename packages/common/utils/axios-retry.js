@@ -1,5 +1,5 @@
-const axios = require("axios")
-const axiosRetry = require("axios-retry")
+const { default: axios } = require("axios")
+const { default: axiosRetry } = require("axios-retry")
 
 const kontinuousVersion = require("./kontinuous-version")
 

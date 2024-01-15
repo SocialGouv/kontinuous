@@ -1,3 +1,8 @@
+/**
+ *
+ * @param {string|string[]} arg
+ * @returns {[cmd: string, args:string[]]}
+ */
 module.exports = (arg) => {
   if (typeof arg === "string") {
     arg = arg

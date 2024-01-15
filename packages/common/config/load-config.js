@@ -15,7 +15,12 @@ const configDependencyKey = require("~common/utils/config-dependency-key")
 const lowerKeys = require("~common/utils/lower-keys")
 const ctx = require("../ctx")
 const patternMatch = require("../utils/pattern-match")
-const loadStructuredConfig = require("../utils/load-structured-config")
+
+const loadStructuredConfig =
+  /** @type {import("../utils/load-structured-config").LoadStructuredConfig} */ (
+    /** @type {unknown} */ (require("../utils/load-structured-config"))
+  )
+
 const getGitRef = require("../utils/get-git-ref")
 const getGitSha = require("../utils/get-git-sha")
 const getGitUrl = require("../utils/get-git-url")
