@@ -514,8 +514,10 @@ spec:
   imagePullPolicy: IfNotPresent
   resources:
     limits:
+      cpu: 4
       memory: 1G
     requests:
+      cpu: 100m
       memory: 42Mb
   storage:
     size: 8Gi
@@ -550,7 +552,7 @@ spec:
       pg_stat_statements.track: all
   monitoring:
     enablePodMonitor: true
-  priorityClassName: cnpg-high-priority
+  priorityClassName: cnpg-high-priority-2
   bootstrap:
     initdb:
       database: test-pg
