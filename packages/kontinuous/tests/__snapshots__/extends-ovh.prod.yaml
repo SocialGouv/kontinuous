@@ -794,7 +794,7 @@ spec:
       pg_stat_statements.track: all
   monitoring:
     enablePodMonitor: true
-  priorityClassName: cnpg-high-priority-2
+  priorityClassName: cnpg-high-priority-3
   bootstrap:
     initdb:
       database: test-extends-ovh
@@ -890,7 +890,7 @@ spec:
       pg_stat_statements.track: all
   monitoring:
     enablePodMonitor: true
-  priorityClassName: cnpg-high-priority-2
+  priorityClassName: cnpg-high-priority-3
   bootstrap:
     initdb:
       database: test-extends-ovh

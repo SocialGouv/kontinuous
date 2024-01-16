@@ -388,7 +388,7 @@ spec:
       pg_stat_statements.track: all
   monitoring:
     enablePodMonitor: false
-  priorityClassName: cnpg-high-priority-2
+  priorityClassName: cnpg-high-priority-3
   bootstrap:
     initdb:
       database: autodevops_feature-branch-1

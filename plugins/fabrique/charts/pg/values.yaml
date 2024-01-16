@@ -76,7 +76,7 @@ cnpg-cluster:
           ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
           key: bucket_region
 
-  priorityClassName: cnpg-high-priority-2
+  priorityClassName: cnpg-high-priority-3
 
   recovery:
     barmanObjectStore:
