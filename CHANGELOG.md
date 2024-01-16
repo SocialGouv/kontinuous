@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.169.1 (2024-01-16)
+
+
+### Bug Fixes
+
+* upgrade cnpg priority classes ([3e190fd](https://github.com/socialgouv/kontinuous/commit/3e190fd99145c8097e9af5f9617bce2c68cf0ace))
+
 ## 1.169.0 (2024-01-15)
 
 
