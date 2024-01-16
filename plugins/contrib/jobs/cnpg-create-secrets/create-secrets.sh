@@ -23,7 +23,7 @@ else
   echo "create db secret for app"
   PGUSER="$(kubectl -n $NAMESPACE get secrets $CNPG_DB_SECRET_NAME -o jsonpath={.data.username} | base64 -d)"
   PGPASSWORD="$(kubectl -n $NAMESPACE get secrets $CNPG_DB_SECRET_NAME -o jsonpath={.data.password} | base64 -d)"
-  PGSSLMODE="${PGSSLMODE:-require}"
+  PGSSLMODE="${PGSSLMODE:-disable}"
   PGUSER_URLENCODED=$(printf %s "$PGUSER" |jq -sRr @uri)
   PGPASSWORD_URLENCODED=$(printf %s "$PGPASSWORD" |jq -sRr @uri)
   PGPORT="${PGPORT:-5432}"
