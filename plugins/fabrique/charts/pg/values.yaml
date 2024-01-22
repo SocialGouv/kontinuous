@@ -10,8 +10,8 @@ recovery:
 
 cnpg-cluster:
   enabled: true
-  ~tpl~minSyncReplicas: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).minSyncReplicas) ((or .Values.global.isProd .Values.global.isPreProd) | ternary `1` `0`) }}"
-  ~tpl~maxSyncReplicas: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).maxSyncReplicas) ((or .Values.global.isProd .Values.global.isPreProd) | ternary `1` `0`) }}"
+  ~tpl~minSyncReplicas: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).minSyncReplicas) (.Values.global.isProd | ternary `1` `0`) }}"
+  ~tpl~maxSyncReplicas: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).maxSyncReplicas) (.Values.global.isProd | ternary `1` `0`) }}"
   fullnameOverride: test-cluster
   ~tpl~fullnameOverride: "{{ index .Values.kontinuous.chartContext 2 }}"
   ~tpl~nameOverride: "{{ index .Values.kontinuous.chartContext 2 }}"
@@ -20,7 +20,7 @@ cnpg-cluster:
     - {{ .Values.kontinuous.parentChart }}.jobs-pg
   ~tpl~dbOwner: "{{ .Values.global.pgUser }}"
   ~tpl~dbName: "{{ .Values.global.pgDatabase }}"
-  ~tpl~instances: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).instances) ((or .Values.global.isProd .Values.global.isPreProd) | ternary `3` `2`) }}"
+  ~tpl~instances: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).instances) (.Values.global.isProd | ternary `3` `1`) }}"
   postgresqlParameters:
     TimeZone: "Europe/Paris"
     pg_stat_statements.max: "10000"
@@ -97,6 +97,10 @@ cnpg-cluster:
         region:
           ~tpl~name: "{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups-access-key"
           key: bucket_region
+
+  clusterExtraSpec:
+    nodeMaintenanceWindow:
+      inProgress: "{{not .Values.global.isProd}}"
 
 jobs-pg:
   enabled: true

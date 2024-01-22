@@ -810,6 +810,8 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS \\"citext\\";
         - CREATE EXTENSION IF NOT EXISTS \\"pgcrypto\\";
         - CREATE EXTENSION IF NOT EXISTS \\"hstore\\";
+  nodeMaintenanceWindow:
+    inProgress: \\"{{not .Values.global.isProd}}\\"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
@@ -906,6 +908,8 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS \\"citext\\";
         - CREATE EXTENSION IF NOT EXISTS \\"pgcrypto\\";
         - CREATE EXTENSION IF NOT EXISTS \\"hstore\\";
+  nodeMaintenanceWindow:
+    inProgress: \\"{{not .Values.global.isProd}}\\"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
