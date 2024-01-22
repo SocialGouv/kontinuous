@@ -588,7 +588,7 @@ metadata:
     kontinuous/plugin.log: \\"false\\"
   namespace: test-extends-ovh-feature-branch-1
 spec:
-  instances: 2
+  instances: 1
   imageName: ghcr.io/cloudnative-pg/postgis:14
   imagePullPolicy: IfNotPresent
   resources:
@@ -628,6 +628,8 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS \\"citext\\";
         - CREATE EXTENSION IF NOT EXISTS \\"pgcrypto\\";
         - CREATE EXTENSION IF NOT EXISTS \\"hstore\\";
+  nodeMaintenanceWindow:
+    inProgress: \\"{{not .Values.global.isProd}}\\"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
@@ -665,7 +667,7 @@ metadata:
     kontinuous/plugin.log: \\"false\\"
   namespace: test-extends-ovh-feature-branch-1
 spec:
-  instances: 2
+  instances: 1
   imageName: ghcr.io/cloudnative-pg/postgis:14
   imagePullPolicy: IfNotPresent
   resources:
@@ -705,5 +707,7 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS \\"citext\\";
         - CREATE EXTENSION IF NOT EXISTS \\"pgcrypto\\";
         - CREATE EXTENSION IF NOT EXISTS \\"hstore\\";
+  nodeMaintenanceWindow:
+    inProgress: \\"{{not .Values.global.isProd}}\\"
 "
 `;
