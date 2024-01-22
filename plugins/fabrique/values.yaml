@@ -2,8 +2,6 @@ pg:
   enabled: false
 pgweb:
   enabled: false
-maildev:
-  enabled: false
 keycloakx:
   enabled: false
 contrib:
