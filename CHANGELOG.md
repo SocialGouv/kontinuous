@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.169.2 (2024-01-22)
+
+
+### Bug Fixes
+
+* **cnpg:** reduce replicas in dev/preprod and use maintenance when no… ([#458](https://github.com/socialgouv/kontinuous/issues/458)) ([f04707d](https://github.com/socialgouv/kontinuous/commit/f04707d9abf815dd44547fae711448c926220b80))
+
 ## 1.169.1 (2024-01-16)
 
 
