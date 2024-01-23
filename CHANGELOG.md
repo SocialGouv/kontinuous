@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.169.3 (2024-01-23)
+
+
+### Bug Fixes
+
+* **cnpg:** fix templated values in pg chart ([d33db66](https://github.com/socialgouv/kontinuous/commit/d33db66a7b11628403eaeddfec43b654ed27d59e))
+
 ## 1.169.2 (2024-01-22)
 
 
