@@ -100,7 +100,7 @@ cnpg-cluster:
 
   clusterExtraSpec:
     nodeMaintenanceWindow:
-      inProgress: "{{not .Values.global.isProd}}"
+      ~tpl~inProgress: "{{not .Values.global.isProd}}"
 
 jobs-pg:
   enabled: true

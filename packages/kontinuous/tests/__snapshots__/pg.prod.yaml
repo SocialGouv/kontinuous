@@ -569,7 +569,7 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS \\"pgcrypto\\";
         - CREATE EXTENSION IF NOT EXISTS \\"hstore\\";
   nodeMaintenanceWindow:
-    inProgress: \\"{{not .Values.global.isProd}}\\"
+    inProgress: false
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup

@@ -629,7 +629,7 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS \\"pgcrypto\\";
         - CREATE EXTENSION IF NOT EXISTS \\"hstore\\";
   nodeMaintenanceWindow:
-    inProgress: \\"{{not .Values.global.isProd}}\\"
+    inProgress: true
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
@@ -708,6 +708,6 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS \\"pgcrypto\\";
         - CREATE EXTENSION IF NOT EXISTS \\"hstore\\";
   nodeMaintenanceWindow:
-    inProgress: \\"{{not .Values.global.isProd}}\\"
+    inProgress: true
 "
 `;
