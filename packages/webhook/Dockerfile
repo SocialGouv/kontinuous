@@ -4,17 +4,17 @@ ARG UBUNTU_VERSION=22.04
 FROM ubuntu:$UBUNTU_VERSION as base
 
 RUN apt-get update && \
-  apt-get install -y \
-    curl \
-    wget \
-    git \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  curl \
+  wget \
+  git \
   && rm -rf /var/lib/apt/lists/*
 
 # renovate: datasource=node depName=node versioning=node
 ARG NODE_VERSION=20
 ENV NODE_VERSION=$NODE_VERSION
 RUN wget -qO- https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
-  && apt-get install nodejs \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs \
   && npm install -g yarn \
   && rm -rf /var/lib/apt/lists/*
 
