@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.169.5 (2024-01-29)
+
+
+### Bug Fixes
+
+* **webhook:** dockerfile apt install ([#460](https://github.com/socialgouv/kontinuous/issues/460)) ([f8e70fc](https://github.com/socialgouv/kontinuous/commit/f8e70fcba235c525e7792e232efc72e09ca1aa13))
+
 ## 1.169.4 (2024-01-29)
 
 ## 1.169.3 (2024-01-23)
