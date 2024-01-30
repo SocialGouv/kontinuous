@@ -15,7 +15,6 @@ function extractMaildevComponents(values, acc = []) {
 }
 
 const maildev = async (values, _options, { _config, utils, _ctx }) => {
-  console.log("maildev", values)
   const { deepmerge } = utils
 
   const components = extractMaildevComponents(values)
