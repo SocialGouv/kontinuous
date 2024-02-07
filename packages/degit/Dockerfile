@@ -9,6 +9,7 @@ RUN apt-get update && \
   ca-certificates \
   curl \
   git \
+  openssh-client \
   && rm -rf /var/lib/apt/lists/*
 
 # renovate: datasource=node depName=node versioning=node
