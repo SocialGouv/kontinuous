@@ -96,16 +96,16 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   annotations:
-    kontinuous/chartPath: project.fabrique.maildev.maildev
-    kontinuous/source: project/charts/fabrique/charts/maildev/charts/maildev/templates/deployment.yaml
+    kontinuous/chartPath: project.fabrique.contrib.maildev
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/maildev/templates/deployment.yaml
     kontinuous/deployment: test-maildev-feature-branch-1-ffac537e6cbbf934b08745a-5iniqvup
-    kontinuous/depname.full: project.fabrique.maildev.maildev.deployment.maildev
+    kontinuous/depname.full: project.fabrique.contrib.maildev.deployment.maildev
     kontinuous/depname.chartResource: maildev.deployment.maildev
     kontinuous/depname.chartName: maildev
-    kontinuous/depname.chartPath: project.fabrique.maildev.maildev
+    kontinuous/depname.chartPath: project.fabrique.contrib.maildev
     kontinuous/depname.resourcePath: deployment.maildev
     kontinuous/depname.resourceName: maildev
-    kontinuous/depname.chartNameTopFull: maildev.maildev
+    kontinuous/depname.chartNameTopFull: maildev
     kontinuous/depname.chartNameTop: maildev
     kontinuous/plugin.log: \\"false\\"
     reloader.stakater.com/auto: \\"true\\"
@@ -182,8 +182,8 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: maildev
   annotations:
-    kontinuous/chartPath: project.fabrique.maildev.maildev
-    kontinuous/source: project/charts/fabrique/charts/maildev/charts/maildev/templates/service.yaml
+    kontinuous/chartPath: project.fabrique.contrib.maildev
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/maildev/templates/service.yaml
     kontinuous/deployment: test-maildev-feature-branch-1-ffac537e6cbbf934b08745a-5iniqvup
   namespace: test-maildev-feature-branch-1
 spec:
@@ -203,8 +203,8 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.maildev.maildev
-    kontinuous/source: project/charts/fabrique/charts/maildev/charts/maildev/templates/ingress.yaml
+    kontinuous/chartPath: project.fabrique.contrib.maildev
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/maildev/templates/ingress.yaml
     kontinuous/deployment: test-maildev-feature-branch-1-ffac537e6cbbf934b08745a-5iniqvup
   labels:
     component: maildev

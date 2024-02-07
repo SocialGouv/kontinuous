@@ -9,5 +9,6 @@ module.exports = [
 
   "./global-defaults.js",
 
+  "../charts/contrib/values-compilers/09-maildev.js",
   "../charts/contrib/values-compilers/10-tpl-meta-values",
 ]
