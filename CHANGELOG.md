@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.169.10](https://github.com/socialgouv/kontinuous/compare/v1.169.9...v1.169.10) (2024-02-07)
+
+
+### Bug Fixes
+
+* degit image for private repo ([9e72d8f](https://github.com/socialgouv/kontinuous/commit/9e72d8f8bb32a13f7072700da0e3228a9a81c086))
+
 ## [1.169.9](https://github.com/socialgouv/kontinuous/compare/v1.169.8...v1.169.9) (2024-02-07)
 
 
