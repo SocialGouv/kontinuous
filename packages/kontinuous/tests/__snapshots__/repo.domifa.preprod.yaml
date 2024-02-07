@@ -170,7 +170,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.169.6
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.169.7
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -356,7 +356,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.169.6
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.169.7
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -547,7 +547,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.169.6
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.169.7
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -734,7 +734,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.169.6
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.169.7
           imagePullPolicy: IfNotPresent
           command:
             - sh

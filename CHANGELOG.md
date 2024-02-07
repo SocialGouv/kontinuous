@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.169.7 (2024-02-07)
+
+
+### Bug Fixes
+
+* maildev value compiler ([#457](https://github.com/socialgouv/kontinuous/issues/457)) ([0e27dcb](https://github.com/socialgouv/kontinuous/commit/0e27dcb3c74fcf640f3b1e8e50a5762c9aceb8d7))
+
 ## 1.169.6 (2024-01-30)
 
 ## 1.169.5 (2024-01-29)

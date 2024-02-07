@@ -1,18 +1,18 @@
 apiVersion: v2
 name: fabrique
-version: 1.169.6
+version: 1.169.7
 dependencies:
   - name: contrib
     repository: file://./charts/contrib
-    version: 1.169.6
+    version: 1.169.7
     condition: contrib.enabled
   - name: pg
     repository: file://./charts/pg
-    version: 1.169.6
+    version: 1.169.7
     condition: pg.enabled
   - name: pgweb
     repository: file://./charts/pgweb
-    version: 1.169.6
+    version: 1.169.7
     condition: pgweb.enabled
   - name: keycloakx
     repository: https://codecentric.github.io/helm-charts
