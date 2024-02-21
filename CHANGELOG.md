@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.169.11 (2024-02-21)
+
+
+### Bug Fixes
+
+* back to previous storage class on ovg ([6309008](https://github.com/socialgouv/kontinuous/commit/63090089a49529541d08b38844b7cc3df5b5cdf2))
+
 ## [1.169.10](https://github.com/socialgouv/kontinuous/compare/v1.169.9...v1.169.10) (2024-02-07)
 
 
