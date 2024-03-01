@@ -54,6 +54,24 @@ dependencies:
         options:
           cpu: 1
           memory: 1Gi
+      addJobsAffinityAndTolerations:
+        enabled: true
+        options:
+          affinityToAdd:
+            nodeAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 100
+                  preference:
+                    matchExpressions:
+                      - key: nodepool
+                        operator: In
+                        values:
+                          - prod-build
+          tolerationsToAdd:
+            - key: pool
+              operator: Equal
+              value: ci
+              effect: NoSchedule
 
     validators:
       rancherProjectId:

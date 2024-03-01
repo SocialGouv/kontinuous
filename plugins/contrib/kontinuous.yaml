@@ -29,6 +29,8 @@ patches:
     enabled: false
   janitor:
     enabled: true
+  addJobsAffinityAndTolerations:
+    enabled: false
 
 validators:
   rancherProjectId:
