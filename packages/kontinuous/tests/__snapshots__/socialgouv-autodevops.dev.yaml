@@ -264,21 +264,21 @@ spec:
           secret:
             optional: true
             secretName: buildkit-client-certs
-  affinity:
-    nodeAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          preference:
-            matchExpressions:
-              - key: nodepool
-                operator: In
-                values:
-                  - prod-build
-  tolerations:
-    - key: pool
-      operator: Equal
-      value: ci
-      effect: NoSchedule
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: nodepool
+                    operator: In
+                    values:
+                      - prod-build
+      tolerations:
+        - key: pool
+          operator: Equal
+          value: ci
+          effect: NoSchedule
 ---
 apiVersion: apps/v1
 kind: Deployment

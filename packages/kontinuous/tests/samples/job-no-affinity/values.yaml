@@ -1,0 +1,6 @@
+global:
+  antiAffinity.enabled: false
+
+build-app:
+  ~chart: job
+  use: build
