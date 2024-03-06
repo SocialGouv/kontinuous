@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.170.0 (2024-03-06)
+
+
+### Features
+
+* addJobsAffinityAndTolerations ([#462](https://github.com/socialgouv/kontinuous/issues/462)) ([74f89b5](https://github.com/socialgouv/kontinuous/commit/74f89b5b57ef97d7a6be3354e79cdd3a7d8b33dd))
+
 ## 1.169.11 (2024-02-21)
 
 
