@@ -63,5 +63,20 @@ spec:
             requests:
               cpu: 41m
               memory: 121Mi
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: nodepool
+                    operator: In
+                    values:
+                      - prod-build
+      tolerations:
+        - key: pool
+          operator: Equal
+          value: ci
+          effect: NoSchedule
 "
 `;
