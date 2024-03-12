@@ -4,6 +4,7 @@ module.exports = async (values, options, { config, logger, kubectl }) => {
   const {
     surviveOnBrokenCluster = false,
     buildkitServiceNamespace = "buildkit-service",
+    required = false,
   } = options
   let { podCount } = options
   if (!podCount) {
@@ -23,11 +24,16 @@ module.exports = async (values, options, { config, logger, kubectl }) => {
         }
       )
     } catch (error) {
-      logger.error(
-        { error },
+      if (required) {
+        logger.error(
+          { error },
+          `unable to retrieve buildkit statefulset pod count in "${buildkitServiceNamespace}`
+        )
+        throw error
+      }
+      logger.warn(
         `unable to retrieve buildkit statefulset pod count in "${buildkitServiceNamespace}`
       )
-      throw error
     }
   }
   if (podCount) {
