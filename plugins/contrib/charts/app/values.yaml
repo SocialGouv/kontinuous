@@ -63,3 +63,5 @@ securityContext:
 #   runAsGroup: 26
 #   runAsNonRoot: true
 #   runAsUser: 26
+
+sidecars: []

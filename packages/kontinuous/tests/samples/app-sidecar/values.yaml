@@ -1,0 +1,13 @@
+app:
+  enabled: true
+  sidecars:
+  - name: cronjob
+    image: test/background-cronjob
+    command:
+    - /bin/sh
+    - -c
+    - |
+      run-background-cronjob
+    extraSpec:
+      securityContext:
+        runAsUser: 1000
