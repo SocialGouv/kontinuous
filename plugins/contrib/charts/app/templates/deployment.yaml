@@ -1,3 +1,23 @@
+{{- $registry := or .Values.registry .Values.global.registry -}}
+{{- $imageProject := or .Values.imageProject .Values.global.imageProject -}}
+{{- $imageRepository := or .Values.imageRepository .Values.global.imageRepository -}}
+{{- $imagePackage := .Values.imagePackage -}}
+{{- $imageTag := or .Values.imageTag .Values.global.imageTag -}}
+
+
+{{ $imagePath := "" }}
+{{- if .Values.image }}
+{{- $imagePath = .Values.image }}
+{{ else }}
+{{- $imagePathList := list -}}
+{{- if $registry }}{{- $imagePathList = append $imagePathList $registry -}}{{- end -}}
+{{- if $imageProject }}{{- $imagePathList = append $imagePathList (print $imageProject) -}}{{- end -}}
+{{- if $imageRepository }}{{- $imagePathList = append $imagePathList (print $imageRepository) -}}{{- end -}}
+{{- if $imagePackage }}{{- $imagePathList = append $imagePathList (print $imagePackage) -}}{{- end -}}
+{{- $fullImagePath := join "/" $imagePathList -}}
+{{- $imagePath = printf "%s:%s" $fullImagePath $imageTag -}}
+{{ end }}
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -41,11 +61,7 @@ spec:
             claimName: "{{ tpl $volumeName $ }}"
         {{- end }}
       containers:
-        - {{- if .Values.image }}
-          image: "{{ .Values.image }}"
-          {{- else }}
-          image: "{{ or .Values.registry .Values.global.registry }}{{ if (or .Values.imageProject .Values.global.imageProject) }}{{ (print "/" (or .Values.imageProject .Values.global.imageProject)) }}{{ end }}{{ if (or .Values.imageRepository .Values.global.imageRepository) }}{{ (print "/" (or .Values.imageRepository .Values.global.imageRepository)) }}{{ end }}{{ if .Values.imagePackage }}{{ (print "/" .Values.imagePackage) }}{{ end }}:{{ or .Values.imageTag .Values.global.imageTag }}"
-          {{- end }}
+        - image: "{{ $imagePath }}"
           {{- if .Values.securityContext }}
           securityContext:
             allowPrivilegeEscalation: false
@@ -101,3 +117,13 @@ spec:
             - name: "{{ tpl $volumeName $ }}"
               mountPath: "/mnt/{{ tpl $volumeName $ }}"
             {{- end }}
+        {{- range $sidecar := .Values.sidecars }}
+        - name: {{ $sidecar.name }}
+          image: {{ or $sidecar.image $imagePath }}
+          {{ if $sidecar.command }}
+          command: {{ $sidecar.command | toYaml | nindent 12 }}
+          {{- end }}
+          {{- with $sidecar.extraSpec }}
+          {{- toYaml . | nindent 10 }}
+          {{- end }}
+        {{- end }}
