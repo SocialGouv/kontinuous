@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.171.0 (2024-03-12)
+
+
+### Features
+
+* **chart-app:** sidecars ([#463](https://github.com/socialgouv/kontinuous/issues/463)) ([797b1eb](https://github.com/socialgouv/kontinuous/commit/797b1eba7edae6295bb2c2994c938c07c67fc838))
+
 ## 1.170.0 (2024-03-06)
 
 
