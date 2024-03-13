@@ -9,7 +9,6 @@ module.exports = async (values, options, { config, utils }) => {
 
   const isProd = env === "prod"
   const isPreProd = env === "preprod"
-  const isDev = !(isProd || isPreProd)
 
   const {
     domain: defaultRootDomain,
@@ -26,10 +25,6 @@ module.exports = async (values, options, { config, utils }) => {
     : isPreProd
     ? `${repositoryName}-preprod`
     : slug(`${repositoryName}-${gitBranch}`)
-
-  const isRenovate = gitBranch.startsWith("renovate")
-
-  const ttl = isDev ? (isRenovate ? "1d" : "7d") : ""
 
   const domain = isProd
     ? defaultRootDomain
@@ -57,7 +52,6 @@ module.exports = async (values, options, { config, utils }) => {
 
   const defaultValues = {
     global: {
-      ttl,
       pgSecretName,
       pgDatabase,
       pgUser,
