@@ -122,7 +122,6 @@ metadata:
   annotations:
     kontinuous/needsName: build-backend.buildkit
     kontinuous/needsNames: '[\\"build-backend\\",\\"build-backend.buildkit\\",\\"build-backend..buildkit\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -323,7 +322,6 @@ metadata:
   annotations:
     kontinuous/needsName: build-frontend.buildkit
     kontinuous/needsNames: '[\\"build-frontend\\",\\"build-frontend.buildkit\\",\\"build-frontend..buildkit\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -529,7 +527,6 @@ metadata:
   annotations:
     kontinuous/needsName: build-portail-admins.buildkit
     kontinuous/needsNames: '[\\"build-portail-admins\\",\\"build-portail-admins.buildkit\\",\\"build-portail-admins..buildkit\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -731,7 +728,6 @@ metadata:
   annotations:
     kontinuous/needsName: build-portail-usagers.buildkit
     kontinuous/needsNames: '[\\"build-portail-usagers\\",\\"build-portail-usagers.buildkit\\",\\"build-portail-usagers..buildkit\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak

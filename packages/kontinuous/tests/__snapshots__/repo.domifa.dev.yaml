@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
-    janitor/ttl: 7d
   labels:
     application: test-repo.domifa
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -124,7 +123,6 @@ metadata:
   annotations:
     kontinuous/needsName: build-backend.buildkit
     kontinuous/needsNames: '[\\"build-backend\\",\\"build-backend.buildkit\\",\\"build-backend..buildkit\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -329,7 +327,6 @@ metadata:
   annotations:
     kontinuous/needsName: build-frontend.buildkit
     kontinuous/needsNames: '[\\"build-frontend\\",\\"build-frontend.buildkit\\",\\"build-frontend..buildkit\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -535,7 +532,6 @@ metadata:
   annotations:
     kontinuous/needsName: build-portail-admins.buildkit
     kontinuous/needsNames: '[\\"build-portail-admins\\",\\"build-portail-admins.buildkit\\",\\"build-portail-admins..buildkit\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -737,7 +733,6 @@ metadata:
   annotations:
     kontinuous/needsName: build-portail-usagers.buildkit
     kontinuous/needsNames: '[\\"build-portail-usagers\\",\\"build-portail-usagers.buildkit\\",\\"build-portail-usagers..buildkit\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -941,7 +936,6 @@ metadata:
     kontinuous/needsName: create-db.create-db
     kontinuous/needsNames: '[\\"create-db\\",\\"create-db.create-db\\",\\"create-db..create-db\\"]'
     kontinuous/plugin.needs: '[\\"create-db..create-secret\\",\\"drop-db\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -1106,7 +1100,6 @@ metadata:
     kontinuous/needsName: create-db.create-secret
     kontinuous/needsNames: '[\\"create-db\\",\\"create-db.create-secret\\",\\"create-db..create-secret\\"]'
     kontinuous/plugin.needs: '[\\"drop-db\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -1266,7 +1259,6 @@ metadata:
   annotations:
     kontinuous/needsName: drop-db.drop-db
     kontinuous/needsNames: '[\\"drop-db\\",\\"drop-db.drop-db\\",\\"drop-db..drop-db\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
@@ -1406,7 +1398,6 @@ metadata:
     kontinuous/needsName: seed.seed-db
     kontinuous/needsNames: '[\\"seed\\",\\"seed.seed-db\\",\\"seed..seed-db\\"]'
     kontinuous/plugin.needs: '[\\"backend\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak

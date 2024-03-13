@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-bra-2prquyml
-    janitor/ttl: 7d
   labels:
     application: test-long-branch-host-patch
     kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-bra-2prquyml

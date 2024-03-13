@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
-    janitor/ttl: 7d
   labels:
     application: test-socialgouv-autodevops
     kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
@@ -88,7 +87,6 @@ metadata:
   annotations:
     kontinuous/needsName: build-app.buildkit
     kontinuous/needsNames: '[\\"build-app\\",\\"build-app.buildkit\\",\\"build-app..buildkit\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu

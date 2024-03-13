@@ -87,7 +87,6 @@ metadata:
   annotations:
     kontinuous/needsName: seed
     kontinuous/needsNames: '[\\"seed\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-values-extends-feature-branch-1-ffac537e6cbbf934-18dfb8mu

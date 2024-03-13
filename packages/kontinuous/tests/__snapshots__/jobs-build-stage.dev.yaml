@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf9-6bjy8r03
-    janitor/ttl: 7d
   labels:
     application: test-jobs-build-stage
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf9-6bjy8r03
@@ -89,7 +88,6 @@ metadata:
     kontinuous/needsName: db.create-db
     kontinuous/needsNames: '[\\"db\\",\\"db.create-db\\",\\"db..create-db\\"]'
     kontinuous/plugin.needs: '[\\"db..create-secret\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs-dev
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs-dev/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf9-6bjy8r03
@@ -253,7 +251,6 @@ metadata:
   annotations:
     kontinuous/needsName: db.create-secret
     kontinuous/needsNames: '[\\"db\\",\\"db.create-secret\\",\\"db..create-secret\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs-dev
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs-dev/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf9-6bjy8r03
@@ -414,7 +411,6 @@ metadata:
     kontinuous/needsName: build-app.buildkit
     kontinuous/plugin.stage: build
     kontinuous/needsNames: '[\\"build-app\\",\\"build-app.buildkit\\",\\"build-app..buildkit\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf9-6bjy8r03
@@ -615,7 +611,6 @@ metadata:
     kontinuous/needsName: build-hasura.buildkit
     kontinuous/plugin.stage: build
     kontinuous/needsNames: '[\\"build-hasura\\",\\"build-hasura.buildkit\\",\\"build-hasura..buildkit\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf9-6bjy8r03
