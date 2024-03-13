@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
-    janitor/ttl: 7d
   labels:
     application: test-output
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
@@ -113,7 +112,6 @@ metadata:
   annotations:
     kontinuous/needsName: a
     kontinuous/needsNames: '[\\"a\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea
@@ -251,7 +249,6 @@ metadata:
     kontinuous/needsName: b
     kontinuous/needsNames: '[\\"b\\"]'
     kontinuous/plugin.needs: '[\\"a\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-output-feature-branch-1-ffac537e6cbbf934b08745a3-4eok7uea

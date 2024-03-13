@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-multi-containers-feature-branch-1-ffac537e6cbbf9-66ono92u
-    janitor/ttl: 7d
   labels:
     application: test-multi-containers
     kontinuous/deployment: test-multi-containers-feature-branch-1-ffac537e6cbbf9-66ono92u

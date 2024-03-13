@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-deactivate-param-not-activated-feature-branch-1-qes6b147
-    janitor/ttl: 7d
   labels:
     application: test-deactivate-param-not-activated
     kontinuous/deployment: test-deactivate-param-not-activated-feature-branch-1-qes6b147

@@ -167,7 +167,6 @@ metadata:
   annotations:
     kontinuous/needsName: create-secrets.create-secrets
     kontinuous/needsNames: '[\\"create-secrets\\",\\"create-secrets.create-secrets\\",\\"create-secrets..create-secrets\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.cnpg.jobs-pg
     kontinuous/source: project/charts/fabrique/charts/cnpg/charts/jobs-pg/templates/jobs.yaml
     kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3

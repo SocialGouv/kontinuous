@@ -7,7 +7,7 @@ metadata:
   name: some-ns
 `
 
-const runJanitor = async (config, values) => {
+const runJanitor = async (config, options = {}) => {
   const ctx = require("~common/ctx")
   const utils = require("~common/utils")
 
@@ -18,10 +18,12 @@ const runJanitor = async (config, values) => {
     ctx.set("logger", logger)
     return janitor(
       manifests,
-      {},
+      {
+        mode: "ttl",
+        ...options,
+      },
       {
         config,
-        values,
         ctx,
         utils,
       }

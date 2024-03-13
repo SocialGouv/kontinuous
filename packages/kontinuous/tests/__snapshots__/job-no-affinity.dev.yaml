@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-job-no-affinity-feature-branch-1-ffac537e6cbbf93-3uenw7mk
-    janitor/ttl: 7d
   labels:
     application: test-job-no-affinity
     kontinuous/deployment: test-job-no-affinity-feature-branch-1-ffac537e6cbbf93-3uenw7mk
@@ -87,7 +86,6 @@ metadata:
   annotations:
     kontinuous/needsName: build-app.buildkit
     kontinuous/needsNames: '[\\"build-app\\",\\"build-app.buildkit\\",\\"build-app..buildkit\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.build-app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/build-app/templates/job.yaml
     kontinuous/deployment: test-job-no-affinity-feature-branch-1-ffac537e6cbbf93-3uenw7mk
