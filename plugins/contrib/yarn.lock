@@ -2923,6 +2923,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"parse-duration@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "parse-duration@npm:1.1.0"
+  checksum: c860198825906ea6bc57d6de271acafabe150ae0d8e32942f9cf8eb6fc441a2756799da7d5aa9c3c5e7eb9d185e555dde0b845d8d3f40195df7062ecfd0761d6
+  languageName: node
+  linkType: hard
+
 "parse-json@npm:^5.2.0":
   version: 5.2.0
   resolution: "parse-json@npm:5.2.0"
@@ -3625,6 +3632,7 @@ __metadata:
     lodash.omit: "npm:^4.5.0"
     lodash.pick: "npm:^4.4.0"
     lodash.set: "npm:^4.3.2"
+    parse-duration: "npm:^1.1.0"
     slackstream: "npm:^0.2.1"
   languageName: unknown
   linkType: soft
