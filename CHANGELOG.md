@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.171.2 (2024-03-13)
+
+
+### Bug Fixes
+
+* janitor ttl to expires ([#467](https://github.com/socialgouv/kontinuous/issues/467)) ([6960351](https://github.com/socialgouv/kontinuous/commit/6960351ba936763c117c3587cb261ed03622f59a))
+
 ## 1.171.1 (2024-03-12)
 
 
