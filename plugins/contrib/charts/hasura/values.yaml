@@ -7,7 +7,6 @@ imageProject:
 imageRepository:
 imagePackage: hasura
 imageTag:
-ttl:
 isProd: false
 isPreProd: false
 replicas: 1

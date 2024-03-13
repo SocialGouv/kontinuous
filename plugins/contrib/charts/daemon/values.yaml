@@ -6,7 +6,6 @@ imageRepository:
 imagePackage: daemon
 imageTag:
 image:
-ttl:
 replicas: 
 env: []
 vars: {}
