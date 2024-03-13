@@ -24,7 +24,7 @@ module.exports = (manifests, options, { config, utils }) => {
       "develop",
       ...persistPatterns,
     ],
-    mode = "expire", // expire or ttl
+    mode = "expires", // expire or ttl
     ttl = "7d",
     resetLastPeriod = true,
   } = options
@@ -41,7 +41,7 @@ module.exports = (manifests, options, { config, utils }) => {
 
   let annotationValue
   switch (mode) {
-    case "expire": {
+    case "expires": {
       if (expires === null) {
         const date = new Date()
         const duration = parseDuration(ttl)
