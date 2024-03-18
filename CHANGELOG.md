@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.172.1 (2024-03-18)
+
+
+### Bug Fixes
+
+* up parse-manifests ([#468](https://github.com/socialgouv/kontinuous/issues/468)) ([6d215b4](https://github.com/socialgouv/kontinuous/commit/6d215b4cc2193b595846b128e1e5dc31801df9e7))
+
 ## 1.172.0 (2024-03-18)
 
 
