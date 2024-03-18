@@ -144,7 +144,7 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
-  backoffLimit: 1
+  backoffLimit: 0
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
@@ -193,7 +193,7 @@ spec:
               memory: \\"0\\"
       containers:
         - name: job
-          image: moby/buildkit:v0.11.6-rootless
+          image: moby/buildkit:v0.13.0-rootless
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -211,19 +211,68 @@ spec:
             - >
               set -e
 
-              if [ \\"\\" != \\"\\" ]; then
-                export CI_REGISTRY=\\"\\"
-              fi
 
-              buildctl_options_cache=\\"\\"
+              export IMAGE_NAME=/domifa/test-repo.domifa/backend
+
+              export IMAGE_PATH=\\"\${CI_REGISTRY}\${IMAGE_NAME}\\"
+
+
+              buildctl_options_cache=\\"\\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-main \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-master \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-dev \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-develop \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                \\"
+
+
+
+              buildkit_addr=tcp://buildkit-service.buildkit-service.svc:1234
+
+
+              # consistent hashing distribution
+
+
+
+              ## setup consistent hashing variable
+
+              export pod_count='1'
+
+              export pod_hash_ref=\\"$IMAGE_NAME\\"
+
+
+              ## get the pod number
+
+              pod_num=$(( 0x$(echo \\"$pod_hash_ref\\" | md5sum | cut -d ' ' -f 1 | head -c 15) ))
+
+              [ $pod_num -lt 0 ] && pod_num=$((pod_num * -1))
+
+              pod_num=$(( $pod_num % $pod_count ))
+
+
+              ## rewrite addr
+
+              prefix_addr=\\"\${buildkit_addr%%.*}\\"
+
+              protocol=\\"\${prefix_addr%%://*}\\"
+
+              # protocol=kube-pod
+
+              subdomain=\\"\${prefix_addr#*//}\\"
+
+
+              buildkit_addr=$(echo \\"$buildkit_addr\\" | sed \\"s|$prefix_addr|$protocol://$subdomain-$pod_num.$subdomain|\\")
+
+
+
+              # buildkit_addr=\\"tcp://test-buildkit-service.test-buildkit-service.svc:1235\\" # enable in debug to emulate service failure
+
+
+
+
+              buildctl_cmd=\\"buildctl --addr $buildkit_addr \\"
 
               buildctl_options_mtls=\\"\\"
-
-
-
-              buildctl_cmd=\\"buildctl \\\\
-                --addr tcp://buildkit-service.buildkit-service.svc:1234 \\\\
-              \\"
 
               if [ -f /buildkit-certs/cert.pem ]; then
                 buildctl_options_mtls=\\"\\\\
@@ -239,25 +288,60 @@ spec:
 
               echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
 
-              export IMAGE_PATH=$CI_REGISTRY/domifa/test-repo.domifa/backend
-
               export LATEST_TAG=\\"\\"
 
               if [ \\"false\\" = \\"true\\" ]; then
                 export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
               fi
 
-              $buildctl_cmd \\\\
-                $buildctl_options_mtls \\\\
-                build \\\\
-                --frontend dockerfile.v0 \\\\
-                --local context=/workspace/ \\\\
-                --local dockerfile=/workspace \\\\
-                --opt filename=./packages/backend/Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
-                $buildctl_options_cache \\\\
-                --opt build-arg:\\"DOMIFA_ENV_ID=preprod\\" \\\\
-                echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
+
+              runBuildkit() {
+                tempfile=$(mktemp -u)
+                pipe=$(mktemp -u)
+                mkfifo \\"$pipe\\"
+                tee \\"$tempfile\\" < \\"$pipe\\" &
+
+                $buildctl_cmd \\\\
+                  $buildctl_options_mtls \\\\
+                  build \\\\
+                  --frontend dockerfile.v0 \\\\
+                  --local context=/workspace/ \\\\
+                  --local dockerfile=/workspace \\\\
+                  --opt filename=./packages/backend/Dockerfile \\\\
+                  --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
+                  $buildctl_options_cache \\\\
+                  --opt build-arg:\\"DOMIFA_ENV_ID=preprod\\" \\\\
+                  >\\"$pipe\\" 2>&1
+                return $?
+              }
+
+
+              set +e
+
+              runBuildkit
+
+              status=$?
+
+              set -e
+
+
+              if [ \\"$status\\" -ne 0 ]; then
+                echo \\"Command failed. Handling error...\\"
+                if grep -q -e \\"listing workers for Build: failed to list workers: Unavailable\\" $tempfile; then
+                  echo \\"buildkit optimized service unavailable, fallback to local build\\"
+                  buildctl_cmd=\\"buildctl-daemonless.sh\\"
+                  buildctl_options_mtls=\\"\\"
+                  runBuildkit
+                else
+                  exit $status
+                fi
+              fi
+
+
+              echo \\"build succeeded.\\"
+
+
+              echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
               cpu: \\"2\\"
@@ -268,6 +352,7 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+            allowPrivilegeEscalation: true
             seccompProfile:
               type: Unconfined
           volumeMounts:
@@ -344,7 +429,7 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
-  backoffLimit: 1
+  backoffLimit: 0
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
@@ -393,7 +478,7 @@ spec:
               memory: \\"0\\"
       containers:
         - name: job
-          image: moby/buildkit:v0.11.6-rootless
+          image: moby/buildkit:v0.13.0-rootless
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -411,19 +496,68 @@ spec:
             - >
               set -e
 
-              if [ \\"\\" != \\"\\" ]; then
-                export CI_REGISTRY=\\"\\"
-              fi
 
-              buildctl_options_cache=\\"\\"
+              export IMAGE_NAME=/domifa/test-repo.domifa/frontend
+
+              export IMAGE_PATH=\\"\${CI_REGISTRY}\${IMAGE_NAME}\\"
+
+
+              buildctl_options_cache=\\"\\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-main \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-master \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-dev \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-develop \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                \\"
+
+
+
+              buildkit_addr=tcp://buildkit-service.buildkit-service.svc:1234
+
+
+              # consistent hashing distribution
+
+
+
+              ## setup consistent hashing variable
+
+              export pod_count='1'
+
+              export pod_hash_ref=\\"$IMAGE_NAME\\"
+
+
+              ## get the pod number
+
+              pod_num=$(( 0x$(echo \\"$pod_hash_ref\\" | md5sum | cut -d ' ' -f 1 | head -c 15) ))
+
+              [ $pod_num -lt 0 ] && pod_num=$((pod_num * -1))
+
+              pod_num=$(( $pod_num % $pod_count ))
+
+
+              ## rewrite addr
+
+              prefix_addr=\\"\${buildkit_addr%%.*}\\"
+
+              protocol=\\"\${prefix_addr%%://*}\\"
+
+              # protocol=kube-pod
+
+              subdomain=\\"\${prefix_addr#*//}\\"
+
+
+              buildkit_addr=$(echo \\"$buildkit_addr\\" | sed \\"s|$prefix_addr|$protocol://$subdomain-$pod_num.$subdomain|\\")
+
+
+
+              # buildkit_addr=\\"tcp://test-buildkit-service.test-buildkit-service.svc:1235\\" # enable in debug to emulate service failure
+
+
+
+
+              buildctl_cmd=\\"buildctl --addr $buildkit_addr \\"
 
               buildctl_options_mtls=\\"\\"
-
-
-
-              buildctl_cmd=\\"buildctl \\\\
-                --addr tcp://buildkit-service.buildkit-service.svc:1234 \\\\
-              \\"
 
               if [ -f /buildkit-certs/cert.pem ]; then
                 buildctl_options_mtls=\\"\\\\
@@ -439,30 +573,65 @@ spec:
 
               echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
 
-              export IMAGE_PATH=$CI_REGISTRY/domifa/test-repo.domifa/frontend
-
               export LATEST_TAG=\\"\\"
 
               if [ \\"false\\" = \\"true\\" ]; then
                 export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
               fi
 
-              $buildctl_cmd \\\\
-                $buildctl_options_mtls \\\\
-                build \\\\
-                --frontend dockerfile.v0 \\\\
-                --local context=/workspace/ \\\\
-                --local dockerfile=/workspace \\\\
-                --opt filename=./packages/frontend/Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
-                $buildctl_options_cache \\\\
-                --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
-                --opt build-arg:\\"DOMIFA_ENV_ID=preprod\\" \\\\
-                --opt build-arg:\\"DOMIFA_FRONTEND_META_ROBOTS=noindex,nofollow\\" \\\\
-                --opt build-arg:\\"DOMIFA_PORTAIL_ADMINS_URL=https://admin-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
-                --opt build-arg:\\"DOMIFA_PORTAIL_USAGERS_URL=https://mon-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
-                --opt build-arg:\\"DOMIFA_SENTRY_DSN_FRONTEND=https://***@sentry.fabrique.social.gouv.fr/31\\" \\\\
-                echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
+
+              runBuildkit() {
+                tempfile=$(mktemp -u)
+                pipe=$(mktemp -u)
+                mkfifo \\"$pipe\\"
+                tee \\"$tempfile\\" < \\"$pipe\\" &
+
+                $buildctl_cmd \\\\
+                  $buildctl_options_mtls \\\\
+                  build \\\\
+                  --frontend dockerfile.v0 \\\\
+                  --local context=/workspace/ \\\\
+                  --local dockerfile=/workspace \\\\
+                  --opt filename=./packages/frontend/Dockerfile \\\\
+                  --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
+                  $buildctl_options_cache \\\\
+                  --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
+                  --opt build-arg:\\"DOMIFA_ENV_ID=preprod\\" \\\\
+                  --opt build-arg:\\"DOMIFA_FRONTEND_META_ROBOTS=noindex,nofollow\\" \\\\
+                  --opt build-arg:\\"DOMIFA_PORTAIL_ADMINS_URL=https://admin-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
+                  --opt build-arg:\\"DOMIFA_PORTAIL_USAGERS_URL=https://mon-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
+                  --opt build-arg:\\"DOMIFA_SENTRY_DSN_FRONTEND=https://***@sentry.fabrique.social.gouv.fr/31\\" \\\\
+                  >\\"$pipe\\" 2>&1
+                return $?
+              }
+
+
+              set +e
+
+              runBuildkit
+
+              status=$?
+
+              set -e
+
+
+              if [ \\"$status\\" -ne 0 ]; then
+                echo \\"Command failed. Handling error...\\"
+                if grep -q -e \\"listing workers for Build: failed to list workers: Unavailable\\" $tempfile; then
+                  echo \\"buildkit optimized service unavailable, fallback to local build\\"
+                  buildctl_cmd=\\"buildctl-daemonless.sh\\"
+                  buildctl_options_mtls=\\"\\"
+                  runBuildkit
+                else
+                  exit $status
+                fi
+              fi
+
+
+              echo \\"build succeeded.\\"
+
+
+              echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
               cpu: \\"2\\"
@@ -473,6 +642,7 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+            allowPrivilegeEscalation: true
             seccompProfile:
               type: Unconfined
           volumeMounts:
@@ -549,7 +719,7 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
-  backoffLimit: 1
+  backoffLimit: 0
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
@@ -598,7 +768,7 @@ spec:
               memory: \\"0\\"
       containers:
         - name: job
-          image: moby/buildkit:v0.11.6-rootless
+          image: moby/buildkit:v0.13.0-rootless
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -616,19 +786,68 @@ spec:
             - >
               set -e
 
-              if [ \\"\\" != \\"\\" ]; then
-                export CI_REGISTRY=\\"\\"
-              fi
 
-              buildctl_options_cache=\\"\\"
+              export IMAGE_NAME=/domifa/test-repo.domifa/portail-admins
+
+              export IMAGE_PATH=\\"\${CI_REGISTRY}\${IMAGE_NAME}\\"
+
+
+              buildctl_options_cache=\\"\\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-main \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-master \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-dev \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-develop \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                \\"
+
+
+
+              buildkit_addr=tcp://buildkit-service.buildkit-service.svc:1234
+
+
+              # consistent hashing distribution
+
+
+
+              ## setup consistent hashing variable
+
+              export pod_count='1'
+
+              export pod_hash_ref=\\"$IMAGE_NAME\\"
+
+
+              ## get the pod number
+
+              pod_num=$(( 0x$(echo \\"$pod_hash_ref\\" | md5sum | cut -d ' ' -f 1 | head -c 15) ))
+
+              [ $pod_num -lt 0 ] && pod_num=$((pod_num * -1))
+
+              pod_num=$(( $pod_num % $pod_count ))
+
+
+              ## rewrite addr
+
+              prefix_addr=\\"\${buildkit_addr%%.*}\\"
+
+              protocol=\\"\${prefix_addr%%://*}\\"
+
+              # protocol=kube-pod
+
+              subdomain=\\"\${prefix_addr#*//}\\"
+
+
+              buildkit_addr=$(echo \\"$buildkit_addr\\" | sed \\"s|$prefix_addr|$protocol://$subdomain-$pod_num.$subdomain|\\")
+
+
+
+              # buildkit_addr=\\"tcp://test-buildkit-service.test-buildkit-service.svc:1235\\" # enable in debug to emulate service failure
+
+
+
+
+              buildctl_cmd=\\"buildctl --addr $buildkit_addr \\"
 
               buildctl_options_mtls=\\"\\"
-
-
-
-              buildctl_cmd=\\"buildctl \\\\
-                --addr tcp://buildkit-service.buildkit-service.svc:1234 \\\\
-              \\"
 
               if [ -f /buildkit-certs/cert.pem ]; then
                 buildctl_options_mtls=\\"\\\\
@@ -644,26 +863,61 @@ spec:
 
               echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
 
-              export IMAGE_PATH=$CI_REGISTRY/domifa/test-repo.domifa/portail-admins
-
               export LATEST_TAG=\\"\\"
 
               if [ \\"false\\" = \\"true\\" ]; then
                 export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
               fi
 
-              $buildctl_cmd \\\\
-                $buildctl_options_mtls \\\\
-                build \\\\
-                --frontend dockerfile.v0 \\\\
-                --local context=/workspace/ \\\\
-                --local dockerfile=/workspace \\\\
-                --opt filename=./packages/portail-admins/Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
-                $buildctl_options_cache \\\\
-                --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
-                --opt build-arg:\\"DOMIFA_ENV_ID=preprod\\" \\\\
-                echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
+
+              runBuildkit() {
+                tempfile=$(mktemp -u)
+                pipe=$(mktemp -u)
+                mkfifo \\"$pipe\\"
+                tee \\"$tempfile\\" < \\"$pipe\\" &
+
+                $buildctl_cmd \\\\
+                  $buildctl_options_mtls \\\\
+                  build \\\\
+                  --frontend dockerfile.v0 \\\\
+                  --local context=/workspace/ \\\\
+                  --local dockerfile=/workspace \\\\
+                  --opt filename=./packages/portail-admins/Dockerfile \\\\
+                  --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
+                  $buildctl_options_cache \\\\
+                  --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
+                  --opt build-arg:\\"DOMIFA_ENV_ID=preprod\\" \\\\
+                  >\\"$pipe\\" 2>&1
+                return $?
+              }
+
+
+              set +e
+
+              runBuildkit
+
+              status=$?
+
+              set -e
+
+
+              if [ \\"$status\\" -ne 0 ]; then
+                echo \\"Command failed. Handling error...\\"
+                if grep -q -e \\"listing workers for Build: failed to list workers: Unavailable\\" $tempfile; then
+                  echo \\"buildkit optimized service unavailable, fallback to local build\\"
+                  buildctl_cmd=\\"buildctl-daemonless.sh\\"
+                  buildctl_options_mtls=\\"\\"
+                  runBuildkit
+                else
+                  exit $status
+                fi
+              fi
+
+
+              echo \\"build succeeded.\\"
+
+
+              echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
               cpu: \\"2\\"
@@ -674,6 +928,7 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+            allowPrivilegeEscalation: true
             seccompProfile:
               type: Unconfined
           volumeMounts:
@@ -750,7 +1005,7 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
-  backoffLimit: 1
+  backoffLimit: 0
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
@@ -799,7 +1054,7 @@ spec:
               memory: \\"0\\"
       containers:
         - name: job
-          image: moby/buildkit:v0.11.6-rootless
+          image: moby/buildkit:v0.13.0-rootless
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -817,19 +1072,68 @@ spec:
             - >
               set -e
 
-              if [ \\"\\" != \\"\\" ]; then
-                export CI_REGISTRY=\\"\\"
-              fi
 
-              buildctl_options_cache=\\"\\"
+              export IMAGE_NAME=/domifa/test-repo.domifa/portail-usagers
+
+              export IMAGE_PATH=\\"\${CI_REGISTRY}\${IMAGE_NAME}\\"
+
+
+              buildctl_options_cache=\\"\\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-main \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-master \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-dev \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-develop \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                \\"
+
+
+
+              buildkit_addr=tcp://buildkit-service.buildkit-service.svc:1234
+
+
+              # consistent hashing distribution
+
+
+
+              ## setup consistent hashing variable
+
+              export pod_count='1'
+
+              export pod_hash_ref=\\"$IMAGE_NAME\\"
+
+
+              ## get the pod number
+
+              pod_num=$(( 0x$(echo \\"$pod_hash_ref\\" | md5sum | cut -d ' ' -f 1 | head -c 15) ))
+
+              [ $pod_num -lt 0 ] && pod_num=$((pod_num * -1))
+
+              pod_num=$(( $pod_num % $pod_count ))
+
+
+              ## rewrite addr
+
+              prefix_addr=\\"\${buildkit_addr%%.*}\\"
+
+              protocol=\\"\${prefix_addr%%://*}\\"
+
+              # protocol=kube-pod
+
+              subdomain=\\"\${prefix_addr#*//}\\"
+
+
+              buildkit_addr=$(echo \\"$buildkit_addr\\" | sed \\"s|$prefix_addr|$protocol://$subdomain-$pod_num.$subdomain|\\")
+
+
+
+              # buildkit_addr=\\"tcp://test-buildkit-service.test-buildkit-service.svc:1235\\" # enable in debug to emulate service failure
+
+
+
+
+              buildctl_cmd=\\"buildctl --addr $buildkit_addr \\"
 
               buildctl_options_mtls=\\"\\"
-
-
-
-              buildctl_cmd=\\"buildctl \\\\
-                --addr tcp://buildkit-service.buildkit-service.svc:1234 \\\\
-              \\"
 
               if [ -f /buildkit-certs/cert.pem ]; then
                 buildctl_options_mtls=\\"\\\\
@@ -845,27 +1149,62 @@ spec:
 
               echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
 
-              export IMAGE_PATH=$CI_REGISTRY/domifa/test-repo.domifa/portail-usagers
-
               export LATEST_TAG=\\"\\"
 
               if [ \\"false\\" = \\"true\\" ]; then
                 export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
               fi
 
-              $buildctl_cmd \\\\
-                $buildctl_options_mtls \\\\
-                build \\\\
-                --frontend dockerfile.v0 \\\\
-                --local context=/workspace/ \\\\
-                --local dockerfile=/workspace \\\\
-                --opt filename=./packages/portail-usagers/Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
-                $buildctl_options_cache \\\\
-                --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
-                --opt build-arg:\\"DOMIFA_ENV_ID=preprod\\" \\\\
-                --opt build-arg:\\"DOMIFA_SENTRY_DSN_PORTAIL=https://***@sentry.fabrique.social.gouv.fr/58\\" \\\\
-                echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
+
+              runBuildkit() {
+                tempfile=$(mktemp -u)
+                pipe=$(mktemp -u)
+                mkfifo \\"$pipe\\"
+                tee \\"$tempfile\\" < \\"$pipe\\" &
+
+                $buildctl_cmd \\\\
+                  $buildctl_options_mtls \\\\
+                  build \\\\
+                  --frontend dockerfile.v0 \\\\
+                  --local context=/workspace/ \\\\
+                  --local dockerfile=/workspace \\\\
+                  --opt filename=./packages/portail-usagers/Dockerfile \\\\
+                  --output type=image,\\\\\\"name=$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
+                  $buildctl_options_cache \\\\
+                  --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo.domifa-preprod.dev.fabrique.social.gouv.fr/\\" \\\\
+                  --opt build-arg:\\"DOMIFA_ENV_ID=preprod\\" \\\\
+                  --opt build-arg:\\"DOMIFA_SENTRY_DSN_PORTAIL=https://***@sentry.fabrique.social.gouv.fr/58\\" \\\\
+                  >\\"$pipe\\" 2>&1
+                return $?
+              }
+
+
+              set +e
+
+              runBuildkit
+
+              status=$?
+
+              set -e
+
+
+              if [ \\"$status\\" -ne 0 ]; then
+                echo \\"Command failed. Handling error...\\"
+                if grep -q -e \\"listing workers for Build: failed to list workers: Unavailable\\" $tempfile; then
+                  echo \\"buildkit optimized service unavailable, fallback to local build\\"
+                  buildctl_cmd=\\"buildctl-daemonless.sh\\"
+                  buildctl_options_mtls=\\"\\"
+                  runBuildkit
+                else
+                  exit $status
+                fi
+              fi
+
+
+              echo \\"build succeeded.\\"
+
+
+              echo \\"$IMAGE_PATH:preprod-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
               cpu: \\"2\\"
@@ -876,6 +1215,7 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+            allowPrivilegeEscalation: true
             seccompProfile:
               type: Unconfined
           volumeMounts:

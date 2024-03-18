@@ -3,9 +3,10 @@ runs:
   - name: buildkit
     checkout: true
     action: false
-    # image: moby/buildkit:master-rootless
-    image: moby/buildkit:v0.11.6-rootless
-    # serviceAccountName: buildkit
+    retry: 0
+    image: moby/buildkit:v0.13.0-rootless
+    # image: ghcr.io/socialgouv/buildkit:v0.13.0-rootless
+    # kubernetes: true
     cpuLimit: "2"
     cpuRequest: 500m
     memoryLimit: 4Gi
@@ -17,6 +18,8 @@ runs:
       container.apparmor.security.beta.kubernetes.io/job: unconfined
     seccompProfile:
       type: Unconfined
+    actionSecurityContext:
+      allowPrivilegeEscalation: true
     envFrom:
       - secretRef:
           name: "{{ or $.with.registrySecretRefName $.Values.global.registrySecretRefName }}"
@@ -38,16 +41,56 @@ runs:
         name: certs
         readOnly: true
     run: |
-      if [ "{{ $.with.registry }}" != "" ]; then
-        export CI_REGISTRY="{{ $.with.registry }}"
-      fi
-      buildctl_options_cache=""
-      buildctl_options_mtls=""
+      {{ if $.with.registry }}
+      export CI_REGISTRY="{{ $.with.registry }}"
+      {{ end }}
+      export IMAGE_NAME={{ if (or $.with.imageProject $.Values.global.imageProject) }}{{ (print "/" (or $.with.imageProject $.Values.global.imageProject)) }}{{ end }}/{{ or $.with.imageRepository $.Values.global.imageRepository }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{else}}/app{{ end }}{{ if $.with.target }}{{ (print "-" $.with.target) }}{{ end }}
+      export IMAGE_PATH="${CI_REGISTRY}${IMAGE_NAME}"
 
-      {{ if (or $.with.buildkitServiceEnabled $.Values.global.buildkitServiceEnabled) }}
-      buildctl_cmd="buildctl \
-        --addr {{ or $.with.buildkitServiceAddr "tcp://buildkit-service.buildkit-service.svc:1234" }} \
-      "
+      buildctl_options_cache="\
+        --import-cache type=registry,ref=$IMAGE_PATH:cache-main \
+        --import-cache type=registry,ref=$IMAGE_PATH:cache-master \
+        --import-cache type=registry,ref=$IMAGE_PATH:cache-dev \
+        --import-cache type=registry,ref=$IMAGE_PATH:cache-develop \
+        --import-cache type=registry,ref=$IMAGE_PATH:{{ $.Values.global.branchSlug32 }} \
+        "
+
+      {{ if has $.Values.global.branchSlug (list "main" "master" "dev" "develop")  }}
+      buildctl_options_cache="\
+        $buildctl_options_cache \
+        --export-cache type=registry,mode=max,image-manifest=true,ignore-error=true,ref=$IMAGE_PATH:cache-{{ $.Values.global.branchSlug }} \
+        "
+      {{ end }}
+
+      buildkit_addr={{ or $.with.buildkitServiceAddr "tcp://buildkit-service.buildkit-service.svc:1234" }}
+
+      # consistent hashing distribution
+      {{ $buildkitPodCount := (or $.with.buildkitPodCount $.Values.global.buildkitPodCount) }}
+      {{ if $buildkitPodCount }}
+      ## setup consistent hashing variable
+      export pod_count={{ $buildkitPodCount }}
+      export pod_hash_ref="$IMAGE_NAME"
+
+      ## get the pod number
+      pod_num=$(( 0x$(echo "$pod_hash_ref" | md5sum | cut -d ' ' -f 1 | head -c 15) ))
+      [ $pod_num -lt 0 ] && pod_num=$((pod_num * -1))
+      pod_num=$(( $pod_num % $pod_count ))
+
+      ## rewrite addr
+      prefix_addr="${buildkit_addr%%.*}"
+      protocol="${prefix_addr%%://*}"
+      # protocol=kube-pod
+      subdomain="${prefix_addr#*//}"
+
+      buildkit_addr=$(echo "$buildkit_addr" | sed "s|$prefix_addr|$protocol://$subdomain-$pod_num.$subdomain|")
+      {{ end }}
+
+      # buildkit_addr="tcp://test-buildkit-service.test-buildkit-service.svc:1235" # enable in debug to emulate service failure
+
+      {{ $buildkitServiceEnabled := (or $.with.buildkitServiceEnabled $.Values.global.buildkitServiceEnabled) }}
+      {{ if $buildkitServiceEnabled }}
+      buildctl_cmd="buildctl --addr $buildkit_addr "
+      buildctl_options_mtls=""
       if [ -f /buildkit-certs/cert.pem ]; then
         buildctl_options_mtls="\
           --tlscacert /buildkit-certs/ca.pem \
@@ -57,40 +100,64 @@ runs:
       fi
       {{ else }}
       buildctl_cmd=buildctl-daemonless.sh
-      buildctl_options_cache="\
-        --export-cache type=inline \
-        --import-cache type=registry,ref=$IMAGE_PATH:{{ $.Values.global.branchSlug32 }} \
-        "
       {{ end }}
 
       mkdir -p /home/user/.docker
       echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /home/user/.docker/config.json
-      export IMAGE_PATH=$CI_REGISTRY{{ if (or $.with.imageProject $.Values.global.imageProject) }}{{ (print "/" (or $.with.imageProject $.Values.global.imageProject)) }}{{ end }}/{{ or $.with.imageRepository $.Values.global.imageRepository }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{else}}/app{{ end }}{{ if $.with.target }}{{ (print "-" $.with.target) }}{{ end }}
       export LATEST_TAG=""
       if [ "{{ $.Values.global.isProd }}" = "true" ]; then
         export LATEST_TAG=",$IMAGE_PATH:latest"
       fi
-      $buildctl_cmd \
-        $buildctl_options_mtls \
-        build \
-        --frontend dockerfile.v0 \
-        --local context=/workspace/{{ if $.with.context }}/{{ $.with.context }}{{ end }} \
-        --local dockerfile=/workspace{{ if $.with.context }}/{{ $.with.context }}{{ end }} \
-        --opt filename=./{{ or $.with.dockerfile "Dockerfile" }} \
-        --output type=image,\"name=$IMAGE_PATH:{{ or $.with.imageTag $.Values.global.imageTag }},$IMAGE_PATH:{{ $.Values.global.branchSlug32 }}$LATEST_TAG\",push=true \
-        $buildctl_options_cache \
-        {{ if $.with.buildArgs -}}
-        {{- range $key, $val := $.with.buildArgs -}}
-        --opt build-arg:"{{ tpl $key $ }}={{ tpl (print $val) $ }}" \
-        {{ end -}}
-        {{ end -}}
-        {{ if $.with.secrets -}}
-        {{- range $id, $val := $.with.secrets -}}
-        --secret id={{ or $val.id $id }},env=SECRET_{{ $id | upper }} \
-        {{ end -}}
-        {{ end -}}
-        {{ if $.with.target -}}
-        --target="{{ $.with.target }}" \
-        {{ end -}}
+
+      runBuildkit() {
+        tempfile=$(mktemp -u)
+        pipe=$(mktemp -u)
+        mkfifo "$pipe"
+        tee "$tempfile" < "$pipe" &
+
+        $buildctl_cmd \
+          $buildctl_options_mtls \
+          build \
+          --frontend dockerfile.v0 \
+          --local context=/workspace/{{ if $.with.context }}/{{ $.with.context }}{{ end }} \
+          --local dockerfile=/workspace{{ if $.with.context }}/{{ $.with.context }}{{ end }} \
+          --opt filename=./{{ or $.with.dockerfile "Dockerfile" }} \
+          --output type=image,\"name=$IMAGE_PATH:{{ or $.with.imageTag $.Values.global.imageTag }},$IMAGE_PATH:{{ $.Values.global.branchSlug32 }}$LATEST_TAG\",push=true \
+          $buildctl_options_cache \
+          {{ if $.with.buildArgs -}}
+          {{- range $key, $val := $.with.buildArgs -}}
+          --opt build-arg:"{{ tpl $key $ }}={{ tpl (print $val) $ }}" \
+          {{ end -}}
+          {{ end -}}
+          {{ if $.with.secrets -}}
+          {{- range $id, $val := $.with.secrets -}}
+          --secret id={{ or $val.id $id }},env=SECRET_{{ $id | upper }} \
+          {{ end -}}
+          {{ end -}}
+          {{ if $.with.target -}}
+          --target="{{ $.with.target }}" \
+          {{ end -}}
+            >"$pipe" 2>&1
+        return $?
+      }
+
+      set +e
+      runBuildkit
+      status=$?
+      set -e
+
+      if [ "$status" -ne 0 ]; then
+        echo "Command failed. Handling error..."
+        if grep -q -e "listing workers for Build: failed to list workers: Unavailable" $tempfile; then
+          echo "buildkit optimized service unavailable, fallback to local build"
+          buildctl_cmd="buildctl-daemonless.sh"
+          buildctl_options_mtls=""
+          runBuildkit
+        else
+          exit $status
+        fi
+      fi
+
+      echo "build succeeded."
 
       echo "$IMAGE_PATH:{{ or $.with.imageTag $.Values.global.imageTag }}" >$KONTINUOUS_OUTPUT/IMAGE
