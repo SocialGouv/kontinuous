@@ -199,36 +199,6 @@ spec:
 
 
 
-              ## setup consistent hashing variable
-
-              export pod_count='1'
-
-              export pod_hash_ref=\\"$IMAGE_NAME\\"
-
-
-              ## get the pod number
-
-              pod_num=$(( 0x$(echo \\"$pod_hash_ref\\" | md5sum | cut -d ' ' -f 1 | head -c 15) ))
-
-              [ $pod_num -lt 0 ] && pod_num=$((pod_num * -1))
-
-              pod_num=$(( $pod_num % $pod_count ))
-
-
-              ## rewrite addr
-
-              prefix_addr=\\"\${buildkit_addr%%.*}\\"
-
-              protocol=\\"\${prefix_addr%%://*}\\"
-
-              # protocol=kube-pod
-
-              subdomain=\\"\${prefix_addr#*//}\\"
-
-
-              buildkit_addr=$(echo \\"$buildkit_addr\\" | sed \\"s|$prefix_addr|$protocol://$subdomain-$pod_num.$subdomain|\\")
-
-
 
               # buildkit_addr=\\"tcp://test-buildkit-service.test-buildkit-service.svc:1235\\" # enable in debug to emulate service failure
 
