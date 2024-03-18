@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.172.0 (2024-03-18)
+
+
+### Features
+
+* **buildkit:** scale and fallback ([#466](https://github.com/socialgouv/kontinuous/issues/466)) ([508dd33](https://github.com/socialgouv/kontinuous/commit/508dd33c0e1c1689a715aa1f1b29c738c20b2d75))
+
 ## 1.171.2 (2024-03-13)
 
 
