@@ -5,15 +5,15 @@ __metadata:
   version: 7
   cacheKey: 9
 
-"@socialgouv/parse-manifests@npm:^1.14.9":
-  version: 1.14.9
-  resolution: "@socialgouv/parse-manifests@npm:1.14.9"
+"@socialgouv/parse-manifests@npm:^1.16.4":
+  version: 1.16.4
+  resolution: "@socialgouv/parse-manifests@npm:1.16.4"
   dependencies:
     get-stdin: "npm:^9.0.0"
     yaml: "npm:^1.10.2"
   bin:
     parse-manifests: bin/index.js
-  checksum: b5d00993926f40b761a61566796494509b85b91c4511090512e26c0119e6781ec8e544c335f5ee831bd2c6ce0d91cb99827131ab4df4de74d90cdd56e6aa016d
+  checksum: 3a335f1d21623c4c14424d31937cf63b9de4484edda35c66f5a194766a5fda4218521942543c3f36dfa14f0f70313af801627ea8e0c5cd86e8f252a6492f40c9
   languageName: node
   linkType: hard
 
@@ -35,6 +35,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "~fabrique@workspace:."
   dependencies:
-    "@socialgouv/parse-manifests": "npm:^1.14.9"
+    "@socialgouv/parse-manifests": "npm:^1.16.4"
   languageName: unknown
   linkType: soft
