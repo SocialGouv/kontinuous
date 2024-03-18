@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.172.2 (2024-03-18)
+
+
+### Bug Fixes
+
+* debug-links provider ([8edde8c](https://github.com/socialgouv/kontinuous/commit/8edde8ca46e2293bf39bf5d1ef4f7339c6d345c7))
+
 ## 1.172.1 (2024-03-18)
 
 
