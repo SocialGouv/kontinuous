@@ -489,6 +489,9 @@ const loadConfig = async (
       env: "KS_ISLOCAL",
       defaultFunction: (config) => !config.ci,
     },
+    provider: {
+      env: "KS_PROVIDER",
+    },
     clusterEnvironments: {
       transform: (value) => ({
         ...{
