@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.173.1](https://github.com/socialgouv/kontinuous/compare/v1.173.0...v1.173.1) (2024-03-19)
+
+
+### Bug Fixes
+
+* detect buildkit down while in progress to fallback ([4cb43a8](https://github.com/socialgouv/kontinuous/commit/4cb43a896bbb0d3a5138086c3b0970271373c3f6))
+
 ## 1.173.0 (2024-03-19)
 
 
