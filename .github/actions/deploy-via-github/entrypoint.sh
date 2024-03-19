@@ -37,11 +37,11 @@ else
   kontinuous deploy
 fi
 
+EXIT_CODE=$?
+
 provider=$(kontinuous config provider)
 
 echo "provider=$provider" >> $GITHUB_OUTPUT
-
-EXIT_CODE=$?
 
 mv "$KS_BUILD_PATH/manifests.yaml" \
    "$GITHUB_WORKSPACE/manifests.yaml"
