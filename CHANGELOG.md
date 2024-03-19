@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.173.0 (2024-03-19)
+
+
+### Features
+
+* add head branch to persist patterns ([d412fad](https://github.com/socialgouv/kontinuous/commit/d412fad8525155d999985c131365470a42ae254f))
+
 ## 1.172.3 (2024-03-19)
 
 
