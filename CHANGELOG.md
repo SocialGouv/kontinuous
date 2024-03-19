@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.172.3 (2024-03-19)
+
+
+### Bug Fixes
+
+* github action ([4e8a233](https://github.com/socialgouv/kontinuous/commit/4e8a2332ec12b22c5c66aab081e7ae2fd26bf71d))
+
 ## 1.172.2 (2024-03-18)
 
 
