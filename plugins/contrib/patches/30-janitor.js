@@ -48,6 +48,7 @@ module.exports = (manifests, options, { config, utils }) => {
         if (resetLastPeriod) {
           resetDateToLastPeriodBasedOnDuration(date, duration)
         }
+        date.setTime(date.getTime() + duration)
         const formattedDate = date.toISOString()
         expires = `${formattedDate.slice(0, -5)}Z`
       }
