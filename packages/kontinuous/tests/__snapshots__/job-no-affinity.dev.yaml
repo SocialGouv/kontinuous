@@ -260,7 +260,7 @@ spec:
 
               if [ \\"$status\\" -ne 0 ]; then
                 echo \\"Command failed. Handling error...\\"
-                if grep -q -e \\"listing workers for Build: failed to list workers: Unavailable\\" $tempfile; then
+                if grep -q -e \\"listing workers for Build: failed to list workers: Unavailable\\" -e \\"closing transport due to: connection error\\" $tempfile; then
                   echo \\"buildkit optimized service unavailable, fallback to local build\\"
                   buildctl_cmd=\\"buildctl-daemonless.sh\\"
                   buildctl_options_mtls=\\"\\"
