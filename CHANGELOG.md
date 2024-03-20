@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.173.3](https://github.com/socialgouv/kontinuous/compare/v1.173.2...v1.173.3) (2024-03-20)
+
+
+### Bug Fixes
+
+* add global buildkitServiceAddr ([7b5b7ef](https://github.com/socialgouv/kontinuous/commit/7b5b7efffa42a9aecd5e2fb166ce05cb57e18f74))
+* up snapshots ([6ae7358](https://github.com/socialgouv/kontinuous/commit/6ae7358a2eb93c7ee075ce2022c65b4bbb1ea448))
+
 ## [1.173.2](https://github.com/socialgouv/kontinuous/compare/v1.173.1...v1.173.2) (2024-03-20)
 
 
