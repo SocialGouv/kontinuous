@@ -17,13 +17,7 @@ module.exports = (manifests, options, { config, utils }) => {
   }
 
   const {
-    permanentDevEnvironmentBranches = [
-      "master",
-      "main",
-      "dev",
-      "develop",
-      ...persistPatterns,
-    ],
+    permanentDevEnvironmentBranches = [...persistPatterns],
     mode = "expires", // expire or ttl
     ttl = "7d",
     resetLastPeriod = true,
