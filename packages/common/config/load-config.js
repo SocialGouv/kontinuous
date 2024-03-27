@@ -555,7 +555,7 @@ const loadConfig = async (
               `ci-${config.projectName || config.repositoryName}`,
               `${config.projectName || config.repositoryName}-ci`,
             ]
-          : `${config.projectName || config.repositoryName}-ci`,
+          : `ci-${config.projectName || config.repositoryName}`,
       transform: async (value, config) => {
         if (!Array.isArray(value)) {
           return value
