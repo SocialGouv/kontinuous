@@ -146,6 +146,9 @@ dependencies:
         enabled: true
 
     deployWith:
+      kubectlDependencyTree:
+        options:
+          applyConcurrencyLimit: 10
       kapp:
         options:
           kubeApiQps: 1000
