@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.173.6 (2024-03-28)
+
+
+### Bug Fixes
+
+* disable pre-deploy import secrets by default ([#469](https://github.com/socialgouv/kontinuous/issues/469)) ([eaa069b](https://github.com/socialgouv/kontinuous/commit/eaa069bdd1c246218835623fdb645b5f9f0ab4f7))
+
 ## 1.173.5 (2024-03-28)
 
 
