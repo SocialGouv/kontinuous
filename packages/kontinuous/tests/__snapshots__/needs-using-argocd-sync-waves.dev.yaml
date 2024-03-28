@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
-    janitor/ttl: 7d
   labels:
     application: test-needs-using-argocd-sync-waves
     kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip

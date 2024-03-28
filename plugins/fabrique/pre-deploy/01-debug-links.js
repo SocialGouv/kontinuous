@@ -1,13 +1,19 @@
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved, import/extensions */
 
-const getManifestsSummaryImport = import(
-  "@socialgouv/parse-manifests/src/getManifestsSummary.js"
-)
-const summaryToTextImport = import(
-  "@socialgouv/parse-manifests/src/summaryToText.js"
-)
+module.exports = async (manifests, _options, { config, logger, utils }) => {
+  let envProviderOrigin
+  if (process.env.PROVIDER) {
+    envProviderOrigin = process.env.PROVIDER
+  }
+  process.env.PROVIDER = config.provider
 
-module.exports = async (manifests, _options, { logger, utils }) => {
+  const getManifestsSummaryImport = import(
+    "@socialgouv/parse-manifests/src/getManifestsSummary.js"
+  )
+  const summaryToTextImport = import(
+    "@socialgouv/parse-manifests/src/summaryToText.js"
+  )
+
   const getManifestsSummary = (await getManifestsSummaryImport).default
   const summaryToText = (await summaryToTextImport).default
 
@@ -27,4 +33,8 @@ module.exports = async (manifests, _options, { logger, utils }) => {
     line = utils.removePrefix(line, "### ")
     log.debug(line)
   })
+
+  if (envProviderOrigin) {
+    process.env.PROVIDER = envProviderOrigin
+  }
 }

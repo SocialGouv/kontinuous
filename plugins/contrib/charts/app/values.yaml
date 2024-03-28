@@ -8,7 +8,6 @@ imageRepository:
 imagePackage: app
 imageTag:
 image:
-ttl:
 rancherProjectId:
 isProd: false
 isPreProd: false

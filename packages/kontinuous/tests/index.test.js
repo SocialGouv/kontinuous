@@ -94,6 +94,7 @@ describe("test build manifests with snapshots", () => {
       KS_DISABLE_PLUGIN: JSON.stringify([
         "fabrique/contrib/validators/kubeconform",
         "fabrique/contrib/validators/sealedSecrets",
+        "fabrique/contrib/patches/janitor",
       ]),
     }
     const envFile = `${testdirPath}/.env`

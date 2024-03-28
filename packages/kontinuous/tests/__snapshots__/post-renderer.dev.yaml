@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-post-renderer-feature-branch-1-ffac537e6cbbf934b-1nm6zie7
-    janitor/ttl: 7d
   labels:
     application: test-post-renderer
     kontinuous/deployment: test-post-renderer-feature-branch-1-ffac537e6cbbf934b-1nm6zie7

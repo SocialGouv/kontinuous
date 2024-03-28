@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-force-restart-optout-feature-branch-1-ffac537e6c-392utzlw
-    janitor/ttl: 7d
   labels:
     application: test-force-restart-optout
     kontinuous/deployment: test-force-restart-optout-feature-branch-1-ffac537e6c-392utzlw

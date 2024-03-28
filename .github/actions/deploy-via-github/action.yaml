@@ -42,10 +42,14 @@ inputs:
     description: "Set config values using dot notation. eg: my.config.key=value,another.config.key=value2"
     default: ""
 
+outputs:
+  provider:
+    description: "Plateform provider"
+
 runs:
   using: docker
   # image: Dockerfile
-  image: docker://ghcr.io/socialgouv/kontinuous/deploy-via-github:v1.171.0
+  image: docker://ghcr.io/socialgouv/kontinuous/deploy-via-github:v1.173.4
   env:
     KS_ENVIRONMENT: ${{ inputs.environment }}
     KS_CHART: ${{ inputs.chart }}

@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-maildev-feature-branch-1-ffac537e6cbbf934b08745a-5iniqvup
-    janitor/ttl: 7d
   labels:
     application: test-maildev
     kontinuous/deployment: test-maildev-feature-branch-1-ffac537e6cbbf934b08745a-5iniqvup

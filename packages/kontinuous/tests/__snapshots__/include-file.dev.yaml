@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv
-    janitor/ttl: 7d
   labels:
     application: test-include-file
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv
@@ -87,7 +86,6 @@ metadata:
   annotations:
     kontinuous/needsName: say-hello
     kontinuous/needsNames: '[\\"say-hello\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-include-file-feature-branch-1-ffac537e6cbbf934b0-3mtci4uv
@@ -134,7 +132,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.171.0
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.173.4
           imagePullPolicy: IfNotPresent
           command:
             - sh

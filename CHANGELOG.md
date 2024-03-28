@@ -2,6 +2,84 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.173.4](https://github.com/socialgouv/kontinuous/compare/v1.173.3...v1.173.4) (2024-03-27)
+
+
+### Bug Fixes
+
+* default ci ns ([15f9cbe](https://github.com/socialgouv/kontinuous/commit/15f9cbe954281f2b895a36437e080b631dba346a))
+
+## [1.173.3](https://github.com/socialgouv/kontinuous/compare/v1.173.2...v1.173.3) (2024-03-20)
+
+
+### Bug Fixes
+
+* add global buildkitServiceAddr ([7b5b7ef](https://github.com/socialgouv/kontinuous/commit/7b5b7efffa42a9aecd5e2fb166ce05cb57e18f74))
+* up snapshots ([6ae7358](https://github.com/socialgouv/kontinuous/commit/6ae7358a2eb93c7ee075ce2022c65b4bbb1ea448))
+
+## [1.173.2](https://github.com/socialgouv/kontinuous/compare/v1.173.1...v1.173.2) (2024-03-20)
+
+
+### Bug Fixes
+
+* janitor expires ([45a4ada](https://github.com/socialgouv/kontinuous/commit/45a4adafdacc5c3a2b7d4e56348db80353d70c48))
+
+## [1.173.1](https://github.com/socialgouv/kontinuous/compare/v1.173.0...v1.173.1) (2024-03-19)
+
+
+### Bug Fixes
+
+* detect buildkit down while in progress to fallback ([4cb43a8](https://github.com/socialgouv/kontinuous/commit/4cb43a896bbb0d3a5138086c3b0970271373c3f6))
+
+## 1.173.0 (2024-03-19)
+
+
+### Features
+
+* add head branch to persist patterns ([d412fad](https://github.com/socialgouv/kontinuous/commit/d412fad8525155d999985c131365470a42ae254f))
+
+## 1.172.3 (2024-03-19)
+
+
+### Bug Fixes
+
+* github action ([4e8a233](https://github.com/socialgouv/kontinuous/commit/4e8a2332ec12b22c5c66aab081e7ae2fd26bf71d))
+
+## 1.172.2 (2024-03-18)
+
+
+### Bug Fixes
+
+* debug-links provider ([8edde8c](https://github.com/socialgouv/kontinuous/commit/8edde8ca46e2293bf39bf5d1ef4f7339c6d345c7))
+
+## 1.172.1 (2024-03-18)
+
+
+### Bug Fixes
+
+* up parse-manifests ([#468](https://github.com/socialgouv/kontinuous/issues/468)) ([6d215b4](https://github.com/socialgouv/kontinuous/commit/6d215b4cc2193b595846b128e1e5dc31801df9e7))
+
+## 1.172.0 (2024-03-18)
+
+
+### Features
+
+* **buildkit:** scale and fallback ([#466](https://github.com/socialgouv/kontinuous/issues/466)) ([508dd33](https://github.com/socialgouv/kontinuous/commit/508dd33c0e1c1689a715aa1f1b29c738c20b2d75))
+
+## 1.171.2 (2024-03-13)
+
+
+### Bug Fixes
+
+* janitor ttl to expires ([#467](https://github.com/socialgouv/kontinuous/issues/467)) ([6960351](https://github.com/socialgouv/kontinuous/commit/6960351ba936763c117c3587cb261ed03622f59a))
+
+## 1.171.1 (2024-03-12)
+
+
+### Bug Fixes
+
+* jobs add security context options ([#465](https://github.com/socialgouv/kontinuous/issues/465)) ([daea23f](https://github.com/socialgouv/kontinuous/commit/daea23f89c0374aadd4ae9dcdbeb90445b0b85cf))
+
 ## 1.171.0 (2024-03-12)
 
 

@@ -27,17 +27,21 @@ else
 fi
 
 
+cd $GITHUB_WORKSPACE
 if [ -n "$KS_DEPLOY_WRITE_OUTPUT_FILE" ]; then
   if [ "$KS_DEPLOY_WRITE_OUTPUT_FILE" = "true" ]; then
     export KS_DEPLOY_WRITE_OUTPUT_FILE="kontinuous-deployment-output.log"
   fi
-  cd $GITHUB_WORKSPACE
   script -e -q -f -c "kontinuous deploy" "$KS_DEPLOY_WRITE_OUTPUT_FILE"
 else
   kontinuous deploy
 fi
 
 EXIT_CODE=$?
+
+provider=$(kontinuous config provider)
+
+echo "provider=$provider" >> $GITHUB_OUTPUT
 
 mv "$KS_BUILD_PATH/manifests.yaml" \
    "$GITHUB_WORKSPACE/manifests.yaml"

@@ -248,7 +248,6 @@ metadata:
   annotations:
     kontinuous/needsName: create-secrets.create-secrets
     kontinuous/needsNames: '[\\"create-secrets\\",\\"create-secrets.create-secrets\\",\\"create-secrets..create-secrets\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.pg-hasura.jobs-pg
     kontinuous/source: project/charts/fabrique/charts/pg-hasura/charts/jobs-pg/templates/jobs.yaml
     kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
@@ -295,7 +294,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.171.0
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.173.4
           command:
             - sh
             - -c
@@ -412,7 +411,6 @@ metadata:
   annotations:
     kontinuous/needsName: create-secrets.create-secrets
     kontinuous/needsNames: '[\\"create-secrets\\",\\"create-secrets.create-secrets\\",\\"create-secrets..create-secrets\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.pg-keycloak.jobs-pg
     kontinuous/source: project/charts/fabrique/charts/pg-keycloak/charts/jobs-pg/templates/jobs.yaml
     kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
@@ -459,7 +457,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.171.0
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.173.4
           command:
             - sh
             - -c

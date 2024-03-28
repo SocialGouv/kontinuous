@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-project-chart-implicit-enabled-feature-branch-1-4798dszb
-    janitor/ttl: 7d
   labels:
     application: test-project-chart-implicit-enabled
     kontinuous/deployment: test-project-chart-implicit-enabled-feature-branch-1-4798dszb

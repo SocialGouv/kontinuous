@@ -49,7 +49,6 @@ metadata:
     {{- if not (kindIs "invalid" $run.log) }}
     kontinuous/plugin.log: {{ $run.log | quote }}
     {{- end }}
-    janitor/ttl: "7d"
     {{- if $run.onChangedPaths }}
     kontinuous/onChangedPaths: |
       {{- range $val := $run.onChangedPaths }}
@@ -223,6 +222,9 @@ spec:
           securityContext:
             runAsUser: {{ $user }}
             runAsGroup: {{ $group }}
+            {{ if $run.actionSecurityContext }}
+              {{- tpl ($run.actionSecurityContext | toYaml) . | nindent 12 }}
+            {{ end }}
             {{ if $run.seccompProfile }}
             seccompProfile:
               {{- tpl ($run.seccompProfile | toYaml) . | nindent 14 }}
@@ -257,6 +259,9 @@ spec:
             {{- end }}
       securityContext:
         fsGroup: {{ $fsGroup }}
+        {{ if $run.securityContext }}
+          {{- tpl ($run.securityContext | toYaml) . | nindent 8 }}
+        {{ end }}
       volumes:
         - name: workspace
           {{- if and (eq .Values.global.env "local") (or (not (hasKey $run "checkout")) $run.checkout) }}

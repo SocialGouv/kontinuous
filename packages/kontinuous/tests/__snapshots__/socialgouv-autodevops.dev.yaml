@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
-    janitor/ttl: 7d
   labels:
     application: test-socialgouv-autodevops
     kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
@@ -88,7 +87,6 @@ metadata:
   annotations:
     kontinuous/needsName: build-app.buildkit
     kontinuous/needsNames: '[\\"build-app\\",\\"build-app.buildkit\\",\\"build-app..buildkit\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
@@ -111,7 +109,7 @@ metadata:
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
-  backoffLimit: 1
+  backoffLimit: 0
   activeDeadlineSeconds: 3600
   ttlSecondsAfterFinished: 1800
   template:
@@ -136,7 +134,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.171.0
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.173.4
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -160,7 +158,7 @@ spec:
               memory: \\"0\\"
       containers:
         - name: job
-          image: moby/buildkit:v0.11.6-rootless
+          image: moby/buildkit:v0.13.0-rootless
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -178,19 +176,38 @@ spec:
             - >
               set -e
 
-              if [ \\"\\" != \\"\\" ]; then
-                export CI_REGISTRY=\\"\\"
-              fi
 
-              buildctl_options_cache=\\"\\"
+              export IMAGE_NAME=/test-socialgouv-autodevops/app
+
+              export IMAGE_PATH=\\"\${CI_REGISTRY}\${IMAGE_NAME}\\"
+
+
+              buildctl_options_cache=\\"\\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-main \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-master \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-dev \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:cache-develop \\\\
+                --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
+                \\"
+
+
+
+              buildkit_addr=tcp://buildkit-service.buildkit-service.svc:1234
+
+
+              # consistent hashing distribution
+
+
+
+
+              # buildkit_addr=\\"tcp://test-buildkit-service.test-buildkit-service.svc:1235\\" # enable in debug to emulate service failure
+
+
+
+
+              buildctl_cmd=\\"buildctl --addr $buildkit_addr \\"
 
               buildctl_options_mtls=\\"\\"
-
-
-
-              buildctl_cmd=\\"buildctl \\\\
-                --addr tcp://buildkit-service.buildkit-service.svc:1234 \\\\
-              \\"
 
               if [ -f /buildkit-certs/cert.pem ]; then
                 buildctl_options_mtls=\\"\\\\
@@ -206,24 +223,59 @@ spec:
 
               echo \\"{\\\\\\"auths\\\\\\":{\\\\\\"$CI_REGISTRY\\\\\\":{\\\\\\"username\\\\\\":\\\\\\"$CI_REGISTRY_USER\\\\\\",\\\\\\"password\\\\\\":\\\\\\"$CI_REGISTRY_PASSWORD\\\\\\"}}}\\" > /home/user/.docker/config.json
 
-              export IMAGE_PATH=$CI_REGISTRY/test-socialgouv-autodevops/app
-
               export LATEST_TAG=\\"\\"
 
               if [ \\"false\\" = \\"true\\" ]; then
                 export LATEST_TAG=\\",$IMAGE_PATH:latest\\"
               fi
 
-              $buildctl_cmd \\\\
-                $buildctl_options_mtls \\\\
-                build \\\\
-                --frontend dockerfile.v0 \\\\
-                --local context=/workspace/ \\\\
-                --local dockerfile=/workspace \\\\
-                --opt filename=./Dockerfile \\\\
-                --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
-                $buildctl_options_cache \\\\
-                echo \\"$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
+
+              runBuildkit() {
+                tempfile=$(mktemp -u)
+                pipe=$(mktemp -u)
+                mkfifo \\"$pipe\\"
+                tee \\"$tempfile\\" < \\"$pipe\\" &
+
+                $buildctl_cmd \\\\
+                  $buildctl_options_mtls \\\\
+                  build \\\\
+                  --frontend dockerfile.v0 \\\\
+                  --local context=/workspace/ \\\\
+                  --local dockerfile=/workspace \\\\
+                  --opt filename=./Dockerfile \\\\
+                  --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
+                  $buildctl_options_cache \\\\
+                  >\\"$pipe\\" 2>&1
+                return $?
+              }
+
+
+              set +e
+
+              runBuildkit
+
+              status=$?
+
+              set -e
+
+
+              if [ \\"$status\\" -ne 0 ]; then
+                echo \\"Command failed. Handling error...\\"
+                if grep -q -e \\"listing workers for Build: failed to list workers: Unavailable\\" -e \\"closing transport due to: connection error\\" $tempfile; then
+                  echo \\"buildkit optimized service unavailable, fallback to local build\\"
+                  buildctl_cmd=\\"buildctl-daemonless.sh\\"
+                  buildctl_options_mtls=\\"\\"
+                  runBuildkit
+                else
+                  exit $status
+                fi
+              fi
+
+
+              echo \\"build succeeded.\\"
+
+
+              echo \\"$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
               cpu: \\"2\\"
@@ -234,6 +286,7 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
+            allowPrivilegeEscalation: true
             seccompProfile:
               type: Unconfined
           volumeMounts:

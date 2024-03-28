@@ -1,5 +1,6 @@
 config:
   kubeconfigContext: ovh
+  provider: ovh
 
 valuesCompilers:
   globalDefaults:

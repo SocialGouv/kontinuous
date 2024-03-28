@@ -12,7 +12,6 @@ metadata:
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
     kontinuous/deployment: test-meta-log-feature-branch-1-ffac537e6cbbf934b08745-66eu3lo2
-    janitor/ttl: 7d
   labels:
     application: test-meta-log
     kontinuous/deployment: test-meta-log-feature-branch-1-ffac537e6cbbf934b08745-66eu3lo2
@@ -89,7 +88,6 @@ metadata:
     kontinuous/needsName: a
     kontinuous/needsNames: '[\\"a\\"]'
     kontinuous/plugin.log: \\"false\\"
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/deployment: test-meta-log-feature-branch-1-ffac537e6cbbf934b08745-66eu3lo2
@@ -135,7 +133,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.171.0
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.173.4
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -218,7 +216,6 @@ metadata:
   annotations:
     kontinuous/needsName: b
     kontinuous/needsNames: '[\\"b\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.jobs
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
     kontinuous/plugin.log: \\"true\\"
@@ -265,7 +262,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-repository
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.171.0
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.173.4
           imagePullPolicy: IfNotPresent
           command:
             - sh

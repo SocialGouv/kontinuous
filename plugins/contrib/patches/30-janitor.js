@@ -1,19 +1,29 @@
+const parseDuration = require("parse-duration")
 const { persistPatterns } = require("../lib/persist-convention")
 
-module.exports = (manifests, options, { config, values, utils }) => {
+function resetDateToLastPeriodBasedOnDuration(date, durationSeconds) {
+  if (durationSeconds > 86400) {
+    date.setHours(0, 0, 0, 0)
+  } else if (durationSeconds > 3600) {
+    date.setMinutes(0, 0, 0)
+  } else if (durationSeconds > 60) {
+    date.setSeconds(0, 0)
+  }
+}
+
+module.exports = (manifests, options, { config, utils }) => {
   if (config.environment !== "dev") {
     return manifests
   }
 
   const {
-    permanentDevEnvironmentBranches = [
-      "master",
-      "main",
-      "dev",
-      "develop",
-      ...persistPatterns,
-    ],
+    permanentDevEnvironmentBranches = [...persistPatterns],
+    mode = "expires", // expire or ttl
+    ttl = "7d",
+    resetLastPeriod = true,
   } = options
+
+  let { expires = null } = options
 
   const { patternMatch } = utils
 
@@ -21,8 +31,32 @@ module.exports = (manifests, options, { config, values, utils }) => {
     return
   }
 
-  const ttl =
-    (values && (values.ttl || (values.global && values.global.ttl))) || "7d"
+  const annotationKey = `janitor/${mode}`
+
+  let annotationValue
+  switch (mode) {
+    case "expires": {
+      if (expires === null) {
+        const date = new Date()
+        const duration = parseDuration(ttl)
+        if (resetLastPeriod) {
+          resetDateToLastPeriodBasedOnDuration(date, duration)
+        }
+        date.setTime(date.getTime() + duration)
+        const formattedDate = date.toISOString()
+        expires = `${formattedDate.slice(0, -5)}Z`
+      }
+      annotationValue = expires
+      break
+    }
+    case "ttl": {
+      annotationValue = ttl
+      break
+    }
+    default: {
+      throw new Error(`Unknown mode ${mode}`)
+    }
+  }
 
   for (const manifest of manifests) {
     if (manifest.kind === "Namespace") {
@@ -32,7 +66,7 @@ module.exports = (manifests, options, { config, values, utils }) => {
       if (!manifest.metadata.annotations) {
         manifest.metadata.annotations = {}
       }
-      manifest.metadata.annotations["janitor/ttl"] = ttl
+      manifest.metadata.annotations[annotationKey] = annotationValue
     }
   }
 

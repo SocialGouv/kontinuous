@@ -11,4 +11,6 @@ module.exports = [
 
   "../charts/contrib/values-compilers/09-maildev.js",
   "../charts/contrib/values-compilers/10-tpl-meta-values",
+
+  "./buildkit-service-pod-count-injector.js",
 ]

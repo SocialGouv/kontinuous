@@ -9,7 +9,6 @@ metadata:
   annotations:
     kontinuous/needsName: deactivate.delete-namespace
     kontinuous/needsNames: '[\\"deactivate\\",\\"deactivate.delete-namespace\\",\\"deactivate..delete-namespace\\"]'
-    janitor/ttl: 7d
     kontinuous/chartPath: project.fabrique.contrib.deactivate.jobs-deactivate
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/deactivate/charts/jobs-deactivate/templates/jobs.yaml
     kontinuous/deployment: test-deactivate-feature-branch-1-ffac537e6cbbf934b087-43cki7aw
@@ -56,7 +55,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: degit-action
-          image: ghcr.io/socialgouv/kontinuous/degit:v1.171.0
+          image: ghcr.io/socialgouv/kontinuous/degit:v1.173.4
           command:
             - sh
             - -c
