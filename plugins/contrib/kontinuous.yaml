@@ -54,6 +54,8 @@ preDeploy:
     enabled: true
   cleanOrphan:
     enabled: true
+  importSecrets:
+    enabled: false
 
 deploySidecars:
   failfast:
