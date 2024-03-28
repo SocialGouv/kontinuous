@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.173.5 (2024-03-28)
+
+
+### Bug Fixes
+
+* applyConcurrencyLimit to 10 ([#464](https://github.com/socialgouv/kontinuous/issues/464)) ([2393d40](https://github.com/socialgouv/kontinuous/commit/2393d4047860a08a3ff82ac618a6bfaec5e56184))
+
 ## [1.173.4](https://github.com/socialgouv/kontinuous/compare/v1.173.3...v1.173.4) (2024-03-27)
 
 
