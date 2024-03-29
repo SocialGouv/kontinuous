@@ -47,15 +47,13 @@ runs:
       export IMAGE_NAME={{ if (or $.with.imageProject $.Values.global.imageProject) }}{{ (print "/" (or $.with.imageProject $.Values.global.imageProject)) }}{{ end }}/{{ or $.with.imageRepository $.Values.global.imageRepository }}{{ if $.with.imagePackage }}{{ (print "/" $.with.imagePackage) }}{{else}}/app{{ end }}{{ if $.with.target }}{{ (print "-" $.with.target) }}{{ end }}
       export IMAGE_PATH="${CI_REGISTRY}${IMAGE_NAME}"
 
+      {{ $gitDefaultBranch := (or $.with.gitDefaultBranch .Values.global.gitDefaultBranch "main") }}
       buildctl_options_cache="\
-        --import-cache type=registry,ref=$IMAGE_PATH:cache-main \
-        --import-cache type=registry,ref=$IMAGE_PATH:cache-master \
-        --import-cache type=registry,ref=$IMAGE_PATH:cache-dev \
-        --import-cache type=registry,ref=$IMAGE_PATH:cache-develop \
+        --import-cache type=registry,ref=$IMAGE_PATH:cache-{{ $gitDefaultBranch  }} \
         --import-cache type=registry,ref=$IMAGE_PATH:{{ $.Values.global.branchSlug32 }} \
         "
 
-      {{ if has $.Values.global.branchSlug (list "main" "master" "dev" "develop")  }}
+      {{ if eq $.Values.global.branchSlug $gitDefaultBranch  }}
       buildctl_options_cache="\
         $buildctl_options_cache \
         --export-cache type=registry,mode=max,image-manifest=true,ignore-error=true,ref=$IMAGE_PATH:cache-{{ $.Values.global.branchSlug }} \
@@ -65,10 +63,10 @@ runs:
       buildkit_addr={{ or $.with.buildkitServiceAddr $.Values.global.buildkitServiceAddr "tcp://buildkit-service.buildkit-service.svc:1234" }}
 
       # consistent hashing distribution
-      {{ $buildkitPodCount := (or $.with.buildkitPodCount $.Values.global.buildkitPodCount) }}
-      {{ if $buildkitPodCount }}
+      {{ $buildkitSvcCount := (or $.with.buildkitSvcCount $.Values.global.buildkitSvcCount) }}
+      {{ if $buildkitSvcCount }}
       ## setup consistent hashing variable
-      export pod_count={{ $buildkitPodCount }}
+      export pod_count={{ $buildkitSvcCount }}
       export pod_hash_ref="$IMAGE_NAME"
 
       ## get the pod number

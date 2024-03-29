@@ -95,6 +95,7 @@ describe("test build manifests with snapshots", () => {
         "fabrique/contrib/validators/kubeconform",
         "fabrique/contrib/validators/sealedSecrets",
         "fabrique/contrib/patches/janitor",
+        "fabrique/contrib/values-compilers/getGitDefaultBranch",
       ]),
     }
     const envFile = `${testdirPath}/.env`
