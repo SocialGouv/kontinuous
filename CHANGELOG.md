@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.173.7 (2024-03-29)
+
+
+### Bug Fixes
+
+* distributed buildkit service ([#470](https://github.com/socialgouv/kontinuous/issues/470)) ([92226cc](https://github.com/socialgouv/kontinuous/commit/92226cc8579896d9905d555040b7c74dd7c86438))
+
 ## 1.173.6 (2024-03-28)
 
 
