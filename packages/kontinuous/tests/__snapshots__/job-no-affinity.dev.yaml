@@ -181,11 +181,9 @@ spec:
               export IMAGE_PATH=\\"\${CI_REGISTRY}\${IMAGE_NAME}\\"
 
 
+
               buildctl_options_cache=\\"\\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:cache-main \\\\
-                --import-cache type=registry,ref=$IMAGE_PATH:cache-master \\\\
-                --import-cache type=registry,ref=$IMAGE_PATH:cache-dev \\\\
-                --import-cache type=registry,ref=$IMAGE_PATH:cache-develop \\\\
                 --import-cache type=registry,ref=$IMAGE_PATH:feature-branch-1 \\\\
                 \\"
 
@@ -196,6 +194,36 @@ spec:
 
               # consistent hashing distribution
 
+
+
+              ## setup consistent hashing variable
+
+              export pod_count=6
+
+              export pod_hash_ref=\\"$IMAGE_NAME\\"
+
+
+              ## get the pod number
+
+              pod_num=$(( 0x$(echo \\"$pod_hash_ref\\" | md5sum | cut -d ' ' -f 1 | head -c 15) ))
+
+              [ $pod_num -lt 0 ] && pod_num=$((pod_num * -1))
+
+              pod_num=$(( $pod_num % $pod_count ))
+
+
+              ## rewrite addr
+
+              prefix_addr=\\"\${buildkit_addr%%.*}\\"
+
+              protocol=\\"\${prefix_addr%%://*}\\"
+
+              # protocol=kube-pod
+
+              subdomain=\\"\${prefix_addr#*//}\\"
+
+
+              buildkit_addr=$(echo \\"$buildkit_addr\\" | sed \\"s|$prefix_addr|$protocol://$subdomain-$pod_num.$subdomain|\\")
 
 
 
