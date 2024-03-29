@@ -40,17 +40,25 @@ module.exports = (type, context) => {
         )
 
     const ext = path.extname(inc)
+    const incBasename = ext.length
+      ? path.basename(inc).slice(0, -1 * ext.length)
+      : path.basename(inc)
 
-    const pluginName = [
-      scope.slice(1),
-      type,
-      configDependencyKey(path.basename(inc).slice(0, -1 * ext.length)),
-    ]
-      .flatMap((v) => v)
-      .join("/")
+    const pluginNameSlice = [...scope.slice(1)]
+
+    if (pluginNameSlice[pluginNameSlice.length - 1] !== incBasename) {
+      pluginNameSlice.push(type)
+      pluginNameSlice.push(incBasename)
+    }
+    pluginNameSlice[pluginNameSlice.length - 1] = configDependencyKey(
+      pluginNameSlice[pluginNameSlice.length - 1]
+    )
+
+    const pluginName = pluginNameSlice.flatMap((v) => v).join("/")
     context.logger = context.logger.child({ plugin: pluginName })
 
     const pluginFullName = pluginName.split("/").map(camelCase).join("/")
+
     if (patternMatch(pluginFullName, disablePlugin)) {
       return (data) => data
     }
