@@ -1,0 +1,9 @@
+config:
+  private: true
+  
+dependencies:
+  contrib:
+    patches:
+      privateImages:
+        enabled: true
+        

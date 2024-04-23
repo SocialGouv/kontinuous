@@ -680,7 +680,7 @@ const loadConfig = async (
     },
     deployKeySecretName: {
       env: "KS_DEPLOY_KEY_SECRET_NAME",
-      default: null,
+      default: "deploy-key",
     },
     gitDiffEnabled: {
       option: "gitDiffEnabled",

@@ -31,6 +31,8 @@ patches:
     enabled: true
   addJobsAffinityAndTolerations:
     enabled: false
+  privateImages:
+    enabled: false
 
 validators:
   rancherProjectId:

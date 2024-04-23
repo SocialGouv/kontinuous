@@ -73,6 +73,11 @@ dependencies:
               operator: Equal
               value: ci
               effect: NoSchedule
+      privateImages:
+        enabled: false
+        options:
+          imagePrefixes:
+          - "harbor.fabrique.social.gouv.fr"
 
     validators:
       rancherProjectId:
