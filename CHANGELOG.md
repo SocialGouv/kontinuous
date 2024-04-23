@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.174.0 (2024-04-23)
+
+
+### Features
+
+* private-mode as plugin + extends sugar ([#472](https://github.com/socialgouv/kontinuous/issues/472)) ([230203a](https://github.com/socialgouv/kontinuous/commit/230203acc1c3308563bd7f5de2a70a166bc0c617))
+
 ## 1.173.7 (2024-03-29)
 
 
