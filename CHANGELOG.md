@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.174.1 (2024-05-02)
+
+
+### Bug Fixes
+
+* kubeseal prod url ([c44c5bf](https://github.com/socialgouv/kontinuous/commit/c44c5bf446a22571b5d7c3f5cecdd947692de99f))
+
 ## 1.174.0 (2024-04-23)
 
 
