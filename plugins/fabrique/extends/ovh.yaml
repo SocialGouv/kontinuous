@@ -22,6 +22,8 @@ dependencies:
           clusters:
             dev:
               kubesealEndpoint: "https://kubeseal.ovh.fabrique.social.gouv.fr"
+            prod:
+              kubesealEndpoint: "https://kubeseal.ovh-prod.fabrique.social.gouv.fr"
     patches:
       certs:
         options:
