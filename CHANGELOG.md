@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.174.3 (2024-05-03)
+
+
+### Bug Fixes
+
+* mutliple fixes for pgadmin ([#473](https://github.com/socialgouv/kontinuous/issues/473)) ([a88a687](https://github.com/socialgouv/kontinuous/commit/a88a6873739e6170e5017a7d8c7cb1b3926d345a))
+
 ## 1.174.2 (2024-05-02)
 
 
