@@ -1,23 +1,9 @@
-function isMaildevComponent(component) {
-  return component[`~chart`]?.endsWith(".contrib.maildev")
-}
-
-function extractMaildevComponents(values, acc = []) {
-  Object.entries(values).forEach(([key, component]) => {
-    if (typeof component === "object" && component !== null) {
-      extractMaildevComponents(component, acc)
-      if (component._isChartValues && isMaildevComponent(component)) {
-        acc.push([key, component])
-      }
-    }
-  })
-  return acc
-}
+const extractComponents = require("./helpers/extract-components")
 
 const maildev = async (values, _options, { _config, utils, _ctx }) => {
   const { deepmerge } = utils
 
-  const components = extractMaildevComponents(values)
+  const components = extractComponents("maildev", values)
 
   components.forEach(([key, component]) => {
     const persistenceEnabled =

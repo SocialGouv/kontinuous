@@ -54,7 +54,7 @@ module.exports = async (options, context) => {
 
   const { surviveOnBrokenCluster = false } = options
 
-  const { applyTimeout = "2m" } = options
+  const { applyTimeout = "2m", kindsForceRecreate = ["Job"] } = options
 
   const kubectlProcesses = []
   const kubectlDeleteManifestOptions = {
@@ -75,7 +75,7 @@ module.exports = async (options, context) => {
 
   const recreateAnnotationKey = "kontinuous/kubectl-recreate"
   const getRecreateThisResource = (manifest) => {
-    if (manifest.kind === "Job") {
+    if (kindsForceRecreate.includes(manifest.kind)) {
       return true
     }
     const manifestsRecreateResourceOption =
