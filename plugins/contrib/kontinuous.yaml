@@ -67,6 +67,13 @@ deploySidecars:
   progressing:
     enabled: true
 
+deployWith:
+  kubectlDependencyTree:
+    options:
+      kindsForceRecreate:
+        - "Job"
+        - "Policy"
+
 postDeploy:
   notifyMattermost:
     enabled: false

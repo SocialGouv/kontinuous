@@ -61,3 +61,7 @@ dependencies:
     degit: socialgouv/helm-charts/charts/maildev@v1
     condition: maildev.enabled
     version: "1"
+  - name: pgadmin
+    degit: socialgouv/helm-charts/charts/pgadmin@v1
+    version: "1"
+    condition: pgadmin.enabled
