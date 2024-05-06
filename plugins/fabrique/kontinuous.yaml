@@ -1,10 +1,10 @@
 patches:
   setUndefinedStorageClassname:
     options:
-      defaultStorageClassName: "azurefile"
+      defaultStorageClassName: ""
   setUndefinedStorageClassnameCnpg:
     options:
-      defaultStorageClassName: "managed-csi"
+      defaultStorageClassName: sc-hspeed-gen2-delete
 
 dependencies:
   contrib:
@@ -24,7 +24,7 @@ dependencies:
       certs:
         enabled: true
         options:
-          wildcardHost: ".dev.fabrique.social.gouv.fr"
+          wildcardHost: ".ovh.fabrique.social.gouv.fr"
           internalHosts:
             - ".fabrique.social.gouv.fr"
             - ".beta.gouv.fr"
@@ -48,7 +48,7 @@ dependencies:
             cpu: 10m
             memory: 10Mi
           nodeConfig:
-            maxPods: 250
+            maxPods: 110
             cpu: 7820m
             memory: 27717Mi
       defaultMaxResourcesLimits:
@@ -86,6 +86,12 @@ dependencies:
         enabled: true
       sealedSecrets:
         enabled: true
+        options:
+          clusters:
+            dev:
+              kubesealEndpoint: "https://kubeseal.ovh.fabrique.social.gouv.fr"
+            prod:
+              kubesealEndpoint: "https://kubeseal.ovh-prod.fabrique.social.gouv.fr"
       kubeconform:
         options:
           kubeVersion: null
@@ -165,20 +171,17 @@ dependencies:
 
 config:
   webhookUri: https://kontinuous.fabrique.social.gouv.fr
+  kubeconfigContext: ovh
 
 options:
   kubernetesMethod: kubeconfig
   surviveOnBrokenCluster: true
-  clusters:
-    dev:
-      kubesealEndpoint: "https://kubeseal.dev2.fabrique.social.gouv.fr"
-      environments:
-        - dev
-        - preprod
-    prod:
-      kubesealEndpoint: "https://kubeseal.prod2.fabrique.social.gouv.fr"
-      environments:
-        - prod
+  
 
   registry: "harbor.fabrique.social.gouv.fr"
   domain: "fabrique.social.gouv.fr"
+
+valuesCompilers:
+  globalDefaults:
+    options:
+      devDomain: ovh.fabrique.social.gouv.fr
