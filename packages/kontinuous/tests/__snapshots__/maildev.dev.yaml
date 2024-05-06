@@ -159,8 +159,8 @@ spec:
             runAsGroup: 1000
           resources:
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
       volumes:
         - name: data
           emptyDir: {}
@@ -220,7 +220,7 @@ metadata:
   namespace: test-maildev-feature-branch-1
 spec:
   rules:
-    - host: maildev-test-maildev-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: maildev-test-maildev-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -232,7 +232,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - maildev-test-maildev-feature-branch-1.dev.fabrique.social.gouv.fr
+        - maildev-test-maildev-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

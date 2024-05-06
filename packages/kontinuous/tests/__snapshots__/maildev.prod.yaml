@@ -158,8 +158,8 @@ spec:
             runAsGroup: 1000
           resources:
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
       volumes:
         - name: data
           emptyDir: {}

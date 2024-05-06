@@ -183,8 +183,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: v1
 kind: Service
@@ -238,7 +238,7 @@ metadata:
   namespace: test-long-branch-host-a-very-very-very-long-branch-na-47z9um9b
 spec:
   rules:
-    - host: app-api-test-long-branch-host-a-very-very-very-long-b-4php810x.dev.fabrique.social.gouv.fr
+    - host: app-api-test-long-branch-host-a-very-very-very-long-b-4php810x.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -250,7 +250,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - app-api-test-long-branch-host-a-very-very-very-long-b-4php810x.dev.fabrique.social.gouv.fr
+        - app-api-test-long-branch-host-a-very-very-very-long-b-4php810x.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

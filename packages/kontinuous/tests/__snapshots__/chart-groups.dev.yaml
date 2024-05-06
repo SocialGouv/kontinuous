@@ -106,8 +106,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -214,8 +214,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: v1
 kind: Service
@@ -301,7 +301,7 @@ metadata:
   namespace: test-chart-groups-feature-branch-1
 spec:
   rules:
-    - host: api1-test-chart-groups-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: api1-test-chart-groups-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -313,7 +313,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - api1-test-chart-groups-feature-branch-1.dev.fabrique.social.gouv.fr
+        - api1-test-chart-groups-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -340,7 +340,7 @@ metadata:
   namespace: test-chart-groups-feature-branch-1
 spec:
   rules:
-    - host: api2-test-chart-groups-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: api2-test-chart-groups-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -352,7 +352,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - api2-test-chart-groups-feature-branch-1.dev.fabrique.social.gouv.fr
+        - api2-test-chart-groups-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

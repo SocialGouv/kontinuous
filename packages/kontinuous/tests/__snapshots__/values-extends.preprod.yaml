@@ -175,8 +175,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -318,8 +318,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: v1
 kind: Service
@@ -375,7 +375,7 @@ metadata:
   namespace: test-values-extends-preprod
 spec:
   rules:
-    - host: test-values-extends-preprod.dev.fabrique.social.gouv.fr
+    - host: test-values-extends-preprod.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -387,7 +387,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - test-values-extends-preprod.dev.fabrique.social.gouv.fr
+        - test-values-extends-preprod.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

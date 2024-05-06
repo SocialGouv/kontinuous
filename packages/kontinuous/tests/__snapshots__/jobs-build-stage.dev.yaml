@@ -205,8 +205,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -355,8 +355,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -1073,8 +1073,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           envFrom:
             - secretRef:
                 name: pg-user
@@ -1163,8 +1163,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           startupProbe:
             failureThreshold: 30
             httpGet:
@@ -1264,7 +1264,7 @@ metadata:
   namespace: test-jobs-build-stage-feature-branch-1
 spec:
   rules:
-    - host: test-jobs-build-stage-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: test-jobs-build-stage-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -1276,7 +1276,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - test-jobs-build-stage-feature-branch-1.dev.fabrique.social.gouv.fr
+        - test-jobs-build-stage-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -1303,7 +1303,7 @@ metadata:
   namespace: test-jobs-build-stage-feature-branch-1
 spec:
   rules:
-    - host: hasura-test-jobs-build-stage-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: hasura-test-jobs-build-stage-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -1315,7 +1315,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - hasura-test-jobs-build-stage-feature-branch-1.dev.fabrique.social.gouv.fr
+        - hasura-test-jobs-build-stage-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

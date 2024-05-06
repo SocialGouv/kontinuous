@@ -356,8 +356,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -519,8 +519,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -670,8 +670,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: v1
 kind: Service
@@ -791,7 +791,7 @@ spec:
       memory: 1G
   storage:
     size: 8Gi
-    storageClass: managed-csi
+    storageClass: sc-hspeed-gen2-delete
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
@@ -889,7 +889,7 @@ spec:
       memory: 1G
   storage:
     size: 8Gi
-    storageClass: managed-csi
+    storageClass: sc-hspeed-gen2-delete
   backup:
     retentionPolicy: 60d
     barmanObjectStore:

@@ -183,8 +183,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -292,8 +292,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -401,8 +401,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -510,8 +510,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -619,8 +619,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -728,8 +728,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: v1
 kind: Service
@@ -933,7 +933,7 @@ metadata:
   namespace: test-needs-using-argocd-sync-waves-feature-branch-1
 spec:
   rules:
-    - host: app1-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: app1-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -945,7 +945,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - app1-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+        - app1-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -972,7 +972,7 @@ metadata:
   namespace: test-needs-using-argocd-sync-waves-feature-branch-1
 spec:
   rules:
-    - host: app2-bis-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: app2-bis-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -984,7 +984,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - app2-bis-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+        - app2-bis-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -1011,7 +1011,7 @@ metadata:
   namespace: test-needs-using-argocd-sync-waves-feature-branch-1
 spec:
   rules:
-    - host: app2-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: app2-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -1023,7 +1023,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - app2-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+        - app2-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -1050,7 +1050,7 @@ metadata:
   namespace: test-needs-using-argocd-sync-waves-feature-branch-1
 spec:
   rules:
-    - host: app3-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: app3-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -1062,7 +1062,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - app3-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+        - app3-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -1089,7 +1089,7 @@ metadata:
   namespace: test-needs-using-argocd-sync-waves-feature-branch-1
 spec:
   rules:
-    - host: app4-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: app4-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -1101,7 +1101,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - app4-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+        - app4-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -1128,7 +1128,7 @@ metadata:
   namespace: test-needs-using-argocd-sync-waves-feature-branch-1
 spec:
   rules:
-    - host: app5-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: app5-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -1140,7 +1140,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - app5-test-needs-using-argocd-sync-waves-feature-branch-1.dev.fabrique.social.gouv.fr
+        - app5-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;
