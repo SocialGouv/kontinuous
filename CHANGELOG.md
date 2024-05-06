@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.174.4 (2024-05-06)
+
+
+### Bug Fixes
+
+* skip kubeconform policy ([#474](https://github.com/socialgouv/kontinuous/issues/474)) ([ace8054](https://github.com/socialgouv/kontinuous/commit/ace8054faef75c7ad4e0095d4c5bfce453ebe807))
+
 ## 1.174.3 (2024-05-03)
 
 
