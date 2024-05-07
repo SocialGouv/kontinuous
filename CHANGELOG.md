@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.174.5](https://github.com/socialgouv/kontinuous/compare/v1.174.4...v1.174.5) (2024-05-07)
+
+
+### Bug Fixes
+
+* disable default pgadmin ([d0bf2e9](https://github.com/socialgouv/kontinuous/commit/d0bf2e9f74d4090ba0029869c46467a6e7562db9))
+
 ## 1.174.4 (2024-05-06)
 
 
