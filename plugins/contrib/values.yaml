@@ -24,3 +24,5 @@ redis:
   enabled: false
 security-policies:
   enabled: false
+pgadmin:
+  enabled: false
