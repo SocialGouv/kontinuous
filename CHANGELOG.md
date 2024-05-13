@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.175.0 (2024-05-13)
+
+
+### Features
+
+* set ovh as default env ([#475](https://github.com/socialgouv/kontinuous/issues/475)) ([5742a35](https://github.com/socialgouv/kontinuous/commit/5742a35d7911abb022a635fd12f2573a3496a20b))
+
 ## [1.174.5](https://github.com/socialgouv/kontinuous/compare/v1.174.4...v1.174.5) (2024-05-07)
 
 
