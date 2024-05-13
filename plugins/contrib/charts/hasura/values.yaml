@@ -9,14 +9,19 @@ imagePackage: hasura
 imageTag:
 isProd: false
 isPreProd: false
-replicas: 1
+replicas:
 containerPort: 8080
 servicePort: 80
 env: []
 envFrom: []
 envConfigName:
 probesPath: /healthz
-probesPort: 
+probesPort:
+startupProbe:
+  httpGet:
+    path: /healthz
+    port: http
+  failureThreshold: 120
 resources:
   limits:
     cpu: 

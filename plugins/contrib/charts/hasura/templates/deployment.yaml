@@ -8,7 +8,7 @@ metadata:
   namespace: {{ or .Values.namespace .Values.global.namespace }}
   annotations: {}
 spec:
-  replicas: {{ .Values.replicas }}
+  replicas: {{ or .Values.replicas .Values.global.replicas 1 }}
   selector:
     matchLabels:
       component: {{ (or .Values.component .Chart.Name) | lower }}
