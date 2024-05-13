@@ -205,8 +205,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -355,8 +355,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -502,8 +502,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -662,8 +662,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -877,7 +877,7 @@ metadata:
   namespace: test-app-simple-options-feature-branch-1
 spec:
   rules:
-    - host: test-app-simple-options-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: test-app-simple-options-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -889,7 +889,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - test-app-simple-options-feature-branch-1.dev.fabrique.social.gouv.fr
+        - test-app-simple-options-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

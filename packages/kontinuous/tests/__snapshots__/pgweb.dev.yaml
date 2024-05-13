@@ -181,8 +181,8 @@ spec:
               port: http
           resources:
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: v1
 kind: Service
@@ -235,7 +235,7 @@ metadata:
   namespace: test-pgweb-feature-branch-1
 spec:
   rules:
-    - host: pgweb-test-pgweb-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: pgweb-test-pgweb-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -247,7 +247,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - pgweb-test-pgweb-feature-branch-1.dev.fabrique.social.gouv.fr
+        - pgweb-test-pgweb-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

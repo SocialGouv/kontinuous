@@ -627,7 +627,7 @@ spec:
       memory: 1G
   storage:
     size: 8Gi
-    storageClass: csi-cinder-high-speed
+    storageClass: sc-hspeed-gen2-delete
   minSyncReplicas: 0
   maxSyncReplicas: 0
   postgresql:
@@ -706,7 +706,7 @@ spec:
       memory: 1G
   storage:
     size: 8Gi
-    storageClass: csi-cinder-high-speed
+    storageClass: sc-hspeed-gen2-delete
   minSyncReplicas: 0
   maxSyncReplicas: 0
   postgresql:

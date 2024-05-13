@@ -272,7 +272,7 @@ spec:
                   --opt filename=./Dockerfile \\\\
                   --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                   $buildctl_options_cache \\\\
-                  --opt build-arg:\\"NEXT_PUBLIC_HASURA_URL=https://hasura-test-job-builds-feature-branch-1.dev.fabrique.social.gouv.fr/v1/graphql\\" \\\\
+                  --opt build-arg:\\"NEXT_PUBLIC_HASURA_URL=https://hasura-test-job-builds-feature-branch-1.ovh.fabrique.social.gouv.fr/v1/graphql\\" \\\\
                   >\\"$pipe\\" 2>&1
                 return $?
               }

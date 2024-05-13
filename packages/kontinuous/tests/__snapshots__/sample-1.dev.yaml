@@ -262,8 +262,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           envFrom:
             - secretRef:
                 name: pg-user
@@ -383,8 +383,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           envFrom:
             - secretRef:
                 name: pg-user
@@ -478,8 +478,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           startupProbe:
             failureThreshold: 30
             httpGet:
@@ -575,8 +575,8 @@ spec:
               port: http
           resources:
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: v1
 kind: Service
@@ -719,7 +719,7 @@ metadata:
   namespace: test-sample-1-feature-branch-1
 spec:
   rules:
-    - host: app-2nd-instance-test-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: app-2nd-instance-test-sample-1-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -731,7 +731,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - app-2nd-instance-test-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
+        - app-2nd-instance-test-sample-1-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -768,7 +768,7 @@ metadata:
   namespace: test-sample-1-feature-branch-1
 spec:
   rules:
-    - host: test-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: test-sample-1-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -780,7 +780,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - test-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
+        - test-sample-1-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -807,7 +807,7 @@ metadata:
   namespace: test-sample-1-feature-branch-1
 spec:
   rules:
-    - host: hasura-test-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: hasura-test-sample-1-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -819,7 +819,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - hasura-test-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
+        - hasura-test-sample-1-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -845,7 +845,7 @@ metadata:
   namespace: test-sample-1-feature-branch-1
 spec:
   rules:
-    - host: pgweb-test-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
+    - host: pgweb-test-sample-1-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -857,7 +857,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - pgweb-test-sample-1-feature-branch-1.dev.fabrique.social.gouv.fr
+        - pgweb-test-sample-1-feature-branch-1.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

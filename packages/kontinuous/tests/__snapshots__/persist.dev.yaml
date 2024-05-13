@@ -183,8 +183,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: v1
 kind: Service
@@ -238,7 +238,7 @@ metadata:
   namespace: test-persist-my-env-persist-4c70122w
 spec:
   rules:
-    - host: test-persist-my-env-persist-4c70122w.dev.fabrique.social.gouv.fr
+    - host: test-persist-my-env-persist-4c70122w.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -250,7 +250,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - test-persist-my-env-persist-4c70122w.dev.fabrique.social.gouv.fr
+        - test-persist-my-env-persist-4c70122w.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

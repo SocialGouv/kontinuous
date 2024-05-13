@@ -309,11 +309,11 @@ spec:
                   --opt filename=./packages/backend/Dockerfile \\\\
                   --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                   $buildctl_options_cache \\\\
-                  --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
+                  --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/\\" \\\\
                   --opt build-arg:\\"DOMIFA_ENV_ID=dev\\" \\\\
-                  --opt build-arg:\\"DOMIFA_FRONTEND_URL=https://test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
-                  --opt build-arg:\\"DOMIFA_PORTAIL_ADMINS_URL=https://admin-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
-                  --opt build-arg:\\"DOMIFA_PORTAIL_USAGERS_URL=https://mon-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
+                  --opt build-arg:\\"DOMIFA_FRONTEND_URL=https://test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/\\" \\\\
+                  --opt build-arg:\\"DOMIFA_PORTAIL_ADMINS_URL=https://admin-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/\\" \\\\
+                  --opt build-arg:\\"DOMIFA_PORTAIL_USAGERS_URL=https://mon-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/\\" \\\\
                   >\\"$pipe\\" 2>&1
                 return $?
               }
@@ -596,11 +596,11 @@ spec:
                   --opt filename=./packages/frontend/Dockerfile \\\\
                   --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                   $buildctl_options_cache \\\\
-                  --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
+                  --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/\\" \\\\
                   --opt build-arg:\\"DOMIFA_ENV_ID=dev\\" \\\\
                   --opt build-arg:\\"DOMIFA_FRONTEND_META_ROBOTS=noindex,nofollow\\" \\\\
-                  --opt build-arg:\\"DOMIFA_PORTAIL_ADMINS_URL=https://admin-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
-                  --opt build-arg:\\"DOMIFA_PORTAIL_USAGERS_URL=https://mon-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
+                  --opt build-arg:\\"DOMIFA_PORTAIL_ADMINS_URL=https://admin-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/\\" \\\\
+                  --opt build-arg:\\"DOMIFA_PORTAIL_USAGERS_URL=https://mon-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/\\" \\\\
                   --opt build-arg:\\"DOMIFA_SENTRY_DSN_FRONTEND=https://***@sentry.fabrique.social.gouv.fr/31\\" \\\\
                   >\\"$pipe\\" 2>&1
                 return $?
@@ -884,7 +884,7 @@ spec:
                   --opt filename=./packages/portail-admins/Dockerfile \\\\
                   --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                   $buildctl_options_cache \\\\
-                  --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
+                  --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/\\" \\\\
                   --opt build-arg:\\"DOMIFA_ENV_ID=dev\\" \\\\
                   >\\"$pipe\\" 2>&1
                 return $?
@@ -1168,7 +1168,7 @@ spec:
                   --opt filename=./packages/portail-usagers/Dockerfile \\\\
                   --output type=image,\\\\\\"name=$IMAGE_PATH:sha-ffac537e6cbbf934b08745a378932722df287a53,$IMAGE_PATH:feature-branch-1$LATEST_TAG\\\\\\",push=true \\\\
                   $buildctl_options_cache \\\\
-                  --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/\\" \\\\
+                  --opt build-arg:\\"DOMIFA_BACKEND_URL=https://api-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/\\" \\\\
                   --opt build-arg:\\"DOMIFA_ENV_ID=dev\\" \\\\
                   --opt build-arg:\\"DOMIFA_SENTRY_DSN_PORTAIL=https://***@sentry.fabrique.social.gouv.fr/58\\" \\\\
                   >\\"$pipe\\" 2>&1
@@ -1385,8 +1385,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -1536,8 +1536,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -1683,8 +1683,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -1843,8 +1843,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -2000,13 +2000,13 @@ spec:
             - name: POSTGRES_DATABASE
               value: $(PGDATABASE)
             - name: DOMIFA_BACKEND_URL
-              value: https://api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/
+              value: https://api-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/
             - name: DOMIFA_FRONTEND_URL
-              value: https://test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/
+              value: https://test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/
             - name: DOMIFA_PORTAIL_USAGERS_URL
-              value: https://mon-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/
+              value: https://mon-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/
             - name: DOMIFA_PORTAIL_ADMINS_URL
-              value: https://admin-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/
+              value: https://admin-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/
             - name: DOMIFA_CRON_ENABLED
               value: \\"true\\"
             - name: ELASTIC_APM_SERVICE_NAME
@@ -2141,13 +2141,13 @@ spec:
             - name: POSTGRES_DATABASE
               value: $(PGDATABASE)
             - name: DOMIFA_BACKEND_URL
-              value: https://api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/
+              value: https://api-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/
             - name: DOMIFA_FRONTEND_URL
-              value: https://test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/
+              value: https://test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/
             - name: DOMIFA_PORTAIL_USAGERS_URL
-              value: https://mon-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/
+              value: https://mon-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/
             - name: DOMIFA_PORTAIL_ADMINS_URL
-              value: https://admin-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr/
+              value: https://admin-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr/
             - name: DOMIFA_CRON_ENABLED
               value: \\"false\\"
           envFrom:
@@ -2374,8 +2374,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -2482,8 +2482,8 @@ spec:
               cpu: 1
               memory: 1Gi
             requests:
-              cpu: 41m
-              memory: 121Mi
+              cpu: 81m
+              memory: 262Mi
 ---
 apiVersion: v1
 kind: Service
@@ -2659,7 +2659,7 @@ metadata:
   namespace: test-repo-domifa-feature-branch-1-o91f7v1i
 spec:
   rules:
-    - host: api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr
+    - host: api-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -2671,7 +2671,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - api-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr
+        - api-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -2698,7 +2698,7 @@ metadata:
   namespace: test-repo-domifa-feature-branch-1-o91f7v1i
 spec:
   rules:
-    - host: test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr
+    - host: test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -2710,7 +2710,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr
+        - test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -2737,7 +2737,7 @@ metadata:
   namespace: test-repo-domifa-feature-branch-1-o91f7v1i
 spec:
   rules:
-    - host: admin-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr
+    - host: admin-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -2749,7 +2749,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - admin-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr
+        - admin-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: networking.k8s.io/v1
@@ -2776,7 +2776,7 @@ metadata:
   namespace: test-repo-domifa-feature-branch-1-o91f7v1i
 spec:
   rules:
-    - host: mon-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr
+    - host: mon-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -2788,7 +2788,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - mon-test-repo-domifa-feature-branch-1-o91f7v1i.dev.fabrique.social.gouv.fr
+        - mon-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;
