@@ -412,7 +412,7 @@ metadata:
     kontinuous/plugin.log: \\"false\\"
     reloader.stakater.com/auto: \\"true\\"
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       component: hasura
