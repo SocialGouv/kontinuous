@@ -77,7 +77,7 @@ dependencies:
         enabled: false
         options:
           imagePrefixes:
-          - "harbor.fabrique.social.gouv.fr"
+            - "harbor.fabrique.social.gouv.fr"
 
     validators:
       rancherProjectId:
@@ -172,11 +172,11 @@ dependencies:
 config:
   webhookUri: https://kontinuous.fabrique.social.gouv.fr
   kubeconfigContext: ovh
+  provider: ovh
 
 options:
   kubernetesMethod: kubeconfig
   surviveOnBrokenCluster: true
-  
 
   registry: "harbor.fabrique.social.gouv.fr"
   domain: "fabrique.social.gouv.fr"
