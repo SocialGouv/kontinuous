@@ -62,9 +62,9 @@ spec:
         {{- end }}
       containers:
         - image: "{{ $imagePath }}"
-          {{- if .Values.securityContext }}
+          {{- if .Values.containerSecurityContext }}
           securityContext:
-            allowPrivilegeEscalation: false
+            {{- tpl (.Values.containerSecurityContext | toYaml) . | nindent 12 }}
           {{- end }}
           {{- if .Values.entrypoint }}
           command:

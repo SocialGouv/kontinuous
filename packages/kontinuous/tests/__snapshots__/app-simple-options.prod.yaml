@@ -159,8 +159,6 @@ spec:
             claimName: docs
       containers:
         - image: harbor.fabrique.social.gouv.fr/test-app-simple-options/app:prod
-          securityContext:
-            allowPrivilegeEscalation: false
           name: app
           ports:
             - containerPort: 3000
