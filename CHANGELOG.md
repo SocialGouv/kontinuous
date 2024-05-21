@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.176.2 (2024-05-21)
+
+
+### Bug Fixes
+
+* securityContext container app ([#478](https://github.com/socialgouv/kontinuous/issues/478)) ([98b5386](https://github.com/socialgouv/kontinuous/commit/98b5386f1da461f1c4fcc5253ab6c5cd8d9e822a))
+
 ## 1.176.1 (2024-05-21)
 
 
