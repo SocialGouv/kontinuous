@@ -21,6 +21,9 @@ dependencies:
             buildkitSvcCount: 6
 
     patches:
+      zeroDowntimeReadiness:
+        # enabled: true
+        enabled: false
       certs:
         enabled: true
         options:
