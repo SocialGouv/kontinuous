@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.176.1 (2024-05-21)
+
+
+### Bug Fixes
+
+* persist preprod branch ([#477](https://github.com/socialgouv/kontinuous/issues/477)) ([63b6fd4](https://github.com/socialgouv/kontinuous/commit/63b6fd48315308dd8f2fee071a38541b5ed02fd7))
+
 ## 1.176.0 (2024-05-21)
 
 
