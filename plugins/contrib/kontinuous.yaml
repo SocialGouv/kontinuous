@@ -33,6 +33,8 @@ patches:
     enabled: false
   privateImages:
     enabled: false
+  zeroDowntimeReadiness:
+    enabled: false
 
 validators:
   rancherProjectId:
