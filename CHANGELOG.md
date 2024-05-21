@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.176.0 (2024-05-21)
+
+
+### Features
+
+* zero downtime readiness ([#476](https://github.com/socialgouv/kontinuous/issues/476)) ([a0c6e2a](https://github.com/socialgouv/kontinuous/commit/a0c6e2a62e985cd8051b8cba22966acb27ef05a9))
+
 ## [1.175.2](https://github.com/socialgouv/kontinuous/compare/v1.175.1...v1.175.2) (2024-05-15)
 
 
