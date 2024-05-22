@@ -31,11 +31,31 @@ resources:
     memory:
 autoscale:
   enabled: false
+  mode: horizontal
   minReplicas: 2
   maxReplicas: 10
-  averageUtilization:
-    cpu: 70
-    memory: 80
+  vpa:
+    updateMode: Auto
+    spec:
+  hpa:
+    averageUtilization:
+      cpu: 70
+      memory: 80
+  opa:
+    defaultLimit: true
+    enforceLimit: false
+    limitRatio:
+      cpu: 1 # Guaranteed
+      memory: 1 # Guaranteed
+    baseResource:
+      cpu: "10m"
+      memory: "10Mi"
+    cursorMode: "any"
+    podCursor:
+      cpu: "1"
+      memory: "2Gi"
+    containerCursors: []
+
 certSecretName:
 waitForPostgres: false
 addVolumes: []

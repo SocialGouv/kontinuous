@@ -28,7 +28,11 @@ metadata:
   namespace: {{ or .Values.namespace .Values.global.namespace }}
   annotations: {}
 spec:
+  {{ if and .Values.autoscale.enabled (ne .Values.autoscale.mode "horizontal") }}
+  replicas: {{ or .Values.autoscale.minReplicas }}
+  {{ else if not (and .Values.autoscale.enabled (eq .Values.autoscale.mode "horizontal")) }}
   replicas: {{ or .Values.replicas .Values.global.replicas 1 }}
+  {{ end }}
   selector:
     matchLabels:
       component: {{ (or .Values.component .Chart.Name) | lower }}

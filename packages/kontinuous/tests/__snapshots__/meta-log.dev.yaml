@@ -149,12 +149,8 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 1000m
-              memory: 1024Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: debian:stable
@@ -166,12 +162,8 @@ spec:
             - name: KONTINUOUS_INPUT
               value: /kontinuous-input
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -278,12 +270,8 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 1000m
-              memory: 1024Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: debian:stable
@@ -295,12 +283,8 @@ spec:
             - name: KONTINUOUS_INPUT
               value: /kontinuous-input
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -437,12 +421,8 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
 ---
 apiVersion: v1
 kind: Service

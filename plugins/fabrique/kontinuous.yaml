@@ -92,6 +92,7 @@ dependencies:
             - bitnami.com/v1alpha1/SealedSecret
             - monitoring.coreos.com/v1/PodMonitor
             - kyverno.io/v1/Policy
+            - socialgouv.io/v1/OblikPodAutoscaler
 
     preDeploy:
       importSecrets:

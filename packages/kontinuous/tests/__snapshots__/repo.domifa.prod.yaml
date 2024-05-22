@@ -240,12 +240,8 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 2000m
-              memory: 4096Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: moby/buildkit:v0.13.0-rootless
@@ -526,12 +522,8 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 2000m
-              memory: 4096Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: moby/buildkit:v0.13.0-rootless
@@ -814,12 +806,8 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 2000m
-              memory: 4096Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: moby/buildkit:v0.13.0-rootless
@@ -1099,12 +1087,8 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 2000m
-              memory: 4096Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: moby/buildkit:v0.13.0-rootless
@@ -1817,12 +1801,8 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -1925,12 +1905,8 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
 ---
 apiVersion: v1
 kind: Service

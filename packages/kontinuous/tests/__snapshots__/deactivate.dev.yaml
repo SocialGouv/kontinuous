@@ -68,12 +68,8 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits:
-              cpu: 1000m
-              memory: 1024Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -96,12 +92,8 @@ spec:
                 kubectl delete namespace \\"$NAMESPACE\\" --now=true --wait=false
               fi
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001

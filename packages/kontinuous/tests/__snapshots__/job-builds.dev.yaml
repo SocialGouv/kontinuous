@@ -149,12 +149,8 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 2000m
-              memory: 8192Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: moby/buildkit:v0.13.0-rootless
@@ -432,12 +428,8 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 2000m
-              memory: 4096Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: moby/buildkit:v0.13.0-rootless

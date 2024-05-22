@@ -227,12 +227,8 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits:
-              cpu: 1000m
-              memory: 1024Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -271,12 +267,8 @@ spec:
               set -e
               /action/create-secrets.sh
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001

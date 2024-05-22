@@ -102,12 +102,8 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -210,12 +206,8 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
 ---
 apiVersion: v1
 kind: Service

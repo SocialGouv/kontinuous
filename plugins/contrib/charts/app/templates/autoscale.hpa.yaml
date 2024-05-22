@@ -1,4 +1,4 @@
-{{ if .Values.autoscale.enabled }}
+{{ if and .Values.autoscale.enabled (eq .Values.autoscale.mode "horizontal") }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -13,13 +13,13 @@ spec:
     - resource:
         name: cpu
         target:
-          averageUtilization: {{ .Values.autoscale.averageUtilization.cpu }}
+          averageUtilization: {{ .Values.autoscale.hpa.averageUtilization.cpu }}
           type: Utilization
       type: Resource
     - resource:
         name: memory
         target:
-          averageUtilization: {{ .Values.autoscale.averageUtilization.memory }}
+          averageUtilization: {{ .Values.autoscale.hpa.averageUtilization.memory }}
           type: Utilization
       type: Resource
   scaleTargetRef:

@@ -1,0 +1,17 @@
+{{ if and .Values.autoscale.enabled (eq .Values.autoscale.mode "vertical") }}
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: {{ (or .Values.component .Chart.Name) | lower }}
+  namespace: {{ or .Values.namespace .Values.global.namespace }}
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: Deployment
+    name: {{ (or .Values.component .Chart.Name) | lower }}
+  updatePolicy:
+    updateMode: {{ .Values.vpa.updateMode | quote }}
+  {{ if .Values.autoscale.vpa.spec }}
+  {{ .Values.autoscale.vpa.spec | toYaml | nindent 2 }}
+  {{ end }}
+{{ end }}

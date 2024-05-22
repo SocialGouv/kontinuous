@@ -149,12 +149,8 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 1000m
-              memory: 1024Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: harbor.fabrique.social.gouv.fr/test-values-extends/app:sha-ffac537e6cbbf934b08745a378932722df287a53
@@ -171,12 +167,8 @@ spec:
               set -e
               yarn seed
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -314,12 +306,8 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
 ---
 apiVersion: v1
 kind: Service

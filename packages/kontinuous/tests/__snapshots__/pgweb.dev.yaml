@@ -179,10 +179,7 @@ spec:
             httpGet:
               path: /
               port: http
-          resources:
-            requests:
-              cpu: 81m
-              memory: 262Mi
+          resources: {}
 ---
 apiVersion: v1
 kind: Service

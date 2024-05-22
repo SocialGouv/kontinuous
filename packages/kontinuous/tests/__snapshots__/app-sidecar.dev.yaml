@@ -179,12 +179,8 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 41m
-              memory: 131Mi
+            limits: {}
+            requests: {}
         - name: cronjob
           image: test/background-cronjob
           command:
@@ -194,10 +190,6 @@ spec:
               run-background-cronjob
           securityContext:
             runAsUser: 1000
-          resources:
-            requests:
-              cpu: 41m
-              memory: 131Mi
 ---
 apiVersion: v1
 kind: Service

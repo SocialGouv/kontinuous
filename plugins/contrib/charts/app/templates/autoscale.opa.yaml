@@ -1,0 +1,47 @@
+{{ if and .Values.autoscale.enabled (eq .Values.autoscale.mode "oblik") }}
+apiVersion: socialgouv.io/v1
+kind: OblikPodAutoscaler
+metadata:
+  name: {{ (or .Values.component .Chart.Name) | lower }}
+spec:
+  defaultLimit: {{ .Values.autoscale.opa.defaultLimit }}
+  enforceLimit: {{ .Values.autoscale.opa.enforceLimit }}
+  limitRatio:
+    cpu: {{ .Values.autoscale.opa.limitRatio.cpu }}
+    memory: {{ .Values.autoscale.opa.limitRatio.memory }}
+  minReplicas: {{ .Values.autoscale.minReplicas }}
+  baseResource:
+    cpu: {{ .Values.autoscale.opa.baseResource.cpu | quote }}
+    memory: {{ .Values.autoscale.opa.baseResource.memory | quote }}
+  cursorMode: {{ .Values.autoscale.opa.cursorMode | quote }}
+  podCursor:
+    cpu: {{ .Values.autoscale.opa.podCursor.cpu | quote }}
+    memory: {{ .Values.autoscale.opa.podCursor.memory | quote }}
+  containerCursors: {{ toYaml .Values.autoscale.opa.containerCursors | nindent 4 }}
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ (or .Values.component .Chart.Name) | lower }}
+  hpa:
+    minReplicas: {{ .Values.autoscale.minReplicas }}
+    maxReplicas: {{ .Values.autoscale.maxReplicas }}
+    metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: {{ .Values.autoscale.hpa.averageUtilization.cpu }}
+          type: Utilization
+      type: Resource
+    - resource:
+        name: memory
+        target:
+          averageUtilization: {{ .Values.autoscale.hpa.averageUtilization.memory }}
+          type: Utilization
+      type: Resource
+  vpa:
+    updatePolicy:
+      updateMode: {{ .Values.autoscale.vpa.updateMode | quote }}
+    {{ if .Values.autoscale.vpa.spec }}
+    {{ .Values.autoscale.vpa.spec | toYaml | nindent 4 }}
+    {{ end }}
+{{ end }}
