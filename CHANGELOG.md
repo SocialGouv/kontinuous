@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.176.3 (2024-05-22)
+
+
+### Bug Fixes
+
+* app initContainers ([#480](https://github.com/socialgouv/kontinuous/issues/480)) ([4977bc4](https://github.com/socialgouv/kontinuous/commit/4977bc46e856390e1a73aab650ad178c5ebf5c59))
+
 ## 1.176.2 (2024-05-21)
 
 
