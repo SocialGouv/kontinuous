@@ -44,20 +44,6 @@ dependencies:
         enabled: false
       filterDisableKapp:
         enabled: true
-      defaultMinResourcesRequests:
-        options:
-          avoidOutOfpods: true
-          avoidOutOfpodsMargin:
-            cpu: 10m
-            memory: 10Mi
-          nodeConfig:
-            maxPods: 110
-            cpu: 7820m
-            memory: 27717Mi
-      defaultMaxResourcesLimits:
-        options:
-          cpu: 1
-          memory: 1Gi
       addJobsAffinityAndTolerations:
         enabled: true
         options:

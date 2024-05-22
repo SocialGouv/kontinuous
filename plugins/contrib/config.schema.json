@@ -297,42 +297,6 @@
             }
           }
         },
-        "defaultMinResourcesRequests": {
-          "type": "object",
-          "title": "defaultMinResourcesRequests",
-          "markdownDescription": "Configuration of the defaultMinResourcesRequests plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/20-default-min-resources-requests.js)",
-          "properties": {
-            "enabled": {
-              "title": "defaultMinResourcesRequests.enabled",
-              "description": "Enable or disable this plugin",
-              "type": "boolean"
-            },
-            "options": {
-              "title": "defaultMinResourcesRequests.options",
-              "markdownDescription": "Options of the defaultMinResourcesRequests plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/20-default-min-resources-requests.js)",
-              "type": "object",
-              "properties": {}
-            }
-          }
-        },
-        "defaultMaxResourcesLimits": {
-          "type": "object",
-          "title": "defaultMaxResourcesLimits",
-          "markdownDescription": "Configuration of the defaultMaxResourcesLimits plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/21-default-max-resources-limits.js)",
-          "properties": {
-            "enabled": {
-              "title": "defaultMaxResourcesLimits.enabled",
-              "description": "Enable or disable this plugin",
-              "type": "boolean"
-            },
-            "options": {
-              "title": "defaultMaxResourcesLimits.options",
-              "markdownDescription": "Options of the defaultMaxResourcesLimits plugin\n\nSee [plugin source](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/patches/21-default-max-resources-limits.js)",
-              "type": "object",
-              "properties": {}
-            }
-          }
-        },
         "janitor": {
           "type": "object",
           "title": "janitor",
