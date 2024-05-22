@@ -51,6 +51,9 @@ spec:
       {{- if .Values.waitForPostgres }}
         {{- include "contrib-helpers.init-containers.wait-for-postgres" . | nindent 8 }}
       {{- end }}
+      {{- if .Values.initContainers }}
+        {{- tpl (.Values.initContainers | toYaml) . | nindent 8 }}
+      {{- end }}
       volumes:
         {{- if gt (len .Values.volumes) 0 }}
         {{- tpl (.Values.volumes | toYaml) . | nindent 8 }}

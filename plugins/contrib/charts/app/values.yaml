@@ -64,4 +64,5 @@ securityContext:
 #   runAsUser: 26
 containerSecurityContext:
 
+initContainers:
 sidecars: []
