@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.176.4 (2024-05-28)
+
+
+### Bug Fixes
+
+* zerodowntime ([#481](https://github.com/socialgouv/kontinuous/issues/481)) ([ca8161b](https://github.com/socialgouv/kontinuous/commit/ca8161b3f4b63c341920cec3a9bf2c5fddb09e87))
+
 ## 1.176.3 (2024-05-22)
 
 
