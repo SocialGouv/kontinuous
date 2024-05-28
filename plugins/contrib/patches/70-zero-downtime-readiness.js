@@ -39,11 +39,10 @@ module.exports = function updateDeploymentManifests(manifests, options = {}) {
           },
           preStop: {
             exec: {
-              // Adding a sleep of gracefulShutdownSeconds before removing the readiness file
               command: [
                 "sh",
                 "-c",
-                `sleep ${gracefulShutdownSeconds}; rm -f /var/run/readiness-check/readiness-file`,
+                `rm -f /var/run/readiness-check/readiness-file; sleep ${gracefulShutdownSeconds}`,
               ],
             },
           },
