@@ -39,11 +39,10 @@ module.exports = function updateDeploymentManifests(manifests, options = {}) {
           },
           preStop: {
             exec: {
-              // Adding a sleep of gracefulShutdownSeconds before removing the readiness file
               command: [
                 "sh",
                 "-c",
-                `sleep ${gracefulShutdownSeconds}; rm -f /var/run/readiness-check/readiness-file`,
+                `rm -f /var/run/readiness-check/readiness-file; sleep ${gracefulShutdownSeconds}`,
               ],
             },
           },
@@ -69,6 +68,9 @@ module.exports = function updateDeploymentManifests(manifests, options = {}) {
       })
 
       // Ensure the volume does not conflict and is added to the pod spec
+      if (!manifest.spec.template.spec.volumes) {
+        manifest.spec.template.spec.volumes = []
+      }
       if (
         !manifest.spec.template.spec.volumes.some(
           (v) => v.name === "readiness-check-volume"
