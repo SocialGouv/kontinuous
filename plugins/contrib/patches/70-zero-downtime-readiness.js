@@ -69,6 +69,9 @@ module.exports = function updateDeploymentManifests(manifests, options = {}) {
       })
 
       // Ensure the volume does not conflict and is added to the pod spec
+      if (!manifest.spec.template.spec.volumes) {
+        manifest.spec.template.spec.volumes = []
+      }
       if (
         !manifest.spec.template.spec.volumes.some(
           (v) => v.name === "readiness-check-volume"
