@@ -158,5 +158,31 @@ spec:
             requests:
               cpu: 81m
               memory: 262Mi
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - touch /var/run/readiness-check/readiness-file
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - rm -f /var/run/readiness-check/readiness-file; sleep 30
+          readinessProbe:
+            exec:
+              command:
+                - cat
+                - /var/run/readiness-check/readiness-file
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          volumeMounts:
+            - name: readiness-check-volume
+              mountPath: /var/run/readiness-check
+      volumes:
+        - name: readiness-check-volume
+          emptyDir: {}
 "
 `;

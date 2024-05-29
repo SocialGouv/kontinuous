@@ -780,6 +780,8 @@ spec:
         - name: docs
           persistentVolumeClaim:
             claimName: docs
+        - name: readiness-check-volume
+          emptyDir: {}
       containers:
         - image: harbor.fabrique.social.gouv.fr/test-app-simple-options/app:sha-ffac537e6cbbf934b08745a378932722df287a53
           name: app
@@ -795,14 +797,12 @@ spec:
             periodSeconds: 5
             timeoutSeconds: 5
           readinessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /index.html
-              port: http
-            initialDelaySeconds: 1
+            exec:
+              command:
+                - cat
+                - /var/run/readiness-check/readiness-file
+            initialDelaySeconds: 5
             periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
           startupProbe:
             failureThreshold: 124
             httpGet:
@@ -820,6 +820,21 @@ spec:
           volumeMounts:
             - name: docs
               mountPath: /mnt/docs
+            - name: readiness-check-volume
+              mountPath: /var/run/readiness-check
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - touch /var/run/readiness-check/readiness-file
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - rm -f /var/run/readiness-check/readiness-file; sleep 30
 ---
 apiVersion: v1
 kind: Service
