@@ -164,14 +164,12 @@ spec:
             periodSeconds: 5
             timeoutSeconds: 5
           readinessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /index.html
-              port: http
-            initialDelaySeconds: 1
+            exec:
+              command:
+                - cat
+                - /var/run/readiness-check/readiness-file
+            initialDelaySeconds: 5
             periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
           startupProbe:
             failureThreshold: 12
             httpGet:
@@ -185,6 +183,25 @@ spec:
             requests:
               cpu: 81m
               memory: 262Mi
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - touch /var/run/readiness-check/readiness-file
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - rm -f /var/run/readiness-check/readiness-file; sleep 30
+          volumeMounts:
+            - name: readiness-check-volume
+              mountPath: /var/run/readiness-check
+      volumes:
+        - name: readiness-check-volume
+          emptyDir: {}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -273,14 +290,12 @@ spec:
             periodSeconds: 5
             timeoutSeconds: 5
           readinessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /index.html
-              port: http
-            initialDelaySeconds: 1
+            exec:
+              command:
+                - cat
+                - /var/run/readiness-check/readiness-file
+            initialDelaySeconds: 5
             periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
           startupProbe:
             failureThreshold: 12
             httpGet:
@@ -294,6 +309,25 @@ spec:
             requests:
               cpu: 81m
               memory: 262Mi
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - touch /var/run/readiness-check/readiness-file
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - rm -f /var/run/readiness-check/readiness-file; sleep 30
+          volumeMounts:
+            - name: readiness-check-volume
+              mountPath: /var/run/readiness-check
+      volumes:
+        - name: readiness-check-volume
+          emptyDir: {}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -382,14 +416,12 @@ spec:
             periodSeconds: 5
             timeoutSeconds: 5
           readinessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /index.html
-              port: http
-            initialDelaySeconds: 1
+            exec:
+              command:
+                - cat
+                - /var/run/readiness-check/readiness-file
+            initialDelaySeconds: 5
             periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
           startupProbe:
             failureThreshold: 12
             httpGet:
@@ -403,6 +435,25 @@ spec:
             requests:
               cpu: 81m
               memory: 262Mi
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - touch /var/run/readiness-check/readiness-file
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - rm -f /var/run/readiness-check/readiness-file; sleep 30
+          volumeMounts:
+            - name: readiness-check-volume
+              mountPath: /var/run/readiness-check
+      volumes:
+        - name: readiness-check-volume
+          emptyDir: {}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -491,14 +542,12 @@ spec:
             periodSeconds: 5
             timeoutSeconds: 5
           readinessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /index.html
-              port: http
-            initialDelaySeconds: 1
+            exec:
+              command:
+                - cat
+                - /var/run/readiness-check/readiness-file
+            initialDelaySeconds: 5
             periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
           startupProbe:
             failureThreshold: 12
             httpGet:
@@ -512,6 +561,25 @@ spec:
             requests:
               cpu: 81m
               memory: 262Mi
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - touch /var/run/readiness-check/readiness-file
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - rm -f /var/run/readiness-check/readiness-file; sleep 30
+          volumeMounts:
+            - name: readiness-check-volume
+              mountPath: /var/run/readiness-check
+      volumes:
+        - name: readiness-check-volume
+          emptyDir: {}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -600,14 +668,12 @@ spec:
             periodSeconds: 5
             timeoutSeconds: 5
           readinessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /index.html
-              port: http
-            initialDelaySeconds: 1
+            exec:
+              command:
+                - cat
+                - /var/run/readiness-check/readiness-file
+            initialDelaySeconds: 5
             periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
           startupProbe:
             failureThreshold: 12
             httpGet:
@@ -621,6 +687,25 @@ spec:
             requests:
               cpu: 81m
               memory: 262Mi
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - touch /var/run/readiness-check/readiness-file
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - rm -f /var/run/readiness-check/readiness-file; sleep 30
+          volumeMounts:
+            - name: readiness-check-volume
+              mountPath: /var/run/readiness-check
+      volumes:
+        - name: readiness-check-volume
+          emptyDir: {}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -709,14 +794,12 @@ spec:
             periodSeconds: 5
             timeoutSeconds: 5
           readinessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /index.html
-              port: http
-            initialDelaySeconds: 1
+            exec:
+              command:
+                - cat
+                - /var/run/readiness-check/readiness-file
+            initialDelaySeconds: 5
             periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
           startupProbe:
             failureThreshold: 12
             httpGet:
@@ -730,6 +813,25 @@ spec:
             requests:
               cpu: 81m
               memory: 262Mi
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - touch /var/run/readiness-check/readiness-file
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - rm -f /var/run/readiness-check/readiness-file; sleep 30
+          volumeMounts:
+            - name: readiness-check-volume
+              mountPath: /var/run/readiness-check
+      volumes:
+        - name: readiness-check-volume
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
