@@ -152,12 +152,8 @@ spec:
         - image: harbor.fabrique.social.gouv.fr/test-daemon/daemon:sha-ffac537e6cbbf934b08745a378932722df287a53
           name: app
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
           lifecycle:
             postStart:
               exec:

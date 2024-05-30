@@ -147,12 +147,8 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits:
-              cpu: 1000m
-              memory: 1024Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:6.70.0
@@ -201,12 +197,8 @@ spec:
               set -e
               /action/ensure-db.sh
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -310,12 +302,8 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits:
-              cpu: 1000m
-              memory: 1024Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -351,12 +339,8 @@ spec:
               set -e
               /action/create-secret.sh
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -473,12 +457,8 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 2000m
-              memory: 4096Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: moby/buildkit:v0.13.0-rootless
@@ -755,12 +735,8 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits:
-              cpu: 2000m
-              memory: 4096Mi
-            requests:
-              cpu: \\"0\\"
-              memory: \\"0\\"
+            limits: {}
+            requests: {}
       containers:
         - name: job
           image: moby/buildkit:v0.13.0-rootless
@@ -1065,12 +1041,8 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
           envFrom:
             - secretRef:
                 name: pg-user
@@ -1172,12 +1144,8 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
           startupProbe:
             failureThreshold: 30
             httpGet:

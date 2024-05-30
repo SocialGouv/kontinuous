@@ -59,10 +59,6 @@ spec:
             - |
               set -e
               echo Hello World
-          resources:
-            requests:
-              cpu: 81m
-              memory: 262Mi
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

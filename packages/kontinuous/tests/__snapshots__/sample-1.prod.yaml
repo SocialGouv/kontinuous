@@ -251,12 +251,8 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
           envFrom:
             - secretRef:
                 name: pg-user
@@ -382,12 +378,8 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
           envFrom:
             - secretRef:
                 name: pg-user
@@ -488,12 +480,8 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
           startupProbe:
             failureThreshold: 30
             httpGet:
@@ -608,10 +596,7 @@ spec:
                 - /var/run/readiness-check/readiness-file
             initialDelaySeconds: 5
             periodSeconds: 5
-          resources:
-            requests:
-              cpu: 81m
-              memory: 262Mi
+          resources: {}
           lifecycle:
             postStart:
               exec:
