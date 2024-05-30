@@ -263,7 +263,7 @@ spec:
                 $buildctl_cmd \\\\
                   $buildctl_options_mtls \\\\
                   build \\\\
-                  --frontend dockerfile.v0 \\\\
+                  --frontend gateway.v0 \\\\
                   --local context=/workspace/ \\\\
                   --local dockerfile=/workspace \\\\
                   --opt filename=./Dockerfile \\\\
