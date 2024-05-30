@@ -177,12 +177,8 @@ spec:
               port: http
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 41m
-              memory: 131Mi
+            limits: {}
+            requests: {}
           lifecycle:
             postStart:
               exec:
@@ -208,10 +204,6 @@ spec:
               run-background-cronjob
           securityContext:
             runAsUser: 1000
-          resources:
-            requests:
-              cpu: 41m
-              memory: 131Mi
           lifecycle:
             postStart:
               exec:

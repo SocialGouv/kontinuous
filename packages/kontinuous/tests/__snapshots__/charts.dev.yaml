@@ -157,10 +157,6 @@ spec:
               set -e
               echo Hello World
               FOO=\\"barjo\\"\\"
-          resources:
-            requests:
-              cpu: 81m
-              memory: 262Mi
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

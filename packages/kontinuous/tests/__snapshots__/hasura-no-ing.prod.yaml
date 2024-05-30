@@ -151,12 +151,8 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
           resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 81m
-              memory: 262Mi
+            limits: {}
+            requests: {}
           startupProbe:
             failureThreshold: 30
             httpGet:

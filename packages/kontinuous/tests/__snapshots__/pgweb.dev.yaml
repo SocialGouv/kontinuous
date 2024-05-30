@@ -182,10 +182,7 @@ spec:
                 - /var/run/readiness-check/readiness-file
             initialDelaySeconds: 5
             periodSeconds: 5
-          resources:
-            requests:
-              cpu: 81m
-              memory: 262Mi
+          resources: {}
           lifecycle:
             postStart:
               exec:
