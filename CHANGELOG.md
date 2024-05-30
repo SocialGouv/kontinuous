@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.176.6 (2024-05-30)
+
+
+### Bug Fixes
+
+* clean remove old charts ([#484](https://github.com/socialgouv/kontinuous/issues/484)) ([548c813](https://github.com/socialgouv/kontinuous/commit/548c813e4d13fa807b18f4d67a8f2765178e21f9))
+
 ## 1.176.5 (2024-05-29)
 
 
