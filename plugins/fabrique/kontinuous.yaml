@@ -68,6 +68,8 @@ dependencies:
             - "harbor.fabrique.social.gouv.fr"
 
     validators:
+      qos:
+        enabled: false
       rancherProjectId:
         enabled: true
       noPlainSecrets:
