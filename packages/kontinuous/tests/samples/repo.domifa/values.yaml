@@ -156,9 +156,3 @@ jobs:
           DOMIFA_ENV_ID: "{{ .Values.global.env }}"
           DOMIFA_BACKEND_URL: "https://api-{{ .Values.global.host }}/"
           DOMIFA_SENTRY_DSN_PORTAIL: "https://***@sentry.fabrique.social.gouv.fr/58"
-
-metabase:
-  enabled: false
-
-oauth2-proxy:
-  enabled: false

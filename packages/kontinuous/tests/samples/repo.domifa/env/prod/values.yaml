@@ -2,49 +2,27 @@ jobs:
   runs:
     build-backend:
       with:
-        buildArgs: 
+        buildArgs:
           DOMIFA_BACKEND_URL: "https://domifa-api.{{ .Values.global.domain }}/"
           DOMIFA_PORTAIL_ADMINS_URL: "https://admin-{{ .Values.global.host }}/"
           DOMIFA_PORTAIL_USAGERS_URL: "https://mon-{{ .Values.global.host }}/"
 
     build-frontend:
       with:
-        buildArgs: 
+        buildArgs:
           DOMIFA_BACKEND_URL: "https://domifa-api.{{ .Values.global.domain }}/"
 
     build-portail-admins:
       with:
-        buildArgs: 
+        buildArgs:
           DOMIFA_BACKEND_URL: "https://domifa-api.{{ .Values.global.domain }}/"
           PRODUCTION: "true"
 
     build-portail-usagers:
       with:
-        buildArgs: 
+        buildArgs:
           DOMIFA_BACKEND_URL: "https://domifa-api.{{ .Values.global.domain }}/"
           PRODUCTION: "true"
-
-#metabase:
-#  enabled: true
-#  ingress:
-#    enabled: false
-#  envFrom:
-#    - secretRef:
-#        name: metabase-pg-user
-#    - configMapRef:
-#        name: metabase-configmap
-
-#oauth2-proxy:
-#  host: "metabase-{{ .Values.global.host }}"
-#  certSecretName: oauth2-proxy-crt
-#  upstream: http://metabase
-#  enabled: true
-#  envFrom:
-#    - secretRef:
-#        name: "oauth2-proxy-sealed-secret"
-#    - configMapRef:
-#        name: oauth2-proxy-configmap
-
 
 backend-cron:
   addVolumes:

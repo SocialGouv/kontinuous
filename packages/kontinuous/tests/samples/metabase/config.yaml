@@ -1,8 +1,0 @@
-dependencies:
-  fabrique:
-    import: socialgouv/kontinuous/plugins/fabrique
-    dependencies:
-      contrib:
-        validators:
-          sealedSecrets:
-            enabled: false
