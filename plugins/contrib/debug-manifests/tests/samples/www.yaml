@@ -5,8 +5,8 @@ metadata:
     janitor/ttl: 7d
     field.cattle.io/projectId: c-gjtkk:p-qxn46
     kontinuous/gitBranch: kontinuous-ac
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: "true"
+    kapp.k14s.io/exists: ""
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
@@ -138,7 +138,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - "-c"
             - |
 
               degit SocialGouv/www#kontinuous-ac \
@@ -165,10 +165,10 @@ spec:
                 name: harbor
           env:
             - name: BUILDKITD_FLAGS
-              value: '--oci-worker-no-process-sandbox'
+              value: "--oci-worker-no-process-sandbox"
           command:
             - /bin/sh
-            - '-c'
+            - "-c"
             - >
               set -e
 
@@ -186,17 +186,17 @@ spec:
 
               buildctl-daemonless.sh \
                 build \
-                --frontend dockerfile.v0 \
+                --frontend gateway.v0 \
                 --local context=/workspace/ \
                 --local dockerfile=/workspace \
                 --opt filename=./Dockerfile \
                 --output type=image,\"name=$IMAGE_PATH:sha-1ca3107affe6e436280896ab63b912d536790cfe,$IMAGE_PATH:kontinuous-ac\",push=true \
                 --export-cache type=inline \
                 --import-cache type=registry,ref=$IMAGE_PATH:kontinuous-ac \
-                
+
           resources:
             limits:
-              cpu: '2'
+              cpu: "2"
               memory: 4Gi
             requests:
               cpu: 0
@@ -249,7 +249,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    reloader.stakater.com/auto: 'true'
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
@@ -337,7 +337,7 @@ spec:
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
+              value: "true"
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
