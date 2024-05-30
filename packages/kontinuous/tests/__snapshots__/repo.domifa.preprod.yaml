@@ -298,7 +298,7 @@ spec:
                 $buildctl_cmd \\\\
                   $buildctl_options_mtls \\\\
                   build \\\\
-                  --frontend dockerfile.v0 \\\\
+                  --frontend gateway.v0 \\\\
                   --local context=/workspace/ \\\\
                   --local dockerfile=/workspace \\\\
                   --opt filename=./packages/backend/Dockerfile \\\\
@@ -577,7 +577,7 @@ spec:
                 $buildctl_cmd \\\\
                   $buildctl_options_mtls \\\\
                   build \\\\
-                  --frontend dockerfile.v0 \\\\
+                  --frontend gateway.v0 \\\\
                   --local context=/workspace/ \\\\
                   --local dockerfile=/workspace \\\\
                   --opt filename=./packages/frontend/Dockerfile \\\\
@@ -861,7 +861,7 @@ spec:
                 $buildctl_cmd \\\\
                   $buildctl_options_mtls \\\\
                   build \\\\
-                  --frontend dockerfile.v0 \\\\
+                  --frontend gateway.v0 \\\\
                   --local context=/workspace/ \\\\
                   --local dockerfile=/workspace \\\\
                   --opt filename=./packages/portail-admins/Dockerfile \\\\
@@ -1141,7 +1141,7 @@ spec:
                 $buildctl_cmd \\\\
                   $buildctl_options_mtls \\\\
                   build \\\\
-                  --frontend dockerfile.v0 \\\\
+                  --frontend gateway.v0 \\\\
                   --local context=/workspace/ \\\\
                   --local dockerfile=/workspace \\\\
                   --opt filename=./packages/portail-usagers/Dockerfile \\\\

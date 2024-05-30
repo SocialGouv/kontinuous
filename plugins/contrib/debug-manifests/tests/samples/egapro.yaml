@@ -4,8 +4,8 @@ metadata:
   annotations:
     field.cattle.io/projectId: c-gjtkk:p-bgthz
     kontinuous/gitBranch: master
-    kontinuous/mainNamespace: 'true'
-    kapp.k14s.io/exists: ''
+    kontinuous/mainNamespace: "true"
+    kapp.k14s.io/exists: ""
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: >-
       project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
@@ -109,7 +109,7 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   annotations:
-    sealedsecrets.bitnami.com/cluster-wide: 'true'
+    sealedsecrets.bitnami.com/cluster-wide: "true"
     kontinuous/chartPath: project
     kontinuous/source: project/templates/basic-auth.sealed-secret.yaml
     kontinuous/deployment: egapro-master-1669991086
@@ -131,7 +131,7 @@ spec:
   template:
     metadata:
       annotations:
-        sealedsecrets.bitnami.com/cluster-wide: 'true'
+        sealedsecrets.bitnami.com/cluster-wide: "true"
       name: basic-auth
     type: Opaque
 ---
@@ -139,7 +139,7 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   annotations:
-    sealedsecrets.bitnami.com/cluster-wide: 'true'
+    sealedsecrets.bitnami.com/cluster-wide: "true"
     kontinuous/chartPath: project
     kontinuous/source: project/templates/staff.sealed-secret.yaml
     kontinuous/deployment: egapro-master-1669991086
@@ -161,7 +161,7 @@ spec:
   template:
     metadata:
       annotations:
-        sealedsecrets.bitnami.com/cluster-wide: 'true'
+        sealedsecrets.bitnami.com/cluster-wide: "true"
       name: staff
     type: Opaque
 ---
@@ -223,7 +223,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - "-c"
             - |
 
               degit SocialGouv/egapro#master \
@@ -250,10 +250,10 @@ spec:
                 name: harbor
           env:
             - name: BUILDKITD_FLAGS
-              value: '--oci-worker-no-process-sandbox'
+              value: "--oci-worker-no-process-sandbox"
           command:
             - /bin/sh
-            - '-c'
+            - "-c"
             - >
               set -e
 
@@ -271,17 +271,17 @@ spec:
 
               buildctl-daemonless.sh \
                 build \
-                --frontend dockerfile.v0 \
+                --frontend gateway.v0 \
                 --local context=/workspace//packages/api \
                 --local dockerfile=/workspace/packages/api \
                 --opt filename=./Dockerfile \
                 --output type=image,\"name=$IMAGE_PATH:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8,$IMAGE_PATH:master\",push=true \
                 --export-cache type=inline \
                 --import-cache type=registry,ref=$IMAGE_PATH:master \
-                
+
           resources:
             limits:
-              cpu: '2'
+              cpu: "2"
               memory: 4Gi
             requests:
               cpu: 500m
@@ -364,7 +364,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - "-c"
             - |
 
               degit SocialGouv/egapro#master \
@@ -391,10 +391,10 @@ spec:
                 name: harbor
           env:
             - name: BUILDKITD_FLAGS
-              value: '--oci-worker-no-process-sandbox'
+              value: "--oci-worker-no-process-sandbox"
           command:
             - /bin/sh
-            - '-c'
+            - "-c"
             - >
               set -e
 
@@ -412,7 +412,7 @@ spec:
 
               buildctl-daemonless.sh \
                 build \
-                --frontend dockerfile.v0 \
+                --frontend gateway.v0 \
                 --local context=/workspace/ \
                 --local dockerfile=/workspace \
                 --opt filename=./packages/app/Dockerfile \
@@ -420,10 +420,10 @@ spec:
                 --export-cache type=inline \
                 --import-cache type=registry,ref=$IMAGE_PATH:master \
                 --opt build-arg:"NEXT_PUBLIC_API_URL=https://egapro-preprod.dev.fabrique.social.gouv.fr/api" \
-                
+
           resources:
             limits:
-              cpu: '2'
+              cpu: "2"
               memory: 14Gi
             requests:
               cpu: 500m
@@ -507,7 +507,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - "-c"
             - |
 
               degit SocialGouv/egapro#master \
@@ -534,10 +534,10 @@ spec:
                 name: harbor
           env:
             - name: BUILDKITD_FLAGS
-              value: '--oci-worker-no-process-sandbox'
+              value: "--oci-worker-no-process-sandbox"
           command:
             - /bin/sh
-            - '-c'
+            - "-c"
             - >
               set -e
 
@@ -555,7 +555,7 @@ spec:
 
               buildctl-daemonless.sh \
                 build \
-                --frontend dockerfile.v0 \
+                --frontend gateway.v0 \
                 --local context=/workspace//packages/declaration \
                 --local dockerfile=/workspace/packages/declaration \
                 --opt filename=./Dockerfile \
@@ -564,10 +564,10 @@ spec:
                 --import-cache type=registry,ref=$IMAGE_PATH:master \
                 --opt build-arg:"BASE_URL=https://egapro-preprod.dev.fabrique.social.gouv.fr/index-egapro/declaration" \
                 --opt build-arg:"EGAPRO_API_URL=https://egapro-preprod.dev.fabrique.social.gouv.fr/api" \
-                
+
           resources:
             limits:
-              cpu: '2'
+              cpu: "2"
               memory: 4Gi
             requests:
               cpu: 500m
@@ -651,7 +651,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - "-c"
             - |
 
               degit SocialGouv/egapro#master \
@@ -678,10 +678,10 @@ spec:
                 name: harbor
           env:
             - name: BUILDKITD_FLAGS
-              value: '--oci-worker-no-process-sandbox'
+              value: "--oci-worker-no-process-sandbox"
           command:
             - /bin/sh
-            - '-c'
+            - "-c"
             - >
               set -e
 
@@ -699,7 +699,7 @@ spec:
 
               buildctl-daemonless.sh \
                 build \
-                --frontend dockerfile.v0 \
+                --frontend gateway.v0 \
                 --local context=/workspace/ \
                 --local dockerfile=/workspace \
                 --opt filename=./packages/simulateur/Dockerfile \
@@ -710,10 +710,10 @@ spec:
                 --opt build-arg:"REACT_APP_DECLARATION_URL=https://egapro-preprod.dev.fabrique.social.gouv.fr/index-egapro/declaration" \
                 --opt build-arg:"REACT_APP_EGAPRO_API_URL=https://egapro-preprod.dev.fabrique.social.gouv.fr/api" \
                 --opt build-arg:"REACT_APP_VERSION=master" \
-                
+
           resources:
             limits:
-              cpu: '2'
+              cpu: "2"
               memory: 10Gi
             requests:
               cpu: 500m
@@ -796,7 +796,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command:
             - sh
-            - '-c'
+            - "-c"
             - |
 
               degit SocialGouv/egapro#master \
@@ -823,10 +823,10 @@ spec:
                 name: harbor
           env:
             - name: BUILDKITD_FLAGS
-              value: '--oci-worker-no-process-sandbox'
+              value: "--oci-worker-no-process-sandbox"
           command:
             - /bin/sh
-            - '-c'
+            - "-c"
             - >
               set -e
 
@@ -844,17 +844,17 @@ spec:
 
               buildctl-daemonless.sh \
                 build \
-                --frontend dockerfile.v0 \
+                --frontend gateway.v0 \
                 --local context=/workspace/ \
                 --local dockerfile=/workspace \
                 --opt filename=./packages/app/.storybook/Dockerfile \
                 --output type=image,\"name=$IMAGE_PATH:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8,$IMAGE_PATH:master\",push=true \
                 --export-cache type=inline \
                 --import-cache type=registry,ref=$IMAGE_PATH:master \
-                
+
           resources:
             limits:
-              cpu: '2'
+              cpu: "2"
               memory: 8Gi
             requests:
               cpu: 500m
@@ -907,7 +907,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.api
     kontinuous/depname.resourcePath: deployment.api
     kontinuous/depname.resourceName: api
-    reloader.stakater.com/auto: 'true'
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
@@ -997,20 +997,20 @@ spec:
             - name: EGAPRO_DBUSER
               value: $(PGUSER)
             - name: EGAPRO_SEND_EMAILS
-              value: 'True'
+              value: "True"
             - name: EGAPRO_SENTRY_DSN
               value: >-
                 https://084bf19c0e1141ddadbc1f7b86d2eb57@sentry.fabrique.social.gouv.fr/22
             - name: EGAPRO_SMTP_HOST
               value: maildev
             - name: EGAPRO_SMTP_LOGIN
-              value: ''
+              value: ""
             - name: EGAPRO_SMTP_PASSWORD
-              value: ''
+              value: ""
             - name: EGAPRO_SMTP_PORT
-              value: '1025'
+              value: "1025"
             - name: EGAPRO_SMTP_SSL
-              value: ''
+              value: ""
           envFrom:
             - secretRef:
                 name: pg-user
@@ -1028,7 +1028,7 @@ spec:
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
+              value: "true"
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
@@ -1070,7 +1070,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.app
     kontinuous/depname.resourcePath: deployment.app
     kontinuous/depname.resourceName: app
-    reloader.stakater.com/auto: 'true'
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
@@ -1181,7 +1181,7 @@ spec:
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
+              value: "true"
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
@@ -1223,7 +1223,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.declaration
     kontinuous/depname.resourcePath: deployment.declaration
     kontinuous/depname.resourceName: declaration
-    reloader.stakater.com/auto: 'true'
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
@@ -1311,7 +1311,7 @@ spec:
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
+              value: "true"
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
@@ -1352,7 +1352,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.files
     kontinuous/depname.resourcePath: deployment.files
     kontinuous/depname.resourceName: files
-    reloader.stakater.com/auto: 'true'
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
@@ -1459,7 +1459,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.maildev
     kontinuous/depname.resourcePath: deployment.maildev
     kontinuous/depname.resourceName: maildev
-    reloader.stakater.com/auto: 'true'
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
@@ -1525,7 +1525,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.simulateur
     kontinuous/depname.resourcePath: deployment.simulateur
     kontinuous/depname.resourceName: simulateur
-    reloader.stakater.com/auto: 'true'
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
@@ -1613,7 +1613,7 @@ spec:
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
+              value: "true"
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
@@ -1655,7 +1655,7 @@ metadata:
     kontinuous/depname.chartPath: project.fabrique.contrib.storybook
     kontinuous/depname.resourcePath: deployment.storybook
     kontinuous/depname.resourceName: storybook
-    reloader.stakater.com/auto: 'true'
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
@@ -1743,7 +1743,7 @@ spec:
             - name: KUBECONFIG
               value: /secrets/kubeconfig
             - name: SURVIVE_ON_BROKEN_CLUSTER
-              value: 'true'
+              value: "true"
           volumeMounts:
             - name: kontinuous-wait-needs-kubeconfig
               mountPath: /secrets
@@ -1799,7 +1799,7 @@ spec:
                   mountPath: /mnt/files
               command:
                 - sh
-                - '-c'
+                - "-c"
                 - |
                   set -e
                   egapro export-public-data /mnt/files/index-egalite-fh.csv
@@ -1863,7 +1863,7 @@ spec:
                   mountPath: /mnt/files
               command:
                 - sh
-                - '-c'
+                - "-c"
                 - |
                   set -e
                   egapro dump-dgt /mnt/files/dgt.xlsx
@@ -1927,7 +1927,7 @@ spec:
                   mountPath: /mnt/files
               command:
                 - sh
-                - '-c'
+                - "-c"
                 - >
                   set -e
 
@@ -1993,7 +1993,7 @@ spec:
                   mountPath: /mnt/files
               command:
                 - sh
-                - '-c'
+                - "-c"
                 - |
                   set -e
                   egapro full /mnt/files/full.ndjson
@@ -2057,7 +2057,7 @@ spec:
                   mountPath: /mnt/files
               command:
                 - sh
-                - '-c'
+                - "-c"
                 - |
                   set -e
                   egapro export-indexes /mnt/files/indexes.csv
@@ -2121,7 +2121,7 @@ spec:
                   mountPath: /mnt/files
               command:
                 - sh
-                - '-c'
+                - "-c"
                 - >
                   set -e
 
