@@ -117,6 +117,7 @@ runs:
           $buildctl_options_mtls \
           build \
           --frontend gateway.v0 \
+          --opt source=docker/dockerfile:1 \
           --local context=/workspace/{{ if $.with.context }}/{{ $.with.context }}{{ end }} \
           --local dockerfile=/workspace{{ if $.with.context }}/{{ $.with.context }}{{ end }} \
           --opt filename=./{{ or $.with.dockerfile "Dockerfile" }} \
