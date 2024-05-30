@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.176.7 (2024-05-30)
+
+
+### Bug Fixes
+
+* build docker syntax unclamping ([#485](https://github.com/socialgouv/kontinuous/issues/485)) ([712d939](https://github.com/socialgouv/kontinuous/commit/712d9399aa12546659da2acd74c8e6f80fccf014))
+
 ## 1.176.6 (2024-05-30)
 
 
