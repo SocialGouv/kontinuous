@@ -5,8 +5,7 @@
   "type": "object",
   "patternProperties": {
     "^pg-.*": {
-      "allOf": [
-        {
+      "allOf": [{
           "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/fabrique/charts/pg/kontinuous.values.schema.json"
         },
         {
@@ -20,8 +19,7 @@
       ]
     },
     "^app-.*": {
-      "allOf": [
-        {
+      "allOf": [{
           "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/app/kontinuous.values.schema.json"
         },
         {
@@ -38,8 +36,7 @@
   "additionalProperties": {
     "type": "object",
     "title": "Additional helm chart",
-    "allOf": [
-      {
+    "allOf": [{
         "if": {
           "required": ["~chart"],
           "properties": {
@@ -76,19 +73,6 @@
         },
         "then": {
           "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json"
-        }
-      },
-      {
-        "if": {
-          "required": ["~chart"],
-          "properties": {
-            "~chart": {
-              "const": "oauth2-proxy"
-            }
-          }
-        },
-        "then": {
-          "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/oauth2-proxy/values.schema.json"
         }
       },
       {
@@ -188,7 +172,10 @@
       }
     },
 
-    "project": { "type": "object", "additionalProperties": true },
+    "project": {
+      "type": "object",
+      "additionalProperties": true
+    },
 
     "jobs": {
       "$ref": "https://raw.githubusercontent.com/socialgouv/kontinuous/v1/plugins/contrib/charts/jobs/kontinuous.values.schema.json"
@@ -203,8 +190,7 @@
           "description": "Kontinuous chart to use",
           "type": "string",
           "default": "app",
-          "anyOf": [
-            {
+          "anyOf": [{
               "type": "string",
               "markdownDescription": "Bring your own helm chart. \n\nYou should have an entry with the same name in your `./Chart.yaml`.\n\nSee https://socialgouv.github.io/kontinuous/#/./faq?id=add-a-custom-helm-chart"
             },
@@ -221,20 +207,12 @@
               "markdownDescription": "The [hasura chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/hasura) deploys an [hasura](https://hasura.io) instance"
             },
             {
-              "const": "metabase",
-              "markdownDescription": "The [metabase chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/metabase) deploys a [metabase](https://metabase.com) instance"
-            },
-            {
               "const": "pgweb",
               "markdownDescription": "The [pgweb chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/pgweb) deploys a [pgweb](https://github.com/sosedoff/pgweb) instance"
             },
             {
               "const": "maildev",
               "markdownDescription": "The [maildev chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/fabrique/charts/maildev) deploys a [maildev](https://github.com/maildev/maildev) instance"
-            },
-            {
-              "const": "oauth2-proxy",
-              "markdownDescription": "The [oauth2-proxy chart](https://github.com/SocialGouv/kontinuous/blob/master/plugins/contrib/charts/oauth2-proxy) deploys an [oauth2-proxy](https://oauth2-proxy.github.io/oauth2-proxy/) instance"
             },
             {
               "const": "redis",

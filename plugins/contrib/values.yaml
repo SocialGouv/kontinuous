@@ -10,11 +10,7 @@ job:
   enabled: false
 jobs:
   enabled: false
-metabase:
-  enabled: false
 namespace:
-  enabled: false
-oauth2-proxy:
   enabled: false
 output-volume:
   enabled: false

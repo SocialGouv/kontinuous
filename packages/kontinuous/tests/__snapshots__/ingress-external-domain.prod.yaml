@@ -78,117 +78,90 @@ metadata:
   namespace: test-ingress-external-domain
 automountServiceAccountToken: false
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  labels:
-    component: metabase
-    application: test-ingress-external-domain
-    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
-    kontinuous/deployment.env: test-ingress-external-domain-prod
-    kontinuous/ref: feature-branch-1
-    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: configmap-metabase-1tfah3wb
-    app.kubernetes.io/manifest-managed-by: kontinuous
-    app.kubernetes.io/manifest-created-by: kontinuous
-  name: metabase
-  namespace: test-ingress-external-domain
-  annotations:
-    kontinuous/chartPath: project.fabrique.contrib.metabase
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/configmap.yaml
-    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
-data:
-  MB_APPLICATION_NAME: metabase
-  MB_DB_TYPE: postgres
-  MB_ADMIN_EMAIL: admin@fabrique.social.gouv.fr
-  MB_ANON_TRACKING_ENABLED: \\"false\\"
-  MB_APPLICATION_LOGO_URL: https://socialgouv.github.io/support/_media/marianne.jpeg
-  MB_EMAIL_FROM_ADDRESS: contact@fabrique.social.gouv.fr
-  MB_EMAIL_FROM_NAME: Fabrique numérique des ministères sociaux
-  MB_ENABLE_EMBEDDING: \\"true\\"
-  MB_ENABLE_PUBLIC_SHARING: \\"true\\"
-  MB_SITE_LOCALE: fr
-  MB_START_OF_WEEK: monday
-  MB_SITE_NAME: Fabrique numérique des ministères sociaux
-  MB_SITE_URL: https://some.external.host
-  MB_PASSWORD_COMPLEXITY: strong
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    component: metabase
+    component: app
     application: test-ingress-external-domain
     kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
     kontinuous/deployment.env: test-ingress-external-domain-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: deployment-metabase-5wn3odrk
+    kontinuous/resourceName: deployment-app-55fzcjih
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  name: metabase
+  name: app
   namespace: test-ingress-external-domain
   annotations:
-    kontinuous/chartPath: project.fabrique.contrib.metabase
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/deployment.yaml
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
-    kontinuous/depname.full: project.fabrique.contrib.metabase.deployment.metabase
-    kontinuous/depname.chartResource: metabase.deployment.metabase
-    kontinuous/depname.chartName: metabase
-    kontinuous/depname.chartPath: project.fabrique.contrib.metabase
-    kontinuous/depname.resourcePath: deployment.metabase
-    kontinuous/depname.resourceName: metabase
-    kontinuous/depname.chartNameTopFull: metabase
-    kontinuous/depname.chartNameTop: metabase
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
+    kontinuous/depname.chartName: app
+    kontinuous/depname.chartPath: project.fabrique.contrib.app
+    kontinuous/depname.resourcePath: deployment.app
+    kontinuous/depname.resourceName: app
+    kontinuous/depname.chartNameTopFull: app
+    kontinuous/depname.chartNameTop: app
     kontinuous/plugin.log: \\"false\\"
     reloader.stakater.com/auto: \\"true\\"
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      component: metabase
+      component: app
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        component: metabase
+        component: app
+        application: test-ingress-external-domain
+        namespace: test-ingress-external-domain
         kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
         kontinuous/deployment.env: test-ingress-external-domain-prod
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: deployment-metabase-5wn3odrk
+        kontinuous/resourceName: deployment-app-55fzcjih
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
         kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
     spec:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        runAsNonRoot: true
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-ingress-external-domain
+                    - key: component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
       containers:
-        - image: metabase/metabase:v0.47.0
-          name: metabase
-          securityContext:
-            allowPrivilegeEscalation: false
-          envFrom:
-            - configMapRef:
-                name: metabase
+        - image: harbor.fabrique.social.gouv.fr/test-ingress-external-domain/app:prod
+          name: app
           ports:
             - containerPort: 3000
               name: http
-          startupProbe:
-            failureThreshold: 30
+          livenessProbe:
+            failureThreshold: 15
             httpGet:
-              path: /api/health
+              path: /index.html
               port: http
-            periodSeconds: 10
-            initialDelaySeconds: 60
-            successThreshold: 1
-            timeoutSeconds: 10
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
           readinessProbe:
             exec:
               command:
@@ -196,21 +169,19 @@ spec:
                 - /var/run/readiness-check/readiness-file
             initialDelaySeconds: 5
             periodSeconds: 5
-          livenessProbe:
-            failureThreshold: 6
+          startupProbe:
+            failureThreshold: 12
             httpGet:
-              path: /api/health
+              path: /index.html
               port: http
-            initialDelaySeconds: 30
             periodSeconds: 5
-            timeoutSeconds: 5
           resources:
             limits:
-              cpu: 1000m
-              memory: 2048Mi
+              cpu: 1
+              memory: 1Gi
             requests:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 81m
+              memory: 262Mi
           lifecycle:
             postStart:
               exec:
@@ -235,21 +206,21 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    component: metabase
+    component: app
     application: test-ingress-external-domain
     kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
     kontinuous/deployment.env: test-ingress-external-domain-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: service-metabase-5idimw41
+    kontinuous/resourceName: service-app-46z2o1vv
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  name: metabase
+  name: app
   namespace: test-ingress-external-domain
   annotations:
-    kontinuous/chartPath: project.fabrique.contrib.metabase
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/service.yaml
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
     kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
 spec:
   ports:
@@ -257,7 +228,7 @@ spec:
       port: 80
       targetPort: 3000
   selector:
-    component: metabase
+    component: app
   type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
@@ -265,21 +236,21 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.metabase
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/metabase/templates/ingress.yaml
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
     kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
   labels:
-    component: metabase
+    component: app
     application: test-ingress-external-domain
     kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
     kontinuous/deployment.env: test-ingress-external-domain-prod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: ingress-metabase-5ybj4te8
+    kontinuous/resourceName: ingress-app-b4kcj2bx
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  name: metabase
+  name: app
   namespace: test-ingress-external-domain
 spec:
   rules:
@@ -288,7 +259,7 @@ spec:
         paths:
           - backend:
               service:
-                name: metabase
+                name: app
                 port:
                   name: http
             path: /
@@ -296,6 +267,6 @@ spec:
   tls:
     - hosts:
         - some.external.host
-      secretName: metabase-crt
+      secretName: app-crt
 "
 `;

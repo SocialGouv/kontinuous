@@ -388,12 +388,6 @@ Official plugins are here [plugins/contrib/](https://github.com/socialgouv/konti
   - [charts/maildev](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/charts/maildev) <br>
     deploy an instance of [maildev](https://github.com/maildev/maildev)
 
-  - [charts/metabase](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/charts/metabase) <br>
-    deploy an instance of [metabase](https://www.metabase.com/)
-
-  - [charts/oauth2-proxy](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/charts/oauth2-proxy) <br>
-    deploy an instance of [oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy)
-
   - [charts/redis](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/charts/redis) <br>
     deploy an instance of [redis](https://redis.io/)
   - [patches/cert-letsencrypt-issuer](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/patches/cert-letsencrypt-issuer.js) <br>
