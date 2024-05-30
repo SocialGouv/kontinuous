@@ -572,6 +572,7 @@ spec:
                   $buildctl_options_mtls \\\\
                   build \\\\
                   --frontend gateway.v0 \\\\
+                  --opt source=docker/dockerfile:1 \\\\
                   --local context=/workspace/ \\\\
                   --local dockerfile=/workspace \\\\
                   --opt filename=./Dockerfile \\\\
@@ -851,6 +852,7 @@ spec:
                   $buildctl_options_mtls \\\\
                   build \\\\
                   --frontend gateway.v0 \\\\
+                  --opt source=docker/dockerfile:1 \\\\
                   --local context=/workspace//hasura \\\\
                   --local dockerfile=/workspace/hasura \\\\
                   --opt filename=./Dockerfile \\\\
