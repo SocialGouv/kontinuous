@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.176.11](https://github.com/socialgouv/kontinuous/compare/v1.176.10...v1.176.11) (2024-05-31)
+
+
+### Bug Fixes
+
+* increase startup probe for hasura ([dce8397](https://github.com/socialgouv/kontinuous/commit/dce83973c3ab67f01c246ed035de94e8a407ce55))
+
 ## [1.176.10](https://github.com/socialgouv/kontinuous/compare/v1.176.9...v1.176.10) (2024-05-31)
 
 
