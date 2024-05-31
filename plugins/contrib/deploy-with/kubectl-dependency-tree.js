@@ -244,7 +244,7 @@ module.exports = async (options, context) => {
   const { deploymentLabelKey } = config
 
   const rolloutStatusManifest = async (manifest) => {
-    const { kind } = manifest
+    const { kind, apiVersion } = manifest
     if (!kindIsWaitable(kind, options.customWaitableKinds)) {
       return
     }
@@ -274,6 +274,7 @@ module.exports = async (options, context) => {
           selector,
           kubectl,
           kind,
+          apiVersion,
           abortSignal,
           kubeconfig,
           kubecontext: kubeconfigContext,

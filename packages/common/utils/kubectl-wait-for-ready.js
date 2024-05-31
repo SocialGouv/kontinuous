@@ -8,6 +8,7 @@ const defaultWaitRulesForKindDefault = require("./wait-rules-for-kind-default")
 module.exports = async (options) => {
   const {
     kind,
+    apiVersion,
     namespace,
     selector,
     kubeconfig,
@@ -24,12 +25,13 @@ module.exports = async (options) => {
     waitRulesForKind._Default ||
     defaultWaitRulesForKindDefault
 
+  const apiGroup = apiVersion.split("/")[0]
   return waitAppear(options, async () => {
     try {
       const json = await kubectl(
         `${
           namespace ? `-n ${namespace}` : ""
-        } get ${kind} -l ${selector} -o json`,
+        } get ${kind}.${apiGroup} -l ${selector} -o json`,
         {
           abortSignal,
           kubeconfig,
