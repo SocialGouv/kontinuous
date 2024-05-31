@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.176.10](https://github.com/socialgouv/kontinuous/compare/v1.176.9...v1.176.10) (2024-05-31)
+
+
+### Bug Fixes
+
+* increase startup probe ([050deb4](https://github.com/socialgouv/kontinuous/commit/050deb45da3edbe451a6ea34ff3fdd7edd95ecae))
+
 ## 1.176.9 (2024-05-31)
 
 
