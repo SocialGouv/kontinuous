@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.176.12](https://github.com/socialgouv/kontinuous/compare/v1.176.11...v1.176.12) (2024-05-31)
+
+
+### Bug Fixes
+
+* float64 env var ([4f628f3](https://github.com/socialgouv/kontinuous/commit/4f628f3edcba0c9b27c913610c6b535569c3ed5c))
+
 ## [1.176.11](https://github.com/socialgouv/kontinuous/compare/v1.176.10...v1.176.11) (2024-05-31)
 
 
