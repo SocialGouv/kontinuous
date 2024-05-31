@@ -152,6 +152,10 @@ dependencies:
       kubectlDependencyTree:
         options:
           applyConcurrencyLimit: 10
+          kindsForceRecreate:
+            - "Job"
+            - "Policy"
+            - "Deployment" # remove in future
       kapp:
         options:
           kubeApiQps: 1000
