@@ -130,7 +130,12 @@ module.exports = async (options, context) => {
       }
       result = await kubectlApplyManifest(manifest)
     } catch (err) {
-      if (err.message.includes("field is immutable")) {
+      if (
+        err.message.includes("field is immutable") ||
+        err.message.includes(
+          "Forbidden: may not specify more than 1 handler type"
+        )
+      ) {
         return handleFieldIsImmutableError(manifest, err)
       }
       throw err
