@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.176.13](https://github.com/socialgouv/kontinuous/compare/v1.176.12...v1.176.13) (2024-05-31)
+
+
+### Bug Fixes
+
+* probe methods conflict force apply ([1852792](https://github.com/socialgouv/kontinuous/commit/1852792668990bba40cb0d289763e65572266095))
+
 ## [1.176.12](https://github.com/socialgouv/kontinuous/compare/v1.176.11...v1.176.12) (2024-05-31)
 
 
