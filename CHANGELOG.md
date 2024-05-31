@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.176.9 (2024-05-31)
+
+
+### Bug Fixes
+
+* wait for cnpg cluster, fullname ([#486](https://github.com/socialgouv/kontinuous/issues/486)) ([cc5f7a9](https://github.com/socialgouv/kontinuous/commit/cc5f7a9724e0d9ff87c77da33556112cc7b59d04))
+
 ## [1.176.8](https://github.com/socialgouv/kontinuous/compare/v1.176.7...v1.176.8) (2024-05-30)
 
 
