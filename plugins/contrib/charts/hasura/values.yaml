@@ -13,7 +13,7 @@ replicas:
 containerPort: 8080
 servicePort: 80
 vars:
-  HASURA_GRAPHQL_MIGRATIONS_SERVER_TIMEOUT: 360
+  HASURA_GRAPHQL_MIGRATIONS_SERVER_TIMEOUT: "360"
 env: []
 envFrom: []
 envConfigName:
