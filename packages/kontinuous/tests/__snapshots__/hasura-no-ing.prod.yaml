@@ -131,18 +131,22 @@ spec:
     spec:
       containers:
         - image: harbor.fabrique.social.gouv.fr/test-hasura-no-ing/hasura:prod
-          livenessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /healthz
-              port: http
-            initialDelaySeconds: 30
-            periodSeconds: 5
-            timeoutSeconds: 5
           name: hasura
           ports:
             - containerPort: 8080
               name: http
+          resources:
+            limits: {}
+            requests: {}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            failureThreshold: 15
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
           readinessProbe:
             exec:
               command:
@@ -150,16 +154,18 @@ spec:
                 - /var/run/readiness-check/readiness-file
             initialDelaySeconds: 5
             periodSeconds: 5
-          resources:
-            limits: {}
-            requests: {}
           startupProbe:
-            failureThreshold: 30
             httpGet:
               path: /healthz
               port: http
-            periodSeconds: 5
-          env: []
+            failureThreshold: 60
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          env:
+            - name: HASURA_GRAPHQL_MIGRATIONS_SERVER_TIMEOUT
+              value: \\"360\\"
           envFrom: []
           lifecycle:
             postStart:
