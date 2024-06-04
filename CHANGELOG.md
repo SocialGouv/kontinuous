@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.176.17 (2024-06-04)
+
+
+### Bug Fixes
+
+* wait for rancher ns roles ready ([#488](https://github.com/socialgouv/kontinuous/issues/488)) ([4253191](https://github.com/socialgouv/kontinuous/commit/425319189e65b01217be22d47d3392c1d63ada30))
+
 ## 1.176.16 (2024-06-04)
 
 
