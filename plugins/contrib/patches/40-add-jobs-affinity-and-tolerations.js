@@ -1,12 +1,19 @@
 module.exports = (manifests, options) => {
-  const { affinityToAdd = {}, tolerationsToAdd = [] } = options
+  const {
+    affinityToAdd = {},
+    tolerationsToAdd = [],
+    cronjobEnabled = true,
+  } = options
   for (const manifest of manifests) {
-    if (manifest.kind !== "Job") {
+    const { kind } = manifest
+    if (!(kind === "Job" || (kind === "CronJob" && cronjobEnabled))) {
       continue
     }
 
-    manifest.spec.template.spec = manifest.spec.template.spec || {}
-    const templateSpec = manifest.spec.template.spec
+    const parentSpec = kind === "CronJob" ? manifest.spec.jobTemplate : manifest
+
+    parentSpec.spec.template.spec = parentSpec.spec.template.spec || {}
+    const templateSpec = parentSpec.spec.template.spec
 
     // Add or merge affinity
     templateSpec.affinity = templateSpec.affinity || {}
