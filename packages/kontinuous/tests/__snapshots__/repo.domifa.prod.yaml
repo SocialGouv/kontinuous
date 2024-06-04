@@ -1344,11 +1344,12 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
           startupProbe:
-            failureThreshold: 12
+            failureThreshold: 20
             httpGet:
               path: /healthz
               port: http
-            periodSeconds: 5
+            initialDelaySeconds: 10
+            periodSeconds: 10
           resources:
             limits:
               cpu: \\"1.5\\"
@@ -1506,11 +1507,12 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
           startupProbe:
-            failureThreshold: 12
+            failureThreshold: 20
             httpGet:
               path: /healthz
               port: http
-            periodSeconds: 5
+            initialDelaySeconds: 10
+            periodSeconds: 10
           resources:
             limits:
               cpu: \\"1.5\\"
@@ -1662,11 +1664,12 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
           startupProbe:
-            failureThreshold: 12
+            failureThreshold: 20
             httpGet:
               path: /index.html
               port: http
-            periodSeconds: 5
+            initialDelaySeconds: 10
+            periodSeconds: 10
           resources:
             limits:
               cpu: \\"1\\"
@@ -1787,11 +1790,12 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
           startupProbe:
-            failureThreshold: 12
+            failureThreshold: 20
             httpGet:
               path: /index.html
               port: http
-            periodSeconds: 5
+            initialDelaySeconds: 10
+            periodSeconds: 10
           resources:
             limits: {}
             requests: {}
@@ -1908,11 +1912,12 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
           startupProbe:
-            failureThreshold: 12
+            failureThreshold: 20
             httpGet:
               path: /index.html
               port: http
-            periodSeconds: 5
+            initialDelaySeconds: 10
+            periodSeconds: 10
           resources:
             limits: {}
             requests: {}
