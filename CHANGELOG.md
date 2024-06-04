@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.176.16 (2024-06-04)
+
+
+### Bug Fixes
+
+* enable affinity on cronjob ([#487](https://github.com/socialgouv/kontinuous/issues/487)) ([5c64688](https://github.com/socialgouv/kontinuous/commit/5c64688cdef25fd423307d6bcae30161bb6fc4fc))
+
 ## [1.176.15](https://github.com/socialgouv/kontinuous/compare/v1.176.14...v1.176.15) (2024-05-31)
 
 
