@@ -561,7 +561,7 @@ spec:
       memory: 42Mb
   storage:
     size: 8Gi
-    storageClass: sc-hspeed-gen2-delete
+    storageClass: csi-cinder-high-speed
   backup:
     retentionPolicy: 60d
     barmanObjectStore:

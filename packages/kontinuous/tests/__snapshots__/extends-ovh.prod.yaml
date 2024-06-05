@@ -819,7 +819,7 @@ spec:
       memory: 1G
   storage:
     size: 8Gi
-    storageClass: sc-hspeed-gen2-delete
+    storageClass: csi-cinder-high-speed
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
@@ -917,7 +917,7 @@ spec:
       memory: 1G
   storage:
     size: 8Gi
-    storageClass: sc-hspeed-gen2-delete
+    storageClass: csi-cinder-high-speed
   backup:
     retentionPolicy: 60d
     barmanObjectStore:
