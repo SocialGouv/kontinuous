@@ -7,3 +7,4 @@ addVolumes: []
 volumes: []
 volumeMounts: []
 ~forceRestart: false
+annotations: {}
