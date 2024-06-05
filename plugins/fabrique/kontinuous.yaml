@@ -4,7 +4,7 @@ patches:
       defaultStorageClassName: ""
   setUndefinedStorageClassnameCnpg:
     options:
-      defaultStorageClassName: sc-hspeed-gen2-delete
+      defaultStorageClassName: csi-cinder-high-speed
 
 dependencies:
   contrib:
