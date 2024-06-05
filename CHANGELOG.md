@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.177.0 (2024-06-05)
+
+
+### Features
+
+* add annotations values in charts ([#489](https://github.com/socialgouv/kontinuous/issues/489)) ([1737ea6](https://github.com/socialgouv/kontinuous/commit/1737ea61d0a85ee0e37d9b297371da3d99f99235))
+
 ## [1.176.18](https://github.com/socialgouv/kontinuous/compare/v1.176.17...v1.176.18) (2024-06-05)
 
 
