@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.176.18](https://github.com/socialgouv/kontinuous/compare/v1.176.17...v1.176.18) (2024-06-05)
+
+
+### Bug Fixes
+
+* cnpg defaultStorageClassName ([c54c8d9](https://github.com/socialgouv/kontinuous/commit/c54c8d94f7ff2dc8afd33dc8665180fb8c6eaf6c))
+
 ## 1.176.17 (2024-06-04)
 
 
