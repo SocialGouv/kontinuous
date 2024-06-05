@@ -35,6 +35,8 @@ patches:
     enabled: false
   zeroDowntimeReadiness:
     enabled: false
+  updateManifestsWithPreprodResources:
+    enabled: false
 
 validators:
   rancherProjectId:

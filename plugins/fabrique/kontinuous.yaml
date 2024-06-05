@@ -21,6 +21,8 @@ dependencies:
             buildkitSvcCount: 6
 
     patches:
+      updateManifestsWithPreprodResources:
+        enabled: true
       zeroDowntimeReadiness:
         enabled: true
       certs:
