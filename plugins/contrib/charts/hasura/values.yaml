@@ -56,3 +56,4 @@ waitForPostgres: false
 ingress:
   enabled: true
   annotations: {}
+annotations: {}
