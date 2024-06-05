@@ -57,12 +57,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
+
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.nodeVersion }}
-          cache: 'yarn'
-      
+          cache: "yarn"
+
       - name: Yarn install
         run: |
           yarn workspaces focus kontinuous --production
@@ -73,10 +73,17 @@ jobs:
         shell: bash
         run: |
           mkdir -p $HOME/.kontinuous
-          
+
           echo "
           links:
             socialgouv/kontinuous: ${GITHUB_WORKSPACE}
+          dependencies:
+            fabrique:
+              dependencies:
+                contrib:
+                  preDeploy:
+                    rancherNamespaces:
+                      enabled: false
           " > $HOME/.kontinuous/config.yaml
 
           kubectl cluster-info
@@ -100,7 +107,7 @@ jobs:
           KS_INLINE_CONFIG_SET: |
             dependencies.fabrique.dependencies.contrib.preDeploy.cleanOrphan.options.crdApiResources: []
         run: ./kontinuous deploy
-      
+
       - name: run test script
         shell: bash
         run: |
