@@ -1,11 +1,6 @@
 const retry = require("async-retry")
 
-module.exports = async (
-  manifests,
-  _options,
-  { utils, config, logger, kubectl }
-) => {
-  const { kubeEnsureNamespace } = utils
+module.exports = async (manifests, _options, { config, logger, kubectl }) => {
   const { kubeconfig, kubeconfigContext, surviveOnBrokenCluster } = config
 
   const rancherNamespacesManifests = manifests.filter(
@@ -23,18 +18,6 @@ module.exports = async (
   )
 
   logger.debug({ namespaces }, "🟦 ensure rancher namespaces are availables")
-
-  await Promise.all(
-    rancherNamespacesManifests.map((manifest) =>
-      kubeEnsureNamespace({ kubeconfig, kubeconfigContext, manifest, kubectl })
-    )
-  )
-
-  await Promise.all(
-    rancherNamespacesManifests.map((manifest) =>
-      kubeEnsureNamespace({ kubeconfig, kubeconfigContext, manifest, kubectl })
-    )
-  )
 
   const ensureRancherNamespaceReady = async (namespace) => {
     const retryOptions = {
