@@ -51,7 +51,7 @@ validators:
 
 preDeploy:
   namespaces:
-    enabled: false
+    enabled: true
   rancherNamespaces:
     enabled: false
   clear:

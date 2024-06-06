@@ -90,7 +90,6 @@ jobs:
           kubectl version
           kubectl get pods -n kube-system
           kubectl create ns test-project-ci
-          kubectl create ns kontinuous
 
       - name: test deploy-via-github
         shell: bash
