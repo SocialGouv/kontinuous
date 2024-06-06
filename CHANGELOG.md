@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.178.0 (2024-06-06)
+
+
+### Features
+
+* update manifests with preprod resources ([#490](https://github.com/socialgouv/kontinuous/issues/490)) ([d9ac7b0](https://github.com/socialgouv/kontinuous/commit/d9ac7b0506bb0238419432ede7261f19cc0a3980))
+
 ## 1.177.0 (2024-06-05)
 
 
