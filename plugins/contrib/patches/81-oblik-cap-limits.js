@@ -80,8 +80,7 @@ module.exports = async function oblikCapLimits(manifests, _options, _context) {
       containers.forEach((container) => {
         const containerName = container.name
         container.resources ||= {}
-        container.resources.limits ||= {}
-        const { limits } = container.resources
+        const { limits = {} } = container.resources
 
         annotationsToCheck.forEach((annotation) => {
           const defaultAnnotationValue = annotations[annotation]
@@ -111,7 +110,8 @@ module.exports = async function oblikCapLimits(manifests, _options, _context) {
               (annotation.includes("min") && resourceValue < annotationValue) ||
               (annotation.includes("max") && resourceValue > annotationValue)
             ) {
-              limits[key] = annotationValue
+              container.resources.limits[key] = annotationValue
+              container.resources.limits = limits
             }
           }
         })
