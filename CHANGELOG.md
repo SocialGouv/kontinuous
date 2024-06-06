@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.178.1 (2024-06-06)
+
+
+### Bug Fixes
+
+* namespace ready + clean ([#491](https://github.com/socialgouv/kontinuous/issues/491)) ([bef8234](https://github.com/socialgouv/kontinuous/commit/bef8234bab0ffa2ce0109636c5530524a73eaecf))
+
 ## 1.178.0 (2024-06-06)
 
 
