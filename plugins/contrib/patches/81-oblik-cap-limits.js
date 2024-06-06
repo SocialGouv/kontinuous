@@ -110,7 +110,7 @@ module.exports = async function oblikCapLimits(manifests, _options, _context) {
               (annotation.includes("min") && resourceValue < annotationValue) ||
               (annotation.includes("max") && resourceValue > annotationValue)
             ) {
-              container.resources.limits[key] = annotationValue
+              limits[key] = annotationValue
               container.resources.limits = limits
             }
           }
