@@ -1,0 +1,276 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test build manifests with snapshots oblik-cap-resources.dev 1`] = `
+"apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/projectId: \\"1234\\"
+    kontinuous/gitBranch: feature-branch-1
+    kontinuous/mainNamespace: \\"true\\"
+    kapp.k14s.io/exists: \\"\\"
+    kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
+    kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
+  labels:
+    application: test-oblik-cap-resources
+    kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
+    kontinuous/deployment.env: test-oblik-cap-resources-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: namespace-test-oblik-cap-resources-feature-branch-1-5da5kenz
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+    cert: wildcard
+  name: test-oblik-cap-resources-feature-branch-1
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: test-oblik-cap-resources-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
+  labels:
+    kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
+    kontinuous/deployment.env: test-oblik-cap-resources-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
+  labels:
+    kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
+    kontinuous/deployment.env: test-oblik-cap-resources-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-oblik-cap-resources-feature-branch-1
+automountServiceAccountToken: false
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app
+    application: test-oblik-cap-resources
+    kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
+    kontinuous/deployment.env: test-oblik-cap-resources-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: deployment-app-55fzcjih
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-oblik-cap-resources-feature-branch-1
+  annotations:
+    oblik.socialgouv.io/max-limit-cpu: 200m
+    oblik.socialgouv.io/min-limit-memory: 100Mi
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
+    kontinuous/depname.chartName: app
+    kontinuous/depname.chartPath: project.fabrique.contrib.app
+    kontinuous/depname.resourcePath: deployment.app
+    kontinuous/depname.resourceName: app
+    kontinuous/depname.chartNameTopFull: app
+    kontinuous/depname.chartNameTop: app
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        component: app
+        application: test-oblik-cap-resources
+        namespace: test-oblik-cap-resources-feature-branch-1
+        kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
+        kontinuous/deployment.env: test-oblik-cap-resources-feature-branch-1
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-app-55fzcjih
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - test-oblik-cap-resources-feature-branch-1
+                    - key: component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: harbor.fabrique.social.gouv.fr/test-oblik-cap-resources/app:sha-ffac537e6cbbf934b08745a378932722df287a53
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            exec:
+              command:
+                - cat
+                - /var/run/readiness-check/readiness-file
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          startupProbe:
+            failureThreshold: 20
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            limits:
+              cpu: 0.2
+              memory: 104857600
+            requests: {}
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - touch /var/run/readiness-check/readiness-file
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - rm -f /var/run/readiness-check/readiness-file; sleep 30
+          volumeMounts:
+            - name: readiness-check-volume
+              mountPath: /var/run/readiness-check
+      volumes:
+        - name: readiness-check-volume
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: test-oblik-cap-resources
+    kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
+    kontinuous/deployment.env: test-oblik-cap-resources-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-app-46z2o1vv
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-oblik-cap-resources-feature-branch-1
+  annotations:
+    oblik.socialgouv.io/max-limit-cpu: 200m
+    oblik.socialgouv.io/min-limit-memory: 100Mi
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
+    kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
+  labels:
+    component: app
+    application: test-oblik-cap-resources
+    kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
+    kontinuous/deployment.env: test-oblik-cap-resources-feature-branch-1
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-app-b4kcj2bx
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: test-oblik-cap-resources-feature-branch-1
+spec:
+  rules:
+    - host: test-oblik-cap-resources-feature-branch-1.ovh.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - test-oblik-cap-resources-feature-branch-1.ovh.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+"
+`;

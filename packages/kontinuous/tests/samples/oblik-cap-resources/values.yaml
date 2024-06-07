@@ -1,0 +1,8 @@
+app:
+  annotations:
+    oblik.socialgouv.io/max-limit-cpu: 200m
+    oblik.socialgouv.io/min-limit-memory: 100Mi
+  resources:
+    limits:
+      cpu: "10"
+      memory: 10Mi
