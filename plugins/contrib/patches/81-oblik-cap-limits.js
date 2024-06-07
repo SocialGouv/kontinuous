@@ -73,49 +73,53 @@ module.exports = async function oblikCapLimits(manifests, _options, _context) {
   ]
 
   manifests.forEach((manifest) => {
-    if (resourcesToCheck.includes(manifest.kind)) {
-      const annotations = manifest.metadata.annotations || {}
-      const { containers } = manifest.spec.template.spec
-
-      containers.forEach((container) => {
-        const containerName = container.name
-        const { limits = {} } = container.resources || {}
-
-        annotationsToCheck.forEach((annotation) => {
-          const defaultAnnotationValue = annotations[annotation]
-            ? parseQuantity(annotations[annotation])
-            : null
-          const containerSpecificAnnotation = `${annotation}.${containerName}`
-          const containerSpecificAnnotationValue = annotations[
-            containerSpecificAnnotation
-          ]
-            ? parseQuantity(annotations[containerSpecificAnnotation])
-            : null
-
-          const annotationValue =
-            containerSpecificAnnotationValue !== null
-              ? containerSpecificAnnotationValue
-              : defaultAnnotationValue
-
-          if (annotationValue === null) {
-            return
-          }
-          const key = annotation.includes("cpu") ? "cpu" : "memory"
-
-          const resourceValue = limits[key] ? parseQuantity(limits[key]) : null
-
-          if (resourceValue !== null) {
-            if (
-              (annotation.includes("min") && resourceValue < annotationValue) ||
-              (annotation.includes("max") && resourceValue > annotationValue)
-            ) {
-              limits[key] = annotationValue
-              container.resources ||= {}
-              container.resources.limits ||= limits
-            }
-          }
-        })
-      })
+    if (!resourcesToCheck.includes(manifest.kind)) {
+      return
     }
+    const annotations = manifest.metadata.annotations || {}
+    const { containers } =
+      manifest.kind === "CronJob"
+        ? manifest.spec.jobTemplate.spec.template.spec
+        : manifest.spec.template.spec
+
+    containers.forEach((container) => {
+      const containerName = container.name
+      const { limits = {} } = container.resources || {}
+
+      annotationsToCheck.forEach((annotation) => {
+        const defaultAnnotationValue = annotations[annotation]
+          ? parseQuantity(annotations[annotation])
+          : null
+        const containerSpecificAnnotation = `${annotation}.${containerName}`
+        const containerSpecificAnnotationValue = annotations[
+          containerSpecificAnnotation
+        ]
+          ? parseQuantity(annotations[containerSpecificAnnotation])
+          : null
+
+        const annotationValue =
+          containerSpecificAnnotationValue !== null
+            ? containerSpecificAnnotationValue
+            : defaultAnnotationValue
+
+        if (annotationValue === null) {
+          return
+        }
+        const key = annotation.includes("cpu") ? "cpu" : "memory"
+
+        const resourceValue = limits[key] ? parseQuantity(limits[key]) : null
+
+        if (resourceValue !== null) {
+          if (
+            (annotation.includes("min") && resourceValue < annotationValue) ||
+            (annotation.includes("max") && resourceValue > annotationValue)
+          ) {
+            limits[key] = annotationValue
+            container.resources ||= {}
+            container.resources.limits ||= limits
+          }
+        }
+      })
+    })
   })
 }
