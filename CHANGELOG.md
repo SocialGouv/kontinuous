@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.179.0 (2024-06-07)
+
+
+### Features
+
+* oblik-cap-limit ([#492](https://github.com/socialgouv/kontinuous/issues/492)) ([36affc2](https://github.com/socialgouv/kontinuous/commit/36affc2aab5901b4531c7191bcdca1a77017d8e0))
+
 ## 1.178.1 (2024-06-06)
 
 
