@@ -99,8 +99,7 @@ cnpg-cluster:
           key: bucket_region
 
   clusterExtraSpec:
-    nodeMaintenanceWindow:
-      ~tpl~inProgress: "{{not .Values.global.isProd}}"
+    ~tpl~enablePDB: "{{ .Values.global.isProd }}"
     enableSuperuserAccess: true
 
 jobs-pg:
