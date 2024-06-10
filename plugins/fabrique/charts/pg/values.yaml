@@ -101,6 +101,7 @@ cnpg-cluster:
   clusterExtraSpec:
     nodeMaintenanceWindow:
       ~tpl~inProgress: "{{not .Values.global.isProd}}"
+    enableSuperuserAccess: true
 
 jobs-pg:
   enabled: true
