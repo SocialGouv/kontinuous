@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.179.2 (2024-06-10)
+
+
+### Bug Fixes
+
+* default startup probe timeout ([#494](https://github.com/socialgouv/kontinuous/issues/494)) ([9c38e7e](https://github.com/socialgouv/kontinuous/commit/9c38e7e03c0e12deda3a0c9c2a8aa5493b13ed8b))
+
 ## 1.179.1 (2024-06-10)
 
 
