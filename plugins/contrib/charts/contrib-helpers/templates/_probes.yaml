@@ -28,7 +28,7 @@ httpGet:
 {{- end -}}
 
 {{- define "contrib-helpers.startupProbe" -}}
-{{ $defaultStartupProbe := dict "failureThreshold" 20 "periodSeconds" 10 "initialDelaySeconds" 10 }}
+{{ $defaultStartupProbe := dict "failureThreshold" 20 "periodSeconds" 10 "initialDelaySeconds" 10 "timeoutSeconds" 5 }}
 {{ if .Values.startupProbe }}
 {{ mergeOverwrite dict $defaultStartupProbe ((include "contrib-helpers.probe" .) | fromYaml) .Values.startupProbe | toYaml }}
 {{ else }}

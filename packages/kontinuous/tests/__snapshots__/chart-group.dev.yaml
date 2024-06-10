@@ -100,6 +100,7 @@ spec:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 10
+            timeoutSeconds: 5
           resources:
             limits: {}
             requests: {}
@@ -222,6 +223,7 @@ spec:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 10
+            timeoutSeconds: 5
           resources:
             limits: {}
             requests: {}

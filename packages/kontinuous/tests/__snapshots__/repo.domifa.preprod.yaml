@@ -1341,6 +1341,7 @@ spec:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 10
+            timeoutSeconds: 5
           resources:
             limits:
               cpu: \\"1.5\\"
@@ -1503,6 +1504,7 @@ spec:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 10
+            timeoutSeconds: 5
           resources:
             limits:
               cpu: \\"1.5\\"
@@ -1658,6 +1660,7 @@ spec:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 10
+            timeoutSeconds: 5
           resources:
             limits:
               cpu: \\"1\\"
@@ -1784,6 +1787,7 @@ spec:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 10
+            timeoutSeconds: 5
           resources:
             limits: {}
             requests: {}
@@ -1906,6 +1910,7 @@ spec:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 10
+            timeoutSeconds: 5
           resources:
             limits: {}
             requests: {}
