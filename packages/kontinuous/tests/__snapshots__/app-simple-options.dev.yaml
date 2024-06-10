@@ -774,6 +774,7 @@ spec:
               port: http
             initialDelaySeconds: 123
             periodSeconds: 125
+            timeoutSeconds: 5
           resources:
             limits:
               cpu: \\"2\\"
