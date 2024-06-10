@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.179.1 (2024-06-10)
+
+
+### Bug Fixes
+
+* enable superuser secrets to be backward compatible ([#493](https://github.com/socialgouv/kontinuous/issues/493)) ([b99993b](https://github.com/socialgouv/kontinuous/commit/b99993b3ee305a70a672c551766b7e781b27dd4a))
+
 ## 1.179.0 (2024-06-07)
 
 
