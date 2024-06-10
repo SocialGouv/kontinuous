@@ -653,8 +653,8 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS \\"citext\\";
         - CREATE EXTENSION IF NOT EXISTS \\"pgcrypto\\";
         - CREATE EXTENSION IF NOT EXISTS \\"hstore\\";
-  nodeMaintenanceWindow:
-    inProgress: true
+  enablePDB: false
+  enableSuperuserAccess: true
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
@@ -732,7 +732,7 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS \\"citext\\";
         - CREATE EXTENSION IF NOT EXISTS \\"pgcrypto\\";
         - CREATE EXTENSION IF NOT EXISTS \\"hstore\\";
-  nodeMaintenanceWindow:
-    inProgress: true
+  enablePDB: false
+  enableSuperuserAccess: true
 "
 `;
