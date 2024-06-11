@@ -66,6 +66,10 @@ function parseQuantity(quantity) {
 module.exports = async function oblikCapLimits(manifests, _options, _context) {
   const resourcesToCheck = ["Deployment", "StatefulSet", "CronJob"]
   const annotationsToCheck = [
+    "oblik.socialgouv.io/min-request-cpu",
+    "oblik.socialgouv.io/min-request-memory",
+    "oblik.socialgouv.io/max-request-cpu",
+    "oblik.socialgouv.io/max-request-memory",
     "oblik.socialgouv.io/min-limit-cpu",
     "oblik.socialgouv.io/min-limit-memory",
     "oblik.socialgouv.io/max-limit-cpu",
@@ -84,7 +88,8 @@ module.exports = async function oblikCapLimits(manifests, _options, _context) {
 
     containers.forEach((container) => {
       const containerName = container.name
-      const { limits = {} } = container.resources || {}
+      const { requests = {}, limits = {} } = container.resources || {}
+      const containerResources = { requests, limits }
 
       annotationsToCheck.forEach((annotation) => {
         const defaultAnnotationValue = annotations[annotation]
@@ -105,18 +110,25 @@ module.exports = async function oblikCapLimits(manifests, _options, _context) {
         if (annotationValue === null) {
           return
         }
-        const key = annotation.includes("cpu") ? "cpu" : "memory"
+        const resourceTarget = annotation.includes("cpu") ? "cpu" : "memory"
+        const resourceType = annotation.includes("request")
+          ? "requests"
+          : "limits"
 
-        const resourceValue = limits[key] ? parseQuantity(limits[key]) : null
+        const resourceValue = containerResources[resourceType][resourceTarget]
+          ? parseQuantity(containerResources[resourceType][resourceTarget])
+          : null
 
         if (resourceValue !== null) {
           if (
             (annotation.includes("min") && resourceValue < annotationValue) ||
             (annotation.includes("max") && resourceValue > annotationValue)
           ) {
-            limits[key] = annotationValue
+            containerResources[resourceType][resourceTarget] = annotationValue
             container.resources ||= {}
-            container.resources.limits ||= limits
+            container.resources[resourceType] ||= {}
+            container.resources[resourceType][resourceTarget] ||=
+              containerResources[resourceType][resourceTarget]
           }
         }
       })

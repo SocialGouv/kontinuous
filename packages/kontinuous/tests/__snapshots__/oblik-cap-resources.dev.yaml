@@ -97,7 +97,9 @@ metadata:
   namespace: test-oblik-cap-resources-feature-branch-1
   annotations:
     oblik.socialgouv.io/max-limit-cpu: 200m
+    oblik.socialgouv.io/max-request-memory: 100Mi
     oblik.socialgouv.io/min-limit-memory: 100Mi
+    oblik.socialgouv.io/min-request-cpu: 50m
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
     kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
@@ -184,7 +186,9 @@ spec:
             limits:
               cpu: 0.2
               memory: 104857600
-            requests: {}
+            requests:
+              cpu: 0.05
+              memory: 104857600
           lifecycle:
             postStart:
               exec:
@@ -223,7 +227,9 @@ metadata:
   namespace: test-oblik-cap-resources-feature-branch-1
   annotations:
     oblik.socialgouv.io/max-limit-cpu: 200m
+    oblik.socialgouv.io/max-request-memory: 100Mi
     oblik.socialgouv.io/min-limit-memory: 100Mi
+    oblik.socialgouv.io/min-request-cpu: 50m
     kontinuous/chartPath: project.fabrique.contrib.app
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
     kontinuous/deployment: test-oblik-cap-resources-feature-branch-1-ffac537e6cb-5kms108e
