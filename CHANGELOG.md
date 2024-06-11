@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.179.3 (2024-06-11)
+
+
+### Bug Fixes
+
+* oblik patch requests ([#495](https://github.com/socialgouv/kontinuous/issues/495)) ([3f629a5](https://github.com/socialgouv/kontinuous/commit/3f629a5cc2204404bfcf147bfe314053ad3cec36))
+
 ## 1.179.2 (2024-06-10)
 
 
