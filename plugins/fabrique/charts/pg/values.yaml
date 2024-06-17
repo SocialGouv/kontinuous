@@ -51,7 +51,7 @@ cnpg-cluster:
       ~tpl~cpu: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).resources (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.requests (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.requests.cpu) `100m` }}"
     limits:
       ~tpl~memory: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).resources (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.limits (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.limits.memory) `1G` }}"
-      ~tpl~cpu: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).resources (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.requests (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.requests.cpu) `4` }}"
+      ~tpl~cpu: "{{ or (and .Values.Parent._ProjectValues (index .Values.Parent._ProjectValues `cnpg-cluster`).resources (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.limits (index .Values.Parent._ProjectValues `cnpg-cluster`).resources.limits.cpu) `4` }}"
 
   backup:
     ~tpl~enabled: "{{ (or .Values.Parent.backup.enabled .Values.global.isProd .Values.global.isPreProd) | ternary `true` `false` }}"
