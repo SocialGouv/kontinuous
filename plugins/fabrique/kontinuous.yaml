@@ -19,7 +19,7 @@ dependencies:
             pgBackupEndpointURL: https://s3.gra.io.cloud.ovh.net
             buildkitServiceEnabled: true
             buildkitSvcCount: 6
-      enableHpaWhenGt1r:
+      enableHpaWhenGreaterThan1replica:
         enabled: true
 
     patches:

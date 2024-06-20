@@ -13,5 +13,5 @@ module.exports = [
   "../charts/contrib/values-compilers/09-pgadmin",
   "../charts/contrib/values-compilers/10-tpl-meta-values",
   "../charts/contrib/values-compilers/11-get-git-default-branch",
-  "../charts/contrib/values-compilers/20-enable-hpa-when-gt-1r",
+  "../charts/contrib/values-compilers/20-enable-hpa-when-greater-than1replica",
 ]

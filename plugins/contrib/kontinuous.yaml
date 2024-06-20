@@ -5,7 +5,7 @@ options:
 valuesCompilers:
   globalDefaults:
     enabled: true
-  enableHpaWhenGt1r:
+  enableHpaWhenGreaterThan1replica:
     enabled: false
 
 patches:
