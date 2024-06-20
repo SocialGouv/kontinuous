@@ -6,19 +6,19 @@ imageRepository:
 imagePackage: daemon
 imageTag:
 image:
-replicas: 
+replicas:
 env: []
 vars: {}
 envFrom: []
 resources:
   limits:
-    cpu: 
+    cpu:
     memory:
   requests:
-    cpu: 
-    memory: 
+    cpu:
+    memory:
 autoscale:
-  enabled: false
+  enabled:
   minReplicas: 2
   maxReplicas: 10
   averageUtilization:
@@ -30,5 +30,5 @@ volumeMounts: []
 entrypoint:
 args: []
 antiAffinity:
-  enabled: 
+  enabled:
 strategyType: RollingUpdate

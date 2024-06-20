@@ -10,6 +10,9 @@ module.exports = async (values, _options, { utils }) => {
     if (replicas < 2) {
       return
     }
+    if (componentValues.autoscale.enabled === false) {
+      return
+    }
     const valuesPatch = {
       autoscale: {
         enabled: true,
