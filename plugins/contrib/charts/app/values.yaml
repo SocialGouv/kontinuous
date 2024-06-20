@@ -30,7 +30,7 @@ resources:
     cpu:
     memory:
 autoscale:
-  enabled: false
+  enabled:
   minReplicas: 2
   maxReplicas: 10
   averageUtilization:

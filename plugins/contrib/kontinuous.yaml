@@ -5,6 +5,8 @@ options:
 valuesCompilers:
   globalDefaults:
     enabled: true
+  enableHpaWhenGreaterThan1replica:
+    enabled: false
 
 patches:
   certs:
