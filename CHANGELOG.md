@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.179.4 (2024-06-20)
+
+
+### Bug Fixes
+
+* enable autoscale when 2 replicas on base charts ([#496](https://github.com/socialgouv/kontinuous/issues/496)) ([2450d89](https://github.com/socialgouv/kontinuous/commit/2450d89e43ff8158b5ddc95c1fb8ec8a1c76e893))
+
 ## 1.179.3 (2024-06-11)
 
 
