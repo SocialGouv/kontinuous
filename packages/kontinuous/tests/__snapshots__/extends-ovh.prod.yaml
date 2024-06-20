@@ -731,6 +731,46 @@ spec:
     component: app
   type: ClusterIP
 ---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: app
+  namespace: test-extends-ovh
+  labels:
+    component: app
+    kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
+    kontinuous/deployment.env: test-extends-ovh-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: horizontalpodautoscaler-app-5g3qm0bo
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/autoscaler.yaml
+    kontinuous/deployment: test-extends-ovh-feature-branch-1-ffac537e6cbbf934b08-5oa7s3iv
+spec:
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: 70
+          type: Utilization
+      type: Resource
+    - resource:
+        name: memory
+        target:
+          averageUtilization: 80
+          type: Utilization
+      type: Resource
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: app
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

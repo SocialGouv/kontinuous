@@ -5,6 +5,8 @@ options:
 valuesCompilers:
   globalDefaults:
     enabled: true
+  enableHpaWhenGt1r:
+    enabled: false
 
 patches:
   certs:

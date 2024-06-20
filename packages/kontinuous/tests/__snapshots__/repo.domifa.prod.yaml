@@ -2096,6 +2096,211 @@ spec:
     component: portail-usagers
   type: ClusterIP
 ---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: backend-cron
+  namespace: test-repo.domifa
+  labels:
+    component: backend-cron
+    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
+    kontinuous/deployment.env: test-repo-domifa-prod-26ul0o86
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: horizontalpodautoscaler-backend-cron-2yie5z9d
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.backend-cron
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/backend-cron/templates/autoscaler.yaml
+    kontinuous/plugin.needs: '[\\"build-backend\\"]'
+    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
+spec:
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: 70
+          type: Utilization
+      type: Resource
+    - resource:
+        name: memory
+        target:
+          averageUtilization: 80
+          type: Utilization
+      type: Resource
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: backend-cron
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: backend
+  namespace: test-repo.domifa
+  labels:
+    component: backend
+    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
+    kontinuous/deployment.env: test-repo-domifa-prod-26ul0o86
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: horizontalpodautoscaler-backend-hse0uu89
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.backend
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/backend/templates/autoscaler.yaml
+    kontinuous/plugin.needs: '[\\"build-backend\\"]'
+    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
+spec:
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: 70
+          type: Utilization
+      type: Resource
+    - resource:
+        name: memory
+        target:
+          averageUtilization: 80
+          type: Utilization
+      type: Resource
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: backend
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: frontend
+  namespace: test-repo.domifa
+  labels:
+    component: frontend
+    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
+    kontinuous/deployment.env: test-repo-domifa-prod-26ul0o86
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: horizontalpodautoscaler-frontend-69txr3t1
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.frontend
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/frontend/templates/autoscaler.yaml
+    kontinuous/plugin.needs: '[\\"build-frontend\\"]'
+    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
+spec:
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: 70
+          type: Utilization
+      type: Resource
+    - resource:
+        name: memory
+        target:
+          averageUtilization: 80
+          type: Utilization
+      type: Resource
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: frontend
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: portail-admins
+  namespace: test-repo.domifa
+  labels:
+    component: portail-admins
+    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
+    kontinuous/deployment.env: test-repo-domifa-prod-26ul0o86
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: horizontalpodautoscaler-portail-admins-620z998r
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.portail-admins
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/portail-admins/templates/autoscaler.yaml
+    kontinuous/plugin.needs: '[\\"build-portail-admins\\"]'
+    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
+spec:
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: 70
+          type: Utilization
+      type: Resource
+    - resource:
+        name: memory
+        target:
+          averageUtilization: 80
+          type: Utilization
+      type: Resource
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: portail-admins
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: portail-usagers
+  namespace: test-repo.domifa
+  labels:
+    component: portail-usagers
+    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
+    kontinuous/deployment.env: test-repo-domifa-prod-26ul0o86
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: horizontalpodautoscaler-portail-usagers-1kufzfe4
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.portail-usagers
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/portail-usagers/templates/autoscaler.yaml
+    kontinuous/plugin.needs: '[\\"build-portail-usagers\\"]'
+    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
+spec:
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: 70
+          type: Utilization
+      type: Resource
+    - resource:
+        name: memory
+        target:
+          averageUtilization: 80
+          type: Utilization
+      type: Resource
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: portail-usagers
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

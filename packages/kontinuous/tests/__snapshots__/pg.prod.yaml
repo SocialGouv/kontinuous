@@ -471,6 +471,47 @@ spec:
     component: hasura
   type: ClusterIP
 ---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hasura
+  namespace: test-pg
+  labels:
+    component: hasura
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment.env: test-pg-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: horizontalpodautoscaler-hasura-2gwbp4ld
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/autoscaler.yaml
+    kontinuous/plugin.needs: '[\\"cnpg\\"]'
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+spec:
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: 70
+          type: Utilization
+      type: Resource
+    - resource:
+        name: memory
+        target:
+          averageUtilization: 80
+          type: Utilization
+      type: Resource
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hasura
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

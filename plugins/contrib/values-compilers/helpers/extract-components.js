@@ -1,12 +1,15 @@
-function isComponent(name, component) {
-  return component[`~chart`]?.endsWith(`.contrib.${name}`)
+function isComponent(names, component) {
+  if (!Array.isArray(names)) {
+    names = [names]
+  }
+  return names.some((name) => component[`~chart`]?.endsWith(`.contrib.${name}`))
 }
 
-function extractComponents(name, values, acc = []) {
+function extractComponents(names, values, acc = []) {
   Object.entries(values).forEach(([key, component]) => {
     if (typeof component === "object" && component !== null) {
-      extractComponents(name, component, acc)
-      if (component._isChartValues && isComponent(name, component)) {
+      extractComponents(names, component, acc)
+      if (component._isChartValues && isComponent(names, component)) {
         acc.push([key, component])
       }
     }
