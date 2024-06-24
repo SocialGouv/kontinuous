@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.179.5 (2024-06-24)
+
+
+### Bug Fixes
+
+* tolerations for app chart ([#497](https://github.com/socialgouv/kontinuous/issues/497)) ([7edce77](https://github.com/socialgouv/kontinuous/commit/7edce7727483740e8f3d8290cd27c0da652a2601))
+
 ## 1.179.4 (2024-06-20)
 
 
