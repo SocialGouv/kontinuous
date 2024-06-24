@@ -52,6 +52,10 @@ spec:
       {{- end }}
       affinity:
         {{- include "contrib-helpers.anti-affinity" . | nindent 8}}
+      {{- if .Values.tolerations }}
+      tolerations:
+        {{- tpl (.Values.tolerations | toYaml) . | nindent 8}}
+      {{- end }}
       initContainers:
       {{- if .Values.waitForPostgres }}
         {{- include "contrib-helpers.init-containers.wait-for-postgres" . | nindent 8 }}
