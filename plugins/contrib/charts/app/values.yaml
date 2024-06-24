@@ -52,6 +52,11 @@ entrypoint:
 args: []
 antiAffinity:
   enabled:
+tolerations:
+  # - key: startup
+  #   operator: Equal
+  #   value: cdtn
+  #   effect: NoSchedule
 onChangedPaths:
 onChangedAnnotate:
 onChangedNeeds:
