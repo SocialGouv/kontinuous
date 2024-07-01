@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.179.6 (2024-07-01)
+
+
+### Bug Fixes
+
+* up cpu autoscale to 80% ([#498](https://github.com/socialgouv/kontinuous/issues/498)) ([a6ee9ee](https://github.com/socialgouv/kontinuous/commit/a6ee9ee7bf42db9ccde3be6a9b568755c2cabec2))
+
 ## 1.179.5 (2024-06-24)
 
 
