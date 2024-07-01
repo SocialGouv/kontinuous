@@ -2123,7 +2123,7 @@ spec:
     - resource:
         name: cpu
         target:
-          averageUtilization: 70
+          averageUtilization: 80
           type: Utilization
       type: Resource
     - resource:
@@ -2164,7 +2164,7 @@ spec:
     - resource:
         name: cpu
         target:
-          averageUtilization: 70
+          averageUtilization: 80
           type: Utilization
       type: Resource
     - resource:
@@ -2205,7 +2205,7 @@ spec:
     - resource:
         name: cpu
         target:
-          averageUtilization: 70
+          averageUtilization: 80
           type: Utilization
       type: Resource
     - resource:
@@ -2246,7 +2246,7 @@ spec:
     - resource:
         name: cpu
         target:
-          averageUtilization: 70
+          averageUtilization: 80
           type: Utilization
       type: Resource
     - resource:
@@ -2287,7 +2287,7 @@ spec:
     - resource:
         name: cpu
         target:
-          averageUtilization: 70
+          averageUtilization: 80
           type: Utilization
       type: Resource
     - resource:
