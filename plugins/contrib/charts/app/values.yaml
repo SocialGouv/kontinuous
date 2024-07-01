@@ -34,7 +34,7 @@ autoscale:
   minReplicas: 2
   maxReplicas: 10
   averageUtilization:
-    cpu: 70
+    cpu: 80
     memory: 80
 certSecretName:
 waitForPostgres: false
