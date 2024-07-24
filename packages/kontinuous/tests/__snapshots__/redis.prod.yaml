@@ -111,6 +111,8 @@ metadata:
     reloader.stakater.com/auto: \\"true\\"
 spec:
   replicas: 1
+  strategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       component: redis
