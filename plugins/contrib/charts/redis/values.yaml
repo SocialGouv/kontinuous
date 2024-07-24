@@ -8,3 +8,4 @@ volumes: []
 volumeMounts: []
 ~forceRestart: false
 annotations: {}
+strategyType: RollingUpdate
