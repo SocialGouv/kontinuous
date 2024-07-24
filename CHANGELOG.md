@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.179.7 (2024-07-24)
+
+
+### Bug Fixes
+
+* strategyType for redis ([#500](https://github.com/socialgouv/kontinuous/issues/500)) ([d12f175](https://github.com/socialgouv/kontinuous/commit/d12f1758686953e9fcf71bfa44e745cafa698b90))
+
 ## 1.179.6 (2024-07-01)
 
 
