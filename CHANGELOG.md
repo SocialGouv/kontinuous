@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.179.8 (2024-07-26)
+
+
+### Bug Fixes
+
+* **oauth2-proxy:** external chart ([5bbb916](https://github.com/socialgouv/kontinuous/commit/5bbb916fb1573453c28e45f066ac1f9371994f46))
+
 ## 1.179.7 (2024-07-24)
 
 
