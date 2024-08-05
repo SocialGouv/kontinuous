@@ -97,6 +97,7 @@ describe("test build manifests with snapshots", () => {
         "fabrique/contrib/patches/janitor",
         "fabrique/contrib/patches/updateManifestsWithPreprodResources",
         "fabrique/contrib/valuesCompilers/getGitDefaultBranch",
+        "fabrique/patches/infraResources",
       ]),
     }
     const envFile = `${testdirPath}/.env`
