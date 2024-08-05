@@ -40,10 +40,17 @@ module.exports = async ({
       { cwd: tmpdir, env }
     )
 
-    await asyncShell(`git checkout ${ref} -- ${file}`, {
-      cwd: tmpdir,
-      env,
-    })
+    try {
+      await asyncShell(`git checkout ${ref} -- ${file}`, {
+        cwd: tmpdir,
+        env,
+      })
+    } catch (err) {
+      if (err.message.includes("error: pathspec")) {
+        return false
+      }
+      throw err
+    }
 
     const content = await fs.readFile(`${tmpdir}/${file}`, {
       encoding: "utf-8",

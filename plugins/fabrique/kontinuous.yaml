@@ -5,6 +5,9 @@ patches:
   setUndefinedStorageClassnameCnpg:
     options:
       defaultStorageClassName: csi-cinder-high-speed
+  infraResources:
+    options:
+      repositoryUrl: https://github.com/SocialGouv/infra-resources.git
 
 dependencies:
   contrib:
