@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.180.0 (2024-08-05)
+
+
+### Features
+
+* load resources from repo ([#501](https://github.com/socialgouv/kontinuous/issues/501)) ([3c8af38](https://github.com/socialgouv/kontinuous/commit/3c8af3801a60210b8c9d2c93df133a3e74b0ca6c))
+
 ## 1.179.8 (2024-07-26)
 
 
