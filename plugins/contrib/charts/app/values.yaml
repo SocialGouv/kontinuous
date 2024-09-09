@@ -52,6 +52,7 @@ entrypoint:
 args: []
 antiAffinity:
   enabled:
+affinity:
 tolerations:
   # - key: startup
   #   operator: Equal
