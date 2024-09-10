@@ -52,6 +52,9 @@ spec:
       {{- end }}
       affinity:
         {{- include "contrib-helpers.anti-affinity" . | nindent 8}}
+        {{- if .Values.affinity }}
+        {{- tpl (.Values.affinity | toYaml) . | nindent 8}}
+        {{- end }}
       {{- if .Values.tolerations }}
       tolerations:
         {{- tpl (.Values.tolerations | toYaml) . | nindent 8}}
