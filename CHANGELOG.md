@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.180.1 (2024-09-10)
+
+
+### Bug Fixes
+
+* **app:** affinity ([#504](https://github.com/socialgouv/kontinuous/issues/504)) ([58c82cb](https://github.com/socialgouv/kontinuous/commit/58c82cbaa50fc0a83f5ad66d6d9fa0870a582ff1))
+
 ## 1.180.0 (2024-08-05)
 
 
