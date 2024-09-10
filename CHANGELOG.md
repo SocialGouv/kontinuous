@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.180.2 (2024-09-10)
+
+
+### Bug Fixes
+
+* backup retention for dev ([#505](https://github.com/socialgouv/kontinuous/issues/505)) ([9d8d92b](https://github.com/socialgouv/kontinuous/commit/9d8d92b09af6c5c376d4c37145a98973a096daca))
+
 ## 1.180.1 (2024-09-10)
 
 

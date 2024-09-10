@@ -1,4 +1,4 @@
 apiVersion: v2
 name: contrib-helpers
-version: 1.180.1
+version: 1.180.2
 type: library
