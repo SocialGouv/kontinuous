@@ -56,8 +56,8 @@ cnpg-cluster:
   backup:
     ~tpl~enabled: "{{ (or .Values.Parent.backup.enabled .Values.global.isProd .Values.global.isPreProd) | ternary `true` `false` }}"
     schedule: "0 0 0 * * *" # daily
-    retentionPolicy: 60d
-    sqlDumpRetentionDays: "60"
+    ~tpl~retentionPolicy: "{{ .Values.global.isProd | ternary `60d` `7d` }}"
+    ~tpl~sqlDumpRetentionDays: "{{ .Values.global.isProd | ternary `'60'` `'7'` }}"
     barmanObjectStore:
       ~tpl~destinationPath: "s3://{{ .Values.global.projectName }}-{{ .Values.global.isProd | ternary `prod` `dev` }}-backups/{{ .Values.global.namespace }}{{ (ne .Values.Parent.backup.name ``) | ternary (print `-` .Values.Parent.backup.name) `` }}"
       ~tpl~endpointURL: "{{ .Values.global.pgBackupEndpointURL }}"

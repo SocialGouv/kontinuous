@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test build manifests with snapshots override-env-default.dev 1`] = `
+exports[`test build manifests with snapshots pg.preprod 1`] = `
 "apiVersion: v1
 kind: Namespace
 metadata:
@@ -11,31 +11,32 @@ metadata:
     kapp.k14s.io/exists: \\"\\"
     kontinuous/chartPath: project.fabrique.contrib.rancher-namespace
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/rancher-namespace/templates/namespace.yaml
-    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
   labels:
-    application: test-override-env-default
-    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
-    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    application: test-pg
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment.env: test-pg-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: namespace-test-override-env-default-feature-branch-1-23780fnk
+    kontinuous/resourceName: namespace-test-pg-preprod-17ujfkwo
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  name: test-override-env-default-feature-branch-1
+    cert: wildcard
+  name: test-pg-preprod
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: netpol-ingress
-  namespace: test-override-env-default-feature-branch-1
+  namespace: test-pg-preprod
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
-    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
   labels:
-    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
-    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment.env: test-pg-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
@@ -65,17 +66,17 @@ metadata:
   annotations:
     kontinuous/chartPath: project.fabrique.contrib.security-policies
     kontinuous/source: project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
-    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
   labels:
-    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
-    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment.env: test-pg-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/resourceName: serviceaccount-default-2g5dmk74
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  namespace: test-override-env-default-feature-branch-1
+  namespace: test-pg-preprod
 automountServiceAccountToken: false
 ---
 apiVersion: batch/v1
@@ -83,22 +84,22 @@ kind: CronJob
 metadata:
   labels:
     app: cnpg-backup-s3-client
-    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
-    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment.env: test-pg-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: cronjob-pg-backup-cron-5yup7xxm
+    kontinuous/resourceName: cronjob-cnpg-backup-cron-46qlv71y
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
-  name: pg-backup-cron
+  name: cnpg-backup-cron
   annotations:
-    kontinuous/chartPath: project.fabrique.pg.cnpg-cluster
-    kontinuous/source: project/charts/fabrique/charts/pg/charts/cnpg-cluster/templates/backup-cron.yaml
+    kontinuous/chartPath: project.fabrique.cnpg.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/cnpg/charts/cnpg-cluster/templates/backup-cron.yaml
     kontinuous/plugin.needs: |
-      - project.fabrique.pg.jobs-pg
-    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
-  namespace: test-override-env-default-feature-branch-1
+      - project.fabrique.cnpg.jobs-pg
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+  namespace: test-pg-preprod
 spec:
   schedule: 0 0 * * *
   concurrencyPolicy: Forbid
@@ -141,21 +142,21 @@ spec:
                 - name: AWS_ENDPOINT_URL
                   value: https://s3.gra.io.cloud.ovh.net
                 - name: DESTINATION_PATH
-                  value: s3://fabrique-dev-backups/test-override-env-default-feature-branch-1/pg/dumps
+                  value: s3://fabrique-dev-backups/test-pg-preprod/cnpg/dumps
                 - name: PGPASSWORD
                   valueFrom:
                     secretKeyRef:
-                      name: pg-superuser
+                      name: cnpg-superuser
                       key: password
                 - name: PGUSER
                   valueFrom:
                     secretKeyRef:
-                      name: pg-superuser
+                      name: cnpg-superuser
                       key: username
                 - name: PGDATABASE
-                  value: autodevops_feature-branch-1
+                  value: preprod
                 - name: PGHOST
-                  value: pg-r
+                  value: cnpg-r
                 - name: RETENTION_DAYS
                   value: \\"7\\"
           affinity:
@@ -177,30 +178,30 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-dev-test-override-env-default-feature-branch-1-cr-2l6fzsi6
-  namespace: test-override-env-default-feature-branch-1
+  name: job-preprod-test-pg-feature-branch-1-create-secrets-c-23y0idio
+  namespace: test-pg-preprod
   annotations:
     kontinuous/needsName: create-secrets.create-secrets
     kontinuous/needsNames: '[\\"create-secrets\\",\\"create-secrets.create-secrets\\",\\"create-secrets..create-secrets\\"]'
-    kontinuous/chartPath: project.fabrique.pg.jobs-pg
-    kontinuous/source: project/charts/fabrique/charts/pg/charts/jobs-pg/templates/jobs.yaml
-    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
-    kontinuous/depname.full: project.fabrique.pg.jobs-pg.job.job-dev-test-override-env-default-feature-branch-1-cr-2l6fzsi6
-    kontinuous/depname.chartResource: jobs-pg.job.job-dev-test-override-env-default-feature-branch-1-cr-2l6fzsi6
+    kontinuous/chartPath: project.fabrique.cnpg.jobs-pg
+    kontinuous/source: project/charts/fabrique/charts/cnpg/charts/jobs-pg/templates/jobs.yaml
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/depname.full: project.fabrique.cnpg.jobs-pg.job.job-preprod-test-pg-feature-branch-1-create-secrets-c-23y0idio
+    kontinuous/depname.chartResource: jobs-pg.job.job-preprod-test-pg-feature-branch-1-create-secrets-c-23y0idio
     kontinuous/depname.chartName: jobs-pg
-    kontinuous/depname.chartPath: project.fabrique.pg.jobs-pg
-    kontinuous/depname.resourcePath: job.job-dev-test-override-env-default-feature-branch-1-cr-2l6fzsi6
-    kontinuous/depname.resourceName: job-dev-test-override-env-default-feature-branch-1-cr-2l6fzsi6
-    kontinuous/depname.chartNameTopFull: pg.jobs-pg
-    kontinuous/depname.chartNameTop: pg
+    kontinuous/depname.chartPath: project.fabrique.cnpg.jobs-pg
+    kontinuous/depname.resourcePath: job.job-preprod-test-pg-feature-branch-1-create-secrets-c-23y0idio
+    kontinuous/depname.resourceName: job-preprod-test-pg-feature-branch-1-create-secrets-c-23y0idio
+    kontinuous/depname.chartNameTopFull: cnpg.jobs-pg
+    kontinuous/depname.chartNameTop: cnpg
     kontinuous/plugin.log: \\"true\\"
   labels:
-    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
-    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment.env: test-pg-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: job-job-dev-test-override-env-default-feature-branch-48ey1316
+    kontinuous/resourceName: job-job-preprod-test-pg-feature-branch-1-create-secre-2fexbo2w
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
 spec:
@@ -210,20 +211,20 @@ spec:
   template:
     metadata:
       labels:
-        environment: dev
+        environment: preprod
         ref: feature-branch-1
-        repository: test-override-env-default
+        repository: test-pg
         runName: cnpg-create-secrets
-        kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
-        kontinuous/deployment.env: test-override-env-default-feature-branch-1
+        kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+        kontinuous/deployment.env: test-pg-preprod
         kontinuous/ref: feature-branch-1
         kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
         kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-        kontinuous/resourceName: job-job-dev-test-override-env-default-feature-branch-48ey1316
+        kontinuous/resourceName: job-job-preprod-test-pg-feature-branch-1-create-secre-2fexbo2w
         app.kubernetes.io/manifest-managed-by: kontinuous
         app.kubernetes.io/manifest-created-by: kontinuous
       annotations:
-        kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
+        kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
     spec:
       restartPolicy: Never
       initContainers:
@@ -250,25 +251,25 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: APP_DB_SECRET_NAME
-              value: pg-app
+              value: cnpg-app
             - name: CNPG_DB_SECRET_NAME
-              value: pg-db
+              value: cnpg-db
             - name: HBA_DATABASE
               value: \\"*\\"
             - name: HBA_HOST
-              value: pg-rw
+              value: cnpg-rw
             - name: HBA_USER
               value: \\"*\\"
             - name: NAMESPACE
-              value: test-override-env-default-feature-branch-1
+              value: test-pg-preprod
             - name: PGDATABASE
-              value: autodevops_feature-branch-1
+              value: preprod
             - name: PGHOST
-              value: pg-rw
+              value: cnpg-rw
             - name: PGPORT
               value: \\"5432\\"
             - name: PGUSER
-              value: user_feature-branch-1
+              value: preprod
             - name: KUBECONFIG
               value: /secrets/k8s/kubeconfig
             - name: KONTINUOUS_OUTPUT
@@ -297,7 +298,7 @@ spec:
               readOnly: true
             - name: kontinuous-io
               mountPath: /kontinuous-output
-              subPath: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy/jobs-pg.create-secrets.create-secrets
+              subPath: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3/jobs-pg.create-secrets.create-secrets
       securityContext:
         fsGroup: 1001
       volumes:
@@ -329,41 +330,222 @@ spec:
           value: ci
           effect: NoSchedule
 ---
-apiVersion: postgresql.cnpg.io/v1
-kind: Cluster
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: pg
   labels:
-    helm.sh/chart: cnpg-cluster-1.15.1
-    app.kubernetes.io/name: pg
-    app.kubernetes.io/instance: release-name
-    app.kubernetes.io/version: \\"15\\"
-    app.kubernetes.io/managed-by: Helm
-    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
-    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    component: hasura
+    application: test-pg
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment.env: test-pg-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: cluster-pg-251tk6jn
+    kontinuous/resourceName: deployment-hasura-3fivxu5u
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: hasura
+  namespace: test-pg-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/deployment.yaml
+    kontinuous/plugin.needs: '[\\"cnpg\\"]'
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/depname.full: project.fabrique.contrib.hasura.deployment.hasura
+    kontinuous/depname.chartResource: hasura.deployment.hasura
+    kontinuous/depname.chartName: hasura
+    kontinuous/depname.chartPath: project.fabrique.contrib.hasura
+    kontinuous/depname.resourcePath: deployment.hasura
+    kontinuous/depname.resourceName: hasura
+    kontinuous/depname.chartNameTopFull: hasura
+    kontinuous/depname.chartNameTop: hasura
+    kontinuous/plugin.log: \\"false\\"
+    reloader.stakater.com/auto: \\"true\\"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: hasura
+  template:
+    metadata:
+      labels:
+        component: hasura
+        application: test-pg
+        kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+        kontinuous/deployment.env: test-pg-preprod
+        kontinuous/ref: feature-branch-1
+        kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+        kontinuous/resourceName: deployment-hasura-3fivxu5u
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    spec:
+      containers:
+        - image: harbor.fabrique.social.gouv.fr/fabrique/test-pg/hasura:preprod-ffac537e6cbbf934b08745a378932722df287a53
+          name: hasura
+          ports:
+            - containerPort: 8080
+              name: http
+          resources:
+            limits: {}
+            requests: {}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            failureThreshold: 15
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            exec:
+              command:
+                - cat
+                - /var/run/readiness-check/readiness-file
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            failureThreshold: 60
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          env:
+            - name: HASURA_GRAPHQL_MIGRATIONS_SERVER_TIMEOUT
+              value: \\"360\\"
+          envFrom:
+            - secretRef:
+                name: cnpg-app
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - touch /var/run/readiness-check/readiness-file
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - rm -f /var/run/readiness-check/readiness-file; sleep 30
+          volumeMounts:
+            - name: readiness-check-volume
+              mountPath: /var/run/readiness-check
+      volumes:
+        - name: readiness-check-volume
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: hasura
+    application: test-pg
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment.env: test-pg-preprod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: service-hasura-2b56e0cf
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: hasura
+  namespace: test-pg-preprod
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/service.yaml
+    kontinuous/plugin.needs: '[\\"cnpg\\"]'
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    component: hasura
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"cnpg\\"]'
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+  labels:
+    component: hasura
+    application: test-pg
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment.env: test-pg-preprod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: ingress-hasura-2784v1wj
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: hasura
+  namespace: test-pg-preprod
+spec:
+  rules:
+    - host: hasura-test-pg-preprod.ovh.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: hasura
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - hasura-test-pg-preprod.ovh.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cnpg
+  labels:
+    helm.sh/chart: cnpg-cluster-1.15.1
+    app.kubernetes.io/name: cnpg
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: \\"15\\"
+    app.kubernetes.io/managed-by: Helm
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment.env: test-pg-preprod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: cluster-cnpg-ojdq2mqf
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   annotations:
     app.kubernetes.io/managed-by: Helm
-    kontinuous/chartPath: project.fabrique.pg.cnpg-cluster
-    kontinuous/source: project/charts/fabrique/charts/pg/charts/cnpg-cluster/templates/cluster.cnpg.yaml
+    kontinuous/chartPath: project.fabrique.cnpg.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/cnpg/charts/cnpg-cluster/templates/cluster.cnpg.yaml
     kontinuous/plugin.needs: |
-      - project.fabrique.pg.jobs-pg
-    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
-    kontinuous/depname.full: project.fabrique.pg.cnpg-cluster.cluster.pg
-    kontinuous/depname.chartResource: cnpg-cluster.cluster.pg
+      - project.fabrique.cnpg.jobs-pg
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/depname.full: project.fabrique.cnpg.cnpg-cluster.cluster.cnpg
+    kontinuous/depname.chartResource: cnpg-cluster.cluster.cnpg
     kontinuous/depname.chartName: cnpg-cluster
-    kontinuous/depname.chartPath: project.fabrique.pg.cnpg-cluster
-    kontinuous/depname.resourcePath: cluster.pg
-    kontinuous/depname.resourceName: pg
-    kontinuous/depname.chartNameTopFull: pg.cnpg-cluster
-    kontinuous/depname.chartNameTop: pg
+    kontinuous/depname.chartPath: project.fabrique.cnpg.cnpg-cluster
+    kontinuous/depname.resourcePath: cluster.cnpg
+    kontinuous/depname.resourceName: cnpg
+    kontinuous/depname.chartNameTopFull: cnpg.cnpg-cluster
+    kontinuous/depname.chartNameTop: cnpg
     kontinuous/plugin.log: \\"false\\"
-  namespace: test-override-env-default-feature-branch-1
+  namespace: test-pg-preprod
 spec:
   instances: 1
   imageName: ghcr.io/cloudnative-pg/postgis:14
@@ -374,7 +556,7 @@ spec:
       memory: 1G
     requests:
       cpu: 100m
-      memory: 1G
+      memory: 42Mb
   storage:
     size: 8Gi
     storageClass: csi-cinder-high-speed
@@ -383,7 +565,7 @@ spec:
     barmanObjectStore:
       data:
         compression: gzip
-      destinationPath: s3://fabrique-dev-backups/test-override-env-default-feature-branch-1
+      destinationPath: s3://fabrique-dev-backups/test-pg-preprod
       endpointURL: https://s3.gra.io.cloud.ovh.net
       s3Credentials:
         accessKeyId:
@@ -407,14 +589,14 @@ spec:
       pg_stat_statements.max: \\"10000\\"
       pg_stat_statements.track: all
   monitoring:
-    enablePodMonitor: false
+    enablePodMonitor: true
   priorityClassName: cnpg-high-priority-3
   bootstrap:
     initdb:
-      database: autodevops_feature-branch-1
-      owner: user_feature-branch-1
+      database: preprod
+      owner: preprod
       secret:
-        name: pg-db
+        name: cnpg-db
       postInitTemplateSQL:
         - CREATE EXTENSION IF NOT EXISTS \\"postgis\\";
         - CREATE EXTENSION IF NOT EXISTS \\"postgis_topology\\";
@@ -430,32 +612,32 @@ spec:
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
-  name: pg-scheduledbackup
+  name: cnpg-scheduledbackup
   labels:
     helm.sh/chart: cnpg-cluster-1.15.1
-    app.kubernetes.io/name: pg
+    app.kubernetes.io/name: cnpg
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/version: \\"15\\"
     app.kubernetes.io/managed-by: Helm
-    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
-    kontinuous/deployment.env: test-override-env-default-feature-branch-1
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment.env: test-pg-preprod
     kontinuous/ref: feature-branch-1
     kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
     kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
-    kontinuous/resourceName: scheduledbackup-pg-scheduledbackup-4p1q206g
+    kontinuous/resourceName: scheduledbackup-cnpg-scheduledbackup-28p98xvy
     app.kubernetes.io/manifest-managed-by: kontinuous
     app.kubernetes.io/manifest-created-by: kontinuous
   annotations:
-    kontinuous/chartPath: project.fabrique.pg.cnpg-cluster
-    kontinuous/source: project/charts/fabrique/charts/pg/charts/cnpg-cluster/templates/scheduledbackup.cnpg.yaml
+    kontinuous/chartPath: project.fabrique.cnpg.cnpg-cluster
+    kontinuous/source: project/charts/fabrique/charts/cnpg/charts/cnpg-cluster/templates/scheduledbackup.cnpg.yaml
     kontinuous/plugin.needs: |
-      - project.fabrique.pg.jobs-pg
-    kontinuous/deployment: test-override-env-default-feature-branch-1-ffac537e6c-tw0tuagy
-  namespace: test-override-env-default-feature-branch-1
+      - project.fabrique.cnpg.jobs-pg
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+  namespace: test-pg-preprod
 spec:
   backupOwnerReference: self
   cluster:
-    name: pg
+    name: cnpg
   schedule: 0 0 0 * * *
   immediate: true
 "
