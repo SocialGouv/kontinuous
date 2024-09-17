@@ -103,25 +103,11 @@ dependencies:
 
     preDeploy:
       importSecrets:
-        enabled: false
+        enabled: true
         options:
-          secrets:
-            kubeconfig:
-            harbor:
-            buildkit-client-certs:
-            pg-admin-user:
-              from:
-                - azure-pg-admin-user
-                - pg-scaleway
-            # secret-name:
-            # enabled: true
-            # reload: false
-            # required: false
-            # fromNamespace: <$projectName-ci>
-            # toNamespace: true
-            # toAllNamespace: false
-            # to: azure-pg-admin-user
-            # from: [azure-pg-admin-user]
+          copyAllNeeded: false
+          copyAllFromCiNamespace: true
+          secrets: {}
       rancherNamespaces:
         enabled: true
       cleanFailed:
