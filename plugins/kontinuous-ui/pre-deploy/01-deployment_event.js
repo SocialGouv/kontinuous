@@ -15,3 +15,5 @@ module.exports = async (manifests, _options, { config, logger }) => {
   // logger.info("DATA:", JSON.stringify(data, null, 2))
   logger.info("CONFIG", config)
 }
+
+// ../kontinuous/kontinuous deploy --kubeconfig-context ovh-dev --dry-run -d
