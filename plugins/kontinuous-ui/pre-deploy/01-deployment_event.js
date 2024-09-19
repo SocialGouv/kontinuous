@@ -3,7 +3,7 @@ const { createClient } = require("@supabase/supabase-js")
 module.exports = async (_manifests, _options, { config, ctx }) => {
   const processEnv = ctx.get("env") || process.env
   const { SUPABASE_URL: supabaseUrl, SUPABASE_KEY: supabaseKey } = processEnv
-  console.log("ENV", processEnv, supabaseUrl, supabaseKey)
+
   const {
     gitSha,
     projectName,
