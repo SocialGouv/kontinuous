@@ -6,7 +6,7 @@ exports[`egapro 1`] = `
 │   ├── api
 │   │   ├── Deployment
 │   │   │   ├── kontinuous-wait-needs (init)
-│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │   │   │   └── app
 │   │   │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │       └── port: 2626
@@ -18,7 +18,7 @@ exports[`egapro 1`] = `
 │   ├── app
 │   │   ├── Deployment
 │   │   │   ├── kontinuous-wait-needs (init)
-│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │   │   │   └── app
 │   │   │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/app:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │       └── port: 3000
@@ -30,7 +30,7 @@ exports[`egapro 1`] = `
 │   ├── declaration
 │   │   ├── Deployment
 │   │   │   ├── kontinuous-wait-needs (init)
-│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │   │   │   └── app
 │   │   │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/declaration:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │       └── port: 8080
@@ -59,7 +59,7 @@ exports[`egapro 1`] = `
 │   ├── simulateur
 │   │   ├── Deployment
 │   │   │   ├── kontinuous-wait-needs (init)
-│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │   │   │   └── app
 │   │   │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/simulateur:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │       └── port: 8080
@@ -71,7 +71,7 @@ exports[`egapro 1`] = `
 │   └── storybook
 │       ├── Deployment
 │       │   ├── kontinuous-wait-needs (init)
-│       │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│       │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │       │   └── app
 │       │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/storybook:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │       │       └── port: 8080
@@ -95,35 +95,35 @@ exports[`egapro 1`] = `
     ├── Job
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-api-buildkit-4zg3ke
     │   │   ├── degit-repository (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   │   └── job
     │   │       ├── image: moby/buildkit:v0.10.5-rootless
     │   │       └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-app-buildkit-1ngsea
     │   │   ├── degit-repository (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   │   └── job
     │   │       ├── image: moby/buildkit:v0.10.5-rootless
     │   │       └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-declaration-bui-3ykcwt
     │   │   ├── degit-repository (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   │   └── job
     │   │       ├── image: moby/buildkit:v0.10.5-rootless
     │   │       └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-simulateur-buil-3zbx3v
     │   │   ├── degit-repository (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   │   └── job
     │   │       ├── image: moby/buildkit:v0.10.5-rootless
     │   │       └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   └── job-egapro-master-jobs-con-6v7vwk-build-storybook-build-287ohe
     │       ├── degit-repository (init)
-    │       │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │       │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │       │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │       └── job
     │           ├── image: moby/buildkit:v0.10.5-rootless
@@ -174,7 +174,7 @@ exports[`template 1`] = `
 │   ├── api
 │   │   ├── Deployment
 │   │   │   ├── kontinuous-wait-needs (init)
-│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │   │   │   └── app
 │   │   │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │       └── port: 2626
@@ -186,7 +186,7 @@ exports[`template 1`] = `
 │   ├── app
 │   │   ├── Deployment
 │   │   │   ├── kontinuous-wait-needs (init)
-│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │   │   │   └── app
 │   │   │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/app:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │       └── port: 3000
@@ -198,7 +198,7 @@ exports[`template 1`] = `
 │   ├── declaration
 │   │   ├── Deployment
 │   │   │   ├── kontinuous-wait-needs (init)
-│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │   │   │   └── app
 │   │   │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/declaration:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │       └── port: 8080
@@ -227,7 +227,7 @@ exports[`template 1`] = `
 │   ├── simulateur
 │   │   ├── Deployment
 │   │   │   ├── kontinuous-wait-needs (init)
-│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │   │   │   └── app
 │   │   │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/simulateur:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │       └── port: 8080
@@ -239,7 +239,7 @@ exports[`template 1`] = `
 │   └── storybook
 │       ├── Deployment
 │       │   ├── kontinuous-wait-needs (init)
-│       │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│       │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │       │   └── app
 │       │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/storybook:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │       │       └── port: 8080
@@ -263,35 +263,35 @@ exports[`template 1`] = `
     ├── Job
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-api-buildkit-4zg3ke
     │   │   ├── degit-repository (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   │   └── job
     │   │       ├── image: moby/buildkit:v0.10.5-rootless
     │   │       └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-app-buildkit-1ngsea
     │   │   ├── degit-repository (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   │   └── job
     │   │       ├── image: moby/buildkit:v0.10.5-rootless
     │   │       └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-declaration-bui-3ykcwt
     │   │   ├── degit-repository (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   │   └── job
     │   │       ├── image: moby/buildkit:v0.10.5-rootless
     │   │       └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-simulateur-buil-3zbx3v
     │   │   ├── degit-repository (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   │   └── job
     │   │       ├── image: moby/buildkit:v0.10.5-rootless
     │   │       └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   └── job-egapro-master-jobs-con-6v7vwk-build-storybook-build-287ohe
     │       ├── degit-repository (init)
-    │       │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │       │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │       │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │       └── job
     │           ├── image: moby/buildkit:v0.10.5-rootless
@@ -374,53 +374,53 @@ exports[`template 1`] = `
     ├── Job
     │   ├── job-template-k-mvp-mig-9-jobs-con-6v7vwk-db-hasura-crea-3rcr3k
     │   │   ├── kontinuous-wait-needs (init)
-    │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+    │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
     │   │   ├── degit-action (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
     │   │       ├── image: ghcr.io/socialgouv/docker/psql:6.70.0
     │   │       └── command: /bin/bash -c set -e /action/ensure-db.sh
     │   ├── job-template-k-mvp-mig-9-jobs-con-6v7vwk-db-hasura-crea-5axfnj
     │   │   ├── degit-action (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
     │   │       ├── image: bitnami/kubectl:latest
     │   │       └── command: /bin/bash -c set -e /action/create-secret.sh
     │   ├── job-template-k-mvp-mig-9-jobs-con-6v7vwk-db-keycloak-cr-5fc7zt
     │   │   ├── kontinuous-wait-needs (init)
-    │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+    │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
     │   │   ├── degit-action (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
     │   │       ├── image: ghcr.io/socialgouv/docker/psql:6.70.0
     │   │       └── command: /bin/bash -c set -e /action/ensure-db.sh
     │   ├── job-template-k-mvp-mig-9-jobs-con-6v7vwk-db-keycloak-cr-4j23v3
     │   │   ├── degit-action (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
     │   │       ├── image: bitnami/kubectl:latest
     │   │       └── command: /bin/bash -c set -e /action/create-secret.sh
     │   ├── job-template-k-mvp-mig-9-jobs-con-6v7vwk-seed-hasura-im-pfycj9
     │   │   ├── kontinuous-wait-needs (init)
-    │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+    │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
     │   │   ├── degit-action (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
     │   │       ├── image: bitnami/kubectl:latest
     │   │       └── command: /bin/bash -c set -e /action/import-secret.sh
     │   └── job-template-k-mvp-mig-9-jobs-con-6v7vwk-seed-hasura-se-5un89q
     │       ├── kontinuous-wait-needs (init)
-    │       │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+    │       │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
     │       ├── degit-repository (init)
-    │       │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │       │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │       │   └── command: sh -c  degit SocialGouv/template#k-mvp-mig-9 \\   /...
     │       ├── degit-action (init)
-    │       │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │       │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │       │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │       └── job
     │           ├── image: ghcr.io/socialgouv/docker/psql:7.0.0
@@ -443,7 +443,7 @@ exports[`www 1`] = `
 │   ├── api
 │   │   ├── Deployment
 │   │   │   ├── kontinuous-wait-needs (init)
-│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │   │   │   └── app
 │   │   │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/api:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │       └── port: 2626
@@ -455,7 +455,7 @@ exports[`www 1`] = `
 │   ├── app
 │   │   ├── Deployment
 │   │   │   ├── kontinuous-wait-needs (init)
-│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │   │   │   └── app
 │   │   │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/app:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │       └── port: 3000
@@ -467,7 +467,7 @@ exports[`www 1`] = `
 │   ├── declaration
 │   │   ├── Deployment
 │   │   │   ├── kontinuous-wait-needs (init)
-│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │   │   │   └── app
 │   │   │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/declaration:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │       └── port: 8080
@@ -496,7 +496,7 @@ exports[`www 1`] = `
 │   ├── simulateur
 │   │   ├── Deployment
 │   │   │   ├── kontinuous-wait-needs (init)
-│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│   │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │   │   │   └── app
 │   │   │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/simulateur:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │   │   │       └── port: 8080
@@ -508,7 +508,7 @@ exports[`www 1`] = `
 │   └── storybook
 │       ├── Deployment
 │       │   ├── kontinuous-wait-needs (init)
-│       │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│       │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │       │   └── app
 │       │       ├── image: harbor.fabrique.social.gouv.fr/egapro/egapro/storybook:preprod-b5faa561893cd5e18a5bc6fca3b3b10f5adc2ae8
 │       │       └── port: 8080
@@ -532,35 +532,35 @@ exports[`www 1`] = `
     ├── Job
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-api-buildkit-4zg3ke
     │   │   ├── degit-repository (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   │   └── job
     │   │       ├── image: moby/buildkit:v0.10.5-rootless
     │   │       └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-app-buildkit-1ngsea
     │   │   ├── degit-repository (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   │   └── job
     │   │       ├── image: moby/buildkit:v0.10.5-rootless
     │   │       └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-declaration-bui-3ykcwt
     │   │   ├── degit-repository (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   │   └── job
     │   │       ├── image: moby/buildkit:v0.10.5-rootless
     │   │       └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   ├── job-egapro-master-jobs-con-6v7vwk-build-simulateur-buil-3zbx3v
     │   │   ├── degit-repository (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │   │   └── job
     │   │       ├── image: moby/buildkit:v0.10.5-rootless
     │   │       └── command: /bin/sh -c set -e if [ "" != "" ]; then   export C...
     │   └── job-egapro-master-jobs-con-6v7vwk-build-storybook-build-287ohe
     │       ├── degit-repository (init)
-    │       │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │       │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │       │   └── command: sh -c  degit SocialGouv/egapro#master \\   /workspa...
     │       └── job
     │           ├── image: moby/buildkit:v0.10.5-rootless
@@ -643,53 +643,53 @@ exports[`www 1`] = `
     ├── Job
     │   ├── job-template-k-mvp-mig-9-jobs-con-6v7vwk-db-hasura-crea-3rcr3k
     │   │   ├── kontinuous-wait-needs (init)
-    │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+    │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
     │   │   ├── degit-action (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
     │   │       ├── image: ghcr.io/socialgouv/docker/psql:6.70.0
     │   │       └── command: /bin/bash -c set -e /action/ensure-db.sh
     │   ├── job-template-k-mvp-mig-9-jobs-con-6v7vwk-db-hasura-crea-5axfnj
     │   │   ├── degit-action (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
     │   │       ├── image: bitnami/kubectl:latest
     │   │       └── command: /bin/bash -c set -e /action/create-secret.sh
     │   ├── job-template-k-mvp-mig-9-jobs-con-6v7vwk-db-keycloak-cr-5fc7zt
     │   │   ├── kontinuous-wait-needs (init)
-    │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+    │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
     │   │   ├── degit-action (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
     │   │       ├── image: ghcr.io/socialgouv/docker/psql:6.70.0
     │   │       └── command: /bin/bash -c set -e /action/ensure-db.sh
     │   ├── job-template-k-mvp-mig-9-jobs-con-6v7vwk-db-keycloak-cr-4j23v3
     │   │   ├── degit-action (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
     │   │       ├── image: bitnami/kubectl:latest
     │   │       └── command: /bin/bash -c set -e /action/create-secret.sh
     │   ├── job-template-k-mvp-mig-9-jobs-con-6v7vwk-seed-hasura-im-pfycj9
     │   │   ├── kontinuous-wait-needs (init)
-    │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+    │   │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
     │   │   ├── degit-action (init)
-    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
     │   │       ├── image: bitnami/kubectl:latest
     │   │       └── command: /bin/bash -c set -e /action/import-secret.sh
     │   └── job-template-k-mvp-mig-9-jobs-con-6v7vwk-seed-hasura-se-5un89q
     │       ├── kontinuous-wait-needs (init)
-    │       │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+    │       │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
     │       ├── degit-repository (init)
-    │       │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │       │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │       │   └── command: sh -c  degit SocialGouv/template#k-mvp-mig-9 \\   /...
     │       ├── degit-action (init)
-    │       │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+    │       │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
     │       │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │       └── job
     │           ├── image: ghcr.io/socialgouv/docker/psql:7.0.0
@@ -708,7 +708,7 @@ exports[`www 1`] = `
 │   └── app
 │       ├── Deployment
 │       │   ├── kontinuous-wait-needs (init)
-│       │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.2
+│       │   │   └── image: ghcr.io/socialgouv/kontinuous/wait-needs:v1.180.3
 │       │   └── app
 │       │       ├── image: ghcr.io/socialgouv/www/app:sha-1ca3107affe6e436280896ab63b912d536790cfe
 │       │       └── port: 8080
@@ -727,7 +727,7 @@ exports[`www 1`] = `
     └── Job
         └── job-www-kontinuous-ac-jobs-con-6v7vwk-build-app-buildkit-1ngsea
             ├── degit-repository (init)
-            │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.2
+            │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.180.3
             │   └── command: sh -c  degit SocialGouv/www#kontinuous-ac \\   /wor...
             └── job
                 ├── image: moby/buildkit:v0.10.5-rootless
