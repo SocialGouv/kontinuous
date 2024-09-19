@@ -1,30 +1,30 @@
-const { createClient } = require("@supabase/supabase-js")
+const supabase = require("../lib/supabase")
 
-module.exports = async (_manifests, _options, { config, ctx }) => {
-  const processEnv = ctx.get("env") || process.env
-  const { SUPABASE_URL: supabaseUrl, SUPABASE_KEY: supabaseKey } = processEnv
-
+module.exports = async (_manifests, _options, { config, logger }) => {
   const {
     gitSha,
     projectName,
     environment,
-    refLabelValue,
+    gitBranch,
     repositoryName,
-    actionCommandName,
+    gitRepositoryUrl,
+    pipelineUUID,
   } = config
 
-  const supabase = createClient(supabaseUrl, supabaseKey)
+  const values = {
+    uuid: pipelineUUID,
+    status: "pre-deploy",
+    commit_hash: gitSha,
+    project: projectName,
+    environment,
+    branch: gitBranch,
+    repository: repositoryName,
+    repository_url: gitRepositoryUrl,
+  }
 
-  const { error } = await supabase.from("deployments_logs").insert([
-    {
-      status: actionCommandName,
-      commit_hash: gitSha,
-      project: projectName,
-      environment,
-      branch: refLabelValue,
-      repository: repositoryName,
-    },
-  ])
+  const { error } = await supabase.from("deployments_logs").insert([values])
 
   if (error) throw error
+
+  logger.info(values, "FINISHED")
 }

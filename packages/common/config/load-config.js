@@ -1,6 +1,7 @@
 const os = require("os")
 const path = require("path")
 const { mkdtemp } = require("fs/promises")
+const { v4: uuidv4 } = require("uuid")
 
 const { satisfies } = require("compare-versions")
 const fs = require("fs-extra")
@@ -240,6 +241,9 @@ const loadConfig = async (
       default: true,
       env: "KS_FORCE_NEW_DEPLOY",
       envParser: envParserYaml,
+    },
+    pipelineUUID: {
+      defaultFunction: () => uuidv4(),
     },
     pipelineId: {
       defaultFunction: (config) => {

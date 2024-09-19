@@ -15698,6 +15698,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uuid@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "uuid@npm:10.0.0"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 9ea91ef753d88b03746de0a22192251c355bbe595d9cb3a67520aacf693c793df7e85c4ad0378aecb133c372a5e7bb7ec0f3b14db477ab7e3b6ff29792e047b9
+  languageName: node
+  linkType: hard
+
 "uuid@npm:^9.0.0":
   version: 9.0.0
   resolution: "uuid@npm:9.0.0"
@@ -16253,6 +16262,7 @@ __metadata:
     slugify: "npm:^1.6.5"
     sonic-boom: "npm:^3.0.0"
     tiged: "npm:^2.12.4"
+    uuid: "npm:^10.0.0"
     which: "npm:^3.0.0"
     yaml: "npm:^2.3.1"
     zx: "npm:^7.1.1"
