@@ -156,6 +156,9 @@ module.exports = async (options, context) => {
         err.message.includes("field is immutable") ||
         err.message.includes("invalid: spec: Forbidden: updates") ||
         err.message.includes(
+          "may not be specified when `value` is not empty"
+        ) ||
+        err.message.includes(
           "Forbidden: may not specify more than 1 handler type"
         )
       ) {

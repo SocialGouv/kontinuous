@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.180.3](https://github.com/socialgouv/kontinuous/compare/v1.180.2...v1.180.3) (2024-09-19)
+
+
+### Bug Fixes
+
+* force replace when value collision ([1ddc897](https://github.com/socialgouv/kontinuous/commit/1ddc8978cbd8ea4edf2adbdef6cc9b8f31a4bf22))
+
 ## 1.180.2 (2024-09-10)
 
 
