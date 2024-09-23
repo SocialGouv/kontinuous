@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.181.1 (2024-09-23)
+
+
+### Bug Fixes
+
+* clean oblik related after oblik webhook feat ([#508](https://github.com/socialgouv/kontinuous/issues/508)) ([ccc43bf](https://github.com/socialgouv/kontinuous/commit/ccc43bf49d9edbbad309db5f4862fb48cbcd56c1))
+
 ## 1.181.0 (2024-09-23)
 
 
