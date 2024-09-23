@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.181.0 (2024-09-23)
+
+
+### Features
+
+* import secrets copyAllFromCiNamespace + copyAllNeeded ([#506](https://github.com/socialgouv/kontinuous/issues/506)) ([9812b71](https://github.com/socialgouv/kontinuous/commit/9812b71a0c256567d395c997b6b227fd1e6f0e22))
+
 ## [1.180.3](https://github.com/socialgouv/kontinuous/compare/v1.180.2...v1.180.3) (2024-09-19)
 
 
