@@ -173,8 +173,12 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 64m
+              memory: 32Mi
       containers:
         - name: job
           image: debian:stable
@@ -192,8 +196,12 @@ spec:
               set -e
               echo earth>$KONTINUOUS_OUTPUT/WORLD
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: \\"3\\"
+              memory: 1Gi
+            requests:
+              cpu: 64m
+              memory: 32Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -302,8 +310,12 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 64m
+              memory: 32Mi
       containers:
         - name: job
           image: debian:stable
@@ -323,8 +335,12 @@ spec:
               echo \\"Hello $PLANET !\\"
               sleep 10
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: \\"3\\"
+              memory: 1Gi
+            requests:
+              cpu: 64m
+              memory: 32Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

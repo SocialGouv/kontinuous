@@ -183,8 +183,12 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 64m
+              memory: 32Mi
       containers:
         - name: job
           image: moby/buildkit:v0.13.0-rootless
@@ -320,17 +324,6 @@ spec:
               set -e
 
 
-              if [ \\"$status\\" -ne 0 ]; then
-                echo \\"Command failed. Handling error...\\"
-                if grep -q -e \\"listing workers for Build: failed to list workers: Unavailable\\" -e \\"closing transport due to: connection error\\" $tempfile; then
-                  echo \\"buildkit optimized service unavailable, fallback to local build\\"
-                  buildctl_cmd=\\"buildctl-daemonless.sh\\"
-                  buildctl_options_mtls=\\"\\"
-                  runBuildkit
-                else
-                  exit $status
-                fi
-              fi
 
 
               echo \\"build succeeded.\\"
@@ -339,11 +332,11 @@ spec:
               echo \\"$IMAGE_PATH:prod\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
-              cpu: \\"2\\"
-              memory: 4Gi
+              cpu: \\"3\\"
+              memory: 250Mi
             requests:
-              cpu: 500m
-              memory: 1Gi
+              cpu: 64m
+              memory: 32Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -465,8 +458,12 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 64m
+              memory: 32Mi
       containers:
         - name: job
           image: moby/buildkit:v0.13.0-rootless
@@ -604,17 +601,6 @@ spec:
               set -e
 
 
-              if [ \\"$status\\" -ne 0 ]; then
-                echo \\"Command failed. Handling error...\\"
-                if grep -q -e \\"listing workers for Build: failed to list workers: Unavailable\\" -e \\"closing transport due to: connection error\\" $tempfile; then
-                  echo \\"buildkit optimized service unavailable, fallback to local build\\"
-                  buildctl_cmd=\\"buildctl-daemonless.sh\\"
-                  buildctl_options_mtls=\\"\\"
-                  runBuildkit
-                else
-                  exit $status
-                fi
-              fi
 
 
               echo \\"build succeeded.\\"
@@ -623,11 +609,11 @@ spec:
               echo \\"$IMAGE_PATH:prod\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
-              cpu: \\"2\\"
-              memory: 4Gi
+              cpu: \\"3\\"
+              memory: 250Mi
             requests:
-              cpu: 500m
-              memory: 1Gi
+              cpu: 64m
+              memory: 32Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -749,8 +735,12 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 64m
+              memory: 32Mi
       containers:
         - name: job
           image: moby/buildkit:v0.13.0-rootless
@@ -885,17 +875,6 @@ spec:
               set -e
 
 
-              if [ \\"$status\\" -ne 0 ]; then
-                echo \\"Command failed. Handling error...\\"
-                if grep -q -e \\"listing workers for Build: failed to list workers: Unavailable\\" -e \\"closing transport due to: connection error\\" $tempfile; then
-                  echo \\"buildkit optimized service unavailable, fallback to local build\\"
-                  buildctl_cmd=\\"buildctl-daemonless.sh\\"
-                  buildctl_options_mtls=\\"\\"
-                  runBuildkit
-                else
-                  exit $status
-                fi
-              fi
 
 
               echo \\"build succeeded.\\"
@@ -904,11 +883,11 @@ spec:
               echo \\"$IMAGE_PATH:prod\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
-              cpu: \\"2\\"
-              memory: 4Gi
+              cpu: \\"3\\"
+              memory: 250Mi
             requests:
-              cpu: 500m
-              memory: 1Gi
+              cpu: 64m
+              memory: 32Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -1030,8 +1009,12 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 64m
+              memory: 32Mi
       containers:
         - name: job
           image: moby/buildkit:v0.13.0-rootless
@@ -1167,17 +1150,6 @@ spec:
               set -e
 
 
-              if [ \\"$status\\" -ne 0 ]; then
-                echo \\"Command failed. Handling error...\\"
-                if grep -q -e \\"listing workers for Build: failed to list workers: Unavailable\\" -e \\"closing transport due to: connection error\\" $tempfile; then
-                  echo \\"buildkit optimized service unavailable, fallback to local build\\"
-                  buildctl_cmd=\\"buildctl-daemonless.sh\\"
-                  buildctl_options_mtls=\\"\\"
-                  runBuildkit
-                else
-                  exit $status
-                fi
-              fi
 
 
               echo \\"build succeeded.\\"
@@ -1186,11 +1158,11 @@ spec:
               echo \\"$IMAGE_PATH:prod\\" >$KONTINUOUS_OUTPUT/IMAGE
           resources:
             limits:
-              cpu: \\"2\\"
-              memory: 4Gi
+              cpu: \\"3\\"
+              memory: 250Mi
             requests:
-              cpu: 500m
-              memory: 1Gi
+              cpu: 64m
+              memory: 32Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

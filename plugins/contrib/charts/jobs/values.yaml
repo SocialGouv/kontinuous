@@ -14,27 +14,27 @@ priorityClassName: ""
 serviceAccountName: ""
 resources:
   limits:
-    cpu: 
-    memory: 
+    cpu: "3"
+    memory: 1Gi
   requests:
-    cpu: 
-    memory: 
+    cpu: 64m
+    memory: 32Mi
 degitRepository:
   resources:
     limits:
-      cpu: 
-      memory: 
+      cpu: 200m
+      memory: 100Mi
     requests:
-      cpu: 
-      memory: 
+      cpu: 64m
+      memory: 32Mi
 degitAction:
   resources:
     limits:
-      cpu: 
-      memory: 
+      cpu: 200m
+      memory: 100Mi
     requests:
-      cpu: 
-      memory: 
+      cpu: 64m
+      memory: 32Mi
 deployKey:
   enabled: false
   secretRefName: deploy-key

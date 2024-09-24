@@ -147,8 +147,12 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 64m
+              memory: 32Mi
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:6.70.0
@@ -197,8 +201,12 @@ spec:
               set -e
               /action/ensure-db.sh
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: \\"3\\"
+              memory: 1Gi
+            requests:
+              cpu: 64m
+              memory: 32Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -302,8 +310,12 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 64m
+              memory: 32Mi
       containers:
         - name: job
           image: bitnami/kubectl:latest
@@ -339,8 +351,12 @@ spec:
               set -e
               /action/create-secret.sh
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: \\"3\\"
+              memory: 1Gi
+            requests:
+              cpu: 64m
+              memory: 32Mi
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001
@@ -457,8 +473,12 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 64m
+              memory: 32Mi
       containers:
         - name: job
           image: harbor.fabrique.social.gouv.fr/test-app-simple-options/app:sha-ffac537e6cbbf934b08745a378932722df287a53
@@ -478,8 +498,12 @@ spec:
               set -e
               yarn seed
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: \\"3\\"
+              memory: 1Gi
+            requests:
+              cpu: 64m
+              memory: 32Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -587,8 +611,12 @@ spec:
             - name: workspace
               mountPath: /workspace
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 64m
+              memory: 32Mi
         - name: degit-action
           image: ghcr.io/socialgouv/kontinuous/degit:v1.181.2
           command:
@@ -603,8 +631,12 @@ spec:
             - name: action
               mountPath: /action
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 64m
+              memory: 32Mi
       containers:
         - name: job
           image: ghcr.io/socialgouv/docker/psql:7.0.0
@@ -626,8 +658,12 @@ spec:
               set -e
               /action/seed-db.sh
           resources:
-            limits: {}
-            requests: {}
+            limits:
+              cpu: \\"3\\"
+              memory: 1Gi
+            requests:
+              cpu: 64m
+              memory: 32Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

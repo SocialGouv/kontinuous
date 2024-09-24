@@ -1,8 +1,6 @@
 build-app:
   ~chart: job
   use: build
-  memoryLimit: 8Gi
-  memoryRequest: 4Gi
   with:
     imagePackage: app
     buildArgs:
