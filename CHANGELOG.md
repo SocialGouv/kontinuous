@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.181.3 (2024-09-24)
+
+
+### Bug Fixes
+
+* jobs setup and improve default resources ([#510](https://github.com/socialgouv/kontinuous/issues/510)) ([e20548f](https://github.com/socialgouv/kontinuous/commit/e20548f4d6bc30b825ab730724223aece8d1677f))
+
 ## 1.181.2 (2024-09-24)
 
 
