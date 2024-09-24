@@ -7,10 +7,10 @@ runs:
     image: moby/buildkit:v0.13.0-rootless
     # image: ghcr.io/socialgouv/buildkit:v0.13.0-rootless
     # kubernetes: true
-    cpuLimit: "2"
-    cpuRequest: 500m
-    memoryLimit: 4Gi
-    memoryRequest: 1Gi
+    cpuLimit: "3"
+    cpuRequest: 64m
+    memoryLimit: 250Mi
+    memoryRequest: 32Mi
     entrypoint: ["/bin/sh", "-c"]
     user: 1000
     group: 1000
@@ -144,6 +144,8 @@ runs:
       status=$?
       set -e
 
+      {{ if $.with.fallbackEnabled }}
+      # not compatible with enforced rootless cluster, so it's disabled by default
       if [ "$status" -ne 0 ]; then
         echo "Command failed. Handling error..."
         if grep -q -e "listing workers for Build: failed to list workers: Unavailable" -e "closing transport due to: connection error" $tempfile; then
@@ -155,6 +157,7 @@ runs:
           exit $status
         fi
       fi
+      {{ end }}
 
       echo "build succeeded."
 
