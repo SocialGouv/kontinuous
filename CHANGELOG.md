@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.181.2 (2024-09-24)
+
+
+### Bug Fixes
+
+* buildkit frontend ([#509](https://github.com/socialgouv/kontinuous/issues/509)) ([097f291](https://github.com/socialgouv/kontinuous/commit/097f291f215edf822bb8ee5bf110bd59d1678883))
+
 ## 1.181.1 (2024-09-23)
 
 
