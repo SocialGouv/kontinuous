@@ -1,7 +1,7 @@
 enabled:
-namespace: 
-repository: 
-gitBranch: 
+namespace:
+repository:
+gitBranch:
 runs: {}
 image: "debian:stable"
 
@@ -22,11 +22,11 @@ resources:
 degitRepository:
   resources:
     limits:
-      cpu: 200m
-      memory: 100Mi
+      cpu: 500m
+      memory: 1Gi
     requests:
-      cpu: 64m
-      memory: 32Mi
+      cpu: 500m
+      memory: 1Gi
 degitAction:
   resources:
     limits:
@@ -44,3 +44,4 @@ kubeconfig:
   secretRefKey: KUBECONFIG
 mountDeployKey: false
 _pluginValuesCompilerContribJobs: true
+
