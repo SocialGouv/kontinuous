@@ -197,6 +197,10 @@ jobs:
 
 **NOTE** in this example, only users from `some-org` GitHub organisation can access the metabase, but they also have to login on the metabase separately.
 
+## Deploy additionnal production environments
+
+[TODO]
+
 ## Define a custom docker registry
 
 [TODO]
