@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.181.4 (2024-10-01)
+
+
+### Bug Fixes
+
+* more memory for degit init-container ([#511](https://github.com/socialgouv/kontinuous/issues/511)) ([8f60b95](https://github.com/socialgouv/kontinuous/commit/8f60b955eb42be644f42e83f18e45a73e6d267b8))
+
 ## 1.181.3 (2024-09-24)
 
 
