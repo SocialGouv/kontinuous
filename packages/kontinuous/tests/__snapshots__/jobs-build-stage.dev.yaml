@@ -475,11 +475,11 @@ spec:
               mountPath: /workspace
           resources:
             limits:
-              cpu: 200m
-              memory: 100Mi
+              cpu: 500m
+              memory: 1Gi
             requests:
-              cpu: 64m
-              memory: 32Mi
+              cpu: 500m
+              memory: 1Gi
       containers:
         - name: job
           image: moby/buildkit:v0.13.0-rootless
@@ -747,11 +747,11 @@ spec:
               mountPath: /workspace
           resources:
             limits:
-              cpu: 200m
-              memory: 100Mi
+              cpu: 500m
+              memory: 1Gi
             requests:
-              cpu: 64m
-              memory: 32Mi
+              cpu: 500m
+              memory: 1Gi
       containers:
         - name: job
           image: moby/buildkit:v0.13.0-rootless

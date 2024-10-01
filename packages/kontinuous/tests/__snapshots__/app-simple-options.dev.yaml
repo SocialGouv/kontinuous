@@ -474,11 +474,11 @@ spec:
               mountPath: /workspace
           resources:
             limits:
-              cpu: 200m
-              memory: 100Mi
+              cpu: 500m
+              memory: 1Gi
             requests:
-              cpu: 64m
-              memory: 32Mi
+              cpu: 500m
+              memory: 1Gi
       containers:
         - name: job
           image: harbor.fabrique.social.gouv.fr/test-app-simple-options/app:sha-ffac537e6cbbf934b08745a378932722df287a53
@@ -612,11 +612,11 @@ spec:
               mountPath: /workspace
           resources:
             limits:
-              cpu: 200m
-              memory: 100Mi
+              cpu: 500m
+              memory: 1Gi
             requests:
-              cpu: 64m
-              memory: 32Mi
+              cpu: 500m
+              memory: 1Gi
         - name: degit-action
           image: ghcr.io/socialgouv/kontinuous/degit:v1.181.4
           command:
