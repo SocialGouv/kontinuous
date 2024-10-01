@@ -1,8 +1,8 @@
 enabled:
 output: false
-namespace: 
-repository: 
-gitBranch: 
+namespace:
+repository:
+gitBranch:
 runs: {}
 defaults:
   image: "debian:stable"
@@ -15,27 +15,27 @@ defaults:
   serviceAccountName: ""
   resources:
     limits:
-      cpu: 
-      memory: 
+      cpu:
+      memory:
     requests:
-      cpu: 
-      memory: 
+      cpu:
+      memory:
   degitRepository:
     resources:
       limits:
-        cpu: 
-        memory: 
+        cpu: "1"
+        memory: 1Gi
       requests:
-        cpu: 
-        memory: 
+        cpu: "1"
+        memory: 1Gi
   degitAction:
     resources:
       limits:
-        cpu: 
-        memory: 
+        cpu:
+        memory:
       requests:
-        cpu: 
-        memory: 
+        cpu:
+        memory:
   deployKey:
     enabled: false
     secretRefName: deploy-key
@@ -45,3 +45,4 @@ defaults:
     secretRefKey: KUBECONFIG
   mountDeployKey: false
 _pluginValuesCompilerContribJob: true
+
