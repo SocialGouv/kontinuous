@@ -157,6 +157,10 @@ runs:
           exit $status
         fi
       fi
+      {{ else }}
+      if [ "$status" -ne 0 ]; then
+        exit $status
+      fi
       {{ end }}
 
       echo "build succeeded."
