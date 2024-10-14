@@ -25,8 +25,8 @@ RUN chown 1001:1001 /workspace
 RUN git config --global --add safe.directory /workspace
 
 
-COPY --from=ghcr.io/socialgouv/kontinuous:v1.181.7 /usr/local/bin /usr/local/bin/
-COPY --from=ghcr.io/socialgouv/kontinuous:v1.181.7 --chown=999:999 /opt/kontinuous /opt/kontinuous/
+COPY --from=ghcr.io/socialgouv/kontinuous:v1.181.8 /usr/local/bin /usr/local/bin/
+COPY --from=ghcr.io/socialgouv/kontinuous:v1.181.8 --chown=999:999 /opt/kontinuous /opt/kontinuous/
 
 # Switch back to non-root user
 USER 999

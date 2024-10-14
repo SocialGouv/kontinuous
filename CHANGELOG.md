@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.181.8](https://github.com/socialgouv/kontinuous/compare/v1.181.7...v1.181.8) (2024-10-14)
+
+
+### Bug Fixes
+
+* overridable startupProbe ([c6fe264](https://github.com/socialgouv/kontinuous/commit/c6fe26482ad3f4fe678f6213aab869a4361c1fcc))
+
 ## [1.181.7](https://github.com/socialgouv/kontinuous/compare/v1.181.6...v1.181.7) (2024-10-14)
 
 
