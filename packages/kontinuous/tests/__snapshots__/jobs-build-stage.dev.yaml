@@ -612,6 +612,11 @@ spec:
 
 
 
+              if [ \\"$status\\" -ne 0 ]; then
+                exit $status
+              fi
+
+
 
               echo \\"build succeeded.\\"
 
@@ -882,6 +887,11 @@ spec:
 
               set -e
 
+
+
+              if [ \\"$status\\" -ne 0 ]; then
+                exit $status
+              fi
 
 
 
