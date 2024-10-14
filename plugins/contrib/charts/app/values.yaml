@@ -49,7 +49,7 @@ ingress:
   paths:
   rewriteTarget:
 entrypoint:
-args: []
+args: 
 antiAffinity:
   enabled:
 affinity:

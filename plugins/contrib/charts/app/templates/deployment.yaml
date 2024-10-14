@@ -85,7 +85,7 @@ spec:
           command:
             {{- tpl (.Values.entrypoint | toYaml) $ | nindent 12 }}
           {{- end }}
-          {{- if .Values.cmd }}
+          {{- if .Values.args }}
           args:
           {{- range $arg := .Values.args }}
             - "{{ tpl $arg $ }}"
