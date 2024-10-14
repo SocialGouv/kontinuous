@@ -805,9 +805,6 @@ spec:
             periodSeconds: 5
           startupProbe:
             failureThreshold: 124
-            httpGet:
-              path: /index.html
-              port: http
             initialDelaySeconds: 123
             periodSeconds: 125
             timeoutSeconds: 5
