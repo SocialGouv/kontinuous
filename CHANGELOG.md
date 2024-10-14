@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.181.7](https://github.com/socialgouv/kontinuous/compare/v1.181.6...v1.181.7) (2024-10-14)
+
+
+### Bug Fixes
+
+* command override ([1f7c29d](https://github.com/socialgouv/kontinuous/commit/1f7c29d1a533658b8e700694bb4ef21f9fe5926c))
+
 ## [1.181.6](https://github.com/socialgouv/kontinuous/compare/v1.181.5...v1.181.6) (2024-10-07)
 
 
