@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.182.1](https://github.com/socialgouv/kontinuous/compare/v1.182.0...v1.182.1) (2024-10-15)
+
+
+### Bug Fixes
+
+* indent typo ([c1a94ac](https://github.com/socialgouv/kontinuous/commit/c1a94ac7812fe6212bae67d15a4846298dd95713))
+
 ## [1.182.0](https://github.com/socialgouv/kontinuous/compare/v1.181.9...v1.182.0) (2024-10-15)
 
 
