@@ -72,3 +72,4 @@ containerSecurityContext:
 initContainers:
 sidecars: []
 annotations: {}
+labels: {}

@@ -24,6 +24,11 @@ metadata:
   labels:
     component: {{ (or .Values.component .Chart.Name) | lower }}
     application: {{ .Values.global.repositoryName }}
+    {{- if .Values.labels }}
+    {{- range $key, $val := .Values.labels }}
+      "{{ $key }}": "{{ $val }}"
+    {{- end }}
+    {{- end }}
   name: {{ (or .Values.component .Chart.Name) | lower }}
   namespace: {{ or .Values.namespace .Values.global.namespace }}
   annotations:
