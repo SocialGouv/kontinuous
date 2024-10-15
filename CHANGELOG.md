@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.181.9](https://github.com/socialgouv/kontinuous/compare/v1.181.8...v1.181.9) (2024-10-15)
+
+
+### Bug Fixes
+
+* disable resources from preprod ([c8e7572](https://github.com/socialgouv/kontinuous/commit/c8e75720ea81dc35979a3c6eb154ec8243f6c94d))
+
 ## [1.181.8](https://github.com/socialgouv/kontinuous/compare/v1.181.7...v1.181.8) (2024-10-14)
 
 
