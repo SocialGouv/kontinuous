@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.182.2](https://github.com/socialgouv/kontinuous/compare/v1.182.1...v1.182.2) (2024-10-15)
+
+
+### Bug Fixes
+
+* add labels values to chart hasura ([c7c9b3d](https://github.com/socialgouv/kontinuous/commit/c7c9b3d8cfeb6471eeffe7329e99316eecc9773b))
+
 ## [1.182.1](https://github.com/socialgouv/kontinuous/compare/v1.182.0...v1.182.1) (2024-10-15)
 
 
