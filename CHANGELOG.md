@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.182.0](https://github.com/socialgouv/kontinuous/compare/v1.181.9...v1.182.0) (2024-10-15)
+
+
+### Features
+
+* add labels values to chart app ([08f6c94](https://github.com/socialgouv/kontinuous/commit/08f6c949bbc9df8c2608ea4e37a19d8cb338b7bd))
+
 ## [1.181.9](https://github.com/socialgouv/kontinuous/compare/v1.181.8...v1.181.9) (2024-10-15)
 
 
