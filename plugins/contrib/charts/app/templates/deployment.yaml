@@ -26,7 +26,7 @@ metadata:
     application: {{ .Values.global.repositoryName }}
     {{- if .Values.labels }}
     {{- range $key, $val := .Values.labels }}
-      "{{ $key }}": "{{ $val }}"
+    "{{ $key }}": "{{ $val }}"
     {{- end }}
     {{- end }}
   name: {{ (or .Values.component .Chart.Name) | lower }}
