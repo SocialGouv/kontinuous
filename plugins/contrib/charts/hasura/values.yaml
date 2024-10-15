@@ -57,3 +57,4 @@ ingress:
   enabled: true
   annotations: {}
 annotations: {}
+labels: {}
