@@ -26,8 +26,6 @@ dependencies:
         enabled: true
 
     patches:
-      updateManifestsWithPreprodResources:
-        enabled: true
       zeroDowntimeReadiness:
         enabled: true
       certs:
