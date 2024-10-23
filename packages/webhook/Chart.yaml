@@ -1,6 +1,6 @@
 apiVersion: v2
 name: kontinuous-webhook
-version: 1.182.3
+version: 1.182.4
 home: https://socialgouv.github.io/kontinuous/
 description: Webhook CI for Kubernetes
 icon: https://avatars.githubusercontent.com/u/45039513?v=4
