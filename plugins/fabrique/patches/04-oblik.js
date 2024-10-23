@@ -1,4 +1,8 @@
-module.exports = async (manifests, _options, _context) => {
+module.exports = async (manifests, _options, context) => {
+  if (context.config.environment === "prod") {
+    return manifests
+  }
+
   const labelKey = "oblik.socialgouv.io/enabled"
   const labelValue = "true"
 
