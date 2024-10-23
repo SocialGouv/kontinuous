@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.182.3](https://github.com/socialgouv/kontinuous/compare/v1.182.2...v1.182.3) (2024-10-23)
+
+
+### Bug Fixes
+
+* add oblik label to workloads ([72e5f3b](https://github.com/socialgouv/kontinuous/commit/72e5f3b1fc2edd555f4e778acdd70cca34affc86))
+
 ## [1.182.2](https://github.com/socialgouv/kontinuous/compare/v1.182.1...v1.182.2) (2024-10-15)
 
 
