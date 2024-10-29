@@ -2,6 +2,8 @@ const order = [
   "namespace",
   "networkpolicy",
   "serviceaccount",
+  "role",
+  "rolebinding",
   "configmap",
   "secret",
   "sealedsecret",
