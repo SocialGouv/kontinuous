@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.182.6 (2024-10-29)
+
+
+### Bug Fixes
+
+* rbac order ([#514](https://github.com/socialgouv/kontinuous/issues/514)) ([139cf76](https://github.com/socialgouv/kontinuous/commit/139cf7623cb315be61bfb8a896e916fa78361046))
+
 ## 1.182.5 (2024-10-29)
 
 
