@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.183.0 (2024-11-05)
+
+
+### Features
+
+* handle semver dependencies ([#515](https://github.com/socialgouv/kontinuous/issues/515)) ([c344213](https://github.com/socialgouv/kontinuous/commit/c344213d1a3455730d4c90412e1a9f0378185b3a))
+
 ## 1.182.6 (2024-10-29)
 
 
