@@ -41,14 +41,24 @@ module.exports = async ({ dependency, target, cachePath, logger }) => {
       const repo = yaml.load(repositoryIndex.data)
       const { entries } = repo
       const entryVersions = entries[dependency.name]
-      const versionEntry = entryVersions.find((entry) =>
+
+      // Find all versions that satisfy the constraint
+      const satisfyingVersions = entryVersions.filter((entry) =>
         satisfiesVersion(entry.version, dependency.version)
       )
-      if (!versionEntry) {
+
+      if (satisfyingVersions.length === 0) {
         throw new Error(
           `No matching version found for ${dependency.name}@${version}`
         )
       }
+
+      // Sort the satisfying versions in descending order
+      satisfyingVersions.sort((a, b) => semver.rcompare(a.version, b.version))
+
+      // Select the newest version that satisfies the constraint
+      const versionEntry = satisfyingVersions[0]
+
       let url = versionEntry.urls[0]
       // Check if the URL is relative and add the repository as prefix if needed
       if (!url.startsWith("http://") && !url.startsWith("https://")) {
