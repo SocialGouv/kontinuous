@@ -33,7 +33,7 @@ metadata:
     kontinuous/source: project/charts/postgresql/templates/secrets.yaml
 type: Opaque
 data:
-  postgres-password: WFhLNkYxWVA2Rw==
+  postgres-password: MTIzNA==
 ---
 apiVersion: v1
 kind: Service
