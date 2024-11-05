@@ -9305,6 +9305,7 @@ __metadata:
   dependencies:
     decompress: "npm:^4.2.1"
     fs-extra: "npm:^11.1.1"
+    semver: "npm:^7.6.3"
     ~common: "workspace:^"
   languageName: unknown
   linkType: soft
@@ -14089,6 +14090,15 @@ __metadata:
   bin:
     semver: ./bin/semver.js
   checksum: 18f3d42ec70a542e9efc498ecc3d0b9b088099115e8658b49d2bfc6470b46a6144b294374dac3f343fe1600039cbd80d5e830dd356053fd5abd4f1af5118a928
+  languageName: node
+  linkType: hard
+
+"semver@npm:^7.6.3":
+  version: 7.6.3
+  resolution: "semver@npm:7.6.3"
+  bin:
+    semver: bin/semver.js
+  checksum: 783216b1ad06776dda65c8d24f7e447fd7d129c83f0d2e795b2791d234e2b41b631f5520f8baa5e6e0f1624ffa56f363a20c5f309958cdba8d648cb3dff5d808
   languageName: node
   linkType: hard
 

@@ -1,0 +1,5 @@
+global:
+  postgresql:
+    auth:
+      password: "1234"
+      postgresPassword: "1234"
