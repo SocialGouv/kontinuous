@@ -153,7 +153,7 @@ spec:
             requests: {}
       containers:
         - name: job
-          image: moby/buildkit:v0.13.0-rootless
+          image: moby/buildkit:v0.17.1-rootless
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -426,7 +426,7 @@ spec:
             requests: {}
       containers:
         - name: job
-          image: moby/buildkit:v0.13.0-rootless
+          image: moby/buildkit:v0.17.1-rootless
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
