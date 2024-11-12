@@ -4,7 +4,7 @@ runs:
     checkout: true
     action: false
     retry: 0
-    image: moby/buildkit:v0.13.0-rootless
+    image: moby/buildkit:v0.17.1-rootless
     # image: ghcr.io/socialgouv/buildkit:v0.13.0-rootless
     # kubernetes: true
     cpuLimit: "3"
