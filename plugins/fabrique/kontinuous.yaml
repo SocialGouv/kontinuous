@@ -106,7 +106,11 @@ dependencies:
         options:
           copyAllNeeded: false
           copyAllFromCiNamespace: true
-          secrets: {}
+          secrets:
+            kubeconfig:
+              reload: true
+            harbor:
+              reload: true
       rancherNamespaces:
         enabled: true
       cleanFailed:
