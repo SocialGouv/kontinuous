@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.183.2 (2024-11-19)
+
+
+### Bug Fixes
+
+* reload kubeconfig and harbor ([#516](https://github.com/socialgouv/kontinuous/issues/516)) ([8ebdc80](https://github.com/socialgouv/kontinuous/commit/8ebdc804ba6e5a72f355b9c3e873390888dfeeea))
+
 ## [1.183.1](https://github.com/socialgouv/kontinuous/compare/v1.183.0...v1.183.1) (2024-11-12)
 
 
