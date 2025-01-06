@@ -7,11 +7,20 @@ concurrency:
   cancel-in-progress: true
   group: ${{ github.workflow }}-${{ github.ref_name }}
 
+permissions:
+  id-token: write  # Required for OIDC token generation
+
 jobs:
   link-e2e:
     name: Link e2e if match dev-**
     runs-on: ubuntu-latest
     steps:
+      - name: Get GitHub App Token
+        id: token
+        uses: SocialGouv/token-bureau@main
+        with:
+          token-bureau-url: https://token-bureau.fabrique.social.gouv.fr
+          audience: socialgouv
       - id: vars
         name: Branch check convention
         run: |
@@ -28,7 +37,7 @@ jobs:
         if: steps.vars.outputs.ok == 'yes'
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
+          token: ${{ steps.token.outputs.token }}
           ref: ${{ steps.vars.output.branch }}
       
       - name: Install dependencies
