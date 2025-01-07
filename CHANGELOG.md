@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.183.3 (2025-01-07)
+
+
+### Bug Fixes
+
+* **ci-cd:** use token-bureau ([#517](https://github.com/socialgouv/kontinuous/issues/517)) ([8f44006](https://github.com/socialgouv/kontinuous/commit/8f44006fe314a44c19cd71e746eccf005b9187da))
+
 ## 1.183.2 (2024-11-19)
 
 
