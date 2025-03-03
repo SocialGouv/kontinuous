@@ -13,7 +13,7 @@ All custom logic can be implemented in plugins. By creating plugins you can cove
 There are differents type of plugins:
 
 - values-compilers: transform user defined values to be consummed by charts
-- charts: it's basically all helm charts, you can import from helm repository or declare your own in git repository
+- charts: it's basically all helm charts, you can import from Helm repository, OCI repository (using `oci://` protocol), or declare your own in git repository
 - patches: patches applies to final generated kubernetes manifests
 - post-renderer: applies to final generated kubernetes manifests after patches, it's like a final super patch, usually used to hack the manifests at project level using dirty bash and jq
 - validators: make custom conformity checks on final generated kubernetes manifests
@@ -151,6 +151,21 @@ You can add a `package.json` and a `yarn.lock` file at root of your kontinuous p
 Charts plugin are basically helm charts, that can be autolinked from the umbrella (name for the main chart in helm jargon). <br>
 If you doesn't create a `Chart.yaml` in a chart repository, a default on will be created for you by kontinuous. <br>
 A parent chart will be automatically created from project/plugin path, charts that are present in the `charts` directory will be automatically added to this chart as subcharts (`dependencies` key in `Chart.yaml`). <br>
+
+### Using OCI repositories
+
+Kontinuous supports pulling Helm charts from OCI (Open Container Initiative) registries. To use an OCI repository, specify the repository URL with the `oci://` protocol prefix in your dependencies:
+
+```yaml
+# .kontinuous/config.yaml
+dependencies:
+  my-dependency:
+    name: chart-name
+    version: 1.0.0
+    repository: oci://registry.example.com/charts
+```
+
+This allows you to pull charts from container registries like GitHub Container Registry (ghcr.io), Docker Hub, or any other OCI-compliant registry.
 
 ## values-compilers
 
