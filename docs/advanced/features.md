@@ -15,6 +15,7 @@
 - nested charts
 - external helm charts
   - from helm repository
+  - from OCI repository (using `oci://` protocol)
   - from git repository
 - private repository (experimental)
 - adaptable to your infra
