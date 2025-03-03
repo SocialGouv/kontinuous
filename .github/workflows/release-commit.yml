@@ -4,8 +4,10 @@ on:
   workflow_dispatch:
   pull_request:
     types: [closed]
-    
-    
+
+permissions:
+  id-token: write  # Required for OIDC token generation    
+
 concurrency:
   cancel-in-progress: true
   group: ${{ github.workflow }}-${{ github.ref_name }}
@@ -16,10 +18,17 @@ jobs:
     runs-on: ubuntu-latest
     name: Create release using commit-and-tag-version
     steps:
+      - name: Get GitHub App Token
+        id: token
+        uses: SocialGouv/token-bureau@main
+        with:
+          token-bureau-url: https://token-bureau.fabrique.social.gouv.fr
+          audience: socialgouv
+
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
+          token: ${{ steps.token.outputs.token }}
 
       - name: Install dependencies
         run: yarn --immutable
