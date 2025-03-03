@@ -5,6 +5,9 @@ on:
     tags:
       - v*.*
 
+permissions:
+  id-token: write  # Required for OIDC token generation
+
 concurrency:
   cancel-in-progress: true
   group: ${{ github.workflow }}-${{ github.ref_name }}
@@ -59,9 +62,16 @@ jobs:
         run: |
           echo "Version changed: ${{ steps.publish-kontinuous.outputs.old-version }} => ${{ steps.publish-kontinuous.outputs.version }}"
       
+      - name: Get GitHub App Token
+        id: token
+        uses: SocialGouv/token-bureau@main
+        with:
+          token-bureau-url: https://token-bureau.fabrique.social.gouv.fr
+          audience: socialgouv
+
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
+          token: ${{ steps.token.outputs.token }}
           generate_release_notes: true
