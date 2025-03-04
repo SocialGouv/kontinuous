@@ -133,7 +133,7 @@ runs:
           {{ end -}}
           {{ end -}}
           {{ if $.with.target -}}
-          --target="{{ $.with.target }}" \
+          --opt target="{{ $.with.target }}" \
           {{ end -}}
             >"$pipe" 2>&1
         return $?
