@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.183.6](https://github.com/socialgouv/kontinuous/compare/v1.183.5...v1.183.6) (2025-03-04)
+
+
+### Bug Fixes
+
+* **buildkit:** opt target ([aeb76bc](https://github.com/socialgouv/kontinuous/commit/aeb76bc56d7008d0ff49069b00718c8f4f90bfda))
+
 ## 1.183.5 (2025-03-03)
 
 
