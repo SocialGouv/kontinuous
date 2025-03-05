@@ -13,6 +13,9 @@ module.exports = (manifests, _options, { config }) => {
       "false"
     ) {
       for (const key of cleanKeys) {
+        if (!manifest.spec) {
+          return
+        }
         if (manifest.spec.template?.metadata?.annotations?.[key]) {
           delete manifest.spec.template.metadata.annotations[key]
         }
