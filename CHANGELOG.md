@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.183.7](https://github.com/socialgouv/kontinuous/compare/v1.183.6...v1.183.7) (2025-03-05)
+
+
+### Bug Fixes
+
+* vars multiline support ([8a4180b](https://github.com/socialgouv/kontinuous/commit/8a4180b180713102e901504b4e6c82467b61a367))
+
 ## [1.183.6](https://github.com/socialgouv/kontinuous/compare/v1.183.5...v1.183.6) (2025-03-04)
 
 
