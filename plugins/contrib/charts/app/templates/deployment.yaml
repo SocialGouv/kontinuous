@@ -123,7 +123,8 @@ spec:
             {{- end }}
             {{- range $name, $value := .Values.vars }}
             - name: "{{ $name }}"
-              value: "{{ tpl $value $ }}"
+              value: |-
+                {{- tpl $value $ | nindent 16 }}
             {{- end }}
           envFrom:
             {{- if gt (len .Values.envFrom) 0 }}
