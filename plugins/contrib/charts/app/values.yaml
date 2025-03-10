@@ -48,6 +48,7 @@ ingress:
   path: /
   paths:
   rewriteTarget:
+  pathType: Prefix
 entrypoint:
 args: 
 antiAffinity:
