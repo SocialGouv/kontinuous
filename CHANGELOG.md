@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.183.11](https://github.com/socialgouv/kontinuous/compare/v1.183.10...v1.183.11) (2025-03-10)
+
+
+### Bug Fixes
+
+* variabilize pathType ([e2c2150](https://github.com/socialgouv/kontinuous/commit/e2c2150e17e0fececb66bac01b57751ed4f65307))
+
 ## [1.183.10](https://github.com/socialgouv/kontinuous/compare/v1.183.9...v1.183.10) (2025-03-10)
 
 
