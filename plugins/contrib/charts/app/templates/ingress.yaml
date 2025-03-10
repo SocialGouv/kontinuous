@@ -28,7 +28,7 @@ spec:
                 port:
                   name: http
             path: {{ $val | quote }}
-            pathType: {{ .Values.ingress.pathType }}
+            pathType: {{ $.Values.ingress.pathType }}
           {{ end }}
 
   tls:
