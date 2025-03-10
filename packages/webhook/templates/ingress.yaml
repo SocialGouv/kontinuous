@@ -2,7 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.class: nginx
     {{ if .Values.isProdCluster }}
     cert-manager.io: cluster-issuer
     kubernetes.io/tls-acme: 'true'
@@ -19,6 +18,7 @@ metadata:
   namespace: "{{ .Release.Namespace }}"
   {{ end }}
 spec:
+  ingressClassName: nginx
   rules:
     - host: >-
         {{- tpl (required "host value is required" .Values.host) $ | nindent 8 }}

@@ -3,7 +3,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.class: nginx
     {{ if .Values.ingress.rewriteTarget }}
     nginx.ingress.kubernetes.io/rewrite-target: {{ .Values.ingress.rewriteTarget | quote }}
     {{ end }}
@@ -16,6 +15,7 @@ metadata:
   name: {{ (or .Values.component .Chart.Name) | lower }}
   namespace: {{ or .Values.namespace .Values.global.namespace }}
 spec:
+  ingressClassName: nginx
   rules:
     - host: >-
         {{- include "contrib-helpers.ingress-host" . | nindent 8 }}
