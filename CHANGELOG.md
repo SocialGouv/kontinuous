@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.183.10](https://github.com/socialgouv/kontinuous/compare/v1.183.9...v1.183.10) (2025-03-10)
+
+
+### Bug Fixes
+
+* deprecated kubernetes.io/ingress.class: nginx ([f897e70](https://github.com/socialgouv/kontinuous/commit/f897e705ad0feb452a6bacfa83c59e1587009b07))
+
 ## [1.183.9](https://github.com/socialgouv/kontinuous/compare/v1.183.8...v1.183.9) (2025-03-06)
 
 
