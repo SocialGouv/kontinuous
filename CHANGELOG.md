@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.183.12](https://github.com/socialgouv/kontinuous/compare/v1.183.11...v1.183.12) (2025-03-10)
+
+
+### Bug Fixes
+
+* helm typo ([2b7e0ea](https://github.com/socialgouv/kontinuous/commit/2b7e0ea174d8973e71dec216fc9dd62cc0145c19))
+
 ## [1.183.11](https://github.com/socialgouv/kontinuous/compare/v1.183.10...v1.183.11) (2025-03-10)
 
 
