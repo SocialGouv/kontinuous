@@ -6,6 +6,9 @@ metadata:
     {{ if .Values.ingress.rewriteTarget }}
     nginx.ingress.kubernetes.io/rewrite-target: {{ .Values.ingress.rewriteTarget | quote }}
     {{ end }}
+    {{ if .Values.customHeaders }}
+    nginx.ingress.kubernetes.io/proxy-set-headers: "{{ .Values.global.namespace }}/ingress-custom-headers"
+    {{ end }}
     {{ range $key, $val := (merge dict .Values.global.ingress.annotations .Values.ingress.annotations) }}
     "{{ $key }}": {{ $val | quote }}
     {{ end }}

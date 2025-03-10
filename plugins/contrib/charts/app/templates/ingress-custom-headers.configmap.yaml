@@ -1,0 +1,10 @@
+{{- if .Values.customHeaders }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-custom-headers
+data:
+  {{- range $key, $val := .Values.customHeaders }}
+  {{ $key }}: {{ $val | quote }}
+  {{- end }}
+{{- end }}

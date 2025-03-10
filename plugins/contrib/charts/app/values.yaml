@@ -1,6 +1,7 @@
 enabled:
 namespace:
 host:
+customHeaders: {}
 registry:
 imagePath:
 imageProject:
