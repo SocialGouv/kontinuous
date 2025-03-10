@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.184.0](https://github.com/socialgouv/kontinuous/compare/v1.183.12...v1.184.0) (2025-03-10)
+
+
+### Features
+
+* ingress-custom-headers ([eb9abc9](https://github.com/socialgouv/kontinuous/commit/eb9abc9b55d71845d4de13f45e6f2b5b3272a693))
+
 ## [1.183.12](https://github.com/socialgouv/kontinuous/compare/v1.183.11...v1.183.12) (2025-03-10)
 
 
