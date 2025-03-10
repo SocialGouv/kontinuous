@@ -513,7 +513,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/configuration-snippet: >
       more_set_headers \\"Content-Security-Policy: default-src 'none'; connect-src
       'self' https://*.gouv.fr; font-src 'self'; img-src 'self'; prefetch-src
@@ -543,6 +542,7 @@ metadata:
   name: app
   namespace: test-socialgouv-autodevops-override-feature-branch-1
 spec:
+  ingressClassName: nginx
   rules:
     - host: test-socialgouv-autodevops-override-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:

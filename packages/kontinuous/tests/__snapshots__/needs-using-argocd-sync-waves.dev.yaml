@@ -1003,11 +1003,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app1
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app1/templates/ingress.yaml
-    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
   labels:
     component: app1
     application: test-needs-using-argocd-sync-waves
@@ -1021,7 +1016,12 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app1
   namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app1
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app1/templates/ingress.yaml
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
 spec:
+  ingressClassName: nginx
   rules:
     - host: app1-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
@@ -1041,12 +1041,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app2-bis
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app2-bis/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"app1\\"]'
-    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
   labels:
     component: app2-bis
     application: test-needs-using-argocd-sync-waves
@@ -1060,7 +1054,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app2-bis
   namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app2-bis
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app2-bis/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"app1\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
 spec:
+  ingressClassName: nginx
   rules:
     - host: app2-bis-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
@@ -1080,12 +1080,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app2
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app2/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"app1\\"]'
-    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
   labels:
     component: app2
     application: test-needs-using-argocd-sync-waves
@@ -1099,7 +1093,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app2
   namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app2
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app2/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"app1\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
 spec:
+  ingressClassName: nginx
   rules:
     - host: app2-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
@@ -1119,12 +1119,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app3
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app3/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"app2\\"]'
-    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
   labels:
     component: app3
     application: test-needs-using-argocd-sync-waves
@@ -1138,7 +1132,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app3
   namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app3
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app3/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"app2\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
 spec:
+  ingressClassName: nginx
   rules:
     - host: app3-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
@@ -1158,12 +1158,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app4
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app4/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"app3\\"]'
-    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
   labels:
     component: app4
     application: test-needs-using-argocd-sync-waves
@@ -1177,7 +1171,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app4
   namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app4
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app4/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"app3\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
 spec:
+  ingressClassName: nginx
   rules:
     - host: app4-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
@@ -1197,12 +1197,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app5
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app5/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"app2\\",\\"app4\\"]'
-    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
   labels:
     component: app5
     application: test-needs-using-argocd-sync-waves
@@ -1216,7 +1210,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app5
   namespace: test-needs-using-argocd-sync-waves-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app5
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app5/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"app2\\",\\"app4\\"]'
+    kontinuous/deployment: test-needs-using-argocd-sync-waves-feature-branch-1-f-3dcx8eip
 spec:
+  ingressClassName: nginx
   rules:
     - host: app5-test-needs-using-argocd-sync-waves-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:

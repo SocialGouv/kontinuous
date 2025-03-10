@@ -369,12 +369,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"seed\\"]'
-    kontinuous/deployment: test-values-extends-feature-branch-1-ffac537e6cbbf934-18dfb8mu
   labels:
     component: app
     application: test-values-extends
@@ -388,7 +382,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-values-extends-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"seed\\"]'
+    kontinuous/deployment: test-values-extends-feature-branch-1-ffac537e6cbbf934-18dfb8mu
 spec:
+  ingressClassName: nginx
   rules:
     - host: test-values-extends-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:

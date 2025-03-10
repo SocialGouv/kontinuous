@@ -491,11 +491,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/deployment: test-meta-log-feature-branch-1-ffac537e6cbbf934b08745-66eu3lo2
   labels:
     component: app
     application: test-meta-log
@@ -509,7 +504,12 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-meta-log-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/deployment: test-meta-log-feature-branch-1-ffac537e6cbbf934b08745-66eu3lo2
 spec:
+  ingressClassName: nginx
   rules:
     - host: test-meta-log-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:

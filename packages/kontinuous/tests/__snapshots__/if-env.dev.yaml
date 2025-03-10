@@ -233,11 +233,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/deployment: test-if-env-feature-branch-1-ffac537e6cbbf934b08745a3-2idnplgr
   labels:
     component: app
     application: test-if-env
@@ -251,7 +246,12 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-if-env-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/deployment: test-if-env-feature-branch-1-ffac537e6cbbf934b08745a3-2idnplgr
 spec:
+  ingressClassName: nginx
   rules:
     - host: test-if-env-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:

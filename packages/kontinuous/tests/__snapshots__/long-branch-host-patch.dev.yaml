@@ -233,11 +233,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-bra-2prquyml
   labels:
     component: app
     application: test-long-branch-host-patch
@@ -251,7 +246,12 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-long-branch-host-patch-a-very-very-very-long-bra-2h9265rk
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/deployment: test-long-branch-host-patch-a-very-very-very-long-bra-2prquyml
 spec:
+  ingressClassName: nginx
   rules:
     - host: some-long-prefix-name-test-long-branch-host-patch-a-v-6vwodrjq.ovh.fabrique.social.gouv.fr
       http:

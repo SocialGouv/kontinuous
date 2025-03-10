@@ -233,11 +233,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
   labels:
     component: app
     application: test-persist
@@ -251,7 +246,12 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-persist-my-env-persist-4c70122w
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/deployment: test-persist-my-env-persist-ffac537e6cbbf934b08745a37-2mqwhmle
 spec:
+  ingressClassName: nginx
   rules:
     - host: test-persist-my-env-persist-4c70122w.ovh.fabrique.social.gouv.fr
       http:

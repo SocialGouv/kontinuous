@@ -233,11 +233,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/deployment: test-inline-values-feature-branch-1-ffac537e6cbbf934b-3dm537n4
   labels:
     component: app
     application: test-inline-values
@@ -251,7 +246,12 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-inline-values-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/deployment: test-inline-values-feature-branch-1-ffac537e6cbbf934b-3dm537n4
 spec:
+  ingressClassName: nginx
   rules:
     - host: test-inline-values-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:

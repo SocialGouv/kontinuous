@@ -1263,12 +1263,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"build-app\\"]'
-    kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
   labels:
     component: app
     application: test-jobs-build
@@ -1282,7 +1276,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-jobs-build-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"build-app\\"]'
+    kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
 spec:
+  ingressClassName: nginx
   rules:
     - host: test-jobs-build-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
@@ -1302,12 +1302,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"jobs.build-hasura\\",\\"jobs-dev.db\\"]'
-    kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
   labels:
     component: hasura
     application: test-jobs-build
@@ -1321,7 +1315,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: hasura
   namespace: test-jobs-build-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"jobs.build-hasura\\",\\"jobs-dev.db\\"]'
+    kontinuous/deployment: test-jobs-build-feature-branch-1-ffac537e6cbbf934b087-50be2a5c
 spec:
+  ingressClassName: nginx
   rules:
     - host: hasura-test-jobs-build-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:

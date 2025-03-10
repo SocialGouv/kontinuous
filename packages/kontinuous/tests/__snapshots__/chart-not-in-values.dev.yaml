@@ -155,11 +155,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-1fqfb7ju
   labels:
     component: app
     application: test-chart-not-in-values
@@ -173,7 +168,12 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-chart-not-in-values-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/deployment: test-chart-not-in-values-feature-branch-1-ffac537e6cb-1fqfb7ju
 spec:
+  ingressClassName: nginx
   rules:
     - host: test-chart-not-in-values-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:

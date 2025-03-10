@@ -232,11 +232,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/deployment: test-values-js-feature-branch-1-ffac537e6cbbf934b0874-6cv8lfvm
   labels:
     component: app
     application: test-values-js
@@ -250,7 +245,12 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-namespace
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/deployment: test-values-js-feature-branch-1-ffac537e6cbbf934b0874-6cv8lfvm
 spec:
+  ingressClassName: nginx
   rules:
     - host: test.demo.net
       http:

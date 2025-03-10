@@ -310,12 +310,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.api1
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/api1/templates/ingress.yaml
-    kontinuous/plugin.chart-group: '[\\"the-group\\",\\"second-group\\"]'
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
   labels:
     component: api1
     application: test-chart-groups
@@ -329,7 +323,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: api1
   namespace: test-chart-groups-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.api1
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/api1/templates/ingress.yaml
+    kontinuous/plugin.chart-group: '[\\"the-group\\",\\"second-group\\"]'
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
 spec:
+  ingressClassName: nginx
   rules:
     - host: api1-test-chart-groups-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
@@ -349,12 +349,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.api2
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/api2/templates/ingress.yaml
-    kontinuous/plugin.chart-group: the-group
-    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
   labels:
     component: api2
     application: test-chart-groups
@@ -368,7 +362,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: api2
   namespace: test-chart-groups-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.api2
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/api2/templates/ingress.yaml
+    kontinuous/plugin.chart-group: the-group
+    kontinuous/deployment: test-chart-groups-feature-branch-1-ffac537e6cbbf934b0-12p6s9t0
 spec:
+  ingressClassName: nginx
   rules:
     - host: api2-test-chart-groups-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:

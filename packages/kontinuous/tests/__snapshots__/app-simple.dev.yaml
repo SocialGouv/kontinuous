@@ -233,11 +233,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/deployment: test-app-simple-feature-branch-1-ffac537e6cbbf934b087-4w1j23zk
   labels:
     component: app
     application: test-app-simple
@@ -251,7 +246,12 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-app-simple-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/deployment: test-app-simple-feature-branch-1-ffac537e6cbbf934b087-4w1j23zk
 spec:
+  ingressClassName: nginx
   rules:
     - host: test-app-simple-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:

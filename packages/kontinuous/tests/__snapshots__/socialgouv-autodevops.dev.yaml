@@ -511,12 +511,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"build-app\\"]'
-    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
   labels:
     component: app
     application: test-socialgouv-autodevops
@@ -530,7 +524,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-socialgouv-autodevops-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"build-app\\"]'
+    kontinuous/deployment: test-socialgouv-autodevops-feature-branch-1-ffac537e6-3chnwvtu
 spec:
+  ingressClassName: nginx
   rules:
     - host: test-socialgouv-autodevops-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:

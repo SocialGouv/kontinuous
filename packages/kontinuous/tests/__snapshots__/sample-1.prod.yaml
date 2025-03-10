@@ -866,14 +866,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app-2nd-instance
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/ingress.yaml
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    cert-manager.io: cluster-issuer
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: \\"true\\"
   labels:
     component: app-2nd-instance
     application: test-sample-1
@@ -887,7 +879,15 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app-2nd-instance
   namespace: test-sample-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app-2nd-instance
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app-2nd-instance/templates/ingress.yaml
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
+    cert-manager.io: cluster-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: \\"true\\"
 spec:
+  ingressClassName: nginx
   rules:
     - host: app-2nd-instance-test-sample-1.fabrique.social.gouv.fr
       http:
@@ -908,7 +908,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/configuration-snippet: >
       more_set_headers \\"Content-Security-Policy: default-src 'none'; connect-src
       'self' https://*.gouv.fr; font-src 'self'; img-src 'self'; prefetch-src
@@ -940,6 +939,7 @@ metadata:
   name: app
   namespace: test-sample-1
 spec:
+  ingressClassName: nginx
   rules:
     - host: test-sample-1.fabrique.social.gouv.fr
       http:
@@ -959,14 +959,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
-    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
-    cert-manager.io: cluster-issuer
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: \\"true\\"
   labels:
     component: hasura
     application: test-sample-1
@@ -980,7 +972,15 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: hasura
   namespace: test-sample-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
+    kontinuous/deployment: test-sample-1-feature-branch-1-ffac537e6cbbf934b08745-5y3s29fx
+    cert-manager.io: cluster-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: \\"true\\"
 spec:
+  ingressClassName: nginx
   rules:
     - host: hasura-test-sample-1.fabrique.social.gouv.fr
       http:

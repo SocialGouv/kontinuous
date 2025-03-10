@@ -523,15 +523,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"cnpg\\"]'
-    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
-    cert-manager.io: cluster-issuer
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: \\"true\\"
   labels:
     component: hasura
     application: test-pg
@@ -545,7 +536,16 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: hasura
   namespace: test-pg
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"cnpg\\"]'
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    cert-manager.io: cluster-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: \\"true\\"
 spec:
+  ingressClassName: nginx
   rules:
     - host: hasura-test-pg.fabrique.social.gouv.fr
       http:

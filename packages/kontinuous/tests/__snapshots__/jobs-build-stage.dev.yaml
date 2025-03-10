@@ -1265,12 +1265,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"build\\"]'
-    kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf9-6bjy8r03
   labels:
     component: app
     application: test-jobs-build-stage
@@ -1284,7 +1278,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-jobs-build-stage-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"build\\"]'
+    kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf9-6bjy8r03
 spec:
+  ingressClassName: nginx
   rules:
     - host: test-jobs-build-stage-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:
@@ -1304,12 +1304,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.hasura
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"build\\",\\"db\\"]'
-    kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf9-6bjy8r03
   labels:
     component: hasura
     application: test-jobs-build-stage
@@ -1323,7 +1317,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: hasura
   namespace: test-jobs-build-stage-feature-branch-1
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.hasura
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/hasura/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"build\\",\\"db\\"]'
+    kontinuous/deployment: test-jobs-build-stage-feature-branch-1-ffac537e6cbbf9-6bjy8r03
 spec:
+  ingressClassName: nginx
   rules:
     - host: hasura-test-jobs-build-stage-feature-branch-1.ovh.fabrique.social.gouv.fr
       http:

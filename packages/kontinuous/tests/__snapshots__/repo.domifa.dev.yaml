@@ -2699,12 +2699,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.backend
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/backend/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"build-backend\\"]'
-    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
   labels:
     component: backend
     application: test-repo.domifa
@@ -2718,7 +2712,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: backend
   namespace: test-repo-domifa-feature-branch-1-o91f7v1i
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.backend
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/backend/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"build-backend\\"]'
+    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
 spec:
+  ingressClassName: nginx
   rules:
     - host: api-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr
       http:
@@ -2738,12 +2738,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.frontend
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/frontend/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"build-frontend\\"]'
-    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
   labels:
     component: frontend
     application: test-repo.domifa
@@ -2757,7 +2751,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: frontend
   namespace: test-repo-domifa-feature-branch-1-o91f7v1i
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.frontend
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/frontend/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"build-frontend\\"]'
+    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
 spec:
+  ingressClassName: nginx
   rules:
     - host: test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr
       http:
@@ -2777,12 +2777,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.portail-admins
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/portail-admins/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"build-portail-admins\\"]'
-    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
   labels:
     component: portail-admins
     application: test-repo.domifa
@@ -2796,7 +2790,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: portail-admins
   namespace: test-repo-domifa-feature-branch-1-o91f7v1i
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.portail-admins
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/portail-admins/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"build-portail-admins\\"]'
+    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
 spec:
+  ingressClassName: nginx
   rules:
     - host: admin-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr
       http:
@@ -2816,12 +2816,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.portail-usagers
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/portail-usagers/templates/ingress.yaml
-    kontinuous/plugin.needs: '[\\"build-portail-usagers\\"]'
-    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
   labels:
     component: portail-usagers
     application: test-repo.domifa
@@ -2835,7 +2829,13 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: portail-usagers
   namespace: test-repo-domifa-feature-branch-1-o91f7v1i
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.portail-usagers
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/portail-usagers/templates/ingress.yaml
+    kontinuous/plugin.needs: '[\\"build-portail-usagers\\"]'
+    kontinuous/deployment: test-repo-domifa-feature-branch-1-ffac537e6cbbf934b08-2xrjelak
 spec:
+  ingressClassName: nginx
   rules:
     - host: mon-test-repo-domifa-feature-branch-1-o91f7v1i.ovh.fabrique.social.gouv.fr
       http:

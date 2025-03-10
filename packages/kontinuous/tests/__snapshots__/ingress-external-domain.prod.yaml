@@ -272,11 +272,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    kontinuous/chartPath: project.fabrique.contrib.app
-    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
-    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
   labels:
     component: app
     application: test-ingress-external-domain
@@ -290,7 +285,12 @@ metadata:
     app.kubernetes.io/manifest-created-by: kontinuous
   name: app
   namespace: test-ingress-external-domain
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/deployment: test-ingress-external-domain-feature-branch-1-ffac537-4dx6300n
 spec:
+  ingressClassName: nginx
   rules:
     - host: some.external.host
       http:
