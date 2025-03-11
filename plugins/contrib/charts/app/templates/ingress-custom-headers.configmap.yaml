@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ingress-custom-headers
+  name: {{ (or .Values.component .Chart.Name) | lower }}-ingress-custom-headers
 data:
   {{- range $key, $val := .Values.ingress.customHeaders }}
   {{ $key }}: {{ $val | quote }}
