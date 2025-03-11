@@ -1,7 +1,6 @@
 enabled:
 namespace:
 host:
-customHeaders: {}
 registry:
 imagePath:
 imageProject:
@@ -46,6 +45,7 @@ redirectFrom: []
 ingress:
   enabled: true
   annotations: {}
+  customHeaders: {}
   path: /
   paths:
   rewriteTarget:
