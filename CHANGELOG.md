@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.184.5](https://github.com/socialgouv/kontinuous/compare/v1.184.4...v1.184.5) (2025-03-12)
+
+
+### Bug Fixes
+
+* add default pdb ([6abeb0c](https://github.com/socialgouv/kontinuous/commit/6abeb0cdaff4a4489e6ca3bdc912b8b9865b8c0b))
+
 ## [1.184.4](https://github.com/socialgouv/kontinuous/compare/v1.184.3...v1.184.4) (2025-03-12)
 
 
