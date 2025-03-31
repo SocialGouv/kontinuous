@@ -6,7 +6,11 @@ metadata:
     application: {{ .Values.global.repositoryName }}
   name: {{ (or .Values.component .Chart.Name) | lower }}
   namespace: {{ or .Values.namespace .Values.global.namespace }}
-  annotations: {}
+  annotations:
+  {{- if .Values.annotations }}
+  {{- range $key, $val := .Values.annotations }}
+    "{{ $key }}": "{{ $val }}"
+  {{- end }}
 spec:
   replicas: {{ or .Values.replicas .Values.global.replicas 1 }}
   selector:

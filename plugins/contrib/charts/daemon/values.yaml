@@ -32,3 +32,4 @@ args: []
 antiAffinity:
   enabled:
 strategyType: RollingUpdate
+annotations:
