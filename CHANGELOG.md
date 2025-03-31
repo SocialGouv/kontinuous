@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.184.6](https://github.com/socialgouv/kontinuous/compare/v1.184.5...v1.184.6) (2025-03-31)
+
+
+### Bug Fixes
+
+* annotations values for daemon ([238300d](https://github.com/socialgouv/kontinuous/commit/238300df71029d87cc46cf928b5657d8bccd4b56))
+
 ## [1.184.5](https://github.com/socialgouv/kontinuous/compare/v1.184.4...v1.184.5) (2025-03-12)
 
 
