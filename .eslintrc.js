@@ -52,6 +52,7 @@ module.exports = {
     "no-process-exit": [0],
     "node/no-unsupported-features/es-syntax": [0],
     "node/shebang": [0],
+    "no-ex-assign": [0],
     "import/no-commonjs": [0],
     "import/no-dynamic-require": [0],
     "import/no-extraneous-dependencies": noExtraneousRule,
