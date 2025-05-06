@@ -10467,14 +10467,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-specific-snapshot@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "jest-specific-snapshot@npm:7.0.0"
+"jest-specific-snapshot@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "jest-specific-snapshot@npm:8.0.0"
   dependencies:
     jest-snapshot: "npm:^29.0.0"
   peerDependencies:
     jest: ">= 29.0.0"
-  checksum: a87e6426d2f1939dbfe58f3bad4f6303a0785f0cc0169aeecc41bca3f34ba2d6d2c20f5e1fe126fb6d14d5e522f4bb443c11b90119e07dd6c0842424e2927cdf
+  checksum: b2a2445dc2b8785488119bd21f95774d231384e02555c46736867c74bb05768369a8d13b183a9ff3715ceb5b6c10d3f6ee886378e0e5d6b131b7d726dbfa4bcf
   languageName: node
   linkType: hard
 
@@ -10795,7 +10795,7 @@ __metadata:
     fs-extra: "npm:^11.1.1"
     helm-tree: "workspace:^"
     jest: "npm:^29.0.0"
-    jest-specific-snapshot: "npm:^7.0.0"
+    jest-specific-snapshot: "npm:^8.0.0"
     launch-editor: "npm:^2.4.0"
     link-module-alias: "npm:^1.2.0"
     lodash.camelcase: "npm:^4.3.0"
@@ -16316,7 +16316,7 @@ __metadata:
     fs-extra: "npm:^11.1.1"
     helm-tree: "workspace:^"
     jest: "npm:^29.0.0"
-    jest-specific-snapshot: "npm:^7.0.0"
+    jest-specific-snapshot: "npm:^8.0.0"
     link-module-alias: "npm:^1.2.0"
     lodash.defaultsdeep: "npm:^4.6.1"
     lodash.mergewith: "npm:^4.6.2"
