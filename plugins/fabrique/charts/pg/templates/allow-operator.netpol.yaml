@@ -1,0 +1,20 @@
+# https://github.com/cloudnative-pg/cloudnative-pg/issues/5247
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ (or .Values.component .Chart.Name) | lower }}-allow-operator
+spec:
+  podSelector:
+    matchLabels:
+      cnpg.io/cluster: {{ (or .Values.component .Chart.Name) | lower }} # The label value must be the cluster name
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ .Values.operatorNamespace }}
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: cloudnative-pg
+      ports:
+        - port: 8000
+        - port: 5432
