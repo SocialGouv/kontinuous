@@ -27,6 +27,40 @@ metadata:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
+  name: cnpg-allow-operator
+  annotations:
+    kontinuous/chartPath: project.fabrique.cnpg
+    kontinuous/source: project/charts/fabrique/charts/cnpg/templates/allow-operator.netpol.yaml
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+  labels:
+    kontinuous/deployment: test-pg-feature-branch-1-ffac537e6cbbf934b08745a37893-4f12g0z3
+    kontinuous/deployment.env: test-pg-prod
+    kontinuous/ref: feature-branch-1
+    kontinuous/gitSha: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/appVersion: ffac537e6cbbf934b08745a378932722df287a53
+    kontinuous/resourceName: networkpolicy-cnpg-allow-operator-mmab8p6h
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: test-pg
+spec:
+  podSelector:
+    matchLabels:
+      cnpg.io/cluster: cnpg
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: cnpg-system
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: cloudnative-pg
+      ports:
+        - port: 8000
+        - port: 5432
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
   name: netpol-ingress
   namespace: test-pg
   annotations:
