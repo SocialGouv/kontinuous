@@ -112,4 +112,4 @@ jobs-pg:
         ~tpl~cnpgDbSecretName: "{{ index .Values.kontinuous.chartContext 2 }}-db"
         ~tpl~pgHost: "{{ index .Values.kontinuous.chartContext 2 }}-rw"
 
-operatorNamespace: cnpg-system
+operatorNamespace: cnpg
