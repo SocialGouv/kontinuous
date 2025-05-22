@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.184.9](https://github.com/socialgouv/kontinuous/compare/v1.184.8...v1.184.9) (2025-05-22)
+
+
+### Bug Fixes
+
+* default cnpg ns ([b152102](https://github.com/socialgouv/kontinuous/commit/b152102c11d97eb81b705b0786edd0e16e3f99b0))
+
 ## [1.184.8](https://github.com/socialgouv/kontinuous/compare/v1.184.7...v1.184.8) (2025-05-07)
 
 
