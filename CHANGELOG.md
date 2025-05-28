@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.185.0](https://github.com/socialgouv/kontinuous/compare/v1.184.10...v1.185.0) (2025-05-28)
+
+
+### Features
+
+* github action env output branchSlug32 ([c2118f8](https://github.com/socialgouv/kontinuous/commit/c2118f8fe4ab5f0fcce88fed0aa7232fddfb17c7))
+
 ## [1.184.10](https://github.com/socialgouv/kontinuous/compare/v1.184.9...v1.184.10) (2025-05-22)
 
 
