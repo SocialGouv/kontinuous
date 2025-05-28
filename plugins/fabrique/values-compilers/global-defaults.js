@@ -36,7 +36,7 @@ module.exports = async (values, options, { config, utils }) => {
 
   const productionDatabase = repositoryName
 
-  const branchSlug32 = slug(gitBranch, 32)
+  const { gitBranchSlug32: branchSlug32 } = config
 
   const pgDatabase = isProd
     ? productionDatabase

@@ -53,7 +53,7 @@ module.exports = async (values, options, { config, utils, ctx }) => {
 
   const imageRepository = repositoryName.toLowerCase()
 
-  const branchSlug32 = slug(gitBranch, 32)
+  const { gitBranchSlug32: branchSlug32 } = config
 
   const { projectName } = config
 

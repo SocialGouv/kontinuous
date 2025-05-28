@@ -16,6 +16,7 @@ if [ -z "$KS_GIT_BRANCH" ] && [ "$GITHUB_EVENT_NAME" = "delete" ] || [ "$GH_ACTI
 fi
 
 echo "branch=$(kontinuous config gitBranch)">>$GITHUB_OUTPUT
+echo "branchSlug32=$(kontinuous config gitBranchSlug32)">>$GITHUB_OUTPUT
 
 echo "subdomain=$(kontinuous slug-subdomain --repository-name=$KSENV_REPOSITORY_NAME)">>$GITHUB_OUTPUT
 

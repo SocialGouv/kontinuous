@@ -210,6 +210,9 @@ const loadConfig = async (
         return cleanGitRef(ref)
       },
     },
+    gitBranchSlug32: {
+      defaultFunction: (config) => slug(config.gitBranch, 32),
+    },
     gitSha: {
       env: "KS_GIT_SHA",
       option: "commit",
