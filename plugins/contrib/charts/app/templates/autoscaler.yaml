@@ -26,6 +26,13 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: {{ (or .Values.component .Chart.Name) | lower }}
+{{- if .Values.autoscale.behavior }}
+  behavior:
+{{- if .Values.autoscale.behavior.scaleUp }}
+    scaleUp:
+      stabilizationWindowSeconds: {{ .Values.autoscale.behavior.scaleUp.stabilizationWindowSeconds }}
+{{- end }}
+{{- end }}
 ---
 # see https://carvel.dev/kapp/docs/develop/hpa-deployment-rebase/
 apiVersion: kapp.k14s.io/v1alpha1
