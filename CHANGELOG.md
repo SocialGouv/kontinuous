@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.185.1](https://github.com/socialgouv/kontinuous/compare/v1.185.0...v1.185.1) (2025-07-24)
+
+
+### Bug Fixes
+
+* **hpa:** more reactivity ([db2a123](https://github.com/socialgouv/kontinuous/commit/db2a12380eaca9c4f17246f592da374495e12114))
+
 ## [1.185.0](https://github.com/socialgouv/kontinuous/compare/v1.184.10...v1.185.0) (2025-05-28)
 
 
