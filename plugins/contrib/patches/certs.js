@@ -1,15 +1,21 @@
 module.exports = (manifests, options) => {
-  const hasWildcard = (host) => host.endsWith(options.wildcardHost)
-  const isInternalHost = (host) =>
-    options.internalHosts.some((internalHost) => host.endsWith(internalHost))
-
   const {
+    annotationEnableKey = "kontinuous/use-cert-manager",
+    defaultEnabled = true,
+    detectWildcard = true,
+    internalHosts = [],
+    detectInternal = internalHosts.length > 0,
     secretName = "wildcard-crt",
     clusterIssuer = "letsencrypt-prod",
     namespaceLabels = {
       cert: "wildcard",
     },
   } = options
+
+  const hasWildcard = (host) => host.endsWith(options.wildcardHost)
+  const isInternalHost = (host) =>
+    internalHosts.some((internalHost) => host.endsWith(internalHost))
+
   const wildcardNamespaces = new Set()
 
   for (const manifest of manifests) {
@@ -24,20 +30,37 @@ module.exports = (manifests, options) => {
         tlsEntry.secretName = secretName
       }
 
-      // apply cert-manager annotations only for internal, non-wildcard hosts
-      if (!hosts.every(hasWildcard) && hosts.every(isInternalHost)) {
-        if (!manifest.metadata) {
-          manifest.metadata = {}
-        }
-        if (!manifest.metadata.annotations) {
-          manifest.metadata.annotations = {}
-        }
-        Object.assign(manifest.metadata.annotations, {
-          "cert-manager.io": "cluster-issuer",
-          "cert-manager.io/cluster-issuer": clusterIssuer,
-          "kubernetes.io/tls-acme": "true",
-        })
+      let enabled = defaultEnabled
+
+      const annotationEnableValue =
+        manifest.metadata?.annotations?.[annotationEnableKey]
+      if (
+        annotationEnableValue !== undefined &&
+        annotationEnableValue !== null &&
+        annotationEnableValue !== ""
+      ) {
+        enabled = annotationEnableValue !== "false"
+      } else if (detectWildcard && hosts.some(hasWildcard)) {
+        enabled = false
+      } else if (detectInternal && !hosts.every(isInternalHost)) {
+        enabled = false
       }
+
+      if (!enabled) {
+        continue
+      }
+
+      if (!manifest.metadata) {
+        manifest.metadata = {}
+      }
+      if (!manifest.metadata.annotations) {
+        manifest.metadata.annotations = {}
+      }
+      Object.assign(manifest.metadata.annotations, {
+        "cert-manager.io": "cluster-issuer",
+        "cert-manager.io/cluster-issuer": clusterIssuer,
+        "kubernetes.io/tls-acme": "true",
+      })
     }
   }
 
