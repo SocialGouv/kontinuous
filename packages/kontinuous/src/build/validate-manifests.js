@@ -17,5 +17,16 @@ module.exports = async (manifests) => {
   logger.info("🌀 [LIFECYCLE]: validators")
   const context = createContext({ type: "validators", ValidationError })
   const { buildProjectPath } = config
-  await pluginFunction(`${buildProjectPath}/validators`)(manifests, {}, context)
+  try {
+    await pluginFunction(`${buildProjectPath}/validators`)(
+      manifests,
+      {},
+      context
+    )
+  } catch (err) {
+    if (!(err instanceof ValidationError)) {
+      err = new ValidationError(err.message)
+    }
+    throw err
+  }
 }

@@ -17,10 +17,12 @@ const loadDependencies = require("./load-dependencies")
 
 module.exports = async (_options = {}) => {
   const config = ctx.require("config")
+  const logger = ctx.require("logger")
+
+  logger.info("🌀 [LIFECYCLE]: pre-build")
+  // TODO:
 
   const { buildPath, buildProjectPath, workspaceKsPath } = config
-
-  const logger = ctx.require("logger")
 
   if (await fs.pathExists(workspaceKsPath)) {
     await fs.copy(workspaceKsPath, buildProjectPath, {
@@ -76,6 +78,9 @@ module.exports = async (_options = {}) => {
   await validateManifests(manifests)
 
   await debugManifests(manifests, values)
+
+  logger.info("🌀 [LIFECYCLE]: post-build")
+  // TODO:
 
   return {
     manifestsFile,

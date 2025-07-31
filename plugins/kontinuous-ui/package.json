@@ -1,0 +1,13 @@
+{
+  "name": "~kontinuous-ui",
+  "dependencies": {
+    "@socialgouv/parse-manifests": "^1.16.4",
+    "@supabase/supabase-js": "2.45.4"
+  },
+  "license": "MIT",
+  "private": true,
+  "packageManager": "yarn@4.0.0-rc.39",
+  "engines": {
+    "node": "^16.17 || ^18 || ^20"
+  }
+}
