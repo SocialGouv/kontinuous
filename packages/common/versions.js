@@ -1,6 +1,6 @@
 module.exports = {
   // renovate: datasource=github-releases depName=helm/helm
-  helm: "3.11.3",
+  helm: "3.19.0",
 
   // renovate: datasource=github-tags depName=kubernetes/kubectl extractVersion=^kubernetes-(?<version>.+)$
   kubectl: "1.27.1",
