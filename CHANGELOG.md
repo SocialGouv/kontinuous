@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.185.2](https://github.com/socialgouv/kontinuous/compare/v1.185.1...v1.185.2) (2025-09-17)
+
+
+### Bug Fixes
+
+* bitnami/kubectl missing image ([8b2a499](https://github.com/socialgouv/kontinuous/commit/8b2a499df73fe7ea28f3ce9eab2f2f079ceda590))
+
 ## [1.185.1](https://github.com/socialgouv/kontinuous/compare/v1.185.0...v1.185.1) (2025-07-24)
 
 
