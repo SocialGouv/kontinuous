@@ -2923,7 +2923,7 @@ spec:
               memory: 227.555Mi
       containers:
         - name: job
-          image: bitnami/kubectl:latest
+          image: bitnami/kubectl@sha256:ed0b31a0508da84ee655c5c6e01bd3897fc56ad6cf69debb27fa1893a06d2246
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -3225,7 +3225,7 @@ spec:
               memory: 227.555Mi
       containers:
         - name: job
-          image: bitnami/kubectl:latest
+          image: bitnami/kubectl@sha256:ed0b31a0508da84ee655c5c6e01bd3897fc56ad6cf69debb27fa1893a06d2246
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -3382,7 +3382,7 @@ spec:
               memory: 227.555Mi
       containers:
         - name: job
-          image: bitnami/kubectl:latest
+          image: bitnami/kubectl@sha256:ed0b31a0508da84ee655c5c6e01bd3897fc56ad6cf69debb27fa1893a06d2246
           imagePullPolicy: IfNotPresent
           env:
             - name: DB_SECRET_NAME

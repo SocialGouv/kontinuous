@@ -386,7 +386,7 @@ exports[`template 1`] = `
     │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.185.1
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
-    │   │       ├── image: bitnami/kubectl:latest
+    │   │       ├── image: bitnami/kubectl@sha256:ed0b31a0508da84ee655c5c6e01bd3897fc56ad6cf69debb27fa1893a06d2246
     │   │       └── command: /bin/bash -c set -e /action/create-secret.sh
     │   ├── job-template-k-mvp-mig-9-jobs-con-6v7vwk-db-keycloak-cr-5fc7zt
     │   │   ├── kontinuous-wait-needs (init)
@@ -402,7 +402,7 @@ exports[`template 1`] = `
     │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.185.1
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
-    │   │       ├── image: bitnami/kubectl:latest
+    │   │       ├── image: bitnami/kubectl@sha256:ed0b31a0508da84ee655c5c6e01bd3897fc56ad6cf69debb27fa1893a06d2246
     │   │       └── command: /bin/bash -c set -e /action/create-secret.sh
     │   ├── job-template-k-mvp-mig-9-jobs-con-6v7vwk-seed-hasura-im-pfycj9
     │   │   ├── kontinuous-wait-needs (init)
@@ -411,7 +411,7 @@ exports[`template 1`] = `
     │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.185.1
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
-    │   │       ├── image: bitnami/kubectl:latest
+    │   │       ├── image: bitnami/kubectl@sha256:ed0b31a0508da84ee655c5c6e01bd3897fc56ad6cf69debb27fa1893a06d2246
     │   │       └── command: /bin/bash -c set -e /action/import-secret.sh
     │   └── job-template-k-mvp-mig-9-jobs-con-6v7vwk-seed-hasura-se-5un89q
     │       ├── kontinuous-wait-needs (init)
@@ -655,7 +655,7 @@ exports[`www 1`] = `
     │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.185.1
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
-    │   │       ├── image: bitnami/kubectl:latest
+    │   │       ├── image: bitnami/kubectl@sha256:ed0b31a0508da84ee655c5c6e01bd3897fc56ad6cf69debb27fa1893a06d2246
     │   │       └── command: /bin/bash -c set -e /action/create-secret.sh
     │   ├── job-template-k-mvp-mig-9-jobs-con-6v7vwk-db-keycloak-cr-5fc7zt
     │   │   ├── kontinuous-wait-needs (init)
@@ -671,7 +671,7 @@ exports[`www 1`] = `
     │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.185.1
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
-    │   │       ├── image: bitnami/kubectl:latest
+    │   │       ├── image: bitnami/kubectl@sha256:ed0b31a0508da84ee655c5c6e01bd3897fc56ad6cf69debb27fa1893a06d2246
     │   │       └── command: /bin/bash -c set -e /action/create-secret.sh
     │   ├── job-template-k-mvp-mig-9-jobs-con-6v7vwk-seed-hasura-im-pfycj9
     │   │   ├── kontinuous-wait-needs (init)
@@ -680,7 +680,7 @@ exports[`www 1`] = `
     │   │   │   ├── image: ghcr.io/socialgouv/kontinuous/degit:v1.185.1
     │   │   │   └── command: sh -c degit SocialGouv/kontinuous/plugins/contrib/...
     │   │   └── job
-    │   │       ├── image: bitnami/kubectl:latest
+    │   │       ├── image: bitnami/kubectl@sha256:ed0b31a0508da84ee655c5c6e01bd3897fc56ad6cf69debb27fa1893a06d2246
     │   │       └── command: /bin/bash -c set -e /action/import-secret.sh
     │   └── job-template-k-mvp-mig-9-jobs-con-6v7vwk-seed-hasura-se-5un89q
     │       ├── kontinuous-wait-needs (init)

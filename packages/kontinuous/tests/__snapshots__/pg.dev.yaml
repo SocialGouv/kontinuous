@@ -157,7 +157,7 @@ spec:
               memory: \\"0\\"
       containers:
         - name: job
-          image: bitnami/kubectl:latest
+          image: bitnami/kubectl@sha256:ed0b31a0508da84ee655c5c6e01bd3897fc56ad6cf69debb27fa1893a06d2246
           imagePullPolicy: IfNotPresent
           env:
             - name: APP_DB_SECRET_NAME
