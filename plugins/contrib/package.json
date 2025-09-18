@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "private": true,
-  "packageManager": "yarn@4.0.0-rc.39",
+  "packageManager": "yarn@4.10.0",
   "devDependencies": {
     "jest": "^29.3.1"
   },

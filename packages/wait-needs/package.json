@@ -1,6 +1,6 @@
 {
   "name": "wait-needs",
-  "packageManager": "yarn@4.0.0-rc.39",
+  "packageManager": "yarn@4.10.0",
   "dependencies": {
     "~common": "workspace:^"
   },
