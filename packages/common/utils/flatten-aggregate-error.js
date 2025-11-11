@@ -1,7 +1,8 @@
 const indent = require("./indent")
 
-module.exports = (aggregateError) =>
-  new Error(
+module.exports = (aggregateError) => {
+  console.log("aggregateError", aggregateError)
+  return new Error(
     `${aggregateError.name} ${aggregateError.message}: \n${indent(
       aggregateError.errors
         .map((error) => `${error.stack.toString()}`)
@@ -9,3 +10,4 @@ module.exports = (aggregateError) =>
       2
     )}`
   )
+}
