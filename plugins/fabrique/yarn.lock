@@ -2,8 +2,8 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 7
-  cacheKey: 9
+  version: 8
+  cacheKey: 10
 
 "@socialgouv/parse-manifests@npm:^1.16.4":
   version: 1.16.4
@@ -13,21 +13,21 @@ __metadata:
     yaml: "npm:^1.10.2"
   bin:
     parse-manifests: bin/index.js
-  checksum: 3a335f1d21623c4c14424d31937cf63b9de4484edda35c66f5a194766a5fda4218521942543c3f36dfa14f0f70313af801627ea8e0c5cd86e8f252a6492f40c9
+  checksum: 9/3a335f1d21623c4c14424d31937cf63b9de4484edda35c66f5a194766a5fda4218521942543c3f36dfa14f0f70313af801627ea8e0c5cd86e8f252a6492f40c9
   languageName: node
   linkType: hard
 
 "get-stdin@npm:^9.0.0":
   version: 9.0.0
   resolution: "get-stdin@npm:9.0.0"
-  checksum: 3adee5758c111b3432b2855cba6af7d342a679330a85867bf076bfc51b03f8747f34a5057f33e4a8909af4589acdc909a28eda82b3a4050b88e1d400696b6efe
+  checksum: 9/3adee5758c111b3432b2855cba6af7d342a679330a85867bf076bfc51b03f8747f34a5057f33e4a8909af4589acdc909a28eda82b3a4050b88e1d400696b6efe
   languageName: node
   linkType: hard
 
 "yaml@npm:^1.10.2":
   version: 1.10.2
   resolution: "yaml@npm:1.10.2"
-  checksum: d6f04384bdf1105256581aef39991f825e358f3f48f081974b0e0f39ff5240c60ccafb5842cb79d1287517efa2b9ee172c702f2e4855ba6cc46948b40a43aa6e
+  checksum: 9/d6f04384bdf1105256581aef39991f825e358f3f48f081974b0e0f39ff5240c60ccafb5842cb79d1287517efa2b9ee172c702f2e4855ba6cc46948b40a43aa6e
   languageName: node
   linkType: hard
 
