@@ -18,3 +18,12 @@ spec:
       ports:
         - port: 8000
         - port: 5432
+   
+   # required by kubectl cnpg status
+   - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - protocol: TCP
+      port: 8000
