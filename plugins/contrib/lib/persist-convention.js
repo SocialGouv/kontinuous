@@ -16,6 +16,10 @@ const persistPatterns = [
   "dev",
   "develop",
   "preprod",
+
+  "alpha",
+  "beta",
+  "next",
 ]
 module.exports = {
   persistPatterns,
