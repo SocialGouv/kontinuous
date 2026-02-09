@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.185.3](https://github.com/socialgouv/kontinuous/compare/v1.185.2...v1.185.3) (2026-02-09)
+
+
+### Bug Fixes
+
+* **cnpg:** netpol ([867d5d3](https://github.com/socialgouv/kontinuous/commit/867d5d3399c3e881236ada3e4ae64098d5f0b738))
+* **persist:** add alpha, beta, next ([247e205](https://github.com/socialgouv/kontinuous/commit/247e205f3588d263286f8cc5e25f9e86736df3b7))
+
 ## [1.185.2](https://github.com/socialgouv/kontinuous/compare/v1.185.1...v1.185.2) (2025-09-17)
 
 
