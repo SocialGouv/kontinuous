@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.185.6 (2026-03-03)
+
+
+### Bug Fixes
+
+* alpha and beta branches image tag ([7d495c1](https://github.com/socialgouv/kontinuous/commit/7d495c1f3b99bd9126a74f733b43231191189bd9))
+
 ## 1.185.5 (2026-03-03)
 
 
