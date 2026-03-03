@@ -45,6 +45,9 @@ module.exports = async (values, options, { config, utils, ctx }) => {
     } else {
       imageTag = "prod"
     }
+  } else if (gitBranch === "alpha" || gitBranch === "beta") {
+    // Exception: alpha/beta branches should use a stable tag (not sha/persist)
+    imageTag = gitBranch
   } else if (patternMatch(gitBranch, persistPatterns)) {
     imageTag = `persist-${sha}`
   } else {
