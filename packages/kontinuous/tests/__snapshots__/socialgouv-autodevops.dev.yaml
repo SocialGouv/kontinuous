@@ -190,7 +190,7 @@ spec:
 
 
 
-              buildkit_addr=tcp://buildkit.socialgouv.io:1234
+              buildkit_addr=tcp://buildkit.atlas.fabrique.social.gouv.fr:1234
 
 
               # consistent hashing distribution

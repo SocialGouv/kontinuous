@@ -85,13 +85,20 @@ spec:
     - from:
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: cnpg-system
+              kubernetes.io/metadata.name: cnpg
           podSelector:
             matchLabels:
               app.kubernetes.io/name: cloudnative-pg
       ports:
         - port: 8000
         - port: 5432
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: TCP
+          port: 8000
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -119,13 +126,20 @@ spec:
     - from:
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: cnpg-system
+              kubernetes.io/metadata.name: cnpg
           podSelector:
             matchLabels:
               app.kubernetes.io/name: cloudnative-pg
       ports:
         - port: 8000
         - port: 5432
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: TCP
+          port: 8000
 ---
 apiVersion: v1
 kind: ServiceAccount

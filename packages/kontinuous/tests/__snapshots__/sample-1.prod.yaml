@@ -823,19 +823,22 @@ spec:
     - resource:
         name: cpu
         target:
-          averageUtilization: 80
+          averageUtilization: 70
           type: Utilization
       type: Resource
     - resource:
         name: memory
         target:
-          averageUtilization: 80
+          averageUtilization: 70
           type: Utilization
       type: Resource
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: app-2nd-instance
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 0
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -863,19 +866,22 @@ spec:
     - resource:
         name: cpu
         target:
-          averageUtilization: 80
+          averageUtilization: 70
           type: Utilization
       type: Resource
     - resource:
         name: memory
         target:
-          averageUtilization: 80
+          averageUtilization: 70
           type: Utilization
       type: Resource
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: app
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 0
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler

@@ -2251,19 +2251,22 @@ spec:
     - resource:
         name: cpu
         target:
-          averageUtilization: 80
+          averageUtilization: 70
           type: Utilization
       type: Resource
     - resource:
         name: memory
         target:
-          averageUtilization: 80
+          averageUtilization: 70
           type: Utilization
       type: Resource
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: backend-cron
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 0
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -2292,19 +2295,22 @@ spec:
     - resource:
         name: cpu
         target:
-          averageUtilization: 80
+          averageUtilization: 70
           type: Utilization
       type: Resource
     - resource:
         name: memory
         target:
-          averageUtilization: 80
+          averageUtilization: 70
           type: Utilization
       type: Resource
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: backend
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 0
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -2333,19 +2339,22 @@ spec:
     - resource:
         name: cpu
         target:
-          averageUtilization: 80
+          averageUtilization: 70
           type: Utilization
       type: Resource
     - resource:
         name: memory
         target:
-          averageUtilization: 80
+          averageUtilization: 70
           type: Utilization
       type: Resource
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: frontend
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 0
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -2374,19 +2383,22 @@ spec:
     - resource:
         name: cpu
         target:
-          averageUtilization: 80
+          averageUtilization: 70
           type: Utilization
       type: Resource
     - resource:
         name: memory
         target:
-          averageUtilization: 80
+          averageUtilization: 70
           type: Utilization
       type: Resource
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: portail-admins
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 0
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -2415,19 +2427,22 @@ spec:
     - resource:
         name: cpu
         target:
-          averageUtilization: 80
+          averageUtilization: 70
           type: Utilization
       type: Resource
     - resource:
         name: memory
         target:
-          averageUtilization: 80
+          averageUtilization: 70
           type: Utilization
       type: Resource
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: portail-usagers
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 0
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
