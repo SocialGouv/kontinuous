@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.187.0 (2026-03-16)
+
+
+### Features
+
+* **gitlab:** compat wip ([2172e55](https://github.com/socialgouv/kontinuous/commit/2172e551fd3d70563ead82bfe1db72772c72297e))
+
 ## 1.186.8 (2026-03-16)
 
 
