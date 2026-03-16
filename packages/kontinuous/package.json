@@ -1,6 +1,6 @@
 {
   "name": "kontinuous",
-  "version": "1.186.5",
+  "version": "1.186.6",
   "repository": {
     "type": "git",
     "url": "https://github.com/SocialGouv/kontinuous"
@@ -64,9 +64,7 @@
   "_moduleAliases": {
     "~": "src"
   },
-  "bin": {
-    "kontinuous": "./dist/index.js"
-  },
+  "bin": "./dist/index.js",
   "files": [
     "dist",
     "package.json",
