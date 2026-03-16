@@ -37,7 +37,7 @@ jobs:
       - name: prepublish
         run: |
           cp LICENSE README.md packages/kontinuous/
-          cat <<< $(jq "del(.dependencies, .devDependencies, .scripts, .main, ._moduleAliases)" packages/kontinuous/package.json) > packages/kontinuous/package.json
+          cat <<< $(jq "del(.dependencies, .devDependencies, .scripts, .main, ._moduleAliases, .engines)" packages/kontinuous/package.json) > packages/kontinuous/package.json
 
       - name: extract npm tag
         id: npm-tag
