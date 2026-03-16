@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.186.0 (2026-03-16)
+
+
+### Features
+
+* **proxy:** support for npx ([d466177](https://github.com/socialgouv/kontinuous/commit/d4661774bc67e2e125ea29a787d3f632468e0481))
+
 ## 1.185.6 (2026-03-03)
 
 
