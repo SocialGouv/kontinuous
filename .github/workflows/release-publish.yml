@@ -23,8 +23,10 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: 22
-          cache: 'yarn'
           registry-url: 'https://registry.npmjs.org'
+
+      - name: Update npm
+        run: npm install -g npm@latest
 
       - name: yarn install
         run: yarn --immutable
