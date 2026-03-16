@@ -133,7 +133,9 @@ const loadConfig = async (
           if (repository.includes(":")) {
             return repository
           }
-          return `${defaultRepositoryProvider}/${repository}`
+          const repositoryProvider =
+            environ.CI_SERVER_URL || defaultRepositoryProvider
+          return `${repositoryProvider}/${repository}`
         }
         if (config.git) {
           try {
