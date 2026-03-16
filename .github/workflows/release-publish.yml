@@ -50,7 +50,8 @@ jobs:
           echo "tag=$npm_tag" >> $GITHUB_OUTPUT
 
       - name: Publish to npm
-        run: npm publish packages/kontinuous --tag ${{ steps.npm-tag.outputs.tag }} --provenance --access public
+        working-directory: packages/kontinuous
+        run: npm publish --tag ${{ steps.npm-tag.outputs.tag }} --provenance --access public
 
       - name: Get GitHub App Token
         id: token
