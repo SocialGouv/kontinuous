@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.186.8 (2026-03-16)
+
+
+### Bug Fixes
+
+* node version compat ([ddfe6d0](https://github.com/socialgouv/kontinuous/commit/ddfe6d004f5a4877f1afa2c8333424135a907c09))
+
 ## 1.186.7 (2026-03-16)
 
 ## 1.186.6 (2026-03-16)
