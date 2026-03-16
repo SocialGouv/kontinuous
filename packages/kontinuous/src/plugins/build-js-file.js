@@ -69,10 +69,10 @@ module.exports = async (target, type, definition) => {
       return acc
     }, {})
 
-  for (const [name, load] of Object.entries(loads)) {
-    let { require: req } = load
+  for (const [, load] of Object.entries(loads)) {
+    const { require: req } = load
     if (!req) {
-      req = `./${name}`
+      continue
     }
     processors.push(req)
   }
