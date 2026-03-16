@@ -4969,6 +4969,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"agent-base@npm:^7.1.0, agent-base@npm:^7.1.2":
+  version: 7.1.4
+  resolution: "agent-base@npm:7.1.4"
+  checksum: 2fadec40e73c161e539ec55c82b50305da579988aaf8e52b834c2c85647168e835d9bbd605cc6b93f09a2475fa14beb6bedd864c5d381c8cb809dffc42d83d5a
+  languageName: node
+  linkType: hard
+
 "agentkeepalive@npm:4.2.1, agentkeepalive@npm:^4.2.1":
   version: 4.2.1
   resolution: "agentkeepalive@npm:4.2.1"
@@ -9391,6 +9398,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"http-proxy-agent@npm:^7.0.2":
+  version: 7.0.2
+  resolution: "http-proxy-agent@npm:7.0.2"
+  dependencies:
+    agent-base: "npm:^7.1.0"
+    debug: "npm:^4.3.4"
+  checksum: b3d0773ccdec3db24193abc516f99bbed8c84bdecc5ac8410767a0240b2720fed3bf907e180c902122ebcc482bad1f27ef75e1f7adf2b14cad984589e0974dbe
+  languageName: node
+  linkType: hard
+
 "http2-wrapper@npm:^1.0.0-beta.5.2":
   version: 1.0.3
   resolution: "http2-wrapper@npm:1.0.3"
@@ -9418,6 +9435,16 @@ __metadata:
     agent-base: "npm:6"
     debug: "npm:4"
   checksum: 8e767faec977400c31bca2ef0f5338b843b781b63fd985c00d199adac2d6c8a5ecc6e553588a6821a058198960f167a3c83f014bd64bef9a15b176d992d29dfe
+  languageName: node
+  linkType: hard
+
+"https-proxy-agent@npm:^7.0.6":
+  version: 7.0.6
+  resolution: "https-proxy-agent@npm:7.0.6"
+  dependencies:
+    agent-base: "npm:^7.1.2"
+    debug: "npm:4"
+  checksum: 7912865d2b3d709df2689039b2b7ce90f2da74576bbc030c44e36b019b2ce74bfb64f012e333d810c1d131784619de2d4f955e1d00c8aa093fb6094257e44f08
   languageName: node
   linkType: hard
 
@@ -16250,6 +16277,8 @@ __metadata:
     direct-logger: "npm:^2.7.3"
     dotenv: "npm:^16.0.2"
     fs-extra: "npm:^11.1.1"
+    http-proxy-agent: "npm:^7.0.2"
+    https-proxy-agent: "npm:^7.0.6"
     jest-diff: "npm:^29.0.0"
     js-yaml: "npm:^4.1.0"
     lodash.camelcase: "npm:^4.3.0"
