@@ -64,7 +64,9 @@
   "_moduleAliases": {
     "~": "src"
   },
-  "bin": "./dist/index.js",
+  "bin": {
+    "kontinuous": "./dist/index.js"
+  },
   "files": [
     "dist",
     "package.json",
