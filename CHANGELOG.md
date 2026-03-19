@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.187.2 (2026-03-19)
+
+
+### Bug Fixes
+
+* **patches:** cert tls ([8616277](https://github.com/socialgouv/kontinuous/commit/8616277b071d59237dbd06acf612d2cbab53ef5b))
+
 ## 1.187.1 (2026-03-16)
 
 
