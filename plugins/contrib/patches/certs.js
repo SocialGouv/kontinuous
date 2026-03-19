@@ -13,6 +13,7 @@ module.exports = (manifests, options) => {
   const wildcardNamespaces = new Set()
 
   for (const manifest of manifests) {
+    if (manifest.kind !== "Ingress") continue
     const tls = manifest.spec?.tls || []
     for (const tlsEntry of tls) {
       const { hosts } = tlsEntry
