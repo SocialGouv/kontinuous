@@ -10,6 +10,8 @@ patches:
       repositoryUrl: https://github.com/SocialGouv/infra-resources.git
 
 dependencies:
+  kontinuous-ui:
+    import: socialgouv/kontinuous/plugins/kontinuous-ui
   contrib:
     import: socialgouv/kontinuous/plugins/contrib
 
