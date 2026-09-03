@@ -687,6 +687,25 @@ const loadConfig = async (
       env: "KS_DEPLOY_KEY_SECRET_NAME",
       default: "deploy-key",
     },
+    gitAuthSecretEnabled: {
+      env: "KS_GIT_AUTH_SECRET_ENABLED",
+      envParser: envParserYaml,
+      // on by default: the secret mount is optional and the checkout keeps its
+      // previous behaviour when no token is provisioned, so this can only help
+      default: true,
+    },
+    gitAuthSecretName: {
+      env: "KS_GIT_AUTH_SECRET_NAME",
+      default: "git-auth",
+    },
+    gitAuthSecretKey: {
+      env: "KS_GIT_AUTH_SECRET_KEY",
+      default: "GIT_AUTH_TOKEN",
+    },
+    gitAuthHost: {
+      env: "KS_GIT_AUTH_HOST",
+      default: "github.com",
+    },
     gitDiffEnabled: {
       option: "gitDiffEnabled",
       env: "KS_GIT_DIFF_ENABLED",

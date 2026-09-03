@@ -1,6 +1,7 @@
 const { ctx } = require("@modjo/core")
 
 const gitSshCommand = require("~common/utils/git-ssh-command")
+const gitAuthSetupScript = require("~common/utils/git-auth-setup")
 const castArray = require("~common/utils/cast-array")
 
 module.exports = ({
@@ -59,6 +60,12 @@ module.exports = ({
   const { pipelineImage, pipelineCheckoutImage } = projectConfig
   let { pipelineImageTag, pipelineCheckoutImageTag } = projectConfig
 
+  const gitAuth = projectConfig.gitAuth || {}
+  const gitAuthEnabled = !!gitAuth.secretName
+  const gitAuthSetup = gitAuthEnabled
+    ? gitAuthSetupScript({ host: gitAuth.host })
+    : ""
+
   if (kontinuousVersion) {
     pipelineImageTag = kontinuousVersion
     pipelineCheckoutImageTag = kontinuousVersion
@@ -102,8 +109,12 @@ module.exports = ({
                     command: [
                       "sh",
                       "-c",
-                      `degit ${
-                        deployKeyCiSecretName ? "--mode=git " : ""
+                      `${gitAuthEnabled ? `${gitAuthSetup}\n` : ""}degit ${
+                        deployKeyCiSecretName
+                          ? "--mode=git "
+                          : gitAuthEnabled
+                          ? "$KS_DEGIT_MODE "
+                          : ""
                       }${repositoryUrl}#${
                         gitCommit &&
                         gitCommit !== "0000000000000000000000000000000000000000"
@@ -124,12 +135,21 @@ module.exports = ({
                             },
                           ]
                         : []),
+                      ...(gitAuthEnabled
+                        ? [
+                            {
+                              name: "gitAuth",
+                              mountPath: "/secrets/git",
+                              readOnly: true,
+                            },
+                          ]
+                        : []),
                     ],
                     env: [
                       ...(deployKeyCiSecretName
                         ? [
                             {
-                              name: "GIT_COMMAND_SSH",
+                              name: "GIT_SSH_COMMAND",
                               value: gitSshCommand({
                                 deployKey: "/secrets/ssh/deploy-key",
                               }),
@@ -290,13 +310,35 @@ module.exports = ({
               ? [
                   {
                     name: "deployKey",
-                    secretName: deployKeyCiSecretName,
-                    items: [
-                      {
-                        key: "DEPLOY_KEY",
-                        path: "deploy-key",
-                      },
-                    ],
+                    secret: {
+                      secretName: deployKeyCiSecretName,
+                      items: [
+                        {
+                          key: "DEPLOY_KEY",
+                          path: "deploy-key",
+                        },
+                      ],
+                    },
+                  },
+                ]
+              : []),
+            ...(gitAuthEnabled
+              ? [
+                  {
+                    name: "gitAuth",
+                    secret: {
+                      secretName: gitAuth.secretName,
+                      // optional: a project with no token provisioned degrades
+                      // to anonymous git with a warning, rather than a pipeline
+                      // that cannot start at all
+                      optional: true,
+                      items: [
+                        {
+                          key: gitAuth.secretKey,
+                          path: "token",
+                        },
+                      ],
+                    },
                   },
                 ]
               : []),

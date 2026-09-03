@@ -138,14 +138,29 @@ spec:
           command:
             - sh
             - -c
-            - degit --disable-cache
-              socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
+            - >
+              KS_DEGIT_MODE=\\"\\"
+
+              if [ -s /secrets/git/token ]; then
+                KS_GIT_AUTH_TOKEN=\\"$(cat /secrets/git/token)\\"
+                git config --global url.\\"https://x-access-token:\${KS_GIT_AUTH_TOKEN}@github.com/\\".insteadOf \\"https://github.com/\\"
+                git config --global --add url.\\"https://x-access-token:\${KS_GIT_AUTH_TOKEN}@github.com/\\".insteadOf \\"git@github.com:\\"
+                unset KS_GIT_AUTH_TOKEN
+                KS_DEGIT_MODE=\\"--mode=git\\"
+              else
+                echo \\"kontinuous: gitAuth is enabled but /secrets/git/token is empty or missing, falling back to anonymous git — github.com throttles unauthenticated access\\" >&2
+              fi
+
+              degit --disable-cache $KS_DEGIT_MODE socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
           volumeMounts:
             - name: action
               mountPath: /action
+            - name: git-auth
+              mountPath: /secrets/git
+              readOnly: true
           resources:
             limits:
               cpu: 200m
@@ -225,6 +240,13 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
+        - name: git-auth
+          secret:
+            secretName: git-auth
+            optional: true
+            items:
+              - key: GIT_AUTH_TOKEN
+                path: token
         - name: kontinuous-io
           emptyDir: {}
       affinity:
@@ -301,14 +323,29 @@ spec:
           command:
             - sh
             - -c
-            - degit --disable-cache
-              socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
+            - >
+              KS_DEGIT_MODE=\\"\\"
+
+              if [ -s /secrets/git/token ]; then
+                KS_GIT_AUTH_TOKEN=\\"$(cat /secrets/git/token)\\"
+                git config --global url.\\"https://x-access-token:\${KS_GIT_AUTH_TOKEN}@github.com/\\".insteadOf \\"https://github.com/\\"
+                git config --global --add url.\\"https://x-access-token:\${KS_GIT_AUTH_TOKEN}@github.com/\\".insteadOf \\"git@github.com:\\"
+                unset KS_GIT_AUTH_TOKEN
+                KS_DEGIT_MODE=\\"--mode=git\\"
+              else
+                echo \\"kontinuous: gitAuth is enabled but /secrets/git/token is empty or missing, falling back to anonymous git — github.com throttles unauthenticated access\\" >&2
+              fi
+
+              degit --disable-cache $KS_DEGIT_MODE socialgouv/kontinuous/plugins/contrib/jobs/create-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
           volumeMounts:
             - name: action
               mountPath: /action
+            - name: git-auth
+              mountPath: /secrets/git
+              readOnly: true
           resources:
             limits:
               cpu: 200m
@@ -378,6 +415,13 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
+        - name: git-auth
+          secret:
+            secretName: git-auth
+            optional: true
+            items:
+              - key: GIT_AUTH_TOKEN
+                path: token
         - name: kubeconfig
           secret:
             secretName: kubeconfig
@@ -464,7 +508,19 @@ spec:
             - -c
             - >
               
-              degit --disable-cache kontinuous/test-app-simple-options#feature-branch-1 \\\\
+              KS_DEGIT_MODE=\\"\\"
+
+              if [ -s /secrets/git/token ]; then
+                KS_GIT_AUTH_TOKEN=\\"$(cat /secrets/git/token)\\"
+                git config --global url.\\"https://x-access-token:\${KS_GIT_AUTH_TOKEN}@github.com/\\".insteadOf \\"https://github.com/\\"
+                git config --global --add url.\\"https://x-access-token:\${KS_GIT_AUTH_TOKEN}@github.com/\\".insteadOf \\"git@github.com:\\"
+                unset KS_GIT_AUTH_TOKEN
+                KS_DEGIT_MODE=\\"--mode=git\\"
+              else
+                echo \\"kontinuous: gitAuth is enabled but /secrets/git/token is empty or missing, falling back to anonymous git — github.com throttles unauthenticated access\\" >&2
+              fi
+
+              degit --disable-cache --verbose $KS_DEGIT_MODE kontinuous/test-app-simple-options#feature-branch-1 \\\\
                 /workspace
           securityContext:
             runAsUser: 1000
@@ -472,6 +528,9 @@ spec:
           volumeMounts:
             - name: workspace
               mountPath: /workspace
+            - name: git-auth
+              mountPath: /secrets/git
+              readOnly: true
           resources:
             limits:
               cpu: 500m
@@ -522,6 +581,13 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
+        - name: git-auth
+          secret:
+            secretName: git-auth
+            optional: true
+            items:
+              - key: GIT_AUTH_TOKEN
+                path: token
         - name: kontinuous-io
           emptyDir: {}
       affinity:
@@ -602,7 +668,19 @@ spec:
             - -c
             - >
               
-              degit --disable-cache kontinuous/test-app-simple-options#feature-branch-1 \\\\
+              KS_DEGIT_MODE=\\"\\"
+
+              if [ -s /secrets/git/token ]; then
+                KS_GIT_AUTH_TOKEN=\\"$(cat /secrets/git/token)\\"
+                git config --global url.\\"https://x-access-token:\${KS_GIT_AUTH_TOKEN}@github.com/\\".insteadOf \\"https://github.com/\\"
+                git config --global --add url.\\"https://x-access-token:\${KS_GIT_AUTH_TOKEN}@github.com/\\".insteadOf \\"git@github.com:\\"
+                unset KS_GIT_AUTH_TOKEN
+                KS_DEGIT_MODE=\\"--mode=git\\"
+              else
+                echo \\"kontinuous: gitAuth is enabled but /secrets/git/token is empty or missing, falling back to anonymous git — github.com throttles unauthenticated access\\" >&2
+              fi
+
+              degit --disable-cache --verbose $KS_DEGIT_MODE kontinuous/test-app-simple-options#feature-branch-1 \\\\
                 /workspace
           securityContext:
             runAsUser: 1000
@@ -610,6 +688,9 @@ spec:
           volumeMounts:
             - name: workspace
               mountPath: /workspace
+            - name: git-auth
+              mountPath: /secrets/git
+              readOnly: true
           resources:
             limits:
               cpu: 500m
@@ -622,14 +703,29 @@ spec:
           command:
             - sh
             - -c
-            - degit --disable-cache
-              socialgouv/kontinuous/plugins/contrib/jobs/seed-db /action
+            - >
+              KS_DEGIT_MODE=\\"\\"
+
+              if [ -s /secrets/git/token ]; then
+                KS_GIT_AUTH_TOKEN=\\"$(cat /secrets/git/token)\\"
+                git config --global url.\\"https://x-access-token:\${KS_GIT_AUTH_TOKEN}@github.com/\\".insteadOf \\"https://github.com/\\"
+                git config --global --add url.\\"https://x-access-token:\${KS_GIT_AUTH_TOKEN}@github.com/\\".insteadOf \\"git@github.com:\\"
+                unset KS_GIT_AUTH_TOKEN
+                KS_DEGIT_MODE=\\"--mode=git\\"
+              else
+                echo \\"kontinuous: gitAuth is enabled but /secrets/git/token is empty or missing, falling back to anonymous git — github.com throttles unauthenticated access\\" >&2
+              fi
+
+              degit --disable-cache $KS_DEGIT_MODE socialgouv/kontinuous/plugins/contrib/jobs/seed-db /action
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
           volumeMounts:
             - name: action
               mountPath: /action
+            - name: git-auth
+              mountPath: /secrets/git
+              readOnly: true
           resources:
             limits:
               cpu: 200m
@@ -682,6 +778,13 @@ spec:
           emptyDir: {}
         - name: action
           emptyDir: {}
+        - name: git-auth
+          secret:
+            secretName: git-auth
+            optional: true
+            items:
+              - key: GIT_AUTH_TOKEN
+                path: token
         - name: kontinuous-io
           emptyDir: {}
       affinity:

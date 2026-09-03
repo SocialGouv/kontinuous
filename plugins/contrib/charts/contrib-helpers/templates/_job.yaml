@@ -104,6 +104,10 @@ spec:
               export GIT_SSH_COMMAND="ssh -i /secrets/ssh/deploy-key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
               degit --disable-cache --verbose --mode=git {{ or $val.repository $val.global.repository }}#{{ or $val.gitBranch $val.global.gitBranch }} \
                 /workspace
+              {{ else if and .Values.gitAuth .Values.gitAuth.enabled }}
+              {{- include "contrib-helpers.git-auth-setup" (dict "host" .Values.gitAuth.host "tokenPath" "/secrets/git/token") | nindent 14 }}
+              degit --disable-cache --verbose $KS_DEGIT_MODE {{ or $val.repository $val.global.repository }}#{{ or $val.gitBranch $val.global.gitBranch }} \
+                /workspace
               {{ else }}
               degit --disable-cache {{ or $val.repository $val.global.repository }}#{{ or $val.gitBranch $val.global.gitBranch }} \
                 /workspace
@@ -117,6 +121,11 @@ spec:
             {{ if .Values.deployKey.enabled }}
             - name: deploy-key
               mountPath: /secrets/ssh
+              readOnly: true
+            {{ end }}
+            {{ if and .Values.gitAuth .Values.gitAuth.enabled }}
+            - name: git-auth
+              mountPath: /secrets/git
               readOnly: true
             {{ end }}
           resources:
@@ -133,13 +142,24 @@ spec:
           command:
             - sh
             - -c
+            {{ if and .Values.gitAuth .Values.gitAuth.enabled }}
+            - |
+              {{- include "contrib-helpers.git-auth-setup" (dict "host" .Values.gitAuth.host "tokenPath" "/secrets/git/token") | nindent 14 }}
+              degit --disable-cache $KS_DEGIT_MODE {{ $run.action | replace "@" "#" }} /action
+            {{ else }}
             - degit --disable-cache {{ $run.action | replace "@" "#" }} /action
+            {{ end }}
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
           volumeMounts:
             - name: action
               mountPath: /action
+            {{ if and .Values.gitAuth .Values.gitAuth.enabled }}
+            - name: git-auth
+              mountPath: /secrets/git
+              readOnly: true
+            {{ end }}
           resources:
             limits:
               cpu: {{ or $run.degitActionCpuLimit .Values.degitAction.resources.limits.cpu }}
@@ -286,6 +306,17 @@ spec:
             items:
               - key: {{ .Values.deployKey.secretRefKey }}
                 path: deploy-key
+        {{ end }}
+        {{ if and .Values.gitAuth .Values.gitAuth.enabled }}
+        - name: git-auth
+          secret:
+            secretName: {{ .Values.gitAuth.secretRefName }}
+            # optional: a project with no token provisioned degrades to anonymous
+            # git with a warning, rather than jobs that cannot start at all
+            optional: true
+            items:
+              - key: {{ .Values.gitAuth.secretRefKey }}
+                path: token
         {{ end }}
         {{- if and $run.kubernetes (eq $run.kubernetesMethod "kubeconfig") }}
         - name: kubeconfig

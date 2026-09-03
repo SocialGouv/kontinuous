@@ -41,6 +41,7 @@ module.exports = {
   getRepositoryFile: require("./get-repository-file"),
   getRepositoryFileHttps: require("./get-repository-file-https"),
   getYamlPath: require("./get-yaml-path"),
+  gitAuthSetup: require("./git-auth-setup"),
   gitEnv: require("./git-env"),
   gitSshCommand: require("./git-ssh-command"),
   graphEasyExists: require("./graph-easy-exists"),

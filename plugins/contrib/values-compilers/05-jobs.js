@@ -427,6 +427,21 @@ const compileJobsValues = async (values, context, chartScope, chartConf) => {
       values.deployKey.secretRefName = config.deployKeySecretName
     }
   }
+  if (config.gitAuthSecretEnabled) {
+    if (!values.gitAuth) {
+      values.gitAuth = {}
+    }
+    values.gitAuth.enabled = true
+    if (config.gitAuthSecretName) {
+      values.gitAuth.secretRefName = config.gitAuthSecretName
+    }
+    if (config.gitAuthSecretKey) {
+      values.gitAuth.secretRefKey = config.gitAuthSecretKey
+    }
+    if (config.gitAuthHost) {
+      values.gitAuth.host = config.gitAuthHost
+    }
+  }
   if (chartConf.isJob) {
     await compileSingle(context, values, chartScope)
   } else {

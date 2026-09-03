@@ -144,3 +144,29 @@ Here are some (titles are config keys):
     commands: `build`,`deploy`,`env`,`logs` <br>
     default: retrieved from `ciNamespace` when running `deploy` command.<br>
     Used to create namespace when running `deploy` command and provided as global chart value from plugin [`fabrique/values-compilers/global-defaults`](https://github.com/socialgouv/kontinuous/blob/master/plugins/fabrique/values-compilers/global-defaults.js) on `build` command.
+
+- **gitAuthSecretEnabled** <br>
+    env: `KS_GIT_AUTH_SECRET_ENABLED` <br>
+    commands: `build`,`deploy` <br>
+    default: `true` <br>
+    Authenticates the in-cluster `degit` checkouts against the forge. GitHub throttles unauthenticated access to the git endpoint `degit` uses to resolve a ref, per egress IP, so anonymous checkouts from a cluster fail with `could not fetch remote ...` once the cluster is over the limit. When a token is available, the `degit-repository` and `degit-action` init containers switch to `--mode=git` — the only `degit` mode that goes through git, and therefore the only one that can carry credentials — and rewrite the forge URL to embed the token.<br>
+    The token is read from the `gitAuthSecretName` secret, mounted at `/secrets/git/token`. That mount is **optional**, and `--mode=git` is only used when a token was actually mounted: a namespace with no token provisioned logs an explicit warning and keeps its previous anonymous tar-mode checkout, rather than failing on an ssh URL it has no key for. That is why this defaults to on — it can only help, never regress. Set `KS_GIT_AUTH_SECRET_ENABLED=false` to opt out entirely.<br>
+    On the SocialGouv fleet the secret is delivered by the [`importSecrets`](https://github.com/socialgouv/kontinuous/blob/master/plugins/contrib/pre-deploy/02-import-secrets.js) pre-deploy plugin, which copies it from the product's `ci-` namespace into every deployed namespace, with `reload: true` so a rotated token propagates on the next deploy.
+
+- **gitAuthSecretName** <br>
+    env: `KS_GIT_AUTH_SECRET_NAME` <br>
+    commands: `build`,`deploy` <br>
+    default: `git-auth`
+
+- **gitAuthSecretKey** <br>
+    env: `KS_GIT_AUTH_SECRET_KEY` <br>
+    commands: `build`,`deploy` <br>
+    default: `GIT_AUTH_TOKEN`
+
+- **gitAuthHost** <br>
+    env: `KS_GIT_AUTH_HOST` <br>
+    commands: `build`,`deploy` <br>
+    default: `github.com` <br>
+    Forge host the token authenticates against. Both URL forms `degit` can produce are rewritten: the https URL, and the ssh one it builds from an `owner/repo` shorthand.
+
+The webhook service has the same capability for the pipeline `checkout` init container, configured through `KUBEWEBHOOK_GIT_AUTH_SECRET_NAME` (empty means anonymous), `KUBEWEBHOOK_GIT_AUTH_SECRET_KEY` and `KUBEWEBHOOK_GIT_AUTH_HOST`. There the secret is read directly from the CI namespace the pipeline job runs in.

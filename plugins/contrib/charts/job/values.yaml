@@ -40,6 +40,14 @@ defaults:
     enabled: false
     secretRefName: deploy-key
     secretRefKey: DEPLOY_KEY
+  # Authenticates the degit checkouts against the forge. The forge throttles
+  # anonymous access to the git endpoint degit uses to resolve a ref, so an
+  # unauthenticated in-cluster checkout is rate-limited per egress IP.
+  gitAuth:
+    enabled: false
+    secretRefName: git-auth
+    secretRefKey: GIT_AUTH_TOKEN
+    host: github.com
   kubeconfig:
     secretRefName: kubeconfig
     secretRefKey: KUBECONFIG

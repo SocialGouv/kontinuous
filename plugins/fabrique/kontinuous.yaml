@@ -111,6 +111,11 @@ dependencies:
               reload: true
             harbor:
               reload: true
+            # forge token the degit checkouts authenticate with (see the
+            # gitAuth values of the job/jobs charts); reloaded on every deploy
+            # so a rotated token reaches the namespaces without a manual purge
+            git-auth:
+              reload: true
       rancherNamespaces:
         enabled: true
       cleanFailed:

@@ -108,6 +108,14 @@ module.exports = async function createConfig() {
   const ciNamespaceServiceAccountNameDefault =
     env.KUBEWEBHOOK_CI_NAMESPACE_SERVICE_ACCOUNT_NAME_DEFAULT
 
+  // Authenticates the pipeline checkout against the forge, which throttles
+  // anonymous access to the git endpoint degit uses to resolve a ref. Empty
+  // means anonymous, i.e. subject to that per-egress-IP rate limit.
+  const gitAuthSecretName = env.KUBEWEBHOOK_GIT_AUTH_SECRET_NAME || ""
+  const gitAuthSecretKey =
+    env.KUBEWEBHOOK_GIT_AUTH_SECRET_KEY || "GIT_AUTH_TOKEN"
+  const gitAuthHost = env.KUBEWEBHOOK_GIT_AUTH_HOST || "github.com"
+
   const surviveOnBrokenCluster =
     env.KUBEWEBHOOK_SURVIVE_ON_BROKEN_CLUSTER === "true"
 
@@ -140,6 +148,11 @@ module.exports = async function createConfig() {
         serviceAccountNameDefault: ciNamespaceServiceAccountNameDefault,
         kubeconfigSecretName: ciNamespaceKubeconfigSecretName,
         mountSecretsDefault: ciNamespaceMountSecretsDefault,
+      },
+      gitAuth: {
+        secretName: gitAuthSecretName,
+        secretKey: gitAuthSecretKey,
+        host: gitAuthHost,
       },
       surviveOnBrokenCluster,
     },

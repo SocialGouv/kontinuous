@@ -1,0 +1,31 @@
+{{/*
+Shell preamble authenticating git against the forge before a degit checkout.
+
+GitHub throttles unauthenticated access to the git smart-HTTP endpoint, which
+breaks degit's tar mode: it resolves a ref with `git ls-remote` before
+downloading the archive. Authenticating requires `--mode=git`, the only degit
+mode that goes through git and therefore honours this configuration.
+
+The token is injected in the rewritten URL rather than through a credential
+helper: git only invokes a helper on a 401, and the throttle is a git protocol
+error, so a helper would never fire. Both forms degit can produce are rewritten
+— the https URL, and the ssh one it builds from a `owner/repo` shorthand.
+
+Emits KS_DEGIT_MODE, which the caller passes to degit. It only holds
+`--mode=git` when a token was actually mounted: with no token, git mode would
+resolve a shorthand to an ssh URL and fail for want of a key, where tar mode at
+least still works against an unthrottled forge. So a namespace with no token
+provisioned keeps exactly its previous behaviour.
+*/}}
+{{- define "contrib-helpers.git-auth-setup" -}}
+KS_DEGIT_MODE=""
+if [ -s {{ .tokenPath }} ]; then
+  KS_GIT_AUTH_TOKEN="$(cat {{ .tokenPath }})"
+  git config --global url."https://x-access-token:${KS_GIT_AUTH_TOKEN}@{{ .host }}/".insteadOf "https://{{ .host }}/"
+  git config --global --add url."https://x-access-token:${KS_GIT_AUTH_TOKEN}@{{ .host }}/".insteadOf "git@{{ .host }}:"
+  unset KS_GIT_AUTH_TOKEN
+  KS_DEGIT_MODE="--mode=git"
+else
+  echo "kontinuous: gitAuth is enabled but {{ .tokenPath }} is empty or missing, falling back to anonymous git — {{ .host }} throttles unauthenticated access" >&2
+fi
+{{- end -}}
