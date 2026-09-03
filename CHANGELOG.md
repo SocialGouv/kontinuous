@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.188.0](https://github.com/socialgouv/kontinuous/compare/v1.187.1...v1.188.0) (2026-09-03)
+
+
+### Features
+
+* **jobs:** authenticate the in-cluster degit checkouts against the forge ([63bd139](https://github.com/socialgouv/kontinuous/commit/63bd1394481458ff3b5b611d50a410bf668547f7))
+
+
+### Bug Fixes
+
+* **patches:** cert tls ([8616277](https://github.com/socialgouv/kontinuous/commit/8616277b071d59237dbd06acf612d2cbab53ef5b))
+
 ## 1.187.2 (2026-03-19)
 
 
