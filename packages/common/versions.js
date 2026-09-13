@@ -12,7 +12,7 @@ module.exports = {
   stern: "1.25.0",
 
   // renovate: datasource=github-releases depName=carvel-dev/kapp
-  kapp: "0.54.3",
+  kapp: "0.64.2",
 
   // renovate: datasource=github-releases depName=yannh/kubeconform
   kubeconform: "0.6.1",
