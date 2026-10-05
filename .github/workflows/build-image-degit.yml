@@ -9,7 +9,7 @@ on:
       - '**'
     paths:
       - .github/kontinuousVersion
-      - packages/degit
+      - packages/degit/**
 
 concurrency:
   cancel-in-progress: true
